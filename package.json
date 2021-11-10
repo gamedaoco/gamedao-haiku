@@ -1,0 +1,25 @@
+{
+  "name": "gamedao-haiku",
+  "packageManager": "yarn@3.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "workspaces": [
+    "pkg/*"
+  ],
+  "scripts": {
+    "dev": "yarn workspace app dev",
+    "build": "wsrun -e -c -s -x app build",
+    "test": "wsrun -e -c -s --exclude-missing test",
+    "release": "yarn build && yarn changeset publish"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.17.0",
+    "prettier": "2.4.1",
+    "wsrun": "^5.2.1"
+  }
+}
