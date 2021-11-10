@@ -1,0 +1,1 @@
+{"version":3,"file":"reducer.d.ts","sourceRoot":"","sources":["../../../../../src/providers/substrahooks-provider/reducer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,iBAAiB,EAAE,MAAM,+BAA+B,CAAC;AAGlE,UAAU,mBAAmB;IAC3B,gBAAgB,EAAE,iBAAiB,CAAC;CACrC;AAED,wBAAgB,mBAAmB,CACjC,KAAK,EAAE,mBAAmB,EAC1B,MAAM,EAAE,OAAO,CAAC,mBAAmB,CAAC,GACnC,mBAAmB,CAErB"}
