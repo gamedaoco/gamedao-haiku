@@ -11,9 +11,11 @@
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
     "dev": "wsrun -p app -c dev",
-    "build": "wsrun -e -c -s -x app build",
+    "build": "wsrun -e -c -s -x app,example build",
     "test": "wsrun -e -c -s --exclude-missing test",
-    "release": "yarn build && yarn changeset publish"
+    "release": "yarn build && yarn changeset publish",
+    "format": "prettier --write --check 'pkg/**/*.{js,jsx,ts,tsx}'",
+    "format:verify": "prettier --check 'pkg/**/*.{js,jsx,ts,tsx}'"
   },
   "publishConfig": {
     "access": "public"
@@ -22,5 +24,38 @@
     "@changesets/cli": "^2.17.0",
     "prettier": "2.4.1",
     "wsrun": "^5.2.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@commitlint/prompt-cli": "^13.2.1",
+    "@picgo/bump-version": "^1.0.3",
+    "commitizen": "^4.2.3",
+    "concurrently": "^6.0.0",
+    "conventional-changelog": "^3.1.24",
+    "cz-customizable": "^6.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./node_modules/@picgo/bump-version/.cz-config.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn format:verify"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
