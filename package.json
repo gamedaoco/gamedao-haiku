@@ -9,7 +9,8 @@
     "pkg/*"
   ],
   "scripts": {
-    "dev": "yarn workspace app dev",
+    "setup": "yarn && wsrun -s -c install",
+    "dev": "wsrun -p app -c dev",
     "build": "wsrun -e -c -s -x app build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "release": "yarn build && yarn changeset publish"
