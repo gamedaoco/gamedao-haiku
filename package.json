@@ -1,6 +1,6 @@
 {
   "name": "gamedao-haiku",
-  "packageManager": "yarn@3.1.0",
+  "packageManager": "yarn@3.1.1",
   "private": true,
   "engines": {
     "node": ">=14"
