@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import types from 'src/config/types.json';
-import { ApiProvider } from 'src/types/network';
-import { NetworkContext } from './modules/context';
-import { initializeApi } from './modules/network';
+import { useEffect, useRef, useState } from 'react'
+import types from 'src/config/types.json'
+import { ApiProvider } from 'src/types/network'
+import { NetworkContext } from './modules/context'
+import { initializeApi } from './modules/network'
 
 // TODO: Data should be retrieved from GraphQL or another interface.
 // @2075
@@ -11,26 +11,26 @@ import { initializeApi } from './modules/network';
 const API_PROVIDER_CONFIG = {
 	wsProviderUrl: 'wss://alphaville.zero.io',
 	types: types,
-};
+}
 
 export default function NetworkProvider({ children }) {
-	const [apiProviderState, setApiProviderState] = useState<ApiProvider>(null);
-	const isMountedRef = useRef<null | boolean>(null);
+	const [apiProviderState, setApiProviderState] = useState<ApiProvider>(null)
+	const isMountedRef = useRef<null | boolean>(null)
 
 	useEffect(() => {
-		isMountedRef.current = true;
+		isMountedRef.current = true
 
 		// Create and connect to Api
 		initializeApi(API_PROVIDER_CONFIG).then((provider: ApiProvider) => {
 			if (isMountedRef.current) {
-				setApiProviderState(provider);
+				setApiProviderState(provider)
 			}
-		});
+		})
 
 		return () => {
-			isMountedRef.current = false;
-		};
-	}, []);
+			isMountedRef.current = false
+		}
+	}, [])
 
-	return <NetworkContext.Provider value={{ apiProvider: apiProviderState }}>{children}</NetworkContext.Provider>;
+	return <NetworkContext.Provider value={{ apiProvider: apiProviderState }}>{children}</NetworkContext.Provider>
 }

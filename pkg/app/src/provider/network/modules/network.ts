@@ -1,21 +1,21 @@
-import { ApiPromise, WsProvider } from '@polkadot/api';
-import { ApiProvider, ApiProviderConfig, SystemProperties } from 'src/types/network';
+import { ApiPromise, WsProvider } from '@polkadot/api'
+import { ApiProvider, ApiProviderConfig, SystemProperties } from 'src/types/network'
 
 // Load system properties(token format and symbol)
 async function getProperties(apiProvider: ApiPromise): Promise<SystemProperties> {
 	try {
-		const systemProperties = await apiProvider.rpc.system.properties();
-		const { tokenDecimals, tokenSymbol, ss58Format } = systemProperties.toHuman();
+		const systemProperties = await apiProvider.rpc.system.properties()
+		const { tokenDecimals, tokenSymbol, ss58Format } = systemProperties.toHuman()
 
 		return {
 			ss58Format: !isNaN(parseInt(ss58Format as string)) ? parseInt(ss58Format as string) : 25,
 			tokenDecimals: tokenDecimals?.[0] ?? 18,
 			tokenSymbol: tokenSymbol?.[0] ?? 'ZERO',
-		};
+		}
 	} catch (error: any) {
-		console.error('The system properties could not be loaded ', 'error', error);
+		console.error('The system properties could not be loaded ', 'error', error)
 	}
-	return null;
+	return null
 }
 
 // Connect to ws node and return ApiProvider
@@ -25,12 +25,12 @@ export async function initializeApi(config: ApiProviderConfig): Promise<ApiProvi
 			provider: new WsProvider(config.wsProviderUrl),
 			types: config.types,
 			throwOnConnect: true,
-		});
-		await apiProvider.isReady;
+		})
+		await apiProvider.isReady
 		return {
 			systemProperties: await getProperties(apiProvider),
 			apiProvider: apiProvider,
-		};
+		}
 	} catch (error: any) {
 		console.error(
 			'The RPC could not be initialized',
@@ -40,8 +40,8 @@ export async function initializeApi(config: ApiProviderConfig): Promise<ApiProvi
 			config.wsProviderUrl,
 			'types:',
 			config.types,
-		);
+		)
 	}
 
-	return null;
+	return null
 }
