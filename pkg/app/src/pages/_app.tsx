@@ -6,7 +6,7 @@ import Network from 'src/provider'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'src/theme/createEmotionCache'
-import ThemeConfig from 'src/theme/mnml'
+import ThemeConfig from 'src/theme'
 import GlobalStyles from 'src/theme/globalStyles'
 import ThemePrimaryColor from 'src/components/ThemePrimaryColor'
 
