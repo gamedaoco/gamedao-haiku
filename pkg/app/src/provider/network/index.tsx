@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { NetworkContext } from './modules/_context';
-import { ApiProvider } from '../../types/network';
-import types from './modules/types.json';
-import { initializeApi } from './modules/_network';
+import types from 'src/config/types.json';
+import { ApiProvider } from 'src/types/network';
+import { NetworkContext } from './modules/context';
+import { initializeApi } from './modules/network';
 
 // TODO: Data should be retrieved from GraphQL or another interface.
 // @2075
@@ -13,7 +13,7 @@ const API_PROVIDER_CONFIG = {
 	types: types,
 };
 
-export function NetworkProvider({ children }) {
+export default function NetworkProvider({ children }) {
 	const [apiProviderState, setApiProviderState] = useState<ApiProvider>(null);
 	const isMountedRef = useRef<null | boolean>(null);
 

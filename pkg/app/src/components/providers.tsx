@@ -1,5 +1,5 @@
-import { ExtensionProvider } from '../provider/extension/extensionProvider';
-import { NetworkProvider } from '../provider/network/networkProvider';
+import ExtensionProvider from 'src/provider/extension';
+import NetworkProvider from 'src/provider/network';
 
 export function Providers({ children }) {
 	return (

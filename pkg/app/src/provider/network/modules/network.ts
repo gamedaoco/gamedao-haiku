@@ -1,5 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { ApiProvider, ApiProviderConfig, SystemProperties } from '../../../types/network';
+import { ApiProvider, ApiProviderConfig, SystemProperties } from 'src/types/network';
 
 // Load system properties(token format and symbol)
 async function getProperties(apiProvider: ApiPromise): Promise<SystemProperties> {

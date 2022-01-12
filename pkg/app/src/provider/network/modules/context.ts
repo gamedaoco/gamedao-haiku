@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { NetworkState } from '../../../types/network';
+import { NetworkState } from 'src/types/network';
 
 export const NetworkContext = createContext<NetworkState>({
 	apiProvider: {},

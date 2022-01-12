@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/_context';
-import { useNetworkContext } from '../network/modules/_context';
-import { initializeAccounts } from './modules/_accounts';
-import { ExtensionState } from '../../types/extension';
+import { ExtensionState } from 'src/types/extension';
+import { useNetworkContext } from 'src/provider/network/modules/context';
+import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context';
+import { initializeAccounts } from './modules/accounts';
 
-export function ExtensionProvider({ children, allowConnect }) {
+export default function ExtensionProvider({ children, allowConnect }) {
 	const [state, setState] = useState<ExtensionState>(null);
 	const { apiProvider } = useNetworkContext();
 	const isMountedRef = useRef<null | boolean>(null);
