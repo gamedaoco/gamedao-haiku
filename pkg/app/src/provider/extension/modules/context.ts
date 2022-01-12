@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { ExtensionState } from 'src/types/extension'
+import { ExtensionState } from 'src/@types/extension'
 
 export const EXTENSION_STATE_DEFAULT: ExtensionState = {
 	w3Enabled: false,

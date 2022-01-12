@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ExtensionState } from 'src/types/extension'
+import { ExtensionState } from 'src/@types/extension'
 import { useNetworkContext } from 'src/provider/network/modules/context'
 import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 import { initializeAccounts } from './modules/accounts'

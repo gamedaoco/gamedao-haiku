@@ -1,5 +1,5 @@
-import { SystemProperties } from 'src/types/network'
-import { ExtensionState } from 'src/types/extension'
+import { SystemProperties } from 'src/@types/network'
+import { ExtensionState } from 'src/@types/extension'
 
 export async function initializeAccounts(systemProperties: SystemProperties): Promise<ExtensionState> {
 	if (!systemProperties) return null
