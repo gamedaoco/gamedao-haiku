@@ -2422,6 +2422,7 @@ __metadata:
     "@types/react": ^17.0.34
     eslint: 7
     eslint-config-next: 12.0.3
+    lodash: ^4.17.21
     next: 12.0.3
     react: 17.0.2
     react-dom: 17.0.2

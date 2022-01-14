@@ -1,14 +1,12 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import AppProps from 'next/app'
-
-import Network from 'src/provider'
+import { Providers } from 'src/provider'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import createEmotionCache from 'src/theme/createEmotionCache'
 import ThemeConfig from 'src/theme'
-import GlobalStyles from 'src/theme/globalStyles'
 import ThemePrimaryColor from 'src/components/ThemePrimaryColor'
+import createEmotionCache from 'src/theme/createEmotionCache'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -24,14 +22,15 @@ const MyApp = (props) => {
 			<Head>
 				<title>GameDAO</title>
 				<meta name="viewport" content="initial-scale=1, width=device-width" />
+				<link rel="stylesheet" href="/fonts/iconfont.css" />
 			</Head>
-			<Network>
+			<Providers>
 				<ThemeConfig>
-					<ThemePrimaryColor>
-						<Component {...pageProps} />
-					</ThemePrimaryColor>
+					{/*	<ThemePrimaryColor>*/}
+					<Component {...pageProps} />
+					{/*	</ThemePrimaryColor>*/}
 				</ThemeConfig>
-			</Network>
+			</Providers>
 		</CacheProvider>
 	)
 }

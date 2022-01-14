@@ -13,7 +13,7 @@ const API_PROVIDER_CONFIG = {
 	types: types,
 }
 
-export default function NetworkProvider({ children }) {
+export function NetworkProvider({ children }) {
 	const [apiProviderState, setApiProviderState] = useState<ApiProvider>(null)
 	const isMountedRef = useRef<null | boolean>(null)
 

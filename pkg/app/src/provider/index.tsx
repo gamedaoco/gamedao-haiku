@@ -1,7 +1,7 @@
-import ExtensionProvider from './extension'
-import NetworkProvider from './network'
+import { NetworkProvider } from 'src/provider/network'
+import { ExtensionProvider } from 'src/provider/extension'
 
-export default function Providers({ children }) {
+export function Providers({ children }) {
 	return (
 		<NetworkProvider>
 			{/* allowConnect is here the state that is set when someone presses the connect button */}
