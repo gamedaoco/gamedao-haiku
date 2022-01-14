@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import types from 'src/config/types.json'
+import types from 'src/data/types.json'
 import { ApiProvider } from 'src/@types/network'
 import { NetworkContext } from './modules/context'
 import { initializeApi } from './modules/network'

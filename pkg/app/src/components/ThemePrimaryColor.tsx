@@ -1,12 +1,7 @@
 import { ReactNode, useMemo } from 'react'
-// material
 import { alpha, useTheme, createTheme, ThemeProvider } from '@mui/material/styles'
-// hooks
 import useSettings from '../hooks/useSettings'
-//
 import componentsOverride from '../theme/overrides'
-
-// ----------------------------------------------------------------------
 
 type ThemePrimaryColorProps = {
 	children: ReactNode

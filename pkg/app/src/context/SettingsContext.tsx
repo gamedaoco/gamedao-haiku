@@ -1,12 +1,7 @@
 import { ReactNode, createContext } from 'react'
-// hooks
 import useLocalStorage from '../hooks/useLocalStorage'
-// theme
 import palette from '../theme/palette'
-// @type
 import { ThemeMode, ThemeDirection, ThemeColor, SettingsContextProps } from '../@types/settings'
-
-// ----------------------------------------------------------------------
 
 const PRIMARY_COLOR = [
 	// DEFAULT
@@ -120,7 +115,7 @@ function SettingsProvider({ children }: SettingsProviderProps) {
 	const [settings, setSettings] = useLocalStorage('settings', {
 		themeMode: 'light',
 		themeDirection: 'ltr',
-		themeColor: 'default',
+		themeColor: 'purple',
 		themeStretch: false,
 	})
 
