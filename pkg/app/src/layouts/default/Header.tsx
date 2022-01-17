@@ -10,11 +10,11 @@ import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 
 // import AccountSelector from 'src/components/AccountSelector'
-import { Icons, ICON_MAPPING } from 'src/components/Icons'
+// import { Icons, ICON_MAPPING } from 'src/components/Icons'
 
 function Main() {
 	const { themeMode } = useSettings()
-
+	return null
 	return (
 		<AppBar position="sticky" elevation={0}>
 			<Toolbar

@@ -3,12 +3,12 @@ import useSettings from 'src/hooks/useSettings'
 
 import { useTheme, styled } from '@mui/material/styles'
 import { Divider, Paper } from '@mui/material'
-import { Icons, ICON_MAPPING } from 'src/components/Icons'
+// import { Icons, ICON_MAPPING } from 'src/components/Icons'
 
 const ThemeSwitcher = () => {
 	const theme = useTheme()
 	const { themeMode, onChangeMode } = useSettings()
-
+	return null
 	return (
 		<Paper
 			sx={{

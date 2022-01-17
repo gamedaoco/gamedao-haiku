@@ -19,7 +19,7 @@ import {
 	useMediaQuery,
 	Link,
 } from '@mui/material'
-import { FontIcon, Icons, ICON_MAPPING } from 'src/components/Icons'
+// import { FontIcon, Icons, ICON_MAPPING } from 'src/components/Icons'
 
 // TODO:
 // theme switcher
@@ -65,9 +65,7 @@ const SidebarNavItem = ({ href, pattern, name, children }) => {
 	return (
 		<Link component={NavLink} href={href}>
 			<SidebarButton active={active} sx={{ mx: 4, py: 0 }}>
-				<ListItemIcon>
-					<FontIcon sx={{ ...override }} name={name} />
-				</ListItemIcon>
+				<ListItemIcon>{/*<FontIcon sx={{ ...override }} name={name} />*/}</ListItemIcon>
 				<Typography sx={{ fontSize: '1rem' }}>{children}</Typography>
 			</SidebarButton>
 		</Link>
