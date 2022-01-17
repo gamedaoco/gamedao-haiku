@@ -1,0 +1,25 @@
+{
+  "global": {
+    "DEBUG": false,
+    "SHOW_HEADER": true,
+    "SHOW_FOOTER": true,
+    "SHOW_FOOTER_NAV": false,
+    "SHOW_APPLY": false,
+    "SHOW_CAMPAIGNS": false,
+    "SHOW_FX": true
+  },
+  "dev": {
+    "DEBUG": false,
+    "SHOW_HEADER": true,
+    "SHOW_FOOTER": true,
+    "SHOW_FOOTER_NAV": true,
+    "SHOW_APPLY": true,
+    "SHOW_CAMPAIGNS": true
+  },
+  "production": {
+    "SHOW_APPLY": true,
+    "SHOW_CAMPAIGNS": false,
+    "SHOW_FOOTER_NAV": false,
+    "SHOW_FX": false
+  }
+}
