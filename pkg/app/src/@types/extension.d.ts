@@ -3,6 +3,7 @@ import { Signer } from '@polkadot/types/types'
 
 export interface AccountSettings {
 	selectedAddress: string
+	allowConnect: boolean
 }
 
 export interface AccountState {
@@ -14,4 +15,7 @@ export interface ExtensionState {
 	w3Enabled: boolean
 	accounts: AccountState[] | null
 	selectedAccount: AccountState
+	connectWallet: Function
+	disconnectWallet: Function
+	selectAccount: Function<AccountState>
 }

@@ -37,6 +37,9 @@ export async function initializeAccounts(
 			w3Enabled,
 			accounts,
 			selectedAccount,
+			connectWallet: null,
+			disconnectWallet: null,
+			selectAccount: null,
 		}
 	} catch (error: any) {
 		console.error('Accounts could not be initialized', 'error:', error)

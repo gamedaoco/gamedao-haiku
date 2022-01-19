@@ -7,11 +7,9 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
+import { FontIcons } from 'src/components/Icons/icons'
 
-// import AccountSelector from 'src/components/AccountSelector'
-// import { Icons, ICON_MAPPING } from 'src/components/Icons'
-
-function Main() {
+export function Header() {
 	const { themeMode } = useSettings()
 	return null
 	return (
@@ -29,11 +27,7 @@ function Main() {
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 2, marginTop: 1 }}>
 					<NextLink href="/">
-						<Icons
-							src={themeMode === 'light' ? ICON_MAPPING.logo : ICON_MAPPING.logoWhite}
-							alt={'GameDAO'}
-							sx={{ height: '45.4px' }}
-						/>
+						<FontIcons name={themeMode === 'light' ? 'logo-colored' : 'logo'} />
 					</NextLink>
 				</Box>
 				<Stack
@@ -50,5 +44,3 @@ function Main() {
 		</AppBar>
 	)
 }
-
-export default Main

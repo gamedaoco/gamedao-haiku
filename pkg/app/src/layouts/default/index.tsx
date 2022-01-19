@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
 import { Box, Container } from '@mui/material'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Footer from './Footer'
+import { Header } from './Header'
+import { Sidebar } from './Sidebar'
+import { Footer } from './Footer'
 
 interface ComponentProps {
 	showHeader?: boolean
@@ -15,7 +15,7 @@ interface ComponentProps {
 	children?: React.ReactNode
 }
 
-const Layout = ({
+export function Layout({
 	showHeader,
 	showFooter,
 	showSidebar,
@@ -23,9 +23,8 @@ const Layout = ({
 	showNavigation,
 	noContainer,
 	title,
-}: ComponentProps) => {
+}: ComponentProps) {
 	const SITE_NAME = 'GameDAO'
-
 	return (
 		<>
 			<Head>
@@ -70,5 +69,3 @@ const Layout = ({
 		</>
 	)
 }
-
-export default Layout

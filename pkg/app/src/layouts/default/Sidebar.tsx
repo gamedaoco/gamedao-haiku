@@ -15,9 +15,11 @@ import {
 	Typography,
 	useMediaQuery,
 } from '@mui/material'
+import { ThemeSwitcher } from 'src/layouts/default/ThemeSwitcher'
 // import { FontIcon, Icons, ICON_MAPPING } from 'src/components/Icons'
 
 // TODO:
+// Fix error on page load!!
 // theme switcher
 // language switcher
 // network selector
@@ -68,7 +70,7 @@ const SidebarNavItem = ({ href, pattern, name, children }) => {
 	)
 }
 
-function Main({ showNavigation }: ComponentProps) {
+export function Sidebar({ showNavigation }: ComponentProps) {
 	const theme = useTheme()
 	const { themeMode } = useSettings()
 	const { pathname } = useRouter()
@@ -97,26 +99,26 @@ function Main({ showNavigation }: ComponentProps) {
 				borderRight: '1px solid ' + theme.palette.grey[500_32],
 			}}
 		>
-			<List
-				sx={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: '1.5rem', justifyContent: 'start' }}
-			>
-				<SidebarNavItem href="/app" pattern={`/app`} name="dashboard">
-					Dashboard
-				</SidebarNavItem>
-				<SidebarNavItem href="/app/governance" pattern={`/app/governance`} name="voting">
-					Governance
-					{counter.gov > 0 && (
-						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.gov} color={'primary'} variant="dot" />
-					)}
-				</SidebarNavItem>
-				<SidebarNavItem href="/app/campaigns" pattern={`/app/campaigns`} name="campaign">
-					Campaigns
-					{counter.cam > 0 && (
-						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
-					)}
-				</SidebarNavItem>
-			</List>
-
+			{/*TODO: Fix error on Page load */}
+			{/*<List*/}
+			{/*	sx={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: '1.5rem', justifyContent: 'start' }}*/}
+			{/*>*/}
+			{/*	<SidebarNavItem href="/app" pattern={`/app`} name="dashboard">*/}
+			{/*		Dashboard*/}
+			{/*	</SidebarNavItem>*/}
+			{/*	<SidebarNavItem href="/app/governance" pattern={`/app/governance`} name="voting">*/}
+			{/*		Governance*/}
+			{/*		{counter.gov > 0 && (*/}
+			{/*			<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.gov} color={'primary'} variant="dot" />*/}
+			{/*		)}*/}
+			{/*	</SidebarNavItem>*/}
+			{/*	<SidebarNavItem href="/app/campaigns" pattern={`/app/campaigns`} name="campaign">*/}
+			{/*		Campaigns*/}
+			{/*		{counter.cam > 0 && (*/}
+			{/*			<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />*/}
+			{/*		)}*/}
+			{/*	</SidebarNavItem>*/}
+			{/*</List>*/}
 			<Box sx={{ flex: 1 }} />
 			{/*
 
@@ -200,5 +202,3 @@ function Main({ showNavigation }: ComponentProps) {
 		</Box>
 	)
 }
-
-export default Main

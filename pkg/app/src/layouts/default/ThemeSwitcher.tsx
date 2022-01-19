@@ -3,12 +3,11 @@ import useSettings from 'src/hooks/useSettings'
 
 import { useTheme } from '@mui/material/styles'
 import { Divider, Paper } from '@mui/material'
-// import { Icons, ICON_MAPPING } from 'src/components/Icons'
+import { FontIcons } from 'src/components/Icons/icons'
 
-const ThemeSwitcher = () => {
+export function ThemeSwitcher() {
 	const theme = useTheme()
 	const { themeMode, onChangeMode } = useSettings()
-	return null
 	return (
 		<Paper
 			sx={{
@@ -24,27 +23,23 @@ const ThemeSwitcher = () => {
 				'*': { transitionTimingFunction: 'ease-in-out;', transitionDuration: '150ms' },
 			}}
 		>
-			<Icons
-				src={ICON_MAPPING.moon}
-				alt="moon"
+			<FontIcons
+				name="moon"
 				sx={{
 					cursor: 'pointer',
-					filter: themeMode === 'light' ? 'invert(0)' : 'invert(0.5)',
+					color: theme.palette.text.primary,
 				}}
 				onClick={(e) => onChangeMode(e)}
 			/>
 			<Divider orientation="vertical" variant="middle" flexItem />
-			<Icons
-				src={ICON_MAPPING.sun}
-				alt="sun"
+			<FontIcons
+				name="sun"
 				sx={{
 					cursor: 'pointer',
-					filter: themeMode === 'light' ? 'invert(0.5)' : 'invert(1)',
+					color: theme.palette.text.primary,
 				}}
 				onClick={(e) => onChangeMode(e)}
 			/>
 		</Paper>
 	)
 }
-
-export default ThemeSwitcher

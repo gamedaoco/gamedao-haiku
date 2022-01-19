@@ -1,4 +1,5 @@
 import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
+import { AccountState } from 'src/@types/extension'
 
 export function shortAccountAddress(account: InjectedAccountWithMeta): string {
 	const address = account?.address ?? ''
@@ -7,4 +8,8 @@ export function shortAccountAddress(account: InjectedAccountWithMeta): string {
 
 export function getAccountName(account: InjectedAccountWithMeta): string {
 	return account?.meta?.name ?? ''
+}
+
+export function getAddressFromAccountState(accountState: AccountState) {
+	return accountState?.account?.address
 }
