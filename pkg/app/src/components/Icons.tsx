@@ -1,9 +1,8 @@
 import React from 'react'
+import Image from 'next/image'
 import { Box } from '@mui/material'
 import Icon from '@mui/material/Icon'
 import SvgIcon from '@mui/material/SvgIcon'
-
-export * as Logo from '/assets/gamedao-logo-color.svg'
 
 export const ICON_MAPPING = {
 	logo: `/assets/gamedao-logo-color.svg`,
@@ -30,12 +29,4 @@ export function Icons({ src, alt, ...props }) {
 export function FontIcon({ name = 'tangram', ...props }) {
 	const url = ICON_MAPPING[name]
 	return <Icon baseClassName="gamedao-icon-font" className={'icon-' + name} {...props} />
-}
-
-export function HomeIcon({ url, ...props }) {
-	return (
-		<SvgIcon {...props}>
-			<img src={url} />
-		</SvgIcon>
-	)
 }
