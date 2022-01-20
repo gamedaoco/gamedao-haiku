@@ -98,6 +98,7 @@ export function Sidebar({ showNavigation }: ComponentProps) {
 			}}
 		>
 			{/*TODO: Fix error on Page load */}
+			{/*TODO: Remove styles and refactor*/}
 			<List
 				sx={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: '1.5rem', justifyContent: 'start' }}
 			>
