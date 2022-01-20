@@ -1,7 +1,7 @@
-import { ReactNode, createContext } from 'react'
+import { createContext, ReactNode } from 'react'
 import useLocalStorage from '../hooks/useLocalStorage'
 import palette from '../theme/palette'
-import { ThemeMode, ThemeDirection, ThemeColor, SettingsContextProps } from '../@types/settings'
+import { SettingsContextProps, ThemeColor, ThemeDirection, ThemeMode } from '../@types/settings'
 
 const PRIMARY_COLOR = [
 	// DEFAULT

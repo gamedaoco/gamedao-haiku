@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from 'react'
-import { alpha, useTheme, createTheme, ThemeProvider } from '@mui/material/styles'
+import { alpha, createTheme, ThemeProvider, useTheme } from '@mui/material/styles'
 import useSettings from '../hooks/useSettings'
 import componentsOverride from '../theme/overrides'
 

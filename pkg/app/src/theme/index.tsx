@@ -1,4 +1,4 @@
-import { useMemo, ReactNode } from 'react'
+import { ReactNode, useMemo } from 'react'
 // material
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles'
@@ -11,6 +11,7 @@ import typography from './typography'
 import breakpoints from './breakpoints'
 import componentsOverride from './overrides'
 import shadows, { customShadows } from './shadows'
+import { ToastContainer } from 'react-toastify'
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +41,7 @@ export default function ThemeConfig({ children }: ThemeConfigProps) {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<ToastContainer position="bottom-right" theme={themeMode} />
 			<CssBaseline />
 			{children}
 		</ThemeProvider>

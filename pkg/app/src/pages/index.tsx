@@ -1,25 +1,30 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import Head from 'next/head'
-import Image from 'next/image'
-
-import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import Layout from 'src/layouts/default'
+import { Layout } from 'src/layouts/default'
+import { Button } from '@mui/material'
+import { useRouter } from 'next/router'
 
-export default function Page() {
+export function Page() {
+	const { push } = useRouter()
 	return (
-		<Layout showHeader showFooter showSidebar>
+		<Layout showFooter>
 			<Box sx={{ p: '4rem', height: '90vh' }}>
 				<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-						Hello.
+						Welcome to GameDAO haiku
 					</Typography>
+
+					<Button variant="contained" onClick={() => push('/app')}>
+						Enter App
+					</Button>
 				</Paper>
 			</Box>
 		</Layout>
 	)
 }
+
+export default Page

@@ -1486,6 +1486,7 @@ __metadata:
     react: 17.0.2
     react-dom: 17.0.2
     react-icons: ^4.3.1
+    react-toastify: ^8.1.0
     typescript: ^4.4.4
   languageName: unknown
   linkType: soft
@@ -4940,6 +4941,18 @@ __metadata:
   version: 0.8.3
   resolution: "react-refresh@npm:0.8.3"
   checksum: 3cffe5a9cbac1c5d59bf74bf9fff43c987d87ef32098b9092ea94b6637377d86c08565b9374d9397f446b3fbcd95de986ec77220a16f979687cb39b7b89e2f91
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "react-toastify@npm:8.1.0"
+  dependencies:
+    clsx: ^1.1.1
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 9d7b18c747e1b6736771dbb877dfaab61c49e99a64b9dbdaa3d57d62c899d8a46e193fd69aa4bd045a1e0023859353f94ce4617d600154657a2bdd213407e607
   languageName: node
   linkType: hard
 

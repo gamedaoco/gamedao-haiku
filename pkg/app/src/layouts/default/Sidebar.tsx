@@ -3,25 +3,21 @@ import NavLink from 'next/link'
 import { useRouter } from 'next/router'
 import useSettings from 'src/hooks/useSettings'
 
-import { useTheme, styled } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import {
+	Badge,
 	Box,
+	Link,
 	List,
 	ListItemButton,
 	ListItemIcon,
 	ListSubheader,
-	Badge,
-	Select,
-	MenuItem,
-	Divider,
-	Paper,
 	Typography,
 	useMediaQuery,
-	Link,
 } from '@mui/material'
-import { FontIcon, Icons, ICON_MAPPING } from 'src/components/Icons'
 
 // TODO:
+// Fix error on page load!!
 // theme switcher
 // language switcher
 // network selector
@@ -65,16 +61,14 @@ const SidebarNavItem = ({ href, pattern, name, children }) => {
 	return (
 		<Link component={NavLink} href={href}>
 			<SidebarButton active={active} sx={{ mx: 4, py: 0 }}>
-				<ListItemIcon>
-					<FontIcon sx={{ ...override }} name={name} />
-				</ListItemIcon>
+				<ListItemIcon>{/*<FontIcon sx={{ ...override }} name={name} />*/}</ListItemIcon>
 				<Typography sx={{ fontSize: '1rem' }}>{children}</Typography>
 			</SidebarButton>
 		</Link>
 	)
 }
 
-function Main({ showNavigation }: ComponentProps) {
+export function Sidebar({ showNavigation }: ComponentProps) {
 	const theme = useTheme()
 	const { themeMode } = useSettings()
 	const { pathname } = useRouter()
@@ -103,6 +97,7 @@ function Main({ showNavigation }: ComponentProps) {
 				borderRight: '1px solid ' + theme.palette.grey[500_32],
 			}}
 		>
+			{/*TODO: Fix error on Page load */}
 			<List
 				sx={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: '1.5rem', justifyContent: 'start' }}
 			>
@@ -122,7 +117,6 @@ function Main({ showNavigation }: ComponentProps) {
 					)}
 				</SidebarNavItem>
 			</List>
-
 			<Box sx={{ flex: 1 }} />
 			{/*
 
@@ -206,5 +200,3 @@ function Main({ showNavigation }: ComponentProps) {
 		</Box>
 	)
 }
-
-export default Main
