@@ -11,6 +11,7 @@
 .yarn/unplugged
 
 **/.next/
+**/.idea/
 # testing
 /coverage
 
