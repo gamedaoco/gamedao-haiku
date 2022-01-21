@@ -5,7 +5,7 @@ import { Providers } from 'src/provider/provider'
 import Theme from 'src/theme'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'src/theme/createEmotionCache'
-import ThemePrimaryColor from 'src/components/ThemePrimaryColor'
+import ThemePrimaryColor from 'src/components/ThemePrimaryColor/themePrimaryColor'
 
 // Toastify styles + custom styles overrides
 import 'react-toastify/dist/ReactToastify.css'

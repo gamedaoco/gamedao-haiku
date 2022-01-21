@@ -42,26 +42,32 @@ export function AccountSelector() {
 	// Show account selector
 	if (selectedAccount) {
 		return (
-			<Paper>
-				<Stack direction="row" alignItems="center">
-					<IconButton size="small" aria-label="disconnect" onClick={handleCopyAddress}>
-						<FavoriteBorder />
-					</IconButton>
-					<Select value={getAddressFromAccountState(selectedAccount)} onChange={handleAccountChange}>
-						{accounts?.map((accountState: AccountState) => {
-							const address = getAddressFromAccountState(accountState)
-							return (
-								<MenuItem value={address} key={address}>
-									{getAccountName(accountState?.account)}
-								</MenuItem>
-							)
-						})}
-					</Select>
-					<IconButton size="small" aria-label="disconnect" onClick={disconnectWallet as any}>
-						<Logout />
-					</IconButton>
-				</Stack>
-			</Paper>
+			<Stack
+				component={Paper}
+				direction="row"
+				alignItems="center"
+				width="fit-content"
+				elevation={5}
+				spacing={2}
+				px={1}
+			>
+				<IconButton size="small" aria-label="disconnect" onClick={handleCopyAddress}>
+					<FavoriteBorder />
+				</IconButton>
+				<Select value={getAddressFromAccountState(selectedAccount)} onChange={handleAccountChange}>
+					{accounts?.map((accountState: AccountState) => {
+						const address = getAddressFromAccountState(accountState)
+						return (
+							<MenuItem value={address} key={address}>
+								{getAccountName(accountState?.account)}
+							</MenuItem>
+						)
+					})}
+				</Select>
+				<IconButton size="small" aria-label="disconnect" onClick={disconnectWallet as any}>
+					<Logout />
+				</IconButton>
+			</Stack>
 		)
 	}
 

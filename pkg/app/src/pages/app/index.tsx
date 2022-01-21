@@ -1,11 +1,8 @@
 import React from 'react'
-
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-
-import { Layout } from 'src/layouts/default'
-import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
+import { Layout } from 'src/layouts/default/layout'
 
 export function AppPage() {
 	return (
@@ -15,9 +12,6 @@ export function AppPage() {
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 						Hello.
 					</Typography>
-
-					<Typography>Account selector component ---</Typography>
-					<AccountSelector />
 				</Paper>
 			</Box>
 		</Layout>

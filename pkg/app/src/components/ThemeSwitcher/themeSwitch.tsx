@@ -1,29 +1,28 @@
 import React from 'react'
-import useSettings from 'src/hooks/useSettings'
-
+import { useSettings } from 'src/hooks/useSettings'
 import { useTheme } from '@mui/material/styles'
 import { Divider, IconButton, Paper, Stack } from '@mui/material'
 import { FontIcons } from 'src/components/Icons/icons'
 
-export function ThemeSwitcher() {
+export function ThemeSwitch() {
 	const theme = useTheme()
-	const { themeMode, onChangeMode } = useSettings()
+	const { themeMode, changeThemeMode } = useSettings()
 	return (
 		<Stack component={Paper} direction="row" width="fit-content" padding={1} elevation={5}>
-			<IconButton onClick={(e) => onChangeMode(null)}>
+			<IconButton onClick={() => changeThemeMode('dark')}>
 				<FontIcons
 					name="moon"
 					sx={{
-						color: themeMode theme.palette.text.primary,
+						color: themeMode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary,
 					}}
 				/>
 			</IconButton>
 			<Divider orientation="vertical" variant="middle" flexItem />
-			<IconButton onClick={(e) => onChangeMode(null)}>
+			<IconButton onClick={() => changeThemeMode('light')}>
 				<FontIcons
 					name="sun"
 					sx={{
-						color: theme.palette.text.primary,
+						color: themeMode === 'light' ? theme.palette.text.primary : theme.palette.text.secondary,
 					}}
 				/>
 			</IconButton>

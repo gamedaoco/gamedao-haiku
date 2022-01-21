@@ -60,7 +60,6 @@
 }
 .icon-logo:before {
   content: "\e907";
-  color: #fff;
 }
 .icon-gamedao-logo-colored .path1:before {
   content: "\e908";
@@ -133,11 +132,9 @@
 }
 .icon-moon:before {
   content: "\e916";
-  color: #fff;
 }
 .icon-sun:before {
   content: "\e917";
-  color: #fff;
 }
 .icon-calendar:before {
   content: "\e800";
