@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react'
-
-import Head from 'next/head'
-import Image from 'next/image'
-
-import Button from '@mui/material/Button'
+import React from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import Layout from 'src/layouts/default'
+import { Layout } from 'src/layouts/default'
 
-export default function Page() {
+export function GovernancePage() {
 	return (
 		<Layout showHeader showFooter showSidebar title="Governance">
 			<Box sx={{ p: '4rem', height: '90vh' }}>
@@ -23,3 +18,5 @@ export default function Page() {
 		</Layout>
 	)
 }
+
+export default GovernancePage

@@ -1,37 +1,34 @@
-import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import AppProps from 'next/app'
-import { useRouter } from 'next/router'
 
-import Network from 'src/provider'
+import { Providers } from 'src/provider/provider'
 import Theme from 'src/theme'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'src/theme/createEmotionCache'
-import GlobalStyles from 'src/theme/globalStyles'
 import ThemePrimaryColor from 'src/components/ThemePrimaryColor'
+
+// Toastify styles + custom styles overrides
+import 'react-toastify/dist/ReactToastify.css'
+import 'src/theme/css/toastify.css'
 
 const clientSideEmotionCache = createEmotionCache()
 
 interface MyAppProps extends AppProps {
-	emotionCache?: EmotionCache
+	Component: any
+	emotionCache: EmotionCache
+	pageProps: object
 }
 
-const MyApp = (props) => {
-	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
-	const { pathname } = useRouter()
+const SITE_NAME = 'GameDAO'
+const SITE_TITLE = 'Fundraising, coordination, ownership for video games, esports and the creative industry.'
+const SITE_DESCRIPTION =
+	'The DAO for video games, esports and creatives. We connect gamers, creators, publishers and investors for better video games with the power of web3, dao, defi and nft.'
+const SITE_IMAGE = 'https://gamedao.co/assets/gamedao-logo.png'
+const TW_SITE_NAME = '@gamedaoco'
+const TW_SITE_CREATOR = '@zerodotio'
+const CONTACT = 'hey@gamedao.co'
 
-	const SITE_NAME = 'GameDAO'
-	const SITE_TITLE = 'Fundraising, coordination, ownership for video games, esports and the creative industry.'
-	const SITE_DESCRIPTION =
-		'The DAO for video games, esports and creatives. We connect gamers, creators, publishers and investors for better video games with the power of web3, dao, defi and nft.'
-	const SITE_IMAGE = 'https://gamedao.co/assets/gamedao-logo.png'
-	const TW_SITE_NAME = '@gamedaoco'
-	const TW_SITE_CREATOR = '@zerodotio'
-	const CONTACT = 'hey@gamedao.co'
-
-	// TODO: make it better
-	const path = pathname
-
+export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
 	return (
 		<CacheProvider value={emotionCache}>
 			<Head>
@@ -40,6 +37,7 @@ const MyApp = (props) => {
 					content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no"
 				/>
 				<meta name="format-detection" content="telephone=no, address=no, email=no" />
+				<link rel="stylesheet" href="/iconfont.css" />
 				<link rel="shortcut icon" href="/favicon.png" />
 				<link rel="icon" type="image/png" href="/favicon.png" />
 
@@ -56,13 +54,13 @@ const MyApp = (props) => {
 				<meta name="twitter:description" content={SITE_DESCRIPTION} />
 				<meta property="twitter:image" content={SITE_IMAGE} />
 			</Head>
-			<Network>
+			<Providers>
 				<Theme>
 					<ThemePrimaryColor>
 						<Component {...pageProps} />
 					</ThemePrimaryColor>
 				</Theme>
-			</Network>
+			</Providers>
 		</CacheProvider>
 	)
 }

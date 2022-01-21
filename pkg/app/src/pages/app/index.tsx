@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import Head from 'next/head'
-import Image from 'next/image'
-
-import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import Layout from 'src/layouts/default'
+import { Layout } from 'src/layouts/default'
+import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
 
-export default function Page() {
+export function AppPage() {
 	return (
 		<Layout showHeader showFooter showSidebar>
 			<Box sx={{ p: '4rem', height: '90vh' }}>
@@ -18,8 +15,13 @@ export default function Page() {
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 						Hello.
 					</Typography>
+
+					<Typography>Account selector component ---</Typography>
+					<AccountSelector />
 				</Paper>
 			</Box>
 		</Layout>
 	)
 }
+
+export default AppPage

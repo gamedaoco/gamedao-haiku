@@ -25,3 +25,10 @@ export type SettingsContextProps = {
 	onChangeColor: (event: React.ChangeEvent<HTMLInputElement>) => void
 	onToggleStretch: VoidFunction
 }
+
+export interface SettingsState {
+	themeMode: ThemeMode
+	themeDirection: ThemeDirection
+	themeColor: ThemeColor
+	themeStretch: boolean
+}
