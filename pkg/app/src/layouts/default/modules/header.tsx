@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import { FontIcons } from 'src/components/Icons/icons'
 import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
 import { useTheme } from '@mui/material/styles'
-import { Link } from '@mui/material'
+import { NavLink } from 'src/components/NavLink/navLink'
 
 export function Header() {
 	const theme = useTheme()
@@ -22,9 +22,9 @@ export function Header() {
 				}}
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 2, marginTop: 1 }}>
-					<Link href="/">
+					<NavLink href="/">
 						<FontIcons name={'logo'} sx={{ color: theme.palette.text.primary }} />
-					</Link>
+					</NavLink>
 				</Box>
 				<Stack direction="row" justifyContent="end" alignItems="right">
 					<AccountSelector />
