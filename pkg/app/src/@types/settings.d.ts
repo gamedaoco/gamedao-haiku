@@ -20,10 +20,10 @@ export type SettingsContextProps = {
 		name: string
 		value: string
 	}[]
-	onChangeMode: (event: React.ChangeEvent<HTMLInputElement>) => void
-	onChangeDirection: (event: React.ChangeEvent<HTMLInputElement>) => void
-	onChangeColor: (event: React.ChangeEvent<HTMLInputElement>) => void
-	onToggleStretch: VoidFunction
+	changeThemeMode: (mode: ThemeMode) => void
+	changeThemeDirection: (event: React.ChangeEvent<HTMLInputElement>) => void
+	changeThemeColor: (event: React.ChangeEvent<HTMLInputElement>) => void
+	toggleThemeStretch: VoidFunction
 }
 
 export interface SettingsState {

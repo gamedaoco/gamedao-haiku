@@ -60,9 +60,6 @@ export function ExtensionProvider({ children }) {
 					}
 
 					setState(extensionState)
-
-					// TODO: Remove
-					console.log('ExtensionState', extensionState)
 				}
 			})
 		} else {

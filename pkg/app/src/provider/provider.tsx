@@ -1,10 +1,13 @@
-import { NetworkProvider } from 'src/provider/network/networkProvider'
-import { ExtensionProvider } from 'src/provider/extension/extensionProvider'
+import { NetworkProvider } from './network/networkProvider'
+import { ExtensionProvider } from './extension/extensionProvider'
+import { SettingsProvider } from './settings/settingsProvider'
 
 export function Providers({ children }) {
 	return (
-		<NetworkProvider>
-			<ExtensionProvider>{children}</ExtensionProvider>
-		</NetworkProvider>
+		<SettingsProvider>
+			<NetworkProvider>
+				<ExtensionProvider>{children}</ExtensionProvider>
+			</NetworkProvider>
+		</SettingsProvider>
 	)
 }

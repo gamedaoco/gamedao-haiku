@@ -1,10 +1,7 @@
 import { ReactNode, useMemo } from 'react'
-// material
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles'
-// hooks
-import useSettings from 'src/hooks/useSettings'
-//
+import { useSettings } from 'src/hooks/useSettings'
 import shape from './shape'
 import palette from './palette'
 import typography from './typography'

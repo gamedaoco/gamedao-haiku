@@ -1,6 +1,3 @@
-import { useContext } from 'react'
-import { SettingsContext } from '../context/SettingsContext'
+import { useSettingsContext } from 'src/provider/settings/modules/context'
 
-const useSettings = () => useContext(SettingsContext)
-
-export default useSettings
+export const useSettings = useSettingsContext
