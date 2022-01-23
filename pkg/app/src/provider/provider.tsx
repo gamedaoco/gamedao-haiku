@@ -8,9 +8,7 @@ export function Providers({ children }) {
 		<AppProvider>
 			<SettingsProvider>
 				<NetworkProvider>
-					<ExtensionProvider>
-						{children}
-					</ExtensionProvider>
+					<ExtensionProvider>{children}</ExtensionProvider>
 				</NetworkProvider>
 			</SettingsProvider>
 		</AppProvider>
