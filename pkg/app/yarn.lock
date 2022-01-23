@@ -1479,10 +1479,12 @@ __metadata:
     "@polkadot/util-crypto": ^8.3.1
     "@types/node": ^16.11.7
     "@types/react": ^17.0.34
+    dotenv: ^14.2.0
     eslint: 7
     eslint-config-next: 12.0.3
     lodash: ^4.17.21
     next: 12.0.3
+    nextjs-sitemap-generator: ^1.3.1
     react: 17.0.2
     react-dom: 17.0.2
     react-icons: ^4.3.1
@@ -2257,6 +2259,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:^2.9.0":
+  version: 2.28.0
+  resolution: "date-fns@npm:2.28.0"
+  checksum: a0516b2e4f99b8bffc6cc5193349f185f195398385bdcaf07f17c2c4a24473c99d933eb0018be4142a86a6d46cb0b06be6440ad874f15e795acbedd6fd727a1f
+  languageName: node
+  linkType: hard
+
 "debug@npm:2, debug@npm:^2.2.0, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -2386,6 +2395,13 @@ __metadata:
   version: 4.19.0
   resolution: "domain-browser@npm:4.19.0"
   checksum: 1b77fa2a85f1531b8bdfcc42c2a2706016aeaddeed12ce4851f9d6a17135588e05120e380c6b5b645290522684f9311a6e0a3e68b46f864f864ed89620d4bdd7
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^14.2.0":
+  version: 14.2.0
+  resolution: "dotenv@npm:14.2.0"
+  checksum: 85a0e44918ef49e64c278f757dab50a156b9a6ca67f708876fd81d265e575e35b67387fc681d910df99368d6c1edca66cd546edeb0f7db3b499cb876c999233e
   languageName: node
   linkType: hard
 
@@ -4327,6 +4343,15 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: 68be20fdc9a681ad3d705666b500bbac9fdec9700272810e1eb3733cb77fe4ac01879aca15859ed217c123629cec3798bec3245e5e07b9011bc8b0ab8a6853a6
+  languageName: node
+  linkType: hard
+
+"nextjs-sitemap-generator@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "nextjs-sitemap-generator@npm:1.3.1"
+  dependencies:
+    date-fns: ^2.9.0
+  checksum: ace4bae61fed574edfeba4a9f2e4fcda48b3d3a357b3ad3c713b194a9992eca1e2f2344b47886136335a70c3972a1942c2b25da08c21c96ef9f367c2c0156a02
   languageName: node
   linkType: hard
 

@@ -5,13 +5,13 @@ import Typography from '@mui/material/Typography'
 
 import { Layout } from 'src/layouts/default/layout'
 
-export function CampaignsPage() {
+export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
 			<Box sx={{ p: '4rem', height: '90vh' }}>
 				<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-						Hello.
+						Campaigns.
 					</Typography>
 				</Paper>
 			</Box>
@@ -19,4 +19,4 @@ export function CampaignsPage() {
 	)
 }
 
-export default CampaignsPage
+export default Page

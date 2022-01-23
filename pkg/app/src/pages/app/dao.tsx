@@ -5,13 +5,13 @@ import Typography from '@mui/material/Typography'
 
 import { Layout } from 'src/layouts/default/layout'
 
-export function DAOPage() {
+export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar title="DAO">
 			<Box sx={{ p: '4rem', height: '90vh' }}>
 				<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-						Hello.
+						DAO.
 					</Typography>
 				</Paper>
 			</Box>
@@ -19,4 +19,4 @@ export function DAOPage() {
 	)
 }
 
-export default DAOPage
+export default Page
