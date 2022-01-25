@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "@gamedao-haiku/app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@gamedao-haiku/translations": "^1.0.0",
     "@iconify/icons-eva": "^1.1.0",
     "@iconify/icons-ic": "^1.1.13",
     "@iconify/react": "^3.0.1",

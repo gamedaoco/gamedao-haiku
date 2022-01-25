@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
-    "dev": "wsrun -p app -c dev",
-    "build": "wsrun -e -c -s -x app,example build",
+    "dev": "wsrun -p @gamedao-haiku/app -c dev",
+    "build": "wsrun -e -c -s -x @gamedao-haiku/app,example build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "release": "yarn build && yarn changeset publish",
     "format": "prettier --write --check 'pkg/**/*.{js,jsx,ts,tsx}'",
