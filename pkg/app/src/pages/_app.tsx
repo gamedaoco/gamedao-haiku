@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import AppProps from 'next/app'
+import type { AppProps, NextWebVitalsMetric } from 'next/app'
 
 import { Providers } from 'src/provider/provider'
 import Theme from 'src/theme'
@@ -63,6 +63,10 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 			</Providers>
 		</CacheProvider>
 	)
+}
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+	console.log(metric)
 }
 
 export default MyApp
