@@ -53,10 +53,7 @@
       "themes/*": [
         "./src/themes/*"
       ]
-    },
-    "typeRoots": [
-      "./src/@types"
-    ]
+    }
   },
   "include": [
     "next-env.d.ts",
