@@ -31,13 +31,13 @@ const NavBadge = styled(Badge)(({ theme }) => ({
 	},
 }))
 
-const SidebarNavItem = ({ href, pattern, name, children }) => {
+const SidebarNavItem = ({ href, name, children }) => {
 	const { pathname } = useRouter()
 	const isMobile = useMediaQuery('(max-width:640px)')
 	const override = { fontSize: isMobile ? '2rem' : '3rem' }
 	return (
 		<NavLink href={href}>
-			<SidebarButton active={(!!pathname.match(pattern)).toString()}>
+			<SidebarButton active={(pathname === href).toString()}>
 				<Stack direction="row" alignItems="center" px={2}>
 					<ListItemIcon>{<FontIcons sx={{ ...override }} name={name} />}</ListItemIcon>
 					<Typography>{children}</Typography>
@@ -69,16 +69,16 @@ export function Sidebar() {
 			}}
 		>
 			<Stack spacing={2}>
-				<SidebarNavItem href="/app" pattern={`/app`} name="dashboard">
+				<SidebarNavItem href="/app" name="dashboard">
 					Dashboard
 				</SidebarNavItem>
-				<SidebarNavItem href="/app/governance" pattern={`/app/governance`} name="voting">
+				<SidebarNavItem href="/app/governance" name="voting">
 					Governance
 					{counter.gov > 0 && (
 						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.gov} color={'primary'} variant="dot" />
 					)}
 				</SidebarNavItem>
-				<SidebarNavItem href="/app/campaigns" pattern={`/app/campaigns`} name="campaign">
+				<SidebarNavItem href="/app/campaigns" name="campaign">
 					Campaigns
 					{counter.cam > 0 && (
 						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
