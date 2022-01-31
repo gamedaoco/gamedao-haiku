@@ -8,7 +8,6 @@
     "providers": "RefCount",
     "data": "AccountData"
   },
-
   "Body": {
     "id": "Hash",
     "index": "u128",
@@ -19,7 +18,6 @@
     "created": "BlockNumber",
     "mutated": "BlockNumber"
   },
-
   "BConfig": {
     "fee_model": "ControlFeeModel",
     "fee": "Balance",
@@ -28,7 +26,6 @@
     "access": "ControlAccessModel",
     "member_limit": "u64"
   },
-
   "ControlType": {
     "_enum": [
       "INDIVIDUAL",
@@ -36,23 +33,30 @@
       "DAO",
       "HYBRID"
     ]
-
   },
   "ControlState": {
-    "_enum": ["INACTIVE", "ACTIVE", "LOCKED"]
+    "_enum": [
+      "INACTIVE",
+      "ACTIVE",
+      "LOCKED"
+    ]
   },
   "ControlMemberState": {
     "_enum": [
-          "INACTIVE",
-          "ACTIVE",
-          "PENDING",
-          "KICKED",
-          "BANNED",
-          "EXITED"]
-
+      "INACTIVE",
+      "ACTIVE",
+      "PENDING",
+      "KICKED",
+      "BANNED",
+      "EXITED"
+    ]
   },
   "ControlFeeModel": {
-    "_enum": ["NOFEES", "RESERVE", "TRANSFER"]
+    "_enum": [
+      "NOFEES",
+      "RESERVE",
+      "TRANSFER"
+    ]
   },
   "ControlAccessModel": {
     "_enum": [
@@ -61,7 +65,6 @@
       "CONTROLLER"
     ]
   },
-
   "RealmIndex": "u64",
   "ClassIndex": "u64",
   "ItemIndex": "u64",
@@ -106,7 +109,6 @@
   },
   "TangramId": "Hash",
   "TangramItemOf": "TangramItem",
-
   "Campaign": {
     "id": "Hash",
     "owner": "AccountId",
@@ -134,27 +136,25 @@
   },
   "FlowGovernance": {
     "_enum": [
-          "NO",
-          "YES"]
-
+      "NO",
+      "YES"
+    ]
   },
   "FlowState": {
-    "_enum":
-    [  "INIT",
-          "ACTIVE",
-          "PAUSED",
-          "SUCCESS",
-          "FAILED",
-          "LOCKED"
-        ]
+    "_enum": [
+      "INIT",
+      "ACTIVE",
+      "PAUSED",
+      "SUCCESS",
+      "FAILED",
+      "LOCKED"
+    ]
   },
-
   "campaign_id": "Hash",
   "contribution": "Balance",
   "Timestamp": "Moment",
   "EventMessage": "Vec<u8>",
   "Nonce": "u64",
-
   "Proposal": {
     "proposal_id": "Hash",
     "context_id": "Hash",
@@ -163,47 +163,43 @@
     "start": "BlockNumber",
     "expiry": "BlockNumber"
   },
-
   "ProposalMetadata": {
     "title": "Vec<u8>",
     "cid": "Vec<u8>",
     "amount": "Balance"
   },
-
   "ProposalState": {
-    "_enum":
-[      "INIT",
+    "_enum": [
+      "INIT",
       "ACTIVE",
       "ACCEPTED",
       "REJECTED",
       "EXPIRED",
       "ABORTED",
-      "FINALIZED"]
-
+      "FINALIZED"
+    ]
   },
   "ProposalType": {
     "_enum": [
-          "GENERAL",
-          "MULTIPLE",
-          "MEMBER",
-          "WITHDRAWAL",
-          "SPENDING"]
-
+      "GENERAL",
+      "MULTIPLE",
+      "MEMBER",
+      "WITHDRAWAL",
+      "SPENDING"
+    ]
   },
   "VotingType": {
     "_enum": [
-          "SIMPLE_MAJORITY",
-          "TOKEN_MAJORITY",
-          "ABSOLUTE_MAJORITY",
-          "QUADRATIC",
-          "RANKED",
-          "CONVICTION"]
-
+      "SIMPLE_MAJORITY",
+      "TOKEN_MAJORITY",
+      "ABSOLUTE_MAJORITY",
+      "QUADRATIC",
+      "RANKED",
+      "CONVICTION"
+    ]
   },
-
   "TitleText": "Vec<u8>",
   "CID": "Vec<u8>",
-
   "Entity": {
     "account": "AccountId",
     "index": "u128",
@@ -215,5 +211,5 @@
     "value": "u64",
     "mutated": "BlockNumber"
   },
-  "State":"FlowState"
+  "State": "FlowState"
 }

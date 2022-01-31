@@ -1,5 +1,6 @@
 import { ReactNode, useCallback } from 'react'
 import { useRouter } from 'next/router'
+
 type NavLinkProps = {
 	href: string
 	children: ReactNode

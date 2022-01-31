@@ -26,18 +26,22 @@ declare module '@mui/material/styles/createPalette' {
 	interface TypeBackground {
 		neutral: string
 	}
+
 	interface SimplePaletteColorOptions {
 		lighter: string
 		darker: string
 	}
+
 	interface PaletteColor {
 		lighter: string
 		darker: string
 	}
+
 	interface Palette {
 		gradients: GradientsPaletteOptions
 		chart: ChartPaletteOptions
 	}
+
 	interface PaletteOptions {
 		gradients: GradientsPaletteOptions
 		chart: ChartPaletteOptions

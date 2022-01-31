@@ -1,26 +1,66 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": false,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-		"incremental": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"baseUrl": ".",
-		"paths": {
-			"src/*": [
-				"src/*"
-			]
-		}
-	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "config/*": [
+        "./src/config/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "data/*": [
+        "./src/data/*"
+      ],
+      "hooks/*": [
+        "./src/hooks/*"
+      ],
+      "layouts/*": [
+        "./src/layouts/*"
+      ],
+      "lib/*": [
+        "./src/lib/*"
+      ],
+      "provider/*": [
+        "./src/provider/*"
+      ],
+      "public/*": [
+        "./public/*"
+      ],
+      "queries/*": [
+        "./src/queries/*"
+      ],
+      "src/*": [
+        "./src/*"
+      ],
+      "themes/*": [
+        "./src/themes/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

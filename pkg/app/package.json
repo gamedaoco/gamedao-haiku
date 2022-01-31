@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "@gamedao-haiku/app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -26,18 +26,18 @@
     "@polkadot/util": "^8.3.1",
     "@polkadot/util-crypto": "^8.3.1",
     "lodash": "^4.17.21",
-    "next": "12.0.3",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next": "12.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-toastify": "^8.1.0"
+    "react-toastify": "^8.1.0",
+    "@gamedao-haiku/translations": "*"
   },
   "devDependencies": {
-    "@types/node": "^16.11.7",
+    "@types/node": "^17.0.13",
     "@types/react": "^17.0.34",
-    "eslint": "7",
-    "eslint-config-next": "12.0.3",
-    "typescript": "^4.4.4"
-  },
-  "packageManager": "yarn@3.1.1"
+    "eslint": "^8.8.0",
+    "eslint-config-next": "^12.0.9",
+    "typescript": "^4.5.5"
+  }
 }

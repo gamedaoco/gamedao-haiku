@@ -6,12 +6,12 @@
 /node_modules
 /.pnp
 .pnp.js
-.yarn/cache
-.yarn/release
-.yarn/unplugged
+.yarn/
 
+**/node_modules/
 **/.next/
 **/.idea/
+**/.yarn/
 # testing
 /coverage
 

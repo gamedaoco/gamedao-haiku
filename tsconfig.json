@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "exclude": ["node_modules"]
   }
 }
