@@ -7,7 +7,7 @@ type ThemePrimaryColorProps = {
 	children: ReactNode
 }
 
-export default function ThemePrimaryColor({ children }: ThemePrimaryColorProps) {
+export function ThemePrimaryColor({ children }: ThemePrimaryColorProps) {
 	const defaultTheme = useTheme()
 	const { setColor } = useSettings()
 
