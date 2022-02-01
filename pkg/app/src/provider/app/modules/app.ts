@@ -5,7 +5,7 @@ import type { Dispatch } from 'react'
 const HOST = 'api/'
 const ENV = 'dev'
 
-async function loadAppDat(resource: string, env: string) {
+async function loadAppData(resource: string, env: string) {
 	try {
 		let data = await fetch(HOST + resource, {
 			method: 'POST',
