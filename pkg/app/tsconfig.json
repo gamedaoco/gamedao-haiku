@@ -21,37 +21,37 @@
     "baseUrl": ".",
     "paths": {
       "config/*": [
-        "./src/config/*"
+        "src/config/*"
       ],
       "components/*": [
-        "./src/components/*"
+        "src/components/*"
       ],
       "data/*": [
-        "./src/data/*"
+        "src/data/*"
       ],
       "hooks/*": [
-        "./src/hooks/*"
+        "src/hooks/*"
       ],
       "layouts/*": [
-        "./src/layouts/*"
+        "src/layouts/*"
       ],
       "lib/*": [
-        "./src/lib/*"
+        "src/lib/*"
       ],
       "provider/*": [
-        "./src/provider/*"
+        "src/provider/*"
       ],
       "public/*": [
-        "./public/*"
+        "public/*"
       ],
       "queries/*": [
-        "./src/queries/*"
+        "src/queries/*"
       ],
       "src/*": [
-        "./src/*"
+        "src/*"
       ],
       "themes/*": [
-        "./src/themes/*"
+        "src/themes/*"
       ]
     }
   },
