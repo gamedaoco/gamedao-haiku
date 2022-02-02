@@ -25,7 +25,7 @@ async function loadAppData(resource: string, env: string) {
 export async function loadAppConfig(dispatch: Dispatch<AppAction>) {
 	try {
 		dispatch({ type: AppActionTypes.CONFIG_LOAD })
-		const config = await loadAppDat('config', ENV)
+		const config = await loadAppData('config', ENV)
 		dispatch({
 			type: AppActionTypes.CONFIG_UPDATE,
 			payload: config,
@@ -40,7 +40,7 @@ export async function loadAppConfig(dispatch: Dispatch<AppAction>) {
 export async function loadAppFeatures(dispatch: Dispatch<AppAction>) {
 	try {
 		dispatch({ type: AppActionTypes.FEATURES_LOAD })
-		const features = await loadAppDat('features', ENV)
+		const features = await loadAppData('features', ENV)
 		dispatch({
 			type: AppActionTypes.FEATURES_UPDATE,
 			payload: features,
