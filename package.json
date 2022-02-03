@@ -13,8 +13,8 @@
     "build": "wsrun -e -c -s -x -m build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "release": "yarn build && yarn changeset publish",
-    "format": "prettier --write --check pkg/**/*.{js,jsx,ts,tsx}",
-    "format:verify": "prettier --check pkg/**/*.{js,jsx,ts,tsx}"
+    "format": "prettier --write --check pkg/**/*.{ts,tsx}",
+    "format:verify": "prettier --check pkg/**/*.{ts,tsx}"
   },
   "publishConfig": {
     "access": "public"
