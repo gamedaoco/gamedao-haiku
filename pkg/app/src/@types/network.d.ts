@@ -1,6 +1,6 @@
 import { ApiProvider } from './ApiProvider'
 import { ApiPromise } from '@polkadot/api'
-import { RegistryTypes } from '@polkadot/types/types'
+import type { RegistryTypes } from '@polkadot/types/types'
 
 export interface SystemProperties {
 	ss58Format: number
@@ -11,6 +11,7 @@ export interface SystemProperties {
 export interface ApiProvider {
 	apiProvider: ApiPromise | null
 	systemProperties: SystemProperties
+	chainName: string
 }
 
 export interface ApiProviderConfig {
@@ -19,5 +20,7 @@ export interface ApiProviderConfig {
 }
 
 export interface NetworkState {
-	apiProvider: ApiProvider
+	selectedApiProvider: ApiProvider
+	apiProviders: ApiProvider[]
+	selectApiProvider: Function<ApiProvider>
 }

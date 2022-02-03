@@ -2,12 +2,13 @@ import { SystemProperties } from 'src/@types/network'
 import { AccountSettings, ExtensionState } from 'src/@types/extension'
 import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
 import { Signer } from '@polkadot/types/types'
+import { getDecodedAddress } from 'src/utils/accountUtils'
 
 export async function getSigner(account: InjectedAccountWithMeta): Promise<Signer> {
 	const { web3FromSource } = await import('@polkadot/extension-dapp')
 	try {
 		return (await web3FromSource(account.meta.source)).signer
-	} catch (error: any) {
+	} catch (error) {
 		console.error('The signer could not be retrieved from the account', 'error:', error)
 	}
 
@@ -21,7 +22,7 @@ export async function initializeAccounts(
 	if (!systemProperties) return null
 	try {
 		const { web3Accounts, web3Enable } = await import('@polkadot/extension-dapp')
-		const w3Enabled = (await web3Enable('polkadot-extension'))?.length > 0
+		const w3Enabled = (await web3Enable('GameDao'))?.length > 0
 		const walletAccounts = await web3Accounts({ ss58Format: systemProperties.ss58Format })
 		const accounts = await Promise.all(
 			walletAccounts.map(async (account) => {
@@ -31,7 +32,10 @@ export async function initializeAccounts(
 				}
 			}),
 		)
-		const selectedAccount = accounts.find((acc) => acc.account.address === accountSettings.selectedAddress) || null
+		const selectedAccount =
+			accounts.find(
+				(acc) => getDecodedAddress(acc.account.address) === getDecodedAddress(accountSettings.selectedAddress),
+			) || null
 
 		return {
 			w3Enabled,
@@ -41,7 +45,7 @@ export async function initializeAccounts(
 			disconnectWallet: null,
 			selectAccount: null,
 		}
-	} catch (error: any) {
+	} catch (error) {
 		console.error('Accounts could not be initialized', 'error:', error)
 	}
 
