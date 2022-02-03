@@ -6,12 +6,12 @@
       xmlns:xhtml="http://www.w3.org/1999/xhtml">
       
 	<url>
-		<loc>https://haiku.gamedao.co/app/campaigns/[id]</loc>
+		<loc>https://haiku.gamedao.co/app/campaigns</loc>
 		<lastmod>2022-02-03</lastmod>
 	</url>
 
 	<url>
-		<loc>https://haiku.gamedao.co/app/campaigns</loc>
+		<loc>https://haiku.gamedao.co/app/campaigns/[id]</loc>
 		<lastmod>2022-02-03</lastmod>
 	</url>
 
