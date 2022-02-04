@@ -1,10 +1,12 @@
 import { createContext, useContext } from 'react'
-import { NetworkState } from 'src/@types/network'
+import type { NetworkState } from 'src/@types/network'
 
 export const NetworkContext = createContext<NetworkState>({
-	apiProvider: {},
+	selectedApiProvider: null,
+	apiProviders: null,
+	selectApiProvider: () => {},
 })
 
-export function useNetworkContext() {
+export function useNetworkContext(): NetworkState {
 	return useContext(NetworkContext)
 }

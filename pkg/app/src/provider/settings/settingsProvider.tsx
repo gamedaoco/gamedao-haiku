@@ -1,5 +1,5 @@
 import { SettingsContext } from './modules/context'
-import useLocalStorage from 'src/hooks/useLocalStorage'
+import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { SettingsState, ThemeColor, ThemeDirection, ThemeMode } from 'src/@types/settings'
 import { useCallback } from 'react'
 import { PRIMARY_COLOR } from 'src/theme/palette'
