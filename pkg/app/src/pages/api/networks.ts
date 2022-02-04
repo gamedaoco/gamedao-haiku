@@ -1,16 +1,26 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 // TODO: should use @zeroio/type-definitions
 // TODO: should use @gamedao/types
-import data from 'src/data/types.json'
+import data from 'src/data/networks.json'
 
 // test config local:
-// curl -X POST localhost:3000/api/config -H "Content-Type:application/json;charset=utf-8" -d '{"key":"hello","env":"local"}'
+// curl -X POST localhost:3000/api/networks -H "Content-Type:application/json;charset=utf-8" -d '{"key":"hello","prefix":"0"}'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST' && req.body.key == 'hello') {
-		const { env } = req.body
+
+		const { prefix } = req.body
+
+		console.log('prefix', prefix)
+
+		const slice = (prefix)
+			? data.networks.filter( s => ( s.prefix == prefix ? true : false ))[0]
+			: data.networks
+
+		console.log(slice)
+
 		const content = {
-			...data,
+			...slice,
 		}
 
 		try {
