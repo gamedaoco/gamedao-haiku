@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
-import { useNetworkContext } from 'src/provider/network/modules/context'
+import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
 import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 import { initializeAccounts } from './modules/accounts'
-import useLocalStorage from 'src/hooks/useLocalStorage'
+import { useLocalStorage } from 'src/hooks/useLocalStorage'
+import { useApiProvider } from 'hooks/useApiProvider'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)
-	const { apiProvider } = useNetworkContext()
+	const apiProvider = useApiProvider()
 	const [accountSettings, setAccountSettings] = useLocalStorage<AccountSettings>('extension-account-settings', {
 		selectedAddress: null,
 		allowConnect: false,
