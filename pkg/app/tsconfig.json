@@ -20,6 +20,9 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "graphql/*": [
+        "src/graphql/*"
+      ],
       "config/*": [
         "src/config/*"
       ],
