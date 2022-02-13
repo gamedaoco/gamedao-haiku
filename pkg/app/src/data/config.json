@@ -36,11 +36,11 @@
     "GQL_KEY": "i-HFXk_txMvwZL4Ej7dphgCZ"
   },
   "identity": {
-    "provider": "fractal.id",
-    "url": "https://next.fractal.id/authorize",
-    "client_id": "USM9o1aifkcKnrUr-wMuYHNEO7AwUeQYTy2FevLEElw",
-    "redirect_uri": "https%3A%2F%2Fdao.zero.io%2Faccount%2Fcb",
-    "response_type": "code",
-    "scope": "email%3Aread%20verification.basic%3Aread%20verification.basic.details%3Aread%20verification.liveness%3Aread%20verification.liveness.details%3Aread"
+    "PROVIDER": "fractal.id",
+    "URL": "https://next.fractal.id/authorize",
+    "CLIENT_ID": "USM9o1aifkcKnrUr-wMuYHNEO7AwUeQYTy2FevLEElw",
+    "REDIRECT_URI": "https%3A%2F%2Fdao.zero.io%2Faccount%2Fcb",
+    "RESPONSE_TYPE": "code",
+    "SCOPE": "email%3Aread%20verification.basic%3Aread%20verification.basic.details%3Aread%20verification.liveness%3Aread%20verification.liveness.details%3Aread"
   }
 }
