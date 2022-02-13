@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import type { AppProps, NextWebVitalsMetric } from 'next/app'
+import { AppProps, NextWebVitalsMetric } from 'next/app'
 
 import { Providers } from 'src/provider/provider'
 import Theme from 'src/theme'
