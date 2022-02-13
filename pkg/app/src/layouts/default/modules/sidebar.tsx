@@ -5,6 +5,7 @@ import { Badge, ListItemButton, ListItemIcon, Stack, Typography, useMediaQuery }
 import { ThemeSwitch } from 'src/components/ThemeSwitcher/themeSwitch'
 import { FontIcons } from 'src/components/Icons/icons'
 import { NavLink } from 'src/components/NavLink/navLink'
+import { NetworkSelector } from 'src/components'
 
 // TODO:
 // Fix error on page load!!
@@ -85,7 +86,10 @@ export function Sidebar() {
 					)}
 				</SidebarNavItem>
 			</Stack>
-			<Stack direction="row" mt="auto" justifyContent="flex-end">
+
+			<Stack direction="row" mt="auto" spacing={2} justifyContent="flex-end">
+				<NetworkSelector />
+
 				<ThemeSwitch />
 			</Stack>
 		</Stack>
