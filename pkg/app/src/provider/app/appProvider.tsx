@@ -1,5 +1,5 @@
 import { Reducer, useEffect, useReducer } from 'react'
-import type { AppAction, AppState } from 'src/@types/app'
+import { AppAction, AppState } from 'src/@types/app'
 import { AppActionTypes } from 'src/@types/app'
 import { loadAppConfig, loadAppFeatures } from 'provider/app/modules/app'
 import { AppContext, INITIAL_APP_STATE } from 'provider/app/modules/context'

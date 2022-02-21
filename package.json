@@ -13,17 +13,15 @@
     "build": "wsrun -e -c -s -x -m build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "release": "yarn build && yarn changeset publish",
-    "format": "prettier --write --check pkg/**/*.{js,jsx,ts,tsx}",
-    "format:verify": "prettier --check pkg/**/*.{js,jsx,ts,tsx}"
+    "format": "prettier --write --check pkg/**/*.{ts,tsx}",
+    "format:verify": "prettier --check pkg/**/*.{ts,tsx}"
   },
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@changesets/cli": "^2.17.0",
-    "wsrun": "^5.2.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@changesets/cli": "^2.17.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "@commitlint/prompt-cli": "^16.1.0",
@@ -35,7 +33,8 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.3",
     "prettier": "^2.5.1",
-    "pretty-quick": "^3.1.3"
+    "pretty-quick": "^3.1.3",
+    "wsrun": "^5.2.1"
   },
   "config": {
     "commitizen": {
