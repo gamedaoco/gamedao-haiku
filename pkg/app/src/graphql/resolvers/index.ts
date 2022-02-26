@@ -1,12 +1,9 @@
 import pkg from '../../../package.json'
 
-import { typeDefs } from '../schema'
 import { links } from './links'
 import { config } from './config'
 import { features } from './features'
-// import { translations } from './translations'
-// import { networks } from './networks'
-// import { rmrk } from './rmrk'
+import { networks } from './networks'
 
 export const resolvers = {
 	Query: {
@@ -16,8 +13,6 @@ export const resolvers = {
 		links,
 		config,
 		features,
-		// translations
-		// networks,
-		// rmrk,
+		networks,
 	},
 }

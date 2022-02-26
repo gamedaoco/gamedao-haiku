@@ -56,10 +56,19 @@ export const typeDefs = gql`
 		SUBZERO_PORT: String
 	}
 
+	scalar Object
+	type Network {
+		prefix: Int
+		network: String
+		displayName: String
+		types: Object
+	}
+
 	type Query {
 		version: String!
 		links: [Link]!
 		config(env: Environment!): Config!
 		features(env: Environment!): Features!
+		networks: [Network]!
 	}
 `
