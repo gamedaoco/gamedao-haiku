@@ -8,14 +8,11 @@ import data from 'src/data/networks.json'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST' && req.body.key == 'hello') {
-
 		const { prefix } = req.body
 
 		console.log('prefix', prefix)
 
-		const slice = (prefix)
-			? data.networks.filter( s => ( s.prefix == prefix ? true : false ))[0]
-			: data.networks
+		const slice = prefix ? data.networks.filter((s) => (s.prefix == prefix ? true : false))[0] : data.networks
 
 		console.log(slice)
 

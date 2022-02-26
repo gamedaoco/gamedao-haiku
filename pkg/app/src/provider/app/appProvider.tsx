@@ -1,64 +1,34 @@
-import { Reducer, useEffect, useReducer } from 'react'
-import type { AppAction, AppState } from 'src/@types/app'
-import { AppActionTypes } from 'src/@types/app'
-import { loadAppConfig, loadAppFeatures } from 'provider/app/modules/app'
-import { AppContext, INITIAL_APP_STATE } from 'provider/app/modules/context'
-
-// TODO: get root config through .env
-const DEV = true
-
-const reducer: Reducer<AppState, AppAction> = (state: AppState, action: AppAction) => {
-	switch (action.type) {
-		case AppActionTypes.CONFIG_LOAD:
-			if (DEV) console.log('config load')
-			return {
-				...state,
-				app: { ...state.app, READY: false },
-				config: { ...state.config, loading: true },
-			}
-
-		case AppActionTypes.CONFIG_UPDATE:
-			if (DEV) console.log('config', action.payload)
-			return {
-				...state,
-				app: { ...state.app, READY: true },
-				config: {
-					loading: false,
-					data: action.payload as any,
-				},
-			}
-
-		case AppActionTypes.FEATURES_LOAD:
-			if (DEV) console.log('features load')
-			return {
-				...state,
-				features: { ...state.features, loading: true },
-			}
-
-		case AppActionTypes.FEATURES_UPDATE:
-			if (DEV) console.log('features', action.payload)
-			return {
-				...state,
-				features: {
-					loading: false,
-					data: action.payload as any,
-				},
-			}
-
-		default:
-			throw new Error(`Unknown type: ${action.type}`)
-	}
-}
+import { useEffect } from 'react'
+import { useQuery } from '@apollo/client'
+import { AppContext } from 'provider/app/modules/context'
+import { GET_CONFIG_QUERY } from 'graphql/queries/config'
+import { GET_FEATURE_QUERY } from 'graphql/queries/feature'
 
 export function AppProvider({ children }) {
-	const [state, dispatch] = useReducer(reducer, INITIAL_APP_STATE)
-	const { READY } = state.app
+	const configQueryResult = useQuery(GET_CONFIG_QUERY)
+	const featureQueryResult = useQuery(GET_FEATURE_QUERY)
 
 	useEffect(() => {
-		Promise.all([loadAppConfig(dispatch), loadAppFeatures(dispatch)]).then(() => {
-			if (DEV) console.log('App config and features were loaded')
-		})
-	}, [])
+		if (configQueryResult.error) {
+			console.error('The app config could not be retrieved', 'error', configQueryResult.error)
+		}
+	}, [configQueryResult.error])
 
-	return !READY ? null : <AppContext.Provider value={state}>{children}</AppContext.Provider>
+	useEffect(() => {
+		if (featureQueryResult.error) {
+			console.error('The app config could not be retrieved', 'error', featureQueryResult.error)
+		}
+	}, [featureQueryResult.error])
+
+	return (
+		<AppContext.Provider
+			value={{
+				ready: configQueryResult.data && featureQueryResult.data,
+				config: configQueryResult.data?.config ?? null,
+				features: featureQueryResult.data?.features ?? null,
+			}}
+		>
+			{children}
+		</AppContext.Provider>
+	)
 }
