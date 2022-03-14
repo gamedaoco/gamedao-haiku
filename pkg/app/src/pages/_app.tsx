@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { AppProps, NextWebVitalsMetric } from 'next/app'
 
 import { Providers } from 'src/provider/provider'
-import Theme from 'src/theme'
+
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'src/theme/createEmotionCache'
 import { ThemePrimaryColor } from 'src/components/ThemePrimaryColor/themePrimaryColor'
@@ -55,11 +55,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 				<meta property="twitter:image" content={SITE_IMAGE} />
 			</Head>
 			<Providers>
-				<Theme>
-					<ThemePrimaryColor>
-						<Component {...pageProps} />
-					</ThemePrimaryColor>
-				</Theme>
+				<Component {...pageProps} />
 			</Providers>
 		</CacheProvider>
 	)

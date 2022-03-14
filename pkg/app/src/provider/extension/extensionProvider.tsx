@@ -4,12 +4,16 @@ import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 import { initializeAccounts } from './modules/accounts'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useApiProvider } from 'hooks/useApiProvider'
+import { getWallets, isWalletInstalled, Wallet } from '@talisman-connect/wallets'
+import { WalletDialog } from 'components/WalletDialog/walletDialog'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)
 	const apiProvider = useApiProvider()
+	const [supportedWalletsState, setSupportedWalletsState] = useState<Wallet[]>()
 	const [accountSettings, setAccountSettings] = useLocalStorage<AccountSettings>('extension-account-settings', {
 		selectedAddress: null,
+		lastUsedExtension: null,
 		allowConnect: false,
 	})
 	const isMountedRef = useRef<null | boolean>(null)
@@ -20,13 +24,22 @@ export function ExtensionProvider({ children }) {
 		setAccountSettings({ ...accountSettings, allowConnect: true })
 	}, [accountSettings, setAccountSettings])
 	const disconnectWalletCallback = useCallback(() => {
-		setAccountSettings({ ...accountSettings, allowConnect: false })
+		setAccountSettings({ ...accountSettings, allowConnect: false, lastUsedExtension: null })
 	}, [accountSettings, setAccountSettings])
+	const selectWalletExtension = useCallback(
+		(extensionName: string) => {
+			setAccountSettings({ ...accountSettings, lastUsedExtension: extensionName })
+		},
+		[accountSettings, setAccountSettings],
+	)
 
 	// Change selected account callback
 	const selectAccountCallback = useCallback(
 		(accountState: AccountState) => {
 			if (!accountState) return
+			document.addEventListener('@talisman-connect/wallet-selected', () => {
+				console.log('XXXXXXXXXXXXX')
+			})
 			setState({ ...(state ?? ({} as any)), selectedAccount: accountState })
 			setAccountSettings({
 				...accountSettings,
@@ -39,6 +52,7 @@ export function ExtensionProvider({ children }) {
 	// Initialize is mounted ref
 	useEffect(() => {
 		isMountedRef.current = true
+		setSupportedWalletsState(getWallets().filter((wallet) => wallet.installed))
 		return () => {
 			isMountedRef.current = false
 		}
@@ -47,26 +61,28 @@ export function ExtensionProvider({ children }) {
 	// Logic initialize polkadot wallet and account loading
 	useEffect(() => {
 		if (!apiProvider) return
-		if (accountSettings.allowConnect) {
+		if (accountSettings.allowConnect && accountSettings.lastUsedExtension) {
 			// Load accounts from extension
-			initializeAccounts(apiProvider.systemProperties, accountSettings).then((extensionState: ExtensionState) => {
-				if (isMountedRef.current) {
-					if (!extensionState?.selectedAccount && extensionState?.accounts?.length > 0) {
-						extensionState.selectedAccount = extensionState.accounts[0]
-						setAccountSettings({
-							...accountSettings,
-							selectedAddress: extensionState.selectedAccount?.account?.address,
-						})
-					}
+			initializeAccounts(apiProvider.systemProperties, accountSettings, supportedWalletsState).then(
+				(extensionState: ExtensionState) => {
+					if (isMountedRef.current) {
+						if (!extensionState?.selectedAccount && extensionState?.accounts?.length > 0) {
+							extensionState.selectedAccount = extensionState.accounts[0]
+							setAccountSettings({
+								...accountSettings,
+								selectedAddress: extensionState.selectedAccount?.account?.address,
+							})
+						}
 
-					setState(extensionState)
-				}
-			})
+						setState(extensionState)
+					}
+				},
+			)
 		} else {
 			// Reset accounts and state
 			setState(EXTENSION_STATE_DEFAULT)
 		}
-	}, [apiProvider, accountSettings.allowConnect])
+	}, [apiProvider, accountSettings.allowConnect, accountSettings.lastUsedExtension])
 
 	return (
 		<ExtensionContext.Provider
@@ -76,9 +92,14 @@ export function ExtensionProvider({ children }) {
 					connectWallet: connectWalletCallback,
 					disconnectWallet: disconnectWalletCallback,
 					selectAccount: selectAccountCallback,
+					supportedWallets: supportedWalletsState,
 				} as any
 			}
 		>
+			<WalletDialog
+				callback={selectWalletExtension as any}
+				open={accountSettings.allowConnect && !accountSettings.lastUsedExtension}
+			/>
 			{children}
 		</ExtensionContext.Provider>
 	)

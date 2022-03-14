@@ -7,7 +7,7 @@ import { useCallback } from 'react'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
 export function AccountSelector() {
-	const { w3Enabled, selectedAccount, accounts, connectWallet, disconnectWallet, selectAccount } =
+	const { w3Enabled, selectedAccount, accounts, connectWallet, disconnectWallet, selectAccount, supportedWallets } =
 		useExtensionContext()
 
 	// Change selected account
@@ -30,6 +30,10 @@ export function AccountSelector() {
 		createInfoNotification('Address Copied to Clipboard')
 	}, [selectedAccount])
 
+	// No There is no wallet available
+	if (!supportedWallets?.length) {
+		return null
+	}
 	// Show connect button
 	if (w3Enabled === false) {
 		return (

@@ -1,4 +1,4 @@
-import configJSON   from 'src/data/config.json'
+import configJSON from 'src/data/config.json'
 import featuresJSON from 'src/data/features.json'
 
 // ToDo: Add real interfaces

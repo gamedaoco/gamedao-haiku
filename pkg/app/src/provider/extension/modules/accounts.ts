@@ -1,49 +1,55 @@
 import { SystemProperties } from 'src/@types/network'
 import { AccountSettings, ExtensionState } from 'src/@types/extension'
-import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
-import { Signer } from '@polkadot/types/types'
+import { InjectedAccount, InjectedExtension } from '@polkadot/extension-inject/types'
 import { getDecodedAddress } from 'src/utils/accountUtils'
-
-export async function getSigner(account: InjectedAccountWithMeta): Promise<Signer> {
-	const { web3FromSource } = await import('@polkadot/extension-dapp')
-	try {
-		return (await web3FromSource(account.meta.source)).signer
-	} catch (error) {
-		console.error('The signer could not be retrieved from the account', 'error:', error)
-	}
-
-	return null
-}
+import { getWalletBySource, getWallets, Wallet } from '@talisman-connect/wallets'
+import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 
 export async function initializeAccounts(
 	systemProperties: SystemProperties,
 	accountSettings: AccountSettings,
+	supportedWallets: Wallet[],
 ): Promise<ExtensionState> {
-	if (!systemProperties) return null
+	if (!systemProperties || !supportedWallets?.length) return null
+
+	const wallet = getWalletBySource(accountSettings.lastUsedExtension)
+	if (!wallet) {
+		console.error(`The wallet ${accountSettings.lastUsedExtension} is not installed `)
+		return null
+	}
+
 	try {
-		const { web3Accounts, web3Enable } = await import('@polkadot/extension-dapp')
-		const w3Enabled = (await web3Enable('GameDao'))?.length > 0
-		const walletAccounts = await web3Accounts({ ss58Format: systemProperties.ss58Format })
+		// Enable wallet
+		await wallet.enable('GameDao')
+		const extension: InjectedExtension = wallet.extension
+		if (!extension) {
+			throw new Error('The wallet connection is unauthorized')
+		}
+
+		const walletAccounts: InjectedAccount[] = await extension.accounts.get()
 		const accounts = await Promise.all(
-			walletAccounts.map(async (account) => {
+			walletAccounts.map(async (account: InjectedAccount) => {
+				account.address = encodeAddress(decodeAddress(account.address), systemProperties.ss58Format)
 				return {
 					account,
-					signer: await getSigner(account),
+					signer: extension.signer,
 				}
 			}),
 		)
+
 		const selectedAccount =
 			accounts.find(
 				(acc) => getDecodedAddress(acc.account.address) === getDecodedAddress(accountSettings.selectedAddress),
 			) || null
 
 		return {
-			w3Enabled,
+			w3Enabled: true,
 			accounts,
 			selectedAccount,
 			connectWallet: null,
 			disconnectWallet: null,
 			selectAccount: null,
+			supportedWallets: null,
 		}
 	} catch (error) {
 		console.error('Accounts could not be initialized', 'error:', error)

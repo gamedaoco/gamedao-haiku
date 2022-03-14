@@ -1,14 +1,14 @@
-import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
+import type { InjectedAccount } from '@polkadot/extension-inject/types'
 import type { AccountState } from 'src/@types/extension'
 import { decodeAddress } from '@polkadot/util-crypto'
 
-export function shortAccountAddress(account: InjectedAccountWithMeta): string {
+export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
 	return `${address.slice(0, 15)}...${address.slice(-6)}`
 }
 
-export function getAccountName(account: InjectedAccountWithMeta): string {
-	return account?.meta?.name ?? ''
+export function getAccountName(account: InjectedAccount): string {
+	return account?.name ?? ''
 }
 
 export function getAddressFromAccountState(accountState: AccountState) {

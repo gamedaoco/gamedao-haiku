@@ -1,22 +1,23 @@
 import { ReactNode, useMemo } from 'react'
 import { CssBaseline } from '@mui/material'
-import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeOptions, ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import { useSettings } from 'src/hooks/useSettings'
-import shape from './shape'
-import palette from './palette'
-import typography from './typography'
-import breakpoints from './breakpoints'
-import componentsOverride from './overrides'
-import shadows, { customShadows } from './shadows'
+import shape from 'src/theme/shape'
+import palette from 'src/theme/palette'
+import typography from 'src/theme/typography'
+import breakpoints from 'src/theme/breakpoints'
+import componentsOverride from 'src/theme/overrides'
+import shadows, { customShadows } from 'src/theme/shadows'
 import { ToastContainer } from 'react-toastify'
+import { ThemePrimaryColor } from 'src/components'
 
 // ----------------------------------------------------------------------
 
-type ThemeConfigProps = {
+type ComponentProps = {
 	children: ReactNode
 }
 
-export default function ThemeConfig({ children }: ThemeConfigProps) {
+export function ThemeProvider({ children }: ComponentProps) {
 	const { themeMode, themeDirection } = useSettings()
 	const isLight = themeMode === 'light'
 
@@ -37,10 +38,10 @@ export default function ThemeConfig({ children }: ThemeConfigProps) {
 	theme.components = componentsOverride(theme)
 
 	return (
-		<ThemeProvider theme={theme}>
+		<MuiThemeProvider theme={theme}>
 			<ToastContainer position="bottom-right" theme={themeMode} />
 			<CssBaseline />
-			{children}
-		</ThemeProvider>
+			<ThemePrimaryColor>{children}</ThemePrimaryColor>
+		</MuiThemeProvider>
 	)
 }
