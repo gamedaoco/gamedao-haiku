@@ -13,9 +13,9 @@ export function Providers({ children }) {
 				<SettingsProvider>
 					<NetworkProvider>
 						<ThemeProvider>
-							<ExtensionProvider>
-								<ReadyProvider>{children}</ReadyProvider>
-							</ExtensionProvider>
+							<ReadyProvider>
+								<ExtensionProvider>{children}</ExtensionProvider>
+							</ReadyProvider>
 						</ThemeProvider>
 					</NetworkProvider>
 				</SettingsProvider>

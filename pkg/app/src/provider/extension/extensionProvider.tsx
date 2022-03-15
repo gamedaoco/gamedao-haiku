@@ -37,9 +37,6 @@ export function ExtensionProvider({ children }) {
 	const selectAccountCallback = useCallback(
 		(accountState: AccountState) => {
 			if (!accountState) return
-			document.addEventListener('@talisman-connect/wallet-selected', () => {
-				console.log('XXXXXXXXXXXXX')
-			})
 			setState({ ...(state ?? ({} as any)), selectedAccount: accountState })
 			setAccountSettings({
 				...accountSettings,
@@ -52,7 +49,7 @@ export function ExtensionProvider({ children }) {
 	// Initialize is mounted ref
 	useEffect(() => {
 		isMountedRef.current = true
-		setSupportedWalletsState(getWallets().filter((wallet) => wallet.installed))
+
 		return () => {
 			isMountedRef.current = false
 		}
@@ -61,9 +58,17 @@ export function ExtensionProvider({ children }) {
 	// Logic initialize polkadot wallet and account loading
 	useEffect(() => {
 		if (!apiProvider) return
+		let supWallets = supportedWalletsState
+
+		if (!supportedWalletsState) {
+			const wallets = getWallets().filter((wallet) => wallet.installed)
+			setSupportedWalletsState(wallets)
+			supWallets = wallets
+		}
+
 		if (accountSettings.allowConnect && accountSettings.lastUsedExtension) {
 			// Load accounts from extension
-			initializeAccounts(apiProvider.systemProperties, accountSettings, supportedWalletsState).then(
+			initializeAccounts(apiProvider.systemProperties, accountSettings, supWallets).then(
 				(extensionState: ExtensionState) => {
 					if (isMountedRef.current) {
 						if (!extensionState?.selectedAccount && extensionState?.accounts?.length > 0) {
