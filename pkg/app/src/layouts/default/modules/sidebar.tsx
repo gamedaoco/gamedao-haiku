@@ -75,7 +75,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			sx={{
 				'& .MuiPaper-root': {
 					width: '100%',
-					maxWidth: 256,
+					maxWidth: 300,
 					top: { xs: 0, md: showHeader ? 64 : 0 },
 					bottom: 0,
 					height: 'auto',
