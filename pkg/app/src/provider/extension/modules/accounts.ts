@@ -39,7 +39,7 @@ export async function initializeAccounts(
 
 		const selectedAccount =
 			accounts.find(
-				acc => getDecodedAddress(acc.account.address) === getDecodedAddress(accountSettings.selectedAddress),
+				(acc) => getDecodedAddress(acc.account.address) === getDecodedAddress(accountSettings.selectedAddress),
 			) || null
 
 		return {

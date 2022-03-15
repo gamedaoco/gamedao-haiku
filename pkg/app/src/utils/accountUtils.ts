@@ -1,6 +1,6 @@
 import type { InjectedAccount } from '@polkadot/extension-inject/types'
 import type { AccountState } from 'src/@types/extension'
-import { decodeAddress } from '@polkadot/util-crypto'
+import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
@@ -13,6 +13,10 @@ export function getAccountName(account: InjectedAccount): string {
 
 export function getAddressFromAccountState(accountState: AccountState) {
 	return accountState?.account?.address
+}
+
+export function getKusamaAddressFromAccountState(accountState: AccountState) {
+	return encodeAddress(decodeAddress(getAddressFromAccountState(accountState)), 2)
 }
 
 export function getDecodedAddress(address: string): string {

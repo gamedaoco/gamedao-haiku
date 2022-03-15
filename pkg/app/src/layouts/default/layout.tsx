@@ -18,14 +18,14 @@ const SITE_NAME = 'GameDAO'
 
 export function Layout({ showHeader, showFooter, showSidebar, children, noContainer, title }: ComponentProps) {
 	return (
-		<>
+		<Stack height={'100%'}>
 			<Head>
 				<title> {title ? `${title} · ${SITE_NAME}` : `${SITE_NAME}`} </title>
 			</Head>
 
 			{showHeader && <Header />}
 
-			<Stack direction="row">
+			<Stack direction="row" flex={1}>
 				{showSidebar && (
 					<Box flexGrow={0}>
 						<Sidebar />
@@ -35,6 +35,6 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			</Stack>
 
 			{showFooter && <Footer />}
-		</>
+		</Stack>
 	)
 }

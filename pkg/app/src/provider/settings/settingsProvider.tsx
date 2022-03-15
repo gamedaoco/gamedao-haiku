@@ -89,7 +89,7 @@ export function SettingsProvider({ children }) {
 				changeThemeColor: handleChangeThemeColor,
 				toggleThemeStretch: handleToggleThemeStretch,
 				setColor: SetColor(settings.themeColor),
-				colorOption: PRIMARY_COLOR.map(color => ({
+				colorOption: PRIMARY_COLOR.map((color) => ({
 					name: color.name,
 					value: color.main,
 				})),

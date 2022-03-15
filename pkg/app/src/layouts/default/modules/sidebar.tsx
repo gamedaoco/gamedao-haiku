@@ -85,11 +85,14 @@ export function Sidebar() {
 						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
 					)}
 				</SidebarNavItem>
+				<SidebarNavItem href="/app/wallet" name="wallet">
+					Wallet
+					{counter.cam > 0 && <NavBadge sx={{ ml: '0.5rem' }} />}
+				</SidebarNavItem>
 			</Stack>
 
 			<Stack direction="row" mt="auto" spacing={2} justifyContent="flex-end">
 				<NetworkSelector />
-
 				<ThemeSwitch />
 			</Stack>
 		</Stack>
