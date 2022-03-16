@@ -13,3 +13,14 @@ export async function fetchIpfsJson(ipfsHash: string, gateway: string = 'https:/
 
 	return null
 }
+
+export async function fetchIpfsBlob(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
+	try {
+		const response = await fetch(parseIpfsHash(ipfsHash, gateway), { method: 'GET' })
+		return await response.blob()
+	} catch (e) {
+		console.error('Ipfs file can not be loaded', ipfsHash, e)
+	}
+
+	return null
+}

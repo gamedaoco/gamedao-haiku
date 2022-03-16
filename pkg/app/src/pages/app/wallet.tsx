@@ -29,7 +29,7 @@ export function WalletPage() {
 	if (!accountState) {
 		return <NoWalletConnected />
 	}
-	console.log(data)
+
 	return (
 		<Layout showHeader showFooter showSidebar title="DAO">
 			<Stack spacing={4} padding={4}>
@@ -43,10 +43,12 @@ export function WalletPage() {
 						</Box>
 					)}
 					{data && (
-						<Stack
-							direction={'row'}
-							flexWrap="wrap"
-							justifyContent={data.nfts?.length > 1 ? 'space-evenly' : 'flex-start'}
+						<Box
+							sx={{
+								display: 'grid',
+								gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 300px))',
+								justifyContent: 'space-evenly',
+							}}
 						>
 							{data.nfts?.map((collectable: Collectable) => {
 								return (
@@ -55,7 +57,7 @@ export function WalletPage() {
 									</Box>
 								)
 							})}
-						</Stack>
+						</Box>
 					)}
 				</Stack>
 			</Stack>

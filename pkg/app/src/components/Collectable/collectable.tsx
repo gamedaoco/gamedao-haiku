@@ -1,7 +1,8 @@
-import { Box, Card, CircularProgress, Typography } from '@mui/material'
+import { Box, Card, CircularProgress, Typography, CardMedia, CardContent } from '@mui/material'
 import { Collectable } from 'src/@types/collectable'
 import React, { useEffect, useState } from 'react'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
+import { ModelDialog } from 'components/Collectable/modules/modelDialog'
 
 interface IpfsMetadata {
 	description: string
@@ -19,7 +20,8 @@ const RMRK_GATEWAY = 'https://rmrk.mypinata.cloud/'
 
 export function Collectable({ item }: ComponentProps) {
 	const [ipfsMetadata, setIpfsMetadata] = useState<IpfsMetadata>(null)
-
+	const [openModel, setOpenModel] = useState<boolean>(false)
+	console.log(ipfsMetadata)
 	useEffect(() => {
 		if (item) {
 			fetchIpfsJson(item.metadata, RMRK_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
@@ -31,17 +33,29 @@ export function Collectable({ item }: ComponentProps) {
 	}
 
 	return (
-		<Card sx={{ width: '240px', minHeight: '240px', alignItems: 'center', justifyContent: 'center' }}>
+		<Card sx={{ width: '100%' }}>
 			{ipfsMetadata ? (
 				<>
-					<img
-						src={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
+					<CardMedia
+						component="img"
+						sx={{ width: '100%' }}
+						image={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
 						alt="collectable_image"
-						width="100%"
-						height="auto"
+						onClick={() => setOpenModel(true)}
 					/>
-					<Typography sx={{ pt: 1, px: 2, fontFamily: 'PT Serif Regular' }}>{ipfsMetadata.name}</Typography>
-					<Typography sx={{ pb: 1, px: 2, fontFamily: 'PT Serif Regular' }}>{item.sn}</Typography>
+					<CardContent>
+						<Typography sx={{ pt: 1, px: 2, fontFamily: 'PT Serif Regular' }}>
+							{ipfsMetadata.name}
+						</Typography>
+						<Typography sx={{ pb: 1, px: 2, fontFamily: 'PT Serif Regular' }}>{item.sn}</Typography>
+					</CardContent>
+					<ModelDialog
+						open={openModel}
+						mediaUrl={ipfsMetadata.mediaUri}
+						handleClose={() => setOpenModel(false)}
+						poster={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
+						alt={ipfsMetadata.description}
+					/>
 				</>
 			) : (
 				<Box display="flex" justifyContent="center" height="100%" alignItems="center">

@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { AppProps, NextWebVitalsMetric } from 'next/app'
-
 import { Providers } from 'src/provider/provider'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'

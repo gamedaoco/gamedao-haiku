@@ -60,6 +60,7 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 					/>
+					<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
 				</Head>
 				<body
 					style={{
@@ -74,7 +75,6 @@ export default class MyDocument extends Document {
 						#__next {
 							height: 100%;
 						}
-
 						* {
 							color: red !important;
 						}
