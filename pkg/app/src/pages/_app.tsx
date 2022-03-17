@@ -37,7 +37,6 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 						content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no"
 					/>
 					<meta name="format-detection" content="telephone=no, address=no, email=no" />
-					<link rel="stylesheet" href="/iconfont.css" />
 					<link rel="shortcut icon" href="/favicon.png" />
 					<link rel="icon" type="image/png" href="/favicon.png" />
 

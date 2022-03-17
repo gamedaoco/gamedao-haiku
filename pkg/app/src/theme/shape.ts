@@ -8,9 +8,9 @@ declare module '@mui/system' {
 }
 
 const shape = {
-	borderRadius: 0,
-	borderRadiusSm: 1,
-	borderRadiusMd: 2,
+	borderRadiusSm: '0.1rem',
+	borderRadiusMd: '0.2rem',
+	borderRadius: '0.3rem',
 }
 
 export default shape
