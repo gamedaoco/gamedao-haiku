@@ -1,6 +1,7 @@
-import { Box, Dialog, Paper } from '@mui/material'
 import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { fetchIpfsBlob } from 'src/utils/ipfs'
+import { Box, Dialog, Paper } from '@mui/material'
 
 interface ComponentProps {
 	open: boolean
@@ -24,10 +25,17 @@ async function blobToBase64(blob) {
 }
 
 export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: ComponentProps) {
+	const [isClient, setIsClient] = useState(false)
 	const [fileState, setFileState] = useState<string>()
 	const [is3DModel, setIs3DModel] = useState<boolean>(false)
 	const [isImage, setIsImage] = useState<boolean>(false)
 	const [isVideo, setIsVideo] = useState<string>(null)
+
+	useEffect(async () => {
+		if (isClient) return
+		const ModelViewer = (await import('@google/model-viewer')).default
+		setIsClient(true)
+	}, [isClient])
 
 	useEffect(() => {
 		if (open && mediaUrl) {
