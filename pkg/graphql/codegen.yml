@@ -1,0 +1,31 @@
+schema: ./src/schema/schema.graphql
+overwrite: true
+generates:
+  ./src/types/index.ts:
+    config:
+      useIndexSignature: true
+    plugins:
+      - typescript
+
+  ./src/query/index.ts:
+    documents: ./src/schema/queries/**/*.graphql
+    config:
+      useIndexSignature: true
+      immutableTypes: true
+      preResolveTypes: true
+      noSchemaStitching: false
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+
+  ./src/resolver/resolvers-types.ts:
+    config:
+      useIndexSignature: true
+      immutableTypes: true
+      preResolveTypes: true
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - typescript-operations
+      - typed-document-node

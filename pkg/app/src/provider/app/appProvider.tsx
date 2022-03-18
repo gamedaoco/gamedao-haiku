@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
-import { useQuery } from '@apollo/client'
 import { AppContext } from 'provider/app/modules/context'
-import { GET_CONFIG_QUERY } from 'graphql/queries/config'
-import { GET_FEATURE_QUERY } from 'graphql/queries/feature'
+import { ENVIRONMENT } from 'src/constants'
+import { useConfigQuery, useFeaturesQuery } from '@gamedao-haiku/graphql/dist'
 
 export function AppProvider({ children }) {
-	const configQueryResult = useQuery(GET_CONFIG_QUERY)
-	const featureQueryResult = useQuery(GET_FEATURE_QUERY)
+	const configQueryResult = useConfigQuery({
+		variables: { env: ENVIRONMENT },
+	})
+	const featureQueryResult = useFeaturesQuery({
+		variables: { env: ENVIRONMENT },
+	})
 
 	useEffect(() => {
 		if (configQueryResult.error) {
@@ -23,7 +26,7 @@ export function AppProvider({ children }) {
 	return (
 		<AppContext.Provider
 			value={{
-				ready: configQueryResult.data && featureQueryResult.data,
+				ready: !!configQueryResult.data && !!featureQueryResult.data,
 				config: configQueryResult.data?.config ?? null,
 				features: featureQueryResult.data?.features ?? null,
 			}}

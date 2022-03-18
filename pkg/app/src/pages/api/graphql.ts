@@ -1,24 +1,41 @@
 import { ApolloServer } from 'apollo-server-micro'
+import pkg from '../../../package.json'
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
+import { addResolversToSchema } from '@graphql-tools/schema'
 import Cors from 'micro-cors'
 import { stitchSchemas } from '@graphql-tools/stitch'
-import { makeExecutableSchema } from '@graphql-tools/schema'
+import { resolvers, getRmrkSubSchema } from '@gamedao-haiku/graphql/dist/index.js'
+import type { Resolvers } from '@gamedao-haiku/graphql/dist/resolver/resolvers-types'
 
-import { typeDefs } from 'graphql/schema'
-import { resolvers } from 'graphql/resolvers'
-import { getRmrkSubSchema } from 'graphql/executors/rmrk'
+const { loadSchema } = require('@graphql-tools/load')
+const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
 
 const cors = Cors()
-const gameDaoSubSchema = makeExecutableSchema({
-	typeDefs,
-	resolvers,
-})
-
 export default cors(async function handler(req, res) {
 	if (req.method === 'OPTIONS') {
 		res.end()
 		return false
 	}
+
+	// TODO: import from package ! not at runtime
+	const gameDaoSchema = await loadSchema('../graphql/src/schema/gameDao.graphql', {
+		loaders: [new GraphQLFileLoader()],
+	})
+
+	// Add custom resolvers like version
+	const extendedResolver: Resolvers = {
+		Query: {
+			...(resolvers.Query ?? {}),
+			version: () => {
+				return pkg.version
+			},
+		},
+	} as Resolvers
+
+	const gameDaoSubSchema = addResolversToSchema({
+		schema: gameDaoSchema,
+		resolvers: extendedResolver,
+	})
 
 	const gatewaySchema = stitchSchemas({
 		subschemas: [await getRmrkSubSchema(), gameDaoSubSchema],

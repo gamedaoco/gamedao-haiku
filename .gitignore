@@ -8,6 +8,7 @@
 .pnp.js
 .yarn/
 
+**/dist/
 **/node_modules/
 **/.next/
 **/.idea/

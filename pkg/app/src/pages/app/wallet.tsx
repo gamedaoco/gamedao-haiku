@@ -5,19 +5,14 @@ import { Stack, Typography, Paper, CircularProgress, Box } from '@mui/material'
 import { Layout } from 'src/layouts/default/layout'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
-import { useLazyQuery } from '@apollo/client'
-import { GET_COLLECTABLES_FOR_USER } from 'graphql/queries/collectables'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
 import type { Collectable } from 'src/@types/collectable'
 import { Collectable as CollectableComponent } from 'components/Collectable/collectable'
-
-interface CollectableData {
-	nfts: Collectable[]
-}
+import { useCollectablesForUserLazyQuery } from '@gamedao-haiku/graphql/dist'
 
 export function WalletPage() {
 	const accountState = useCurrentAccountState()
-	const [loadCollectables, { loading, data }] = useLazyQuery<CollectableData>(GET_COLLECTABLES_FOR_USER)
+	const [loadCollectables, { loading, data }] = useCollectablesForUserLazyQuery()
 
 	useEffect(() => {
 		if (accountState) {
