@@ -39,7 +39,7 @@ export function ThemeProvider({ children }: ComponentProps) {
 
 	return (
 		<MuiThemeProvider theme={theme}>
-			<ToastContainer position="bottom-right" theme={themeMode} />
+			<ToastContainer theme={themeMode} />
 			<CssBaseline />
 			<ThemePrimaryColor>{children}</ThemePrimaryColor>
 		</MuiThemeProvider>

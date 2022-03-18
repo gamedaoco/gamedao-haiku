@@ -53,7 +53,6 @@ export async function initializeAccounts(
 		}
 	} catch (error) {
 		console.error('Accounts could not be initialized', 'error:', error)
+		throw error
 	}
-
-	return null
 }

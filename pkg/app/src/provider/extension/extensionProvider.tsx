@@ -6,6 +6,7 @@ import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useApiProvider } from 'hooks/useApiProvider'
 import { getWallets, isWalletInstalled, Wallet } from '@talisman-connect/wallets'
 import { WalletDialog } from 'components/WalletDialog/walletDialog'
+import { createErrorNotification } from 'src/utils/notificationUtils'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)
@@ -68,8 +69,13 @@ export function ExtensionProvider({ children }) {
 
 		if (accountSettings.allowConnect && accountSettings.lastUsedExtension) {
 			// Load accounts from extension
-			initializeAccounts(apiProvider.systemProperties, accountSettings, supWallets).then(
-				(extensionState: ExtensionState) => {
+			initializeAccounts(apiProvider.systemProperties, accountSettings, supWallets)
+				.then((extensionState: ExtensionState) => {
+					if (extensionState === null) {
+						disconnectWalletCallback()
+						return
+					}
+
 					if (isMountedRef.current) {
 						if (!extensionState?.selectedAccount && extensionState?.accounts?.length > 0) {
 							extensionState.selectedAccount = extensionState.accounts[0]
@@ -81,8 +87,11 @@ export function ExtensionProvider({ children }) {
 
 						setState(extensionState)
 					}
-				},
-			)
+				})
+				.catch((error) => {
+					createErrorNotification(`Wallet connection error: ${error.message}`)
+					disconnectWalletCallback()
+				})
 		} else {
 			// Reset accounts and state
 			setState(EXTENSION_STATE_DEFAULT)
