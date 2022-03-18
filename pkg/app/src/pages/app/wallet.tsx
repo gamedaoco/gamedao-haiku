@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect } from 'react'
-
+import React, { useEffect } from 'react'
+import Script from 'next/script'
 import { Stack, Typography, Paper, CircularProgress, Box } from '@mui/material'
 
 import { Layout } from 'src/layouts/default/layout'
@@ -26,37 +26,41 @@ export function WalletPage() {
 	}
 
 	return (
-		<Layout showHeader showFooter showSidebar title="DAO">
-			<Stack spacing={4} padding={4}>
-				<Typography variant="h3">Wallet</Typography>
+		<>
+			<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
 
-				<Stack component={Paper} elevation={10} padding={4} spacing={2}>
-					<Typography variant="h4"> Collectables </Typography>
-					{loading && (
-						<Box display="flex" justifyContent="center">
-							<CircularProgress />
-						</Box>
-					)}
-					{data && (
-						<Box
-							sx={{
-								display: 'grid',
-								gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 300px))',
-								justifyContent: 'space-evenly',
-							}}
-						>
-							{data.nfts?.map((collectable: Collectable) => {
-								return (
-									<Box key={collectable.id} margin={4}>
-										<CollectableComponent item={collectable} />
-									</Box>
-								)
-							})}
-						</Box>
-					)}
+			<Layout showHeader showFooter showSidebar title="DAO">
+				<Stack spacing={4} padding={4}>
+					<Typography variant="h3">Wallet</Typography>
+
+					<Stack component={Paper} elevation={10} padding={4} spacing={2}>
+						<Typography variant="h4"> Collectables </Typography>
+						{loading && (
+							<Box display="flex" justifyContent="center">
+								<CircularProgress />
+							</Box>
+						)}
+						{data && (
+							<Box
+								sx={{
+									display: 'grid',
+									gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 300px))',
+									justifyContent: 'space-evenly',
+								}}
+							>
+								{data.nfts?.map((collectable: Collectable) => {
+									return (
+										<Box key={collectable.id} margin={4}>
+											<CollectableComponent item={collectable} />
+										</Box>
+									)
+								})}
+							</Box>
+						)}
+					</Stack>
 				</Stack>
-			</Stack>
-		</Layout>
+			</Layout>
+		</>
 	)
 }
 

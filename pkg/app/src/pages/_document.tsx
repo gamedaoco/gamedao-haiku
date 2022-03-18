@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from 'src/theme/createEmotionCache'
 import { DocumentContext, DocumentInitialProps } from 'next/dist/shared/lib/utils'
@@ -61,7 +60,6 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 					/>
-					<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
 				</Head>
 				<body
 					style={{
