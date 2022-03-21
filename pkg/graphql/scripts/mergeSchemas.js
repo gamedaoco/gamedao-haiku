@@ -2,7 +2,7 @@ const fs = require('fs')
 const { loadSchema } = require('@graphql-tools/load')
 const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
 const { UrlLoader } = require('@graphql-tools/url-loader')
-const { printSchema } = require('graphql')
+const { printSchema, introspectionFromSchema } = require('graphql')
 const { stitchSchemas } = require('@graphql-tools/stitch')
 
 const remoteList = [
@@ -19,12 +19,13 @@ const remoteList = [
 
 	let schemas = []
 	for (let fileName of files) {
-		console.log('fil', fileName)
-		schemas.push(
-			await loadSchema(path + fileName, {
-				loaders: [new GraphQLFileLoader()],
-			}),
-		)
+		const localSchema = await loadSchema(path + fileName, {
+			loaders: [new GraphQLFileLoader()],
+		})
+
+		const introspection = JSON.stringify(introspectionFromSchema(localSchema))
+		fs.writeFileSync(`./src/schema/json/${fileName.split('.')[0]}.json`, introspection)
+		schemas.push(localSchema)
 	}
 
 	for (let url of remoteList) {
