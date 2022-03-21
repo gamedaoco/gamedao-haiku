@@ -1,0 +1,46 @@
+{
+  "global": {
+    "SITE_NAME": "GameDAO",
+    "SITE_TITLE": "Crowdfunding for videogames",
+    "SITE_DESCRIPTION": "The DAO for videogames, esports and creative content connecting gamers and creators in sustainable investment and finance.",
+    "SITE_IMAGE": "https://gamedao.co/z-control-45-full.png",
+    "TW_SITE_NAME": "@gamedaoco",
+    "TW_SITE_CREATOR": "@marcobahn",
+    "CONTACT": "play@zero.io",
+    "UNSPLASH_KEY": "25e3469051d2c296671e6e61e04128cd6eb535dbafe4bbd76990f86943105f24",
+    "UNSPLASH_SECRET": "fc70f99b0cd6a2a839068239db71a8ca76f5d027d67d870f343f008b0d96e7e4",
+    "CRYPTOCOMPARE": "d5ab234c3ac67eac66d00f89848ee97c68d3851bee6d71fdf2c24ea2c6a3e4a7",
+    "INFURA_MODE": "TESTNET",
+    "INFURA_KEY": "ID36974f265ac745f68c4013c14cfa926c",
+    "INFURA_SECRET": "62aa4af9a79d4756ac3a8c87c2a8277bEndpoint",
+    "INFURA_MAINNET": "https://mainnet.infura.io/v3/36974f265ac745f68c4013c14cfa926c",
+    "INFURA_TESTNET": "https://ropsten.infura.io/v3/36974f265ac745f68c4013c14cfa926c",
+    "AWS_REGION": "eu-central-1",
+    "AWS_USERPOOL_ID": "eu-central-1_S8Cabr4g4",
+    "AWS_USERPOOL_WEBCLIENT_ID": "5aqrro1fmt7atfmov5ch2uar95",
+    "GQL_URI": "http://localhost:28080/v1/graphql",
+    "GQL_KEY": "i-HFXk_txMvwZL4Ej7dphgCZ"
+  },
+  "dev": {
+    "ETH_URI": "http://localhost:8545",
+    "SUB_URI": "http://localhost:9944",
+    "IPFS_URI": "http://localhost:5001",
+    "GQL_URI": "https://graph.zero.io/v1/graphql",
+    "GQL_KEY": "i-HFXk_txMvwZL4Ej7dphgCZ"
+  },
+  "production": {
+    "ETH_URI": "https://eth.zero.io:8545",
+    "SUB_URI": "https://sub.zero.io:9944",
+    "IPFS_URI": "https://ipfs.zero.io:5001",
+    "GQL_URI": "https://graph.zero.io/v1/graphql",
+    "GQL_KEY": "i-HFXk_txMvwZL4Ej7dphgCZ"
+  },
+  "identity": {
+    "PROVIDER": "fractal.id",
+    "URL": "https://next.fractal.id/authorize",
+    "CLIENT_ID": "USM9o1aifkcKnrUr-wMuYHNEO7AwUeQYTy2FevLEElw",
+    "REDIRECT_URI": "https%3A%2F%2Fdao.zero.io%2Faccount%2Fcb",
+    "RESPONSE_TYPE": "code",
+    "SCOPE": "email%3Aread%20verification.basic%3Aread%20verification.basic.details%3Aread%20verification.liveness%3Aread%20verification.liveness.details%3Aread"
+  }
+}

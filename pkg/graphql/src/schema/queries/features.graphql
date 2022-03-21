@@ -1,0 +1,12 @@
+query Features($env: Environment!) {
+    features(env: $env) {
+        DEBUG
+        SHOW_HEADER
+        SHOW_HEADER_NAV
+        SHOW_FOOTER
+        SHOW_FOOTER_NAV
+        SHOW_APPLY
+        SHOW_CAMPAIGNS
+        SHOW_FX
+    }
+}

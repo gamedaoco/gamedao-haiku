@@ -2,7 +2,12 @@ import { fetch } from 'cross-undici-fetch'
 import { print } from 'graphql'
 import { introspectSchema } from '@graphql-tools/wrap'
 
-async function remoteExecutor({ document, variables }) {
+interface Executor {
+	document: any
+	variables: any
+}
+
+async function remoteExecutor({ document, variables }: Executor) {
 	const query = print(document)
 	const fetchResult = await fetch('https://gql-rmrk2-prod.graphcdn.app/', {
 		method: 'POST',
@@ -14,7 +19,7 @@ async function remoteExecutor({ document, variables }) {
 
 export async function getRmrkSubSchema() {
 	return {
-		schema: await introspectSchema(remoteExecutor),
+		schema: await introspectSchema(remoteExecutor as any),
 		executor: remoteExecutor,
 	}
 }
