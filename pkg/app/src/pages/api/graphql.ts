@@ -4,11 +4,9 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 import { addResolversToSchema } from '@graphql-tools/schema'
 import Cors from 'micro-cors'
 import { stitchSchemas } from '@graphql-tools/stitch'
-import { resolvers, getRmrkSubSchema } from '@gamedao-haiku/graphql/dist/index.js'
+import { resolvers, getRmrkSubSchema, gameDaoSchemaJson } from '@gamedao-haiku/graphql/dist/index.js'
 import type { Resolvers } from '@gamedao-haiku/graphql/dist/resolver/resolvers-types'
-
-const { loadSchema } = require('@graphql-tools/load')
-const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
+import { buildClientSchema, parse, print } from 'graphql'
 
 const cors = Cors()
 export default cors(async function handler(req, res) {
@@ -16,11 +14,6 @@ export default cors(async function handler(req, res) {
 		res.end()
 		return false
 	}
-
-	// TODO: import from package ! not at runtime
-	const gameDaoSchema = await loadSchema('../graphql/src/schema/gameDao.graphql', {
-		loaders: [new GraphQLFileLoader()],
-	})
 
 	// Add custom resolvers like version
 	const extendedResolver: Resolvers = {
@@ -33,7 +26,7 @@ export default cors(async function handler(req, res) {
 	} as Resolvers
 
 	const gameDaoSubSchema = addResolversToSchema({
-		schema: gameDaoSchema,
+		schema: buildClientSchema(gameDaoSchemaJson),
 		resolvers: extendedResolver,
 	})
 
