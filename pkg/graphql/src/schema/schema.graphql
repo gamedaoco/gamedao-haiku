@@ -1293,6 +1293,14 @@ type Query {
   fetch data from the table: "yuletide_item_track" using primary key columns
   """
   yuletide_item_track_by_pk(id: String!): yuletide_item_track
+  bodyById(id: ID!): Body
+  bodyByUniqueInput(where: BodyWhereUniqueInput!): Body @deprecated(reason: "Use `bodyById`")
+  bodies(where: BodyWhereInput, orderBy: [BodyOrderByInput], offset: Int, limit: Int): [Body!]!
+  bodiesConnection(orderBy: [BodyOrderByInput!]!, after: String, first: Int, where: BodyWhereInput): BodiesConnection!
+  bodyMemberById(id: ID!): BodyMember
+  bodyMemberByUniqueInput(where: BodyMemberWhereUniqueInput!): BodyMember @deprecated(reason: "Use `bodyMemberById`")
+  bodyMembers(where: BodyMemberWhereInput, orderBy: [BodyMemberOrderByInput], offset: Int, limit: Int): [BodyMember!]!
+  bodyMembersConnection(orderBy: [BodyMemberOrderByInput!]!, after: String, first: Int, where: BodyMemberWhereInput): BodyMembersConnection!
 }
 
 enum Environment {
@@ -8428,4 +8436,319 @@ type yuletide_item_track_var_samp_fields {
 """aggregate variance on columns"""
 type yuletide_item_track_variance_fields {
   item_count: Float
+}
+
+"""Big number integer"""
+scalar BigInt
+
+"""
+A date-time string in simplified extended ISO 8601 format (YYYY-MM-DDTHH:mm:ss.sssZ)
+"""
+scalar DateTime
+
+"""Binary data encoded as a hex string always prefixed with 0x"""
+scalar Bytes
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String!
+  endCursor: String!
+}
+
+enum BodyOrderByInput {
+  id_ASC
+  id_DESC
+  creator_ASC
+  creator_DESC
+  controller_ASC
+  controller_DESC
+  treasury_ASC
+  treasury_DESC
+  name_ASC
+  name_DESC
+  cid_ASC
+  cid_DESC
+  body_ASC
+  body_DESC
+  access_ASC
+  access_DESC
+  feeModel_ASC
+  feeModel_DESC
+  fee_ASC
+  fee_DESC
+  govAsset_ASC
+  govAsset_DESC
+  payAsset_ASC
+  payAsset_DESC
+  memberLimit_ASC
+  memberLimit_DESC
+}
+
+input BodyWhereUniqueInput {
+  id: ID!
+}
+
+input BodyWhereInput {
+  id_eq: ID
+  id_not_eq: ID
+  id_gt: ID
+  id_gte: ID
+  id_lt: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_contains: ID
+  id_not_contains: ID
+  id_startsWith: ID
+  id_not_startsWith: ID
+  id_endsWith: ID
+  id_not_endsWith: ID
+  creator_eq: String
+  creator_not_eq: String
+  creator_gt: String
+  creator_gte: String
+  creator_lt: String
+  creator_lte: String
+  creator_in: [String!]
+  creator_not_in: [String!]
+  creator_contains: String
+  creator_not_contains: String
+  creator_startsWith: String
+  creator_not_startsWith: String
+  creator_endsWith: String
+  creator_not_endsWith: String
+  controller_eq: String
+  controller_not_eq: String
+  controller_gt: String
+  controller_gte: String
+  controller_lt: String
+  controller_lte: String
+  controller_in: [String!]
+  controller_not_in: [String!]
+  controller_contains: String
+  controller_not_contains: String
+  controller_startsWith: String
+  controller_not_startsWith: String
+  controller_endsWith: String
+  controller_not_endsWith: String
+  treasury_eq: String
+  treasury_not_eq: String
+  treasury_gt: String
+  treasury_gte: String
+  treasury_lt: String
+  treasury_lte: String
+  treasury_in: [String!]
+  treasury_not_in: [String!]
+  treasury_contains: String
+  treasury_not_contains: String
+  treasury_startsWith: String
+  treasury_not_startsWith: String
+  treasury_endsWith: String
+  treasury_not_endsWith: String
+  name_eq: String
+  name_not_eq: String
+  name_gt: String
+  name_gte: String
+  name_lt: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_not_contains: String
+  name_startsWith: String
+  name_not_startsWith: String
+  name_endsWith: String
+  name_not_endsWith: String
+  cid_eq: String
+  cid_not_eq: String
+  cid_gt: String
+  cid_gte: String
+  cid_lt: String
+  cid_lte: String
+  cid_in: [String!]
+  cid_not_in: [String!]
+  cid_contains: String
+  cid_not_contains: String
+  cid_startsWith: String
+  cid_not_startsWith: String
+  cid_endsWith: String
+  cid_not_endsWith: String
+  body_eq: Int
+  body_not_eq: Int
+  body_gt: Int
+  body_gte: Int
+  body_lt: Int
+  body_lte: Int
+  body_in: [Int!]
+  body_not_in: [Int!]
+  access_eq: Int
+  access_not_eq: Int
+  access_gt: Int
+  access_gte: Int
+  access_lt: Int
+  access_lte: Int
+  access_in: [Int!]
+  access_not_in: [Int!]
+  feeModel_eq: Int
+  feeModel_not_eq: Int
+  feeModel_gt: Int
+  feeModel_gte: Int
+  feeModel_lt: Int
+  feeModel_lte: Int
+  feeModel_in: [Int!]
+  feeModel_not_in: [Int!]
+  fee_eq: BigInt
+  fee_not_eq: BigInt
+  fee_gt: BigInt
+  fee_gte: BigInt
+  fee_lt: BigInt
+  fee_lte: BigInt
+  fee_in: [BigInt!]
+  fee_not_in: [BigInt!]
+  govAsset_eq: Int
+  govAsset_not_eq: Int
+  govAsset_gt: Int
+  govAsset_gte: Int
+  govAsset_lt: Int
+  govAsset_lte: Int
+  govAsset_in: [Int!]
+  govAsset_not_in: [Int!]
+  payAsset_eq: Int
+  payAsset_not_eq: Int
+  payAsset_gt: Int
+  payAsset_gte: Int
+  payAsset_lt: Int
+  payAsset_lte: Int
+  payAsset_in: [Int!]
+  payAsset_not_in: [Int!]
+  memberLimit_eq: BigInt
+  memberLimit_not_eq: BigInt
+  memberLimit_gt: BigInt
+  memberLimit_gte: BigInt
+  memberLimit_lt: BigInt
+  memberLimit_lte: BigInt
+  memberLimit_in: [BigInt!]
+  memberLimit_not_in: [BigInt!]
+  members_every: BodyMemberWhereInput
+  members_some: BodyMemberWhereInput
+  members_none: BodyMemberWhereInput
+  AND: [BodyWhereInput!]
+  OR: [BodyWhereInput!]
+}
+
+type Body {
+  id: ID!
+  creator: String!
+  controller: String!
+  treasury: String!
+  name: String!
+  cid: String!
+  body: Int!
+  access: Int!
+  feeModel: Int!
+  fee: BigInt!
+  govAsset: Int!
+  payAsset: Int!
+  memberLimit: BigInt!
+  members(where: BodyMemberWhereInput, orderBy: [BodyMemberOrderByInput], offset: Int, limit: Int): [BodyMember!]!
+}
+
+type BodyEdge {
+  node: Body!
+  cursor: String!
+}
+
+type BodiesConnection {
+  edges: [BodyEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+enum BodyMemberOrderByInput {
+  id_ASC
+  id_DESC
+  body_id_ASC
+  body_id_DESC
+  body_creator_ASC
+  body_creator_DESC
+  body_controller_ASC
+  body_controller_DESC
+  body_treasury_ASC
+  body_treasury_DESC
+  body_name_ASC
+  body_name_DESC
+  body_cid_ASC
+  body_cid_DESC
+  body_body_ASC
+  body_body_DESC
+  body_access_ASC
+  body_access_DESC
+  body_feeModel_ASC
+  body_feeModel_DESC
+  body_fee_ASC
+  body_fee_DESC
+  body_govAsset_ASC
+  body_govAsset_DESC
+  body_payAsset_ASC
+  body_payAsset_DESC
+  body_memberLimit_ASC
+  body_memberLimit_DESC
+  address_ASC
+  address_DESC
+}
+
+input BodyMemberWhereUniqueInput {
+  id: ID!
+}
+
+input BodyMemberWhereInput {
+  id_eq: ID
+  id_not_eq: ID
+  id_gt: ID
+  id_gte: ID
+  id_lt: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_contains: ID
+  id_not_contains: ID
+  id_startsWith: ID
+  id_not_startsWith: ID
+  id_endsWith: ID
+  id_not_endsWith: ID
+  body: BodyWhereInput
+  address_eq: String
+  address_not_eq: String
+  address_gt: String
+  address_gte: String
+  address_lt: String
+  address_lte: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_contains: String
+  address_not_contains: String
+  address_startsWith: String
+  address_not_startsWith: String
+  address_endsWith: String
+  address_not_endsWith: String
+  AND: [BodyMemberWhereInput!]
+  OR: [BodyMemberWhereInput!]
+}
+
+type BodyMember {
+  id: ID!
+  body: Body!
+  address: String!
+}
+
+type BodyMemberEdge {
+  node: BodyMember!
+  cursor: String!
+}
+
+type BodyMembersConnection {
+  edges: [BodyMemberEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
 }

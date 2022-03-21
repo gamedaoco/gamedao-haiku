@@ -4,9 +4,14 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 import { addResolversToSchema } from '@graphql-tools/schema'
 import Cors from 'micro-cors'
 import { stitchSchemas } from '@graphql-tools/stitch'
-import { resolvers, getRmrkSubSchema, gameDaoSchemaJson } from '@gamedao-haiku/graphql/dist/index.js'
+import {
+	resolvers,
+	getRmrkSubSchema,
+	getSubsquidSubSchema,
+	gameDaoSchemaJson,
+} from '@gamedao-haiku/graphql/dist/index.js'
 import type { Resolvers } from '@gamedao-haiku/graphql/dist/resolver/resolvers-types'
-import { buildClientSchema, parse, print } from 'graphql'
+import { buildClientSchema } from 'graphql'
 
 const cors = Cors()
 export default cors(async function handler(req, res) {
@@ -31,7 +36,7 @@ export default cors(async function handler(req, res) {
 	})
 
 	const gatewaySchema = stitchSchemas({
-		subschemas: [await getRmrkSubSchema(), gameDaoSubSchema],
+		subschemas: [await getRmrkSubSchema(), await getSubsquidSubSchema(), gameDaoSubSchema],
 	})
 
 	const apolloServer = new ApolloServer({
