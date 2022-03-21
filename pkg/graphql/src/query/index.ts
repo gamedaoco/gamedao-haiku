@@ -7083,6 +7083,18 @@ export type Yuletide_Item_Track_Variance_Fields = {
 	readonly item_count?: Maybe<Scalars['Float']>
 }
 
+export type BodiesQueryVariables = Exact<{ [key: string]: never }>
+
+export type BodiesQuery = {
+	readonly __typename?: 'Query'
+	readonly bodies: ReadonlyArray<{
+		readonly __typename?: 'Body'
+		readonly id: string
+		readonly name: string
+		readonly members: ReadonlyArray<{ readonly __typename?: 'BodyMember'; readonly address: string }>
+	}>
+}
+
 export type CollectablesForUserQueryVariables = Exact<{
 	owner: Scalars['String']
 }>
@@ -7152,6 +7164,44 @@ export type FeaturesQuery = {
 	}
 }
 
+export const BodiesDocument = gql`
+	query Bodies {
+		bodies {
+			id
+			name
+			members {
+				address
+			}
+		}
+	}
+`
+
+/**
+ * __useBodiesQuery__
+ *
+ * To run a query within a React component, call `useBodiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBodiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBodiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useBodiesQuery(baseOptions?: Apollo.QueryHookOptions<BodiesQuery, BodiesQueryVariables>) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<BodiesQuery, BodiesQueryVariables>(BodiesDocument, options)
+}
+export function useBodiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BodiesQuery, BodiesQueryVariables>) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<BodiesQuery, BodiesQueryVariables>(BodiesDocument, options)
+}
+export type BodiesQueryHookResult = ReturnType<typeof useBodiesQuery>
+export type BodiesLazyQueryHookResult = ReturnType<typeof useBodiesLazyQuery>
+export type BodiesQueryResult = Apollo.QueryResult<BodiesQuery, BodiesQueryVariables>
 export const CollectablesForUserDocument = gql`
 	query CollectablesForUser($owner: String!) {
 		nfts(where: { owner: { _eq: $owner } }) {
