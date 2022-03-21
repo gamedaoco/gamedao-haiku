@@ -1,14 +1,15 @@
-import { gql } from 'apollo-server-micro'
+schema {
+    query: Query
+}
 
-export const typeDefs = gql`
-
-  enum Environment {
+enum Environment {
     DEVELOPMENT
     STAGING
     PRODUCTION
-  }
+}
 
-  type Link {
+
+type Link {
     id: String
     title: String
     description: String
@@ -16,20 +17,20 @@ export const typeDefs = gql`
     category: String
     imageUrl: String
     users: [String]
-  }
+}
 
-  type Features {
-    DEBUG: Boolean,
-    SHOW_HEADER: Boolean,
-    SHOW_HEADER_NAV: Boolean,
-    SHOW_FOOTER: Boolean,
-    SHOW_FOOTER_NAV: Boolean,
-    SHOW_APPLY: Boolean,
-    SHOW_CAMPAIGNS: Boolean,
+type Features {
+    DEBUG: Boolean
+    SHOW_HEADER: Boolean
+    SHOW_HEADER_NAV: Boolean
+    SHOW_FOOTER: Boolean
+    SHOW_FOOTER_NAV: Boolean
+    SHOW_APPLY: Boolean
+    SHOW_CAMPAIGNS: Boolean
     SHOW_FX: Boolean
-  }
+}
 
-  type Config {
+type Config {
     SITE_NAME: String
     SITE_TITLE: String
     SITE_DESCRIPTION: String
@@ -55,13 +56,11 @@ export const typeDefs = gql`
     IPFS_URI: String
     SUBZERO_URI: String
     SUBZERO_PORT: String
-  }
+}
 
-  type Query {
+type Query {
     version: String!
     links: [Link]!
-    config( env: Environment! ): Config!
-    features( env: Environment! ): Features!
-  }
-
-`
+    config(env: Environment!): Config!
+    features(env: Environment!): Features!
+}

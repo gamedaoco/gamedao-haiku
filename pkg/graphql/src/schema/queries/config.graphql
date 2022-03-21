@@ -1,0 +1,29 @@
+query Config($env: Environment!) {
+    config(env: $env) {
+        SITE_NAME
+        SITE_TITLE
+        SITE_DESCRIPTION
+        SITE_IMAGE
+        TW_SITE_NAME
+        TW_SITE_CREATOR
+        CONTACT
+        UNSPLASH_KEY
+        UNSPLASH_SECRET
+        CRYPTOCOMPARE
+        INFURA_MODE
+        INFURA_KEY
+        INFURA_SECRET
+        INFURA_MAINNET
+        INFURA_TESTNET
+        AWS_REGION
+        AWS_USERPOOL_ID
+        AWS_USERPOOL_WEBCLIENT_ID
+        GQL_URI
+        GQL_KEY
+        ETH_URI
+        SUB_URI
+        IPFS_URI
+        SUBZERO_URI
+        SUBZERO_PORT
+    }
+}

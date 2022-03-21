@@ -1,12 +1,7 @@
-import configJSON   from 'src/data/config.json'
-import featuresJSON from 'src/data/features.json'
-
-// ToDo: Add real interfaces
-export type AppConfigTypes = typeof configJSON.global
-export type AppFeatureTypes = typeof featuresJSON.global
+import type { Config, Features } from '@gamedao-haiku/graphql/dist'
 
 export interface AppState {
 	ready: boolean
-	config: AppConfigTypes
-	features: AppFeatureTypes
+	config: Config
+	features: Features
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { styled, useTheme } from '@mui/material/styles'
-import { Badge, ListItemButton, ListItemIcon, Stack, Typography, useMediaQuery } from '@mui/material'
+import { Badge, ListItemButton, ListItemIcon, Stack, Typography, useMediaQuery, Drawer } from '@mui/material'
 import { ThemeSwitch } from 'src/components/ThemeSwitcher/themeSwitch'
 import { FontIcons } from 'src/components/Icons/icons'
 import { NavLink } from 'src/components/NavLink/navLink'
@@ -48,7 +48,14 @@ const SidebarNavItem = ({ href, name, children }) => {
 	)
 }
 
-export function Sidebar() {
+interface ComponentProps {
+	showHeader: boolean
+	onClose: () => void
+	open: boolean
+	variant: 'permanent' | 'persistent' | 'temporary' | undefined
+}
+
+export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) {
 	const theme = useTheme()
 
 	// TODO: Replace with real values
@@ -60,38 +67,56 @@ export function Sidebar() {
 	})
 
 	return (
-		<Stack
-			flex={1}
-			padding={2}
+		<Drawer
+			anchor="left"
+			onClose={onClose}
+			open={open}
+			variant={variant}
 			sx={{
-				backgroundColor: theme.palette.background.default,
-				borderRight: `1px solid ${theme.palette.grey[500_32]}`,
-				minHeight: '100%',
+				'& .MuiPaper-root': {
+					width: '100%',
+					maxWidth: 300,
+					top: { xs: 0, md: showHeader ? 64 : 0 },
+					bottom: 0,
+					height: 'auto',
+					backgroundColor: theme.palette.background.default,
+					borderRight: `1px solid ${theme.palette.grey[500_32]}`,
+				},
 			}}
 		>
-			<Stack spacing={2}>
-				<SidebarNavItem href="/app" name="dashboard">
-					Dashboard
-				</SidebarNavItem>
-				<SidebarNavItem href="/app/governance" name="voting">
-					Governance
-					{counter.gov > 0 && (
-						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.gov} color={'primary'} variant="dot" />
-					)}
-				</SidebarNavItem>
-				<SidebarNavItem href="/app/campaigns" name="campaign">
-					Campaigns
-					{counter.cam > 0 && (
-						<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
-					)}
-				</SidebarNavItem>
-			</Stack>
+			<Stack flex={1} padding={2}>
+				<Stack spacing={2}>
+					<SidebarNavItem href="/app" name="dashboard">
+						Dashboard
+					</SidebarNavItem>
+					<SidebarNavItem href="/app/governance" name="voting">
+						Governance
+						{counter.gov > 0 && (
+							<NavBadge
+								sx={{ ml: '0.5rem' }}
+								badgeContent={counter.gov}
+								color={'primary'}
+								variant="dot"
+							/>
+						)}
+					</SidebarNavItem>
+					<SidebarNavItem href="/app/campaigns" name="campaign">
+						Campaigns
+						{counter.cam > 0 && (
+							<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
+						)}
+					</SidebarNavItem>
+					<SidebarNavItem href="/app/wallet" name="wallet">
+						Wallet
+						{counter.cam > 0 && <NavBadge sx={{ ml: '0.5rem' }} />}
+					</SidebarNavItem>
+				</Stack>
 
-			<Stack direction="row" mt="auto" spacing={2} justifyContent="flex-end">
-				<NetworkSelector />
-
-				<ThemeSwitch />
+				<Stack direction="row" mt="auto" spacing={2} justifyContent="flex-end">
+					<NetworkSelector />
+					<ThemeSwitch />
+				</Stack>
 			</Stack>
-		</Stack>
+		</Drawer>
 	)
 }

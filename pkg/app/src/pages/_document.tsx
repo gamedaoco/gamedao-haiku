@@ -20,7 +20,8 @@ export default class MyDocument extends Document {
 					},
 			})
 
-		const initialProps = await Document.getInitialProps(ctx)
+		const initialProps: DocumentInitialProps = await Document.getInitialProps(ctx)
+
 		// This is important. It prevents emotion to render invalid HTML.
 		// See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
 		const emotionStyles = extractCriticalToChunks(initialProps.html)
@@ -36,7 +37,18 @@ export default class MyDocument extends Document {
 		return {
 			...initialProps,
 			// Styles fragment is rendered after the app and page rendering finish.
-			styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
+			styles: (
+				<>
+					{initialProps.styles}
+					{emotionStyleTags}
+					<style>{`
+						#__next {
+							height: 100%;
+							width: 100%;
+						}
+					`}</style>
+				</>
+			),
 		} as any
 	}
 
@@ -49,9 +61,23 @@ export default class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 					/>
 				</Head>
-				<body>
+				<body
+					style={{
+						height: '100vh',
+						width: '100vw',
+						overflowX: 'hidden',
+					}}
+				>
 					<Main />
 					<NextScript />
+					<style jsx global>{`
+						#__next {
+							height: 100%;
+						}
+						* {
+							color: red !important;
+						}
+					`}</style>
 				</body>
 			</Html>
 		)
