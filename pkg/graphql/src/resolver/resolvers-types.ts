@@ -12,11 +12,327 @@ export type Scalars = {
 	Boolean: boolean
 	Int: number
 	Float: number
+	/** Big number integer */
+	BigInt: any
+	/** Binary data encoded as a hex string always prefixed with 0x */
+	Bytes: any
+	/** A date-time string in simplified extended ISO 8601 format (YYYY-MM-DDTHH:mm:ss.sssZ) */
+	DateTime: any
 	bigint: any
 	jsonb: any
 	numeric: any
 	smallint: any
 	timestamptz: any
+}
+
+export type BodiesConnection = {
+	readonly __typename?: 'BodiesConnection'
+	readonly edges: ReadonlyArray<BodyEdge>
+	readonly pageInfo: PageInfo
+	readonly totalCount: Scalars['Int']
+}
+
+export type Body = {
+	readonly __typename?: 'Body'
+	readonly access: Scalars['Int']
+	readonly body: Scalars['Int']
+	readonly cid: Scalars['String']
+	readonly controller: Scalars['String']
+	readonly creator: Scalars['String']
+	readonly fee: Scalars['BigInt']
+	readonly feeModel: Scalars['Int']
+	readonly govAsset: Scalars['Int']
+	readonly id: Scalars['ID']
+	readonly memberLimit: Scalars['BigInt']
+	readonly members: ReadonlyArray<BodyMember>
+	readonly name: Scalars['String']
+	readonly payAsset: Scalars['Int']
+	readonly treasury: Scalars['String']
+}
+
+export type BodyMembersArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<ReadonlyArray<InputMaybe<BodyMemberOrderByInput>>>
+	where?: InputMaybe<BodyMemberWhereInput>
+}
+
+export type BodyEdge = {
+	readonly __typename?: 'BodyEdge'
+	readonly cursor: Scalars['String']
+	readonly node: Body
+}
+
+export type BodyMember = {
+	readonly __typename?: 'BodyMember'
+	readonly address: Scalars['String']
+	readonly body: Body
+	readonly id: Scalars['ID']
+}
+
+export type BodyMemberEdge = {
+	readonly __typename?: 'BodyMemberEdge'
+	readonly cursor: Scalars['String']
+	readonly node: BodyMember
+}
+
+export enum BodyMemberOrderByInput {
+	AddressAsc = 'address_ASC',
+	AddressDesc = 'address_DESC',
+	BodyAccessAsc = 'body_access_ASC',
+	BodyAccessDesc = 'body_access_DESC',
+	BodyBodyAsc = 'body_body_ASC',
+	BodyBodyDesc = 'body_body_DESC',
+	BodyCidAsc = 'body_cid_ASC',
+	BodyCidDesc = 'body_cid_DESC',
+	BodyControllerAsc = 'body_controller_ASC',
+	BodyControllerDesc = 'body_controller_DESC',
+	BodyCreatorAsc = 'body_creator_ASC',
+	BodyCreatorDesc = 'body_creator_DESC',
+	BodyFeeModelAsc = 'body_feeModel_ASC',
+	BodyFeeModelDesc = 'body_feeModel_DESC',
+	BodyFeeAsc = 'body_fee_ASC',
+	BodyFeeDesc = 'body_fee_DESC',
+	BodyGovAssetAsc = 'body_govAsset_ASC',
+	BodyGovAssetDesc = 'body_govAsset_DESC',
+	BodyIdAsc = 'body_id_ASC',
+	BodyIdDesc = 'body_id_DESC',
+	BodyMemberLimitAsc = 'body_memberLimit_ASC',
+	BodyMemberLimitDesc = 'body_memberLimit_DESC',
+	BodyNameAsc = 'body_name_ASC',
+	BodyNameDesc = 'body_name_DESC',
+	BodyPayAssetAsc = 'body_payAsset_ASC',
+	BodyPayAssetDesc = 'body_payAsset_DESC',
+	BodyTreasuryAsc = 'body_treasury_ASC',
+	BodyTreasuryDesc = 'body_treasury_DESC',
+	IdAsc = 'id_ASC',
+	IdDesc = 'id_DESC',
+}
+
+export type BodyMemberWhereInput = {
+	readonly AND?: InputMaybe<ReadonlyArray<BodyMemberWhereInput>>
+	readonly OR?: InputMaybe<ReadonlyArray<BodyMemberWhereInput>>
+	readonly address_contains?: InputMaybe<Scalars['String']>
+	readonly address_endsWith?: InputMaybe<Scalars['String']>
+	readonly address_eq?: InputMaybe<Scalars['String']>
+	readonly address_gt?: InputMaybe<Scalars['String']>
+	readonly address_gte?: InputMaybe<Scalars['String']>
+	readonly address_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly address_lt?: InputMaybe<Scalars['String']>
+	readonly address_lte?: InputMaybe<Scalars['String']>
+	readonly address_not_contains?: InputMaybe<Scalars['String']>
+	readonly address_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly address_not_eq?: InputMaybe<Scalars['String']>
+	readonly address_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly address_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly address_startsWith?: InputMaybe<Scalars['String']>
+	readonly body?: InputMaybe<BodyWhereInput>
+	readonly id_contains?: InputMaybe<Scalars['ID']>
+	readonly id_endsWith?: InputMaybe<Scalars['ID']>
+	readonly id_eq?: InputMaybe<Scalars['ID']>
+	readonly id_gt?: InputMaybe<Scalars['ID']>
+	readonly id_gte?: InputMaybe<Scalars['ID']>
+	readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
+	readonly id_lt?: InputMaybe<Scalars['ID']>
+	readonly id_lte?: InputMaybe<Scalars['ID']>
+	readonly id_not_contains?: InputMaybe<Scalars['ID']>
+	readonly id_not_endsWith?: InputMaybe<Scalars['ID']>
+	readonly id_not_eq?: InputMaybe<Scalars['ID']>
+	readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
+	readonly id_not_startsWith?: InputMaybe<Scalars['ID']>
+	readonly id_startsWith?: InputMaybe<Scalars['ID']>
+}
+
+export type BodyMemberWhereUniqueInput = {
+	readonly id: Scalars['ID']
+}
+
+export type BodyMembersConnection = {
+	readonly __typename?: 'BodyMembersConnection'
+	readonly edges: ReadonlyArray<BodyMemberEdge>
+	readonly pageInfo: PageInfo
+	readonly totalCount: Scalars['Int']
+}
+
+export enum BodyOrderByInput {
+	AccessAsc = 'access_ASC',
+	AccessDesc = 'access_DESC',
+	BodyAsc = 'body_ASC',
+	BodyDesc = 'body_DESC',
+	CidAsc = 'cid_ASC',
+	CidDesc = 'cid_DESC',
+	ControllerAsc = 'controller_ASC',
+	ControllerDesc = 'controller_DESC',
+	CreatorAsc = 'creator_ASC',
+	CreatorDesc = 'creator_DESC',
+	FeeModelAsc = 'feeModel_ASC',
+	FeeModelDesc = 'feeModel_DESC',
+	FeeAsc = 'fee_ASC',
+	FeeDesc = 'fee_DESC',
+	GovAssetAsc = 'govAsset_ASC',
+	GovAssetDesc = 'govAsset_DESC',
+	IdAsc = 'id_ASC',
+	IdDesc = 'id_DESC',
+	MemberLimitAsc = 'memberLimit_ASC',
+	MemberLimitDesc = 'memberLimit_DESC',
+	NameAsc = 'name_ASC',
+	NameDesc = 'name_DESC',
+	PayAssetAsc = 'payAsset_ASC',
+	PayAssetDesc = 'payAsset_DESC',
+	TreasuryAsc = 'treasury_ASC',
+	TreasuryDesc = 'treasury_DESC',
+}
+
+export type BodyWhereInput = {
+	readonly AND?: InputMaybe<ReadonlyArray<BodyWhereInput>>
+	readonly OR?: InputMaybe<ReadonlyArray<BodyWhereInput>>
+	readonly access_eq?: InputMaybe<Scalars['Int']>
+	readonly access_gt?: InputMaybe<Scalars['Int']>
+	readonly access_gte?: InputMaybe<Scalars['Int']>
+	readonly access_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly access_lt?: InputMaybe<Scalars['Int']>
+	readonly access_lte?: InputMaybe<Scalars['Int']>
+	readonly access_not_eq?: InputMaybe<Scalars['Int']>
+	readonly access_not_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly body_eq?: InputMaybe<Scalars['Int']>
+	readonly body_gt?: InputMaybe<Scalars['Int']>
+	readonly body_gte?: InputMaybe<Scalars['Int']>
+	readonly body_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly body_lt?: InputMaybe<Scalars['Int']>
+	readonly body_lte?: InputMaybe<Scalars['Int']>
+	readonly body_not_eq?: InputMaybe<Scalars['Int']>
+	readonly body_not_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly cid_contains?: InputMaybe<Scalars['String']>
+	readonly cid_endsWith?: InputMaybe<Scalars['String']>
+	readonly cid_eq?: InputMaybe<Scalars['String']>
+	readonly cid_gt?: InputMaybe<Scalars['String']>
+	readonly cid_gte?: InputMaybe<Scalars['String']>
+	readonly cid_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly cid_lt?: InputMaybe<Scalars['String']>
+	readonly cid_lte?: InputMaybe<Scalars['String']>
+	readonly cid_not_contains?: InputMaybe<Scalars['String']>
+	readonly cid_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly cid_not_eq?: InputMaybe<Scalars['String']>
+	readonly cid_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly cid_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly cid_startsWith?: InputMaybe<Scalars['String']>
+	readonly controller_contains?: InputMaybe<Scalars['String']>
+	readonly controller_endsWith?: InputMaybe<Scalars['String']>
+	readonly controller_eq?: InputMaybe<Scalars['String']>
+	readonly controller_gt?: InputMaybe<Scalars['String']>
+	readonly controller_gte?: InputMaybe<Scalars['String']>
+	readonly controller_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly controller_lt?: InputMaybe<Scalars['String']>
+	readonly controller_lte?: InputMaybe<Scalars['String']>
+	readonly controller_not_contains?: InputMaybe<Scalars['String']>
+	readonly controller_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly controller_not_eq?: InputMaybe<Scalars['String']>
+	readonly controller_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly controller_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly controller_startsWith?: InputMaybe<Scalars['String']>
+	readonly creator_contains?: InputMaybe<Scalars['String']>
+	readonly creator_endsWith?: InputMaybe<Scalars['String']>
+	readonly creator_eq?: InputMaybe<Scalars['String']>
+	readonly creator_gt?: InputMaybe<Scalars['String']>
+	readonly creator_gte?: InputMaybe<Scalars['String']>
+	readonly creator_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly creator_lt?: InputMaybe<Scalars['String']>
+	readonly creator_lte?: InputMaybe<Scalars['String']>
+	readonly creator_not_contains?: InputMaybe<Scalars['String']>
+	readonly creator_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly creator_not_eq?: InputMaybe<Scalars['String']>
+	readonly creator_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly creator_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly creator_startsWith?: InputMaybe<Scalars['String']>
+	readonly feeModel_eq?: InputMaybe<Scalars['Int']>
+	readonly feeModel_gt?: InputMaybe<Scalars['Int']>
+	readonly feeModel_gte?: InputMaybe<Scalars['Int']>
+	readonly feeModel_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly feeModel_lt?: InputMaybe<Scalars['Int']>
+	readonly feeModel_lte?: InputMaybe<Scalars['Int']>
+	readonly feeModel_not_eq?: InputMaybe<Scalars['Int']>
+	readonly feeModel_not_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly fee_eq?: InputMaybe<Scalars['BigInt']>
+	readonly fee_gt?: InputMaybe<Scalars['BigInt']>
+	readonly fee_gte?: InputMaybe<Scalars['BigInt']>
+	readonly fee_in?: InputMaybe<ReadonlyArray<Scalars['BigInt']>>
+	readonly fee_lt?: InputMaybe<Scalars['BigInt']>
+	readonly fee_lte?: InputMaybe<Scalars['BigInt']>
+	readonly fee_not_eq?: InputMaybe<Scalars['BigInt']>
+	readonly fee_not_in?: InputMaybe<ReadonlyArray<Scalars['BigInt']>>
+	readonly govAsset_eq?: InputMaybe<Scalars['Int']>
+	readonly govAsset_gt?: InputMaybe<Scalars['Int']>
+	readonly govAsset_gte?: InputMaybe<Scalars['Int']>
+	readonly govAsset_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly govAsset_lt?: InputMaybe<Scalars['Int']>
+	readonly govAsset_lte?: InputMaybe<Scalars['Int']>
+	readonly govAsset_not_eq?: InputMaybe<Scalars['Int']>
+	readonly govAsset_not_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly id_contains?: InputMaybe<Scalars['ID']>
+	readonly id_endsWith?: InputMaybe<Scalars['ID']>
+	readonly id_eq?: InputMaybe<Scalars['ID']>
+	readonly id_gt?: InputMaybe<Scalars['ID']>
+	readonly id_gte?: InputMaybe<Scalars['ID']>
+	readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
+	readonly id_lt?: InputMaybe<Scalars['ID']>
+	readonly id_lte?: InputMaybe<Scalars['ID']>
+	readonly id_not_contains?: InputMaybe<Scalars['ID']>
+	readonly id_not_endsWith?: InputMaybe<Scalars['ID']>
+	readonly id_not_eq?: InputMaybe<Scalars['ID']>
+	readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
+	readonly id_not_startsWith?: InputMaybe<Scalars['ID']>
+	readonly id_startsWith?: InputMaybe<Scalars['ID']>
+	readonly memberLimit_eq?: InputMaybe<Scalars['BigInt']>
+	readonly memberLimit_gt?: InputMaybe<Scalars['BigInt']>
+	readonly memberLimit_gte?: InputMaybe<Scalars['BigInt']>
+	readonly memberLimit_in?: InputMaybe<ReadonlyArray<Scalars['BigInt']>>
+	readonly memberLimit_lt?: InputMaybe<Scalars['BigInt']>
+	readonly memberLimit_lte?: InputMaybe<Scalars['BigInt']>
+	readonly memberLimit_not_eq?: InputMaybe<Scalars['BigInt']>
+	readonly memberLimit_not_in?: InputMaybe<ReadonlyArray<Scalars['BigInt']>>
+	readonly members_every?: InputMaybe<BodyMemberWhereInput>
+	readonly members_none?: InputMaybe<BodyMemberWhereInput>
+	readonly members_some?: InputMaybe<BodyMemberWhereInput>
+	readonly name_contains?: InputMaybe<Scalars['String']>
+	readonly name_endsWith?: InputMaybe<Scalars['String']>
+	readonly name_eq?: InputMaybe<Scalars['String']>
+	readonly name_gt?: InputMaybe<Scalars['String']>
+	readonly name_gte?: InputMaybe<Scalars['String']>
+	readonly name_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly name_lt?: InputMaybe<Scalars['String']>
+	readonly name_lte?: InputMaybe<Scalars['String']>
+	readonly name_not_contains?: InputMaybe<Scalars['String']>
+	readonly name_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly name_not_eq?: InputMaybe<Scalars['String']>
+	readonly name_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly name_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly name_startsWith?: InputMaybe<Scalars['String']>
+	readonly payAsset_eq?: InputMaybe<Scalars['Int']>
+	readonly payAsset_gt?: InputMaybe<Scalars['Int']>
+	readonly payAsset_gte?: InputMaybe<Scalars['Int']>
+	readonly payAsset_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly payAsset_lt?: InputMaybe<Scalars['Int']>
+	readonly payAsset_lte?: InputMaybe<Scalars['Int']>
+	readonly payAsset_not_eq?: InputMaybe<Scalars['Int']>
+	readonly payAsset_not_in?: InputMaybe<ReadonlyArray<Scalars['Int']>>
+	readonly treasury_contains?: InputMaybe<Scalars['String']>
+	readonly treasury_endsWith?: InputMaybe<Scalars['String']>
+	readonly treasury_eq?: InputMaybe<Scalars['String']>
+	readonly treasury_gt?: InputMaybe<Scalars['String']>
+	readonly treasury_gte?: InputMaybe<Scalars['String']>
+	readonly treasury_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly treasury_lt?: InputMaybe<Scalars['String']>
+	readonly treasury_lte?: InputMaybe<Scalars['String']>
+	readonly treasury_not_contains?: InputMaybe<Scalars['String']>
+	readonly treasury_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly treasury_not_eq?: InputMaybe<Scalars['String']>
+	readonly treasury_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly treasury_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly treasury_startsWith?: InputMaybe<Scalars['String']>
+}
+
+export type BodyWhereUniqueInput = {
+	readonly id: Scalars['ID']
 }
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -135,6 +451,14 @@ export type MutationInsert_Hatched_Birds_OneArgs = {
 	object: Hatched_Birds_Insert_Input
 }
 
+export type PageInfo = {
+	readonly __typename?: 'PageInfo'
+	readonly endCursor: Scalars['String']
+	readonly hasNextPage: Scalars['Boolean']
+	readonly hasPreviousPage: Scalars['Boolean']
+	readonly startCursor: Scalars['String']
+}
+
 export type Query = {
 	readonly __typename?: 'Query'
 	/** fetch data from the table: "base_themes" */
@@ -147,6 +471,16 @@ export type Query = {
 	readonly bases_aggregate: Bases_Aggregate
 	/** fetch data from the table: "bases" using primary key columns */
 	readonly bases_by_pk?: Maybe<Bases>
+	readonly bodies: ReadonlyArray<Body>
+	readonly bodiesConnection: BodiesConnection
+	readonly bodyById?: Maybe<Body>
+	/** @deprecated Use `bodyById` */
+	readonly bodyByUniqueInput?: Maybe<Body>
+	readonly bodyMemberById?: Maybe<BodyMember>
+	/** @deprecated Use `bodyMemberById` */
+	readonly bodyMemberByUniqueInput?: Maybe<BodyMember>
+	readonly bodyMembers: ReadonlyArray<BodyMember>
+	readonly bodyMembersConnection: BodyMembersConnection
 	/** An array relationship */
 	readonly changes: ReadonlyArray<Changes>
 	/** An aggregate relationship */
@@ -343,6 +677,50 @@ export type QueryBases_AggregateArgs = {
 
 export type QueryBases_By_PkArgs = {
 	id: Scalars['String']
+}
+
+export type QueryBodiesArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<ReadonlyArray<InputMaybe<BodyOrderByInput>>>
+	where?: InputMaybe<BodyWhereInput>
+}
+
+export type QueryBodiesConnectionArgs = {
+	after?: InputMaybe<Scalars['String']>
+	first?: InputMaybe<Scalars['Int']>
+	orderBy: ReadonlyArray<BodyOrderByInput>
+	where?: InputMaybe<BodyWhereInput>
+}
+
+export type QueryBodyByIdArgs = {
+	id: Scalars['ID']
+}
+
+export type QueryBodyByUniqueInputArgs = {
+	where: BodyWhereUniqueInput
+}
+
+export type QueryBodyMemberByIdArgs = {
+	id: Scalars['ID']
+}
+
+export type QueryBodyMemberByUniqueInputArgs = {
+	where: BodyMemberWhereUniqueInput
+}
+
+export type QueryBodyMembersArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<ReadonlyArray<InputMaybe<BodyMemberOrderByInput>>>
+	where?: InputMaybe<BodyMemberWhereInput>
+}
+
+export type QueryBodyMembersConnectionArgs = {
+	after?: InputMaybe<Scalars['String']>
+	first?: InputMaybe<Scalars['Int']>
+	orderBy: ReadonlyArray<BodyMemberOrderByInput>
+	where?: InputMaybe<BodyMemberWhereInput>
 }
 
 export type QueryChangesArgs = {
@@ -6779,17 +7157,34 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+	BigInt: ResolverTypeWrapper<Scalars['BigInt']>
+	BodiesConnection: ResolverTypeWrapper<BodiesConnection>
+	Body: ResolverTypeWrapper<Body>
+	BodyEdge: ResolverTypeWrapper<BodyEdge>
+	BodyMember: ResolverTypeWrapper<BodyMember>
+	BodyMemberEdge: ResolverTypeWrapper<BodyMemberEdge>
+	BodyMemberOrderByInput: BodyMemberOrderByInput
+	BodyMemberWhereInput: BodyMemberWhereInput
+	BodyMemberWhereUniqueInput: BodyMemberWhereUniqueInput
+	BodyMembersConnection: ResolverTypeWrapper<BodyMembersConnection>
+	BodyOrderByInput: BodyOrderByInput
+	BodyWhereInput: BodyWhereInput
+	BodyWhereUniqueInput: BodyWhereUniqueInput
 	Boolean: ResolverTypeWrapper<Scalars['Boolean']>
 	Boolean_comparison_exp: Boolean_Comparison_Exp
+	Bytes: ResolverTypeWrapper<Scalars['Bytes']>
 	Config: ResolverTypeWrapper<Config>
+	DateTime: ResolverTypeWrapper<Scalars['DateTime']>
 	Environment: Environment
 	Features: ResolverTypeWrapper<Features>
 	Float: ResolverTypeWrapper<Scalars['Float']>
 	Float_comparison_exp: Float_Comparison_Exp
+	ID: ResolverTypeWrapper<Scalars['ID']>
 	Int: ResolverTypeWrapper<Scalars['Int']>
 	Int_comparison_exp: Int_Comparison_Exp
 	Link: ResolverTypeWrapper<Link>
 	Mutation: ResolverTypeWrapper<{}>
+	PageInfo: ResolverTypeWrapper<PageInfo>
 	Query: ResolverTypeWrapper<{}>
 	String: ResolverTypeWrapper<Scalars['String']>
 	String_comparison_exp: String_Comparison_Exp
@@ -7212,16 +7607,31 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+	BigInt: Scalars['BigInt']
+	BodiesConnection: BodiesConnection
+	Body: Body
+	BodyEdge: BodyEdge
+	BodyMember: BodyMember
+	BodyMemberEdge: BodyMemberEdge
+	BodyMemberWhereInput: BodyMemberWhereInput
+	BodyMemberWhereUniqueInput: BodyMemberWhereUniqueInput
+	BodyMembersConnection: BodyMembersConnection
+	BodyWhereInput: BodyWhereInput
+	BodyWhereUniqueInput: BodyWhereUniqueInput
 	Boolean: Scalars['Boolean']
 	Boolean_comparison_exp: Boolean_Comparison_Exp
+	Bytes: Scalars['Bytes']
 	Config: Config
+	DateTime: Scalars['DateTime']
 	Features: Features
 	Float: Scalars['Float']
 	Float_comparison_exp: Float_Comparison_Exp
+	ID: Scalars['ID']
 	Int: Scalars['Int']
 	Int_comparison_exp: Int_Comparison_Exp
 	Link: Link
 	Mutation: {}
+	PageInfo: PageInfo
 	Query: {}
 	String: Scalars['String']
 	String_comparison_exp: String_Comparison_Exp
@@ -7609,6 +8019,83 @@ export type ResolversParentTypes = ResolversObject<{
 	yuletide_item_track_variance_fields: Yuletide_Item_Track_Variance_Fields
 }>
 
+export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
+	name: 'BigInt'
+}
+
+export type BodiesConnectionResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['BodiesConnection'] = ResolversParentTypes['BodiesConnection'],
+> = ResolversObject<{
+	edges?: Resolver<ReadonlyArray<ResolversTypes['BodyEdge']>, ParentType, ContextType>
+	pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>
+	totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type BodyResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['Body'] = ResolversParentTypes['Body'],
+> = ResolversObject<{
+	access?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	body?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	cid?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	controller?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	creator?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	fee?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>
+	feeModel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	govAsset?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+	memberLimit?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>
+	members?: Resolver<ReadonlyArray<ResolversTypes['BodyMember']>, ParentType, ContextType, Partial<BodyMembersArgs>>
+	name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	payAsset?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	treasury?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type BodyEdgeResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['BodyEdge'] = ResolversParentTypes['BodyEdge'],
+> = ResolversObject<{
+	cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	node?: Resolver<ResolversTypes['Body'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type BodyMemberResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['BodyMember'] = ResolversParentTypes['BodyMember'],
+> = ResolversObject<{
+	address?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	body?: Resolver<ResolversTypes['Body'], ParentType, ContextType>
+	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type BodyMemberEdgeResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['BodyMemberEdge'] = ResolversParentTypes['BodyMemberEdge'],
+> = ResolversObject<{
+	cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	node?: Resolver<ResolversTypes['BodyMember'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type BodyMembersConnectionResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['BodyMembersConnection'] = ResolversParentTypes['BodyMembersConnection'],
+> = ResolversObject<{
+	edges?: Resolver<ReadonlyArray<ResolversTypes['BodyMemberEdge']>, ParentType, ContextType>
+	pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>
+	totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export interface BytesScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Bytes'], any> {
+	name: 'Bytes'
+}
+
 export type ConfigResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Config'] = ResolversParentTypes['Config'],
@@ -7640,6 +8127,10 @@ export type ConfigResolvers<
 	UNSPLASH_SECRET?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
+
+export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+	name: 'DateTime'
+}
 
 export type FeaturesResolvers<
 	ContextType = any,
@@ -7688,6 +8179,17 @@ export type MutationResolvers<
 	>
 }>
 
+export type PageInfoResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo'],
+> = ResolversObject<{
+	endCursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	hasPreviousPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	startCursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
 export type QueryResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
@@ -7716,6 +8218,44 @@ export type QueryResolvers<
 		ParentType,
 		ContextType,
 		RequireFields<QueryBases_By_PkArgs, 'id'>
+	>
+	bodies?: Resolver<ReadonlyArray<ResolversTypes['Body']>, ParentType, ContextType, Partial<QueryBodiesArgs>>
+	bodiesConnection?: Resolver<
+		ResolversTypes['BodiesConnection'],
+		ParentType,
+		ContextType,
+		RequireFields<QueryBodiesConnectionArgs, 'orderBy'>
+	>
+	bodyById?: Resolver<Maybe<ResolversTypes['Body']>, ParentType, ContextType, RequireFields<QueryBodyByIdArgs, 'id'>>
+	bodyByUniqueInput?: Resolver<
+		Maybe<ResolversTypes['Body']>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryBodyByUniqueInputArgs, 'where'>
+	>
+	bodyMemberById?: Resolver<
+		Maybe<ResolversTypes['BodyMember']>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryBodyMemberByIdArgs, 'id'>
+	>
+	bodyMemberByUniqueInput?: Resolver<
+		Maybe<ResolversTypes['BodyMember']>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryBodyMemberByUniqueInputArgs, 'where'>
+	>
+	bodyMembers?: Resolver<
+		ReadonlyArray<ResolversTypes['BodyMember']>,
+		ParentType,
+		ContextType,
+		Partial<QueryBodyMembersArgs>
+	>
+	bodyMembersConnection?: Resolver<
+		ResolversTypes['BodyMembersConnection'],
+		ParentType,
+		ContextType,
+		RequireFields<QueryBodyMembersConnectionArgs, 'orderBy'>
 	>
 	changes?: Resolver<ReadonlyArray<ResolversTypes['changes']>, ParentType, ContextType, Partial<QueryChangesArgs>>
 	changes_aggregate?: Resolver<
@@ -11563,10 +12103,20 @@ export type Yuletide_Item_Track_Variance_FieldsResolvers<
 }>
 
 export type Resolvers<ContextType = any> = ResolversObject<{
+	BigInt?: GraphQLScalarType
+	BodiesConnection?: BodiesConnectionResolvers<ContextType>
+	Body?: BodyResolvers<ContextType>
+	BodyEdge?: BodyEdgeResolvers<ContextType>
+	BodyMember?: BodyMemberResolvers<ContextType>
+	BodyMemberEdge?: BodyMemberEdgeResolvers<ContextType>
+	BodyMembersConnection?: BodyMembersConnectionResolvers<ContextType>
+	Bytes?: GraphQLScalarType
 	Config?: ConfigResolvers<ContextType>
+	DateTime?: GraphQLScalarType
 	Features?: FeaturesResolvers<ContextType>
 	Link?: LinkResolvers<ContextType>
 	Mutation?: MutationResolvers<ContextType>
+	PageInfo?: PageInfoResolvers<ContextType>
 	Query?: QueryResolvers<ContextType>
 	Subscription?: SubscriptionResolvers<ContextType>
 	base_themes?: Base_ThemesResolvers<ContextType>

@@ -10,11 +10,327 @@ export type Scalars = {
 	Boolean: boolean
 	Int: number
 	Float: number
+	/** Big number integer */
+	BigInt: any
+	/** Binary data encoded as a hex string always prefixed with 0x */
+	Bytes: any
+	/** A date-time string in simplified extended ISO 8601 format (YYYY-MM-DDTHH:mm:ss.sssZ) */
+	DateTime: any
 	bigint: any
 	jsonb: any
 	numeric: any
 	smallint: any
 	timestamptz: any
+}
+
+export type BodiesConnection = {
+	__typename?: 'BodiesConnection'
+	edges: Array<BodyEdge>
+	pageInfo: PageInfo
+	totalCount: Scalars['Int']
+}
+
+export type Body = {
+	__typename?: 'Body'
+	access: Scalars['Int']
+	body: Scalars['Int']
+	cid: Scalars['String']
+	controller: Scalars['String']
+	creator: Scalars['String']
+	fee: Scalars['BigInt']
+	feeModel: Scalars['Int']
+	govAsset: Scalars['Int']
+	id: Scalars['ID']
+	memberLimit: Scalars['BigInt']
+	members: Array<BodyMember>
+	name: Scalars['String']
+	payAsset: Scalars['Int']
+	treasury: Scalars['String']
+}
+
+export type BodyMembersArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<Array<InputMaybe<BodyMemberOrderByInput>>>
+	where?: InputMaybe<BodyMemberWhereInput>
+}
+
+export type BodyEdge = {
+	__typename?: 'BodyEdge'
+	cursor: Scalars['String']
+	node: Body
+}
+
+export type BodyMember = {
+	__typename?: 'BodyMember'
+	address: Scalars['String']
+	body: Body
+	id: Scalars['ID']
+}
+
+export type BodyMemberEdge = {
+	__typename?: 'BodyMemberEdge'
+	cursor: Scalars['String']
+	node: BodyMember
+}
+
+export enum BodyMemberOrderByInput {
+	AddressAsc = 'address_ASC',
+	AddressDesc = 'address_DESC',
+	BodyAccessAsc = 'body_access_ASC',
+	BodyAccessDesc = 'body_access_DESC',
+	BodyBodyAsc = 'body_body_ASC',
+	BodyBodyDesc = 'body_body_DESC',
+	BodyCidAsc = 'body_cid_ASC',
+	BodyCidDesc = 'body_cid_DESC',
+	BodyControllerAsc = 'body_controller_ASC',
+	BodyControllerDesc = 'body_controller_DESC',
+	BodyCreatorAsc = 'body_creator_ASC',
+	BodyCreatorDesc = 'body_creator_DESC',
+	BodyFeeModelAsc = 'body_feeModel_ASC',
+	BodyFeeModelDesc = 'body_feeModel_DESC',
+	BodyFeeAsc = 'body_fee_ASC',
+	BodyFeeDesc = 'body_fee_DESC',
+	BodyGovAssetAsc = 'body_govAsset_ASC',
+	BodyGovAssetDesc = 'body_govAsset_DESC',
+	BodyIdAsc = 'body_id_ASC',
+	BodyIdDesc = 'body_id_DESC',
+	BodyMemberLimitAsc = 'body_memberLimit_ASC',
+	BodyMemberLimitDesc = 'body_memberLimit_DESC',
+	BodyNameAsc = 'body_name_ASC',
+	BodyNameDesc = 'body_name_DESC',
+	BodyPayAssetAsc = 'body_payAsset_ASC',
+	BodyPayAssetDesc = 'body_payAsset_DESC',
+	BodyTreasuryAsc = 'body_treasury_ASC',
+	BodyTreasuryDesc = 'body_treasury_DESC',
+	IdAsc = 'id_ASC',
+	IdDesc = 'id_DESC',
+}
+
+export type BodyMemberWhereInput = {
+	AND?: InputMaybe<Array<BodyMemberWhereInput>>
+	OR?: InputMaybe<Array<BodyMemberWhereInput>>
+	address_contains?: InputMaybe<Scalars['String']>
+	address_endsWith?: InputMaybe<Scalars['String']>
+	address_eq?: InputMaybe<Scalars['String']>
+	address_gt?: InputMaybe<Scalars['String']>
+	address_gte?: InputMaybe<Scalars['String']>
+	address_in?: InputMaybe<Array<Scalars['String']>>
+	address_lt?: InputMaybe<Scalars['String']>
+	address_lte?: InputMaybe<Scalars['String']>
+	address_not_contains?: InputMaybe<Scalars['String']>
+	address_not_endsWith?: InputMaybe<Scalars['String']>
+	address_not_eq?: InputMaybe<Scalars['String']>
+	address_not_in?: InputMaybe<Array<Scalars['String']>>
+	address_not_startsWith?: InputMaybe<Scalars['String']>
+	address_startsWith?: InputMaybe<Scalars['String']>
+	body?: InputMaybe<BodyWhereInput>
+	id_contains?: InputMaybe<Scalars['ID']>
+	id_endsWith?: InputMaybe<Scalars['ID']>
+	id_eq?: InputMaybe<Scalars['ID']>
+	id_gt?: InputMaybe<Scalars['ID']>
+	id_gte?: InputMaybe<Scalars['ID']>
+	id_in?: InputMaybe<Array<Scalars['ID']>>
+	id_lt?: InputMaybe<Scalars['ID']>
+	id_lte?: InputMaybe<Scalars['ID']>
+	id_not_contains?: InputMaybe<Scalars['ID']>
+	id_not_endsWith?: InputMaybe<Scalars['ID']>
+	id_not_eq?: InputMaybe<Scalars['ID']>
+	id_not_in?: InputMaybe<Array<Scalars['ID']>>
+	id_not_startsWith?: InputMaybe<Scalars['ID']>
+	id_startsWith?: InputMaybe<Scalars['ID']>
+}
+
+export type BodyMemberWhereUniqueInput = {
+	id: Scalars['ID']
+}
+
+export type BodyMembersConnection = {
+	__typename?: 'BodyMembersConnection'
+	edges: Array<BodyMemberEdge>
+	pageInfo: PageInfo
+	totalCount: Scalars['Int']
+}
+
+export enum BodyOrderByInput {
+	AccessAsc = 'access_ASC',
+	AccessDesc = 'access_DESC',
+	BodyAsc = 'body_ASC',
+	BodyDesc = 'body_DESC',
+	CidAsc = 'cid_ASC',
+	CidDesc = 'cid_DESC',
+	ControllerAsc = 'controller_ASC',
+	ControllerDesc = 'controller_DESC',
+	CreatorAsc = 'creator_ASC',
+	CreatorDesc = 'creator_DESC',
+	FeeModelAsc = 'feeModel_ASC',
+	FeeModelDesc = 'feeModel_DESC',
+	FeeAsc = 'fee_ASC',
+	FeeDesc = 'fee_DESC',
+	GovAssetAsc = 'govAsset_ASC',
+	GovAssetDesc = 'govAsset_DESC',
+	IdAsc = 'id_ASC',
+	IdDesc = 'id_DESC',
+	MemberLimitAsc = 'memberLimit_ASC',
+	MemberLimitDesc = 'memberLimit_DESC',
+	NameAsc = 'name_ASC',
+	NameDesc = 'name_DESC',
+	PayAssetAsc = 'payAsset_ASC',
+	PayAssetDesc = 'payAsset_DESC',
+	TreasuryAsc = 'treasury_ASC',
+	TreasuryDesc = 'treasury_DESC',
+}
+
+export type BodyWhereInput = {
+	AND?: InputMaybe<Array<BodyWhereInput>>
+	OR?: InputMaybe<Array<BodyWhereInput>>
+	access_eq?: InputMaybe<Scalars['Int']>
+	access_gt?: InputMaybe<Scalars['Int']>
+	access_gte?: InputMaybe<Scalars['Int']>
+	access_in?: InputMaybe<Array<Scalars['Int']>>
+	access_lt?: InputMaybe<Scalars['Int']>
+	access_lte?: InputMaybe<Scalars['Int']>
+	access_not_eq?: InputMaybe<Scalars['Int']>
+	access_not_in?: InputMaybe<Array<Scalars['Int']>>
+	body_eq?: InputMaybe<Scalars['Int']>
+	body_gt?: InputMaybe<Scalars['Int']>
+	body_gte?: InputMaybe<Scalars['Int']>
+	body_in?: InputMaybe<Array<Scalars['Int']>>
+	body_lt?: InputMaybe<Scalars['Int']>
+	body_lte?: InputMaybe<Scalars['Int']>
+	body_not_eq?: InputMaybe<Scalars['Int']>
+	body_not_in?: InputMaybe<Array<Scalars['Int']>>
+	cid_contains?: InputMaybe<Scalars['String']>
+	cid_endsWith?: InputMaybe<Scalars['String']>
+	cid_eq?: InputMaybe<Scalars['String']>
+	cid_gt?: InputMaybe<Scalars['String']>
+	cid_gte?: InputMaybe<Scalars['String']>
+	cid_in?: InputMaybe<Array<Scalars['String']>>
+	cid_lt?: InputMaybe<Scalars['String']>
+	cid_lte?: InputMaybe<Scalars['String']>
+	cid_not_contains?: InputMaybe<Scalars['String']>
+	cid_not_endsWith?: InputMaybe<Scalars['String']>
+	cid_not_eq?: InputMaybe<Scalars['String']>
+	cid_not_in?: InputMaybe<Array<Scalars['String']>>
+	cid_not_startsWith?: InputMaybe<Scalars['String']>
+	cid_startsWith?: InputMaybe<Scalars['String']>
+	controller_contains?: InputMaybe<Scalars['String']>
+	controller_endsWith?: InputMaybe<Scalars['String']>
+	controller_eq?: InputMaybe<Scalars['String']>
+	controller_gt?: InputMaybe<Scalars['String']>
+	controller_gte?: InputMaybe<Scalars['String']>
+	controller_in?: InputMaybe<Array<Scalars['String']>>
+	controller_lt?: InputMaybe<Scalars['String']>
+	controller_lte?: InputMaybe<Scalars['String']>
+	controller_not_contains?: InputMaybe<Scalars['String']>
+	controller_not_endsWith?: InputMaybe<Scalars['String']>
+	controller_not_eq?: InputMaybe<Scalars['String']>
+	controller_not_in?: InputMaybe<Array<Scalars['String']>>
+	controller_not_startsWith?: InputMaybe<Scalars['String']>
+	controller_startsWith?: InputMaybe<Scalars['String']>
+	creator_contains?: InputMaybe<Scalars['String']>
+	creator_endsWith?: InputMaybe<Scalars['String']>
+	creator_eq?: InputMaybe<Scalars['String']>
+	creator_gt?: InputMaybe<Scalars['String']>
+	creator_gte?: InputMaybe<Scalars['String']>
+	creator_in?: InputMaybe<Array<Scalars['String']>>
+	creator_lt?: InputMaybe<Scalars['String']>
+	creator_lte?: InputMaybe<Scalars['String']>
+	creator_not_contains?: InputMaybe<Scalars['String']>
+	creator_not_endsWith?: InputMaybe<Scalars['String']>
+	creator_not_eq?: InputMaybe<Scalars['String']>
+	creator_not_in?: InputMaybe<Array<Scalars['String']>>
+	creator_not_startsWith?: InputMaybe<Scalars['String']>
+	creator_startsWith?: InputMaybe<Scalars['String']>
+	feeModel_eq?: InputMaybe<Scalars['Int']>
+	feeModel_gt?: InputMaybe<Scalars['Int']>
+	feeModel_gte?: InputMaybe<Scalars['Int']>
+	feeModel_in?: InputMaybe<Array<Scalars['Int']>>
+	feeModel_lt?: InputMaybe<Scalars['Int']>
+	feeModel_lte?: InputMaybe<Scalars['Int']>
+	feeModel_not_eq?: InputMaybe<Scalars['Int']>
+	feeModel_not_in?: InputMaybe<Array<Scalars['Int']>>
+	fee_eq?: InputMaybe<Scalars['BigInt']>
+	fee_gt?: InputMaybe<Scalars['BigInt']>
+	fee_gte?: InputMaybe<Scalars['BigInt']>
+	fee_in?: InputMaybe<Array<Scalars['BigInt']>>
+	fee_lt?: InputMaybe<Scalars['BigInt']>
+	fee_lte?: InputMaybe<Scalars['BigInt']>
+	fee_not_eq?: InputMaybe<Scalars['BigInt']>
+	fee_not_in?: InputMaybe<Array<Scalars['BigInt']>>
+	govAsset_eq?: InputMaybe<Scalars['Int']>
+	govAsset_gt?: InputMaybe<Scalars['Int']>
+	govAsset_gte?: InputMaybe<Scalars['Int']>
+	govAsset_in?: InputMaybe<Array<Scalars['Int']>>
+	govAsset_lt?: InputMaybe<Scalars['Int']>
+	govAsset_lte?: InputMaybe<Scalars['Int']>
+	govAsset_not_eq?: InputMaybe<Scalars['Int']>
+	govAsset_not_in?: InputMaybe<Array<Scalars['Int']>>
+	id_contains?: InputMaybe<Scalars['ID']>
+	id_endsWith?: InputMaybe<Scalars['ID']>
+	id_eq?: InputMaybe<Scalars['ID']>
+	id_gt?: InputMaybe<Scalars['ID']>
+	id_gte?: InputMaybe<Scalars['ID']>
+	id_in?: InputMaybe<Array<Scalars['ID']>>
+	id_lt?: InputMaybe<Scalars['ID']>
+	id_lte?: InputMaybe<Scalars['ID']>
+	id_not_contains?: InputMaybe<Scalars['ID']>
+	id_not_endsWith?: InputMaybe<Scalars['ID']>
+	id_not_eq?: InputMaybe<Scalars['ID']>
+	id_not_in?: InputMaybe<Array<Scalars['ID']>>
+	id_not_startsWith?: InputMaybe<Scalars['ID']>
+	id_startsWith?: InputMaybe<Scalars['ID']>
+	memberLimit_eq?: InputMaybe<Scalars['BigInt']>
+	memberLimit_gt?: InputMaybe<Scalars['BigInt']>
+	memberLimit_gte?: InputMaybe<Scalars['BigInt']>
+	memberLimit_in?: InputMaybe<Array<Scalars['BigInt']>>
+	memberLimit_lt?: InputMaybe<Scalars['BigInt']>
+	memberLimit_lte?: InputMaybe<Scalars['BigInt']>
+	memberLimit_not_eq?: InputMaybe<Scalars['BigInt']>
+	memberLimit_not_in?: InputMaybe<Array<Scalars['BigInt']>>
+	members_every?: InputMaybe<BodyMemberWhereInput>
+	members_none?: InputMaybe<BodyMemberWhereInput>
+	members_some?: InputMaybe<BodyMemberWhereInput>
+	name_contains?: InputMaybe<Scalars['String']>
+	name_endsWith?: InputMaybe<Scalars['String']>
+	name_eq?: InputMaybe<Scalars['String']>
+	name_gt?: InputMaybe<Scalars['String']>
+	name_gte?: InputMaybe<Scalars['String']>
+	name_in?: InputMaybe<Array<Scalars['String']>>
+	name_lt?: InputMaybe<Scalars['String']>
+	name_lte?: InputMaybe<Scalars['String']>
+	name_not_contains?: InputMaybe<Scalars['String']>
+	name_not_endsWith?: InputMaybe<Scalars['String']>
+	name_not_eq?: InputMaybe<Scalars['String']>
+	name_not_in?: InputMaybe<Array<Scalars['String']>>
+	name_not_startsWith?: InputMaybe<Scalars['String']>
+	name_startsWith?: InputMaybe<Scalars['String']>
+	payAsset_eq?: InputMaybe<Scalars['Int']>
+	payAsset_gt?: InputMaybe<Scalars['Int']>
+	payAsset_gte?: InputMaybe<Scalars['Int']>
+	payAsset_in?: InputMaybe<Array<Scalars['Int']>>
+	payAsset_lt?: InputMaybe<Scalars['Int']>
+	payAsset_lte?: InputMaybe<Scalars['Int']>
+	payAsset_not_eq?: InputMaybe<Scalars['Int']>
+	payAsset_not_in?: InputMaybe<Array<Scalars['Int']>>
+	treasury_contains?: InputMaybe<Scalars['String']>
+	treasury_endsWith?: InputMaybe<Scalars['String']>
+	treasury_eq?: InputMaybe<Scalars['String']>
+	treasury_gt?: InputMaybe<Scalars['String']>
+	treasury_gte?: InputMaybe<Scalars['String']>
+	treasury_in?: InputMaybe<Array<Scalars['String']>>
+	treasury_lt?: InputMaybe<Scalars['String']>
+	treasury_lte?: InputMaybe<Scalars['String']>
+	treasury_not_contains?: InputMaybe<Scalars['String']>
+	treasury_not_endsWith?: InputMaybe<Scalars['String']>
+	treasury_not_eq?: InputMaybe<Scalars['String']>
+	treasury_not_in?: InputMaybe<Array<Scalars['String']>>
+	treasury_not_startsWith?: InputMaybe<Scalars['String']>
+	treasury_startsWith?: InputMaybe<Scalars['String']>
+}
+
+export type BodyWhereUniqueInput = {
+	id: Scalars['ID']
 }
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -133,6 +449,14 @@ export type MutationInsert_Hatched_Birds_OneArgs = {
 	object: Hatched_Birds_Insert_Input
 }
 
+export type PageInfo = {
+	__typename?: 'PageInfo'
+	endCursor: Scalars['String']
+	hasNextPage: Scalars['Boolean']
+	hasPreviousPage: Scalars['Boolean']
+	startCursor: Scalars['String']
+}
+
 export type Query = {
 	__typename?: 'Query'
 	/** fetch data from the table: "base_themes" */
@@ -145,6 +469,16 @@ export type Query = {
 	bases_aggregate: Bases_Aggregate
 	/** fetch data from the table: "bases" using primary key columns */
 	bases_by_pk?: Maybe<Bases>
+	bodies: Array<Body>
+	bodiesConnection: BodiesConnection
+	bodyById?: Maybe<Body>
+	/** @deprecated Use `bodyById` */
+	bodyByUniqueInput?: Maybe<Body>
+	bodyMemberById?: Maybe<BodyMember>
+	/** @deprecated Use `bodyMemberById` */
+	bodyMemberByUniqueInput?: Maybe<BodyMember>
+	bodyMembers: Array<BodyMember>
+	bodyMembersConnection: BodyMembersConnection
 	/** An array relationship */
 	changes: Array<Changes>
 	/** An aggregate relationship */
@@ -341,6 +675,50 @@ export type QueryBases_AggregateArgs = {
 
 export type QueryBases_By_PkArgs = {
 	id: Scalars['String']
+}
+
+export type QueryBodiesArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<Array<InputMaybe<BodyOrderByInput>>>
+	where?: InputMaybe<BodyWhereInput>
+}
+
+export type QueryBodiesConnectionArgs = {
+	after?: InputMaybe<Scalars['String']>
+	first?: InputMaybe<Scalars['Int']>
+	orderBy: Array<BodyOrderByInput>
+	where?: InputMaybe<BodyWhereInput>
+}
+
+export type QueryBodyByIdArgs = {
+	id: Scalars['ID']
+}
+
+export type QueryBodyByUniqueInputArgs = {
+	where: BodyWhereUniqueInput
+}
+
+export type QueryBodyMemberByIdArgs = {
+	id: Scalars['ID']
+}
+
+export type QueryBodyMemberByUniqueInputArgs = {
+	where: BodyMemberWhereUniqueInput
+}
+
+export type QueryBodyMembersArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<Array<InputMaybe<BodyMemberOrderByInput>>>
+	where?: InputMaybe<BodyMemberWhereInput>
+}
+
+export type QueryBodyMembersConnectionArgs = {
+	after?: InputMaybe<Scalars['String']>
+	first?: InputMaybe<Scalars['Int']>
+	orderBy: Array<BodyMemberOrderByInput>
+	where?: InputMaybe<BodyMemberWhereInput>
 }
 
 export type QueryChangesArgs = {

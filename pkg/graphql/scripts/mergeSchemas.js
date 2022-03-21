@@ -5,7 +5,10 @@ const { UrlLoader } = require('@graphql-tools/url-loader')
 const { printSchema } = require('graphql')
 const { stitchSchemas } = require('@graphql-tools/stitch')
 
-const remoteList = ['https://gql-rmrk2-prod.graphcdn.app/']
+const remoteList = [
+	'https://gql-rmrk2-prod.graphcdn.app/',
+	'https://app.gc.subsquid.io/beta/test-gamedao-indexer/v001/graphql',
+]
 
 ;(async () => {
 	const path = './src/schema/'
