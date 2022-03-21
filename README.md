@@ -14,7 +14,7 @@ sudo apt install nodejs npm
 
 ---
 
-##Packages:
+## Packages:
 
 ### App:
     Frontend application for gamedao
