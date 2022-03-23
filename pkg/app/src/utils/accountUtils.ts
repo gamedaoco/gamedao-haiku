@@ -1,5 +1,5 @@
-import type { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
-import type { AccountState } from 'src/@types/extension'
+import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types'
+import { AccountState } from 'src/@types/extension'
 import { decodeAddress } from '@polkadot/util-crypto'
 
 export function shortAccountAddress(account: InjectedAccountWithMeta): string {

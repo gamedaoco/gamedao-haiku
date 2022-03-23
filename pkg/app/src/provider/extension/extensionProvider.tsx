@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
+import { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
 import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 import { initializeAccounts } from './modules/accounts'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'

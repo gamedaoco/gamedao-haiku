@@ -62,7 +62,7 @@
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx"
-  ],
+, "src/defaultComponents/index.tx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import types from 'src/data/types.json'
-import type { ApiProvider } from 'src/@types/network'
+import { ApiProvider } from 'src/@types/network'
 import { NetworkContext } from './modules/context'
 import { initializeApis, keepAlive } from 'provider/network/modules/network'
 
