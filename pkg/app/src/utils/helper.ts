@@ -9,7 +9,6 @@ export function formatZero(amount): string {
 const ZERO_SS58_PREFIX = 25
 
 export function toZeroAddress(addr) {
-	console.info('addrr', addr);
 	try {
 		return encodeAddress(isHex(addr) ? hexToU8a(addr) : decodeAddress(addr), ZERO_SS58_PREFIX)
 	} catch (e) {
@@ -19,17 +18,12 @@ export function toZeroAddress(addr) {
 
 export function isValidZeroAddress(address) {
 	try {
-		encodeAddress(
-			isHex(address)
-				? hexToU8a(address)
-				: decodeAddress(address), ZERO_SS58_PREFIX);
-				console.info('true')
-				return true;
-			} catch (error) {
-		console.info('false')
-		return false;
+		encodeAddress(isHex(address) ? hexToU8a(address) : decodeAddress(address), ZERO_SS58_PREFIX)
+		return true
+	} catch (error) {
+		return false
 	}
-};
+}
 
 export function toKusamaAddress(addr) {
 	try {

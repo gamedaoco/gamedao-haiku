@@ -9,7 +9,7 @@ export function NetworkSelector() {
 	const handleNetworkChange = useCallback(
 		(event: SelectChangeEvent<string>) => {
 			const chainName = event?.target?.value
-			const newApiProvider = apiProviders.find((apiProvider) => apiProvider.chainName === chainName)
+			const newApiProvider = apiProviders.find(apiProvider => apiProvider.chainName === chainName)
 			if (newApiProvider) {
 				selectApiProvider(newApiProvider)
 			}

@@ -7,16 +7,21 @@ import { useCallback } from 'react'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
 export function AccountSelector() {
-	const { w3Enabled, selectedAccount, accounts, connectWallet, disconnectWallet, selectAccount, supportedWallets } =
-		useExtensionContext()
+	const {
+		w3Enabled,
+		selectedAccount,
+		accounts,
+		connectWallet,
+		disconnectWallet,
+		selectAccount,
+		supportedWallets,
+	} = useExtensionContext()
 
 	// Change selected account
 	const handleAccountChange = useCallback(
 		(event: SelectChangeEvent<string>) => {
 			const address = event?.target?.value
-			const newAccountState = accounts?.find(
-				(accountState) => getAddressFromAccountState(accountState) === address,
-			)
+			const newAccountState = accounts?.find(accountState => getAddressFromAccountState(accountState) === address)
 			if (newAccountState) {
 				selectAccount(newAccountState)
 			}

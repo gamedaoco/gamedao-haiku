@@ -8,27 +8,27 @@ import { FormDao } from 'components/Forms/FormDao'
 
 import { Layout } from 'src/layouts/default/layout'
 
-
 export function AppPage() {
-	const [isShow, setIsShow] = useState(false);
+	const [isShow, setIsShow] = useState(false)
 
 	const callback = (data: any) => {
 		console.log('yes gotcha', data)
 	}
 
 	const setVisible = (state: boolean) => {
-		console.log('state',state)
-		setIsShow(!state);
+		console.log('state', state)
+		setIsShow(!state)
 	}
 
 	const handleForm = () => {
-		setIsShow(!isShow);
+		setIsShow(!isShow)
 	}
 
 	return (
 		<Layout showHeader showFooter showSidebar>
-			{isShow ?
-				<FormDao parentCallback={callback} isCloseProposal={setVisible}/> :
+			{isShow ? (
+				<FormDao parentCallback={callback} isCloseDao={setVisible} />
+			) : (
 				<Box sx={{ p: '4rem', height: '90vh' }}>
 					<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
@@ -37,7 +37,7 @@ export function AppPage() {
 						<Button onClick={handleForm}>New Dao</Button>
 					</Paper>
 				</Box>
-			}
+			)}
 		</Layout>
 	)
 }

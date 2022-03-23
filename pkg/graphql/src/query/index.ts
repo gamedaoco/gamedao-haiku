@@ -3105,7 +3105,9 @@ export type Collections_Order_By = {
 	readonly nfts_aggregate?: InputMaybe<Nfts_Aggregate_Order_By>
 	readonly nfts_stats?: InputMaybe<Nfts_Stats_Order_By>
 	readonly singular_blacklisted_accounts_aggregate?: InputMaybe<Singular_Blacklisted_Accounts_Aggregate_Order_By>
-	readonly singular_blacklisted_collections_aggregate?: InputMaybe<Singular_Blacklisted_Collections_Aggregate_Order_By>
+	readonly singular_blacklisted_collections_aggregate?: InputMaybe<
+		Singular_Blacklisted_Collections_Aggregate_Order_By
+	>
 	readonly singular_curated_aggregate?: InputMaybe<Singular_Curated_Collections_Aggregate_Order_By>
 	readonly singular_hidden_collections_aggregate?: InputMaybe<Singular_Nsfw_Collections_Aggregate_Order_By>
 	readonly singular_nsfw_collections_aggregate?: InputMaybe<Singular_Nsfw_Collections_Aggregate_Order_By>

@@ -3104,7 +3104,9 @@ export type Collections_Order_By = {
 	readonly nfts_aggregate?: InputMaybe<Nfts_Aggregate_Order_By>
 	readonly nfts_stats?: InputMaybe<Nfts_Stats_Order_By>
 	readonly singular_blacklisted_accounts_aggregate?: InputMaybe<Singular_Blacklisted_Accounts_Aggregate_Order_By>
-	readonly singular_blacklisted_collections_aggregate?: InputMaybe<Singular_Blacklisted_Collections_Aggregate_Order_By>
+	readonly singular_blacklisted_collections_aggregate?: InputMaybe<
+		Singular_Blacklisted_Collections_Aggregate_Order_By
+	>
 	readonly singular_curated_aggregate?: InputMaybe<Singular_Curated_Collections_Aggregate_Order_By>
 	readonly singular_hidden_collections_aggregate?: InputMaybe<Singular_Nsfw_Collections_Aggregate_Order_By>
 	readonly singular_nsfw_collections_aggregate?: InputMaybe<Singular_Nsfw_Collections_Aggregate_Order_By>
@@ -8025,7 +8027,7 @@ export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 
 export type BodiesConnectionResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['BodiesConnection'] = ResolversParentTypes['BodiesConnection'],
+	ParentType extends ResolversParentTypes['BodiesConnection'] = ResolversParentTypes['BodiesConnection']
 > = ResolversObject<{
 	edges?: Resolver<ReadonlyArray<ResolversTypes['BodyEdge']>, ParentType, ContextType>
 	pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>
@@ -8035,7 +8037,7 @@ export type BodiesConnectionResolvers<
 
 export type BodyResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Body'] = ResolversParentTypes['Body'],
+	ParentType extends ResolversParentTypes['Body'] = ResolversParentTypes['Body']
 > = ResolversObject<{
 	access?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	body?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
@@ -8056,7 +8058,7 @@ export type BodyResolvers<
 
 export type BodyEdgeResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['BodyEdge'] = ResolversParentTypes['BodyEdge'],
+	ParentType extends ResolversParentTypes['BodyEdge'] = ResolversParentTypes['BodyEdge']
 > = ResolversObject<{
 	cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	node?: Resolver<ResolversTypes['Body'], ParentType, ContextType>
@@ -8065,7 +8067,7 @@ export type BodyEdgeResolvers<
 
 export type BodyMemberResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['BodyMember'] = ResolversParentTypes['BodyMember'],
+	ParentType extends ResolversParentTypes['BodyMember'] = ResolversParentTypes['BodyMember']
 > = ResolversObject<{
 	address?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	body?: Resolver<ResolversTypes['Body'], ParentType, ContextType>
@@ -8075,7 +8077,7 @@ export type BodyMemberResolvers<
 
 export type BodyMemberEdgeResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['BodyMemberEdge'] = ResolversParentTypes['BodyMemberEdge'],
+	ParentType extends ResolversParentTypes['BodyMemberEdge'] = ResolversParentTypes['BodyMemberEdge']
 > = ResolversObject<{
 	cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	node?: Resolver<ResolversTypes['BodyMember'], ParentType, ContextType>
@@ -8084,7 +8086,7 @@ export type BodyMemberEdgeResolvers<
 
 export type BodyMembersConnectionResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['BodyMembersConnection'] = ResolversParentTypes['BodyMembersConnection'],
+	ParentType extends ResolversParentTypes['BodyMembersConnection'] = ResolversParentTypes['BodyMembersConnection']
 > = ResolversObject<{
 	edges?: Resolver<ReadonlyArray<ResolversTypes['BodyMemberEdge']>, ParentType, ContextType>
 	pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>
@@ -8098,7 +8100,7 @@ export interface BytesScalarConfig extends GraphQLScalarTypeConfig<ResolversType
 
 export type ConfigResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Config'] = ResolversParentTypes['Config'],
+	ParentType extends ResolversParentTypes['Config'] = ResolversParentTypes['Config']
 > = ResolversObject<{
 	AWS_REGION?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	AWS_USERPOOL_ID?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -8134,7 +8136,7 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type FeaturesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Features'] = ResolversParentTypes['Features'],
+	ParentType extends ResolversParentTypes['Features'] = ResolversParentTypes['Features']
 > = ResolversObject<{
 	DEBUG?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
 	SHOW_APPLY?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
@@ -8149,7 +8151,7 @@ export type FeaturesResolvers<
 
 export type LinkResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Link'] = ResolversParentTypes['Link'],
+	ParentType extends ResolversParentTypes['Link'] = ResolversParentTypes['Link']
 > = ResolversObject<{
 	category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -8163,7 +8165,7 @@ export type LinkResolvers<
 
 export type MutationResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
+	ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = ResolversObject<{
 	insert_hatched_birds?: Resolver<
 		Maybe<ResolversTypes['hatched_birds_mutation_response']>,
@@ -8181,7 +8183,7 @@ export type MutationResolvers<
 
 export type PageInfoResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo'],
+	ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']
 > = ResolversObject<{
 	endCursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
@@ -8192,7 +8194,7 @@ export type PageInfoResolvers<
 
 export type QueryResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
+	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = ResolversObject<{
 	base_themes?: Resolver<
 		ReadonlyArray<ResolversTypes['base_themes']>,
@@ -8715,7 +8717,7 @@ export type QueryResolvers<
 
 export type SubscriptionResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
+	ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']
 > = ResolversObject<{
 	base_themes?: SubscriptionResolver<
 		ReadonlyArray<ResolversTypes['base_themes']>,
@@ -9316,7 +9318,7 @@ export type SubscriptionResolvers<
 
 export type Base_ThemesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['base_themes'] = ResolversParentTypes['base_themes'],
+	ParentType extends ResolversParentTypes['base_themes'] = ResolversParentTypes['base_themes']
 > = ResolversObject<{
 	id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	resources_base_themes?: Resolver<
@@ -9334,7 +9336,7 @@ export type Base_ThemesResolvers<
 
 export type BasesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases'] = ResolversParentTypes['bases'],
+	ParentType extends ResolversParentTypes['bases'] = ResolversParentTypes['bases']
 > = ResolversObject<{
 	block?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	changes?: Resolver<ReadonlyArray<ResolversTypes['changes']>, ParentType, ContextType, Partial<BasesChangesArgs>>
@@ -9360,7 +9362,7 @@ export type BasesResolvers<
 
 export type Bases_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_aggregate'] = ResolversParentTypes['bases_aggregate'],
+	ParentType extends ResolversParentTypes['bases_aggregate'] = ResolversParentTypes['bases_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['bases_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['bases']>, ParentType, ContextType>
@@ -9369,7 +9371,7 @@ export type Bases_AggregateResolvers<
 
 export type Bases_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_aggregate_fields'] = ResolversParentTypes['bases_aggregate_fields'],
+	ParentType extends ResolversParentTypes['bases_aggregate_fields'] = ResolversParentTypes['bases_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['bases_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Bases_Aggregate_FieldsCountArgs>>
@@ -9387,7 +9389,7 @@ export type Bases_Aggregate_FieldsResolvers<
 
 export type Bases_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_avg_fields'] = ResolversParentTypes['bases_avg_fields'],
+	ParentType extends ResolversParentTypes['bases_avg_fields'] = ResolversParentTypes['bases_avg_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9395,7 +9397,7 @@ export type Bases_Avg_FieldsResolvers<
 
 export type Bases_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_max_fields'] = ResolversParentTypes['bases_max_fields'],
+	ParentType extends ResolversParentTypes['bases_max_fields'] = ResolversParentTypes['bases_max_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9407,7 +9409,7 @@ export type Bases_Max_FieldsResolvers<
 
 export type Bases_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_min_fields'] = ResolversParentTypes['bases_min_fields'],
+	ParentType extends ResolversParentTypes['bases_min_fields'] = ResolversParentTypes['bases_min_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9419,7 +9421,7 @@ export type Bases_Min_FieldsResolvers<
 
 export type Bases_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_stddev_fields'] = ResolversParentTypes['bases_stddev_fields'],
+	ParentType extends ResolversParentTypes['bases_stddev_fields'] = ResolversParentTypes['bases_stddev_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9427,7 +9429,7 @@ export type Bases_Stddev_FieldsResolvers<
 
 export type Bases_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_stddev_pop_fields'] = ResolversParentTypes['bases_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['bases_stddev_pop_fields'] = ResolversParentTypes['bases_stddev_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9435,7 +9437,7 @@ export type Bases_Stddev_Pop_FieldsResolvers<
 
 export type Bases_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_stddev_samp_fields'] = ResolversParentTypes['bases_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['bases_stddev_samp_fields'] = ResolversParentTypes['bases_stddev_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9443,7 +9445,7 @@ export type Bases_Stddev_Samp_FieldsResolvers<
 
 export type Bases_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_sum_fields'] = ResolversParentTypes['bases_sum_fields'],
+	ParentType extends ResolversParentTypes['bases_sum_fields'] = ResolversParentTypes['bases_sum_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9451,7 +9453,7 @@ export type Bases_Sum_FieldsResolvers<
 
 export type Bases_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_var_pop_fields'] = ResolversParentTypes['bases_var_pop_fields'],
+	ParentType extends ResolversParentTypes['bases_var_pop_fields'] = ResolversParentTypes['bases_var_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9459,7 +9461,7 @@ export type Bases_Var_Pop_FieldsResolvers<
 
 export type Bases_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_var_samp_fields'] = ResolversParentTypes['bases_var_samp_fields'],
+	ParentType extends ResolversParentTypes['bases_var_samp_fields'] = ResolversParentTypes['bases_var_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9467,7 +9469,7 @@ export type Bases_Var_Samp_FieldsResolvers<
 
 export type Bases_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['bases_variance_fields'] = ResolversParentTypes['bases_variance_fields'],
+	ParentType extends ResolversParentTypes['bases_variance_fields'] = ResolversParentTypes['bases_variance_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -9479,7 +9481,7 @@ export interface BigintScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 
 export type ChangesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes'] = ResolversParentTypes['changes'],
+	ParentType extends ResolversParentTypes['changes'] = ResolversParentTypes['changes']
 > = ResolversObject<{
 	block?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	caller?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -9503,7 +9505,7 @@ export type ChangesResolvers<
 
 export type Changes_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_aggregate'] = ResolversParentTypes['changes_aggregate'],
+	ParentType extends ResolversParentTypes['changes_aggregate'] = ResolversParentTypes['changes_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['changes_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['changes']>, ParentType, ContextType>
@@ -9512,7 +9514,7 @@ export type Changes_AggregateResolvers<
 
 export type Changes_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_aggregate_fields'] = ResolversParentTypes['changes_aggregate_fields'],
+	ParentType extends ResolversParentTypes['changes_aggregate_fields'] = ResolversParentTypes['changes_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['changes_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Changes_Aggregate_FieldsCountArgs>>
@@ -9530,7 +9532,7 @@ export type Changes_Aggregate_FieldsResolvers<
 
 export type Changes_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_avg_fields'] = ResolversParentTypes['changes_avg_fields'],
+	ParentType extends ResolversParentTypes['changes_avg_fields'] = ResolversParentTypes['changes_avg_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9539,7 +9541,7 @@ export type Changes_Avg_FieldsResolvers<
 
 export type Changes_CollectionResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_collection'] = ResolversParentTypes['changes_collection'],
+	ParentType extends ResolversParentTypes['changes_collection'] = ResolversParentTypes['changes_collection']
 > = ResolversObject<{
 	block?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	caller?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -9556,7 +9558,7 @@ export type Changes_CollectionResolvers<
 
 export type Changes_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_max_fields'] = ResolversParentTypes['changes_max_fields'],
+	ParentType extends ResolversParentTypes['changes_max_fields'] = ResolversParentTypes['changes_max_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	caller?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9572,7 +9574,7 @@ export type Changes_Max_FieldsResolvers<
 
 export type Changes_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_min_fields'] = ResolversParentTypes['changes_min_fields'],
+	ParentType extends ResolversParentTypes['changes_min_fields'] = ResolversParentTypes['changes_min_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	caller?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9588,7 +9590,7 @@ export type Changes_Min_FieldsResolvers<
 
 export type Changes_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_stddev_fields'] = ResolversParentTypes['changes_stddev_fields'],
+	ParentType extends ResolversParentTypes['changes_stddev_fields'] = ResolversParentTypes['changes_stddev_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9597,7 +9599,7 @@ export type Changes_Stddev_FieldsResolvers<
 
 export type Changes_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_stddev_pop_fields'] = ResolversParentTypes['changes_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['changes_stddev_pop_fields'] = ResolversParentTypes['changes_stddev_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9606,7 +9608,7 @@ export type Changes_Stddev_Pop_FieldsResolvers<
 
 export type Changes_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_stddev_samp_fields'] = ResolversParentTypes['changes_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['changes_stddev_samp_fields'] = ResolversParentTypes['changes_stddev_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9615,7 +9617,7 @@ export type Changes_Stddev_Samp_FieldsResolvers<
 
 export type Changes_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_sum_fields'] = ResolversParentTypes['changes_sum_fields'],
+	ParentType extends ResolversParentTypes['changes_sum_fields'] = ResolversParentTypes['changes_sum_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
@@ -9624,7 +9626,7 @@ export type Changes_Sum_FieldsResolvers<
 
 export type Changes_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_var_pop_fields'] = ResolversParentTypes['changes_var_pop_fields'],
+	ParentType extends ResolversParentTypes['changes_var_pop_fields'] = ResolversParentTypes['changes_var_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9633,7 +9635,7 @@ export type Changes_Var_Pop_FieldsResolvers<
 
 export type Changes_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_var_samp_fields'] = ResolversParentTypes['changes_var_samp_fields'],
+	ParentType extends ResolversParentTypes['changes_var_samp_fields'] = ResolversParentTypes['changes_var_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9642,7 +9644,7 @@ export type Changes_Var_Samp_FieldsResolvers<
 
 export type Changes_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['changes_variance_fields'] = ResolversParentTypes['changes_variance_fields'],
+	ParentType extends ResolversParentTypes['changes_variance_fields'] = ResolversParentTypes['changes_variance_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9651,7 +9653,7 @@ export type Changes_Variance_FieldsResolvers<
 
 export type Collection_BannersResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collection_banners'] = ResolversParentTypes['collection_banners'],
+	ParentType extends ResolversParentTypes['collection_banners'] = ResolversParentTypes['collection_banners']
 > = ResolversObject<{
 	collection?: Resolver<Maybe<ResolversTypes['collections']>, ParentType, ContextType>
 	collection_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -9662,7 +9664,7 @@ export type Collection_BannersResolvers<
 
 export type CollectionsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections'] = ResolversParentTypes['collections'],
+	ParentType extends ResolversParentTypes['collections'] = ResolversParentTypes['collections']
 > = ResolversObject<{
 	banners?: Resolver<Maybe<ResolversTypes['collection_banners']>, ParentType, ContextType>
 	block?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
@@ -9754,7 +9756,7 @@ export type CollectionsResolvers<
 
 export type Collections_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_aggregate'] = ResolversParentTypes['collections_aggregate'],
+	ParentType extends ResolversParentTypes['collections_aggregate'] = ResolversParentTypes['collections_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['collections_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['collections']>, ParentType, ContextType>
@@ -9763,7 +9765,7 @@ export type Collections_AggregateResolvers<
 
 export type Collections_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_aggregate_fields'] = ResolversParentTypes['collections_aggregate_fields'],
+	ParentType extends ResolversParentTypes['collections_aggregate_fields'] = ResolversParentTypes['collections_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['collections_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Collections_Aggregate_FieldsCountArgs>>
@@ -9781,7 +9783,7 @@ export type Collections_Aggregate_FieldsResolvers<
 
 export type Collections_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_avg_fields'] = ResolversParentTypes['collections_avg_fields'],
+	ParentType extends ResolversParentTypes['collections_avg_fields'] = ResolversParentTypes['collections_avg_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9790,7 +9792,7 @@ export type Collections_Avg_FieldsResolvers<
 
 export type Collections_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_max_fields'] = ResolversParentTypes['collections_max_fields'],
+	ParentType extends ResolversParentTypes['collections_max_fields'] = ResolversParentTypes['collections_max_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9807,7 +9809,7 @@ export type Collections_Max_FieldsResolvers<
 
 export type Collections_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_min_fields'] = ResolversParentTypes['collections_min_fields'],
+	ParentType extends ResolversParentTypes['collections_min_fields'] = ResolversParentTypes['collections_min_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9824,7 +9826,7 @@ export type Collections_Min_FieldsResolvers<
 
 export type Collections_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_stddev_fields'] = ResolversParentTypes['collections_stddev_fields'],
+	ParentType extends ResolversParentTypes['collections_stddev_fields'] = ResolversParentTypes['collections_stddev_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9833,7 +9835,7 @@ export type Collections_Stddev_FieldsResolvers<
 
 export type Collections_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_stddev_pop_fields'] = ResolversParentTypes['collections_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['collections_stddev_pop_fields'] = ResolversParentTypes['collections_stddev_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9842,7 +9844,7 @@ export type Collections_Stddev_Pop_FieldsResolvers<
 
 export type Collections_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_stddev_samp_fields'] = ResolversParentTypes['collections_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['collections_stddev_samp_fields'] = ResolversParentTypes['collections_stddev_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9851,7 +9853,7 @@ export type Collections_Stddev_Samp_FieldsResolvers<
 
 export type Collections_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_sum_fields'] = ResolversParentTypes['collections_sum_fields'],
+	ParentType extends ResolversParentTypes['collections_sum_fields'] = ResolversParentTypes['collections_sum_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
@@ -9860,7 +9862,7 @@ export type Collections_Sum_FieldsResolvers<
 
 export type Collections_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_var_pop_fields'] = ResolversParentTypes['collections_var_pop_fields'],
+	ParentType extends ResolversParentTypes['collections_var_pop_fields'] = ResolversParentTypes['collections_var_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9869,7 +9871,7 @@ export type Collections_Var_Pop_FieldsResolvers<
 
 export type Collections_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_var_samp_fields'] = ResolversParentTypes['collections_var_samp_fields'],
+	ParentType extends ResolversParentTypes['collections_var_samp_fields'] = ResolversParentTypes['collections_var_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9878,7 +9880,7 @@ export type Collections_Var_Samp_FieldsResolvers<
 
 export type Collections_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['collections_variance_fields'] = ResolversParentTypes['collections_variance_fields'],
+	ParentType extends ResolversParentTypes['collections_variance_fields'] = ResolversParentTypes['collections_variance_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9887,7 +9889,7 @@ export type Collections_Variance_FieldsResolvers<
 
 export type Distinct_Kanaria_NftsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts'] = ResolversParentTypes['distinct_kanaria_nfts'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts'] = ResolversParentTypes['distinct_kanaria_nfts']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -9954,7 +9956,7 @@ export type Distinct_Kanaria_NftsResolvers<
 
 export type Distinct_Kanaria_Nfts_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_aggregate'] = ResolversParentTypes['distinct_kanaria_nfts_aggregate'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_aggregate'] = ResolversParentTypes['distinct_kanaria_nfts_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['distinct_kanaria_nfts_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['distinct_kanaria_nfts']>, ParentType, ContextType>
@@ -9963,7 +9965,7 @@ export type Distinct_Kanaria_Nfts_AggregateResolvers<
 
 export type Distinct_Kanaria_Nfts_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_aggregate_fields'] = ResolversParentTypes['distinct_kanaria_nfts_aggregate_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_aggregate_fields'] = ResolversParentTypes['distinct_kanaria_nfts_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['distinct_kanaria_nfts_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<
@@ -9986,7 +9988,7 @@ export type Distinct_Kanaria_Nfts_Aggregate_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_avg_fields'] = ResolversParentTypes['distinct_kanaria_nfts_avg_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_avg_fields'] = ResolversParentTypes['distinct_kanaria_nfts_avg_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -9998,7 +10000,7 @@ export type Distinct_Kanaria_Nfts_Avg_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_max_fields'] = ResolversParentTypes['distinct_kanaria_nfts_max_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_max_fields'] = ResolversParentTypes['distinct_kanaria_nfts_max_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10026,7 +10028,7 @@ export type Distinct_Kanaria_Nfts_Max_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_min_fields'] = ResolversParentTypes['distinct_kanaria_nfts_min_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_min_fields'] = ResolversParentTypes['distinct_kanaria_nfts_min_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10054,7 +10056,7 @@ export type Distinct_Kanaria_Nfts_Min_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_stddev_fields'] = ResolversParentTypes['distinct_kanaria_nfts_stddev_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_stddev_fields'] = ResolversParentTypes['distinct_kanaria_nfts_stddev_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10066,7 +10068,7 @@ export type Distinct_Kanaria_Nfts_Stddev_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_stddev_pop_fields'] = ResolversParentTypes['distinct_kanaria_nfts_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_stddev_pop_fields'] = ResolversParentTypes['distinct_kanaria_nfts_stddev_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10078,7 +10080,7 @@ export type Distinct_Kanaria_Nfts_Stddev_Pop_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_stddev_samp_fields'] = ResolversParentTypes['distinct_kanaria_nfts_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_stddev_samp_fields'] = ResolversParentTypes['distinct_kanaria_nfts_stddev_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10090,7 +10092,7 @@ export type Distinct_Kanaria_Nfts_Stddev_Samp_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_sum_fields'] = ResolversParentTypes['distinct_kanaria_nfts_sum_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_sum_fields'] = ResolversParentTypes['distinct_kanaria_nfts_sum_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -10102,7 +10104,7 @@ export type Distinct_Kanaria_Nfts_Sum_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_var_pop_fields'] = ResolversParentTypes['distinct_kanaria_nfts_var_pop_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_var_pop_fields'] = ResolversParentTypes['distinct_kanaria_nfts_var_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10114,7 +10116,7 @@ export type Distinct_Kanaria_Nfts_Var_Pop_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_var_samp_fields'] = ResolversParentTypes['distinct_kanaria_nfts_var_samp_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_var_samp_fields'] = ResolversParentTypes['distinct_kanaria_nfts_var_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10126,7 +10128,7 @@ export type Distinct_Kanaria_Nfts_Var_Samp_FieldsResolvers<
 
 export type Distinct_Kanaria_Nfts_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_variance_fields'] = ResolversParentTypes['distinct_kanaria_nfts_variance_fields'],
+	ParentType extends ResolversParentTypes['distinct_kanaria_nfts_variance_fields'] = ResolversParentTypes['distinct_kanaria_nfts_variance_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10138,7 +10140,7 @@ export type Distinct_Kanaria_Nfts_Variance_FieldsResolvers<
 
 export type Distinct_NftsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts'] = ResolversParentTypes['distinct_nfts'],
+	ParentType extends ResolversParentTypes['distinct_nfts'] = ResolversParentTypes['distinct_nfts']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10219,7 +10221,7 @@ export type Distinct_NftsResolvers<
 
 export type Distinct_Nfts_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_aggregate'] = ResolversParentTypes['distinct_nfts_aggregate'],
+	ParentType extends ResolversParentTypes['distinct_nfts_aggregate'] = ResolversParentTypes['distinct_nfts_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['distinct_nfts_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['distinct_nfts']>, ParentType, ContextType>
@@ -10228,7 +10230,7 @@ export type Distinct_Nfts_AggregateResolvers<
 
 export type Distinct_Nfts_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_aggregate_fields'] = ResolversParentTypes['distinct_nfts_aggregate_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_aggregate_fields'] = ResolversParentTypes['distinct_nfts_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['distinct_nfts_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Distinct_Nfts_Aggregate_FieldsCountArgs>>
@@ -10246,7 +10248,7 @@ export type Distinct_Nfts_Aggregate_FieldsResolvers<
 
 export type Distinct_Nfts_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_avg_fields'] = ResolversParentTypes['distinct_nfts_avg_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_avg_fields'] = ResolversParentTypes['distinct_nfts_avg_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10258,7 +10260,7 @@ export type Distinct_Nfts_Avg_FieldsResolvers<
 
 export type Distinct_Nfts_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_max_fields'] = ResolversParentTypes['distinct_nfts_max_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_max_fields'] = ResolversParentTypes['distinct_nfts_max_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10285,7 +10287,7 @@ export type Distinct_Nfts_Max_FieldsResolvers<
 
 export type Distinct_Nfts_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_min_fields'] = ResolversParentTypes['distinct_nfts_min_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_min_fields'] = ResolversParentTypes['distinct_nfts_min_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10312,7 +10314,7 @@ export type Distinct_Nfts_Min_FieldsResolvers<
 
 export type Distinct_Nfts_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_stddev_fields'] = ResolversParentTypes['distinct_nfts_stddev_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_stddev_fields'] = ResolversParentTypes['distinct_nfts_stddev_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10324,7 +10326,7 @@ export type Distinct_Nfts_Stddev_FieldsResolvers<
 
 export type Distinct_Nfts_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_stddev_pop_fields'] = ResolversParentTypes['distinct_nfts_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_stddev_pop_fields'] = ResolversParentTypes['distinct_nfts_stddev_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10336,7 +10338,7 @@ export type Distinct_Nfts_Stddev_Pop_FieldsResolvers<
 
 export type Distinct_Nfts_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_stddev_samp_fields'] = ResolversParentTypes['distinct_nfts_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_stddev_samp_fields'] = ResolversParentTypes['distinct_nfts_stddev_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10348,7 +10350,7 @@ export type Distinct_Nfts_Stddev_Samp_FieldsResolvers<
 
 export type Distinct_Nfts_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_sum_fields'] = ResolversParentTypes['distinct_nfts_sum_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_sum_fields'] = ResolversParentTypes['distinct_nfts_sum_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -10360,7 +10362,7 @@ export type Distinct_Nfts_Sum_FieldsResolvers<
 
 export type Distinct_Nfts_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_var_pop_fields'] = ResolversParentTypes['distinct_nfts_var_pop_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_var_pop_fields'] = ResolversParentTypes['distinct_nfts_var_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10372,7 +10374,7 @@ export type Distinct_Nfts_Var_Pop_FieldsResolvers<
 
 export type Distinct_Nfts_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_var_samp_fields'] = ResolversParentTypes['distinct_nfts_var_samp_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_var_samp_fields'] = ResolversParentTypes['distinct_nfts_var_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10384,7 +10386,7 @@ export type Distinct_Nfts_Var_Samp_FieldsResolvers<
 
 export type Distinct_Nfts_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['distinct_nfts_variance_fields'] = ResolversParentTypes['distinct_nfts_variance_fields'],
+	ParentType extends ResolversParentTypes['distinct_nfts_variance_fields'] = ResolversParentTypes['distinct_nfts_variance_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10396,7 +10398,7 @@ export type Distinct_Nfts_Variance_FieldsResolvers<
 
 export type DutchieResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['dutchie'] = ResolversParentTypes['dutchie'],
+	ParentType extends ResolversParentTypes['dutchie'] = ResolversParentTypes['dutchie']
 > = ResolversObject<{
 	active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	current_price?: Resolver<ResolversTypes['bigint'], ParentType, ContextType>
@@ -10415,7 +10417,7 @@ export type DutchieResolvers<
 
 export type Gems_EnabledResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['gems_enabled'] = ResolversParentTypes['gems_enabled'],
+	ParentType extends ResolversParentTypes['gems_enabled'] = ResolversParentTypes['gems_enabled']
 > = ResolversObject<{
 	enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -10425,7 +10427,7 @@ export type Gems_EnabledResolvers<
 
 export type Hatched_BirdsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['hatched_birds'] = ResolversParentTypes['hatched_birds'],
+	ParentType extends ResolversParentTypes['hatched_birds'] = ResolversParentTypes['hatched_birds']
 > = ResolversObject<{
 	id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10433,7 +10435,7 @@ export type Hatched_BirdsResolvers<
 
 export type Hatched_Birds_Mutation_ResponseResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['hatched_birds_mutation_response'] = ResolversParentTypes['hatched_birds_mutation_response'],
+	ParentType extends ResolversParentTypes['hatched_birds_mutation_response'] = ResolversParentTypes['hatched_birds_mutation_response']
 > = ResolversObject<{
 	affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	returning?: Resolver<ReadonlyArray<ResolversTypes['hatched_birds']>, ParentType, ContextType>
@@ -10446,7 +10448,7 @@ export interface JsonbScalarConfig extends GraphQLScalarTypeConfig<ResolversType
 
 export type NftsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts'] = ResolversParentTypes['nfts'],
+	ParentType extends ResolversParentTypes['nfts'] = ResolversParentTypes['nfts']
 > = ResolversObject<{
 	block?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	burned?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -10541,7 +10543,7 @@ export type NftsResolvers<
 
 export type Nfts_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_aggregate'] = ResolversParentTypes['nfts_aggregate'],
+	ParentType extends ResolversParentTypes['nfts_aggregate'] = ResolversParentTypes['nfts_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['nfts_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['nfts']>, ParentType, ContextType>
@@ -10550,7 +10552,7 @@ export type Nfts_AggregateResolvers<
 
 export type Nfts_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_aggregate_fields'] = ResolversParentTypes['nfts_aggregate_fields'],
+	ParentType extends ResolversParentTypes['nfts_aggregate_fields'] = ResolversParentTypes['nfts_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['nfts_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Nfts_Aggregate_FieldsCountArgs>>
@@ -10568,7 +10570,7 @@ export type Nfts_Aggregate_FieldsResolvers<
 
 export type Nfts_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_avg_fields'] = ResolversParentTypes['nfts_avg_fields'],
+	ParentType extends ResolversParentTypes['nfts_avg_fields'] = ResolversParentTypes['nfts_avg_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10580,7 +10582,7 @@ export type Nfts_Avg_FieldsResolvers<
 
 export type Nfts_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_max_fields'] = ResolversParentTypes['nfts_max_fields'],
+	ParentType extends ResolversParentTypes['nfts_max_fields'] = ResolversParentTypes['nfts_max_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10610,7 +10612,7 @@ export type Nfts_Max_FieldsResolvers<
 
 export type Nfts_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_min_fields'] = ResolversParentTypes['nfts_min_fields'],
+	ParentType extends ResolversParentTypes['nfts_min_fields'] = ResolversParentTypes['nfts_min_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	burned?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10640,7 +10642,7 @@ export type Nfts_Min_FieldsResolvers<
 
 export type Nfts_Reactions_StatsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats'] = ResolversParentTypes['nfts_reactions_stats'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats'] = ResolversParentTypes['nfts_reactions_stats']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10661,7 +10663,7 @@ export type Nfts_Reactions_StatsResolvers<
 
 export type Nfts_Reactions_Stats_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_aggregate'] = ResolversParentTypes['nfts_reactions_stats_aggregate'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_aggregate'] = ResolversParentTypes['nfts_reactions_stats_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['nfts_reactions_stats_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['nfts_reactions_stats']>, ParentType, ContextType>
@@ -10670,7 +10672,7 @@ export type Nfts_Reactions_Stats_AggregateResolvers<
 
 export type Nfts_Reactions_Stats_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_aggregate_fields'] = ResolversParentTypes['nfts_reactions_stats_aggregate_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_aggregate_fields'] = ResolversParentTypes['nfts_reactions_stats_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['nfts_reactions_stats_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<
@@ -10693,7 +10695,7 @@ export type Nfts_Reactions_Stats_Aggregate_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_avg_fields'] = ResolversParentTypes['nfts_reactions_stats_avg_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_avg_fields'] = ResolversParentTypes['nfts_reactions_stats_avg_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10701,7 +10703,7 @@ export type Nfts_Reactions_Stats_Avg_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_max_fields'] = ResolversParentTypes['nfts_reactions_stats_max_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_max_fields'] = ResolversParentTypes['nfts_reactions_stats_max_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10710,7 +10712,7 @@ export type Nfts_Reactions_Stats_Max_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_min_fields'] = ResolversParentTypes['nfts_reactions_stats_min_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_min_fields'] = ResolversParentTypes['nfts_reactions_stats_min_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -10719,7 +10721,7 @@ export type Nfts_Reactions_Stats_Min_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_stddev_fields'] = ResolversParentTypes['nfts_reactions_stats_stddev_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_stddev_fields'] = ResolversParentTypes['nfts_reactions_stats_stddev_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10727,7 +10729,7 @@ export type Nfts_Reactions_Stats_Stddev_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_stddev_pop_fields'] = ResolversParentTypes['nfts_reactions_stats_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_stddev_pop_fields'] = ResolversParentTypes['nfts_reactions_stats_stddev_pop_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10735,7 +10737,7 @@ export type Nfts_Reactions_Stats_Stddev_Pop_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_stddev_samp_fields'] = ResolversParentTypes['nfts_reactions_stats_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_stddev_samp_fields'] = ResolversParentTypes['nfts_reactions_stats_stddev_samp_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10743,7 +10745,7 @@ export type Nfts_Reactions_Stats_Stddev_Samp_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_sum_fields'] = ResolversParentTypes['nfts_reactions_stats_sum_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_sum_fields'] = ResolversParentTypes['nfts_reactions_stats_sum_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10751,7 +10753,7 @@ export type Nfts_Reactions_Stats_Sum_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_var_pop_fields'] = ResolversParentTypes['nfts_reactions_stats_var_pop_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_var_pop_fields'] = ResolversParentTypes['nfts_reactions_stats_var_pop_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10759,7 +10761,7 @@ export type Nfts_Reactions_Stats_Var_Pop_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_var_samp_fields'] = ResolversParentTypes['nfts_reactions_stats_var_samp_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_var_samp_fields'] = ResolversParentTypes['nfts_reactions_stats_var_samp_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10767,7 +10769,7 @@ export type Nfts_Reactions_Stats_Var_Samp_FieldsResolvers<
 
 export type Nfts_Reactions_Stats_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_reactions_stats_variance_fields'] = ResolversParentTypes['nfts_reactions_stats_variance_fields'],
+	ParentType extends ResolversParentTypes['nfts_reactions_stats_variance_fields'] = ResolversParentTypes['nfts_reactions_stats_variance_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10775,7 +10777,7 @@ export type Nfts_Reactions_Stats_Variance_FieldsResolvers<
 
 export type Nfts_StatsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats'] = ResolversParentTypes['nfts_stats'],
+	ParentType extends ResolversParentTypes['nfts_stats'] = ResolversParentTypes['nfts_stats']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -10784,7 +10786,7 @@ export type Nfts_StatsResolvers<
 
 export type Nfts_Stats_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_aggregate'] = ResolversParentTypes['nfts_stats_aggregate'],
+	ParentType extends ResolversParentTypes['nfts_stats_aggregate'] = ResolversParentTypes['nfts_stats_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['nfts_stats_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['nfts_stats']>, ParentType, ContextType>
@@ -10793,7 +10795,7 @@ export type Nfts_Stats_AggregateResolvers<
 
 export type Nfts_Stats_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_aggregate_fields'] = ResolversParentTypes['nfts_stats_aggregate_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_aggregate_fields'] = ResolversParentTypes['nfts_stats_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['nfts_stats_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Nfts_Stats_Aggregate_FieldsCountArgs>>
@@ -10811,7 +10813,7 @@ export type Nfts_Stats_Aggregate_FieldsResolvers<
 
 export type Nfts_Stats_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_avg_fields'] = ResolversParentTypes['nfts_stats_avg_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_avg_fields'] = ResolversParentTypes['nfts_stats_avg_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10819,7 +10821,7 @@ export type Nfts_Stats_Avg_FieldsResolvers<
 
 export type Nfts_Stats_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_max_fields'] = ResolversParentTypes['nfts_stats_max_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_max_fields'] = ResolversParentTypes['nfts_stats_max_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -10828,7 +10830,7 @@ export type Nfts_Stats_Max_FieldsResolvers<
 
 export type Nfts_Stats_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_min_fields'] = ResolversParentTypes['nfts_stats_min_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_min_fields'] = ResolversParentTypes['nfts_stats_min_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -10837,7 +10839,7 @@ export type Nfts_Stats_Min_FieldsResolvers<
 
 export type Nfts_Stats_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_stddev_fields'] = ResolversParentTypes['nfts_stats_stddev_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_stddev_fields'] = ResolversParentTypes['nfts_stats_stddev_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10845,7 +10847,7 @@ export type Nfts_Stats_Stddev_FieldsResolvers<
 
 export type Nfts_Stats_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_stddev_pop_fields'] = ResolversParentTypes['nfts_stats_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_stddev_pop_fields'] = ResolversParentTypes['nfts_stats_stddev_pop_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10853,7 +10855,7 @@ export type Nfts_Stats_Stddev_Pop_FieldsResolvers<
 
 export type Nfts_Stats_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_stddev_samp_fields'] = ResolversParentTypes['nfts_stats_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_stddev_samp_fields'] = ResolversParentTypes['nfts_stats_stddev_samp_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10861,7 +10863,7 @@ export type Nfts_Stats_Stddev_Samp_FieldsResolvers<
 
 export type Nfts_Stats_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_sum_fields'] = ResolversParentTypes['nfts_stats_sum_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_sum_fields'] = ResolversParentTypes['nfts_stats_sum_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10869,7 +10871,7 @@ export type Nfts_Stats_Sum_FieldsResolvers<
 
 export type Nfts_Stats_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_var_pop_fields'] = ResolversParentTypes['nfts_stats_var_pop_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_var_pop_fields'] = ResolversParentTypes['nfts_stats_var_pop_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10877,7 +10879,7 @@ export type Nfts_Stats_Var_Pop_FieldsResolvers<
 
 export type Nfts_Stats_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_var_samp_fields'] = ResolversParentTypes['nfts_stats_var_samp_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_var_samp_fields'] = ResolversParentTypes['nfts_stats_var_samp_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10885,7 +10887,7 @@ export type Nfts_Stats_Var_Samp_FieldsResolvers<
 
 export type Nfts_Stats_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stats_variance_fields'] = ResolversParentTypes['nfts_stats_variance_fields'],
+	ParentType extends ResolversParentTypes['nfts_stats_variance_fields'] = ResolversParentTypes['nfts_stats_variance_fields']
 > = ResolversObject<{
 	count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -10893,7 +10895,7 @@ export type Nfts_Stats_Variance_FieldsResolvers<
 
 export type Nfts_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stddev_fields'] = ResolversParentTypes['nfts_stddev_fields'],
+	ParentType extends ResolversParentTypes['nfts_stddev_fields'] = ResolversParentTypes['nfts_stddev_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10905,7 +10907,7 @@ export type Nfts_Stddev_FieldsResolvers<
 
 export type Nfts_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stddev_pop_fields'] = ResolversParentTypes['nfts_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['nfts_stddev_pop_fields'] = ResolversParentTypes['nfts_stddev_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10917,7 +10919,7 @@ export type Nfts_Stddev_Pop_FieldsResolvers<
 
 export type Nfts_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_stddev_samp_fields'] = ResolversParentTypes['nfts_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['nfts_stddev_samp_fields'] = ResolversParentTypes['nfts_stddev_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10929,7 +10931,7 @@ export type Nfts_Stddev_Samp_FieldsResolvers<
 
 export type Nfts_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_sum_fields'] = ResolversParentTypes['nfts_sum_fields'],
+	ParentType extends ResolversParentTypes['nfts_sum_fields'] = ResolversParentTypes['nfts_sum_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -10941,7 +10943,7 @@ export type Nfts_Sum_FieldsResolvers<
 
 export type Nfts_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_var_pop_fields'] = ResolversParentTypes['nfts_var_pop_fields'],
+	ParentType extends ResolversParentTypes['nfts_var_pop_fields'] = ResolversParentTypes['nfts_var_pop_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10953,7 +10955,7 @@ export type Nfts_Var_Pop_FieldsResolvers<
 
 export type Nfts_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_var_samp_fields'] = ResolversParentTypes['nfts_var_samp_fields'],
+	ParentType extends ResolversParentTypes['nfts_var_samp_fields'] = ResolversParentTypes['nfts_var_samp_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10965,7 +10967,7 @@ export type Nfts_Var_Samp_FieldsResolvers<
 
 export type Nfts_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['nfts_variance_fields'] = ResolversParentTypes['nfts_variance_fields'],
+	ParentType extends ResolversParentTypes['nfts_variance_fields'] = ResolversParentTypes['nfts_variance_fields']
 > = ResolversObject<{
 	block?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -10981,7 +10983,7 @@ export interface NumericScalarConfig extends GraphQLScalarTypeConfig<ResolversTy
 
 export type PartsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts'] = ResolversParentTypes['parts'],
+	ParentType extends ResolversParentTypes['parts'] = ResolversParentTypes['parts']
 > = ResolversObject<{
 	base?: Resolver<ResolversTypes['bases'], ParentType, ContextType>
 	base_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -11021,7 +11023,7 @@ export type PartsResolvers<
 
 export type Parts_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_aggregate'] = ResolversParentTypes['parts_aggregate'],
+	ParentType extends ResolversParentTypes['parts_aggregate'] = ResolversParentTypes['parts_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['parts_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['parts']>, ParentType, ContextType>
@@ -11030,7 +11032,7 @@ export type Parts_AggregateResolvers<
 
 export type Parts_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_aggregate_fields'] = ResolversParentTypes['parts_aggregate_fields'],
+	ParentType extends ResolversParentTypes['parts_aggregate_fields'] = ResolversParentTypes['parts_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['parts_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Parts_Aggregate_FieldsCountArgs>>
@@ -11048,7 +11050,7 @@ export type Parts_Aggregate_FieldsResolvers<
 
 export type Parts_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_avg_fields'] = ResolversParentTypes['parts_avg_fields'],
+	ParentType extends ResolversParentTypes['parts_avg_fields'] = ResolversParentTypes['parts_avg_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11056,7 +11058,7 @@ export type Parts_Avg_FieldsResolvers<
 
 export type Parts_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_max_fields'] = ResolversParentTypes['parts_max_fields'],
+	ParentType extends ResolversParentTypes['parts_max_fields'] = ResolversParentTypes['parts_max_fields']
 > = ResolversObject<{
 	base_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11069,7 +11071,7 @@ export type Parts_Max_FieldsResolvers<
 
 export type Parts_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_min_fields'] = ResolversParentTypes['parts_min_fields'],
+	ParentType extends ResolversParentTypes['parts_min_fields'] = ResolversParentTypes['parts_min_fields']
 > = ResolversObject<{
 	base_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11082,7 +11084,7 @@ export type Parts_Min_FieldsResolvers<
 
 export type Parts_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_stddev_fields'] = ResolversParentTypes['parts_stddev_fields'],
+	ParentType extends ResolversParentTypes['parts_stddev_fields'] = ResolversParentTypes['parts_stddev_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11090,7 +11092,7 @@ export type Parts_Stddev_FieldsResolvers<
 
 export type Parts_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_stddev_pop_fields'] = ResolversParentTypes['parts_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['parts_stddev_pop_fields'] = ResolversParentTypes['parts_stddev_pop_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11098,7 +11100,7 @@ export type Parts_Stddev_Pop_FieldsResolvers<
 
 export type Parts_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_stddev_samp_fields'] = ResolversParentTypes['parts_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['parts_stddev_samp_fields'] = ResolversParentTypes['parts_stddev_samp_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11106,7 +11108,7 @@ export type Parts_Stddev_Samp_FieldsResolvers<
 
 export type Parts_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_sum_fields'] = ResolversParentTypes['parts_sum_fields'],
+	ParentType extends ResolversParentTypes['parts_sum_fields'] = ResolversParentTypes['parts_sum_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11114,7 +11116,7 @@ export type Parts_Sum_FieldsResolvers<
 
 export type Parts_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_var_pop_fields'] = ResolversParentTypes['parts_var_pop_fields'],
+	ParentType extends ResolversParentTypes['parts_var_pop_fields'] = ResolversParentTypes['parts_var_pop_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11122,7 +11124,7 @@ export type Parts_Var_Pop_FieldsResolvers<
 
 export type Parts_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_var_samp_fields'] = ResolversParentTypes['parts_var_samp_fields'],
+	ParentType extends ResolversParentTypes['parts_var_samp_fields'] = ResolversParentTypes['parts_var_samp_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11130,7 +11132,7 @@ export type Parts_Var_Samp_FieldsResolvers<
 
 export type Parts_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['parts_variance_fields'] = ResolversParentTypes['parts_variance_fields'],
+	ParentType extends ResolversParentTypes['parts_variance_fields'] = ResolversParentTypes['parts_variance_fields']
 > = ResolversObject<{
 	z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11138,7 +11140,7 @@ export type Parts_Variance_FieldsResolvers<
 
 export type ReactionsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions'] = ResolversParentTypes['reactions'],
+	ParentType extends ResolversParentTypes['reactions'] = ResolversParentTypes['reactions']
 > = ResolversObject<{
 	created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>
 	id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
@@ -11175,7 +11177,7 @@ export type ReactionsResolvers<
 
 export type Reactions_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_aggregate'] = ResolversParentTypes['reactions_aggregate'],
+	ParentType extends ResolversParentTypes['reactions_aggregate'] = ResolversParentTypes['reactions_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['reactions_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['reactions']>, ParentType, ContextType>
@@ -11184,7 +11186,7 @@ export type Reactions_AggregateResolvers<
 
 export type Reactions_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_aggregate_fields'] = ResolversParentTypes['reactions_aggregate_fields'],
+	ParentType extends ResolversParentTypes['reactions_aggregate_fields'] = ResolversParentTypes['reactions_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['reactions_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Reactions_Aggregate_FieldsCountArgs>>
@@ -11202,7 +11204,7 @@ export type Reactions_Aggregate_FieldsResolvers<
 
 export type Reactions_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_avg_fields'] = ResolversParentTypes['reactions_avg_fields'],
+	ParentType extends ResolversParentTypes['reactions_avg_fields'] = ResolversParentTypes['reactions_avg_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11210,7 +11212,7 @@ export type Reactions_Avg_FieldsResolvers<
 
 export type Reactions_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_max_fields'] = ResolversParentTypes['reactions_max_fields'],
+	ParentType extends ResolversParentTypes['reactions_max_fields'] = ResolversParentTypes['reactions_max_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
@@ -11222,7 +11224,7 @@ export type Reactions_Max_FieldsResolvers<
 
 export type Reactions_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_min_fields'] = ResolversParentTypes['reactions_min_fields'],
+	ParentType extends ResolversParentTypes['reactions_min_fields'] = ResolversParentTypes['reactions_min_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
@@ -11234,7 +11236,7 @@ export type Reactions_Min_FieldsResolvers<
 
 export type Reactions_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_stddev_fields'] = ResolversParentTypes['reactions_stddev_fields'],
+	ParentType extends ResolversParentTypes['reactions_stddev_fields'] = ResolversParentTypes['reactions_stddev_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11242,7 +11244,7 @@ export type Reactions_Stddev_FieldsResolvers<
 
 export type Reactions_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_stddev_pop_fields'] = ResolversParentTypes['reactions_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['reactions_stddev_pop_fields'] = ResolversParentTypes['reactions_stddev_pop_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11250,7 +11252,7 @@ export type Reactions_Stddev_Pop_FieldsResolvers<
 
 export type Reactions_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_stddev_samp_fields'] = ResolversParentTypes['reactions_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['reactions_stddev_samp_fields'] = ResolversParentTypes['reactions_stddev_samp_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11258,7 +11260,7 @@ export type Reactions_Stddev_Samp_FieldsResolvers<
 
 export type Reactions_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_sum_fields'] = ResolversParentTypes['reactions_sum_fields'],
+	ParentType extends ResolversParentTypes['reactions_sum_fields'] = ResolversParentTypes['reactions_sum_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11266,7 +11268,7 @@ export type Reactions_Sum_FieldsResolvers<
 
 export type Reactions_UnicodeResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_unicode'] = ResolversParentTypes['reactions_unicode'],
+	ParentType extends ResolversParentTypes['reactions_unicode'] = ResolversParentTypes['reactions_unicode']
 > = ResolversObject<{
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11277,7 +11279,7 @@ export type Reactions_UnicodeResolvers<
 
 export type Reactions_Unicode_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_unicode_aggregate'] = ResolversParentTypes['reactions_unicode_aggregate'],
+	ParentType extends ResolversParentTypes['reactions_unicode_aggregate'] = ResolversParentTypes['reactions_unicode_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['reactions_unicode_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['reactions_unicode']>, ParentType, ContextType>
@@ -11286,7 +11288,7 @@ export type Reactions_Unicode_AggregateResolvers<
 
 export type Reactions_Unicode_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_unicode_aggregate_fields'] = ResolversParentTypes['reactions_unicode_aggregate_fields'],
+	ParentType extends ResolversParentTypes['reactions_unicode_aggregate_fields'] = ResolversParentTypes['reactions_unicode_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<
 		ResolversTypes['Int'],
@@ -11301,7 +11303,7 @@ export type Reactions_Unicode_Aggregate_FieldsResolvers<
 
 export type Reactions_Unicode_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_unicode_max_fields'] = ResolversParentTypes['reactions_unicode_max_fields'],
+	ParentType extends ResolversParentTypes['reactions_unicode_max_fields'] = ResolversParentTypes['reactions_unicode_max_fields']
 > = ResolversObject<{
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11311,7 +11313,7 @@ export type Reactions_Unicode_Max_FieldsResolvers<
 
 export type Reactions_Unicode_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_unicode_min_fields'] = ResolversParentTypes['reactions_unicode_min_fields'],
+	ParentType extends ResolversParentTypes['reactions_unicode_min_fields'] = ResolversParentTypes['reactions_unicode_min_fields']
 > = ResolversObject<{
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11321,7 +11323,7 @@ export type Reactions_Unicode_Min_FieldsResolvers<
 
 export type Reactions_UsersResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_users'] = ResolversParentTypes['reactions_users'],
+	ParentType extends ResolversParentTypes['reactions_users'] = ResolversParentTypes['reactions_users']
 > = ResolversObject<{
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11332,7 +11334,7 @@ export type Reactions_UsersResolvers<
 
 export type Reactions_Users_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_users_aggregate'] = ResolversParentTypes['reactions_users_aggregate'],
+	ParentType extends ResolversParentTypes['reactions_users_aggregate'] = ResolversParentTypes['reactions_users_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['reactions_users_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['reactions_users']>, ParentType, ContextType>
@@ -11341,7 +11343,7 @@ export type Reactions_Users_AggregateResolvers<
 
 export type Reactions_Users_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_users_aggregate_fields'] = ResolversParentTypes['reactions_users_aggregate_fields'],
+	ParentType extends ResolversParentTypes['reactions_users_aggregate_fields'] = ResolversParentTypes['reactions_users_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Reactions_Users_Aggregate_FieldsCountArgs>>
 	max?: Resolver<Maybe<ResolversTypes['reactions_users_max_fields']>, ParentType, ContextType>
@@ -11351,7 +11353,7 @@ export type Reactions_Users_Aggregate_FieldsResolvers<
 
 export type Reactions_Users_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_users_max_fields'] = ResolversParentTypes['reactions_users_max_fields'],
+	ParentType extends ResolversParentTypes['reactions_users_max_fields'] = ResolversParentTypes['reactions_users_max_fields']
 > = ResolversObject<{
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11361,7 +11363,7 @@ export type Reactions_Users_Max_FieldsResolvers<
 
 export type Reactions_Users_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_users_min_fields'] = ResolversParentTypes['reactions_users_min_fields'],
+	ParentType extends ResolversParentTypes['reactions_users_min_fields'] = ResolversParentTypes['reactions_users_min_fields']
 > = ResolversObject<{
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11371,7 +11373,7 @@ export type Reactions_Users_Min_FieldsResolvers<
 
 export type Reactions_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_var_pop_fields'] = ResolversParentTypes['reactions_var_pop_fields'],
+	ParentType extends ResolversParentTypes['reactions_var_pop_fields'] = ResolversParentTypes['reactions_var_pop_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11379,7 +11381,7 @@ export type Reactions_Var_Pop_FieldsResolvers<
 
 export type Reactions_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_var_samp_fields'] = ResolversParentTypes['reactions_var_samp_fields'],
+	ParentType extends ResolversParentTypes['reactions_var_samp_fields'] = ResolversParentTypes['reactions_var_samp_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11387,7 +11389,7 @@ export type Reactions_Var_Samp_FieldsResolvers<
 
 export type Reactions_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['reactions_variance_fields'] = ResolversParentTypes['reactions_variance_fields'],
+	ParentType extends ResolversParentTypes['reactions_variance_fields'] = ResolversParentTypes['reactions_variance_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11395,7 +11397,7 @@ export type Reactions_Variance_FieldsResolvers<
 
 export type Recently_ListedResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed'] = ResolversParentTypes['recently_listed'],
+	ParentType extends ResolversParentTypes['recently_listed'] = ResolversParentTypes['recently_listed']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -11406,7 +11408,7 @@ export type Recently_ListedResolvers<
 
 export type Recently_Listed_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_aggregate'] = ResolversParentTypes['recently_listed_aggregate'],
+	ParentType extends ResolversParentTypes['recently_listed_aggregate'] = ResolversParentTypes['recently_listed_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['recently_listed_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['recently_listed']>, ParentType, ContextType>
@@ -11415,7 +11417,7 @@ export type Recently_Listed_AggregateResolvers<
 
 export type Recently_Listed_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_aggregate_fields'] = ResolversParentTypes['recently_listed_aggregate_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_aggregate_fields'] = ResolversParentTypes['recently_listed_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['recently_listed_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Recently_Listed_Aggregate_FieldsCountArgs>>
@@ -11433,7 +11435,7 @@ export type Recently_Listed_Aggregate_FieldsResolvers<
 
 export type Recently_Listed_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_avg_fields'] = ResolversParentTypes['recently_listed_avg_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_avg_fields'] = ResolversParentTypes['recently_listed_avg_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11441,7 +11443,7 @@ export type Recently_Listed_Avg_FieldsResolvers<
 
 export type Recently_Listed_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_max_fields'] = ResolversParentTypes['recently_listed_max_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_max_fields'] = ResolversParentTypes['recently_listed_max_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -11451,7 +11453,7 @@ export type Recently_Listed_Max_FieldsResolvers<
 
 export type Recently_Listed_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_min_fields'] = ResolversParentTypes['recently_listed_min_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_min_fields'] = ResolversParentTypes['recently_listed_min_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
@@ -11461,7 +11463,7 @@ export type Recently_Listed_Min_FieldsResolvers<
 
 export type Recently_Listed_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_stddev_fields'] = ResolversParentTypes['recently_listed_stddev_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_stddev_fields'] = ResolversParentTypes['recently_listed_stddev_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11469,7 +11471,7 @@ export type Recently_Listed_Stddev_FieldsResolvers<
 
 export type Recently_Listed_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_stddev_pop_fields'] = ResolversParentTypes['recently_listed_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_stddev_pop_fields'] = ResolversParentTypes['recently_listed_stddev_pop_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11477,7 +11479,7 @@ export type Recently_Listed_Stddev_Pop_FieldsResolvers<
 
 export type Recently_Listed_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_stddev_samp_fields'] = ResolversParentTypes['recently_listed_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_stddev_samp_fields'] = ResolversParentTypes['recently_listed_stddev_samp_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11485,7 +11487,7 @@ export type Recently_Listed_Stddev_Samp_FieldsResolvers<
 
 export type Recently_Listed_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_sum_fields'] = ResolversParentTypes['recently_listed_sum_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_sum_fields'] = ResolversParentTypes['recently_listed_sum_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11493,7 +11495,7 @@ export type Recently_Listed_Sum_FieldsResolvers<
 
 export type Recently_Listed_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_var_pop_fields'] = ResolversParentTypes['recently_listed_var_pop_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_var_pop_fields'] = ResolversParentTypes['recently_listed_var_pop_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11501,7 +11503,7 @@ export type Recently_Listed_Var_Pop_FieldsResolvers<
 
 export type Recently_Listed_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_var_samp_fields'] = ResolversParentTypes['recently_listed_var_samp_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_var_samp_fields'] = ResolversParentTypes['recently_listed_var_samp_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11509,7 +11511,7 @@ export type Recently_Listed_Var_Samp_FieldsResolvers<
 
 export type Recently_Listed_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['recently_listed_variance_fields'] = ResolversParentTypes['recently_listed_variance_fields'],
+	ParentType extends ResolversParentTypes['recently_listed_variance_fields'] = ResolversParentTypes['recently_listed_variance_fields']
 > = ResolversObject<{
 	forsale?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11517,7 +11519,7 @@ export type Recently_Listed_Variance_FieldsResolvers<
 
 export type ResourcesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources'] = ResolversParentTypes['resources'],
+	ParentType extends ResolversParentTypes['resources'] = ResolversParentTypes['resources']
 > = ResolversObject<{
 	base?: Resolver<Maybe<ResolversTypes['bases']>, ParentType, ContextType>
 	base_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11557,7 +11559,7 @@ export type ResourcesResolvers<
 
 export type Resources_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_aggregate'] = ResolversParentTypes['resources_aggregate'],
+	ParentType extends ResolversParentTypes['resources_aggregate'] = ResolversParentTypes['resources_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['resources_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['resources']>, ParentType, ContextType>
@@ -11566,7 +11568,7 @@ export type Resources_AggregateResolvers<
 
 export type Resources_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_aggregate_fields'] = ResolversParentTypes['resources_aggregate_fields'],
+	ParentType extends ResolversParentTypes['resources_aggregate_fields'] = ResolversParentTypes['resources_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Resources_Aggregate_FieldsCountArgs>>
 	max?: Resolver<Maybe<ResolversTypes['resources_max_fields']>, ParentType, ContextType>
@@ -11576,7 +11578,7 @@ export type Resources_Aggregate_FieldsResolvers<
 
 export type Resources_Base_ThemesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_base_themes'] = ResolversParentTypes['resources_base_themes'],
+	ParentType extends ResolversParentTypes['resources_base_themes'] = ResolversParentTypes['resources_base_themes']
 > = ResolversObject<{
 	resource?: Resolver<ResolversTypes['resources'], ParentType, ContextType>
 	resource_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -11587,7 +11589,7 @@ export type Resources_Base_ThemesResolvers<
 
 export type Resources_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_max_fields'] = ResolversParentTypes['resources_max_fields'],
+	ParentType extends ResolversParentTypes['resources_max_fields'] = ResolversParentTypes['resources_max_fields']
 > = ResolversObject<{
 	base_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11601,7 +11603,7 @@ export type Resources_Max_FieldsResolvers<
 
 export type Resources_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_min_fields'] = ResolversParentTypes['resources_min_fields'],
+	ParentType extends ResolversParentTypes['resources_min_fields'] = ResolversParentTypes['resources_min_fields']
 > = ResolversObject<{
 	base_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11615,7 +11617,7 @@ export type Resources_Min_FieldsResolvers<
 
 export type Resources_PartsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_parts'] = ResolversParentTypes['resources_parts'],
+	ParentType extends ResolversParentTypes['resources_parts'] = ResolversParentTypes['resources_parts']
 > = ResolversObject<{
 	part?: Resolver<ResolversTypes['parts'], ParentType, ContextType>
 	part_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -11626,7 +11628,7 @@ export type Resources_PartsResolvers<
 
 export type Resources_Parts_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_parts_aggregate'] = ResolversParentTypes['resources_parts_aggregate'],
+	ParentType extends ResolversParentTypes['resources_parts_aggregate'] = ResolversParentTypes['resources_parts_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['resources_parts_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['resources_parts']>, ParentType, ContextType>
@@ -11635,7 +11637,7 @@ export type Resources_Parts_AggregateResolvers<
 
 export type Resources_Parts_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_parts_aggregate_fields'] = ResolversParentTypes['resources_parts_aggregate_fields'],
+	ParentType extends ResolversParentTypes['resources_parts_aggregate_fields'] = ResolversParentTypes['resources_parts_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<ResolversTypes['Int'], ParentType, ContextType, Partial<Resources_Parts_Aggregate_FieldsCountArgs>>
 	max?: Resolver<Maybe<ResolversTypes['resources_parts_max_fields']>, ParentType, ContextType>
@@ -11645,7 +11647,7 @@ export type Resources_Parts_Aggregate_FieldsResolvers<
 
 export type Resources_Parts_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_parts_max_fields'] = ResolversParentTypes['resources_parts_max_fields'],
+	ParentType extends ResolversParentTypes['resources_parts_max_fields'] = ResolversParentTypes['resources_parts_max_fields']
 > = ResolversObject<{
 	part_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	resource_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11654,7 +11656,7 @@ export type Resources_Parts_Max_FieldsResolvers<
 
 export type Resources_Parts_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['resources_parts_min_fields'] = ResolversParentTypes['resources_parts_min_fields'],
+	ParentType extends ResolversParentTypes['resources_parts_min_fields'] = ResolversParentTypes['resources_parts_min_fields']
 > = ResolversObject<{
 	part_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	resource_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11663,7 +11665,7 @@ export type Resources_Parts_Min_FieldsResolvers<
 
 export type SalesResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['sales'] = ResolversParentTypes['sales'],
+	ParentType extends ResolversParentTypes['sales'] = ResolversParentTypes['sales']
 > = ResolversObject<{
 	day?: Resolver<Maybe<ResolversTypes['numeric']>, ParentType, ContextType>
 	month?: Resolver<Maybe<ResolversTypes['numeric']>, ParentType, ContextType>
@@ -11674,7 +11676,7 @@ export type SalesResolvers<
 
 export type Singular_Blacklisted_AccountsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_blacklisted_accounts'] = ResolversParentTypes['singular_blacklisted_accounts'],
+	ParentType extends ResolversParentTypes['singular_blacklisted_accounts'] = ResolversParentTypes['singular_blacklisted_accounts']
 > = ResolversObject<{
 	account?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>
@@ -11683,7 +11685,7 @@ export type Singular_Blacklisted_AccountsResolvers<
 
 export type Singular_Blacklisted_CollectionsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_blacklisted_collections'] = ResolversParentTypes['singular_blacklisted_collections'],
+	ParentType extends ResolversParentTypes['singular_blacklisted_collections'] = ResolversParentTypes['singular_blacklisted_collections']
 > = ResolversObject<{
 	collection?: Resolver<Maybe<ResolversTypes['collections']>, ParentType, ContextType>
 	collection_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -11693,7 +11695,7 @@ export type Singular_Blacklisted_CollectionsResolvers<
 
 export type Singular_CuratedResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated'] = ResolversParentTypes['singular_curated'],
+	ParentType extends ResolversParentTypes['singular_curated'] = ResolversParentTypes['singular_curated']
 > = ResolversObject<{
 	created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>
 	nft_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -11702,7 +11704,7 @@ export type Singular_CuratedResolvers<
 
 export type Singular_Curated_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_aggregate'] = ResolversParentTypes['singular_curated_aggregate'],
+	ParentType extends ResolversParentTypes['singular_curated_aggregate'] = ResolversParentTypes['singular_curated_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['singular_curated_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['singular_curated']>, ParentType, ContextType>
@@ -11711,7 +11713,7 @@ export type Singular_Curated_AggregateResolvers<
 
 export type Singular_Curated_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_aggregate_fields'] = ResolversParentTypes['singular_curated_aggregate_fields'],
+	ParentType extends ResolversParentTypes['singular_curated_aggregate_fields'] = ResolversParentTypes['singular_curated_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<
 		ResolversTypes['Int'],
@@ -11726,7 +11728,7 @@ export type Singular_Curated_Aggregate_FieldsResolvers<
 
 export type Singular_Curated_CollectionsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_collections'] = ResolversParentTypes['singular_curated_collections'],
+	ParentType extends ResolversParentTypes['singular_curated_collections'] = ResolversParentTypes['singular_curated_collections']
 > = ResolversObject<{
 	collection_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>
@@ -11735,7 +11737,7 @@ export type Singular_Curated_CollectionsResolvers<
 
 export type Singular_Curated_Collections_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_collections_aggregate'] = ResolversParentTypes['singular_curated_collections_aggregate'],
+	ParentType extends ResolversParentTypes['singular_curated_collections_aggregate'] = ResolversParentTypes['singular_curated_collections_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<
 		Maybe<ResolversTypes['singular_curated_collections_aggregate_fields']>,
@@ -11748,7 +11750,7 @@ export type Singular_Curated_Collections_AggregateResolvers<
 
 export type Singular_Curated_Collections_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_collections_aggregate_fields'] = ResolversParentTypes['singular_curated_collections_aggregate_fields'],
+	ParentType extends ResolversParentTypes['singular_curated_collections_aggregate_fields'] = ResolversParentTypes['singular_curated_collections_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<
 		ResolversTypes['Int'],
@@ -11763,7 +11765,7 @@ export type Singular_Curated_Collections_Aggregate_FieldsResolvers<
 
 export type Singular_Curated_Collections_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_collections_max_fields'] = ResolversParentTypes['singular_curated_collections_max_fields'],
+	ParentType extends ResolversParentTypes['singular_curated_collections_max_fields'] = ResolversParentTypes['singular_curated_collections_max_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
@@ -11772,7 +11774,7 @@ export type Singular_Curated_Collections_Max_FieldsResolvers<
 
 export type Singular_Curated_Collections_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_collections_min_fields'] = ResolversParentTypes['singular_curated_collections_min_fields'],
+	ParentType extends ResolversParentTypes['singular_curated_collections_min_fields'] = ResolversParentTypes['singular_curated_collections_min_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
@@ -11781,7 +11783,7 @@ export type Singular_Curated_Collections_Min_FieldsResolvers<
 
 export type Singular_Curated_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_max_fields'] = ResolversParentTypes['singular_curated_max_fields'],
+	ParentType extends ResolversParentTypes['singular_curated_max_fields'] = ResolversParentTypes['singular_curated_max_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11790,7 +11792,7 @@ export type Singular_Curated_Max_FieldsResolvers<
 
 export type Singular_Curated_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_curated_min_fields'] = ResolversParentTypes['singular_curated_min_fields'],
+	ParentType extends ResolversParentTypes['singular_curated_min_fields'] = ResolversParentTypes['singular_curated_min_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11799,7 +11801,7 @@ export type Singular_Curated_Min_FieldsResolvers<
 
 export type Singular_Nsfw_CollectionsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_collections'] = ResolversParentTypes['singular_nsfw_collections'],
+	ParentType extends ResolversParentTypes['singular_nsfw_collections'] = ResolversParentTypes['singular_nsfw_collections']
 > = ResolversObject<{
 	collection?: Resolver<Maybe<ResolversTypes['collections']>, ParentType, ContextType>
 	collection_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -11815,7 +11817,7 @@ export type Singular_Nsfw_CollectionsResolvers<
 
 export type Singular_Nsfw_Collections_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_collections_aggregate'] = ResolversParentTypes['singular_nsfw_collections_aggregate'],
+	ParentType extends ResolversParentTypes['singular_nsfw_collections_aggregate'] = ResolversParentTypes['singular_nsfw_collections_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['singular_nsfw_collections_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['singular_nsfw_collections']>, ParentType, ContextType>
@@ -11824,7 +11826,7 @@ export type Singular_Nsfw_Collections_AggregateResolvers<
 
 export type Singular_Nsfw_Collections_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_collections_aggregate_fields'] = ResolversParentTypes['singular_nsfw_collections_aggregate_fields'],
+	ParentType extends ResolversParentTypes['singular_nsfw_collections_aggregate_fields'] = ResolversParentTypes['singular_nsfw_collections_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<
 		ResolversTypes['Int'],
@@ -11839,7 +11841,7 @@ export type Singular_Nsfw_Collections_Aggregate_FieldsResolvers<
 
 export type Singular_Nsfw_Collections_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_collections_max_fields'] = ResolversParentTypes['singular_nsfw_collections_max_fields'],
+	ParentType extends ResolversParentTypes['singular_nsfw_collections_max_fields'] = ResolversParentTypes['singular_nsfw_collections_max_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
@@ -11848,7 +11850,7 @@ export type Singular_Nsfw_Collections_Max_FieldsResolvers<
 
 export type Singular_Nsfw_Collections_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_collections_min_fields'] = ResolversParentTypes['singular_nsfw_collections_min_fields'],
+	ParentType extends ResolversParentTypes['singular_nsfw_collections_min_fields'] = ResolversParentTypes['singular_nsfw_collections_min_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
@@ -11857,7 +11859,7 @@ export type Singular_Nsfw_Collections_Min_FieldsResolvers<
 
 export type Singular_Nsfw_NftsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_nfts'] = ResolversParentTypes['singular_nsfw_nfts'],
+	ParentType extends ResolversParentTypes['singular_nsfw_nfts'] = ResolversParentTypes['singular_nsfw_nfts']
 > = ResolversObject<{
 	created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>
 	nft?: Resolver<ResolversTypes['nfts'], ParentType, ContextType>
@@ -11868,7 +11870,7 @@ export type Singular_Nsfw_NftsResolvers<
 
 export type Singular_Nsfw_Nfts_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_nfts_aggregate'] = ResolversParentTypes['singular_nsfw_nfts_aggregate'],
+	ParentType extends ResolversParentTypes['singular_nsfw_nfts_aggregate'] = ResolversParentTypes['singular_nsfw_nfts_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['singular_nsfw_nfts_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['singular_nsfw_nfts']>, ParentType, ContextType>
@@ -11877,7 +11879,7 @@ export type Singular_Nsfw_Nfts_AggregateResolvers<
 
 export type Singular_Nsfw_Nfts_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_nfts_aggregate_fields'] = ResolversParentTypes['singular_nsfw_nfts_aggregate_fields'],
+	ParentType extends ResolversParentTypes['singular_nsfw_nfts_aggregate_fields'] = ResolversParentTypes['singular_nsfw_nfts_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<
 		ResolversTypes['Int'],
@@ -11892,7 +11894,7 @@ export type Singular_Nsfw_Nfts_Aggregate_FieldsResolvers<
 
 export type Singular_Nsfw_Nfts_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_nfts_max_fields'] = ResolversParentTypes['singular_nsfw_nfts_max_fields'],
+	ParentType extends ResolversParentTypes['singular_nsfw_nfts_max_fields'] = ResolversParentTypes['singular_nsfw_nfts_max_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11901,7 +11903,7 @@ export type Singular_Nsfw_Nfts_Max_FieldsResolvers<
 
 export type Singular_Nsfw_Nfts_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_nsfw_nfts_min_fields'] = ResolversParentTypes['singular_nsfw_nfts_min_fields'],
+	ParentType extends ResolversParentTypes['singular_nsfw_nfts_min_fields'] = ResolversParentTypes['singular_nsfw_nfts_min_fields']
 > = ResolversObject<{
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
 	nft_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -11910,7 +11912,7 @@ export type Singular_Nsfw_Nfts_Min_FieldsResolvers<
 
 export type Singular_Verified_CollectionsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_verified_collections'] = ResolversParentTypes['singular_verified_collections'],
+	ParentType extends ResolversParentTypes['singular_verified_collections'] = ResolversParentTypes['singular_verified_collections']
 > = ResolversObject<{
 	collection_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>
@@ -11919,7 +11921,7 @@ export type Singular_Verified_CollectionsResolvers<
 
 export type Singular_Verified_Collections_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_verified_collections_aggregate'] = ResolversParentTypes['singular_verified_collections_aggregate'],
+	ParentType extends ResolversParentTypes['singular_verified_collections_aggregate'] = ResolversParentTypes['singular_verified_collections_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<
 		Maybe<ResolversTypes['singular_verified_collections_aggregate_fields']>,
@@ -11932,7 +11934,7 @@ export type Singular_Verified_Collections_AggregateResolvers<
 
 export type Singular_Verified_Collections_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_verified_collections_aggregate_fields'] = ResolversParentTypes['singular_verified_collections_aggregate_fields'],
+	ParentType extends ResolversParentTypes['singular_verified_collections_aggregate_fields'] = ResolversParentTypes['singular_verified_collections_aggregate_fields']
 > = ResolversObject<{
 	count?: Resolver<
 		ResolversTypes['Int'],
@@ -11947,7 +11949,7 @@ export type Singular_Verified_Collections_Aggregate_FieldsResolvers<
 
 export type Singular_Verified_Collections_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_verified_collections_max_fields'] = ResolversParentTypes['singular_verified_collections_max_fields'],
+	ParentType extends ResolversParentTypes['singular_verified_collections_max_fields'] = ResolversParentTypes['singular_verified_collections_max_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
@@ -11956,7 +11958,7 @@ export type Singular_Verified_Collections_Max_FieldsResolvers<
 
 export type Singular_Verified_Collections_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['singular_verified_collections_min_fields'] = ResolversParentTypes['singular_verified_collections_min_fields'],
+	ParentType extends ResolversParentTypes['singular_verified_collections_min_fields'] = ResolversParentTypes['singular_verified_collections_min_fields']
 > = ResolversObject<{
 	collection_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>
@@ -11969,7 +11971,7 @@ export interface SmallintScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type SystemResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['system'] = ResolversParentTypes['system'],
+	ParentType extends ResolversParentTypes['system'] = ResolversParentTypes['system']
 > = ResolversObject<{
 	purchaseEnabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -11981,7 +11983,7 @@ export interface TimestamptzScalarConfig extends GraphQLScalarTypeConfig<Resolve
 
 export type Yuletide_Item_TrackResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track'] = ResolversParentTypes['yuletide_item_track'],
+	ParentType extends ResolversParentTypes['yuletide_item_track'] = ResolversParentTypes['yuletide_item_track']
 > = ResolversObject<{
 	id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	item_count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
@@ -11990,7 +11992,7 @@ export type Yuletide_Item_TrackResolvers<
 
 export type Yuletide_Item_Track_AggregateResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_aggregate'] = ResolversParentTypes['yuletide_item_track_aggregate'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_aggregate'] = ResolversParentTypes['yuletide_item_track_aggregate']
 > = ResolversObject<{
 	aggregate?: Resolver<Maybe<ResolversTypes['yuletide_item_track_aggregate_fields']>, ParentType, ContextType>
 	nodes?: Resolver<ReadonlyArray<ResolversTypes['yuletide_item_track']>, ParentType, ContextType>
@@ -11999,7 +12001,7 @@ export type Yuletide_Item_Track_AggregateResolvers<
 
 export type Yuletide_Item_Track_Aggregate_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_aggregate_fields'] = ResolversParentTypes['yuletide_item_track_aggregate_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_aggregate_fields'] = ResolversParentTypes['yuletide_item_track_aggregate_fields']
 > = ResolversObject<{
 	avg?: Resolver<Maybe<ResolversTypes['yuletide_item_track_avg_fields']>, ParentType, ContextType>
 	count?: Resolver<
@@ -12022,7 +12024,7 @@ export type Yuletide_Item_Track_Aggregate_FieldsResolvers<
 
 export type Yuletide_Item_Track_Avg_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_avg_fields'] = ResolversParentTypes['yuletide_item_track_avg_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_avg_fields'] = ResolversParentTypes['yuletide_item_track_avg_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12030,7 +12032,7 @@ export type Yuletide_Item_Track_Avg_FieldsResolvers<
 
 export type Yuletide_Item_Track_Max_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_max_fields'] = ResolversParentTypes['yuletide_item_track_max_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_max_fields'] = ResolversParentTypes['yuletide_item_track_max_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	item_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
@@ -12039,7 +12041,7 @@ export type Yuletide_Item_Track_Max_FieldsResolvers<
 
 export type Yuletide_Item_Track_Min_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_min_fields'] = ResolversParentTypes['yuletide_item_track_min_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_min_fields'] = ResolversParentTypes['yuletide_item_track_min_fields']
 > = ResolversObject<{
 	id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	item_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
@@ -12048,7 +12050,7 @@ export type Yuletide_Item_Track_Min_FieldsResolvers<
 
 export type Yuletide_Item_Track_Stddev_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_stddev_fields'] = ResolversParentTypes['yuletide_item_track_stddev_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_stddev_fields'] = ResolversParentTypes['yuletide_item_track_stddev_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12056,7 +12058,7 @@ export type Yuletide_Item_Track_Stddev_FieldsResolvers<
 
 export type Yuletide_Item_Track_Stddev_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_stddev_pop_fields'] = ResolversParentTypes['yuletide_item_track_stddev_pop_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_stddev_pop_fields'] = ResolversParentTypes['yuletide_item_track_stddev_pop_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12064,7 +12066,7 @@ export type Yuletide_Item_Track_Stddev_Pop_FieldsResolvers<
 
 export type Yuletide_Item_Track_Stddev_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_stddev_samp_fields'] = ResolversParentTypes['yuletide_item_track_stddev_samp_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_stddev_samp_fields'] = ResolversParentTypes['yuletide_item_track_stddev_samp_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12072,7 +12074,7 @@ export type Yuletide_Item_Track_Stddev_Samp_FieldsResolvers<
 
 export type Yuletide_Item_Track_Sum_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_sum_fields'] = ResolversParentTypes['yuletide_item_track_sum_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_sum_fields'] = ResolversParentTypes['yuletide_item_track_sum_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12080,7 +12082,7 @@ export type Yuletide_Item_Track_Sum_FieldsResolvers<
 
 export type Yuletide_Item_Track_Var_Pop_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_var_pop_fields'] = ResolversParentTypes['yuletide_item_track_var_pop_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_var_pop_fields'] = ResolversParentTypes['yuletide_item_track_var_pop_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12088,7 +12090,7 @@ export type Yuletide_Item_Track_Var_Pop_FieldsResolvers<
 
 export type Yuletide_Item_Track_Var_Samp_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_var_samp_fields'] = ResolversParentTypes['yuletide_item_track_var_samp_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_var_samp_fields'] = ResolversParentTypes['yuletide_item_track_var_samp_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12096,7 +12098,7 @@ export type Yuletide_Item_Track_Var_Samp_FieldsResolvers<
 
 export type Yuletide_Item_Track_Variance_FieldsResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['yuletide_item_track_variance_fields'] = ResolversParentTypes['yuletide_item_track_variance_fields'],
+	ParentType extends ResolversParentTypes['yuletide_item_track_variance_fields'] = ResolversParentTypes['yuletide_item_track_variance_fields']
 > = ResolversObject<{
 	item_count?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
@@ -12318,7 +12320,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	singular_nsfw_nfts_min_fields?: Singular_Nsfw_Nfts_Min_FieldsResolvers<ContextType>
 	singular_verified_collections?: Singular_Verified_CollectionsResolvers<ContextType>
 	singular_verified_collections_aggregate?: Singular_Verified_Collections_AggregateResolvers<ContextType>
-	singular_verified_collections_aggregate_fields?: Singular_Verified_Collections_Aggregate_FieldsResolvers<ContextType>
+	singular_verified_collections_aggregate_fields?: Singular_Verified_Collections_Aggregate_FieldsResolvers<
+		ContextType
+	>
 	singular_verified_collections_max_fields?: Singular_Verified_Collections_Max_FieldsResolvers<ContextType>
 	singular_verified_collections_min_fields?: Singular_Verified_Collections_Min_FieldsResolvers<ContextType>
 	smallint?: GraphQLScalarType

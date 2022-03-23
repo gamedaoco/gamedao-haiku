@@ -48,7 +48,7 @@ export function FormVoting(props) {
 		resolver: yupResolver(validationSchema),
 	})
 
-	const onSubmit = (data) => {
+	const onSubmit = data => {
 		const formData = JSON.stringify(data, null, 2)
 		alert(formData)
 		props.parentCallback(formData)
@@ -78,7 +78,7 @@ export function FormVoting(props) {
 							</Grid>
 							<Grid item xs={12} md={6}>
 								<TextField label="Organization" fullWidth name="entity" select {...register('entity')}>
-									{data.memberships.map((ms) => (
+									{data.memberships.map(ms => (
 										<MenuItem key={ms.key} value={ms.value}>
 											{ms.text}
 										</MenuItem>
@@ -95,7 +95,7 @@ export function FormVoting(props) {
 									variant="outlined"
 									{...register('proposal_type')}
 								>
-									{data.proposal_types.map((pt) => (
+									{data.proposal_types.map(pt => (
 										<MenuItem key={pt.key} value={pt.value}>
 											{pt.text}
 										</MenuItem>
@@ -148,7 +148,7 @@ export function FormVoting(props) {
 									}}
 									fullWidth
 								>
-									{data.voting_types.map((vt) => (
+									{data.voting_types.map(vt => (
 										<MenuItem key={vt.key} value={vt.value}>
 											{vt.text}
 										</MenuItem>
@@ -200,7 +200,7 @@ export function FormVoting(props) {
 
 							<Grid item xs={12} md={6}>
 								<TextField label={'Duration'} name={'duration'} {...register('duration')} fullWidth>
-									{data.project_durations.map((pd) => (
+									{data.project_durations.map(pd => (
 										<MenuItem key={pd.key} value={pd.value}>
 											{pd.text}
 										</MenuItem>

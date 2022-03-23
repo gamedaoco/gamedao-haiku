@@ -24,7 +24,7 @@ export function Collectable({ item }: ComponentProps) {
 	console.log(ipfsMetadata)
 	useEffect(() => {
 		if (item) {
-			fetchIpfsJson(item.metadata, RMRK_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
+			fetchIpfsJson(item.metadata, RMRK_GATEWAY).then(json => setIpfsMetadata(json as IpfsMetadata))
 		}
 	}, [item])
 

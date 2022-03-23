@@ -9,7 +9,7 @@ import { FormCampaign } from 'components/Forms/FormCampaign'
 import { Layout } from 'src/layouts/default/layout'
 
 export function Campaigns() {
-	const [isShow, setIsShow] = useState(false);
+	const [isShow, setIsShow] = useState(false)
 
 	const callback = (data: any) => {
 		console.log('yes gotcha', data)
@@ -17,17 +17,18 @@ export function Campaigns() {
 
 	const setVisible = (state: boolean) => {
 		console.log('state', state)
-		setIsShow(!state);
+		setIsShow(!state)
 	}
 
 	const handleForm = () => {
-		setIsShow(!isShow);
+		setIsShow(!isShow)
 	}
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
-			{isShow ?
-				<FormCampaign parentCallback={callback} isCloseProposal={setVisible} /> :
+			{isShow ? (
+				<FormCampaign parentCallback={callback} isCloseCampaign={setVisible} />
+			) : (
 				<Box sx={{ p: '4rem', height: '90vh' }}>
 					<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
@@ -36,7 +37,7 @@ export function Campaigns() {
 						<Button onClick={handleForm}>New Campaign</Button>
 					</Paper>
 				</Box>
-			}
+			)}
 		</Layout>
 	)
 }

@@ -184,9 +184,7 @@ export const project_durations = [
 
 //
 
-export const memberships = [
-	{key:'0', text:'CitizenGame', value:0}
-]
+export const memberships = [{ key: '0', text: 'CitizenGame', value: 0 }]
 
 export const data = {
 	// proposal_states,
