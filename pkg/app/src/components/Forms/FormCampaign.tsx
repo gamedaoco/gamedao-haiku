@@ -4,21 +4,16 @@ import {
 	Grid,
 	TextField,
 	FormControlLabel,
-	FormControl,
-	InputLabel,
 	Checkbox,
 	Button,
-	Select,
 	Paper,
 	Box,
 	MenuItem,
 	Autocomplete,
 	Container,
-	FormHelperText,
 	Stepper,
 	Step,
 	StepLabel,
-	Divider,
 	InputAdornment,
 } from '@mui/material'
 
@@ -77,7 +72,6 @@ export function FormCampaign(props) {
 			<Box>
 				<Typography variant="h6">Create Campaign</Typography>
 			</Box>
-
 			<Box display="flex" justifyContent="flex-end" alignItems="center" flex="1">
 				<Button
 					variant="outlined"
