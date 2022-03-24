@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import {
 	Typography,
 	Grid,
@@ -73,7 +73,7 @@ export function FormCampaign(props) {
 	}
 
 	return (
-		<form>
+		<Fragment>
 			<Box>
 				<Typography variant="h6">Create Campaign</Typography>
 			</Box>
@@ -332,7 +332,7 @@ export function FormCampaign(props) {
 									control={control}
 									name="governance"
 									defaultValue="false"
-									{...register('governance')}
+									inputRef={register()}
 									render={({ field: { onChange } }) => (
 										<Checkbox color="primary" onChange={e => onChange(e.target.checked)} />
 									)}
@@ -347,7 +347,7 @@ export function FormCampaign(props) {
 									control={control}
 									name="accept_terms"
 									defaultValue="false"
-									inputRef={register}
+									inputRef={register()}
 									render={({ field: { onChange } }) => (
 										<Checkbox color="primary" onChange={e => onChange(e.target.checked)} />
 									)}
@@ -363,10 +363,10 @@ export function FormCampaign(props) {
 				</Grid>
 			</Paper>
 			<Container maxWidth={'xs'} sx={{ p: 4 }}>
-				<Button type="submit" variant="contained" fullWidth onClick={handleSubmit(onSubmit)}>
+				<Button variant="contained" fullWidth onClick={handleSubmit(onSubmit)}>
 					Create Campaign
 				</Button>
 			</Container>
-		</form>
+		</Fragment>
 	)
 }
