@@ -53,7 +53,7 @@ export function FormCampaign(props) {
 				return isValidZeroAddress(value)
 			}),
 
-		acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
+		accept_terms: Yup.bool().oneOf([true], 'Accept Terms is required'),
 	})
 
 	const {
@@ -347,14 +347,14 @@ export function FormCampaign(props) {
 									control={control}
 									name="accept_terms"
 									defaultValue="false"
-									{...register('accept_terms')}
+									inputRef={register}
 									render={({ field: { onChange } }) => (
 										<Checkbox color="primary" onChange={e => onChange(e.target.checked)} />
 									)}
 								/>
 							}
 							label={
-								<Typography color={errors.acceptTerms ? 'error' : 'inherit'}>
+								<Typography color={errors.accept_terms ? 'error' : 'inherit'}>
 									I have read and agree to the Terms *
 								</Typography>
 							}
