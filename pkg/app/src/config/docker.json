@@ -1,0 +1,8 @@
+{
+	"API_URL": "ipfs",
+	"API_PROTOCOL": "http",
+	"API_PORT": 5001,
+	"GATEWAY_URL": "ipfs",
+	"GATEWAY_PROTOCOL": "http",
+	"GATEWAY_PORT": "8080"
+}

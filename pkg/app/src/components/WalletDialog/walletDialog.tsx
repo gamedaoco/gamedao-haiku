@@ -25,7 +25,7 @@ export function WalletDialog({ open, callback }: ComponentProps) {
 		<Dialog open={open}>
 			<DialogTitle>Select wallet extension</DialogTitle>
 			<List sx={{ pt: 0 }}>
-				{supportedWallets.map(wallet => (
+				{supportedWallets.map((wallet) => (
 					<ListItem
 						button
 						onClick={() => {

@@ -1,0 +1,8 @@
+{
+	"PROVIDER_SOCKET": "wss://subzero.gamedao.co",
+	"API_URL": "ipfs.gamedao.co",
+	"API_PROTOCOL": "https",
+	"API_PORT": 5001,
+	"GATEWAY_URL": "ipfs.gamedao.co",
+	"GATEWAY_PROTOCOL": "https"
+}

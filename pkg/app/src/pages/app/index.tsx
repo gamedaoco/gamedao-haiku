@@ -26,6 +26,40 @@ export function AppPage() {
 
 	return (
 		<Layout showHeader showFooter showSidebar>
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}
+			>
+				<Box>
+					{!isShow ? (
+						<h4>No organisations yet. Create one!</h4>
+					) : (
+						<h4>Total organisations: {6}</h4>
+					)}
+				</Box>
+				<Box>
+					{isShow ? (
+						<Button
+							variant="outlined"
+							// startIcon={<ClearIcon />}
+							onClick={handleForm}
+						>
+							Close
+						</Button>
+					) : (
+						<Button
+							variant="outlined"
+							// startIcon={<AddIcon />}
+							onClick={handleForm}
+						>
+							New DAO
+						</Button>
+					)}
+				</Box>
+			</Box>
 			{isShow ? (
 				<FormDao parentCallback={callback} isCloseDao={setVisible} />
 			) : (
@@ -34,7 +68,6 @@ export function AppPage() {
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 							Hello! DASHBOARD
 						</Typography>
-						<Button onClick={handleForm}>New Dao</Button>
 					</Paper>
 				</Box>
 			)}

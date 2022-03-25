@@ -1,0 +1,10 @@
+{
+	"DEVELOPMENT_KEYRING": true,
+	"PROVIDER_SOCKET": "ws://localhost:9944",
+	"API_URL": "ipfs.gamedao.co",
+	"API_PROTOCOL": "https",
+	"API_PORT": 5001,
+	"GATEWAY_URL": "ipfs.gamedao.co",
+	"GATEWAY_PROTOCOL": "https",
+	"GATEWAY_PORT": ""
+}

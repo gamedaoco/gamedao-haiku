@@ -10,7 +10,7 @@ export function NavLink({ href, children }: NavLinkProps) {
 	const { push } = useRouter()
 
 	const handleClick = useCallback(
-		e => {
+		(e) => {
 			e.preventDefault()
 			push(href)
 		},
