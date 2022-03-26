@@ -1,0 +1,9 @@
+query Bodies {
+    bodies {
+        id
+        name
+        members {
+            address
+        }
+    }
+}
