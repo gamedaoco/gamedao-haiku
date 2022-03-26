@@ -33,13 +33,7 @@ export function AppPage() {
 					alignItems: 'center',
 				}}
 			>
-				<Box>
-					{!isShow ? (
-						<h4>No organisations yet. Create one!</h4>
-					) : (
-						<h4>Total organisations: {6}</h4>
-					)}
-				</Box>
+				<Box>{!isShow ? <h4>No organisations yet. Create one!</h4> : <h4>Total organisations: {6}</h4>}</Box>
 				<Box>
 					{isShow ? (
 						<Button

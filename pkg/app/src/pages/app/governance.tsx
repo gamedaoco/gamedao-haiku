@@ -25,6 +25,34 @@ export function GovernancePage() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Governance">
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}
+			>
+				<Box>{!isShow ? <h4>No proposals yet. Create one!</h4> : <h4>Total proposals: {6}</h4>}</Box>
+				<Box>
+					{isShow ? (
+						<Button
+							variant="outlined"
+							// startIcon={<ClearIcon />}
+							onClick={handleForm}
+						>
+							Close
+						</Button>
+					) : (
+						<Button
+							variant="outlined"
+							// startIcon={<AddIcon />}
+							onClick={handleForm}
+						>
+							New Proposal
+						</Button>
+					)}
+				</Box>
+			</Box>
 			{isShow ? (
 				<FormVoting parentCallback={callback} isCloseProposal={setVisible} />
 			) : (
@@ -33,7 +61,6 @@ export function GovernancePage() {
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 							Hello! Proposal
 						</Typography>
-						<Button onClick={handleForm}>New Proposal</Button>
 					</Paper>
 				</Box>
 			)}

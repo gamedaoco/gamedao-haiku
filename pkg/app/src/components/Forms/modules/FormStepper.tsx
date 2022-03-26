@@ -1,7 +1,6 @@
-import { styled } from '@mui/material/styles'
 import { Stepper, Step, StepLabel } from '@mui/material'
 
-const FormStepper = (props) => {
+export const FormStepper = (props) => {
 	return (
 		<Stepper activeStep={props.stepperState} orientation={'horizontal'}>
 			<Step>
@@ -16,6 +15,3 @@ const FormStepper = (props) => {
 		</Stepper>
 	)
 }
-
-
-export default FormStepper

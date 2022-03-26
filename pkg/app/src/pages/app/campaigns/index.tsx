@@ -26,6 +26,34 @@ export function Campaigns() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}
+			>
+				<Box>{!isShow ? <h4>No campaigns yet. Create one!</h4> : <h4>Total campaigns: {6}</h4>}</Box>
+				<Box>
+					{isShow ? (
+						<Button
+							variant="outlined"
+							// startIcon={<ClearIcon />}
+							onClick={handleForm}
+						>
+							Close
+						</Button>
+					) : (
+						<Button
+							variant="outlined"
+							// startIcon={<AddIcon />}
+							onClick={handleForm}
+						>
+							New Campaign
+						</Button>
+					)}
+				</Box>
+			</Box>
 			{isShow ? (
 				<FormCampaign parentCallback={callback} isCloseCampaign={setVisible} />
 			) : (
@@ -34,7 +62,6 @@ export function Campaigns() {
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 							Hello! Campaign
 						</Typography>
-						<Button onClick={handleForm}>New Campaign</Button>
 					</Paper>
 				</Box>
 			)}

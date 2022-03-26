@@ -12,12 +12,7 @@ const PaddedBox = styled(Box)(({ theme }) => ({
 }))
 
 export function Image16to9({ src, sx }) {
-	return (
-		<PaddedBox
-			sx={{ ...sx }}
-			style={{ backgroundImage: `url(${src || 'https://picsum.photos/1240'})` }}
-		/>
-	)
+	return <PaddedBox sx={{ ...sx }} style={{ backgroundImage: `url(${src || 'https://picsum.photos/1240'})` }} />
 }
 
 export function Box16to9({ children, sx }) {
@@ -25,7 +20,6 @@ export function Box16to9({ children, sx }) {
 		<Box
 			sx={{
 				position: 'relative',
-				/* 16:9 aspect ratio */
 				paddingBottom: '56.25%',
 				...sx,
 			}}
