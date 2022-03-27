@@ -19,7 +19,6 @@ export const FormCheckbox = ({ name, control, label, required }: FormCheckboxPro
 				<Controller
 					control={control}
 					name={name}
-					defaultValue={false}
 					render={({ field: { onChange, value }, fieldState: { error }, formState: { errors } }) => (
 						<Checkbox
 							color="primary"

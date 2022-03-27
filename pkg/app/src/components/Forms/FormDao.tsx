@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Paper, Typography, Grid, Box, Container } from '@mui/material'
+import { Button, Paper, Typography, Box, Container, Stack } from '@mui/material'
 import { FormInput } from './modules/FormInput'
 import { FormAutoComplete } from './modules/FormAutoComplete'
 import { FormStepper } from './modules/FormStepper'
@@ -30,11 +30,21 @@ const accounts = [
 	'3HHHHHHHHHHHHH8UavtA7zJnFcpTemUmSrL8LfH43Rym2WJ',
 	'3T9tBQ3UePp25qDcY8ncZfEhajn1iyVoj85mfLhb51VotMee',
 ]
+const defaultValues = {
+	org_body: data.dao_bodies[0].value,
+	country: data.countries[0].value,
+	website: '',
+	repo: '',
+	access: data.dao_member_governance[0].value,
+	member_limit: '1',
+	fee_model: data.dao_fee_model[0].value,
+	fee: '1',
+}
 
 export function FormDao(props) {
 	const [stepperState, setStepperState] = useState(0)
 	const [organizationName, setOrganizationName] = useState('')
-	const methods = useForm({ resolver: yupResolver(validationSchema) })
+	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })
 	const { handleSubmit, control } = methods
 	const onSubmit = (data) => {
 		const formData = JSON.stringify(data, null, 2)
@@ -43,110 +53,79 @@ export function FormDao(props) {
 	}
 	return (
 		<FormProvider {...methods}>
-			<Grid container alignItems={'center'} spacing={3}>
-				<Grid item xs={12} md={7}>
-					<Typography variant={'h3'}>{organizationName || 'Untitled organization'}</Typography>
-				</Grid>
-				<Grid item xs={12} md={5}>
-					<FormStepper stepperState={stepperState} />
-				</Grid>
-			</Grid>
+			<Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" justifyContent="space-between">
+				<Typography variant={'h3'}>{organizationName || 'Untitled organization'}</Typography>
+				<FormStepper stepperState={stepperState} />
+			</Stack>
 			<form>
 				<Paper sx={{ p: 6 }}>
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
-							<Typography variant={'h5'}>General Information</Typography>
-						</Grid>
-						<Grid item xs={12} md={6}>
+					<Stack spacing={3}>
+						<Typography variant={'h5'}>General Information</Typography>
+						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={6}>
 							<FormInput name="org_name" label="Organization Name" control={control} required />
-						</Grid>
-						<Grid item xs={12} md={6}>
 							<FormInput name="org_email" label="Organization Email" control={control} required />
-						</Grid>
-						<Grid item xs={12}>
-							<FormInput
-								name="org_body"
-								label="Organizational Body"
-								control={control}
-								options={data.dao_bodies}
-								selectable={true}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<FormInput
-								name="country"
-								label="Country"
-								control={control}
-								options={data.countries}
-								selectable={true}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<Typography variant={'h5'}>Images</Typography>
-						</Grid>
-						<Grid item xs={12}>
-							<Typography variant={'h6'}>Logo (800 x 800px)</Typography>
-							<Box sx={{ width: 600, height: 200 }}></Box>
-						</Grid>
-						<Grid item xs={12}>
-							<Typography>Meta Information</Typography>
-						</Grid>
-						<Grid item xs={12}>
-							<FormInput
-								name="description"
-								label="Short Description"
-								placeholder="Tell us more about your organization..."
-								control={control}
-								minRows={3}
-								required
-							/>
-						</Grid>
-						<Grid item xs={12} md={6}>
+						</Stack>
+
+						<FormInput
+							name="org_body"
+							label="Organizational Body"
+							control={control}
+							options={data.dao_bodies}
+							selectable={true}
+						/>
+						<FormInput
+							name="country"
+							label="Country"
+							control={control}
+							options={data.countries}
+							selectable={true}
+						/>
+						<Typography variant={'h5'}>Images</Typography>
+						<Typography variant={'h6'}>Logo (800 x 800px)</Typography>
+						<Box sx={{ width: 600, height: 200 }}></Box>
+						<Typography>Meta Information</Typography>
+						<FormInput
+							name="description"
+							label="Short Description"
+							placeholder="Tell us more about your organization..."
+							control={control}
+							minRows={3}
+							required
+						/>
+						<Stack direction={{ xs: 'column', md: 'row' }} spacing={6}>
 							<FormInput
 								name="website"
 								label="Website"
 								placeholder="https://your.website.xyz"
 								control={control}
 							/>
-						</Grid>
-						<Grid item xs={12} md={6}>
 							<FormInput name="repo" label="Code Repository" placeholder="repo" control={control} />
-						</Grid>
-						<Grid item xs={12}>
-							<Typography>Controller Settings</Typography>
-						</Grid>
-						<Grid item xs={12}>
-							<FormAutoComplete
-								name="controller_account"
-								label="Controller Account"
-								options={accounts}
-								control={control}
-								required
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<FormAutoComplete
-								name="treasury_account"
-								label="Treasury Account"
-								options={accounts}
-								control={control}
-								required
-							/>
-						</Grid>
+						</Stack>
+						<Typography>Controller Settings</Typography>
+						<FormAutoComplete
+							name="controller_account"
+							label="Controller Account"
+							options={accounts}
+							control={control}
+							required
+						/>
+						<FormAutoComplete
+							name="treasury_account"
+							label="Treasury Account"
+							options={accounts}
+							control={control}
+							required
+						/>
 
-						<Grid item xs={12}>
-							<FormInput
-								name="access"
-								label="Member Access Control"
-								options={data.dao_member_governance}
-								selectable={true}
-								control={control}
-							/>
-						</Grid>
-						<Grid item xs={12} md={4}>
+						<FormInput
+							name="access"
+							label="Member Access Control"
+							options={data.dao_member_governance}
+							selectable={true}
+							control={control}
+						/>
+						<Stack direction={{ xs: 'column', md: 'row' }} spacing={6}>
 							<FormInput name="member_limit" label="Member Limit" placeholder="100" control={control} />
-						</Grid>
-						<Grid item xs={12} md={4}>
 							<FormInput
 								name="fee_model"
 								label="Fee Model"
@@ -154,11 +133,9 @@ export function FormDao(props) {
 								options={data.dao_fee_model}
 								control={control}
 							/>
-						</Grid>
-						<Grid item xs={12} md={4}>
 							<FormInput name="fee" label="Membership Fee" placeholder="10" control={control} />
-						</Grid>
-					</Grid>
+						</Stack>
+					</Stack>
 				</Paper>
 			</form>
 			<Container maxWidth={'xs'} sx={{ p: 4 }}>

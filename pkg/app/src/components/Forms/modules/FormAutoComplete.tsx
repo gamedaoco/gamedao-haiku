@@ -22,6 +22,7 @@ export const FormAutoComplete = ({ name, control, label, options, onChange, requ
 					freeSolo
 					disableClearable
 					options={options}
+					fullWidth
 					// getOptionDisabled={(option) => option.disabled}
 					// getOptionLabel={(option) => option.label}
 					onChange={(event, value) => field.onChange(value)}
@@ -30,6 +31,7 @@ export const FormAutoComplete = ({ name, control, label, options, onChange, requ
 							required={required}
 							error={!!error}
 							helperText={error?.message}
+							fullWidth
 							name={name}
 							label={label}
 							variant="outlined"
