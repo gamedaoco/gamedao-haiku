@@ -7,11 +7,10 @@ export interface FormAutoCompleteProps {
 	name: string
 	control: any
 	label: string
-	onChange?: any
 	required?: boolean
 }
 
-export const FormAutoComplete = ({ name, control, label, options, onChange, required }: FormAutoCompleteProps) => {
+export const FormAutoComplete = ({ name, control, label, options, required }: FormAutoCompleteProps) => {
 	return (
 		<Controller
 			name={name}
@@ -33,6 +32,7 @@ export const FormAutoComplete = ({ name, control, label, options, onChange, requ
 							helperText={error?.message}
 							fullWidth
 							name={name}
+							onChange={field.onChange}
 							label={label}
 							variant="outlined"
 							type="search"

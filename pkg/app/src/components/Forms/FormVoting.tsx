@@ -21,7 +21,6 @@ const defaultValues = {
 }
 
 export function FormVoting(props) {
-	const [loading, setLoading] = useState(false)
 	const [votingType, setVotingType] = useState(0)
 
 	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })

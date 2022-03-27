@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button, Paper, Typography, Box, Container, Stack } from '@mui/material'
 import { FormInput } from './modules/FormInput'
 import { FormAutoComplete } from './modules/FormAutoComplete'
@@ -31,10 +31,13 @@ const accounts = [
 	'3T9tBQ3UePp25qDcY8ncZfEhajn1iyVoj85mfLhb51VotMee',
 ]
 const defaultValues = {
+	org_name: '',
 	org_body: data.dao_bodies[0].value,
 	country: data.countries[0].value,
 	website: '',
 	repo: '',
+	controller_account: '',
+	treasury_account: '',
 	access: data.dao_member_governance[0].value,
 	member_limit: '1',
 	fee_model: data.dao_fee_model[0].value,
@@ -43,9 +46,9 @@ const defaultValues = {
 
 export function FormDao(props) {
 	const [stepperState, setStepperState] = useState(0)
-	const [organizationName, setOrganizationName] = useState('')
 	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })
-	const { handleSubmit, control } = methods
+	const { handleSubmit, control, watch } = methods
+	const watchOrganName = watch('org_name', '')
 	const onSubmit = (data) => {
 		const formData = JSON.stringify(data, null, 2)
 		alert(formData)
@@ -54,7 +57,7 @@ export function FormDao(props) {
 	return (
 		<FormProvider {...methods}>
 			<Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" justifyContent="space-between">
-				<Typography variant={'h3'}>{organizationName || 'Untitled organization'}</Typography>
+				<Typography variant={'h3'}>{watchOrganName || 'Untitled organization'}</Typography>
 				<FormStepper stepperState={stepperState} />
 			</Stack>
 			<form>
@@ -80,9 +83,11 @@ export function FormDao(props) {
 							options={data.countries}
 							selectable={true}
 						/>
+
 						<Typography variant={'h5'}>Images</Typography>
 						<Typography variant={'h6'}>Logo (800 x 800px)</Typography>
 						<Box sx={{ width: 600, height: 200 }}></Box>
+
 						<Typography>Meta Information</Typography>
 						<FormInput
 							name="description"
@@ -92,6 +97,7 @@ export function FormDao(props) {
 							minRows={3}
 							required
 						/>
+
 						<Stack direction={{ xs: 'column', md: 'row' }} spacing={6}>
 							<FormInput
 								name="website"
@@ -101,6 +107,7 @@ export function FormDao(props) {
 							/>
 							<FormInput name="repo" label="Code Repository" placeholder="repo" control={control} />
 						</Stack>
+
 						<Typography>Controller Settings</Typography>
 						<FormAutoComplete
 							name="controller_account"
@@ -124,6 +131,7 @@ export function FormDao(props) {
 							selectable={true}
 							control={control}
 						/>
+
 						<Stack direction={{ xs: 'column', md: 'row' }} spacing={6}>
 							<FormInput name="member_limit" label="Member Limit" placeholder="100" control={control} />
 							<FormInput

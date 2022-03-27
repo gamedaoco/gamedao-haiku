@@ -20,6 +20,8 @@ const validationSchema = Yup.object().shape({
 		.test('This is zero-address', 'This is not valid zero-address', (value) => {
 			return isValidZeroAddress(value)
 		}),
+	deposit: Yup.number().required('Deposit is required'),
+	cap: Yup.number().required('Funding Target is required'),
 	accept_terms: Yup.bool().oneOf([true], 'Accept Terms is required'),
 })
 const accounts = [
@@ -29,21 +31,27 @@ const accounts = [
 ]
 
 const defaultValues = {
+	campaign_name: '',
 	org_name: data.memberships[0].value,
 	usage: data.project_types[0].value,
 	protocol: data.protocol_types[0].value,
-	deposit: '3',
-	cap: '99',
+	deposit: 3,
+	cap: 99,
 	duration: data.project_durations[0].value,
 	governance: true,
+	accept_terms: false,
 }
 
 export function FormCampaign(props) {
 	const [stepperState, setStepperState] = useState(0)
-	const [campaignName, setCampaignName] = useState('')
-
 	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })
-	const { handleSubmit, control, setValue } = methods
+	const {
+		handleSubmit,
+		control,
+		watch,
+		formState: { errors },
+	} = methods
+	const watchCampaignName = watch('campaign_name', '')
 	const onSubmit = (data) => {
 		const formData = JSON.stringify(data, null, 2)
 		alert(formData)
@@ -53,7 +61,7 @@ export function FormCampaign(props) {
 	return (
 		<FormProvider {...methods}>
 			<Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" spacing={6}>
-				<Typography variant={'h3'}>{campaignName || 'Untitled organization'}</Typography>
+				<Typography variant={'h3'}>{watchCampaignName || 'Untitled Campaign'}</Typography>
 				<FormStepper stepperState={stepperState} />
 			</Stack>
 			<form>
@@ -164,8 +172,9 @@ export function FormCampaign(props) {
 						<FormCheckbox name="governance" label="DAO Governance" control={control} />
 						<FormCheckbox
 							name="accept_terms"
-							label="I agree to the Terms and Conditions"
+							label="I agree to the Terms and Conditions*"
 							control={control}
+							error={errors.accept_terms?.message}
 							required
 						/>
 					</Stack>

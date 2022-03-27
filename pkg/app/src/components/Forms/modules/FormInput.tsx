@@ -32,13 +32,13 @@ export const FormInput = ({
 		<Controller
 			name={name}
 			control={control}
-			render={({ field: { onChange, value }, fieldState: { error }, formState }) => (
+			render={({ field: { ref, onChange, value }, fieldState: { error }, formState }) => (
 				<TextField
 					helperText={error ? error.message : null}
 					size="small"
 					error={!!error}
 					onChange={onChange}
-					value={value}
+					// value={value}
 					fullWidth
 					label={label}
 					variant="outlined"
@@ -48,6 +48,7 @@ export const FormInput = ({
 					placeholder={placeholder}
 					defaultValue={options ? options[0].value : value}
 					required={required}
+					inputRef={ref}
 					InputProps={InputProps}
 					InputLabelProps={InputLabelProps}
 				>
