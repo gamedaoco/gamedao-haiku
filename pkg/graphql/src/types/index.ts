@@ -63,9 +63,9 @@ export type BodyEdge = {
 
 export type BodyMember = {
 	__typename?: 'BodyMember'
-	address: Scalars['String']
 	body: Body
 	id: Scalars['ID']
+	identity: Identity
 }
 
 export type BodyMemberEdge = {
@@ -75,8 +75,6 @@ export type BodyMemberEdge = {
 }
 
 export enum BodyMemberOrderByInput {
-	AddressAsc = 'address_ASC',
-	AddressDesc = 'address_DESC',
 	BodyAccessAsc = 'body_access_ASC',
 	BodyAccessDesc = 'body_access_DESC',
 	BodyBodyAsc = 'body_body_ASC',
@@ -105,25 +103,25 @@ export enum BodyMemberOrderByInput {
 	BodyTreasuryDesc = 'body_treasury_DESC',
 	IdAsc = 'id_ASC',
 	IdDesc = 'id_DESC',
+	IdentityDisplayNameAsc = 'identity_displayName_ASC',
+	IdentityDisplayNameDesc = 'identity_displayName_DESC',
+	IdentityEmailAsc = 'identity_email_ASC',
+	IdentityEmailDesc = 'identity_email_DESC',
+	IdentityIdAsc = 'identity_id_ASC',
+	IdentityIdDesc = 'identity_id_DESC',
+	IdentityImageAsc = 'identity_image_ASC',
+	IdentityImageDesc = 'identity_image_DESC',
+	IdentityLegalNameAsc = 'identity_legalName_ASC',
+	IdentityLegalNameDesc = 'identity_legalName_DESC',
+	IdentityRiotAsc = 'identity_riot_ASC',
+	IdentityRiotDesc = 'identity_riot_DESC',
+	IdentityTwitterAsc = 'identity_twitter_ASC',
+	IdentityTwitterDesc = 'identity_twitter_DESC',
 }
 
 export type BodyMemberWhereInput = {
 	AND?: InputMaybe<Array<BodyMemberWhereInput>>
 	OR?: InputMaybe<Array<BodyMemberWhereInput>>
-	address_contains?: InputMaybe<Scalars['String']>
-	address_endsWith?: InputMaybe<Scalars['String']>
-	address_eq?: InputMaybe<Scalars['String']>
-	address_gt?: InputMaybe<Scalars['String']>
-	address_gte?: InputMaybe<Scalars['String']>
-	address_in?: InputMaybe<Array<Scalars['String']>>
-	address_lt?: InputMaybe<Scalars['String']>
-	address_lte?: InputMaybe<Scalars['String']>
-	address_not_contains?: InputMaybe<Scalars['String']>
-	address_not_endsWith?: InputMaybe<Scalars['String']>
-	address_not_eq?: InputMaybe<Scalars['String']>
-	address_not_in?: InputMaybe<Array<Scalars['String']>>
-	address_not_startsWith?: InputMaybe<Scalars['String']>
-	address_startsWith?: InputMaybe<Scalars['String']>
 	body?: InputMaybe<BodyWhereInput>
 	id_contains?: InputMaybe<Scalars['ID']>
 	id_endsWith?: InputMaybe<Scalars['ID']>
@@ -139,6 +137,7 @@ export type BodyMemberWhereInput = {
 	id_not_in?: InputMaybe<Array<Scalars['ID']>>
 	id_not_startsWith?: InputMaybe<Scalars['ID']>
 	id_startsWith?: InputMaybe<Scalars['ID']>
+	identity?: InputMaybe<IdentityWhereInput>
 }
 
 export type BodyMemberWhereUniqueInput = {
@@ -406,6 +405,154 @@ export type Float_Comparison_Exp = {
 	_nin?: InputMaybe<Array<Scalars['Float']>>
 }
 
+export type IdentitiesConnection = {
+	__typename?: 'IdentitiesConnection'
+	edges: Array<IdentityEdge>
+	pageInfo: PageInfo
+	totalCount: Scalars['Int']
+}
+
+export type Identity = {
+	__typename?: 'Identity'
+	displayName?: Maybe<Scalars['String']>
+	email?: Maybe<Scalars['String']>
+	id: Scalars['ID']
+	image?: Maybe<Scalars['String']>
+	legalName?: Maybe<Scalars['String']>
+	riot?: Maybe<Scalars['String']>
+	twitter?: Maybe<Scalars['String']>
+}
+
+export type IdentityEdge = {
+	__typename?: 'IdentityEdge'
+	cursor: Scalars['String']
+	node: Identity
+}
+
+export enum IdentityOrderByInput {
+	DisplayNameAsc = 'displayName_ASC',
+	DisplayNameDesc = 'displayName_DESC',
+	EmailAsc = 'email_ASC',
+	EmailDesc = 'email_DESC',
+	IdAsc = 'id_ASC',
+	IdDesc = 'id_DESC',
+	ImageAsc = 'image_ASC',
+	ImageDesc = 'image_DESC',
+	LegalNameAsc = 'legalName_ASC',
+	LegalNameDesc = 'legalName_DESC',
+	RiotAsc = 'riot_ASC',
+	RiotDesc = 'riot_DESC',
+	TwitterAsc = 'twitter_ASC',
+	TwitterDesc = 'twitter_DESC',
+}
+
+export type IdentityWhereInput = {
+	AND?: InputMaybe<Array<IdentityWhereInput>>
+	OR?: InputMaybe<Array<IdentityWhereInput>>
+	displayName_contains?: InputMaybe<Scalars['String']>
+	displayName_endsWith?: InputMaybe<Scalars['String']>
+	displayName_eq?: InputMaybe<Scalars['String']>
+	displayName_gt?: InputMaybe<Scalars['String']>
+	displayName_gte?: InputMaybe<Scalars['String']>
+	displayName_in?: InputMaybe<Array<Scalars['String']>>
+	displayName_lt?: InputMaybe<Scalars['String']>
+	displayName_lte?: InputMaybe<Scalars['String']>
+	displayName_not_contains?: InputMaybe<Scalars['String']>
+	displayName_not_endsWith?: InputMaybe<Scalars['String']>
+	displayName_not_eq?: InputMaybe<Scalars['String']>
+	displayName_not_in?: InputMaybe<Array<Scalars['String']>>
+	displayName_not_startsWith?: InputMaybe<Scalars['String']>
+	displayName_startsWith?: InputMaybe<Scalars['String']>
+	email_contains?: InputMaybe<Scalars['String']>
+	email_endsWith?: InputMaybe<Scalars['String']>
+	email_eq?: InputMaybe<Scalars['String']>
+	email_gt?: InputMaybe<Scalars['String']>
+	email_gte?: InputMaybe<Scalars['String']>
+	email_in?: InputMaybe<Array<Scalars['String']>>
+	email_lt?: InputMaybe<Scalars['String']>
+	email_lte?: InputMaybe<Scalars['String']>
+	email_not_contains?: InputMaybe<Scalars['String']>
+	email_not_endsWith?: InputMaybe<Scalars['String']>
+	email_not_eq?: InputMaybe<Scalars['String']>
+	email_not_in?: InputMaybe<Array<Scalars['String']>>
+	email_not_startsWith?: InputMaybe<Scalars['String']>
+	email_startsWith?: InputMaybe<Scalars['String']>
+	id_contains?: InputMaybe<Scalars['ID']>
+	id_endsWith?: InputMaybe<Scalars['ID']>
+	id_eq?: InputMaybe<Scalars['ID']>
+	id_gt?: InputMaybe<Scalars['ID']>
+	id_gte?: InputMaybe<Scalars['ID']>
+	id_in?: InputMaybe<Array<Scalars['ID']>>
+	id_lt?: InputMaybe<Scalars['ID']>
+	id_lte?: InputMaybe<Scalars['ID']>
+	id_not_contains?: InputMaybe<Scalars['ID']>
+	id_not_endsWith?: InputMaybe<Scalars['ID']>
+	id_not_eq?: InputMaybe<Scalars['ID']>
+	id_not_in?: InputMaybe<Array<Scalars['ID']>>
+	id_not_startsWith?: InputMaybe<Scalars['ID']>
+	id_startsWith?: InputMaybe<Scalars['ID']>
+	image_contains?: InputMaybe<Scalars['String']>
+	image_endsWith?: InputMaybe<Scalars['String']>
+	image_eq?: InputMaybe<Scalars['String']>
+	image_gt?: InputMaybe<Scalars['String']>
+	image_gte?: InputMaybe<Scalars['String']>
+	image_in?: InputMaybe<Array<Scalars['String']>>
+	image_lt?: InputMaybe<Scalars['String']>
+	image_lte?: InputMaybe<Scalars['String']>
+	image_not_contains?: InputMaybe<Scalars['String']>
+	image_not_endsWith?: InputMaybe<Scalars['String']>
+	image_not_eq?: InputMaybe<Scalars['String']>
+	image_not_in?: InputMaybe<Array<Scalars['String']>>
+	image_not_startsWith?: InputMaybe<Scalars['String']>
+	image_startsWith?: InputMaybe<Scalars['String']>
+	legalName_contains?: InputMaybe<Scalars['String']>
+	legalName_endsWith?: InputMaybe<Scalars['String']>
+	legalName_eq?: InputMaybe<Scalars['String']>
+	legalName_gt?: InputMaybe<Scalars['String']>
+	legalName_gte?: InputMaybe<Scalars['String']>
+	legalName_in?: InputMaybe<Array<Scalars['String']>>
+	legalName_lt?: InputMaybe<Scalars['String']>
+	legalName_lte?: InputMaybe<Scalars['String']>
+	legalName_not_contains?: InputMaybe<Scalars['String']>
+	legalName_not_endsWith?: InputMaybe<Scalars['String']>
+	legalName_not_eq?: InputMaybe<Scalars['String']>
+	legalName_not_in?: InputMaybe<Array<Scalars['String']>>
+	legalName_not_startsWith?: InputMaybe<Scalars['String']>
+	legalName_startsWith?: InputMaybe<Scalars['String']>
+	riot_contains?: InputMaybe<Scalars['String']>
+	riot_endsWith?: InputMaybe<Scalars['String']>
+	riot_eq?: InputMaybe<Scalars['String']>
+	riot_gt?: InputMaybe<Scalars['String']>
+	riot_gte?: InputMaybe<Scalars['String']>
+	riot_in?: InputMaybe<Array<Scalars['String']>>
+	riot_lt?: InputMaybe<Scalars['String']>
+	riot_lte?: InputMaybe<Scalars['String']>
+	riot_not_contains?: InputMaybe<Scalars['String']>
+	riot_not_endsWith?: InputMaybe<Scalars['String']>
+	riot_not_eq?: InputMaybe<Scalars['String']>
+	riot_not_in?: InputMaybe<Array<Scalars['String']>>
+	riot_not_startsWith?: InputMaybe<Scalars['String']>
+	riot_startsWith?: InputMaybe<Scalars['String']>
+	twitter_contains?: InputMaybe<Scalars['String']>
+	twitter_endsWith?: InputMaybe<Scalars['String']>
+	twitter_eq?: InputMaybe<Scalars['String']>
+	twitter_gt?: InputMaybe<Scalars['String']>
+	twitter_gte?: InputMaybe<Scalars['String']>
+	twitter_in?: InputMaybe<Array<Scalars['String']>>
+	twitter_lt?: InputMaybe<Scalars['String']>
+	twitter_lte?: InputMaybe<Scalars['String']>
+	twitter_not_contains?: InputMaybe<Scalars['String']>
+	twitter_not_endsWith?: InputMaybe<Scalars['String']>
+	twitter_not_eq?: InputMaybe<Scalars['String']>
+	twitter_not_in?: InputMaybe<Array<Scalars['String']>>
+	twitter_not_startsWith?: InputMaybe<Scalars['String']>
+	twitter_startsWith?: InputMaybe<Scalars['String']>
+}
+
+export type IdentityWhereUniqueInput = {
+	id: Scalars['ID']
+}
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['Int']>
@@ -537,6 +684,11 @@ export type Query = {
 	hatched_birds: Array<Hatched_Birds>
 	/** fetch data from the table: "hatched_birds" using primary key columns */
 	hatched_birds_by_pk?: Maybe<Hatched_Birds>
+	identities: Array<Identity>
+	identitiesConnection: IdentitiesConnection
+	identityById?: Maybe<Identity>
+	/** @deprecated Use `identityById` */
+	identityByUniqueInput?: Maybe<Identity>
 	links: Array<Maybe<Link>>
 	/** An array relationship */
 	nfts: Array<Nfts>
@@ -927,6 +1079,28 @@ export type QueryHatched_BirdsArgs = {
 
 export type QueryHatched_Birds_By_PkArgs = {
 	id: Scalars['String']
+}
+
+export type QueryIdentitiesArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<Array<InputMaybe<IdentityOrderByInput>>>
+	where?: InputMaybe<IdentityWhereInput>
+}
+
+export type QueryIdentitiesConnectionArgs = {
+	after?: InputMaybe<Scalars['String']>
+	first?: InputMaybe<Scalars['Int']>
+	orderBy: Array<IdentityOrderByInput>
+	where?: InputMaybe<IdentityWhereInput>
+}
+
+export type QueryIdentityByIdArgs = {
+	id: Scalars['ID']
+}
+
+export type QueryIdentityByUniqueInputArgs = {
+	where: IdentityWhereUniqueInput
 }
 
 export type QueryNftsArgs = {

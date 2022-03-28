@@ -65,9 +65,9 @@ export type BodyEdge = {
 
 export type BodyMember = {
 	readonly __typename?: 'BodyMember'
-	readonly address: Scalars['String']
 	readonly body: Body
 	readonly id: Scalars['ID']
+	readonly identity: Identity
 }
 
 export type BodyMemberEdge = {
@@ -77,8 +77,6 @@ export type BodyMemberEdge = {
 }
 
 export enum BodyMemberOrderByInput {
-	AddressAsc = 'address_ASC',
-	AddressDesc = 'address_DESC',
 	BodyAccessAsc = 'body_access_ASC',
 	BodyAccessDesc = 'body_access_DESC',
 	BodyBodyAsc = 'body_body_ASC',
@@ -107,25 +105,25 @@ export enum BodyMemberOrderByInput {
 	BodyTreasuryDesc = 'body_treasury_DESC',
 	IdAsc = 'id_ASC',
 	IdDesc = 'id_DESC',
+	IdentityDisplayNameAsc = 'identity_displayName_ASC',
+	IdentityDisplayNameDesc = 'identity_displayName_DESC',
+	IdentityEmailAsc = 'identity_email_ASC',
+	IdentityEmailDesc = 'identity_email_DESC',
+	IdentityIdAsc = 'identity_id_ASC',
+	IdentityIdDesc = 'identity_id_DESC',
+	IdentityImageAsc = 'identity_image_ASC',
+	IdentityImageDesc = 'identity_image_DESC',
+	IdentityLegalNameAsc = 'identity_legalName_ASC',
+	IdentityLegalNameDesc = 'identity_legalName_DESC',
+	IdentityRiotAsc = 'identity_riot_ASC',
+	IdentityRiotDesc = 'identity_riot_DESC',
+	IdentityTwitterAsc = 'identity_twitter_ASC',
+	IdentityTwitterDesc = 'identity_twitter_DESC',
 }
 
 export type BodyMemberWhereInput = {
 	readonly AND?: InputMaybe<ReadonlyArray<BodyMemberWhereInput>>
 	readonly OR?: InputMaybe<ReadonlyArray<BodyMemberWhereInput>>
-	readonly address_contains?: InputMaybe<Scalars['String']>
-	readonly address_endsWith?: InputMaybe<Scalars['String']>
-	readonly address_eq?: InputMaybe<Scalars['String']>
-	readonly address_gt?: InputMaybe<Scalars['String']>
-	readonly address_gte?: InputMaybe<Scalars['String']>
-	readonly address_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
-	readonly address_lt?: InputMaybe<Scalars['String']>
-	readonly address_lte?: InputMaybe<Scalars['String']>
-	readonly address_not_contains?: InputMaybe<Scalars['String']>
-	readonly address_not_endsWith?: InputMaybe<Scalars['String']>
-	readonly address_not_eq?: InputMaybe<Scalars['String']>
-	readonly address_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
-	readonly address_not_startsWith?: InputMaybe<Scalars['String']>
-	readonly address_startsWith?: InputMaybe<Scalars['String']>
 	readonly body?: InputMaybe<BodyWhereInput>
 	readonly id_contains?: InputMaybe<Scalars['ID']>
 	readonly id_endsWith?: InputMaybe<Scalars['ID']>
@@ -141,6 +139,7 @@ export type BodyMemberWhereInput = {
 	readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
 	readonly id_not_startsWith?: InputMaybe<Scalars['ID']>
 	readonly id_startsWith?: InputMaybe<Scalars['ID']>
+	readonly identity?: InputMaybe<IdentityWhereInput>
 }
 
 export type BodyMemberWhereUniqueInput = {
@@ -408,6 +407,154 @@ export type Float_Comparison_Exp = {
 	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['Float']>>
 }
 
+export type IdentitiesConnection = {
+	readonly __typename?: 'IdentitiesConnection'
+	readonly edges: ReadonlyArray<IdentityEdge>
+	readonly pageInfo: PageInfo
+	readonly totalCount: Scalars['Int']
+}
+
+export type Identity = {
+	readonly __typename?: 'Identity'
+	readonly displayName?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly id: Scalars['ID']
+	readonly image?: Maybe<Scalars['String']>
+	readonly legalName?: Maybe<Scalars['String']>
+	readonly riot?: Maybe<Scalars['String']>
+	readonly twitter?: Maybe<Scalars['String']>
+}
+
+export type IdentityEdge = {
+	readonly __typename?: 'IdentityEdge'
+	readonly cursor: Scalars['String']
+	readonly node: Identity
+}
+
+export enum IdentityOrderByInput {
+	DisplayNameAsc = 'displayName_ASC',
+	DisplayNameDesc = 'displayName_DESC',
+	EmailAsc = 'email_ASC',
+	EmailDesc = 'email_DESC',
+	IdAsc = 'id_ASC',
+	IdDesc = 'id_DESC',
+	ImageAsc = 'image_ASC',
+	ImageDesc = 'image_DESC',
+	LegalNameAsc = 'legalName_ASC',
+	LegalNameDesc = 'legalName_DESC',
+	RiotAsc = 'riot_ASC',
+	RiotDesc = 'riot_DESC',
+	TwitterAsc = 'twitter_ASC',
+	TwitterDesc = 'twitter_DESC',
+}
+
+export type IdentityWhereInput = {
+	readonly AND?: InputMaybe<ReadonlyArray<IdentityWhereInput>>
+	readonly OR?: InputMaybe<ReadonlyArray<IdentityWhereInput>>
+	readonly displayName_contains?: InputMaybe<Scalars['String']>
+	readonly displayName_endsWith?: InputMaybe<Scalars['String']>
+	readonly displayName_eq?: InputMaybe<Scalars['String']>
+	readonly displayName_gt?: InputMaybe<Scalars['String']>
+	readonly displayName_gte?: InputMaybe<Scalars['String']>
+	readonly displayName_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly displayName_lt?: InputMaybe<Scalars['String']>
+	readonly displayName_lte?: InputMaybe<Scalars['String']>
+	readonly displayName_not_contains?: InputMaybe<Scalars['String']>
+	readonly displayName_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly displayName_not_eq?: InputMaybe<Scalars['String']>
+	readonly displayName_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly displayName_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly displayName_startsWith?: InputMaybe<Scalars['String']>
+	readonly email_contains?: InputMaybe<Scalars['String']>
+	readonly email_endsWith?: InputMaybe<Scalars['String']>
+	readonly email_eq?: InputMaybe<Scalars['String']>
+	readonly email_gt?: InputMaybe<Scalars['String']>
+	readonly email_gte?: InputMaybe<Scalars['String']>
+	readonly email_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly email_lt?: InputMaybe<Scalars['String']>
+	readonly email_lte?: InputMaybe<Scalars['String']>
+	readonly email_not_contains?: InputMaybe<Scalars['String']>
+	readonly email_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly email_not_eq?: InputMaybe<Scalars['String']>
+	readonly email_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly email_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly email_startsWith?: InputMaybe<Scalars['String']>
+	readonly id_contains?: InputMaybe<Scalars['ID']>
+	readonly id_endsWith?: InputMaybe<Scalars['ID']>
+	readonly id_eq?: InputMaybe<Scalars['ID']>
+	readonly id_gt?: InputMaybe<Scalars['ID']>
+	readonly id_gte?: InputMaybe<Scalars['ID']>
+	readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
+	readonly id_lt?: InputMaybe<Scalars['ID']>
+	readonly id_lte?: InputMaybe<Scalars['ID']>
+	readonly id_not_contains?: InputMaybe<Scalars['ID']>
+	readonly id_not_endsWith?: InputMaybe<Scalars['ID']>
+	readonly id_not_eq?: InputMaybe<Scalars['ID']>
+	readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>
+	readonly id_not_startsWith?: InputMaybe<Scalars['ID']>
+	readonly id_startsWith?: InputMaybe<Scalars['ID']>
+	readonly image_contains?: InputMaybe<Scalars['String']>
+	readonly image_endsWith?: InputMaybe<Scalars['String']>
+	readonly image_eq?: InputMaybe<Scalars['String']>
+	readonly image_gt?: InputMaybe<Scalars['String']>
+	readonly image_gte?: InputMaybe<Scalars['String']>
+	readonly image_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly image_lt?: InputMaybe<Scalars['String']>
+	readonly image_lte?: InputMaybe<Scalars['String']>
+	readonly image_not_contains?: InputMaybe<Scalars['String']>
+	readonly image_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly image_not_eq?: InputMaybe<Scalars['String']>
+	readonly image_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly image_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly image_startsWith?: InputMaybe<Scalars['String']>
+	readonly legalName_contains?: InputMaybe<Scalars['String']>
+	readonly legalName_endsWith?: InputMaybe<Scalars['String']>
+	readonly legalName_eq?: InputMaybe<Scalars['String']>
+	readonly legalName_gt?: InputMaybe<Scalars['String']>
+	readonly legalName_gte?: InputMaybe<Scalars['String']>
+	readonly legalName_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly legalName_lt?: InputMaybe<Scalars['String']>
+	readonly legalName_lte?: InputMaybe<Scalars['String']>
+	readonly legalName_not_contains?: InputMaybe<Scalars['String']>
+	readonly legalName_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly legalName_not_eq?: InputMaybe<Scalars['String']>
+	readonly legalName_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly legalName_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly legalName_startsWith?: InputMaybe<Scalars['String']>
+	readonly riot_contains?: InputMaybe<Scalars['String']>
+	readonly riot_endsWith?: InputMaybe<Scalars['String']>
+	readonly riot_eq?: InputMaybe<Scalars['String']>
+	readonly riot_gt?: InputMaybe<Scalars['String']>
+	readonly riot_gte?: InputMaybe<Scalars['String']>
+	readonly riot_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly riot_lt?: InputMaybe<Scalars['String']>
+	readonly riot_lte?: InputMaybe<Scalars['String']>
+	readonly riot_not_contains?: InputMaybe<Scalars['String']>
+	readonly riot_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly riot_not_eq?: InputMaybe<Scalars['String']>
+	readonly riot_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly riot_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly riot_startsWith?: InputMaybe<Scalars['String']>
+	readonly twitter_contains?: InputMaybe<Scalars['String']>
+	readonly twitter_endsWith?: InputMaybe<Scalars['String']>
+	readonly twitter_eq?: InputMaybe<Scalars['String']>
+	readonly twitter_gt?: InputMaybe<Scalars['String']>
+	readonly twitter_gte?: InputMaybe<Scalars['String']>
+	readonly twitter_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly twitter_lt?: InputMaybe<Scalars['String']>
+	readonly twitter_lte?: InputMaybe<Scalars['String']>
+	readonly twitter_not_contains?: InputMaybe<Scalars['String']>
+	readonly twitter_not_endsWith?: InputMaybe<Scalars['String']>
+	readonly twitter_not_eq?: InputMaybe<Scalars['String']>
+	readonly twitter_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>
+	readonly twitter_not_startsWith?: InputMaybe<Scalars['String']>
+	readonly twitter_startsWith?: InputMaybe<Scalars['String']>
+}
+
+export type IdentityWhereUniqueInput = {
+	readonly id: Scalars['ID']
+}
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
 	readonly _eq?: InputMaybe<Scalars['Int']>
@@ -539,6 +686,11 @@ export type Query = {
 	readonly hatched_birds: ReadonlyArray<Hatched_Birds>
 	/** fetch data from the table: "hatched_birds" using primary key columns */
 	readonly hatched_birds_by_pk?: Maybe<Hatched_Birds>
+	readonly identities: ReadonlyArray<Identity>
+	readonly identitiesConnection: IdentitiesConnection
+	readonly identityById?: Maybe<Identity>
+	/** @deprecated Use `identityById` */
+	readonly identityByUniqueInput?: Maybe<Identity>
 	readonly links: ReadonlyArray<Maybe<Link>>
 	/** An array relationship */
 	readonly nfts: ReadonlyArray<Nfts>
@@ -929,6 +1081,28 @@ export type QueryHatched_BirdsArgs = {
 
 export type QueryHatched_Birds_By_PkArgs = {
 	id: Scalars['String']
+}
+
+export type QueryIdentitiesArgs = {
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	orderBy?: InputMaybe<ReadonlyArray<InputMaybe<IdentityOrderByInput>>>
+	where?: InputMaybe<IdentityWhereInput>
+}
+
+export type QueryIdentitiesConnectionArgs = {
+	after?: InputMaybe<Scalars['String']>
+	first?: InputMaybe<Scalars['Int']>
+	orderBy: ReadonlyArray<IdentityOrderByInput>
+	where?: InputMaybe<IdentityWhereInput>
+}
+
+export type QueryIdentityByIdArgs = {
+	id: Scalars['ID']
+}
+
+export type QueryIdentityByUniqueInputArgs = {
+	where: IdentityWhereUniqueInput
 }
 
 export type QueryNftsArgs = {
@@ -7180,6 +7354,12 @@ export type ResolversTypes = ResolversObject<{
 	Float: ResolverTypeWrapper<Scalars['Float']>
 	Float_comparison_exp: Float_Comparison_Exp
 	ID: ResolverTypeWrapper<Scalars['ID']>
+	IdentitiesConnection: ResolverTypeWrapper<IdentitiesConnection>
+	Identity: ResolverTypeWrapper<Identity>
+	IdentityEdge: ResolverTypeWrapper<IdentityEdge>
+	IdentityOrderByInput: IdentityOrderByInput
+	IdentityWhereInput: IdentityWhereInput
+	IdentityWhereUniqueInput: IdentityWhereUniqueInput
 	Int: ResolverTypeWrapper<Scalars['Int']>
 	Int_comparison_exp: Int_Comparison_Exp
 	Link: ResolverTypeWrapper<Link>
@@ -7627,6 +7807,11 @@ export type ResolversParentTypes = ResolversObject<{
 	Float: Scalars['Float']
 	Float_comparison_exp: Float_Comparison_Exp
 	ID: Scalars['ID']
+	IdentitiesConnection: IdentitiesConnection
+	Identity: Identity
+	IdentityEdge: IdentityEdge
+	IdentityWhereInput: IdentityWhereInput
+	IdentityWhereUniqueInput: IdentityWhereUniqueInput
 	Int: Scalars['Int']
 	Int_comparison_exp: Int_Comparison_Exp
 	Link: Link
@@ -8067,9 +8252,9 @@ export type BodyMemberResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['BodyMember'] = ResolversParentTypes['BodyMember'],
 > = ResolversObject<{
-	address?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	body?: Resolver<ResolversTypes['Body'], ParentType, ContextType>
 	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+	identity?: Resolver<ResolversTypes['Identity'], ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
@@ -8144,6 +8329,39 @@ export type FeaturesResolvers<
 	SHOW_FX?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
 	SHOW_HEADER?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
 	SHOW_HEADER_NAV?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type IdentitiesConnectionResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['IdentitiesConnection'] = ResolversParentTypes['IdentitiesConnection'],
+> = ResolversObject<{
+	edges?: Resolver<ReadonlyArray<ResolversTypes['IdentityEdge']>, ParentType, ContextType>
+	pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>
+	totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type IdentityResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['Identity'] = ResolversParentTypes['Identity'],
+> = ResolversObject<{
+	displayName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+	email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+	image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+	legalName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+	riot?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+	twitter?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type IdentityEdgeResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['IdentityEdge'] = ResolversParentTypes['IdentityEdge'],
+> = ResolversObject<{
+	cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	node?: Resolver<ResolversTypes['Identity'], ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
@@ -8416,6 +8634,30 @@ export type QueryResolvers<
 		ParentType,
 		ContextType,
 		RequireFields<QueryHatched_Birds_By_PkArgs, 'id'>
+	>
+	identities?: Resolver<
+		ReadonlyArray<ResolversTypes['Identity']>,
+		ParentType,
+		ContextType,
+		Partial<QueryIdentitiesArgs>
+	>
+	identitiesConnection?: Resolver<
+		ResolversTypes['IdentitiesConnection'],
+		ParentType,
+		ContextType,
+		RequireFields<QueryIdentitiesConnectionArgs, 'orderBy'>
+	>
+	identityById?: Resolver<
+		Maybe<ResolversTypes['Identity']>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryIdentityByIdArgs, 'id'>
+	>
+	identityByUniqueInput?: Resolver<
+		Maybe<ResolversTypes['Identity']>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryIdentityByUniqueInputArgs, 'where'>
 	>
 	links?: Resolver<ReadonlyArray<Maybe<ResolversTypes['Link']>>, ParentType, ContextType>
 	nfts?: Resolver<ReadonlyArray<ResolversTypes['nfts']>, ParentType, ContextType, Partial<QueryNftsArgs>>
@@ -12114,6 +12356,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	Config?: ConfigResolvers<ContextType>
 	DateTime?: GraphQLScalarType
 	Features?: FeaturesResolvers<ContextType>
+	IdentitiesConnection?: IdentitiesConnectionResolvers<ContextType>
+	Identity?: IdentityResolvers<ContextType>
+	IdentityEdge?: IdentityEdgeResolvers<ContextType>
 	Link?: LinkResolvers<ContextType>
 	Mutation?: MutationResolvers<ContextType>
 	PageInfo?: PageInfoResolvers<ContextType>

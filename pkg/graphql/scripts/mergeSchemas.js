@@ -7,7 +7,7 @@ const { stitchSchemas } = require('@graphql-tools/stitch')
 
 const remoteList = [
 	'https://gql-rmrk2-prod.graphcdn.app/',
-	'https://app.gc.subsquid.io/beta/test-gamedao-indexer/v001/graphql',
+	'https://app.gc.subsquid.io/beta/test-gamedao-indexer/v003/graphql',
 ]
 
 ;(async () => {

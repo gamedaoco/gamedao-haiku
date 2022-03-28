@@ -1301,6 +1301,10 @@ type Query {
   bodyMemberByUniqueInput(where: BodyMemberWhereUniqueInput!): BodyMember @deprecated(reason: "Use `bodyMemberById`")
   bodyMembers(where: BodyMemberWhereInput, orderBy: [BodyMemberOrderByInput], offset: Int, limit: Int): [BodyMember!]!
   bodyMembersConnection(orderBy: [BodyMemberOrderByInput!]!, after: String, first: Int, where: BodyMemberWhereInput): BodyMembersConnection!
+  identityById(id: ID!): Identity
+  identityByUniqueInput(where: IdentityWhereUniqueInput!): Identity @deprecated(reason: "Use `identityById`")
+  identities(where: IdentityWhereInput, orderBy: [IdentityOrderByInput], offset: Int, limit: Int): [Identity!]!
+  identitiesConnection(orderBy: [IdentityOrderByInput!]!, after: String, first: Int, where: IdentityWhereInput): IdentitiesConnection!
 }
 
 enum Environment {
@@ -8694,8 +8698,20 @@ enum BodyMemberOrderByInput {
   body_payAsset_DESC
   body_memberLimit_ASC
   body_memberLimit_DESC
-  address_ASC
-  address_DESC
+  identity_id_ASC
+  identity_id_DESC
+  identity_displayName_ASC
+  identity_displayName_DESC
+  identity_legalName_ASC
+  identity_legalName_DESC
+  identity_email_ASC
+  identity_email_DESC
+  identity_riot_ASC
+  identity_riot_DESC
+  identity_image_ASC
+  identity_image_DESC
+  identity_twitter_ASC
+  identity_twitter_DESC
 }
 
 input BodyMemberWhereUniqueInput {
@@ -8718,20 +8734,7 @@ input BodyMemberWhereInput {
   id_endsWith: ID
   id_not_endsWith: ID
   body: BodyWhereInput
-  address_eq: String
-  address_not_eq: String
-  address_gt: String
-  address_gte: String
-  address_lt: String
-  address_lte: String
-  address_in: [String!]
-  address_not_in: [String!]
-  address_contains: String
-  address_not_contains: String
-  address_startsWith: String
-  address_not_startsWith: String
-  address_endsWith: String
-  address_not_endsWith: String
+  identity: IdentityWhereInput
   AND: [BodyMemberWhereInput!]
   OR: [BodyMemberWhereInput!]
 }
@@ -8739,7 +8742,7 @@ input BodyMemberWhereInput {
 type BodyMember {
   id: ID!
   body: Body!
-  address: String!
+  identity: Identity!
 }
 
 type BodyMemberEdge {
@@ -8749,6 +8752,151 @@ type BodyMemberEdge {
 
 type BodyMembersConnection {
   edges: [BodyMemberEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+enum IdentityOrderByInput {
+  id_ASC
+  id_DESC
+  displayName_ASC
+  displayName_DESC
+  legalName_ASC
+  legalName_DESC
+  email_ASC
+  email_DESC
+  riot_ASC
+  riot_DESC
+  image_ASC
+  image_DESC
+  twitter_ASC
+  twitter_DESC
+}
+
+input IdentityWhereUniqueInput {
+  id: ID!
+}
+
+input IdentityWhereInput {
+  id_eq: ID
+  id_not_eq: ID
+  id_gt: ID
+  id_gte: ID
+  id_lt: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_contains: ID
+  id_not_contains: ID
+  id_startsWith: ID
+  id_not_startsWith: ID
+  id_endsWith: ID
+  id_not_endsWith: ID
+  displayName_eq: String
+  displayName_not_eq: String
+  displayName_gt: String
+  displayName_gte: String
+  displayName_lt: String
+  displayName_lte: String
+  displayName_in: [String!]
+  displayName_not_in: [String!]
+  displayName_contains: String
+  displayName_not_contains: String
+  displayName_startsWith: String
+  displayName_not_startsWith: String
+  displayName_endsWith: String
+  displayName_not_endsWith: String
+  legalName_eq: String
+  legalName_not_eq: String
+  legalName_gt: String
+  legalName_gte: String
+  legalName_lt: String
+  legalName_lte: String
+  legalName_in: [String!]
+  legalName_not_in: [String!]
+  legalName_contains: String
+  legalName_not_contains: String
+  legalName_startsWith: String
+  legalName_not_startsWith: String
+  legalName_endsWith: String
+  legalName_not_endsWith: String
+  email_eq: String
+  email_not_eq: String
+  email_gt: String
+  email_gte: String
+  email_lt: String
+  email_lte: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_contains: String
+  email_not_contains: String
+  email_startsWith: String
+  email_not_startsWith: String
+  email_endsWith: String
+  email_not_endsWith: String
+  riot_eq: String
+  riot_not_eq: String
+  riot_gt: String
+  riot_gte: String
+  riot_lt: String
+  riot_lte: String
+  riot_in: [String!]
+  riot_not_in: [String!]
+  riot_contains: String
+  riot_not_contains: String
+  riot_startsWith: String
+  riot_not_startsWith: String
+  riot_endsWith: String
+  riot_not_endsWith: String
+  image_eq: String
+  image_not_eq: String
+  image_gt: String
+  image_gte: String
+  image_lt: String
+  image_lte: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_contains: String
+  image_not_contains: String
+  image_startsWith: String
+  image_not_startsWith: String
+  image_endsWith: String
+  image_not_endsWith: String
+  twitter_eq: String
+  twitter_not_eq: String
+  twitter_gt: String
+  twitter_gte: String
+  twitter_lt: String
+  twitter_lte: String
+  twitter_in: [String!]
+  twitter_not_in: [String!]
+  twitter_contains: String
+  twitter_not_contains: String
+  twitter_startsWith: String
+  twitter_not_startsWith: String
+  twitter_endsWith: String
+  twitter_not_endsWith: String
+  AND: [IdentityWhereInput!]
+  OR: [IdentityWhereInput!]
+}
+
+type Identity {
+  id: ID!
+  displayName: String
+  legalName: String
+  email: String
+  riot: String
+  image: String
+  twitter: String
+}
+
+type IdentityEdge {
+  node: Identity!
+  cursor: String!
+}
+
+type IdentitiesConnection {
+  edges: [IdentityEdge!]!
   pageInfo: PageInfo!
   totalCount: Int!
 }
