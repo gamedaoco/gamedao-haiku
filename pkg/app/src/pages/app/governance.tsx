@@ -26,7 +26,7 @@ export function GovernancePage() {
 										Members:
 										<ul>
 											{body.members.map((member) => (
-												<li key={`${body.id}-${member.address}`}>{member.address}</li>
+												<li key={`${body.id}-${member.identity.id}`}>{member.identity.id}</li>
 											))}
 										</ul>
 									</div>

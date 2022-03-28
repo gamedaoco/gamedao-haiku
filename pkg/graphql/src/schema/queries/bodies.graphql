@@ -3,7 +3,9 @@ query Bodies {
         id
         name
         members {
-            address
+            identity {
+                id
+            }
         }
     }
 }
