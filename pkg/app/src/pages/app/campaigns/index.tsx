@@ -16,7 +16,6 @@ export function Campaigns() {
 	}
 
 	const setVisible = (state: boolean) => {
-		console.log('state', state)
 		setIsShow(!state)
 	}
 
@@ -33,22 +32,14 @@ export function Campaigns() {
 					alignItems: 'center',
 				}}
 			>
-				<Box>{!isShow ? <h4>No campaigns yet. Create one!</h4> : <h4>Total campaigns: {6}</h4>}</Box>
+				<Box>{isShow ? <h4>Total campaigns: {6}</h4> : <h4>No campaigns yet. Create one!</h4>}</Box>
 				<Box>
 					{isShow ? (
-						<Button
-							variant="outlined"
-							// startIcon={<ClearIcon />}
-							onClick={handleForm}
-						>
+						<Button variant="outlined" onClick={handleForm}>
 							Close
 						</Button>
 					) : (
-						<Button
-							variant="outlined"
-							// startIcon={<AddIcon />}
-							onClick={handleForm}
-						>
+						<Button variant="outlined" onClick={handleForm}>
 							New Campaign
 						</Button>
 					)}

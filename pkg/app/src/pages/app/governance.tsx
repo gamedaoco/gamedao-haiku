@@ -6,8 +6,11 @@ import Button from '@mui/material/Button'
 
 import { FormVoting } from 'components/Forms/FormVoting'
 import { Layout } from 'src/layouts/default/layout'
+import { useBodiesQuery } from '@gamedao-haiku/graphql/dist'
+import { CircularProgress } from '@mui/material'
 
 export function GovernancePage() {
+	const { loading, data } = useBodiesQuery()
 	const [isShow, setIsShow] = useState(false)
 
 	const callback = (data: any) => {
@@ -15,7 +18,6 @@ export function GovernancePage() {
 	}
 
 	const setVisible = (state: boolean) => {
-		console.log('state', state)
 		setIsShow(!state)
 	}
 
@@ -25,33 +27,41 @@ export function GovernancePage() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Governance">
-			<Box
-				sx={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-				}}
-			>
-				<Box>{!isShow ? <h4>No proposals yet. Create one!</h4> : <h4>Total proposals: {6}</h4>}</Box>
-				<Box>
-					{isShow ? (
-						<Button
-							variant="outlined"
-							// startIcon={<ClearIcon />}
-							onClick={handleForm}
-						>
-							Close
-						</Button>
-					) : (
-						<Button
-							variant="outlined"
-							// startIcon={<AddIcon />}
-							onClick={handleForm}
-						>
-							New Proposal
-						</Button>
+			<Box>{isShow ? <h4>Total proposals: {6}</h4> : <h4>No proposals yet. Create one!</h4>}</Box>
+			<Box>
+				{isShow ? (
+					<Button variant="outlined" onClick={handleForm}>
+						Close
+					</Button>
+				) : (
+					<Button variant="outlined" onClick={handleForm}>
+						New Proposal
+					</Button>
+				)}
+			</Box>
+			<Box sx={{ p: '4rem', minHeight: '90vh' }}>
+				<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
+					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
+						Hello. Bodies count: {loading ? <CircularProgress /> : data?.bodies.length}
+					</Typography>
+					{data && (
+						<ul>
+							{data.bodies.map((body) => (
+								<li key={body.id}>
+									<div>Name: {body.name}</div>
+									<div>
+										Members:
+										<ul>
+											{body.members.map((member) => (
+												<li key={`${body.id}-${member.identity.id}`}>{member.identity.id}</li>
+											))}
+										</ul>
+									</div>
+								</li>
+							))}
+						</ul>
 					)}
-				</Box>
+				</Paper>
 			</Box>
 			{isShow ? (
 				<FormVoting parentCallback={callback} isCloseProposal={setVisible} />

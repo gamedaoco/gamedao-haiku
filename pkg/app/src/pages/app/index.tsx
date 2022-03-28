@@ -16,7 +16,6 @@ export function AppPage() {
 	}
 
 	const setVisible = (state: boolean) => {
-		console.log('state', state)
 		setIsShow(!state)
 	}
 
@@ -33,7 +32,7 @@ export function AppPage() {
 					alignItems: 'center',
 				}}
 			>
-				<Box>{!isShow ? <h4>No organisations yet. Create one!</h4> : <h4>Total organisations: {6}</h4>}</Box>
+				<Box>{isShow ? <h4>Total organisations: {6}</h4> : <h4>No organisations yet. Create one!</h4>}</Box>
 				<Box>
 					{isShow ? (
 						<Button
