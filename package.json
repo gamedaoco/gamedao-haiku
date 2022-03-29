@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
-    "dev": "wsrun -p @gamedao-haiku/app -c dev",
+    "dev": "yarn build:graphql && yarn dev:app",
+    "dev:app": "wsrun -p @gamedao-haiku/app -c dev",
     "build": "wsrun -e -c -s -x -m build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "release": "yarn build && yarn changeset publish",
