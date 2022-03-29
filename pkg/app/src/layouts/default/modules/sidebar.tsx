@@ -6,6 +6,7 @@ import { ThemeSwitch } from 'src/components/ThemeSwitcher/themeSwitch'
 import { FontIcons } from 'src/components/Icons/icons'
 import { NavLink } from 'src/components/NavLink/navLink'
 import { NetworkSelector } from 'src/components'
+import { useTranslation } from 'react-i18next'
 
 // TODO:
 // Fix error on page load!!
@@ -57,6 +58,7 @@ interface ComponentProps {
 
 export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) {
 	const theme = useTheme()
+	const { t } = useTranslation()
 
 	// TODO: Replace with real values
 	const [counter, updateCounter] = useState({
@@ -87,10 +89,10 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			<Stack flex={1} padding={2}>
 				<Stack spacing={2}>
 					<SidebarNavItem href="/app" name="dashboard">
-						Dashboard
+						{t('button.navigation.dashboard')}
 					</SidebarNavItem>
 					<SidebarNavItem href="/app/governance" name="voting">
-						Governance
+						{t('button.navigation.governance')}
 						{counter.gov > 0 && (
 							<NavBadge
 								sx={{ ml: '0.5rem' }}
@@ -101,13 +103,13 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 						)}
 					</SidebarNavItem>
 					<SidebarNavItem href="/app/campaigns" name="campaign">
-						Campaigns
+						{t('button.navigation.campaigns')}
 						{counter.cam > 0 && (
 							<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
 						)}
 					</SidebarNavItem>
 					<SidebarNavItem href="/app/wallet" name="wallet">
-						Wallet
+						{t('button.navigation.wallet')}
 						{counter.cam > 0 && <NavBadge sx={{ ml: '0.5rem' }} />}
 					</SidebarNavItem>
 				</Stack>

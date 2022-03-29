@@ -29,5 +29,9 @@ module.exports = {
 	poweredByHeader: 'gamedao.co loves you',
 	experiments: {
 		topLevelAwait: true,
-	}
+	},
+  i18n: {
+    locales: ['en-US', 'fr'],
+    defaultLocale: 'en-US'
+  },
 }
