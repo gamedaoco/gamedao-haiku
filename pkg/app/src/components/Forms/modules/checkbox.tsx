@@ -1,8 +1,8 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
-import { FormControlLabel, Checkbox, Typography, FormHelperText } from '@mui/material'
+import { FormControlLabel, Checkbox as MUICheckbox, Typography, FormHelperText } from '@mui/material'
 
-export interface FormCheckboxProps {
+interface ComponentProps {
 	name: string
 	control: any
 	label?: string
@@ -11,7 +11,7 @@ export interface FormCheckboxProps {
 	error?: string
 }
 
-export const FormCheckbox = ({ name, control, label, required, error }: FormCheckboxProps) => {
+export const Checkbox = ({ name, control, label, required, error }: ComponentProps) => {
 	return (
 		<>
 			<FormControlLabel
@@ -21,7 +21,7 @@ export const FormCheckbox = ({ name, control, label, required, error }: FormChec
 						control={control}
 						name={name}
 						render={({ field: { onChange, value }, fieldState: { error }, formState: { errors } }) => (
-							<Checkbox
+							<MUICheckbox
 								color="primary"
 								checked={value}
 								required={required}

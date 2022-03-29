@@ -2,7 +2,7 @@ import React from 'react'
 import { Controller } from 'react-hook-form'
 import { TextField, MenuItem } from '@mui/material'
 
-export interface FormInputProps {
+interface ComponentProps {
 	name: string
 	control: any
 	label: string
@@ -16,7 +16,7 @@ export interface FormInputProps {
 	InputLabelProps?: any
 }
 
-export const FormInput = ({
+export const Input = ({
 	name,
 	control,
 	label,
@@ -27,7 +27,7 @@ export const FormInput = ({
 	required,
 	InputProps,
 	InputLabelProps,
-}: FormInputProps) => {
+}: ComponentProps) => {
 	return (
 		<Controller
 			name={name}
@@ -38,7 +38,6 @@ export const FormInput = ({
 					size="small"
 					error={!!error}
 					onChange={onChange}
-					// value={value}
 					fullWidth
 					label={label}
 					variant="outlined"

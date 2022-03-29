@@ -1,8 +1,8 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
-import { TextField, Autocomplete } from '@mui/material'
+import { TextField, Autocomplete as MUIAutocomplete } from '@mui/material'
 
-export interface FormAutoCompleteProps {
+interface ComponentProps {
 	options: any
 	name: string
 	control: any
@@ -10,20 +10,18 @@ export interface FormAutoCompleteProps {
 	required?: boolean
 }
 
-export const FormAutoComplete = ({ name, control, label, options, required }: FormAutoCompleteProps) => {
+export const Autocomplete = ({ name, control, label, options, required }: ComponentProps) => {
 	return (
 		<Controller
 			name={name}
 			control={control}
 			render={({ field: { ref, ...field }, fieldState: { error } }) => (
-				<Autocomplete
+				<MUIAutocomplete
 					{...field}
 					freeSolo
 					disableClearable
 					options={options}
 					fullWidth
-					// getOptionDisabled={(option) => option.disabled}
-					// getOptionLabel={(option) => option.label}
 					onChange={(event, value) => field.onChange(value)}
 					renderInput={(params) => (
 						<TextField
