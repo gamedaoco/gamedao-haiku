@@ -11,7 +11,7 @@ export function OrganisationById() {
 			<Box sx={{ p: '4rem', height: '90vh' }}>
 				<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-						Organisations.
+						Organisation Detail
 					</Typography>
 				</Paper>
 			</Box>
