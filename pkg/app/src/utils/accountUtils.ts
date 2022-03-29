@@ -1,6 +1,7 @@
 import type { InjectedAccount } from '@polkadot/extension-inject/types'
 import type { AccountState } from 'src/@types/extension'
 import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
+import { hexToU8a, isHex } from '@polkadot/util'
 
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
@@ -27,4 +28,13 @@ export function getDecodedAddress(address: string): string {
 	}
 
 	return null
+}
+
+export function checkIsAddressValid(address: string): boolean {
+	try {
+		isHex(address) ? hexToU8a(address) : decodeAddress(address)
+		return true
+	} catch (error) {
+		return false
+	}
 }
