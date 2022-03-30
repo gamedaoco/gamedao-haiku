@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { Stack, TablePagination, Box, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import { Item } from './item'
 
 export function ItemList({ data }) {

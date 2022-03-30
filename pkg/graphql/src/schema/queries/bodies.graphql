@@ -7,5 +7,6 @@ query Bodies {
                 id
             }
         }
+        cid
     }
 }
