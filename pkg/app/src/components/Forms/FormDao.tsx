@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import { Button, Paper, Typography, Box, Container, Stack } from '@mui/material'
+import React, { useState } from 'react'
+import { Button, Paper, Typography, Box, Container, Stack, CircularProgress } from '@mui/material'
 import { Input } from './modules/input'
 import { Autocomplete } from './modules/autocomplete'
 import { Stepper } from './modules/stepper'
 import { useForm, FormProvider } from 'react-hook-form'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { dao_bodies, countries, dao_member_governance, dao_fee_model } from 'src/utils/data'
 import { checkIsAddressValid } from 'src/utils/accountUtils'
+import { useDisplayValues } from 'hooks/useDisplayValues'
 
 const validationSchema = Yup.object().shape({
 	org_name: Yup.string().required('Organization Name is required'),
@@ -26,28 +26,25 @@ const validationSchema = Yup.object().shape({
 		}),
 })
 
-const accounts = [
-	'3ZBh2L6YhhmBRWG8UavtA7zJnFcpTemUmSrL8LfH43Rym2WJ',
-	'3HHHHHHHHHHHHH8UavtA7zJnFcpTemUmSrL8LfH43Rym2WJ',
-	'3T9tBQ3UePp25qDcY8ncZfEhajn1iyVoj85mfLhb51VotMee',
-]
-const defaultValues = {
-	org_name: '',
-	org_body: dao_bodies[0].value,
-	country: countries[0].value,
-	website: '',
-	repo: '',
-	controller_account: '',
-	treasury_account: '',
-	access: dao_member_governance[0].value,
-	member_limit: '1',
-	fee_model: dao_fee_model[0].value,
-	fee: '1',
-}
-
 export function FormDao(props) {
 	const [stepperState, setStepperState] = useState(0)
-	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })
+	const displayValues = useDisplayValues()
+	const methods = useForm({
+		resolver: yupResolver(validationSchema),
+		defaultValues: {
+			org_name: '',
+			org_body: 0,
+			country: 'eu',
+			website: '',
+			repo: '',
+			controller_account: '',
+			treasury_account: '',
+			access: 0,
+			member_limit: '1',
+			fee_model: 0,
+			fee: '1',
+		},
+	})
 	const { handleSubmit, control, watch } = methods
 	const watchOrganName = watch('org_name', '')
 
@@ -55,6 +52,10 @@ export function FormDao(props) {
 		const formData = JSON.stringify(data, null, 2)
 		alert(formData)
 		props.parentCallback(formData)
+	}
+
+	if (!displayValues) {
+		return <CircularProgress />
 	}
 
 	return (
@@ -76,10 +77,16 @@ export function FormDao(props) {
 							name="org_body"
 							label="Organizational Body"
 							control={control}
-							options={dao_bodies}
+							options={displayValues.daoBodies}
 							selectable={true}
 						/>
-						<Input name="country" label="Country" control={control} options={countries} selectable={true} />
+						<Input
+							name="country"
+							label="Country"
+							control={control}
+							options={displayValues.countries}
+							selectable={true}
+						/>
 
 						<Typography variant={'h5'}>Images</Typography>
 						<Typography variant={'h6'}>Logo (800 x 800px)</Typography>
@@ -106,25 +113,12 @@ export function FormDao(props) {
 						</Stack>
 
 						<Typography>Controller Settings</Typography>
-						<Autocomplete
-							name="controller_account"
-							label="Controller Account"
-							options={accounts}
-							control={control}
-							required
-						/>
-						<Autocomplete
-							name="treasury_account"
-							label="Treasury Account"
-							options={accounts}
-							control={control}
-							required
-						/>
-
+						<Autocomplete name="controller_account" label="Controller Account" control={control} required />
+						<Autocomplete name="treasury_account" label="Treasury Account" control={control} required />
 						<Input
 							name="access"
 							label="Member Access Control"
-							options={dao_member_governance}
+							options={displayValues.daoMemberGovernance}
 							selectable={true}
 							control={control}
 						/>
@@ -135,7 +129,7 @@ export function FormDao(props) {
 								name="fee_model"
 								label="Fee Model"
 								selectable={true}
-								options={dao_fee_model}
+								options={displayValues.daoFeeModel}
 								control={control}
 							/>
 							<Input name="fee" label="Membership Fee" placeholder="10" control={control} />

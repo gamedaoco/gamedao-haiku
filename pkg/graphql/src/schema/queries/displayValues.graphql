@@ -1,0 +1,60 @@
+query DisplayValues {
+    displayValues {
+        collateralTypes {
+            key
+            value
+            text
+        }
+        proposalTypes {
+            key
+            value
+            text
+        }
+        votingTypes {
+            key
+            value
+            text
+        }
+        daoBodies {
+            key
+            value
+            text
+        }
+        daoMemberGovernance {
+            key
+            value
+            text
+        }
+        daoFeeModel {
+            key
+            value
+            text
+        }
+        projectTypes {
+            key
+            value
+            text
+        }
+        protocolTypes {
+            key
+            value
+            text
+        }
+        projectDurations {
+            key
+            value
+            text
+        }
+        memberships {
+            key
+            value
+            text
+        }
+        countries {
+            key
+            value
+            text
+            flag
+        }
+    }
+}
