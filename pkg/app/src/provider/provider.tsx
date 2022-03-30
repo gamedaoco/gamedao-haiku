@@ -5,20 +5,23 @@ import { AppProvider } from 'provider/app/appProvider'
 import { GraphQlProvider } from 'provider/graphQl/graphQlProvider'
 import { ReadyProvider } from 'provider/ready/readyProvider'
 import { ThemeProvider } from 'provider/theme/themeProvider'
+import { LanguageProvider } from 'provider/language/languageProvider'
 
 export function Providers({ children }) {
 	return (
 		<GraphQlProvider>
 			<AppProvider>
-				<SettingsProvider>
-					<NetworkProvider>
-						<ThemeProvider>
-							<ReadyProvider>
-								<ExtensionProvider>{children}</ExtensionProvider>
-							</ReadyProvider>
-						</ThemeProvider>
-					</NetworkProvider>
-				</SettingsProvider>
+				<LanguageProvider>
+					<SettingsProvider>
+						<NetworkProvider>
+							<ThemeProvider>
+								<ReadyProvider>
+									<ExtensionProvider>{children}</ExtensionProvider>
+								</ReadyProvider>
+							</ThemeProvider>
+						</NetworkProvider>
+					</SettingsProvider>
+				</LanguageProvider>
 			</AppProvider>
 		</GraphQlProvider>
 	)
