@@ -29,5 +29,5 @@ module.exports = {
 	poweredByHeader: 'gamedao.co loves you',
 	experiments: {
 		topLevelAwait: true,
-	}
+	},
 }
