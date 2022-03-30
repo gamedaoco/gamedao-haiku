@@ -18,16 +18,7 @@ export async function getI18next(): Promise<I18nType> {
 		.use(initReactI18next)
 		.use(LanguageDetector)
 		.init({
-			resources: {
-				...((await fetchLang()) ?? {}),
-				de: {
-					button: {
-						navigation: {
-							governance: 'SweetTT',
-						},
-					},
-				},
-			},
+			resources: (await fetchLang()) ?? {},
 			fallbackLng: 'en',
 			interpolation: {
 				escapeValue: false,
