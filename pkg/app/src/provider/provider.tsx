@@ -11,17 +11,17 @@ export function Providers({ children }) {
 	return (
 		<GraphQlProvider>
 			<AppProvider>
-				<SettingsProvider>
-					<NetworkProvider>
-						<ThemeProvider>
-							<LanguageProvider>
+				<LanguageProvider>
+					<SettingsProvider>
+						<NetworkProvider>
+							<ThemeProvider>
 								<ReadyProvider>
 									<ExtensionProvider>{children}</ExtensionProvider>
 								</ReadyProvider>
-							</LanguageProvider>
-						</ThemeProvider>
-					</NetworkProvider>
-				</SettingsProvider>
+							</ThemeProvider>
+						</NetworkProvider>
+					</SettingsProvider>
+				</LanguageProvider>
 			</AppProvider>
 		</GraphQlProvider>
 	)

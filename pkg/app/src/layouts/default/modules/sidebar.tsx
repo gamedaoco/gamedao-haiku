@@ -89,10 +89,10 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			<Stack flex={1} padding={2}>
 				<Stack spacing={2}>
 					<SidebarNavItem href="/app" name="dashboard">
-						{t('button.navigation.dashboard')}
+						{t('button:navigation:dashboard')}
 					</SidebarNavItem>
 					<SidebarNavItem href="/app/governance" name="voting">
-						{t('button.navigation.governance')}
+						{t('button:navigation:governance')}
 						{counter.gov > 0 && (
 							<NavBadge
 								sx={{ ml: '0.5rem' }}
@@ -103,13 +103,13 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 						)}
 					</SidebarNavItem>
 					<SidebarNavItem href="/app/campaigns" name="campaign">
-						{t('button.navigation.campaigns')}
+						{t('button:navigation:campaigns')}
 						{counter.cam > 0 && (
 							<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
 						)}
 					</SidebarNavItem>
 					<SidebarNavItem href="/app/wallet" name="wallet">
-						{t('button.navigation.wallet')}
+						{t('button:navigation:wallet')}
 						{counter.cam > 0 && <NavBadge sx={{ ml: '0.5rem' }} />}
 					</SidebarNavItem>
 				</Stack>
