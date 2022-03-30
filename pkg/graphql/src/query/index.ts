@@ -7266,6 +7266,7 @@ export type BodiesQuery = {
 		readonly id: string
 		readonly name: string
 		readonly cid: string
+		readonly access: number
 		readonly members: ReadonlyArray<{
 			readonly __typename?: 'BodyMember'
 			readonly identity: { readonly __typename?: 'Identity'; readonly id: string }
@@ -7353,6 +7354,7 @@ export const BodiesDocument = gql`
 				}
 			}
 			cid
+			access
 		}
 	}
 `
