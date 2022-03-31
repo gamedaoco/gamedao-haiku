@@ -9,7 +9,11 @@ import { useBodiesQuery } from '@gamedao-haiku/graphql/dist'
 import { CircularProgress } from '@mui/material'
 
 export function OrganisationPage() {
-	const { loading, data } = useBodiesQuery()
+	const { loading, error, data } = useBodiesQuery()
+	if (error) {
+		console.error(error)
+		return <div>Error!</div>
+	}
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box sx={{ p: '4rem', minHeight: '90vh' }}>
@@ -17,7 +21,7 @@ export function OrganisationPage() {
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 						Hello. Bodies count: {loading ? <CircularProgress /> : data?.bodies.length}
 					</Typography>
-					{data && <ItemList data={data.bodies}></ItemList>}
+					{<ItemList data={data?.bodies}></ItemList>}
 				</Paper>
 			</Box>
 		</Layout>

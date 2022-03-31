@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useExtensionContext } from 'src/provider/extension/modules/context'
 import { NavLink } from 'src/components/NavLink/navLink'
 import { useTheme } from '@mui/material/styles'
@@ -7,19 +8,18 @@ import { Person, Key, KeyOff, Check } from '@mui/icons-material'
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
-export const TileCard = (props) => {
+export const TileCard = ({ item, metadata }) => {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const bgPlain = { backgroundColor: theme.palette.grey[500_16] }
-	const title = props.data.name.length > 17 ? `${props.data.name.slice(0, 17)} ...` : props.data.name
 	const address = selectedAccount?.account.address
 
-	const SubHeader = () => {
+	const SubHeader = useMemo(() => {
 		return (
 			<Box sx={{ display: 'flex', gap: '5px', alignItems: 'stretch' }}>
 				<Person />
-				<span>{`${props.data?.members.length} ${props.data?.members.length > 1 ? 'Members' : 'Member'} `}</span>
-				{props.data.members.find((member) => member.identity.id === address) ? (
+				<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
+				{item.members.find((member) => member.identity.id === address) ? (
 					<>
 						<span>
 							<Check />
@@ -28,16 +28,16 @@ export const TileCard = (props) => {
 					</>
 				) : (
 					<>
-						<span>{props.data?.access === 0 ? <KeyOff /> : <Key />}</span>
-						<span>{props.data?.access === 0 ? 'Public' : 'Private'}</span>
+						<span>{item?.access === 0 ? <KeyOff /> : <Key />}</span>
+						<span>{item?.access === 0 ? 'Public' : 'Private'}</span>
 					</>
 				)}
 			</Box>
 		)
-	}
+	}, [item, address])
 
 	return (
-		<NavLink href={`${toLink}${props.data.id}`}>
+		<NavLink href={`${toLink}${item.id}`}>
 			<Card
 				sx={{
 					width: '344px',
@@ -50,12 +50,12 @@ export const TileCard = (props) => {
 			>
 				<CardHeader
 					avatar={
-						<Avatar src={`${gateway}${props.metadata?.logo}`} sx={{ width: 64, height: 64 }}>
-							{title.slice(0, 1)}
+						<Avatar src={`${gateway}${metadata?.logo}`} sx={{ width: 64, height: 64 }}>
+							{item?.name.slice(0, 1)}
 						</Avatar>
 					}
-					title={title}
-					subheader={<SubHeader />}
+					title={<Typography noWrap>{item?.name}</Typography>}
+					subheader={SubHeader}
 				/>
 				<CardContent>
 					<Typography
@@ -67,7 +67,7 @@ export const TileCard = (props) => {
 							'-webkit-box-orient': 'vertical',
 						}}
 					>
-						{props.metadata?.description}
+						{metadata?.description}
 					</Typography>
 				</CardContent>
 			</Card>

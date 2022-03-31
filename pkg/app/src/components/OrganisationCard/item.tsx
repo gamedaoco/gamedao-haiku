@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react'
+import { BodyData } from 'src/@types/bodydata'
 
 import { fetchIpfsJson } from 'src/utils/ipfs'
 
 import { TileCard } from './modules/tileCard'
 
-export function Item({ data }) {
-	const [metadata, setMetadata] = useState<any>()
+interface IpfsMetadata {
+	description: string
+	email: string
+	logo: string
+	name: string
+	repo: string
+	website: string
+}
+
+interface ComponentProps {
+	item: BodyData
+}
+
+export function Item({ item }: ComponentProps) {
+	const [metadata, setMetadata] = useState<IpfsMetadata>(null)
 
 	useEffect(() => {
 		const fetch = async () => {
-			let result = await fetchIpfsJson(data?.cid)
+			let result = await fetchIpfsJson(item?.cid)
 			setMetadata(result)
 		}
 		fetch()
-	}, [data])
+	}, [item])
 
-	return <TileCard metadata={metadata} data={data}></TileCard>
+	return <TileCard metadata={metadata} item={item}></TileCard>
 }

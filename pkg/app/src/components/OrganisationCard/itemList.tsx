@@ -1,4 +1,5 @@
 import { Grid } from '@mui/material'
+import { BodyData } from 'src/@types/bodydata'
 import { Item } from './item'
 
 export function ItemList({ data }) {
@@ -8,7 +9,7 @@ export function ItemList({ data }) {
 		<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 6, md: 12 }}>
 			{data?.map((itemData, index) => (
 				<Grid item xs={4} md={6} key={index}>
-					<Item data={itemData} />
+					<Item item={itemData} />
 				</Grid>
 			))}
 		</Grid>
