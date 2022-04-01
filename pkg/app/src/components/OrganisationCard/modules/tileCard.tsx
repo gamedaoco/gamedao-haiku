@@ -23,22 +23,46 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 
 	const SubHeader = useMemo(() => {
 		return (
-			<Box sx={{ display: 'flex', gap: '5px', alignItems: 'stretch' }}>
-				<Person />
-				<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
-				{item.members.find((member) => member.identity.id === address) ? (
-					<>
-						<span>
-							<Check />
-						</span>
-						<span>{'Joined'}</span>
-					</>
-				) : (
-					<>
-						<span>{item?.access === 0 ? <KeyOff /> : <Key />}</span>
-						<span>{item?.access === 0 ? 'Public' : 'Private'}</span>
-					</>
-				)}
+			<Box
+				sx={{
+					display: 'flex',
+					gap: '.25rem',
+					flexWrap: 'wrap',
+					justifyContent: 'flex-start',
+					alignItems: 'center',
+				}}
+			>
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						gap: '.25rem',
+					}}
+				>
+					<Person />
+					<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
+				</Box>
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						gap: '.25rem',
+					}}
+				>
+					{item.members.find((member) => member.identity.id === address) ? (
+						<>
+							<span>
+								<Check />
+							</span>
+							<span>{'Joined'}</span>
+						</>
+					) : (
+						<>
+							<span>{item?.access === 0 ? <KeyOff /> : <Key />}</span>
+							<span>{item?.access === 0 ? 'Public' : 'Private'}</span>
+						</>
+					)}
+				</Box>
 			</Box>
 		)
 	}, [item, address])
@@ -47,10 +71,8 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 		<NavLink href={`${toLink}${item.id}`}>
 			<Card
 				sx={{
-					width: '344px',
-					height: '172px',
+					minHeight: '184px',
 					borderRadius: '16px',
-					background: '#212B36',
 					'&:hover': { borderColor: 'primary.main' },
 					...bgPlain,
 				}}
