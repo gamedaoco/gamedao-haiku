@@ -1,14 +1,21 @@
 import { useMemo } from 'react'
 import { useExtensionContext } from 'src/provider/extension/modules/context'
 import { NavLink } from 'src/components/NavLink/navLink'
+import { BodyData } from 'src/@types/bodydata'
+import { IpfsMetadata } from 'src/@types/ipfsmetadata'
 import { useTheme } from '@mui/material/styles'
 import { Typography, Card, Box, CardHeader, CardContent, Avatar } from '@mui/material'
 import { Person, Key, KeyOff, Check } from '@mui/icons-material'
 
+interface ComponentsPros {
+	item: BodyData
+	metadata: IpfsMetadata
+}
+
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
-export const TileCard = ({ item, metadata }) => {
+export const TileCard = ({ item, metadata }: ComponentsPros) => {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const bgPlain = { backgroundColor: theme.palette.grey[500_16] }

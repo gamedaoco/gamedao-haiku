@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { BodyData } from 'src/@types/bodydata'
+import { IpfsMetadata } from 'src/@types/ipfsmetadata'
 
 import { fetchIpfsJson } from 'src/utils/ipfs'
 
 import { TileCard } from './modules/tileCard'
-
-interface IpfsMetadata {
-	description: string
-	email: string
-	logo: string
-	name: string
-	repo: string
-	website: string
-}
 
 interface ComponentProps {
 	item: BodyData
