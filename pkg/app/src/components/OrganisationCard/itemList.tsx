@@ -2,7 +2,11 @@ import { Grid } from '@mui/material'
 import { BodyData } from 'src/@types/bodydata'
 import { Item } from './item'
 
-export function ItemList({ data }) {
+interface ComponentProps {
+	data: BodyData[]
+}
+
+export function ItemList({ data }: ComponentProps) {
 	if (!Array.isArray(data)) return null
 
 	return (
