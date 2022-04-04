@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import { Box, Button, Container, InputAdornment, Paper, Stack, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Container, InputAdornment, Paper, Stack, Typography } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Input } from './modules/input'
 import { Autocomplete } from './modules/autocomplete'
 import { Checkbox } from './modules/checkbox'
 import { Stepper } from './modules/stepper'
-import { memberships, project_durations, project_types, protocol_types } from 'src/utils/data'
 import { checkIsAddressValid } from 'src/utils/accountUtils'
 import * as Yup from 'yup'
+import { useDisplayValues } from 'hooks/useDisplayValues'
 
 const validationSchema = Yup.object().shape({
 	campaign_name: Yup.string().required('Campaign Name is required'),
@@ -25,44 +25,44 @@ const validationSchema = Yup.object().shape({
 	accept_terms: Yup.bool().oneOf([true], 'Accept Terms is required'),
 })
 
-const accounts = [
-	'3ZBh2L6YhhmBRWG8UavtA7zJnFcpTemUmSrL8LfH43Rym2WJ',
-	'3HHHHHHHHHHHHH8UavtA7zJnFcpTemUmSrL8LfH43Rym2WJ',
-	'3T9tBQ3UePp25qDcY8ncZfEhajn1iyVoj85mfLhb51VotMee',
-]
-
-const defaultValues = {
-	campaign_name: '',
-	org_name: memberships[0].value,
-	usage: project_types[0].value,
-	protocol: protocol_types[0].value,
-	deposit: 3,
-	cap: 99,
-	duration: project_durations[0].value,
-	governance: true,
-	accept_terms: false,
-}
-
 export function FormCampaign(props) {
 	const [stepperState, setStepperState] = useState(0)
-	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })
+	const displayValues = useDisplayValues()
+	const methods = useForm({
+		resolver: yupResolver(validationSchema),
+		defaultValues: {
+			campaign_name: '',
+			org_name: 0,
+			usage: 0,
+			protocol: 0,
+			deposit: 3,
+			cap: 99,
+			duration: 0,
+			governance: true,
+			accept_terms: false,
+		},
+	})
 	const {
 		handleSubmit,
 		control,
 		watch,
 		formState: { errors },
 	} = methods
-	const watchCampaignName = watch('campaign_name', '')
+
 	const onSubmit = (data) => {
 		const formData = JSON.stringify(data, null, 2)
 		alert(formData)
 		props.parentCallback(formData)
 	}
 
+	if (!displayValues) {
+		return <CircularProgress />
+	}
+
 	return (
 		<FormProvider {...methods}>
 			<Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" spacing={6}>
-				<Typography variant={'h3'}>{watchCampaignName || 'Untitled Campaign'}</Typography>
+				<Typography variant={'h3'}>{watch('campaign_name', '') || 'Untitled Campaign'}</Typography>
 				<Stepper stepperState={stepperState} />
 			</Stack>
 			<form>
@@ -75,7 +75,7 @@ export function FormCampaign(props) {
 								name="org_name"
 								label="Organization"
 								selectable
-								options={memberships}
+								options={displayValues.memberships}
 								placeholder="Organization"
 								control={control}
 							/>
@@ -99,13 +99,13 @@ export function FormCampaign(props) {
 
 						<Typography variant={'h5'}>Content</Typography>
 						<Typography variant={'h6'}>Logo (800 x 800px)</Typography>
-						<Box sx={{ width: 600, height: 200 }}></Box>
+						<Box sx={{ width: 600, height: 200 }} />
 
 						<Typography variant={'h6'}>Header Image (1920 x 800px)</Typography>
-						<Box sx={{ width: 600, height: 200 }}></Box>
+						<Box sx={{ width: 600, height: 200 }} />
 
 						<Typography variant={'h5'}>Content Description</Typography>
-						<Box sx={{ width: 600, height: 200 }}></Box>
+						<Box sx={{ width: 600, height: 200 }} />
 
 						<Typography variant={'h5'}>Public Representative</Typography>
 						<Stack direction={{ xs: 'column', md: 'row' }} spacing={6}>
@@ -115,19 +115,13 @@ export function FormCampaign(props) {
 
 						<Typography variant={'h5'}>Campaign Settings</Typography>
 						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" spacing={6}>
-							<Autocomplete
-								name="admin"
-								label="Admin Account"
-								options={accounts}
-								control={control}
-								required
-							/>
+							<Autocomplete name="admin" label="Admin Account" control={control} required />
 							<Input
 								name="usage"
 								label="Usage of funds"
 								placeholder="Usage"
 								selectable
-								options={project_types}
+								options={displayValues.projectTypes}
 								control={control}
 							/>
 						</Stack>
@@ -137,7 +131,7 @@ export function FormCampaign(props) {
 							label={'protocol'}
 							placeholder="Protocol"
 							selectable
-							options={protocol_types}
+							options={displayValues.protocolTypes}
 							control={control}
 						/>
 
@@ -165,7 +159,7 @@ export function FormCampaign(props) {
 								label="Campaign Duration"
 								placeholder="Campaign Duration"
 								selectable
-								options={project_durations}
+								options={displayValues.projectDurations}
 								control={control}
 							/>
 						</Stack>

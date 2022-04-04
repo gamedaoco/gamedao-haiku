@@ -376,6 +376,48 @@ export type Config = {
 	readonly UNSPLASH_SECRET?: Maybe<Scalars['String']>
 }
 
+export type DisplayValueEntry = {
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+}
+
+export type DisplayValueEntryCountry = DisplayValueEntry & {
+	readonly __typename?: 'DisplayValueEntryCountry'
+	readonly flag: Scalars['String']
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+	readonly value: Scalars['String']
+}
+
+export type DisplayValueEntryNumber = DisplayValueEntry & {
+	readonly __typename?: 'DisplayValueEntryNumber'
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+	readonly value: Scalars['Int']
+}
+
+export type DisplayValueEntryString = DisplayValueEntry & {
+	readonly __typename?: 'DisplayValueEntryString'
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+	readonly value: Scalars['String']
+}
+
+export type DisplayValues = {
+	readonly __typename?: 'DisplayValues'
+	readonly collateralTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly countries?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryCountry>>>
+	readonly daoBodies?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly daoFeeModel?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly daoMemberGovernance?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly memberships?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly projectDurations?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+}
+
 export enum Environment {
 	Development = 'DEVELOPMENT',
 	Production = 'PRODUCTION',
@@ -649,6 +691,7 @@ export type Query = {
 	/** fetch data from the table: "collections" using primary key columns */
 	readonly collections_by_pk?: Maybe<Collections>
 	readonly config: Config
+	readonly displayValues?: Maybe<DisplayValues>
 	/** fetch data from the table: "distinct_kanaria_nfts" */
 	readonly distinct_kanaria_nfts: ReadonlyArray<Distinct_Kanaria_Nfts>
 	/** fetch aggregated fields from the table: "distinct_kanaria_nfts" */
@@ -7349,6 +7392,14 @@ export type ResolversTypes = ResolversObject<{
 	Bytes: ResolverTypeWrapper<Scalars['Bytes']>
 	Config: ResolverTypeWrapper<Config>
 	DateTime: ResolverTypeWrapper<Scalars['DateTime']>
+	DisplayValueEntry:
+		| ResolversTypes['DisplayValueEntryCountry']
+		| ResolversTypes['DisplayValueEntryNumber']
+		| ResolversTypes['DisplayValueEntryString']
+	DisplayValueEntryCountry: ResolverTypeWrapper<DisplayValueEntryCountry>
+	DisplayValueEntryNumber: ResolverTypeWrapper<DisplayValueEntryNumber>
+	DisplayValueEntryString: ResolverTypeWrapper<DisplayValueEntryString>
+	DisplayValues: ResolverTypeWrapper<DisplayValues>
 	Environment: Environment
 	Features: ResolverTypeWrapper<Features>
 	Float: ResolverTypeWrapper<Scalars['Float']>
@@ -7803,6 +7854,14 @@ export type ResolversParentTypes = ResolversObject<{
 	Bytes: Scalars['Bytes']
 	Config: Config
 	DateTime: Scalars['DateTime']
+	DisplayValueEntry:
+		| ResolversParentTypes['DisplayValueEntryCountry']
+		| ResolversParentTypes['DisplayValueEntryNumber']
+		| ResolversParentTypes['DisplayValueEntryString']
+	DisplayValueEntryCountry: DisplayValueEntryCountry
+	DisplayValueEntryNumber: DisplayValueEntryNumber
+	DisplayValueEntryString: DisplayValueEntryString
+	DisplayValues: DisplayValues
 	Features: Features
 	Float: Scalars['Float']
 	Float_comparison_exp: Float_Comparison_Exp
@@ -8317,6 +8376,112 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 	name: 'DateTime'
 }
 
+export type DisplayValueEntryResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['DisplayValueEntry'] = ResolversParentTypes['DisplayValueEntry'],
+> = ResolversObject<{
+	__resolveType: TypeResolveFn<
+		'DisplayValueEntryCountry' | 'DisplayValueEntryNumber' | 'DisplayValueEntryString',
+		ParentType,
+		ContextType
+	>
+	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+}>
+
+export type DisplayValueEntryCountryResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['DisplayValueEntryCountry'] = ResolversParentTypes['DisplayValueEntryCountry'],
+> = ResolversObject<{
+	flag?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	value?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type DisplayValueEntryNumberResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['DisplayValueEntryNumber'] = ResolversParentTypes['DisplayValueEntryNumber'],
+> = ResolversObject<{
+	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	value?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type DisplayValueEntryStringResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['DisplayValueEntryString'] = ResolversParentTypes['DisplayValueEntryString'],
+> = ResolversObject<{
+	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	value?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type DisplayValuesResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['DisplayValues'] = ResolversParentTypes['DisplayValues'],
+> = ResolversObject<{
+	collateralTypes?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	countries?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryCountry']>>>,
+		ParentType,
+		ContextType
+	>
+	daoBodies?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	daoFeeModel?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	daoMemberGovernance?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	memberships?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	projectDurations?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	projectTypes?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	proposalTypes?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	protocolTypes?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	votingTypes?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
 export type FeaturesResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Features'] = ResolversParentTypes['Features'],
@@ -8531,6 +8696,7 @@ export type QueryResolvers<
 		RequireFields<QueryCollections_By_PkArgs, 'id'>
 	>
 	config?: Resolver<ResolversTypes['Config'], ParentType, ContextType, RequireFields<QueryConfigArgs, 'env'>>
+	displayValues?: Resolver<Maybe<ResolversTypes['DisplayValues']>, ParentType, ContextType>
 	distinct_kanaria_nfts?: Resolver<
 		ReadonlyArray<ResolversTypes['distinct_kanaria_nfts']>,
 		ParentType,
@@ -12355,6 +12521,11 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	Bytes?: GraphQLScalarType
 	Config?: ConfigResolvers<ContextType>
 	DateTime?: GraphQLScalarType
+	DisplayValueEntry?: DisplayValueEntryResolvers<ContextType>
+	DisplayValueEntryCountry?: DisplayValueEntryCountryResolvers<ContextType>
+	DisplayValueEntryNumber?: DisplayValueEntryNumberResolvers<ContextType>
+	DisplayValueEntryString?: DisplayValueEntryStringResolvers<ContextType>
+	DisplayValues?: DisplayValuesResolvers<ContextType>
 	Features?: FeaturesResolvers<ContextType>
 	IdentitiesConnection?: IdentitiesConnectionResolvers<ContextType>
 	Identity?: IdentityResolvers<ContextType>

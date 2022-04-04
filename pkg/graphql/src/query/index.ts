@@ -377,6 +377,48 @@ export type Config = {
 	readonly UNSPLASH_SECRET?: Maybe<Scalars['String']>
 }
 
+export type DisplayValueEntry = {
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+}
+
+export type DisplayValueEntryCountry = DisplayValueEntry & {
+	readonly __typename?: 'DisplayValueEntryCountry'
+	readonly flag: Scalars['String']
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+	readonly value: Scalars['String']
+}
+
+export type DisplayValueEntryNumber = DisplayValueEntry & {
+	readonly __typename?: 'DisplayValueEntryNumber'
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+	readonly value: Scalars['Int']
+}
+
+export type DisplayValueEntryString = DisplayValueEntry & {
+	readonly __typename?: 'DisplayValueEntryString'
+	readonly key: Scalars['String']
+	readonly text: Scalars['String']
+	readonly value: Scalars['String']
+}
+
+export type DisplayValues = {
+	readonly __typename?: 'DisplayValues'
+	readonly collateralTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly countries?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryCountry>>>
+	readonly daoBodies?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly daoFeeModel?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly daoMemberGovernance?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly memberships?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly projectDurations?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+}
+
 export enum Environment {
 	Development = 'DEVELOPMENT',
 	Production = 'PRODUCTION',
@@ -650,6 +692,7 @@ export type Query = {
 	/** fetch data from the table: "collections" using primary key columns */
 	readonly collections_by_pk?: Maybe<Collections>
 	readonly config: Config
+	readonly displayValues?: Maybe<DisplayValues>
 	/** fetch data from the table: "distinct_kanaria_nfts" */
 	readonly distinct_kanaria_nfts: ReadonlyArray<Distinct_Kanaria_Nfts>
 	/** fetch aggregated fields from the table: "distinct_kanaria_nfts" */
@@ -7324,6 +7367,82 @@ export type ConfigQuery = {
 	}
 }
 
+export type DisplayValuesQueryVariables = Exact<{ [key: string]: never }>
+
+export type DisplayValuesQuery = {
+	readonly __typename?: 'Query'
+	readonly displayValues?: {
+		readonly __typename?: 'DisplayValues'
+		readonly collateralTypes?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly proposalTypes?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly votingTypes?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly daoBodies?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly daoMemberGovernance?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly daoFeeModel?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly projectTypes?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly protocolTypes?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly projectDurations?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly memberships?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryNumber'
+			readonly key: string
+			readonly value: number
+			readonly text: string
+		} | null> | null
+		readonly countries?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryCountry'
+			readonly key: string
+			readonly value: string
+			readonly text: string
+			readonly flag: string
+		} | null> | null
+	} | null
+}
+
 export type FeaturesQueryVariables = Exact<{
 	env: Environment
 }>
@@ -7494,6 +7613,99 @@ export function useConfigLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Con
 export type ConfigQueryHookResult = ReturnType<typeof useConfigQuery>
 export type ConfigLazyQueryHookResult = ReturnType<typeof useConfigLazyQuery>
 export type ConfigQueryResult = Apollo.QueryResult<ConfigQuery, ConfigQueryVariables>
+export const DisplayValuesDocument = gql`
+	query DisplayValues {
+		displayValues {
+			collateralTypes {
+				key
+				value
+				text
+			}
+			proposalTypes {
+				key
+				value
+				text
+			}
+			votingTypes {
+				key
+				value
+				text
+			}
+			daoBodies {
+				key
+				value
+				text
+			}
+			daoMemberGovernance {
+				key
+				value
+				text
+			}
+			daoFeeModel {
+				key
+				value
+				text
+			}
+			projectTypes {
+				key
+				value
+				text
+			}
+			protocolTypes {
+				key
+				value
+				text
+			}
+			projectDurations {
+				key
+				value
+				text
+			}
+			memberships {
+				key
+				value
+				text
+			}
+			countries {
+				key
+				value
+				text
+				flag
+			}
+		}
+	}
+`
+
+/**
+ * __useDisplayValuesQuery__
+ *
+ * To run a query within a React component, call `useDisplayValuesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDisplayValuesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDisplayValuesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDisplayValuesQuery(
+	baseOptions?: Apollo.QueryHookOptions<DisplayValuesQuery, DisplayValuesQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<DisplayValuesQuery, DisplayValuesQueryVariables>(DisplayValuesDocument, options)
+}
+export function useDisplayValuesLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<DisplayValuesQuery, DisplayValuesQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<DisplayValuesQuery, DisplayValuesQueryVariables>(DisplayValuesDocument, options)
+}
+export type DisplayValuesQueryHookResult = ReturnType<typeof useDisplayValuesQuery>
+export type DisplayValuesLazyQueryHookResult = ReturnType<typeof useDisplayValuesLazyQuery>
+export type DisplayValuesQueryResult = Apollo.QueryResult<DisplayValuesQuery, DisplayValuesQueryVariables>
 export const FeaturesDocument = gql`
 	query Features($env: Environment!) {
 		features(env: $env) {

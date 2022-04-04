@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
@@ -10,10 +10,13 @@ import { CircularProgress } from '@mui/material'
 
 export function OrganisationPage() {
 	const { loading, error, data } = useBodiesQuery()
-	if (error) {
-		console.error(error)
-		return <div>Error!</div>
-	}
+	console.log('data------>', data)
+	useEffect(() => {
+		if (error) {
+			console.error('There is an error when querying the display values')
+		}
+	}, [error])
+
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box sx={{ p: { sx: '.5rem', sm: '1rem', lg: '4rem' }, minHeight: '90vh' }}>

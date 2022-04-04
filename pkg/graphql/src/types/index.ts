@@ -374,6 +374,48 @@ export type Config = {
 	UNSPLASH_SECRET?: Maybe<Scalars['String']>
 }
 
+export type DisplayValueEntry = {
+	key: Scalars['String']
+	text: Scalars['String']
+}
+
+export type DisplayValueEntryCountry = DisplayValueEntry & {
+	__typename?: 'DisplayValueEntryCountry'
+	flag: Scalars['String']
+	key: Scalars['String']
+	text: Scalars['String']
+	value: Scalars['String']
+}
+
+export type DisplayValueEntryNumber = DisplayValueEntry & {
+	__typename?: 'DisplayValueEntryNumber'
+	key: Scalars['String']
+	text: Scalars['String']
+	value: Scalars['Int']
+}
+
+export type DisplayValueEntryString = DisplayValueEntry & {
+	__typename?: 'DisplayValueEntryString'
+	key: Scalars['String']
+	text: Scalars['String']
+	value: Scalars['String']
+}
+
+export type DisplayValues = {
+	__typename?: 'DisplayValues'
+	collateralTypes?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	countries?: Maybe<Array<Maybe<DisplayValueEntryCountry>>>
+	daoBodies?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	daoFeeModel?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	daoMemberGovernance?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	memberships?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	projectDurations?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	projectTypes?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	proposalTypes?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	protocolTypes?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+	votingTypes?: Maybe<Array<Maybe<DisplayValueEntryNumber>>>
+}
+
 export enum Environment {
 	Development = 'DEVELOPMENT',
 	Production = 'PRODUCTION',
@@ -647,6 +689,7 @@ export type Query = {
 	/** fetch data from the table: "collections" using primary key columns */
 	collections_by_pk?: Maybe<Collections>
 	config: Config
+	displayValues?: Maybe<DisplayValues>
 	/** fetch data from the table: "distinct_kanaria_nfts" */
 	distinct_kanaria_nfts: Array<Distinct_Kanaria_Nfts>
 	/** fetch aggregated fields from the table: "distinct_kanaria_nfts" */

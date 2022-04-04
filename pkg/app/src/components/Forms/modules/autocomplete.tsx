@@ -1,16 +1,17 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
 import { TextField, Autocomplete as MUIAutocomplete } from '@mui/material'
+import { useAddresses } from 'hooks/useAddresses'
 
 interface ComponentProps {
-	options: any
 	name: string
 	control: any
 	label: string
 	required?: boolean
 }
 
-export const Autocomplete = ({ name, control, label, options, required }: ComponentProps) => {
+export const Autocomplete = ({ name, control, label, required }: ComponentProps) => {
+	const options = useAddresses()
 	return (
 		<Controller
 			name={name}
