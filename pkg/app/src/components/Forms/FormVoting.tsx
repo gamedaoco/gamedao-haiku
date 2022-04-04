@@ -1,42 +1,51 @@
 import React, { useState } from 'react'
-import { Typography, Stack, Paper, Button, Box, Divider, InputAdornment, Container } from '@mui/material'
+import {
+	Typography,
+	Stack,
+	Paper,
+	Button,
+	Box,
+	Divider,
+	InputAdornment,
+	Container,
+	CircularProgress,
+} from '@mui/material'
 import { Input } from './modules/input'
 import { useForm, FormProvider } from 'react-hook-form'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {
-	proposal_types,
-	voting_types,
-	collateral_types,
-	project_durations,
-	protocol_types,
-	memberships,
-} from 'src/utils/data'
+import { useDisplayValues } from 'hooks/useDisplayValues'
 
 const validationSchema = Yup.object().shape({
 	title: Yup.string().required('Proposal title is required'),
 })
 
-const defaultValues = {
-	entity: '',
-	proposal_type: proposal_types[0].value,
-	voting_type: voting_types[0].value,
-	collateral_type: collateral_types[0].value,
-	collateral_amount: '',
-	state: 'now',
-	duration: project_durations[0].value,
-	amount: '',
-}
-
 export function FormVoting(props) {
 	const [votingType, setVotingType] = useState(0)
+	const displayValues = useDisplayValues()
+	const methods = useForm({
+		resolver: yupResolver(validationSchema),
+		defaultValues: {
+			entity: '',
+			proposal_type: 0,
+			voting_type: 0,
+			collateral_type: 0,
+			collateral_amount: '',
+			state: 'now',
+			duration: 0,
+			amount: '',
+		},
+	})
 
-	const methods = useForm({ resolver: yupResolver(validationSchema), defaultValues: defaultValues })
 	const { handleSubmit, control, getValues } = methods
 	const onSubmit = (data) => {
 		const formData = JSON.stringify(data, null, 2)
 		alert(formData)
 		props.parentCallback(formData)
+	}
+
+	if (!displayValues) {
+		return <CircularProgress />
 	}
 
 	return (
@@ -50,14 +59,14 @@ export function FormVoting(props) {
 								name="entity"
 								label="Organization"
 								selectable
-								options={memberships}
+								options={displayValues.memberships}
 								control={control}
 							/>
 							<Input
 								name="proposal_type"
 								label="Proposal Type"
 								selectable
-								options={protocol_types}
+								options={displayValues.proposalTypes}
 								control={control}
 							/>
 						</Stack>
@@ -75,7 +84,7 @@ export function FormVoting(props) {
 								name="voting_type"
 								label="Voting Type"
 								selectable
-								options={voting_types}
+								options={displayValues.votingTypes}
 								control={control}
 							/>
 							{votingType > 0 ? (
@@ -84,7 +93,7 @@ export function FormVoting(props) {
 										name="collateral_type"
 										label="Collateral Type"
 										selectable
-										options={collateral_types}
+										options={displayValues.collateralTypes}
 										control={control}
 									/>
 									<Input
@@ -112,7 +121,7 @@ export function FormVoting(props) {
 								name="duration"
 								label="Duration"
 								selectable
-								options={project_durations}
+								options={displayValues.projectDurations}
 								control={control}
 							/>
 						</Stack>

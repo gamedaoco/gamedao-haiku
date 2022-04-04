@@ -58,9 +58,51 @@ type Config {
     SUBZERO_PORT: String
 }
 
+
+interface DisplayValueEntry {
+    key: String!
+    text: String!
+}
+
+type DisplayValueEntryNumber implements DisplayValueEntry{
+    key: String!
+    text: String!
+    value: Int!
+}
+
+type DisplayValueEntryString implements DisplayValueEntry{
+    key: String!
+    text: String!
+    value: String!
+}
+
+type DisplayValueEntryCountry implements DisplayValueEntry{
+    key: String!
+    text: String!
+    flag: String!
+    value: String!
+}
+
+type DisplayValues {
+    collateralTypes: [DisplayValueEntryNumber]
+    proposalTypes: [DisplayValueEntryNumber]
+    votingTypes: [DisplayValueEntryNumber]
+    daoBodies: [DisplayValueEntryNumber]
+    daoMemberGovernance: [DisplayValueEntryNumber]
+    daoFeeModel: [DisplayValueEntryNumber]
+    projectTypes: [DisplayValueEntryNumber]
+    protocolTypes: [DisplayValueEntryNumber]
+    projectDurations: [DisplayValueEntryNumber]
+    memberships: [DisplayValueEntryNumber]
+    countries: [DisplayValueEntryCountry]
+}
+
+
+
 type Query {
     version: String!
     links: [Link]!
     config(env: Environment!): Config!
     features(env: Environment!): Features!
+    displayValues: DisplayValues
 }
