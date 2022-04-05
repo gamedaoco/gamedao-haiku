@@ -10,7 +10,6 @@ import { CircularProgress } from '@mui/material'
 
 export function OrganisationPage() {
 	const { loading, error, data } = useBodiesQuery()
-	console.log('data------>', data)
 	useEffect(() => {
 		if (error) {
 			console.error('There is an error when querying the display values')

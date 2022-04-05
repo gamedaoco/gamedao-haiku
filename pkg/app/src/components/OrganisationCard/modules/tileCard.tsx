@@ -4,7 +4,7 @@ import { NavLink } from 'src/components/NavLink/navLink'
 import { BodyData } from 'src/@types/bodydata'
 import { IpfsMetadata } from 'src/@types/ipfsmetadata'
 import { useTheme } from '@mui/material/styles'
-import { Typography, Card, Box, CardHeader, CardContent, Avatar } from '@mui/material'
+import { Typography, Card, Box, CardHeader, CardContent, Avatar, CircularProgress } from '@mui/material'
 import { Person, Key, KeyOff, Check } from '@mui/icons-material'
 
 interface ComponentsPros {
@@ -67,14 +67,23 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 		)
 	}, [item, address])
 
+	if (!item || !metadata) {
+		return (
+			<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<CircularProgress color="inherit" />
+			</Box>
+		)
+	}
+
 	return (
 		<NavLink href={`${toLink}${item.id}`}>
 			<Card
 				sx={{
 					minHeight: '184px',
 					borderRadius: '16px',
-					'&:hover': { borderColor: 'primary.main' },
+					'&:hover': { background: theme.palette.grey[500_32] },
 					...bgPlain,
+					cursor: 'pointer',
 				}}
 			>
 				<CardHeader
