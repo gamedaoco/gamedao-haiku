@@ -9,7 +9,7 @@ interface Executor {
 
 async function remoteExecutor({ document, variables }: Executor) {
 	const query = print(document)
-	const fetchResult = await fetch('https://app.gc.subsquid.io/beta/test-gamedao-indexer/v003/graphql', {
+	const fetchResult = await fetch('https://app.gc.subsquid.io/beta/test-gamedao-indexer/v005/graphql', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ query, variables }),

@@ -1,7 +1,6 @@
 query Bodies {
     bodies {
         id
-        name
         members {
             identity {
                 id
