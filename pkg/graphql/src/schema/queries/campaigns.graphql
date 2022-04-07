@@ -1,13 +1,18 @@
-query Bodies {
-    bodies {
+query Campaigns {
+    campaigns {
         id
+        tokenName
+        tokenSymbol
+        isFinished
+        isFunded
         metadata {
             name
             description
             logo
         }
-        members {
+        contributors {
             address
+            contributed
             identity {
                 displayName
             }
