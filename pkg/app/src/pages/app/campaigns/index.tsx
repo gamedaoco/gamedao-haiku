@@ -7,9 +7,12 @@ import Button from '@mui/material/Button'
 import { FormCampaign } from 'components/Forms/FormCampaign'
 
 import { Layout } from 'src/layouts/default/layout'
+import { useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
+import { CircularProgress } from '@mui/material'
 
 export function Campaigns() {
 	const [isShow, setIsShow] = useState(false)
+	const { loading, data } = useCampaignsQuery()
 
 	const callback = (data: any) => {
 		console.log('yes gotcha', data)
@@ -48,11 +51,40 @@ export function Campaigns() {
 			{isShow ? (
 				<FormCampaign parentCallback={callback} isCloseCampaign={setVisible} />
 			) : (
-				<Box sx={{ p: '4rem', height: '90vh' }}>
+				<Box sx={{ p: '4rem', minHeight: '90vh' }}>
 					<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-							Hello! Campaign
+							Hello. Campaigns count: {loading ? <CircularProgress /> : data?.campaigns.length}
 						</Typography>
+						{data && (
+							<ul>
+								{data.campaigns.map((campaign) => (
+									<li key={campaign.id}>
+										<div>
+											Name: {campaign.metadata.name} (Token: {campaign.tokenName})
+										</div>
+										<ul>
+											<li>isFinished: {campaign.isFinished ? 'Yes' : 'No'}</li>
+											{campaign.isFinished && (
+												<li>isFunded: {campaign.isFunded ? 'Yes' : 'No (Expired)'}</li>
+											)}
+										</ul>
+										<div>
+											Contributors:
+											<ul>
+												{campaign.contributors.map((contributor) => (
+													<li key={`${campaign.id}-${contributor.address}`}>
+														{contributor.identity.displayName ?? contributor.address}:{' '}
+														{(contributor.contributed / Math.pow(10, 18)).toPrecision(2)}{' '}
+														{campaign.tokenSymbol}
+													</li>
+												))}
+											</ul>
+										</div>
+									</li>
+								))}
+							</ul>
+						)}
 					</Paper>
 				</Box>
 			)}
