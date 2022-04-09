@@ -3,9 +3,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material'
-
 import { FormDao } from 'components/Forms/FormDao'
-
 import { Layout } from 'src/layouts/default/layout'
 
 export function AppPage() {

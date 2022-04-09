@@ -53,7 +53,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			sx={{
 				'& .MuiPaper-root': {
 					width: '90px',
-					top: showHeader ? 64 : 0,
+					top: showHeader ? 90 : 0,
 					bottom: 0,
 					height: 'auto',
 					backgroundColor: theme.palette.background.default,
@@ -100,7 +100,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 					</Stack>
 				)}
 				<Stack alignItems="center" spacing={2} width="100%">
-					<Divider sx={{ width: '50%' }} />
+					{(loading || data) && <Divider sx={{ width: '50%' }} />}
 					<Fab
 						color={'primary'}
 						aria-label="add"

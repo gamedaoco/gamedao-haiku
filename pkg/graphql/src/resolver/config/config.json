@@ -19,7 +19,8 @@
     "AWS_USERPOOL_ID": "eu-central-1_S8Cabr4g4",
     "AWS_USERPOOL_WEBCLIENT_ID": "5aqrro1fmt7atfmov5ch2uar95",
     "GQL_URI": "http://localhost:28080/v1/graphql",
-    "GQL_KEY": "i-HFXk_txMvwZL4Ej7dphgCZ"
+    "GQL_KEY": "i-HFXk_txMvwZL4Ej7dphgCZ",
+    "IPFS_GATEWAY": "https://gamedao.infura-ipfs.io/"
   },
   "dev": {
     "ETH_URI": "http://localhost:8545",

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Stack from '@mui/material/Stack'
@@ -7,14 +7,32 @@ import { AccountSelector, FontIcons } from 'src/components'
 import { useTheme } from '@mui/material/styles'
 import { NavLink } from 'src/components/NavLink/navLink'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 interface ComponentProps {
 	onSidebarOpen: () => void
 }
 
+// TODO: Extract to features / graphql
+const urls = [
+	{
+		name: 'button:navigation:organisations',
+		path: '/app/organisations',
+	},
+	{
+		name: 'button:navigation:campaigns',
+		path: '/app/campaigns',
+	},
+	{
+		name: 'button:navigation:wallet',
+		path: '/app/wallet',
+	},
+]
+
 export function Header({ onSidebarOpen }: ComponentProps) {
 	const theme = useTheme()
+	const { t } = useTranslation()
 
 	return (
 		<AppBar position="fixed" elevation={0}>
@@ -24,13 +42,34 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 					borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
 					justifyContent: 'space-between',
 					alignItems: 'center',
+					height: '90px',
 				}}
 			>
-				<Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 2, marginTop: 1 }}>
+				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
 					<NavLink href="/">
-						<FontIcons name={'logo'} sx={{ color: theme.palette.text.primary }} />
+						<FontIcons
+							name={'logo'}
+							sx={{
+								color: theme.palette.text.primary,
+								fontSize: '3rem',
+								lineHeight: 0,
+								display: 'block',
+							}}
+						/>
 					</NavLink>
 				</Box>
+
+				<Stack direction="row" alignItems="center" spacing={4} minWidth="60%">
+					{urls.map((navItem) => {
+						return (
+							<Fragment key={navItem.name}>
+								<NavLink href={navItem.path}>
+									<Typography sx={{ cursor: 'pointer' }}>{t(navItem.name)}</Typography>
+								</NavLink>
+							</Fragment>
+						)
+					})}
+				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
 					<AccountSelector />

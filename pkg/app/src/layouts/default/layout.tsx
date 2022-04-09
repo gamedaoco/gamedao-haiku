@@ -4,6 +4,7 @@ import { Header } from './modules/header'
 import { Sidebar } from './modules/sidebar'
 import { Footer } from './modules/footer'
 import { useCallback, useState } from 'react'
+import { HeaderMobile } from 'layouts/default/modules/headerMobile'
 
 interface ComponentProps {
 	showHeader?: boolean
@@ -47,9 +48,13 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				/>
 			)}
 
-			{showHeader && <Header onSidebarOpen={handleSidebarOpen} />}
+			{showHeader && isMd ? (
+				<Header onSidebarOpen={handleSidebarOpen} />
+			) : (
+				<HeaderMobile onSidebarOpen={handleSidebarOpen} />
+			)}
 
-			<Box height={{ xs: 58, sm: 66, md: 71 }} />
+			{showHeader && <Box height={90} />}
 			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>
 				<Box display="flex" flex="1 1 auto" overflow="hidden">
 					<Box flex="1 1 auto" height="100%" overflow="auto">

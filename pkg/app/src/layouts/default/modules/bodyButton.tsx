@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { Avatar, Tooltip, Box, Badge } from '@mui/material'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import { useRouter } from 'next/router'
+import { useConfig } from 'hooks/useConfig'
 
 interface ComponentProps {
 	id: string
@@ -13,6 +14,7 @@ interface ComponentProps {
 
 export function BodyButton({ id, logo, name, active, notification }: ComponentProps) {
 	const { push } = useRouter()
+	const config = useConfig()
 	const navigateCall = useCallback(() => {
 		push(`app/organisations/${id}`)
 	}, [id, push])
@@ -75,7 +77,7 @@ export function BodyButton({ id, logo, name, active, notification }: ComponentPr
 						},
 					})}
 					alt={name}
-					src={parseIpfsHash(logo ?? '')}
+					src={parseIpfsHash(logo ?? '', config.IPFS_GATEWAY)}
 				>
 					<img src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} />
 				</Avatar>
