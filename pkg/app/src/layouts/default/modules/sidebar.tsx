@@ -62,7 +62,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			}}
 		>
 			<Stack pb={3} alignItems="center" height="100%" width="100%">
-				{(loading || data) && (
+				{(loading || (data && selectedAccount)) && (
 					<Stack
 						spacing={2}
 						py={2}
@@ -100,11 +100,12 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 					</Stack>
 				)}
 				<Stack alignItems="center" spacing={2} width="100%">
-					{(loading || data) && <Divider sx={{ width: '50%' }} />}
+					{(loading || (data && selectedAccount)) && <Divider sx={{ width: '50%' }} />}
 					<Fab
 						color={'primary'}
 						aria-label="add"
 						sx={{
+							mt: 1,
 							width: '48px',
 							height: '48px',
 						}}
