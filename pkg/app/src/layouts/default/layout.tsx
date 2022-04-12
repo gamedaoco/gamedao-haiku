@@ -48,11 +48,12 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				/>
 			)}
 
-			{showHeader && isMd ? (
-				<Header onSidebarOpen={handleSidebarOpen} />
-			) : (
-				<HeaderMobile onSidebarOpen={handleSidebarOpen} />
-			)}
+			{showHeader &&
+				(isMd ? (
+					<Header onSidebarOpen={handleSidebarOpen} />
+				) : (
+					<HeaderMobile onSidebarOpen={handleSidebarOpen} />
+				))}
 
 			{showHeader && <Box height={90} />}
 			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>

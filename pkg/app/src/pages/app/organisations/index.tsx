@@ -2,10 +2,9 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-
 import { Layout } from 'src/layouts/default/layout'
 
-export function DAOPage() {
+export function OrganisationsPage() {
 	return (
 		<Layout showHeader showFooter showSidebar title="DAO">
 			<Box sx={{ p: '4rem', height: '90vh' }}>
@@ -19,4 +18,4 @@ export function DAOPage() {
 	)
 }
 
-export default DAOPage
+export default OrganisationsPage

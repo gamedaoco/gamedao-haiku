@@ -6,7 +6,7 @@ import { Add as AddIcon } from '@mui/icons-material'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
 import { createErrorNotification } from 'src/utils/notificationUtils'
-import { BodyButton } from 'layouts/default/modules/bodyButton'
+import { BodyButtonMemoized } from 'layouts/default/modules/bodyButton'
 import { useExtensionContext } from 'provider/extension/modules/context'
 
 interface ComponentProps {
@@ -19,7 +19,7 @@ interface ComponentProps {
 export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) {
 	const theme = useTheme()
 	const address = useCurrentAccountAddress()
-	const { pathname, push } = useRouter()
+	const { push } = useRouter()
 	const { w3Enabled, connectWallet, selectedAccount } = useExtensionContext()
 	const [loadSideBarForAddress, { error, loading, data }] = useSidebarLazyQuery()
 
@@ -76,7 +76,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 							<CircularProgress
 								sx={{
 									width: '48px',
-									minHeight: '48px',
+									height: '48px',
 									margin: 'auto',
 								}}
 							/>
@@ -87,11 +87,11 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 								?.map((body, i) => {
 									return (
 										<Fragment key={body?.id}>
-											<BodyButton
+											<BodyButtonMemoized
 												id={body?.id}
 												logo={body?.metadata?.logo}
 												name={body?.metadata?.name}
-												active={pathname?.indexOf(body?.id) >= 0}
+												active={location?.pathname?.indexOf(body?.id) >= 0}
 												notification={i % 2 == 0}
 											/>
 										</Fragment>
