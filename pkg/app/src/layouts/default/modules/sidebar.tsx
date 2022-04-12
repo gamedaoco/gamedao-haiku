@@ -69,7 +69,11 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 						width={'100%'}
 						alignItems="center"
 						sx={{
-							overflow: 'auto',
+							overflow: 'scroll',
+							'&::-webkit-scrollbar': {
+								width: 0,
+								background: 'transparent',
+							},
 						}}
 					>
 						{loading && (
