@@ -12,5 +12,7 @@ query Bodies {
                 displayName
             }
         }
+        cid
+        access
     }
 }

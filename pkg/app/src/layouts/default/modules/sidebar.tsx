@@ -91,6 +91,17 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 					<SidebarNavItem href="/app" name="dashboard">
 						{t('button:navigation:dashboard')}
 					</SidebarNavItem>
+					<SidebarNavItem href="/app/organisations" name="organisation">
+						Organisations
+						{counter.gov > 0 && (
+							<NavBadge
+								sx={{ ml: '0.5rem' }}
+								badgeContent={counter.gov}
+								color={'primary'}
+								variant="dot"
+							/>
+						)}
+					</SidebarNavItem>
 					<SidebarNavItem href="/app/governance" name="voting">
 						{t('button:navigation:governance')}
 						{counter.gov > 0 && (
