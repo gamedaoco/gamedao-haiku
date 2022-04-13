@@ -56,6 +56,7 @@ type Config {
     IPFS_URI: String
     SUBZERO_URI: String
     SUBZERO_PORT: String
+    IPFS_GATEWAY: String
 }
 
 
