@@ -70,9 +70,19 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 						alignItems="center"
 						sx={{
 							overflow: 'scroll',
+							position: 'relative',
 							'&::-webkit-scrollbar': {
 								width: 0,
 								background: 'transparent',
+							},
+							':after': {
+								position: 'absolute',
+								content: '""',
+								top: 0,
+								bottom: 0,
+								left: 0,
+								right: 0,
+								backgroundImage: `linear-gradient(to bottom,transparent 90%, ${theme.palette.background.default})`,
 							},
 						}}
 					>
