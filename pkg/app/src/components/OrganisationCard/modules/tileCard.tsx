@@ -16,6 +16,7 @@ const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
 export const TileCard = ({ item, metadata }: ComponentsPros) => {
+	console.log({ item })
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const bgPlain = { backgroundColor: theme.palette.grey[500_16] }
@@ -87,10 +88,10 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 						<CardHeader
 							avatar={
 								<Avatar src={`${gateway}${metadata?.logo}`} sx={{ width: 64, height: 64 }}>
-									{item?.name.slice(0, 1)}
+									{metadata?.name?.slice(0, 1)}
 								</Avatar>
 							}
-							title={<Typography noWrap>{item?.name}</Typography>}
+							title={<Typography noWrap>{metadata?.name}</Typography>}
 							subheader={SubHeader}
 						/>
 						<CardContent>
