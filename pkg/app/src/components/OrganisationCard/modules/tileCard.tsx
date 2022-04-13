@@ -5,21 +5,21 @@ import { BodyData } from 'src/@types/bodydata'
 import { IpfsMetadata } from 'src/@types/ipfsmetadata'
 import { useTheme } from '@mui/material/styles'
 import { Typography, Card, Box, CardHeader, CardContent, Avatar, CircularProgress } from '@mui/material'
-import { Person, Key, KeyOff, Check } from '@mui/icons-material'
+import { Person, Key, Check } from '@mui/icons-material'
 
 interface ComponentsPros {
 	item: BodyData
 	metadata: IpfsMetadata
+	loading?: boolean
 }
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
 export const TileCard = ({ item, metadata }: ComponentsPros) => {
-	console.log({ item })
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
-	const bgPlain = { backgroundColor: theme.palette.grey[500_16] }
+	const bgPlain = { backgroundColor: '#212B36' }
 	const address = selectedAccount?.account.address
 
 	const SubHeader = useMemo(() => {
@@ -27,7 +27,7 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 			<Box
 				sx={{
 					display: 'flex',
-					gap: '.25rem',
+					gap: '1.25rem',
 					flexWrap: 'wrap',
 					justifyContent: 'flex-start',
 					alignItems: 'center',
@@ -40,7 +40,7 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 						gap: '.25rem',
 					}}
 				>
-					<Person />
+					<Person fontSize={'small'} />
 					<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
 				</Box>
 				<Box
@@ -58,10 +58,18 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 							<span>{'Joined'}</span>
 						</>
 					) : (
-						<>
-							<span>{item?.access === 0 ? <KeyOff /> : <Key />}</span>
-							<span>{item?.access === 0 ? 'Public' : 'Private'}</span>
-						</>
+						<Box
+							sx={{
+								display: 'flex',
+								flexWrap: 'wrap',
+								flexDirection: 'row',
+								gap: '0.25rem',
+								alignItems: 'center',
+							}}
+						>
+							<Key fontSize={'small'} />
+							<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
+						</Box>
 					)}
 				</Box>
 			</Box>
@@ -72,7 +80,8 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 		<NavLink href={`${toLink}${item.id}`}>
 			<Card
 				sx={{
-					minHeight: '184px',
+					minHeight: '164px',
+					maxWidth: '344px',
 					borderRadius: '16px',
 					'&:hover': { background: theme.palette.grey[500_32] },
 					...bgPlain,
@@ -91,11 +100,18 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 									{metadata?.name?.slice(0, 1)}
 								</Avatar>
 							}
-							title={<Typography noWrap>{metadata?.name}</Typography>}
+							title={
+								<Typography variant={'body2'} fontWeight={'700'} noWrap>
+									{metadata?.name}
+								</Typography>
+							}
 							subheader={SubHeader}
 						/>
 						<CardContent>
 							<Typography
+								variant={'caption'}
+								fontWeight={'400'}
+								color={'#DCDEE0'}
 								sx={{
 									overflow: 'hidden',
 									textOverflow: 'ellipsis',
