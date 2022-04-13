@@ -4,8 +4,9 @@ import { NavLink } from 'src/components/NavLink/navLink'
 import { BodyData } from 'src/@types/bodydata'
 import { IpfsMetadata } from 'src/@types/ipfsmetadata'
 import { useTheme } from '@mui/material/styles'
-import { Typography, Card, Box, CardHeader, CardContent, Avatar, CircularProgress } from '@mui/material'
+import { Typography, Card, Box, CardHeader, CardContent, Avatar } from '@mui/material'
 import { Person, Key, Check } from '@mui/icons-material'
+import Skeleton from '@mui/material/Skeleton'
 
 interface ComponentsPros {
 	item: BodyData
@@ -16,7 +17,7 @@ interface ComponentsPros {
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
-export const TileCard = ({ item, metadata }: ComponentsPros) => {
+export const TileCard = ({ item, metadata, loading }: ComponentsPros) => {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const bgPlain = { backgroundColor: '#212B36' }
@@ -41,7 +42,11 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 					}}
 				>
 					<Person fontSize={'small'} />
-					<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
+					{loading ? (
+						<Skeleton animation="wave" height={8} width="40px" />
+					) : (
+						<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
+					)}
 				</Box>
 				<Box
 					sx={{
@@ -68,7 +73,11 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 							}}
 						>
 							<Key fontSize={'small'} />
-							<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
+							{loading ? (
+								<Skeleton animation="wave" height={8} width="30px" />
+							) : (
+								<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
+							)}
 						</Box>
 					)}
 				</Box>
@@ -88,10 +97,21 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 					cursor: 'pointer',
 				}}
 			>
-				{!item || !metadata ? (
-					<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<CircularProgress color="inherit" />
-					</Box>
+				{loading ? (
+					<>
+						<CardHeader
+							avatar={<Skeleton variant="circular" width={64} height={64} />}
+							title={<Skeleton animation="wave" height={13} width="80%" />}
+							subheader={SubHeader}
+						/>
+						<CardContent>
+							<>
+								<Skeleton animation="wave" height={8} width="90%" />
+								<Skeleton animation="wave" height={8} width="90%" />
+								<Skeleton animation="wave" height={8} width="90%" />
+							</>
+						</CardContent>
+					</>
 				) : (
 					<>
 						<CardHeader
