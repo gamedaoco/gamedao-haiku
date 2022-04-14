@@ -9,6 +9,7 @@ export const EXTENSION_STATE_DEFAULT: ExtensionState = {
 	disconnectWallet: null,
 	selectAccount: null,
 	supportedWallets: null,
+	allSupportedWallets: null,
 }
 
 export const ExtensionContext = createContext<ExtensionState>(EXTENSION_STATE_DEFAULT)

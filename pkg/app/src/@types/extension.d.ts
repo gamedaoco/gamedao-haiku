@@ -16,6 +16,7 @@ export interface AccountState {
 export interface ExtensionState {
 	w3Enabled: boolean
 	supportedWallets: Wallet[]
+	allSupportedWallets: Wallet[]
 	accounts: AccountState[] | null
 	selectedAccount: AccountState
 	connectWallet: Function
