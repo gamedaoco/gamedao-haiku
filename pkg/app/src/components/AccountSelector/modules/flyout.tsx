@@ -1,7 +1,8 @@
-import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Paper, Stack } from '@mui/material'
+import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack } from '@mui/material'
 import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic } from '@mui/icons-material'
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { AccountCard } from 'components/AccountCard/accountCard'
+import { BalanceCard } from 'components/BalanceCard/balanceCard'
 
 interface ComponentProps {
 	anchorEl: Element
@@ -57,7 +58,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect }: Compo
 				>
 					<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
 				</Box>
-				<Paper elevation={3}>Balance</Paper>
+				<BalanceCard />
 				<Stack spacing={{ xs: 0, sm: 1 }}>
 					<Divider />
 					<MenuItem>

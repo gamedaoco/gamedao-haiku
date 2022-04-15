@@ -1,13 +1,10 @@
 import { Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useExtensionContext } from 'provider/extension/modules/context'
-import { useEffect, useState } from 'react'
-import { createErrorNotification } from 'src/utils/notificationUtils'
 import { ExpandMore, Verified } from '@mui/icons-material'
-import { useIdentityByAddressLazyQuery } from '@gamedao-haiku/graphql/dist'
-import type { Identity } from '@gamedao-haiku/graphql/dist/types'
 import md5 from 'md5'
 import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
 import { useTheme } from '@mui/material/styles'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 
 interface ComponentProps {
 	onClick: () => void
@@ -16,30 +13,11 @@ interface ComponentProps {
 export function Selector({ onClick }: ComponentProps) {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
+	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
+
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
-	const [identityState, setIdentityState] = useState<Identity>(null)
-	const [queryIdentity, { data, error, loading }] = useIdentityByAddressLazyQuery()
-
-	useEffect(() => {
-		if (selectedAccount?.account) {
-			queryIdentity({ variables: { address: selectedAccount.account.address } })
-		}
-	}, [selectedAccount])
-
-	useEffect(() => {
-		if (data?.identities?.length >= 1) {
-			setIdentityState(data.identities.slice()[0] as any)
-		}
-	}, [data])
-
-	useEffect(() => {
-		if (error) {
-			console.error(error)
-			createErrorNotification('Identity could not be loaded ')
-		}
-	}, [error])
 
 	if (!selectedAccount) {
 		return null
@@ -51,8 +29,8 @@ export function Selector({ onClick }: ComponentProps) {
 				onClick={onClick}
 				sx={{ width: '48px', height: '48px' }}
 				src={
-					identityState?.email
-						? `https://www.gravatar.com/avatar/${md5(identityState?.email)}`
+					identity?.email
+						? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
 						: 'https://picsum.photos/200'
 				}
 			/>
@@ -87,8 +65,8 @@ export function Selector({ onClick }: ComponentProps) {
 				<Avatar
 					sx={{ width: '48px', height: '48px' }}
 					src={
-						identityState?.email
-							? `https://www.gravatar.com/avatar/${md5(identityState?.email)}`
+						identity?.email
+							? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
 							: 'https://picsum.photos/200'
 					}
 				/>

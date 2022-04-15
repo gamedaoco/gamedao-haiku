@@ -1,12 +1,11 @@
 import { Avatar, Button, Card, Skeleton, Stack, Typography } from '@mui/material'
-import { useCallback, useEffect, useState } from 'react'
-import { AccountState } from 'src/@types/extension'
+import { useCallback } from 'react'
+import type { AccountState } from 'src/@types/extension'
 import { getAccountName, getAddressFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { Check, Verified } from '@mui/icons-material'
-import { useIdentityByAddressLazyQuery } from '@gamedao-haiku/graphql/dist'
-import type { Identity } from '@gamedao-haiku/graphql/dist/types'
-import { createErrorNotification, createInfoNotification } from 'src/utils/notificationUtils'
+import { createInfoNotification } from 'src/utils/notificationUtils'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 
 interface ComponentProps {
@@ -18,13 +17,13 @@ interface ComponentProps {
 
 export function AccountCard({ accountState, active, selectable, callback }: ComponentProps) {
 	const { accounts, selectAccount, selectedAccount } = useExtensionContext()
-	const [identityState, setIdentityState] = useState<Identity>(null)
-	const [queryIdentity, { data, error, loading }] = useIdentityByAddressLazyQuery()
+	const { identity, loading } = useIdentityByAddress(accountState?.account?.address)
 
 	const handleCopyAddress = useCallback(() => {
-		navigator.clipboard.writeText(getAddressFromAccountState(selectedAccount))
 		// TODO: Add i18n
-		createInfoNotification('Address Copied to Clipboard')
+		navigator.clipboard
+			.writeText(getAddressFromAccountState(selectedAccount))
+			.then(() => createInfoNotification('Address Copied to Clipboard'))
 	}, [selectedAccount])
 
 	const handleButtonClick = useCallback(
@@ -47,25 +46,6 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 		[selectAccount, accounts, accountState, callback, selectable],
 	)
 
-	useEffect(() => {
-		if (accountState?.account) {
-			queryIdentity({ variables: { address: accountState.account.address } })
-		}
-	}, [accountState])
-
-	useEffect(() => {
-		if (data?.identities?.length >= 1) {
-			setIdentityState(data.identities.slice()[0] as any)
-		}
-	}, [data])
-
-	useEffect(() => {
-		if (error) {
-			console.error(error)
-			createErrorNotification('Identity could not be loaded ')
-		}
-	}, [error])
-
 	if (!accountState) {
 		return null
 	}
@@ -73,8 +53,8 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 	return (
 		<Card onClick={handleCopyAddress}>
 			<Stack p={{ xs: 1, sm: 4 }} direction="row" alignItems="center" spacing={2}>
-				{(loading || !data) && <Skeleton variant="rectangular" height="3rem" width={'100%'} />}
-				{!loading && data && (
+				{loading && <Skeleton variant="rectangular" height="3rem" width={'100%'} />}
+				{!loading && (
 					<>
 						<Avatar
 							sx={{
@@ -83,8 +63,8 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 								height: { md: '48px !important' },
 							}}
 							src={
-								identityState?.email
-									? `https://www.gravatar.com/avatar/${md5(identityState?.email)}`
+								identity?.email
+									? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
 									: 'https://picsum.photos/200'
 							}
 						/>
