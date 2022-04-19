@@ -3,16 +3,19 @@ import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
+import { useApiProvider } from 'hooks/useApiProvider'
 
 interface ComponentProps {
 	anchorEl: Element
 	open: boolean
 	handleClose: () => void
-	openAccountSelect: () => void
+	openAccountSelect: (event) => void
+	openNetworkSelect: (event) => void
 }
 
-export function Flyout({ anchorEl, open, handleClose, openAccountSelect }: ComponentProps) {
+export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNetworkSelect }: ComponentProps) {
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
+	const apiProvider = useApiProvider()
 	return (
 		<Menu
 			anchorEl={anchorEl}
@@ -56,7 +59,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect }: Compo
 						sm: '450px',
 					}}
 				>
-					<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
+					<AccountCard accountState={selectedAccount} callback={openAccountSelect as any} />
 				</Box>
 				<BalanceCard />
 				<Stack spacing={{ xs: 0, sm: 1 }}>
@@ -101,8 +104,8 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect }: Compo
 					<Divider />
 				</Stack>
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
-					ZERO Network
-					<Button>
+					{apiProvider?.chainName ?? ''}
+					<Button onClick={openNetworkSelect}>
 						<MoreVert fontSize="small" />
 					</Button>
 				</Box>
