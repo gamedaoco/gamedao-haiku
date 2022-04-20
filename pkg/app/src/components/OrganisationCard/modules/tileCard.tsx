@@ -81,7 +81,8 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 					maxWidth: '344px',
 					borderRadius: '16px',
 					'&:hover': {
-						border: 'rgba(255, 255, 255, 0.24) 1px solid',
+						// transform: '',
+						outline: 'rgba(255, 255, 255, 0.24) 1px solid',
 					},
 					...bgPlain,
 					cursor: 'pointer',
