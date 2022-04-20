@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
 import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'

@@ -1,7 +1,8 @@
 import { Grid } from '@mui/material'
-import { Item } from './item'
 import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
 import type { Body } from '@gamedao-haiku/graphql/dist'
+import { TileCard } from 'components/OrganisationCard/modules/tileCard'
+import React from 'react'
 
 interface ComponentProps {
 	items: Body[]
@@ -21,9 +22,9 @@ export function ItemList({ items, loading }: ComponentProps) {
 				))
 			) : (
 				<>
-					{items?.map((itemData, index) => (
+					{items?.map((item, index) => (
 						<Grid item xs={4} sm={4} md={6} key={index}>
-							<Item item={itemData} />
+							<TileCard item={item} />
 						</Grid>
 					))}
 				</>
