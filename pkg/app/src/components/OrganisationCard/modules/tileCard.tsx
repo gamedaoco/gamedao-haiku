@@ -101,18 +101,22 @@ export const TileCard = ({ item }: ComponentsPros) => {
 						subheader={SubHeader}
 					/>
 					<CardContent>
-						<Typography
-							variant={'caption'}
-							fontWeight={'400'}
-							color={'#DCDEE0'}
-							sx={{
-								overflow: 'hidden',
-								textOverflow: 'ellipsis',
-								display: '-webkit-box',
-							}}
-						>
-							{item?.metadata?.description}
-						</Typography>
+						<div>
+							<Typography
+								variant={'caption'}
+								fontWeight={'400'}
+								color={'#DCDEE0'}
+								sx={{
+									overflow: 'hidden',
+									textOverflow: 'ellipsis',
+									display: '-webkit-box',
+									WebkitLineClamp: '2',
+									WebkitBoxOrient: 'vertical',
+								}}
+							>
+								{item?.metadata?.description}
+							</Typography>
+						</div>
 					</CardContent>
 				</>
 			</Card>
