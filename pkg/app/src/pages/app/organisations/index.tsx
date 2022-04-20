@@ -26,7 +26,7 @@ export function OrganisationPage() {
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 						Hello. Bodies count: {loading ? <CircularProgress /> : data?.bodies.length}
 					</Typography>
-					<ItemList items={data?.bodies} />
+					<ItemList items={data?.bodies} loading={loading}></ItemList>
 				</Paper>
 			</Box>
 		</Layout>
