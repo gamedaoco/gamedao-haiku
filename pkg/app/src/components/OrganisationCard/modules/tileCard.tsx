@@ -47,27 +47,27 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 						gap: '.25rem',
 					}}
 				>
-					{item?.members?.find((member) => member.identity.id === address) ? (
-						<>
-							<span>
-								<Check />
-							</span>
-							<span>{'Joined'}</span>
-						</>
-					) : (
-						<Box
-							sx={{
-								display: 'flex',
-								flexWrap: 'wrap',
-								flexDirection: 'row',
-								gap: '0.25rem',
-								alignItems: 'center',
-							}}
-						>
-							<Key fontSize={'small'} />
-							<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
-						</Box>
-					)}
+					<Box
+						sx={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							flexDirection: 'row',
+							gap: '0.25rem',
+							alignItems: 'center',
+						}}
+					>
+						{item?.members?.find((member) => member.address === address) ? (
+							<>
+								<Check fontSize={'small'} />
+								<span>{'Joined'}</span>
+							</>
+						) : (
+							<>
+								<Key fontSize={'small'} />
+								<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
+							</>
+						)}
+					</Box>
 				</Box>
 			</Box>
 		)
