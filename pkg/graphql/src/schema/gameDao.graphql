@@ -98,8 +98,6 @@ type DisplayValues {
     countries: [DisplayValueEntryCountry]
 }
 
-
-
 type Query {
     version: String!
     links: [Link]!
