@@ -6,18 +6,16 @@ import { IpfsMetadata } from 'src/@types/ipfsmetadata'
 import { useTheme } from '@mui/material/styles'
 import { Typography, Card, Box, CardHeader, CardContent, Avatar } from '@mui/material'
 import { Person, Key, Check } from '@mui/icons-material'
-import Skeleton from '@mui/material/Skeleton'
 
 interface ComponentsPros {
 	item: BodyData
 	metadata: IpfsMetadata
-	loading?: boolean
 }
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
-export const TileCard = ({ item, metadata, loading }: ComponentsPros) => {
+export const TileCard = ({ item, metadata }: ComponentsPros) => {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const bgPlain = { backgroundColor: '#212B36' }
@@ -42,11 +40,7 @@ export const TileCard = ({ item, metadata, loading }: ComponentsPros) => {
 					}}
 				>
 					<Person fontSize={'small'} />
-					{loading ? (
-						<Skeleton animation="wave" height={8} width="40px" />
-					) : (
-						<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
-					)}
+					<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
 				</Box>
 				<Box
 					sx={{
@@ -55,7 +49,7 @@ export const TileCard = ({ item, metadata, loading }: ComponentsPros) => {
 						gap: '.25rem',
 					}}
 				>
-					{item.members.find((member) => member.identity.id === address) ? (
+					{item?.members?.find((member) => member.identity.id === address) ? (
 						<>
 							<span>
 								<Check />
@@ -73,11 +67,7 @@ export const TileCard = ({ item, metadata, loading }: ComponentsPros) => {
 							}}
 						>
 							<Key fontSize={'small'} />
-							{loading ? (
-								<Skeleton animation="wave" height={8} width="30px" />
-							) : (
-								<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
-							)}
+							<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
 						</Box>
 					)}
 				</Box>
@@ -97,54 +87,37 @@ export const TileCard = ({ item, metadata, loading }: ComponentsPros) => {
 					cursor: 'pointer',
 				}}
 			>
-				{loading ? (
-					<>
-						<CardHeader
-							avatar={<Skeleton variant="circular" width={64} height={64} />}
-							title={<Skeleton animation="wave" height={13} width="80%" />}
-							subheader={SubHeader}
-						/>
-						<CardContent>
-							<>
-								<Skeleton animation="wave" height={8} width="90%" />
-								<Skeleton animation="wave" height={8} width="90%" />
-								<Skeleton animation="wave" height={8} width="90%" />
-							</>
-						</CardContent>
-					</>
-				) : (
-					<>
-						<CardHeader
-							avatar={
-								<Avatar src={`${gateway}${metadata?.logo}`} sx={{ width: 64, height: 64 }}>
-									{metadata?.name?.slice(0, 1)}
-								</Avatar>
-							}
-							title={
-								<Typography variant={'body2'} fontWeight={'700'} noWrap>
-									{metadata?.name}
-								</Typography>
-							}
-							subheader={SubHeader}
-						/>
-						<CardContent>
-							<Typography
-								variant={'caption'}
-								fontWeight={'400'}
-								color={'#DCDEE0'}
-								sx={{
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
-									display: '-webkit-box',
-									'-webkit-line-clamp': '2',
-									'-webkit-box-orient': 'vertical',
-								}}
-							>
-								{metadata?.description}
+				<>
+					<CardHeader
+						avatar={
+							<Avatar src={`${gateway}${metadata?.logo}`} sx={{ width: 64, height: 64 }}>
+								{metadata?.name?.slice(0, 1)}
+							</Avatar>
+						}
+						title={
+							<Typography variant={'body2'} fontWeight={'700'} noWrap>
+								{metadata?.name}
 							</Typography>
-						</CardContent>
-					</>
-				)}
+						}
+						subheader={SubHeader}
+					/>
+					<CardContent>
+						<Typography
+							variant={'caption'}
+							fontWeight={'400'}
+							color={'#DCDEE0'}
+							sx={{
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								display: '-webkit-box',
+								'-webkit-line-clamp': '2',
+								'-webkit-box-orient': 'vertical',
+							}}
+						>
+							{metadata?.description}
+						</Typography>
+					</CardContent>
+				</>
 			</Card>
 		</NavLink>
 	)
