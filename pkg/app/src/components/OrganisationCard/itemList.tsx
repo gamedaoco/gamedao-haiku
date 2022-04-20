@@ -1,10 +1,10 @@
 import { Grid } from '@mui/material'
-import { BodyData } from 'src/@types/bodydata'
 import { Item } from './item'
 import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
+import type { Body } from '@gamedao-haiku/graphql/dist'
 
 interface ComponentProps {
-	items: readonly BodyData[]
+	items: Body[]
 	loading: boolean
 }
 

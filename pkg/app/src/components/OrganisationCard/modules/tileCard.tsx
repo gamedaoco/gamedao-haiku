@@ -1,20 +1,18 @@
 import { useMemo } from 'react'
 import { useExtensionContext } from 'src/provider/extension/modules/context'
 import { NavLink } from 'src/components/NavLink/navLink'
-import { BodyData } from 'src/@types/bodydata'
-import { IpfsMetadata } from 'src/@types/ipfsmetadata'
-import { Typography, Card, Box, CardHeader, CardContent, Avatar } from '@mui/material'
-import { Person, Key, Check } from '@mui/icons-material'
+import type { Body } from '@gamedao-haiku/graphql/dist'
+import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { Check, Key, Person } from '@mui/icons-material'
 
 interface ComponentsPros {
-	item: BodyData
-	metadata: IpfsMetadata
+	item: Body
 }
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
-export const TileCard = ({ item, metadata }: ComponentsPros) => {
+export const TileCard = ({ item }: ComponentsPros) => {
 	const { selectedAccount } = useExtensionContext()
 	const bgPlain = { backgroundColor: '#212B36' }
 	const address = selectedAccount?.account.address
@@ -91,13 +89,13 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 				<>
 					<CardHeader
 						avatar={
-							<Avatar src={`${gateway}${metadata?.logo}`} sx={{ width: 64, height: 64 }}>
-								{metadata?.name?.slice(0, 1)}
+							<Avatar src={`${gateway}${item?.metadata?.logo}`} sx={{ width: 64, height: 64 }}>
+								{item?.metadata?.name?.slice(0, 1)}
 							</Avatar>
 						}
 						title={
 							<Typography variant={'body2'} fontWeight={'700'} noWrap>
-								{metadata?.name}
+								{item?.metadata?.name}
 							</Typography>
 						}
 						subheader={SubHeader}
@@ -111,11 +109,9 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 								overflow: 'hidden',
 								textOverflow: 'ellipsis',
 								display: '-webkit-box',
-								'-webkit-line-clamp': '2',
-								'-webkit-box-orient': 'vertical',
 							}}
 						>
-							{metadata?.description}
+							{item?.metadata?.description}
 						</Typography>
 					</CardContent>
 				</>

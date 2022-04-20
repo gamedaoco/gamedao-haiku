@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
-import { useBodiesQuery } from '@gamedao-haiku/graphql/dist'
+import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'
 import { CircularProgress } from '@mui/material'
 
 export function OrganisationPage() {
@@ -26,7 +26,7 @@ export function OrganisationPage() {
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
 						Hello. Bodies count: {loading ? <CircularProgress /> : data?.bodies.length}
 					</Typography>
-					<ItemList items={data?.bodies} loading={loading}></ItemList>
+					<ItemList items={data?.bodies?.slice() as Body[]} loading={loading}></ItemList>
 				</Paper>
 			</Box>
 		</Layout>
