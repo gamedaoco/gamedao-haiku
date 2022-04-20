@@ -3,7 +3,6 @@ import { useExtensionContext } from 'src/provider/extension/modules/context'
 import { NavLink } from 'src/components/NavLink/navLink'
 import { BodyData } from 'src/@types/bodydata'
 import { IpfsMetadata } from 'src/@types/ipfsmetadata'
-import { useTheme } from '@mui/material/styles'
 import { Typography, Card, Box, CardHeader, CardContent, Avatar } from '@mui/material'
 import { Person, Key, Check } from '@mui/icons-material'
 
@@ -17,7 +16,6 @@ const toLink = '/app/organisations/'
 
 export const TileCard = ({ item, metadata }: ComponentsPros) => {
 	const { selectedAccount } = useExtensionContext()
-	const theme = useTheme()
 	const bgPlain = { backgroundColor: '#212B36' }
 	const address = selectedAccount?.account.address
 
@@ -82,7 +80,9 @@ export const TileCard = ({ item, metadata }: ComponentsPros) => {
 					minHeight: '164px',
 					maxWidth: '344px',
 					borderRadius: '16px',
-					'&:hover': { background: theme.palette.grey[500_32] },
+					'&:hover': {
+						border: 'rgba(255, 255, 255, 0.24) 1px solid',
+					},
 					...bgPlain,
 					cursor: 'pointer',
 				}}
