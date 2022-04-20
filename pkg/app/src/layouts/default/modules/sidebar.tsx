@@ -1,53 +1,13 @@
-import React, { useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { styled, useTheme } from '@mui/material/styles'
-import { Badge, ListItemButton, ListItemIcon, Stack, Typography, useMediaQuery, Drawer } from '@mui/material'
-import { ThemeSwitch } from 'src/components/ThemeSwitcher/themeSwitch'
-import { FontIcons } from 'src/components/Icons/icons'
-import { NavLink } from 'src/components/NavLink/navLink'
-import { NetworkSelector } from 'src/components'
-import { useTranslation } from 'react-i18next'
-
-// TODO:
-// Fix error on page load!!
-// theme switcher
-// language switcher
-// network selector
-// import NetInfo from 'src/components/NetInfo'
-
-// TODO: Create custom component with override etc
-const SidebarButton = styled(ListItemButton)<{ active?: string }>(({ theme, active }) => ({
-	p: theme.spacing(1),
-	m: theme.spacing(1),
-	borderRadius: '2rem',
-	color: theme.palette.text.primary,
-	backgroundColor: active === 'true' ? theme.palette.grey[500_16] : 'transparent',
-}))
-
-// TODO: Create custom component with override etc
-const NavBadge = styled(Badge)(({ theme }) => ({
-	'& .MuiBadge-badge': {
-		color: theme.palette.background.default,
-		borderRadius: '2rem',
-		right: 'initial',
-	},
-}))
-
-const SidebarNavItem = ({ href, name, children }) => {
-	const { pathname } = useRouter()
-	const isMobile = useMediaQuery('(max-width:640px)')
-	const override = { fontSize: isMobile ? '2rem' : '3rem' }
-	return (
-		<NavLink href={href}>
-			<SidebarButton active={(pathname === href).toString()}>
-				<Stack direction="row" alignItems="center" px={2}>
-					<ListItemIcon>{<FontIcons sx={{ ...override }} name={name} />}</ListItemIcon>
-					<Typography>{children}</Typography>
-				</Stack>
-			</SidebarButton>
-		</NavLink>
-	)
-}
+import { useTheme } from '@mui/material/styles'
+import { Stack, Drawer, Fab, CircularProgress, Divider, Box } from '@mui/material'
+import { Add as AddIcon } from '@mui/icons-material'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
+import { createErrorNotification } from 'src/utils/notificationUtils'
+import { BodyButtonMemoized } from 'layouts/default/modules/bodyButton'
+import { useExtensionContext } from 'provider/extension/modules/context'
 
 interface ComponentProps {
 	showHeader: boolean
@@ -58,15 +18,31 @@ interface ComponentProps {
 
 export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) {
 	const theme = useTheme()
-	const { t } = useTranslation()
+	const address = useCurrentAccountAddress()
+	const { push } = useRouter()
+	const { w3Enabled, connectWallet, selectedAccount } = useExtensionContext()
+	const [loadSideBarForAddress, { error, loading, data }] = useSidebarLazyQuery()
 
-	// TODO: Replace with real values
-	const [counter, updateCounter] = useState({
-		cam: 2,
-		gov: 2,
-		dao: 1,
-		tan: 0,
-	})
+	const buttonCallback = useCallback(() => {
+		if (w3Enabled === false) {
+			connectWallet()
+		} else if (selectedAccount) {
+			push('/app/organisations')
+		}
+	}, [w3Enabled, connectWallet, selectedAccount, push])
+
+	useEffect(() => {
+		if (address && address.length > 0) {
+			loadSideBarForAddress({ variables: { address } })
+		}
+	}, [address])
+
+	useEffect(() => {
+		if (error) {
+			createErrorNotification('The information for the sidebar could not be retrieved')
+			console.error(error)
+		}
+	}, [error])
 
 	return (
 		<Drawer
@@ -76,9 +52,8 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			variant={variant}
 			sx={{
 				'& .MuiPaper-root': {
-					width: '100%',
-					maxWidth: 300,
-					top: { xs: 0, md: showHeader ? 64 : 0 },
+					width: '90px',
+					top: showHeader ? 90 : 0,
 					bottom: 0,
 					height: 'auto',
 					backgroundColor: theme.palette.background.default,
@@ -86,48 +61,72 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 				},
 			}}
 		>
-			<Stack flex={1} padding={2}>
-				<Stack spacing={2}>
-					<SidebarNavItem href="/app" name="dashboard">
-						{t('button:navigation:dashboard')}
-					</SidebarNavItem>
-					<SidebarNavItem href="/app/organisations" name="organisation">
-						Organisations
-						{counter.gov > 0 && (
-							<NavBadge
-								sx={{ ml: '0.5rem' }}
-								badgeContent={counter.gov}
-								color={'primary'}
-								variant="dot"
+			<Stack pb={3} alignItems="center" height="100%" width="100%">
+				{(loading || (data && selectedAccount)) && (
+					<Stack
+						spacing={2}
+						py={2}
+						width={'100%'}
+						alignItems="center"
+						sx={{
+							overflow: 'scroll',
+							position: 'relative',
+							'&::-webkit-scrollbar': {
+								width: 0,
+								background: 'transparent',
+							},
+							':after': {
+								position: 'absolute',
+								content: '""',
+								top: 0,
+								bottom: 0,
+								left: 0,
+								right: 0,
+								backgroundImage: `linear-gradient(to bottom,transparent 90%, ${theme.palette.background.default})`,
+							},
+						}}
+					>
+						{loading && (
+							<CircularProgress
+								sx={{
+									width: '48px',
+									height: '48px',
+									margin: 'auto',
+								}}
 							/>
 						)}
-					</SidebarNavItem>
-					<SidebarNavItem href="/app/governance" name="voting">
-						{t('button:navigation:governance')}
-						{counter.gov > 0 && (
-							<NavBadge
-								sx={{ ml: '0.5rem' }}
-								badgeContent={counter.gov}
-								color={'primary'}
-								variant="dot"
-							/>
-						)}
-					</SidebarNavItem>
-					<SidebarNavItem href="/app/campaigns" name="campaign">
-						{t('button:navigation:campaigns')}
-						{counter.cam > 0 && (
-							<NavBadge sx={{ ml: '0.5rem' }} badgeContent={counter.cam} color={'info'} variant="dot" />
-						)}
-					</SidebarNavItem>
-					<SidebarNavItem href="/app/wallet" name="wallet">
-						{t('button:navigation:wallet')}
-						{counter.cam > 0 && <NavBadge sx={{ ml: '0.5rem' }} />}
-					</SidebarNavItem>
-				</Stack>
-
-				<Stack direction="row" mt="auto" spacing={2} justifyContent="flex-end">
-					<NetworkSelector />
-					<ThemeSwitch />
+						{selectedAccount &&
+							(data?.bodies?.slice() as any)
+								?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
+								?.map((body, i) => {
+									return (
+										<Fragment key={body?.id}>
+											<BodyButtonMemoized
+												id={body?.id}
+												logo={body?.metadata?.logo}
+												name={body?.metadata?.name}
+												active={location?.pathname?.indexOf(body?.id) >= 0}
+												notification={i % 2 == 0}
+											/>
+										</Fragment>
+									)
+								})}
+					</Stack>
+				)}
+				<Stack alignItems="center" spacing={2} width="100%">
+					{(loading || (data && selectedAccount)) && <Divider sx={{ width: '50%' }} />}
+					<Fab
+						color={'primary'}
+						aria-label="add"
+						sx={{
+							mt: 1,
+							width: '48px',
+							height: '48px',
+						}}
+						onClick={buttonCallback}
+					>
+						<AddIcon />
+					</Fab>
 				</Stack>
 			</Stack>
 		</Drawer>
