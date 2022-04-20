@@ -4,7 +4,7 @@ import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 import { initializeAccounts } from './modules/accounts'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useApiProvider } from 'hooks/useApiProvider'
-import { getWallets, isWalletInstalled, Wallet } from '@talisman-connect/wallets'
+import { getWallets, Wallet } from '@talisman-connect/wallets'
 import { WalletDialog } from 'components/WalletDialog/walletDialog'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
@@ -12,6 +12,7 @@ export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)
 	const apiProvider = useApiProvider()
 	const [supportedWalletsState, setSupportedWalletsState] = useState<Wallet[]>()
+	const [allSupportedWalletsState, setAllSupportedWalletsState] = useState<Wallet[]>()
 	const [accountSettings, setAccountSettings] = useLocalStorage<AccountSettings>('extension-account-settings', {
 		selectedAddress: null,
 		lastUsedExtension: null,
@@ -62,6 +63,7 @@ export function ExtensionProvider({ children }) {
 		let supWallets = supportedWalletsState
 
 		if (!supportedWalletsState) {
+			setAllSupportedWalletsState(getWallets() ?? [])
 			const wallets = getWallets().filter((wallet) => wallet.installed)
 			setSupportedWalletsState(wallets)
 			supWallets = wallets
@@ -107,6 +109,7 @@ export function ExtensionProvider({ children }) {
 					disconnectWallet: disconnectWalletCallback,
 					selectAccount: selectAccountCallback,
 					supportedWallets: supportedWalletsState,
+					allSupportedWallets: allSupportedWalletsState,
 				} as any
 			}
 		>

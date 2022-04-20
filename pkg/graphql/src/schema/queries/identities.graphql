@@ -1,0 +1,11 @@
+query IdentityByAddress($address: String!) {
+    identities(where: {address_eq: $address}) {
+        id
+        email
+        displayName
+        image
+        legalName
+        riot
+        twitter
+    }
+}

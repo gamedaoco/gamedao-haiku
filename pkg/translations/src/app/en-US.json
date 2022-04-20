@@ -6,6 +6,9 @@
       "organisations": "Organisations",
       "dashboard": "Dashboard",
       "wallet": "Wallet"
+    },
+    "ui": {
+      "connect-wallet": "Connect wallet"
     }
   },
   "page": {

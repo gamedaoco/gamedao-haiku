@@ -2,7 +2,7 @@ import { SystemProperties } from 'src/@types/network'
 import { AccountSettings, ExtensionState } from 'src/@types/extension'
 import { InjectedAccount, InjectedExtension } from '@polkadot/extension-inject/types'
 import { getDecodedAddress } from 'src/utils/accountUtils'
-import { getWalletBySource, getWallets, Wallet } from '@talisman-connect/wallets'
+import { getWalletBySource, Wallet } from '@talisman-connect/wallets'
 import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 
 export async function initializeAccounts(
@@ -50,6 +50,7 @@ export async function initializeAccounts(
 			disconnectWallet: null,
 			selectAccount: null,
 			supportedWallets: null,
+			allSupportedWallets: null,
 		}
 	} catch (error) {
 		console.error('Accounts could not be initialized', 'error:', error)

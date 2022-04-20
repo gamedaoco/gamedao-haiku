@@ -1,36 +1,17 @@
-import React, { Fragment, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import { AccountSelector, FontIcons } from 'src/components'
 import { useTheme } from '@mui/material/styles'
 import { NavLink } from 'src/components/NavLink/navLink'
-import MenuIcon from '@mui/icons-material/Menu'
-import { Button, Typography } from '@mui/material'
-import { useTranslation } from 'react-i18next'
-import { MoreVert, Menu } from '@mui/icons-material'
+import { Button, Stack } from '@mui/material'
+import { Menu, MoreVert } from '@mui/icons-material'
 import { NavbarMobile } from 'layouts/default/modules/navbarMobile'
 
 interface ComponentProps {
 	onSidebarOpen: () => void
 }
-
-// TODO: Extract to features / graphql
-const urls = [
-	{
-		name: 'button:navigation:organisations',
-		path: '/app/organisations',
-	},
-	{
-		name: 'button:navigation:campaigns',
-		path: '/app/campaigns',
-	},
-	{
-		name: 'button:navigation:wallet',
-		path: '/app/wallet',
-	},
-]
 
 export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 	const theme = useTheme()
@@ -90,18 +71,21 @@ export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 							/>
 						</NavLink>
 					</Box>
-					<Button
-						onClick={handleMenuOpen}
-						aria-label="Menu"
-						sx={{
-							color: theme.palette.text.primary,
-							borderRadius: 2,
-							minWidth: 'auto',
-							padding: 1,
-						}}
-					>
-						<Menu />
-					</Button>
+					<Stack direction="row" spacing={2} alignItems="center">
+						<AccountSelector />
+						<Button
+							onClick={handleMenuOpen}
+							aria-label="Menu"
+							sx={{
+								color: theme.palette.text.primary,
+								borderRadius: 2,
+								minWidth: 'auto',
+								padding: 1,
+							}}
+						>
+							<Menu />
+						</Button>
+					</Stack>
 				</Toolbar>
 			</AppBar>
 			<NavbarMobile onClose={handleMenuClose} open={openMenu} />

@@ -1,7 +1,7 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useTheme } from '@mui/material/styles'
-import { Stack, Drawer, Fab, CircularProgress, Divider, Box } from '@mui/material'
+import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { Add as AddIcon } from '@mui/icons-material'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
@@ -78,11 +78,11 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 							':after': {
 								position: 'absolute',
 								content: '""',
-								top: 0,
+								height: '2rem',
 								bottom: 0,
 								left: 0,
 								right: 0,
-								backgroundImage: `linear-gradient(to bottom,transparent 90%, ${theme.palette.background.default})`,
+								backgroundImage: `linear-gradient(to bottom,transparent 0%, ${theme.palette.background.default})`,
 							},
 						}}
 					>

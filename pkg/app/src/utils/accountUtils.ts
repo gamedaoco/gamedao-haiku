@@ -5,7 +5,7 @@ import { hexToU8a, isHex } from '@polkadot/util'
 
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
-	return `${address.slice(0, 15)}...${address.slice(-6)}`
+	return `${address.slice(0, 10)}...${address.slice(-6)}`
 }
 
 export function getAccountName(account: InjectedAccount): string {
