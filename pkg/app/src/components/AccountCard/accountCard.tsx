@@ -71,7 +71,7 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 						<Stack spacing={1}>
 							<Typography variant="subtitle2">{getAccountName(accountState?.account)}</Typography>
 							<Stack direction="row" alignItems="center" spacing={1}>
-								<Verified />
+								{identity?.email && <Verified color="secondary" />}
 								<Typography variant="body2">{shortAccountAddress(accountState?.account)}</Typography>
 							</Stack>
 						</Stack>

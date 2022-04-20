@@ -11,6 +11,7 @@ export function BalanceCard() {
 			{!balance && <Skeleton variant="rectangular" height="5rem" width={'100%'} />}
 			{balance && (
 				<Stack p={{ xs: 2, sm: 4 }} spacing={2}>
+					<Typography variant="overline">Balances</Typography>
 					<Stack direction="row" justifyContent="space-between">
 						<Typography variant="body2">{balance.tokenSymbol}</Typography>
 						<Typography variant="body2">{balance.free}</Typography>

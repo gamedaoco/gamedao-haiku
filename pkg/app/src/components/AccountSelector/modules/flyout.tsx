@@ -9,7 +9,7 @@ interface ComponentProps {
 	anchorEl: Element
 	open: boolean
 	handleClose: () => void
-	openAccountSelect: (event) => void
+	openAccountSelect: () => void
 	openNetworkSelect: (event) => void
 }
 
@@ -59,7 +59,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						sm: '450px',
 					}}
 				>
-					<AccountCard accountState={selectedAccount} callback={openAccountSelect as any} />
+					<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
 				</Box>
 				<BalanceCard />
 				<Stack spacing={{ xs: 0, sm: 1 }}>

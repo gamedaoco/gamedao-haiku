@@ -16,7 +16,6 @@ export function AccountSelector() {
 	const anchorRef = useRef(null)
 
 	// Change selected account
-
 	const handleOpenFlyout = useCallback(() => {
 		setFlyoutOpenState(true)
 	}, [setFlyoutOpenState])
@@ -25,13 +24,9 @@ export function AccountSelector() {
 		setFlyoutOpenState(false)
 	}, [setFlyoutOpenState])
 
-	const handleOpenAccountSelect = useCallback(
-		(event) => {
-			event.stopPropagation()
-			setAccountSelectOpenState(true)
-		},
-		[setAccountSelectOpenState],
-	)
+	const handleOpenAccountSelect = useCallback(() => {
+		setAccountSelectOpenState(true)
+	}, [setAccountSelectOpenState])
 
 	const handleCloseAccountSelect = useCallback(() => {
 		setAccountSelectOpenState(false)
@@ -49,14 +44,10 @@ export function AccountSelector() {
 		setNetworkSelectOpenState(false)
 	}, [setNetworkSelectOpenState])
 
-	// There is no wallet available
-	if (!supportedWallets?.length) {
-		return null
-	}
 	// Show connect button
 	if (w3Enabled === false) {
 		return (
-			<Button variant={'text'} onClick={connectWallet as any}>
+			<Button variant="contained" onClick={connectWallet as any}>
 				{t('button:ui:connect-wallet')}
 			</Button>
 		)
