@@ -6,6 +6,7 @@ import { Layout } from 'src/layouts/default/layout'
 import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid, InputAdornment, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles'
+import FilterListIcon from '@mui/icons-material/FilterList'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -101,7 +102,37 @@ export function OrganisationPage() {
 										/>
 									</Grid>
 									<Grid item xs={0} md={5}></Grid>
-									<Grid item xs={12} md={3}></Grid>
+									<Grid item xs={12} md={3}>
+										<Box
+											sx={{
+												display: 'flex',
+												justifyContent: 'space-evenly',
+												alignItems: 'center',
+											}}
+										>
+											<Box
+												sx={{
+													display: 'flex',
+													justifyContent: 'space-around',
+													alignItems: 'center',
+												}}
+											>
+												<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
+													Filters
+												</Typography>
+												<FilterListIcon fontSize={'small'} sx={{ ml: 1 }} />
+											</Box>
+											<Box
+												sx={{
+													display: 'flex',
+													justifyContent: 'space-between',
+													alignItems: 'center',
+												}}
+											>
+												{/*	TODO Sort Options*/}
+											</Box>
+										</Box>
+									</Grid>
 								</Grid>
 							</Box>
 						</Box>
