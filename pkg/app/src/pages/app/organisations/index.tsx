@@ -4,7 +4,16 @@ import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
 import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'
-import { Button, Container, createSvgIcon, Grid, InputAdornment, TextField } from '@mui/material'
+import {
+	Button,
+	Container,
+	createSvgIcon,
+	FormControl,
+	Grid,
+	InputAdornment,
+	NativeSelect,
+	TextField,
+} from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import FilterListIcon from '@mui/icons-material/FilterList'
 
@@ -36,6 +45,19 @@ export function OrganisationPage() {
 		field: {
 			'& fieldset': {
 				borderRadius: 8,
+			},
+		},
+		formControl: {
+			'& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+				borderColor: 'blue',
+			},
+		},
+		select: {
+			'&&&:before': {
+				borderBottom: 'none',
+			},
+			'&&:after': {
+				borderBottom: 'none',
 			},
 		},
 	})
@@ -101,12 +123,11 @@ export function OrganisationPage() {
 											placeholder="Search Organisations…"
 										/>
 									</Grid>
-									<Grid item xs={0} md={5}></Grid>
-									<Grid item xs={12} md={3}>
+									<Grid item xs={0} md={4}></Grid>
+									<Grid item xs={12} md={4}>
 										<Box
 											sx={{
 												display: 'flex',
-												justifyContent: 'space-evenly',
 												alignItems: 'center',
 											}}
 										>
@@ -124,12 +145,31 @@ export function OrganisationPage() {
 											</Box>
 											<Box
 												sx={{
+													flexGrow: 1,
 													display: 'flex',
-													justifyContent: 'space-between',
+													justifyContent: 'space-evenly',
 													alignItems: 'center',
 												}}
 											>
-												{/*	TODO Sort Options*/}
+												<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
+													Sort By:
+												</Typography>
+												<Box sx={{ minWidth: 120 }}>
+													<FormControl fullWidth className={classes.formControl}>
+														<NativeSelect
+															className={classes.select}
+															defaultValue={30}
+															inputProps={{
+																name: 'sort',
+																id: 'uncontrolled-native',
+																style: { fontSize: 14 },
+															}}
+														>
+															<option value={10}>Member: High-Low</option>
+															<option value={20}>Member: Low-High</option>
+														</NativeSelect>
+													</FormControl>
+												</Box>
 											</Box>
 										</Box>
 									</Grid>
