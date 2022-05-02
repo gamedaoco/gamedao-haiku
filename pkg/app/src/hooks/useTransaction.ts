@@ -16,6 +16,6 @@ export function useTransaction(): (
 		(tx: SubmittableExtrinsic, msg: PromiseMsg, callback?: (state, result) => void) => {
 			return signAndNotify(selectedApiProvider.apiProvider, selectedAccount, tx, msg, callback)
 		},
-		[selectedApiProvider, signAndNotify, selectedApiProvider],
+		[signAndNotify, selectedApiProvider.apiProvider, selectedAccount],
 	)
 }
