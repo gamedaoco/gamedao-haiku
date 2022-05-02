@@ -22,4 +22,5 @@ export interface ExtensionState {
 	connectWallet: Function
 	disconnectWallet: Function
 	selectAccount: Function<AccountState>
+	signAndNotify: Function
 }

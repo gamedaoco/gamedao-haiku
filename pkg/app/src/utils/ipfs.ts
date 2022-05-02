@@ -1,3 +1,6 @@
+import { createErrorNotification } from 'src/utils/notificationUtils'
+import { create } from 'ipfs-http-client'
+
 export function parseIpfsHash(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
 	let hashPart = ipfsHash.split('/')
 	return gateway + 'ipfs/' + hashPart[hashPart.length - 1]
@@ -23,4 +26,17 @@ export async function fetchIpfsBlob(ipfsHash: string, gateway: string = 'https:/
 	}
 
 	return null
+}
+
+export async function uploadFileToIpfs(apiUrl: string, file: File) {
+	try {
+		const client = await create({
+			url: apiUrl,
+		})
+
+		const ipfsResult = await client.add(file)
+	} catch (err) {
+		console.error(err)
+		createErrorNotification('Ipfs upload failed')
+	}
 }

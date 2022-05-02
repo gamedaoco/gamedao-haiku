@@ -51,6 +51,7 @@ export async function initializeAccounts(
 			selectAccount: null,
 			supportedWallets: null,
 			allSupportedWallets: null,
+			signAndNotify: null,
 		}
 	} catch (error) {
 		console.error('Accounts could not be initialized', 'error:', error)

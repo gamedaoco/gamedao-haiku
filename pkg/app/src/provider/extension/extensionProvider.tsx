@@ -7,6 +7,7 @@ import { useApiProvider } from 'hooks/useApiProvider'
 import { getWallets, Wallet } from '@talisman-connect/wallets'
 import { WalletDialog } from 'components/WalletDialog/walletDialog'
 import { createErrorNotification } from 'src/utils/notificationUtils'
+import { SignAndNotify } from 'provider/extension/modules/signAndNotify'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)
@@ -110,6 +111,7 @@ export function ExtensionProvider({ children }) {
 					selectAccount: selectAccountCallback,
 					supportedWallets: supportedWalletsState,
 					allSupportedWallets: allSupportedWalletsState,
+					signAndNotify: SignAndNotify,
 				} as any
 			}
 		>
