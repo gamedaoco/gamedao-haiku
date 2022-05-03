@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import Typography from '@mui/material/Typography'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import Box from '@mui/material/Box'
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { Button, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import { makeStyles } from '@mui/styles'
-import CancelIcon from '@mui/icons-material/Cancel'
-
+import ClearIcon from '@mui/icons-material/Clear'
+import ClearAllIcon from '@mui/icons-material/ClearAll'
 const useStyles = makeStyles({
 	list: {
 		width: 250,
@@ -35,7 +35,7 @@ const FiltersTab = () => {
 					Filters
 				</Typography>
 				<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit">
-					<CancelIcon fontSize={'small'} />
+					<ClearIcon fontSize={'small'} />
 				</IconButton>
 			</Box>
 			<Divider />
@@ -56,6 +56,23 @@ const FiltersTab = () => {
 					</ListItem>
 				))}
 			</List>
+			<Box
+				mt={3}
+				position="absolute"
+				bottom="0px"
+				sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', py: 3 }}
+			>
+				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60%' }}>
+					<Button
+						variant="outlined"
+						fullWidth
+						startIcon={<ClearAllIcon />}
+						sx={{ color: 'white', border: 'white 0.7px solid' }}
+					>
+						Clear
+					</Button>
+				</Box>
+			</Box>
 		</Box>
 	)
 	return (
