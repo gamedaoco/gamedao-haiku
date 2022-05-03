@@ -1,18 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Box from '@mui/material/Box'
-import {
-	createSvgIcon,
-	FormControl,
-	Grid,
-	InputAdornment,
-	MenuItem,
-	Select,
-	SelectChangeEvent,
-	TextField,
-} from '@mui/material'
-import Typography from '@mui/material/Typography'
-import FilterListIcon from '@mui/icons-material/FilterList'
+import { createSvgIcon, Grid, InputAdornment, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles'
+import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
+import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
 
 const SearchIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -24,18 +15,8 @@ const SearchIcon = createSvgIcon(
 	</svg>,
 	'Search',
 )
-const sortOptions = [
-	{ value: 'low-hi', name: 'Member: High-Low' },
-	{ value: 'hi-low', name: 'Member: Low-High' },
-]
 
 const FiltersSection = () => {
-	const [sortOption, setSortOption] = useState(sortOptions[0].value)
-
-	const handleChange = (event: SelectChangeEvent) => {
-		console.log(event.target.value)
-		setSortOption(event.target.value)
-	}
 	const useStyles = makeStyles({
 		field: {
 			'& fieldset': {
@@ -89,46 +70,8 @@ const FiltersSection = () => {
 								alignItems: 'center',
 							}}
 						>
-							<Box
-								sx={{
-									display: 'flex',
-									justifyContent: 'space-around',
-									alignItems: 'center',
-								}}
-							>
-								<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
-									Filters
-								</Typography>
-								<FilterListIcon fontSize={'small'} sx={{ ml: 1 }} />
-							</Box>
-							<Box
-								sx={{
-									flexGrow: 1,
-									display: 'flex',
-									justifyContent: 'space-evenly',
-									alignItems: 'center',
-								}}
-							>
-								<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
-									Sort By:
-								</Typography>
-								<Box sx={{ minWidth: 120 }}>
-									<FormControl
-										fullWidth
-										className={classes.formControl}
-										size="small"
-										sx={{ m: 1, minWidth: 120 }}
-									>
-										<Select value={sortOption} onChange={handleChange}>
-											{sortOptions.map((x) => (
-												<MenuItem value={x.value} key={x.value}>
-													{x.name}
-												</MenuItem>
-											))}
-										</Select>
-									</FormControl>
-								</Box>
-							</Box>
+							<FiltersTab />
+							<SortOptionsTab classes={classes} />
 						</Box>
 					</Grid>
 				</Grid>
