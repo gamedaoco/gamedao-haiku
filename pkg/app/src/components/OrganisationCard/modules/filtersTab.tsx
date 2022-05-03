@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import Typography from '@mui/material/Typography'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import Box from '@mui/material/Box'
-import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import { makeStyles } from '@mui/styles'
+import CancelIcon from '@mui/icons-material/Cancel'
 
 const useStyles = makeStyles({
 	list: {
@@ -24,11 +25,20 @@ const FiltersTab = () => {
 	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
 	const ListTab = () => (
 		<Box
-			sx={{ width: 250 }}
+			sx={{ width: 280 }}
 			role="presentation"
 			onClick={() => setOpenDrawer(false)}
 			onKeyDown={() => setOpenDrawer(false)}
 		>
+			<Box sx={{ my: 2, px: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+				<Typography fontWeight="700" variant={'body1'}>
+					Filters
+				</Typography>
+				<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit">
+					<CancelIcon fontSize={'small'} />
+				</IconButton>
+			</Box>
+			<Divider />
 			<List>
 				{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
 					<ListItem key={text}>
@@ -67,7 +77,9 @@ const FiltersTab = () => {
 			<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
 				Filters
 			</Typography>
-			<FilterListIcon fontSize={'small'} sx={{ ml: 1 }} onClick={handleDrawerNavigation} />
+			<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit" sx={{ ml: 1 }}>
+				<FilterListIcon fontSize={'small'} />
+			</IconButton>
 		</Box>
 	)
 }
