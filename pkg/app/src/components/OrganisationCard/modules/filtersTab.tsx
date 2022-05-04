@@ -2,7 +2,22 @@ import React, { useState } from 'react'
 import Typography from '@mui/material/Typography'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import Box from '@mui/material/Box'
-import { Button, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import {
+	Button,
+	Checkbox,
+	Divider,
+	Drawer,
+	FormControl,
+	FormControlLabel,
+	FormGroup,
+	IconButton,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Radio,
+	RadioGroup,
+} from '@mui/material'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import { makeStyles } from '@mui/styles'
@@ -24,12 +39,7 @@ const FiltersTab = () => {
 	const [openDrawer, setOpenDrawer] = useState(false)
 	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
 	const ListTab = () => (
-		<Box
-			sx={{ width: 280 }}
-			role="presentation"
-			onClick={() => setOpenDrawer(false)}
-			onKeyDown={() => setOpenDrawer(false)}
-		>
+		<Box sx={{ width: 280 }} role="presentation">
 			<Box sx={{ my: 2, px: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 				<Typography fontWeight="700" variant={'body1'}>
 					Filters
@@ -39,23 +49,38 @@ const FiltersTab = () => {
 				</IconButton>
 			</Box>
 			<Divider />
-			<List>
-				{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-					<ListItem key={text}>
-						<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
-			</List>
-			<Divider />
-			<List>
-				{['All mail', 'Trash', 'Spam'].map((text, index) => (
-					<ListItem key={text}>
-						<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
-			</List>
+			<Box sx={{ px: 4, mt: 2 }}>
+				<Typography fontWeight="700" variant={'body1'}>
+					Filter Checkbox
+				</Typography>
+				<Box sx={{ px: 2 }}>
+					<FormControl>
+						<FormGroup>
+							<FormControlLabel control={<Checkbox defaultChecked />} label="Men" />
+							<FormControlLabel control={<Checkbox />} label="Women" />
+							<FormControlLabel control={<Checkbox />} label="Kids" />
+						</FormGroup>
+					</FormControl>
+				</Box>
+			</Box>
+			<Box sx={{ px: 4, mt: 2 }}>
+				<Typography fontWeight="700" variant={'body1'}>
+					Filter Radio Button
+				</Typography>
+				<Box sx={{ px: 2 }}>
+					<FormControl>
+						<RadioGroup
+							aria-labelledby="demo-radio-buttons-group-label"
+							defaultValue="female"
+							name="radio-buttons-group"
+						>
+							<FormControlLabel value="female" control={<Radio />} label="Shose" />
+							<FormControlLabel value="male" control={<Radio />} label="Apparel" />
+							<FormControlLabel value="other" control={<Radio />} label="Accessories" />
+						</RadioGroup>
+					</FormControl>
+				</Box>
+			</Box>
 			<Box
 				mt={3}
 				position="absolute"
