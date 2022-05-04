@@ -11,15 +11,9 @@ import {
 	FormControlLabel,
 	FormGroup,
 	IconButton,
-	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText,
 	Radio,
 	RadioGroup,
 } from '@mui/material'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
 import { makeStyles } from '@mui/styles'
 import ClearIcon from '@mui/icons-material/Clear'
 import ClearAllIcon from '@mui/icons-material/ClearAll'
@@ -56,9 +50,9 @@ const FiltersTab = () => {
 				<Box sx={{ px: 2 }}>
 					<FormControl>
 						<FormGroup>
-							<FormControlLabel control={<Checkbox defaultChecked />} label="Men" />
-							<FormControlLabel control={<Checkbox />} label="Women" />
-							<FormControlLabel control={<Checkbox />} label="Kids" />
+							<FormControlLabel control={<Checkbox defaultChecked />} label="Checkbox 1" />
+							<FormControlLabel control={<Checkbox />} label="Checkbox 2" />
+							<FormControlLabel control={<Checkbox />} label="Checkbox 3" />
 						</FormGroup>
 					</FormControl>
 				</Box>
@@ -74,9 +68,9 @@ const FiltersTab = () => {
 							defaultValue="female"
 							name="radio-buttons-group"
 						>
-							<FormControlLabel value="female" control={<Radio />} label="Shose" />
-							<FormControlLabel value="male" control={<Radio />} label="Apparel" />
-							<FormControlLabel value="other" control={<Radio />} label="Accessories" />
+							<FormControlLabel value="female" control={<Radio />} label="Option 1" />
+							<FormControlLabel value="male" control={<Radio />} label="Option 2" />
+							<FormControlLabel value="other" control={<Radio />} label="Option 3" />
 						</RadioGroup>
 					</FormControl>
 				</Box>
