@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
@@ -6,6 +6,7 @@ import { Layout } from 'src/layouts/default/layout'
 import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import FiltersSection from 'components/OrganisationCard/modules/filtersSection'
+import { ArrowDownward } from '@mui/icons-material'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -17,7 +18,7 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-
+const applyPagination = (data: Body[], rowsPerPage: number): Body[] => data?.filter((x, index) => index < rowsPerPage)
 export function OrganisationPage() {
 	const { loading, error, data } = useBodiesQuery()
 	useEffect(() => {
@@ -25,7 +26,12 @@ export function OrganisationPage() {
 			console.error('There is an error when querying the display values')
 		}
 	}, [error])
-
+	const [bodyCount, setBodyCount] = useState<number>(15)
+	const paginatedData = applyPagination(data?.bodies?.slice() as Body[], bodyCount)
+	const buttonVisibility = useMemo(
+		() => paginatedData?.length < data?.bodies?.slice()?.length,
+		[data?.bodies, paginatedData?.length],
+	)
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box
@@ -53,8 +59,35 @@ export function OrganisationPage() {
 						</Grid>
 						<FiltersSection />
 					</Box>
-					<ItemList items={data?.bodies?.slice() as Body[]} loading={loading} />
+					<ItemList items={paginatedData} loading={loading} />
 				</Container>
+				{buttonVisibility && (
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+						<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'center',
+									justifyContent: 'center',
+									gap: 1.5,
+								}}
+							>
+								<Button
+									endIcon={<ArrowDownward />}
+									onClick={() => setBodyCount((p) => p + 30)}
+									variant="outlined"
+									sx={{ color: '#919EAB', border: '#919EAB 1px solid', borderRadius: 2 }}
+								>
+									Load 30 More Organisations
+								</Button>
+								<Typography>
+									Showing {paginatedData?.length} of {data?.bodies?.slice()?.length} organisations
+								</Typography>
+							</Box>
+						</Box>
+					</Box>
+				)}
 			</Box>
 		</Layout>
 	)
