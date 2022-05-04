@@ -28,6 +28,10 @@ const FiltersSection = () => {
 			minWidth: 120,
 			'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
 				border: 'none',
+				color: 'white',
+			},
+			'& .MuiSvgIcon-root': {
+				color: 'white',
 			},
 		},
 	})
@@ -68,6 +72,7 @@ const FiltersSection = () => {
 							sx={{
 								display: 'flex',
 								alignItems: 'center',
+								marginLeft: 2,
 							}}
 						>
 							<FiltersTab />
