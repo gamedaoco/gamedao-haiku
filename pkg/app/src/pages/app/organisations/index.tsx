@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
 import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'
-import { Button, Container, createSvgIcon, Grid, InputAdornment, TextField } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { Button, Container, createSvgIcon, Grid } from '@mui/material'
+import FiltersSection from 'components/OrganisationCard/modules/filtersSection'
+import { ArrowDownward } from '@mui/icons-material'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -17,35 +18,20 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-
-const SearchIcon = createSvgIcon(
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-		={' '}
-		<path
-			fillRule="evenodd"
-			d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-			clipRule="evenodd"
-		/>
-	</svg>,
-	'Search',
-)
-
+const applyPagination = (data: Body[], rowsPerPage: number): Body[] => data?.filter((x, index) => index < rowsPerPage)
 export function OrganisationPage() {
-	const useStyles = makeStyles({
-		field: {
-			'& fieldset': {
-				borderRadius: 8,
-			},
-		},
-	})
-	const classes = useStyles()
 	const { loading, error, data } = useBodiesQuery()
 	useEffect(() => {
 		if (error) {
 			console.error('There is an error when querying the display values')
 		}
 	}, [error])
-
+	const [bodyCount, setBodyCount] = useState<number>(15)
+	const paginatedData = applyPagination(data?.bodies?.slice() as Body[], bodyCount)
+	const buttonVisibility = useMemo(
+		() => paginatedData?.length < data?.bodies?.slice()?.length,
+		[data?.bodies, paginatedData?.length],
+	)
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box
@@ -71,43 +57,37 @@ export function OrganisationPage() {
 								</Button>
 							</Grid>
 						</Grid>
-						<Box
-							sx={{
-								m: -1,
-								mt: 3,
-							}}
-						>
+						<FiltersSection />
+					</Box>
+					<ItemList items={paginatedData} loading={loading} />
+				</Container>
+				{buttonVisibility && (
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+						<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
 							<Box
 								sx={{
-									flexGrow: 1,
-									m: 1.5,
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'center',
+									justifyContent: 'center',
+									gap: 1.5,
 								}}
 							>
-								<Grid container spacing={3}>
-									<Grid item xs={12} md={4}>
-										<TextField
-											id="outlined-basic"
-											size="small"
-											className={classes.field}
-											fullWidth
-											InputProps={{
-												startAdornment: (
-													<InputAdornment position="start">
-														<SearchIcon fontSize="small" />
-													</InputAdornment>
-												),
-											}}
-											placeholder="Search Organisations…"
-										/>
-									</Grid>
-									<Grid item xs={0} md={5}></Grid>
-									<Grid item xs={12} md={3}></Grid>
-								</Grid>
+								<Button
+									endIcon={<ArrowDownward />}
+									onClick={() => setBodyCount((p) => p + 30)}
+									variant="outlined"
+									sx={{ color: '#919EAB', border: '#919EAB 1px solid', borderRadius: 2 }}
+								>
+									Load 30 More Organisations
+								</Button>
+								<Typography>
+									Showing {paginatedData?.length} of {data?.bodies?.slice()?.length} organisations
+								</Typography>
 							</Box>
 						</Box>
 					</Box>
-					<ItemList items={data?.bodies?.slice() as Body[]} loading={loading}></ItemList>
-				</Container>
+				)}
 			</Box>
 		</Layout>
 	)
