@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Box from '@mui/material/Box'
 import { createSvgIcon, Grid, InputAdornment, TextField } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -16,7 +16,11 @@ const SearchIcon = createSvgIcon(
 	'Search',
 )
 
-const FiltersSection = () => {
+interface FiltersSectionPropsInterface {
+	filters: string
+	setFilters: (x: string) => void
+}
+const FiltersSection: FC<FiltersSectionPropsInterface> = ({ filters, setFilters }) => {
 	const useStyles = makeStyles({
 		field: {
 			'& fieldset': {
@@ -52,6 +56,8 @@ const FiltersSection = () => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={4}>
 						<TextField
+							onChange={(e) => setFilters(e.target.value)}
+							value={filters}
 							id="outlined-basic"
 							size="small"
 							className={classes.field}
