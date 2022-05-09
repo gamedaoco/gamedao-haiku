@@ -7,6 +7,8 @@ export interface TMPOrganisation {
 	feeAmount: number
 	hasWhitelist: boolean
 	hasApplication: boolean
+	headerCID: string
+	logoCID: string
 }
 
 export interface TMPOrganisationState extends TMPOrganisation {
@@ -18,4 +20,6 @@ export interface TMPOrganisationState extends TMPOrganisation {
 	setFeeAmount: (number) => void
 	setHasWhitelist: (boolen) => void
 	setHasApplication: (boolen) => void
+	setHeaderCID: (string) => void
+	setLogoCID: (string) => void
 }

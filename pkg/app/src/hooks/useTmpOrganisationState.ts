@@ -12,6 +12,8 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 	const [feeAmount, setFeeAmount] = useLocalStorage<number>(`TmpOrg-${address}-feeAmount`, 0)
 	const [hasWhitelist, setHasWhitelist] = useLocalStorage<boolean>(`TmpOrg-${address}-hasWhitelist`, true)
 	const [hasApplication, setHasApplication] = useLocalStorage<boolean>(`TmpOrg-${address}-hasApplication`, false)
+	const [headerCID, setHeaderCID] = useLocalStorage<string>(`TmpOrg-${address}-headerCID`, '')
+	const [logoCID, setLogoCID] = useLocalStorage<string>(`TmpOrg-${address}-logoCID`, '')
 
 	return {
 		type: selectedType,
@@ -22,6 +24,8 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 		feeAmount: feeAmount,
 		hasWhitelist: hasWhitelist,
 		hasApplication: hasApplication,
+		headerCID: headerCID,
+		logoCID: logoCID,
 		setType: setSelectedType,
 		setName: setNameState,
 		setMode: setSelectedMode,
@@ -30,5 +34,7 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 		setFeeAmount: setFeeAmount,
 		setHasWhitelist: setHasWhitelist,
 		setHasApplication: setHasApplication,
+		setHeaderCID: setHeaderCID,
+		setLogoCID: setLogoCID,
 	}
 }
