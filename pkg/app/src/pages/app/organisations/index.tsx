@@ -50,8 +50,8 @@ export function OrganisationPage() {
 	const filteredData = applyFilters(data?.bodies?.slice() as Body[], filters)
 	const paginatedData = applyPagination(filteredData, bodyCount)
 	const buttonVisibility = useMemo(
-		() => paginatedData?.length < data?.bodies?.slice()?.length && !filters,
-		[data?.bodies, paginatedData?.length, filters],
+		() => paginatedData?.length < filteredData?.length,
+		[paginatedData?.length, filteredData?.length],
 	)
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
@@ -80,20 +80,29 @@ export function OrganisationPage() {
 						</Grid>
 						<FiltersSection filters={filters} setFilters={setFilters} />
 					</Box>
+					{paginatedData?.length === 0 && !loading && (
+						<Box sx={{ mt: 2, mb: 4 }}>
+							<Typography fontWeight={700}>No organisation found</Typography>
+							<Typography>
+								No results found for “{filters}”. Try checking for typos or using a different term.
+							</Typography>
+						</Box>
+					)}
 					<ItemList items={paginatedData} loading={loading} />
 				</Container>
-				{buttonVisibility && (
-					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-						<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
-							<Box
-								sx={{
-									display: 'flex',
-									flexDirection: 'column',
-									alignItems: 'center',
-									justifyContent: 'center',
-									gap: 1.5,
-								}}
-							>
+
+				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
+						<Box
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: 'center',
+								justifyContent: 'center',
+								gap: 1.5,
+							}}
+						>
+							{buttonVisibility && (
 								<Button
 									endIcon={<ArrowDownward />}
 									onClick={() => setBodyCount((p) => p + 30)}
@@ -102,13 +111,13 @@ export function OrganisationPage() {
 								>
 									Load 30 More Organisations
 								</Button>
-								<Typography>
-									Showing {paginatedData?.length} of {data?.bodies?.slice()?.length} organisations
-								</Typography>
-							</Box>
+							)}
+							<Typography>
+								Showing {paginatedData?.length} of {filteredData?.length} organisations
+							</Typography>
 						</Box>
 					</Box>
-				)}
+				</Box>
 			</Box>
 		</Layout>
 	)
