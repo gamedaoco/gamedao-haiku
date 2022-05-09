@@ -18,8 +18,28 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
+const applyFilters = (data: Body[], filters: string): Body[] =>
+	data?.filter((x) => {
+		if (filters) {
+			let queryMatched = false
+			const properties = ['name', 'description']
+
+			properties.forEach((property) => {
+				if (x?.metadata?.[property]?.toLowerCase().includes(filters.toLowerCase())) {
+					queryMatched = true
+				}
+			})
+
+			if (!queryMatched) {
+				return false
+			}
+		}
+
+		return true
+	})
 const applyPagination = (data: Body[], rowsPerPage: number): Body[] => data?.filter((x, index) => index < rowsPerPage)
 export function OrganisationPage() {
+	const [filters, setFilters] = useState('')
 	const { loading, error, data } = useBodiesQuery()
 	useEffect(() => {
 		if (error) {
@@ -27,10 +47,11 @@ export function OrganisationPage() {
 		}
 	}, [error])
 	const [bodyCount, setBodyCount] = useState<number>(15)
-	const paginatedData = applyPagination(data?.bodies?.slice() as Body[], bodyCount)
+	const filteredData = applyFilters(data?.bodies?.slice() as Body[], filters)
+	const paginatedData = applyPagination(filteredData, bodyCount)
 	const buttonVisibility = useMemo(
-		() => paginatedData?.length < data?.bodies?.slice()?.length,
-		[data?.bodies, paginatedData?.length],
+		() => paginatedData?.length < data?.bodies?.slice()?.length && !filters,
+		[data?.bodies, paginatedData?.length, filters],
 	)
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
@@ -57,7 +78,7 @@ export function OrganisationPage() {
 								</Button>
 							</Grid>
 						</Grid>
-						<FiltersSection />
+						<FiltersSection filters={filters} setFilters={setFilters} />
 					</Box>
 					<ItemList items={paginatedData} loading={loading} />
 				</Container>
