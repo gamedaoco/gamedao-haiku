@@ -1,5 +1,5 @@
-import { useCallback, memo } from 'react'
-import { Avatar, Tooltip, Box, Badge } from '@mui/material'
+import { memo, useCallback } from 'react'
+import { Avatar, Box, Tooltip } from '@mui/material'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import { useRouter } from 'next/router'
 import { useConfig } from 'hooks/useConfig'
@@ -12,7 +12,7 @@ interface ComponentProps {
 	notification?: boolean
 }
 
-export function BodyButton({ id, logo, name, active, notification }: ComponentProps) {
+export function OrganizationButton({ id, logo, name, active, notification }: ComponentProps) {
 	const { push } = useRouter()
 	const config = useConfig()
 	const navigateCall = useCallback(() => {
@@ -86,4 +86,4 @@ export function BodyButton({ id, logo, name, active, notification }: ComponentPr
 	)
 }
 
-export const BodyButtonMemoized = memo(BodyButton)
+export const OrganizationButtonMemoized = memo(OrganizationButton)

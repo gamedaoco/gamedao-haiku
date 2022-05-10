@@ -1,5 +1,5 @@
-query Bodies {
-    bodies {
+query Organizations {
+    organizations {
         id
         metadata {
             name
