@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import types from 'src/data/types.json'
+import ZeroTypes from 'data/zero-types.json'
 import type { ApiProvider } from 'src/@types/network'
 import { NetworkContext } from './modules/context'
 import { initializeApis, keepAlive } from 'provider/network/modules/network'
@@ -9,8 +9,8 @@ import { initializeApis, keepAlive } from 'provider/network/modules/network'
 // Are there already ideas here should the types come also from GraphQL or rather
 // be pulled from the chain itself
 const API_PROVIDER_CONFIG_ZERO = {
-	wsProviderUrl: 'wss://alphaville.zero.io',
-	types: types,
+	wsProviderUrl: 'wss://beeblebrox.zero.io/node',
+	types: ZeroTypes,
 }
 
 const API_PROVIDER_CONFIG_POLKADOT = {
