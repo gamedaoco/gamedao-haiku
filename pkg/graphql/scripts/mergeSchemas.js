@@ -1,14 +1,13 @@
 const fs = require('fs')
+const config = require('../package.json')
+
 const { loadSchema } = require('@graphql-tools/load')
 const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
 const { UrlLoader } = require('@graphql-tools/url-loader')
 const { printSchema, introspectionFromSchema } = require('graphql')
 const { stitchSchemas } = require('@graphql-tools/stitch')
 
-const remoteList = [
-	'https://gql-rmrk2-prod.graphcdn.app/',
-	'https://app.gc.subsquid.io/beta/test-gamedao-indexer/v005/graphql',
-]
+const remoteList = [config.remoteGraphQlUrls.rmrk, config.remoteGraphQlUrls.subsquid]
 
 ;(async () => {
 	const path = './src/schema/'

@@ -1,11 +1,11 @@
 import { Grid } from '@mui/material'
 import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
-import type { Body } from '@gamedao-haiku/graphql/dist'
+import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { TileCard } from 'components/OrganisationCard/modules/tileCard'
 import React from 'react'
 
 interface ComponentProps {
-	items: Body[]
+	items: Organization[]
 	loading: boolean
 }
 

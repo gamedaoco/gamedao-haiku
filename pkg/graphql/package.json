@@ -9,6 +9,10 @@
     "merge": "node scripts/mergeSchemas.js",
     "build": "yarn npm-run-all -s merge generate transpile"
   },
+  "remoteGraphQlUrls": {
+    "rmrk": "https://gql-rmrk2-prod.graphcdn.app/",
+    "subsquid": "https://app.gc.subsquid.io/beta/gamedao-upgrade/v001/graphql"
+  },
   "dependencies": {
     "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/import-types-preset": "^2.1.14",

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
-import { Body, useBodiesQuery } from '@gamedao-haiku/graphql/dist'
+import { Organization, useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import FiltersSection from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
@@ -18,7 +18,7 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-const applyFilters = (data: Body[], filters: string): Body[] =>
+const applyFilters = (data: Organization[], filters: string): Organization[] =>
 	data?.filter((x) => {
 		if (filters) {
 			let queryMatched = false
@@ -37,17 +37,19 @@ const applyFilters = (data: Body[], filters: string): Body[] =>
 
 		return true
 	})
-const applyPagination = (data: Body[], rowsPerPage: number): Body[] => data?.filter((x, index) => index < rowsPerPage)
+const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
+	data?.filter((x, index) => index < rowsPerPage)
+
 export function OrganisationPage() {
 	const [filters, setFilters] = useState('')
-	const { loading, error, data } = useBodiesQuery()
+	const { loading, error, data } = useOrganizationsQuery()
 	useEffect(() => {
 		if (error) {
 			console.error('There is an error when querying the display values')
 		}
 	}, [error])
 	const [bodyCount, setBodyCount] = useState<number>(15)
-	const filteredData = applyFilters(data?.bodies?.slice() as Body[], filters)
+	const filteredData = applyFilters(data?.organizations?.slice() as Organization[], filters)
 	const paginatedData = applyPagination(filteredData, bodyCount)
 	const buttonVisibility = useMemo(
 		() => paginatedData?.length < filteredData?.length,

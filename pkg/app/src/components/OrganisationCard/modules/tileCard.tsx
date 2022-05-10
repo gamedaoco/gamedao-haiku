@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 import { useExtensionContext } from 'src/provider/extension/modules/context'
 import { NavLink } from 'src/components/NavLink/navLink'
-import type { Body } from '@gamedao-haiku/graphql/dist'
+import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Check, Key, Person } from '@mui/icons-material'
 
 interface ComponentsPros {
-	item: Body
+	item: Organization
 }
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
@@ -62,7 +62,7 @@ export const TileCard = ({ item }: ComponentsPros) => {
 						) : (
 							<>
 								<Key fontSize={'small'} />
-								<span>{item?.access === 0 ? 'Open' : 'Invitation'}</span>
+								<span>{item?.access === 'Open' ? 'Open' : 'Invitation'}</span>
 							</>
 						)}
 					</Box>

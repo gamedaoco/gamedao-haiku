@@ -1,5 +1,5 @@
 query Sidebar($address: String!) {
-    bodies(where: {members_some: {address_eq: $address}}) {
+    organizations(where: {members_some: {address_eq: $address}}) {
         id
         metadata {
             logo
