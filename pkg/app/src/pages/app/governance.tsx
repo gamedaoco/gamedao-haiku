@@ -6,12 +6,13 @@ import Button from '@mui/material/Button'
 
 import { FormVoting } from 'components/Forms/FormVoting'
 import { Layout } from 'src/layouts/default/layout'
-import { useBodiesQuery } from '@gamedao-haiku/graphql/dist'
+
 import { CircularProgress } from '@mui/material'
+import { useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
 
 export function GovernancePage() {
 	const [isShow, setIsShow] = useState(false)
-	const { loading, data } = useBodiesQuery()
+	const { loading, data } = useOrganizationsQuery()
 
 	const callback = (data: any) => {
 		console.log('yes gotcha', data)
@@ -43,11 +44,11 @@ export function GovernancePage() {
 				<Box sx={{ p: '4rem', minHeight: '90vh' }}>
 					<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-							Hello. Bodies count: {loading ? <CircularProgress /> : data?.bodies.length}
+							Hello. Bodies count: {loading ? <CircularProgress /> : data?.organizations.length}
 						</Typography>
 						{data && (
 							<ul>
-								{data.bodies.map((body) => (
+								{data.organizations.map((body) => (
 									<li key={body.id}>
 										<div>Name: {body.metadata.name}</div>
 										<div>

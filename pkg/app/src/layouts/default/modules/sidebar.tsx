@@ -6,7 +6,7 @@ import { Add as AddIcon } from '@mui/icons-material'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
 import { createErrorNotification } from 'src/utils/notificationUtils'
-import { BodyButtonMemoized } from 'layouts/default/modules/bodyButton'
+import { OrganizationButtonMemoized } from 'layouts/default/modules/organizationButton'
 import { useExtensionContext } from 'provider/extension/modules/context'
 
 interface ComponentProps {
@@ -96,16 +96,16 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 							/>
 						)}
 						{selectedAccount &&
-							(data?.bodies?.slice() as any)
+							(data?.organizations?.slice() as any)
 								?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
-								?.map((body) => {
+								?.map((organization) => {
 									return (
-										<Fragment key={body?.id}>
-											<BodyButtonMemoized
-												id={body?.id}
-												logo={body?.metadata?.logo}
-												name={body?.metadata?.name}
-												active={location?.pathname?.indexOf(body?.id) >= 0}
+										<Fragment key={organization?.id}>
+											<OrganizationButtonMemoized
+												id={organization?.id}
+												logo={organization?.metadata?.logo}
+												name={organization?.metadata?.name}
+												active={location?.pathname?.indexOf(organization?.id) >= 0}
 												notification={false}
 											/>
 										</Fragment>

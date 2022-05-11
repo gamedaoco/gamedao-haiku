@@ -7,12 +7,11 @@ import Button from '@mui/material/Button'
 import { FormCampaign } from 'components/Forms/FormCampaign'
 
 import { Layout } from 'src/layouts/default/layout'
-import { useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
 import { CircularProgress } from '@mui/material'
 
 export function Campaigns() {
 	const [isShow, setIsShow] = useState(false)
-	const { loading, data } = useCampaignsQuery()
+	// const { loading, data } = useCampaignsQuery()
 
 	const callback = (data: any) => {
 		console.log('yes gotcha', data)
@@ -25,6 +24,11 @@ export function Campaigns() {
 	const handleForm = () => {
 		setIsShow(!isShow)
 	}
+
+	// TODO: Remove after campaigns are indexed
+	const loading = false
+	const data: any = {}
+	return null
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
