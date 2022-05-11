@@ -98,7 +98,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 						{selectedAccount &&
 							(data?.organizations?.slice() as any)
 								?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
-								?.map((organization, i) => {
+								?.map((organization) => {
 									return (
 										<Fragment key={organization?.id}>
 											<OrganizationButtonMemoized
@@ -106,7 +106,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 												logo={organization?.metadata?.logo}
 												name={organization?.metadata?.name}
 												active={location?.pathname?.indexOf(organization?.id) >= 0}
-												notification={i % 2 == 0}
+												notification={false}
 											/>
 										</Fragment>
 									)

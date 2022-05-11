@@ -11,7 +11,6 @@ export async function initializeAccounts(
 	supportedWallets: Wallet[],
 ): Promise<ExtensionState> {
 	if (!systemProperties || !supportedWallets?.length) return null
-
 	const wallet = getWalletBySource(accountSettings.lastUsedExtension)
 	if (!wallet) {
 		console.error(`The wallet ${accountSettings.lastUsedExtension} is not installed `)
@@ -51,6 +50,7 @@ export async function initializeAccounts(
 			selectAccount: null,
 			supportedWallets: null,
 			allSupportedWallets: null,
+			signAndNotify: null,
 		}
 	} catch (error) {
 		console.error('Accounts could not be initialized', 'error:', error)

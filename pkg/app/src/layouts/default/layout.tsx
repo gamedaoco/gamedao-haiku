@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Box, Container, Stack, useTheme, useMediaQuery } from '@mui/material'
+import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
 import { Header } from './modules/header'
 import { Sidebar } from './modules/sidebar'
 import { Footer } from './modules/footer'
@@ -59,7 +59,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>
 				<Box display="flex" flex="1 1 auto" overflow="hidden">
 					<Box flex="1 1 auto" height="100%" overflow="auto">
-						<Box>{noContainer ? { children } : <Container>{children}</Container>}</Box>
+						<Box>{noContainer ? children : <Container>{children}</Container>}</Box>
 
 						{showFooter && <Footer />}
 					</Box>
