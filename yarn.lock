@@ -1128,6 +1128,39 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
+"@date-io/core@^2.13.2":
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.13.2.tgz#63983fbe2816a758d3fe51857e88d9170c40073c"
+  integrity sha512-lAUDhC5kpzlxa00BxfqENBgerbGI5ojuKQpXLGZCTrqT1rQR+vrp2rwf0I+H2KlM2z3N1ldyQuANmzZ+ehomog==
+
+"@date-io/date-fns@^2.11.0":
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-2.13.2.tgz#d0abddc7e76dbaeff92b876b7ad839729cc682cf"
+  integrity sha512-Pq0xBH6cvEg5IsOs7Olkk1PHFFJFTM34OT5mk/9ND1ied4RGhLNeLYRwbyCThZ29jolqPsV2HBs9wo2QTiNIkg==
+  dependencies:
+    "@date-io/core" "^2.13.2"
+
+"@date-io/dayjs@^2.11.0":
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/@date-io/dayjs/-/dayjs-2.13.2.tgz#b337e92bd9d3fe896619f82d68f23209e2b03f8f"
+  integrity sha512-uP/Bvr+QfzpLN3JGX/x3uJtGnnSWckn7e500Wn+pVNVvIleaXSJxDbE5IAz1P7WwQrnSuxuBI1e6Sl8J/njzKQ==
+  dependencies:
+    "@date-io/core" "^2.13.2"
+
+"@date-io/luxon@^2.11.1":
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/@date-io/luxon/-/luxon-2.13.2.tgz#57476ff987488e12f560f5d5b2831898104ca094"
+  integrity sha512-/LeUXsBeM9DITZliaAzKYBu6GtaD3AT5nQR5u7AasjUz1JlYPCTjV5z8b+wnY/jm4bFz5AhgK+TMHGaZoMJW+w==
+  dependencies:
+    "@date-io/core" "^2.13.2"
+
+"@date-io/moment@^2.11.0":
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-2.13.2.tgz#2702aa27571742436efd6dd3f0b8f80745bcf1a4"
+  integrity sha512-6uWeCS44srr86MaeUS0mS10T1g7WKfqZ47r1rEc+8xcS3640TIPNf/pg30kwprZKAM7gtbZu6vW6pe1MEPbcKA==
+  dependencies:
+    "@date-io/core" "^2.13.2"
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
@@ -2049,6 +2082,22 @@
   dependencies:
     "@babel/runtime" "^7.17.2"
 
+"@mui/lab@^5.0.0-alpha.81":
+  version "5.0.0-alpha.81"
+  resolved "https://registry.yarnpkg.com/@mui/lab/-/lab-5.0.0-alpha.81.tgz#c24bd3b5679e33947bf1a0ce490513932d6cf69d"
+  integrity sha512-TMUJVRjdOH7ZoXuVNjJB4EaPxKd7D3w9pwFxixqMVWy/2R9PlRJq/a/4Hwda1+dwjI0jQzOnTk/kVcFxiz2X3w==
+  dependencies:
+    "@babel/runtime" "^7.17.2"
+    "@mui/base" "5.0.0-alpha.80"
+    "@mui/system" "^5.7.0"
+    "@mui/utils" "^5.7.0"
+    "@mui/x-date-pickers" "5.0.0-alpha.0"
+    clsx "^1.1.1"
+    prop-types "^15.8.1"
+    react-is "^17.0.2"
+    react-transition-group "^4.4.2"
+    rifm "^0.12.1"
+
 "@mui/material@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.7.0.tgz#94f326ce517fc3fcaf1b744b4358af3daf8dcac6"
@@ -2133,7 +2182,7 @@
   resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.1.3.tgz#d7636f3046110bcccc63e6acfd100e2ad9ca712a"
   integrity sha512-DDF0UhMBo4Uezlk+6QxrlDbchF79XG6Zs0zIewlR4c0Dt6GKVFfUtzPtHCH1tTbcSlq/L2bGEdiaoHBJ9Y1gSA==
 
-"@mui/utils@^5.7.0":
+"@mui/utils@^5.2.3", "@mui/utils@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.7.0.tgz#7e96df6b871f4d3da13f26a623d73ddf9a11b19c"
   integrity sha512-uWpDIEXl7bWYkJwKQQ4Rdhc2dcotVETRYuLy29V6qLYZyAbs7AMKwDDz0XKy3RMNmU7S2R/jEeSb9xjXscQUHQ==
@@ -2143,6 +2192,21 @@
     "@types/react-is" "^16.7.1 || ^17.0.0"
     prop-types "^15.8.1"
     react-is "^17.0.2"
+
+"@mui/x-date-pickers@5.0.0-alpha.0":
+  version "5.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-5.0.0-alpha.0.tgz#a62ffbab453d3c2dcd4ec20bd4f3f6338ad2ed3f"
+  integrity sha512-JTzTaNSWbxNi8KDUJjHCH6im0YlIEv88gPoKhGm7s6xCGT1q6FtMp/oQ40nhfwrJ73nkM5G1JXRIzI/yfsHXQQ==
+  dependencies:
+    "@date-io/date-fns" "^2.11.0"
+    "@date-io/dayjs" "^2.11.0"
+    "@date-io/luxon" "^2.11.1"
+    "@date-io/moment" "^2.11.0"
+    "@mui/utils" "^5.2.3"
+    clsx "^1.1.1"
+    prop-types "^15.7.2"
+    react-transition-group "^4.4.2"
+    rifm "^0.12.1"
 
 "@n1ru4l/graphql-live-query@^0.9.0":
   version "0.9.0"
@@ -3731,6 +3795,18 @@ anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+apexcharts@^3.35.2:
+  version "3.35.2"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.35.2.tgz#90faafffa055ce502f73b11008ba77238e94228f"
+  integrity sha512-VOSb25mrcSv/JjaWKjnasL8277cqnA0Gp20uV1+rlgE4U6j44fdTYW850Powl+S8RkXd/lPwzBB2jvKkEOHl0Q==
+  dependencies:
+    svg.draggable.js "^2.2.2"
+    svg.easing.js "^2.0.0"
+    svg.filter.js "^2.0.2"
+    svg.pathmorphing.js "^0.1.3"
+    svg.resize.js "^1.4.3"
+    svg.select.js "^3.0.1"
 
 apollo-datasource@^3.3.1:
   version "3.3.1"
@@ -9933,7 +10009,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -10109,6 +10185,13 @@ react-3d-viewer@^1.0.12:
     react-router "^3.2.1"
     react-scroll-up "^1.3.3"
     three "^0.95.0"
+
+react-apexcharts@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-apexcharts/-/react-apexcharts-1.4.0.tgz#e3619104b34750da67a2ca80289dc87085c2aa27"
+  integrity sha512-DrcMV4aAMrUG+n6412yzyATWEyCDWlpPBBhVbpzBC4PDeuYU6iF84SmExbck+jx5MUm4U5PM3/T307Mc3kzc9Q==
+  dependencies:
+    prop-types "^15.5.7"
 
 react-dom@^18.1.0:
   version "18.1.0"
@@ -10586,6 +10669,11 @@ rfdc@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/rfdc/-/rfdc-1.3.0.tgz#d0b7c441ab2720d05dc4cf26e01c89631d9da08b"
   integrity sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==
+
+rifm@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/rifm/-/rifm-0.12.1.tgz#8fa77f45b7f1cda2a0068787ac821f0593967ac4"
+  integrity sha512-OGA1Bitg/dSJtI/c4dh90svzaUPt228kzFsUkJbtA2c964IqEAwWXeL9ZJi86xWv3j5SMqRvGULl7bA6cK0Bvg==
 
 rimraf@^2.5.2:
   version "2.7.1"
@@ -11385,6 +11473,61 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+svg.draggable.js@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/svg.draggable.js/-/svg.draggable.js-2.2.2.tgz#c514a2f1405efb6f0263e7958f5b68fce50603ba"
+  integrity sha512-JzNHBc2fLQMzYCZ90KZHN2ohXL0BQJGQimK1kGk6AvSeibuKcIdDX9Kr0dT9+UJ5O8nYA0RB839Lhvk4CY4MZw==
+  dependencies:
+    svg.js "^2.0.1"
+
+svg.easing.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/svg.easing.js/-/svg.easing.js-2.0.0.tgz#8aa9946b0a8e27857a5c40a10eba4091e5691f12"
+  integrity sha1-iqmUawqOJ4V6XEChDrpAkeVpHxI=
+  dependencies:
+    svg.js ">=2.3.x"
+
+svg.filter.js@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/svg.filter.js/-/svg.filter.js-2.0.2.tgz#91008e151389dd9230779fcbe6e2c9a362d1c203"
+  integrity sha1-kQCOFROJ3ZIwd5/L5uLJo2LRwgM=
+  dependencies:
+    svg.js "^2.2.5"
+
+svg.js@>=2.3.x, svg.js@^2.0.1, svg.js@^2.2.5, svg.js@^2.4.0, svg.js@^2.6.5:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/svg.js/-/svg.js-2.7.1.tgz#eb977ed4737001eab859949b4a398ee1bb79948d"
+  integrity sha512-ycbxpizEQktk3FYvn/8BH+6/EuWXg7ZpQREJvgacqn46gIddG24tNNe4Son6omdXCnSOaApnpZw6MPCBA1dODA==
+
+svg.pathmorphing.js@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/svg.pathmorphing.js/-/svg.pathmorphing.js-0.1.3.tgz#c25718a1cc7c36e852ecabc380e758ac09bb2b65"
+  integrity sha512-49HWI9X4XQR/JG1qXkSDV8xViuTLIWm/B/7YuQELV5KMOPtXjiwH4XPJvr/ghEDibmLQ9Oc22dpWpG0vUDDNww==
+  dependencies:
+    svg.js "^2.4.0"
+
+svg.resize.js@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/svg.resize.js/-/svg.resize.js-1.4.3.tgz#885abd248e0cd205b36b973c4b578b9a36f23332"
+  integrity sha512-9k5sXJuPKp+mVzXNvxz7U0uC9oVMQrrf7cFsETznzUDDm0x8+77dtZkWdMfRlmbkEEYvUn9btKuZ3n41oNA+uw==
+  dependencies:
+    svg.js "^2.6.5"
+    svg.select.js "^2.1.2"
+
+svg.select.js@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/svg.select.js/-/svg.select.js-2.1.2.tgz#e41ce13b1acff43a7441f9f8be87a2319c87be73"
+  integrity sha512-tH6ABEyJsAOVAhwcCjF8mw4crjXSI1aa7j2VQR8ZuJ37H2MBUbyeqYr5nEO7sSN3cy9AR9DUwNg0t/962HlDbQ==
+  dependencies:
+    svg.js "^2.2.5"
+
+svg.select.js@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/svg.select.js/-/svg.select.js-3.0.1.tgz#a4198e359f3825739226415f82176a90ea5cc917"
+  integrity sha512-h5IS/hKkuVCbKSieR9uQCj9w+zLHoPh+ce19bBYyqF53g6mnPB8sAtIbe1s9dh2S2fCmYX2xel1Ln3PJBbK4kw==
+  dependencies:
+    svg.js "^2.6.5"
 
 swap-case@^2.0.2:
   version "2.0.2"

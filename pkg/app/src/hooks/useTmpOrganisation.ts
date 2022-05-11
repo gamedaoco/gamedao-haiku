@@ -12,6 +12,8 @@ export function UseTmpOrganisation(): TMPOrganisation {
 	const [feeAmount] = useLocalStorage<number>(`TmpOrg-${address}-feeAmount`, 0)
 	const [hasWhitelist] = useLocalStorage<boolean>(`TmpOrg-${address}-hasWhitelist`, true)
 	const [hasApplication] = useLocalStorage<boolean>(`TmpOrg-${address}-hasApplication`, false)
+	const [headerCID] = useLocalStorage<string>(`TmpOrg-${address}-headerCID`, '')
+	const [logoCID] = useLocalStorage<string>(`TmpOrg-${address}-logoCID`, '')
 
 	return {
 		type: selectedType,
@@ -22,5 +24,7 @@ export function UseTmpOrganisation(): TMPOrganisation {
 		feeAmount: feeAmount,
 		hasWhitelist: hasWhitelist,
 		hasApplication: hasApplication,
+		headerCID: headerCID,
+		logoCID: logoCID,
 	}
 }

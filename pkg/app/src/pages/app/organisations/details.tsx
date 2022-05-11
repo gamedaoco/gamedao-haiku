@@ -63,7 +63,7 @@ export function OrganisationDetailsPage() {
 									{!tmpOrg.headerCID?.length && (
 										<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
 									)}
-									{tmpOrg.headerCID?.length && (
+									{!!tmpOrg.headerCID?.length && (
 										<CardMedia
 											component="img"
 											src={parseIpfsHash(tmpOrg.headerCID, config.IPFS_GATEWAY)}
