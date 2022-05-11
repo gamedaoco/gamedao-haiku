@@ -70,7 +70,7 @@ export function ExtensionProvider({ children }) {
 			supWallets = wallets
 		}
 
-		if (accountSettings.allowConnect && accountSettings.lastUsedExtension) {
+		if (accountSettings.allowConnect && accountSettings.lastUsedExtension && supWallets) {
 			// Load accounts from extension
 			initializeAccounts(apiProvider.systemProperties, accountSettings, supWallets)
 				.then((extensionState: ExtensionState) => {

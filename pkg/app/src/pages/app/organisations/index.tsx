@@ -5,7 +5,7 @@ import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
 import { Organization, useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
-import FiltersSection from 'components/OrganisationCard/modules/filtersSection'
+import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
 
 const PlusIcon = createSvgIcon(
