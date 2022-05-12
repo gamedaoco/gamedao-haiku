@@ -6,7 +6,6 @@ import Skeleton from '@mui/material/Skeleton'
 
 const LoadingTileCard: FC = () => {
 	const theme = useTheme()
-	const bgPlain = { backgroundColor: '#212B36' }
 
 	const SubHeader = useMemo(() => {
 		return (
@@ -58,9 +57,9 @@ const LoadingTileCard: FC = () => {
 			sx={{
 				minHeight: '164px',
 				maxWidth: '344px',
-				borderRadius: '16px',
+				borderRadius: '1rem',
 				'&:hover': { background: theme.palette.grey[500_32] },
-				...bgPlain,
+				backgroundColor: theme.palette.grey[500_8],
 				cursor: 'pointer',
 			}}
 		>
