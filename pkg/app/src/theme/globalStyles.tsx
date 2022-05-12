@@ -18,7 +18,23 @@ export default function GlobalStyles() {
 				html: {
 					width: '100%',
 					height: '100%',
-					WebkitOverflowScrolling: 'touch',
+
+					transitionDuration: 'border 250ms, opacity 250ms, color 250ms',
+					transitionTimingFunction: 'ease-in-out',
+
+					// overflow: 'scroll',
+					// overflowX: 'hidden',
+					// scrollBehavior: 'smooth',
+					// WebkitOverflowScrolling: 'touch',
+					// scrollbarWidth: 'thin',
+					// scrollbarColor: 'rgba( 255, 0, 255, 1 )',
+				},
+				'::-webkit-scrollbar': {
+					width: '2px',
+					background: 'black',
+				},
+				'::-webkit-scrollbar-thumb': {
+					background: 'rgba( 255, 0, 255, 1 )',
 				},
 				body: {
 					width: '100%',
