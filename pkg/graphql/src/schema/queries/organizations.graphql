@@ -1,5 +1,5 @@
-query Organizations {
-    organizations {
+query Organizations($limit: Int, $orderBy: [OrganizationOrderByInput]) {
+  organizations(limit: $limit, orderBy: $orderBy) {
         id
         metadata {
             name
