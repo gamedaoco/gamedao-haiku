@@ -1,11 +1,11 @@
 import { Grid } from '@mui/material'
 import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
-import type { Organization } from '@gamedao-haiku/graphql/dist'
+import type { OrganizationEdge } from '@gamedao-haiku/graphql/dist'
 import { TileCard } from 'components/OrganisationCard/modules/tileCard'
 import React from 'react'
 
 interface ComponentProps {
-	items: Organization[]
+	items: OrganizationEdge[]
 	loading: boolean
 }
 
@@ -24,7 +24,7 @@ export function ItemList({ items, loading }: ComponentProps) {
 				<>
 					{items?.map((item, index) => (
 						<Grid item xs={4} key={index}>
-							<TileCard item={item} />
+							<TileCard item={item.node} />
 						</Grid>
 					))}
 				</>

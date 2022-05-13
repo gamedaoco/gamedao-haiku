@@ -6,57 +6,57 @@
       xmlns:xhtml="http://www.w3.org/1999/xhtml">
       
 	<url>
-		<loc>https://haiku.gamedao.co/app/campaigns</loc>
-		<lastmod>2022-05-11</lastmod>
+		<loc>https://haiku.gamedao.co/app/campaigns/[id]</loc>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
-		<loc>https://haiku.gamedao.co/app/campaigns/[id]</loc>
-		<lastmod>2022-05-11</lastmod>
+		<loc>https://haiku.gamedao.co/app/campaigns</loc>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
 		<loc>https://haiku.gamedao.co/app/dashboard</loc>
-		<lastmod>2022-05-11</lastmod>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
 		<loc>https://haiku.gamedao.co/app/governance</loc>
-		<lastmod>2022-05-11</lastmod>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
 		<loc>https://haiku.gamedao.co/app</loc>
-		<lastmod>2022-05-11</lastmod>
-	</url>
-
-	<url>
-		<loc>https://haiku.gamedao.co/app/organisations/create</loc>
-		<lastmod>2022-05-11</lastmod>
-	</url>
-
-	<url>
-		<loc>https://haiku.gamedao.co/app/organisations/details</loc>
-		<lastmod>2022-05-11</lastmod>
-	</url>
-
-	<url>
-		<loc>https://haiku.gamedao.co/app/organisations</loc>
-		<lastmod>2022-05-11</lastmod>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
 		<loc>https://haiku.gamedao.co/app/organisations/[id]</loc>
-		<lastmod>2022-05-11</lastmod>
+		<lastmod>2022-05-13</lastmod>
+	</url>
+
+	<url>
+		<loc>https://haiku.gamedao.co/app/organisations/create</loc>
+		<lastmod>2022-05-13</lastmod>
+	</url>
+
+	<url>
+		<loc>https://haiku.gamedao.co/app/organisations/details</loc>
+		<lastmod>2022-05-13</lastmod>
+	</url>
+
+	<url>
+		<loc>https://haiku.gamedao.co/app/organisations</loc>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
 		<loc>https://haiku.gamedao.co/app/wallet</loc>
-		<lastmod>2022-05-11</lastmod>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 
 	<url>
 		<loc>https://haiku.gamedao.co</loc>
-		<lastmod>2022-05-11</lastmod>
+		<lastmod>2022-05-13</lastmod>
 	</url>
 </urlset>

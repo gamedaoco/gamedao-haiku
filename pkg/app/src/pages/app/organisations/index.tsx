@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
-import { Organization, useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
+import { useOrganizationsLazyQuery, OrganizationOrderByInput, OrganizationEdge } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
@@ -18,14 +18,14 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-const applyFilters = (data: Organization[], filters: string): Organization[] =>
+const applyFilters = (data: OrganizationEdge[], filters: string): OrganizationEdge[] =>
 	data?.filter((x) => {
 		if (filters) {
 			let queryMatched = false
 			const properties = ['name', 'description']
 
 			properties.forEach((property) => {
-				if (x?.metadata?.[property]?.toLowerCase().includes(filters.toLowerCase())) {
+				if (x?.node?.metadata?.[property]?.toLowerCase().includes(filters.toLowerCase())) {
 					queryMatched = true
 				}
 			})
@@ -37,23 +37,29 @@ const applyFilters = (data: Organization[], filters: string): Organization[] =>
 
 		return true
 	})
-const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
+const applyPagination = (data: OrganizationEdge[], rowsPerPage: number): OrganizationEdge[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
 export function OrganisationPage() {
 	const [filters, setFilters] = useState('')
-	const { loading, error, data } = useOrganizationsQuery()
+	const [bodyCount, setBodyCount] = useState<number>(2)
+	const [fetchOrganizations, { loading, error, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
 		if (error) {
 			console.error('There is an error when querying the display values')
 		}
 	}, [error])
-	const [bodyCount, setBodyCount] = useState<number>(15)
-	const filteredData = applyFilters(data?.organizations?.slice() as Organization[], filters)
+
+	useEffect(() => {
+		fetchOrganizations({
+			variables: { first: bodyCount, orderBy: OrganizationOrderByInput.MetadataNameDesc },
+		})
+	}, [bodyCount, fetchOrganizations])
+	const filteredData = applyFilters(data?.organizationsConnection?.edges?.slice() as OrganizationEdge[], filters)
 	const paginatedData = applyPagination(filteredData, bodyCount)
 	const buttonVisibility = useMemo(
-		() => paginatedData?.length < filteredData?.length,
-		[paginatedData?.length, filteredData?.length],
+		() => paginatedData?.length < data?.organizationsConnection?.totalCount,
+		[paginatedData?.length, data?.organizationsConnection?.totalCount],
 	)
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
@@ -107,7 +113,7 @@ export function OrganisationPage() {
 							{buttonVisibility && (
 								<Button
 									endIcon={<ArrowDownward />}
-									onClick={() => setBodyCount((p) => p + 30)}
+									onClick={() => setBodyCount((p) => p + 1)}
 									variant="outlined"
 									sx={{ color: '#919EAB', border: '#919EAB 1px solid', borderRadius: 2 }}
 								>
