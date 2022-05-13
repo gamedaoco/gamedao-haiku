@@ -121,7 +121,8 @@ export function OrganisationPage() {
 								</Button>
 							)}
 							<Typography>
-								Showing {paginatedData?.length} of {filteredData?.length} organisations
+								Showing {paginatedData?.length} of {data?.organizationsConnection?.totalCount}{' '}
+								organisations
 							</Typography>
 						</Box>
 					</Box>
