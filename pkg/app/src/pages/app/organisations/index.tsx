@@ -40,9 +40,22 @@ const applyFilters = (data: OrganizationEdge[], filters: string): OrganizationEd
 const applyPagination = (data: OrganizationEdge[], rowsPerPage: number): OrganizationEdge[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
+interface SortOptionsInterface {
+	name: String
+	value: OrganizationOrderByInput
+}
+
+const sortOptions: SortOptionsInterface[] = [
+	{ value: OrganizationOrderByInput.MemberLimitDesc, name: 'Member: High-Low' },
+	{ value: OrganizationOrderByInput.MemberLimitAsc, name: 'Member: Low-High' },
+	{ value: OrganizationOrderByInput.MetadataDescriptionAsc, name: 'Newest' },
+	{ value: OrganizationOrderByInput.MetadataDescriptionDesc, name: 'Oldest' },
+]
+
 export function OrganisationPage() {
 	const [filters, setFilters] = useState('')
 	const [bodyCount, setBodyCount] = useState<number>(2)
+	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
 	const [fetchOrganizations, { loading, error, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
 		if (error) {
@@ -52,9 +65,9 @@ export function OrganisationPage() {
 
 	useEffect(() => {
 		fetchOrganizations({
-			variables: { first: bodyCount, orderBy: OrganizationOrderByInput.MetadataNameDesc },
+			variables: { first: bodyCount, orderBy: sortOption },
 		})
-	}, [bodyCount, fetchOrganizations])
+	}, [bodyCount, fetchOrganizations, sortOption])
 	const filteredData = applyFilters(data?.organizationsConnection?.edges?.slice() as OrganizationEdge[], filters)
 	const paginatedData = applyPagination(filteredData, bodyCount)
 	const buttonVisibility = useMemo(
@@ -86,7 +99,13 @@ export function OrganisationPage() {
 								</Button>
 							</Grid>
 						</Grid>
-						<FiltersSection filters={filters} setFilters={setFilters} />
+						<FiltersSection
+							filters={filters}
+							setFilters={setFilters}
+							sortOption={sortOption}
+							setSortOption={setSortOption}
+							sortOptions={sortOptions}
+						/>
 					</Box>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>

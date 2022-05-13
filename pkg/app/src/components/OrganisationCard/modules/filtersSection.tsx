@@ -5,10 +5,18 @@ import { Search } from '@mui/icons-material'
 import { makeStyles } from '@mui/styles'
 import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
 import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
+import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 
+interface SortOptionsInterface {
+	name: String
+	value: OrganizationOrderByInput
+}
 interface FiltersSectionPropsInterface {
 	filters: string
 	setFilters: (x: string) => void
+	sortOption: OrganizationOrderByInput
+	setSortOption: (x: OrganizationOrderByInput) => void
+	sortOptions: SortOptionsInterface[]
 }
 
 const useStyles = makeStyles({
@@ -30,7 +38,13 @@ const useStyles = makeStyles({
 	},
 })
 
-export const FiltersSection: FC<FiltersSectionPropsInterface> = ({ filters, setFilters }) => {
+export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
+	filters,
+	setFilters,
+	sortOption,
+	setSortOption,
+	sortOptions,
+}) => {
 	const classes = useStyles()
 	return (
 		<Box
@@ -74,7 +88,12 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({ filters, setF
 							}}
 						>
 							<FiltersTab />
-							<SortOptionsTab classes={classes} />
+							<SortOptionsTab
+								classes={classes}
+								sortOption={sortOption}
+								setSortOption={setSortOption}
+								sortOptions={sortOptions}
+							/>
 						</Box>
 					</Grid>
 				</Grid>

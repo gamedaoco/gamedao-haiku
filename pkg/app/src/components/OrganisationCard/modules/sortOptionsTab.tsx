@@ -2,18 +2,11 @@ import React, { useState } from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 
-const sortOptions = [
-	{ value: 'hi-low', name: 'Member: High-Low' },
-	{ value: 'featured', name: 'Featured' },
-	{ value: 'newest', name: 'Newest' },
-]
-const SortOptionsTab = ({ classes }) => {
-	const [sortOption, setSortOption] = useState(sortOptions[0].value)
-
+const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => {
 	const handleChange = (event: SelectChangeEvent) => {
-		console.log(event.target.value)
-		setSortOption(event.target.value)
+		setSortOption(event.target.value as OrganizationOrderByInput)
 	}
 	return (
 		<Box
