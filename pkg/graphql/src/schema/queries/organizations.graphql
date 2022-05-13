@@ -1,6 +1,9 @@
-query Organizations($limit: Int, $orderBy: [OrganizationOrderByInput]) {
-  organizations(limit: $limit, orderBy: $orderBy) {
-        id
+query Organizations($orderBy: [OrganizationOrderByInput!]!, $first: Int) {
+  organizationsConnection(orderBy: $orderBy, first: $first) {
+    totalCount
+    edges {
+      node {
+         id
         metadata {
             name
             description
@@ -14,5 +17,7 @@ query Organizations($limit: Int, $orderBy: [OrganizationOrderByInput]) {
         }
         cid
         access
+      }
     }
+  }
 }
