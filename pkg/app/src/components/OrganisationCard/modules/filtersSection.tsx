@@ -50,10 +50,9 @@ const useStyles = makeStyles({
 		// 	borderLeft: '50px solid transparent',
 		// 	borderRight: '50px solid transparent',
 		// },
+		paddingTop: 3,
 		borderRadius: '7%',
 		backgroundColor: '#212B36',
-		width: 150,
-		padding: 1,
 		fontSize: 14,
 		color: '#919EAB',
 
