@@ -25,9 +25,48 @@ const useStyles = makeStyles({
 			borderRadius: 8,
 		},
 	},
+	dropdownStyle: {
+		// '&::before': {
+		// 	content: '',
+		// 	display: 'block',
+		// 	position: 'absolute',
+		// 	left: 140,
+		// 	bottom: '100%',
+		// 	width: 0,
+		// 	height: 0,
+		// 	border: '10px solid transparent',
+		// 	borderBottomColor: 'black',
+		// },
+
+		// '&::after': {
+		// 	content: '',
+		// 	position: 'absolute',
+		// 	left: 0,
+		// 	right: 0,
+		// 	margin: '0 auto',
+		// 	width: 0,
+		// 	height: 0,
+		// 	borderTop: '25px solid #6A0136',
+		// 	borderLeft: '50px solid transparent',
+		// 	borderRight: '50px solid transparent',
+		// },
+		borderRadius: '7%',
+		backgroundColor: '#212B36',
+		width: 150,
+		padding: 1,
+		fontSize: 14,
+		color: '#919EAB',
+
+		'& .MuiMenuItem-root': {
+			paddingBottom: 20,
+			fontSize: 14,
+			width: 200,
+			color: '#919EAB',
+		},
+	},
 	formControl: {
 		m: 1,
-		minWidth: 120,
+
 		'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
 			border: 'none',
 			color: 'white',
@@ -84,7 +123,7 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 							sx={{
 								display: 'flex',
 								alignItems: 'center',
-								marginLeft: 2,
+								marginLeft: 1,
 							}}
 						>
 							<FiltersTab />

@@ -48,8 +48,8 @@ interface SortOptionsInterface {
 const sortOptions: SortOptionsInterface[] = [
 	{ value: OrganizationOrderByInput.MemberLimitDesc, name: 'Member: High-Low' },
 	{ value: OrganizationOrderByInput.MemberLimitAsc, name: 'Member: Low-High' },
-	{ value: OrganizationOrderByInput.MetadataDescriptionAsc, name: 'Newest' },
-	{ value: OrganizationOrderByInput.MetadataDescriptionDesc, name: 'Oldest' },
+	{ value: OrganizationOrderByInput.MetadataDescriptionAsc, name: 'Created: Newest first' },
+	{ value: OrganizationOrderByInput.MetadataDescriptionDesc, name: 'Created: Newest first' },
 ]
 
 export function OrganisationPage() {
