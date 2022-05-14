@@ -1,19 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
+import { DisplaySettings } from '@mui/icons-material'
 
-const sortOptions = [
-	{ value: 'hi-low', name: 'Member: High-Low' },
-	{ value: 'featured', name: 'Featured' },
-	{ value: 'newest', name: 'Newest' },
-]
-const SortOptionsTab = ({ classes }) => {
-	const [sortOption, setSortOption] = useState(sortOptions[0].value)
-
+const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => {
 	const handleChange = (event: SelectChangeEvent) => {
-		console.log(event.target.value)
-		setSortOption(event.target.value)
+		setSortOption(event.target.value as OrganizationOrderByInput)
 	}
 	return (
 		<Box
@@ -21,22 +15,23 @@ const SortOptionsTab = ({ classes }) => {
 				display: 'flex',
 				justifyContent: 'flex-start',
 				alignItems: 'center',
-				marginLeft: 3,
+				marginLeft: 2,
+				minWidth: 400,
 			}}
 		>
 			<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
 				Sort By:
 			</Typography>
-			<Box sx={{ minWidth: 120 }}>
-				<FormControl fullWidth className={classes.formControl} size="small" sx={{ minWidth: 120 }}>
+			<Box>
+				<FormControl fullWidth className={classes.formControl} size="small">
 					<Select
-						sx={{ fontSize: 14, color: '#919EAB' }}
-						className={classes.menuItem}
+						className={classes.PaperProps}
 						value={sortOption}
 						onChange={handleChange}
+						MenuProps={{ classes: { paper: classes.dropdownStyle } }}
 					>
 						{sortOptions.map((x) => (
-							<MenuItem sx={{ color: '#919EAB', fontSize: 14, pl: 10 }} value={x.value} key={x.value}>
+							<MenuItem value={x.value} key={x.value}>
 								{x.name}
 							</MenuItem>
 						))}
