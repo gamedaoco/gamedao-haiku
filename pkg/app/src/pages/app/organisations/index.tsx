@@ -54,7 +54,7 @@ const sortOptions: SortOptionsInterface[] = [
 
 export function OrganisationPage() {
 	const [filters, setFilters] = useState('')
-	const [bodyCount, setBodyCount] = useState<number>(2)
+	const [bodyCount, setBodyCount] = useState<number>(15)
 	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
 	const [fetchOrganizations, { loading, error, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
@@ -132,7 +132,7 @@ export function OrganisationPage() {
 							{buttonVisibility && (
 								<Button
 									endIcon={<ArrowDownward />}
-									onClick={() => setBodyCount((p) => p + 1)}
+									onClick={() => setBodyCount((p) => p + 30)}
 									variant="outlined"
 									sx={{ color: '#919EAB', border: '#919EAB 1px solid', borderRadius: 2 }}
 								>
