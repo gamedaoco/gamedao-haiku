@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
-import { DisplaySettings } from '@mui/icons-material'
 
 const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => {
-	const handleChange = (event: SelectChangeEvent) => {
-		setSortOption(event.target.value as OrganizationOrderByInput)
-	}
+	const handleChange = useCallback(
+		(event: SelectChangeEvent) => {
+			setSortOption(event.target.value as OrganizationOrderByInput)
+		},
+		[setSortOption],
+	)
 	return (
 		<Box
 			sx={{

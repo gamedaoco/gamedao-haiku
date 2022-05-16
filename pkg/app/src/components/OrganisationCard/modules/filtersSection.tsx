@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 		'& .MuiMenuItem-root': {
 			paddingBottom: 20,
 			fontSize: 14,
-			width: 200,
+			minWidth: 200,
 			color: '#919EAB',
 		},
 	},
