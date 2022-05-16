@@ -6,18 +6,22 @@ import * as Yup from 'yup'
 interface ComponentProps {
 	name: string
 	setName: (name) => void
+	description: string
+	setDescription: (description) => void
 }
 
-let validationSchema = Yup.string().required('* Organization Name is required')
+const validationNameSchema = Yup.string().required('* Organization Name is required')
+// Only temporary, the description will be entered later on another page
+const validationDescriptionSchema = Yup.string().required('* Organization Description is required')
 
-export function Name({ name, setName }: ComponentProps) {
+export function Name({ name, setName, description, setDescription }: ComponentProps) {
 	const [errorState, setErrorState] = useState<string>()
 
 	const handleNameChange = useCallback(
 		(event) => {
 			if (setName) {
 				try {
-					validationSchema.validateSync(event.target.value)
+					validationNameSchema.validateSync(event.target.value)
 					setErrorState(null)
 				} catch (err) {
 					setErrorState(err.message)
@@ -29,6 +33,22 @@ export function Name({ name, setName }: ComponentProps) {
 		[setName, setErrorState],
 	)
 
+	const handleDescriptionChange = useCallback(
+		(event) => {
+			if (setDescription) {
+				try {
+					validationDescriptionSchema.validateSync(event.target.value)
+					setErrorState(null)
+				} catch (err) {
+					setErrorState(err.message)
+				}
+
+				setDescription(event.target.value)
+			}
+		},
+		[setDescription, setErrorState],
+	)
+
 	return (
 		<BaseForm title={'What’s the name of your organization?'} error={errorState}>
 			<TextField
@@ -36,6 +56,16 @@ export function Name({ name, setName }: ComponentProps) {
 				onChange={handleNameChange}
 				value={name}
 				label="Organization Name"
+				variant="outlined"
+				error={!!errorState}
+			/>
+			<TextField
+				fullWidth
+				multiline
+				minRows={4}
+				onChange={handleDescriptionChange}
+				value={description}
+				label="Organization Description"
 				variant="outlined"
 				error={!!errorState}
 			/>

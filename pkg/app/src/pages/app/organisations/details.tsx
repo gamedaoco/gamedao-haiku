@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Layout } from 'src/layouts/default/layout'
 import {
 	Avatar,
@@ -40,6 +40,27 @@ export function OrganisationDetailsPage() {
 		const cid = await uploadFileToIpfs(files[0])
 		setter(cid.toString())
 	}, [])
+
+	// Update and upload metadata
+	useEffect(() => {
+		if (tmpOrg.name && tmpOrg.description && tmpOrg.logoCID && tmpOrg.headerCID) {
+			const metaData = {
+				name: tmpOrg.name,
+				description: tmpOrg.description,
+				logo: tmpOrg.logoCID,
+				header: tmpOrg.headerCID,
+			}
+
+			;(async (): Promise<string> => {
+				const file = new File([JSON.stringify(metaData)], `${tmpOrg.name}-metadata.json`, {
+					type: 'text/plain',
+				})
+
+				const cid = await uploadFileToIpfs(file)
+				return cid.toString()
+			})().then((cid) => tmpOrg.setMetaDataCID(cid))
+		}
+	}, [tmpOrg.name, tmpOrg.description, tmpOrg.logoCID, tmpOrg.headerCID])
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">

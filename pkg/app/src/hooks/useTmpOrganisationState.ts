@@ -14,6 +14,8 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 	const [hasApplication, setHasApplication] = useLocalStorage<boolean>(`TmpOrg-${address}-hasApplication`, false)
 	const [headerCID, setHeaderCID] = useLocalStorage<string>(`TmpOrg-${address}-headerCID`, '')
 	const [logoCID, setLogoCID] = useLocalStorage<string>(`TmpOrg-${address}-logoCID`, '')
+	const [description, setDescription] = useLocalStorage<string>(`TmpOrg-${address}-description`, '')
+	const [metaDataCID, setMetaDataCID] = useLocalStorage<string>(`TmpOrg-${address}-metaDataCID`, '')
 
 	return {
 		type: selectedType,
@@ -36,5 +38,9 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 		setHasApplication: setHasApplication,
 		setHeaderCID: setHeaderCID,
 		setLogoCID: setLogoCID,
+		description: description,
+		setDescription: setDescription,
+		metaDataCID: metaDataCID,
+		setMetaDataCID: setMetaDataCID,
 	}
 }

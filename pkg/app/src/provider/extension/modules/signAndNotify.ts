@@ -64,6 +64,7 @@ export async function SignAndNotify(
 		)
 		if (error) {
 			console.log('Transaction failing with', error)
+			createErrorNotification(error.message)
 			if (callback) callback(false, null)
 			return reject()
 		}

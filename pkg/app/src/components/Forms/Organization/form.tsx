@@ -48,7 +48,14 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 
 	return (
 		<>
-			{currentStep === 0 && <Name name={tmpOrgState.name} setName={tmpOrgState.setName} />}
+			{currentStep === 0 && (
+				<Name
+					name={tmpOrgState.name}
+					setName={tmpOrgState.setName}
+					description={tmpOrgState.description}
+					setDescription={tmpOrgState.setDescription}
+				/>
+			)}
 			{currentStep === 1 && <Controller selected={tmpOrgState.type} setSelected={tmpOrgState.setType} />}
 			{currentStep === 2 && (
 				<Settings
