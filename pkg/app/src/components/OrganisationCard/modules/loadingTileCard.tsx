@@ -3,10 +3,11 @@ import { useTheme } from '@mui/material/styles'
 import { Card, Box, CardHeader, CardContent } from '@mui/material'
 import { Person, Key } from '@mui/icons-material'
 import Skeleton from '@mui/material/Skeleton'
+import { PRIMARY_COLOR } from 'src/theme/palette'
 
 const LoadingTileCard: FC = () => {
 	const theme = useTheme()
-	const bgPlain = { backgroundColor: '#212B36' }
+	const bgPlain = { backgroundColor: PRIMARY_COLOR[3].background }
 
 	const SubHeader = useMemo(() => {
 		return (

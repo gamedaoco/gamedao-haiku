@@ -7,6 +7,7 @@ import { useOrganizationsLazyQuery, OrganizationOrderByInput, OrganizationEdge }
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
+import { PRIMARY_COLOR } from 'src/theme/palette'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -92,7 +93,11 @@ export function OrganisationPage() {
 							<Grid item>
 								<Button
 									startIcon={<PlusIcon fontSize="small" />}
-									sx={{ color: '#919EAB', borderColor: '#919EAB', borderRadius: 2 }}
+									sx={{
+										color: PRIMARY_COLOR[3].text,
+										borderColor: PRIMARY_COLOR[3].text,
+										borderRadius: 2,
+									}}
 									variant="outlined"
 								>
 									Create
@@ -134,7 +139,11 @@ export function OrganisationPage() {
 									endIcon={<ArrowDownward />}
 									onClick={() => setBodyCount((p) => p + 30)}
 									variant="outlined"
-									sx={{ color: '#919EAB', border: '#919EAB 1px solid', borderRadius: 2 }}
+									sx={{
+										color: PRIMARY_COLOR[3].text,
+										border: `${PRIMARY_COLOR[3].text} 1px solid`,
+										borderRadius: 2,
+									}}
 								>
 									Load 30 More Organisations
 								</Button>

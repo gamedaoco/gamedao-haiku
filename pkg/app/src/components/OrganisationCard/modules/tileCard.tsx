@@ -4,6 +4,7 @@ import { NavLink } from 'src/components/NavLink/navLink'
 import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Check, Key, Person } from '@mui/icons-material'
+import { PRIMARY_COLOR } from 'src/theme/palette'
 
 interface ComponentsPros {
 	item: Organization
@@ -14,7 +15,7 @@ const toLink = '/app/organisations/'
 
 export const TileCard = ({ item }: ComponentsPros) => {
 	const { selectedAccount } = useExtensionContext()
-	const bgPlain = { backgroundColor: '#212B36' }
+	const bgPlain = { backgroundColor: PRIMARY_COLOR[3].background }
 	const address = selectedAccount?.account.address
 
 	const SubHeader = useMemo(() => {
@@ -105,7 +106,7 @@ export const TileCard = ({ item }: ComponentsPros) => {
 							<Typography
 								variant={'caption'}
 								fontWeight={'400'}
-								color={'#DCDEE0'}
+								color={PRIMARY_COLOR[3].contrastText}
 								sx={{
 									overflow: 'hidden',
 									textOverflow: 'ellipsis',

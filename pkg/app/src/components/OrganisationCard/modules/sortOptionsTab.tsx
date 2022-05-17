@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
+import { PRIMARY_COLOR } from 'src/theme/palette'
 
 const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => {
 	const handleChange = useCallback(
@@ -27,7 +28,7 @@ const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => 
 			<Box>
 				<FormControl fullWidth className={classes.formControl} size="small">
 					<Select
-						className={classes.PaperProps}
+						style={{ color: PRIMARY_COLOR[3].text }}
 						value={sortOption}
 						onChange={handleChange}
 						MenuProps={{ classes: { paper: classes.dropdownStyle } }}

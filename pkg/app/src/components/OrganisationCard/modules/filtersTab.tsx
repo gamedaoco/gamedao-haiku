@@ -17,6 +17,7 @@ import {
 import { makeStyles } from '@mui/styles'
 import ClearIcon from '@mui/icons-material/Clear'
 import ClearAllIcon from '@mui/icons-material/ClearAll'
+import { PRIMARY_COLOR } from 'src/theme/palette'
 const useStyles = makeStyles({
 	list: {
 		width: 250,
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
 		width: 'auto',
 	},
 	paper: {
-		background: '#212B36',
+		background: PRIMARY_COLOR[3].background,
 	},
 })
 const FiltersTab = () => {
