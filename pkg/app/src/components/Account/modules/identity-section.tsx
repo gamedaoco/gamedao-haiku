@@ -1,7 +1,9 @@
 import { Avatar, Box, Button, Chip, Grid, Typography } from '@mui/material'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import React, { FC, useCallback } from 'react'
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
+import md5 from 'md5'
 import { getAddressFromAccountState, getNameFromAccountState, getInitials } from 'src/utils/accountUtils'
 
 interface IdentitySectionProps {
@@ -13,6 +15,7 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 	const handleButtonClick = useCallback(() => {
 		setCurrentTab(AccountTabs.IDENTITY)
 	}, [setCurrentTab])
+	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 	return (
 		<Grid container justifyContent="space-between" spacing={3}>
 			<Grid
@@ -24,7 +27,11 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 				}}
 			>
 				<Avatar
-					src={getNameFromAccountState(accountState)}
+					src={
+						identity?.email
+							? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
+							: 'https://picsum.photos/200'
+					}
 					sx={{
 						height: {
 							md: 128,
