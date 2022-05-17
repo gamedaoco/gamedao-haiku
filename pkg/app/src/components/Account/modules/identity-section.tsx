@@ -21,7 +21,10 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 			<Grid
 				item
 				sx={{
-					alignItems: 'center',
+					alignItems: {
+						sm: 'top',
+						md: 'center',
+					},
 					display: 'flex',
 					overflow: 'hidden',
 				}}
