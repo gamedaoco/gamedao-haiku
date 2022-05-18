@@ -11,7 +11,6 @@ interface AccountPageGeneralLayoutProps {
 }
 const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountState }) => {
 	const [currentTab, setCurrentTab] = useState<AccountTabs>(AccountTabs.OVERVIEW)
-	console.log({ accountState })
 	return (
 		<Box
 			component="main"
@@ -20,7 +19,7 @@ const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountSt
 				py: 8,
 			}}
 		>
-			<Container maxWidth="md">
+			<Container>
 				<IdentitySection accountState={accountState} setCurrentTab={setCurrentTab} />
 				<TabsSection setCurrentTab={setCurrentTab} currentTab={currentTab} />
 				<SectionsLayout currentTab={currentTab} accountState={accountState} />
