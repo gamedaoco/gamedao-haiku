@@ -9,6 +9,7 @@ import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
 import type { Collectable } from 'src/@types/collectable'
 import { Collectable as CollectableComponent } from 'components/Collectable/collectable'
 import { useCollectablesForUserLazyQuery } from '@gamedao-haiku/graphql/dist'
+import AccountGuard from 'src/guards/account-guard'
 
 export function WalletPage() {
 	const accountState = useCurrentAccountState()
@@ -19,11 +20,6 @@ export function WalletPage() {
 			loadCollectables({ variables: { owner: getKusamaAddressFromAccountState(accountState) } })
 		}
 	}, [accountState])
-
-	// Displayed when the wallet is not yet connected
-	if (!accountState) {
-		return <NoWalletConnected />
-	}
 
 	return (
 		<>
@@ -63,5 +59,7 @@ export function WalletPage() {
 		</>
 	)
 }
+
+WalletPage.getLayout = (page) => <AccountGuard>{page}</AccountGuard>
 
 export default WalletPage

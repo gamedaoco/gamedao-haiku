@@ -28,6 +28,7 @@ const TW_SITE_CREATOR = '@zerodotio'
 const CONTACT = 'hey@gamedao.co'
 
 export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
+	const getLayout = Component.getLayout ?? ((page) => page)
 	return (
 		<>
 			<CacheProvider value={emotionCache}>
@@ -53,9 +54,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 					<meta name="twitter:description" content={SITE_DESCRIPTION} />
 					<meta property="twitter:image" content={SITE_IMAGE} />
 				</Head>
-				<Providers>
-					<Component {...pageProps} />
-				</Providers>
+				<Providers>{getLayout(<Component {...pageProps} />)}</Providers>
 			</CacheProvider>
 		</>
 	)
