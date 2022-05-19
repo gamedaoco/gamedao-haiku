@@ -12,7 +12,6 @@ const AccountPage: NextPage = () => {
 
 	return (
 		<Layout showHeader showSidebar title="My Account">
-			<h1>Hello</h1>
 			<AccountPageGeneralLayout accountState={accountState} />
 		</Layout>
 	)

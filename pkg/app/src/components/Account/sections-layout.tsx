@@ -18,7 +18,7 @@ const SectionsLayout: FC<SectionsLayoutProps> = ({ accountState, currentTab }) =
 			{currentTab === AccountTabs.ORGANIZATIONS && <MyOrganisationsTab accountState={accountState} />}
 			{currentTab === AccountTabs.CAMPAIGNS && <MyCampaignsTab accountState={accountState} />}
 			{currentTab === AccountTabs.COLLECTABLES && <MyCollectablesTab accountState={accountState} />}
-			{currentTab === AccountTabs.IDENTITY && <IdentityTab accountState={accountState}/>}
+			{currentTab === AccountTabs.IDENTITY && <IdentityTab accountState={accountState} />}
 		</>
 	)
 }
