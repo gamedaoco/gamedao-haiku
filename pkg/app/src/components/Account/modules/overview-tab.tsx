@@ -27,7 +27,6 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 					<MyBalancesCard balances={tempBalances} />
 				</Grid>
 				<Grid item xs={12}>
-					{/* my organizations */}
 					<MyOrganisationsTable organisations={tempOrganisations} title={'Organisations'} loading={loading} />
 				</Grid>
 				<Grid item xs={12}>
