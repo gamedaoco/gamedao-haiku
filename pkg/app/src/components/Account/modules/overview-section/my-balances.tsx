@@ -1,4 +1,14 @@
-import { Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import {
+	Card,
+	CardContent,
+	IconButton,
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableRow,
+	Typography,
+} from '@mui/material'
 import { Scrollbar } from 'components/scrollbar'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
@@ -30,7 +40,9 @@ const MyBalancesCard = ({ balances }) => {
 									<TableCell>{balance.reserved}</TableCell>
 									<TableCell>{balance.total}</TableCell>
 									<TableCell align="right">
-										<MoreVertIcon />
+										<IconButton aria-label="options">
+											<MoreVertIcon />
+										</IconButton>
 									</TableCell>
 								</TableRow>
 							))}
