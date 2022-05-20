@@ -22,7 +22,7 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 				</Grid>
 				<Grid item xs={12}>
 					{/* my organizations */}
-					<MyOrganisationsTable organisations={tempOrganisations} title={'Organisations'} loading={false} />
+					<MyOrganisationsTable organisations={tempOrganisations} title={'Organisations'} loading />
 				</Grid>
 				<Grid item xs={12}>
 					<MyCollectablesTab accountState={accountState} />
