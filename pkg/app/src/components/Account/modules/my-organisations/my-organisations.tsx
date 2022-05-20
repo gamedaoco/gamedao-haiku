@@ -42,7 +42,7 @@ const MyOrganisationsTable = ({ organisations, title, loading }) => {
 						) : (
 							<TableBody>
 								{organisations?.map((organisation, index) => (
-									<TableRow key={index}>
+									<TableRow hover key={index}>
 										<TableCell>
 											<Box
 												sx={{

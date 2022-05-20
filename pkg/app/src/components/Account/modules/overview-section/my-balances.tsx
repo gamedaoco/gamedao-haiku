@@ -33,7 +33,7 @@ const MyBalancesCard = ({ balances }) => {
 						</TableHead>
 						<TableBody>
 							{balances?.map((balance, index) => (
-								<TableRow key={index}>
+								<TableRow hover key={index}>
 									<TableCell>{balance.token}</TableCell>
 									<TableCell>{balance.transferrable}</TableCell>
 									<TableCell>{balance.locked}</TableCell>

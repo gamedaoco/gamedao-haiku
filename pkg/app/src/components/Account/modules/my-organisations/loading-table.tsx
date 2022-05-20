@@ -5,7 +5,7 @@ import Skeleton from '@mui/material/Skeleton'
 const LoadingTable: FC = () => {
 	return (
 		<TableBody>
-			{[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]?.map((index) => (
+			{[1, 2, 3, 4, 5]?.map((index) => (
 				<TableRow hover key={index}>
 					<TableCell>
 						<Box

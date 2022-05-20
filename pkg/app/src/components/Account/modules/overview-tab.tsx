@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 import { AccountState } from 'src/@types/extension'
 import { Box, Grid } from '@mui/material'
 import MyAchievementsCard from './overview-section/my-achievements'
@@ -11,6 +11,12 @@ interface OverviewTabProps {
 	accountState: AccountState
 }
 const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
+	const [loading, setLoading] = useState(true)
+	useEffect(() => {
+		setTimeout(() => {
+			setLoading(false)
+		}, 4000)
+	}, [])
 	return (
 		<Box>
 			<Grid container spacing={3}>
@@ -22,7 +28,7 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 				</Grid>
 				<Grid item xs={12}>
 					{/* my organizations */}
-					<MyOrganisationsTable organisations={tempOrganisations} title={'Organisations'} loading />
+					<MyOrganisationsTable organisations={tempOrganisations} title={'Organisations'} loading={loading} />
 				</Grid>
 				<Grid item xs={12}>
 					<MyCollectablesTab accountState={accountState} />
