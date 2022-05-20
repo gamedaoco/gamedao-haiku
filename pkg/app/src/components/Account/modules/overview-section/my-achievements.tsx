@@ -6,7 +6,7 @@ import ShieldIcon from '@mui/icons-material/Shield'
 
 const MyAchievementsCard = () => {
 	return (
-		<Card sx={{ borderRadius: '16px', height: '336px' }}>
+		<Card sx={{ borderRadius: '16px', height: '100%' }}>
 			<CardContent>
 				<Typography fontWeight="700" variant="h5">
 					My Achievements
@@ -14,8 +14,8 @@ const MyAchievementsCard = () => {
 				<Typography variant="caption">
 					Level up by using our protocols and collaborating with the community.
 				</Typography>
-				<Box sx={{ mt: 2.5, display: 'flex', flexDirection: 'column', gap: 3 }}>
-					<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2 }}>
+				<Box sx={{ mt: 3.5, display: 'flex', flexDirection: 'column', gap: 3.5 }}>
+					<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2.5 }}>
 						<Avatar>
 							<FavoriteIcon color="primary" />
 						</Avatar>

@@ -5,7 +5,7 @@ import MyAchievementsCard from './overview-section/my-achievements'
 import MyBalancesCard from './overview-section/my-balances'
 import { tempBalances, tempOrganisations } from '../TempData'
 import MyCollectablesTab from './my-collectables-tab'
-import MyOrganisationsTable from './my-organisations'
+import MyOrganisationsTable from './my-organisations/my-organisations'
 
 interface OverviewTabProps {
 	accountState: AccountState

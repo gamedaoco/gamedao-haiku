@@ -1,5 +1,7 @@
 import { Edit } from '@mui/icons-material'
 import {
+	Avatar,
+	Box,
 	Card,
 	CardContent,
 	IconButton,
@@ -11,6 +13,7 @@ import {
 	Typography,
 } from '@mui/material'
 import { Scrollbar } from 'components/scrollbar'
+import { getInitials } from 'src/utils/accountUtils'
 
 const MyOrganisationsTable = ({ organisations, title, loading }) => {
 	return (
@@ -36,7 +39,25 @@ const MyOrganisationsTable = ({ organisations, title, loading }) => {
 						<TableBody>
 							{organisations?.map((organisation, index) => (
 								<TableRow key={index}>
-									<TableCell>{organisation.name}</TableCell>
+									<TableCell>
+										<Box
+											sx={{
+												alignItems: 'center',
+												display: 'flex',
+											}}
+										>
+											<Avatar
+												src={organisation?.logo}
+												sx={{
+													height: 42,
+													width: 42,
+												}}
+											>
+												{getInitials(organisation?.name)}
+											</Avatar>
+											<Box sx={{ ml: 1 }}>{organisation.name}</Box>
+										</Box>
+									</TableCell>
 									<TableCell>{organisation.membersCount}</TableCell>
 									<TableCell>{organisation.valueLocked}</TableCell>
 									<TableCell>{organisation.access}</TableCell>
