@@ -3,8 +3,9 @@ import { AccountState } from 'src/@types/extension'
 import { Box, Grid } from '@mui/material'
 import MyAchievementsCard from './overview-section/my-achievements'
 import MyBalancesCard from './overview-section/my-balances'
-import { tempBalances } from '../TempData'
+import { tempBalances, tempOrganisations } from '../TempData'
 import MyCollectablesTab from './my-collectables-tab'
+import MyOrganisationsTable from './my-organisations'
 
 interface OverviewTabProps {
 	accountState: AccountState
@@ -21,7 +22,7 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 				</Grid>
 				<Grid item xs={12}>
 					{/* my organizations */}
-					<MyCollectablesTab accountState={accountState} />
+					<MyOrganisationsTable organisations={tempOrganisations} title={'Organisations'} loading={false} />
 				</Grid>
 				<Grid item xs={12}>
 					<MyCollectablesTab accountState={accountState} />
