@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 import {
 	Avatar,
 	Box,
@@ -18,15 +18,15 @@ import { AddAPhoto } from '@mui/icons-material'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { useConfig } from 'hooks/useConfig'
-import { UseTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTheme } from '@mui/material/styles'
-import { TmpOverview } from 'src/tabPanels/Organization/TmpOverview'
+import { TmpOverview } from 'src/components/TabPanels/Organization/TmpOverview'
 
 export function OrganisationDetailsPage() {
 	const [activeStep, setActiveStep] = useState<string>('organization-overview')
 	const theme = useTheme()
 	const config = useConfig()
-	const tmpOrg = UseTmpOrganisationState()
+	const tmpOrg = useTmpOrganisationState()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
@@ -50,7 +50,6 @@ export function OrganisationDetailsPage() {
 				logo: tmpOrg.logoCID,
 				header: tmpOrg.headerCID,
 			}
-
 			;(async (): Promise<string> => {
 				const file = new File([JSON.stringify(metaData)], `${tmpOrg.name}-metadata.json`, {
 					type: 'text/plain',

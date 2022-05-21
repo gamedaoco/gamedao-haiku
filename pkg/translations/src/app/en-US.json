@@ -13,36 +13,38 @@
   },
   "page": {
     "campaigns": {
-
     },
     "governance": {
-
     },
     "dao": {
-
     },
     "dashboard": {
-
     },
     "app": {
-
     },
     "wallet": {
-
     }
   },
-  "notification":{
+  "notification": {
+    "transactions": {
+      "createOrganization": {
+        "pending": "Summoning your Organization...",
+        "success": "The beast is unleashed!",
+        "error": "Summoning failed, check your Mana."
+      },
+      "createProposal": {
+        "pending": "Summoning your Proposal...",
+        "success": "Proposal created",
+        "error": "Summoning failed, check your Mana."
+      }
+    },
     "info": {
-
     },
     "success": {
-
     },
     "warning": {
-
     },
     "error": {
-
     }
   }
 }

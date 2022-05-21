@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material'
 import { FormDao } from 'components/Forms/FormDao'
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 
 export function AppPage() {
 	const [isShow, setIsShow] = useState(false)

@@ -4,6 +4,9 @@ import { Info } from '@mui/icons-material'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 import { useCallback, useState } from 'react'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import type { ISubmittableResult } from '@polkadot/types/types'
+import { useTranslation } from 'react-i18next'
 
 const Chart = dynamic(() => import('react-apexcharts'), {
 	ssr: false,
@@ -11,6 +14,8 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 export function TmpOverview() {
 	const [modalState, setModalState] = useState<boolean>(false)
+	const tmpOrgState = useTmpOrganisationState()
+	const { t } = useTranslation()
 	const tx = useCreateOrgTransaction()
 
 	const handleModalOpen = useCallback(() => {
@@ -21,11 +26,35 @@ export function TmpOverview() {
 		setModalState(false)
 	}, [setModalState])
 
+	const handleDepositChange = useCallback(
+		(event) => {
+			const value = event.target.value
+			tmpOrgState?.setDeposit(value < 5 ? 5 : value)
+		},
+		[tmpOrgState?.setDeposit],
+	)
+
+	const handleTxCallback = useCallback(
+		(state: boolean, result: ISubmittableResult) => {
+			if (state) {
+				// The transaction was successful, clear state
+				tmpOrgState?.clearAll()
+			}
+		},
+		[tmpOrgState.clearAll],
+	)
+
 	return (
 		<>
 			<Stack spacing={4}>
 				<Stack direction="row" spacing={4}>
-					<Paper sx={{ width: '100%' }}></Paper>
+					<Paper sx={{ width: '100%' }}>
+						<Stack alignItems="center" justifyContent="center" height="100%">
+							<Typography textAlign="center">
+								You need to upload a header and logo image to create your dao
+							</Typography>
+						</Stack>
+					</Paper>
 					<Paper sx={{ maxWidth: '300px', padding: 4 }}>
 						<Stack justifyContent="center" display="flex" alignItems="center">
 							<Chart
@@ -82,6 +111,8 @@ export function TmpOverview() {
 								InputProps={{
 									endAdornment: <InputAdornment position="start">GAME</InputAdornment>,
 								}}
+								value={tmpOrgState.deposit}
+								onChange={handleDepositChange}
 							/>
 							<Button
 								size="large"
@@ -101,10 +132,11 @@ export function TmpOverview() {
 				onClose={handleModalClose}
 				tx={tx}
 				txMsg={{
-					pending: 'Summoning your DAO...',
-					success: 'The beast is unleashed!',
-					error: 'Summoning failed, check your Mana.',
+					pending: t('notification:transactions:createOrganization:pending'),
+					success: t('notification:transactions:createOrganization:success'),
+					error: t('notification:transactions:createOrganization:error'),
 				}}
+				txCallback={handleTxCallback}
 			/>
 		</>
 	)

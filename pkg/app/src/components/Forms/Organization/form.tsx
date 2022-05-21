@@ -1,10 +1,11 @@
 import { useCallback } from 'react'
-import { Controller } from 'components/Forms/Organization/controller'
+import { Controller } from 'components/Forms/Organization/modules/controller'
 import { Button, Stack } from '@mui/material'
-import { Name } from 'components/Forms/Organization/name'
-import { Settings } from 'components/Forms/Organization/settings'
+import { Name } from 'components/Forms/Organization/modules/name'
+import { Settings } from 'components/Forms/Organization/modules/settings'
 import { createInfoNotification } from 'src/utils/notificationUtils'
-import { UseTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useRouter } from 'next/router'
 
 interface ComponentProps {
 	currentStep: number
@@ -12,7 +13,8 @@ interface ComponentProps {
 }
 
 export function Form({ currentStep, setStep }: ComponentProps) {
-	const tmpOrgState = UseTmpOrganisationState()
+	const tmpOrgState = useTmpOrganisationState()
+	const { push } = useRouter()
 
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {
@@ -27,8 +29,9 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 
 		if (currentStep == 2) {
 			createInfoNotification('Organization was saved')
+			push('/app/organisations/details')
 		}
-	}, [currentStep, setStep])
+	}, [currentStep, setStep, push])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {

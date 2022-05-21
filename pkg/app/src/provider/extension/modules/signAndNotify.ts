@@ -4,13 +4,14 @@ import { createErrorNotification, createPromiseNotification } from 'src/utils/no
 import { to } from 'await-to-js'
 import { ApiPromise } from '@polkadot/api'
 import { PromiseMsg } from 'src/@types/promiseMsg'
+import type { ISubmittableResult } from '@polkadot/types/types'
 
 export async function SignAndNotify(
 	ApiProvider: ApiPromise,
 	accountState: AccountState,
 	tx: SubmittableExtrinsic,
 	msg: PromiseMsg,
-	callback?: (state, result) => void,
+	callback?: (state: boolean, result: ISubmittableResult) => void,
 ) {
 	const promise = new Promise(async (resolve, reject) => {
 		if (!ApiProvider) {

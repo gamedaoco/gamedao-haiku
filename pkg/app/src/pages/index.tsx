@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 import { Button } from '@mui/material'
 import { NavLink } from 'src/components/NavLink/navLink'
 

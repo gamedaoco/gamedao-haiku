@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 import { FormVoting } from 'components/Forms/FormVoting'
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 
 import { CircularProgress } from '@mui/material'
 import { useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'

@@ -11,10 +11,11 @@ export interface TMPOrganisation {
 	logoCID: string
 	description: string
 	metaDataCID: string
+	deposit: number
 }
 
 export interface TMPOrganisationState extends TMPOrganisation {
-	setType: (boolen) => void
+	setType: (number) => void
 	setName: (name) => void
 	setMode: (number) => void
 	setFeeMode: (number) => void
@@ -26,4 +27,6 @@ export interface TMPOrganisationState extends TMPOrganisation {
 	setLogoCID: (string) => void
 	setDescription: (string) => void
 	setMetaDataCID: (string) => void
+	setDeposit: (number) => void
+	clearAll: () => void
 }

@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 import { Organization, useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
+import { useRouter } from 'next/router'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -48,6 +49,7 @@ export function OrganisationPage() {
 			console.error('There is an error when querying the display values')
 		}
 	}, [error])
+	const { push } = useRouter()
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const filteredData = applyFilters(data?.organizations?.slice() as Organization[], filters)
 	const paginatedData = applyPagination(filteredData, bodyCount)
@@ -55,6 +57,11 @@ export function OrganisationPage() {
 		() => paginatedData?.length < filteredData?.length,
 		[paginatedData?.length, filteredData?.length],
 	)
+
+	const handleClickCreate = useCallback(() => {
+		push('/app/organisations/create')
+	}, [push])
+
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box
@@ -75,6 +82,7 @@ export function OrganisationPage() {
 									startIcon={<PlusIcon fontSize="small" />}
 									sx={{ color: '#919EAB', borderColor: '#919EAB', borderRadius: 2 }}
 									variant="outlined"
+									onClick={handleClickCreate}
 								>
 									Create
 								</Button>

@@ -8,19 +8,20 @@ interface ComponentProps {
 	value: any
 	selectedValue
 	onChange: (value) => void
+	disabled?: boolean
 }
 
-export function RadioItem({ icon, title, description, value, selectedValue, onChange }: ComponentProps) {
+export function RadioItem({ icon, title, description, value, selectedValue, onChange, disabled }: ComponentProps) {
 	const theme = useTheme()
 
 	const handleClick = useCallback(
 		(event) => {
 			event.stopPropagation()
-			if (onChange) {
+			if (onChange && !disabled) {
 				onChange(value)
 			}
 		},
-		[onChange, value],
+		[onChange, value, disabled],
 	)
 
 	return (
@@ -36,7 +37,7 @@ export function RadioItem({ icon, title, description, value, selectedValue, onCh
 			onClick={handleClick}
 			sx={{ cursor: 'pointer' }}
 		>
-			<Radio checked={selectedValue === value} onChange={onChange} value={value} />
+			<Radio checked={selectedValue === value} onChange={onChange} value={value} disabled={disabled} />
 			{icon}
 			<Stack spacing={1} width="100%">
 				<Typography variant="subtitle2">{title}</Typography>
