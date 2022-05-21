@@ -1,6 +1,6 @@
-import { ReactNode, useMemo } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { CssBaseline } from '@mui/material'
-import { createTheme, ThemeOptions, ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
+import { createTheme, Theme, ThemeOptions, ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import { useSettings } from 'src/hooks/useSettings'
 import shape from 'src/theme/shape'
 import palette from 'src/theme/palette'
@@ -19,10 +19,16 @@ type ComponentProps = {
 
 export function ThemeProvider({ children }: ComponentProps) {
 	const { themeMode, themeDirection } = useSettings()
-	const isLight = themeMode === 'light'
+	const [themeState, setThemeState] = useState<Theme>(null)
 
-	const themeOptions: ThemeOptions = useMemo(
-		() => ({
+	useEffect(() => {
+		if (!themeMode || !themeDirection) {
+			return
+		}
+
+		const isLight = themeMode === 'light'
+
+		const themeOptions: ThemeOptions = {
 			palette: isLight ? { ...palette.light, mode: 'light' } : { ...palette.dark, mode: 'dark' },
 			shape,
 			typography,
@@ -30,15 +36,19 @@ export function ThemeProvider({ children }: ComponentProps) {
 			direction: themeDirection,
 			shadows: isLight ? shadows.light : shadows.dark,
 			customShadows: isLight ? customShadows.light : customShadows.dark,
-		}),
-		[isLight, themeDirection],
-	)
+		}
 
-	const theme = createTheme(themeOptions)
-	theme.components = componentsOverride(theme)
+		const theme = createTheme(themeOptions)
+		theme.components = componentsOverride(theme)
+		setThemeState(theme)
+	}, [themeMode, themeDirection])
+
+	if (!themeState) {
+		return null
+	}
 
 	return (
-		<MuiThemeProvider theme={theme}>
+		<MuiThemeProvider theme={themeState}>
 			<ToastContainer theme={themeMode} />
 			<CssBaseline />
 			<ThemePrimaryColor>{children}</ThemePrimaryColor>
