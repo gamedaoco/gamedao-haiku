@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
-import { Controller } from 'components/Forms/Organization/modules/controller'
+import { Controller } from './modules/controller'
 import { Button, Stack } from '@mui/material'
-import { Name } from 'components/Forms/Organization/modules/name'
-import { Settings } from 'components/Forms/Organization/modules/settings'
+import { Name, validationSchema as nameValidationSchema } from './modules/name'
+import { Settings } from './modules/settings'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useRouter } from 'next/router'
@@ -36,7 +36,10 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
-				return tmpOrgState.name?.length === 0
+				return !nameValidationSchema.isValidSync({
+					name: tmpOrgState.name,
+					description: tmpOrgState.description,
+				})
 		}
 		return false
 	}

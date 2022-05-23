@@ -13,6 +13,10 @@ interface ComponentProps {
 const validationNameSchema = Yup.string().required('* Organization Name is required')
 // Only temporary, the description will be entered later on another page
 const validationDescriptionSchema = Yup.string().required('* Organization Description is required')
+export const validationSchema = Yup.object().shape({
+	name: Yup.string().required(),
+	description: Yup.string().required(),
+})
 
 export function Name({ name, setName, description, setDescription }: ComponentProps) {
 	const [errorState, setErrorState] = useState<string>()

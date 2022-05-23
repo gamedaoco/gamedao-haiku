@@ -39,7 +39,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 1:
-				return descriptionValidationSchema.isValidSync({
+				return !descriptionValidationSchema.isValidSync({
 					name: tmpProposalState.name,
 					description: tmpProposalState.description,
 					startDate: tmpProposalState.startDate,

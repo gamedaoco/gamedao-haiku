@@ -8,7 +8,7 @@
       "wallet": "Wallet"
     },
     "ui": {
-      "connect-wallet": "Connect wallet"
+      "connect_wallet": "Connect wallet"
     }
   },
   "page": {
@@ -43,6 +43,9 @@
     "success": {
     },
     "warning": {
+      "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
+      "max_1m_game_fee": "Please consider charging a maximum of 1M GAME",
+      "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users"
     },
     "error": {
     }

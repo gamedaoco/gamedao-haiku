@@ -4,6 +4,8 @@ import { defaultValuesTMPProposal as defaultValues } from 'src/constants'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useCallback } from 'react'
 
+// TODO: Replace store logic with db for cross device storage
+
 export function useTMPProposalState(): TMPProposalState {
 	const address = useCurrentAccountAddress()
 	const [selectedType, setSelectedType] = useLocalStorage<number>(

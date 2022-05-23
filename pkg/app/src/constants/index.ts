@@ -12,7 +12,7 @@ export const defaultValuesTmpOrganisation: TMPOrganisation = {
 	mode: 0,
 	feeMode: 0,
 	memberLimit: 0,
-	feeAmount: 0,
+	feeAmount: 1,
 	hasWhitelist: true,
 	hasApplication: false,
 	headerCID: '',
