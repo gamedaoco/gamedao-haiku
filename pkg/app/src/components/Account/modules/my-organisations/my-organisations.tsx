@@ -66,12 +66,14 @@ const MyOrganisationsTable = ({ organisations, title, loading }) => {
 										<TableCell>{organisation.valueLocked}</TableCell>
 										<TableCell>{organisation.access}</TableCell>
 										<TableCell>{organisation.role}</TableCell>
-										{organisation?.canEdit && (
+										{organisation?.canEdit ? (
 											<TableCell align="right">
 												<IconButton aria-label="edit">
 													<Edit />
 												</IconButton>
 											</TableCell>
+										) : (
+											<TableCell />
 										)}
 									</TableRow>
 								))}
