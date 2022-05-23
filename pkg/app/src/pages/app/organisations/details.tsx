@@ -71,7 +71,13 @@ export function OrganisationDetailsPage() {
 								position: 'relative',
 							}}
 						>
-							<Grid minHeight="20vh" display="grid" justifyContent="center" alignItems="center">
+							<Grid
+								minHeight="20vh"
+								display="grid"
+								justifyContent="center"
+								alignItems="center"
+								maxHeight="30vh"
+							>
 								<label htmlFor="header-file-upload">
 									<input
 										style={{ display: 'none' }}
@@ -134,7 +140,7 @@ export function OrganisationDetailsPage() {
 								</label>
 
 								<Stack spacing={1}>
-									<Typography variant="h4">AggroCalypseDAO</Typography>
+									<Typography variant="h4">{tmpOrg.name ?? ''}</Typography>
 									<Typography>1 Member</Typography>
 								</Stack>
 							</Stack>
@@ -146,11 +152,10 @@ export function OrganisationDetailsPage() {
 									scrollButtons="auto"
 								>
 									<Tab label="Overview" value={'organization-overview'} />
-									<Tab label="Campaigns" value={'organization-campaigns'} />
-									<Tab label="Votings" value={'organization-votings'} />
-									<Tab label="Members" value={'organization-members'} />
-									<Tab label="Treasury" value={'organization-treasury'} />
-									<Tab label="Settings" value={'organization-settings'} />
+									<Tab label="Campaigns" value={'organization-campaigns'} disabled />
+									<Tab label="Votings" value={'organization-votings'} disabled />
+									<Tab label="Members" value={'organization-members'} disabled />
+									<Tab label="Treasury" value={'organization-treasury'} disabled />
 								</Tabs>
 							</CardContent>
 						</Card>
