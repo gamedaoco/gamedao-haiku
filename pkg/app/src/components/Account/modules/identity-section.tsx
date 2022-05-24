@@ -1,10 +1,12 @@
-import { Avatar, Box, Button, Chip, Grid, Typography } from '@mui/material'
+import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import React, { FC, useCallback } from 'react'
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
 import md5 from 'md5'
 import { getAddressFromAccountState, getNameFromAccountState, getInitials } from 'src/utils/accountUtils'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import { createInfoNotification } from 'src/utils/notificationUtils'
 
 interface IdentitySectionProps {
 	accountState: AccountState
@@ -16,6 +18,13 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 		setCurrentTab(AccountTabs.IDENTITY)
 	}, [setCurrentTab])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
+	const handleCopyAddress = useCallback(() => {
+		// TODO: Add i18n
+		navigator.clipboard
+			.writeText(getAddressFromAccountState(accountState))
+			.then(() => createInfoNotification('Address Copied to Clipboard'))
+	}, [accountState])
+
 	return (
 		<Grid container justifyContent="space-between" spacing={3}>
 			<Grid
@@ -58,10 +67,23 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 						sx={{
 							display: 'flex',
 							alignItems: 'center',
-							maxWidth: '70%',
+							maxWidth: '80%',
+							gap: 1,
 						}}
 					>
-						<Chip label={getAddressFromAccountState(accountState)} size="small" />
+						<Chip
+							label={getAddressFromAccountState(accountState)}
+							size="small"
+							sx={{
+								maxWidth: {
+									xs: '50%',
+									md: '80%',
+								},
+							}}
+						/>
+						<IconButton aria-label="copy" onClick={handleCopyAddress}>
+							<ContentCopyIcon fontSize="small" />
+						</IconButton>
 					</Box>
 					<Button
 						sx={{
