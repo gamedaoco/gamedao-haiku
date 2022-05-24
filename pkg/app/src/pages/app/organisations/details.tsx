@@ -73,10 +73,11 @@ export function OrganisationDetailsPage() {
 						>
 							<Grid
 								minHeight="20vh"
+								maxHeight="20vh"
 								display="grid"
 								justifyContent="center"
 								alignItems="center"
-								maxHeight="30vh"
+								overflow="hidden"
 							>
 								<label htmlFor="header-file-upload">
 									<input
@@ -156,6 +157,7 @@ export function OrganisationDetailsPage() {
 									<Tab label="Votings" value={'organization-votings'} disabled />
 									<Tab label="Members" value={'organization-members'} disabled />
 									<Tab label="Treasury" value={'organization-treasury'} disabled />
+									<Tab label="Settings" value={'organization-settings'} disabled />
 								</Tabs>
 							</CardContent>
 						</Card>
