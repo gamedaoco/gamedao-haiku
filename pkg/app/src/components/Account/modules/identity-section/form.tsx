@@ -16,7 +16,13 @@ const IdentityForm: FC = () => {
 		},
 		validationSchema: Yup.object({
 			displayName: Yup.string().max(32).required('Display Name is required'),
+			legalName: Yup.string().max(32),
+			riotName: Yup.string().email('Must be a valid email').max(255),
 			email: Yup.string().email('Must be a valid email').max(255),
+			web: Yup.string().matches(
+				/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+				'Enter correct url!',
+			),
 		}),
 		onSubmit: (values) => {
 			console.log(values)
