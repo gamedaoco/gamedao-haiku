@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { Box, Button, Card, CardActions, CardContent, CardHeader, Grid, TextField } from '@mui/material'
+import { Box, Button, Card, CardActions, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 
 const IdentityForm: FC = () => {
 	const formik = useFormik({
@@ -14,6 +14,10 @@ const IdentityForm: FC = () => {
 			totalDeposit: '',
 			web: '',
 		},
+		validationSchema: Yup.object({
+			displayName: Yup.string().max(32).required('Display Name is required'),
+			email: Yup.string().email('Must be a valid email').max(255),
+		}),
 		onSubmit: (values) => {
 			console.log(values)
 		},
@@ -26,6 +30,7 @@ const IdentityForm: FC = () => {
 					<Grid container spacing={3}>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="QDozer"
 								error={Boolean(formik.touched.displayName && formik.errors.displayName)}
 								fullWidth
 								helperText={formik.touched.displayName && formik.errors.displayName}
@@ -39,6 +44,7 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="@TwitterHandle"
 								error={Boolean(formik.touched.twitter && formik.errors.twitter)}
 								fullWidth
 								helperText={formik.touched.twitter && formik.errors.twitter}
@@ -51,6 +57,7 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="John Q Doe"
 								error={Boolean(formik.touched.legalName && formik.errors.legalName)}
 								fullWidth
 								helperText={formik.touched.legalName && formik.errors.legalName}
@@ -63,6 +70,7 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="@yourname:matrix.org"
 								error={Boolean(formik.touched.riotName && formik.errors.riotName)}
 								fullWidth
 								helperText={formik.touched.riotName && formik.errors.riotName}
@@ -75,6 +83,7 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="email@internet.com"
 								error={Boolean(formik.touched.email && formik.errors.email)}
 								fullWidth
 								helperText={formik.touched.email && formik.errors.email}
@@ -87,6 +96,7 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="1.0000"
 								error={Boolean(formik.touched.totalDeposit && formik.errors.totalDeposit)}
 								fullWidth
 								helperText={formik.touched.totalDeposit && formik.errors.totalDeposit}
@@ -95,10 +105,14 @@ const IdentityForm: FC = () => {
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
 								value={formik.values.totalDeposit}
+								InputProps={{
+									endAdornment: <Typography>milli</Typography>,
+								}}
 							/>
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								placeholder="https://yourwebsitename.com"
 								error={Boolean(formik.touched.web && formik.errors.web)}
 								fullWidth
 								helperText={formik.touched.web && formik.errors.web}
