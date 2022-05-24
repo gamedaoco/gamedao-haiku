@@ -9,6 +9,9 @@ import { FiltersSection } from 'components/OrganisationCard/modules/filtersSecti
 import { ArrowDownward } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
 
+// please replace use useTheme and derive the keys
+import { PRIMARY_COLOR } from 'src/theme/palette'
+
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 		<path
