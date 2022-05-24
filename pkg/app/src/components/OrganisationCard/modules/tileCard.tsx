@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
 import { useExtensionContext } from 'src/provider/extension/modules/context'
+import { useTheme } from '@mui/material/styles'
+
 import { NavLink } from 'src/components/NavLink/navLink'
 import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
@@ -14,8 +16,9 @@ const gateway = 'https://ipfs.gamedao.co/gateway/'
 const toLink = '/app/organisations/'
 
 export const TileCard = ({ item }: ComponentsPros) => {
+	const theme = useTheme()
+
 	const { selectedAccount } = useExtensionContext()
-	const bgPlain = { backgroundColor: PRIMARY_COLOR[3].background }
 	const address = selectedAccount?.account.address
 
 	const SubHeader = useMemo(() => {
@@ -78,12 +81,12 @@ export const TileCard = ({ item }: ComponentsPros) => {
 				sx={{
 					minHeight: '164px',
 					maxWidth: '344px',
-					borderRadius: '16px',
+					border: '1px solid transparent',
 					'&:hover': {
-						// transform: '',
-						outline: 'rgba(255, 255, 255, 0.24) 1px solid',
+						border: `1px solid ${theme.palette.grey[500_32]}`,
+						background: theme.palette.grey[500_16],
 					},
-					...bgPlain,
+					backgroundColor: theme.palette.grey[500_16],
 					cursor: 'pointer',
 				}}
 			>

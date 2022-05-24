@@ -7,7 +7,7 @@ import { useOrganizationsLazyQuery, OrganizationOrderByInput, OrganizationEdge }
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
-import { PRIMARY_COLOR } from 'src/theme/palette'
+import { useTheme } from '@mui/material/styles'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -54,13 +54,14 @@ const sortOptions: SortOptionsInterface[] = [
 ]
 
 export function OrganisationPage() {
+	const theme = useTheme()  
 	const [filters, setFilters] = useState('')
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
 	const [fetchOrganizations, { loading, error, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
 		if (error) {
-			console.error('There is an error when querying the display values')
+			console.error('There was an error querying the display values')
 		}
 	}, [error])
 

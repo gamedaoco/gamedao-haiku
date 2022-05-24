@@ -2,12 +2,15 @@ import { ReactNode, useEffect, useState } from 'react'
 import { CssBaseline } from '@mui/material'
 import { createTheme, Theme, ThemeOptions, ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import { useSettings } from 'src/hooks/useSettings'
+
+import GlobalStyles from 'src/theme/globalStyles'
 import shape from 'src/theme/shape'
 import palette from 'src/theme/palette'
 import typography from 'src/theme/typography'
 import breakpoints from 'src/theme/breakpoints'
 import componentsOverride from 'src/theme/overrides'
 import shadows, { customShadows } from 'src/theme/shadows'
+
 import { ToastContainer } from 'react-toastify'
 import { ThemePrimaryColor } from 'src/components'
 
@@ -52,6 +55,7 @@ export function ThemeProvider({ children }: ComponentProps) {
 			<ToastContainer theme={themeMode} />
 			<CssBaseline />
 			<ThemePrimaryColor>{children}</ThemePrimaryColor>
+			<GlobalStyles />
 		</MuiThemeProvider>
 	)
 }

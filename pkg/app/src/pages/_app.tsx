@@ -18,6 +18,7 @@ interface MyAppProps extends AppProps {
 	pageProps: object
 }
 
+// TODO: @andre query from graph
 const SITE_NAME = 'GameDAO'
 const SITE_TITLE = 'Fundraising, coordination, ownership for video games, esports and the creative industry.'
 const SITE_DESCRIPTION =

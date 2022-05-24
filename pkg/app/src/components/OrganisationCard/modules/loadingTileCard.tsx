@@ -3,12 +3,10 @@ import { useTheme } from '@mui/material/styles'
 import { Card, Box, CardHeader, CardContent } from '@mui/material'
 import { Person, Key } from '@mui/icons-material'
 import Skeleton from '@mui/material/Skeleton'
-import { PRIMARY_COLOR } from 'src/theme/palette'
 
 const LoadingTileCard: FC = () => {
 	const theme = useTheme()
-	const bgPlain = { backgroundColor: PRIMARY_COLOR[3].background }
-
+  
 	const SubHeader = useMemo(() => {
 		return (
 			<Box
@@ -59,9 +57,9 @@ const LoadingTileCard: FC = () => {
 			sx={{
 				minHeight: '164px',
 				maxWidth: '344px',
-				borderRadius: '16px',
+				borderRadius: '1rem',
 				'&:hover': { background: theme.palette.grey[500_32] },
-				...bgPlain,
+				backgroundColor: theme.palette.grey[500_8],
 				cursor: 'pointer',
 			}}
 		>
