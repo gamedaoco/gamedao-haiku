@@ -36,6 +36,11 @@ const IdentityForm: FC = () => {
 					<Grid container spacing={3}>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="QDozer"
 								error={Boolean(formik.touched.displayName && formik.errors.displayName)}
 								fullWidth
@@ -50,6 +55,11 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="@TwitterHandle"
 								error={Boolean(formik.touched.twitter && formik.errors.twitter)}
 								fullWidth
@@ -63,6 +73,11 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="John Q Doe"
 								error={Boolean(formik.touched.legalName && formik.errors.legalName)}
 								fullWidth
@@ -76,6 +91,11 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="@yourname:matrix.org"
 								error={Boolean(formik.touched.riotName && formik.errors.riotName)}
 								fullWidth
@@ -89,6 +109,11 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="email@internet.com"
 								error={Boolean(formik.touched.email && formik.errors.email)}
 								fullWidth
@@ -102,6 +127,11 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="1.0000"
 								error={Boolean(formik.touched.totalDeposit && formik.errors.totalDeposit)}
 								fullWidth
@@ -118,6 +148,11 @@ const IdentityForm: FC = () => {
 						</Grid>
 						<Grid item md={6} xs={12}>
 							<TextField
+								sx={{
+									'& fieldset': {
+										borderRadius: '16px',
+									},
+								}}
 								placeholder="https://yourwebsitename.com"
 								error={Boolean(formik.touched.web && formik.errors.web)}
 								fullWidth
