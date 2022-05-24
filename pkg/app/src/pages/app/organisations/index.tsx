@@ -45,7 +45,7 @@ export function OrganisationPage() {
 	const { loading, error, data } = useOrganizationsQuery()
 	useEffect(() => {
 		if (error) {
-			console.error('There is an error when querying the display values')
+			console.error('There was an error querying the display values')
 		}
 	}, [error])
 	const [bodyCount, setBodyCount] = useState<number>(15)
@@ -73,7 +73,7 @@ export function OrganisationPage() {
 							<Grid item>
 								<Button
 									startIcon={<PlusIcon fontSize="small" />}
-									sx={{ color: '#919EAB', borderColor: '#919EAB', borderRadius: 2 }}
+									// sx={{ color: '#919EAB', borderColor: '#919EAB', borderRadius: 2 }}
 									variant="outlined"
 								>
 									Create
