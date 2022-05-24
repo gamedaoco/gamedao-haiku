@@ -15,13 +15,14 @@ const IdentityForm: FC = () => {
 			web: '',
 		},
 		validationSchema: Yup.object({
-			displayName: Yup.string().max(32).required('Display Name is required'),
-			legalName: Yup.string().max(32),
-			riotName: Yup.string().email('Must be a valid email').max(255),
+			displayName: Yup.string().max(32, 'Max of 32 characters').required('Display Name is required'),
+			legalName: Yup.string().max(32, 'Max of 32 characters'),
+			riotName: Yup.string().max(32, 'Max of 32 characters'),
 			email: Yup.string().email('Must be a valid email').max(255),
+			totalDeposit: Yup.number().typeError('Must be a valid number'),
 			web: Yup.string().matches(
 				/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-				'Enter correct url!',
+				'Must be a valid website',
 			),
 		}),
 		onSubmit: (values) => {
@@ -177,7 +178,12 @@ const IdentityForm: FC = () => {
 								>
 									Clear Identity
 								</Button>
-								<Button color="primary" disabled={formik.isSubmitting} variant="contained">
+								<Button
+									onClick={formik.submitForm}
+									color="primary"
+									// disabled={formik.isSubmitting}
+									variant="contained"
+								>
 									Sign and Submit
 								</Button>
 							</Box>
