@@ -25,7 +25,7 @@ const CollectablesList: FC<CollectablesListProps> = ({ loading, items }) => {
 			) : (
 				<>
 					{items?.nfts.map((item: Collectable) => (
-						<Grid item xs={12 / 5} key={item.id}>
+						<Grid item xs={12 / 5} style={{ marginBottom: 10 }} key={item.id}>
 							<CollectableCard item={item} />
 						</Grid>
 					))}
