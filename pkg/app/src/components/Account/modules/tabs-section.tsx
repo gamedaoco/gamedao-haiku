@@ -43,9 +43,10 @@ const TabsSection: FC<TabsSectionProps> = ({ setCurrentTab, currentTab }) => {
 	return (
 		<Box sx={{ bgcolor: 'background.paper', my: 2, borderRadius: '8px' }}>
 			<Tabs
+				scrollButtons
+				allowScrollButtonsMobile
 				indicatorColor="primary"
 				onChange={handleTabsChange}
-				scrollButtons="auto"
 				sx={{ px: 3 }}
 				textColor="primary"
 				value={currentTab}
