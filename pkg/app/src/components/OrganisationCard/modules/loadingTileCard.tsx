@@ -6,7 +6,7 @@ import Skeleton from '@mui/material/Skeleton'
 
 const LoadingTileCard: FC = () => {
 	const theme = useTheme()
-  
+
 	const SubHeader = useMemo(() => {
 		return (
 			<Box

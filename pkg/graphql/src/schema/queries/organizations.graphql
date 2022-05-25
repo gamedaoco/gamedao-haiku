@@ -1,5 +1,5 @@
-query Organizations($orderBy: [OrganizationOrderByInput!]!, $first: Int) {
-  organizationsConnection(orderBy: $orderBy, first: $first) {
+query Organizations($orderBy: [OrganizationOrderByInput!]!, $first: Int, $searchQuery: String) {
+  organizationsConnection(orderBy: $orderBy, first: $first, where: {metadata: {name_contains: $searchQuery, OR: {description_contains: $searchQuery}}}) {
     totalCount
     edges {
       node {

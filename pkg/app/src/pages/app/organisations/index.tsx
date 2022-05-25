@@ -22,25 +22,6 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-const applyFilters = (data: OrganizationEdge[], filters: string): OrganizationEdge[] =>
-	data?.filter((x) => {
-		if (filters) {
-			let queryMatched = false
-			const properties = ['name', 'description']
-
-			properties.forEach((property) => {
-				if (x?.node?.metadata?.[property]?.toLowerCase().includes(filters.toLowerCase())) {
-					queryMatched = true
-				}
-			})
-
-			if (!queryMatched) {
-				return false
-			}
-		}
-
-		return true
-	})
 const applyPagination = (data: OrganizationEdge[], rowsPerPage: number): OrganizationEdge[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
@@ -57,7 +38,8 @@ const sortOptions: SortOptionsInterface[] = [
 ]
 
 export function OrganisationPage() {
-	const theme = useTheme()  
+	const theme = useTheme()
+	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
@@ -70,11 +52,13 @@ export function OrganisationPage() {
 
 	useEffect(() => {
 		fetchOrganizations({
-			variables: { first: bodyCount, orderBy: sortOption },
+			variables: { first: bodyCount, orderBy: sortOption, searchQuery: filters },
 		})
-	}, [bodyCount, fetchOrganizations, sortOption])
-	const filteredData = applyFilters(data?.organizationsConnection?.edges?.slice() as OrganizationEdge[], filters)
-	const paginatedData = applyPagination(filteredData, bodyCount)
+	}, [bodyCount, fetchOrganizations, sortOption, filters])
+	const paginatedData = applyPagination(
+		data?.organizationsConnection?.edges?.slice() as OrganizationEdge[],
+		bodyCount,
+	)
 	const buttonVisibility = useMemo(
 		() => paginatedData?.length < data?.organizationsConnection?.totalCount,
 		[paginatedData?.length, data?.organizationsConnection?.totalCount],
