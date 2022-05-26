@@ -1,10 +1,12 @@
 import { Box, Card, CardContent, CardMedia, Skeleton } from '@mui/material'
 import React, { FC } from 'react'
+import { useTheme } from '@mui/material/styles'
 
 const LoadingCollectableCard: FC = () => {
+	const theme = useTheme()
+
 	return (
-		//TODO: Change the static color to fetch from theme once the last pull request is merged
-		<Card sx={{ maxWidth: '95%', height: '100%', borderRadius: '12px', backgroundColor: '#161C24' }}>
+		<Card sx={{ maxWidth: '95%', height: '100%', backgroundColor: theme.palette.grey[700] }}>
 			<CardMedia sx={{ padding: 0.7 }}>
 				<Skeleton sx={{ height: 190, borderRadius: '10px' }} animation="wave" variant="rectangular" />
 			</CardMedia>

@@ -4,6 +4,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 import { ModelDialog } from 'components/Collectable/modules/modelDialog'
 import LoadingCollectableCard from './loading-collectable-card'
+import { useTheme } from '@mui/material/styles'
 
 interface IpfsMetadata {
 	description: string
@@ -22,6 +23,8 @@ const RMRK_GATEWAY = 'https://rmrk.mypinata.cloud/'
 const CollectableCard: FC<ComponentProps> = ({ item }) => {
 	const [ipfsMetadata, setIpfsMetadata] = useState<IpfsMetadata>(null)
 	const [openModel, setOpenModel] = useState<boolean>(false)
+	const theme = useTheme()
+
 	useEffect(() => {
 		if (item) {
 			fetchIpfsJson(item.metadata, RMRK_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
@@ -35,7 +38,7 @@ const CollectableCard: FC<ComponentProps> = ({ item }) => {
 	return (
 		<>
 			{ipfsMetadata ? (
-				<Card sx={{ maxWidth: '95%' }}>
+				<Card sx={{ maxWidth: '95%', backgroundColor: theme.palette.grey[700] }}>
 					<CardMedia
 						component="img"
 						sx={{ width: '100%', padding: 0.7, borderRadius: '16px' }}
