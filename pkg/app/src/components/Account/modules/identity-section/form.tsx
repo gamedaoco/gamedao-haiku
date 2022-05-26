@@ -1,23 +1,29 @@
 import type { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { Box, Button, Card, CardActions, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import type { Identity } from '@gamedao-haiku/graphql/dist/types'
 
-const IdentityForm: FC = () => {
+interface IdentityFormProps {
+	identity: Identity
+}
+
+const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 	const formik = useFormik({
+		enableReinitialize: true,
 		initialValues: {
-			displayName: 'Jennifer Doe',
-			twitter: '',
-			legalName: '',
-			riotName: '',
-			email: '',
+			displayName: identity?.displayName || '',
+			twitter: identity?.twitter || '',
+			legalName: identity?.legalName || '',
+			riot: identity?.riot || '',
+			email: identity?.email || '',
 			totalDeposit: '',
 			web: '',
 		},
 		validationSchema: Yup.object({
 			displayName: Yup.string().max(32, 'Max of 32 characters').required('Display Name is required'),
 			legalName: Yup.string().max(32, 'Max of 32 characters'),
-			riotName: Yup.string().max(32, 'Max of 32 characters'),
+			riot: Yup.string().max(32, 'Max of 32 characters'),
 			email: Yup.string().email('Must be a valid email').max(255),
 			totalDeposit: Yup.number().typeError('Must be a valid number'),
 			web: Yup.string().matches(
@@ -98,14 +104,14 @@ const IdentityForm: FC = () => {
 									},
 								}}
 								placeholder="@yourname:matrix.org"
-								error={Boolean(formik.touched.riotName && formik.errors.riotName)}
+								error={Boolean(formik.touched.riot && formik.errors.riot)}
 								fullWidth
-								helperText={formik.touched.riotName && formik.errors.riotName}
+								helperText={formik.touched.riot && formik.errors.riot}
 								label="Riot Name"
-								name="riotName"
+								name="riot"
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
-								value={formik.values.riotName}
+								value={formik.values.riot}
 							/>
 						</Grid>
 						<Grid item md={6} xs={12}>
