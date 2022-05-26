@@ -22,14 +22,7 @@ const MyCollectablesTab: FC<MyCollectablesTabProps> = ({ accountState }) => {
 	return (
 		<>
 			<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
-			<Stack
-				component={Paper}
-				spacing={0.5}
-				padding={3}
-				borderRadius="16px"
-				//TODO: Change the static color to fetch from theme once the last pull request is merged
-				style={{ backgroundColor: '#212B36' }}
-			>
+			<Stack component={Paper} spacing={0.5} padding={3} borderRadius="16px">
 				<Typography variant="h6">My Collectables </Typography>
 				<CollectablesList loading={loading} items={data} />
 			</Stack>

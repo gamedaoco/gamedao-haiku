@@ -33,10 +33,9 @@ const CollectableCard: FC<ComponentProps> = ({ item }) => {
 	}
 
 	return (
-		//TODO: Change the static color to fetch from theme once the last pull request that contains the colors
 		<>
 			{ipfsMetadata ? (
-				<Card sx={{ maxWidth: '95%', borderRadius: '12px', backgroundColor: '#161C24' }}>
+				<Card sx={{ maxWidth: '95%' }}>
 					<CardMedia
 						component="img"
 						sx={{ width: '100%', padding: 0.7, borderRadius: '16px' }}
