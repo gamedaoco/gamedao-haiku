@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
-import { PRIMARY_COLOR } from 'src/theme/palette'
 
 const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => {
 	const handleChange = useCallback(
@@ -26,9 +25,17 @@ const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => 
 				Sort By:
 			</Typography>
 			<Box>
-				<FormControl fullWidth className={classes.formControl} size="small">
+				<FormControl
+					fullWidth
+					sx={{
+						m: 1,
+						'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+							border: 'none',
+						},
+					}}
+					size="small"
+				>
 					<Select
-						style={{ color: PRIMARY_COLOR[3].text }}
 						value={sortOption}
 						onChange={handleChange}
 						MenuProps={{ classes: { paper: classes.dropdownStyle } }}

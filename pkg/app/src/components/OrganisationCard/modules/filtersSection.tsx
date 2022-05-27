@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles'
 import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
 import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
-import { PRIMARY_COLOR } from 'src/theme/palette'
 
 interface SortOptionsInterface {
 	name: String
@@ -21,31 +20,14 @@ interface FiltersSectionPropsInterface {
 }
 
 const useStyles = makeStyles({
-	field: {
-		'& fieldset': {
-			borderRadius: 8,
-		},
-	},
 	dropdownStyle: {
 		paddingTop: 3,
 		borderRadius: '7%',
-		backgroundColor: PRIMARY_COLOR[3].background,
 		fontSize: 14,
 		'& .MuiMenuItem-root': {
 			paddingBottom: 20,
 			fontSize: 14,
 			minWidth: 200,
-			color: PRIMARY_COLOR[3].text,
-		},
-	},
-	formControl: {
-		m: 1,
-		'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-			border: 'none',
-			color: 'white',
-		},
-		'& .MuiSvgIcon-root': {
-			color: 'white',
 		},
 	},
 })
@@ -78,7 +60,6 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 							value={filters}
 							id="outlined-basic"
 							size="small"
-							className={classes.field}
 							fullWidth
 							InputProps={{
 								startAdornment: (

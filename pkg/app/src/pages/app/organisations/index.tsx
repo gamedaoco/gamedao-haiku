@@ -7,10 +7,6 @@ import { useOrganizationsLazyQuery, OrganizationOrderByInput, OrganizationEdge }
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
-import { useTheme } from '@mui/material/styles'
-
-// please replace use useTheme and derive the keys
-import { PRIMARY_COLOR } from 'src/theme/palette'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -38,7 +34,6 @@ const sortOptions: SortOptionsInterface[] = [
 ]
 
 export function OrganisationPage() {
-	const theme = useTheme()
 	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
 	const [bodyCount, setBodyCount] = useState<number>(15)
@@ -79,15 +74,7 @@ export function OrganisationPage() {
 								<Typography variant="h3">Organisations</Typography>
 							</Grid>
 							<Grid item>
-								<Button
-									startIcon={<PlusIcon fontSize="small" />}
-									sx={{
-										color: PRIMARY_COLOR[3].text,
-										borderColor: PRIMARY_COLOR[3].text,
-										borderRadius: 2,
-									}}
-									variant="outlined"
-								>
+								<Button startIcon={<PlusIcon fontSize="small" />} variant="outlined">
 									Create
 								</Button>
 							</Grid>
@@ -127,13 +114,8 @@ export function OrganisationPage() {
 									endIcon={<ArrowDownward />}
 									onClick={() => setBodyCount((p) => p + 30)}
 									variant="outlined"
-									sx={{
-										color: PRIMARY_COLOR[3].text,
-										border: `${PRIMARY_COLOR[3].text} 1px solid`,
-										borderRadius: 2,
-									}}
 								>
-									Load 30 More Organisations
+									Load More Organisations
 								</Button>
 							)}
 							<Typography>

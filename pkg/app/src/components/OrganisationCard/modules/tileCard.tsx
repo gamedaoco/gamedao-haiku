@@ -6,7 +6,6 @@ import { NavLink } from 'src/components/NavLink/navLink'
 import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Check, Key, Person } from '@mui/icons-material'
-import { PRIMARY_COLOR } from 'src/theme/palette'
 
 interface ComponentsPros {
 	item: Organization
@@ -109,7 +108,6 @@ export const TileCard = ({ item }: ComponentsPros) => {
 							<Typography
 								variant={'caption'}
 								fontWeight={'400'}
-								color={PRIMARY_COLOR[3].contrastText}
 								sx={{
 									overflow: 'hidden',
 									textOverflow: 'ellipsis',
