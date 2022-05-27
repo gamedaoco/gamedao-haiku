@@ -1,40 +1,15 @@
 import type { FC } from 'react'
-import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import type { Identity } from '@gamedao-haiku/graphql/dist/types'
+import { FormValues, formikHandler } from './formik'
 
 interface IdentityFormProps {
 	identity: Identity
 }
 
 const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
-	const formik = useFormik({
-		enableReinitialize: true,
-		initialValues: {
-			displayName: identity?.displayName || '',
-			twitter: identity?.twitter || '',
-			legalName: identity?.legalName || '',
-			riot: identity?.riot || '',
-			email: identity?.email || '',
-			totalDeposit: '',
-			web: '',
-		},
-		validationSchema: Yup.object({
-			displayName: Yup.string().max(32, 'Max of 32 characters').required('Display Name is required'),
-			legalName: Yup.string().max(32, 'Max of 32 characters'),
-			riot: Yup.string().max(32, 'Max of 32 characters'),
-			email: Yup.string().email('Must be a valid email').max(255),
-			totalDeposit: Yup.number().typeError('Must be a valid number'),
-			web: Yup.string().matches(
-				/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-				'Must be a valid website',
-			),
-		}),
-		onSubmit: (values) => {
-			console.log(values)
-		},
-	})
+	const formik = useFormik<FormValues>(formikHandler(identity, (v, h) => console.log(v)))
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Card sx={{ borderRadius: '16px' }}>
