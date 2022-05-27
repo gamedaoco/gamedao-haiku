@@ -2,14 +2,15 @@ import type { FC } from 'react'
 import { useFormik } from 'formik'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import type { Identity } from '@gamedao-haiku/graphql/dist/types'
-import { FormValues, formikHandler } from './formik'
+import { FormValues, formikHandler, formikSubmitHandlerType } from './formik'
 
 interface IdentityFormProps {
 	identity: Identity
 }
 
 const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
-	const formik = useFormik<FormValues>(formikHandler(identity, (v, h) => console.log(v)))
+	const formikHandleSubmit: formikSubmitHandlerType = (v) => console.log(v)
+	const formik = useFormik<FormValues>(formikHandler(identity, formikHandleSubmit))
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Card sx={{ borderRadius: '16px' }}>

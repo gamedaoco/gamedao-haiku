@@ -1,4 +1,5 @@
 import { Identity } from '@gamedao-haiku/graphql/dist'
+import { FormikHelpers } from 'formik'
 import * as Yup from 'yup'
 
 const webRegularExpression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
@@ -30,9 +31,10 @@ const validationSchema = Yup.object({
 	web: Yup.string().matches(webRegularExpression, 'Must be a valid website'),
 })
 
-export const formikHandler = (identity: Identity, callback) => ({
+export type formikSubmitHandlerType = (values: FormValues, helpers: FormikHelpers<FormValues>) => void
+export const formikHandler = (identity: Identity, callback: formikSubmitHandlerType) => ({
 	enableReinitialize: true,
 	initialValues: formikInitialValues(identity),
 	validationSchema,
-	onSubmit: (values, handlers) => callback(values, handlers),
+	onSubmit: (values: FormValues, helpers: FormikHelpers<FormValues>) => callback(values, helpers),
 })
