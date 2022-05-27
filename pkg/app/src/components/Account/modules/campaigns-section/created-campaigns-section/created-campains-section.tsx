@@ -1,12 +1,16 @@
 import { Box, Card, Grid, Typography, Button } from '@mui/material'
-import { campaigns } from 'components/Account/TempData'
 import React, { FC } from 'react'
 import CampaignCard from './campaign-card'
 import AddIcon from '@mui/icons-material/Add'
 import { useTheme } from '@mui/material/styles'
+import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 const CreatedCampaignSection: FC = () => {
 	const theme = useTheme()
+	const { data } = useCampaignsQuery({ variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' } })
+	// const temp = getAddressFromAccountState()
+	console.log('data', data)
 
 	return (
 		<Box sx={{ pb: 4 }}>
@@ -53,8 +57,8 @@ const CreatedCampaignSection: FC = () => {
 						</Button>
 					</Card>
 				</Grid>
-				{campaigns.map((campaign) => (
-					<Grid item xs={4} style={{ marginBottom: 10 }} key={campaign.id}>
+				{data?.campaigns?.map((campaign: Campaign) => (
+					<Grid item xs={4} style={{ marginBottom: 10 }} key={campaign?.id}>
 						<CampaignCard campaign={campaign} />
 					</Grid>
 				))}
