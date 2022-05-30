@@ -1,5 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { useApiProvider } from 'hooks/useApiProvider'
+import { toUnit } from 'src/utils/token'
 
 function unsubRef(ref: MutableRefObject<any>) {
 	if (ref.current && typeof ref.current === 'function') {
@@ -30,12 +31,15 @@ export function useBalanceByAddress(address: string): Balance {
 					const data = result?.toHuman()?.data
 					if (data) {
 						Object.keys(data || {}).forEach((key) => {
-							data[key] = +data[key]?.split(' ')?.[0]
+							data[key] = toUnit(
+								data[key]?.split(' ')?.[0]?.replaceAll(',', ''),
+								provider.systemProperties.tokenDecimals,
+							)
 						})
 						setBalanceState({
 							...data,
 							tokenSymbol: provider.systemProperties.tokenSymbol,
-							tokenDecimals: +provider.systemProperties.tokenDecimals,
+							tokenDecimals: provider.systemProperties.tokenDecimals,
 						})
 					} else {
 						setBalanceState(null)

@@ -1,19 +1,20 @@
-import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
-import { PromiseMsg } from 'src/@types/promiseMsg'
+import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
+import type { PromiseMsg } from 'src/@types/promiseMsg'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { Button, Stack, Typography } from '@mui/material'
 import { Balance, useBalanceByAddress } from 'hooks/useBalanceByAddress'
 import { useCallback, useEffect, useState } from 'react'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
+import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import { useTransaction } from 'hooks/useTransaction'
+import type { ISubmittableResult } from '@polkadot/types/types'
 
 interface ComponentProps {
 	open: boolean
 	onClose: () => void
 	tx: SubmittableExtrinsic
 	txMsg: PromiseMsg
-	txCallback?: (state, result) => void
+	txCallback?: (state: boolean, result: ISubmittableResult) => void
 }
 
 // TODO?, Deposit?

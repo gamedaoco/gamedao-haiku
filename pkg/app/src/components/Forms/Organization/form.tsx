@@ -1,10 +1,11 @@
 import { useCallback } from 'react'
-import { Controller } from 'components/Forms/Organization/controller'
+import { Controller } from './modules/controller'
 import { Button, Stack } from '@mui/material'
-import { Name } from 'components/Forms/Organization/name'
-import { Settings } from 'components/Forms/Organization/settings'
+import { Name, validationSchema as nameValidationSchema } from './modules/name'
+import { Settings } from './modules/settings'
 import { createInfoNotification } from 'src/utils/notificationUtils'
-import { UseTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useRouter } from 'next/router'
 
 interface ComponentProps {
 	currentStep: number
@@ -12,7 +13,8 @@ interface ComponentProps {
 }
 
 export function Form({ currentStep, setStep }: ComponentProps) {
-	const tmpOrgState = UseTmpOrganisationState()
+	const tmpOrgState = useTmpOrganisationState()
+	const { push } = useRouter()
 
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {
@@ -27,13 +29,17 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 
 		if (currentStep == 2) {
 			createInfoNotification('Organization was saved')
+			push('/app/organisations/details')
 		}
-	}, [currentStep, setStep])
+	}, [currentStep, setStep, push])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
-				return tmpOrgState.name?.length === 0
+				return !nameValidationSchema.isValidSync({
+					name: tmpOrgState.name,
+					description: tmpOrgState.description,
+				})
 		}
 		return false
 	}
@@ -48,7 +54,14 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 
 	return (
 		<>
-			{currentStep === 0 && <Name name={tmpOrgState.name} setName={tmpOrgState.setName} />}
+			{currentStep === 0 && (
+				<Name
+					name={tmpOrgState.name}
+					setName={tmpOrgState.setName}
+					description={tmpOrgState.description}
+					setDescription={tmpOrgState.setDescription}
+				/>
+			)}
 			{currentStep === 1 && <Controller selected={tmpOrgState.type} setSelected={tmpOrgState.setType} />}
 			{currentStep === 2 && (
 				<Settings
