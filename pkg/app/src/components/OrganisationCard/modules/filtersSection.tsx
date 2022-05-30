@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import Box from '@mui/material/Box'
 import { Grid, InputAdornment, TextField } from '@mui/material'
 import { Search } from '@mui/icons-material'
-import { makeStyles } from '@mui/styles'
 import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
 import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
@@ -19,19 +18,6 @@ interface FiltersSectionPropsInterface {
 	sortOptions: SortOptionsInterface[]
 }
 
-const useStyles = makeStyles({
-	dropdownStyle: {
-		paddingTop: 3,
-		borderRadius: '7%',
-		fontSize: 14,
-		'& .MuiMenuItem-root': {
-			paddingBottom: 20,
-			fontSize: 14,
-			minWidth: 200,
-		},
-	},
-})
-
 export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 	filters,
 	setFilters,
@@ -39,7 +25,6 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 	setSortOption,
 	sortOptions,
 }) => {
-	const classes = useStyles()
 	return (
 		<Box
 			sx={{
@@ -82,7 +67,6 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 						>
 							<FiltersTab />
 							<SortOptionsTab
-								classes={classes}
 								sortOption={sortOption}
 								setSortOption={setSortOption}
 								sortOptions={sortOptions}

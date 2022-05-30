@@ -14,20 +14,10 @@ import {
 	Radio,
 	RadioGroup,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
 import ClearIcon from '@mui/icons-material/Clear'
 import ClearAllIcon from '@mui/icons-material/ClearAll'
 
-const useStyles = makeStyles({
-	list: {
-		width: 250,
-	},
-	fullList: {
-		width: 'auto',
-	},
-})
 const FiltersTab = () => {
-	const classes = useStyles()
 	const [openDrawer, setOpenDrawer] = useState(false)
 	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
 	const ListTab = () => (

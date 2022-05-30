@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 
-const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => {
+const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
 			setSortOption(event.target.value as OrganizationOrderByInput)
@@ -35,11 +35,7 @@ const SortOptionsTab = ({ classes, sortOption, sortOptions, setSortOption }) => 
 					}}
 					size="small"
 				>
-					<Select
-						value={sortOption}
-						onChange={handleChange}
-						MenuProps={{ classes: { paper: classes.dropdownStyle } }}
-					>
+					<Select value={sortOption} onChange={handleChange}>
 						{sortOptions.map((x) => (
 							<MenuItem value={x.value} key={x.value}>
 								{x.name}
