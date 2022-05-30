@@ -65,6 +65,8 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 				)
 				setTxState(tx)
 			} catch (e) {
+				// TODO: Add logger engine. It does not necessarily have to be an error,
+				//  it can also be that data is still missing that is required for the transaction.
 				console.warn('CreateOrgTransaction', e)
 			}
 		}

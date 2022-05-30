@@ -9,6 +9,7 @@ import {
 	validationSchema as descriptionValidationSchema,
 } from 'components/Forms/Proposal/modules/description'
 import { Majority } from 'components/Forms/Proposal/modules/majority'
+import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 interface ComponentProps {
 	currentStep: number
@@ -31,10 +32,30 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		}
 
 		if (currentStep == 2) {
+			uploadMetadata()
 			createInfoNotification('Proposal was saved')
 			push('/app/proposals')
+			// TODO create proposal tx
 		}
 	}, [currentStep, setStep, push])
+
+	// Update and upload metadata
+	const uploadMetadata = useCallback(() => {
+		if (tmpProposalState.description && tmpProposalState.name) {
+			const metaData = {
+				name: tmpProposalState.name,
+				description: tmpProposalState.description,
+			}
+			;(async (): Promise<string> => {
+				const file = new File([JSON.stringify(metaData)], `${tmpProposalState.name}-proposal-metadata.json`, {
+					type: 'text/plain',
+				})
+
+				const cid = await uploadFileToIpfs(file)
+				return cid.toString()
+			})().then((cid) => tmpProposalState.setMetaDataCID(cid))
+		}
+	}, [tmpProposalState])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {

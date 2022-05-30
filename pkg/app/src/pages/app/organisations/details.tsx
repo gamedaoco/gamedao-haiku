@@ -20,7 +20,7 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTheme } from '@mui/material/styles'
-import { TmpOverview } from 'src/components/TabPanels/Organization/TmpOverview'
+import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 
 export function OrganisationDetailsPage() {
 	const [activeStep, setActiveStep] = useState<string>('organization-overview')
