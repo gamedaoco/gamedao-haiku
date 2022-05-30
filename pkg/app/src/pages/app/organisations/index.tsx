@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { Layout } from 'src/layouts/default/layout'
-import { useOrganizationsLazyQuery, OrganizationOrderByInput, OrganizationEdge } from '@gamedao-haiku/graphql/dist'
+import { useOrganizationsLazyQuery, OrganizationOrderByInput, Organization } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
@@ -18,7 +18,7 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-const applyPagination = (data: OrganizationEdge[], rowsPerPage: number): OrganizationEdge[] =>
+const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
 interface SortOptionsInterface {
@@ -50,10 +50,7 @@ export function OrganisationPage() {
 			variables: { first: bodyCount, orderBy: sortOption, searchQuery: filters },
 		})
 	}, [bodyCount, fetchOrganizations, sortOption, filters])
-	const paginatedData = applyPagination(
-		data?.organizationsConnection?.edges?.slice() as OrganizationEdge[],
-		bodyCount,
-	)
+	const paginatedData = applyPagination(data?.organizations?.slice() as Organization[], bodyCount)
 	const buttonVisibility = useMemo(
 		() => paginatedData?.length < data?.organizationsConnection?.totalCount,
 		[paginatedData?.length, data?.organizationsConnection?.totalCount],

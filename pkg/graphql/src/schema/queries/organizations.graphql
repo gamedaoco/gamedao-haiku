@@ -1,22 +1,20 @@
 query Organizations($orderBy: [OrganizationOrderByInput!]!, $first: Int, $searchQuery: String) {
   organizationsConnection(orderBy: $orderBy, first: $first, where: {metadata: {name_contains: $searchQuery, OR: {description_contains: $searchQuery}}}) {
     totalCount
-    edges {
-      node {
-         id
-        metadata {
-            name
-            description
-            logo
-        }
-        members {
-            address
-            identity {
-                displayName
-            }
-        }
-        cid
-        access
+  }
+  organizations(limit: $first, orderBy: $orderBy, where: {metadata: {name_contains: $searchQuery, OR: {description_contains: $searchQuery}}}) {
+    id
+    metadata {
+      name
+      description
+      logo
+    }
+    access
+    creator
+    members{
+      address
+      identity{
+        displayName
       }
     }
   }

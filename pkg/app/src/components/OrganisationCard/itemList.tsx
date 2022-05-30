@@ -1,16 +1,16 @@
 import { Grid } from '@mui/material'
 import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
-import type { OrganizationEdge } from '@gamedao-haiku/graphql/dist'
+import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { TileCard } from 'components/OrganisationCard/modules/tileCard'
 import React, { useEffect, useState } from 'react'
 
 interface ComponentProps {
-	items: OrganizationEdge[]
+	items: Organization[]
 	loading: boolean
 }
 
 export function ItemList({ items, loading }: ComponentProps) {
-	const [allData, setAllData] = useState<OrganizationEdge[]>(items)
+	const [allData, setAllData] = useState<Organization[]>(items)
 	useEffect(() => {
 		if (items) {
 			setAllData(items)
@@ -22,7 +22,7 @@ export function ItemList({ items, loading }: ComponentProps) {
 		<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 			{allData?.map((item, index) => (
 				<Grid item xs={4} key={index}>
-					<TileCard item={item.node} />
+					<TileCard item={item} />
 				</Grid>
 			))}
 

@@ -44,12 +44,11 @@ export function GovernancePage() {
 				<Box sx={{ p: '4rem', minHeight: '90vh' }}>
 					<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-							Hello. Bodies count:{' '}
-							{loading ? <CircularProgress /> : data?.organizationsConnection?.edges.length}
+							Hello. Bodies count: {loading ? <CircularProgress /> : data?.organizations?.length}
 						</Typography>
 						{data && (
 							<ul>
-								{data?.organizationsConnection?.edges?.map(({ node: body }) => (
+								{data?.organizations?.map((body) => (
 									<li key={body.id}>
 										<div>Name: {body.metadata.name}</div>
 										<div>
