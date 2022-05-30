@@ -24,6 +24,12 @@ export function getCampaignContributors(campaign: Campaign): number {
 	return campaign?.contributors?.length
 }
 
-export function getCampaignNam(campaign: Campaign) {
-	return campaign.metadata.name
+export function getCampaignFunding(campaign: Campaign): number {
+	let total = 0
+	campaign.contributors.map((contributor) => (total += parseInt(contributor.contributed)))
+	return total
+}
+
+export function getCampaignProgress(campaign: Campaign): number {
+	return (getCampaignFunding(campaign) / getCampaignTarget(campaign)) * 100
 }

@@ -10,6 +10,8 @@ import {
 	getCampaignName,
 	getCampaignTarget,
 	getCampaignTitle,
+	getCampaignFunding,
+	getCampaignProgress,
 } from './campaignUtils'
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
@@ -61,7 +63,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 
 					<LinearProgress
 						variant="determinate"
-						value={50}
+						value={getCampaignProgress(campaign)}
 						sx={{
 							mt: 2.3,
 							pt: 1.2,
@@ -89,7 +91,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 						<Typography variant="caption" color={theme.palette.grey[500]}>
 							Funded
 						</Typography>
-						<Typography variant="body1">{}</Typography>
+						<Typography variant="body1">{getCampaignFunding(campaign)}</Typography>
 					</Box>
 					<Box
 						sx={{
