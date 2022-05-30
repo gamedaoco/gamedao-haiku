@@ -3,7 +3,7 @@ import React from 'react'
 import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { useTheme } from '@mui/material/styles'
-import { FontIcons } from 'src/components/Icons/icons'
+import { FontIcons } from 'components/Icons/icons'
 
 const Link = ({ href, children }) => (
 	<Box>

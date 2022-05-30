@@ -2,36 +2,29 @@ import React, { FC } from 'react'
 import Box from '@mui/material/Box'
 import { Grid, InputAdornment, TextField } from '@mui/material'
 import { Search } from '@mui/icons-material'
-import { makeStyles } from '@mui/styles'
 import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
 import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
+import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 
+interface SortOptionsInterface {
+	name: String
+	value: OrganizationOrderByInput
+}
 interface FiltersSectionPropsInterface {
 	filters: string
 	setFilters: (x: string) => void
+	sortOption: OrganizationOrderByInput
+	setSortOption: (x: OrganizationOrderByInput) => void
+	sortOptions: SortOptionsInterface[]
 }
 
-const useStyles = makeStyles({
-	field: {
-		'& fieldset': {
-			borderRadius: 8,
-		},
-	},
-	formControl: {
-		m: 1,
-		minWidth: 120,
-		'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-			border: 'none',
-			color: 'white',
-		},
-		'& .MuiSvgIcon-root': {
-			color: 'white',
-		},
-	},
-})
-
-export const FiltersSection: FC<FiltersSectionPropsInterface> = ({ filters, setFilters }) => {
-	const classes = useStyles()
+export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
+	filters,
+	setFilters,
+	sortOption,
+	setSortOption,
+	sortOptions,
+}) => {
 	return (
 		<Box
 			sx={{
@@ -52,7 +45,6 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({ filters, setF
 							value={filters}
 							id="outlined-basic"
 							size="small"
-							className={classes.field}
 							fullWidth
 							InputProps={{
 								startAdornment: (
@@ -70,11 +62,15 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({ filters, setF
 							sx={{
 								display: 'flex',
 								alignItems: 'center',
-								marginLeft: 2,
+								marginLeft: 1,
 							}}
 						>
 							<FiltersTab />
-							<SortOptionsTab classes={classes} />
+							<SortOptionsTab
+								sortOption={sortOption}
+								setSortOption={setSortOption}
+								sortOptions={sortOptions}
+							/>
 						</Box>
 					</Grid>
 				</Grid>

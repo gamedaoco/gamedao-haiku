@@ -8,41 +8,46 @@
       "wallet": "Wallet"
     },
     "ui": {
-      "connect-wallet": "Connect wallet"
+      "connect_wallet": "Connect wallet"
     }
   },
   "page": {
     "campaigns": {
-
     },
     "governance": {
-
     },
     "dao": {
-
     },
     "dashboard": {
-
     },
     "app": {
-
     },
     "wallet": {
-
     }
   },
-  "notification":{
+  "notification": {
+    "transactions": {
+      "createOrganization": {
+        "pending": "Summoning your Organization...",
+        "success": "The beast is unleashed!",
+        "error": "Summoning failed, check your Mana."
+      },
+      "createProposal": {
+        "pending": "Summoning your Proposal...",
+        "success": "Proposal created",
+        "error": "Summoning failed, check your Mana."
+      }
+    },
     "info": {
-
     },
     "success": {
-
     },
     "warning": {
-
+      "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
+      "max_1m_game_fee": "Please consider charging a maximum of 1M GAME",
+      "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users"
     },
     "error": {
-
     }
   }
 }

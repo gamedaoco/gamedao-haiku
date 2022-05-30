@@ -4,7 +4,7 @@ import { Header } from './modules/header'
 import { Sidebar } from './modules/sidebar'
 import { Footer } from './modules/footer'
 import { useCallback, useState } from 'react'
-import { HeaderMobile } from 'layouts/default/modules/headerMobile'
+import { HeaderMobile } from 'components/Layouts/default/modules/headerMobile'
 
 interface ComponentProps {
 	showHeader?: boolean

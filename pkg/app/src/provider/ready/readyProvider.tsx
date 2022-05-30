@@ -12,7 +12,7 @@ export function ReadyProvider({ children }: ComponentProps) {
 	if (!appContext.ready) {
 		return (
 			<Stack width="100vw" height="100vh" justifyContent="center" alignItems="center" spacing={6}>
-				<Typography variant={'h5'}>The app is prepared for you</Typography>
+				<Typography variant={'h5'}>Loading...</Typography>
 				<CircularProgress />
 			</Stack>
 		)

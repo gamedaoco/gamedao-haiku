@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react'
-import { Layout } from 'src/layouts/default/layout'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Layout } from 'src/components/Layouts/default/layout'
 import {
 	Avatar,
 	Box,
@@ -18,15 +18,15 @@ import { AddAPhoto } from '@mui/icons-material'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { useConfig } from 'hooks/useConfig'
-import { UseTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTheme } from '@mui/material/styles'
-import { TmpOverview } from 'src/tabPanels/Organization/TmpOverview'
+import { TmpOverview } from 'src/components/TabPanels/Organization/TmpOverview'
 
 export function OrganisationDetailsPage() {
 	const [activeStep, setActiveStep] = useState<string>('organization-overview')
 	const theme = useTheme()
 	const config = useConfig()
-	const tmpOrg = UseTmpOrganisationState()
+	const tmpOrg = useTmpOrganisationState()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
@@ -41,6 +41,26 @@ export function OrganisationDetailsPage() {
 		setter(cid.toString())
 	}, [])
 
+	// Update and upload metadata
+	useEffect(() => {
+		if (tmpOrg.name && tmpOrg.description && tmpOrg.logoCID && tmpOrg.headerCID) {
+			const metaData = {
+				name: tmpOrg.name,
+				description: tmpOrg.description,
+				logo: tmpOrg.logoCID,
+				header: tmpOrg.headerCID,
+			}
+			;(async (): Promise<string> => {
+				const file = new File([JSON.stringify(metaData)], `${tmpOrg.name}-metadata.json`, {
+					type: 'text/plain',
+				})
+
+				const cid = await uploadFileToIpfs(file)
+				return cid.toString()
+			})().then((cid) => tmpOrg.setMetaDataCID(cid))
+		}
+	}, [tmpOrg.name, tmpOrg.description, tmpOrg.logoCID, tmpOrg.headerCID])
+
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box width="100%" height="100%" minHeight="90vh" padding={{ xs: 2, sm: 4 }}>
@@ -51,7 +71,14 @@ export function OrganisationDetailsPage() {
 								position: 'relative',
 							}}
 						>
-							<Grid minHeight="20vh" display="grid" justifyContent="center" alignItems="center">
+							<Grid
+								minHeight="20vh"
+								maxHeight="20vh"
+								display="grid"
+								justifyContent="center"
+								alignItems="center"
+								overflow="hidden"
+							>
 								<label htmlFor="header-file-upload">
 									<input
 										style={{ display: 'none' }}
@@ -114,7 +141,7 @@ export function OrganisationDetailsPage() {
 								</label>
 
 								<Stack spacing={1}>
-									<Typography variant="h4">AggroCalypseDAO</Typography>
+									<Typography variant="h4">{tmpOrg.name ?? ''}</Typography>
 									<Typography>1 Member</Typography>
 								</Stack>
 							</Stack>
@@ -126,11 +153,11 @@ export function OrganisationDetailsPage() {
 									scrollButtons="auto"
 								>
 									<Tab label="Overview" value={'organization-overview'} />
-									<Tab label="Campaigns" value={'organization-campaigns'} />
-									<Tab label="Votings" value={'organization-votings'} />
-									<Tab label="Members" value={'organization-members'} />
-									<Tab label="Treasury" value={'organization-treasury'} />
-									<Tab label="Settings" value={'organization-settings'} />
+									<Tab label="Campaigns" value={'organization-campaigns'} disabled />
+									<Tab label="Votings" value={'organization-votings'} disabled />
+									<Tab label="Members" value={'organization-members'} disabled />
+									<Tab label="Treasury" value={'organization-treasury'} disabled />
+									<Tab label="Settings" value={'organization-settings'} disabled />
 								</Tabs>
 							</CardContent>
 						</Card>
