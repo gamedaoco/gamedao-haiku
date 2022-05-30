@@ -6,7 +6,7 @@ import { Add as AddIcon } from '@mui/icons-material'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
 import { createErrorNotification } from 'src/utils/notificationUtils'
-import { OrganizationButtonMemoized } from 'layouts/default/modules/organizationButton'
+import { OrganizationButtonMemoized } from 'components/Layouts/default/modules/organizationButton'
 import { useExtensionContext } from 'provider/extension/modules/context'
 
 interface ComponentProps {
@@ -27,7 +27,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 		if (w3Enabled === false) {
 			connectWallet()
 		} else if (selectedAccount) {
-			push('/app/organisations')
+			push('/app/organisations/create')
 		}
 	}, [w3Enabled, connectWallet, selectedAccount, push])
 

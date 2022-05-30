@@ -9,10 +9,13 @@ export interface TMPOrganisation {
 	hasApplication: boolean
 	headerCID: string
 	logoCID: string
+	description: string
+	metaDataCID: string
+	deposit: number
 }
 
 export interface TMPOrganisationState extends TMPOrganisation {
-	setType: (boolen) => void
+	setType: (number) => void
 	setName: (name) => void
 	setMode: (number) => void
 	setFeeMode: (number) => void
@@ -22,4 +25,8 @@ export interface TMPOrganisationState extends TMPOrganisation {
 	setHasApplication: (boolen) => void
 	setHeaderCID: (string) => void
 	setLogoCID: (string) => void
+	setDescription: (string) => void
+	setMetaDataCID: (string) => void
+	setDeposit: (number) => void
+	clearAll: () => void
 }

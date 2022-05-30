@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import Script from 'next/script'
-import { Stack, Typography, Paper, CircularProgress, Box } from '@mui/material'
+import { Box, CircularProgress, Paper, Stack, Typography } from '@mui/material'
 
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'

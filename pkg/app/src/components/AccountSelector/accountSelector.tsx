@@ -48,7 +48,7 @@ export function AccountSelector() {
 	if (w3Enabled === false) {
 		return (
 			<Button variant="contained" onClick={connectWallet as any}>
-				{t('button:ui:connect-wallet')}
+				{t('button:ui:connect_wallet')}
 			</Button>
 		)
 	}
