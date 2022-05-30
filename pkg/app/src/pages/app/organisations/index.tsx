@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
+import { useOrganizationsLazyQuery, OrganizationOrderByInput, Organization } from '@gamedao-haiku/graphql/dist'
 import { Layout } from 'src/components/Layouts/default/layout'
-import { Organization, useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
 import { ArrowDownward } from '@mui/icons-material'
@@ -19,43 +19,43 @@ const PlusIcon = createSvgIcon(
 	</svg>,
 	'Plus',
 )
-const applyFilters = (data: Organization[], filters: string): Organization[] =>
-	data?.filter((x) => {
-		if (filters) {
-			let queryMatched = false
-			const properties = ['name', 'description']
-
-			properties.forEach((property) => {
-				if (x?.metadata?.[property]?.toLowerCase().includes(filters.toLowerCase())) {
-					queryMatched = true
-				}
-			})
-
-			if (!queryMatched) {
-				return false
-			}
-		}
-
-		return true
-	})
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
+interface SortOptionsInterface {
+	name: String
+	value: OrganizationOrderByInput
+}
+
+const sortOptions: SortOptionsInterface[] = [
+	{ value: OrganizationOrderByInput.MemberLimitDesc, name: 'Member: High-Low' },
+	{ value: OrganizationOrderByInput.MemberLimitAsc, name: 'Member: Low-High' },
+	{ value: OrganizationOrderByInput.CreatedAtBlockDesc, name: 'Created: Newest first' },
+	{ value: OrganizationOrderByInput.CreatedAtBlockAsc, name: 'Created: Oldest first' },
+]
+
 export function OrganisationPage() {
+	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
-	const { loading, error, data } = useOrganizationsQuery()
+	const [bodyCount, setBodyCount] = useState<number>(15)
+	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
+	const [fetchOrganizations, { loading, error, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
 		if (error) {
 			console.error('There was an error querying the display values')
 		}
 	}, [error])
+
+	useEffect(() => {
+		fetchOrganizations({
+			variables: { first: bodyCount, orderBy: sortOption, searchQuery: filters },
+		})
+	}, [bodyCount, fetchOrganizations, sortOption, filters])
+	const paginatedData = applyPagination(data?.organizations?.slice() as Organization[], bodyCount)
 	const { push } = useRouter()
-	const [bodyCount, setBodyCount] = useState<number>(15)
-	const filteredData = applyFilters(data?.organizations?.slice() as Organization[], filters)
-	const paginatedData = applyPagination(filteredData, bodyCount)
 	const buttonVisibility = useMemo(
-		() => paginatedData?.length < filteredData?.length,
-		[paginatedData?.length, filteredData?.length],
+		() => paginatedData?.length < data?.organizationsConnection?.totalCount,
+		[paginatedData?.length, data?.organizationsConnection?.totalCount],
 	)
 
 	const handleClickCreate = useCallback(() => {
@@ -88,7 +88,13 @@ export function OrganisationPage() {
 								</Button>
 							</Grid>
 						</Grid>
-						<FiltersSection filters={filters} setFilters={setFilters} />
+						<FiltersSection
+							filters={filters}
+							setFilters={setFilters}
+							sortOption={sortOption}
+							setSortOption={setSortOption}
+							sortOptions={sortOptions}
+						/>
 					</Box>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
@@ -117,13 +123,13 @@ export function OrganisationPage() {
 									endIcon={<ArrowDownward />}
 									onClick={() => setBodyCount((p) => p + 30)}
 									variant="outlined"
-									sx={{ color: '#919EAB', border: '#919EAB 1px solid', borderRadius: 2 }}
 								>
-									Load 30 More Organisations
+									Load More Organisations
 								</Button>
 							)}
 							<Typography>
-								Showing {paginatedData?.length} of {filteredData?.length} organisations
+								Showing {paginatedData?.length} of {data?.organizationsConnection?.totalCount}{' '}
+								organisations
 							</Typography>
 						</Box>
 					</Box>
