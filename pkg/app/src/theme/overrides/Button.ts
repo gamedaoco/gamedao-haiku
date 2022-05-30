@@ -48,7 +48,6 @@ export default function Button(theme: Theme) {
 					},
 				},
 				textInherit: {
-
 					'&:hover': {
 						backgroundColor: theme.palette.action.hover,
 					},
