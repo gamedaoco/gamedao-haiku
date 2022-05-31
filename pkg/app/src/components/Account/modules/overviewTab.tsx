@@ -1,11 +1,13 @@
 import React, { FC, memo, useEffect, useState } from 'react'
-import { AccountState } from 'src/@types/extension'
+
 import { Box, Grid } from '@mui/material'
+import { AccountState } from 'src/@types/extension'
+
+import { tempBalances, tempOrganisations } from '../TempData'
+import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 import MyAchievementsCard from './OverviewSection/myAchievements'
 import MyBalancesCard from './OverviewSection/myBalances'
-import { tempBalances, tempOrganisations } from '../TempData'
 import MyCollectablesTab from './myCollectablesTab'
-import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 
 interface OverviewTabProps {
 	accountState: AccountState

@@ -1,6 +1,7 @@
-import { Card, CardContent, CardMedia, Typography, Box, LinearProgress } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import React, { FC } from 'react'
+
+import { Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
 interface Campaign {
 	id: number

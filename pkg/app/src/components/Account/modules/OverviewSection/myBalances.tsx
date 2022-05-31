@@ -1,3 +1,4 @@
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
 	CardContent,
@@ -9,8 +10,8 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
+
 import { Scrollbar } from 'components/scrollbar'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 const MyBalancesCard = ({ balances }) => {
 	return (

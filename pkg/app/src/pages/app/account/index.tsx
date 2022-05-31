@@ -1,8 +1,10 @@
-import AccountPageGeneralLayout from 'components/Account/generalLayout'
-import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { Layout } from 'components/Layouts/default/layout'
 import { NextPage } from 'next'
+
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+
+import AccountPageGeneralLayout from 'components/Account/generalLayout'
+import { Layout } from 'components/Layouts/default/layout'
+import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 
 const AccountPage: NextPage = () => {
 	const accountState = useCurrentAccountState()

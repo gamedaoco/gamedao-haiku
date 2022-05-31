@@ -1,8 +1,9 @@
-import { Avatar, Box, Card, CardContent, Divider, List, ListItem, ListItemText, Typography } from '@mui/material'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import React from 'react'
+
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShieldIcon from '@mui/icons-material/Shield'
+import { Avatar, Box, Card, CardContent, Divider, List, ListItem, ListItemText, Typography } from '@mui/material'
 
 const MyAchievementsCard = () => {
 	return (

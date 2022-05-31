@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
+
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
+
 import IdentityTab from './modules/identityTab'
 import MyCampaignsTab from './modules/myCampaignsTab'
 import MyCollectablesTab from './modules/myCollectablesTab'

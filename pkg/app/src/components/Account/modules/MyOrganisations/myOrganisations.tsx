@@ -12,8 +12,10 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
-import { Scrollbar } from 'components/scrollbar'
 import { getInitials } from 'src/utils/accountUtils'
+
+import { Scrollbar } from 'components/scrollbar'
+
 import LoadingTable from './loadingTable'
 
 const MyOrganisationsTable = ({ organisations, title, loading }) => {

@@ -1,7 +1,9 @@
 import type { FC } from 'react'
-import { useFormik } from 'formik'
-import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+
 import type { Identity } from '@gamedao-haiku/graphql/dist/types'
+import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import { useFormik } from 'formik'
+
 import { FormValues, formikHandler, formikSubmitHandlerType } from './formik'
 
 interface IdentityFormProps {
