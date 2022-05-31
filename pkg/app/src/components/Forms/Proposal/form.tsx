@@ -1,14 +1,17 @@
 import { useCallback } from 'react'
-import { createInfoNotification } from 'src/utils/notificationUtils'
+
 import { useRouter } from 'next/router'
+
 import { Button, Stack } from '@mui/material'
 import { useTMPProposalState } from 'hooks/useTMPProposalState'
-import { Type } from 'components/Forms/Proposal/modules/type'
+import { createInfoNotification } from 'src/utils/notificationUtils'
+
 import {
 	Description,
 	validationSchema as descriptionValidationSchema,
 } from 'components/Forms/Proposal/modules/description'
 import { Majority } from 'components/Forms/Proposal/modules/majority'
+import { Type } from 'components/Forms/Proposal/modules/type'
 
 interface ComponentProps {
 	currentStep: number

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
-import { TextField, Autocomplete as MUIAutocomplete } from '@mui/material'
+
+import { Autocomplete as MUIAutocomplete, TextField } from '@mui/material'
 import { useAddresses } from 'hooks/useAddresses'
+import { Controller } from 'react-hook-form'
 
 interface ComponentProps {
 	name: string

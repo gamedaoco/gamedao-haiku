@@ -1,8 +1,9 @@
-import { Avatar, Button, Card, Stack, Typography } from '@mui/material'
-import { Check } from '@mui/icons-material'
-import type { ApiProvider } from 'src/@types/network'
-import { useNetworkContext } from 'provider/network/modules/context'
 import { useCallback } from 'react'
+
+import { Check } from '@mui/icons-material'
+import { Avatar, Button, Card, Stack, Typography } from '@mui/material'
+import { useNetworkContext } from 'provider/network/modules/context'
+import type { ApiProvider } from 'src/@types/network'
 
 interface ComponentProps {
 	apiProvider: ApiProvider

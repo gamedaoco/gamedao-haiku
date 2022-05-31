@@ -1,6 +1,7 @@
+import { Person } from '@mui/icons-material'
+
 import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
-import { Person } from '@mui/icons-material'
 
 interface ComponentProps {
 	selected: number

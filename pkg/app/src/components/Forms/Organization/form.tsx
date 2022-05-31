@@ -1,11 +1,14 @@
 import { useCallback } from 'react'
-import { Controller } from './modules/controller'
+
+import { useRouter } from 'next/router'
+
 import { Button, Stack } from '@mui/material'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { createInfoNotification } from 'src/utils/notificationUtils'
+
+import { Controller } from './modules/controller'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
 import { Settings } from './modules/settings'
-import { createInfoNotification } from 'src/utils/notificationUtils'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { useRouter } from 'next/router'
 
 interface ComponentProps {
 	currentStep: number

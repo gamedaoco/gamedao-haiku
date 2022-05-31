@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { Button, Paper, Typography, Box, Container, Stack, CircularProgress } from '@mui/material'
-import { Input } from './modules/input'
-import { Autocomplete } from './modules/autocomplete'
-import { Stepper } from './modules/stepper'
-import { useForm, FormProvider } from 'react-hook-form'
-import * as Yup from 'yup'
+
 import { yupResolver } from '@hookform/resolvers/yup'
-import { checkIsAddressValid } from 'src/utils/accountUtils'
+import { Box, Button, CircularProgress, Container, Paper, Stack, Typography } from '@mui/material'
 import { useDisplayValues } from 'hooks/useDisplayValues'
+import { FormProvider, useForm } from 'react-hook-form'
+import { checkIsAddressValid } from 'src/utils/accountUtils'
+import * as Yup from 'yup'
+
+import { Autocomplete } from './modules/autocomplete'
+import { Input } from './modules/input'
+import { Stepper } from './modules/stepper'
 
 const validationSchema = Yup.object().shape({
 	org_name: Yup.string().required('Organization Name is required'),
