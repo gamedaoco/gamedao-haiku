@@ -18,15 +18,15 @@ interface ComponentProps {
 const urls = [
 	{
 		name: 'button:navigation:organisations',
-		path: '/app/organisations',
+		path: '/organisations',
 	},
 	{
 		name: 'button:navigation:campaigns',
-		path: '/app/campaigns',
+		path: '/campaigns',
 	},
 	{
 		name: 'button:navigation:wallet',
-		path: '/app/wallet',
+		path: '/wallet',
 	},
 ]
 

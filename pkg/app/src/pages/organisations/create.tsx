@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Layout } from 'src/components/Layouts/default/layout'
+import { Layout } from 'components/Layouts/default/layout'
 import { Grid, Stack, Step, StepLabel, Stepper } from '@mui/material'
 import { Form } from 'components/Forms/Organization/form'
 

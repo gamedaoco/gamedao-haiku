@@ -12,7 +12,7 @@ interface ComponentsPros {
 }
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
-const toLink = '/app/organisations/'
+const toLink = '/organisations/'
 
 export const TileCard = ({ item }: ComponentsPros) => {
 	const theme = useTheme()

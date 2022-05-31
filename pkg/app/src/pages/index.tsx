@@ -1,29 +1,21 @@
 import React from 'react'
-
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
+import { Layout } from 'components/Layouts/default/layout'
 
-import { Layout } from 'src/components/Layouts/default/layout'
-import { Button } from '@mui/material'
-import { NavLink } from 'src/components/NavLink/navLink'
-
-export function Page() {
+export function AppPage() {
 	return (
-		<Layout showFooter>
+		<Layout showHeader showFooter showSidebar>
 			<Box sx={{ p: '4rem', height: '90vh' }}>
 				<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
 					<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-						Welcome to GameDAO haiku
+						Hello! DASHBOARD
 					</Typography>
-
-					<NavLink href="/app">
-						<Button variant="contained">Enter App</Button>
-					</NavLink>
 				</Paper>
 			</Box>
 		</Layout>
 	)
 }
 
-export default Page
+export default AppPage

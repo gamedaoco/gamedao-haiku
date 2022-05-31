@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { ItemList } from 'components/OrganisationCard/itemList'
-import { Layout } from 'src/components/Layouts/default/layout'
+import { Layout } from 'components/Layouts/default/layout'
 import { Organization, useOrganizationsQuery } from '@gamedao-haiku/graphql/dist'
 import { Button, Container, createSvgIcon, Grid } from '@mui/material'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
@@ -59,7 +59,7 @@ export function OrganisationPage() {
 	)
 
 	const handleClickCreate = useCallback(() => {
-		push('/app/organisations/create')
+		push('/organisations/create')
 	}, [push])
 
 	return (

@@ -34,7 +34,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		if (currentStep == 2) {
 			uploadMetadata()
 			createInfoNotification('Proposal was saved')
-			push('/app/proposals')
+			push('/proposals')
 			// TODO create proposal tx
 		}
 	}, [currentStep, setStep, push])

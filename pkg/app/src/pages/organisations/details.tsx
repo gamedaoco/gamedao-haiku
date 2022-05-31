@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Layout } from 'src/components/Layouts/default/layout'
+import { Layout } from 'components/Layouts/default/layout'
 import {
 	Avatar,
 	Box,
