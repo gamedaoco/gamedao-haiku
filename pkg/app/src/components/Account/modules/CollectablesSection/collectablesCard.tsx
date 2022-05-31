@@ -3,7 +3,7 @@ import { Collectable } from 'src/@types/collectable'
 import React, { FC, useEffect, useState } from 'react'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 import { ModelDialog } from 'components/Collectable/modules/modelDialog'
-import LoadingCollectableCard from './loading-collectable-card'
+import LoadingCollectableCard from './loadingCollectableCard'
 import { useTheme } from '@mui/material/styles'
 
 interface IpfsMetadata {

@@ -1,7 +1,7 @@
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import React, { FC, memo } from 'react'
 import { AccountState } from 'src/@types/extension'
-import IdentityForm from './identity-section/form'
+import IdentityForm from './IdentitySection/form'
 
 interface IdentityTabProps {
 	accountState: AccountState

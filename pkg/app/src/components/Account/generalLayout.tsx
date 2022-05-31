@@ -2,9 +2,9 @@ import { Box, Container } from '@mui/material'
 import React, { FC, useState } from 'react'
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
-import IdentitySection from './modules/identity-section'
-import TabsSection from './modules/tabs-section'
-import SectionsLayout from './sections-layout'
+import IdentitySection from './modules/identitySection'
+import TabsSection from './modules/tabsSection'
+import SectionsLayout from './sectionsLayout'
 
 interface AccountPageGeneralLayoutProps {
 	accountState: AccountState

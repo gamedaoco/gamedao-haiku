@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material'
 import React, { FC, memo } from 'react'
 
-import CollectableCard from './collectables-card'
-import LoadingCollectableCard from './loading-collectable-card'
+import CollectableCard from './collectablesCard'
+import LoadingCollectableCard from './loadingCollectableCard'
 import { CollectablesForUserQuery } from '@gamedao-haiku/graphql/dist'
 import { Collectable } from 'src/@types/collectable'
 

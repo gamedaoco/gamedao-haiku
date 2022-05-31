@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
 import React, { FC, memo } from 'react'
 import { AccountState } from 'src/@types/extension'
-import ContributedCampaginsSection from './campaigns-section/contributed-campaigns-section'
-import CreatedCampaignSection from './campaigns-section/created-campaigns-section/created-campains-section'
+import ContributedCampaginsSection from './CampaignsSection/contributedCampaignsSection'
+import CreatedCampaignSection from './CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
 
 interface MyCampaignsTabProps {
 	accountState: AccountState

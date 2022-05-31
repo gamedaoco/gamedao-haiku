@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { Scrollbar } from 'components/scrollbar'
 import { getInitials } from 'src/utils/accountUtils'
-import LoadingTable from './loading-table'
+import LoadingTable from './loadingTable'
 
 const MyOrganisationsTable = ({ organisations, title, loading }) => {
 	return (

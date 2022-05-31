@@ -1,4 +1,4 @@
-import AccountPageGeneralLayout from 'components/Account/general-layout'
+import AccountPageGeneralLayout from 'components/Account/generalLayout'
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { Layout } from 'components/Layouts/default/layout'
