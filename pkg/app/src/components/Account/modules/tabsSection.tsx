@@ -1,5 +1,6 @@
-import { Tabs, Tab, Box } from '@mui/material'
 import React, { ChangeEvent, FC, useCallback } from 'react'
+
+import { Box, Tab, Tabs } from '@mui/material'
 import { AccountTabs } from 'src/@types/account'
 
 interface TabsSectionProps {

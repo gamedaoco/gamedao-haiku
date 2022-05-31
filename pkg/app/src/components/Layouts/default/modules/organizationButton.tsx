@@ -1,8 +1,10 @@
 import { memo, useCallback } from 'react'
-import { Avatar, Box, Tooltip } from '@mui/material'
-import { parseIpfsHash } from 'src/utils/ipfs'
+
 import { useRouter } from 'next/router'
+
+import { Avatar, Box, Tooltip } from '@mui/material'
 import { useConfig } from 'hooks/useConfig'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 interface ComponentProps {
 	id: string

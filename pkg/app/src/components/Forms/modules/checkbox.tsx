@@ -1,6 +1,7 @@
 import React from 'react'
+
+import { FormControlLabel, FormHelperText, Checkbox as MUICheckbox, Typography } from '@mui/material'
 import { Controller } from 'react-hook-form'
-import { FormControlLabel, Checkbox as MUICheckbox, Typography, FormHelperText } from '@mui/material'
 
 interface ComponentProps {
 	name: string

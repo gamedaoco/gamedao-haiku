@@ -1,11 +1,13 @@
 import React, { FC } from 'react'
+
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
-import IdentityTab from './modules/identity-tab'
-import MyCampaignsTab from './modules/my-campaigns-tab'
-import MyCollectablesTab from './modules/my-collectables-tab'
-import MyOrganisationsTab from './modules/my-organisations-tab'
-import OverviewTab from './modules/overview-tab'
+
+import IdentityTab from './modules/identityTab'
+import MyCampaignsTab from './modules/myCampaignsTab'
+import MyCollectablesTab from './modules/myCollectablesTab'
+import MyOrganisationsTab from './modules/myOrganisationsTab'
+import OverviewTab from './modules/overviewTab'
 
 interface SectionsLayoutProps {
 	accountState: AccountState

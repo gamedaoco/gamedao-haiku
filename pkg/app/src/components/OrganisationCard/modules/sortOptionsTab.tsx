@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+
 import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 	const handleChange = useCallback(

@@ -1,10 +1,13 @@
-import { Paper, Stack, Typography } from '@mui/material'
 import React, { FC, memo, useEffect } from 'react'
-import { AccountState } from 'src/@types/extension'
+
 import Script from 'next/script'
+
 import { useCollectablesForUserLazyQuery } from '@gamedao-haiku/graphql/dist'
+import { Paper, Stack, Typography } from '@mui/material'
+import { AccountState } from 'src/@types/extension'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
-import CollectablesList from './collectables-section/collectables-list'
+
+import CollectablesList from './CollectablesSection/collectablesList'
 
 interface MyCollectablesTabProps {
 	accountState: AccountState

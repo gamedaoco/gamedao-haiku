@@ -1,11 +1,12 @@
+import React, { FC, useCallback } from 'react'
+
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
-import React, { FC, useCallback } from 'react'
+import md5 from 'md5'
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
-import md5 from 'md5'
-import { getAddressFromAccountState, getNameFromAccountState, getInitials } from 'src/utils/accountUtils'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import { getAddressFromAccountState, getInitials, getNameFromAccountState } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
 interface IdentitySectionProps {

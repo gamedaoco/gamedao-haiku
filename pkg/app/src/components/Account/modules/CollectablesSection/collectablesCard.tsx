@@ -1,10 +1,13 @@
-import { Box, Card, CircularProgress, Typography, CardMedia, CardContent } from '@mui/material'
-import { Collectable } from 'src/@types/collectable'
 import React, { FC, useEffect, useState } from 'react'
-import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
-import { ModelDialog } from 'components/Collectable/modules/modelDialog'
-import LoadingCollectableCard from './loading-collectable-card'
+
+import { Box, Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { Collectable } from 'src/@types/collectable'
+import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
+
+import { ModelDialog } from 'components/Collectable/modules/modelDialog'
+
+import LoadingCollectableCard from './loadingCollectableCard'
 
 interface IpfsMetadata {
 	description: string

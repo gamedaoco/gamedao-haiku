@@ -1,10 +1,12 @@
 import { Fragment, useEffect } from 'react'
-import { BaseDialog } from 'components/BaseDialog/baseDialog'
+
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNetworkContext } from 'provider/network/modules/context'
-import { NetworkCard } from 'components/SelectNetworkDialog/modules/networkCard'
 import type { ApiProvider } from 'src/@types/network'
+
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
+import { NetworkCard } from 'components/SelectNetworkDialog/modules/networkCard'
 
 interface ComponentProps {
 	open: boolean

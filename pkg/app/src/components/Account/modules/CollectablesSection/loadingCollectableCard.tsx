@@ -1,5 +1,6 @@
-import { Box, Card, CardContent, CardMedia, Skeleton } from '@mui/material'
 import React, { FC } from 'react'
+
+import { Box, Card, CardContent, CardMedia, Skeleton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 const LoadingCollectableCard: FC = () => {

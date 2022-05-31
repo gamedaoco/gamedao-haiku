@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
-import { Button, Dialog, Paper, Stack, Typography } from '@mui/material'
+
 import { Close } from '@mui/icons-material'
+import { Button, Dialog, Paper, Stack, Typography } from '@mui/material'
 
 interface ComponentProps {
 	children: ReactNode

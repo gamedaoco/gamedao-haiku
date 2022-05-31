@@ -1,9 +1,11 @@
-import { Box, Button } from '@mui/material'
 import React, { FC, memo, useEffect, useState } from 'react'
-import { AccountState } from 'src/@types/extension'
-import { tempOrganisations } from '../TempData'
-import MyOrganisationsTable from './my-organisations/my-organisations'
+
 import AddIcon from '@mui/icons-material/Add'
+import { Box, Button } from '@mui/material'
+import { AccountState } from 'src/@types/extension'
+
+import { tempOrganisations } from '../TempData'
+import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 
 interface MyOrganisationsTabProps {
 	accountState: AccountState

@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
-import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
-import { initializeAccounts } from './modules/accounts'
-import { useLocalStorage } from 'src/hooks/useLocalStorage'
+
+import { Wallet, getWallets } from '@talisman-connect/wallets'
 import { useApiProvider } from 'hooks/useApiProvider'
-import { getWallets, Wallet } from '@talisman-connect/wallets'
-import { WalletDialog } from 'components/WalletDialog/walletDialog'
-import { createErrorNotification } from 'src/utils/notificationUtils'
 import { SignAndNotify } from 'provider/extension/modules/signAndNotify'
+import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
+import { useLocalStorage } from 'src/hooks/useLocalStorage'
+import { createErrorNotification } from 'src/utils/notificationUtils'
+
+import { WalletDialog } from 'components/WalletDialog/walletDialog'
+
+import { initializeAccounts } from './modules/accounts'
+import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)

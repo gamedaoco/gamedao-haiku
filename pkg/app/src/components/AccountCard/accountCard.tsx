@@ -1,12 +1,13 @@
-import { Avatar, Button, Card, Skeleton, Stack, Typography } from '@mui/material'
 import { useCallback } from 'react'
-import type { AccountState } from 'src/@types/extension'
-import { getAccountName, getAddressFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
-import { useExtensionContext } from 'provider/extension/modules/context'
+
 import { Check, Verified } from '@mui/icons-material'
-import { createInfoNotification } from 'src/utils/notificationUtils'
+import { Avatar, Button, Card, Skeleton, Stack, Typography } from '@mui/material'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
+import { useExtensionContext } from 'provider/extension/modules/context'
+import type { AccountState } from 'src/@types/extension'
+import { getAccountName, getAddressFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
+import { createInfoNotification } from 'src/utils/notificationUtils'
 
 interface ComponentProps {
 	accountState: AccountState

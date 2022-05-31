@@ -1,7 +1,7 @@
-import { Icon } from '@iconify/react'
 import starFill from '@iconify/icons-eva/star-fill'
-import { Theme } from '@mui/material/styles'
+import { Icon } from '@iconify/react'
 import { SvgIcon } from '@mui/material'
+import { Theme } from '@mui/material/styles'
 
 // ----------------------------------------------------------------------
 
