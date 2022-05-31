@@ -14,8 +14,9 @@ import {
 	Chip,
 	TableContainer,
 } from '@mui/material'
-import { tempCampaginContributions } from '../../TempData/index'
 import { useTheme } from '@mui/material/styles'
+import { useCampaignsConnectionQuery } from '@gamedao-haiku/graphql/dist'
+const gateway = 'https://ipfs.gamedao.co/gateway/'
 
 interface ContributionStatus {
 	active: String
@@ -29,7 +30,10 @@ const status: ContributionStatus = {
 
 const ContributedCampaginsSection: FC = () => {
 	const theme = useTheme()
-	console.log(theme.palette.common.black)
+	const { data } = useCampaignsConnectionQuery({
+		variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' },
+	})
+	console.log(data)
 	return (
 		<Box>
 			<Typography variant="body2" fontWeight="bold" sx={{ color: theme.palette.grey[500], pb: 4 }}>
@@ -60,7 +64,7 @@ const ContributedCampaginsSection: FC = () => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{tempCampaginContributions?.map((contribution, index) => (
+								{data?.campaignsConnection?.edges.map((campaignConnection, index) => (
 									<TableRow key={index}>
 										<TableCell>
 											<Box display="flex" gap={3} justifyItems="center" alignItems="center">
@@ -72,56 +76,45 @@ const ContributedCampaginsSection: FC = () => {
 															width: 64,
 															height: 64,
 														}}
-														src={contribution.image}
-														alt="contribution_image"
+														src={`${gateway}${campaignConnection?.node?.metadata?.logo}`}
+														alt="campaign_logo"
 													/>
 												</Box>
 												<Box display="flex" flexDirection="column">
-													<Typography> {contribution.name}</Typography>
+													<Typography> {campaignConnection?.node?.metadata?.name}</Typography>
 													<Typography variant="body2" color={theme.palette.grey[500]}>
-														{contribution.title}
+														{campaignConnection?.node?.metadata?.title}
 													</Typography>
 												</Box>
 											</Box>
 										</TableCell>
-										<TableCell>{contribution.contributors}</TableCell>
-										<TableCell>{contribution.investment} USD</TableCell>
+										<TableCell>{campaignConnection?.node?.contributors.length}</TableCell>
+										<TableCell>{} USD</TableCell>
 										<TableCell>
 											<Box display="flex" flexDirection="column" sx={{ mt: 2 }}>
 												<LinearProgress
 													variant="determinate"
-													value={contribution.progress}
+													value={50}
 													sx={{ maxHeight: 6 }}
 												/>
 												<Typography variant="body2">
-													{contribution.raised}/{contribution.goal} USD
+													100/{campaignConnection?.node?.target} USD
 												</Typography>
 											</Box>
 										</TableCell>
-										<TableCell>{contribution.timeLeft}</TableCell>
 										<TableCell>
-											{contribution.status === status.completed ? (
-												<Chip
-													label={contribution.status}
-													sx={{
-														backgroundColor: theme.palette.success.main,
-														fontWeight: '700',
-														color: theme.palette.common.black,
-														borderRadius: '6px',
-													}}
-												/>
-											) : (
-												<Chip
-													label={contribution.status}
-													variant="outlined"
-													sx={{
-														color: theme.palette.success.main,
-														backgroundColor: theme.palette.success.darker,
-														fontWeight: '700',
-														borderRadius: '6px',
-													}}
-												/>
-											)}
+											{campaignConnection.node.expiry - campaignConnection.node.createdAtBlock}
+										</TableCell>
+										<TableCell>
+											<Chip
+												label={campaignConnection?.node?.state}
+												sx={{
+													backgroundColor: theme.palette.success.main,
+													fontWeight: '700',
+													color: theme.palette.common.black,
+													borderRadius: '6px',
+												}}
+											/>
 										</TableCell>
 									</TableRow>
 								))}

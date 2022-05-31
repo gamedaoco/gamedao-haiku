@@ -1,17 +1,22 @@
 query CampaignsConnection ($address: String!) {
   campaignsConnection(orderBy: createdAtBlock_DESC, where: {adminIdentity: {address_eq:  $address}}) {
-    edges {
-      node {
-        id
-        expiry
-        deposit
-        metadata {
-          name
-          title
-        }
-        target
-        createdAtBlock
-      }
+       edges {
+          node {
+            createdAtBlock
+            deposit
+            expiry
+            target
+            state
+            metadata {
+              logo
+              name
+              title
+            }
+            contributors {
+              id
+            }
+          }
     }
   }
 }
+

@@ -4,13 +4,10 @@ import CampaignCard from './campaign-card'
 import AddIcon from '@mui/icons-material/Add'
 import { useTheme } from '@mui/material/styles'
 import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 const CreatedCampaignSection: FC = () => {
 	const theme = useTheme()
 	const { data } = useCampaignsQuery({ variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' } })
-	// const temp = getAddressFromAccountState()
-	console.log('data', data)
 
 	return (
 		<Box sx={{ pb: 4 }}>
