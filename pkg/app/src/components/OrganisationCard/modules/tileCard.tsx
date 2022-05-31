@@ -80,7 +80,6 @@ export const TileCard = ({ item }: ComponentsPros) => {
 				sx={{
 					minHeight: '164px',
 					maxWidth: '344px',
-					// borderRadius: '1rem',
 					border: '1px solid transparent',
 					'&:hover': {
 						border: `1px solid ${theme.palette.grey[500_32]}`,
@@ -109,7 +108,6 @@ export const TileCard = ({ item }: ComponentsPros) => {
 							<Typography
 								variant={'caption'}
 								fontWeight={'400'}
-								color={'#DCDEE0'}
 								sx={{
 									overflow: 'hidden',
 									textOverflow: 'ellipsis',

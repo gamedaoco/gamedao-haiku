@@ -4,10 +4,10 @@ import Toolbar from '@mui/material/Toolbar'
 import Box from '@mui/material/Box'
 import { AccountSelector, FontIcons } from 'src/components'
 import { useTheme } from '@mui/material/styles'
-import { NavLink } from 'src/components/NavLink/navLink'
+import { NavLink } from 'components/NavLink/navLink'
 import { Button, Stack } from '@mui/material'
 import { Menu, MoreVert } from '@mui/icons-material'
-import { NavbarMobile } from 'layouts/default/modules/navbarMobile'
+import { NavbarMobile } from 'components/Layouts/default/modules/navbarMobile'
 
 interface ComponentProps {
 	onSidebarOpen: () => void

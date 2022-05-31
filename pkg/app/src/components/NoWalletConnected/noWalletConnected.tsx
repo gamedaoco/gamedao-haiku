@@ -1,5 +1,5 @@
-import { Layout } from 'layouts/default/layout'
-import { Box, Paper, Typography, Button, useTheme, Stack } from '@mui/material'
+import { Layout } from 'components/Layouts/default/layout'
+import { Button, Paper, Stack, Typography } from '@mui/material'
 import { useCallback } from 'react'
 
 export function NoWalletConnected() {

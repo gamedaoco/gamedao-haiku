@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 
 import { FormCampaign } from 'components/Forms/FormCampaign'
 
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/components/Layouts/default/layout'
 import { CircularProgress } from '@mui/material'
 
 export function Campaigns() {

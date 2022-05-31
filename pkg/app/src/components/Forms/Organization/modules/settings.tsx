@@ -3,6 +3,15 @@ import { RadioItem } from 'components/Forms/modules/radioItem'
 import { Person } from '@mui/icons-material'
 import { Box, Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
 import { useCallback } from 'react'
+import * as Yup from 'yup'
+import { createWarningNotification } from 'src/utils/notificationUtils'
+import { useTranslation } from 'react-i18next'
+
+const validationFeeSchema = Yup.number()
+	.min(1, 'notification:warning:min_1_game_fee')
+	.max(1000000, 'notification:warning:max_1m_game_fee')
+
+const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit')
 
 interface ComponentProps {
 	selectedMode: number
@@ -33,22 +42,41 @@ export function Settings({
 	feeAmount,
 	setFeeAmount,
 }: ComponentProps) {
+	const { t } = useTranslation()
 	const handleMemberLimitChange = useCallback(
 		(event) => {
-			if (setMemberLimit) {
-				setMemberLimit(event.target.value < 0 ? 0 : event.target.value)
+			const value = event.target.value
+			if (!value) {
+				return
+			}
+			try {
+				validationMemberLimitSchema?.validateSync(value)
+				if (setMemberLimit) {
+					setMemberLimit(value < 0 ? 0 : value)
+				}
+			} catch (e) {
+				createWarningNotification(t(e.message))
 			}
 		},
-		[setMemberLimit],
+		[setMemberLimit, validationMemberLimitSchema, t],
 	)
 
 	const handleFeeAmountChange = useCallback(
 		(event) => {
-			if (setFeeAmount) {
-				setFeeAmount(event.target.value < 0 ? 0 : event.target.value)
+			const value = event.target.value
+			if (!value) {
+				return
+			}
+			try {
+				validationFeeSchema?.validateSync(value)
+				if (setFeeAmount) {
+					setFeeAmount(value < 0 ? 0 : value)
+				}
+			} catch (e) {
+				createWarningNotification(t(e.message))
 			}
 		},
-		[setFeeAmount],
+		[setFeeAmount, validationFeeSchema, t],
 	)
 
 	const handleWhitelistChange = useCallback(

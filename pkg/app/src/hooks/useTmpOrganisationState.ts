@@ -1,19 +1,81 @@
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { TMPOrganisationState } from 'src/@types/organisation'
+import type { TMPOrganisationState } from 'src/@types/organisation'
+import { useCallback } from 'react'
+import { defaultValuesTmpOrganisation as defaultValues } from 'src/constants'
 
-export function UseTmpOrganisationState(): TMPOrganisationState {
+// TODO: Replace store logic with db for cross device storage
+
+export function useTmpOrganisationState(): TMPOrganisationState {
 	const address = useCurrentAccountAddress()
-	const [selectedType, setSelectedType] = useLocalStorage<number>(`TmpOrg-${address}-selectedType`, 0)
-	const [nameState, setNameState] = useLocalStorage<string>(`TmpOrg-${address}-nameState`, '')
-	const [selectedMode, setSelectedMode] = useLocalStorage<number>(`TmpOrg-${address}-selectedMode`, 0)
-	const [selectedFee, setSelectedFee] = useLocalStorage<number>(`TmpOrg-${address}-selectedFee`, 0)
-	const [memberLimit, setMemberLimit] = useLocalStorage<number>(`TmpOrg-${address}-memberLimit`, 0)
-	const [feeAmount, setFeeAmount] = useLocalStorage<number>(`TmpOrg-${address}-feeAmount`, 0)
-	const [hasWhitelist, setHasWhitelist] = useLocalStorage<boolean>(`TmpOrg-${address}-hasWhitelist`, true)
-	const [hasApplication, setHasApplication] = useLocalStorage<boolean>(`TmpOrg-${address}-hasApplication`, false)
-	const [headerCID, setHeaderCID] = useLocalStorage<string>(`TmpOrg-${address}-headerCID`, '')
-	const [logoCID, setLogoCID] = useLocalStorage<string>(`TmpOrg-${address}-logoCID`, '')
+	const [selectedType, setSelectedType] = useLocalStorage<number>(
+		`TmpOrg-${address}-selectedType`,
+		defaultValues.type,
+	)
+	const [nameState, setNameState] = useLocalStorage<string>(`TmpOrg-${address}-nameState`, defaultValues.name)
+	const [selectedMode, setSelectedMode] = useLocalStorage<number>(
+		`TmpOrg-${address}-selectedMode`,
+		defaultValues.mode,
+	)
+	const [selectedFee, setSelectedFee] = useLocalStorage<number>(
+		`TmpOrg-${address}-selectedFee`,
+		defaultValues.feeMode,
+	)
+	const [memberLimit, setMemberLimit] = useLocalStorage<number>(
+		`TmpOrg-${address}-memberLimit`,
+		defaultValues.memberLimit,
+	)
+	const [feeAmount, setFeeAmount] = useLocalStorage<number>(`TmpOrg-${address}-feeAmount`, defaultValues.feeAmount)
+	const [hasWhitelist, setHasWhitelist] = useLocalStorage<boolean>(
+		`TmpOrg-${address}-hasWhitelist`,
+		defaultValues.hasWhitelist,
+	)
+	const [hasApplication, setHasApplication] = useLocalStorage<boolean>(
+		`TmpOrg-${address}-hasApplication`,
+		defaultValues.hasApplication,
+	)
+	const [headerCID, setHeaderCID] = useLocalStorage<string>(`TmpOrg-${address}-headerCID`, defaultValues.headerCID)
+	const [logoCID, setLogoCID] = useLocalStorage<string>(`TmpOrg-${address}-logoCID`, defaultValues.logoCID)
+	const [description, setDescription] = useLocalStorage<string>(
+		`TmpOrg-${address}-description`,
+		defaultValues.description,
+	)
+	const [metaDataCID, setMetaDataCID] = useLocalStorage<string>(
+		`TmpOrg-${address}-metaDataCID`,
+		defaultValues.metaDataCID,
+	)
+	const [deposit, setDeposit] = useLocalStorage<number>(`TmpOrg-${address}-deposit`, defaultValues.deposit)
+
+	// Clear state after re
+	const clearAll = useCallback(() => {
+		setSelectedType(defaultValues.type)
+		setNameState(defaultValues.name)
+		setSelectedMode(defaultValues.mode)
+		setSelectedFee(defaultValues.feeMode)
+		setMemberLimit(defaultValues.memberLimit)
+		setFeeAmount(defaultValues.feeAmount)
+		setHasWhitelist(defaultValues.hasWhitelist)
+		setHasApplication(defaultValues.hasApplication)
+		setHeaderCID(defaultValues.headerCID)
+		setLogoCID(defaultValues.logoCID)
+		setDescription(defaultValues.description)
+		setMetaDataCID(defaultValues.metaDataCID)
+		setDeposit(defaultValues.deposit)
+	}, [
+		setSelectedType,
+		setNameState,
+		setSelectedMode,
+		setSelectedFee,
+		setMemberLimit,
+		setFeeAmount,
+		setHasWhitelist,
+		setHasApplication,
+		setHeaderCID,
+		setLogoCID,
+		setDescription,
+		setMetaDataCID,
+		setDeposit,
+	])
 
 	return {
 		type: selectedType,
@@ -26,6 +88,9 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 		hasApplication: hasApplication,
 		headerCID: headerCID,
 		logoCID: logoCID,
+		description: description,
+		metaDataCID: metaDataCID,
+		deposit: deposit,
 		setType: setSelectedType,
 		setName: setNameState,
 		setMode: setSelectedMode,
@@ -36,5 +101,9 @@ export function UseTmpOrganisationState(): TMPOrganisationState {
 		setHasApplication: setHasApplication,
 		setHeaderCID: setHeaderCID,
 		setLogoCID: setLogoCID,
+		setDescription: setDescription,
+		setMetaDataCID: setMetaDataCID,
+		setDeposit: setDeposit,
+		clearAll: clearAll,
 	}
 }
