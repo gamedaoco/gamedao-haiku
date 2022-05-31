@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
-import Box from '@mui/material/Box'
-import { Grid, InputAdornment, TextField } from '@mui/material'
+
+import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 import { Search } from '@mui/icons-material'
+import { Grid, InputAdornment, TextField } from '@mui/material'
+import Box from '@mui/material/Box'
+
 import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
 import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
-import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 
 interface SortOptionsInterface {
 	name: String

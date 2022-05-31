@@ -1,11 +1,13 @@
-import { useExtensionContext } from 'provider/extension/modules/context'
 import { Fragment, useEffect } from 'react'
-import { BaseDialog } from 'components/BaseDialog/baseDialog'
-import { AccountState } from 'src/@types/extension'
-import { AccountCard } from 'components/AccountCard/accountCard'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
+
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { useExtensionContext } from 'provider/extension/modules/context'
+import { AccountState } from 'src/@types/extension'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
+
+import { AccountCard } from 'components/AccountCard/accountCard'
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
 
 interface ComponentProps {
 	open: boolean

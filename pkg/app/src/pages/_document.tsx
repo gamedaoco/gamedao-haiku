@@ -1,8 +1,10 @@
 import * as React from 'react'
+
+import { DocumentContext, DocumentInitialProps } from 'next/dist/shared/lib/utils'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from 'src/theme/createEmotionCache'
-import { DocumentContext, DocumentInitialProps } from 'next/dist/shared/lib/utils'
 
 export default class MyDocument extends Document {
 	// `getInitialProps` belongs to `_document` (instead of `_app`),

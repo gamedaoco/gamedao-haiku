@@ -1,11 +1,13 @@
-import { BaseForm } from 'components/Forms/baseForm'
-import { RadioItem } from 'components/Forms/modules/radioItem'
+import { useCallback } from 'react'
+
 import { Person } from '@mui/icons-material'
 import { Box, Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
-import { useCallback } from 'react'
-import * as Yup from 'yup'
-import { createWarningNotification } from 'src/utils/notificationUtils'
 import { useTranslation } from 'react-i18next'
+import { createWarningNotification } from 'src/utils/notificationUtils'
+import * as Yup from 'yup'
+
+import { BaseForm } from 'components/Forms/baseForm'
+import { RadioItem } from 'components/Forms/modules/radioItem'
 
 const validationFeeSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')

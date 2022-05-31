@@ -1,13 +1,15 @@
-import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
-import type { PromiseMsg } from 'src/@types/promiseMsg'
-import { BaseDialog } from 'components/BaseDialog/baseDialog'
-import { Button, Stack, Typography } from '@mui/material'
-import { Balance, useBalanceByAddress } from 'hooks/useBalanceByAddress'
 import { useCallback, useEffect, useState } from 'react'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+
+import { Button, Stack, Typography } from '@mui/material'
+import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
-import { useTransaction } from 'hooks/useTransaction'
 import type { ISubmittableResult } from '@polkadot/types/types'
+import { Balance, useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTransaction } from 'hooks/useTransaction'
+import type { PromiseMsg } from 'src/@types/promiseMsg'
+
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
 
 interface ComponentProps {
 	open: boolean

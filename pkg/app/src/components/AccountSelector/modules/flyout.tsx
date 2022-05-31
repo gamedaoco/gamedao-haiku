@@ -1,9 +1,10 @@
-import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack } from '@mui/material'
 import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic } from '@mui/icons-material'
+import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack } from '@mui/material'
+import { useApiProvider } from 'hooks/useApiProvider'
 import { useExtensionContext } from 'provider/extension/modules/context'
+
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
-import { useApiProvider } from 'hooks/useApiProvider'
 
 interface ComponentProps {
 	anchorEl: Element

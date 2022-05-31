@@ -1,8 +1,10 @@
-import { SettingsContext } from './modules/context'
-import { useLocalStorage } from 'src/hooks/useLocalStorage'
-import { SettingsState, ThemeColor, ThemeDirection, ThemeMode } from 'src/@types/settings'
 import { useCallback } from 'react'
+
+import { SettingsState, ThemeColor, ThemeDirection, ThemeMode } from 'src/@types/settings'
+import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { PRIMARY_COLOR } from 'src/theme/palette'
+
+import { SettingsContext } from './modules/context'
 
 function SetColor(themeColor: ThemeColor) {
 	let color

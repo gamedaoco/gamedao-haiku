@@ -1,6 +1,6 @@
 import { Card, Skeleton, Stack, Typography } from '@mui/material'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 export function BalanceCard() {
 	const address = useCurrentAccountAddress()

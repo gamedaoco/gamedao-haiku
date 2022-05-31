@@ -1,5 +1,6 @@
-import { Box, Dialog, Paper } from '@mui/material'
 import { useEffect, useState } from 'react'
+
+import { Box, Dialog, Paper } from '@mui/material'
 import { fetchIpfsBlob } from 'src/utils/ipfs'
 
 interface ComponentProps {

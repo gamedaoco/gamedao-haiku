@@ -1,8 +1,9 @@
 import React, { FC, useMemo } from 'react'
-import { useTheme } from '@mui/material/styles'
-import { Card, Box, CardHeader, CardContent } from '@mui/material'
-import { Person, Key } from '@mui/icons-material'
+
+import { Key, Person } from '@mui/icons-material'
+import { Box, Card, CardContent, CardHeader } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
+import { useTheme } from '@mui/material/styles'
 
 const LoadingTileCard: FC = () => {
 	const theme = useTheme()

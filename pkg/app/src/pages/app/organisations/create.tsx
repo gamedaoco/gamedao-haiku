@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { Layout } from 'src/components/Layouts/default/layout'
+
 import { Grid, Stack, Step, StepLabel, Stepper } from '@mui/material'
+import { Layout } from 'src/components/Layouts/default/layout'
+
 import { Form } from 'components/Forms/Organization/form'
 
 export function CreateOrganisationPage() {

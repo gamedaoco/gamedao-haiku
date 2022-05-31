@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import Typography from '@mui/material/Typography'
+
+import ClearIcon from '@mui/icons-material/Clear'
+import ClearAllIcon from '@mui/icons-material/ClearAll'
 import FilterListIcon from '@mui/icons-material/FilterList'
-import Box from '@mui/material/Box'
 import {
 	Button,
 	Checkbox,
@@ -14,8 +15,8 @@ import {
 	Radio,
 	RadioGroup,
 } from '@mui/material'
-import ClearIcon from '@mui/icons-material/Clear'
-import ClearAllIcon from '@mui/icons-material/ClearAll'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 const FiltersTab = () => {
 	const [openDrawer, setOpenDrawer] = useState(false)

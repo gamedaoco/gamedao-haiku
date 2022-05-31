@@ -1,8 +1,9 @@
 import React from 'react'
-import { useSettings } from 'src/hooks/useSettings'
-import { useTheme } from '@mui/material/styles'
+
 import { Divider, IconButton, Paper, Stack } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { FontIcons } from 'src/components/Icons/icons'
+import { useSettings } from 'src/hooks/useSettings'
 
 export function ThemeSwitch() {
 	const theme = useTheme()

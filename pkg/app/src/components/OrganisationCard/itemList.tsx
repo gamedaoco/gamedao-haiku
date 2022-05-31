@@ -1,8 +1,10 @@
-import { Grid } from '@mui/material'
-import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
-import type { Organization } from '@gamedao-haiku/graphql/dist'
-import { TileCard } from 'components/OrganisationCard/modules/tileCard'
 import React, { useEffect, useState } from 'react'
+
+import type { Organization } from '@gamedao-haiku/graphql/dist'
+import { Grid } from '@mui/material'
+
+import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
+import { TileCard } from 'components/OrganisationCard/modules/tileCard'
 
 interface ComponentProps {
 	items: Organization[]

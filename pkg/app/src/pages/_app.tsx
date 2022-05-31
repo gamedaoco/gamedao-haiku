@@ -1,13 +1,12 @@
-import Head from 'next/head'
 import { AppProps, NextWebVitalsMetric } from 'next/app'
-import { Providers } from 'src/provider/provider'
+import Head from 'next/head'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import createEmotionCache from 'src/theme/createEmotionCache'
-import { ThemePrimaryColor } from 'src/components/ThemePrimaryColor/themePrimaryColor'
-
 // Toastify styles + custom styles overrides
 import 'react-toastify/dist/ReactToastify.css'
+import { ThemePrimaryColor } from 'src/components/ThemePrimaryColor/themePrimaryColor'
+import { Providers } from 'src/provider/provider'
+import createEmotionCache from 'src/theme/createEmotionCache'
 import 'src/theme/css/toastify.css'
 
 const clientSideEmotionCache = createEmotionCache()
