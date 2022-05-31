@@ -1,8 +1,8 @@
 import React from 'react'
+
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-
 import { Layout } from 'src/components/Layouts/default/layout'
 
 export function OrganisationById() {

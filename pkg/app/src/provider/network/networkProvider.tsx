@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+
 import ZeroTypes from 'data/zero-types.json'
-import type { ApiProvider } from 'src/@types/network'
-import { NetworkContext } from './modules/context'
 import { initializeApis, keepAlive } from 'provider/network/modules/network'
+import type { ApiProvider } from 'src/@types/network'
+
+import { NetworkContext } from './modules/context'
 
 // TODO: Data should be retrieved from GraphQL or another interface.
 // @2075

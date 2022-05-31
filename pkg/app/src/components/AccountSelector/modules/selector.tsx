@@ -1,10 +1,10 @@
-import { Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
-import { useExtensionContext } from 'provider/extension/modules/context'
 import { ExpandMore, Verified } from '@mui/icons-material'
-import md5 from 'md5'
-import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
+import { Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
+import md5 from 'md5'
+import { useExtensionContext } from 'provider/extension/modules/context'
+import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
 
 interface ComponentProps {
 	onClick: () => void

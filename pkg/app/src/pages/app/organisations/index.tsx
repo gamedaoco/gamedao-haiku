@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+
+import { useRouter } from 'next/router'
+
+import { Organization, OrganizationOrderByInput, useOrganizationsLazyQuery } from '@gamedao-haiku/graphql/dist'
+import { ArrowDownward } from '@mui/icons-material'
+import { Button, Container, Grid, createSvgIcon } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { ItemList } from 'components/OrganisationCard/itemList'
-import { useOrganizationsLazyQuery, OrganizationOrderByInput, Organization } from '@gamedao-haiku/graphql/dist'
 import { Layout } from 'src/components/Layouts/default/layout'
-import { Button, Container, createSvgIcon, Grid } from '@mui/material'
+
+import { ItemList } from 'components/OrganisationCard/itemList'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
-import { ArrowDownward } from '@mui/icons-material'
-import { useRouter } from 'next/router'
 
 const PlusIcon = createSvgIcon(
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

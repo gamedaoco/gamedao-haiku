@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
-import { useExtensionContext } from 'src/provider/extension/modules/context'
-import { useTheme } from '@mui/material/styles'
 
-import { NavLink } from 'src/components/NavLink/navLink'
 import type { Organization } from '@gamedao-haiku/graphql/dist'
-import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Check, Key, Person } from '@mui/icons-material'
+import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { NavLink } from 'src/components/NavLink/navLink'
+import { useExtensionContext } from 'src/provider/extension/modules/context'
 
 interface ComponentsPros {
 	item: Organization

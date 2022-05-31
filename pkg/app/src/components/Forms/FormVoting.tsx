@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
+
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
-	Typography,
-	Stack,
-	Paper,
-	Button,
 	Box,
+	Button,
+	CircularProgress,
+	Container,
 	Divider,
 	InputAdornment,
-	Container,
-	CircularProgress,
+	Paper,
+	Stack,
+	Typography,
 } from '@mui/material'
-import { Input } from './modules/input'
-import { useForm, FormProvider } from 'react-hook-form'
-import * as Yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useDisplayValues } from 'hooks/useDisplayValues'
+import { FormProvider, useForm } from 'react-hook-form'
+import * as Yup from 'yup'
+
+import { Input } from './modules/input'
 
 const validationSchema = Yup.object().shape({
 	title: Yup.string().required('Proposal title is required'),

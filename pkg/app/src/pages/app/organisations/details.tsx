@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Layout } from 'src/components/Layouts/default/layout'
+
+import { AddAPhoto } from '@mui/icons-material'
+import { TabContext, TabPanel } from '@mui/lab'
 import {
 	Avatar,
 	Box,
@@ -13,14 +15,13 @@ import {
 	Typography,
 	useMediaQuery,
 } from '@mui/material'
-import { TabContext, TabPanel } from '@mui/lab'
-import { AddAPhoto } from '@mui/icons-material'
-import { createWarningNotification } from 'src/utils/notificationUtils'
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { useTheme } from '@mui/material/styles'
+import { Layout } from 'src/components/Layouts/default/layout'
 import { TmpOverview } from 'src/components/TabPanels/Organization/TmpOverview'
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 export function OrganisationDetailsPage() {
 	const [activeStep, setActiveStep] = useState<string>('organization-overview')

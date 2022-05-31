@@ -1,7 +1,9 @@
-import { Box, Card, CircularProgress, Typography, CardMedia, CardContent } from '@mui/material'
-import { Collectable } from 'src/@types/collectable'
 import React, { useEffect, useState } from 'react'
+
+import { Box, Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material'
+import { Collectable as CollectableInterface } from 'src/@types/collectable'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
+
 import { ModelDialog } from 'components/Collectable/modules/modelDialog'
 
 interface IpfsMetadata {
@@ -12,7 +14,7 @@ interface IpfsMetadata {
 }
 
 interface ComponentProps {
-	item: Collectable
+	item: CollectableInterface
 }
 
 // TODO extract to app config

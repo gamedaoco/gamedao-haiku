@@ -1,10 +1,14 @@
+import { useCallback, useState } from 'react'
+
 import Head from 'next/head'
+
 import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
+
+import { HeaderMobile } from 'components/Layouts/default/modules/headerMobile'
+
+import { Footer } from './modules/footer'
 import { Header } from './modules/header'
 import { Sidebar } from './modules/sidebar'
-import { Footer } from './modules/footer'
-import { useCallback, useState } from 'react'
-import { HeaderMobile } from 'components/Layouts/default/modules/headerMobile'
 
 interface ComponentProps {
 	showHeader?: boolean

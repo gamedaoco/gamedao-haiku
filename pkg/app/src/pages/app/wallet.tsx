@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
-import Script from 'next/script'
-import { Box, CircularProgress, Paper, Stack, Typography } from '@mui/material'
 
-import { Layout } from 'src/components/Layouts/default/layout'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
-import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
-import type { Collectable } from 'src/@types/collectable'
-import { Collectable as CollectableComponent } from 'components/Collectable/collectable'
+import Script from 'next/script'
+
 import { useCollectablesForUserLazyQuery } from '@gamedao-haiku/graphql/dist'
+import { Box, CircularProgress, Paper, Stack, Typography } from '@mui/material'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import type { Collectable } from 'src/@types/collectable'
+import { Layout } from 'src/components/Layouts/default/layout'
+import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
+
+import { Collectable as CollectableComponent } from 'components/Collectable/collectable'
+import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 
 export function WalletPage() {
 	const accountState = useCurrentAccountState()

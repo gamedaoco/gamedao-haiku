@@ -1,10 +1,11 @@
-import { Icon } from '@iconify/react'
-import infoFill from '@iconify/icons-eva/info-fill'
 import alertCircleFill from '@iconify/icons-eva/alert-circle-fill'
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill'
 import checkmarkCircle2Fill from '@iconify/icons-eva/checkmark-circle-2-fill'
+import infoFill from '@iconify/icons-eva/info-fill'
+import { Icon } from '@iconify/react'
 // material
 import { Theme } from '@mui/material/styles'
+
 // @types
 import { ColorSchema } from '../../@types/theme'
 
