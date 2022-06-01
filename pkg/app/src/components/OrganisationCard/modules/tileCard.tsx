@@ -75,7 +75,7 @@ export const TileCard = ({ item }: ComponentsPros) => {
 	}, [item, address])
 
 	return (
-		<NavLink href={`${toLink}${item.id}`}>
+		<NavLink href={`${toLink}${item.id}/dashboard`}>
 			<Card
 				sx={{
 					minHeight: '164px',

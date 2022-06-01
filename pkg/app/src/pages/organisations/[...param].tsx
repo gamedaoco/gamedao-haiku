@@ -1,35 +1,47 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+
 import { Layout } from 'components/Layouts/default/layout'
-import {
-	Avatar,
-	Box,
-	Card,
-	CardContent,
-	CardMedia,
-	Grid,
-	Stack,
-	Tab,
-	Tabs,
-	Typography,
-	useMediaQuery,
-} from '@mui/material'
-import { TabContext, TabPanel } from '@mui/lab'
-import { AddAPhoto } from '@mui/icons-material'
-import { createWarningNotification } from 'src/utils/notificationUtils'
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { useRouter } from 'next/router'
+import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { useTheme } from '@mui/material/styles'
+import { Avatar, Card, CardContent, CardMedia, Grid, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
+import { createWarningNotification } from 'src/utils/notificationUtils'
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { TabContext, TabPanel } from '@mui/lab'
+import { AddAPhoto } from '@mui/icons-material'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
+import { Overview } from 'components/TabPanels/Organization/overview'
+import { Proposals } from 'components/TabPanels/Organization/proposals'
+import { useOrganizationByIdLazyQuery } from '@gamedao-haiku/graphql/dist'
+import type { Organization } from '@gamedao-haiku/graphql/dist/types'
 
-export function OrganisationDetailsPage() {
-	const [activeStep, setActiveStep] = useState<string>('organization-overview')
+export function OrganisationById() {
+	const { query, push } = useRouter()
+	const [routeState, setRouteState] = useState<string>(null)
+	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
+	const [activeStep, setActiveStep] = useState<string>('dashboard')
+	const [queryOrganization, { data, error, loading }] = useOrganizationByIdLazyQuery()
+	const [organizationState, setOrganizationState] = useState<Organization>()
 	const theme = useTheme()
 	const config = useConfig()
 	const tmpOrg = useTmpOrganisationState()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
+
+	const handleTabSelect = useCallback(
+		(newPath) => {
+			if (organizationIdState) {
+				push(`${organizationIdState}/${newPath}`)
+			} else {
+				push(newPath)
+			}
+		},
+		[organizationIdState, push],
+	)
 
 	const handleUploadImage = useCallback(async (event, setter) => {
 		const files = event.target.files
@@ -40,6 +52,26 @@ export function OrganisationDetailsPage() {
 		const cid = await uploadFileToIpfs(files[0])
 		setter(cid.toString())
 	}, [])
+
+	// Query and route mapping
+	useEffect(() => {
+		const param = query?.param
+		if (param && Array.isArray(param)) {
+			if (param.length == 1) {
+				setRouteState(param[0])
+			} else if (param.length >= 2) {
+				setOrganizationIdState(param[0])
+				setRouteState(param[1])
+				queryOrganization({ variables: { orgId: param[0] } })
+			}
+		}
+	}, [query])
+
+	useEffect(() => {
+		if (routeState) {
+			setActiveStep(routeState)
+		}
+	}, [routeState])
 
 	// Update and upload metadata
 	useEffect(() => {
@@ -60,6 +92,14 @@ export function OrganisationDetailsPage() {
 			})().then((cid) => tmpOrg.setMetaDataCID(cid))
 		}
 	}, [tmpOrg.name, tmpOrg.description, tmpOrg.logoCID, tmpOrg.headerCID])
+
+	useEffect(() => {
+		if (data) {
+			setOrganizationState(data?.organizations?.[0] as Organization)
+		}
+	}, [data])
+
+	console.log(routeState, organizationIdState, activeStep, data, error, loading, 'STATE', organizationState)
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
@@ -128,8 +168,11 @@ export function OrganisationDetailsPage() {
 											cursor: 'pointer',
 										})}
 										srcSet={
-											tmpOrg.logoCID?.length
-												? parseIpfsHash(tmpOrg.logoCID, config.IPFS_GATEWAY)
+											organizationState?.metadata?.logo || tmpOrg.logoCID?.length
+												? parseIpfsHash(
+														organizationState?.metadata?.logo || tmpOrg.logoCID,
+														config.IPFS_GATEWAY,
+												  )
 												: null
 										}
 									>
@@ -149,20 +192,21 @@ export function OrganisationDetailsPage() {
 								<Tabs
 									variant="scrollable"
 									value={activeStep}
-									onChange={(_, value) => setActiveStep(value)}
+									onChange={(_, value) => handleTabSelect(value)}
 									scrollButtons="auto"
 								>
-									<Tab label="Overview" value={'organization-overview'} />
-									<Tab label="Campaigns" value={'organization-campaigns'} disabled />
-									<Tab label="Votings" value={'organization-votings'} disabled />
-									<Tab label="Members" value={'organization-members'} disabled />
-									<Tab label="Treasury" value={'organization-treasury'} disabled />
-									<Tab label="Settings" value={'organization-settings'} disabled />
+									<Tab label="Overview" value={'dashboard'} />
+									<Tab label="Campaigns" value={'campaigns'} disabled={!organizationIdState} />
+									<Tab label="proposals" value={'proposals'} disabled={!organizationIdState} />
+									<Tab label="members" value={'members'} disabled={!organizationIdState} />
+									<Tab label="treasury" value={'treasury'} disabled={!organizationIdState} />
+									<Tab label="settings" value={'settings'} disabled={!organizationIdState} />
 								</Tabs>
 							</CardContent>
 						</Card>
-						<TabPanel value={'organization-overview'}>
-							<TmpOverview />
+						<TabPanel value={'dashboard'}>{organizationIdState ? <Overview /> : <TmpOverview />}</TabPanel>
+						<TabPanel value={'proposals'}>
+							{organizationIdState && <Proposals organizationId={organizationIdState} />}
 						</TabPanel>
 					</Stack>
 				</TabContext>
@@ -171,4 +215,4 @@ export function OrganisationDetailsPage() {
 	)
 }
 
-export default OrganisationDetailsPage
+export default OrganisationById
