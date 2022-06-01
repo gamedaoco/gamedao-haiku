@@ -31,7 +31,6 @@ const status: ContributionStatus = {
 
 const ContributedCampaginsSection: FC = () => {
 	const theme = useTheme()
-	console.log(theme.palette.common.black)
 	return (
 		<Box>
 			<Typography variant="body2" fontWeight="bold" sx={{ color: theme.palette.grey[500], pb: 4 }}>
