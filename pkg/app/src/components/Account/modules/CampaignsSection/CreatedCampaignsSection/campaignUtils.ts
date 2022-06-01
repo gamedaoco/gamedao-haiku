@@ -25,9 +25,7 @@ export function getCampaignContributors(campaign: Campaign): number {
 }
 
 export function getCampaignFunding(campaign: Campaign): number {
-	let total = 0
-	campaign.contributors.map((contributor) => (total += parseInt(contributor.contributed)))
-	return total
+	return campaign?.contributors.reduce((acc, obj) => (acc += parseInt(obj.contributed)), parseInt(campaign?.deposit))
 }
 
 export function getCampaignProgress(campaign: Campaign): number {

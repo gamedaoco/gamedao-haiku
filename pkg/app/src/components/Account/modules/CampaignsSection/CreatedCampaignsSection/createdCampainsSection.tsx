@@ -3,13 +3,17 @@ import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
-import { campaigns } from 'components/Account/TempData'
 
 import CampaignCard from './campaignCard'
+import { AccountState } from 'src/@types/extension'
 
-const CreatedCampaignSection: FC = () => {
+interface CreatedCampaignSectionProps {
+	accountState: AccountState
+}
+
+const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState }) => {
 	const theme = useTheme()
-	const { data } = useCampaignsQuery({ variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' } })
+	const { data } = useCampaignsQuery({ variables: { address: accountState?.account?.address } })
 
 	return (
 		<Box sx={{ pb: 4 }}>
