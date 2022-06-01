@@ -1,0 +1,11 @@
+query accountBalances{
+  account{
+    balances{
+      token
+      total
+      transferrable
+      locked
+      reserved
+    }
+  }
+}

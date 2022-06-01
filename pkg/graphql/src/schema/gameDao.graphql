@@ -65,6 +65,18 @@ interface DisplayValueEntry {
     text: String!
 }
 
+type AccountBalance {
+    token: String!
+	transferrable: Int!
+	locked: Int!
+	reserved: Int!
+	total: Int!
+}
+
+type Account {
+    balances: [AccountBalance]
+}
+
 type DisplayValueEntryNumber implements DisplayValueEntry{
     key: String!
     text: String!
@@ -99,6 +111,7 @@ type DisplayValues {
 }
 
 type Query {
+    account: Account
     version: String!
     links: [Link]!
     config(env: Environment!): Config!
