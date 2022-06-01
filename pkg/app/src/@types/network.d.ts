@@ -1,6 +1,7 @@
-import { ApiProvider } from './ApiProvider'
 import { ApiPromise } from '@polkadot/api'
 import type { RegistryTypes } from '@polkadot/types/types'
+
+import { ApiProvider } from './ApiProvider'
 
 export interface SystemProperties {
 	ss58Format: number

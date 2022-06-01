@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
-import { useExtensionContext } from 'src/provider/extension/modules/context'
-import { useTheme } from '@mui/material/styles'
 
-import { NavLink } from 'src/components/NavLink/navLink'
 import type { Organization } from '@gamedao-haiku/graphql/dist'
-import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Check, Key, Person } from '@mui/icons-material'
+import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { NavLink } from 'src/components/NavLink/navLink'
+import { useExtensionContext } from 'src/provider/extension/modules/context'
 
 interface ComponentsPros {
 	item: Organization
@@ -80,7 +80,6 @@ export const TileCard = ({ item }: ComponentsPros) => {
 				sx={{
 					minHeight: '164px',
 					maxWidth: '344px',
-					// borderRadius: '1rem',
 					border: '1px solid transparent',
 					'&:hover': {
 						border: `1px solid ${theme.palette.grey[500_32]}`,
@@ -109,7 +108,6 @@ export const TileCard = ({ item }: ComponentsPros) => {
 							<Typography
 								variant={'caption'}
 								fontWeight={'400'}
-								color={'#DCDEE0'}
 								sx={{
 									overflow: 'hidden',
 									textOverflow: 'ellipsis',

@@ -1,13 +1,15 @@
 import React, { useCallback, useState } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Box from '@mui/material/Box'
-import { AccountSelector, FontIcons } from 'src/components'
-import { useTheme } from '@mui/material/styles'
-import { NavLink } from 'components/NavLink/navLink'
-import { Button, Stack } from '@mui/material'
+
 import { Menu, MoreVert } from '@mui/icons-material'
+import { Button, Stack } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import { useTheme } from '@mui/material/styles'
+import { AccountSelector, FontIcons } from 'src/components'
+
 import { NavbarMobile } from 'components/Layouts/default/modules/navbarMobile'
+import { NavLink } from 'components/NavLink/navLink'
 
 interface ComponentProps {
 	onSidebarOpen: () => void

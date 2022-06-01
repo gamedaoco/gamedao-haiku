@@ -1,20 +1,22 @@
 import React, { Fragment } from 'react'
+
 import { useRouter } from 'next/router'
-import { useTheme } from '@mui/material/styles'
+
 import {
 	Box,
 	Button,
 	Drawer,
-	Link as MUILink,
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
+	Link as MUILink,
 	Stack,
 	Typography,
 } from '@mui/material'
-import { FontIcons } from 'src/components'
+import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+import { FontIcons } from 'src/components'
 
 interface ComponentProps {
 	onClose: () => void

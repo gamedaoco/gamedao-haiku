@@ -1,4 +1,5 @@
 import { ChangeEvent, createContext, useContext } from 'react'
+
 import { SettingsContextProps, ThemeMode } from 'src/@types/settings'
 import { PRIMARY_COLOR } from 'src/theme/palette'
 

@@ -1,6 +1,8 @@
-import { Layout } from 'components/Layouts/default/layout'
-import { Button, Paper, Stack, Typography } from '@mui/material'
 import { useCallback } from 'react'
+
+import { Button, Paper, Stack, Typography } from '@mui/material'
+
+import { Layout } from 'components/Layouts/default/layout'
 
 export function NoWalletConnected() {
 	const openUrl = useCallback((url: string) => {

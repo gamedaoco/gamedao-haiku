@@ -1,8 +1,9 @@
-import type { TMPProposalState } from 'src/@types/proposal'
-import { useLocalStorage } from 'hooks/useLocalStorage'
-import { defaultValuesTMPProposal as defaultValues } from 'src/constants'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useCallback } from 'react'
+
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useLocalStorage } from 'hooks/useLocalStorage'
+import type { TMPProposalState } from 'src/@types/proposal'
+import { defaultValuesTMPProposal as defaultValues } from 'src/constants'
 
 // TODO: Replace store logic with db for cross device storage
 

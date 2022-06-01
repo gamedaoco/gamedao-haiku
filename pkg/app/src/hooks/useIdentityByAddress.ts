@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { createErrorNotification } from 'src/utils/notificationUtils'
-import type { Identity } from '@gamedao-haiku/graphql/dist/types'
+
 import { useIdentityByAddressLazyQuery } from '@gamedao-haiku/graphql/dist'
+import type { Identity } from '@gamedao-haiku/graphql/dist/types'
+import { createErrorNotification } from 'src/utils/notificationUtils'
 
 export interface IdentityByAddress {
 	identity: Identity

@@ -1,14 +1,16 @@
 import React, { Fragment } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Stack from '@mui/material/Stack'
-import Box from '@mui/material/Box'
-import { AccountSelector, FontIcons } from 'src/components'
-import { useTheme } from '@mui/material/styles'
-import { NavLink } from 'components/NavLink/navLink'
+
 import MenuIcon from '@mui/icons-material/Menu'
 import { Button, Typography } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
+import Toolbar from '@mui/material/Toolbar'
+import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
+import { AccountSelector, FontIcons } from 'src/components'
+
+import { NavLink } from 'components/NavLink/navLink'
 
 interface ComponentProps {
 	onSidebarOpen: () => void

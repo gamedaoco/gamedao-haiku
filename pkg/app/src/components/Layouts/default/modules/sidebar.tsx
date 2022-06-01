@@ -1,13 +1,16 @@
 import React, { Fragment, useCallback, useEffect } from 'react'
+
 import { useRouter } from 'next/router'
-import { useTheme } from '@mui/material/styles'
-import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
-import { Add as AddIcon } from '@mui/icons-material'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+
 import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
-import { createErrorNotification } from 'src/utils/notificationUtils'
-import { OrganizationButtonMemoized } from 'components/Layouts/default/modules/organizationButton'
+import { Add as AddIcon } from '@mui/icons-material'
+import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'provider/extension/modules/context'
+import { createErrorNotification } from 'src/utils/notificationUtils'
+
+import { OrganizationButtonMemoized } from 'components/Layouts/default/modules/organizationButton'
 
 interface ComponentProps {
 	showHeader: boolean

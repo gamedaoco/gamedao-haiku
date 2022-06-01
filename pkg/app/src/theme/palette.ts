@@ -227,6 +227,8 @@ export const PRIMARY_COLOR = [
 		main: '#0045FF',
 		dark: '#0027B7',
 		darker: '#00137A',
+		background: '#212B36',
+		text: '#919EAB',
 		contrastText: '#fff',
 	},
 	// ORANGE

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+
 import { useApiProvider } from 'hooks/useApiProvider'
-import { toUnit } from 'src/utils/token'
 import { unsubRef } from 'src/utils/hooks'
+import { toUnit } from 'src/utils/token'
 
 export interface Balance {
 	feeFrozen: number

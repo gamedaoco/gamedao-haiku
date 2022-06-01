@@ -1,5 +1,6 @@
-import { useApiProvider } from 'hooks/useApiProvider'
 import { useEffect, useRef, useState } from 'react'
+
+import { useApiProvider } from 'hooks/useApiProvider'
 import { unsubRef } from 'src/utils/hooks'
 
 export function useBlockNumber(): number {

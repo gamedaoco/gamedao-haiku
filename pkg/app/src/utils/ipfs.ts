@@ -1,5 +1,5 @@
-import { createErrorNotification } from 'src/utils/notificationUtils'
 import { CID, create } from 'ipfs-http-client'
+import { createErrorNotification } from 'src/utils/notificationUtils'
 
 export function parseIpfsHash(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
 	let hashPart = ipfsHash.split('/')

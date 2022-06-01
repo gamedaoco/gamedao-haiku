@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+
 import data from 'src/data/config.json'
 
 // test config local:

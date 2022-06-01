@@ -1,10 +1,10 @@
-import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
-import { AccountState } from 'src/@types/extension'
-import { createErrorNotification, createPromiseNotification } from 'src/utils/notificationUtils'
-import { to } from 'await-to-js'
 import { ApiPromise } from '@polkadot/api'
-import { PromiseMsg } from 'src/@types/promiseMsg'
+import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import type { ISubmittableResult } from '@polkadot/types/types'
+import { to } from 'await-to-js'
+import { AccountState } from 'src/@types/extension'
+import { PromiseMsg } from 'src/@types/promiseMsg'
+import { createErrorNotification, createPromiseNotification } from 'src/utils/notificationUtils'
 
 export async function SignAndNotify(
 	ApiProvider: ApiPromise,

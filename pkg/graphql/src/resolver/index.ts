@@ -1,9 +1,9 @@
 // Provide resolver functions for your schema fields
-import type { Resolvers } from './resolvers-types'
 import { configResolver } from './config/configResolver'
+import { displayDataResolver } from './displayValues/displayValuesResolver'
 import { featuresResolver } from './features/featuresResolver'
 import { linksResolver } from './links/linksResolver'
-import { displayDataResolver } from './displayValues/displayValuesResolver'
+import type { Resolvers } from './resolvers-types'
 
 export const resolvers: Resolvers = {
 	Query: {

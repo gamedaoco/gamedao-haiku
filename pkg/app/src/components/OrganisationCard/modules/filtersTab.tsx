@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import Typography from '@mui/material/Typography'
+
+import ClearIcon from '@mui/icons-material/Clear'
+import ClearAllIcon from '@mui/icons-material/ClearAll'
 import FilterListIcon from '@mui/icons-material/FilterList'
-import Box from '@mui/material/Box'
 import {
 	Button,
 	Checkbox,
@@ -14,22 +15,10 @@ import {
 	Radio,
 	RadioGroup,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import ClearIcon from '@mui/icons-material/Clear'
-import ClearAllIcon from '@mui/icons-material/ClearAll'
-const useStyles = makeStyles({
-	list: {
-		width: 250,
-	},
-	fullList: {
-		width: 'auto',
-	},
-	paper: {
-		background: '#212B36',
-	},
-})
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+
 const FiltersTab = () => {
-	const classes = useStyles()
 	const [openDrawer, setOpenDrawer] = useState(false)
 	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
 	const ListTab = () => (
@@ -82,12 +71,7 @@ const FiltersTab = () => {
 				sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', py: 3 }}
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60%' }}>
-					<Button
-						variant="outlined"
-						fullWidth
-						startIcon={<ClearAllIcon />}
-						sx={{ color: 'white', border: 'white 0.7px solid' }}
-					>
+					<Button variant="outlined" fullWidth startIcon={<ClearAllIcon />}>
 						Clear
 					</Button>
 				</Box>
@@ -102,12 +86,7 @@ const FiltersTab = () => {
 				alignItems: 'center',
 			}}
 		>
-			<Drawer
-				anchor={'right'}
-				open={openDrawer}
-				onClose={() => setOpenDrawer(false)}
-				classes={{ paper: classes.paper }}
-			>
+			<Drawer anchor={'right'} open={openDrawer} onClose={() => setOpenDrawer(false)}>
 				<ListTab />
 			</Drawer>
 			<Typography sx={{ fontWeight: '700' }} variant={'body2'}>

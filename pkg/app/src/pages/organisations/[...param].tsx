@@ -1,22 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react'
+
+import { useRouter } from 'next/router'
+
+import { useOrganizationByIdLazyQuery } from '@gamedao-haiku/graphql/dist'
+import type { Organization } from '@gamedao-haiku/graphql/dist/types'
+import { AddAPhoto } from '@mui/icons-material'
+import { TabContext, TabPanel } from '@mui/lab'
+import { Avatar, Card, CardContent, CardMedia, Grid, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-
-import { Layout } from 'components/Layouts/default/layout'
-import { useRouter } from 'next/router'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { Avatar, Card, CardContent, CardMedia, Grid, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
-import { createWarningNotification } from 'src/utils/notificationUtils'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { TabContext, TabPanel } from '@mui/lab'
-import { AddAPhoto } from '@mui/icons-material'
-import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
+import { createWarningNotification } from 'src/utils/notificationUtils'
+
+import { Layout } from 'components/Layouts/default/layout'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { Proposals } from 'components/TabPanels/Organization/proposals'
-import { useOrganizationByIdLazyQuery } from '@gamedao-haiku/graphql/dist'
-import type { Organization } from '@gamedao-haiku/graphql/dist/types'
+import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
