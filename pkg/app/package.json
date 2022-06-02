@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.6",
+    "@date-io/moment": "^2.14.0",
     "@emotion/cache": "^11.5.0",
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",

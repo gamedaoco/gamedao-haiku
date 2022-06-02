@@ -101,8 +101,6 @@ export function OrganisationById() {
 		}
 	}, [data])
 
-	console.log(routeState, organizationIdState, activeStep, data, error, loading, 'STATE', organizationState)
-
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box width="100%" height="100%" minHeight="90vh" padding={{ xs: 2, sm: 4 }}>

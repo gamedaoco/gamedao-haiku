@@ -45,8 +45,10 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 	const endDate = moment(data.endDate)
 
 	// Get diff days for start date
-	const startDayDiff = startDate.diff(moment(), 'days')
+	const startDayDiff = startDate.diff(moment(), 'days') + 1
 	const startBlocks = startDayDiff > 0 ? startDayDiff * blocksPerDay + blockNumber : blockNumber
+
+	console.log('startDate', startDate, 'startDayDiff', startDayDiff)
 
 	// Get diff days for end date
 	// min blockNumber + 1 day
@@ -115,7 +117,7 @@ function createWithdrawProposalTx(
 	)
 }
 
-function useCreateProposalTransaction(organizationId: string): SubmittableExtrinsic {
+export function useCreateProposalTransaction(organizationId: string): SubmittableExtrinsic {
 	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
 	const [blockNumberState, setBlockNumberState] = useState<number>(0)
 	const { selectedApiProvider } = useNetworkContext()

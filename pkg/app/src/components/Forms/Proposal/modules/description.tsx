@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react'
 
 import { Stack, TextField } from '@mui/material'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
 import * as Yup from 'yup'
 
@@ -71,43 +73,45 @@ export function Description({
 	)
 
 	return (
-		<BaseForm title={'What’s the name of your proposal?'} error={errorState}>
-			<TextField
-				fullWidth
-				onChange={handleNameChange}
-				value={name}
-				label="Proposal Name"
-				variant="outlined"
-				error={!!errorState}
-			/>
-			<TextField
-				fullWidth
-				multiline
-				minRows={4}
-				onChange={handleDescriptionChange}
-				value={description}
-				label="Proposal Description"
-				variant="outlined"
-				error={!!errorState}
-			/>
-			<Stack direction="row" spacing={1} justifyContent="space-between">
-				<MobileDatePicker
-					label="Start date"
-					inputFormat="MM/dd/yyyy"
-					minDate={new Date()}
-					value={startDate}
-					onChange={setStartDate}
-					renderInput={(params) => <TextField {...params} />}
+		<LocalizationProvider dateAdapter={AdapterDateFns}>
+			<BaseForm title={'What’s the name of your proposal?'} error={errorState}>
+				<TextField
+					fullWidth
+					onChange={handleNameChange}
+					value={name}
+					label="Proposal Name"
+					variant="outlined"
+					error={!!errorState}
 				/>
-				<MobileDatePicker
-					label="End date"
-					inputFormat="MM/dd/yyyy"
-					minDate={new Date()}
-					value={endData}
-					onChange={setEndDate}
-					renderInput={(params) => <TextField {...params} />}
+				<TextField
+					fullWidth
+					multiline
+					minRows={4}
+					onChange={handleDescriptionChange}
+					value={description}
+					label="Proposal Description"
+					variant="outlined"
+					error={!!errorState}
 				/>
-			</Stack>
-		</BaseForm>
+				<Stack direction="row" spacing={1} justifyContent="space-between" width="100%">
+					<MobileDatePicker
+						label="Start date"
+						inputFormat="dd/MM/yyyy"
+						minDate={new Date()}
+						value={startDate}
+						onChange={setStartDate}
+						renderInput={(params) => <TextField {...params} />}
+					/>
+					<MobileDatePicker
+						label="End date"
+						inputFormat="dd/MM/yyyy"
+						minDate={new Date()}
+						value={endData}
+						onChange={setEndDate}
+						renderInput={(params) => <TextField {...params} />}
+					/>
+				</Stack>
+			</BaseForm>
+		</LocalizationProvider>
 	)
 }

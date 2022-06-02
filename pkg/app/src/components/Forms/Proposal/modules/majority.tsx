@@ -45,7 +45,7 @@ export function Majority({ selected, setSelected, deposit, setDeposit }: Compone
 				onChange={setSelected}
 				disabled={!enabledFeature.CREATE_PROPOSAL_RELATIVE_MAJORITY}
 			/>
-			<Stack alignItems="center" justifyContent="space-between" spacing={1}>
+			<Stack alignItems="center" justifyContent="space-between" spacing={1} direction="row" width="100%">
 				<Typography>A min deposit of 1 GAME is needed.</Typography>
 				<TextField
 					variant="outlined"
