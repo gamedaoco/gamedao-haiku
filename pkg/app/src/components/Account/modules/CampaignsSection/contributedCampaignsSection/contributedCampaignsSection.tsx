@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 
+import { CampaignContributorEdge, useCampaignContributorsConnectionQuery } from '@gamedao-haiku/graphql/dist'
 import {
 	Box,
 	Card,
@@ -16,8 +17,8 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { CampaignContributorEdge, useCampaignContributorsConnectionQuery } from '@gamedao-haiku/graphql/dist'
 import { AccountState } from 'src/@types/extension'
+
 import {
 	getContributedCampaignContribution,
 	getContributedCampaignContributorsCount,
@@ -30,6 +31,7 @@ import {
 	getContributedCampaignTimeLeft,
 	getContributedCampaignTitle,
 } from './contributedCampaignUtils'
+
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 
 interface ContributedCampaignsSectionProps {

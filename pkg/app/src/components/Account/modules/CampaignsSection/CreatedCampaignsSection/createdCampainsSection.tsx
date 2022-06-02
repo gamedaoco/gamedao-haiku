@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
+
+import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
+import { AccountState } from 'src/@types/extension'
 
 import CampaignCard from './campaignCard'
-import { AccountState } from 'src/@types/extension'
 
 interface CreatedCampaignSectionProps {
 	accountState: AccountState

@@ -1,17 +1,18 @@
-import { Campaign } from '@gamedao-haiku/graphql/dist'
-import { Card, CardContent, CardMedia, Typography, Box, LinearProgress } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import React, { FC } from 'react'
+
+import { Campaign } from '@gamedao-haiku/graphql/dist'
+import { Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
 import {
 	getCampaignContributors,
+	getCampaignFunding,
 	getCampaignHeader,
 	getCampaignLogo,
 	getCampaignName,
+	getCampaignProgress,
 	getCampaignTarget,
 	getCampaignTitle,
-	getCampaignFunding,
-	getCampaignProgress,
 } from './campaignUtils'
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
