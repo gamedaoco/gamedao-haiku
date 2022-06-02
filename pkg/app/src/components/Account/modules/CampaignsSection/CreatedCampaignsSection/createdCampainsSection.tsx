@@ -14,7 +14,7 @@ interface CreatedCampaignSectionProps {
 const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState }) => {
 	const theme = useTheme()
 	const { data, loading } = useCampaignsQuery({
-		variables: { address: '5G8sQjo6xUTxa6ukByNAiaCv3ezyJRqyV9srrHeyWiTx7xxH' },
+		variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' },
 	})
 
 	return (
@@ -63,7 +63,7 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 					</Card>
 				</Grid>
 
-				{true ? (
+				{loading ? (
 					[1, 2].map((x) => (
 						<Grid item xs={4} key={x} style={{ marginBottom: 10 }}>
 							<LoadingCampaignCard />

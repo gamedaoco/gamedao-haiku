@@ -35,11 +35,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 				src={`${gateway}${getCampaignHeader(campaign)}`}
 				alt="campaign_poster"
 			/>
-			<Box
-				display="flex"
-				justifyContent="center"
-				sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-			>
+			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<CardMedia
 					component="img"
 					sx={{
