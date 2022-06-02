@@ -1,0 +1,28 @@
+query CampaignContributorsConnection($address: String!) {
+  campaignContributorsConnection(orderBy: id_ASC, where: {address_eq: $address}) {
+    edges {
+      node {
+        id
+        contributed
+        campaign {
+          metadata {
+            name
+            title
+            logo
+          }
+          contributors {
+            id
+            contributed
+          }
+          createdAtBlock
+          deposit
+          expiry
+          state
+          target
+        }
+      }
+    }
+  }
+}
+
+

@@ -21,5 +21,42 @@
             "reserved": 12323,
             "total": 4123
         }
+    ],
+    "organizations": [
+        {
+            "name": "Master DAO",
+            "logo": "https://picsum.photos/200",
+            "membersCount": "12k",
+            "valueLocked": "202 USD",
+            "access": "Open",
+            "role": "Member",
+            "canEdit": true
+        },
+        {
+            "name": "Lost Vegas",
+            "logo": "https://picsum.photos/200",
+            "membersCount": "2k",
+            "valueLocked": "123 USD",
+            "access": "Invitation",
+            "role": "Prime",
+            "canEdit": false
+        },
+        {
+            "name": "Master DAO2",
+            "logo": "https://picsum.photos/200",
+            "membersCount": "123k",
+            "valueLocked": "2022 USD",
+            "access": "Open",
+            "role": "Member",
+            "canEdit": true
+        },
+        {
+            "name": "Master DAO3",
+            "membersCount": "121k",
+            "valueLocked": "202 USD",
+            "access": "Proposal",
+            "role": "Prime",
+            "canEdit": false
+        }
     ]
 }

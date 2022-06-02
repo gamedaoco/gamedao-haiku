@@ -19,3 +19,20 @@
 #        }
 #    }
 #}
+
+query Campaigns ($address: String!) {
+  campaigns(where: {adminIdentity: {address_eq: $address}}) {
+    target
+    deposit
+    metadata {
+      name
+      logo
+      title
+      header
+    }
+    contributors {
+      contributed
+      id
+    }
+  }
+}
