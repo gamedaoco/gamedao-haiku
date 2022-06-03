@@ -1,8 +1,13 @@
 import { Account } from '../../types'
 import data from './data.json'
 
-export function accountResolver(): Account {
+interface ResolverArgs {
+	address: string
+}
+export function accountResolver(_: any, args: ResolverArgs): Account {
+	console.log(args.address)
+
 	return {
-		...(data ?? {}),
+		...((data as any) ?? {}),
 	} as Account
 }

@@ -1,5 +1,5 @@
-query accountBalances{
-  account{
+query accountBalances ($address: String!){
+  account(address: $address){
     balances{
       token
       total

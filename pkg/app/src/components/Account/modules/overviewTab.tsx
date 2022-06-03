@@ -15,7 +15,7 @@ interface OverviewTabProps {
 }
 
 const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
-	const { data: balancesData, loading: balancesLoading } = useAccountBalancesQuery()
+	const { data: balancesData, loading: balancesLoading } = useAccountBalancesQuery({ variables: { address: 'q2e3' } })
 	const balances = balancesData?.account?.balances
 	return (
 		<Box>

@@ -73,8 +73,26 @@ type AccountBalance {
 	total: Int!
 }
 
+type AccountOrganizationMember {
+    canEdit: Boolean!
+    role: String!
+    valueLocked: Float!
+}
+type AccountOrganizationMetadata {
+    logo: String!
+    name: String!
+}
+
+type AccountOrganizations {
+    membersCount: Int!
+    access: String!
+    member: AccountOrganizationMember!
+    metadata: AccountOrganizationMetadata!
+}
+
 type Account {
     balances: [AccountBalance]
+    organizations: [AccountOrganizations]
 }
 
 type DisplayValueEntryNumber implements DisplayValueEntry{
@@ -111,7 +129,7 @@ type DisplayValues {
 }
 
 type Query {
-    account: Account
+    account(address: String!): Account
     version: String!
     links: [Link]!
     config(env: Environment!): Config!
