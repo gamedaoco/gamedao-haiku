@@ -44,7 +44,7 @@ const CollectableCard: FC<ComponentProps> = ({ item }) => {
 				<Card sx={{ maxWidth: '95%', backgroundColor: theme.palette.grey[700] }}>
 					<CardMedia
 						component="img"
-						sx={{ width: '100%', padding: 0.7, borderRadius: '16px' }}
+						sx={{ width: '100%', padding: 0.7, borderRadius: theme.shape.borderRadiusMd }}
 						image={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
 						alt="collectable_image"
 						onClick={() => setOpenModel(true)}

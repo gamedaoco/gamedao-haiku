@@ -39,8 +39,8 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 				<CardMedia
 					component="img"
 					sx={{
-						width: '18%',
-						borderRadius: '100%',
+						maxWidth: '20%',
+						borderRadius: theme.shape.borderRadiusLg,
 						position: 'relative',
 						top: -35,
 					}}
