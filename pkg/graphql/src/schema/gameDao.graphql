@@ -79,7 +79,7 @@ type AccountOrganizationMember {
     valueLocked: Float!
 }
 type AccountOrganizationMetadata {
-    logo: String!
+    logo: String
     name: String!
 }
 

@@ -33,7 +33,45 @@
             "member": {
                 "role": "Member",
                 "canEdit": true,
-                "valueLocked": 10000.01
+                "valueLocked": 1000
+            }
+        },
+        {
+            "metadata": {
+                "name": "Lost Vegas",
+                "logo": "https://picsum.photos/200"
+            },
+            "membersCount": 2000,
+            "access": "Invitation",
+            "member": {
+                "role": "Prime",
+                "canEdit": false,
+                "valueLocked": 10.00
+            }
+        },
+        {
+            "metadata": {
+                "name": "Master DAO2",
+                "logo": "https://picsum.photos/200"
+            },
+            "membersCount": 23100,
+            "access": "Open",
+            "member": {
+                "role": "Member",
+                "canEdit": false,
+                "valueLocked": 10.00
+            }
+        },
+        {
+            "metadata": {
+                "name": "Master DAO3"
+            },
+            "membersCount": 2000,
+            "access": "Proposal",
+            "member": {
+                "role": "Prime",
+                "canEdit": true,
+                "valueLocked": 10.00
             }
         }
     ]

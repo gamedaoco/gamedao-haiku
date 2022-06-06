@@ -1,0 +1,24 @@
+query account($address: String!) {
+  account(address: $address) {
+    organizations {
+      membersCount
+      member {
+        valueLocked
+        canEdit
+        role
+      }
+      access
+      metadata {
+        logo
+        name
+      }
+    }
+    balances {
+      token
+      transferrable
+      locked
+      reserved
+      total
+    }
+  } 
+}

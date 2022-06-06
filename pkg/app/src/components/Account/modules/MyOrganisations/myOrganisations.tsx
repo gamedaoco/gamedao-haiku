@@ -1,3 +1,6 @@
+import { FC } from 'react'
+
+import { AccountOrganizations } from '@gamedao-haiku/graphql/dist'
 import { Edit } from '@mui/icons-material'
 import {
 	Avatar,
@@ -13,12 +16,18 @@ import {
 	Typography,
 } from '@mui/material'
 import { getInitials } from 'src/utils/accountUtils'
+import { reformatNumber } from 'src/utils/globalUtils'
 
 import { Scrollbar } from 'components/scrollbar'
 
 import LoadingTable from './loadingTable'
 
-const MyOrganisationsTable = ({ organisations, title, loading }) => {
+interface MyOrganisationsTableProps {
+	loading: boolean
+	organisations: AccountOrganizations[]
+	title?: string
+}
+const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, title, loading }) => {
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
 			<CardContent>
@@ -53,22 +62,22 @@ const MyOrganisationsTable = ({ organisations, title, loading }) => {
 												}}
 											>
 												<Avatar
-													src={organisation?.logo}
+													src={organisation?.metadata?.logo}
 													sx={{
 														height: 42,
 														width: 42,
 													}}
 												>
-													{getInitials(organisation?.name)}
+													{getInitials(organisation?.metadata?.logo)}
 												</Avatar>
-												<Box sx={{ ml: 1 }}>{organisation.name}</Box>
+												<Box sx={{ ml: 1 }}>{organisation?.metadata?.name}</Box>
 											</Box>
 										</TableCell>
-										<TableCell>{organisation.membersCount}</TableCell>
-										<TableCell>{organisation.valueLocked}</TableCell>
+										<TableCell>{reformatNumber(organisation.membersCount, 2)}</TableCell>
+										<TableCell>{reformatNumber(organisation?.member?.valueLocked, 3)}</TableCell>
 										<TableCell>{organisation.access}</TableCell>
-										<TableCell>{organisation.role}</TableCell>
-										{organisation?.canEdit ? (
+										<TableCell>{organisation?.member?.role}</TableCell>
+										{organisation?.member?.canEdit ? (
 											<TableCell align="right">
 												<IconButton aria-label="edit">
 													<Edit />
