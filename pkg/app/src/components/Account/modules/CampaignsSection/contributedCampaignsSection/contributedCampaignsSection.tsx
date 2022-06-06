@@ -16,9 +16,9 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { AccountState } from 'src/@types/extension'
 
 import { Scrollbar } from 'components/scrollbar'
-import { AccountState } from 'src/@types/extension'
 
 import {
 	getContributedCampaignContribution,

@@ -1,7 +1,7 @@
 import type { InjectedAccount } from '@polkadot/extension-inject/types'
-import type { AccountState } from 'src/@types/extension'
-import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 import { hexToU8a, isHex } from '@polkadot/util'
+import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
+import type { AccountState } from 'src/@types/extension'
 
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
@@ -42,8 +42,8 @@ export function checkIsAddressValid(address: string): boolean {
 }
 export const getInitials = (name = ''): string =>
 	name
-		.replace(/\s+/, ' ')
-		.split(' ')
-		.slice(0, 2)
-		.map((v) => v && v[0].toUpperCase())
-		.join('')
+		?.replace(/\s+/, ' ')
+		?.split(' ')
+		?.slice(0, 2)
+		?.map((v) => v && v[0].toUpperCase())
+		?.join('')

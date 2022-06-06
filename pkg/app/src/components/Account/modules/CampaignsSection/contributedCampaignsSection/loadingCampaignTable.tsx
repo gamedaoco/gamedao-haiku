@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box, TableBody, TableCell, TableRow, Skeleton } from '@mui/material'
+import { Box, Skeleton, TableBody, TableCell, TableRow } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 const LoadingCampaignTable: FC = () => {

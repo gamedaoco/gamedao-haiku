@@ -1,5 +1,6 @@
-import { Box, Card, CardContent, Skeleton } from '@mui/material'
 import React, { FC } from 'react'
+
+import { Box, Card, CardContent, Skeleton } from '@mui/material'
 
 const LoadingCampaignCard: FC = () => {
 	return (
