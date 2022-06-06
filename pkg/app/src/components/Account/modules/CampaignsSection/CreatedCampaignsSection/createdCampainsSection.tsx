@@ -21,15 +21,18 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 
 	return (
 		<Box sx={{ pb: 4 }}>
-			<Typography variant="body2" fontWeight="bold" sx={{ color: theme.palette.grey[500] }}>
+			<Typography
+				variant="body2"
+				fontWeight={theme.typography.fontWeightBold}
+				sx={{ color: theme.palette.grey[500] }}
+			>
 				Created Campaigns
 			</Typography>
 			<Grid container sx={{ pt: 4 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
 				<Grid item style={{ marginBottom: 10, minHeight: 406 }} xs={4}>
 					<Card
 						sx={{
-							width: '100%',
-							height: '100% ',
+							height: '100%',
 							border: 1,
 							borderColor: theme.palette.grey[500],
 							borderStyle: 'dashed',
@@ -40,7 +43,7 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 							<Box display="flex" flexDirection="column" justifyItems="center" alignItems="center">
 								<Box
 									sx={{
-										borderRadius: '100%',
+										borderRadius: theme.shape.borderRadiusLg,
 										maxWidth: 56,
 										maxHeight: 56,
 										padding: 2,
@@ -73,8 +76,8 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 					))
 				) : (
 					<>
-						{data?.campaigns?.map((campaign: Campaign) => (
-							<Grid item xs={4} key={campaign?.id} style={{ marginBottom: 10 }}>
+						{data?.campaigns?.map((campaign: Campaign, index: number) => (
+							<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>
 								<CampaignCard campaign={campaign} />
 							</Grid>
 						))}

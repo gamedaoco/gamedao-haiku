@@ -9,7 +9,11 @@ const LoadingCollectableCard: FC = () => {
 	return (
 		<Card sx={{ maxWidth: '95%', height: '100%', backgroundColor: theme.palette.grey[700] }}>
 			<CardMedia sx={{ padding: 0.7 }}>
-				<Skeleton sx={{ height: 190, borderRadius: '10px' }} animation="wave" variant="rectangular" />
+				<Skeleton
+					sx={{ height: 190, borderRadius: theme.shape.borderRadiusMd }}
+					animation="wave"
+					variant="rectangular"
+				/>
 			</CardMedia>
 
 			<CardContent sx={{ pt: 2 }}>

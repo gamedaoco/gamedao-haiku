@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Campaign } from '@gamedao-haiku/graphql/dist'
-import { Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Container, LinearProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import {
@@ -35,21 +35,39 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 				src={`${gateway}${getCampaignHeader(campaign)}`}
 				alt="campaign_poster"
 			/>
-			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+			<Box
+				sx={{
+					display: 'flex',
+					justifyItems: 'center',
+				}}
+			>
+				<Container
+					sx={{
+						position: 'relative',
+						width: '6rem',
+						height: '6rem',
+						backgroundColor: theme.palette.grey[800],
+						borderRadius: theme.shape.borderRadiusLg,
+						top: -30,
+						zIndex: 0,
+					}}
+				/>
+			</Box>
+			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 				<CardMedia
 					component="img"
 					sx={{
-						width: '18%',
-						borderRadius: '100%',
+						maxWidth: '4.5rem',
+						borderRadius: theme.shape.borderRadiusLg,
 						position: 'relative',
-						top: -35,
+						top: -120,
 					}}
 					src={`${gateway}${getCampaignLogo(campaign)}`}
 					alt="campaign_poster"
 				/>
 			</Box>
 
-			<CardContent sx={{ pt: 0, mt: -1 }}>
+			<CardContent sx={{ pt: 0, mt: -10 }}>
 				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 					<Typography fontWeight="600" variant="body1">
 						{getCampaignTitle(campaign)}

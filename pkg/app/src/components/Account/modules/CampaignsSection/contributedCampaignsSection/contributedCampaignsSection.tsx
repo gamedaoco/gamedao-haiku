@@ -48,7 +48,11 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 
 	return (
 		<Box>
-			<Typography variant="body2" fontWeight="bold" sx={{ color: theme.palette.grey[500], pb: 4 }}>
+			<Typography
+				variant="body2"
+				fontWeight={theme.typography.fontWeightBold}
+				sx={{ color: theme.palette.grey[500], pb: 4 }}
+			>
 				Contributed Campaigns
 			</Typography>
 			<Card>
@@ -88,7 +92,7 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 																<CardMedia
 																	component="img"
 																	sx={{
-																		borderRadius: '8px',
+																		borderRadius: theme.shape.borderRadiusSm,
 																		width: 64,
 																		height: 64,
 																	}}
@@ -159,7 +163,7 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 																backgroundColor: theme.palette.success.main,
 																fontWeight: '700',
 																color: theme.palette.common.black,
-																borderRadius: '6px',
+																borderRadius: theme.shape.borderRadiusSm,
 															}}
 														/>
 													</TableCell>
