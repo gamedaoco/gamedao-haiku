@@ -32,8 +32,7 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 				<Grid item style={{ marginBottom: 10, minHeight: 406 }} xs={4}>
 					<Card
 						sx={{
-							width: '100%',
-							height: '100% ',
+							height: '100%',
 							border: 1,
 							borderColor: theme.palette.grey[500],
 							borderStyle: 'dashed',
