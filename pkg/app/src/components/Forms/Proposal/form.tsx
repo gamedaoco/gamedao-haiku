@@ -129,11 +129,11 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 			)}
 			<Stack spacing={2} justifyContent="flex-end" direction="row">
 				<Button size="large" variant="outlined" disabled={checkBackButtonState()} onClick={handleBack}>
-					Back
+					{t('button:form:back')}
 				</Button>
 
 				<Button size="large" variant="contained" onClick={handleNext} disabled={checkNextButtonState()}>
-					{currentStep === 2 ? 'Create Proposal' : 'Next step'}
+					{t(currentStep === 2 ? 'button:form:proposal:create' : 'button:form:next_step')}
 				</Button>
 			</Stack>
 			<TransactionDialog
