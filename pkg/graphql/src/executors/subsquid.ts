@@ -1,7 +1,8 @@
-const config = require('../../package.json')
+import { introspectSchema } from '@graphql-tools/wrap'
 import { fetch } from 'cross-undici-fetch'
 import { print } from 'graphql'
-import { introspectSchema } from '@graphql-tools/wrap'
+
+const config = require('../../package.json')
 
 interface Executor {
 	document: any

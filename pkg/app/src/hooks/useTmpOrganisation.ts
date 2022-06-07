@@ -1,7 +1,8 @@
-import type { TMPOrganisation } from 'src/@types/organisation'
+import { useEffect, useState } from 'react'
+
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
-import { useEffect, useState } from 'react'
+import type { TMPOrganisation } from 'src/@types/organisation'
 import { defaultValuesTmpOrganisation as defaultValues } from 'src/constants'
 
 export function useTmpOrganisation(): TMPOrganisation {

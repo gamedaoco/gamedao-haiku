@@ -1,6 +1,7 @@
-import closeCircleFill from '@iconify/icons-eva/close-circle-fill'
-import { Icon } from '@iconify/react'
 import { Theme } from '@mui/material/styles'
+
+//
+import { CloseIcon } from './CustomIcons'
 
 // ----------------------------------------------------------------------
 
@@ -8,7 +9,7 @@ export default function Chip(theme: Theme) {
 	return {
 		MuiChip: {
 			defaultProps: {
-				deleteIcon: <Icon icon={closeCircleFill} />,
+				deleteIcon: <CloseIcon />,
 			},
 
 			styleOverrides: {

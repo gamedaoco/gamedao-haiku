@@ -1,9 +1,10 @@
+import { useCallback } from 'react'
+
+import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
+import type { ISubmittableResult } from '@polkadot/types/types'
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { useNetworkContext } from 'provider/network/modules/context'
-import { useCallback } from 'react'
-import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import type { PromiseMsg } from 'src/@types/promiseMsg'
-import type { ISubmittableResult } from '@polkadot/types/types'
 
 export function useTransaction(): (
 	tx: SubmittableExtrinsic,

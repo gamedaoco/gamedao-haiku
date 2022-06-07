@@ -1,8 +1,9 @@
-import { TMPProposal } from 'src/@types/proposal'
+import { useEffect, useState } from 'react'
+
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
+import { TMPProposal } from 'src/@types/proposal'
 import { defaultValuesTMPProposal as defaultValues } from 'src/constants'
-import { useEffect, useState } from 'react'
 
 export function useTMPProposal(): TMPProposal {
 	const address = useCurrentAccountAddress()
