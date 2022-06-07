@@ -1,7 +1,7 @@
 import type { InjectedAccount } from '@polkadot/extension-inject/types'
-import type { AccountState } from 'src/@types/extension'
-import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 import { hexToU8a, isHex } from '@polkadot/util'
+import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
+import type { AccountState } from 'src/@types/extension'
 
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''

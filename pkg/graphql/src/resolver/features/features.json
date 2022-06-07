@@ -1,25 +1,14 @@
 {
   "global": {
-    "DEBUG": false,
-    "SHOW_HEADER": true,
-    "SHOW_FOOTER": true,
-    "SHOW_FOOTER_NAV": false,
-    "SHOW_APPLY": false,
-    "SHOW_CAMPAIGNS": false,
-    "SHOW_FX": true
+    "CREATE_PROPOSAL": true,
+    "CREATE_PROPOSAL_SIMPLE_MAJORITY": true,
+    "CREATE_PROPOSAL_RELATIVE_MAJORITY": false,
+    "CREATE_GENERAL_PROPOSAL": true,
+    "CREATE_WITHDRAW_PROPOSAL": true,
+    "CREATE_SPENDING_PROPOSAL": false
   },
   "dev": {
-    "DEBUG": false,
-    "SHOW_HEADER": true,
-    "SHOW_FOOTER": true,
-    "SHOW_FOOTER_NAV": true,
-    "SHOW_APPLY": true,
-    "SHOW_CAMPAIGNS": true
   },
   "production": {
-    "SHOW_APPLY": true,
-    "SHOW_CAMPAIGNS": false,
-    "SHOW_FOOTER_NAV": false,
-    "SHOW_FX": false
   }
 }

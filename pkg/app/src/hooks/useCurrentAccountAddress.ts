@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
+
 import { useExtensionContext } from 'provider/extension/modules/context'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 export function useCurrentAccountAddress(): string {
 	const [addressState, setAddressState] = useState<string>('')

@@ -12,7 +12,7 @@ interface ComponentsPros {
 }
 
 const gateway = 'https://ipfs.gamedao.co/gateway/'
-const toLink = '/app/organisations/'
+const toLink = '/organisations/'
 
 export const TileCard = ({ item }: ComponentsPros) => {
 	const theme = useTheme()
@@ -75,7 +75,7 @@ export const TileCard = ({ item }: ComponentsPros) => {
 	}, [item, address])
 
 	return (
-		<NavLink href={`${toLink}${item.id}`}>
+		<NavLink href={`${toLink}${item.id}/dashboard`}>
 			<Card
 				sx={{
 					minHeight: '164px',

@@ -1,7 +1,8 @@
-import { useLocalStorage } from 'hooks/useLocalStorage'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import type { TMPOrganisationState } from 'src/@types/organisation'
 import { useCallback } from 'react'
+
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useLocalStorage } from 'hooks/useLocalStorage'
+import type { TMPOrganisationState } from 'src/@types/organisation'
 import { defaultValuesTmpOrganisation as defaultValues } from 'src/constants'
 
 // TODO: Replace store logic with db for cross device storage

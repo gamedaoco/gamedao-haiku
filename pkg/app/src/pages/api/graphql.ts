@@ -1,17 +1,18 @@
-import { ApolloServer } from 'apollo-server-micro'
-import pkg from '../../../package.json'
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
-import { addResolversToSchema } from '@graphql-tools/schema'
-import Cors from 'micro-cors'
-import { stitchSchemas } from '@graphql-tools/stitch'
 import {
-	resolvers,
+	gameDaoSchemaJson,
 	getRmrkSubSchema,
 	getSubsquidSubSchema,
-	gameDaoSchemaJson,
+	resolvers,
 } from '@gamedao-haiku/graphql/dist/index.js'
 import type { Resolvers } from '@gamedao-haiku/graphql/dist/resolver/resolvers-types'
+import { addResolversToSchema } from '@graphql-tools/schema'
+import { stitchSchemas } from '@graphql-tools/stitch'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
+import { ApolloServer } from 'apollo-server-micro'
 import { buildClientSchema } from 'graphql'
+import Cors from 'micro-cors'
+
+import pkg from '../../../package.json'
 
 const cors = Cors()
 export default cors(async function handler(req, res) {

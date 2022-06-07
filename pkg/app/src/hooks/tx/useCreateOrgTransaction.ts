@@ -1,11 +1,12 @@
-import * as Yup from 'yup'
-import { useNetworkContext } from 'provider/network/modules/context'
 import { useEffect, useState } from 'react'
+
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
-import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
+import { useNetworkContext } from 'provider/network/modules/context'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
+import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
 	controller_id: Yup.string().required(),
@@ -65,6 +66,8 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 				)
 				setTxState(tx)
 			} catch (e) {
+				// TODO: Add logger engine. It does not necessarily have to be an error,
+				//  it can also be that data is still missing that is required for the transaction.
 				console.warn('CreateOrgTransaction', e)
 			}
 		}

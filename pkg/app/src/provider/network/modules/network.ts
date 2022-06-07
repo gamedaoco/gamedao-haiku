@@ -1,6 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
-import type { ApiProvider, ApiProviderConfig, SystemProperties } from 'src/@types/network'
 import type { RpcInterface } from '@polkadot/rpc-core/types/jsonrpc'
+import type { ApiProvider, ApiProviderConfig, SystemProperties } from 'src/@types/network'
 
 // Load system properties(token format and symbol)
 async function getProperties(apiProvider: ApiPromise): Promise<SystemProperties> {

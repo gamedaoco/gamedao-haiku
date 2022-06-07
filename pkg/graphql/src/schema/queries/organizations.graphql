@@ -19,3 +19,29 @@ query Organizations($orderBy: [OrganizationOrderByInput!]!, $first: Int, $search
     }
   }
 }
+
+query OrganizationById($orgId: ID!) {
+    organizations(where: {id_eq: $orgId}) {
+        access
+        controller
+        createdAtBlock
+        creator
+        fee
+        feeModel
+        govAsset
+        id
+        memberLimit
+        payAsset
+        treasury
+        type
+        metadata {
+            description
+            email
+            id
+            logo
+            name
+            repo
+            website
+        }
+    }
+}

@@ -1,8 +1,9 @@
-import { TMPProposal } from 'src/@types/proposal'
+import { useEffect, useState } from 'react'
+
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
+import { TMPProposal } from 'src/@types/proposal'
 import { defaultValuesTMPProposal as defaultValues } from 'src/constants'
-import { useEffect, useState } from 'react'
 
 export function useTMPProposal(): TMPProposal {
 	const address = useCurrentAccountAddress()
@@ -13,6 +14,10 @@ export function useTMPProposal(): TMPProposal {
 	const [endDate] = useLocalStorage<Date>(`TmpProposal-${address}-endDate`, defaultValues.endDate)
 	const [majority] = useLocalStorage<number>(`TmpProposal-${address}-majority`, defaultValues.majority)
 	const [deposit] = useLocalStorage<number>(`TmpProposal-${address}-deposit`, defaultValues.deposit)
+	const [metaDataCID] = useLocalStorage<string>(`TmpProposal-${address}-metaDataCID`, defaultValues.metaDataCID)
+	const [campaignId] = useLocalStorage<string>(`TmpProposal-${address}-campaignId`, defaultValues.campaignId)
+	const [amount] = useLocalStorage<number>(`TmpProposal-${address}-amount`, defaultValues.amount)
+
 	const [state, setState] = useState<TMPProposal>({
 		type: selectedType,
 		name: nameState,
@@ -21,6 +26,9 @@ export function useTMPProposal(): TMPProposal {
 		endDate: endDate,
 		majority: majority,
 		deposit: deposit,
+		campaignId: campaignId,
+		amount: amount,
+		metaDataCID: metaDataCID,
 	})
 
 	useEffect(() => {
@@ -32,8 +40,11 @@ export function useTMPProposal(): TMPProposal {
 			endDate: endDate,
 			majority: majority,
 			deposit: deposit,
+			campaignId: campaignId,
+			amount: amount,
+			metaDataCID: metaDataCID,
 		})
-	}, [selectedType, nameState, description, startDate, endDate, majority, deposit])
+	}, [selectedType, nameState, description, startDate, endDate, majority, deposit, campaignId, amount, metaDataCID])
 
 	return state
 }
