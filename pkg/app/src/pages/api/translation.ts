@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+
 import enJson from '@gamedao-haiku/translations/src/app/en-US.json'
 
 // Test config local:

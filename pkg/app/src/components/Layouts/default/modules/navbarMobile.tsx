@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -6,7 +6,6 @@ import {
 	Box,
 	Button,
 	Drawer,
-	List,
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
@@ -28,22 +27,22 @@ interface ComponentProps {
 const urls = [
 	{
 		name: 'button:navigation:dashboard',
-		path: '/app/dashboard',
+		path: '/dashboard',
 		icon: 'dashboard',
 	},
 	{
 		name: 'button:navigation:organisations',
-		path: '/app/organisations',
+		path: '/organisations',
 		icon: 'organization',
 	},
 	{
 		name: 'button:navigation:campaigns',
-		path: '/app/campaigns',
+		path: '/campaigns',
 		icon: 'campaign',
 	},
 	{
 		name: 'button:navigation:wallet',
-		path: '/app/wallet',
+		path: '/wallet',
 		icon: 'wallet',
 	},
 ]

@@ -1,9 +1,9 @@
-import { SystemProperties } from 'src/@types/network'
-import { AccountSettings, ExtensionState } from 'src/@types/extension'
 import { InjectedAccount, InjectedExtension } from '@polkadot/extension-inject/types'
-import { getDecodedAddress } from 'src/utils/accountUtils'
-import { getWalletBySource, Wallet } from '@talisman-connect/wallets'
 import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
+import { Wallet, getWalletBySource } from '@talisman-connect/wallets'
+import { AccountSettings, ExtensionState } from 'src/@types/extension'
+import { SystemProperties } from 'src/@types/network'
+import { getDecodedAddress } from 'src/utils/accountUtils'
 
 export async function initializeAccounts(
 	systemProperties: SystemProperties,

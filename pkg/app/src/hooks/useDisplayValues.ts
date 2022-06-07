@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { DisplayValues, useDisplayValuesQuery } from '@gamedao-haiku/graphql/dist'
 
 export function useDisplayValues(): DisplayValues {

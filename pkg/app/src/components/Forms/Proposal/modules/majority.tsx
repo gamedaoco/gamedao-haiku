@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 
 import { Person } from '@mui/icons-material'
 import { InputAdornment, Stack, TextField, Typography } from '@mui/material'
+import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 
 import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
@@ -14,6 +15,8 @@ interface ComponentProps {
 }
 
 export function Majority({ selected, setSelected, deposit, setDeposit }: ComponentProps) {
+	const enabledFeature = useProposalFeatures()
+
 	const handleDepositChange = useCallback(
 		(event) => {
 			const value = event.target.value
@@ -31,6 +34,7 @@ export function Majority({ selected, setSelected, deposit, setDeposit }: Compone
 				value={0}
 				selectedValue={selected}
 				onChange={setSelected}
+				disabled={!enabledFeature.CREATE_PROPOSAL_SIMPLE_MAJORITY}
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
@@ -39,9 +43,9 @@ export function Majority({ selected, setSelected, deposit, setDeposit }: Compone
 				value={1}
 				selectedValue={selected}
 				onChange={setSelected}
-				disabled={true}
+				disabled={!enabledFeature.CREATE_PROPOSAL_RELATIVE_MAJORITY}
 			/>
-			<Stack alignItems="center" justifyContent="space-between" spacing={1}>
+			<Stack alignItems="center" justifyContent="space-between" spacing={1} direction="row" width="100%">
 				<Typography>A min deposit of 1 GAME is needed.</Typography>
 				<TextField
 					variant="outlined"

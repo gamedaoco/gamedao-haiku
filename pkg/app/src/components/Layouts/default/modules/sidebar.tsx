@@ -30,7 +30,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 		if (w3Enabled === false) {
 			connectWallet()
 		} else if (selectedAccount) {
-			push('/app/organisations/create')
+			push('/organisations/create')
 		}
 	}, [w3Enabled, connectWallet, selectedAccount, push])
 

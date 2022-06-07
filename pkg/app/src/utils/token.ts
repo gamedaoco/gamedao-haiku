@@ -1,8 +1,12 @@
-import BN from 'bn.js'
 import { formatBalance } from '@polkadot/util'
+import BN from 'bn.js'
 
-export function toUnit(balance: string, decimals: number): number {
-	const balanceFormatted = formatBalance(balance, { withSi: false, forceUnit: '-' }, decimals)
+export function toUnit(balance: string, decimals: number | string): number {
+	const balanceFormatted = formatBalance(
+		balance,
+		{ withSi: false },
+		typeof decimals === 'string' ? parseInt(decimals) : decimals,
+	)
 	return parseFloat(balanceFormatted)
 }
 

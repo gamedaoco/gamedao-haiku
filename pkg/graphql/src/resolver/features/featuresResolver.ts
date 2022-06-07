@@ -1,6 +1,6 @@
 // TODO: Move to core package
-import jsonData from './features.json'
 import type { Features } from '../../types'
+import jsonData from './features.json'
 
 interface ResolverArgs {
 	env: string

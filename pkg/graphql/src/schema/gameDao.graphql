@@ -8,7 +8,6 @@ enum Environment {
     PRODUCTION
 }
 
-
 type Link {
     id: String
     title: String
@@ -19,15 +18,22 @@ type Link {
     users: [String]
 }
 
-type Features {
-    DEBUG: Boolean
-    SHOW_HEADER: Boolean
-    SHOW_HEADER_NAV: Boolean
-    SHOW_FOOTER: Boolean
-    SHOW_FOOTER_NAV: Boolean
-    SHOW_APPLY: Boolean
-    SHOW_CAMPAIGNS: Boolean
-    SHOW_FX: Boolean
+interface ProposalFeatures {
+    CREATE_PROPOSAL: Boolean!
+    CREATE_PROPOSAL_SIMPLE_MAJORITY: Boolean!
+    CREATE_PROPOSAL_RELATIVE_MAJORITY: Boolean!
+    CREATE_GENERAL_PROPOSAL: Boolean!
+    CREATE_WITHDRAW_PROPOSAL: Boolean!
+    CREATE_SPENDING_PROPOSAL: Boolean!
+}
+
+type Features implements ProposalFeatures {
+    CREATE_PROPOSAL: Boolean!
+    CREATE_PROPOSAL_SIMPLE_MAJORITY: Boolean!
+    CREATE_PROPOSAL_RELATIVE_MAJORITY: Boolean!
+    CREATE_GENERAL_PROPOSAL: Boolean!
+    CREATE_WITHDRAW_PROPOSAL: Boolean!
+    CREATE_SPENDING_PROPOSAL: Boolean!
 }
 
 type Config {

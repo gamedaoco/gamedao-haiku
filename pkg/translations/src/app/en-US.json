@@ -9,6 +9,13 @@
     },
     "ui": {
       "connect_wallet": "Connect wallet"
+    },
+    "form": {
+      "next_step": "Next step",
+      "back": "Back",
+      "proposal": {
+        "create": "Create Proposal"
+      }
     }
   },
   "page": {

@@ -1,6 +1,6 @@
 import i18n, { i18n as I18nType } from 'i18next'
-import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import { initReactI18next } from 'react-i18next'
 
 async function fetchLang() {
 	try {
