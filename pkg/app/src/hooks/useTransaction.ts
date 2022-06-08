@@ -22,6 +22,6 @@ export function useTransaction(): (
 		) => {
 			return signAndNotify(selectedApiProvider.apiProvider, selectedAccount, tx, msg, callback)
 		},
-		[signAndNotify, selectedApiProvider.apiProvider, selectedAccount],
+		[signAndNotify, selectedApiProvider?.apiProvider, selectedAccount],
 	)
 }

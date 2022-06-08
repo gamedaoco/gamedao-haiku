@@ -18,7 +18,7 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 	const { push } = useRouter()
 	const config = useConfig()
 	const navigateCall = useCallback(() => {
-		push(`/app/organisations/${id}`)
+		push(`/organisations/${id}/dashboard`)
 	}, [id, push])
 
 	return (

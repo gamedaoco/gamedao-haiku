@@ -1,13 +1,8 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useApiProvider } from 'hooks/useApiProvider'
+import { unsubRef } from 'src/utils/hooks'
 import { toUnit } from 'src/utils/token'
-
-function unsubRef(ref: MutableRefObject<any>) {
-	if (ref.current && typeof ref.current === 'function') {
-		ref.current()
-	}
-}
 
 export interface Balance {
 	feeFrozen: number

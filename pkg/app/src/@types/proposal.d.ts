@@ -6,6 +6,9 @@ export interface TMPProposal {
 	endDate: Date
 	majority: number
 	deposit: number
+	campaignId: string
+	amount: number
+	metaDataCID: string
 }
 
 export interface TMPProposalState extends TMPProposal {
@@ -16,5 +19,8 @@ export interface TMPProposalState extends TMPProposal {
 	setEndDate: (date) => void
 	setMajority: (number) => void
 	setDeposit: (number) => void
+	setMetaDataCID: (string) => void
+	setCampaignId: (string) => void
+	setAmount: (number) => void
 	clearAll: () => void
 }

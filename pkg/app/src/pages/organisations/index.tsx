@@ -62,7 +62,7 @@ export function OrganisationPage() {
 	)
 
 	const handleClickCreate = useCallback(() => {
-		push('/app/organisations/create')
+		push('/organisations/create')
 	}, [push])
 
 	return (
