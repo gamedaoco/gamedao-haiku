@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 
-import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
+import { OrganizationOrderByInput, OrganizationPageFeatures } from '@gamedao-haiku/graphql/dist'
 import { Search } from '@mui/icons-material'
 import { Grid, InputAdornment, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -18,6 +18,7 @@ interface FiltersSectionPropsInterface {
 	sortOption: OrganizationOrderByInput
 	setSortOption: (x: OrganizationOrderByInput) => void
 	sortOptions: SortOptionsInterface[]
+	organizationPageFeatures: OrganizationPageFeatures
 }
 
 export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
@@ -26,7 +27,18 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 	sortOption,
 	setSortOption,
 	sortOptions,
+	organizationPageFeatures,
 }) => {
+	const [features, setFeatures] = useState<OrganizationPageFeatures>({
+		SHOW_SEARCH: true,
+		SHOW_FILTERS: true,
+		SHOW_SORT: true,
+	})
+	useEffect(() => {
+		if (organizationPageFeatures) {
+			setFeatures({ ...organizationPageFeatures })
+		}
+	}, [organizationPageFeatures])
 	return (
 		<Box
 			sx={{
@@ -42,21 +54,23 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 			>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={4}>
-						<TextField
-							onChange={(e) => setFilters(e.target.value)}
-							value={filters}
-							id="outlined-basic"
-							size="small"
-							fullWidth
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<Search />
-									</InputAdornment>
-								),
-							}}
-							placeholder="Search Organisations…"
-						/>
+						{features?.SHOW_SEARCH && (
+							<TextField
+								onChange={(e) => setFilters(e.target.value)}
+								value={filters}
+								id="outlined-basic"
+								size="small"
+								fullWidth
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<Search />
+										</InputAdornment>
+									),
+								}}
+								placeholder="Search Organisations…"
+							/>
+						)}
 					</Grid>
 					<Grid item xs={0} md={4}></Grid>
 					<Grid item xs={12} md={4}>
@@ -67,12 +81,14 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 								marginLeft: 1,
 							}}
 						>
-							<FiltersTab />
-							<SortOptionsTab
-								sortOption={sortOption}
-								setSortOption={setSortOption}
-								sortOptions={sortOptions}
-							/>
+							{features?.SHOW_FILTERS && <FiltersTab />}
+							{features?.SHOW_SORT && (
+								<SortOptionsTab
+									sortOption={sortOption}
+									setSortOption={setSortOption}
+									sortOptions={sortOptions}
+								/>
+							)}
 						</Box>
 					</Grid>
 				</Grid>

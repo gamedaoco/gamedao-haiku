@@ -6,5 +6,10 @@ query Features($env: Environment!) {
         CREATE_GENERAL_PROPOSAL
         CREATE_WITHDRAW_PROPOSAL
         CREATE_SPENDING_PROPOSAL
+        ORGANIZATION_PAGE_FEATURES {
+            SHOW_SEARCH
+            SHOW_SORT
+            SHOW_FILTERS
+        }
     }
 }

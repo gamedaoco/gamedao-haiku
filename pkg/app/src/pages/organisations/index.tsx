@@ -2,7 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { Organization, OrganizationOrderByInput, useOrganizationsLazyQuery } from '@gamedao-haiku/graphql/dist'
+import {
+	Environment,
+	Organization,
+	OrganizationOrderByInput,
+	useFeaturesQuery,
+	useOrganizationsLazyQuery,
+} from '@gamedao-haiku/graphql/dist'
 import { ArrowDownward } from '@mui/icons-material'
 import { Button, Container, Grid, createSvgIcon } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -40,15 +46,16 @@ const sortOptions: SortOptionsInterface[] = [
 export function OrganisationPage() {
 	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
+	const { data: featuresData } = useFeaturesQuery({
+		variables: {
+			env: Environment.Production,
+		},
+	})
+	const organizationPageFeatures = featuresData?.features?.ORGANIZATION_PAGE_FEATURES
+
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
-	const [fetchOrganizations, { loading, error, data }] = useOrganizationsLazyQuery()
-	useEffect(() => {
-		if (error) {
-			console.error('There was an error querying the display values')
-		}
-	}, [error])
-
+	const [fetchOrganizations, { loading, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
 		fetchOrganizations({
 			variables: { first: bodyCount, orderBy: sortOption, searchQuery: filters },
@@ -92,6 +99,7 @@ export function OrganisationPage() {
 							</Grid>
 						</Grid>
 						<FiltersSection
+							organizationPageFeatures={organizationPageFeatures}
 							filters={filters}
 							setFilters={setFilters}
 							sortOption={sortOption}

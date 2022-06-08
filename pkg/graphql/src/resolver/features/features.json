@@ -5,10 +5,32 @@
     "CREATE_PROPOSAL_RELATIVE_MAJORITY": false,
     "CREATE_GENERAL_PROPOSAL": true,
     "CREATE_WITHDRAW_PROPOSAL": true,
-    "CREATE_SPENDING_PROPOSAL": false
+    "CREATE_SPENDING_PROPOSAL": false,
+    "ORGANIZATION_PAGE_FEATURES": {
+      "SHOW_SEARCH": true,
+      "SHOW_FILTERS": true,
+      "SHOW_SORT": true
+    }
   },
-  "dev": {
+  "DEVELOPMENT": {
+    "ORGANIZATION_PAGE_FEATURES": {
+      "SHOW_SEARCH": false,
+      "SHOW_FILTERS": false,
+      "SHOW_SORT": false
+    }
   },
-  "production": {
+  "STAGING":{
+    "ORGANIZATION_PAGE_FEATURES": {
+      "SHOW_SEARCH": false,
+      "SHOW_FILTERS": true,
+      "SHOW_SORT": false
+    }
+  },
+  "PRODUCTION": {
+    "ORGANIZATION_PAGE_FEATURES": {
+      "SHOW_SEARCH": true,
+      "SHOW_FILTERS": true,
+      "SHOW_SORT": true
+    }
   }
 }
