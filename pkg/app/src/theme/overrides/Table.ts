@@ -67,7 +67,7 @@ export default function Table(theme: Theme) {
 				selectIcon: {
 					width: 20,
 					height: 20,
-					marginTop: 2,
+					marginTop: -4,
 				},
 			},
 		},
