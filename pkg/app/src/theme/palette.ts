@@ -6,6 +6,8 @@ function createGradient(color1: string, color2: string) {
 	return `linear-gradient(to bottom, ${color1}, ${color2})`
 }
 
+export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error'
+
 interface GradientsPaletteOptions {
 	primary: string
 	info: string
@@ -64,78 +66,67 @@ declare module '@mui/material' {
 
 // SETUP COLORS
 const PRIMARY = {
-	lighter: '#ee55ff',
-	light: '#dd44cc',
-	main: '#cc3399',
-	dark: '#bb2266',
-	darker: '#aa1133',
-	// lighter: '#C8FACD',
-	// light: '#5BE584',
-	// main: '#00AB55',
-	// dark: '#007B55',
-	// darker: '#005249',
+	lighter: '#A276E8',
+	light: '#8C56E2',
+	main: '#7535DC',
+	dark: '#5B27CD',
+	darker: '#4C20C6',
 }
 const SECONDARY = {
-	lighter: '#fefefe',
-	light: '#cdcdcd',
-	main: '#ababab',
-	dark: '#696969',
-	darker: '#363636',
-	// lighter: '#D6E4FF',
-	// light: '#84A9FF',
-	// main: '#3366FF',
-	// dark: '#1939B7',
-	// darker: '#091A7A',
+	lighter: '#D6E4FF',
+	light: '#84A9FF',
+	main: '#3366FF',
+	dark: '#1939B7',
+	darker: '#091A7A',
 }
 const INFO = {
-	lighter: '#D0F2FF',
-	light: '#74CAFF',
-	main: '#1890FF',
-	dark: '#0C53B7',
-	darker: '#04297A',
+	lighter: '#62F6E9',
+	light: '#3BEDED',
+	main: '#00D0E2',
+	dark: '#00A2C2',
+	darker: '#007BA2',
 }
 const SUCCESS = {
-	lighter: '#E9FCD4',
-	light: '#AAF27F',
-	main: '#54D62C',
-	dark: '#229A16',
-	darker: '#08660D',
+	lighter: '#D7F366',
+	light: '#C2E740',
+	main: '#A4D808',
+	dark: '#88B905',
+	darker: '#6D9B04',
 }
 const WARNING = {
-	lighter: '#FFF7CD',
-	light: '#FFE16A',
-	main: '#FFC107',
-	dark: '#B78103',
-	darker: '#7A4F01',
+	lighter: '#FECD65',
+	light: '#FDB83F',
+	main: '#FC9700',
+	dark: '#D87900',
+	darker: '#B55D00',
 }
 const ERROR = {
-	lighter: '#FFE7D9',
-	light: '#FFA48D',
-	main: '#FF4842',
-	dark: '#B72136',
-	darker: '#7A0C2E',
+	lighter: '#FE8685',
+	light: '#FD6774',
+	main: '#FC3559',
+	dark: '#D82657',
+	darker: '#B51A53',
 }
 
 const GREY = {
-	0: '#fcfcfc',
-	100: '#f2f0ef',
-	200: '#c2c0bf',
-	300: '#b2b0af',
-	400: '#a2a09f',
-	500: '#82807f',
-	600: '#62605f',
-	700: '#42403f',
-	800: '#22201f',
-	900: '#12100f',
-
-	500_8: alpha('#82807f', 0.08),
-	500_12: alpha('#82807f', 0.12),
-	500_16: alpha('#82807f', 0.16),
-	500_24: alpha('#82807f', 0.24),
-	500_32: alpha('#82807f', 0.32),
-	500_48: alpha('#82807f', 0.48),
-	500_56: alpha('#82807f', 0.56),
-	500_80: alpha('#82807f', 0.8),
+	0: '#FCFCFC',
+	100: '#F2F0EF',
+	200: '#C2C0BF',
+	300: '#B2B0AF',
+	400: '#A2A09F',
+	500: '#82807F',
+	600: '#62605F',
+	700: '#42403F',
+	800: '#22201F',
+	900: '#12100F',
+	500_8: alpha('#82807F', 0.08),
+	500_12: alpha('#82807F', 0.12),
+	500_16: alpha('#82807F', 0.16),
+	500_24: alpha('#82807F', 0.24),
+	500_32: alpha('#82807F', 0.32),
+	500_48: alpha('#82807F', 0.48),
+	500_56: alpha('#82807F', 0.56),
+	500_80: alpha('#82807F', 0.8),
 }
 
 const GRADIENTS = {
@@ -180,17 +171,19 @@ const COMMON = {
 const palette = {
 	light: {
 		...COMMON,
+		mode: 'light',
 		text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-		background: { paper: '#fff', default: '#fff', neutral: GREY[200] },
+		background: { paper: '#fff', default: '#fff', neutral: GREY[100] },
 		action: { active: GREY[600], ...COMMON.action },
 	},
 	dark: {
 		...COMMON,
+		mode: 'dark',
 		text: { primary: '#fff', secondary: GREY[500], disabled: GREY[600] },
-		background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16] },
+		background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_12] },
 		action: { active: GREY[500], ...COMMON.action },
 	},
-}
+} as const
 
 // TODO: 2075 merge PRIMARY_COLOR with this file
 export const PRIMARY_COLOR = [

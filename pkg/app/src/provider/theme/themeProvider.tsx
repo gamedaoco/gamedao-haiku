@@ -7,7 +7,7 @@ import { ThemePrimaryColor } from 'src/components'
 import { useSettings } from 'src/hooks/useSettings'
 import breakpoints from 'src/theme/breakpoints'
 import GlobalStyles from 'src/theme/globalStyles'
-import componentsOverride from 'src/theme/overrides'
+import ComponentsOverrides from 'src/theme/overrides'
 import palette from 'src/theme/palette'
 import shadows, { customShadows } from 'src/theme/shadows'
 import shape from 'src/theme/shape'
@@ -41,7 +41,7 @@ export function ThemeProvider({ children }: ComponentProps) {
 		}
 
 		const theme = createTheme(themeOptions)
-		theme.components = componentsOverride(theme)
+		theme.components = ComponentsOverrides(theme)
 		setThemeState(theme)
 	}, [themeMode, themeDirection])
 
