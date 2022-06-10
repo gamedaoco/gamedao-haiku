@@ -34,6 +34,7 @@ function SetColor(themeColor: ThemeColor) {
 		default:
 			color = DEFAULT
 	}
+
 	return color
 }
 
@@ -41,7 +42,7 @@ export function SettingsProvider({ children }) {
 	const [settings, setSettings] = useLocalStorage<SettingsState>('settings', {
 		themeMode: 'dark',
 		themeDirection: 'ltr',
-		themeColor: 'purple',
+		themeColor: '',
 		themeStretch: false,
 	})
 

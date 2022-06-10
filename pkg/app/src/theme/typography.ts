@@ -30,6 +30,7 @@ const typography = {
 		fontWeight: 700,
 		lineHeight: 80 / 64,
 		fontSize: pxToRem(40),
+		letterSpacing: 2,
 		...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
 	},
 	h2: {
@@ -88,7 +89,6 @@ const typography = {
 		fontWeight: 700,
 		lineHeight: 1.5,
 		fontSize: pxToRem(12),
-		letterSpacing: 1.1,
 		textTransform: 'uppercase',
 	},
 	button: {
