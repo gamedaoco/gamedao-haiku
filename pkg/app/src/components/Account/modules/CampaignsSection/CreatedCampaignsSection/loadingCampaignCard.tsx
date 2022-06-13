@@ -20,7 +20,7 @@ const LoadingCampaignCard: FC = () => {
 						width: '5.5rem',
 						height: '4.5rem',
 						backgroundColor: theme.palette.grey[800],
-						borderRadius: theme.shape.borderRadiusLg,
+						borderRadius: '100%',
 						top: -30,
 						zIndex: 0,
 					}}
@@ -31,7 +31,7 @@ const LoadingCampaignCard: FC = () => {
 					sx={{
 						width: '20%',
 						height: '100px',
-						borderRadius: '50%',
+						borderRadius: '100%',
 						position: 'relative',
 						top: -115,
 					}}

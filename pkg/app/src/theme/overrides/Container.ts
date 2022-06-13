@@ -6,7 +6,9 @@ export default function Container(theme: Theme) {
 	return {
 		MuiContainer: {
 			styleOverrides: {
-				root: {},
+				root: {
+					borderRadius: theme.shape.borderRadiusLg,
+				},
 			},
 		},
 	}

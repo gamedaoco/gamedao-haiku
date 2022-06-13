@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+
 import { Box, Skeleton, TableBody, TableCell, TableRow } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
@@ -10,7 +11,7 @@ const LoadingCampaignTable: FC = () => {
 				<TableRow key={index}>
 					<TableCell>
 						<Box display="flex" gap={3} justifyItems="center" alignItems="center">
-							<Skeleton width={64} height={64} sx={{ borderRadius: theme.shape.borderRadiusSm }} />
+							<Skeleton width={64} height={64} />
 							<Box display="flex" flexDirection="column">
 								<Box sx={{ width: 70, height: 1 }}>
 									<Skeleton />

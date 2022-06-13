@@ -25,16 +25,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 
 	return (
 		<Card>
-			<CardMedia
-				component="img"
-				sx={{
-					width: '100%',
-					position: 'relative',
-					bottom: 5,
-				}}
-				src={`${gateway}${getCampaignHeader(campaign)}`}
-				alt="campaign_poster"
-			/>
+			<CardMedia component="img" src={`${gateway}${getCampaignHeader(campaign)}`} alt="campaign_poster" />
 			<Box
 				sx={{
 					display: 'flex',
@@ -44,23 +35,23 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 				<Container
 					sx={{
 						position: 'relative',
-						width: '6rem',
-						height: '6rem',
+						width: '5.5rem',
+						height: '4.5rem',
 						backgroundColor: theme.palette.grey[800],
-						borderRadius: theme.shape.borderRadiusLg,
+						borderRadius: '100%',
 						top: -30,
 						zIndex: 0,
 					}}
 				/>
 			</Box>
+
 			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 				<CardMedia
 					component="img"
 					sx={{
 						maxWidth: '4.5rem',
-						borderRadius: theme.shape.borderRadiusLg,
-						position: 'relative',
-						top: -120,
+						borderRadius: '100%',
+						top: -100,
 					}}
 					src={`${gateway}${getCampaignLogo(campaign)}`}
 					alt="campaign_poster"
@@ -72,9 +63,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 					<Typography fontWeight="600" variant="body1">
 						{getCampaignTitle(campaign)}
 					</Typography>
-					<Typography variant="body2" color={theme.palette.grey[500]}>
-						{getCampaignName(campaign)}
-					</Typography>
+					<Typography variant="body2">{getCampaignName(campaign)}</Typography>
 
 					<LinearProgress
 						variant="determinate"
@@ -103,9 +92,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 							justifyItems: 'center',
 						}}
 					>
-						<Typography variant="caption" color={theme.palette.grey[500]}>
-							Funded
-						</Typography>
+						<Typography variant="caption">Funded</Typography>
 						<Typography variant="body1">{getCampaignFunding(campaign)}</Typography>
 					</Box>
 					<Box
@@ -116,9 +103,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 							justifyItems: 'center',
 						}}
 					>
-						<Typography variant="caption" color={theme.palette.grey[500]}>
-							Target
-						</Typography>
+						<Typography variant="caption">Target</Typography>
 						<Typography variant="body1">{getCampaignTarget(campaign)}</Typography>
 					</Box>
 					<Box
@@ -129,9 +114,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 							justifyItems: 'center',
 						}}
 					>
-						<Typography variant="caption" color={theme.palette.grey[500]}>
-							Contributer
-						</Typography>
+						<Typography variant="caption">Contributer</Typography>
 						<Typography variant="body1">{getCampaignContributors(campaign)}</Typography>
 					</Box>
 				</Box>

@@ -16,16 +16,12 @@ interface CreatedCampaignSectionProps {
 const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState }) => {
 	const theme = useTheme()
 	const { data, loading } = useCampaignsQuery({
-		variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' },
+		variables: { address: '3YutJfdBkSsL9YPuRebVBb4L3VpC1ES7y8RMzKEunCzZ5wwE' },
 	})
 
 	return (
 		<Box sx={{ pb: 4 }}>
-			<Typography
-				variant="body2"
-				fontWeight={theme.typography.fontWeightBold}
-				sx={{ color: theme.palette.grey[500] }}
-			>
+			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold}>
 				Created Campaigns
 			</Typography>
 			<Grid container sx={{ pt: 4 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
@@ -34,7 +30,6 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 						sx={{
 							height: '100%',
 							border: 1,
-							borderColor: theme.palette.grey[500],
 							borderStyle: 'dashed',
 							':hover': { opacity: 0.8 },
 						}}
@@ -52,17 +47,10 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 								>
 									<AddIcon sx={{ color: theme.palette.grey[300] }} />
 								</Box>
-								<Typography
-									variant="body1"
-									color={theme.palette.primary.contrastText}
-									fontWeight="600"
-									sx={{ mt: 2 }}
-								>
+								<Typography variant="body1" fontWeight={theme.typography.fontWeightBold} sx={{ mt: 2 }}>
 									New Campaign
 								</Typography>
-								<Typography variant="body1" color={theme.palette.primary.contrastText}>
-									Click here to create anew campaign
-								</Typography>
+								<Typography variant="body1">Click here to create a new campaign</Typography>
 							</Box>
 						</Button>
 					</Card>
