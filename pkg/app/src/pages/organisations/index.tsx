@@ -41,12 +41,16 @@ export function OrganisationPage() {
 	const [filters, setFilters] = useState('')
 	const { data: featuresData } = useFeaturesQuery({
 		variables: {
-			env: Environment.Production,
+			env: Environment.Staging,
 		},
 	})
 	const organizationPageFeatures = featuresData?.features?.ORGANIZATION_PAGE_FEATURES
-	const sortOptions =
-		featuresData?.features?.ORGANIZATION_PAGE_FEATURES?.SORT_OPTIONS?.slice() as SortOptionsInterface[]
+	const [sortOptions, setSortOptions] = useState<SortOptionsInterface[]>([
+		{ value: OrganizationOrderByInput.MemberLimitDesc, name: 'Member: High-Low' },
+		{ value: OrganizationOrderByInput.MemberLimitAsc, name: 'Member: Low-High' },
+		{ value: OrganizationOrderByInput.CreatedAtBlockDesc, name: 'Created: Newest first' },
+		{ value: OrganizationOrderByInput.CreatedAtBlockAsc, name: 'Created: Oldest first' },
+	])
 
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions?.[0].value)
@@ -62,7 +66,13 @@ export function OrganisationPage() {
 		() => paginatedData?.length < data?.organizationsConnection?.totalCount,
 		[paginatedData?.length, data?.organizationsConnection?.totalCount],
 	)
-
+	useEffect(() => {
+		if (featuresData) {
+			setSortOptions(
+				featuresData?.features?.ORGANIZATION_PAGE_FEATURES?.SORT_OPTIONS?.slice() as SortOptionsInterface[],
+			)
+		}
+	}, [featuresData])
 	const handleClickCreate = useCallback(() => {
 		push('/organisations/create')
 	}, [push])
