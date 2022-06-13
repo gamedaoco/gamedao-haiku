@@ -26,16 +26,16 @@ interface ProposalFeatures {
     CREATE_WITHDRAW_PROPOSAL: Boolean!
     CREATE_SPENDING_PROPOSAL: Boolean!
 }
-# interface OrganizationPageFeaturesSortOptions {
-#     name: String!
-#     value: String!
-# }
+type OrganizationPageFeaturesSortOptions {
+    name: String!
+    value: String!
+}
 
 type OrganizationPageFeatures {
     SHOW_SEARCH: Boolean!
     SHOW_FILTERS: Boolean!
     SHOW_SORT: Boolean!
-    # SORT_OPTIONS: [OrganizationPageFeaturesSortOptions]
+    SORT_OPTIONS: [OrganizationPageFeaturesSortOptions]
 }
 
 type Features implements ProposalFeatures {

@@ -36,13 +36,6 @@ interface SortOptionsInterface {
 	value: OrganizationOrderByInput
 }
 
-const sortOptions: SortOptionsInterface[] = [
-	{ value: OrganizationOrderByInput.MemberLimitDesc, name: 'Member: High-Low' },
-	{ value: OrganizationOrderByInput.MemberLimitAsc, name: 'Member: Low-High' },
-	{ value: OrganizationOrderByInput.CreatedAtBlockDesc, name: 'Created: Newest first' },
-	{ value: OrganizationOrderByInput.CreatedAtBlockAsc, name: 'Created: Oldest first' },
-]
-
 export function OrganisationPage() {
 	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
@@ -52,9 +45,11 @@ export function OrganisationPage() {
 		},
 	})
 	const organizationPageFeatures = featuresData?.features?.ORGANIZATION_PAGE_FEATURES
+	const sortOptions =
+		featuresData?.features?.ORGANIZATION_PAGE_FEATURES?.SORT_OPTIONS?.slice() as SortOptionsInterface[]
 
 	const [bodyCount, setBodyCount] = useState<number>(15)
-	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions[0].value)
+	const [sortOption, setSortOption] = useState<OrganizationOrderByInput>(sortOptions?.[0].value)
 	const [fetchOrganizations, { loading, data }] = useOrganizationsLazyQuery()
 	useEffect(() => {
 		fetchOrganizations({
@@ -71,7 +66,6 @@ export function OrganisationPage() {
 	const handleClickCreate = useCallback(() => {
 		push('/organisations/create')
 	}, [push])
-
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box

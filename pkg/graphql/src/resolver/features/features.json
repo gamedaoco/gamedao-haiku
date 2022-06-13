@@ -9,28 +9,100 @@
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": true,
       "SHOW_FILTERS": true,
-      "SHOW_SORT": true
+      "SHOW_SORT": true,
+      "SORT_OPTIONS": [
+        {
+          "name": "Member: High-Low",
+          "value": "memberLimit_DESC"
+        },
+        {
+          "name": "Member: Low-High",
+          "value": "memberLimit_ASC"
+        },
+        {
+          "name": "Created: Newest first",
+          "value": "createdAtBlock_DESC"
+        },
+        {
+          "name": "Created: Oldest first",
+          "value": "createdAtBlock_ASC"
+        }
+      ]
     }
   },
   "DEVELOPMENT": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": false,
       "SHOW_FILTERS": false,
-      "SHOW_SORT": false
+      "SHOW_SORT": false,
+      "SORT_OPTIONS": [
+        {
+          "name": "Member: High-Low",
+          "value": "memberLimit_DESC"
+        },
+        {
+          "name": "Member: Low-High",
+          "value": "memberLimit_ASC"
+        },
+        {
+          "name": "Controller: Ascending",
+          "value": "controller_ASC"
+        },
+        {
+          "name": "Controller: Descending",
+          "value": "controller_DESC"
+        }
+      ]
     }
   },
-  "STAGING":{
+  "STAGING": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": false,
-      "SHOW_FILTERS": true,
-      "SHOW_SORT": false
+      "SHOW_FILTERS": false,
+      "SHOW_SORT": true,
+      "SORT_OPTIONS": [
+        {
+          "name": "Fee: High-Low",
+          "value": "feeModel_DESC"
+        },
+        {
+          "name": "Fee: Low-High",
+          "value": "feeModel_ASC"
+        },
+        {
+          "name": "Member Limit: High-Low",
+          "value": "memberLimit_DESC"
+        },
+        {
+          "name": "Member Limit: Low-High",
+          "value": "memberLimit_ASC"
+        }
+      ]
     }
   },
   "PRODUCTION": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": true,
       "SHOW_FILTERS": true,
-      "SHOW_SORT": true
+      "SHOW_SORT": true,
+      "SORT_OPTIONS": [
+        {
+          "name": "Member: High-Low",
+          "value": "memberLimit_DESC"
+        },
+        {
+          "name": "Member: Low-High",
+          "value": "memberLimit_ASC"
+        },
+        {
+          "name": "Created: Newest first",
+          "value": "createdAtBlock_DESC"
+        },
+        {
+          "name": "Created: Oldest first",
+          "value": "createdAtBlock_ASC"
+        }
+      ]
     }
   }
 }

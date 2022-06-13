@@ -37,9 +37,9 @@ const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 					size="small"
 				>
 					<Select value={sortOption} onChange={handleChange}>
-						{sortOptions.map((x) => (
-							<MenuItem value={x.value} key={x.value}>
-								{x.name}
+						{sortOptions?.map((x) => (
+							<MenuItem value={x?.value} key={x?.value}>
+								{x?.name}
 							</MenuItem>
 						))}
 					</Select>

@@ -10,6 +10,10 @@ query Features($env: Environment!) {
             SHOW_SEARCH
             SHOW_SORT
             SHOW_FILTERS
+            SORT_OPTIONS {
+                name
+                value
+            }
         }
     }
 }
