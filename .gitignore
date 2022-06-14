@@ -7,6 +7,7 @@
 /.pnp
 .pnp.js
 .yarn/
+yarn.lock
 
 **/dist/
 **/node_modules/
