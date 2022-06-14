@@ -4,6 +4,8 @@ import { Campaign } from '@gamedao-haiku/graphql/dist'
 import { Box, Card, CardContent, CardMedia, Container, LinearProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import Lineup from 'components/modules/lineup'
+
 import {
 	getCampaignContributors,
 	getCampaignFunding,
@@ -75,49 +77,15 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 						}}
 					/>
 				</Box>
-				<Box
-					sx={{
-						display: 'flex',
-						pt: 3,
-						alignContent: 'center',
-						justifyContent: 'center',
-						gap: '20%',
-					}}
-				>
-					<Box
-						sx={{
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'center',
-							justifyItems: 'center',
-						}}
-					>
-						<Typography variant="caption">Funded</Typography>
-						<Typography variant="body1">{getCampaignFunding(campaign)}</Typography>
-					</Box>
-					<Box
-						sx={{
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'center',
-							justifyItems: 'center',
-						}}
-					>
-						<Typography variant="caption">Target</Typography>
-						<Typography variant="body1">{getCampaignTarget(campaign)}</Typography>
-					</Box>
-					<Box
-						sx={{
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'center',
-							justifyItems: 'center',
-						}}
-					>
-						<Typography variant="caption">Contributer</Typography>
-						<Typography variant="body1">{getCampaignContributors(campaign)}</Typography>
-					</Box>
-				</Box>
+				<Lineup
+					firstTitle="Funded"
+					secondTitle="Target"
+					thirdTitle="Contributer"
+					firstSubhead={getCampaignFunding(campaign)}
+					secondSubhead={getCampaignTarget(campaign)}
+					thirdSubhead={getCampaignContributors(campaign)}
+					gap="20%"
+				/>
 			</CardContent>
 		</Card>
 	)
