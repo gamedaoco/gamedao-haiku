@@ -6,7 +6,12 @@ import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
-import { getAddressFromAccountState, getInitials, getNameFromAccountState } from 'src/utils/accountUtils'
+import {
+	getAddressFromAccountState,
+	getInitials,
+	getNameFromAccountState,
+	shortAccountAddress,
+} from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
 interface IdentitySectionProps {
@@ -68,20 +73,9 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 						sx={{
 							display: 'flex',
 							alignItems: 'center',
-							maxWidth: '80%',
-							gap: 1,
 						}}
 					>
-						<Chip
-							label={getAddressFromAccountState(accountState)}
-							size="small"
-							sx={{
-								maxWidth: {
-									xs: '50%',
-									md: '80%',
-								},
-							}}
-						/>
+						<Chip label={shortAccountAddress(accountState?.account)} size="medium" />
 						<IconButton aria-label="copy" onClick={handleCopyAddress}>
 							<ContentCopyIcon fontSize="small" />
 						</IconButton>
