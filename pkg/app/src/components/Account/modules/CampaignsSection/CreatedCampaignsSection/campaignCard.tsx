@@ -4,7 +4,7 @@ import { Campaign } from '@gamedao-haiku/graphql/dist'
 import { Box, Card, CardContent, CardMedia, Container, LinearProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import Lineup from 'components/modules/lineup'
+import Lineup from 'components/lineup'
 
 import {
 	getCampaignContributors,
@@ -27,42 +27,38 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 
 	return (
 		<Card>
-			<CardMedia component="img" src={`${gateway}${getCampaignHeader(campaign)}`} alt="campaign_poster" />
-			<Box
-				sx={{
-					display: 'flex',
-					justifyItems: 'center',
-				}}
-			>
-				<Container
-					sx={{
-						position: 'relative',
-						width: '5.5rem',
-						height: '4.5rem',
-						backgroundColor: theme.palette.grey[800],
-						borderRadius: '100%',
-						top: -30,
-						zIndex: 0,
-					}}
-				/>
-			</Box>
-
-			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-				<CardMedia
-					component="img"
-					sx={{
-						maxWidth: '4.5rem',
-						borderRadius: '100%',
-						top: -100,
-					}}
-					src={`${gateway}${getCampaignLogo(campaign)}`}
-					alt="campaign_poster"
-				/>
+			<Box>
+				<CardMedia component="img" src={`${gateway}${getCampaignHeader(campaign)}`} alt="campaign_poster" />
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Card
+						sx={{
+							position: 'relative',
+							width: '6rem',
+							height: '6rem',
+							//TODO: add border radius
+							top: -35,
+							zIndex: 0,
+						}}
+					/>
+				</Box>
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<CardMedia
+						component="img"
+						sx={{
+							width: '4rem',
+							height: '4rem',
+							//TODO: add border radius
+							top: -115,
+						}}
+						src={`${gateway}${getCampaignLogo(campaign)}`}
+						alt="campaign_poster"
+					/>
+				</Box>
 			</Box>
 
 			<CardContent sx={{ pt: 0, mt: -10 }}>
 				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-					<Typography fontWeight="600" variant="body1">
+					<Typography fontWeight={theme.typography.fontWeightBold} variant="body1">
 						{getCampaignTitle(campaign)}
 					</Typography>
 					<Typography variant="body2">{getCampaignName(campaign)}</Typography>

@@ -9,6 +9,23 @@ import { AccountState } from 'src/@types/extension'
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
 
+export const PlusIcon = () => {
+	const theme = useTheme()
+	return (
+		<Box
+			sx={{
+				borderRadius: theme.shape.borderRadiusLg,
+				maxWidth: 56,
+				maxHeight: 56,
+				padding: 2,
+				backgroundColor: theme.palette.grey[900],
+			}}
+		>
+			<AddIcon sx={{ color: theme.palette.grey[300] }} />
+		</Box>
+	)
+}
+
 interface CreatedCampaignSectionProps {
 	accountState: AccountState
 }
@@ -36,17 +53,7 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 					>
 						<Button sx={{ width: '100%', height: '100%' }}>
 							<Box display="flex" flexDirection="column" justifyItems="center" alignItems="center">
-								<Box
-									sx={{
-										borderRadius: theme.shape.borderRadiusLg,
-										maxWidth: 56,
-										maxHeight: 56,
-										padding: 2,
-										backgroundColor: theme.palette.grey[900],
-									}}
-								>
-									<AddIcon sx={{ color: theme.palette.grey[300] }} />
-								</Box>
+								<PlusIcon />
 								<Typography variant="body1" fontWeight={theme.typography.fontWeightBold} sx={{ mt: 2 }}>
 									New Campaign
 								</Typography>
