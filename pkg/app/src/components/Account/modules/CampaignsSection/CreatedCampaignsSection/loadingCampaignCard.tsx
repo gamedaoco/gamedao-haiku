@@ -11,17 +11,16 @@ const LoadingCampaignCard: FC = () => {
 			<Box
 				sx={{
 					display: 'flex',
-					justifyItems: 'center',
+					justifyContent: 'center',
 				}}
 			>
-				<Container
+				<Card
 					sx={{
 						position: 'relative',
-						width: '5.5rem',
-						height: '4.5rem',
-						backgroundColor: theme.palette.grey[800],
-						borderRadius: theme.shape.borderRadiusLg,
-						top: -30,
+						width: '6rem',
+						height: '6rem',
+						//TODO: add border radius
+						top: -35,
 						zIndex: 0,
 					}}
 				/>
@@ -29,10 +28,9 @@ const LoadingCampaignCard: FC = () => {
 			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<Skeleton
 					sx={{
-						width: '20%',
-						height: '100px',
-						borderRadius: '50%',
-						position: 'relative',
+						width: '5rem',
+						height: '5rem',
+						//TODO: add border radius
 						top: -115,
 					}}
 				/>

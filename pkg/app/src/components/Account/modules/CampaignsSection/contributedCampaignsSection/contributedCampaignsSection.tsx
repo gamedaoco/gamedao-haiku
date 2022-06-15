@@ -43,21 +43,17 @@ interface ContributedCampaignsSectionProps {
 const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ accountState }) => {
 	const theme = useTheme()
 	const { data, loading } = useCampaignContributorsConnectionQuery({
-		variables: { address: '5FJ6hXq3HPjgoYGnphYtbuaZ2kFBwM8yB7qbSwB2ek6qsckR' },
+		variables: { address: '5Dkv3jCJqDdk2uWWdT2DNXAFFgTLhHRZxdFmU8LHz9R74BeS' },
 	})
 
 	return (
 		<Box>
-			<Typography
-				variant="body2"
-				fontWeight={theme.typography.fontWeightBold}
-				sx={{ color: theme.palette.grey[500], pb: 4 }}
-			>
+			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold} sx={{ pb: 4 }}>
 				Contributed Campaigns
 			</Typography>
 			<Card>
 				<CardContent>
-					<Typography fontWeight="700" variant="h6" sx={{ mb: 2 }}>
+					<Typography variant="h6" sx={{ mb: 2 }}>
 						Campaign Contributions
 					</Typography>
 
@@ -92,7 +88,6 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 																<CardMedia
 																	component="img"
 																	sx={{
-																		borderRadius: theme.shape.borderRadiusSm,
 																		width: 64,
 																		height: 64,
 																	}}
@@ -108,10 +103,7 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 																		campaignContributorEdge as CampaignContributorEdge,
 																	)}
 																</Typography>
-																<Typography
-																	variant="body2"
-																	color={theme.palette.grey[500]}
-																>
+																<Typography variant="body2">
 																	{getContributedCampaignTitle(
 																		campaignContributorEdge as CampaignContributorEdge,
 																	)}
@@ -159,12 +151,6 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 															label={getContributedCampaignState(
 																campaignContributorEdge as CampaignContributorEdge,
 															)}
-															sx={{
-																backgroundColor: theme.palette.success.main,
-																fontWeight: '700',
-																color: theme.palette.common.black,
-																borderRadius: theme.shape.borderRadiusSm,
-															}}
 														/>
 													</TableCell>
 												</TableRow>
