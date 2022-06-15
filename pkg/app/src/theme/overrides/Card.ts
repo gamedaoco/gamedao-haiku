@@ -13,7 +13,6 @@ export default function Card(theme: Theme) {
 					boxShadow: theme.customShadows.card,
 					borderRadius: Number(theme.shape.borderRadius) * 20,
 					borderColor: theme.palette.grey[500],
-					backgroundColor: PRIMARY_COLOR[3].background,
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},

@@ -3,7 +3,7 @@ import React, { FC, memo, useEffect } from 'react'
 import Script from 'next/script'
 
 import { useCollectablesForUserLazyQuery } from '@gamedao-haiku/graphql/dist'
-import { Paper, Stack, Typography } from '@mui/material'
+import { Card, Typography } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
 
@@ -25,10 +25,10 @@ const MyCollectablesTab: FC<MyCollectablesTabProps> = ({ accountState }) => {
 	return (
 		<>
 			<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
-			<Stack component={Paper} spacing={0.5} padding={3} borderRadius="16px">
+			<Card sx={{ padding: 4 }}>
 				<Typography variant="h6">My Collectables </Typography>
 				<CollectablesList loading={loading} items={data} />
-			</Stack>
+			</Card>
 		</>
 	)
 }

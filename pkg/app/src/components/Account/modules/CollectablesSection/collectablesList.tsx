@@ -2,9 +2,10 @@ import React, { FC, memo } from 'react'
 
 import { CollectablesForUserQuery } from '@gamedao-haiku/graphql/dist'
 import { Grid } from '@mui/material'
-import { Collectable } from 'src/@types/collectable'
+import type { Collectable as CollectableInterface } from 'src/@types/collectable'
 
-import CollectableCard from './collectablesCard'
+import Collectable from 'components/Collectable/collectable'
+
 import LoadingCollectableCard from './loadingCollectableCard'
 
 interface CollectablesListProps {
@@ -25,9 +26,9 @@ const CollectablesList: FC<CollectablesListProps> = ({ loading, items }) => {
 				))
 			) : (
 				<>
-					{items?.nfts.map((item: Collectable) => (
-						<Grid item xs={12 / 5} style={{ marginBottom: 10 }} key={item.id}>
-							<CollectableCard item={item} />
+					{items?.nfts.map((item: CollectableInterface) => (
+						<Grid item xs={12 / 5} style={{ marginBottom: 10, display: 'flex' }} key={item.id}>
+							<Collectable item={item} />
 						</Grid>
 					))}
 				</>
