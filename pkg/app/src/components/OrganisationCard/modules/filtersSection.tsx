@@ -29,16 +29,6 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 	sortOptions,
 	organizationPageFeatures,
 }) => {
-	const [features, setFeatures] = useState<OrganizationPageFeatures>({
-		SHOW_SEARCH: true,
-		SHOW_FILTERS: true,
-		SHOW_SORT: true,
-	})
-	useEffect(() => {
-		if (organizationPageFeatures) {
-			setFeatures({ ...organizationPageFeatures })
-		}
-	}, [organizationPageFeatures])
 	return (
 		<Box
 			sx={{
@@ -54,7 +44,7 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 			>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={4}>
-						{features?.SHOW_SEARCH && (
+						{organizationPageFeatures?.SHOW_SEARCH && (
 							<TextField
 								onChange={(e) => setFilters(e.target.value)}
 								value={filters}
@@ -81,8 +71,8 @@ export const FiltersSection: FC<FiltersSectionPropsInterface> = ({
 								marginLeft: 1,
 							}}
 						>
-							{features?.SHOW_FILTERS && <FiltersTab />}
-							{features?.SHOW_SORT && (
+							{organizationPageFeatures?.SHOW_FILTERS && <FiltersTab />}
+							{organizationPageFeatures?.SHOW_SORT && (
 								<SortOptionsTab
 									sortOption={sortOption}
 									setSortOption={setSortOption}
