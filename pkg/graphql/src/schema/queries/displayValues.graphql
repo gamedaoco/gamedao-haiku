@@ -56,5 +56,9 @@ query DisplayValues {
             text
             flag
         }
+        sortOptions {
+            name
+            value
+        }
     }
 }

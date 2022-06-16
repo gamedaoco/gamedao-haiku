@@ -35,7 +35,6 @@ type OrganizationPageFeatures {
     SHOW_SEARCH: Boolean!
     SHOW_FILTERS: Boolean!
     SHOW_SORT: Boolean!
-    SORT_OPTIONS: [OrganizationPageFeaturesSortOptions]
 }
 
 type Features implements ProposalFeatures {
@@ -114,6 +113,8 @@ type DisplayValues {
     projectDurations: [DisplayValueEntryNumber]
     memberships: [DisplayValueEntryNumber]
     countries: [DisplayValueEntryCountry]
+    sortOptions: [OrganizationPageFeaturesSortOptions]
+
 }
 
 type Query {

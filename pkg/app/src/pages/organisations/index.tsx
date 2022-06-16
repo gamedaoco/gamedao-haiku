@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import {
 	Organization,
 	OrganizationOrderByInput,
+	useDisplayValuesQuery,
 	useFeaturesQuery,
 	useOrganizationsLazyQuery,
 } from '@gamedao-haiku/graphql/dist'
@@ -47,6 +48,7 @@ export function OrganisationPage() {
 			env: ENVIRONMENT,
 		},
 	})
+	const { data: displayValuesData } = useDisplayValuesQuery()
 	const organizationPageFeatures = featuresData?.features?.ORGANIZATION_PAGE_FEATURES
 	const [sortOptions, setSortOptions] = useState<SortOptionsInterface[]>([
 		{ value: OrganizationOrderByInput.MemberLimitDesc, name: t('page:organisations:sort_options:mem_hi_lo') },
@@ -65,20 +67,24 @@ export function OrganisationPage() {
 	}, [bodyCount, fetchOrganizations, sortOption, filters])
 	const paginatedData = applyPagination(data?.organizations?.slice() as Organization[], bodyCount)
 	const { push } = useRouter()
+	console.log(displayValuesData?.displayValues)
+
 	const buttonVisibility = useMemo(
 		() => paginatedData?.length < data?.organizationsConnection?.totalCount,
 		[paginatedData?.length, data?.organizationsConnection?.totalCount],
 	)
 	useEffect(() => {
-		if (featuresData) {
+		if (displayValuesData) {
 			setSortOptions(
-				featuresData?.features?.ORGANIZATION_PAGE_FEATURES?.SORT_OPTIONS?.map((x) => ({
-					...x,
-					name: t(x.name),
-				}))?.slice() as SortOptionsInterface[],
+				displayValuesData?.displayValues?.sortOptions
+					?.map((x) => ({
+						...x,
+						name: t(x.name),
+					}))
+					?.slice() as SortOptionsInterface[],
 			)
 		}
-	}, [featuresData, t])
+	}, [displayValuesData, t])
 	const handleClickCreate = useCallback(() => {
 		push('/organisations/create')
 	}, [push])

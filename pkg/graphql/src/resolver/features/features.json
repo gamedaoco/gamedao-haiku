@@ -9,100 +9,28 @@
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": true,
       "SHOW_FILTERS": true,
-      "SHOW_SORT": true,
-      "SORT_OPTIONS": [
-        {
-          "name": "page:organisations:sort_options:mem_hi_lo",
-          "value": "memberLimit_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:mem_lo_hi",
-          "value": "memberLimit_ASC"
-        },
-        {
-          "name": "page:organisations:sort_options:created_new",
-          "value": "createdAtBlock_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:created_old",
-          "value": "createdAtBlock_ASC"
-        }
-      ]
+      "SHOW_SORT": true
     }
   },
   "DEVELOPMENT": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": false,
       "SHOW_FILTERS": false,
-      "SHOW_SORT": true,
-      "SORT_OPTIONS": [
-        {
-          "name": "page:organisations:sort_options:mem_hi_lo",
-          "value": "memberLimit_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:mem_lo_hi",
-          "value": "memberLimit_ASC"
-        },
-        {
-          "name": "page:organisations:sort_options:cont_asc",
-          "value": "controller_ASC"
-        },
-        {
-          "name": "page:organisations:sort_options:cont_desc",
-          "value": "controller_DESC"
-        }
-      ]
+      "SHOW_SORT": true
     }
   },
   "STAGING": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": false,
       "SHOW_FILTERS": false,
-      "SHOW_SORT": true,
-      "SORT_OPTIONS": [
-        {
-          "name": "page:organisations:sort_options:fee_hi_lo",
-          "value": "feeModel_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:fee_lo_hi",
-          "value": "feeModel_ASC"
-        },
-        {
-          "name": "page:organisations:sort_options:mem_hi_lo",
-          "value": "memberLimit_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:mem_lo_hi",
-          "value": "memberLimit_ASC"
-        }
-      ]
+      "SHOW_SORT": true
     }
   },
   "PRODUCTION": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": true,
       "SHOW_FILTERS": true,
-      "SHOW_SORT": true,
-      "SORT_OPTIONS": [
-        {
-          "name": "page:organisations:sort_options:mem_hi_lo",
-          "value": "memberLimit_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:mem_lo_hi",
-          "value": "memberLimit_ASC"
-        },
-        {
-          "name": "page:organisations:sort_options:created_new",
-          "value": "createdAtBlock_DESC"
-        },
-        {
-          "name": "page:organisations:sort_options:created_old",
-          "value": "createdAtBlock_ASC"
-        }
-      ]
+      "SHOW_SORT": true
     }
   }
 }

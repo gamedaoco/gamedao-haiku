@@ -210,5 +210,23 @@
       "text": "CitizenGame",
       "value": 0
     }
+  ],
+  "sortOptions": [
+    {
+      "name": "page:organisations:sort_options:mem_hi_lo",
+      "value": "memberLimit_DESC"
+    },
+    {
+      "name": "page:organisations:sort_options:mem_lo_hi",
+      "value": "memberLimit_ASC"
+    },
+    {
+      "name": "page:organisations:sort_options:created_new",
+      "value": "createdAtBlock_DESC"
+    },
+    {
+      "name": "page:organisations:sort_options:created_old",
+      "value": "createdAtBlock_ASC"
+    }
   ]
 }
