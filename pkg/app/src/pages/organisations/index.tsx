@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import {
-	Environment,
 	Organization,
 	OrganizationOrderByInput,
 	useFeaturesQuery,
@@ -13,7 +12,9 @@ import { ArrowDownward } from '@mui/icons-material'
 import { Button, Container, Grid, createSvgIcon } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
 import { Layout } from 'src/components/Layouts/default/layout'
+import { ENVIRONMENT } from 'src/constants'
 
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
@@ -37,19 +38,21 @@ interface SortOptionsInterface {
 }
 
 export function OrganisationPage() {
+	const { t } = useTranslation()
+
 	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
 	const { data: featuresData } = useFeaturesQuery({
 		variables: {
-			env: Environment.Staging,
+			env: ENVIRONMENT,
 		},
 	})
 	const organizationPageFeatures = featuresData?.features?.ORGANIZATION_PAGE_FEATURES
 	const [sortOptions, setSortOptions] = useState<SortOptionsInterface[]>([
-		{ value: OrganizationOrderByInput.MemberLimitDesc, name: 'Member: High-Low' },
-		{ value: OrganizationOrderByInput.MemberLimitAsc, name: 'Member: Low-High' },
-		{ value: OrganizationOrderByInput.CreatedAtBlockDesc, name: 'Created: Newest first' },
-		{ value: OrganizationOrderByInput.CreatedAtBlockAsc, name: 'Created: Oldest first' },
+		{ value: OrganizationOrderByInput.MemberLimitDesc, name: t('page:organisations:sort_options:mem_hi_lo') },
+		{ value: OrganizationOrderByInput.MemberLimitAsc, name: t('page:organisations:sort_options:mem_lo_hi') },
+		{ value: OrganizationOrderByInput.CreatedAtBlockDesc, name: t('page:organisations:sort_options:created_new') },
+		{ value: OrganizationOrderByInput.CreatedAtBlockAsc, name: t('page:organisations:sort_options:created_old') },
 	])
 
 	const [bodyCount, setBodyCount] = useState<number>(15)
@@ -69,10 +72,13 @@ export function OrganisationPage() {
 	useEffect(() => {
 		if (featuresData) {
 			setSortOptions(
-				featuresData?.features?.ORGANIZATION_PAGE_FEATURES?.SORT_OPTIONS?.slice() as SortOptionsInterface[],
+				featuresData?.features?.ORGANIZATION_PAGE_FEATURES?.SORT_OPTIONS?.map((x) => ({
+					...x,
+					name: t(x.name),
+				}))?.slice() as SortOptionsInterface[],
 			)
 		}
-	}, [featuresData])
+	}, [featuresData, t])
 	const handleClickCreate = useCallback(() => {
 		push('/organisations/create')
 	}, [push])

@@ -12,19 +12,19 @@
       "SHOW_SORT": true,
       "SORT_OPTIONS": [
         {
-          "name": "Member: High-Low",
+          "name": "page:organisations:sort_options:mem_hi_lo",
           "value": "memberLimit_DESC"
         },
         {
-          "name": "Member: Low-High",
+          "name": "page:organisations:sort_options:mem_lo_hi",
           "value": "memberLimit_ASC"
         },
         {
-          "name": "Created: Newest first",
+          "name": "page:organisations:sort_options:created_new",
           "value": "createdAtBlock_DESC"
         },
         {
-          "name": "Created: Oldest first",
+          "name": "page:organisations:sort_options:created_old",
           "value": "createdAtBlock_ASC"
         }
       ]
@@ -34,22 +34,22 @@
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": false,
       "SHOW_FILTERS": false,
-      "SHOW_SORT": false,
+      "SHOW_SORT": true,
       "SORT_OPTIONS": [
         {
-          "name": "Member: High-Low",
+          "name": "page:organisations:sort_options:mem_hi_lo",
           "value": "memberLimit_DESC"
         },
         {
-          "name": "Member: Low-High",
+          "name": "page:organisations:sort_options:mem_lo_hi",
           "value": "memberLimit_ASC"
         },
         {
-          "name": "Controller: Ascending",
+          "name": "page:organisations:sort_options:cont_asc",
           "value": "controller_ASC"
         },
         {
-          "name": "Controller: Descending",
+          "name": "page:organisations:sort_options:cont_desc",
           "value": "controller_DESC"
         }
       ]
@@ -62,19 +62,19 @@
       "SHOW_SORT": true,
       "SORT_OPTIONS": [
         {
-          "name": "Fee: High-Low",
+          "name": "page:organisations:sort_options:fee_hi_lo",
           "value": "feeModel_DESC"
         },
         {
-          "name": "Fee: Low-High",
+          "name": "page:organisations:sort_options:fee_lo_hi",
           "value": "feeModel_ASC"
         },
         {
-          "name": "Member Limit: High-Low",
+          "name": "page:organisations:sort_options:mem_hi_lo",
           "value": "memberLimit_DESC"
         },
         {
-          "name": "Member Limit: Low-High",
+          "name": "page:organisations:sort_options:mem_lo_hi",
           "value": "memberLimit_ASC"
         }
       ]
@@ -87,19 +87,19 @@
       "SHOW_SORT": true,
       "SORT_OPTIONS": [
         {
-          "name": "Member: High-Low",
+          "name": "page:organisations:sort_options:mem_hi_lo",
           "value": "memberLimit_DESC"
         },
         {
-          "name": "Member: Low-High",
+          "name": "page:organisations:sort_options:mem_lo_hi",
           "value": "memberLimit_ASC"
         },
         {
-          "name": "Created: Newest first",
+          "name": "page:organisations:sort_options:created_new",
           "value": "createdAtBlock_DESC"
         },
         {
-          "name": "Created: Oldest first",
+          "name": "page:organisations:sort_options:created_old",
           "value": "createdAtBlock_ASC"
         }
       ]

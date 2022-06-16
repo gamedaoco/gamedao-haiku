@@ -19,18 +19,25 @@
     }
   },
   "page": {
-    "campaigns": {
+    "organisations": {
+      "sort_options": {
+        "mem_hi_lo": "Member: High-Low",
+        "mem_lo_hi": "Member: Low-High",
+        "created_new": "Created: Newest first",
+        "created_old": "Created: Oldest first",
+        "fee_hi_lo": "Fee: High-Low",
+        "fee_lo_hi": "Fee: Low-High",
+        "cont_asc": "Controller: Ascending",
+        "cont_desc": "Controller: Descending"
+        
+      }
     },
-    "governance": {
-    },
-    "dao": {
-    },
-    "dashboard": {
-    },
-    "app": {
-    },
-    "wallet": {
-    }
+    "campaigns": {},
+    "governance": {},
+    "dao": {},
+    "dashboard": {},
+    "app": {},
+    "wallet": {}
   },
   "notification": {
     "transactions": {
@@ -45,16 +52,13 @@
         "error": "Summoning failed, check your Mana."
       }
     },
-    "info": {
-    },
-    "success": {
-    },
+    "info": {},
+    "success": {},
     "warning": {
       "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
       "max_1m_game_fee": "Please consider charging a maximum of 1M GAME",
       "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users"
     },
-    "error": {
-    }
+    "error": {}
   }
 }
