@@ -5,14 +5,22 @@ export function useLocalStorage<T>(key: string, defaultValue: any): [T, Dispatch
 
 	const handleSetValue = useCallback(
 		(value: T) => {
-			window.localStorage.setItem(key, JSON.stringify(value))
+			const stringValue = JSON.stringify(value);
+			const event = new StorageEvent('storage', {
+				key: key,
+				newValue: stringValue,
+			});
+
+			window.localStorage.setItem(key, stringValue)
+			window.dispatchEvent(event);
+
 			setState(value)
 		},
 		[setState, key],
 	)
 	const handleUpdateStoreEvent = useCallback((event: StorageEvent) => {
-		if (event.key === key) {
-			setState(event.newValue as any);
+		if (event.key === key && event.newValue) {
+			setState(JSON.parse(event.newValue));
 		}
 	}, [setState, key]);
 
