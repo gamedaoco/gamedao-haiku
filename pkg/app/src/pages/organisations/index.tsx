@@ -13,6 +13,7 @@ import { ArrowDownward } from '@mui/icons-material'
 import { Button, Container, Grid, createSvgIcon } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useFeatures } from 'hooks/useFeatures'
 import { useTranslation } from 'react-i18next'
 import { Layout } from 'src/components/Layouts/default/layout'
 import { ENVIRONMENT } from 'src/constants'
@@ -43,13 +44,9 @@ export function OrganisationPage() {
 
 	// todo - ahmad - refactor the filters to an object for the query and other filters
 	const [filters, setFilters] = useState('')
-	const { data: featuresData } = useFeaturesQuery({
-		variables: {
-			env: ENVIRONMENT,
-		},
-	})
+	const features = useFeatures()
 	const { data: displayValuesData } = useDisplayValuesQuery()
-	const organizationPageFeatures = featuresData?.features?.ORGANIZATION_PAGE_FEATURES
+	const organizationPageFeatures = features?.ORGANIZATION_PAGE_FEATURES
 	const [sortOptions, setSortOptions] = useState<SortOptionsInterface[]>([
 		{ value: OrganizationOrderByInput.MemberLimitDesc, name: t('page:organisations:sort_options:mem_hi_lo') },
 		{ value: OrganizationOrderByInput.MemberLimitAsc, name: t('page:organisations:sort_options:mem_lo_hi') },
