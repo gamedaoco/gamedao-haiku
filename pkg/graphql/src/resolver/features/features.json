@@ -14,7 +14,7 @@
   },
   "DEVELOPMENT": {
     "ORGANIZATION_PAGE_FEATURES": {
-      "SHOW_SEARCH": false,
+      "SHOW_SEARCH": true,
       "SHOW_FILTERS": false,
       "SHOW_SORT": true
     }
@@ -22,7 +22,7 @@
   "STAGING": {
     "ORGANIZATION_PAGE_FEATURES": {
       "SHOW_SEARCH": false,
-      "SHOW_FILTERS": false,
+      "SHOW_FILTERS": true,
       "SHOW_SORT": true
     }
   },
