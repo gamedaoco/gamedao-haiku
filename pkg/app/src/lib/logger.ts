@@ -5,8 +5,8 @@ import prefix from 'loglevel-plugin-prefix'
 type Levels = keyof LogLevel
 // TODO: @darknebula0 get env from config
 const TempLogLevelFromConfig = 'INFO'
-const defaultLevel: Levels = ( TempLogLevelFromConfig || 'INFO' ).toUpperCase() as any
-setDefaultLevel( defaultLevel )
+const defaultLevel: Levels = (TempLogLevelFromConfig || 'INFO').toUpperCase() as any
+setDefaultLevel(defaultLevel)
 
 const colors: Record<Levels, ChalkInstance> = {
 	TRACE: chalk.magenta,
