@@ -8,6 +8,15 @@ enum Environment {
     PRODUCTION
 }
 
+enum LogLevel {
+    TRACE
+    DEBUG
+    INFO
+    WARN
+    ERROR
+    SILENT
+}
+
 type Link {
     id: String
     title: String
@@ -44,25 +53,8 @@ type Config {
     TW_SITE_NAME: String
     TW_SITE_CREATOR: String
     CONTACT: String
-    UNSPLASH_KEY: String
-    UNSPLASH_SECRET: String
-    CRYPTOCOMPARE: String
-    INFURA_MODE: String
-    INFURA_KEY: String
-    INFURA_SECRET: String
-    INFURA_MAINNET: String
-    INFURA_TESTNET: String
-    AWS_REGION: String
-    AWS_USERPOOL_ID: String
-    AWS_USERPOOL_WEBCLIENT_ID: String
-    GQL_URI: String
-    GQL_KEY: String
-    ETH_URI: String
-    SUB_URI: String
-    IPFS_URI: String
-    SUBZERO_URI: String
-    SUBZERO_PORT: String
     IPFS_GATEWAY: String
+    LOG_LEVEL: LogLevel
 }
 
 
