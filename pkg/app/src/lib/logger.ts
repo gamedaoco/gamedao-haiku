@@ -1,4 +1,4 @@
-import chalk, { Chalk } from 'chalk'
+import chalk, { ChalkInstance } from 'chalk'
 import log, { LogLevel, setDefaultLevel } from 'loglevel'
 import prefix from 'loglevel-plugin-prefix'
 
@@ -8,7 +8,7 @@ const TempLogLevelFromConfig = 'INFO'
 const defaultLevel: Levels = ( TempLogLevelFromConfig || 'INFO' ).toUpperCase() as any
 setDefaultLevel( defaultLevel )
 
-const colors: Record<Levels, Chalk> = {
+const colors: Record<Levels, ChalkInstance> = {
 	TRACE: chalk.magenta,
 	DEBUG: chalk.cyan,
 	INFO: chalk.blue,
