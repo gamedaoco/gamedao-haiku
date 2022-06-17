@@ -5,6 +5,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react'
 // Toastify styles + custom styles overrides
 import 'react-toastify/dist/ReactToastify.css'
 import { ThemePrimaryColor } from 'src/components/ThemePrimaryColor/themePrimaryColor'
+import { Logger } from 'src/lib/logger'
 import { Providers } from 'src/provider/provider'
 import createEmotionCache from 'src/theme/createEmotionCache'
 import 'src/theme/css/toastify.css'
@@ -27,7 +28,11 @@ const TW_SITE_NAME = '@gamedaoco'
 const TW_SITE_CREATOR = '@zerodotio'
 const CONTACT = 'hey@gamedao.co'
 
+const log = Logger('HAIKU')
+
 export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
+	log.info(`❤️  Welcome to GameDAO`)
+
 	return (
 		<>
 			<CacheProvider value={emotionCache}>
@@ -62,7 +67,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 }
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
-	console.log(metric)
+	log.trace(metric)
 }
 
 export default MyApp
