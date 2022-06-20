@@ -16,14 +16,16 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Layout } from 'components/Layouts/default/layout'
-import { ProposalOverview } from 'components/ProposalOverview/proposalOverview'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
+import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
+import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
 	const [routeState, setRouteState] = useState<string>(null)
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
+	const [proposalIdState, setProposalIdState] = useState<string>(null)
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
 	const [queryOrganization, { data }] = useOrganizationByIdLazyQuery()
 	const [organizationState, setOrganizationState] = useState<Organization>()
@@ -41,6 +43,9 @@ export function OrganisationById() {
 			} else {
 				push(newPath)
 			}
+
+			// Reset proposal id when click on tab
+			setProposalIdState(null)
 		},
 		[organizationIdState, push],
 	)
@@ -65,6 +70,10 @@ export function OrganisationById() {
 				setOrganizationIdState(param[0])
 				setRouteState(param[1])
 				queryOrganization({ variables: { orgId: param[0] } })
+
+				if (param.length >= 3) {
+					setProposalIdState(param[2])
+				}
 			}
 		}
 	}, [query])
@@ -206,7 +215,15 @@ export function OrganisationById() {
 						</Card>
 						<TabPanel value={'dashboard'}>{organizationIdState ? <Overview /> : <TmpOverview />}</TabPanel>
 						<TabPanel value={'proposals'}>
-							{organizationIdState && <ProposalOverview organizationId={organizationIdState} />}
+							{proposalIdState && organizationState ? (
+								<ProposalDetail
+									organization={organizationState}
+									proposalId={proposalIdState}
+									goBack={() => handleTabSelect('proposals')}
+								/>
+							) : (
+								<ProposalOverview organizationId={organizationIdState} />
+							)}
 						</TabPanel>
 					</Stack>
 				</TabContext>
