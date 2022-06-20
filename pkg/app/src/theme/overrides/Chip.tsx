@@ -26,6 +26,18 @@ export default function Chip(theme: Theme) {
 					'&.MuiChip-colorSecondary': {
 						borderColor: theme.palette.secondary.main,
 					},
+					'&.MuiChip-colorSuccess': {
+						color: theme.palette.success.main,
+						borderColor: theme.palette.success.main,
+					},
+					'&.MuiChip-colorError': {
+						color: theme.palette.error.main,
+						borderColor: theme.palette.error.main,
+					},
+					'&.MuiChip-colorWarning': {
+						color: theme.palette.warning.main,
+						borderColor: theme.palette.warning.main,
+					},
 				},
 				//
 				avatarColorInfo: {
