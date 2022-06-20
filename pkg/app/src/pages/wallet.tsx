@@ -9,7 +9,7 @@ import type { Collectable } from 'src/@types/collectable'
 import { Layout } from 'src/components/Layouts/default/layout'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
 
-import { Collectable as CollectableComponent } from 'components/Collectable/collectable'
+import { default as CollectableComponent } from 'components/Collectable/collectable'
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 
 export function WalletPage() {

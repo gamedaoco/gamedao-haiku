@@ -11,7 +11,7 @@
   },
   "remoteGraphQlUrls": {
     "rmrk": "https://gql-rmrk2-prod.graphcdn.app/",
-    "subsquid": "https://app.gc.subsquid.io/beta/gamedao-upgrade/v001/graphql"
+    "subsquid": "https://app.gc.subsquid.io/beta/gamedao-upgrade/v002/graphql"
   },
   "dependencies": {
     "@graphql-codegen/cli": "^2.6.2",

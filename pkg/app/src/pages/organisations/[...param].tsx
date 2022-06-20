@@ -16,8 +16,8 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Layout } from 'components/Layouts/default/layout'
+import { ProposalOverview } from 'components/ProposalOverview/proposalOverview'
 import { Overview } from 'components/TabPanels/Organization/overview'
-import { Proposals } from 'components/TabPanels/Organization/proposals'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 
 export function OrganisationById() {
@@ -25,7 +25,7 @@ export function OrganisationById() {
 	const [routeState, setRouteState] = useState<string>(null)
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
-	const [queryOrganization, { data, error, loading }] = useOrganizationByIdLazyQuery()
+	const [queryOrganization, { data }] = useOrganizationByIdLazyQuery()
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const theme = useTheme()
 	const config = useConfig()
@@ -206,7 +206,7 @@ export function OrganisationById() {
 						</Card>
 						<TabPanel value={'dashboard'}>{organizationIdState ? <Overview /> : <TmpOverview />}</TabPanel>
 						<TabPanel value={'proposals'}>
-							{organizationIdState && <Proposals organizationId={organizationIdState} />}
+							{organizationIdState && <ProposalOverview organizationId={organizationIdState} />}
 						</TabPanel>
 					</Stack>
 				</TabContext>
