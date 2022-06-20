@@ -1,10 +1,8 @@
 import React, { FC } from 'react'
 
 import { Box, Skeleton, TableBody, TableCell, TableRow } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 
 const LoadingCampaignTable: FC = () => {
-	const theme = useTheme()
 	return (
 		<TableBody>
 			{[1, 2, 3, 4, 5]?.map((index) => (
