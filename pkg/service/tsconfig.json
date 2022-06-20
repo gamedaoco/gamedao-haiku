@@ -1,0 +1,33 @@
+{
+  "ts-node": {
+  },
+  "compilerOptions": {
+    "target": "esnext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "esnext",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "types": [
+      "node"
+    ],
+    "resolveJsonModule": true,
+    "outDir": "./dist/",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "./src/@types/*"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended"
+}
