@@ -64,7 +64,8 @@ interface DisplayValueEntry {
 }
 
 type AccountBalance {
-    token: String!
+    name: String!
+    symbol: String!
 	transferrable: Int!
 	locked: Int!
 	reserved: Int!

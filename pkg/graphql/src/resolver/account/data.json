@@ -2,6 +2,7 @@
     "balances": [
         {
             "name": "ZERO",
+            "symbol": "ZERO",
             "transferrable": 123,
             "locked": 1,
             "reserved": 23,
@@ -9,6 +10,7 @@
         },
         {
             "name": "GAME",
+            "symbol": "GAME",
             "transferrable": 798,
             "locked": 13,
             "reserved": 231,
@@ -16,6 +18,7 @@
         },
         {
             "name": "PLAY",
+            "symbol": "PLAY",
             "transferrable": 112,
             "locked": 123,
             "reserved": 12323,
