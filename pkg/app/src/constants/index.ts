@@ -1,4 +1,4 @@
-import type { Environment } from '@gamedao-haiku/graphql/dist'
+import { Environment } from '@gamedao-haiku/graphql/dist'
 import type { TMPOrganisation } from 'src/@types/organisation'
 import { TMPProposal } from 'src/@types/proposal'
 
