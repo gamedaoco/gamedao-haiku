@@ -7,24 +7,7 @@ query Config($env: Environment!) {
         TW_SITE_NAME
         TW_SITE_CREATOR
         CONTACT
-        UNSPLASH_KEY
-        UNSPLASH_SECRET
-        CRYPTOCOMPARE
-        INFURA_MODE
-        INFURA_KEY
-        INFURA_SECRET
-        INFURA_MAINNET
-        INFURA_TESTNET
-        AWS_REGION
-        AWS_USERPOOL_ID
-        AWS_USERPOOL_WEBCLIENT_ID
-        GQL_URI
-        GQL_KEY
-        ETH_URI
-        SUB_URI
-        IPFS_URI
-        SUBZERO_URI
-        SUBZERO_PORT
         IPFS_GATEWAY
+        LOG_LEVEL
     }
 }
