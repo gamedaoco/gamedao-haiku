@@ -2,27 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { Organization } from '@gamedao-haiku/graphql/dist'
 import { Add as AddIcon, ArrowBack, HowToVote, Launch, LinkOff, Person, Twitter } from '@mui/icons-material'
-import {
-	Badge,
-	Box,
-	Button,
-	Chip,
-	FormControl,
-	FormControlLabel,
-	Grid,
-	IconButton,
-	InputAdornment,
-	LinearProgress,
-	Paper,
-	Radio,
-	RadioGroup,
-	Stack,
-	TextField,
-	Typography,
-} from '@mui/material'
+import { Box, Button, Chip, IconButton, LinearProgress, Paper, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import { useDisplayValues } from 'hooks/useDisplayValues'
 
 import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
@@ -39,8 +23,8 @@ const proposalData = {
 	creator: '0xabcdefghijklmnopqrstuvwxyz',
 
 	status: 1,
-	type: 1,
-	votingType: 1,
+	type: 0,
+	votingType: 0,
 
 	block: 700000,
 	expiryBlock: 999999,
@@ -109,43 +93,9 @@ const columns: GridColDef[] = [
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
-function getProposalTypeName(type: number) {
-	switch (type) {
-		case 0:
-			return 'General Proposal'
-		case 1:
-			return 'Multiple Proposal'
-		case 2:
-			return 'Member Proposal'
-		case 3:
-			return 'Withdrawal Proposal'
-		case 4:
-			return 'Spending Proposal'
-	}
-
-	return 'Unknown type'
-}
-
-function getProposalVotingTypeName(type: number) {
-	switch (type) {
-		case 0:
-			return 'Simple Majority'
-		case 1:
-			return 'Token Voting'
-		case 2:
-			return 'Absolute Majority'
-		case 3:
-			return 'Quadratic Voting'
-		case 4:
-			return 'Ranked Voting'
-		case 5:
-			return 'Convictional Voting'
-	}
-
-	return 'Unknown type'
-}
-
 export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
+	const displayValues = useDisplayValues()
+
 	const [proposal, setProposal] = useState(proposalData)
 	const [proposalTypeName, setProposalTypeName] = useState(null)
 	const [proposalVotingTypeName, setProposalVotingTypeName] = useState(null)
@@ -164,9 +114,6 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	useEffect(() => {
 		if (!proposal) return
 
-		setProposalTypeName(getProposalTypeName(proposal?.type ?? -1))
-		setProposalVotingTypeName(getProposalVotingTypeName(proposal?.votingType ?? -1))
-
 		const yesVotes = proposal.voters.filter((voter) => voter.vote === 1).length
 		const noVotes = proposal.voters.filter((voter) => voter.vote === 0).length
 
@@ -181,6 +128,20 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			})),
 		)
 	}, [proposal])
+
+	useEffect(() => {
+		if (!proposal) return
+
+		const typeName = displayValues?.proposalTypes.find((pt) => pt.value === proposal!.type)?.text
+		if (typeName) {
+			setProposalTypeName(`${typeName} Proposal`)
+		}
+
+		const votingTypeName = displayValues?.votingTypes.find((pt) => pt.value === proposal!.votingType)?.text ?? ''
+		if (votingTypeName) {
+			setProposalVotingTypeName(votingTypeName)
+		}
+	}, [displayValues, proposal])
 
 	return (
 		proposal && (
@@ -209,9 +170,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 								</Stack>
 							</Stack>
 
-							{matches && (
-								<Chip color="secondary" label={getProposalTypeName(proposal.type)} variant="outlined" />
-							)}
+							{matches && <Chip color="secondary" label={proposalTypeName} variant="outlined" />}
 						</Stack>
 						<Typography variant="body1">{proposal.metadata.description}</Typography>
 						<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined">
