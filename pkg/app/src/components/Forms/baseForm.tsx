@@ -3,16 +3,17 @@ import { ReactNode } from 'react'
 import { Paper, Stack, Typography } from '@mui/material'
 
 interface ComponentProps {
-	title: string
+	title?: string
 	children: ReactNode
 	error?: string
+	noPadding?: boolean
 }
 
-export function BaseForm({ title, children, error }: ComponentProps) {
+export function BaseForm({ title, children, error, noPadding }: ComponentProps) {
 	return (
 		<Stack
 			component={Paper}
-			p={{ xs: 3, sm: 6 }}
+			p={!noPadding ? { xs: 3, sm: 6 } : {}}
 			spacing={{ xs: 2, sm: 4 }}
 			width="100%"
 			height="100%"

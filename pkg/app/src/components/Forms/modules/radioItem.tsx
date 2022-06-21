@@ -5,7 +5,7 @@ import { Radio, Stack, Typography, useTheme } from '@mui/material'
 interface ComponentProps {
 	icon: ReactNode
 	title: string
-	description: string
+	description?: string
 	value: any
 	selectedValue
 	onChange: (value) => void
@@ -42,7 +42,7 @@ export function RadioItem({ icon, title, description, value, selectedValue, onCh
 			{icon}
 			<Stack spacing={1} width="100%">
 				<Typography variant="subtitle2">{title}</Typography>
-				<Typography variant="body2">{description}</Typography>
+				{description && <Typography variant="body2">{description}</Typography>}
 			</Stack>
 		</Stack>
 	)

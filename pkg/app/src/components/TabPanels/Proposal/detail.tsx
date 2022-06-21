@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 import { Organization } from '@gamedao-haiku/graphql/dist'
-import { Add as AddIcon, ArrowBack, HowToVote, Launch, LinkOff, Twitter } from '@mui/icons-material'
+import { Add as AddIcon, ArrowBack, HowToVote, Launch, LinkOff, Person, Twitter } from '@mui/icons-material'
 import {
 	Badge,
 	Box,
@@ -11,17 +11,21 @@ import {
 	FormControlLabel,
 	Grid,
 	IconButton,
+	InputAdornment,
 	LinearProgress,
 	Paper,
 	Radio,
 	RadioGroup,
 	Stack,
+	TextField,
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 
+import { BaseForm } from 'components/Forms/baseForm'
+import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 
 interface ComponentProps {
@@ -151,6 +155,8 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 	const [pageSize, setPageSize] = useState<number>(10)
 	const [voterRows, setVoterRows] = useState([])
+
+	const [selectedVote, setSelectedVote] = useState(0)
 
 	const theme = useTheme()
 	const matches = useMediaQuery(theme.breakpoints.up('lg'))
@@ -294,24 +300,30 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 				</Stack>
 
 				{/* Cast vote */}
-				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>
+				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
 					<Stack direction="row" justifyContent="space-between">
 						<Typography variant="h6">Cast your vote</Typography>
 					</Stack>
 					<Stack paddingLeft={4} paddingRight={4}>
-						<form>
-							<FormControl fullWidth={true} variant="standard">
-								<Stack gap={2}>
-									<RadioGroup aria-labelledby="demo-error-radios" name="quiz">
-										<FormControlLabel value="best" control={<Radio />} label="Yes" />
-										<FormControlLabel value="worst" control={<Radio />} label="No" />
-									</RadioGroup>
-									<Button fullWidth={true} variant="contained">
-										Vote
-									</Button>
-								</Stack>
-							</FormControl>
-						</form>
+						<BaseForm noPadding>
+							<RadioItem
+								icon={<></>}
+								title={'Yes'}
+								value={1}
+								selectedValue={selectedVote}
+								onChange={setSelectedVote}
+							/>
+							<RadioItem
+								icon={<></>}
+								title={'No'}
+								value={0}
+								selectedValue={selectedVote}
+								onChange={setSelectedVote}
+							/>
+							<Button fullWidth={true} variant="contained">
+								Vote
+							</Button>
+						</BaseForm>
 					</Stack>
 				</Stack>
 
