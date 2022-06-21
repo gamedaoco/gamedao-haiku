@@ -18,6 +18,8 @@ import {
 	Stack,
 	Typography,
 } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
@@ -150,6 +152,9 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const [pageSize, setPageSize] = useState<number>(10)
 	const [voterRows, setVoterRows] = useState([])
 
+	const theme = useTheme()
+	const matches = useMediaQuery(theme.breakpoints.up('lg'))
+
 	useEffect(() => {
 		if (!proposal) return
 
@@ -173,85 +178,44 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 	return (
 		proposal && (
-			<Stack direction="row" spacing={3}>
-				<Stack gap={3}>
-					<Stack component={Paper} padding={4} spacing={2}>
-						<Stack direction="row" spacing={1} alignItems="center">
-							<IconButton onClick={goBack}>
-								<ArrowBack />
-							</IconButton>
-							<Typography variant="h6">Proposal {proposalId}</Typography>
-						</Stack>
-						<Stack paddingTop={2} paddingLeft={4} paddingRight={4} spacing={2} gap={2}>
-							<Stack direction="row" justifyContent="space-between">
-								<Stack direction="row" spacing={3}>
-									<ProposalStatusChip status={proposal.status} />
-									<Stack direction="row" alignItems="center" spacing={1}>
-										<HowToVote fontSize="large" />
-										<Typography variant="body1">
-											by
-											{` ${proposal.creator.substring(0, 20)}...${proposal.creator.substring(
-												proposal.creator.length - 3,
-											)}`}
-										</Typography>
-									</Stack>
-								</Stack>
+			<Stack direction="row" flexWrap="wrap" gap={3}>
+				{/* Metadata */}
+				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
+					<Stack direction="row" spacing={1} alignItems="center">
+						<IconButton onClick={goBack}>
+							<ArrowBack />
+						</IconButton>
+						<Typography variant="h6">Proposal {proposalId}</Typography>
+					</Stack>
 
-								<Chip color="secondary" label={getProposalTypeName(proposal.type)} variant="outlined" />
-							</Stack>
-							<Typography variant="body1">{proposal.metadata.description}</Typography>
-							<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined">
-								Show more
-							</Button>
-						</Stack>
-					</Stack>
-					<Stack component={Paper} padding={4} spacing={2} gap={2}>
+					<Stack paddingTop={2} paddingLeft={4} paddingRight={4} spacing={2} gap={2}>
 						<Stack direction="row" justifyContent="space-between">
-							<Typography variant="h6">Cast your vote</Typography>
+							<Stack direction="row" flexWrap="wrap" spacing={{ xs: 0, lg: 3 }} gap={2}>
+								<ProposalStatusChip status={proposal.status} />
+								<Stack direction="row" alignItems="center" spacing={1}>
+									<HowToVote fontSize="large" />
+									<Typography sx={{ wordBreak: 'break-all' }} variant="body1">
+										by
+										{` ${proposal.creator.substring(0, 20)}...${proposal.creator.substring(
+											proposal.creator.length - 3,
+										)}`}
+									</Typography>
+								</Stack>
+							</Stack>
+
+							{matches && (
+								<Chip color="secondary" label={getProposalTypeName(proposal.type)} variant="outlined" />
+							)}
 						</Stack>
-						<Stack paddingLeft={4} paddingRight={4}>
-							<form>
-								<FormControl fullWidth={true} variant="standard">
-									<Stack gap={2}>
-										<RadioGroup aria-labelledby="demo-error-radios" name="quiz">
-											<FormControlLabel value="best" control={<Radio />} label="Yes" />
-											<FormControlLabel value="worst" control={<Radio />} label="No" />
-										</RadioGroup>
-										<Button fullWidth={true} variant="contained">
-											Vote
-										</Button>
-									</Stack>
-								</FormControl>
-							</form>
-						</Stack>
-					</Stack>
-					<Stack component={Paper} padding={4} spacing={2} gap={2}>
-						<Stack direction="row" spacing={1}>
-							<Typography variant="h6">Votes</Typography>
-							<Chip size="small" variant="proposalVotes" label={proposal.voters.length} />
-						</Stack>
-						<Stack paddingLeft={4} paddingRight={4}>
-							<Box sx={{ height: 550 }}>
-								<DataGrid
-									rows={voterRows}
-									columns={columns}
-									pageSize={pageSize}
-									rowsPerPageOptions={pageSizeOptions}
-									isCellEditable={() => false}
-									hideFooterSelectedRowCount={true}
-									disableSelectionOnClick={true}
-									getRowHeight={() => {
-										return rowHeight
-									}}
-									onPageSizeChange={(pageSize) => {
-										setPageSize(pageSize)
-									}}
-								/>
-							</Box>
-						</Stack>
+						<Typography variant="body1">{proposal.metadata.description}</Typography>
+						<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined">
+							Show more
+						</Button>
 					</Stack>
 				</Stack>
-				<Stack spacing={2} minWidth={300}>
+
+				{/* Metadata right side */}
+				<Stack spacing={2} flex={1}>
 					<Stack component={Paper} padding={4} spacing={3}>
 						<Typography variant="h6">Information</Typography>
 
@@ -326,6 +290,55 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 							</Stack>
 							<LinearProgress variant="determinate" value={noPercentage} />
 						</Stack>
+					</Stack>
+				</Stack>
+
+				{/* Cast vote */}
+				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="h6">Cast your vote</Typography>
+					</Stack>
+					<Stack paddingLeft={4} paddingRight={4}>
+						<form>
+							<FormControl fullWidth={true} variant="standard">
+								<Stack gap={2}>
+									<RadioGroup aria-labelledby="demo-error-radios" name="quiz">
+										<FormControlLabel value="best" control={<Radio />} label="Yes" />
+										<FormControlLabel value="worst" control={<Radio />} label="No" />
+									</RadioGroup>
+									<Button fullWidth={true} variant="contained">
+										Vote
+									</Button>
+								</Stack>
+							</FormControl>
+						</form>
+					</Stack>
+				</Stack>
+
+				{/* Voter list */}
+				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>
+					<Stack direction="row" spacing={1}>
+						<Typography variant="h6">Votes</Typography>
+						<Chip size="small" variant="proposalVotes" label={proposal.voters.length} />
+					</Stack>
+					<Stack paddingLeft={4} paddingRight={4}>
+						<Box sx={{ height: 550 }}>
+							<DataGrid
+								rows={voterRows}
+								columns={columns}
+								pageSize={pageSize}
+								rowsPerPageOptions={pageSizeOptions}
+								isCellEditable={() => false}
+								hideFooterSelectedRowCount={true}
+								disableSelectionOnClick={true}
+								getRowHeight={() => {
+									return rowHeight
+								}}
+								onPageSizeChange={(pageSize) => {
+									setPageSize(pageSize)
+								}}
+							/>
+						</Box>
 					</Stack>
 				</Stack>
 			</Stack>
