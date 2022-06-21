@@ -1,3 +1,5 @@
+scalar Upload
+
 schema {
     query: Query
 }
@@ -35,16 +37,6 @@ interface ProposalFeatures {
     CREATE_WITHDRAW_PROPOSAL: Boolean!
     CREATE_SPENDING_PROPOSAL: Boolean!
 }
-type OrganizationPageFeaturesSortOptions {
-    name: String!
-    value: String!
-}
-
-type OrganizationPageFeatures {
-    SHOW_SEARCH: Boolean!
-    SHOW_FILTERS: Boolean!
-    SHOW_SORT: Boolean!
-}
 
 type Features implements ProposalFeatures {
     CREATE_PROPOSAL: Boolean!
@@ -53,7 +45,6 @@ type Features implements ProposalFeatures {
     CREATE_GENERAL_PROPOSAL: Boolean!
     CREATE_WITHDRAW_PROPOSAL: Boolean!
     CREATE_SPENDING_PROPOSAL: Boolean!
-    ORGANIZATION_PAGE_FEATURES: OrganizationPageFeatures!
 }
 
 type Config {
@@ -105,8 +96,16 @@ type DisplayValues {
     projectDurations: [DisplayValueEntryNumber]
     memberships: [DisplayValueEntryNumber]
     countries: [DisplayValueEntryCountry]
-    sortOptions: [OrganizationPageFeaturesSortOptions]
+}
 
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
+type Mutation {
+    singleUpload(fileStream: Upload!): String!
 }
 
 type Query {
