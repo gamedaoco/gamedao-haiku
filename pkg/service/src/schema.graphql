@@ -1,3 +1,5 @@
+scalar Upload
+
 schema {
     query: Query
 }
@@ -94,6 +96,16 @@ type DisplayValues {
     projectDurations: [DisplayValueEntryNumber]
     memberships: [DisplayValueEntryNumber]
     countries: [DisplayValueEntryCountry]
+}
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
+type Mutation {
+    singleUpload(fileStream: Upload!): String!
 }
 
 type Query {
