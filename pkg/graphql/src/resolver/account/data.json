@@ -1,21 +1,24 @@
 {
     "balances": [
         {
-            "token": "ZERO",
+            "name": "ZERO",
+            "symbol": "ZERO",
             "transferrable": 123,
             "locked": 1,
             "reserved": 23,
             "total": 4
         },
         {
-            "token": "GAME",
+            "name": "GAME",
+            "symbol": "GAME",
             "transferrable": 798,
             "locked": 13,
             "reserved": 231,
             "total": 44
         },
         {
-            "token": "PLAY",
+            "name": "PLAY",
+            "symbol": "PLAY",
             "transferrable": 112,
             "locked": 123,
             "reserved": 12323,

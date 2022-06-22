@@ -14,7 +14,8 @@ query account($address: String!) {
       }
     }
     balances {
-      token
+      name
+      symbol
       transferrable
       locked
       reserved

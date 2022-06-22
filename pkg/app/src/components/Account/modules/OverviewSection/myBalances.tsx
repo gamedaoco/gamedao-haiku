@@ -68,7 +68,7 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 								<>
 									{balances?.map((balance, index) => (
 										<TableRow hover key={index}>
-											<TableCell>{balance.token}</TableCell>
+											<TableCell>{balance?.symbol}</TableCell>
 											<TableCell>{balance.transferrable}</TableCell>
 											<TableCell>{balance.locked}</TableCell>
 											<TableCell>{balance.reserved}</TableCell>
