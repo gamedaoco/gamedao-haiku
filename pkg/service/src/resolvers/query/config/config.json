@@ -1,0 +1,22 @@
+{
+  "global": {
+    "SITE_NAME": "GameDAO",
+    "SITE_TITLE": "Fundraising, coordination, ownership for video games, esports and the creative industry.",
+    "SITE_DESCRIPTION": "The DAO for video games, esports and creatives. We connect gamers, creators, publishers and investors for better video games with the power of web3, dao, defi and nft.",
+    "SITE_IMAGE": "https://gamedao.co/assets/gamedao-logo.png",
+    "TW_SITE_NAME": "@gamedaoco",
+    "TW_SITE_CREATOR": "@zerodotio",
+    "CONTACT": "hey@gamedao.co",
+    "IPFS_GATEWAY": "https://gamedao.infura-ipfs.io/",
+    "LOG_LEVEL": "INFO"
+  },
+  "DEVELOPMENT": {
+    "LOG_LEVEL": "TRACE"
+  },
+  "STAGING": {
+    "LOG_LEVEL": "INFO"
+  },
+  "PRODUCTION": {
+    "LOG_LEVEL": "SILENT"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "global": {
+    "CREATE_PROPOSAL": true,
+    "CREATE_PROPOSAL_SIMPLE_MAJORITY": true,
+    "CREATE_PROPOSAL_RELATIVE_MAJORITY": false,
+    "CREATE_GENERAL_PROPOSAL": true,
+    "CREATE_WITHDRAW_PROPOSAL": true,
+    "CREATE_SPENDING_PROPOSAL": false
+  },
+  "dev": {
+  },
+  "production": {
+  }
+}
