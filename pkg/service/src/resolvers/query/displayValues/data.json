@@ -1,0 +1,214 @@
+{
+  "collateralTypes": [
+    {
+      "key": "0",
+      "text": "GAME",
+      "value": 0
+    }
+  ],
+  "proposalTypes": [
+    {
+      "key": "0",
+      "text": "General",
+      "value": 0
+    },
+    {
+      "key": "3",
+      "text": "Withdrawal",
+      "value": 3
+    }
+  ],
+  "votingTypes": [
+    {
+      "key": "0",
+      "text": "Simple Majority",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Token Weight Majority",
+      "value": 1
+    },
+    {
+      "key": "4",
+      "text": "Absolute Majority",
+      "value": 3
+    }
+  ],
+  "daoBodies": [
+    {
+      "key": "0",
+      "text": "Individual",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Off Chain Organization",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "On Chain / DAO",
+      "value": 2
+    },
+    {
+      "key": "3",
+      "text": "Hybrid DAO",
+      "value": 3
+    }
+  ],
+  "daoMemberGovernance": [
+    {
+      "key": "0",
+      "text": "Open",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Invitation",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "Proposal",
+      "value": 2
+    }
+  ],
+  "daoFeeModel": [
+    {
+      "key": "0",
+      "text": "no fees",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "reserve",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "transfer",
+      "value": 2
+    }
+  ],
+  "projectTypes": [
+    {
+      "key": "0",
+      "text": "Game",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Content Pack / DLC",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "Concept",
+      "value": 2
+    },
+    {
+      "key": "3",
+      "text": "Audio / Music / SFX",
+      "value": 3
+    },
+    {
+      "key": "4",
+      "text": "Video / Motion Graphics",
+      "value": 4
+    },
+    {
+      "key": "5",
+      "text": "2D / 3D / GFX / Artwork",
+      "value": 5
+    },
+    {
+      "key": "6",
+      "text": "Team",
+      "value": 6
+    },
+    {
+      "key": "7",
+      "text": "Merch",
+      "value": 7
+    },
+    {
+      "key": "8",
+      "text": "Hardware",
+      "value": 8
+    },
+    {
+      "key": "9",
+      "text": "Other",
+      "value": 9
+    }
+  ],
+  "protocolTypes": [
+    {
+      "key": "0",
+      "text": "Grant",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Prepaid",
+      "value": 1
+    }
+  ],
+  "countries": [
+    {
+      "key": "0",
+      "flag": "eu",
+      "text": "Europe",
+      "value": "eu"
+    },
+    {
+      "key": "1",
+      "flag": "de",
+      "text": "Germany",
+      "value": "de"
+    },
+    {
+      "key": "2",
+      "flag": "ch",
+      "text": "Switzerland",
+      "value": "ch"
+    },
+    {
+      "key": "3",
+      "flag": "li",
+      "text": "Liechtenstein",
+      "value": "li"
+    },
+    {
+      "key": "999",
+      "flag": "xx",
+      "text": "other",
+      "value": "999"
+    }
+  ],
+  "projectDurations": [
+    {
+      "key": "0",
+      "text": "1 day",
+      "value": 1
+    },
+    {
+      "key": "1",
+      "text": "7 days",
+      "value": 7
+    },
+    {
+      "key": "2",
+      "text": "30 days",
+      "value": 30
+    }
+  ],
+  "memberships": [
+    {
+      "key": "0",
+      "text": "CitizenGame",
+      "value": 0
+    }
+  ]
+}
