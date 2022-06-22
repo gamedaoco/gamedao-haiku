@@ -1,0 +1,6 @@
+{
+    "startBlock": -1,
+    "networkAddressPrefix": 25,
+    "chainRPC": "wss://zero.gamedao.network",
+    "archiveGQL": "http://localhost:8088/v1/graphql"
+}
