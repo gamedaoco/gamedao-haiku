@@ -1,5 +1,5 @@
 // Constants
-const IPFS_GATEWAY = 'https://ipfs.gamedao.co/gateway/';
+const IPFS_GATEWAY = 'https://gamedao.infura-ipfs.io/ipfs/';
 
 // Helpers
 const getIpfsUrlByCid = (cid: string): string => `${IPFS_GATEWAY}${cid}`;
