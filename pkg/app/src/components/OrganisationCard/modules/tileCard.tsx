@@ -83,9 +83,7 @@ export const TileCard = ({ item }: ComponentsPros) => {
 					border: '1px solid transparent',
 					'&:hover': {
 						border: `1px solid ${theme.palette.grey[500_32]}`,
-						background: theme.palette.grey[500_16],
 					},
-					backgroundColor: theme.palette.grey[500_16],
 					cursor: 'pointer',
 				}}
 			>
