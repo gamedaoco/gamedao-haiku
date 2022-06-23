@@ -47,6 +47,7 @@ async function createOrganization(
 	organization.govAsset = data.govAsset;
 	organization.payAsset = data.payAsset;
 	organization.memberLimit = data.memberLimit;
+	organization.deposit = data?.deposit ?? 0;
 
 	if (data.cid) {
 		organization.metadata = await upsertOrganizationMetadata(store, data.cid, metadata);

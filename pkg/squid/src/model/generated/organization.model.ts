@@ -54,10 +54,10 @@ export class Organization {
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	fee!: bigint;
 
-	@Column_('integer', { nullable: false })
+	@Column_('int4', { nullable: false })
 	govAsset!: number;
 
-	@Column_('integer', { nullable: false })
+	@Column_('int4', { nullable: false })
 	payAsset!: number;
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
@@ -73,6 +73,9 @@ export class Organization {
 	@ManyToOne_(() => OrganizationMetadata, { nullable: true })
 	metadata!: OrganizationMetadata | undefined | null;
 
-	@Column_('integer', { nullable: false })
+	@Column_('int4', { nullable: false })
 	createdAtBlock!: number;
+
+	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
+	deposit!: bigint;
 }

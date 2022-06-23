@@ -31,6 +31,7 @@ async function upsertOrganizationMetadata(
 	organizationMetadata.email = data?.email ?? '';
 	organizationMetadata.repo = data?.repo ?? '';
 	organizationMetadata.logo = data?.logo ?? '';
+	organizationMetadata.header = data?.header ?? '';
 
 	// Save metadata
 	await store.save(organizationMetadata);

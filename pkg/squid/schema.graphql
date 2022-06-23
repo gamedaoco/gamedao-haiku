@@ -34,6 +34,7 @@ type Organization @entity {
     campaigns: [Campaign!]! @derivedFrom(field: "organization")
     metadata: OrganizationMetadata
     createdAtBlock: Int!
+    deposit: BigInt!
 }
 
 type OrganizationMetadata @entity {
@@ -44,6 +45,7 @@ type OrganizationMetadata @entity {
     email: String!
     repo: String!
     logo: String!
+    header: String!
 }
 
 type OrganizationMember @entity {

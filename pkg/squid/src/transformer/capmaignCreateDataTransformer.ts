@@ -32,8 +32,8 @@ function getCampaignCreationData(context: EventHandlerContext): CampaignCreation
 				tokenName: v51Data.tokenName.toString(),
 				blockNumber: context.block.height,
 			};
-		} else if (createData.isV52) {
-			const v52Data = createData.asV52;
+		} else if (createData.isV55) {
+			const v52Data = createData.asV55;
 			return {
 				org: hashToHexString(v52Data.orgId),
 				admin: addressCodec.encode(v52Data.adminId),

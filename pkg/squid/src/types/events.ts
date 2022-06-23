@@ -1,7 +1,7 @@
+import assert from 'assert';
 import { EventContext, Result, deprecateLatest } from './support';
 import * as v51 from './v51';
-import * as v52 from './v52';
-import assert from 'assert';
+import * as v55 from './v55';
 
 export class ControlAddMemberEvent {
 	constructor(private ctx: EventContext) {
@@ -11,7 +11,7 @@ export class ControlAddMemberEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('control.AddMember') ===
-			'1612429c53391716db913b270a71e38a6ffb82fdcf636676c05f981b186dc93d'
+			'e3ecfdf4ae9b50fc2755d1f9db55966f6a1b2d7d7dad41bf1d26118a9f3c59fe'
 		);
 	}
 
@@ -39,7 +39,7 @@ export class ControlOrgCreatedEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('control.OrgCreated') ===
-			'4e393aea082c3c6ff3eaea7f1751b935a60ac5e3314fa506947bbc9db9aff5dd'
+			'8b455a07160eae124684c58db55014bb7e6b9c3520cbcd5ae2dad54b50829dc6'
 		);
 	}
 
@@ -79,7 +79,7 @@ export class ControlRemoveMemberEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('control.RemoveMember') ===
-			'6dbf5f59b7d96281f8c1c006ec712b5a09a4ede5daea0cf19dd7e2547cb9f420'
+			'5d42b282f05739070f0f410d441cfe9c3bd6d3d47ad9292d5c6497e6157b58d2'
 		);
 	}
 
@@ -107,7 +107,7 @@ export class FlowCampaignContributedEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('flow.CampaignContributed') ===
-			'468323ba2b1d06ed69cab44dae01b73effde3718b7f6fa45825f7ab33b4b3470'
+			'd8db14008bc916744d2223c9ae64c77e900996ff702695e41ec566ede7ee72db'
 		);
 	}
 
@@ -135,7 +135,7 @@ export class FlowCampaignCreatedEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('flow.CampaignCreated') ===
-			'371b8f51721e1fd8ed81cf9a3772d6cc0f16c13a8914d6e2db030f98b0b8df78'
+			'ff2ecea79f1fe30537e2d7e89f486cb3705ec64411ac17525c02b4c7369601c4'
 		);
 	}
 
@@ -179,7 +179,7 @@ export class FlowCampaignFailedEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('flow.CampaignFailed') ===
-			'f8729adf95aca79ce70a6bf7e5552c2fbca3c375bd8d28e1c244ab667301a78e'
+			'8f85cbd834ab8bd616c9a81d472f2cc6b0ee0111a1b6eddf44030d7d5d5b742d'
 		);
 	}
 
@@ -207,7 +207,7 @@ export class FlowCampaignFinalizedEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('flow.CampaignFinalized') ===
-			'fc15b0acbdb489eb2e0dabd16a4be053f3ca74fb78406c41d8e49d6946894452'
+			'8f85cbd834ab8bd616c9a81d472f2cc6b0ee0111a1b6eddf44030d7d5d5b742d'
 		);
 	}
 
@@ -235,7 +235,7 @@ export class FlowCampaignUpdatedEvent {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getEventHash('flow.CampaignUpdated') ===
-			'374ef9f1f9e74398ef5466b31f981fbefc95ea63a0d7fd9dc3f519442cafda62'
+			'279ec5a38271bd0d9063c05562eab6c0a03fd7108e17a6c334c36455bbc78ea9'
 		);
 	}
 
@@ -244,25 +244,25 @@ export class FlowCampaignUpdatedEvent {
 		return this.ctx._chain.decodeEvent(this.ctx.event);
 	}
 
-	get isV52(): boolean {
+	get isV55(): boolean {
 		return (
 			this.ctx._chain.getEventHash('flow.CampaignUpdated') ===
-			'd53f44018d02dddde23ec6f21223f3faefce4ac995e762fae76a4e26ad18b37a'
+			'267fba49ebebc21ce2eb1619b84a079d4feeea75659223b0a0dc69ec79b12f5d'
 		);
 	}
 
-	get asV52(): { campaignId: v52.H256; state: v52.FlowState; blockNumber: number } {
-		assert(this.isV52);
+	get asV55(): { campaignId: v55.H256; state: v55.FlowState; blockNumber: number } {
+		assert(this.isV55);
 		return this.ctx._chain.decodeEvent(this.ctx.event);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV52;
+		return this.isV55;
 	}
 
-	get asLatest(): { campaignId: v52.H256; state: v52.FlowState; blockNumber: number } {
+	get asLatest(): { campaignId: v55.H256; state: v55.FlowState; blockNumber: number } {
 		deprecateLatest();
-		return this.asV52;
+		return this.asV55;
 	}
 }

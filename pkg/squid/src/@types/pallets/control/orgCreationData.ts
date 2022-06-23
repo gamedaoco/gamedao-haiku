@@ -1,13 +1,13 @@
-import * as v51 from '../../../types/v51';
+import * as v55 from '../../../types/v55';
 
 export type OrganizationCreationData = {
 	controller: string;
 	name: string;
 	cid: string | null;
 
-	orgType: v51.OrgType;
-	access: v51.AccessModel;
-	feeModel: v51.FeeModel;
+	orgType: v55.OrgType;
+	access: v55.AccessModel;
+	feeModel: v55.FeeModel;
 
 	fee: bigint;
 	govAsset: number;
@@ -17,4 +17,6 @@ export type OrganizationCreationData = {
 	blockNumber: number;
 
 	treasury?: string;
+
+	deposit: bigint;
 };

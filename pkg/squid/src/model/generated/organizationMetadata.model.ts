@@ -26,4 +26,7 @@ export class OrganizationMetadata {
 
 	@Column_('text', { nullable: false })
 	logo!: string;
+
+	@Column_('text', { nullable: false })
+	header!: string;
 }

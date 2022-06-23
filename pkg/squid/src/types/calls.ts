@@ -1,7 +1,7 @@
+import assert from 'assert';
 import { CallContext, Result, deprecateLatest } from './support';
 import * as v51 from './v51';
-import * as v52 from './v52';
-import assert from 'assert';
+import * as v55 from './v55';
 
 export class ControlCreateOrgCall {
 	constructor(private ctx: CallContext) {
@@ -31,7 +31,7 @@ export class ControlCreateOrgCall {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getCallHash('control.create_org') ===
-			'bd66e94f1a9c6b0b127b60556a0af1ef48b7753daf019cf5e66d57c1aa4e7692'
+			'e4015a6d3c42952f5c7d89a5ef9c94907af0fd271f7546354945cb59408149cc'
 		);
 	}
 
@@ -92,10 +92,10 @@ export class ControlCreateOrgCall {
 	 *
 	 * Weight:
 	 */
-	get isV52(): boolean {
+	get isV55(): boolean {
 		return (
 			this.ctx._chain.getCallHash('control.create_org') ===
-			'5a41cf027d0dfe63aaadfff3d4b5cda9eee31089c10470af216dd162e62656e8'
+			'ec8a2644eea287189ed3cc6df51e8a6abe070543beda8ef7a476f4fc05517912'
 		);
 	}
 
@@ -120,35 +120,35 @@ export class ControlCreateOrgCall {
 	 *
 	 * Weight:
 	 */
-	get asV52(): {
-		controllerId: v52.AccountId32;
+	get asV55(): {
+		controllerId: v55.AccountId32;
 		name: Uint8Array;
 		cid: Uint8Array;
-		orgType: v52.OrgType;
-		access: v52.AccessModel;
-		feeModel: v52.FeeModel;
+		orgType: v55.OrgType;
+		access: v55.AccessModel;
+		feeModel: v55.FeeModel;
 		fee: bigint;
 		govAsset: number;
 		payAsset: number;
 		memberLimit: bigint;
 		deposit: bigint;
 	} {
-		assert(this.isV52);
+		assert(this.isV55);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV52;
+		return this.isV55;
 	}
 
 	get asLatest(): {
-		controllerId: v52.AccountId32;
+		controllerId: v55.AccountId32;
 		name: Uint8Array;
 		cid: Uint8Array;
-		orgType: v52.OrgType;
-		access: v52.AccessModel;
-		feeModel: v52.FeeModel;
+		orgType: v55.OrgType;
+		access: v55.AccessModel;
+		feeModel: v55.FeeModel;
 		fee: bigint;
 		govAsset: number;
 		payAsset: number;
@@ -156,7 +156,7 @@ export class ControlCreateOrgCall {
 		deposit: bigint;
 	} {
 		deprecateLatest();
-		return this.asV52;
+		return this.asV55;
 	}
 }
 
@@ -178,7 +178,7 @@ export class FlowContributeCall {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.contribute') ===
-			'61eaa781937ad2c3bdc3d93252533a3ed9af24cea84b9e11282872cab4f156d4'
+			'35bde54551e073c690aea459d53b33dc6aa20c27dc77adb7a7d131d352f68540'
 		);
 	}
 
@@ -236,7 +236,7 @@ export class FlowCreateCampaignCall {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.create_campaign') ===
-			'5565110b83767f4dfa70de59a3cc97fca2f164735c45155550a56bec20aa98b7'
+			'77c1724dfc18684d7f5d51a8e1c49861a65a819834f3482edb08aa131c12b07a'
 		);
 	}
 
@@ -297,10 +297,10 @@ export class FlowCreateCampaignCall {
 	 *
 	 * Weight:
 	 */
-	get isV52(): boolean {
+	get isV55(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.create_campaign') ===
-			'84695d5b64ff13ce4f64ca0eba57df5d41339b681cef22db16f05b7e417221ff'
+			'548b4652cb7480edaf5d64431696136d5b4d32d71d836d3e0670defc3437742d'
 		);
 	}
 
@@ -324,43 +324,43 @@ export class FlowCreateCampaignCall {
 	 *
 	 * Weight:
 	 */
-	get asV52(): {
-		orgId: v52.H256;
-		adminId: v52.AccountId32;
+	get asV55(): {
+		orgId: v55.H256;
+		adminId: v55.AccountId32;
 		name: Uint8Array;
 		target: bigint;
 		deposit: bigint;
 		expiry: number;
-		protocol: v52.FlowProtocol;
-		governance: v52.FlowGovernance;
+		protocol: v55.FlowProtocol;
+		governance: v55.FlowGovernance;
 		cid: Uint8Array;
 		tokenSymbol: Uint8Array;
 		tokenName: Uint8Array;
 	} {
-		assert(this.isV52);
+		assert(this.isV55);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV52;
+		return this.isV55;
 	}
 
 	get asLatest(): {
-		orgId: v52.H256;
-		adminId: v52.AccountId32;
+		orgId: v55.H256;
+		adminId: v55.AccountId32;
 		name: Uint8Array;
 		target: bigint;
 		deposit: bigint;
 		expiry: number;
-		protocol: v52.FlowProtocol;
-		governance: v52.FlowGovernance;
+		protocol: v55.FlowProtocol;
+		governance: v55.FlowGovernance;
 		cid: Uint8Array;
 		tokenSymbol: Uint8Array;
 		tokenName: Uint8Array;
 	} {
 		deprecateLatest();
-		return this.asV52;
+		return this.asV55;
 	}
 }
 
@@ -382,7 +382,7 @@ export class FlowUpdateStateCall {
 	get isV51(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.update_state') ===
-			'7a71460dbd54d3f24c0e77a93e35b1f11a2a15c0f039ddc3b8494032f28e004e'
+			'2d94c26601218d5d123f721766e7be47db410799a29b3070a7eaaf0aed12db7f'
 		);
 	}
 
@@ -411,10 +411,10 @@ export class FlowUpdateStateCall {
 	 *
 	 * Weight:
 	 */
-	get isV52(): boolean {
+	get isV55(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.update_state') ===
-			'f05863bcf1b93380634f42c04678e86a622a4541b3fe23dfda0a629f950d383e'
+			'c64752f2d1ab8a2192e339d44ff98337d7d71317a35d873b4eaa5122665216a8'
 		);
 	}
 
@@ -428,18 +428,18 @@ export class FlowUpdateStateCall {
 	 *
 	 * Weight:
 	 */
-	get asV52(): { campaignId: v52.H256; state: v52.FlowState } {
-		assert(this.isV52);
+	get asV55(): { campaignId: v55.H256; state: v55.FlowState } {
+		assert(this.isV55);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV52;
+		return this.isV55;
 	}
 
-	get asLatest(): { campaignId: v52.H256; state: v52.FlowState } {
+	get asLatest(): { campaignId: v55.H256; state: v55.FlowState } {
 		deprecateLatest();
-		return this.asV52;
+		return this.asV55;
 	}
 }

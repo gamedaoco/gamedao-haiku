@@ -34,9 +34,10 @@ function getOrganizationCreationData(context: EventHandlerContext): Organization
 
 				memberLimit: v51Data.memberLimit,
 				blockNumber: context.block.height,
+				deposit: BigInt(0),
 			};
-		} else if (createData.isV52) {
-			const v52Data = createData.asV52;
+		} else if (createData.isV55) {
+			const v52Data = createData.asV55;
 			return {
 				name: v52Data.name.toString(),
 				cid: v52Data.cid.toString(),
@@ -53,6 +54,7 @@ function getOrganizationCreationData(context: EventHandlerContext): Organization
 
 				memberLimit: v52Data.memberLimit,
 				blockNumber: context.block.height,
+				deposit: v52Data.deposit,
 			};
 		} else {
 			console.error(`Unknown version of create organization extrinsic!`);

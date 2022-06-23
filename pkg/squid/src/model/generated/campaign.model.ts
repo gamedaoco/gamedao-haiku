@@ -45,7 +45,7 @@ export class Campaign {
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	deposit!: bigint;
 
-	@Column_('integer', { nullable: false })
+	@Column_('int4', { nullable: false })
 	expiry!: number;
 
 	@Column_('text', { nullable: false })
@@ -70,6 +70,6 @@ export class Campaign {
 	@OneToMany_(() => CampaignContributor, (e) => e.campaign)
 	contributors!: CampaignContributor[];
 
-	@Column_('integer', { nullable: false })
+	@Column_('int4', { nullable: false })
 	createdAtBlock!: number;
 }
