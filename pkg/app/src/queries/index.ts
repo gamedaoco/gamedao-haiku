@@ -171,6 +171,8 @@ export type Campaign = {
 	readonly admin_identity_id: Scalars['String']
 	/** An array relationship */
 	readonly campaign_contributors: ReadonlyArray<Campaign_Contributor>
+	/** An aggregate relationship */
+	readonly campaign_contributors_aggregate: Campaign_Contributor_Aggregate
 	/** An object relationship */
 	readonly campaign_metadatum?: Maybe<Campaign_Metadata>
 	readonly created_at_block: Scalars['Int']
@@ -204,6 +206,44 @@ export type CampaignCampaign_ContributorsArgs = {
 	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
 }
 
+/** columns and relationships of "campaign" */
+export type CampaignCampaign_Contributors_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>
+	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
+}
+
+/** aggregated selection of "campaign" */
+export type Campaign_Aggregate = {
+	readonly __typename?: 'campaign_aggregate'
+	readonly aggregate?: Maybe<Campaign_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Campaign>
+}
+
+/** aggregate fields of "campaign" */
+export type Campaign_Aggregate_Fields = {
+	readonly __typename?: 'campaign_aggregate_fields'
+	readonly avg?: Maybe<Campaign_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Campaign_Max_Fields>
+	readonly min?: Maybe<Campaign_Min_Fields>
+	readonly stddev?: Maybe<Campaign_Stddev_Fields>
+	readonly stddev_pop?: Maybe<Campaign_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<Campaign_Stddev_Samp_Fields>
+	readonly sum?: Maybe<Campaign_Sum_Fields>
+	readonly var_pop?: Maybe<Campaign_Var_Pop_Fields>
+	readonly var_samp?: Maybe<Campaign_Var_Samp_Fields>
+	readonly variance?: Maybe<Campaign_Variance_Fields>
+}
+
+/** aggregate fields of "campaign" */
+export type Campaign_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
 /** order by aggregate values of table "campaign" */
 export type Campaign_Aggregate_Order_By = {
 	readonly avg?: InputMaybe<Campaign_Avg_Order_By>
@@ -217,6 +257,15 @@ export type Campaign_Aggregate_Order_By = {
 	readonly var_pop?: InputMaybe<Campaign_Var_Pop_Order_By>
 	readonly var_samp?: InputMaybe<Campaign_Var_Samp_Order_By>
 	readonly variance?: InputMaybe<Campaign_Variance_Order_By>
+}
+
+/** aggregate avg on columns */
+export type Campaign_Avg_Fields = {
+	readonly __typename?: 'campaign_avg_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
 }
 
 /** order by avg() on columns of table "campaign" */
@@ -269,6 +318,35 @@ export type Campaign_Contributor = {
 	readonly identity_id: Scalars['String']
 }
 
+/** aggregated selection of "campaign_contributor" */
+export type Campaign_Contributor_Aggregate = {
+	readonly __typename?: 'campaign_contributor_aggregate'
+	readonly aggregate?: Maybe<Campaign_Contributor_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Campaign_Contributor>
+}
+
+/** aggregate fields of "campaign_contributor" */
+export type Campaign_Contributor_Aggregate_Fields = {
+	readonly __typename?: 'campaign_contributor_aggregate_fields'
+	readonly avg?: Maybe<Campaign_Contributor_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Campaign_Contributor_Max_Fields>
+	readonly min?: Maybe<Campaign_Contributor_Min_Fields>
+	readonly stddev?: Maybe<Campaign_Contributor_Stddev_Fields>
+	readonly stddev_pop?: Maybe<Campaign_Contributor_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<Campaign_Contributor_Stddev_Samp_Fields>
+	readonly sum?: Maybe<Campaign_Contributor_Sum_Fields>
+	readonly var_pop?: Maybe<Campaign_Contributor_Var_Pop_Fields>
+	readonly var_samp?: Maybe<Campaign_Contributor_Var_Samp_Fields>
+	readonly variance?: Maybe<Campaign_Contributor_Variance_Fields>
+}
+
+/** aggregate fields of "campaign_contributor" */
+export type Campaign_Contributor_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
 /** order by aggregate values of table "campaign_contributor" */
 export type Campaign_Contributor_Aggregate_Order_By = {
 	readonly avg?: InputMaybe<Campaign_Contributor_Avg_Order_By>
@@ -282,6 +360,12 @@ export type Campaign_Contributor_Aggregate_Order_By = {
 	readonly var_pop?: InputMaybe<Campaign_Contributor_Var_Pop_Order_By>
 	readonly var_samp?: InputMaybe<Campaign_Contributor_Var_Samp_Order_By>
 	readonly variance?: InputMaybe<Campaign_Contributor_Variance_Order_By>
+}
+
+/** aggregate avg on columns */
+export type Campaign_Contributor_Avg_Fields = {
+	readonly __typename?: 'campaign_contributor_avg_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
 }
 
 /** order by avg() on columns of table "campaign_contributor" */
@@ -303,6 +387,16 @@ export type Campaign_Contributor_Bool_Exp = {
 	readonly identity_id?: InputMaybe<String_Comparison_Exp>
 }
 
+/** aggregate max on columns */
+export type Campaign_Contributor_Max_Fields = {
+	readonly __typename?: 'campaign_contributor_max_fields'
+	readonly address?: Maybe<Scalars['String']>
+	readonly campaign_id?: Maybe<Scalars['String']>
+	readonly contributed?: Maybe<Scalars['numeric']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly identity_id?: Maybe<Scalars['String']>
+}
+
 /** order by max() on columns of table "campaign_contributor" */
 export type Campaign_Contributor_Max_Order_By = {
 	readonly address?: InputMaybe<Order_By>
@@ -310,6 +404,16 @@ export type Campaign_Contributor_Max_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
 	readonly id?: InputMaybe<Order_By>
 	readonly identity_id?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type Campaign_Contributor_Min_Fields = {
+	readonly __typename?: 'campaign_contributor_min_fields'
+	readonly address?: Maybe<Scalars['String']>
+	readonly campaign_id?: Maybe<Scalars['String']>
+	readonly contributed?: Maybe<Scalars['numeric']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly identity_id?: Maybe<Scalars['String']>
 }
 
 /** order by min() on columns of table "campaign_contributor" */
@@ -346,9 +450,21 @@ export enum Campaign_Contributor_Select_Column {
 	IdentityId = 'identity_id',
 }
 
+/** aggregate stddev on columns */
+export type Campaign_Contributor_Stddev_Fields = {
+	readonly __typename?: 'campaign_contributor_stddev_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
+}
+
 /** order by stddev() on columns of table "campaign_contributor" */
 export type Campaign_Contributor_Stddev_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type Campaign_Contributor_Stddev_Pop_Fields = {
+	readonly __typename?: 'campaign_contributor_stddev_pop_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
 }
 
 /** order by stddev_pop() on columns of table "campaign_contributor" */
@@ -356,9 +472,21 @@ export type Campaign_Contributor_Stddev_Pop_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
 }
 
+/** aggregate stddev_samp on columns */
+export type Campaign_Contributor_Stddev_Samp_Fields = {
+	readonly __typename?: 'campaign_contributor_stddev_samp_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
+}
+
 /** order by stddev_samp() on columns of table "campaign_contributor" */
 export type Campaign_Contributor_Stddev_Samp_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
+}
+
+/** aggregate sum on columns */
+export type Campaign_Contributor_Sum_Fields = {
+	readonly __typename?: 'campaign_contributor_sum_fields'
+	readonly contributed?: Maybe<Scalars['numeric']>
 }
 
 /** order by sum() on columns of table "campaign_contributor" */
@@ -366,9 +494,21 @@ export type Campaign_Contributor_Sum_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
 }
 
+/** aggregate var_pop on columns */
+export type Campaign_Contributor_Var_Pop_Fields = {
+	readonly __typename?: 'campaign_contributor_var_pop_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
+}
+
 /** order by var_pop() on columns of table "campaign_contributor" */
 export type Campaign_Contributor_Var_Pop_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type Campaign_Contributor_Var_Samp_Fields = {
+	readonly __typename?: 'campaign_contributor_var_samp_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
 }
 
 /** order by var_samp() on columns of table "campaign_contributor" */
@@ -376,9 +516,36 @@ export type Campaign_Contributor_Var_Samp_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
 }
 
+/** aggregate variance on columns */
+export type Campaign_Contributor_Variance_Fields = {
+	readonly __typename?: 'campaign_contributor_variance_fields'
+	readonly contributed?: Maybe<Scalars['Float']>
+}
+
 /** order by variance() on columns of table "campaign_contributor" */
 export type Campaign_Contributor_Variance_Order_By = {
 	readonly contributed?: InputMaybe<Order_By>
+}
+
+/** aggregate max on columns */
+export type Campaign_Max_Fields = {
+	readonly __typename?: 'campaign_max_fields'
+	readonly admin?: Maybe<Scalars['String']>
+	readonly admin_identity_id?: Maybe<Scalars['String']>
+	readonly created_at_block?: Maybe<Scalars['Int']>
+	readonly creator?: Maybe<Scalars['String']>
+	readonly creator_identity_id?: Maybe<Scalars['String']>
+	readonly deposit?: Maybe<Scalars['numeric']>
+	readonly expiry?: Maybe<Scalars['Int']>
+	readonly governance?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly metadata_id?: Maybe<Scalars['String']>
+	readonly organization_id?: Maybe<Scalars['String']>
+	readonly protocol?: Maybe<Scalars['String']>
+	readonly state?: Maybe<Scalars['String']>
+	readonly target?: Maybe<Scalars['numeric']>
+	readonly token_name?: Maybe<Scalars['String']>
+	readonly token_symbol?: Maybe<Scalars['String']>
 }
 
 /** order by max() on columns of table "campaign" */
@@ -406,6 +573,8 @@ export type Campaign_Metadata = {
 	readonly __typename?: 'campaign_metadata'
 	/** An array relationship */
 	readonly campaigns: ReadonlyArray<Campaign>
+	/** An aggregate relationship */
+	readonly campaigns_aggregate: Campaign_Aggregate
 	readonly description: Scalars['String']
 	readonly email: Scalars['String']
 	readonly header: Scalars['String']
@@ -425,6 +594,36 @@ export type Campaign_MetadataCampaignsArgs = {
 	where?: InputMaybe<Campaign_Bool_Exp>
 }
 
+/** columns and relationships of "campaign_metadata" */
+export type Campaign_MetadataCampaigns_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>
+	where?: InputMaybe<Campaign_Bool_Exp>
+}
+
+/** aggregated selection of "campaign_metadata" */
+export type Campaign_Metadata_Aggregate = {
+	readonly __typename?: 'campaign_metadata_aggregate'
+	readonly aggregate?: Maybe<Campaign_Metadata_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Campaign_Metadata>
+}
+
+/** aggregate fields of "campaign_metadata" */
+export type Campaign_Metadata_Aggregate_Fields = {
+	readonly __typename?: 'campaign_metadata_aggregate_fields'
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Campaign_Metadata_Max_Fields>
+	readonly min?: Maybe<Campaign_Metadata_Min_Fields>
+}
+
+/** aggregate fields of "campaign_metadata" */
+export type Campaign_Metadata_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Campaign_Metadata_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
 /** Boolean expression to filter rows from the table "campaign_metadata". All fields are combined with a logical 'AND'. */
 export type Campaign_Metadata_Bool_Exp = {
 	readonly _and?: InputMaybe<ReadonlyArray<Campaign_Metadata_Bool_Exp>>
@@ -439,6 +638,32 @@ export type Campaign_Metadata_Bool_Exp = {
 	readonly markdown?: InputMaybe<String_Comparison_Exp>
 	readonly name?: InputMaybe<String_Comparison_Exp>
 	readonly title?: InputMaybe<String_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Campaign_Metadata_Max_Fields = {
+	readonly __typename?: 'campaign_metadata_max_fields'
+	readonly description?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly header?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly logo?: Maybe<Scalars['String']>
+	readonly markdown?: Maybe<Scalars['String']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly title?: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export type Campaign_Metadata_Min_Fields = {
+	readonly __typename?: 'campaign_metadata_min_fields'
+	readonly description?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly header?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly logo?: Maybe<Scalars['String']>
+	readonly markdown?: Maybe<Scalars['String']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly title?: Maybe<Scalars['String']>
 }
 
 /** Ordering options when selecting data from "campaign_metadata". */
@@ -472,6 +697,27 @@ export enum Campaign_Metadata_Select_Column {
 	Name = 'name',
 	/** column name */
 	Title = 'title',
+}
+
+/** aggregate min on columns */
+export type Campaign_Min_Fields = {
+	readonly __typename?: 'campaign_min_fields'
+	readonly admin?: Maybe<Scalars['String']>
+	readonly admin_identity_id?: Maybe<Scalars['String']>
+	readonly created_at_block?: Maybe<Scalars['Int']>
+	readonly creator?: Maybe<Scalars['String']>
+	readonly creator_identity_id?: Maybe<Scalars['String']>
+	readonly deposit?: Maybe<Scalars['numeric']>
+	readonly expiry?: Maybe<Scalars['Int']>
+	readonly governance?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly metadata_id?: Maybe<Scalars['String']>
+	readonly organization_id?: Maybe<Scalars['String']>
+	readonly protocol?: Maybe<Scalars['String']>
+	readonly state?: Maybe<Scalars['String']>
+	readonly target?: Maybe<Scalars['numeric']>
+	readonly token_name?: Maybe<Scalars['String']>
+	readonly token_symbol?: Maybe<Scalars['String']>
 }
 
 /** order by min() on columns of table "campaign" */
@@ -555,12 +801,30 @@ export enum Campaign_Select_Column {
 	TokenSymbol = 'token_symbol',
 }
 
+/** aggregate stddev on columns */
+export type Campaign_Stddev_Fields = {
+	readonly __typename?: 'campaign_stddev_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
+}
+
 /** order by stddev() on columns of table "campaign" */
 export type Campaign_Stddev_Order_By = {
 	readonly created_at_block?: InputMaybe<Order_By>
 	readonly deposit?: InputMaybe<Order_By>
 	readonly expiry?: InputMaybe<Order_By>
 	readonly target?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type Campaign_Stddev_Pop_Fields = {
+	readonly __typename?: 'campaign_stddev_pop_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
 }
 
 /** order by stddev_pop() on columns of table "campaign" */
@@ -571,12 +835,30 @@ export type Campaign_Stddev_Pop_Order_By = {
 	readonly target?: InputMaybe<Order_By>
 }
 
+/** aggregate stddev_samp on columns */
+export type Campaign_Stddev_Samp_Fields = {
+	readonly __typename?: 'campaign_stddev_samp_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
+}
+
 /** order by stddev_samp() on columns of table "campaign" */
 export type Campaign_Stddev_Samp_Order_By = {
 	readonly created_at_block?: InputMaybe<Order_By>
 	readonly deposit?: InputMaybe<Order_By>
 	readonly expiry?: InputMaybe<Order_By>
 	readonly target?: InputMaybe<Order_By>
+}
+
+/** aggregate sum on columns */
+export type Campaign_Sum_Fields = {
+	readonly __typename?: 'campaign_sum_fields'
+	readonly created_at_block?: Maybe<Scalars['Int']>
+	readonly deposit?: Maybe<Scalars['numeric']>
+	readonly expiry?: Maybe<Scalars['Int']>
+	readonly target?: Maybe<Scalars['numeric']>
 }
 
 /** order by sum() on columns of table "campaign" */
@@ -587,6 +869,15 @@ export type Campaign_Sum_Order_By = {
 	readonly target?: InputMaybe<Order_By>
 }
 
+/** aggregate var_pop on columns */
+export type Campaign_Var_Pop_Fields = {
+	readonly __typename?: 'campaign_var_pop_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
+}
+
 /** order by var_pop() on columns of table "campaign" */
 export type Campaign_Var_Pop_Order_By = {
 	readonly created_at_block?: InputMaybe<Order_By>
@@ -595,12 +886,30 @@ export type Campaign_Var_Pop_Order_By = {
 	readonly target?: InputMaybe<Order_By>
 }
 
+/** aggregate var_samp on columns */
+export type Campaign_Var_Samp_Fields = {
+	readonly __typename?: 'campaign_var_samp_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
+}
+
 /** order by var_samp() on columns of table "campaign" */
 export type Campaign_Var_Samp_Order_By = {
 	readonly created_at_block?: InputMaybe<Order_By>
 	readonly deposit?: InputMaybe<Order_By>
 	readonly expiry?: InputMaybe<Order_By>
 	readonly target?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type Campaign_Variance_Fields = {
+	readonly __typename?: 'campaign_variance_fields'
+	readonly created_at_block?: Maybe<Scalars['Float']>
+	readonly deposit?: Maybe<Scalars['Float']>
+	readonly expiry?: Maybe<Scalars['Float']>
+	readonly target?: Maybe<Scalars['Float']>
 }
 
 /** order by variance() on columns of table "campaign" */
@@ -617,10 +926,16 @@ export type Identity = {
 	readonly address: Scalars['String']
 	/** An array relationship */
 	readonly campaign_contributors: ReadonlyArray<Campaign_Contributor>
+	/** An aggregate relationship */
+	readonly campaign_contributors_aggregate: Campaign_Contributor_Aggregate
 	/** An array relationship */
 	readonly campaigns: ReadonlyArray<Campaign>
 	/** An array relationship */
 	readonly campaignsByCreatorIdentityId: ReadonlyArray<Campaign>
+	/** An aggregate relationship */
+	readonly campaignsByCreatorIdentityId_aggregate: Campaign_Aggregate
+	/** An aggregate relationship */
+	readonly campaigns_aggregate: Campaign_Aggregate
 	readonly display_name?: Maybe<Scalars['String']>
 	readonly email?: Maybe<Scalars['String']>
 	readonly id: Scalars['String']
@@ -628,6 +943,8 @@ export type Identity = {
 	readonly legal_name?: Maybe<Scalars['String']>
 	/** An array relationship */
 	readonly organization_members: ReadonlyArray<Organization_Member>
+	/** An aggregate relationship */
+	readonly organization_members_aggregate: Organization_Member_Aggregate
 	/** An array relationship */
 	readonly organizations: ReadonlyArray<Organization>
 	/** An array relationship */
@@ -654,6 +971,15 @@ export type IdentityCampaign_ContributorsArgs = {
 }
 
 /** columns and relationships of "identity" */
+export type IdentityCampaign_Contributors_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>
+	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
+}
+
+/** columns and relationships of "identity" */
 export type IdentityCampaignsArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -672,7 +998,34 @@ export type IdentityCampaignsByCreatorIdentityIdArgs = {
 }
 
 /** columns and relationships of "identity" */
+export type IdentityCampaignsByCreatorIdentityId_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>
+	where?: InputMaybe<Campaign_Bool_Exp>
+}
+
+/** columns and relationships of "identity" */
+export type IdentityCampaigns_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>
+	where?: InputMaybe<Campaign_Bool_Exp>
+}
+
+/** columns and relationships of "identity" */
 export type IdentityOrganization_MembersArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>
+	where?: InputMaybe<Organization_Member_Bool_Exp>
+}
+
+/** columns and relationships of "identity" */
+export type IdentityOrganization_Members_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -734,6 +1087,27 @@ export type IdentityOrganizations_AggregateArgs = {
 	where?: InputMaybe<Organization_Bool_Exp>
 }
 
+/** aggregated selection of "identity" */
+export type Identity_Aggregate = {
+	readonly __typename?: 'identity_aggregate'
+	readonly aggregate?: Maybe<Identity_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Identity>
+}
+
+/** aggregate fields of "identity" */
+export type Identity_Aggregate_Fields = {
+	readonly __typename?: 'identity_aggregate_fields'
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Identity_Max_Fields>
+	readonly min?: Maybe<Identity_Min_Fields>
+}
+
+/** aggregate fields of "identity" */
+export type Identity_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Identity_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
 /** Boolean expression to filter rows from the table "identity". All fields are combined with a logical 'AND'. */
 export type Identity_Bool_Exp = {
 	readonly _and?: InputMaybe<ReadonlyArray<Identity_Bool_Exp>>
@@ -754,6 +1128,32 @@ export type Identity_Bool_Exp = {
 	readonly organizationsByCreatorIdentityId?: InputMaybe<Organization_Bool_Exp>
 	readonly riot?: InputMaybe<String_Comparison_Exp>
 	readonly twitter?: InputMaybe<String_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Identity_Max_Fields = {
+	readonly __typename?: 'identity_max_fields'
+	readonly address?: Maybe<Scalars['String']>
+	readonly display_name?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly image?: Maybe<Scalars['String']>
+	readonly legal_name?: Maybe<Scalars['String']>
+	readonly riot?: Maybe<Scalars['String']>
+	readonly twitter?: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export type Identity_Min_Fields = {
+	readonly __typename?: 'identity_min_fields'
+	readonly address?: Maybe<Scalars['String']>
+	readonly display_name?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly image?: Maybe<Scalars['String']>
+	readonly legal_name?: Maybe<Scalars['String']>
+	readonly riot?: Maybe<Scalars['String']>
+	readonly twitter?: Maybe<Scalars['String']>
 }
 
 /** Ordering options when selecting data from "identity". */
@@ -841,6 +1241,8 @@ export type Organization = {
 	readonly access: Scalars['String']
 	/** An array relationship */
 	readonly campaigns: ReadonlyArray<Campaign>
+	/** An aggregate relationship */
+	readonly campaigns_aggregate: Campaign_Aggregate
 	readonly controller: Scalars['String']
 	readonly controller_identity_id: Scalars['String']
 	readonly created_at_block: Scalars['Int']
@@ -860,6 +1262,8 @@ export type Organization = {
 	readonly metadata_id?: Maybe<Scalars['String']>
 	/** An array relationship */
 	readonly organization_members: ReadonlyArray<Organization_Member>
+	/** An aggregate relationship */
+	readonly organization_members_aggregate: Organization_Member_Aggregate
 	/** An object relationship */
 	readonly organization_metadata?: Maybe<Organization_Metadata>
 	readonly pay_asset: Scalars['Int']
@@ -878,7 +1282,25 @@ export type OrganizationCampaignsArgs = {
 }
 
 /** columns and relationships of "organization" */
+export type OrganizationCampaigns_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>
+	where?: InputMaybe<Campaign_Bool_Exp>
+}
+
+/** columns and relationships of "organization" */
 export type OrganizationOrganization_MembersArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>
+	where?: InputMaybe<Organization_Member_Bool_Exp>
+}
+
+/** columns and relationships of "organization" */
+export type OrganizationOrganization_Members_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1032,6 +1454,27 @@ export type Organization_Member = {
 	readonly organization_id: Scalars['String']
 }
 
+/** aggregated selection of "organization_member" */
+export type Organization_Member_Aggregate = {
+	readonly __typename?: 'organization_member_aggregate'
+	readonly aggregate?: Maybe<Organization_Member_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Organization_Member>
+}
+
+/** aggregate fields of "organization_member" */
+export type Organization_Member_Aggregate_Fields = {
+	readonly __typename?: 'organization_member_aggregate_fields'
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Organization_Member_Max_Fields>
+	readonly min?: Maybe<Organization_Member_Min_Fields>
+}
+
+/** aggregate fields of "organization_member" */
+export type Organization_Member_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
 /** order by aggregate values of table "organization_member" */
 export type Organization_Member_Aggregate_Order_By = {
 	readonly count?: InputMaybe<Order_By>
@@ -1052,12 +1495,30 @@ export type Organization_Member_Bool_Exp = {
 	readonly organization_id?: InputMaybe<String_Comparison_Exp>
 }
 
+/** aggregate max on columns */
+export type Organization_Member_Max_Fields = {
+	readonly __typename?: 'organization_member_max_fields'
+	readonly address?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly identity_id?: Maybe<Scalars['String']>
+	readonly organization_id?: Maybe<Scalars['String']>
+}
+
 /** order by max() on columns of table "organization_member" */
 export type Organization_Member_Max_Order_By = {
 	readonly address?: InputMaybe<Order_By>
 	readonly id?: InputMaybe<Order_By>
 	readonly identity_id?: InputMaybe<Order_By>
 	readonly organization_id?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type Organization_Member_Min_Fields = {
+	readonly __typename?: 'organization_member_min_fields'
+	readonly address?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly identity_id?: Maybe<Scalars['String']>
+	readonly organization_id?: Maybe<Scalars['String']>
 }
 
 /** order by min() on columns of table "organization_member" */
@@ -1124,6 +1585,27 @@ export type Organization_MetadataOrganizations_AggregateArgs = {
 	where?: InputMaybe<Organization_Bool_Exp>
 }
 
+/** aggregated selection of "organization_metadata" */
+export type Organization_Metadata_Aggregate = {
+	readonly __typename?: 'organization_metadata_aggregate'
+	readonly aggregate?: Maybe<Organization_Metadata_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Organization_Metadata>
+}
+
+/** aggregate fields of "organization_metadata" */
+export type Organization_Metadata_Aggregate_Fields = {
+	readonly __typename?: 'organization_metadata_aggregate_fields'
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Organization_Metadata_Max_Fields>
+	readonly min?: Maybe<Organization_Metadata_Min_Fields>
+}
+
+/** aggregate fields of "organization_metadata" */
+export type Organization_Metadata_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
 /** Boolean expression to filter rows from the table "organization_metadata". All fields are combined with a logical 'AND'. */
 export type Organization_Metadata_Bool_Exp = {
 	readonly _and?: InputMaybe<ReadonlyArray<Organization_Metadata_Bool_Exp>>
@@ -1137,6 +1619,30 @@ export type Organization_Metadata_Bool_Exp = {
 	readonly organizations?: InputMaybe<Organization_Bool_Exp>
 	readonly repo?: InputMaybe<String_Comparison_Exp>
 	readonly website?: InputMaybe<String_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Organization_Metadata_Max_Fields = {
+	readonly __typename?: 'organization_metadata_max_fields'
+	readonly description?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly logo?: Maybe<Scalars['String']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly repo?: Maybe<Scalars['String']>
+	readonly website?: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export type Organization_Metadata_Min_Fields = {
+	readonly __typename?: 'organization_metadata_min_fields'
+	readonly description?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['String']>
+	readonly logo?: Maybe<Scalars['String']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly repo?: Maybe<Scalars['String']>
+	readonly website?: Maybe<Scalars['String']>
 }
 
 /** Ordering options when selecting data from "organization_metadata". */
@@ -1409,14 +1915,20 @@ export type Query_Root = {
 	readonly __typename?: 'query_root'
 	/** fetch data from the table: "campaign" */
 	readonly campaign: ReadonlyArray<Campaign>
+	/** fetch aggregated fields from the table: "campaign" */
+	readonly campaign_aggregate: Campaign_Aggregate
 	/** fetch data from the table: "campaign" using primary key columns */
 	readonly campaign_by_pk?: Maybe<Campaign>
 	/** fetch data from the table: "campaign_contributor" */
 	readonly campaign_contributor: ReadonlyArray<Campaign_Contributor>
+	/** fetch aggregated fields from the table: "campaign_contributor" */
+	readonly campaign_contributor_aggregate: Campaign_Contributor_Aggregate
 	/** fetch data from the table: "campaign_contributor" using primary key columns */
 	readonly campaign_contributor_by_pk?: Maybe<Campaign_Contributor>
 	/** fetch data from the table: "campaign_metadata" */
 	readonly campaign_metadata: ReadonlyArray<Campaign_Metadata>
+	/** fetch aggregated fields from the table: "campaign_metadata" */
+	readonly campaign_metadata_aggregate: Campaign_Metadata_Aggregate
 	/** fetch data from the table: "campaign_metadata" using primary key columns */
 	readonly campaign_metadata_by_pk?: Maybe<Campaign_Metadata>
 	readonly config: Config
@@ -1424,6 +1936,8 @@ export type Query_Root = {
 	readonly features: Features
 	/** fetch data from the table: "identity" */
 	readonly identity: ReadonlyArray<Identity>
+	/** fetch aggregated fields from the table: "identity" */
+	readonly identity_aggregate: Identity_Aggregate
 	/** fetch data from the table: "identity" using primary key columns */
 	readonly identity_by_pk?: Maybe<Identity>
 	readonly links: ReadonlyArray<Maybe<Link>>
@@ -1435,16 +1949,28 @@ export type Query_Root = {
 	readonly organization_by_pk?: Maybe<Organization>
 	/** fetch data from the table: "organization_member" */
 	readonly organization_member: ReadonlyArray<Organization_Member>
+	/** fetch aggregated fields from the table: "organization_member" */
+	readonly organization_member_aggregate: Organization_Member_Aggregate
 	/** fetch data from the table: "organization_member" using primary key columns */
 	readonly organization_member_by_pk?: Maybe<Organization_Member>
 	/** fetch data from the table: "organization_metadata" */
 	readonly organization_metadata: ReadonlyArray<Organization_Metadata>
+	/** fetch aggregated fields from the table: "organization_metadata" */
+	readonly organization_metadata_aggregate: Organization_Metadata_Aggregate
 	/** fetch data from the table: "organization_metadata" using primary key columns */
 	readonly organization_metadata_by_pk?: Maybe<Organization_Metadata>
 	readonly version: Scalars['String']
 }
 
 export type Query_RootCampaignArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>
+	where?: InputMaybe<Campaign_Bool_Exp>
+}
+
+export type Query_RootCampaign_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1464,11 +1990,27 @@ export type Query_RootCampaign_ContributorArgs = {
 	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
 }
 
+export type Query_RootCampaign_Contributor_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>
+	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
+}
+
 export type Query_RootCampaign_Contributor_By_PkArgs = {
 	id: Scalars['String']
 }
 
 export type Query_RootCampaign_MetadataArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Metadata_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Metadata_Order_By>>
+	where?: InputMaybe<Campaign_Metadata_Bool_Exp>
+}
+
+export type Query_RootCampaign_Metadata_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Metadata_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1489,6 +2031,14 @@ export type Query_RootFeaturesArgs = {
 }
 
 export type Query_RootIdentityArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Identity_Order_By>>
+	where?: InputMaybe<Identity_Bool_Exp>
+}
+
+export type Query_RootIdentity_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1528,11 +2078,27 @@ export type Query_RootOrganization_MemberArgs = {
 	where?: InputMaybe<Organization_Member_Bool_Exp>
 }
 
+export type Query_RootOrganization_Member_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>
+	where?: InputMaybe<Organization_Member_Bool_Exp>
+}
+
 export type Query_RootOrganization_Member_By_PkArgs = {
 	id: Scalars['String']
 }
 
 export type Query_RootOrganization_MetadataArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Organization_Metadata_Order_By>>
+	where?: InputMaybe<Organization_Metadata_Bool_Exp>
+}
+
+export type Query_RootOrganization_Metadata_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1548,18 +2114,26 @@ export type Subscription_Root = {
 	readonly __typename?: 'subscription_root'
 	/** fetch data from the table: "campaign" */
 	readonly campaign: ReadonlyArray<Campaign>
+	/** fetch aggregated fields from the table: "campaign" */
+	readonly campaign_aggregate: Campaign_Aggregate
 	/** fetch data from the table: "campaign" using primary key columns */
 	readonly campaign_by_pk?: Maybe<Campaign>
 	/** fetch data from the table: "campaign_contributor" */
 	readonly campaign_contributor: ReadonlyArray<Campaign_Contributor>
+	/** fetch aggregated fields from the table: "campaign_contributor" */
+	readonly campaign_contributor_aggregate: Campaign_Contributor_Aggregate
 	/** fetch data from the table: "campaign_contributor" using primary key columns */
 	readonly campaign_contributor_by_pk?: Maybe<Campaign_Contributor>
 	/** fetch data from the table: "campaign_metadata" */
 	readonly campaign_metadata: ReadonlyArray<Campaign_Metadata>
+	/** fetch aggregated fields from the table: "campaign_metadata" */
+	readonly campaign_metadata_aggregate: Campaign_Metadata_Aggregate
 	/** fetch data from the table: "campaign_metadata" using primary key columns */
 	readonly campaign_metadata_by_pk?: Maybe<Campaign_Metadata>
 	/** fetch data from the table: "identity" */
 	readonly identity: ReadonlyArray<Identity>
+	/** fetch aggregated fields from the table: "identity" */
+	readonly identity_aggregate: Identity_Aggregate
 	/** fetch data from the table: "identity" using primary key columns */
 	readonly identity_by_pk?: Maybe<Identity>
 	/** fetch data from the table: "organization" */
@@ -1570,15 +2144,27 @@ export type Subscription_Root = {
 	readonly organization_by_pk?: Maybe<Organization>
 	/** fetch data from the table: "organization_member" */
 	readonly organization_member: ReadonlyArray<Organization_Member>
+	/** fetch aggregated fields from the table: "organization_member" */
+	readonly organization_member_aggregate: Organization_Member_Aggregate
 	/** fetch data from the table: "organization_member" using primary key columns */
 	readonly organization_member_by_pk?: Maybe<Organization_Member>
 	/** fetch data from the table: "organization_metadata" */
 	readonly organization_metadata: ReadonlyArray<Organization_Metadata>
+	/** fetch aggregated fields from the table: "organization_metadata" */
+	readonly organization_metadata_aggregate: Organization_Metadata_Aggregate
 	/** fetch data from the table: "organization_metadata" using primary key columns */
 	readonly organization_metadata_by_pk?: Maybe<Organization_Metadata>
 }
 
 export type Subscription_RootCampaignArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>
+	where?: InputMaybe<Campaign_Bool_Exp>
+}
+
+export type Subscription_RootCampaign_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1598,6 +2184,14 @@ export type Subscription_RootCampaign_ContributorArgs = {
 	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
 }
 
+export type Subscription_RootCampaign_Contributor_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>
+	where?: InputMaybe<Campaign_Contributor_Bool_Exp>
+}
+
 export type Subscription_RootCampaign_Contributor_By_PkArgs = {
 	id: Scalars['String']
 }
@@ -1610,11 +2204,27 @@ export type Subscription_RootCampaign_MetadataArgs = {
 	where?: InputMaybe<Campaign_Metadata_Bool_Exp>
 }
 
+export type Subscription_RootCampaign_Metadata_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Metadata_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Campaign_Metadata_Order_By>>
+	where?: InputMaybe<Campaign_Metadata_Bool_Exp>
+}
+
 export type Subscription_RootCampaign_Metadata_By_PkArgs = {
 	id: Scalars['String']
 }
 
 export type Subscription_RootIdentityArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Identity_Order_By>>
+	where?: InputMaybe<Identity_Bool_Exp>
+}
+
+export type Subscription_RootIdentity_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1654,11 +2264,27 @@ export type Subscription_RootOrganization_MemberArgs = {
 	where?: InputMaybe<Organization_Member_Bool_Exp>
 }
 
+export type Subscription_RootOrganization_Member_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>
+	where?: InputMaybe<Organization_Member_Bool_Exp>
+}
+
 export type Subscription_RootOrganization_Member_By_PkArgs = {
 	id: Scalars['String']
 }
 
 export type Subscription_RootOrganization_MetadataArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Organization_Metadata_Order_By>>
+	where?: InputMaybe<Organization_Metadata_Bool_Exp>
+}
+
+export type Subscription_RootOrganization_Metadata_AggregateArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
 	offset?: InputMaybe<Scalars['Int']>
@@ -1802,8 +2428,6 @@ export type IdentityByAddressQuery = {
 }
 
 export type OrganizationsPaginationCountSubscriptionVariables = Exact<{
-	orderBy?: InputMaybe<ReadonlyArray<Organization_Order_By> | Organization_Order_By>
-	first?: InputMaybe<Scalars['Int']>
 	searchQuery?: InputMaybe<Scalars['String']>
 }>
 
@@ -2116,14 +2740,8 @@ export type IdentityByAddressQueryHookResult = ReturnType<typeof useIdentityByAd
 export type IdentityByAddressLazyQueryHookResult = ReturnType<typeof useIdentityByAddressLazyQuery>
 export type IdentityByAddressQueryResult = Apollo.QueryResult<IdentityByAddressQuery, IdentityByAddressQueryVariables>
 export const OrganizationsPaginationCountDocument = gql`
-	subscription OrganizationsPaginationCount(
-		$orderBy: [organization_order_by!]
-		$first: Int
-		$searchQuery: String = "%"
-	) {
+	subscription OrganizationsPaginationCount($searchQuery: String = "%") {
 		organization_aggregate(
-			order_by: $orderBy
-			offset: $first
 			where: {
 				organization_metadata: {
 					name: { _ilike: $searchQuery }
@@ -2150,8 +2768,6 @@ export const OrganizationsPaginationCountDocument = gql`
  * @example
  * const { data, loading, error } = useOrganizationsPaginationCountSubscription({
  *   variables: {
- *      orderBy: // value for 'orderBy'
- *      first: // value for 'first'
  *      searchQuery: // value for 'searchQuery'
  *   },
  * });
