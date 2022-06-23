@@ -1,5 +1,5 @@
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
-    organization_aggregate(where: {organization_metadata: {name: {_ilike: $searchQuery}, _or: {description: {_ilike: $searchQuery}}}}) {
+    organization_aggregate(where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
         aggregate {
             count
         }
@@ -7,7 +7,7 @@ subscription OrganizationsPaginationCount($searchQuery: String="%") {
 }
 
 subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
-    organization(limit: $first, order_by: $orderBy, where: {organization_metadata: {name: {_ilike: $searchQuery}, _or: {description: {_ilike: $searchQuery}}}}) {
+    organization(limit: $first, order_by: $orderBy, where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
         id
         organization_metadata {
             name

@@ -48,10 +48,10 @@ export function OrganisationPage() {
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const [sortOption, setSortOption] = useState<Organization_Order_By>(sortOptions[0].value)
 	const organizationsCount = useOrganizationsPaginationCountSubscription({
-		variables: { searchQuery: filters === '' ? '%' : filters },
+		variables: { searchQuery: `%${filters ?? ''}%` },
 	})
 	const organizationsData = useOrganizationsPaginationSubscription({
-		variables: { first: bodyCount, orderBy: sortOption, searchQuery: filters === '' ? '%' : filters },
+		variables: { first: bodyCount, orderBy: sortOption, searchQuery: `%${filters ?? ''}%` },
 	})
 	const loading = organizationsCount?.loading || organizationsData?.loading
 

@@ -23,6 +23,7 @@ const splitLink = split(
 	httpLink,
 )
 
+// TODO: Add cache TypePolicy
 const client = new ApolloClient({
 	link: splitLink,
 	cache: new InMemoryCache(),

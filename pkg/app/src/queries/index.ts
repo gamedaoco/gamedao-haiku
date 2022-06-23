@@ -2744,8 +2744,7 @@ export const OrganizationsPaginationCountDocument = gql`
 		organization_aggregate(
 			where: {
 				organization_metadata: {
-					name: { _ilike: $searchQuery }
-					_or: { description: { _ilike: $searchQuery } }
+					_or: [{ name: { _ilike: $searchQuery } }, { description: { _ilike: $searchQuery } }]
 				}
 			}
 		) {
@@ -2796,8 +2795,7 @@ export const OrganizationsPaginationDocument = gql`
 			order_by: $orderBy
 			where: {
 				organization_metadata: {
-					name: { _ilike: $searchQuery }
-					_or: { description: { _ilike: $searchQuery } }
+					_or: [{ name: { _ilike: $searchQuery } }, { description: { _ilike: $searchQuery } }]
 				}
 			}
 		) {
