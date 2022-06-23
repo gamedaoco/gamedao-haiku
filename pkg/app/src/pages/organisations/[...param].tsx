@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { useOrganizationByIdLazyQuery } from '@gamedao-haiku/graphql/dist'
-import type { Organization } from '@gamedao-haiku/graphql/dist/types'
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
 import { Avatar, Card, CardContent, CardMedia, Grid, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
@@ -12,6 +10,7 @@ import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { Organization, useOrganizationByIdLazyQuery } from 'src/queries'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
@@ -97,7 +96,7 @@ export function OrganisationById() {
 
 	useEffect(() => {
 		if (data) {
-			setOrganizationState(data?.organizations?.[0] as Organization)
+			setOrganizationState(data?.organization?.[0] as Organization)
 		}
 	}, [data])
 
@@ -168,9 +167,10 @@ export function OrganisationById() {
 											cursor: 'pointer',
 										})}
 										srcSet={
-											organizationState?.metadata?.logo || tmpOrg.logoCID?.length
+											organizationState?.organization_metadata?.logo || tmpOrg.logoCID?.length
 												? parseIpfsHash(
-														organizationState?.metadata?.logo || tmpOrg.logoCID,
+														organizationState?.organization_metadata?.logo ||
+															tmpOrg.logoCID,
 														config.IPFS_GATEWAY,
 												  )
 												: null

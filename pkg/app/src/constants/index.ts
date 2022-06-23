@@ -1,6 +1,6 @@
-import { Environment } from '@gamedao-haiku/graphql/dist'
 import type { TMPOrganisation } from 'src/@types/organisation'
 import { TMPProposal } from 'src/@types/proposal'
+import { Environment } from 'src/queries'
 
 export const ENVIRONMENT: Environment = (
 	process.env.NEXT_PUBLIC_ENVIRONMENT || 'production'

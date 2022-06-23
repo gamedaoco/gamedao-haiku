@@ -1,0 +1,50 @@
+subscription OrganizationsPaginationCount($searchQuery: String="%") {
+    organization_aggregate(where: {organization_metadata: {name: {_ilike: $searchQuery}, _or: {description: {_ilike: $searchQuery}}}}) {
+        aggregate {
+            count
+        }
+    }
+}
+
+subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
+    organization(limit: $first, order_by: $orderBy, where: {organization_metadata: {name: {_ilike: $searchQuery}, _or: {description: {_ilike: $searchQuery}}}}) {
+        id
+        organization_metadata {
+            name
+            description
+            logo
+        }
+        access
+        creator
+        organization_members{
+            address
+        }
+    }
+}
+
+
+query OrganizationById($orgId: String!) {
+    organization(where: { id: {_eq: $orgId}}) {
+        access
+        controller
+        created_at_block
+        creator
+        fee
+        fee_model
+        gov_asset
+        id
+        member_limit
+        pay_asset
+        treasury
+        type
+        organization_metadata {
+            description
+            email
+            id
+            logo
+            name
+            repo
+            website
+        }
+    }
+}

@@ -2,12 +2,12 @@ import React, { Fragment, useCallback, useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { useSidebarLazyQuery } from '@gamedao-haiku/graphql/dist'
 import { Add as AddIcon } from '@mui/icons-material'
 import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'provider/extension/modules/context'
+import { useSidebarSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
 import { OrganizationButtonMemoized } from 'components/Layouts/default/modules/organizationButton'
@@ -24,7 +24,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 	const address = useCurrentAccountAddress()
 	const { push } = useRouter()
 	const { w3Enabled, connectWallet, selectedAccount } = useExtensionContext()
-	const [loadSideBarForAddress, { error, loading, data }] = useSidebarLazyQuery()
+	const { error, loading, data } = useSidebarSubscription({ variables: { address } })
 
 	const buttonCallback = useCallback(() => {
 		if (w3Enabled === false) {
@@ -33,12 +33,6 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			push('/organisations/create')
 		}
 	}, [w3Enabled, connectWallet, selectedAccount, push])
-
-	useEffect(() => {
-		if (address && address.length > 0) {
-			loadSideBarForAddress({ variables: { address } })
-		}
-	}, [address])
 
 	useEffect(() => {
 		if (error) {
@@ -99,7 +93,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 							/>
 						)}
 						{selectedAccount &&
-							(data?.organizations?.slice() as any)
+							(data?.organization?.slice() as any)
 								?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
 								?.map((organization) => {
 									return (

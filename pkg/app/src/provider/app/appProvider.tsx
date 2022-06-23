@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
-import { useConfigQuery, useFeaturesQuery } from '@gamedao-haiku/graphql/dist'
 import { AppContext } from 'provider/app/modules/context'
 import { ENVIRONMENT } from 'src/constants'
+import { useConfigQuery, useFeaturesQuery } from 'src/queries'
 
 export function AppProvider({ children }) {
 	const configQueryResult = useConfigQuery({

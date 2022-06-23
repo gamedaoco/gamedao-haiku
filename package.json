@@ -15,7 +15,7 @@
     "release": "yarn build && yarn changeset publish",
     "format": "prettier --parser babel-ts --write --check pkg/**/*.{ts,tsx}",
     "format:verify": "prettier --parser babel-ts --check pkg/**/*.{ts,tsx}",
-    "build:graphql": "yarn workspace @gamedao-haiku/graphql build",
+    "build:graphql": "yarn workspace @gamedao-haiku/app generate",
     "build:frontend": "yarn workspace @gamedao-haiku/app build",
     "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend"
   },
