@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react'
 
-import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { Organization_Order_By } from 'src/queries'
 
 const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
-			setSortOption(event.target.value as OrganizationOrderByInput)
+			setSortOption(event.target.value as Organization_Order_By)
 		},
 		[setSortOption],
 	)
@@ -38,7 +38,7 @@ const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 				>
 					<Select value={sortOption} onChange={handleChange}>
 						{sortOptions.map((x) => (
-							<MenuItem value={x.value} key={x.value}>
+							<MenuItem value={x.value} key={JSON.stringify(x.value)}>
 								{x.name}
 							</MenuItem>
 						))}

@@ -1,22 +1,23 @@
 import React, { FC } from 'react'
 
-import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 import { Search } from '@mui/icons-material'
 import { Grid, InputAdornment, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
+import { Organization_Order_By } from 'src/queries'
 
 import FiltersTab from 'components/OrganisationCard/modules/filtersTab'
 import SortOptionsTab from 'components/OrganisationCard/modules/sortOptionsTab'
 
 interface SortOptionsInterface {
 	name: String
-	value: OrganizationOrderByInput
+	value: Organization_Order_By
 }
+
 interface FiltersSectionPropsInterface {
 	filters: string
 	setFilters: (x: string) => void
-	sortOption: OrganizationOrderByInput
-	setSortOption: (x: OrganizationOrderByInput) => void
+	sortOption: Organization_Order_By
+	setSortOption: (x: Organization_Order_By) => void
 	sortOptions: SortOptionsInterface[]
 }
 

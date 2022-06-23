@@ -1,4 +1,4 @@
-import type { Config, Features } from '@gamedao-haiku/graphql/dist'
+import type { Config, Features } from 'src/queries'
 
 export interface AppState {
 	ready: boolean
