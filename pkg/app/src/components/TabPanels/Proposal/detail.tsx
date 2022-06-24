@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { Organization } from '@gamedao-haiku/graphql/dist'
-import { Add as AddIcon, ArrowBack, HowToVote, Launch, LinkOff, Person, Twitter } from '@mui/icons-material'
+import { Add as AddIcon, ArrowBack, HowToVote, Launch } from '@mui/icons-material'
 import { Box, Button, Chip, IconButton, LinearProgress, Paper, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useDisplayValues } from 'hooks/useDisplayValues'
+import { Organization } from 'src/queries'
 
-import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 
