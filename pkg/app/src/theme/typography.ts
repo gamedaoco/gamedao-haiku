@@ -1,4 +1,5 @@
 // ----------------------------------------------------------------------
+import palette from './palette'
 
 function pxToRem(value: number) {
 	return `${value / 16}rem`
@@ -69,9 +70,10 @@ const typography = {
 		fontSize: pxToRem(16),
 	},
 	subtitle2: {
-		fontWeight: 600,
+		fontWeight: 700,
 		lineHeight: 22 / 14,
 		fontSize: pxToRem(14),
+		color: palette.dark.text.secondary,
 	},
 	body1: {
 		lineHeight: 1.5,
@@ -80,6 +82,7 @@ const typography = {
 	body2: {
 		lineHeight: 22 / 14,
 		fontSize: pxToRem(14),
+		color: palette.dark.text.secondary,
 	},
 	caption: {
 		lineHeight: 1.5,
@@ -90,6 +93,7 @@ const typography = {
 		lineHeight: 1.5,
 		fontSize: pxToRem(12),
 		textTransform: 'uppercase',
+		color: palette.dark.text.disabled,
 	},
 	button: {
 		fontWeight: 700,
