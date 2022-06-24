@@ -263,26 +263,12 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 					<Stack direction="row" justifyContent="space-between">
 						<Typography variant="h6">Cast your vote</Typography>
 					</Stack>
-					<Stack paddingLeft={4} paddingRight={4}>
-						<BaseForm noPadding>
-							<RadioItem
-								icon={<></>}
-								title={'Yes'}
-								value={1}
-								selectedValue={selectedVote}
-								onChange={setSelectedVote}
-							/>
-							<RadioItem
-								icon={<></>}
-								title={'No'}
-								value={0}
-								selectedValue={selectedVote}
-								onChange={setSelectedVote}
-							/>
-							<Button fullWidth={true} variant="contained">
-								Vote
-							</Button>
-						</BaseForm>
+					<Stack paddingLeft={4} paddingRight={4} spacing={4}>
+						<RadioItem title={'Yes'} value={1} selectedValue={selectedVote} onChange={setSelectedVote} />
+						<RadioItem title={'No'} value={0} selectedValue={selectedVote} onChange={setSelectedVote} />
+						<Button fullWidth={true} variant="contained">
+							Vote
+						</Button>
 					</Stack>
 				</Stack>
 
