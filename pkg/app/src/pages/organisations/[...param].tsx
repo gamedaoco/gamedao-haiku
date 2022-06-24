@@ -236,7 +236,11 @@ export function OrganisationById() {
 							<TabPanel value={'dashboard'}>
 								{organizationIdState ? <Overview /> : <TmpOverview />}
 							</TabPanel>
-							<TabPanel value={'treasury'}>Treasury Address: {organizationState.treasury}</TabPanel>
+							<TabPanel value={'treasury'}>
+								{organizationState && (
+									<Typography>Treasury Address: {organizationState.treasury}</Typography>
+								)}
+							</TabPanel>
 							<TabPanel value={'proposals'}>
 								{proposalIdState && organizationState ? (
 									<ProposalDetail
