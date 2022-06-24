@@ -1,8 +1,0 @@
-
-#Generated files
-/dist
-/src/types/index.ts
-/src/query/index.ts
-/src/resolver/resolvers-types.ts
-/src/schema/schema.graphql
-/src/schema/json/gameDao.json

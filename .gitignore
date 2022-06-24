@@ -21,6 +21,8 @@ yarn.lock
 /.next/
 /out/
 
+pkg/app/schema.graphql
+
 # production
 /build
 

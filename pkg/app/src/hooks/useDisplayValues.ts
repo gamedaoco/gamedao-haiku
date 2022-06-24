@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { DisplayValues, useDisplayValuesQuery } from '@gamedao-haiku/graphql/dist'
+import { DisplayValues, useDisplayValuesQuery } from 'src/queries'
 
 export function useDisplayValues(): DisplayValues {
 	const { loading, error, data } = useDisplayValuesQuery()

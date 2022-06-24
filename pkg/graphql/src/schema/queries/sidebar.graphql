@@ -1,9 +1,0 @@
-query Sidebar($address: String!) {
-    organizations(where: {members_some: {address_eq: $address}}) {
-        id
-        metadata {
-            logo
-            name
-        }
-    }
-}
