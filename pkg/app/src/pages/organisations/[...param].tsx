@@ -118,7 +118,7 @@ export function OrganisationById() {
 
 	useEffect(() => {
 		if (data) {
-			setOrganizationState(data.organization[0] as Organization)
+			setOrganizationState(data.organization?.[0] as Organization)
 		}
 	}, [data])
 
