@@ -5,7 +5,7 @@ import type { AccountState } from 'src/@types/extension'
 
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
-	return `${address.slice(0, 10)}...${address.slice(-6)}`
+	return `${address.slice(0, 12)}...`
 }
 
 export function getAccountName(account: InjectedAccount): string {
