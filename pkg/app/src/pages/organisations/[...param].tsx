@@ -140,14 +140,15 @@ export function OrganisationById() {
 								</label>
 							</Grid>
 							<Stack
-								direction="row"
-								spacing={4}
+								direction={isMd ? 'row' : 'column'}
+								spacing={2}
+								alignContent="center"
 								alignItems="center"
 								justifyContent={isMd ? 'flex-start' : 'center'}
 								sx={{
 									position: isMd ? 'absolute' : 'relative',
-									left: '2rem',
-									bottom: '2rem',
+									left: { sm: '2rem' },
+									bottom: { sm: '5rem' },
 								}}
 							>
 								<label htmlFor="logo-file-upload">
@@ -176,15 +177,17 @@ export function OrganisationById() {
 												: null
 										}
 									>
-										<Stack spacing={1} alignItems="center">
+										<Stack spacing={1}>
 											<AddAPhoto sx={{ height: '20px', width: '20px' }} />
 											<Typography>Update photo</Typography>
 										</Stack>
 									</Avatar>
 								</label>
 
-								<Stack spacing={1}>
-									<Typography variant="h4">{tmpOrg.name ?? ''}</Typography>
+								<Stack>
+									<Typography sx={{ alignSelf: { xs: 'center', sm: 'flex-start' } }} variant="h4">
+										{tmpOrg.name ?? ''}
+									</Typography>
 									<Typography>1 Member</Typography>
 								</Stack>
 							</Stack>

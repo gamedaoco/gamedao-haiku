@@ -19,6 +19,12 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 	const tmpOrgState = useTmpOrganisationState()
 	const { push } = useRouter()
 
+	const handleCancel = useCallback(() => {
+		if (currentStep === 0) {
+			push('/organisations')
+		}
+	}, [currentStep])
+
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {
 			setStep(currentStep - 1)
@@ -31,7 +37,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		}
 
 		if (currentStep == 2) {
-			createInfoNotification('Organization was saved')
+			createInfoNotification('Organisation was saved')
 			push('/organisations/dashboard')
 		}
 	}, [currentStep, setStep, push])
@@ -82,12 +88,36 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 					setHasApplication={tmpOrgState.setHasApplication}
 				/>
 			)}
-			<Stack spacing={2} justifyContent="flex-end" direction="row">
-				<Button size="large" variant="outlined" disabled={checkBackButtonState()} onClick={handleBack}>
+			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
+				<Button
+					size="large"
+					variant="outlined"
+					color="primary"
+					sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
+					onClick={handleBack}
+				>
 					Back
 				</Button>
+				<Button
+					size="large"
+					variant="outlined"
+					color="primary"
+					sx={{
+						display: checkBackButtonState() ? 'block' : 'none',
+						flexGrow: { xs: 1, sm: 0 },
+					}}
+					onClick={handleCancel}
+				>
+					Cancel
+				</Button>
 
-				<Button size="large" variant="contained" onClick={handleNext} disabled={checkNextButtonState()}>
+				<Button
+					size="large"
+					variant="contained"
+					onClick={handleNext}
+					disabled={checkNextButtonState()}
+					sx={{ flexGrow: { xs: 1, sm: 0 } }}
+				>
 					{currentStep === 2 ? 'Save organization' : 'Next step'}
 				</Button>
 			</Stack>
