@@ -7,10 +7,10 @@ export function BalanceCard() {
 	const balance = useBalanceByAddress(address)
 
 	return (
-		<Card>
+		<Card variant="primary" sx={{ width: '312px' }}>
 			{!balance && <Skeleton variant="rectangular" height="5rem" width={'100%'} />}
 			{balance && (
-				<Stack p={{ xs: 2, sm: 4 }} spacing={2}>
+				<Stack p={{ xs: 3, sm: 3.5 }} spacing={2}>
 					<Typography variant="overline">Balances</Typography>
 					<Stack direction="row" justifyContent="space-between">
 						<Typography variant="body2">{balance.tokenSymbol}</Typography>
