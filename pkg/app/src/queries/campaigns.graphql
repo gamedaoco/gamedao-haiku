@@ -1,0 +1,8 @@
+subscription CampaignByOrganisationId($orgId: String!) {
+    campaign(where: {organization_id: {_eq: $orgId}}) {
+        id
+        campaign_metadata {
+            name
+        }
+    }
+}

@@ -174,7 +174,7 @@ export type Campaign = {
 	/** An aggregate relationship */
 	readonly campaign_contributors_aggregate: Campaign_Contributor_Aggregate
 	/** An object relationship */
-	readonly campaign_metadatum?: Maybe<Campaign_Metadata>
+	readonly campaign_metadata?: Maybe<Campaign_Metadata>
 	readonly created_at_block: Scalars['Int']
 	readonly creator: Scalars['String']
 	readonly creator_identity_id: Scalars['String']
@@ -284,7 +284,7 @@ export type Campaign_Bool_Exp = {
 	readonly admin?: InputMaybe<String_Comparison_Exp>
 	readonly admin_identity_id?: InputMaybe<String_Comparison_Exp>
 	readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>
-	readonly campaign_metadatum?: InputMaybe<Campaign_Metadata_Bool_Exp>
+	readonly campaign_metadata?: InputMaybe<Campaign_Metadata_Bool_Exp>
 	readonly created_at_block?: InputMaybe<Int_Comparison_Exp>
 	readonly creator?: InputMaybe<String_Comparison_Exp>
 	readonly creator_identity_id?: InputMaybe<String_Comparison_Exp>
@@ -745,7 +745,7 @@ export type Campaign_Order_By = {
 	readonly admin?: InputMaybe<Order_By>
 	readonly admin_identity_id?: InputMaybe<Order_By>
 	readonly campaign_contributors_aggregate?: InputMaybe<Campaign_Contributor_Aggregate_Order_By>
-	readonly campaign_metadatum?: InputMaybe<Campaign_Metadata_Order_By>
+	readonly campaign_metadata?: InputMaybe<Campaign_Metadata_Order_By>
 	readonly created_at_block?: InputMaybe<Order_By>
 	readonly creator?: InputMaybe<Order_By>
 	readonly creator_identity_id?: InputMaybe<Order_By>
@@ -2296,6 +2296,19 @@ export type Subscription_RootOrganization_Metadata_By_PkArgs = {
 	id: Scalars['String']
 }
 
+export type CampaignByOrganisationIdSubscriptionVariables = Exact<{
+	orgId: Scalars['String']
+}>
+
+export type CampaignByOrganisationIdSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly campaign: ReadonlyArray<{
+		readonly __typename?: 'campaign'
+		readonly id: string
+		readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata'; readonly name: string } | null
+	}>
+}
+
 export type ConfigQueryVariables = Exact<{
 	env: Environment
 }>
@@ -2515,6 +2528,47 @@ export type SidebarSubscription = {
 	}>
 }
 
+export const CampaignByOrganisationIdDocument = gql`
+	subscription CampaignByOrganisationId($orgId: String!) {
+		campaign(where: { organization_id: { _eq: $orgId } }) {
+			id
+			campaign_metadata {
+				name
+			}
+		}
+	}
+`
+
+/**
+ * __useCampaignByOrganisationIdSubscription__
+ *
+ * To run a query within a React component, call `useCampaignByOrganisationIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCampaignByOrganisationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCampaignByOrganisationIdSubscription({
+ *   variables: {
+ *      orgId: // value for 'orgId'
+ *   },
+ * });
+ */
+export function useCampaignByOrganisationIdSubscription(
+	baseOptions: Apollo.SubscriptionHookOptions<
+		CampaignByOrganisationIdSubscription,
+		CampaignByOrganisationIdSubscriptionVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<CampaignByOrganisationIdSubscription, CampaignByOrganisationIdSubscriptionVariables>(
+		CampaignByOrganisationIdDocument,
+		options,
+	)
+}
+export type CampaignByOrganisationIdSubscriptionHookResult = ReturnType<typeof useCampaignByOrganisationIdSubscription>
+export type CampaignByOrganisationIdSubscriptionResult = Apollo.SubscriptionResult<CampaignByOrganisationIdSubscription>
 export const ConfigDocument = gql`
 	query Config($env: Environment!) {
 		config(env: $env) {
