@@ -22,8 +22,7 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
     }
 }
 
-
-query OrganizationById($orgId: String!) {
+subscription OrganizationById($orgId: String!) {
     organization(where: { id: {_eq: $orgId}}) {
         access
         controller
@@ -37,11 +36,18 @@ query OrganizationById($orgId: String!) {
         pay_asset
         treasury
         type
+        organization_members {
+            address
+            identity {
+                display_name
+            }
+        }
         organization_metadata {
             description
             email
             id
             logo
+            header
             name
             repo
             website

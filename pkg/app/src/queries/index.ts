@@ -174,7 +174,7 @@ export type Campaign = {
 	/** An aggregate relationship */
 	readonly campaign_contributors_aggregate: Campaign_Contributor_Aggregate
 	/** An object relationship */
-	readonly campaign_metadatum?: Maybe<Campaign_Metadata>
+	readonly campaign_metadata?: Maybe<Campaign_Metadata>
 	readonly created_at_block: Scalars['Int']
 	readonly creator: Scalars['String']
 	readonly creator_identity_id: Scalars['String']
@@ -284,7 +284,7 @@ export type Campaign_Bool_Exp = {
 	readonly admin?: InputMaybe<String_Comparison_Exp>
 	readonly admin_identity_id?: InputMaybe<String_Comparison_Exp>
 	readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>
-	readonly campaign_metadatum?: InputMaybe<Campaign_Metadata_Bool_Exp>
+	readonly campaign_metadata?: InputMaybe<Campaign_Metadata_Bool_Exp>
 	readonly created_at_block?: InputMaybe<Int_Comparison_Exp>
 	readonly creator?: InputMaybe<String_Comparison_Exp>
 	readonly creator_identity_id?: InputMaybe<String_Comparison_Exp>
@@ -745,7 +745,7 @@ export type Campaign_Order_By = {
 	readonly admin?: InputMaybe<Order_By>
 	readonly admin_identity_id?: InputMaybe<Order_By>
 	readonly campaign_contributors_aggregate?: InputMaybe<Campaign_Contributor_Aggregate_Order_By>
-	readonly campaign_metadatum?: InputMaybe<Campaign_Metadata_Order_By>
+	readonly campaign_metadata?: InputMaybe<Campaign_Metadata_Order_By>
 	readonly created_at_block?: InputMaybe<Order_By>
 	readonly creator?: InputMaybe<Order_By>
 	readonly creator_identity_id?: InputMaybe<Order_By>
@@ -1556,6 +1556,7 @@ export type Organization_Metadata = {
 	readonly __typename?: 'organization_metadata'
 	readonly description: Scalars['String']
 	readonly email: Scalars['String']
+	readonly header: Scalars['String']
 	readonly id: Scalars['String']
 	readonly logo: Scalars['String']
 	readonly name: Scalars['String']
@@ -1613,6 +1614,7 @@ export type Organization_Metadata_Bool_Exp = {
 	readonly _or?: InputMaybe<ReadonlyArray<Organization_Metadata_Bool_Exp>>
 	readonly description?: InputMaybe<String_Comparison_Exp>
 	readonly email?: InputMaybe<String_Comparison_Exp>
+	readonly header?: InputMaybe<String_Comparison_Exp>
 	readonly id?: InputMaybe<String_Comparison_Exp>
 	readonly logo?: InputMaybe<String_Comparison_Exp>
 	readonly name?: InputMaybe<String_Comparison_Exp>
@@ -1626,6 +1628,7 @@ export type Organization_Metadata_Max_Fields = {
 	readonly __typename?: 'organization_metadata_max_fields'
 	readonly description?: Maybe<Scalars['String']>
 	readonly email?: Maybe<Scalars['String']>
+	readonly header?: Maybe<Scalars['String']>
 	readonly id?: Maybe<Scalars['String']>
 	readonly logo?: Maybe<Scalars['String']>
 	readonly name?: Maybe<Scalars['String']>
@@ -1638,6 +1641,7 @@ export type Organization_Metadata_Min_Fields = {
 	readonly __typename?: 'organization_metadata_min_fields'
 	readonly description?: Maybe<Scalars['String']>
 	readonly email?: Maybe<Scalars['String']>
+	readonly header?: Maybe<Scalars['String']>
 	readonly id?: Maybe<Scalars['String']>
 	readonly logo?: Maybe<Scalars['String']>
 	readonly name?: Maybe<Scalars['String']>
@@ -1649,6 +1653,7 @@ export type Organization_Metadata_Min_Fields = {
 export type Organization_Metadata_Order_By = {
 	readonly description?: InputMaybe<Order_By>
 	readonly email?: InputMaybe<Order_By>
+	readonly header?: InputMaybe<Order_By>
 	readonly id?: InputMaybe<Order_By>
 	readonly logo?: InputMaybe<Order_By>
 	readonly name?: InputMaybe<Order_By>
@@ -1663,6 +1668,8 @@ export enum Organization_Metadata_Select_Column {
 	Description = 'description',
 	/** column name */
 	Email = 'email',
+	/** column name */
+	Header = 'header',
 	/** column name */
 	Id = 'id',
 	/** column name */
@@ -2465,12 +2472,12 @@ export type OrganizationsPaginationSubscription = {
 	}>
 }
 
-export type OrganizationByIdQueryVariables = Exact<{
+export type OrganizationByIdSubscriptionVariables = Exact<{
 	orgId: Scalars['String']
 }>
 
-export type OrganizationByIdQuery = {
-	readonly __typename?: 'query_root'
+export type OrganizationByIdSubscription = {
+	readonly __typename?: 'subscription_root'
 	readonly organization: ReadonlyArray<{
 		readonly __typename?: 'organization'
 		readonly access: string
@@ -2485,12 +2492,18 @@ export type OrganizationByIdQuery = {
 		readonly pay_asset: number
 		readonly treasury: string
 		readonly type: string
+		readonly organization_members: ReadonlyArray<{
+			readonly __typename?: 'organization_member'
+			readonly address: string
+			readonly identity: { readonly __typename?: 'identity'; readonly display_name?: string | null }
+		}>
 		readonly organization_metadata?: {
 			readonly __typename?: 'organization_metadata'
 			readonly description: string
 			readonly email: string
 			readonly id: string
 			readonly logo: string
+			readonly header: string
 			readonly name: string
 			readonly repo: string
 			readonly website: string
@@ -2847,7 +2860,7 @@ export function useOrganizationsPaginationSubscription(
 export type OrganizationsPaginationSubscriptionHookResult = ReturnType<typeof useOrganizationsPaginationSubscription>
 export type OrganizationsPaginationSubscriptionResult = Apollo.SubscriptionResult<OrganizationsPaginationSubscription>
 export const OrganizationByIdDocument = gql`
-	query OrganizationById($orgId: String!) {
+	subscription OrganizationById($orgId: String!) {
 		organization(where: { id: { _eq: $orgId } }) {
 			access
 			controller
@@ -2861,11 +2874,18 @@ export const OrganizationByIdDocument = gql`
 			pay_asset
 			treasury
 			type
+			organization_members {
+				address
+				identity {
+					display_name
+				}
+			}
 			organization_metadata {
 				description
 				email
 				id
 				logo
+				header
 				name
 				repo
 				website
@@ -2875,36 +2895,32 @@ export const OrganizationByIdDocument = gql`
 `
 
 /**
- * __useOrganizationByIdQuery__
+ * __useOrganizationByIdSubscription__
  *
- * To run a query within a React component, call `useOrganizationByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useOrganizationByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useOrganizationByIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationByIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useOrganizationByIdQuery({
+ * const { data, loading, error } = useOrganizationByIdSubscription({
  *   variables: {
  *      orgId: // value for 'orgId'
  *   },
  * });
  */
-export function useOrganizationByIdQuery(
-	baseOptions: Apollo.QueryHookOptions<OrganizationByIdQuery, OrganizationByIdQueryVariables>,
+export function useOrganizationByIdSubscription(
+	baseOptions: Apollo.SubscriptionHookOptions<OrganizationByIdSubscription, OrganizationByIdSubscriptionVariables>,
 ) {
 	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useQuery<OrganizationByIdQuery, OrganizationByIdQueryVariables>(OrganizationByIdDocument, options)
+	return Apollo.useSubscription<OrganizationByIdSubscription, OrganizationByIdSubscriptionVariables>(
+		OrganizationByIdDocument,
+		options,
+	)
 }
-export function useOrganizationByIdLazyQuery(
-	baseOptions?: Apollo.LazyQueryHookOptions<OrganizationByIdQuery, OrganizationByIdQueryVariables>,
-) {
-	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useLazyQuery<OrganizationByIdQuery, OrganizationByIdQueryVariables>(OrganizationByIdDocument, options)
-}
-export type OrganizationByIdQueryHookResult = ReturnType<typeof useOrganizationByIdQuery>
-export type OrganizationByIdLazyQueryHookResult = ReturnType<typeof useOrganizationByIdLazyQuery>
-export type OrganizationByIdQueryResult = Apollo.QueryResult<OrganizationByIdQuery, OrganizationByIdQueryVariables>
+export type OrganizationByIdSubscriptionHookResult = ReturnType<typeof useOrganizationByIdSubscription>
+export type OrganizationByIdSubscriptionResult = Apollo.SubscriptionResult<OrganizationByIdSubscription>
 export const SidebarDocument = gql`
 	subscription Sidebar($address: String!) {
 		organization(where: { organization_members: { address: { _eq: $address } } }) {
