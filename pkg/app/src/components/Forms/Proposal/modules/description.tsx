@@ -4,7 +4,7 @@ import { InputAdornment, MenuItem, Stack, TextField, Typography } from '@mui/mat
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
-import { useCampaignByOrganisationIdSubscription } from 'src/queries'
+import { useSuccessfulCampaignByOrganisationIdSubscription } from 'src/queries'
 import * as Yup from 'yup'
 
 import { BaseForm } from 'components/Forms/baseForm'
@@ -61,7 +61,7 @@ export function Description({
 	isWithdrawal,
 }: ComponentProps) {
 	const [errorState, setErrorState] = useState<string>()
-	const { data } = useCampaignByOrganisationIdSubscription({ variables: { orgId: organizationId } })
+	const { data } = useSuccessfulCampaignByOrganisationIdSubscription({ variables: { orgId: organizationId } })
 
 	const handleNameChange = useCallback(
 		(event) => {
