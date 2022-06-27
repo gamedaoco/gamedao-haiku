@@ -1,0 +1,38 @@
+#query Campaigns {
+#    campaigns {
+#        id
+#        tokenName
+#        tokenSymbol
+#        isFinished
+#        isFunded
+#        metadata {
+#            name
+#            description
+#            logo
+#        }
+#        contributors {
+#            address
+#            contributed
+#            identity {
+#                displayName
+#            }
+#        }
+#    }
+#}
+
+query Campaigns ($address: String!) {
+  campaigns(where: {adminIdentity: {address_eq: $address}}) {
+    target
+    deposit
+    metadata {
+      name
+      logo
+      title
+      header
+    }
+    contributors {
+      contributed
+      id
+    }
+  }
+}
