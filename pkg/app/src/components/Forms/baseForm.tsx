@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { Paper, Stack, Typography } from '@mui/material'
 
 interface ComponentProps {
-	title: string
+	title?: string
 	children: ReactNode
 	error?: string
 }

@@ -1,0 +1,15 @@
+schema: https://beeblebrox.zero.io/graph/v1/graphql
+overwrite: true
+
+generates:
+  ./src/queries/index.ts:
+    documents: ./src/queries/**/*.graphql
+    config:
+      useIndexSignature: true
+      immutableTypes: true
+      preResolveTypes: true
+      noSchemaStitching: false
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

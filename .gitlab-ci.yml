@@ -1,0 +1,89 @@
+stages:
+  - build
+  - push
+  - deploy
+
+variables:
+  RULES_CHANGES_PATH: "**/*"
+  DOCKER_DRIVER: overlay2
+
+services:
+  - docker:dind
+  - docker:node:16
+
+# Rules 
+.base-rules:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+      when: never
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - $RULES_CHANGES_PATH
+    - when: manual
+      allow_failure: true
+
+.service:
+  extends: .base-rules
+  variables:
+    RULES_CHANGES_PATH: "pkg/service/**/*"
+
+.squid:
+  extends: .base-rules
+  variables:
+    RULES_CHANGES_PATH: "pkg/squid/**/*"
+
+# Service
+service-push:
+  stage: push
+  image: docker
+  extends: .service
+  needs: [ ]
+  script:
+    - cd pkg/service
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t registry.gitlab.com/gamedao/gamedao-haiku/service:latest .
+    - docker push registry.gitlab.com/gamedao/gamedao-haiku/service:latest
+
+service-deploy:
+  stage: deploy
+  extends: .service
+  needs: [ "service-push" ]
+  tags:
+    - beeblebrox
+    - development
+    - shell
+  script:
+    - cd /home/ubuntu/squid
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker-compose pull
+    - docker-compose up -d --force-recreate
+
+
+squid-push:
+  stage: push
+  image: docker
+  extends: .squid
+  script:
+    - cd pkg/squid
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t registry.gitlab.com/gamedao/gamedao-haiku/squid:latest .
+    - docker push registry.gitlab.com/gamedao/gamedao-haiku/squid:latest
+
+squid-deploy:
+  stage: deploy
+  extends: .squid
+  needs: [ "squid-push" ]
+  tags:
+    - beeblebrox
+    - development
+    - shell
+  script:
+    - cd /home/ubuntu/squid
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker-compose pull
+    - docker-compose up -d --force-recreate
+

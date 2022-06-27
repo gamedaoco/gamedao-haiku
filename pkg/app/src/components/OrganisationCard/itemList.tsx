@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { Grid } from '@mui/material'
+import { Organization } from 'src/queries'
 
 import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
 import { TileCard } from 'components/OrganisationCard/modules/tileCard'
