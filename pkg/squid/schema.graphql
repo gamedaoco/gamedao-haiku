@@ -1,0 +1,100 @@
+type Identity @entity {
+    id: ID!
+    address: String!
+    displayName: String
+    legalName: String
+    email: String
+    riot: String
+    image: String
+    twitter: String
+
+    createdOrganizations: [Organization!]! @derivedFrom(field: "creatorIdentity")
+    controllerOrganizations: [Organization!]! @derivedFrom(field: "controllerIdentity")
+    organizationMembers: [OrganizationMember!]! @derivedFrom(field: "identity")
+    createdCampaigns: [Campaign!]! @derivedFrom(field: "creatorIdentity")
+    campaignContributors: [CampaignContributor!]! @derivedFrom(field: "identity")
+}
+
+type Organization @entity {
+    id: ID!
+    creator: String!
+    creatorIdentity: Identity!
+    controller: String!
+    controllerIdentity: Identity!
+    treasury: String!
+    treasuryIdentity: Identity!
+    access: String!
+    feeModel: String!
+    type: String!
+    fee: BigInt!
+    govAsset: Int!
+    payAsset: Int!
+    memberLimit: BigInt!
+    members: [OrganizationMember!] @derivedFrom(field: "organization")
+    campaigns: [Campaign!]! @derivedFrom(field: "organization")
+    metadata: OrganizationMetadata
+    createdAtBlock: Int!
+    deposit: BigInt!
+}
+
+type OrganizationMetadata @entity {
+    id: ID!
+    name: String!
+    description: String!
+    website: String!
+    email: String!
+    repo: String!
+    logo: String!
+    header: String!
+}
+
+type OrganizationMember @entity {
+    id: ID!
+    organization: Organization!
+    address: String!
+    identity: Identity!
+}
+
+type Campaign @entity {
+    id: ID!
+    organization: Organization!
+    creator: String!
+    creatorIdentity: Identity!
+    admin: String!
+    adminIdentity: Identity!
+    target: BigInt!
+    deposit: BigInt!
+    expiry: Int!
+    protocol: String!
+    governance: String!
+    tokenSymbol: String!
+    tokenName: String!
+
+    state: String!
+
+    metadata: CampaignMetadata
+    contributors: [CampaignContributor]! @derivedFrom(field: "campaign")
+
+    createdAtBlock: Int!
+}
+
+type CampaignMetadata @entity {
+    id: ID!
+    name: String!
+    email: String!
+    title: String!
+    description: String!
+    markdown: String!
+    logo: String!
+    header: String!
+}
+
+type CampaignContributor @entity {
+    id: ID!
+    campaign: Campaign!
+
+    address: String!
+    identity: Identity!
+
+    contributed: BigInt!
+}

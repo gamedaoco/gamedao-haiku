@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useIdentityByAddressLazyQuery } from '@gamedao-haiku/graphql/dist'
-import type { Identity } from '@gamedao-haiku/graphql/dist/types'
+import { Identity, useIdentityByAddressLazyQuery } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
 export interface IdentityByAddress {
@@ -20,8 +19,8 @@ export function useIdentityByAddress(address: string): IdentityByAddress {
 	}, [address])
 
 	useEffect(() => {
-		if (data?.identities?.length >= 1) {
-			setIdentityState(data.identities.slice()[0] as any)
+		if (data?.identity_by_pk) {
+			setIdentityState({ ...data.identity_by_pk } as any)
 		}
 	}, [data])
 

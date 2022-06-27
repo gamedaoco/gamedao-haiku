@@ -1,0 +1,11 @@
+query IdentityByAddress($address: String!) {
+    identity_by_pk(id: $address) {
+        id
+        email
+        display_name
+        image
+        legal_name
+        riot
+        twitter
+    }
+}
