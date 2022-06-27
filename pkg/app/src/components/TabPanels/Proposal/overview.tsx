@@ -1,11 +1,14 @@
 import React, { useCallback, useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { Add as AddIcon, HowToVote } from '@mui/icons-material'
 import { Box, Button, Chip, Paper, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
+import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'components/TabPanels/Organization/createProposal'
 
 interface ComponentProps {
@@ -48,24 +51,7 @@ const columns: GridColDef[] = [
 		field: 'status',
 		headerName: 'Status',
 		renderCell: (params) => {
-			switch (params.row.status) {
-				case 0:
-					return <Chip color="secondary" label="Init" variant="outlined" />
-				case 1:
-					return <Chip color="secondary" label="Active" />
-				case 2:
-					return <Chip color="success" label="Accepted" variant="outlined" />
-				case 3:
-					return <Chip color="error" label="Rejected" variant="outlined" />
-				case 4:
-					return <Chip label="Expired" variant="outlined" />
-				case 5:
-					return <Chip color="warning" label="Aborted" variant="outlined" />
-				case 6:
-					return <Chip label="Finalized" />
-			}
-
-			return <Chip color="error" label="Unknown status" />
+			return <ProposalStatusChip status={params.row.status} />
 		},
 	},
 ]
@@ -154,6 +140,7 @@ const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
 export function ProposalOverview({ organizationId }: ComponentProps) {
+	const { push } = useRouter()
 	const [showFormState, setShowFormState] = useState<boolean>(false)
 	const [pageSize, setPageSize] = useState<number>(10)
 	const enabledFeatures = useProposalFeatures()
@@ -195,8 +182,8 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 					onPageSizeChange={(pageSize) => {
 						setPageSize(pageSize)
 					}}
-					onRowClick={(data) => {
-						console.log(data.row)
+					onRowClick={({ row: { id } }) => {
+						push(`/organisations/${organizationId}/proposals/${id}`)
 					}}
 				/>
 			</Box>
