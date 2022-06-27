@@ -2303,11 +2303,11 @@ export type Subscription_RootOrganization_Metadata_By_PkArgs = {
 	id: Scalars['String']
 }
 
-export type CampaignByOrganisationIdSubscriptionVariables = Exact<{
+export type SuccessfulCampaignByOrganisationIdSubscriptionVariables = Exact<{
 	orgId: Scalars['String']
 }>
 
-export type CampaignByOrganisationIdSubscription = {
+export type SuccessfulCampaignByOrganisationIdSubscription = {
 	readonly __typename?: 'subscription_root'
 	readonly campaign: ReadonlyArray<{
 		readonly __typename?: 'campaign'
@@ -2541,9 +2541,9 @@ export type SidebarSubscription = {
 	}>
 }
 
-export const CampaignByOrganisationIdDocument = gql`
-	subscription CampaignByOrganisationId($orgId: String!) {
-		campaign(where: { organization_id: { _eq: $orgId } }) {
+export const SuccessfulCampaignByOrganisationIdDocument = gql`
+	subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
+		campaign(where: { organization_id: { _eq: $orgId }, state: { _eq: "Success" } }) {
 			id
 			campaign_metadata {
 				name
@@ -2553,35 +2553,38 @@ export const CampaignByOrganisationIdDocument = gql`
 `
 
 /**
- * __useCampaignByOrganisationIdSubscription__
+ * __useSuccessfulCampaignByOrganisationIdSubscription__
  *
- * To run a query within a React component, call `useCampaignByOrganisationIdSubscription` and pass it any options that fit your needs.
- * When your component renders, `useCampaignByOrganisationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSuccessfulCampaignByOrganisationIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useSuccessfulCampaignByOrganisationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCampaignByOrganisationIdSubscription({
+ * const { data, loading, error } = useSuccessfulCampaignByOrganisationIdSubscription({
  *   variables: {
  *      orgId: // value for 'orgId'
  *   },
  * });
  */
-export function useCampaignByOrganisationIdSubscription(
+export function useSuccessfulCampaignByOrganisationIdSubscription(
 	baseOptions: Apollo.SubscriptionHookOptions<
-		CampaignByOrganisationIdSubscription,
-		CampaignByOrganisationIdSubscriptionVariables
+		SuccessfulCampaignByOrganisationIdSubscription,
+		SuccessfulCampaignByOrganisationIdSubscriptionVariables
 	>,
 ) {
 	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useSubscription<CampaignByOrganisationIdSubscription, CampaignByOrganisationIdSubscriptionVariables>(
-		CampaignByOrganisationIdDocument,
-		options,
-	)
+	return Apollo.useSubscription<
+		SuccessfulCampaignByOrganisationIdSubscription,
+		SuccessfulCampaignByOrganisationIdSubscriptionVariables
+	>(SuccessfulCampaignByOrganisationIdDocument, options)
 }
-export type CampaignByOrganisationIdSubscriptionHookResult = ReturnType<typeof useCampaignByOrganisationIdSubscription>
-export type CampaignByOrganisationIdSubscriptionResult = Apollo.SubscriptionResult<CampaignByOrganisationIdSubscription>
+export type SuccessfulCampaignByOrganisationIdSubscriptionHookResult = ReturnType<
+	typeof useSuccessfulCampaignByOrganisationIdSubscription
+>
+export type SuccessfulCampaignByOrganisationIdSubscriptionResult =
+	Apollo.SubscriptionResult<SuccessfulCampaignByOrganisationIdSubscription>
 export const ConfigDocument = gql`
 	query Config($env: Environment!) {
 		config(env: $env) {
