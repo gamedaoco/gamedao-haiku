@@ -138,9 +138,9 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 			try {
 				let tx
 				if (data.type === 0) {
-					tx = createGeneralProposalTx(selectedApiProvider.apiProvider, data, blockNumber, organizationId)
+					tx = createGeneralProposalTx(selectedApiProvider, data, blockNumber, organizationId)
 				} else if (data.type === 1) {
-					tx = createWithdrawProposalTx(selectedApiProvider.apiProvider, data, blockNumber)
+					tx = createWithdrawProposalTx(selectedApiProvider, data, blockNumber)
 				}
 
 				if (tx) {
