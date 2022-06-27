@@ -136,7 +136,13 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 	useEffect(() => {
 		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumberState) {
 			try {
-				const tx = createGeneralProposalTx(selectedApiProvider.apiProvider, data, blockNumber, organizationId)
+				let tx
+				if (data.type === 0) {
+					tx = createGeneralProposalTx(selectedApiProvider, data, blockNumber, organizationId)
+				} else if (data.type === 1) {
+					tx = createWithdrawProposalTx(selectedApiProvider, data, blockNumber)
+				}
+
 				if (tx) {
 					setTxState(tx)
 				}

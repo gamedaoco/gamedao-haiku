@@ -1,0 +1,8 @@
+subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
+    campaign(where: {organization_id: {_eq: $orgId}, state: {_eq: "Success"}}) {
+        id
+        campaign_metadata {
+            name
+        }
+    }
+}

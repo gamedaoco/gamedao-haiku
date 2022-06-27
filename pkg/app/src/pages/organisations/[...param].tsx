@@ -211,7 +211,9 @@ export function OrganisationById() {
 									</label>
 
 									<Stack spacing={1}>
-										<Typography variant="h4">{tmpOrg.name ?? ''}</Typography>
+										<Typography variant="h4">
+											{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
+										</Typography>
 										<Typography>
 											{organizationState?.organization_members?.length ?? 1} Member
 										</Typography>
