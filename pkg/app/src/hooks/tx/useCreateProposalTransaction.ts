@@ -4,6 +4,7 @@ import { ApiPromise } from '@polkadot/api'
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useLogger } from 'hooks/useLogger'
 import { useTMPProposal } from 'hooks/useTMPProposal'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
@@ -124,6 +125,7 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 	const address = useCurrentAccountAddress()
 	const data = useTMPProposal()
 	const blockNumber = useBlockNumber()
+	const logger = useLogger('useCreateOrgTransaction')
 
 	useEffect(() => {
 		// The transaction is only regenerated every 2 minutes and not every 2-3 seconds.
@@ -141,9 +143,7 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 					setTxState(tx)
 				}
 			} catch (e) {
-				// TODO: Add logger engine. It does not necessarily have to be an error,
-				//  it can also be that data is still missing that is required for the transaction.
-				console.warn('CreateProposalTransaction', e)
+				logger.trace(e)
 			}
 		}
 	}, [organizationId, selectedApiProvider, address, data, blockNumberState])

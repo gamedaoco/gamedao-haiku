@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { Add as AddIcon, ArrowBack, HowToVote, Launch } from '@mui/icons-material'
+import { ArrowBack, HowToVote, Launch } from '@mui/icons-material'
 import { Box, Button, Chip, IconButton, LinearProgress, Paper, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import { useSimpleVoteTransaction } from 'hooks/tx/useSimpleVoteTransaction'
 import { useDisplayValues } from 'hooks/useDisplayValues'
+import { useTranslation } from 'react-i18next'
 import { Organization } from 'src/queries'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 interface ComponentProps {
 	organization: Organization
@@ -94,7 +97,7 @@ const rowHeight = 80
 
 export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const displayValues = useDisplayValues()
-
+	const { t } = useTranslation()
 	const [proposal, setProposal] = useState(proposalData)
 	const [proposalTypeName, setProposalTypeName] = useState(null)
 	const [proposalVotingTypeName, setProposalVotingTypeName] = useState(null)
@@ -105,10 +108,19 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const [pageSize, setPageSize] = useState<number>(10)
 	const [voterRows, setVoterRows] = useState([])
 
-	const [selectedVote, setSelectedVote] = useState(0)
+	const [selectedVote, setSelectedVote] = useState<number>(null)
+	const [openTxModal, setOpenTxModal] = useState<boolean>(false)
+	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
 
 	const theme = useTheme()
 	const matches = useMediaQuery(theme.breakpoints.up('lg'))
+
+	const handleOpenTxModal = useCallback(() => {
+		setOpenTxModal(true)
+	}, [setOpenTxModal])
+	const handleCloseTxModal = useCallback(() => {
+		setOpenTxModal(false)
+	}, [setOpenTxModal])
 
 	useEffect(() => {
 		if (!proposal) return
@@ -265,7 +277,12 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 					<Stack paddingLeft={4} paddingRight={4} spacing={4}>
 						<RadioItem title={'Yes'} value={1} selectedValue={selectedVote} onChange={setSelectedVote} />
 						<RadioItem title={'No'} value={0} selectedValue={selectedVote} onChange={setSelectedVote} />
-						<Button fullWidth={true} variant="contained">
+						<Button
+							fullWidth={true}
+							variant="contained"
+							disabled={!simpleVoteTx}
+							onClick={handleOpenTxModal}
+						>
 							Vote
 						</Button>
 					</Stack>
@@ -297,6 +314,17 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 						</Box>
 					</Stack>
 				</Stack>
+				<TransactionDialog
+					open={openTxModal}
+					onClose={handleCloseTxModal}
+					tx={simpleVoteTx}
+					txMsg={{
+						pending: t('notification:transactions:simpleVote:pending'),
+						success: t('notification:transactions:simpleVote:success'),
+						error: t('notification:transactions:simpleVote:error'),
+					}}
+					txCallback={handleCloseTxModal}
+				/>
 			</Stack>
 		)
 	)
