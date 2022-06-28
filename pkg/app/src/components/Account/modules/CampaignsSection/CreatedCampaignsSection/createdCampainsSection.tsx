@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
-import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { AccountState } from 'src/@types/extension'
+import { Campaign, useCampaignSubscription } from 'src/queries'
 
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
@@ -32,7 +32,7 @@ interface CreatedCampaignSectionProps {
 
 const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState }) => {
 	const theme = useTheme()
-	const { data, loading } = useCampaignsQuery({
+	const { data, loading } = useCampaignSubscription({
 		variables: { address: '3YutJfdBkSsL9YPuRebVBb4L3VpC1ES7y8RMzKEunCzZ5wwE' },
 	})
 

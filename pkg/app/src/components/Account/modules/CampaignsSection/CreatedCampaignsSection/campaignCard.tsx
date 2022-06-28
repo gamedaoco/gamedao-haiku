@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { Campaign } from '@gamedao-haiku/graphql/dist'
+import { Campaign } from 'src/queries'
 import { Box, Card, CardContent, CardMedia, Container, LinearProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 

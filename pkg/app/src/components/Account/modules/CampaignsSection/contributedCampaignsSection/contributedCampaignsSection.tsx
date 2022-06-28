@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { AccountState } from 'src/@types/extension'
-import { Campaign_Contributor, useCampaignContributorsConnectionQuery } from 'src/queries'
+import { Campaign_Contributor, useCampaignContributorsSubscription } from 'src/queries'
 
 import { Scrollbar } from 'components/scrollbar'
 
@@ -42,9 +42,10 @@ interface ContributedCampaignsSectionProps {
 
 const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ accountState }) => {
 	const theme = useTheme()
-	const { data, loading } = useCampaignContributorsConnectionQuery({
+	const { data, loading } = useCampaignContributorsSubscription({
 		variables: { address: '5Dkv3jCJqDdk2uWWdT2DNXAFFgTLhHRZxdFmU8LHz9R74BeS' },
 	})
+	console.log('DATA:', data)
 
 	return (
 		<Box>
@@ -69,94 +70,94 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 									<TableCell>Status</TableCell>
 								</TableRow>
 							</TableHead>
-							{loading ? (
-								<LoadingCampaignTable />
-							) : (
-								<TableBody>
-									{data?.campaign_contributor_by_pk?.map((campaignContributorEdge, index) => {
-										return (
-											<TableRow key={index}>
-												<TableCell>
-													<Box
-														display="flex"
-														gap={3}
-														justifyItems="center"
-														alignItems="center"
-													>
-														<Box>
-															<CardMedia
-																component="img"
-																sx={{
-																	width: 64,
-																	height: 64,
-																}}
-																src={`${gateway}${getContributedCampaignLogo(
-																	campaignContributorEdge as Campaign_Contributor,
-																)}`}
-																alt="campaign_logo"
-															/>
-														</Box>
-														<Box display="flex" flexDirection="column">
-															<Typography>
-																{getContributedCampaignName(
-																	campaignContributorEdge as Campaign_Contributor,
-																)}
-															</Typography>
-															<Typography variant="body2">
-																{getContributedCampaignTitle(
-																	campaignContributorEdge as Campaign_Contributor,
-																)}
-															</Typography>
-														</Box>
-													</Box>
-												</TableCell>
-												<TableCell>
-													{getContributedCampaignContributorsCount(
-														campaignContributorEdge as Campaign_Contributor,
-													)}
-												</TableCell>
-												<TableCell>
-													{getContributedCampaignContribution(
-														campaignContributorEdge as Campaign_Contributor,
-													)}
-												</TableCell>
-												<TableCell>
-													<Box display="flex" flexDirection="column" sx={{ mt: 2 }}>
-														<LinearProgress
-															variant="determinate"
-															value={getContributedCampaignProgress(
-																campaignContributorEdge as Campaign_Contributor,
-															)}
-															sx={{ maxHeight: 6 }}
-														/>
-														<Typography variant="body2">
-															{getContributedCampaignRaisedAmount(
-																campaignContributorEdge as Campaign_Contributor,
-															)}
-															/
-															{getContributedCampaignTarget(
-																campaignContributorEdge as Campaign_Contributor,
-															)}
-														</Typography>
-													</Box>
-												</TableCell>
-												<TableCell>
-													{getContributedCampaignTimeLeft(
-														campaignContributorEdge as Campaign_Contributor,
-													)}
-												</TableCell>
-												<TableCell>
-													<Chip
-														label={getContributedCampaignState(
-															campaignContributorEdge as Campaign_Contributor,
-														)}
-													/>
-												</TableCell>
-											</TableRow>
-										)
-									})}
-								</TableBody>
-							)}
+							{/*{loading ? (*/}
+							{/*	<LoadingCampaignTable />*/}
+							{/*) : (*/}
+							{/*	<TableBody>*/}
+							{/*		{data? ?.map((campaignContributorEdge, index) => {*/}
+							{/*			return (*/}
+							{/*				<TableRow key={index}>*/}
+							{/*					<TableCell>*/}
+							{/*						<Box*/}
+							{/*							display="flex"*/}
+							{/*							gap={3}*/}
+							{/*							justifyItems="center"*/}
+							{/*							alignItems="center"*/}
+							{/*						>*/}
+							{/*							<Box>*/}
+							{/*								<CardMedia*/}
+							{/*									component="img"*/}
+							{/*									sx={{*/}
+							{/*										width: 64,*/}
+							{/*										height: 64,*/}
+							{/*									}}*/}
+							{/*									src={`${gateway}${getContributedCampaignLogo(*/}
+							{/*										campaignContributorEdge as Campaign_Contributor,*/}
+							{/*									)}`}*/}
+							{/*									alt="campaign_logo"*/}
+							{/*								/>*/}
+							{/*							</Box>*/}
+							{/*							<Box display="flex" flexDirection="column">*/}
+							{/*								<Typography>*/}
+							{/*									{getContributedCampaignName(*/}
+							{/*										campaignContributorEdge as Campaign_Contributor,*/}
+							{/*									)}*/}
+							{/*								</Typography>*/}
+							{/*								<Typography variant="body2">*/}
+							{/*									{getContributedCampaignTitle(*/}
+							{/*										campaignContributorEdge as Campaign_Contributor,*/}
+							{/*									)}*/}
+							{/*								</Typography>*/}
+							{/*							</Box>*/}
+							{/*						</Box>*/}
+							{/*					</TableCell>*/}
+							{/*					<TableCell>*/}
+							{/*						{getContributedCampaignContributorsCount(*/}
+							{/*							campaignContributorEdge as Campaign_Contributor,*/}
+							{/*						)}*/}
+							{/*					</TableCell>*/}
+							{/*					<TableCell>*/}
+							{/*						{getContributedCampaignContribution(*/}
+							{/*							campaignContributorEdge as Campaign_Contributor,*/}
+							{/*						)}*/}
+							{/*					</TableCell>*/}
+							{/*					<TableCell>*/}
+							{/*						<Box display="flex" flexDirection="column" sx={{ mt: 2 }}>*/}
+							{/*							<LinearProgress*/}
+							{/*								variant="determinate"*/}
+							{/*								value={getContributedCampaignProgress(*/}
+							{/*									campaignContributorEdge as Campaign_Contributor,*/}
+							{/*								)}*/}
+							{/*								sx={{ maxHeight: 6 }}*/}
+							{/*							/>*/}
+							{/*							<Typography variant="body2">*/}
+							{/*								{getContributedCampaignRaisedAmount(*/}
+							{/*									campaignContributorEdge as Campaign_Contributor,*/}
+							{/*								)}*/}
+							{/*								/*/}
+							{/*								{getContributedCampaignTarget(*/}
+							{/*									campaignContributorEdge as Campaign_Contributor,*/}
+							{/*								)}*/}
+							{/*							</Typography>*/}
+							{/*						</Box>*/}
+							{/*					</TableCell>*/}
+							{/*					<TableCell>*/}
+							{/*						{getContributedCampaignTimeLeft(*/}
+							{/*							campaignContributorEdge as Campaign_Contributor,*/}
+							{/*						)}*/}
+							{/*					</TableCell>*/}
+							{/*					<TableCell>*/}
+							{/*						<Chip*/}
+							{/*							label={getContributedCampaignState(*/}
+							{/*								campaignContributorEdge as Campaign_Contributor,*/}
+							{/*							)}*/}
+							{/*						/>*/}
+							{/*					</TableCell>*/}
+							{/*				</TableRow>*/}
+							{/*			)*/}
+							{/*		})}*/}
+							{/*	</TableBody>*/}
+							{/*)}*/}
 						</Table>
 					</Scrollbar>
 				</CardContent>
