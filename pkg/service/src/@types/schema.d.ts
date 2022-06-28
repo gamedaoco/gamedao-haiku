@@ -25,6 +25,9 @@ export type ApiProvider = {
 
 export type ChainProperties = {
 	readonly __typename?: 'ChainProperties'
+	readonly governanceCurrency: Scalars['Int']
+	readonly networkCurrency: Scalars['Int']
+	readonly paymentCurrencies: Scalars['Int']
 	readonly ss58Format: Scalars['Int']
 	readonly tokenDecimals: ReadonlyArray<Maybe<Scalars['String']>>
 	readonly tokenSymbol: ReadonlyArray<Maybe<Scalars['String']>>
@@ -187,6 +190,11 @@ export type RmrkNft = {
 	readonly sn: Scalars['String']
 }
 
+export type Subscription = {
+	readonly __typename?: 'Subscription'
+	readonly blockNumber: Scalars['Int']
+}
+
 export type WithIndex<TObject> = TObject & Record<string, any>
 export type ResolversObject<TObject> = WithIndex<TObject>
 
@@ -286,6 +294,7 @@ export type ResolversTypes = ResolversObject<{
 	Query: ResolverTypeWrapper<{}>
 	RMRKNft: ResolverTypeWrapper<RmrkNft>
 	String: ResolverTypeWrapper<Scalars['String']>
+	Subscription: ResolverTypeWrapper<{}>
 	Upload: ResolverTypeWrapper<Scalars['Upload']>
 }>
 
@@ -313,6 +322,7 @@ export type ResolversParentTypes = ResolversObject<{
 	Query: {}
 	RMRKNft: RmrkNft
 	String: Scalars['String']
+	Subscription: {}
 	Upload: Scalars['Upload']
 }>
 
@@ -331,6 +341,9 @@ export type ChainPropertiesResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['ChainProperties'] = ResolversParentTypes['ChainProperties'],
 > = ResolversObject<{
+	governanceCurrency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	networkCurrency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	paymentCurrencies?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	ss58Format?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	tokenDecimals?: Resolver<ReadonlyArray<Maybe<ResolversTypes['String']>>, ParentType, ContextType>
 	tokenSymbol?: Resolver<ReadonlyArray<Maybe<ResolversTypes['String']>>, ParentType, ContextType>
@@ -567,6 +580,13 @@ export type RmrkNftResolvers<
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
+export type SubscriptionResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
+> = ResolversObject<{
+	blockNumber?: SubscriptionResolver<ResolversTypes['Int'], 'blockNumber', ParentType, ContextType>
+}>
+
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
 	name: 'Upload'
 }
@@ -588,5 +608,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	ProposalFeatures?: ProposalFeaturesResolvers<ContextType>
 	Query?: QueryResolvers<ContextType>
 	RMRKNft?: RmrkNftResolvers<ContextType>
+	Subscription?: SubscriptionResolvers<ContextType>
 	Upload?: GraphQLScalarType
 }>

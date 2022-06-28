@@ -21,6 +21,11 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 				ss58Format: ss58Format as any,
 				tokenSymbol: tokenSymbol as any,
 				tokenDecimals: tokenDecimals as any,
+
+				// TODO: Remove hardcoded values
+				networkCurrency: 0, // 0 = ZERO
+				governanceCurrency: 1, // 1 = GAME
+				paymentCurrencies: 13, // 13 = aUSD
 			},
 			name: systemName.toHuman() as any,
 		}

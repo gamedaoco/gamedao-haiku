@@ -8,6 +8,7 @@ import { displayDataResolver } from './query/displayValues/displayValuesResolver
 import { featuresResolver } from './query/features/featuresResolver'
 import { linksResolver } from './query/links/linksResolver'
 import { nftsResolver } from './query/rmrk/nftsResolver'
+import { blockNumberSubscription } from './subscriptions/blockNumbersubscription'
 
 export function resolvers(): Resolvers {
 	return {
@@ -19,6 +20,9 @@ export function resolvers(): Resolvers {
 			displayValues: displayDataResolver,
 			rmrkNfts: nftsResolver,
 			apiProvider: apiProviderResolver,
+		},
+		Subscription: {
+			blockNumber: blockNumberSubscription,
 		},
 		Mutation: {
 			singleUpload: singleUpload,

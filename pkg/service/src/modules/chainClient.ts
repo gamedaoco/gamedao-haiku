@@ -2,11 +2,15 @@ import { ApiPromise, WsProvider } from '@polkadot/api'
 import { cryptoWaitReady } from '@polkadot/util-crypto'
 
 import ZeroTypes from '../chainTypes/zero-types.json'
+import { PubSub } from './pubSub'
+
+const pubSub = PubSub.Instance
 
 export class ChainClient {
 	private static _instance: ChainClient
 	private isInitialized: boolean = false
 	private apiProvider: ApiPromise | undefined
+	private unsubscribeBlockNumber: any = undefined
 
 	public static get Instance() {
 		return ChainClient._instance || (ChainClient._instance = new ChainClient())
@@ -28,6 +32,11 @@ export class ChainClient {
 		return this.apiProvider as ApiPromise
 	}
 
+	private static bestNumberFinalizedHandler(result: any) {
+		console.log()
+		pubSub.client.publish('NEW_BLOCK_NUMBER', { blockNumber: result?.toNumber() })
+	}
+
 	public async Initialize() {
 		if (this.initialized) {
 			return
@@ -43,6 +52,11 @@ export class ChainClient {
 			})
 
 			await this.apiProvider.isReady
+
+			this.unsubscribeBlockNumber = this.api.derive.chain.bestNumberFinalized(
+				ChainClient.bestNumberFinalizedHandler,
+			)
+
 			this.isInitialized = true
 		} catch (error) {
 			console.error('The RPC could not be initialized', 'error', error, 'url:', this.url)

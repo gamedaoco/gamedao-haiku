@@ -124,6 +124,9 @@ type ChainProperties {
     ss58Format: Int!
     tokenDecimals: [String]!
     tokenSymbol: [String]!
+    networkCurrency: Int!
+    governanceCurrency: Int!
+    paymentCurrencies: Int!
 }
 
 type ApiProvider {
@@ -135,6 +138,10 @@ type ApiProvider {
 
 type Mutation {
     singleUpload(fileStream: Upload!): String!
+}
+
+type Subscription {
+    blockNumber: Int!
 }
 
 type Query {
