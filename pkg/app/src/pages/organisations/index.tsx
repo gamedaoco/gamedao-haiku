@@ -79,7 +79,6 @@ export function OrganisationPage() {
 						</Grid>
 						<FiltersSection
 							setFilters={setFilters}
-							sortOption={sortOption}
 							setSortOption={setSortOption}
 							sortOptions={data?.displayValues?.sortOptions?.concat([])}
 						/>

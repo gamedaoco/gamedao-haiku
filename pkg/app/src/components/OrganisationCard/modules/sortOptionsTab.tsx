@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -6,14 +6,27 @@ import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { Organization_Order_By } from 'src/queries'
 
-export function SortOptionsTab({ sortOption, sortOptions, setSortOption }) {
+export function SortOptionsTab({ sortOptions, setSortOption }) {
 	const { t } = useTranslation()
+	const [keyState, setKeyState] = useState<string>('')
+	const [mappingState, setMappingState] = useState({})
+
+	useEffect(() => {
+		if (sortOptions) {
+			const mapping = {}
+			sortOptions.forEach((option) => {
+				mapping[option.key] = option
+			})
+			setMappingState(mapping)
+		}
+	}, [sortOptions])
 
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
-			setSortOption(eval(`(${event.target.value ?? 'null'})`) as Organization_Order_By)
+			setKeyState(event.target.value)
+			setSortOption(eval(`(${mappingState[event.target.value]?.value ?? 'null'})`) as Organization_Order_By)
 		},
-		[setSortOption],
+		[setSortOption, mappingState],
 	)
 
 	if (!sortOptions) return null
@@ -42,9 +55,9 @@ export function SortOptionsTab({ sortOption, sortOptions, setSortOption }) {
 					}}
 					size="small"
 				>
-					<Select value={sortOption || ''} onChange={handleChange}>
+					<Select value={keyState} onChange={handleChange}>
 						{sortOptions.map((x) => (
-							<MenuItem value={x.value} key={x.key}>
+							<MenuItem value={x.key} key={x.key}>
 								{t(x.text)}
 							</MenuItem>
 						))}

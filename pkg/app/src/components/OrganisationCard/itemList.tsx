@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 
 import { Grid } from '@mui/material'
 import { Organization } from 'src/queries'
@@ -12,28 +12,21 @@ interface ComponentProps {
 }
 
 export function ItemList({ items, loading }: ComponentProps) {
-	const [allData, setAllData] = useState<Organization[]>(items)
-	useEffect(() => {
-		if (items) {
-			setAllData(items)
-		}
-	}, [items])
-	if (!Array.isArray(items) && !loading) return null
-
 	return (
-		<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-			{allData?.map((item, index) => (
-				<Grid item xs={4} key={index}>
+		<Grid
+			sx={{
+				display: 'grid',
+				gap: '1rem',
+				gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+			}}
+		>
+			{items?.map((item) => (
+				<Fragment key={item.id}>
 					<TileCard item={item} />
-				</Grid>
+				</Fragment>
 			))}
 
-			{loading &&
-				[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x) => (
-					<Grid item xs={4} key={x}>
-						<LoadingTileCard />
-					</Grid>
-				))}
+			{(!items || loading) && <LoadingTileCard />}
 		</Grid>
 	)
 }

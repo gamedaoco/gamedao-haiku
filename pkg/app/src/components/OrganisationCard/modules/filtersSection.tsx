@@ -12,12 +12,11 @@ import { SortOptionsTab } from 'components/OrganisationCard/modules/sortOptionsT
 
 interface ComponentProps {
 	setFilters: (x: string) => void
-	sortOption: Organization_Order_By
 	setSortOption: (x: Organization_Order_By) => void
 	sortOptions: DisplayValueEntryString[]
 }
 
-export function FiltersSection({ setFilters, sortOption, setSortOption, sortOptions }: ComponentProps) {
+export function FiltersSection({ setFilters, setSortOption, sortOptions }: ComponentProps) {
 	const enabledFeature = useOrganizationFeatures()
 	const [searchInput, searchInputDebounced, setSearchInput] = useDebouncedState<string>(500, '')
 
@@ -29,9 +28,7 @@ export function FiltersSection({ setFilters, sortOption, setSortOption, sortOpti
 	)
 
 	useEffect(() => {
-		if (searchInputDebounced) {
-			setFilters(searchInputDebounced)
-		}
+		setFilters(searchInputDebounced)
 	}, [searchInputDebounced])
 
 	return (
@@ -78,11 +75,7 @@ export function FiltersSection({ setFilters, sortOption, setSortOption, sortOpti
 						>
 							{enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS && <FiltersTab />}
 							{enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT && (
-								<SortOptionsTab
-									sortOption={sortOption}
-									setSortOption={setSortOption}
-									sortOptions={sortOptions}
-								/>
+								<SortOptionsTab setSortOption={setSortOption} sortOptions={sortOptions} />
 							)}
 						</Box>
 					</Grid>
