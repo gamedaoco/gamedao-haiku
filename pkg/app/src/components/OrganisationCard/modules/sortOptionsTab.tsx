@@ -3,15 +3,21 @@ import React, { useCallback } from 'react'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
 import { Organization_Order_By } from 'src/queries'
 
-const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
+export function SortOptionsTab({ sortOption, sortOptions, setSortOption }) {
+	const { t } = useTranslation()
+
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
-			setSortOption(event.target.value as Organization_Order_By)
+			setSortOption(eval(`(${event.target.value ?? 'null'})`) as Organization_Order_By)
 		},
 		[setSortOption],
 	)
+
+	if (!sortOptions) return null
+
 	return (
 		<Box
 			sx={{
@@ -36,10 +42,10 @@ const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 					}}
 					size="small"
 				>
-					<Select value={sortOption} onChange={handleChange}>
+					<Select value={sortOption || ''} onChange={handleChange}>
 						{sortOptions.map((x) => (
-							<MenuItem value={x.value} key={JSON.stringify(x.value)}>
-								{x.name}
+							<MenuItem value={x.value} key={x.key}>
+								{t(x.text)}
 							</MenuItem>
 						))}
 					</Select>
@@ -48,5 +54,3 @@ const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 		</Box>
 	)
 }
-
-export default SortOptionsTab

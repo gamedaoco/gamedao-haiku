@@ -70,6 +70,7 @@ export type DisplayValues = {
 	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly sortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 }
 
@@ -79,15 +80,19 @@ export enum Environment {
 	Staging = 'STAGING',
 }
 
-export type Features = ProposalFeatures & {
-	readonly __typename?: 'Features'
-	readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']
-	readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']
-	readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']
-}
+export type Features = OrganizationFeatures &
+	ProposalFeatures & {
+		readonly __typename?: 'Features'
+		readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']
+		readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']
+		readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
+	}
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
@@ -120,6 +125,12 @@ export enum LogLevel {
 	Silent = 'SILENT',
 	Trace = 'TRACE',
 	Warn = 'WARN',
+}
+
+export type OrganizationFeatures = {
+	readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']
+	readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
+	readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
 }
 
 export type ProposalFeatures = {
@@ -2409,6 +2420,12 @@ export type DisplayValuesQuery = {
 			readonly text: string
 			readonly flag: string
 		} | null> | null
+		readonly sortOptions?: ReadonlyArray<{
+			readonly __typename?: 'DisplayValueEntryString'
+			readonly key: string
+			readonly value: string
+			readonly text: string
+		} | null> | null
 	} | null
 }
 
@@ -2426,6 +2443,9 @@ export type FeaturesQuery = {
 		readonly CREATE_GENERAL_PROPOSAL: boolean
 		readonly CREATE_WITHDRAW_PROPOSAL: boolean
 		readonly CREATE_SPENDING_PROPOSAL: boolean
+		readonly ORGANIZATION_PAGE_SHOW_FILTERS: boolean
+		readonly ORGANIZATION_PAGE_SHOW_SEARCH: boolean
+		readonly ORGANIZATION_PAGE_SHOW_SORT: boolean
 	}
 }
 
@@ -2687,6 +2707,11 @@ export const DisplayValuesDocument = gql`
 				text
 				flag
 			}
+			sortOptions {
+				key
+				value
+				text
+			}
 		}
 	}
 `
@@ -2730,6 +2755,9 @@ export const FeaturesDocument = gql`
 			CREATE_GENERAL_PROPOSAL
 			CREATE_WITHDRAW_PROPOSAL
 			CREATE_SPENDING_PROPOSAL
+			ORGANIZATION_PAGE_SHOW_FILTERS
+			ORGANIZATION_PAGE_SHOW_SEARCH
+			ORGANIZATION_PAGE_SHOW_SORT
 		}
 	}
 `

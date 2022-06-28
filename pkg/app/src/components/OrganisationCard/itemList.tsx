@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
 import { Organization } from 'src/queries'
 
-import LoadingTileCard from 'components/OrganisationCard/modules/loadingTileCard'
+import { LoadingTileCard } from 'components/OrganisationCard/modules/loadingTileCard'
 import { TileCard } from 'components/OrganisationCard/modules/tileCard'
 
 interface ComponentProps {
