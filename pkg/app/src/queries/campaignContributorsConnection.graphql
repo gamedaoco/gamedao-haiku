@@ -1,26 +1,22 @@
 query CampaignContributorsConnection($address: String!) {
-  campaignContributorsConnection(orderBy: id_ASC, where: {address_eq: $address}) {
-    edges {
-      node {
+  campaign_contributor_by_pk(id: $address){
+    id
+    contributed
+    campaign {
+      campaign_metadata {
+        name
+        title
+        logo
+      }
+      campaign_contributors {
         id
         contributed
-        campaign {
-          metadata {
-            name
-            title
-            logo
-          }
-          contributors {
-            id
-            contributed
-          }
-          createdAtBlock
-          deposit
-          expiry
-          state
-          target
-        }
       }
+      deposit
+      expiry
+      state
+      target
+      created_at_block
     }
   }
 }
