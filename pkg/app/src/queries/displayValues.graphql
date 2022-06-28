@@ -56,5 +56,10 @@ query DisplayValues {
             text
             flag
         }
+        sortOptions {
+            key
+            value
+            text
+        }
     }
 }
