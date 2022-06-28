@@ -38,13 +38,22 @@ interface ProposalFeatures {
     CREATE_SPENDING_PROPOSAL: Boolean!
 }
 
-type Features implements ProposalFeatures {
+interface OrganizationFeatures {
+    ORGANIZATION_PAGE_SHOW_SEARCH: Boolean!
+    ORGANIZATION_PAGE_SHOW_FILTERS: Boolean!
+    ORGANIZATION_PAGE_SHOW_SORT: Boolean!
+}
+
+type Features implements ProposalFeatures & OrganizationFeatures {
     CREATE_PROPOSAL: Boolean!
     CREATE_PROPOSAL_SIMPLE_MAJORITY: Boolean!
     CREATE_PROPOSAL_RELATIVE_MAJORITY: Boolean!
     CREATE_GENERAL_PROPOSAL: Boolean!
     CREATE_WITHDRAW_PROPOSAL: Boolean!
     CREATE_SPENDING_PROPOSAL: Boolean!
+    ORGANIZATION_PAGE_SHOW_SEARCH: Boolean!
+    ORGANIZATION_PAGE_SHOW_FILTERS: Boolean!
+    ORGANIZATION_PAGE_SHOW_SORT: Boolean!
 }
 
 type Config {
@@ -96,6 +105,7 @@ type DisplayValues {
     projectDurations: [DisplayValueEntryNumber]
     memberships: [DisplayValueEntryNumber]
     countries: [DisplayValueEntryCountry]
+    sortOptions: [DisplayValueEntryString]
 }
 
 type File {
