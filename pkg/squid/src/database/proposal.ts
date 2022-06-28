@@ -9,6 +9,8 @@ import { getOrganization } from './organization';
 import { upsertProposalMetadata } from './proposalMetadata';
 import { Store } from '@subsquid/substrate-processor';
 
+type ProposalState = 'Init' | 'Active' | 'Accepted' | 'Rejected' | 'Expired' | 'Aborted' | 'Finalized';
+
 // Functions
 function getProposal(store: Store, proposalId: string): Promise<Proposal | null> {
 	return get(store, Proposal, proposalId, ['organization', 'campaign', 'creatorIdentity']);
@@ -64,19 +66,19 @@ async function createProposal(store: Store, data: ProposalCreationData, metadata
 	return proposal;
 }
 
-// async function updateProposalState(store: Store, proposalId: string, state: ProposalState) {
-// 	// Get proposal
-// 	let proposal = await getProposal(store, proposalId);
-// 	if (!proposal) return proposal;
-//
-// 	// Update
-// 	proposal.state = state;
-//
-// 	// Save proposal
-// 	await store.save(proposal);
-//
-// 	return proposal;
-// }
+async function updateProposalState(store: Store, proposalId: string, state: ProposalState) {
+	// Get proposal
+	const proposal = await getProposal(store, proposalId);
+	if (!proposal) return proposal;
+
+	// Update state
+	proposal.state = state;
+
+	// Save proposal
+	await store.save(proposal);
+
+	return proposal;
+}
 
 // Exports
-export { createProposal /*, updateProposalState*/, getProposal };
+export { createProposal, updateProposalState, getProposal };
