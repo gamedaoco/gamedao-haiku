@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.5.0",
+    "@polkadot/api": "^8.10.1",
+    "@polkadot/util-crypto": "^9.6.2",
     "apollo-server": "^3.6.4",
     "apollo-server-core": "^3.9.0",
     "apollo-server-express": "^3.9.0",
