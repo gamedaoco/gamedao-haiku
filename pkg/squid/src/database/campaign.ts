@@ -2,7 +2,7 @@
 // 3rd
 import { CampaignMetadata as CampaignIpfsMetadata } from '../@types/ipfs/campaignMetadata';
 // Types
-import { CampaignCreationData } from '../@types/pallets/crowdfunding/campaignCreationData';
+import { CampaignCreationData } from '../@types/pallets/flow/campaignCreationData';
 // Database
 import { Campaign } from '../model';
 import { upsertCampaignMetadata } from './campaignMetadata';

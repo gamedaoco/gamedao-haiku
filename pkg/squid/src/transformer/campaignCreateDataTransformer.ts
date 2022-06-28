@@ -1,5 +1,5 @@
 // Imports
-import { CampaignCreationData } from '../@types/pallets/crowdfunding/campaignCreationData';
+import { CampaignCreationData } from '../@types/pallets/flow/campaignCreationData';
 import { FlowCreateCampaignCall } from '../types/calls';
 import { addressCodec, hashToHexString } from '../utils';
 // Types

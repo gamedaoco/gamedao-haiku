@@ -10,12 +10,20 @@
     "flow.CampaignContributed",
     "flow.CampaignFailed",
     "flow.CampaignFinalized",
-    "flow.CampaignUpdated"
+    "flow.CampaignUpdated",
+    "signal.ProposalCreated",
+    "signal.Proposal",
+    "signal.ProposalVoted",
+    "signal.ProposalExpired",
+    "signal.ProposalApproved",
+    "signal.ProposalRejected"
   ],
   "calls": [
     "control.create_org",
     "flow.create_campaign",
     "flow.contribute",
-    "flow.update_state"
+    "flow.update_state",
+    "signal.general_proposal",
+    "signal.withdraw_proposal"
   ]
 }
