@@ -16,7 +16,11 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { AccountState } from 'src/@types/extension'
-import { Campaign_Contributor, useCampaignContributorsSubscription } from 'src/queries'
+import {
+	Campaign_Contributor,
+	CampaignContributorsSubscription,
+	useCampaignContributorsSubscription,
+} from 'src/queries'
 
 import { Scrollbar } from 'components/scrollbar'
 
@@ -37,14 +41,13 @@ import LoadingCampaignTable from './loadingCampaignTable'
 const gateway = 'https://ipfs.gamedao.co/gateway/'
 
 interface ContributedCampaignsSectionProps {
+	data: CampaignContributorsSubscription
+	loading: boolean
 	accountState: AccountState
 }
 
-const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ accountState }) => {
+const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading, accountState }) => {
 	const theme = useTheme()
-	const { data, loading } = useCampaignContributorsSubscription({
-		variables: { address: '5Dkv3jCJqDdk2uWWdT2DNXAFFgTLhHRZxdFmU8LHz9R74BeS' },
-	})
 	console.log('DATA:', data)
 
 	return (

@@ -4,8 +4,7 @@ import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { AccountState } from 'src/@types/extension'
-import { Campaign, useCampaignSubscription } from 'src/queries'
-
+import { Campaign, CampaignSubscription } from 'src/queries'
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
 
@@ -27,14 +26,15 @@ export const PlusIcon = () => {
 }
 
 interface CreatedCampaignSectionProps {
+	data: CampaignSubscription
+	loading: boolean
 	accountState: AccountState
 }
 
-const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState }) => {
+const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, accountState }) => {
 	const theme = useTheme()
-	const { data, loading } = useCampaignSubscription({
-		variables: { address: '3YutJfdBkSsL9YPuRebVBb4L3VpC1ES7y8RMzKEunCzZ5wwE' },
-	})
+
+	console.log('DATA:', data)
 
 	return (
 		<Box sx={{ pb: 4 }}>
@@ -63,21 +63,21 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 					</Card>
 				</Grid>
 
-				{loading ? (
-					[1, 2].map((x) => (
-						<Grid item xs={4} key={x} style={{ marginBottom: 10 }}>
-							<LoadingCampaignCard />
-						</Grid>
-					))
-				) : (
-					<>
-						{data?.campaigns?.map((campaign: Campaign, index: number) => (
-							<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>
-								<CampaignCard campaign={campaign} />
-							</Grid>
-						))}
-					</>
-				)}
+				{/*{loading ? (*/}
+				{/*	[1, 2].map((x) => (*/}
+				{/*		<Grid item xs={4} key={x} style={{ marginBottom: 10 }}>*/}
+				{/*			<LoadingCampaignCard />*/}
+				{/*		</Grid>*/}
+				{/*	))*/}
+				{/*) : (*/}
+				{/*	<>*/}
+				{/*		{data?.campaigns?.map((campaign: Campaign, index: number) => (*/}
+				{/*			<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>*/}
+				{/*				<CampaignCard campaign={campaign} />*/}
+				{/*			</Grid>*/}
+				{/*		))}*/}
+				{/*	</>*/}
+				{/*)}*/}
 			</Grid>
 		</Box>
 	)
