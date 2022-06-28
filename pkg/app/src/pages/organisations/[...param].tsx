@@ -20,6 +20,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
@@ -38,13 +39,16 @@ export function OrganisationById() {
 	const [proposalIdState, setProposalIdState] = useState<string>(null)
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
 	const [organizationState, setOrganizationState] = useState<Organization>()
+	const [isMemberState, setIsMemberState] = useState<boolean>(false)
 	const { loading, data } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
 	})
 
+	const address = useCurrentAccountAddress()
 	const theme = useTheme()
 	const config = useConfig()
 	const tmpOrg = useTmpOrganisationState()
+
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
@@ -121,6 +125,12 @@ export function OrganisationById() {
 			setOrganizationState(data.organization?.[0] as Organization)
 		}
 	}, [data])
+
+	useEffect(() => {
+		if (address && organizationState) {
+			setIsMemberState(organizationState.organization_members.some((member) => member.address === address))
+		}
+	}, [organizationState, address])
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Organisation">
@@ -211,7 +221,9 @@ export function OrganisationById() {
 									</label>
 
 									<Stack spacing={1}>
-										<Typography variant="h4">{tmpOrg.name ?? ''}</Typography>
+										<Typography variant="h4">
+											{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
+										</Typography>
 										<Typography>
 											{organizationState?.organization_members?.length ?? 1} Member
 										</Typography>
@@ -234,7 +246,15 @@ export function OrganisationById() {
 								</CardContent>
 							</Card>
 							<TabPanel value={'dashboard'}>
-								{organizationIdState ? <Overview /> : <TmpOverview />}
+								{organizationIdState ? (
+									<Overview
+										organizationId={organizationIdState}
+										isMember={isMemberState}
+										isAdmin={address === organizationState?.controller}
+									/>
+								) : (
+									<TmpOverview />
+								)}
 							</TabPanel>
 							<TabPanel value={'treasury'}>
 								{organizationState && (

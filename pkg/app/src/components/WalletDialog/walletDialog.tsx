@@ -10,9 +10,10 @@ import { WalletCard } from 'components/WalletDialog/modules/walletCard'
 interface ComponentProps {
 	callback: (extensionName: string) => {}
 	open: boolean
+	onClose: () => void
 }
 
-export function WalletDialog({ open, callback }: ComponentProps) {
+export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
 	const theme = useTheme()
 
@@ -29,7 +30,7 @@ export function WalletDialog({ open, callback }: ComponentProps) {
 	}
 
 	return (
-		<BaseDialog title="Select wallet" open={open}>
+		<BaseDialog title="Select wallet" open={open} onClose={onClose}>
 			<Grid
 				display={'grid'}
 				gridTemplateColumns="repeat(auto-fit, minmax(300px, 500px))"

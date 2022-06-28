@@ -2303,6 +2303,19 @@ export type Subscription_RootOrganization_Metadata_By_PkArgs = {
 	id: Scalars['String']
 }
 
+export type SuccessfulCampaignByOrganisationIdSubscriptionVariables = Exact<{
+	orgId: Scalars['String']
+}>
+
+export type SuccessfulCampaignByOrganisationIdSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly campaign: ReadonlyArray<{
+		readonly __typename?: 'campaign'
+		readonly id: string
+		readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata'; readonly name: string } | null
+	}>
+}
+
 export type ConfigQueryVariables = Exact<{
 	env: Environment
 }>
@@ -2528,6 +2541,50 @@ export type SidebarSubscription = {
 	}>
 }
 
+export const SuccessfulCampaignByOrganisationIdDocument = gql`
+	subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
+		campaign(where: { organization_id: { _eq: $orgId }, state: { _eq: "Success" } }) {
+			id
+			campaign_metadata {
+				name
+			}
+		}
+	}
+`
+
+/**
+ * __useSuccessfulCampaignByOrganisationIdSubscription__
+ *
+ * To run a query within a React component, call `useSuccessfulCampaignByOrganisationIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useSuccessfulCampaignByOrganisationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSuccessfulCampaignByOrganisationIdSubscription({
+ *   variables: {
+ *      orgId: // value for 'orgId'
+ *   },
+ * });
+ */
+export function useSuccessfulCampaignByOrganisationIdSubscription(
+	baseOptions: Apollo.SubscriptionHookOptions<
+		SuccessfulCampaignByOrganisationIdSubscription,
+		SuccessfulCampaignByOrganisationIdSubscriptionVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<
+		SuccessfulCampaignByOrganisationIdSubscription,
+		SuccessfulCampaignByOrganisationIdSubscriptionVariables
+	>(SuccessfulCampaignByOrganisationIdDocument, options)
+}
+export type SuccessfulCampaignByOrganisationIdSubscriptionHookResult = ReturnType<
+	typeof useSuccessfulCampaignByOrganisationIdSubscription
+>
+export type SuccessfulCampaignByOrganisationIdSubscriptionResult =
+	Apollo.SubscriptionResult<SuccessfulCampaignByOrganisationIdSubscription>
 export const ConfigDocument = gql`
 	query Config($env: Environment!) {
 		config(env: $env) {

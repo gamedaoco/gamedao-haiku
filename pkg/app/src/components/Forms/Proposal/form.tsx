@@ -12,6 +12,7 @@ import { uploadFileToIpfs } from 'src/utils/ipfs'
 import {
 	Description,
 	validationSchema as descriptionValidationSchema,
+	validationSchemaWithdrawal as descriptionValidationSchemaWithdrawal,
 } from 'components/Forms/Proposal/modules/description'
 import { Majority } from 'components/Forms/Proposal/modules/majority'
 import { Type } from 'components/Forms/Proposal/modules/type'
@@ -88,12 +89,24 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 1:
-				return !descriptionValidationSchema.isValidSync({
-					name: tmpProposalState.name,
-					description: tmpProposalState.description,
-					startDate: tmpProposalState.startDate,
-					endDate: tmpProposalState.endDate,
-				})
+				if (tmpProposalState.type == 1) {
+					return !descriptionValidationSchemaWithdrawal.isValidSync({
+						name: tmpProposalState.name,
+						description: tmpProposalState.description,
+						startDate: tmpProposalState.startDate,
+						endDate: tmpProposalState.endDate,
+						campaignId: tmpProposalState.campaignId,
+						amount: tmpProposalState.amount,
+					})
+				} else {
+					return !descriptionValidationSchema.isValidSync({
+						name: tmpProposalState.name,
+						description: tmpProposalState.description,
+						startDate: tmpProposalState.startDate,
+						endDate: tmpProposalState.endDate,
+					})
+				}
+
 			case 2:
 				return !tx
 		}
@@ -116,7 +129,13 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					startDate={tmpProposalState.startDate}
 					setStartDate={tmpProposalState.setStartDate}
 					endData={tmpProposalState.endDate}
+					amount={tmpProposalState.amount}
+					setAmount={tmpProposalState.setAmount}
+					campaignId={tmpProposalState.campaignId}
+					setCampaignId={tmpProposalState.setCampaignId}
 					setEndDate={tmpProposalState.setEndDate}
+					organizationId={organizationId}
+					isWithdrawal={tmpProposalState.type == 1}
 				/>
 			)}
 			{currentStep === 2 && (

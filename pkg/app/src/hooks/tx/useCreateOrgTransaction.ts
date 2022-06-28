@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useLogger } from 'hooks/useLogger'
 import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
 import { useNetworkContext } from 'provider/network/modules/context'
 import { fromUnit } from 'src/utils/token'
@@ -29,6 +30,7 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
 	const data = useTmpOrganisation()
+	const logger = useLogger('useCreateOrgTransaction')
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && data && address) {
@@ -66,9 +68,7 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 				)
 				setTxState(tx)
 			} catch (e) {
-				// TODO: Add logger engine. It does not necessarily have to be an error,
-				//  it can also be that data is still missing that is required for the transaction.
-				console.warn('CreateOrgTransaction', e)
+				logger.trace(e)
 			}
 		}
 	}, [selectedApiProvider, address, data])

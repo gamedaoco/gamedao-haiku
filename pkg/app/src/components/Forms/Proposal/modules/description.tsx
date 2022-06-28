@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react'
 
-import { Stack, TextField } from '@mui/material'
+import { InputAdornment, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import { useSuccessfulCampaignByOrganisationIdSubscription } from 'src/queries'
 import * as Yup from 'yup'
 
 import { BaseForm } from 'components/Forms/baseForm'
@@ -17,6 +18,12 @@ interface ComponentProps {
 	setStartDate: (date) => void
 	endData: Date
 	setEndDate: (date) => void
+	amount: number
+	setAmount: (number) => void
+	campaignId: string
+	setCampaignId: (campaignId) => void
+	organizationId: string
+	isWithdrawal?: boolean
 }
 
 const validationNameSchema = Yup.string().required('* Proposal name is required')
@@ -28,6 +35,15 @@ export const validationSchema = Yup.object().shape({
 	endDate: Yup.date().required(),
 })
 
+export const validationSchemaWithdrawal = Yup.object().shape({
+	name: Yup.string().required(),
+	description: Yup.string().required(),
+	startDate: Yup.date().required(),
+	endDate: Yup.date().required(),
+	campaignId: Yup.string().required(),
+	amount: Yup.number().required(),
+})
+
 export function Description({
 	name,
 	setName,
@@ -37,8 +53,15 @@ export function Description({
 	setStartDate,
 	endData,
 	setEndDate,
+	amount,
+	setAmount,
+	campaignId,
+	setCampaignId,
+	organizationId,
+	isWithdrawal,
 }: ComponentProps) {
 	const [errorState, setErrorState] = useState<string>()
+	const { data } = useSuccessfulCampaignByOrganisationIdSubscription({ variables: { orgId: organizationId } })
 
 	const handleNameChange = useCallback(
 		(event) => {
@@ -72,9 +95,65 @@ export function Description({
 		[setDescription, setErrorState],
 	)
 
+	const handleAmountChange = useCallback(
+		(event) => {
+			const value = event.target.value
+			setAmount(value < 0 ? 0 : value)
+		},
+		[setAmount],
+	)
+
+	const handleCampaignChange = useCallback(
+		(event) => {
+			const value = event.target.value
+			setCampaignId(value)
+		},
+		[setCampaignId],
+	)
+
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>
-			<BaseForm title={'What’s the name of your proposal?'} error={errorState}>
+			<BaseForm
+				title={isWithdrawal ? 'Withdrawal Proposal' : 'What’s the name of your proposal?'}
+				error={errorState}
+			>
+				{isWithdrawal && (
+					<>
+						<TextField
+							fullWidth
+							variant="outlined"
+							label="Campaign"
+							placeholder="Campaign name"
+							select
+							value={campaignId}
+							onChange={handleCampaignChange}
+						>
+							{data?.campaign?.length === 0 && <MenuItem>No campaign available</MenuItem>}
+							{data?.campaign?.map((campaign) => {
+								return (
+									<MenuItem key={campaign.id} value={campaign.id}>
+										{campaign?.campaign_metadata?.name}
+									</MenuItem>
+								)
+							})}
+						</TextField>
+						<TextField
+							fullWidth
+							variant="outlined"
+							label="Amount"
+							type="number"
+							InputProps={{
+								endAdornment: <InputAdornment position="start">GAME</InputAdornment>,
+							}}
+							value={amount}
+							onChange={handleAmountChange}
+						/>
+						<Typography variant="h5" textAlign="center">
+							What’s the name of your proposal?
+						</Typography>
+					</>
+				)}
+
 				<TextField
 					fullWidth
 					onChange={handleNameChange}

@@ -121,6 +121,7 @@ export function ExtensionProvider({ children }) {
 			<WalletDialog
 				callback={selectWalletExtension as any}
 				open={accountSettings.allowConnect && !accountSettings.lastUsedExtension}
+				onClose={disconnectWalletCallback as any}
 			/>
 			{children}
 		</ExtensionContext.Provider>
