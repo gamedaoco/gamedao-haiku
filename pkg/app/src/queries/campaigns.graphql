@@ -6,3 +6,27 @@ subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
         }
     }
 }
+subscription CampaignContributorsConnection($address: String!) {
+    campaign_contributor(where: {identity: {address: {_eq: $address}}}) {
+        id
+        contributed
+        campaign {
+            campaign_metadata {
+                name
+                title
+                logo
+            }
+            campaign_contributors {
+                id
+                contributed
+            }
+            deposit
+            expiry
+            state
+            target
+            created_at_block
+        }
+    }
+}
+
+
