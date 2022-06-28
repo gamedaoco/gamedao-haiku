@@ -1,5 +1,5 @@
 // Imports
-import { ProposalSimpleVoteData } from '../@types/pallets/governance/proposalSimpleVoteData';
+import { ProposalSimpleVoteData } from '../@types/pallets/signal/proposalSimpleVoteData';
 import { ProposalVoter } from '../model';
 import { get } from './helper';
 import { upsertIdentity } from './identity';

@@ -1,5 +1,5 @@
 // Imports
-import { ProposalSimpleVoteData } from '../../../@types/pallets/governance/proposalSimpleVoteData';
+import { ProposalSimpleVoteData } from '../../../@types/pallets/signal/proposalSimpleVoteData';
 import { createProposalVoter } from '../../../database/proposalVoter';
 import { SignalProposalVotedEvent } from '../../../types/events';
 import { addressCodec, hashToHexString } from '../../../utils';
