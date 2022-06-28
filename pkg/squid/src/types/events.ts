@@ -266,3 +266,201 @@ export class FlowCampaignUpdatedEvent {
 		return this.asV55;
 	}
 }
+
+export class SignalProposalEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.Proposal');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.Proposal') ===
+			'fe8c739a512a2ccc7bb867443cc59e1edebaee76fbf1d9752e1b2137c1681253'
+		);
+	}
+
+	get asV51(): { senderId: v51.AccountId32; proposalId: v51.H256 } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): { senderId: v51.AccountId32; proposalId: v51.H256 } {
+		deprecateLatest();
+		return this.asV51;
+	}
+}
+
+export class SignalProposalApprovedEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.ProposalApproved');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.ProposalApproved') ===
+			'6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+		);
+	}
+
+	get asV51(): { proposalId: v51.H256 } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): { proposalId: v51.H256 } {
+		deprecateLatest();
+		return this.asV51;
+	}
+}
+
+export class SignalProposalCreatedEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.ProposalCreated');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.ProposalCreated') ===
+			'6d8015dc32da812c176da8c2ff038ca67122eca69065b0754f9d44ad7a03b3bc'
+		);
+	}
+
+	get asV51(): {
+		senderId: v51.AccountId32;
+		campaignId: v51.H256;
+		proposalId: v51.H256;
+		amount: bigint;
+		expiry: number;
+	} {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isV55(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.ProposalCreated') ===
+			'9d818c84d63620004efe846a214e3cc101a0d7d0c65f062ade8c6d041174e2d9'
+		);
+	}
+
+	get asV55(): {
+		senderId: v55.AccountId32;
+		contextId: v55.H256;
+		proposalId: v55.H256;
+		amount: bigint;
+		expiry: number;
+	} {
+		assert(this.isV55);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV55;
+	}
+
+	get asLatest(): {
+		senderId: v55.AccountId32;
+		contextId: v55.H256;
+		proposalId: v55.H256;
+		amount: bigint;
+		expiry: number;
+	} {
+		deprecateLatest();
+		return this.asV55;
+	}
+}
+
+export class SignalProposalExpiredEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.ProposalExpired');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.ProposalExpired') ===
+			'6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+		);
+	}
+
+	get asV51(): { proposalId: v51.H256 } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): { proposalId: v51.H256 } {
+		deprecateLatest();
+		return this.asV51;
+	}
+}
+
+export class SignalProposalRejectedEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.ProposalRejected');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.ProposalRejected') ===
+			'6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+		);
+	}
+
+	get asV51(): { proposalId: v51.H256 } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): { proposalId: v51.H256 } {
+		deprecateLatest();
+		return this.asV51;
+	}
+}
+
+export class SignalProposalVotedEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.ProposalVoted');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.ProposalVoted') ===
+			'b9f0b54a4b7147462f039614c0aa5d0456be0d2838509b049b8c6db3b333100d'
+		);
+	}
+
+	get asV51(): { senderId: v51.AccountId32; proposalId: v51.H256; vote: boolean } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): { senderId: v51.AccountId32; proposalId: v51.H256; vote: boolean } {
+		deprecateLatest();
+		return this.asV51;
+	}
+}

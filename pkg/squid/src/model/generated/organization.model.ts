@@ -8,9 +8,10 @@ import {
 } from 'typeorm';
 import * as marshal from './marshal';
 import { Identity } from './identity.model';
+import { OrganizationMetadata } from './organizationMetadata.model';
 import { OrganizationMember } from './organizationMember.model';
 import { Campaign } from './campaign.model';
-import { OrganizationMetadata } from './organizationMetadata.model';
+import { Proposal } from './proposal.model';
 
 @Entity_()
 export class Organization {
@@ -63,12 +64,6 @@ export class Organization {
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	memberLimit!: bigint;
 
-	@OneToMany_(() => OrganizationMember, (e) => e.organization)
-	members!: OrganizationMember[];
-
-	@OneToMany_(() => Campaign, (e) => e.organization)
-	campaigns!: Campaign[];
-
 	@Index_()
 	@ManyToOne_(() => OrganizationMetadata, { nullable: true })
 	metadata!: OrganizationMetadata | undefined | null;
@@ -78,4 +73,13 @@ export class Organization {
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	deposit!: bigint;
+
+	@OneToMany_(() => OrganizationMember, (e) => e.organization)
+	members!: OrganizationMember[];
+
+	@OneToMany_(() => Campaign, (e) => e.organization)
+	campaigns!: Campaign[];
+
+	@OneToMany_(() => Proposal, (e) => e.organization)
+	proposals!: Proposal[];
 }
