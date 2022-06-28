@@ -15,6 +15,21 @@ export type Scalars = {
 	Upload: any
 }
 
+export type ApiProvider = {
+	readonly __typename?: 'ApiProvider'
+	readonly chainProperties: ChainProperties
+	readonly name: Scalars['String']
+	readonly types: Scalars['String']
+	readonly wsProviderUrl: Scalars['String']
+}
+
+export type ChainProperties = {
+	readonly __typename?: 'ChainProperties'
+	readonly ss58Format: Scalars['Int']
+	readonly tokenDecimals: ReadonlyArray<Maybe<Scalars['String']>>
+	readonly tokenSymbol: ReadonlyArray<Maybe<Scalars['String']>>
+}
+
 export type Config = {
 	readonly __typename?: 'Config'
 	readonly CONTACT?: Maybe<Scalars['String']>
@@ -144,10 +159,12 @@ export type ProposalFeatures = {
 
 export type Query = {
 	readonly __typename?: 'Query'
+	readonly apiProvider: ApiProvider
 	readonly config: Config
 	readonly displayValues?: Maybe<DisplayValues>
 	readonly features: Features
 	readonly links: ReadonlyArray<Maybe<Link>>
+	readonly rmrkNfts?: Maybe<ReadonlyArray<Maybe<RmrkNft>>>
 	readonly version: Scalars['String']
 }
 
@@ -157,6 +174,17 @@ export type QueryConfigArgs = {
 
 export type QueryFeaturesArgs = {
 	env: Environment
+}
+
+export type QueryRmrkNftsArgs = {
+	address: Scalars['String']
+}
+
+export type RmrkNft = {
+	readonly __typename?: 'RMRKNft'
+	readonly id: Scalars['String']
+	readonly metadata: Scalars['String']
+	readonly sn: Scalars['String']
 }
 
 export type WithIndex<TObject> = TObject & Record<string, any>
@@ -234,7 +262,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+	ApiProvider: ResolverTypeWrapper<ApiProvider>
 	Boolean: ResolverTypeWrapper<Scalars['Boolean']>
+	ChainProperties: ResolverTypeWrapper<ChainProperties>
 	Config: ResolverTypeWrapper<Config>
 	DisplayValueEntry:
 		| ResolversTypes['DisplayValueEntryCountry']
@@ -254,13 +284,16 @@ export type ResolversTypes = ResolversObject<{
 	OrganizationFeatures: ResolversTypes['Features']
 	ProposalFeatures: ResolversTypes['Features']
 	Query: ResolverTypeWrapper<{}>
+	RMRKNft: ResolverTypeWrapper<RmrkNft>
 	String: ResolverTypeWrapper<Scalars['String']>
 	Upload: ResolverTypeWrapper<Scalars['Upload']>
 }>
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+	ApiProvider: ApiProvider
 	Boolean: Scalars['Boolean']
+	ChainProperties: ChainProperties
 	Config: Config
 	DisplayValueEntry:
 		| ResolversParentTypes['DisplayValueEntryCountry']
@@ -278,8 +311,30 @@ export type ResolversParentTypes = ResolversObject<{
 	OrganizationFeatures: ResolversParentTypes['Features']
 	ProposalFeatures: ResolversParentTypes['Features']
 	Query: {}
+	RMRKNft: RmrkNft
 	String: Scalars['String']
 	Upload: Scalars['Upload']
+}>
+
+export type ApiProviderResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['ApiProvider'] = ResolversParentTypes['ApiProvider'],
+> = ResolversObject<{
+	chainProperties?: Resolver<ResolversTypes['ChainProperties'], ParentType, ContextType>
+	name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	types?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	wsProviderUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type ChainPropertiesResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['ChainProperties'] = ResolversParentTypes['ChainProperties'],
+> = ResolversObject<{
+	ss58Format?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	tokenDecimals?: Resolver<ReadonlyArray<Maybe<ResolversTypes['String']>>, ParentType, ContextType>
+	tokenSymbol?: Resolver<ReadonlyArray<Maybe<ResolversTypes['String']>>, ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
 export type ConfigResolvers<
@@ -488,11 +543,28 @@ export type QueryResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = ResolversObject<{
+	apiProvider?: Resolver<ResolversTypes['ApiProvider'], ParentType, ContextType>
 	config?: Resolver<ResolversTypes['Config'], ParentType, ContextType, RequireFields<QueryConfigArgs, 'env'>>
 	displayValues?: Resolver<Maybe<ResolversTypes['DisplayValues']>, ParentType, ContextType>
 	features?: Resolver<ResolversTypes['Features'], ParentType, ContextType, RequireFields<QueryFeaturesArgs, 'env'>>
 	links?: Resolver<ReadonlyArray<Maybe<ResolversTypes['Link']>>, ParentType, ContextType>
+	rmrkNfts?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['RMRKNft']>>>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryRmrkNftsArgs, 'address'>
+	>
 	version?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+}>
+
+export type RmrkNftResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['RMRKNft'] = ResolversParentTypes['RMRKNft'],
+> = ResolversObject<{
+	id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	metadata?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	sn?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -500,6 +572,8 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 }
 
 export type Resolvers<ContextType = any> = ResolversObject<{
+	ApiProvider?: ApiProviderResolvers<ContextType>
+	ChainProperties?: ChainPropertiesResolvers<ContextType>
 	Config?: ConfigResolvers<ContextType>
 	DisplayValueEntry?: DisplayValueEntryResolvers<ContextType>
 	DisplayValueEntryCountry?: DisplayValueEntryCountryResolvers<ContextType>
@@ -513,5 +587,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	OrganizationFeatures?: OrganizationFeaturesResolvers<ContextType>
 	ProposalFeatures?: ProposalFeaturesResolvers<ContextType>
 	Query?: QueryResolvers<ContextType>
+	RMRKNft?: RmrkNftResolvers<ContextType>
 	Upload?: GraphQLScalarType
 }>

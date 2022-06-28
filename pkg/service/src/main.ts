@@ -4,13 +4,20 @@ import express from 'express'
 import * as fs from 'fs'
 import { graphqlUploadExpress } from 'graphql-upload'
 
+import { ChainClient } from './modules/chainClient'
 import { resolvers } from './resolvers/resolvers'
+
+const chainClient = ChainClient.Instance
 
 const typeDefs = gql(fs.readFileSync(process.cwd() + '/src/schema.graphql').toString())
 
 async function startServer() {
+	// Initialize the chain client
+	await chainClient.Initialize()
+
 	const server = new ApolloServer({
 		typeDefs,
+
 		resolvers: resolvers(),
 		cache: 'bounded',
 	})
