@@ -19,6 +19,18 @@
     }
   },
   "page": {
+    "organisations": {
+      "sort_options": {
+        "mem_hi_lo": "Member: High-Low",
+        "mem_lo_hi": "Member: Low-High",
+        "created_new": "Created: Newest first",
+        "created_old": "Created: Oldest first",
+        "fee_hi_lo": "Fee: High-Low",
+        "fee_lo_hi": "Fee: Low-High",
+        "cont_asc": "Controller: Ascending",
+        "cont_desc": "Controller: Descending"
+      }
+    },
     "campaigns": {
     },
     "governance": {
