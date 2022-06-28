@@ -1,5 +1,4 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -68,6 +67,7 @@ export type DisplayValues = {
 	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly sortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 }
 
@@ -77,15 +77,19 @@ export enum Environment {
 	Staging = 'STAGING',
 }
 
-export type Features = ProposalFeatures & {
-	readonly __typename?: 'Features'
-	readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']
-	readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']
-	readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']
-}
+export type Features = OrganizationFeatures &
+	ProposalFeatures & {
+		readonly __typename?: 'Features'
+		readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']
+		readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']
+		readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
+	}
 
 export type File = {
 	readonly __typename?: 'File'
@@ -121,6 +125,12 @@ export type Mutation = {
 
 export type MutationSingleUploadArgs = {
 	fileStream: Scalars['Upload']
+}
+
+export type OrganizationFeatures = {
+	readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']
+	readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
+	readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
 }
 
 export type ProposalFeatures = {
@@ -241,6 +251,7 @@ export type ResolversTypes = ResolversObject<{
 	Link: ResolverTypeWrapper<Link>
 	LogLevel: LogLevel
 	Mutation: ResolverTypeWrapper<{}>
+	OrganizationFeatures: ResolversTypes['Features']
 	ProposalFeatures: ResolversTypes['Features']
 	Query: ResolverTypeWrapper<{}>
 	String: ResolverTypeWrapper<Scalars['String']>
@@ -264,6 +275,7 @@ export type ResolversParentTypes = ResolversObject<{
 	Int: Scalars['Int']
 	Link: Link
 	Mutation: {}
+	OrganizationFeatures: ResolversParentTypes['Features']
 	ProposalFeatures: ResolversParentTypes['Features']
 	Query: {}
 	String: Scalars['String']
@@ -384,6 +396,11 @@ export type DisplayValuesResolvers<
 		ParentType,
 		ContextType
 	>
+	sortOptions?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
 	votingTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,
@@ -402,6 +419,9 @@ export type FeaturesResolvers<
 	CREATE_PROPOSAL_SIMPLE_MAJORITY?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	CREATE_SPENDING_PROPOSAL?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	CREATE_WITHDRAW_PROPOSAL?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_FILTERS?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SEARCH?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SORT?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
@@ -439,6 +459,16 @@ export type MutationResolvers<
 		ContextType,
 		RequireFields<MutationSingleUploadArgs, 'fileStream'>
 	>
+}>
+
+export type OrganizationFeaturesResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['OrganizationFeatures'] = ResolversParentTypes['OrganizationFeatures'],
+> = ResolversObject<{
+	__resolveType: TypeResolveFn<'Features', ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_FILTERS?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SEARCH?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SORT?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 }>
 
 export type ProposalFeaturesResolvers<
@@ -480,6 +510,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	File?: FileResolvers<ContextType>
 	Link?: LinkResolvers<ContextType>
 	Mutation?: MutationResolvers<ContextType>
+	OrganizationFeatures?: OrganizationFeaturesResolvers<ContextType>
 	ProposalFeatures?: ProposalFeaturesResolvers<ContextType>
 	Query?: QueryResolvers<ContextType>
 	Upload?: GraphQLScalarType
