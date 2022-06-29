@@ -14,11 +14,11 @@ interface MyCampaignsTabProps {
 }
 const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
 	const { data, loading } = useCampaignSubscription({
-		variables: { address: '3ZjAeLZWrhu1uFGxgFSPUuSBJmEJZpgHHM6qJUzuHb3B9ykb' },
+		variables: { address: getAddressFromAccountState(accountState) },
 	})
 	const { data: campaignContributorsData, loading: campaignContributorsLoading } =
 		useCampaignContributorsSubscription({
-			variables: { address: '3b2qZTPzhpJkJULMtMjtL5dsiYvmfVyh15Xxg3K83UwGpCJz' },
+			variables: { address: getAddressFromAccountState(accountState) },
 		})
 	return (
 		<Box>
