@@ -1,34 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
-import type { RpcInterface } from '@polkadot/rpc-core/types/jsonrpc'
-import type { ApiProvider, ApiProviderConfig, SystemProperties } from 'src/@types/network'
-
-// Load system properties(token format and symbol)
-async function getProperties(apiProvider: ApiPromise): Promise<SystemProperties> {
-	try {
-		const systemProperties = await apiProvider.rpc.system.properties()
-		const { tokenDecimals, tokenSymbol, ss58Format } = systemProperties.toHuman()
-
-		return {
-			ss58Format: !isNaN(parseInt(ss58Format as string)) ? parseInt(ss58Format as string) : 25,
-			tokenDecimals: tokenDecimals?.[0] ?? 18,
-			tokenSymbol: tokenSymbol?.[0] ?? 'ZERO',
-		}
-	} catch (error: any) {
-		console.error('The system properties could not be loaded', 'error', error)
-	}
-	return null
-}
-
-// Load system chain name
-async function getChainName(apiProvider: ApiPromise): Promise<string> {
-	try {
-		const systemName = await apiProvider.rpc.system.chain()
-		return systemName.toHuman()
-	} catch (error: any) {
-		console.error('The system name could not be loaded', 'error', error)
-	}
-	return null
-}
+import type { ApiProvider } from 'src/@types/network'
+import type { ApiProvider as ApiProviderConfig } from 'src/queries'
 
 // Call health every 30 seconds as keepalive
 // Websocket is closed after one minute if no request is made
@@ -54,13 +26,14 @@ export async function initializeApis(configs: ApiProviderConfig[]): Promise<ApiP
 		try {
 			const apiProvider = await ApiPromise.create({
 				provider: new WsProvider(config.wsProviderUrl),
-				types: config.types,
+				types: JSON.parse(config.types),
 				throwOnConnect: true,
 			})
 			await apiProvider.isReady
+
 			apiConfigs.push({
-				systemProperties: await getProperties(apiProvider),
-				chainName: await getChainName(apiProvider),
+				systemProperties: config.chainProperties,
+				chainName: config.name,
 				apiProvider: apiProvider,
 			})
 		} catch (error: any) {

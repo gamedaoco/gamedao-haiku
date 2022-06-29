@@ -100,7 +100,10 @@ function createWithdrawProposalTx(
 		campaignId: data.campaignId,
 		title: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 		cid: data.metaDataCID,
-		amount: fromUnit(data.amount, selectedApiProvider.systemProperties.tokenDecimals.toString()),
+		amount: fromUnit(
+			data.amount,
+			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.networkCurrency],
+		),
 		start: blockTime.startBlocks,
 		expiry: blockTime.endBlocks,
 	}

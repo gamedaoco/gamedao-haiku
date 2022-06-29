@@ -14,13 +14,13 @@ export function Providers({ children }) {
 			<AppProvider>
 				<LanguageProvider>
 					<SettingsProvider>
-						<NetworkProvider>
-							<ThemeProvider>
-								<ReadyProvider>
+						<ThemeProvider>
+							<ReadyProvider>
+								<NetworkProvider>
 									<ExtensionProvider>{children}</ExtensionProvider>
-								</ReadyProvider>
-							</ThemeProvider>
-						</NetworkProvider>
+								</NetworkProvider>
+							</ReadyProvider>
+						</ThemeProvider>
 					</SettingsProvider>
 				</LanguageProvider>
 			</AppProvider>
