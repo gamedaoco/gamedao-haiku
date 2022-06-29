@@ -11,7 +11,7 @@ export function useBlockNumber(): number {
 	useEffect(() => {
 		unsubRef(unsubscribeRef)
 
-		if (setBlockNumberState && provider.apiProvider && provider.systemProperties) {
+		if (setBlockNumberState && provider?.apiProvider && provider.systemProperties) {
 			provider.apiProvider.derive.chain
 				.bestNumberFinalized((result) => {
 					const data = result?.toNumber()
