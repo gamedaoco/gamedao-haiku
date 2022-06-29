@@ -46,7 +46,7 @@ interface ContributedCampaignsSectionProps {
 	accountState: AccountState
 }
 
-const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading, accountState }) => {
+const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading, accountState }) => {
 	const theme = useTheme()
 	console.log('DATA:', data)
 
@@ -169,4 +169,4 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 	)
 }
 
-export default ContributedCampaginsSection
+export default ContributedCampaignsSection

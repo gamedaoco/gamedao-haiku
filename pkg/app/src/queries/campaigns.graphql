@@ -20,11 +20,11 @@ subscription CampaignContributors($address: String!) {
                 id
                 contributed
             }
-           organization {
-     				 organization_metadata {
-       			 name
-      		 }
-    		}
+            organization {
+                organization_metadata {
+                    name
+                }
+            }
             deposit
             expiry
             state
@@ -36,26 +36,26 @@ subscription CampaignContributors($address: String!) {
 
 
 subscription campaign($address: String) {
-  campaign(where: {identity: {address: {_eq: $address}}}) {
-    deposit
-    target
-    campaign_metadata {
-      name
-      title
-      logo
-      header
+    campaign(where: {identity: {address: {_eq: $address}}}) {
+        deposit
+        target
+        campaign_metadata {
+            name
+            title
+            logo
+            header
+        }
+        campaign_contributors {
+            contributed
+            id
+        }
+        organization {
+            organization_metadata {
+                name
+            }
+        }
     }
-    campaign_contributors {
-      contributed
-      id
-    }
-    organization {
-      organization_metadata {
-        name
-      }
-    }
-  }
 }
- 
+
 
 
