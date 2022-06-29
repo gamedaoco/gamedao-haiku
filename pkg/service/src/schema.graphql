@@ -114,8 +114,34 @@ type File {
     encoding: String!
 }
 
+type RMRKNft {
+    id: String!
+    metadata: String!
+    sn: String!
+}
+
+type ChainProperties {
+    ss58Format: Int!
+    tokenDecimals: [String]!
+    tokenSymbol: [String]!
+    networkCurrency: Int!
+    governanceCurrency: Int!
+    paymentCurrencies: Int!
+}
+
+type ApiProvider {
+    wsProviderUrl: String!
+    types: String!
+    chainProperties: ChainProperties!
+    name: String!
+}
+
 type Mutation {
     singleUpload(fileStream: Upload!): String!
+}
+
+type Subscription {
+    blockNumber: Int!
 }
 
 type Query {
@@ -124,4 +150,6 @@ type Query {
     config(env: Environment!): Config!
     features(env: Environment!): Features!
     displayValues: DisplayValues
+    rmrkNfts(address: String!): [RMRKNft]
+    apiProvider: ApiProvider!
 }

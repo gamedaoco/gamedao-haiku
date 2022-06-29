@@ -443,3 +443,173 @@ export class FlowUpdateStateCall {
 		return this.asV55;
 	}
 }
+
+export class SignalGeneralProposalCall {
+	constructor(private ctx: CallContext) {
+		assert(
+			this.ctx.extrinsic.name === 'signal.generalProposal' ||
+				this.ctx.extrinsic.name === 'signal.general_proposal',
+		);
+	}
+
+	/**
+	 * Create a general proposal
+	 *
+	 * - `campaign_id`:
+	 * - `title`:
+	 * - `cid`:
+	 * - `start`:
+	 * - `expiry`:
+	 *
+	 * Emits `Proposal` event when successful.
+	 *
+	 * Weight:
+	 */
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getCallHash('signal.general_proposal') ===
+			'e92f2cb2b953f31ac7759281e775b46dc1ad4af0020570540b46aef881da8698'
+		);
+	}
+
+	/**
+	 * Create a general proposal
+	 *
+	 * - `campaign_id`:
+	 * - `title`:
+	 * - `cid`:
+	 * - `start`:
+	 * - `expiry`:
+	 *
+	 * Emits `Proposal` event when successful.
+	 *
+	 * Weight:
+	 */
+	get asV51(): { campaignId: v51.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+	}
+
+	/**
+	 * Create a general proposal
+	 *
+	 * - `org_id`:
+	 * - `title`:
+	 * - `cid`:
+	 * - `start`:
+	 * - `expiry`:
+	 *
+	 * Emits `Proposal` event when successful.
+	 *
+	 * Weight:
+	 */
+	get isV55(): boolean {
+		return (
+			this.ctx._chain.getCallHash('signal.general_proposal') ===
+			'6288e6d7ea1e66ac8f48f8c15e15b0e7913454ed573fca61a600ed52c9a54a2b'
+		);
+	}
+
+	/**
+	 * Create a general proposal
+	 *
+	 * - `org_id`:
+	 * - `title`:
+	 * - `cid`:
+	 * - `start`:
+	 * - `expiry`:
+	 *
+	 * Emits `Proposal` event when successful.
+	 *
+	 * Weight:
+	 */
+	get asV55(): { orgId: v55.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
+		assert(this.isV55);
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV55;
+	}
+
+	get asLatest(): { orgId: v55.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
+		deprecateLatest();
+		return this.asV55;
+	}
+}
+
+export class SignalWithdrawProposalCall {
+	constructor(private ctx: CallContext) {
+		assert(
+			this.ctx.extrinsic.name === 'signal.withdrawProposal' ||
+				this.ctx.extrinsic.name === 'signal.withdraw_proposal',
+		);
+	}
+
+	/**
+	 * Create a withdrawal proposal
+	 * origin must be controller of the campaign == controller of the dao
+	 * beneficiary must be the treasury of the dao
+	 *
+	 * - `campaign_id`:
+	 * - `_member`:
+	 * - `_action`:
+	 * - `_start`:
+	 * - `_expiry`:
+	 *
+	 * Emits `Proposal` event when successful.
+	 *
+	 * Weight:
+	 */
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getCallHash('signal.withdraw_proposal') ===
+			'181f7eb8207b336afbe94515eda27a95279f858acd7d7758f752172ae750eb7a'
+		);
+	}
+
+	/**
+	 * Create a withdrawal proposal
+	 * origin must be controller of the campaign == controller of the dao
+	 * beneficiary must be the treasury of the dao
+	 *
+	 * - `campaign_id`:
+	 * - `_member`:
+	 * - `_action`:
+	 * - `_start`:
+	 * - `_expiry`:
+	 *
+	 * Emits `Proposal` event when successful.
+	 *
+	 * Weight:
+	 */
+	get asV51(): {
+		campaignId: v51.H256;
+		title: Uint8Array;
+		cid: Uint8Array;
+		amount: bigint;
+		start: number;
+		expiry: number;
+	} {
+		assert(this.isV51);
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): {
+		campaignId: v51.H256;
+		title: Uint8Array;
+		cid: Uint8Array;
+		amount: bigint;
+		start: number;
+		expiry: number;
+	} {
+		deprecateLatest();
+		return this.asV51;
+	}
+}

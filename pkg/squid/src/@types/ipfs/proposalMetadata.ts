@@ -1,6 +1,6 @@
 // Types
 interface ProposalMetadata {
-	title: string;
+	name: string;
 	description: string;
 }
 
