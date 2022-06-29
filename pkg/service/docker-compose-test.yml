@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  service:
+    image: test
+    network_mode: host
+    environment:
+      IPFS_API_URL: https://ipfs.infura.io:5001/api/v0
+      IPFS_CLIENT_ID: 1v04L2wj5JmI0JgKF5KztV0oN8o
+      IPFS_CLIENT_SECRET: 85547c6003abb67a6335469d1aa6a3a3
+      SERVER_PORT: 5000
+      CHAIN_RPC_URL: wss://beeblebrox.zero.io/node
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:55322/postgres?schema=public"
