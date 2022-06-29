@@ -12,6 +12,7 @@ import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
 
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'components/TabPanels/Organization/createProposal'
+import { blockTime } from 'src/constants'
 
 interface ComponentProps {
 	organizationId: string
@@ -84,19 +85,47 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 	}, [organizationId, loading, data])
 
 	useEffect(() => {
+		if (!blockNumber) return
+
 		setRows(
-			proposals.map((proposal) => ({
-				id: proposal.id,
-				name: proposal.proposal_metadata?.name ?? '',
-				description: proposal.proposal_metadata?.description ?? '',
-				timeLeft:
-					blockNumber && blockNumber > proposal.created_at_block + proposal.expiry_block
-						? 'Expired'
-						: (((proposal.created_at_block + proposal.expiry_block) * 3) / 60 / 60 / 24)
-								.toFixed(2)
-								.toLocaleString() + ' days',
-				status: 0,
-			})),
+			proposals.map((proposal) => {
+				const expiryBlock = proposal.created_at_block + proposal.expiry_block
+				const isExpired = blockNumber && blockNumber > expiryBlock
+				let timeLeft = ''
+
+				if (!isExpired) {
+					const expiryBlockSeconds = (expiryBlock - blockNumber) * blockTime
+					const minutes = Math.trunc((expiryBlockSeconds % 3600) / 60)
+					const hours = Math.trunc((expiryBlockSeconds % (3600 * 24)) / 3600)
+					const days = Math.trunc(expiryBlockSeconds / (3600 * 24))
+
+					if (days > 0) {
+						timeLeft = days + 'd '
+					}
+
+					if (days > 0 || hours > 0) {
+						timeLeft += hours + 'h '
+					}
+
+					if (days > 0 || hours > 0 || minutes > 0) {
+						timeLeft += minutes + 'm '
+					}
+
+					if (timeLeft === '') {
+						timeLeft = '1m'
+					}
+				} else {
+					timeLeft = 'Expired'
+				}
+
+				return {
+					id: proposal.id,
+					name: proposal.proposal_metadata?.name ?? '',
+					description: proposal.proposal_metadata?.description ?? '',
+					status: proposal.state,
+					timeLeft,
+				}
+			}),
 		)
 	}, [proposals, blockNumber])
 
@@ -124,6 +153,7 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 			</Stack>
 			<Box sx={{ height: 550 }}>
 				<DataGrid
+					loading={loading || !data}
 					rows={rows}
 					columns={columns}
 					pageSize={pageSize}
