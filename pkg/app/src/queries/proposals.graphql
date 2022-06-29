@@ -1,0 +1,14 @@
+subscription ProposalsByOrganizationId($orgId: String!) {
+    proposal(where: { organization_id: {_eq: $orgId}}) {
+        id
+        creator
+        type
+        state
+        created_at_block
+        expiry_block
+        proposal_metadata {
+            name
+            description
+        }
+    }
+}
