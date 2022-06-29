@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -6,10 +6,13 @@ import { Add as AddIcon, HowToVote } from '@mui/icons-material'
 import { Box, Button, Chip, Paper, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
+import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
 
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'components/TabPanels/Organization/createProposal'
+import { blockTime } from 'src/constants'
 
 interface ComponentProps {
 	organizationId: string
@@ -56,95 +59,75 @@ const columns: GridColDef[] = [
 	},
 ]
 
-const rows = [
-	{
-		id: '0xabc',
-		name: 'Make pancakes great again',
-		description: 'Pancakes loses their quality! We need to improve it again.',
-		timeLeft: 'Waiting',
-		status: 0,
-	},
-	{
-		id: '0xbcd',
-		name: 'GameDAO for president',
-		description: 'GameDAO should be the president of the world...?',
-		timeLeft: '2:35 h',
-		status: 1,
-	},
-	{
-		id: '0xcde',
-		name: 'Speed up IPFS',
-		description: 'The IPFS file-server is slow. Can we speed it up?',
-		timeLeft: 'Expired',
-		status: 2,
-	},
-	{
-		id: '0xdef',
-		name: 'Add more validators',
-		description: 'We need more validators for the ZERO-Network.',
-		timeLeft: 'Expired',
-		status: 3,
-	},
-	{
-		id: '0xefg',
-		name: 'GameDAO Goodies',
-		description: 'We need some cool goodies like T-Shirts, caps, ...',
-		timeLeft: 'Expired',
-		status: 4,
-	},
-	{
-		id: '0xfgh',
-		name: 'Self-Hosted Block Explorer',
-		description: 'The ZERO-Network should have an self-hosted Block Explorer.',
-		timeLeft: 'Expired',
-		status: 5,
-	},
-	{
-		id: '0xghi',
-		name: 'Hire more developers',
-		description: 'The development is too slow. We need more developers.',
-		timeLeft: 'Expired',
-		status: 6,
-	},
-	{
-		id: '0xhij',
-		name: 'More transparency around development',
-		description: "The planning is not transparent enough for the community. Let's work on that!",
-		timeLeft: '???',
-		status: 7,
-	},
-	{
-		id: '0xijk',
-		name: 'More public nodes',
-		description: "Currently we have X nodes, let's encourage people to start nodes.",
-		timeLeft: '9:11 h',
-		status: 1,
-	},
-	{
-		id: '0xjkl',
-		name: 'Something is wrong',
-		description: "Oups... Something went wrong :). That's what they say at least.",
-		timeLeft: 'Expired',
-		status: 2,
-	},
-	{
-		id: '0xklm',
-		name: 'IRL meetup',
-		description: "Let's organize an IRL meetup with the team and community!",
-		timeLeft: '0:35 min',
-		status: 1,
-	},
-]
-
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
 export function ProposalOverview({ organizationId }: ComponentProps) {
 	const { push } = useRouter()
+
 	const [showFormState, setShowFormState] = useState<boolean>(false)
 	const [pageSize, setPageSize] = useState<number>(10)
+	const [rows, setRows] = useState<any[]>([])
+	const blockNumber = useBlockNumber()
+	const [proposals, setProposals] = useState<Proposal[]>([])
+	const { loading, data } = useProposalsByOrganizationIdSubscription({
+		variables: { orgId: organizationId },
+	})
 	const enabledFeatures = useProposalFeatures()
 	const address = useCurrentAccountAddress()
+
+	useEffect(() => {
+		if (!loading && data) {
+			setProposals(data.proposal as Proposal[])
+		} else {
+			setProposals([])
+		}
+	}, [organizationId, loading, data])
+
+	useEffect(() => {
+		if (!blockNumber) return
+
+		setRows(
+			proposals.map((proposal) => {
+				const expiryBlock = proposal.created_at_block + proposal.expiry_block
+				const isExpired = blockNumber && blockNumber > expiryBlock
+				let timeLeft = ''
+
+				if (!isExpired) {
+					const expiryBlockSeconds = (expiryBlock - blockNumber) * blockTime
+					const minutes = Math.trunc((expiryBlockSeconds % 3600) / 60)
+					const hours = Math.trunc((expiryBlockSeconds % (3600 * 24)) / 3600)
+					const days = Math.trunc(expiryBlockSeconds / (3600 * 24))
+
+					if (days > 0) {
+						timeLeft = days + 'd '
+					}
+
+					if (days > 0 || hours > 0) {
+						timeLeft += hours + 'h '
+					}
+
+					if (days > 0 || hours > 0 || minutes > 0) {
+						timeLeft += minutes + 'm '
+					}
+
+					if (timeLeft === '') {
+						timeLeft = '1m'
+					}
+				} else {
+					timeLeft = 'Expired'
+				}
+
+				return {
+					id: proposal.id,
+					name: proposal.proposal_metadata?.name ?? '',
+					description: proposal.proposal_metadata?.description ?? '',
+					status: proposal.state,
+					timeLeft,
+				}
+			}),
+		)
+	}, [proposals, blockNumber])
 
 	const handleCreateButtonClick = useCallback(() => {
 		setShowFormState(true)
@@ -170,6 +153,7 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 			</Stack>
 			<Box sx={{ height: 550 }}>
 				<DataGrid
+					loading={loading || !data}
 					rows={rows}
 					columns={columns}
 					pageSize={pageSize}
