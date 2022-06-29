@@ -74,9 +74,9 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 					firstTitle="Funded"
 					secondTitle="Target"
 					thirdTitle="Contributor"
-					firstSubhead={getCampaignFunding(campaign)}
-					secondSubhead={campaign?.target}
-					thirdSubhead={campaign?.campaign_contributors?.length}
+					firstSubhead={reformatNumber(getCampaignFunding(campaign))}
+					secondSubhead={reformatNumber(campaign?.target)}
+					thirdSubhead={reformatNumber(campaign?.campaign_contributors?.length)}
 					gap="20%"
 				/>
 			</CardContent>
