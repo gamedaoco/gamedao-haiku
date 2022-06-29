@@ -1,5 +1,4 @@
 import { ApiPromise } from '@polkadot/api'
-import type { RegistryTypes } from '@polkadot/types/types'
 
 import { ApiProvider } from './ApiProvider'
 
@@ -7,17 +6,15 @@ export interface SystemProperties {
 	ss58Format: number
 	tokenDecimals: number
 	tokenSymbol: string
+	governanceCurrency: number
+	networkCurrency: number
+	paymentCurrencies: number
 }
 
 export interface ApiProvider {
 	apiProvider: ApiPromise | null
 	systemProperties: SystemProperties
 	chainName: string
-}
-
-export interface ApiProviderConfig {
-	wsProviderUrl: string
-	types: RegistryTypes
 }
 
 export interface NetworkState {

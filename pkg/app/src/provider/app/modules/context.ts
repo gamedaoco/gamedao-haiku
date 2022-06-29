@@ -6,6 +6,7 @@ export const AppContext = createContext<AppState>({
 	ready: false,
 	config: null,
 	features: null,
+	apiProviderConfig: null,
 })
 
 export function useAppContext(): AppState {

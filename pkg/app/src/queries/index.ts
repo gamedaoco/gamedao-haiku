@@ -2137,8 +2137,6 @@ export type Proposal = {
 	readonly organization: Organization
 	readonly organization_id: Scalars['String']
 	/** An object relationship */
-	readonly proposal_creator_identity?: Maybe<Identity>
-	/** An object relationship */
 	readonly proposal_metadata?: Maybe<Proposal_Metadata>
 	/** An array relationship */
 	readonly proposal_voters: ReadonlyArray<Proposal_Voter>
@@ -2250,7 +2248,6 @@ export type Proposal_Bool_Exp = {
 	readonly metadata_id?: InputMaybe<String_Comparison_Exp>
 	readonly organization?: InputMaybe<Organization_Bool_Exp>
 	readonly organization_id?: InputMaybe<String_Comparison_Exp>
-	readonly proposal_creator_identity?: InputMaybe<Identity_Bool_Exp>
 	readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Bool_Exp>
 	readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>
 	readonly state?: InputMaybe<String_Comparison_Exp>
@@ -2430,7 +2427,6 @@ export type Proposal_Order_By = {
 	readonly metadata_id?: InputMaybe<Order_By>
 	readonly organization?: InputMaybe<Organization_Order_By>
 	readonly organization_id?: InputMaybe<Order_By>
-	readonly proposal_creator_identity?: InputMaybe<Identity_Order_By>
 	readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Order_By>
 	readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>
 	readonly state?: InputMaybe<Order_By>
@@ -3375,6 +3371,13 @@ export type Subscription_RootProposal_Voter_By_PkArgs = {
 	id: Scalars['String']
 }
 
+export type BlockNumberSubscriptionVariables = Exact<{ [key: string]: never }>
+
+export type BlockNumberSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly ChainInfo: ReadonlyArray<{ readonly __typename?: 'ChainInfo'; readonly blockNumber: any }>
+}
+
 export type SuccessfulCampaignByOrganisationIdSubscriptionVariables = Exact<{
 	orgId: Scalars['String']
 }>
@@ -3405,6 +3408,27 @@ export type ConfigQuery = {
 		readonly CONTACT?: string | null
 		readonly IPFS_GATEWAY?: string | null
 		readonly LOG_LEVEL?: LogLevel | null
+	}
+}
+
+export type ApiProviderConfigQueryVariables = Exact<{ [key: string]: never }>
+
+export type ApiProviderConfigQuery = {
+	readonly __typename?: 'query_root'
+	readonly apiProvider: {
+		readonly __typename?: 'ApiProvider'
+		readonly name: string
+		readonly types: string
+		readonly wsProviderUrl: string
+		readonly chainProperties: {
+			readonly __typename?: 'ChainProperties'
+			readonly governanceCurrency: number
+			readonly networkCurrency: number
+			readonly paymentCurrencies: number
+			readonly ss58Format: number
+			readonly tokenDecimals: ReadonlyArray<string | null>
+			readonly tokenSymbol: ReadonlyArray<string | null>
+		}
 	}
 }
 
@@ -3605,63 +3629,6 @@ export type OrganizationByIdSubscription = {
 	}>
 }
 
-export type ProposalsByOrganizationIdSubscriptionVariables = Exact<{
-	orgId: Scalars['String']
-}>
-
-export type ProposalsByOrganizationIdSubscription = {
-	readonly __typename?: 'subscription_root'
-	readonly proposal: ReadonlyArray<{
-		readonly __typename?: 'proposal'
-		readonly id: string
-		readonly creator: string
-		readonly state: string
-		readonly created_at_block: number
-		readonly expiry_block: number
-		readonly proposal_metadata?: {
-			readonly __typename?: 'proposal_metadata'
-			readonly name: string
-			readonly description: string
-		} | null
-	}>
-}
-
-export type ProposalByIdSubscriptionVariables = Exact<{
-	proposalId: Scalars['String']
-}>
-
-export type ProposalByIdSubscription = {
-	readonly __typename?: 'subscription_root'
-	readonly proposal: ReadonlyArray<{
-		readonly __typename?: 'proposal'
-		readonly id: string
-		readonly type: any
-		readonly voting_type: any
-		readonly state: string
-		readonly created_at_block: number
-		readonly expiry_block: number
-		readonly proposal_creator_identity?: {
-			readonly __typename?: 'identity'
-			readonly id: string
-			readonly display_name?: string | null
-		} | null
-		readonly proposal_metadata?: {
-			readonly __typename?: 'proposal_metadata'
-			readonly name: string
-			readonly description: string
-		} | null
-		readonly proposal_voters: ReadonlyArray<{
-			readonly __typename?: 'proposal_voter'
-			readonly voted: any
-			readonly identity: {
-				readonly __typename?: 'identity'
-				readonly id: string
-				readonly display_name?: string | null
-			}
-		}>
-	}>
-}
-
 export type SidebarSubscriptionVariables = Exact<{
 	address: Scalars['String']
 }>
@@ -3679,6 +3646,40 @@ export type SidebarSubscription = {
 	}>
 }
 
+export const BlockNumberDocument = gql`
+	subscription BlockNumber {
+		ChainInfo {
+			blockNumber
+		}
+	}
+`
+
+/**
+ * __useBlockNumberSubscription__
+ *
+ * To run a query within a React component, call `useBlockNumberSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useBlockNumberSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBlockNumberSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useBlockNumberSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<BlockNumberSubscription, BlockNumberSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<BlockNumberSubscription, BlockNumberSubscriptionVariables>(
+		BlockNumberDocument,
+		options,
+	)
+}
+export type BlockNumberSubscriptionHookResult = ReturnType<typeof useBlockNumberSubscription>
+export type BlockNumberSubscriptionResult = Apollo.SubscriptionResult<BlockNumberSubscription>
 export const SuccessfulCampaignByOrganisationIdDocument = gql`
 	subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
 		campaign(where: { organization_id: { _eq: $orgId }, state: { _eq: "Success" } }) {
@@ -3766,6 +3767,57 @@ export function useConfigLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Con
 export type ConfigQueryHookResult = ReturnType<typeof useConfigQuery>
 export type ConfigLazyQueryHookResult = ReturnType<typeof useConfigLazyQuery>
 export type ConfigQueryResult = Apollo.QueryResult<ConfigQuery, ConfigQueryVariables>
+export const ApiProviderConfigDocument = gql`
+	query ApiProviderConfig {
+		apiProvider {
+			name
+			types
+			wsProviderUrl
+			chainProperties {
+				governanceCurrency
+				networkCurrency
+				paymentCurrencies
+				ss58Format
+				tokenDecimals
+				tokenSymbol
+			}
+		}
+	}
+`
+
+/**
+ * __useApiProviderConfigQuery__
+ *
+ * To run a query within a React component, call `useApiProviderConfigQuery` and pass it any options that fit your needs.
+ * When your component renders, `useApiProviderConfigQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useApiProviderConfigQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useApiProviderConfigQuery(
+	baseOptions?: Apollo.QueryHookOptions<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>(ApiProviderConfigDocument, options)
+}
+export function useApiProviderConfigLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>(
+		ApiProviderConfigDocument,
+		options,
+	)
+}
+export type ApiProviderConfigQueryHookResult = ReturnType<typeof useApiProviderConfigQuery>
+export type ApiProviderConfigLazyQueryHookResult = ReturnType<typeof useApiProviderConfigLazyQuery>
+export type ApiProviderConfigQueryResult = Apollo.QueryResult<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>
 export const DisplayValuesDocument = gql`
 	query DisplayValues {
 		displayValues {
@@ -4124,110 +4176,6 @@ export function useOrganizationByIdSubscription(
 }
 export type OrganizationByIdSubscriptionHookResult = ReturnType<typeof useOrganizationByIdSubscription>
 export type OrganizationByIdSubscriptionResult = Apollo.SubscriptionResult<OrganizationByIdSubscription>
-export const ProposalsByOrganizationIdDocument = gql`
-	subscription ProposalsByOrganizationId($orgId: String!) {
-		proposal(where: { organization_id: { _eq: $orgId } }) {
-			id
-			creator
-			state
-			created_at_block
-			expiry_block
-			proposal_metadata {
-				name
-				description
-			}
-		}
-	}
-`
-
-/**
- * __useProposalsByOrganizationIdSubscription__
- *
- * To run a query within a React component, call `useProposalsByOrganizationIdSubscription` and pass it any options that fit your needs.
- * When your component renders, `useProposalsByOrganizationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProposalsByOrganizationIdSubscription({
- *   variables: {
- *      orgId: // value for 'orgId'
- *   },
- * });
- */
-export function useProposalsByOrganizationIdSubscription(
-	baseOptions: Apollo.SubscriptionHookOptions<
-		ProposalsByOrganizationIdSubscription,
-		ProposalsByOrganizationIdSubscriptionVariables
-	>,
-) {
-	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useSubscription<
-		ProposalsByOrganizationIdSubscription,
-		ProposalsByOrganizationIdSubscriptionVariables
-	>(ProposalsByOrganizationIdDocument, options)
-}
-export type ProposalsByOrganizationIdSubscriptionHookResult = ReturnType<
-	typeof useProposalsByOrganizationIdSubscription
->
-export type ProposalsByOrganizationIdSubscriptionResult =
-	Apollo.SubscriptionResult<ProposalsByOrganizationIdSubscription>
-export const ProposalByIdDocument = gql`
-	subscription ProposalById($proposalId: String!) {
-		proposal(where: { id: { _eq: $proposalId } }) {
-			id
-			type
-			voting_type
-			state
-			created_at_block
-			expiry_block
-			proposal_creator_identity {
-				id
-				display_name
-			}
-			proposal_metadata {
-				name
-				description
-			}
-			proposal_voters {
-				identity {
-					id
-					display_name
-				}
-				voted
-			}
-		}
-	}
-`
-
-/**
- * __useProposalByIdSubscription__
- *
- * To run a query within a React component, call `useProposalByIdSubscription` and pass it any options that fit your needs.
- * When your component renders, `useProposalByIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProposalByIdSubscription({
- *   variables: {
- *      proposalId: // value for 'proposalId'
- *   },
- * });
- */
-export function useProposalByIdSubscription(
-	baseOptions: Apollo.SubscriptionHookOptions<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>,
-) {
-	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useSubscription<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>(
-		ProposalByIdDocument,
-		options,
-	)
-}
-export type ProposalByIdSubscriptionHookResult = ReturnType<typeof useProposalByIdSubscription>
-export type ProposalByIdSubscriptionResult = Apollo.SubscriptionResult<ProposalByIdSubscription>
 export const SidebarDocument = gql`
 	subscription Sidebar($address: String!) {
 		organization(where: { organization_members: { address: { _eq: $address } } }) {
