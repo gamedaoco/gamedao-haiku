@@ -2,10 +2,13 @@ import { GraphQLUpload } from 'graphql-upload'
 
 import { Resolvers } from '../@types/schema'
 import { singleUpload } from './mutation/singleUploadResolver'
+import { apiProviderResolver } from './query/apiProviders/apiProviderResolver'
 import { configResolver } from './query/config/configResolver'
 import { displayDataResolver } from './query/displayValues/displayValuesResolver'
 import { featuresResolver } from './query/features/featuresResolver'
 import { linksResolver } from './query/links/linksResolver'
+import { nftsResolver } from './query/rmrk/nftsResolver'
+import { blockNumberSubscription } from './subscriptions/blockNumbersubscription'
 
 export function resolvers(): Resolvers {
 	return {
@@ -15,6 +18,11 @@ export function resolvers(): Resolvers {
 			config: configResolver,
 			features: featuresResolver,
 			displayValues: displayDataResolver,
+			rmrkNfts: nftsResolver,
+			apiProvider: apiProviderResolver,
+		},
+		Subscription: {
+			blockNumber: blockNumberSubscription,
 		},
 		Mutation: {
 			singleUpload: singleUpload,

@@ -5,3 +5,8 @@ export * from './organizationMember.model';
 export * from './campaign.model';
 export * from './campaignMetadata.model';
 export * from './campaignContributor.model';
+export * from './proposal.model';
+export * from './_proposalTypeData';
+export * from './_proposalTypeWithdrawalData';
+export * from './proposalVoter.model';
+export * from './proposalMetadata.model';

@@ -3,7 +3,7 @@ import { CampaignMetadata } from '../../../@types/ipfs/campaignMetadata';
 // Database
 import { createCampaign } from '../../../database/campaign';
 import { fetchCampaignMetadata } from '../../../ipfs/campaign';
-import { getCampaignCreationData } from '../../../transformer/capmaignCreateDataTransformer';
+import { getCampaignCreationData } from '../../../transformer/campaignCreateDataTransformer';
 // Types
 import { FlowCampaignCreatedEvent } from '../../../types/events';
 import { encodeSigner, hashToHexString } from '../../../utils';
