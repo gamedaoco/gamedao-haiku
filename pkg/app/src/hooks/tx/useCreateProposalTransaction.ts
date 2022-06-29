@@ -60,7 +60,7 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 }
 
 function createGeneralProposalTx(
-	apiProvider: ApiPromise,
+	selectedApiProvider: ApiProvider,
 	data: TMPProposal,
 	blockNumber: number,
 	organizationId: string,
@@ -79,7 +79,7 @@ function createGeneralProposalTx(
 	// Data validation
 	generalProposalValidation.validateSync(mappedData)
 
-	return apiProvider.tx.signal.generalProposal(
+	return selectedApiProvider.apiProvider.tx.signal.generalProposal(
 		mappedData.orgId,
 		mappedData.title,
 		mappedData.cid,
@@ -128,7 +128,7 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 	const address = useCurrentAccountAddress()
 	const data = useTMPProposal()
 	const blockNumber = useBlockNumber()
-	const logger = useLogger('useCreateOrgTransaction')
+	const logger = useLogger('useCreateProposalTransaction')
 
 	useEffect(() => {
 		// The transaction is only regenerated every 2 minutes and not every 2-3 seconds.
