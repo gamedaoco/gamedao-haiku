@@ -1,5 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
-import type { ApiProvider, SystemProperties } from 'src/@types/network'
+import type { ApiProvider } from 'src/@types/network'
 import type { ApiProvider as ApiProviderConfig } from 'src/queries'
 
 // Call health every 30 seconds as keepalive
@@ -32,7 +32,7 @@ export async function initializeApis(configs: ApiProviderConfig[]): Promise<ApiP
 			await apiProvider.isReady
 
 			apiConfigs.push({
-				systemProperties: config.chainProperties as SystemProperties,
+				systemProperties: config.chainProperties as any,
 				chainName: config.name,
 				apiProvider: apiProvider,
 			})
