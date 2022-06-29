@@ -2137,6 +2137,8 @@ export type Proposal = {
 	readonly organization: Organization
 	readonly organization_id: Scalars['String']
 	/** An object relationship */
+	readonly proposal_creator_identity?: Maybe<Identity>
+	/** An object relationship */
 	readonly proposal_metadata?: Maybe<Proposal_Metadata>
 	/** An array relationship */
 	readonly proposal_voters: ReadonlyArray<Proposal_Voter>
@@ -2248,6 +2250,7 @@ export type Proposal_Bool_Exp = {
 	readonly metadata_id?: InputMaybe<String_Comparison_Exp>
 	readonly organization?: InputMaybe<Organization_Bool_Exp>
 	readonly organization_id?: InputMaybe<String_Comparison_Exp>
+	readonly proposal_creator_identity?: InputMaybe<Identity_Bool_Exp>
 	readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Bool_Exp>
 	readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>
 	readonly state?: InputMaybe<String_Comparison_Exp>
@@ -2427,6 +2430,7 @@ export type Proposal_Order_By = {
 	readonly metadata_id?: InputMaybe<Order_By>
 	readonly organization?: InputMaybe<Organization_Order_By>
 	readonly organization_id?: InputMaybe<Order_By>
+	readonly proposal_creator_identity?: InputMaybe<Identity_Order_By>
 	readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Order_By>
 	readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>
 	readonly state?: InputMaybe<Order_By>
@@ -3611,7 +3615,6 @@ export type ProposalsByOrganizationIdSubscription = {
 		readonly __typename?: 'proposal'
 		readonly id: string
 		readonly creator: string
-		readonly type: any
 		readonly state: string
 		readonly created_at_block: number
 		readonly expiry_block: number
@@ -3620,6 +3623,42 @@ export type ProposalsByOrganizationIdSubscription = {
 			readonly name: string
 			readonly description: string
 		} | null
+	}>
+}
+
+export type ProposalByIdSubscriptionVariables = Exact<{
+	proposalId: Scalars['String']
+}>
+
+export type ProposalByIdSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly proposal: ReadonlyArray<{
+		readonly __typename?: 'proposal'
+		readonly id: string
+		readonly type: any
+		readonly voting_type: any
+		readonly state: string
+		readonly created_at_block: number
+		readonly expiry_block: number
+		readonly proposal_creator_identity?: {
+			readonly __typename?: 'identity'
+			readonly id: string
+			readonly display_name?: string | null
+		} | null
+		readonly proposal_metadata?: {
+			readonly __typename?: 'proposal_metadata'
+			readonly name: string
+			readonly description: string
+		} | null
+		readonly proposal_voters: ReadonlyArray<{
+			readonly __typename?: 'proposal_voter'
+			readonly voted: any
+			readonly identity: {
+				readonly __typename?: 'identity'
+				readonly id: string
+				readonly display_name?: string | null
+			}
+		}>
 	}>
 }
 
@@ -4090,7 +4129,6 @@ export const ProposalsByOrganizationIdDocument = gql`
 		proposal(where: { organization_id: { _eq: $orgId } }) {
 			id
 			creator
-			type
 			state
 			created_at_block
 			expiry_block
@@ -4135,6 +4173,61 @@ export type ProposalsByOrganizationIdSubscriptionHookResult = ReturnType<
 >
 export type ProposalsByOrganizationIdSubscriptionResult =
 	Apollo.SubscriptionResult<ProposalsByOrganizationIdSubscription>
+export const ProposalByIdDocument = gql`
+	subscription ProposalById($proposalId: String!) {
+		proposal(where: { id: { _eq: $proposalId } }) {
+			id
+			type
+			voting_type
+			state
+			created_at_block
+			expiry_block
+			proposal_creator_identity {
+				id
+				display_name
+			}
+			proposal_metadata {
+				name
+				description
+			}
+			proposal_voters {
+				identity {
+					id
+					display_name
+				}
+				voted
+			}
+		}
+	}
+`
+
+/**
+ * __useProposalByIdSubscription__
+ *
+ * To run a query within a React component, call `useProposalByIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useProposalByIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProposalByIdSubscription({
+ *   variables: {
+ *      proposalId: // value for 'proposalId'
+ *   },
+ * });
+ */
+export function useProposalByIdSubscription(
+	baseOptions: Apollo.SubscriptionHookOptions<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>(
+		ProposalByIdDocument,
+		options,
+	)
+}
+export type ProposalByIdSubscriptionHookResult = ReturnType<typeof useProposalByIdSubscription>
+export type ProposalByIdSubscriptionResult = Apollo.SubscriptionResult<ProposalByIdSubscription>
 export const SidebarDocument = gql`
 	subscription Sidebar($address: String!) {
 		organization(where: { organization_members: { address: { _eq: $address } } }) {
