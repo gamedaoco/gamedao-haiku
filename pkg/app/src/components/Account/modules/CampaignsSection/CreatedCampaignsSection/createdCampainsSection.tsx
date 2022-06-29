@@ -34,8 +34,6 @@ interface CreatedCampaignSectionProps {
 const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, accountState }) => {
 	const theme = useTheme()
 
-	console.log('DATA:', data)
-
 	return (
 		<Box sx={{ pb: 4 }}>
 			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold}>
@@ -63,21 +61,21 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading
 					</Card>
 				</Grid>
 
-				{/*{loading ? (*/}
-				{/*	[1, 2].map((x) => (*/}
-				{/*		<Grid item xs={4} key={x} style={{ marginBottom: 10 }}>*/}
-				{/*			<LoadingCampaignCard />*/}
-				{/*		</Grid>*/}
-				{/*	))*/}
-				{/*) : (*/}
-				{/*	<>*/}
-				{/*		{data?.campaigns?.map((campaign: Campaign, index: number) => (*/}
-				{/*			<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>*/}
-				{/*				<CampaignCard campaign={campaign} />*/}
-				{/*			</Grid>*/}
-				{/*		))}*/}
-				{/*	</>*/}
-				{/*)}*/}
+				{loading ? (
+					[1, 2].map((x) => (
+						<Grid item xs={4} key={x} style={{ marginBottom: 10 }}>
+							<LoadingCampaignCard />
+						</Grid>
+					))
+				) : (
+					<>
+						{data?.campaign?.map((campaign: Campaign, index: number) => (
+							<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>
+								<CampaignCard campaign={campaign} />
+							</Grid>
+						))}
+					</>
+				)}
 			</Grid>
 		</Box>
 	)

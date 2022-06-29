@@ -6,29 +6,26 @@ import { useTheme } from '@mui/material/styles'
 
 import Lineup from 'components/lineup'
 
-import {
-	getCampaignContributors,
-	getCampaignFunding,
-	getCampaignHeader,
-	getCampaignLogo,
-	getCampaignName,
-	getCampaignProgress,
-	getCampaignTarget,
-	getCampaignTitle,
-} from './campaignUtils'
-
-const gateway = 'https://ipfs.gamedao.co/gateway/'
+import { getCampaignFunding, getCampaignProgress } from './campaignUtils'
+import { useConfig } from 'hooks/useConfig'
+import { parseIpfsHash } from 'src/utils/ipfs'
+import { reformatNumber } from 'src/utils/globalUtils'
 
 interface CampaignCardProps {
 	campaign: Campaign
 }
 const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 	const theme = useTheme()
+	const config = useConfig()
 
 	return (
 		<Card>
 			<Box>
-				<CardMedia component="img" src={`${gateway}${getCampaignHeader(campaign)}`} alt="campaign_poster" />
+				<CardMedia
+					component="img"
+					src={parseIpfsHash(campaign?.campaign_metadata?.header, config.IPFS_GATEWAY)}
+					alt="campaign_poster"
+				/>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<Card
 						sx={{
@@ -50,7 +47,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 							//TODO: add border radius
 							top: -115,
 						}}
-						src={`${gateway}${getCampaignLogo(campaign)}`}
+						src={parseIpfsHash(campaign?.campaign_metadata?.logo, config.IPFS_GATEWAY)}
 						alt="campaign_poster"
 					/>
 				</Box>
@@ -59,9 +56,9 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 			<CardContent sx={{ pt: 0, mt: -10 }}>
 				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 					<Typography fontWeight={theme.typography.fontWeightBold} variant="body1">
-						{getCampaignTitle(campaign)}
+						{campaign?.campaign_metadata?.title}
 					</Typography>
-					<Typography variant="body2">{getCampaignName(campaign)}</Typography>
+					<Typography variant="body2">{campaign?.organization?.organization_metadata?.name}</Typography>
 
 					<LinearProgress
 						variant="determinate"
@@ -76,10 +73,10 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 				<Lineup
 					firstTitle="Funded"
 					secondTitle="Target"
-					thirdTitle="Contributer"
+					thirdTitle="Contributor"
 					firstSubhead={getCampaignFunding(campaign)}
-					secondSubhead={getCampaignTarget(campaign)}
-					thirdSubhead={getCampaignContributors(campaign)}
+					secondSubhead={campaign?.target}
+					thirdSubhead={campaign?.campaign_contributors?.length}
 					gap="20%"
 				/>
 			</CardContent>

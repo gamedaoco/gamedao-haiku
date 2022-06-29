@@ -6,9 +6,9 @@ interface LineupProps {
 	firstTitle: string
 	secondTitle: string
 	thirdTitle: string
-	firstSubhead: number
-	secondSubhead: number
-	thirdSubhead: number
+	firstSubhead: string | number
+	secondSubhead: string | number
+	thirdSubhead: string | number
 	gap: string
 }
 
