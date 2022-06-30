@@ -3502,7 +3502,7 @@ export type CampaignContributorsSubscriptionVariables = Exact<{
 export type CampaignContributorsSubscription = { readonly __typename?: 'subscription_root', readonly campaign_contributor: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly id: string, readonly contributed: any, readonly campaign: { readonly __typename?: 'campaign', readonly deposit: any, readonly expiry: number, readonly state: string, readonly target: any, readonly created_at_block: number, readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata', readonly name: string, readonly title: string, readonly logo: string } | null, readonly campaign_contributors: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly id: string, readonly contributed: any }>, readonly organization: { readonly __typename?: 'organization', readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly name: string } | null } } }> };
 
 export type CampaignSubscriptionVariables = Exact<{
-  address?: InputMaybe<Scalars['String']>;
+  admin_identity_id?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -3706,8 +3706,8 @@ export function useCampaignContributorsSubscription(baseOptions: Apollo.Subscrip
 export type CampaignContributorsSubscriptionHookResult = ReturnType<typeof useCampaignContributorsSubscription>;
 export type CampaignContributorsSubscriptionResult = Apollo.SubscriptionResult<CampaignContributorsSubscription>;
 export const CampaignDocument = gql`
-    subscription campaign($address: String) {
-  campaign(where: {identity: {address: {_eq: $address}}}) {
+    subscription campaign($admin_identity_id: String) {
+  campaign(where: {admin_identity_id: {_eq: $admin_identity_id}}) {
     deposit
     target
     campaign_metadata {
@@ -3741,7 +3741,7 @@ export const CampaignDocument = gql`
  * @example
  * const { data, loading, error } = useCampaignSubscription({
  *   variables: {
- *      address: // value for 'address'
+ *      admin_identity_id: // value for 'admin_identity_id'
  *   },
  * });
  */

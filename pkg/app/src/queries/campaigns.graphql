@@ -35,8 +35,8 @@ subscription CampaignContributors($address: String!) {
 }
 
 
-subscription campaign($address: String) {
-    campaign(where: {identity: {address: {_eq: $address}}}) {
+subscription campaign($admin_identity_id: String) {
+    campaign(where: {admin_identity_id: {_eq: $admin_identity_id}}) {
         deposit
         target
         campaign_metadata {
@@ -56,6 +56,7 @@ subscription campaign($address: String) {
         }
     }
 }
+
 
 
 
