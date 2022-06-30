@@ -1,4 +1,6 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
+
+import { useRouter } from 'next/router'
 
 import { Edit } from '@mui/icons-material'
 import {
@@ -14,9 +16,12 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
-import { AccountOrganizations } from 'src/queries'
+import { useConfig } from 'hooks/useConfig'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { Organization } from 'src/queries'
 import { getInitials } from 'src/utils/accountUtils'
 import { reformatNumber } from 'src/utils/globalUtils'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { Scrollbar } from 'components/scrollbar'
 
@@ -24,10 +29,21 @@ import LoadingTable from './loadingTable'
 
 interface MyOrganisationsTableProps {
 	loading: boolean
-	organisations: AccountOrganizations[]
+	organisations: Organization[]
 	title?: string
 }
 const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, title, loading }) => {
+	const config = useConfig()
+	const router = useRouter()
+	const selectedAddress = useCurrentAccountAddress()
+	const editOrganization = useCallback(
+		(id: string) => {
+			router?.push(`/organisations/${id}/settings`)
+		},
+		[router],
+	)
+
+	const isAdmin = useCallback((address: string) => address === selectedAddress, [selectedAddress])
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
 			<CardContent>
@@ -62,24 +78,32 @@ const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, ti
 												}}
 											>
 												<Avatar
-													src={organisation?.metadata?.logo}
+													src={parseIpfsHash(
+														organisation?.organization_metadata?.logo,
+														config.IPFS_GATEWAY,
+													)}
 													sx={{
 														height: 42,
 														width: 42,
 													}}
 												>
-													{getInitials(organisation?.metadata?.logo)}
+													{getInitials(organisation?.organization_metadata?.logo)}
 												</Avatar>
-												<Box sx={{ ml: 1 }}>{organisation?.metadata?.name}</Box>
+												<Box sx={{ ml: 1 }}>{organisation?.organization_metadata?.name}</Box>
 											</Box>
 										</TableCell>
-										<TableCell>{reformatNumber(organisation.membersCount, 2)}</TableCell>
-										<TableCell>{reformatNumber(organisation?.member?.valueLocked, 3)}</TableCell>
+										<TableCell>
+											{reformatNumber(organisation?.organization_members?.length, 2)}
+										</TableCell>
+										<TableCell>{reformatNumber(12321, 2)}</TableCell>
 										<TableCell>{organisation.access}</TableCell>
-										<TableCell>{organisation?.member?.role}</TableCell>
-										{organisation?.member?.canEdit ? (
+										<TableCell>{isAdmin(organisation?.controller) ? 'Prime' : 'Member'}</TableCell>
+										{isAdmin(organisation?.controller) ? (
 											<TableCell align="right">
-												<IconButton aria-label="edit">
+												<IconButton
+													aria-label="edit"
+													onClick={() => editOrganization(organisation?.id)}
+												>
 													<Edit />
 												</IconButton>
 											</TableCell>

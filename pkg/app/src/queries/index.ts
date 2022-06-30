@@ -3569,6 +3569,13 @@ export type OrganizationByIdSubscriptionVariables = Exact<{
 
 export type OrganizationByIdSubscription = { readonly __typename?: 'subscription_root', readonly organization: ReadonlyArray<{ readonly __typename?: 'organization', readonly access: string, readonly controller: string, readonly created_at_block: number, readonly creator: string, readonly fee: any, readonly fee_model: string, readonly gov_asset: number, readonly id: string, readonly member_limit: any, readonly pay_asset: number, readonly treasury: string, readonly type: string, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string, readonly identity: { readonly __typename?: 'identity', readonly display_name?: string | null } }>, readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly description: string, readonly email: string, readonly id: string, readonly logo: string, readonly header: string, readonly name: string, readonly repo: string, readonly website: string } | null }> };
 
+export type AccountOrganizationsSubscriptionVariables = Exact<{
+  address: Scalars['String'];
+}>;
+
+
+export type AccountOrganizationsSubscription = { readonly __typename?: 'subscription_root', readonly identity_by_pk?: { readonly __typename?: 'identity', readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly organization: { readonly __typename?: 'organization', readonly id: string, readonly access: string, readonly controller: string, readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly name: string, readonly logo: string } | null, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string }> } }> } | null };
+
 export type ProposalsByOrganizationIdSubscriptionVariables = Exact<{
   orgId: Scalars['String'];
 }>;
@@ -4190,6 +4197,49 @@ export function useOrganizationByIdSubscription(baseOptions: Apollo.Subscription
       }
 export type OrganizationByIdSubscriptionHookResult = ReturnType<typeof useOrganizationByIdSubscription>;
 export type OrganizationByIdSubscriptionResult = Apollo.SubscriptionResult<OrganizationByIdSubscription>;
+export const AccountOrganizationsDocument = gql`
+    subscription AccountOrganizations($address: String!) {
+  identity_by_pk(id: $address) {
+    organization_members {
+      organization {
+        id
+        organization_metadata {
+          name
+          logo
+        }
+        access
+        controller
+        organization_members {
+          address
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAccountOrganizationsSubscription__
+ *
+ * To run a query within a React component, call `useAccountOrganizationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useAccountOrganizationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAccountOrganizationsSubscription({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useAccountOrganizationsSubscription(baseOptions: Apollo.SubscriptionHookOptions<AccountOrganizationsSubscription, AccountOrganizationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<AccountOrganizationsSubscription, AccountOrganizationsSubscriptionVariables>(AccountOrganizationsDocument, options);
+      }
+export type AccountOrganizationsSubscriptionHookResult = ReturnType<typeof useAccountOrganizationsSubscription>;
+export type AccountOrganizationsSubscriptionResult = Apollo.SubscriptionResult<AccountOrganizationsSubscription>;
 export const ProposalsByOrganizationIdDocument = gql`
     subscription ProposalsByOrganizationId($orgId: String!) {
   proposal(where: {organization_id: {_eq: $orgId}}) {
