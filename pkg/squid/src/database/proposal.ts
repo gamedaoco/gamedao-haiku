@@ -1,7 +1,7 @@
 // Imports
 import { ProposalMetadata } from '../@types/ipfs/proposalMetadata';
 import { ProposalCreationData } from '../@types/pallets/signal/proposalCreationData';
-import { Proposal, ProposalTypeWithdrawalData } from '../model';
+import { Proposal, ProposalTypeGeneralData, ProposalTypeWithdrawalData } from '../model';
 import { getCampaign } from './campaign';
 import { get } from './helper';
 import { upsertIdentity } from './identity';
@@ -48,10 +48,21 @@ async function createProposal(store: Store, data: ProposalCreationData, metadata
 	proposal.votingType = 0;
 
 	// Withdraw Proposal
-	if (proposal.type === 3) {
-		proposal.data = new ProposalTypeWithdrawalData({
-			withdrawAmount: data.withdrawAmount!,
-		});
+	switch (proposal.type) {
+		case 0:
+			proposal.data = new ProposalTypeGeneralData({
+				type: 0,
+			});
+			break;
+		case 3:
+			proposal.data = new ProposalTypeWithdrawalData({
+				type: 3,
+				withdrawAmount: data.withdrawAmount!,
+			});
+			break;
+		default:
+			console.error(`Unknown proposal type in create proposal, block: ${data.blockNumber}!`);
+			return null;
 	}
 
 	proposal.state = 'Active';

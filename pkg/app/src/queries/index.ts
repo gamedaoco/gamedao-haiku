@@ -14,6 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Upload: any;
+  bigint: any;
   jsonb: any;
   numeric: any;
 };
@@ -25,6 +26,31 @@ export type ApiProvider = {
   readonly types: Scalars['String'];
   readonly wsProviderUrl: Scalars['String'];
 };
+
+/** columns and relationships of "ChainInfo" */
+export type ChainInfo = {
+  readonly __typename?: 'ChainInfo';
+  readonly blockNumber: Scalars['bigint'];
+};
+
+/** Boolean expression to filter rows from the table "ChainInfo". All fields are combined with a logical 'AND'. */
+export type ChainInfo_Bool_Exp = {
+  readonly _and?: InputMaybe<ReadonlyArray<ChainInfo_Bool_Exp>>;
+  readonly _not?: InputMaybe<ChainInfo_Bool_Exp>;
+  readonly _or?: InputMaybe<ReadonlyArray<ChainInfo_Bool_Exp>>;
+  readonly blockNumber?: InputMaybe<Bigint_Comparison_Exp>;
+};
+
+/** Ordering options when selecting data from "ChainInfo". */
+export type ChainInfo_Order_By = {
+  readonly blockNumber?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "ChainInfo" */
+export enum ChainInfo_Select_Column {
+  /** column name */
+  BlockNumber = 'blockNumber'
+}
 
 export type ChainProperties = {
   readonly __typename?: 'ChainProperties';
@@ -199,15 +225,32 @@ export type String_Comparison_Exp = {
   readonly _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type Bigint_Comparison_Exp = {
+  readonly _eq?: InputMaybe<Scalars['bigint']>;
+  readonly _gt?: InputMaybe<Scalars['bigint']>;
+  readonly _gte?: InputMaybe<Scalars['bigint']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['bigint']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
+  readonly _lt?: InputMaybe<Scalars['bigint']>;
+  readonly _lte?: InputMaybe<Scalars['bigint']>;
+  readonly _neq?: InputMaybe<Scalars['bigint']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['bigint']>>;
+};
+
 /** columns and relationships of "campaign" */
 export type Campaign = {
   readonly __typename?: 'campaign';
   readonly admin: Scalars['String'];
   readonly admin_identity_id: Scalars['String'];
+  /** An object relationship */
+  readonly campaign_admin_identity: Identity;
   /** An array relationship */
   readonly campaign_contributors: ReadonlyArray<Campaign_Contributor>;
   /** An aggregate relationship */
   readonly campaign_contributors_aggregate: Campaign_Contributor_Aggregate;
+  /** An object relationship */
+  readonly campaign_creator_identity: Identity;
   /** An object relationship */
   readonly campaign_metadata?: Maybe<Campaign_Metadata>;
   readonly created_at_block: Scalars['Int'];
@@ -217,10 +260,6 @@ export type Campaign = {
   readonly expiry: Scalars['Int'];
   readonly governance: Scalars['String'];
   readonly id: Scalars['String'];
-  /** An object relationship */
-  readonly identity: Identity;
-  /** An object relationship */
-  readonly identityByCreatorIdentityId: Identity;
   readonly metadata_id?: Maybe<Scalars['String']>;
   /** An object relationship */
   readonly organization: Organization;
@@ -345,7 +384,9 @@ export type Campaign_Bool_Exp = {
   readonly _or?: InputMaybe<ReadonlyArray<Campaign_Bool_Exp>>;
   readonly admin?: InputMaybe<String_Comparison_Exp>;
   readonly admin_identity_id?: InputMaybe<String_Comparison_Exp>;
+  readonly campaign_admin_identity?: InputMaybe<Identity_Bool_Exp>;
   readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>;
+  readonly campaign_creator_identity?: InputMaybe<Identity_Bool_Exp>;
   readonly campaign_metadata?: InputMaybe<Campaign_Metadata_Bool_Exp>;
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly creator?: InputMaybe<String_Comparison_Exp>;
@@ -354,8 +395,6 @@ export type Campaign_Bool_Exp = {
   readonly expiry?: InputMaybe<Int_Comparison_Exp>;
   readonly governance?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
-  readonly identity?: InputMaybe<Identity_Bool_Exp>;
-  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Bool_Exp>;
   readonly metadata_id?: InputMaybe<String_Comparison_Exp>;
   readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly organization_id?: InputMaybe<String_Comparison_Exp>;
@@ -811,7 +850,9 @@ export type Campaign_Min_Order_By = {
 export type Campaign_Order_By = {
   readonly admin?: InputMaybe<Order_By>;
   readonly admin_identity_id?: InputMaybe<Order_By>;
+  readonly campaign_admin_identity?: InputMaybe<Identity_Order_By>;
   readonly campaign_contributors_aggregate?: InputMaybe<Campaign_Contributor_Aggregate_Order_By>;
+  readonly campaign_creator_identity?: InputMaybe<Identity_Order_By>;
   readonly campaign_metadata?: InputMaybe<Campaign_Metadata_Order_By>;
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly creator?: InputMaybe<Order_By>;
@@ -820,8 +861,6 @@ export type Campaign_Order_By = {
   readonly expiry?: InputMaybe<Order_By>;
   readonly governance?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
-  readonly identity?: InputMaybe<Identity_Order_By>;
-  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Order_By>;
   readonly metadata_id?: InputMaybe<Order_By>;
   readonly organization?: InputMaybe<Organization_Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
@@ -997,13 +1036,25 @@ export type Identity = {
   /** An aggregate relationship */
   readonly campaign_contributors_aggregate: Campaign_Contributor_Aggregate;
   /** An array relationship */
-  readonly campaigns: ReadonlyArray<Campaign>;
+  readonly campaigns_admin: ReadonlyArray<Campaign>;
+  /** An aggregate relationship */
+  readonly campaigns_admin_aggregate: Campaign_Aggregate;
   /** An array relationship */
-  readonly campaignsByCreatorIdentityId: ReadonlyArray<Campaign>;
+  readonly controller_organizations: ReadonlyArray<Organization>;
   /** An aggregate relationship */
-  readonly campaignsByCreatorIdentityId_aggregate: Campaign_Aggregate;
+  readonly controller_organizations_aggregate: Organization_Aggregate;
+  /** An array relationship */
+  readonly created_campaigns: ReadonlyArray<Campaign>;
   /** An aggregate relationship */
-  readonly campaigns_aggregate: Campaign_Aggregate;
+  readonly created_campaigns_aggregate: Campaign_Aggregate;
+  /** An array relationship */
+  readonly created_organizations: ReadonlyArray<Organization>;
+  /** An aggregate relationship */
+  readonly created_organizations_aggregate: Organization_Aggregate;
+  /** An array relationship */
+  readonly created_proposals: ReadonlyArray<Proposal>;
+  /** An aggregate relationship */
+  readonly created_proposals_aggregate: Proposal_Aggregate;
   readonly display_name?: Maybe<Scalars['String']>;
   readonly email?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
@@ -1014,26 +1065,14 @@ export type Identity = {
   /** An aggregate relationship */
   readonly organization_members_aggregate: Organization_Member_Aggregate;
   /** An array relationship */
-  readonly organizations: ReadonlyArray<Organization>;
-  /** An array relationship */
-  readonly organizationsByControllerIdentityId: ReadonlyArray<Organization>;
-  /** An aggregate relationship */
-  readonly organizationsByControllerIdentityId_aggregate: Organization_Aggregate;
-  /** An array relationship */
-  readonly organizationsByCreatorIdentityId: ReadonlyArray<Organization>;
-  /** An aggregate relationship */
-  readonly organizationsByCreatorIdentityId_aggregate: Organization_Aggregate;
-  /** An aggregate relationship */
-  readonly organizations_aggregate: Organization_Aggregate;
-  /** An array relationship */
   readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
   /** An aggregate relationship */
   readonly proposal_voters_aggregate: Proposal_Voter_Aggregate;
-  /** An array relationship */
-  readonly proposals: ReadonlyArray<Proposal>;
-  /** An aggregate relationship */
-  readonly proposals_aggregate: Proposal_Aggregate;
   readonly riot?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly treasuries: ReadonlyArray<Organization>;
+  /** An aggregate relationship */
+  readonly treasuries_aggregate: Organization_Aggregate;
   readonly twitter?: Maybe<Scalars['String']>;
 };
 
@@ -1059,7 +1098,7 @@ export type IdentityCampaign_Contributors_AggregateArgs = {
 
 
 /** columns and relationships of "identity" */
-export type IdentityCampaignsArgs = {
+export type IdentityCampaigns_AdminArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1069,7 +1108,7 @@ export type IdentityCampaignsArgs = {
 
 
 /** columns and relationships of "identity" */
-export type IdentityCampaignsByCreatorIdentityIdArgs = {
+export type IdentityCampaigns_Admin_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1079,7 +1118,27 @@ export type IdentityCampaignsByCreatorIdentityIdArgs = {
 
 
 /** columns and relationships of "identity" */
-export type IdentityCampaignsByCreatorIdentityId_AggregateArgs = {
+export type IdentityController_OrganizationsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityController_Organizations_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCreated_CampaignsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1089,12 +1148,52 @@ export type IdentityCampaignsByCreatorIdentityId_AggregateArgs = {
 
 
 /** columns and relationships of "identity" */
-export type IdentityCampaigns_AggregateArgs = {
+export type IdentityCreated_Campaigns_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCreated_OrganizationsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCreated_Organizations_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCreated_ProposalsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCreated_Proposals_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
 
@@ -1119,66 +1218,6 @@ export type IdentityOrganization_Members_AggregateArgs = {
 
 
 /** columns and relationships of "identity" */
-export type IdentityOrganizationsArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
-  where?: InputMaybe<Organization_Bool_Exp>;
-};
-
-
-/** columns and relationships of "identity" */
-export type IdentityOrganizationsByControllerIdentityIdArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
-  where?: InputMaybe<Organization_Bool_Exp>;
-};
-
-
-/** columns and relationships of "identity" */
-export type IdentityOrganizationsByControllerIdentityId_AggregateArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
-  where?: InputMaybe<Organization_Bool_Exp>;
-};
-
-
-/** columns and relationships of "identity" */
-export type IdentityOrganizationsByCreatorIdentityIdArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
-  where?: InputMaybe<Organization_Bool_Exp>;
-};
-
-
-/** columns and relationships of "identity" */
-export type IdentityOrganizationsByCreatorIdentityId_AggregateArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
-  where?: InputMaybe<Organization_Bool_Exp>;
-};
-
-
-/** columns and relationships of "identity" */
-export type IdentityOrganizations_AggregateArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
-  where?: InputMaybe<Organization_Bool_Exp>;
-};
-
-
-/** columns and relationships of "identity" */
 export type IdentityProposal_VotersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1199,22 +1238,22 @@ export type IdentityProposal_Voters_AggregateArgs = {
 
 
 /** columns and relationships of "identity" */
-export type IdentityProposalsArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+export type IdentityTreasuriesArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
-  where?: InputMaybe<Proposal_Bool_Exp>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
 };
 
 
 /** columns and relationships of "identity" */
-export type IdentityProposals_AggregateArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+export type IdentityTreasuries_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
-  where?: InputMaybe<Proposal_Bool_Exp>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
 };
 
 /** aggregated selection of "identity" */
@@ -1246,20 +1285,20 @@ export type Identity_Bool_Exp = {
   readonly _or?: InputMaybe<ReadonlyArray<Identity_Bool_Exp>>;
   readonly address?: InputMaybe<String_Comparison_Exp>;
   readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>;
-  readonly campaigns?: InputMaybe<Campaign_Bool_Exp>;
-  readonly campaignsByCreatorIdentityId?: InputMaybe<Campaign_Bool_Exp>;
+  readonly campaigns_admin?: InputMaybe<Campaign_Bool_Exp>;
+  readonly controller_organizations?: InputMaybe<Organization_Bool_Exp>;
+  readonly created_campaigns?: InputMaybe<Campaign_Bool_Exp>;
+  readonly created_organizations?: InputMaybe<Organization_Bool_Exp>;
+  readonly created_proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly display_name?: InputMaybe<String_Comparison_Exp>;
   readonly email?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
   readonly image?: InputMaybe<String_Comparison_Exp>;
   readonly legal_name?: InputMaybe<String_Comparison_Exp>;
   readonly organization_members?: InputMaybe<Organization_Member_Bool_Exp>;
-  readonly organizations?: InputMaybe<Organization_Bool_Exp>;
-  readonly organizationsByControllerIdentityId?: InputMaybe<Organization_Bool_Exp>;
-  readonly organizationsByCreatorIdentityId?: InputMaybe<Organization_Bool_Exp>;
   readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
-  readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly riot?: InputMaybe<String_Comparison_Exp>;
+  readonly treasuries?: InputMaybe<Organization_Bool_Exp>;
   readonly twitter?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1293,20 +1332,20 @@ export type Identity_Min_Fields = {
 export type Identity_Order_By = {
   readonly address?: InputMaybe<Order_By>;
   readonly campaign_contributors_aggregate?: InputMaybe<Campaign_Contributor_Aggregate_Order_By>;
-  readonly campaignsByCreatorIdentityId_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
-  readonly campaigns_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
+  readonly campaigns_admin_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
+  readonly controller_organizations_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
+  readonly created_campaigns_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
+  readonly created_organizations_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
+  readonly created_proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly display_name?: InputMaybe<Order_By>;
   readonly email?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
   readonly image?: InputMaybe<Order_By>;
   readonly legal_name?: InputMaybe<Order_By>;
   readonly organization_members_aggregate?: InputMaybe<Organization_Member_Aggregate_Order_By>;
-  readonly organizationsByControllerIdentityId_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
-  readonly organizationsByCreatorIdentityId_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
-  readonly organizations_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
   readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>;
-  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly riot?: InputMaybe<Order_By>;
+  readonly treasuries_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
   readonly twitter?: InputMaybe<Order_By>;
 };
 
@@ -1416,20 +1455,20 @@ export type Organization = {
   readonly fee_model: Scalars['String'];
   readonly gov_asset: Scalars['Int'];
   readonly id: Scalars['String'];
-  /** An object relationship */
-  readonly identity: Identity;
-  /** An object relationship */
-  readonly identityByControllerIdentityId: Identity;
-  /** An object relationship */
-  readonly identityByCreatorIdentityId: Identity;
   readonly member_limit: Scalars['numeric'];
   readonly metadata_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  readonly organization_controller_identity: Identity;
+  /** An object relationship */
+  readonly organization_creator_identity: Identity;
   /** An array relationship */
   readonly organization_members: ReadonlyArray<Organization_Member>;
   /** An aggregate relationship */
   readonly organization_members_aggregate: Organization_Member_Aggregate;
   /** An object relationship */
   readonly organization_metadata?: Maybe<Organization_Metadata>;
+  /** An object relationship */
+  readonly organization_treasury_identity: Identity;
   readonly pay_asset: Scalars['Int'];
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
@@ -1580,13 +1619,13 @@ export type Organization_Bool_Exp = {
   readonly fee_model?: InputMaybe<String_Comparison_Exp>;
   readonly gov_asset?: InputMaybe<Int_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
-  readonly identity?: InputMaybe<Identity_Bool_Exp>;
-  readonly identityByControllerIdentityId?: InputMaybe<Identity_Bool_Exp>;
-  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Bool_Exp>;
   readonly member_limit?: InputMaybe<Numeric_Comparison_Exp>;
   readonly metadata_id?: InputMaybe<String_Comparison_Exp>;
+  readonly organization_controller_identity?: InputMaybe<Identity_Bool_Exp>;
+  readonly organization_creator_identity?: InputMaybe<Identity_Bool_Exp>;
   readonly organization_members?: InputMaybe<Organization_Member_Bool_Exp>;
   readonly organization_metadata?: InputMaybe<Organization_Metadata_Bool_Exp>;
+  readonly organization_treasury_identity?: InputMaybe<Identity_Bool_Exp>;
   readonly pay_asset?: InputMaybe<Int_Comparison_Exp>;
   readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly treasury?: InputMaybe<String_Comparison_Exp>;
@@ -1934,13 +1973,13 @@ export type Organization_Order_By = {
   readonly fee_model?: InputMaybe<Order_By>;
   readonly gov_asset?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
-  readonly identity?: InputMaybe<Identity_Order_By>;
-  readonly identityByControllerIdentityId?: InputMaybe<Identity_Order_By>;
-  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Order_By>;
   readonly member_limit?: InputMaybe<Order_By>;
   readonly metadata_id?: InputMaybe<Order_By>;
+  readonly organization_controller_identity?: InputMaybe<Identity_Order_By>;
+  readonly organization_creator_identity?: InputMaybe<Identity_Order_By>;
   readonly organization_members_aggregate?: InputMaybe<Organization_Member_Aggregate_Order_By>;
   readonly organization_metadata?: InputMaybe<Organization_Metadata_Order_By>;
+  readonly organization_treasury_identity?: InputMaybe<Identity_Order_By>;
   readonly pay_asset?: InputMaybe<Order_By>;
   readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly treasury?: InputMaybe<Order_By>;
@@ -2129,12 +2168,12 @@ export type Proposal = {
   readonly data: Scalars['jsonb'];
   readonly expiry_block: Scalars['Int'];
   readonly id: Scalars['String'];
-  /** An object relationship */
-  readonly identity: Identity;
   readonly metadata_id?: Maybe<Scalars['String']>;
   /** An object relationship */
   readonly organization: Organization;
   readonly organization_id: Scalars['String'];
+  /** An object relationship */
+  readonly proposal_creator_identity: Identity;
   /** An object relationship */
   readonly proposal_metadata?: Maybe<Proposal_Metadata>;
   /** An array relationship */
@@ -2247,10 +2286,10 @@ export type Proposal_Bool_Exp = {
   readonly data?: InputMaybe<Jsonb_Comparison_Exp>;
   readonly expiry_block?: InputMaybe<Int_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
-  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly metadata_id?: InputMaybe<String_Comparison_Exp>;
   readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly organization_id?: InputMaybe<String_Comparison_Exp>;
+  readonly proposal_creator_identity?: InputMaybe<Identity_Bool_Exp>;
   readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Bool_Exp>;
   readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
@@ -2429,10 +2468,10 @@ export type Proposal_Order_By = {
   readonly data?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
-  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly metadata_id?: InputMaybe<Order_By>;
   readonly organization?: InputMaybe<Organization_Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
+  readonly proposal_creator_identity?: InputMaybe<Identity_Order_By>;
   readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Order_By>;
   readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>;
   readonly state?: InputMaybe<Order_By>;
@@ -2813,6 +2852,8 @@ export type Proposal_Voter_Variance_Order_By = {
 
 export type Query_Root = {
   readonly __typename?: 'query_root';
+  /** fetch data from the table: "ChainInfo" */
+  readonly ChainInfo: ReadonlyArray<ChainInfo>;
   readonly apiProvider: ApiProvider;
   /** fetch data from the table: "campaign" */
   readonly campaign: ReadonlyArray<Campaign>;
@@ -2880,6 +2921,15 @@ export type Query_Root = {
   readonly proposal_voter_by_pk?: Maybe<Proposal_Voter>;
   readonly rmrkNfts?: Maybe<ReadonlyArray<Maybe<RmrkNft>>>;
   readonly version: Scalars['String'];
+};
+
+
+export type Query_RootChainInfoArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<ChainInfo_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<ChainInfo_Order_By>>;
+  where?: InputMaybe<ChainInfo_Bool_Exp>;
 };
 
 
@@ -3129,7 +3179,8 @@ export type Query_RootRmrkNftsArgs = {
 
 export type Subscription_Root = {
   readonly __typename?: 'subscription_root';
-  readonly blockNumber: Scalars['Int'];
+  /** fetch data from the table: "ChainInfo" */
+  readonly ChainInfo: ReadonlyArray<ChainInfo>;
   /** fetch data from the table: "campaign" */
   readonly campaign: ReadonlyArray<Campaign>;
   /** fetch aggregated fields from the table: "campaign" */
@@ -3190,6 +3241,15 @@ export type Subscription_Root = {
   readonly proposal_voter_aggregate: Proposal_Voter_Aggregate;
   /** fetch data from the table: "proposal_voter" using primary key columns */
   readonly proposal_voter_by_pk?: Maybe<Proposal_Voter>;
+};
+
+
+export type Subscription_RootChainInfoArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<ChainInfo_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<ChainInfo_Order_By>>;
+  where?: InputMaybe<ChainInfo_Bool_Exp>;
 };
 
 
@@ -3422,6 +3482,11 @@ export type Subscription_RootProposal_Voter_By_PkArgs = {
   id: Scalars['String'];
 };
 
+export type BlockNumberSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BlockNumberSubscription = { readonly __typename?: 'subscription_root', readonly ChainInfo: ReadonlyArray<{ readonly __typename?: 'ChainInfo', readonly blockNumber: any }> };
+
 export type SuccessfulCampaignByOrganisationIdSubscriptionVariables = Exact<{
   orgId: Scalars['String'];
 }>;
@@ -3456,6 +3521,11 @@ export type ConfigQueryVariables = Exact<{
 
 
 export type ConfigQuery = { readonly __typename?: 'query_root', readonly config: { readonly __typename?: 'Config', readonly SITE_NAME?: string | null, readonly SITE_TITLE?: string | null, readonly SITE_DESCRIPTION?: string | null, readonly SITE_IMAGE?: string | null, readonly TW_SITE_NAME?: string | null, readonly TW_SITE_CREATOR?: string | null, readonly CONTACT?: string | null, readonly IPFS_GATEWAY?: string | null, readonly LOG_LEVEL?: LogLevel | null } };
+
+export type ApiProviderConfigQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ApiProviderConfigQuery = { readonly __typename?: 'query_root', readonly apiProvider: { readonly __typename?: 'ApiProvider', readonly name: string, readonly types: string, readonly wsProviderUrl: string, readonly chainProperties: { readonly __typename?: 'ChainProperties', readonly governanceCurrency: number, readonly networkCurrency: number, readonly paymentCurrencies: number, readonly ss58Format: number, readonly tokenDecimals: ReadonlyArray<string | null>, readonly tokenSymbol: ReadonlyArray<string | null> } } };
 
 export type DisplayValuesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3499,6 +3569,20 @@ export type OrganizationByIdSubscriptionVariables = Exact<{
 
 export type OrganizationByIdSubscription = { readonly __typename?: 'subscription_root', readonly organization: ReadonlyArray<{ readonly __typename?: 'organization', readonly access: string, readonly controller: string, readonly created_at_block: number, readonly creator: string, readonly fee: any, readonly fee_model: string, readonly gov_asset: number, readonly id: string, readonly member_limit: any, readonly pay_asset: number, readonly treasury: string, readonly type: string, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string, readonly identity: { readonly __typename?: 'identity', readonly display_name?: string | null } }>, readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly description: string, readonly email: string, readonly id: string, readonly logo: string, readonly header: string, readonly name: string, readonly repo: string, readonly website: string } | null }> };
 
+export type ProposalsByOrganizationIdSubscriptionVariables = Exact<{
+  orgId: Scalars['String'];
+}>;
+
+
+export type ProposalsByOrganizationIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly creator: string, readonly state: string, readonly created_at_block: number, readonly expiry_block: number, readonly proposal_metadata?: { readonly __typename?: 'proposal_metadata', readonly name: string, readonly description: string } | null }> };
+
+export type ProposalByIdSubscriptionVariables = Exact<{
+  proposalId: Scalars['String'];
+}>;
+
+
+export type ProposalByIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly type: any, readonly voting_type: any, readonly state: string, readonly created_at_block: number, readonly expiry_block: number, readonly proposal_creator_identity: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null }, readonly proposal_metadata?: { readonly __typename?: 'proposal_metadata', readonly name: string, readonly description: string } | null, readonly proposal_voters: ReadonlyArray<{ readonly __typename?: 'proposal_voter', readonly voted: any, readonly identity: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } }> }> };
+
 export type SidebarSubscriptionVariables = Exact<{
   address: Scalars['String'];
 }>;
@@ -3507,6 +3591,35 @@ export type SidebarSubscriptionVariables = Exact<{
 export type SidebarSubscription = { readonly __typename?: 'subscription_root', readonly organization: ReadonlyArray<{ readonly __typename?: 'organization', readonly id: string, readonly metadata?: { readonly __typename?: 'organization_metadata', readonly logo: string, readonly name: string } | null }> };
 
 
+export const BlockNumberDocument = gql`
+    subscription BlockNumber {
+  ChainInfo {
+    blockNumber
+  }
+}
+    `;
+
+/**
+ * __useBlockNumberSubscription__
+ *
+ * To run a query within a React component, call `useBlockNumberSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useBlockNumberSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBlockNumberSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useBlockNumberSubscription(baseOptions?: Apollo.SubscriptionHookOptions<BlockNumberSubscription, BlockNumberSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<BlockNumberSubscription, BlockNumberSubscriptionVariables>(BlockNumberDocument, options);
+      }
+export type BlockNumberSubscriptionHookResult = ReturnType<typeof useBlockNumberSubscription>;
+export type BlockNumberSubscriptionResult = Apollo.SubscriptionResult<BlockNumberSubscription>;
 export const SuccessfulCampaignByOrganisationIdDocument = gql`
     subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
   campaign(where: {organization_id: {_eq: $orgId}, state: {_eq: "Success"}}) {
@@ -3718,6 +3831,50 @@ export function useConfigLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Con
 export type ConfigQueryHookResult = ReturnType<typeof useConfigQuery>;
 export type ConfigLazyQueryHookResult = ReturnType<typeof useConfigLazyQuery>;
 export type ConfigQueryResult = Apollo.QueryResult<ConfigQuery, ConfigQueryVariables>;
+export const ApiProviderConfigDocument = gql`
+    query ApiProviderConfig {
+  apiProvider {
+    name
+    types
+    wsProviderUrl
+    chainProperties {
+      governanceCurrency
+      networkCurrency
+      paymentCurrencies
+      ss58Format
+      tokenDecimals
+      tokenSymbol
+    }
+  }
+}
+    `;
+
+/**
+ * __useApiProviderConfigQuery__
+ *
+ * To run a query within a React component, call `useApiProviderConfigQuery` and pass it any options that fit your needs.
+ * When your component renders, `useApiProviderConfigQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useApiProviderConfigQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useApiProviderConfigQuery(baseOptions?: Apollo.QueryHookOptions<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>(ApiProviderConfigDocument, options);
+      }
+export function useApiProviderConfigLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>(ApiProviderConfigDocument, options);
+        }
+export type ApiProviderConfigQueryHookResult = ReturnType<typeof useApiProviderConfigQuery>;
+export type ApiProviderConfigLazyQueryHookResult = ReturnType<typeof useApiProviderConfigLazyQuery>;
+export type ApiProviderConfigQueryResult = Apollo.QueryResult<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>;
 export const DisplayValuesDocument = gql`
     query DisplayValues {
   displayValues {
@@ -4033,6 +4190,94 @@ export function useOrganizationByIdSubscription(baseOptions: Apollo.Subscription
       }
 export type OrganizationByIdSubscriptionHookResult = ReturnType<typeof useOrganizationByIdSubscription>;
 export type OrganizationByIdSubscriptionResult = Apollo.SubscriptionResult<OrganizationByIdSubscription>;
+export const ProposalsByOrganizationIdDocument = gql`
+    subscription ProposalsByOrganizationId($orgId: String!) {
+  proposal(where: {organization_id: {_eq: $orgId}}) {
+    id
+    creator
+    state
+    created_at_block
+    expiry_block
+    proposal_metadata {
+      name
+      description
+    }
+  }
+}
+    `;
+
+/**
+ * __useProposalsByOrganizationIdSubscription__
+ *
+ * To run a query within a React component, call `useProposalsByOrganizationIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useProposalsByOrganizationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProposalsByOrganizationIdSubscription({
+ *   variables: {
+ *      orgId: // value for 'orgId'
+ *   },
+ * });
+ */
+export function useProposalsByOrganizationIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables>(ProposalsByOrganizationIdDocument, options);
+      }
+export type ProposalsByOrganizationIdSubscriptionHookResult = ReturnType<typeof useProposalsByOrganizationIdSubscription>;
+export type ProposalsByOrganizationIdSubscriptionResult = Apollo.SubscriptionResult<ProposalsByOrganizationIdSubscription>;
+export const ProposalByIdDocument = gql`
+    subscription ProposalById($proposalId: String!) {
+  proposal(where: {id: {_eq: $proposalId}}) {
+    id
+    type
+    voting_type
+    state
+    created_at_block
+    expiry_block
+    proposal_creator_identity {
+      id
+      display_name
+    }
+    proposal_metadata {
+      name
+      description
+    }
+    proposal_voters {
+      identity {
+        id
+        display_name
+      }
+      voted
+    }
+  }
+}
+    `;
+
+/**
+ * __useProposalByIdSubscription__
+ *
+ * To run a query within a React component, call `useProposalByIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useProposalByIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProposalByIdSubscription({
+ *   variables: {
+ *      proposalId: // value for 'proposalId'
+ *   },
+ * });
+ */
+export function useProposalByIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>(ProposalByIdDocument, options);
+      }
+export type ProposalByIdSubscriptionHookResult = ReturnType<typeof useProposalByIdSubscription>;
+export type ProposalByIdSubscriptionResult = Apollo.SubscriptionResult<ProposalByIdSubscription>;
 export const SidebarDocument = gql`
     subscription Sidebar($address: String!) {
   organization(where: {organization_members: {address: {_eq: $address}}}) {

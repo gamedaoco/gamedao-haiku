@@ -2,6 +2,7 @@ import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack } from '@mui/material'
 import { useApiProvider } from 'hooks/useApiProvider'
 import { useExtensionContext } from 'provider/extension/modules/context'
+import { useNetworkContext } from 'provider/network/modules/context'
 
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
@@ -16,6 +17,7 @@ interface ComponentProps {
 
 export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNetworkSelect }: ComponentProps) {
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
+	const { apiProviders } = useNetworkContext()
 	const apiProvider = useApiProvider()
 	return (
 		<Menu
@@ -106,9 +108,11 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				</Stack>
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
 					{apiProvider?.chainName ?? ''}
-					<Button onClick={openNetworkSelect}>
-						<MoreVert fontSize="small" />
-					</Button>
+					{apiProviders?.length > 1 && (
+						<Button onClick={openNetworkSelect}>
+							<MoreVert fontSize="small" />
+						</Button>
+					)}
 				</Box>
 			</Stack>
 		</Menu>

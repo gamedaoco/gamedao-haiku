@@ -144,8 +144,13 @@ type ProposalMetadata @entity {
     description: String!
 }
 
+type ProposalTypeGeneralData {
+    type: Int!
+}
+
 type ProposalTypeWithdrawalData {
+    type: Int!
     withdrawAmount: BigInt!
 }
 
-union ProposalTypeData = ProposalTypeWithdrawalData
+union ProposalTypeData = ProposalTypeGeneralData | ProposalTypeWithdrawalData

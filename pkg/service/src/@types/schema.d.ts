@@ -190,11 +190,6 @@ export type RmrkNft = {
 	readonly sn: Scalars['String']
 }
 
-export type Subscription = {
-	readonly __typename?: 'Subscription'
-	readonly blockNumber: Scalars['Int']
-}
-
 export type WithIndex<TObject> = TObject & Record<string, any>
 export type ResolversObject<TObject> = WithIndex<TObject>
 
@@ -294,7 +289,6 @@ export type ResolversTypes = ResolversObject<{
 	Query: ResolverTypeWrapper<{}>
 	RMRKNft: ResolverTypeWrapper<RmrkNft>
 	String: ResolverTypeWrapper<Scalars['String']>
-	Subscription: ResolverTypeWrapper<{}>
 	Upload: ResolverTypeWrapper<Scalars['Upload']>
 }>
 
@@ -322,7 +316,6 @@ export type ResolversParentTypes = ResolversObject<{
 	Query: {}
 	RMRKNft: RmrkNft
 	String: Scalars['String']
-	Subscription: {}
 	Upload: Scalars['Upload']
 }>
 
@@ -580,13 +573,6 @@ export type RmrkNftResolvers<
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
-export type SubscriptionResolvers<
-	ContextType = any,
-	ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
-> = ResolversObject<{
-	blockNumber?: SubscriptionResolver<ResolversTypes['Int'], 'blockNumber', ParentType, ContextType>
-}>
-
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
 	name: 'Upload'
 }
@@ -608,6 +594,5 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	ProposalFeatures?: ProposalFeaturesResolvers<ContextType>
 	Query?: QueryResolvers<ContextType>
 	RMRKNft?: RmrkNftResolvers<ContextType>
-	Subscription?: SubscriptionResolvers<ContextType>
 	Upload?: GraphQLScalarType
 }>
