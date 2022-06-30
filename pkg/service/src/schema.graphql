@@ -140,10 +140,6 @@ type Mutation {
     singleUpload(fileStream: Upload!): String!
 }
 
-type Subscription {
-    blockNumber: Int!
-}
-
 type Query {
     version: String!
     links: [Link]!

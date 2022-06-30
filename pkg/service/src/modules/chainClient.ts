@@ -2,9 +2,9 @@ import { ApiPromise, WsProvider } from '@polkadot/api'
 import { cryptoWaitReady } from '@polkadot/util-crypto'
 
 import ZeroTypes from '../chainTypes/zero-types.json'
-import { PubSub } from './pubSub'
+import { DbClient } from './dbClient'
 
-const pubSub = PubSub.Instance
+const dbClient = DbClient.Instance
 
 export class ChainClient {
 	private static _instance: ChainClient
@@ -32,9 +32,8 @@ export class ChainClient {
 		return this.apiProvider as ApiPromise
 	}
 
-	private static bestNumberFinalizedHandler(result: any) {
-		console.log()
-		pubSub.client.publish('NEW_BLOCK_NUMBER', { blockNumber: result?.toNumber() })
+	private static async bestNumberFinalizedHandler(result: any) {
+		await dbClient.updateBlockNumber(result.toNumber())
 	}
 
 	public async Initialize() {

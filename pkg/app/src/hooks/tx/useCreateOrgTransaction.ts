@@ -43,11 +43,21 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 					org_type: data.type,
 					access: data.mode,
 					fee_model: data.feeMode,
-					fee: fromUnit(data.feeAmount, selectedApiProvider.systemProperties.tokenDecimals),
-					gov_asset: 2, // TODO
-					pay_asset: 0, // TODO
+					fee: fromUnit(
+						data.feeAmount,
+						selectedApiProvider.systemProperties.tokenDecimals[
+							selectedApiProvider.systemProperties.networkCurrency
+						],
+					),
+					gov_asset: selectedApiProvider.systemProperties.governanceCurrency,
+					pay_asset: selectedApiProvider.systemProperties.paymentCurrencies,
 					member_limit: data.memberLimit,
-					deposit: fromUnit(data.deposit, selectedApiProvider.systemProperties.tokenDecimals),
+					deposit: fromUnit(
+						data.deposit,
+						selectedApiProvider.systemProperties.tokenDecimals[
+							selectedApiProvider.systemProperties.networkCurrency
+						],
+					),
 				}
 
 				// Data validation
