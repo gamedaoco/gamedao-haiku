@@ -4,14 +4,11 @@ import { useRouter } from 'next/router'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button } from '@mui/material'
-import { Simulate } from 'react-dom/test-utils'
 import { AccountState } from 'src/@types/extension'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
-
-import input = Simulate.input
 
 interface MyOrganisationsTabProps {
 	accountState: AccountState

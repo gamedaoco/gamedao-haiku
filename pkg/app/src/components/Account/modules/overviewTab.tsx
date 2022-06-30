@@ -5,6 +5,8 @@ import { AccountState } from 'src/@types/extension'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
+import { balances } from 'components/Account/mock/balances'
+
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 import MyAchievementsCard from './OverviewSection/myAchievements'
 import MyBalancesCard from './OverviewSection/myBalances'
@@ -29,7 +31,7 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 					<MyAchievementsCard />
 				</Grid>
 				<Grid item xs={12} md={8}>
-					{/*<MyBalancesCard balances={balances} loading={loading} />*/}
+					<MyBalancesCard balances={balances} loading={loading} />
 				</Grid>
 				<Grid item xs={12}>
 					<MyOrganisationsTable
