@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Campaign } from 'src/queries'
-import { Box, Card, CardContent, CardMedia, Container, LinearProgress, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import Lineup from 'components/lineup'
@@ -9,7 +9,7 @@ import Lineup from 'components/lineup'
 import { getCampaignFunding, getCampaignProgress } from './campaignUtils'
 import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
-import { reformatNumber } from 'src/utils/globalUtils'
+import { abbreviateNumber } from 'src/utils/globalUtils'
 
 interface CampaignCardProps {
 	campaign: Campaign
@@ -74,9 +74,9 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 					firstTitle="Funded"
 					secondTitle="Target"
 					thirdTitle="Contributor"
-					firstSubhead={reformatNumber(getCampaignFunding(campaign))}
-					secondSubhead={reformatNumber(campaign?.target)}
-					thirdSubhead={reformatNumber(campaign?.campaign_contributors?.length)}
+					firstSubhead={abbreviateNumber(getCampaignFunding(campaign))}
+					secondSubhead={abbreviateNumber(campaign?.target)}
+					thirdSubhead={abbreviateNumber(campaign?.campaign_contributors?.length)}
 					gap="20%"
 				/>
 			</CardContent>

@@ -15,7 +15,6 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { AccountState } from 'src/@types/extension'
 import { Campaign_Contributor, CampaignContributorsSubscription } from 'src/queries'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import { useConfig } from 'hooks/useConfig'
@@ -28,14 +27,14 @@ import {
 	getContributedCampaignTimeLeft,
 } from './contributedCampaignUtils'
 import LoadingCampaignTable from './loadingCampaignTable'
+import { abbreviateNumber } from 'src/utils/globalUtils'
 
 interface ContributedCampaignsSectionProps {
 	data: CampaignContributorsSubscription
 	loading: boolean
-	accountState: AccountState
 }
 
-const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading, accountState }) => {
+const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading }) => {
 	const theme = useTheme()
 	const config = useConfig()
 
@@ -107,7 +106,9 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 												<TableCell>
 													{campaignContributor?.campaign?.campaign_contributors?.length}
 												</TableCell>
-												<TableCell>{campaignContributor?.contributed}</TableCell>
+												<TableCell>
+													{abbreviateNumber(campaignContributor?.contributed)}
+												</TableCell>
 												<TableCell>
 													<Box display="flex" flexDirection="column" sx={{ mt: 2 }}>
 														<LinearProgress
@@ -117,11 +118,14 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 															)}
 															sx={{ maxHeight: 6 }}
 														/>
+
 														<Typography variant="body2">
-															{getContributedCampaignRaisedAmount(
-																campaignContributor as Campaign_Contributor,
+															{abbreviateNumber(
+																getContributedCampaignRaisedAmount(
+																	campaignContributor as Campaign_Contributor,
+																),
 															)}
-															/{campaignContributor?.campaign?.target}
+															/{abbreviateNumber(campaignContributor?.campaign?.target)}
 														</Typography>
 													</Box>
 												</TableCell>
