@@ -4,10 +4,10 @@ import { Box } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
 import { useCampaignContributorsSubscription } from 'src/queries'
 import { Campaign, useCampaignSubscription } from 'src/queries'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import CreatedCampaignSection from './CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
 import ContributedCampaignsSection from './CampaignsSection/contributedCampaignsSection/contributedCampaignsSection'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 interface MyCampaignsTabProps {
 	accountState: AccountState
@@ -23,11 +23,7 @@ const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
 	return (
 		<Box>
 			<CreatedCampaignSection data={data} loading={loading} accountState={accountState} />
-			<ContributedCampaignsSection
-				data={campaignContributorsData}
-				loading={campaignContributorsLoading}
-				accountState={accountState}
-			/>
+			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
 	)
 }
