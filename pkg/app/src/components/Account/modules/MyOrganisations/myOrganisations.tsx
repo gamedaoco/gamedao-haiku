@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { AccountOrganizations } from '@gamedao-haiku/graphql/dist'
 import { Edit } from '@mui/icons-material'
 import {
 	Avatar,
@@ -15,6 +14,7 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
+import { AccountOrganizations } from 'src/queries'
 import { getInitials } from 'src/utils/accountUtils'
 import { reformatNumber } from 'src/utils/globalUtils'
 
