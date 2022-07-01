@@ -138,6 +138,7 @@ type ApiProvider {
 
 type Mutation {
     singleUpload(fileStream: Upload!): String!
+    updateSession(address: String!): Boolean!
 }
 
 type Query {
