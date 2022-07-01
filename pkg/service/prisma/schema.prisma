@@ -14,3 +14,21 @@ model ChainInfo {
     id          Int         @id @default(autoincrement())
     blockNumber BigInt      @default(0)
 }
+
+model Session {
+    id          BigInt      @id @default(autoincrement())
+    address     String      @unique
+    updatedAt   DateTime    @updatedAt
+    key         String      @unique @default(uuid())
+}
+
+model Balance {
+    id          BigInt      @id @default(autoincrement())
+    address     String
+    balanceId   Int
+    free        String      @default("0")
+    reserved    String      @default("0")
+    frozen      String      @default("0")
+
+    @@unique([address, balanceId])
+}
