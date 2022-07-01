@@ -1,9 +1,11 @@
 import React, { FC, memo } from 'react'
 
-import { AccountBalance, AccountOrganizations, useAccountQuery } from '@gamedao-haiku/graphql/dist'
 import { Box, Grid } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
+import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
+
+import { balances } from 'components/Account/mock/balances'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 import MyAchievementsCard from './OverviewSection/myAchievements'
@@ -16,9 +18,12 @@ interface OverviewTabProps {
 
 const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 	const address = getAddressFromAccountState(accountState)
-	const { data, loading } = useAccountQuery({ variables: { address } })
-	const balances = data?.account?.balances?.slice() as AccountBalance[]
-	const organisations = data?.account?.organizations?.slice() as AccountOrganizations[]
+	const { data, loading } = useAccountOrganizationsSubscription({
+		variables: {
+			address: address,
+		},
+	})
+	const organisations = data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice()
 	return (
 		<Box>
 			<Grid container spacing={3}>
@@ -29,7 +34,11 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 					<MyBalancesCard balances={balances} loading={loading} />
 				</Grid>
 				<Grid item xs={12}>
-					<MyOrganisationsTable organisations={organisations} title={'Organisations'} loading={loading} />
+					<MyOrganisationsTable
+						organisations={organisations as Organization[]}
+						title={'Organisations'}
+						loading={loading}
+					/>
 				</Grid>
 				<Grid item xs={12}>
 					<MyCollectablesTab accountState={accountState} />

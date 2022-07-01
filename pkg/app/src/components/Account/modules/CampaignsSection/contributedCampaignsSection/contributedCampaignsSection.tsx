@@ -15,36 +15,28 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { AccountState } from 'src/@types/extension'
-import { Campaign_Contributor, useCampaignContributorsConnectionQuery } from 'src/queries'
+import { Campaign_Contributor, CampaignContributorsSubscription } from 'src/queries'
+import { parseIpfsHash } from 'src/utils/ipfs'
+import { useConfig } from 'hooks/useConfig'
 
 import { Scrollbar } from 'components/scrollbar'
 
 import {
-	getContributedCampaignContribution,
-	getContributedCampaignContributorsCount,
-	getContributedCampaignLogo,
-	getContributedCampaignName,
 	getContributedCampaignProgress,
 	getContributedCampaignRaisedAmount,
-	getContributedCampaignState,
-	getContributedCampaignTarget,
 	getContributedCampaignTimeLeft,
-	getContributedCampaignTitle,
 } from './contributedCampaignUtils'
 import LoadingCampaignTable from './loadingCampaignTable'
-
-const gateway = 'https://ipfs.gamedao.co/gateway/'
+import { abbreviateNumber } from 'src/utils/globalUtils'
 
 interface ContributedCampaignsSectionProps {
-	accountState: AccountState
+	data: CampaignContributorsSubscription
+	loading: boolean
 }
 
-const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ accountState }) => {
+const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading }) => {
 	const theme = useTheme()
-	const { data, loading } = useCampaignContributorsConnectionQuery({
-		variables: { address: '5Dkv3jCJqDdk2uWWdT2DNXAFFgTLhHRZxdFmU8LHz9R74BeS' },
-	})
+	const config = useConfig()
 
 	return (
 		<Box>
@@ -73,7 +65,7 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 								<LoadingCampaignTable />
 							) : (
 								<TableBody>
-									{data?.campaign_contributor_by_pk?.map((campaignContributorEdge, index) => {
+									{data?.campaign_contributor?.map((campaignContributor, index) => {
 										return (
 											<TableRow key={index}>
 												<TableCell>
@@ -90,67 +82,60 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 																	width: 64,
 																	height: 64,
 																}}
-																src={`${gateway}${getContributedCampaignLogo(
-																	campaignContributorEdge as Campaign_Contributor,
-																)}`}
+																src={parseIpfsHash(
+																	campaignContributor?.campaign?.campaign_metadata
+																		?.logo,
+																	config.IPFS_GATEWAY,
+																)}
 																alt="campaign_logo"
 															/>
 														</Box>
 														<Box display="flex" flexDirection="column">
 															<Typography>
-																{getContributedCampaignName(
-																	campaignContributorEdge as Campaign_Contributor,
-																)}
+																{campaignContributor?.campaign?.campaign_metadata?.name}
 															</Typography>
 															<Typography variant="body2">
-																{getContributedCampaignTitle(
-																	campaignContributorEdge as Campaign_Contributor,
-																)}
+																{
+																	campaignContributor?.campaign?.organization
+																		?.organization_metadata?.name
+																}
 															</Typography>
 														</Box>
 													</Box>
 												</TableCell>
 												<TableCell>
-													{getContributedCampaignContributorsCount(
-														campaignContributorEdge as Campaign_Contributor,
-													)}
+													{campaignContributor?.campaign?.campaign_contributors?.length}
 												</TableCell>
 												<TableCell>
-													{getContributedCampaignContribution(
-														campaignContributorEdge as Campaign_Contributor,
-													)}
+													{abbreviateNumber(campaignContributor?.contributed)}
 												</TableCell>
 												<TableCell>
 													<Box display="flex" flexDirection="column" sx={{ mt: 2 }}>
 														<LinearProgress
 															variant="determinate"
 															value={getContributedCampaignProgress(
-																campaignContributorEdge as Campaign_Contributor,
+																campaignContributor as Campaign_Contributor,
 															)}
 															sx={{ maxHeight: 6 }}
 														/>
+
 														<Typography variant="body2">
-															{getContributedCampaignRaisedAmount(
-																campaignContributorEdge as Campaign_Contributor,
+															{abbreviateNumber(
+																getContributedCampaignRaisedAmount(
+																	campaignContributor as Campaign_Contributor,
+																),
 															)}
-															/
-															{getContributedCampaignTarget(
-																campaignContributorEdge as Campaign_Contributor,
-															)}
+															/{abbreviateNumber(campaignContributor?.campaign?.target)}
 														</Typography>
 													</Box>
 												</TableCell>
 												<TableCell>
 													{getContributedCampaignTimeLeft(
-														campaignContributorEdge as Campaign_Contributor,
+														campaignContributor as Campaign_Contributor,
 													)}
 												</TableCell>
 												<TableCell>
-													<Chip
-														label={getContributedCampaignState(
-															campaignContributorEdge as Campaign_Contributor,
-														)}
-													/>
+													<Chip label={campaignContributor?.campaign?.state} />
 												</TableCell>
 											</TableRow>
 										)
@@ -165,4 +150,4 @@ const ContributedCampaginsSection: FC<ContributedCampaignsSectionProps> = ({ acc
 	)
 }
 
-export default ContributedCampaginsSection
+export default ContributedCampaignsSection

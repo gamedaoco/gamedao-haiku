@@ -3494,12 +3494,26 @@ export type SuccessfulCampaignByOrganisationIdSubscriptionVariables = Exact<{
 
 export type SuccessfulCampaignByOrganisationIdSubscription = { readonly __typename?: 'subscription_root', readonly campaign: ReadonlyArray<{ readonly __typename?: 'campaign', readonly id: string, readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata', readonly name: string } | null }> };
 
-export type CampaignContributorsConnectionSubscriptionVariables = Exact<{
+export type CampaignContributorsSubscriptionVariables = Exact<{
   address: Scalars['String'];
 }>;
 
 
-export type CampaignContributorsConnectionSubscription = { readonly __typename?: 'subscription_root', readonly campaign_contributor: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly id: string, readonly contributed: any, readonly campaign: { readonly __typename?: 'campaign', readonly deposit: any, readonly expiry: number, readonly state: string, readonly target: any, readonly created_at_block: number, readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata', readonly name: string, readonly title: string, readonly logo: string } | null, readonly campaign_contributors: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly id: string, readonly contributed: any }> } }> };
+export type CampaignContributorsSubscription = { readonly __typename?: 'subscription_root', readonly campaign_contributor: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly id: string, readonly contributed: any, readonly campaign: { readonly __typename?: 'campaign', readonly deposit: any, readonly expiry: number, readonly state: string, readonly target: any, readonly created_at_block: number, readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata', readonly name: string, readonly title: string, readonly logo: string } | null, readonly campaign_contributors: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly id: string, readonly contributed: any }>, readonly organization: { readonly __typename?: 'organization', readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly name: string } | null } } }> };
+
+export type CampaignSubscriptionVariables = Exact<{
+  address?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CampaignSubscription = { readonly __typename?: 'subscription_root', readonly campaign: ReadonlyArray<{ readonly __typename?: 'campaign', readonly deposit: any, readonly target: any, readonly campaign_metadata?: { readonly __typename?: 'campaign_metadata', readonly name: string, readonly title: string, readonly logo: string, readonly header: string } | null, readonly campaign_contributors: ReadonlyArray<{ readonly __typename?: 'campaign_contributor', readonly contributed: any, readonly id: string }>, readonly organization: { readonly __typename?: 'organization', readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly name: string } | null } }> };
+
+export type CollectablesForUserQueryVariables = Exact<{
+  owner: Scalars['String'];
+}>;
+
+
+export type CollectablesForUserQuery = { readonly __typename?: 'query_root', readonly rmrkNfts?: ReadonlyArray<{ readonly __typename?: 'RMRKNft', readonly id: string, readonly metadata: string, readonly sn: string } | null> | null };
 
 export type ConfigQueryVariables = Exact<{
   env: Environment;
@@ -3554,6 +3568,13 @@ export type OrganizationByIdSubscriptionVariables = Exact<{
 
 
 export type OrganizationByIdSubscription = { readonly __typename?: 'subscription_root', readonly organization: ReadonlyArray<{ readonly __typename?: 'organization', readonly access: string, readonly controller: string, readonly created_at_block: number, readonly creator: string, readonly fee: any, readonly fee_model: string, readonly gov_asset: number, readonly id: string, readonly member_limit: any, readonly pay_asset: number, readonly treasury: string, readonly type: string, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string, readonly identity: { readonly __typename?: 'identity', readonly display_name?: string | null } }>, readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly description: string, readonly email: string, readonly id: string, readonly logo: string, readonly header: string, readonly name: string, readonly repo: string, readonly website: string } | null }> };
+
+export type AccountOrganizationsSubscriptionVariables = Exact<{
+  address: Scalars['String'];
+}>;
+
+
+export type AccountOrganizationsSubscription = { readonly __typename?: 'subscription_root', readonly identity_by_pk?: { readonly __typename?: 'identity', readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly organization: { readonly __typename?: 'organization', readonly id: string, readonly access: string, readonly controller: string, readonly organization_metadata?: { readonly __typename?: 'organization_metadata', readonly name: string, readonly logo: string } | null, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string }> } }> } | null };
 
 export type ProposalsByOrganizationIdSubscriptionVariables = Exact<{
   orgId: Scalars['String'];
@@ -3639,8 +3660,8 @@ export function useSuccessfulCampaignByOrganisationIdSubscription(baseOptions: A
       }
 export type SuccessfulCampaignByOrganisationIdSubscriptionHookResult = ReturnType<typeof useSuccessfulCampaignByOrganisationIdSubscription>;
 export type SuccessfulCampaignByOrganisationIdSubscriptionResult = Apollo.SubscriptionResult<SuccessfulCampaignByOrganisationIdSubscription>;
-export const CampaignContributorsConnectionDocument = gql`
-    subscription CampaignContributorsConnection($address: String!) {
+export const CampaignContributorsDocument = gql`
+    subscription CampaignContributors($address: String!) {
   campaign_contributor(where: {identity: {address: {_eq: $address}}}) {
     id
     contributed
@@ -3654,6 +3675,11 @@ export const CampaignContributorsConnectionDocument = gql`
         id
         contributed
       }
+      organization {
+        organization_metadata {
+          name
+        }
+      }
       deposit
       expiry
       state
@@ -3665,27 +3691,110 @@ export const CampaignContributorsConnectionDocument = gql`
     `;
 
 /**
- * __useCampaignContributorsConnectionSubscription__
+ * __useCampaignContributorsSubscription__
  *
- * To run a query within a React component, call `useCampaignContributorsConnectionSubscription` and pass it any options that fit your needs.
- * When your component renders, `useCampaignContributorsConnectionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCampaignContributorsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCampaignContributorsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCampaignContributorsConnectionSubscription({
+ * const { data, loading, error } = useCampaignContributorsSubscription({
  *   variables: {
  *      address: // value for 'address'
  *   },
  * });
  */
-export function useCampaignContributorsConnectionSubscription(baseOptions: Apollo.SubscriptionHookOptions<CampaignContributorsConnectionSubscription, CampaignContributorsConnectionSubscriptionVariables>) {
+export function useCampaignContributorsSubscription(baseOptions: Apollo.SubscriptionHookOptions<CampaignContributorsSubscription, CampaignContributorsSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<CampaignContributorsConnectionSubscription, CampaignContributorsConnectionSubscriptionVariables>(CampaignContributorsConnectionDocument, options);
+        return Apollo.useSubscription<CampaignContributorsSubscription, CampaignContributorsSubscriptionVariables>(CampaignContributorsDocument, options);
       }
-export type CampaignContributorsConnectionSubscriptionHookResult = ReturnType<typeof useCampaignContributorsConnectionSubscription>;
-export type CampaignContributorsConnectionSubscriptionResult = Apollo.SubscriptionResult<CampaignContributorsConnectionSubscription>;
+export type CampaignContributorsSubscriptionHookResult = ReturnType<typeof useCampaignContributorsSubscription>;
+export type CampaignContributorsSubscriptionResult = Apollo.SubscriptionResult<CampaignContributorsSubscription>;
+export const CampaignDocument = gql`
+    subscription campaign($address: String) {
+  campaign(where: {admin_identity_id: {_eq: $address}}) {
+    deposit
+    target
+    campaign_metadata {
+      name
+      title
+      logo
+      header
+    }
+    campaign_contributors {
+      contributed
+      id
+    }
+    organization {
+      organization_metadata {
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCampaignSubscription__
+ *
+ * To run a query within a React component, call `useCampaignSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCampaignSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCampaignSubscription({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useCampaignSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CampaignSubscription, CampaignSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CampaignSubscription, CampaignSubscriptionVariables>(CampaignDocument, options);
+      }
+export type CampaignSubscriptionHookResult = ReturnType<typeof useCampaignSubscription>;
+export type CampaignSubscriptionResult = Apollo.SubscriptionResult<CampaignSubscription>;
+export const CollectablesForUserDocument = gql`
+    query CollectablesForUser($owner: String!) {
+  rmrkNfts(address: $owner) {
+    id
+    metadata
+    sn
+  }
+}
+    `;
+
+/**
+ * __useCollectablesForUserQuery__
+ *
+ * To run a query within a React component, call `useCollectablesForUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCollectablesForUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCollectablesForUserQuery({
+ *   variables: {
+ *      owner: // value for 'owner'
+ *   },
+ * });
+ */
+export function useCollectablesForUserQuery(baseOptions: Apollo.QueryHookOptions<CollectablesForUserQuery, CollectablesForUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CollectablesForUserQuery, CollectablesForUserQueryVariables>(CollectablesForUserDocument, options);
+      }
+export function useCollectablesForUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CollectablesForUserQuery, CollectablesForUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CollectablesForUserQuery, CollectablesForUserQueryVariables>(CollectablesForUserDocument, options);
+        }
+export type CollectablesForUserQueryHookResult = ReturnType<typeof useCollectablesForUserQuery>;
+export type CollectablesForUserLazyQueryHookResult = ReturnType<typeof useCollectablesForUserLazyQuery>;
+export type CollectablesForUserQueryResult = Apollo.QueryResult<CollectablesForUserQuery, CollectablesForUserQueryVariables>;
 export const ConfigDocument = gql`
     query Config($env: Environment!) {
   config(env: $env) {
@@ -4088,6 +4197,49 @@ export function useOrganizationByIdSubscription(baseOptions: Apollo.Subscription
       }
 export type OrganizationByIdSubscriptionHookResult = ReturnType<typeof useOrganizationByIdSubscription>;
 export type OrganizationByIdSubscriptionResult = Apollo.SubscriptionResult<OrganizationByIdSubscription>;
+export const AccountOrganizationsDocument = gql`
+    subscription AccountOrganizations($address: String!) {
+  identity_by_pk(id: $address) {
+    organization_members {
+      organization {
+        id
+        organization_metadata {
+          name
+          logo
+        }
+        access
+        controller
+        organization_members {
+          address
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAccountOrganizationsSubscription__
+ *
+ * To run a query within a React component, call `useAccountOrganizationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useAccountOrganizationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAccountOrganizationsSubscription({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useAccountOrganizationsSubscription(baseOptions: Apollo.SubscriptionHookOptions<AccountOrganizationsSubscription, AccountOrganizationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<AccountOrganizationsSubscription, AccountOrganizationsSubscriptionVariables>(AccountOrganizationsDocument, options);
+      }
+export type AccountOrganizationsSubscriptionHookResult = ReturnType<typeof useAccountOrganizationsSubscription>;
+export type AccountOrganizationsSubscriptionResult = Apollo.SubscriptionResult<AccountOrganizationsSubscription>;
 export const ProposalsByOrganizationIdDocument = gql`
     subscription ProposalsByOrganizationId($orgId: String!) {
   proposal(where: {organization_id: {_eq: $orgId}}) {

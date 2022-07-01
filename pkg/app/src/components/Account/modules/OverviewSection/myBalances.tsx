@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { AccountBalance } from '@gamedao-haiku/graphql/dist'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -15,10 +14,11 @@ import {
 	Typography,
 } from '@mui/material'
 
+import { Balances } from 'components/Account/mock/balances'
 import { Scrollbar } from 'components/scrollbar'
 
 interface MyBalancesCardProps {
-	balances: AccountBalance[]
+	balances: Balances[]
 	loading: boolean
 }
 
@@ -34,7 +34,7 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 						<TableHead>
 							<TableRow sx={{ borderRadius: '8px' }}>
 								<TableCell>Token</TableCell>
-								<TableCell>Transferrable</TableCell>
+								<TableCell>Transferable</TableCell>
 								<TableCell>Locked</TableCell>
 								<TableCell>Reserved</TableCell>
 								<TableCell>Total</TableCell>
@@ -69,7 +69,7 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 									{balances?.map((balance, index) => (
 										<TableRow hover key={index}>
 											<TableCell>{balance?.symbol}</TableCell>
-											<TableCell>{balance.transferrable}</TableCell>
+											<TableCell>{balance.transferable}</TableCell>
 											<TableCell>{balance.locked}</TableCell>
 											<TableCell>{balance.reserved}</TableCell>
 											<TableCell>{balance.total}</TableCell>

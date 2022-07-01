@@ -1,8 +1,7 @@
-# TODO: Add rmrk nft to service
-#query CollectablesForUser($owner: String!) {
-#    nfts(where: { owner: { _eq: $owner } }) {
-#        id
-#        metadata
-#        sn
-#    }
-#}
+query CollectablesForUser($owner: String!) {
+    rmrkNfts(address: $owner) {
+        id
+        metadata
+        sn
+    }
+}

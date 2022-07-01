@@ -2,7 +2,7 @@ import React, { FC, memo, useEffect } from 'react'
 
 import Script from 'next/script'
 
-import { useCollectablesForUserLazyQuery } from '@gamedao-haiku/graphql/dist'
+import { useCollectablesForUserLazyQuery } from 'src/queries'
 import { Card, Typography } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
