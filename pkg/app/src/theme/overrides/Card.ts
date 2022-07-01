@@ -1,8 +1,11 @@
 import { Theme } from '@mui/material/styles'
 
-import { PRIMARY_COLOR } from '../palette'
-
 // ----------------------------------------------------------------------
+declare module '@mui/material/CardMedia' {
+	interface CardMediaPropsVariantOverrides {
+		circle: true
+	}
+}
 
 export default function Card(theme: Theme) {
 	return {
@@ -31,7 +34,6 @@ export default function Card(theme: Theme) {
 		MuiCardMedia: {
 			styleOverrides: {
 				root: {
-					borderRadius: theme.shape.borderRadiusSm,
 					position: 'relative',
 				},
 			},

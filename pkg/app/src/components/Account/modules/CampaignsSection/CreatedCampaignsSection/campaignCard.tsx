@@ -27,16 +27,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 					alt="campaign_poster"
 				/>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-					<Card
-						sx={{
-							position: 'relative',
-							width: '6rem',
-							height: '6rem',
-							//TODO: add border radius
-							top: -35,
-							zIndex: 0,
-						}}
-					/>
+					<Card variant="mask" />
 				</Box>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<CardMedia
@@ -44,7 +35,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 						sx={{
 							width: '4rem',
 							height: '4rem',
-							//TODO: add border radius
+							borderRadius: Number(theme.shape.borderRadius) * 40,
 							top: -115,
 						}}
 						src={parseIpfsHash(campaign?.campaign_metadata?.logo, config.IPFS_GATEWAY)}
