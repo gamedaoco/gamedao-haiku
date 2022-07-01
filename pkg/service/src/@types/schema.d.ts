@@ -1,5 +1,4 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -14,6 +13,24 @@ export type Scalars = {
 	Int: number
 	Float: number
 	Upload: any
+}
+
+export type ApiProvider = {
+	readonly __typename?: 'ApiProvider'
+	readonly chainProperties: ChainProperties
+	readonly name: Scalars['String']
+	readonly types: Scalars['String']
+	readonly wsProviderUrl: Scalars['String']
+}
+
+export type ChainProperties = {
+	readonly __typename?: 'ChainProperties'
+	readonly governanceCurrency: Scalars['Int']
+	readonly networkCurrency: Scalars['Int']
+	readonly paymentCurrencies: Scalars['Int']
+	readonly ss58Format: Scalars['Int']
+	readonly tokenDecimals: ReadonlyArray<Maybe<Scalars['String']>>
+	readonly tokenSymbol: ReadonlyArray<Maybe<Scalars['String']>>
 }
 
 export type Config = {
@@ -68,6 +85,7 @@ export type DisplayValues = {
 	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly sortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 }
 
@@ -77,15 +95,19 @@ export enum Environment {
 	Staging = 'STAGING',
 }
 
-export type Features = ProposalFeatures & {
-	readonly __typename?: 'Features'
-	readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']
-	readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']
-	readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']
-	readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']
-}
+export type Features = OrganizationFeatures &
+	ProposalFeatures & {
+		readonly __typename?: 'Features'
+		readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']
+		readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']
+		readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']
+		readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
+		readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
+	}
 
 export type File = {
 	readonly __typename?: 'File'
@@ -123,6 +145,12 @@ export type MutationSingleUploadArgs = {
 	fileStream: Scalars['Upload']
 }
 
+export type OrganizationFeatures = {
+	readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']
+	readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
+	readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
+}
+
 export type ProposalFeatures = {
 	readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']
 	readonly CREATE_PROPOSAL: Scalars['Boolean']
@@ -134,10 +162,12 @@ export type ProposalFeatures = {
 
 export type Query = {
 	readonly __typename?: 'Query'
+	readonly apiProvider: ApiProvider
 	readonly config: Config
 	readonly displayValues?: Maybe<DisplayValues>
 	readonly features: Features
 	readonly links: ReadonlyArray<Maybe<Link>>
+	readonly rmrkNfts?: Maybe<ReadonlyArray<Maybe<RmrkNft>>>
 	readonly version: Scalars['String']
 }
 
@@ -147,6 +177,17 @@ export type QueryConfigArgs = {
 
 export type QueryFeaturesArgs = {
 	env: Environment
+}
+
+export type QueryRmrkNftsArgs = {
+	address: Scalars['String']
+}
+
+export type RmrkNft = {
+	readonly __typename?: 'RMRKNft'
+	readonly id: Scalars['String']
+	readonly metadata: Scalars['String']
+	readonly sn: Scalars['String']
 }
 
 export type WithIndex<TObject> = TObject & Record<string, any>
@@ -224,7 +265,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+	ApiProvider: ResolverTypeWrapper<ApiProvider>
 	Boolean: ResolverTypeWrapper<Scalars['Boolean']>
+	ChainProperties: ResolverTypeWrapper<ChainProperties>
 	Config: ResolverTypeWrapper<Config>
 	DisplayValueEntry:
 		| ResolversTypes['DisplayValueEntryCountry']
@@ -241,15 +284,19 @@ export type ResolversTypes = ResolversObject<{
 	Link: ResolverTypeWrapper<Link>
 	LogLevel: LogLevel
 	Mutation: ResolverTypeWrapper<{}>
+	OrganizationFeatures: ResolversTypes['Features']
 	ProposalFeatures: ResolversTypes['Features']
 	Query: ResolverTypeWrapper<{}>
+	RMRKNft: ResolverTypeWrapper<RmrkNft>
 	String: ResolverTypeWrapper<Scalars['String']>
 	Upload: ResolverTypeWrapper<Scalars['Upload']>
 }>
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+	ApiProvider: ApiProvider
 	Boolean: Scalars['Boolean']
+	ChainProperties: ChainProperties
 	Config: Config
 	DisplayValueEntry:
 		| ResolversParentTypes['DisplayValueEntryCountry']
@@ -264,10 +311,36 @@ export type ResolversParentTypes = ResolversObject<{
 	Int: Scalars['Int']
 	Link: Link
 	Mutation: {}
+	OrganizationFeatures: ResolversParentTypes['Features']
 	ProposalFeatures: ResolversParentTypes['Features']
 	Query: {}
+	RMRKNft: RmrkNft
 	String: Scalars['String']
 	Upload: Scalars['Upload']
+}>
+
+export type ApiProviderResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['ApiProvider'] = ResolversParentTypes['ApiProvider'],
+> = ResolversObject<{
+	chainProperties?: Resolver<ResolversTypes['ChainProperties'], ParentType, ContextType>
+	name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	types?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	wsProviderUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}>
+
+export type ChainPropertiesResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['ChainProperties'] = ResolversParentTypes['ChainProperties'],
+> = ResolversObject<{
+	governanceCurrency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	networkCurrency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	paymentCurrencies?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	ss58Format?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+	tokenDecimals?: Resolver<ReadonlyArray<Maybe<ResolversTypes['String']>>, ParentType, ContextType>
+	tokenSymbol?: Resolver<ReadonlyArray<Maybe<ResolversTypes['String']>>, ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
 export type ConfigResolvers<
@@ -384,6 +457,11 @@ export type DisplayValuesResolvers<
 		ParentType,
 		ContextType
 	>
+	sortOptions?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
 	votingTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,
@@ -402,6 +480,9 @@ export type FeaturesResolvers<
 	CREATE_PROPOSAL_SIMPLE_MAJORITY?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	CREATE_SPENDING_PROPOSAL?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	CREATE_WITHDRAW_PROPOSAL?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_FILTERS?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SEARCH?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SORT?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
@@ -441,6 +522,16 @@ export type MutationResolvers<
 	>
 }>
 
+export type OrganizationFeaturesResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['OrganizationFeatures'] = ResolversParentTypes['OrganizationFeatures'],
+> = ResolversObject<{
+	__resolveType: TypeResolveFn<'Features', ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_FILTERS?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SEARCH?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+	ORGANIZATION_PAGE_SHOW_SORT?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+}>
+
 export type ProposalFeaturesResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['ProposalFeatures'] = ResolversParentTypes['ProposalFeatures'],
@@ -458,11 +549,28 @@ export type QueryResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = ResolversObject<{
+	apiProvider?: Resolver<ResolversTypes['ApiProvider'], ParentType, ContextType>
 	config?: Resolver<ResolversTypes['Config'], ParentType, ContextType, RequireFields<QueryConfigArgs, 'env'>>
 	displayValues?: Resolver<Maybe<ResolversTypes['DisplayValues']>, ParentType, ContextType>
 	features?: Resolver<ResolversTypes['Features'], ParentType, ContextType, RequireFields<QueryFeaturesArgs, 'env'>>
 	links?: Resolver<ReadonlyArray<Maybe<ResolversTypes['Link']>>, ParentType, ContextType>
+	rmrkNfts?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['RMRKNft']>>>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryRmrkNftsArgs, 'address'>
+	>
 	version?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+}>
+
+export type RmrkNftResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['RMRKNft'] = ResolversParentTypes['RMRKNft'],
+> = ResolversObject<{
+	id?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	metadata?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	sn?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }>
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -470,6 +578,8 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 }
 
 export type Resolvers<ContextType = any> = ResolversObject<{
+	ApiProvider?: ApiProviderResolvers<ContextType>
+	ChainProperties?: ChainPropertiesResolvers<ContextType>
 	Config?: ConfigResolvers<ContextType>
 	DisplayValueEntry?: DisplayValueEntryResolvers<ContextType>
 	DisplayValueEntryCountry?: DisplayValueEntryCountryResolvers<ContextType>
@@ -480,7 +590,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
 	File?: FileResolvers<ContextType>
 	Link?: LinkResolvers<ContextType>
 	Mutation?: MutationResolvers<ContextType>
+	OrganizationFeatures?: OrganizationFeaturesResolvers<ContextType>
 	ProposalFeatures?: ProposalFeaturesResolvers<ContextType>
 	Query?: QueryResolvers<ContextType>
+	RMRKNft?: RmrkNftResolvers<ContextType>
 	Upload?: GraphQLScalarType
 }>

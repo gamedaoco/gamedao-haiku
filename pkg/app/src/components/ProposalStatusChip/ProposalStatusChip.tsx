@@ -3,24 +3,24 @@ import React from 'react'
 import { Chip } from '@mui/material'
 
 interface ComponentProps {
-	status: number
+	status: string
 }
 
 export function ProposalStatusChip({ status }: ComponentProps) {
 	switch (status) {
-		case 0:
+		case 'Init':
 			return <Chip color="secondary" label="Init" variant="outlined" />
-		case 1:
+		case 'Active':
 			return <Chip color="secondary" label="Active" />
-		case 2:
+		case 'Accepted':
 			return <Chip color="success" label="Accepted" variant="outlined" />
-		case 3:
+		case 'Rejected':
 			return <Chip color="error" label="Rejected" variant="outlined" />
-		case 4:
+		case 'Expired':
 			return <Chip label="Expired" variant="outlined" />
-		case 5:
+		case 'Aborted':
 			return <Chip color="warning" label="Aborted" variant="outlined" />
-		case 6:
+		case 'Finalized':
 			return <Chip label="Finalized" />
 	}
 

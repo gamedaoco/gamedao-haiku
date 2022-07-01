@@ -12,4 +12,4 @@ RUN yarn install
 # Create types
 RUN yarn generate
 
-CMD node --experimental-specifier-resolution=node --loader ts-node/esm src/main.ts
+CMD yarn prisma migrate deploy && node --experimental-specifier-resolution=node --loader ts-node/esm src/main.ts

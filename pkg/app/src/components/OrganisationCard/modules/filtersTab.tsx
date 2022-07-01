@@ -18,7 +18,7 @@ import {
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-const FiltersTab = () => {
+export function FiltersTab() {
 	const [openDrawer, setOpenDrawer] = useState(false)
 	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
 	const ListTab = () => (
@@ -98,5 +98,3 @@ const FiltersTab = () => {
 		</Box>
 	)
 }
-
-export default FiltersTab

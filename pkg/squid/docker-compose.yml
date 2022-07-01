@@ -8,4 +8,3 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "${DB_PORT}:5432"
-      # command: ["postgres", "-c", "log_statement=all"]

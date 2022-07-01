@@ -11,8 +11,12 @@ type Identity @entity {
     createdOrganizations: [Organization!]! @derivedFrom(field: "creatorIdentity")
     controllerOrganizations: [Organization!]! @derivedFrom(field: "controllerIdentity")
     organizationMembers: [OrganizationMember!]! @derivedFrom(field: "identity")
+
     createdCampaigns: [Campaign!]! @derivedFrom(field: "creatorIdentity")
     campaignContributors: [CampaignContributor!]! @derivedFrom(field: "identity")
+
+    createdProposals: [Proposal!]! @derivedFrom(field: "creatorIdentity")
+    proposalVoters: [ProposalVoter!]! @derivedFrom(field: "identity")
 }
 
 type Organization @entity {
@@ -30,11 +34,13 @@ type Organization @entity {
     govAsset: Int!
     payAsset: Int!
     memberLimit: BigInt!
-    members: [OrganizationMember!] @derivedFrom(field: "organization")
-    campaigns: [Campaign!]! @derivedFrom(field: "organization")
     metadata: OrganizationMetadata
     createdAtBlock: Int!
     deposit: BigInt!
+
+    members: [OrganizationMember!] @derivedFrom(field: "organization")
+    campaigns: [Campaign!]! @derivedFrom(field: "organization")
+    proposals: [Proposal]! @derivedFrom(field: "organization")
 }
 
 type OrganizationMetadata @entity {
@@ -74,6 +80,7 @@ type Campaign @entity {
 
     metadata: CampaignMetadata
     contributors: [CampaignContributor]! @derivedFrom(field: "campaign")
+    proposals: [Proposal]! @derivedFrom(field: "campaign")
 
     createdAtBlock: Int!
 }
@@ -98,3 +105,52 @@ type CampaignContributor @entity {
 
     contributed: BigInt!
 }
+
+type Proposal @entity {
+    id: ID!
+    organization: Organization!
+    campaign: Campaign
+
+    creator: String!
+    creatorIdentity: Identity!
+
+    type: Int!
+    data: ProposalTypeData
+
+    votingType: Int!
+    state: String!
+
+    metadata: ProposalMetadata
+
+    expiryBlock: Int!
+    createdAtBlock: Int!
+
+    voters: [ProposalVoter!]! @derivedFrom(field: "proposal")
+}
+
+type ProposalVoter @entity {
+    id: ID!
+    proposal: Proposal!
+
+    address: String!
+    identity: Identity!
+
+    voted: BigInt!
+}
+
+type ProposalMetadata @entity {
+    id: ID!
+    name: String!
+    description: String!
+}
+
+type ProposalTypeGeneralData {
+    type: Int!
+}
+
+type ProposalTypeWithdrawalData {
+    type: Int!
+    withdrawAmount: BigInt!
+}
+
+union ProposalTypeData = ProposalTypeGeneralData | ProposalTypeWithdrawalData

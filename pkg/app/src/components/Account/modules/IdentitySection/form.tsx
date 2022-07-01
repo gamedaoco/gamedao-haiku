@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
-import type { Identity } from '@gamedao-haiku/graphql/dist/types'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import type { Identity } from 'src/queries'
 
 import { FormValues } from './validation'
 

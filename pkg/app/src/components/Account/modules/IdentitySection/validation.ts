@@ -1,4 +1,4 @@
-import { Identity } from '@gamedao-haiku/graphql/dist'
+import { Identity } from 'src/queries'
 import * as Yup from 'yup'
 
 const webRegularExpression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
@@ -13,9 +13,9 @@ export interface FormValues {
 }
 
 export const initialValues = (identity: Identity) => ({
-	displayName: identity?.displayName || '',
+	displayName: identity?.display_name || '',
 	twitter: identity?.twitter || '',
-	legalName: identity?.legalName || '',
+	legalName: identity?.legal_name || '',
 	riot: identity?.riot || '',
 	email: identity?.email || '',
 	totalDeposit: '',

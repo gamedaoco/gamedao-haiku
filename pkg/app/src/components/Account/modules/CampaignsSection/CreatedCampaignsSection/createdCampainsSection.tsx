@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 
-import { Campaign, useCampaignsQuery } from '@gamedao-haiku/graphql/dist'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { AccountState } from 'src/@types/extension'
-
+import { Campaign, CampaignSubscription } from 'src/queries'
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
 
@@ -27,14 +26,13 @@ export const PlusIcon = () => {
 }
 
 interface CreatedCampaignSectionProps {
+	data: CampaignSubscription
+	loading: boolean
 	accountState: AccountState
 }
 
-const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState }) => {
+const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, accountState }) => {
 	const theme = useTheme()
-	const { data, loading } = useCampaignsQuery({
-		variables: { address: '3YutJfdBkSsL9YPuRebVBb4L3VpC1ES7y8RMzKEunCzZ5wwE' },
-	})
 
 	return (
 		<Box sx={{ pb: 4 }}>
@@ -71,7 +69,7 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ accountState 
 					))
 				) : (
 					<>
-						{data?.campaigns?.map((campaign: Campaign, index: number) => (
+						{data?.campaign?.map((campaign: Campaign, index: number) => (
 							<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>
 								<CampaignCard campaign={campaign} />
 							</Grid>

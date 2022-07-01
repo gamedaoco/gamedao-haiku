@@ -38,13 +38,22 @@ interface ProposalFeatures {
     CREATE_SPENDING_PROPOSAL: Boolean!
 }
 
-type Features implements ProposalFeatures {
+interface OrganizationFeatures {
+    ORGANIZATION_PAGE_SHOW_SEARCH: Boolean!
+    ORGANIZATION_PAGE_SHOW_FILTERS: Boolean!
+    ORGANIZATION_PAGE_SHOW_SORT: Boolean!
+}
+
+type Features implements ProposalFeatures & OrganizationFeatures {
     CREATE_PROPOSAL: Boolean!
     CREATE_PROPOSAL_SIMPLE_MAJORITY: Boolean!
     CREATE_PROPOSAL_RELATIVE_MAJORITY: Boolean!
     CREATE_GENERAL_PROPOSAL: Boolean!
     CREATE_WITHDRAW_PROPOSAL: Boolean!
     CREATE_SPENDING_PROPOSAL: Boolean!
+    ORGANIZATION_PAGE_SHOW_SEARCH: Boolean!
+    ORGANIZATION_PAGE_SHOW_FILTERS: Boolean!
+    ORGANIZATION_PAGE_SHOW_SORT: Boolean!
 }
 
 type Config {
@@ -96,12 +105,35 @@ type DisplayValues {
     projectDurations: [DisplayValueEntryNumber]
     memberships: [DisplayValueEntryNumber]
     countries: [DisplayValueEntryCountry]
+    sortOptions: [DisplayValueEntryString]
 }
 
 type File {
     filename: String!
     mimetype: String!
     encoding: String!
+}
+
+type RMRKNft {
+    id: String!
+    metadata: String!
+    sn: String!
+}
+
+type ChainProperties {
+    ss58Format: Int!
+    tokenDecimals: [String]!
+    tokenSymbol: [String]!
+    networkCurrency: Int!
+    governanceCurrency: Int!
+    paymentCurrencies: Int!
+}
+
+type ApiProvider {
+    wsProviderUrl: String!
+    types: String!
+    chainProperties: ChainProperties!
+    name: String!
 }
 
 type Mutation {
@@ -114,4 +146,6 @@ type Query {
     config(env: Environment!): Config!
     features(env: Environment!): Features!
     displayValues: DisplayValues
+    rmrkNfts(address: String!): [RMRKNft]
+    apiProvider: ApiProvider!
 }

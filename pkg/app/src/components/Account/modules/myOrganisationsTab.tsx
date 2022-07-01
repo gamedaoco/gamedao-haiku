@@ -1,9 +1,11 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useCallback } from 'react'
 
-import { AccountOrganizations, useAccountQuery } from '@gamedao-haiku/graphql/dist'
+import { useRouter } from 'next/router'
+
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
+import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
@@ -13,14 +15,28 @@ interface MyOrganisationsTabProps {
 }
 const MyOrganisationsTab: FC<MyOrganisationsTabProps> = ({ accountState }) => {
 	const address = getAddressFromAccountState(accountState)
-	const { data, loading } = useAccountQuery({ variables: { address } })
-	const organisations = data?.account?.organizations?.slice() as AccountOrganizations[]
+	const { data, loading } = useAccountOrganizationsSubscription({
+		variables: {
+			address: address,
+		},
+	})
+	const router = useRouter()
+	const createOrganization = useCallback(() => {
+		router.push('/organisations/create')
+	}, [router])
+
+	const organisations = data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice()
 	return (
 		<Box display="flex" flexDirection="column">
-			<Button startIcon={<AddIcon fontSize="small" />} variant="outlined" sx={{ alignSelf: 'end', mb: 2 }}>
+			<Button
+				startIcon={<AddIcon fontSize="small" />}
+				variant="outlined"
+				sx={{ alignSelf: 'end', mb: 2 }}
+				onClick={createOrganization}
+			>
 				Create
 			</Button>
-			<MyOrganisationsTable organisations={organisations} loading={loading} />
+			<MyOrganisationsTable organisations={organisations as Organization[]} loading={loading} />
 		</Box>
 	)
 }

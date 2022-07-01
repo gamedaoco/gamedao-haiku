@@ -4,8 +4,8 @@ import { Check, Key, Person } from '@mui/icons-material'
 import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { NavLink } from 'src/components/NavLink/navLink'
-import { useExtensionContext } from 'src/provider/extension/modules/context'
 import { Organization } from 'src/queries'
 import { parseIpfsHash } from 'src/utils/ipfs'
 
@@ -16,9 +16,7 @@ interface ComponentPros {
 export const TileCard = ({ item }: ComponentPros) => {
 	const theme = useTheme()
 	const config = useConfig()
-
-	const { selectedAccount } = useExtensionContext()
-	const address = selectedAccount?.account.address
+	const address = useCurrentAccountAddress()
 
 	const SubHeader = useMemo(() => {
 		return (
@@ -80,8 +78,6 @@ export const TileCard = ({ item }: ComponentPros) => {
 		<NavLink href={`/organisations/${item.id}/dashboard`}>
 			<Card
 				sx={{
-					minHeight: '164px',
-					maxWidth: '344px',
 					border: '1px solid transparent',
 					'&:hover': {
 						border: `1px solid ${theme.palette.grey[500_32]}`,
@@ -89,43 +85,43 @@ export const TileCard = ({ item }: ComponentPros) => {
 					},
 					backgroundColor: theme.palette.grey[500_16],
 					cursor: 'pointer',
+					width: '100%',
+					height: '100%',
 				}}
 			>
-				<>
-					<CardHeader
-						avatar={
-							<Avatar
-								src={parseIpfsHash(item?.organization_metadata?.logo, config.IPFS_GATEWAY)}
-								sx={{ width: 64, height: 64 }}
-							>
-								{item?.organization_metadata?.name?.slice(0, 1)}
-							</Avatar>
-						}
-						title={
-							<Typography variant={'body2'} fontWeight={'700'} noWrap>
-								{item?.organization_metadata?.name}
-							</Typography>
-						}
-						subheader={SubHeader}
-					/>
-					<CardContent>
-						<div>
-							<Typography
-								variant={'caption'}
-								fontWeight={'400'}
-								sx={{
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
-									display: '-webkit-box',
-									WebkitLineClamp: '2',
-									WebkitBoxOrient: 'vertical',
-								}}
-							>
-								{item?.organization_metadata?.description}
-							</Typography>
-						</div>
-					</CardContent>
-				</>
+				<CardHeader
+					avatar={
+						<Avatar
+							src={parseIpfsHash(item?.organization_metadata?.logo, config.IPFS_GATEWAY)}
+							sx={{ width: 64, height: 64 }}
+						>
+							{item?.organization_metadata?.name?.slice(0, 1)}
+						</Avatar>
+					}
+					title={
+						<Typography variant={'body2'} fontWeight={'700'} noWrap>
+							{item?.organization_metadata?.name}
+						</Typography>
+					}
+					subheader={SubHeader}
+				/>
+				<CardContent>
+					<div>
+						<Typography
+							variant={'caption'}
+							fontWeight={'400'}
+							sx={{
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								display: '-webkit-box',
+								WebkitLineClamp: '2',
+								WebkitBoxOrient: 'vertical',
+							}}
+						>
+							{item?.organization_metadata?.description}
+						</Typography>
+					</div>
+				</CardContent>
 			</Card>
 		</NavLink>
 	)

@@ -11,6 +11,7 @@ import { Organization } from './organization.model';
 import { Identity } from './identity.model';
 import { CampaignMetadata } from './campaignMetadata.model';
 import { CampaignContributor } from './campaignContributor.model';
+import { Proposal } from './proposal.model';
 
 @Entity_()
 export class Campaign {
@@ -69,6 +70,9 @@ export class Campaign {
 
 	@OneToMany_(() => CampaignContributor, (e) => e.campaign)
 	contributors!: CampaignContributor[];
+
+	@OneToMany_(() => Proposal, (e) => e.campaign)
+	proposals!: Proposal[];
 
 	@Column_('int4', { nullable: false })
 	createdAtBlock!: number;
