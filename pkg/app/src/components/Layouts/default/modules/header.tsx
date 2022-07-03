@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
-import { Button, Typography } from '@mui/material'
+import { Button, Typography, Image } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -11,6 +11,8 @@ import { useTranslation } from 'react-i18next'
 import { AccountSelector, FontIcons } from 'src/components'
 
 import { NavLink } from 'components/NavLink/navLink'
+
+const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
@@ -49,15 +51,7 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
 					<NavLink href="/">
-						<FontIcons
-							name={'logo'}
-							sx={{
-								color: theme.palette.text.primary,
-								fontSize: '3rem',
-								lineHeight: 0,
-								display: 'block',
-							}}
-						/>
+						<Logo />
 					</NavLink>
 				</Box>
 
