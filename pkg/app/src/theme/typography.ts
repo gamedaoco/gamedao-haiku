@@ -1,5 +1,13 @@
 // ----------------------------------------------------------------------
 
+declare module '@mui/material/Typography' {
+	interface TypographyPropsVariantOverrides {
+		small: true;
+	}
+}
+
+// ----------------------------------------------------------------------
+
 function pxToRem(value: number) {
 	return `${value / 16}rem`
 }
