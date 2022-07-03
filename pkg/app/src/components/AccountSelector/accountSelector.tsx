@@ -60,7 +60,7 @@ export function AccountSelector() {
 			</Button>
 		) : (
 			<Box width="100%">
-				<Button variant="contained" size="large" fullWidth="true" onClick={connectWallet as any}>
+				<Button variant="contained" size="large" fullWidth={true} onClick={connectWallet as any}>
 					{t('button:ui:connect_wallet')}
 				</Button>
 			</Box>

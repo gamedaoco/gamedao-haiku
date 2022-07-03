@@ -55,6 +55,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 					height: 'auto',
 					backgroundColor: theme.palette.background.default,
 					borderRight: `1px solid ${theme.palette.grey[500_32]}`,
+					borderRadius: 0,
 				},
 			}}
 		>
