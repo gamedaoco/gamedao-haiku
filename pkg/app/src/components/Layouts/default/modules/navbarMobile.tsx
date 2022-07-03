@@ -77,9 +77,6 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 		>
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
-					<ListItemButton>
-						<ListItemText>Navigation</ListItemText>
-					</ListItemButton>
 					{urls.map((navItem) => {
 						return (
 							<Fragment key={navItem.name}>
@@ -95,14 +92,20 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 				</Stack>
 
 				<Stack alignItems="center" spacing={4}>
-					<Box alignItems="center">
-						<Typography textAlign="center">Need help,</Typography>
-						<Typography textAlign="center">Please check our docs</Typography>
-					</Box>
 					{/*TODO: Should come from graphql and not be called like this + translations */}
-					<Button variant="contained" onClick={() => window.open('https://docs.gamedao.co').focus()}>
-						Documentation
-					</Button>
+					<Box alignItems="center">
+						<Typography textAlign="center">Need help?</Typography>
+						<Typography pb={2} textAlign="center">
+							Check the docs!
+						</Typography>
+						<Button
+							variant="outlined"
+							color="info"
+							onClick={() => window.open('https://docs.gamedao.co').focus()}
+						>
+							Documentation
+						</Button>
+					</Box>
 
 					<Stack direction="row" spacing={2}>
 						<Link href="https://discord.gg/P7NHWGzJ7r">
