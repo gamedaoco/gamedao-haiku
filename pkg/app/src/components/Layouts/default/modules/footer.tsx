@@ -144,8 +144,8 @@ export function Footer() {
 							Reality.
 						</Typography>
 						<Typography variant="small">
-							{process.env.APP_NAME} {process.env.APP_VERSION}, build {process.env.BUILD_TIME} —{' '}
-							{process.env.VERCEL_GITHUB_COMMIT_REF}
+							{process.env.APP_NAME} {process.env.APP_VERSION} build {process.env.BUILD_TIME}
+							{process.env.VERCEL_GIT_COMMIT_SHA} {process.env.VERCEL_ENV}
 						</Typography>
 					</Grid>
 				</Grid>
