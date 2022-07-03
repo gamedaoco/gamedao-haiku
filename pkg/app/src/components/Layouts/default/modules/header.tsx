@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
-import { Button, Typography, Image } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
