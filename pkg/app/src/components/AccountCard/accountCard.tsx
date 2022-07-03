@@ -52,7 +52,7 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 	}
 
 	return (
-		<Card onClick={handleCopyAddress}>
+		<Card onClick={handleCopyAddress} sx={{ boxShadow: 0 }}>
 			<Stack p={{ xs: 1, sm: 4 }} direction="row" alignItems="center" spacing={2}>
 				{loading && <Skeleton variant="rectangular" height="3rem" width={'100%'} />}
 				{!loading && (
