@@ -28,10 +28,10 @@ const urls = [
 		name: 'button:navigation:campaigns',
 		path: '/campaigns',
 	},
-	{
-		name: 'button:navigation:wallet',
-		path: '/wallet',
-	},
+	// {
+	// 	name: 'button:navigation:wallet',
+	// 	path: '/wallet',
+	// },
 ]
 
 export function Header({ onSidebarOpen }: ComponentProps) {
