@@ -23,11 +23,11 @@ export default function GlobalStyles() {
 					transitionTimingFunction: 'ease-in-out',
 
 					// overflow: 'scroll',
-					// overflowX: 'hidden',
-					// scrollBehavior: 'smooth',
-					// WebkitOverflowScrolling: 'touch',
-					// scrollbarWidth: 'thin',
-					// scrollbarColor: 'rgba( 255, 0, 255, 1 )',
+					overflowX: 'hidden',
+					scrollBehavior: 'smooth',
+					WebkitOverflowScrolling: 'touch',
+					scrollbarWidth: 'thin',
+					scrollbarColor: 'rgba( 255, 0, 255, 1 )',
 				},
 				'::-webkit-scrollbar': {
 					width: '2px',
