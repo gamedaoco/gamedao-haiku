@@ -44,7 +44,7 @@ function HeadAndMetaTags() {
 			<meta name="twitter:site" content={config?.TW_SITE_NAME} />
 			<meta name="twitter:title" content={config?.SITE_TITLE} />
 			<meta name="twitter:description" content={config?.SITE_DESCRIPTION} />
-			<meta property="twitter:image" content={config?.SITE_IMAGE} />
+			<meta property="twitter:image" content={config?.TW_SITE_IMAGE} />
 		</Head>
 	)
 }
