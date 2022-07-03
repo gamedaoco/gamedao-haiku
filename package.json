@@ -1,5 +1,6 @@
 {
   "name": "gamedao-haiku",
+  "description": "a monorepo for gamedao dapps",
   "private": true,
   "engines": {
     "node": ">=16"
