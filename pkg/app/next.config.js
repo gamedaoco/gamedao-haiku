@@ -23,7 +23,10 @@ module.exports = {
 		BUILD_TIME: dateStr.toString(),
 		BUILD_TIMESTAMP: +date,
 		APP_NAME: pkg.name,
-		APP_VERSION: pkg.version
+		APP_VERSION: pkg.version,
+		VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
+		VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
+		VERCEL_ENV: process.env.VERCEL_ENV || ''
 	},
 	poweredByHeader: 'gamedao.co loves you',
 	experiments: {
