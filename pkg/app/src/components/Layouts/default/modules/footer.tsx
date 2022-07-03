@@ -138,9 +138,14 @@ export function Footer() {
 						<SocialLinks />
 					</Grid>
 
-					<Grid container direction="row">
-						<Typography variant="body2">
-							{`© 2019-${new Date().getFullYear()} `}GAMEDAO AG, Vaduz, Liechtenstein. Powered by ZERO.IO
+					<Grid container direction="column">
+						<Typography variant="small">
+							{`© 2019-${new Date().getFullYear()} `}GameDAO AG, Vaduz, Liechtenstein. Powered by Zero
+							Reality.
+						</Typography>
+						<Typography variant="small">
+							{process.env.APP_NAME} {process.env.APP_VERSION}, build {process.env.BUILD_TIME} —{' '}
+							{process.env.VERCEL_GITHUB_COMMIT_REF}
 						</Typography>
 					</Grid>
 				</Grid>

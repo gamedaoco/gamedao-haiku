@@ -5,7 +5,7 @@ const dateStr = date.toISOString()
 
 sitemap({
 	ignoredPaths: ['api'],
-	baseUrl: 'https://haiku.gamedao.co',
+	baseUrl: 'https://app.gamedao.co',
 	pagesDirectory: __dirname + '/src/pages',
 	targetDirectory: 'public/',
 	ignoreIndexFiles: true,
