@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 
 import Head from 'next/head'
+import { useConfig } from 'hooks/useConfig'
 
 import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
 
@@ -23,6 +24,7 @@ interface ComponentProps {
 const SITE_NAME = 'GameDAO'
 
 export function Layout({ showHeader, showFooter, showSidebar, children, noContainer, title }: ComponentProps) {
+	const config = useConfig()
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -40,7 +42,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 	return (
 		<>
 			<Head>
-				<title> {title ? `${title} · ${SITE_NAME}` : `${SITE_NAME}`} </title>
+				<title>{title ? `${title} · ${config?.SITE_NAME}` : `${config?.SITE_NAME}`}</title>
 			</Head>
 
 			{showSidebar && (
