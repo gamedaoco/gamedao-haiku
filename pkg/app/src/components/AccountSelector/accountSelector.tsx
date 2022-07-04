@@ -9,7 +9,13 @@ import { Selector } from 'components/AccountSelector/modules/selector'
 import { SelectAccountDialog } from 'components/SelectAccountDialog/selectAccountDialog'
 import { SelectNetworkDialog } from 'components/SelectNetworkDialog/selectNetworkDialog'
 
+import { useMediaQuery, useTheme } from '@mui/material'
+
 export function AccountSelector() {
+	const theme = useTheme()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
 	const { w3Enabled, selectedAccount, connectWallet, supportedWallets } = useExtensionContext()
 	const { t } = useTranslation()
 	const [flyoutOpenState, setFlyoutOpenState] = useState<boolean>(false)
@@ -48,10 +54,16 @@ export function AccountSelector() {
 
 	// Show connect button
 	if (w3Enabled === false) {
-		return (
+		return isMd ? (
 			<Button variant="contained" onClick={connectWallet as any}>
 				{t('button:ui:connect_wallet')}
 			</Button>
+		) : (
+			<Box width="100%">
+				<Button variant="contained" size="large" fullWidth={true} onClick={connectWallet as any}>
+					{t('button:ui:connect_wallet')}
+				</Button>
+			</Box>
 		)
 	}
 

@@ -1,6 +1,26 @@
 // ----------------------------------------------------------------------
 import palette from './palette'
 
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    small: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    small?: React.CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+		small: true;
+  }
+}
+
+// ----------------------------------------------------------------------
+
 function pxToRem(value: number) {
 	return `${value / 16}rem`
 }
@@ -83,6 +103,10 @@ const typography = {
 		lineHeight: 22 / 14,
 		fontSize: pxToRem(14),
 		color: palette.dark.text.secondary,
+	},
+	small: {
+		lineHeight: 22 / 14,
+		fontSize: pxToRem(8),
 	},
 	caption: {
 		lineHeight: 1.5,

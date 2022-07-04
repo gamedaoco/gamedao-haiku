@@ -11,6 +11,8 @@ import { AccountSelector, FontIcons } from 'src/components'
 import { NavbarMobile } from 'components/Layouts/default/modules/navbarMobile'
 import { NavLink } from 'components/NavLink/navLink'
 
+const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
+
 interface ComponentProps {
 	onSidebarOpen: () => void
 }
@@ -62,33 +64,34 @@ export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 						}}
 					>
 						<NavLink href="/">
-							<FontIcons
-								name={'logo'}
-								sx={{
-									color: theme.palette.text.primary,
-									fontSize: '3rem',
-									lineHeight: 0,
-									display: 'block',
-								}}
-							/>
+							<Logo />
 						</NavLink>
 					</Box>
-					<Stack direction="row" spacing={2} alignItems="center">
-						<AccountSelector />
-						<Button
-							onClick={handleMenuOpen}
-							aria-label="Menu"
-							sx={{
-								color: theme.palette.text.primary,
-								borderRadius: 2,
-								minWidth: 'auto',
-								padding: 1,
-							}}
-						>
-							<Menu />
-						</Button>
-					</Stack>
+					<Button
+						onClick={handleMenuOpen}
+						aria-label="Menu"
+						sx={{
+							color: theme.palette.text.primary,
+							borderRadius: 2,
+							minWidth: 'auto',
+							padding: 1,
+						}}
+					>
+						<Menu />
+					</Button>
 				</Toolbar>
+				<Box
+					sx={{
+						display: 'flex',
+						backgroundColor: theme.palette.background.default,
+						textAlign: 'center',
+						p: 2,
+						flexGrow: 1,
+						width: '100%',
+					}}
+				>
+					<AccountSelector />
+				</Box>
 			</AppBar>
 			<NavbarMobile onClose={handleMenuClose} open={openMenu} />
 		</>

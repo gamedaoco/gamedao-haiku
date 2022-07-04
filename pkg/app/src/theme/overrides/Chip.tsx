@@ -5,6 +5,12 @@ import { CloseIcon } from './CustomIcons'
 
 // ----------------------------------------------------------------------
 
+declare module '@mui/material/Chip' {
+	interface ChipPropsVariantOverrides {
+		proposalVotes: true
+	}
+}
+
 export default function Chip(theme: Theme) {
 	return {
 		MuiChip: {
@@ -26,6 +32,18 @@ export default function Chip(theme: Theme) {
 					'&.MuiChip-colorSecondary': {
 						borderColor: theme.palette.secondary.main,
 					},
+					'&.MuiChip-colorSuccess': {
+						color: theme.palette.success.main,
+						borderColor: theme.palette.success.main,
+					},
+					'&.MuiChip-colorError': {
+						color: theme.palette.error.main,
+						borderColor: theme.palette.error.main,
+					},
+					'&.MuiChip-colorWarning': {
+						color: theme.palette.warning.main,
+						borderColor: theme.palette.warning.main,
+					},
 				},
 				//
 				avatarColorInfo: {
@@ -45,6 +63,22 @@ export default function Chip(theme: Theme) {
 					backgroundColor: theme.palette.error.dark,
 				},
 			},
+
+			variants: [
+				{
+					props: { variant: 'proposalVotes' },
+					style: {
+						paddingTop: 0,
+						paddingBottom: 0,
+						paddingRight: 8,
+						paddingLeft: 8,
+						fontSize: 12,
+						fontWeight: 700,
+						color: theme.palette.grey[800],
+						backgroundColor: theme.palette.grey[300],
+					},
+				},
+			],
 		},
 	}
 }

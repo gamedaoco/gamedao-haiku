@@ -2,6 +2,7 @@ import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic
 import { Box, Button, Card, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { useApiProvider } from 'hooks/useApiProvider'
 import { useExtensionContext } from 'provider/extension/modules/context'
+import { useNetworkContext } from 'provider/network/modules/context'
 
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
@@ -17,6 +18,7 @@ interface ComponentProps {
 
 export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNetworkSelect }: ComponentProps) {
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
+	const { apiProviders } = useNetworkContext()
 	const apiProvider = useApiProvider()
 	return (
 		<Menu
@@ -26,7 +28,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			onClose={handleClose}
 			onClick={handleClose}
 			PaperProps={{
-				elevation: 4,
+				elevation: 0,
 				sx: {
 					overflow: 'visible',
 					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
@@ -53,24 +55,27 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 					},
 				},
 			}}
-			transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-			anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
+			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
-			<Stack width={343} p={{ xs: 1, sm: 2 }} spacing={{ xs: 1, sm: 2 }}>
-				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
-				<BalanceCard />
-				<Stack spacing={{ xs: 0, sm: 1 }}>
-					<Divider />
-					<Typography variant="overline">Account</Typography>
-					<NavLink href="/">
-						<MenuItem>
-							<ListItemIcon>
-								<Dashboard fontSize="small" />
-							</ListItemIcon>
-							<Typography variant="body2">Dashboard</Typography>
-						</MenuItem>
-					</NavLink>
+
+<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
+
+        <AccountCard accountState={selectedAccount} callback={openAccountSelect} />
+
+        <BalanceCard />
+
+				<Divider />
+
+				<Stack>
 					<MenuItem>
+						<ListItemIcon>
+							<Dashboard fontSize="small" />
+						</ListItemIcon>
+						Dashboard
+					</MenuItem>
+
+          <MenuItem>
 						<ListItemIcon>
 							<Topic fontSize="small" />
 						</ListItemIcon>
@@ -98,18 +103,21 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						<ListItemIcon>
 							<Logout fontSize="small" />
 						</ListItemIcon>
-						<Typography variant="body2">Logout</Typography>
+						<Typography variant="body2">Disconnect</Typography>
 					</MenuItem>
-					<Divider />
 				</Stack>
+
+				<Divider />
+
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
-					<Typography variant="body2" fontWeight="bold">
-						{' '}
-						{apiProvider?.chainName ?? ''}
-					</Typography>
-					<Button onClick={openNetworkSelect}>
-						<MoreVert fontSize="small" />
-					</Button>
+          <Typography variant="body2" fontWeight="bold">
+            {apiProvider?.chainName ?? ''}
+            {apiProviders?.length > 1 && (
+              <Button onClick={openNetworkSelect}>
+                <MoreVert fontSize="small" />
+              </Button>
+            )}
+          </Typography>
 				</Box>
 			</Stack>
 		</Menu>

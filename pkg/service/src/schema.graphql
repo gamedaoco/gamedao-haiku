@@ -1,0 +1,152 @@
+scalar Upload
+
+schema {
+    query: Query
+}
+
+enum Environment {
+    DEVELOPMENT
+    STAGING
+    PRODUCTION
+}
+
+enum LogLevel {
+    TRACE
+    DEBUG
+    INFO
+    WARN
+    ERROR
+    SILENT
+}
+
+type Link {
+    id: String
+    title: String
+    description: String
+    url: String
+    category: String
+    imageUrl: String
+    users: [String]
+}
+
+interface ProposalFeatures {
+    CREATE_PROPOSAL: Boolean!
+    CREATE_PROPOSAL_SIMPLE_MAJORITY: Boolean!
+    CREATE_PROPOSAL_RELATIVE_MAJORITY: Boolean!
+    CREATE_GENERAL_PROPOSAL: Boolean!
+    CREATE_WITHDRAW_PROPOSAL: Boolean!
+    CREATE_SPENDING_PROPOSAL: Boolean!
+}
+
+interface OrganizationFeatures {
+    ORGANIZATION_PAGE_SHOW_SEARCH: Boolean!
+    ORGANIZATION_PAGE_SHOW_FILTERS: Boolean!
+    ORGANIZATION_PAGE_SHOW_SORT: Boolean!
+}
+
+type Features implements ProposalFeatures & OrganizationFeatures {
+    CREATE_PROPOSAL: Boolean!
+    CREATE_PROPOSAL_SIMPLE_MAJORITY: Boolean!
+    CREATE_PROPOSAL_RELATIVE_MAJORITY: Boolean!
+    CREATE_GENERAL_PROPOSAL: Boolean!
+    CREATE_WITHDRAW_PROPOSAL: Boolean!
+    CREATE_SPENDING_PROPOSAL: Boolean!
+    ORGANIZATION_PAGE_SHOW_SEARCH: Boolean!
+    ORGANIZATION_PAGE_SHOW_FILTERS: Boolean!
+    ORGANIZATION_PAGE_SHOW_SORT: Boolean!
+}
+
+type Config {
+    SITE_NAME: String
+    SITE_TITLE: String
+    SITE_DESCRIPTION: String
+    SITE_IMAGE: String
+    TW_SITE_NAME: String
+    TW_SITE_CREATOR: String
+    CONTACT: String
+    IPFS_GATEWAY: String
+    LOG_LEVEL: LogLevel
+}
+
+
+interface DisplayValueEntry {
+    key: String!
+    text: String!
+}
+
+type DisplayValueEntryNumber implements DisplayValueEntry{
+    key: String!
+    text: String!
+    value: Int!
+}
+
+type DisplayValueEntryString implements DisplayValueEntry{
+    key: String!
+    text: String!
+    value: String!
+}
+
+type DisplayValueEntryCountry implements DisplayValueEntry{
+    key: String!
+    text: String!
+    flag: String!
+    value: String!
+}
+
+type DisplayValues {
+    collateralTypes: [DisplayValueEntryNumber]
+    proposalTypes: [DisplayValueEntryNumber]
+    votingTypes: [DisplayValueEntryNumber]
+    daoBodies: [DisplayValueEntryNumber]
+    daoMemberGovernance: [DisplayValueEntryNumber]
+    daoFeeModel: [DisplayValueEntryNumber]
+    projectTypes: [DisplayValueEntryNumber]
+    protocolTypes: [DisplayValueEntryNumber]
+    projectDurations: [DisplayValueEntryNumber]
+    memberships: [DisplayValueEntryNumber]
+    countries: [DisplayValueEntryCountry]
+    sortOptions: [DisplayValueEntryString]
+}
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
+type RMRKNft {
+    id: String!
+    metadata: String!
+    sn: String!
+}
+
+type ChainProperties {
+    ss58Format: Int!
+    tokenDecimals: [String]!
+    tokenSymbol: [String]!
+    networkCurrency: Int!
+    governanceCurrency: Int!
+    paymentCurrencies: Int!
+}
+
+type ApiProvider {
+    wsProviderUrl: String!
+    types: String!
+    chainProperties: ChainProperties!
+    name: String!
+}
+
+type Mutation {
+    singleUpload(fileStream: Upload!): String!
+    updateSession(address: String!): Boolean!
+}
+
+type Query {
+    version: String!
+    links: [Link]!
+    config(env: Environment!): Config!
+    features(env: Environment!): Features!
+    displayValues: DisplayValues
+    rmrkNfts(address: String!): [RMRKNft]
+    apiProvider: ApiProvider!
+}

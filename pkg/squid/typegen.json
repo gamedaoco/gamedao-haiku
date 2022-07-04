@@ -1,0 +1,29 @@
+{
+  "outDir": "src/types",
+  "chainVersions": "zeroVersions.json",
+  "typesBundle": "zeroTypesBundle.json",
+  "events": [
+    "control.OrgCreated",
+    "control.AddMember",
+    "control.RemoveMember",
+    "flow.CampaignCreated",
+    "flow.CampaignContributed",
+    "flow.CampaignFailed",
+    "flow.CampaignFinalized",
+    "flow.CampaignUpdated",
+    "signal.ProposalCreated",
+    "signal.Proposal",
+    "signal.ProposalVoted",
+    "signal.ProposalExpired",
+    "signal.ProposalApproved",
+    "signal.ProposalRejected"
+  ],
+  "calls": [
+    "control.create_org",
+    "flow.create_campaign",
+    "flow.contribute",
+    "flow.update_state",
+    "signal.general_proposal",
+    "signal.withdraw_proposal"
+  ]
+}

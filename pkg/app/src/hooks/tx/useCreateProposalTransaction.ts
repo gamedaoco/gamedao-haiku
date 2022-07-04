@@ -4,6 +4,7 @@ import { ApiPromise } from '@polkadot/api'
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useLogger } from 'hooks/useLogger'
 import { useTMPProposal } from 'hooks/useTMPProposal'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
@@ -59,7 +60,7 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 }
 
 function createGeneralProposalTx(
-	apiProvider: ApiPromise,
+	selectedApiProvider: ApiProvider,
 	data: TMPProposal,
 	blockNumber: number,
 	organizationId: string,
@@ -78,7 +79,7 @@ function createGeneralProposalTx(
 	// Data validation
 	generalProposalValidation.validateSync(mappedData)
 
-	return apiProvider.tx.signal.generalProposal(
+	return selectedApiProvider.apiProvider.tx.signal.generalProposal(
 		mappedData.orgId,
 		mappedData.title,
 		mappedData.cid,
@@ -99,7 +100,10 @@ function createWithdrawProposalTx(
 		campaignId: data.campaignId,
 		title: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 		cid: data.metaDataCID,
-		amount: fromUnit(data.amount, selectedApiProvider.systemProperties.tokenDecimals.toString()),
+		amount: fromUnit(
+			data.amount,
+			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.networkCurrency],
+		),
 		start: blockTime.startBlocks,
 		expiry: blockTime.endBlocks,
 	}
@@ -124,6 +128,7 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 	const address = useCurrentAccountAddress()
 	const data = useTMPProposal()
 	const blockNumber = useBlockNumber()
+	const logger = useLogger('useCreateProposalTransaction')
 
 	useEffect(() => {
 		// The transaction is only regenerated every 2 minutes and not every 2-3 seconds.
@@ -136,14 +141,18 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 	useEffect(() => {
 		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumberState) {
 			try {
-				const tx = createGeneralProposalTx(selectedApiProvider.apiProvider, data, blockNumber, organizationId)
+				let tx
+				if (data.type === 0) {
+					tx = createGeneralProposalTx(selectedApiProvider, data, blockNumber, organizationId)
+				} else if (data.type === 1) {
+					tx = createWithdrawProposalTx(selectedApiProvider, data, blockNumber)
+				}
+
 				if (tx) {
 					setTxState(tx)
 				}
 			} catch (e) {
-				// TODO: Add logger engine. It does not necessarily have to be an error,
-				//  it can also be that data is still missing that is required for the transaction.
-				console.warn('CreateProposalTransaction', e)
+				logger.trace(e)
 			}
 		}
 	}, [organizationId, selectedApiProvider, address, data, blockNumberState])

@@ -1,24 +1,22 @@
 import { useMemo } from 'react'
 
-import type { Organization } from '@gamedao-haiku/graphql/dist'
 import { Check, Key, Person } from '@mui/icons-material'
 import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { useConfig } from 'hooks/useConfig'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { NavLink } from 'src/components/NavLink/navLink'
-import { useExtensionContext } from 'src/provider/extension/modules/context'
+import { Organization } from 'src/queries'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
-interface ComponentsPros {
+interface ComponentPros {
 	item: Organization
 }
 
-const gateway = 'https://ipfs.gamedao.co/gateway/'
-const toLink = '/organisations/'
-
-export const TileCard = ({ item }: ComponentsPros) => {
+export const TileCard = ({ item }: ComponentPros) => {
 	const theme = useTheme()
-
-	const { selectedAccount } = useExtensionContext()
-	const address = selectedAccount?.account.address
+	const config = useConfig()
+	const address = useCurrentAccountAddress()
 
 	const SubHeader = useMemo(() => {
 		return (
@@ -39,7 +37,9 @@ export const TileCard = ({ item }: ComponentsPros) => {
 					}}
 				>
 					<Person fontSize={'small'} />
-					<span>{`${item?.members.length} ${item?.members.length > 1 ? 'Members' : 'Member'} `}</span>
+					<span>{`${item?.organization_members?.length} ${
+						item?.organization_members?.length > 1 ? 'Members' : 'Member'
+					} `}</span>
 				</Box>
 				<Box
 					sx={{
@@ -57,7 +57,7 @@ export const TileCard = ({ item }: ComponentsPros) => {
 							alignItems: 'center',
 						}}
 					>
-						{item?.members?.find((member) => member.address === address) ? (
+						{item?.organization_members?.find((member) => member.address === address) ? (
 							<>
 								<Check fontSize={'small'} />
 								<span>{'Joined'}</span>
@@ -75,50 +75,51 @@ export const TileCard = ({ item }: ComponentsPros) => {
 	}, [item, address])
 
 	return (
-		<NavLink href={`${toLink}${item.id}/dashboard`}>
+		<NavLink href={`/organisations/${item.id}/dashboard`}>
 			<Card
 				sx={{
-					minHeight: '164px',
-					maxWidth: '344px',
 					border: '1px solid transparent',
 					'&:hover': {
 						border: `1px solid ${theme.palette.grey[500_32]}`,
 					},
 					cursor: 'pointer',
+					width: '100%',
+					height: '100%',
 				}}
 			>
-				<>
-					<CardHeader
-						avatar={
-							<Avatar src={`${gateway}${item?.metadata?.logo}`} sx={{ width: 64, height: 64 }}>
-								{item?.metadata?.name?.slice(0, 1)}
-							</Avatar>
-						}
-						title={
-							<Typography variant={'body2'} fontWeight={'700'} noWrap>
-								{item?.metadata?.name}
-							</Typography>
-						}
-						subheader={SubHeader}
-					/>
-					<CardContent>
-						<div>
-							<Typography
-								variant={'caption'}
-								fontWeight={'400'}
-								sx={{
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
-									display: '-webkit-box',
-									WebkitLineClamp: '2',
-									WebkitBoxOrient: 'vertical',
-								}}
-							>
-								{item?.metadata?.description}
-							</Typography>
-						</div>
-					</CardContent>
-				</>
+				<CardHeader
+					avatar={
+						<Avatar
+							src={parseIpfsHash(item?.organization_metadata?.logo, config.IPFS_GATEWAY)}
+							sx={{ width: 64, height: 64 }}
+						>
+							{item?.organization_metadata?.name?.slice(0, 1)}
+						</Avatar>
+					}
+					title={
+						<Typography variant={'body2'} fontWeight={'700'} noWrap>
+							{item?.organization_metadata?.name}
+						</Typography>
+					}
+					subheader={SubHeader}
+				/>
+				<CardContent>
+					<div>
+						<Typography
+							variant={'caption'}
+							fontWeight={'400'}
+							sx={{
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								display: '-webkit-box',
+								WebkitLineClamp: '2',
+								WebkitBoxOrient: 'vertical',
+							}}
+						>
+							{item?.organization_metadata?.description}
+						</Typography>
+					</div>
+				</CardContent>
 			</Card>
 		</NavLink>
 	)

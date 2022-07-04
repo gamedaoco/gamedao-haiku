@@ -7,6 +7,7 @@
 .yarn/cache
 .yarn/release
 .yarn/unplugged
+schema.graphql
 
 **/.next/
 # testing

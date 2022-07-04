@@ -1,4 +1,4 @@
-import { Card, Skeleton, Stack, Typography } from '@mui/material'
+import { Box, Skeleton, Stack, Typography } from '@mui/material'
 import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
@@ -16,8 +16,16 @@ export function BalanceCard() {
 						<Typography variant="body2">{balance.tokenSymbol}</Typography>
 						<Typography variant="body2">{balance.free}</Typography>
 					</Stack>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="body2">GAME</Typography>
+						<Typography variant="body2">{balance.free}</Typography>
+					</Stack>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="body2">PLAY</Typography>
+						<Typography variant="body2">{balance.free}</Typography>
+					</Stack>
 				</Stack>
 			)}
-		</Card>
+		</Box>
 	)
 }

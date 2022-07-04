@@ -29,13 +29,15 @@ export function useBalanceByAddress(address: string): Balance {
 						Object.keys(data || {}).forEach((key) => {
 							data[key] = toUnit(
 								data[key]?.split(' ')?.[0]?.replaceAll(',', ''),
-								provider.systemProperties.tokenDecimals,
+								provider.systemProperties.tokenDecimals[provider.systemProperties.networkCurrency],
 							)
 						})
 						setBalanceState({
 							...data,
-							tokenSymbol: provider.systemProperties.tokenSymbol,
-							tokenDecimals: provider.systemProperties.tokenDecimals,
+							tokenSymbol:
+								provider.systemProperties.tokenSymbol[provider.systemProperties.networkCurrency],
+							tokenDecimals:
+								provider.systemProperties.tokenDecimals[provider.systemProperties.networkCurrency],
 						})
 					} else {
 						setBalanceState(null)

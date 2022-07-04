@@ -1,0 +1,14 @@
+{
+  "name": "Beeblebrox GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "https://beeblebrox.zero.io/graph/v1/graphql",
+        "headers": {
+        },
+        "introspect": true
+      }
+    }
+  }
+}

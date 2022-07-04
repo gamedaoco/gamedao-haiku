@@ -1,32 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import ZeroTypes from 'data/zero-types.json'
+import { useAppContext } from 'provider/app/modules/context'
 import { initializeApis, keepAlive } from 'provider/network/modules/network'
 import type { ApiProvider } from 'src/@types/network'
 
 import { NetworkContext } from './modules/context'
-
-// TODO: Data should be retrieved from GraphQL or another interface.
-// @2075
-// Are there already ideas here should the types come also from GraphQL or rather
-// be pulled from the chain itself
-const API_PROVIDER_CONFIG_ZERO = {
-	wsProviderUrl: 'wss://beeblebrox.zero.io/node',
-	types: ZeroTypes,
-}
-
-const API_PROVIDER_CONFIG_POLKADOT = {
-	wsProviderUrl: 'wss://rpc.polkadot.io',
-	types: {},
-}
-
-const API_PROVIDERS = [API_PROVIDER_CONFIG_ZERO, API_PROVIDER_CONFIG_POLKADOT]
 
 export function NetworkProvider({ children }) {
 	const [selectedApiProviderState, setSelectedApiProviderState] = useState<ApiProvider>(null)
 	const [apiProvidersState, setApiProvidersState] = useState<ApiProvider[]>(null)
 	const isMountedRef = useRef<null | boolean>(null)
 	const intervalRef = useRef<NodeJS.Timer>(null)
+	const { apiProviderConfig } = useAppContext()
 
 	const handleSelectApiProvider = useCallback(
 		(apiProvider: ApiProvider) => {
@@ -40,16 +25,18 @@ export function NetworkProvider({ children }) {
 	useEffect(() => {
 		isMountedRef.current = true
 
-		// Create and connect to Api
-		initializeApis(API_PROVIDERS).then((providers: ApiProvider[]) => {
-			if (isMountedRef.current && providers.length) {
-				setApiProvidersState(providers)
-				setSelectedApiProviderState(providers[0])
-				if (!intervalRef.current) {
-					intervalRef.current = setInterval(keepAlive, 30000, providers)
+		if (apiProviderConfig) {
+			// Create and connect to Api
+			initializeApis([apiProviderConfig]).then((providers: ApiProvider[]) => {
+				if (isMountedRef.current && providers.length) {
+					setApiProvidersState(providers)
+					setSelectedApiProviderState(providers[0])
+					if (!intervalRef.current) {
+						intervalRef.current = setInterval(keepAlive, 30000, providers)
+					}
 				}
-			}
-		})
+			})
+		}
 
 		return () => {
 			isMountedRef.current = false
@@ -57,7 +44,7 @@ export function NetworkProvider({ children }) {
 				clearInterval(intervalRef.current)
 			}
 		}
-	}, [])
+	}, [apiProviderConfig])
 
 	return (
 		<NetworkContext.Provider

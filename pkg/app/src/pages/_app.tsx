@@ -2,9 +2,10 @@ import { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
+import { useConfig } from 'hooks/useConfig'
+import { Logger } from 'lib/logger'
 // Toastify styles + custom styles overrides
 import 'react-toastify/dist/ReactToastify.css'
-import { ThemePrimaryColor } from 'src/components/ThemePrimaryColor/themePrimaryColor'
 import { Providers } from 'src/provider/provider'
 import createEmotionCache from 'src/theme/createEmotionCache'
 import 'src/theme/css/toastify.css'
@@ -17,52 +18,57 @@ interface MyAppProps extends AppProps {
 	pageProps: object
 }
 
-// TODO: @andre query from graph
-const SITE_NAME = 'GameDAO'
-const SITE_TITLE = 'Fundraising, coordination, ownership for video games, esports and the creative industry.'
-const SITE_DESCRIPTION =
-	'The DAO for video games, esports and creatives. We connect gamers, creators, publishers and investors for better video games with the power of web3, dao, defi and nft.'
-const SITE_IMAGE = 'https://gamedao.co/assets/gamedao-logo.png'
-const TW_SITE_NAME = '@gamedaoco'
-const TW_SITE_CREATOR = '@zerodotio'
-const CONTACT = 'hey@gamedao.co'
+const log = Logger('HAIKU')
+
+function HeadAndMetaTags() {
+	const config = useConfig()
+
+	return (
+		<Head>
+			<meta
+				name="viewport"
+				content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no"
+			/>
+			<meta name="format-detection" content="telephone=no, address=no, email=no" />
+			<link rel="shortcut icon" href="/favicon.png" />
+			<link rel="icon" type="image/png" href="/favicon.png" />
+
+			<meta name="description" content={config?.SITE_DESCRIPTION} />
+
+			<meta property="og:type" content="website" />
+			<meta property="og:site_name" content={config?.SITE_NAME} />
+			<meta property="og:title" content={config?.SITE_TITLE} />
+			<meta property="og:description" content={config?.SITE_DESCRIPTION} />
+			<meta property="og:image" content={config?.SITE_IMAGE} />
+
+			<meta property="twitter:domain" content="app.gamedao.co" />
+			<meta property="twitter:url" content="https://app.gamedao.co/" />
+
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:creator" content={config?.TW_SITE_CREATOR} />
+			<meta name="twitter:site" content={config?.TW_SITE_NAME} />
+			<meta name="twitter:title" content={config?.SITE_TITLE} />
+			<meta name="twitter:description" content={config?.SITE_DESCRIPTION} />
+			<meta property="twitter:image" content={config?.SITE_IMAGE} />
+		</Head>
+	)
+}
 
 export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
+	log.info(`❤️  Welcome to GameDAO`)
+
 	return (
-		<>
-			<CacheProvider value={emotionCache}>
-				<Head>
-					<meta
-						name="viewport"
-						content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no"
-					/>
-					<meta name="format-detection" content="telephone=no, address=no, email=no" />
-					<link rel="shortcut icon" href="/favicon.png" />
-					<link rel="icon" type="image/png" href="/favicon.png" />
-
-					<meta property="og:type" content="website" />
-					<meta property="og:site_name" content={SITE_NAME} />
-					<meta property="og:title" content={SITE_TITLE} />
-					<meta property="og:description" content={SITE_DESCRIPTION} />
-					<meta property="og:image" content={SITE_IMAGE} />
-
-					<meta name="twitter:card" content="summary_large_image" />
-					<meta name="twitter:creator" content={TW_SITE_CREATOR} />
-					<meta name="twitter:site" content={TW_SITE_NAME} />
-					<meta name="twitter:title" content={SITE_TITLE} />
-					<meta name="twitter:description" content={SITE_DESCRIPTION} />
-					<meta property="twitter:image" content={SITE_IMAGE} />
-				</Head>
-				<Providers>
-					<Component {...pageProps} />
-				</Providers>
-			</CacheProvider>
-		</>
+		<CacheProvider value={emotionCache}>
+			<Providers>
+				<HeadAndMetaTags />
+				<Component {...pageProps} />
+			</Providers>
+		</CacheProvider>
 	)
 }
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
-	console.log(metric)
+	log.trace(metric)
 }
 
 export default MyApp

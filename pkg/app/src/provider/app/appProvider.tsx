@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
-import { useConfigQuery, useFeaturesQuery } from '@gamedao-haiku/graphql/dist'
 import { AppContext } from 'provider/app/modules/context'
 import { ENVIRONMENT } from 'src/constants'
+import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 
 export function AppProvider({ children }) {
 	const configQueryResult = useConfigQuery({
@@ -11,6 +11,7 @@ export function AppProvider({ children }) {
 	const featureQueryResult = useFeaturesQuery({
 		variables: { env: ENVIRONMENT },
 	})
+	const apiProviderConfigQueryResult = useApiProviderConfigQuery()
 
 	useEffect(() => {
 		if (configQueryResult.error) {
@@ -27,9 +28,10 @@ export function AppProvider({ children }) {
 	return (
 		<AppContext.Provider
 			value={{
-				ready: !!configQueryResult.data && !!featureQueryResult.data,
+				ready: !!configQueryResult.data && !!featureQueryResult.data && !!apiProviderConfigQueryResult.data,
 				config: configQueryResult.data?.config ?? null,
 				features: featureQueryResult.data?.features ?? null,
+				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
 			}}
 		>
 			{children}

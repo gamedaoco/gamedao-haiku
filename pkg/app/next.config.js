@@ -5,7 +5,7 @@ const dateStr = date.toISOString()
 
 sitemap({
 	ignoredPaths: ['api'],
-	baseUrl: 'https://haiku.gamedao.co',
+	baseUrl: 'https://app.gamedao.co',
 	pagesDirectory: __dirname + '/src/pages',
 	targetDirectory: 'public/',
 	ignoreIndexFiles: true,
@@ -24,7 +24,9 @@ module.exports = {
 		BUILD_TIMESTAMP: +date,
 		APP_NAME: pkg.name,
 		APP_VERSION: pkg.version,
-		VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || 'unknown',
+		VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
+		VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
+		VERCEL_ENV: process.env.VERCEL_ENV || ''
 	},
 	poweredByHeader: 'gamedao.co loves you',
 	experiments: {

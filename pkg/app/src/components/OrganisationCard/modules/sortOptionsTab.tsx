@@ -1,17 +1,36 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
-import { OrganizationOrderByInput } from '@gamedao-haiku/graphql/dist'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
+import { Organization_Order_By } from 'src/queries'
 
-const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
+export function SortOptionsTab({ sortOptions, setSortOption }) {
+	const { t } = useTranslation()
+	const [keyState, setKeyState] = useState<string>('')
+	const [mappingState, setMappingState] = useState({})
+
+	useEffect(() => {
+		if (sortOptions) {
+			const mapping = {}
+			sortOptions.forEach((option) => {
+				mapping[option.key] = option
+			})
+			setMappingState(mapping)
+		}
+	}, [sortOptions])
+
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
-			setSortOption(event.target.value as OrganizationOrderByInput)
+			setKeyState(event.target.value)
+			setSortOption(eval(`(${mappingState[event.target.value]?.value ?? 'null'})`) as Organization_Order_By)
 		},
-		[setSortOption],
+		[setSortOption, mappingState],
 	)
+
+	if (!sortOptions) return null
+
 	return (
 		<Box
 			sx={{
@@ -36,10 +55,10 @@ const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 					}}
 					size="small"
 				>
-					<Select value={sortOption} onChange={handleChange}>
+					<Select value={keyState} onChange={handleChange}>
 						{sortOptions.map((x) => (
-							<MenuItem value={x.value} key={x.value}>
-								{x.name}
+							<MenuItem value={x.key} key={x.key}>
+								{t(x.text)}
 							</MenuItem>
 						))}
 					</Select>
@@ -48,5 +67,3 @@ const SortOptionsTab = ({ sortOption, sortOptions, setSortOption }) => {
 		</Box>
 	)
 }
-
-export default SortOptionsTab

@@ -7,6 +7,7 @@
 /.pnp
 .pnp.js
 .yarn/
+yarn.lock
 
 **/dist/
 **/node_modules/
@@ -19,6 +20,8 @@
 # next.js
 /.next/
 /out/
+
+pkg/app/schema.graphql
 
 # production
 /build
@@ -33,6 +36,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env.local
 .env.development.local
 .env.test.local
