@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Box, Card, CardContent, Skeleton } from '@mui/material'
 
-const LoadingCampaignCard: FC = () => {
+const LoadingCampaignCard = () => {
 	return (
-		<Card>
+		<Card sx={{ maxHeight: 433 }}>
 			<Skeleton height={200} sx={{ position: 'relative', bottom: 5 }} variant="rectangular" />
 			<Box
 				sx={{
@@ -12,7 +12,7 @@ const LoadingCampaignCard: FC = () => {
 					justifyContent: 'center',
 				}}
 			>
-				<Card variant="mask" />
+				<Card sx={{ top: -35 }} variant="mask" />
 			</Box>
 			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<Skeleton variant="circle" />

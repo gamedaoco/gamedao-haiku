@@ -3,7 +3,7 @@ import React, { FC, memo } from 'react'
 import { Box } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
 import { useCampaignContributorsSubscription } from 'src/queries'
-import { Campaign, useCampaignSubscription } from 'src/queries'
+import { useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import CreatedCampaignSection from './CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
@@ -14,7 +14,7 @@ interface MyCampaignsTabProps {
 }
 const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
 	const { data, loading } = useCampaignSubscription({
-		variables: { address: '3ZjAeLZWrhu1uFGxgFSPUuSBJmEJZpgHHM6qJUzuHb3B9ykb' },
+		variables: { address: getAddressFromAccountState(accountState) },
 	})
 	const { data: campaignContributorsData, loading: campaignContributorsLoading } =
 		useCampaignContributorsSubscription({
