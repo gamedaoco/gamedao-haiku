@@ -41,6 +41,9 @@ export class Identity {
 	@Column_('text', { nullable: true })
 	twitter!: string | undefined | null;
 
+	@Column_('text', { nullable: true })
+	web!: string | undefined | null;
+
 	@OneToMany_(() => Organization, (e) => e.creatorIdentity)
 	createdOrganizations!: Organization[];
 

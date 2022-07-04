@@ -33,6 +33,7 @@ async function upsertIdentity(store: Store, identity: string, data: IdentityUpse
 		entity.riot = data.riot;
 		entity.image = data.image;
 		entity.twitter = data.twitter;
+		entity.web = data.web;
 	}
 
 	// Save identity

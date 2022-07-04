@@ -61,6 +61,9 @@ export class Proposal {
 	metadata!: ProposalMetadata | undefined | null;
 
 	@Column_('int4', { nullable: false })
+	startBlock!: number;
+
+	@Column_('int4', { nullable: false })
 	expiryBlock!: number;
 
 	@Column_('int4', { nullable: false })
