@@ -5,13 +5,23 @@ import { Theme } from '@mui/material/styles'
 export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
+			variants: [
+				{
+					props: { variant: 'outlined' },
+					style: {
+						color: 'primary' ? theme.palette.common.white : theme.palette.text.secondary,
+					},
+				},
+			],
 			styleOverrides: {
 				root: {
 					borderRadius: Number(theme.shape.borderRadius) * 10,
 					'&:hover': {
 						boxShadow: 'none',
 					},
+					borderColor: theme.palette.text.secondary,
 				},
+
 				sizeLarge: {
 					height: 48,
 				},

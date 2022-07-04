@@ -58,9 +58,6 @@ export function LoadingTileCard() {
 			sx={{
 				minHeight: '164px',
 				maxWidth: '344px',
-				borderRadius: '1rem',
-				'&:hover': { background: theme.palette.grey[500_32] },
-				backgroundColor: theme.palette.grey[500_8],
 				cursor: 'pointer',
 			}}
 		>

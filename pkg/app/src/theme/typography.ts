@@ -1,4 +1,5 @@
 // ----------------------------------------------------------------------
+import palette from './palette'
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
@@ -89,9 +90,10 @@ const typography = {
 		fontSize: pxToRem(16),
 	},
 	subtitle2: {
-		fontWeight: 600,
+		fontWeight: 700,
 		lineHeight: 22 / 14,
 		fontSize: pxToRem(14),
+		color: palette.dark.text.secondary,
 	},
 	body1: {
 		lineHeight: 1.5,
@@ -100,6 +102,7 @@ const typography = {
 	body2: {
 		lineHeight: 22 / 14,
 		fontSize: pxToRem(14),
+		color: palette.dark.text.secondary,
 	},
 	small: {
 		lineHeight: 22 / 14,
@@ -114,6 +117,7 @@ const typography = {
 		lineHeight: 1.5,
 		fontSize: pxToRem(12),
 		textTransform: 'uppercase',
+		color: palette.dark.text.disabled,
 	},
 	button: {
 		fontWeight: 700,

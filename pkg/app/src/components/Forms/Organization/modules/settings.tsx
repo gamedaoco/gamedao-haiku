@@ -161,6 +161,9 @@ export function Settings({
 					onChange={handleFeeAmountChange}
 					value={feeAmount}
 					label="Fee amount"
+					InputProps={{
+						endAdornment: <Typography variant="body2">GAME</Typography>,
+					}}
 					variant="outlined"
 				/>
 			)}
