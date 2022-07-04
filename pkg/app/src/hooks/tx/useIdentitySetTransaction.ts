@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 
 const webRegularExpression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
 
-const validation = Yup.object({
+export const validation = Yup.object({
 	display_name: Yup.string().max(32, 'Max of 32 characters'),
 	legal_name: Yup.string().max(32, 'Max of 32 characters'),
 	riot: Yup.string().max(32, 'Max of 32 characters'),

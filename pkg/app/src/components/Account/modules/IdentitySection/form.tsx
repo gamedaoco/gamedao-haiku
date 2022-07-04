@@ -3,7 +3,8 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
-import { useIdentitySetTransaction } from 'hooks/tx/useIdentitySetTransaction'
+import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
+import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import type { Identity } from 'src/queries'
@@ -17,10 +18,12 @@ interface IdentityFormProps {
 }
 
 const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
+	const resolver = useYupValidationResolver(validation)
 	const { t } = useTranslation()
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
 	const formHandler = useForm<Identity | any>({
 		defaultValues: initialValues(identity),
+		resolver,
 	})
 	useEffect(() => {
 		if (identity) {
@@ -105,6 +108,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 												},
 											}}
 											error={!!errors?.display_name}
+											helperText={errors?.display_name?.message?.toString()}
 											onChange={onChange}
 											value={value}
 										/>
@@ -115,11 +119,13 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 								<Controller
 									name="twitter"
 									control={formHandler.control}
-									render={({ field: { onChange, value } }) => (
+									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
 											label="Twitter"
 											placeholder="@TwitterHandle"
+											error={!!errors?.twitter}
+											helperText={errors?.twitter?.message?.toString()}
 											sx={{
 												'& fieldset': {
 													borderRadius: '16px',
@@ -135,10 +141,12 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 								<Controller
 									name="legal_name"
 									control={formHandler.control}
-									render={({ field: { onChange, value } }) => (
+									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
 											placeholder="John Q Doe"
+											error={!!errors?.legal_name}
+											helperText={errors?.legal_name?.message?.toString()}
 											sx={{
 												'& fieldset': {
 													borderRadius: '16px',
@@ -155,9 +163,11 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 								<Controller
 									name="riot"
 									control={formHandler.control}
-									render={({ field: { onChange, value } }) => (
+									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
+											error={!!errors?.riot}
+											helperText={errors?.riot?.message?.toString()}
 											placeholder="@yourname:matrix.org"
 											sx={{
 												'& fieldset': {
@@ -175,9 +185,11 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 								<Controller
 									name="email"
 									control={formHandler.control}
-									render={({ field: { onChange, value } }) => (
+									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
+											error={!!errors?.email}
+											helperText={errors?.email?.message?.toString()}
 											placeholder="email@internet.com"
 											sx={{
 												'& fieldset': {
@@ -218,9 +230,11 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 								<Controller
 									name="web"
 									control={formHandler.control}
-									render={({ field: { onChange, value } }) => (
+									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
+											error={!!errors?.web}
+											helperText={errors?.web?.message?.toString()}
 											placeholder="https://yourwebsitename.com"
 											sx={{
 												'& fieldset': {
