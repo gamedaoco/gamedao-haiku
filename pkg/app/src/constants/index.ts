@@ -12,6 +12,8 @@ export const blockTime: number = 3
 export const blocksPerDay: number = (24 * 60 * 60) / blockTime
 export const blockFactor: number = blockTime * (60 / blockTime) * 60 * 24
 
+export const sessionUpdateInterval: number = 5 * 60 * 1000
+
 export const defaultValuesTmpOrganisation: TMPOrganisation = {
 	type: 0,
 	name: '',

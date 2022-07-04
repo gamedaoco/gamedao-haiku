@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { ApiPromise } from '@polkadot/api'
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
@@ -48,8 +47,6 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 	// Get diff days for start date
 	const startDayDiff = startDate.diff(moment(), 'days') + 1
 	const startBlocks = startDayDiff > 0 ? startDayDiff * blocksPerDay + blockNumber : blockNumber
-
-	console.log('startDate', startDate, 'startDayDiff', startDayDiff)
 
 	// Get diff days for end date
 	// min blockNumber + 1 day
