@@ -1,11 +1,6 @@
 import { Theme } from '@mui/material/styles'
 
 // ----------------------------------------------------------------------
-declare module '@mui/material/CardMedia' {
-	interface CardMediaPropsVariantOverrides {
-		circle: true
-	}
-}
 
 export default function Card(theme: Theme) {
 	return {
@@ -19,8 +14,17 @@ export default function Card(theme: Theme) {
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
+			variants:[
+				{
+					props:{variant:'mask'},
+					style:{
+						borderRadius: Number(theme.shape.borderRadius) * 50,
+						boxShadow: 'none'
+					}
+				}
+			]
 		},
-		MuiCardHeader: {
+		MiCardHeader: {
 			defaultProps: {
 				titleTypographyProps: { variant: 'h6' },
 				subheaderTypographyProps: { variant: 'body2', marginTop: theme.spacing(0.5) },

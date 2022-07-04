@@ -40,7 +40,7 @@ const Lineup: FC<LineupProps> = ({
 				}}
 			>
 				<Typography variant="caption">{firstTitle}</Typography>
-				<Typography variant="body1">{firstSubhead}</Typography>
+				<Typography variant="subtitle1">{firstSubhead}</Typography>
 			</Box>
 			<Box
 				sx={{
@@ -51,7 +51,7 @@ const Lineup: FC<LineupProps> = ({
 				}}
 			>
 				<Typography variant="caption">{secondTitle}</Typography>
-				<Typography variant="body1">{secondSubhead}</Typography>
+				<Typography variant="subtitle1">{secondSubhead}</Typography>
 			</Box>
 			<Box
 				sx={{
@@ -62,7 +62,7 @@ const Lineup: FC<LineupProps> = ({
 				}}
 			>
 				<Typography variant="caption">{thirdTitle}</Typography>
-				<Typography variant="body1">{thirdSubhead}</Typography>
+				<Typography variant="subtitle1">{thirdSubhead}</Typography>
 			</Box>
 		</Box>
 	)

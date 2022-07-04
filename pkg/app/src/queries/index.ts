@@ -1214,6 +1214,7 @@ export type Identity = {
   readonly proposal_voters_aggregate: Proposal_Voter_Aggregate;
   readonly riot?: Maybe<Scalars['String']>;
   readonly twitter?: Maybe<Scalars['String']>;
+  readonly web?: Maybe<Scalars['String']>;
 };
 
 
@@ -1419,6 +1420,7 @@ export type Identity_Bool_Exp = {
   readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
   readonly riot?: InputMaybe<String_Comparison_Exp>;
   readonly twitter?: InputMaybe<String_Comparison_Exp>;
+  readonly web?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
@@ -1432,6 +1434,7 @@ export type Identity_Max_Fields = {
   readonly legal_name?: Maybe<Scalars['String']>;
   readonly riot?: Maybe<Scalars['String']>;
   readonly twitter?: Maybe<Scalars['String']>;
+  readonly web?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -1445,6 +1448,7 @@ export type Identity_Min_Fields = {
   readonly legal_name?: Maybe<Scalars['String']>;
   readonly riot?: Maybe<Scalars['String']>;
   readonly twitter?: Maybe<Scalars['String']>;
+  readonly web?: Maybe<Scalars['String']>;
 };
 
 /** Ordering options when selecting data from "identity". */
@@ -1465,6 +1469,7 @@ export type Identity_Order_By = {
   readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>;
   readonly riot?: InputMaybe<Order_By>;
   readonly twitter?: InputMaybe<Order_By>;
+  readonly web?: InputMaybe<Order_By>;
 };
 
 /** select columns of table "identity" */
@@ -1484,7 +1489,9 @@ export enum Identity_Select_Column {
   /** column name */
   Riot = 'riot',
   /** column name */
-  Twitter = 'twitter'
+  Twitter = 'twitter',
+  /** column name */
+  Web = 'web'
 }
 
 export type Jsonb_Cast_Exp = {
@@ -2305,6 +2312,7 @@ export type Proposal = {
   readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
   /** An aggregate relationship */
   readonly proposal_voters_aggregate: Proposal_Voter_Aggregate;
+  readonly start_block: Scalars['Int'];
   readonly state: Scalars['String'];
   readonly type: Scalars['numeric'];
   readonly voting_type: Scalars['numeric'];
@@ -2386,6 +2394,7 @@ export type Proposal_Avg_Fields = {
   readonly __typename?: 'proposal_avg_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2394,6 +2403,7 @@ export type Proposal_Avg_Fields = {
 export type Proposal_Avg_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2417,6 +2427,7 @@ export type Proposal_Bool_Exp = {
   readonly proposal_creator_identity?: InputMaybe<Identity_Bool_Exp>;
   readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Bool_Exp>;
   readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
+  readonly start_block?: InputMaybe<Int_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
   readonly type?: InputMaybe<Numeric_Comparison_Exp>;
   readonly voting_type?: InputMaybe<Numeric_Comparison_Exp>;
@@ -2433,6 +2444,7 @@ export type Proposal_Max_Fields = {
   readonly id?: Maybe<Scalars['String']>;
   readonly metadata_id?: Maybe<Scalars['String']>;
   readonly organization_id?: Maybe<Scalars['String']>;
+  readonly start_block?: Maybe<Scalars['Int']>;
   readonly state?: Maybe<Scalars['String']>;
   readonly type?: Maybe<Scalars['numeric']>;
   readonly voting_type?: Maybe<Scalars['numeric']>;
@@ -2448,6 +2460,7 @@ export type Proposal_Max_Order_By = {
   readonly id?: InputMaybe<Order_By>;
   readonly metadata_id?: InputMaybe<Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
@@ -2563,6 +2576,7 @@ export type Proposal_Min_Fields = {
   readonly id?: Maybe<Scalars['String']>;
   readonly metadata_id?: Maybe<Scalars['String']>;
   readonly organization_id?: Maybe<Scalars['String']>;
+  readonly start_block?: Maybe<Scalars['Int']>;
   readonly state?: Maybe<Scalars['String']>;
   readonly type?: Maybe<Scalars['numeric']>;
   readonly voting_type?: Maybe<Scalars['numeric']>;
@@ -2578,6 +2592,7 @@ export type Proposal_Min_Order_By = {
   readonly id?: InputMaybe<Order_By>;
   readonly metadata_id?: InputMaybe<Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
@@ -2599,6 +2614,7 @@ export type Proposal_Order_By = {
   readonly proposal_creator_identity?: InputMaybe<Identity_Order_By>;
   readonly proposal_metadata?: InputMaybe<Proposal_Metadata_Order_By>;
   readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
@@ -2625,6 +2641,8 @@ export enum Proposal_Select_Column {
   /** column name */
   OrganizationId = 'organization_id',
   /** column name */
+  StartBlock = 'start_block',
+  /** column name */
   State = 'state',
   /** column name */
   Type = 'type',
@@ -2637,6 +2655,7 @@ export type Proposal_Stddev_Fields = {
   readonly __typename?: 'proposal_stddev_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2645,6 +2664,7 @@ export type Proposal_Stddev_Fields = {
 export type Proposal_Stddev_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2654,6 +2674,7 @@ export type Proposal_Stddev_Pop_Fields = {
   readonly __typename?: 'proposal_stddev_pop_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2662,6 +2683,7 @@ export type Proposal_Stddev_Pop_Fields = {
 export type Proposal_Stddev_Pop_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2671,6 +2693,7 @@ export type Proposal_Stddev_Samp_Fields = {
   readonly __typename?: 'proposal_stddev_samp_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2679,6 +2702,7 @@ export type Proposal_Stddev_Samp_Fields = {
 export type Proposal_Stddev_Samp_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2688,6 +2712,7 @@ export type Proposal_Sum_Fields = {
   readonly __typename?: 'proposal_sum_fields';
   readonly created_at_block?: Maybe<Scalars['Int']>;
   readonly expiry_block?: Maybe<Scalars['Int']>;
+  readonly start_block?: Maybe<Scalars['Int']>;
   readonly type?: Maybe<Scalars['numeric']>;
   readonly voting_type?: Maybe<Scalars['numeric']>;
 };
@@ -2696,6 +2721,7 @@ export type Proposal_Sum_Fields = {
 export type Proposal_Sum_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2705,6 +2731,7 @@ export type Proposal_Var_Pop_Fields = {
   readonly __typename?: 'proposal_var_pop_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2713,6 +2740,7 @@ export type Proposal_Var_Pop_Fields = {
 export type Proposal_Var_Pop_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2722,6 +2750,7 @@ export type Proposal_Var_Samp_Fields = {
   readonly __typename?: 'proposal_var_samp_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2730,6 +2759,7 @@ export type Proposal_Var_Samp_Fields = {
 export type Proposal_Var_Samp_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
@@ -2739,6 +2769,7 @@ export type Proposal_Variance_Fields = {
   readonly __typename?: 'proposal_variance_fields';
   readonly created_at_block?: Maybe<Scalars['Float']>;
   readonly expiry_block?: Maybe<Scalars['Float']>;
+  readonly start_block?: Maybe<Scalars['Float']>;
   readonly type?: Maybe<Scalars['Float']>;
   readonly voting_type?: Maybe<Scalars['Float']>;
 };
@@ -2747,6 +2778,7 @@ export type Proposal_Variance_Fields = {
 export type Proposal_Variance_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly expiry_block?: InputMaybe<Order_By>;
+  readonly start_block?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
   readonly voting_type?: InputMaybe<Order_By>;
 };
