@@ -52,14 +52,13 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 	}
 
 	return (
-		<Card onClick={handleCopyAddress} sx={{ boxShadow: 0 }}>
-			<Stack p={{ xs: 1, sm: 4 }} direction="row" alignItems="center" spacing={2}>
+		<Card variant="primary" sx={{ maxWidth: '312px' }} onClick={handleCopyAddress}>
+			<Stack p={{ xs: 3, sm: 3.5 }} justifyContent="" direction="row" alignItems="center">
 				{loading && <Skeleton variant="rectangular" height="3rem" width={'100%'} />}
 				{!loading && (
 					<>
 						<Avatar
 							sx={{
-								display: { xs: 'none', sm: 'block' },
 								width: { md: '48px !important' },
 								height: { md: '48px !important' },
 							}}
@@ -69,10 +68,10 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 									: 'https://picsum.photos/200'
 							}
 						/>
-						<Stack spacing={1}>
+						<Stack>
 							<Typography variant="subtitle2">{getAccountName(accountState?.account)}</Typography>
-							<Stack direction="row" alignItems="center" spacing={1}>
-								{identity?.email && <Verified color="secondary" />}
+							<Stack direction="row" alignItems="center" spacing={0.5} pr={2}>
+								{identity?.email && <Verified color="disabled" />}
 								<Typography variant="body2">{shortAccountAddress(accountState?.account)}</Typography>
 							</Stack>
 						</Stack>
@@ -85,7 +84,7 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 									variant="outlined"
 									sx={{ marginLeft: 'auto !important' }}
 								>
-									<Typography>{selectable ? 'Select' : 'Change'}</Typography>
+									<Typography variant="body2">{selectable ? 'Select' : 'Change'}</Typography>
 								</Button>
 							)
 						)}
