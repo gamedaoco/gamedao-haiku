@@ -139,10 +139,15 @@ export enum LogLevel {
 export type Mutation = {
 	readonly __typename?: 'Mutation'
 	readonly singleUpload: Scalars['String']
+	readonly updateSession: Scalars['Boolean']
 }
 
 export type MutationSingleUploadArgs = {
 	fileStream: Scalars['Upload']
+}
+
+export type MutationUpdateSessionArgs = {
+	address: Scalars['String']
 }
 
 export type OrganizationFeatures = {
@@ -519,6 +524,12 @@ export type MutationResolvers<
 		ParentType,
 		ContextType,
 		RequireFields<MutationSingleUploadArgs, 'fileStream'>
+	>
+	updateSession?: Resolver<
+		ResolversTypes['Boolean'],
+		ParentType,
+		ContextType,
+		RequireFields<MutationUpdateSessionArgs, 'address'>
 	>
 }>
 

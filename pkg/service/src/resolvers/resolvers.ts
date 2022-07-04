@@ -2,6 +2,7 @@ import { GraphQLUpload } from 'graphql-upload'
 
 import { Resolvers } from '../@types/schema'
 import { singleUpload } from './mutation/singleUploadResolver'
+import { updateSessionResolver } from './mutation/updateSessionResolver'
 import { apiProviderResolver } from './query/apiProviders/apiProviderResolver'
 import { configResolver } from './query/config/configResolver'
 import { displayDataResolver } from './query/displayValues/displayValuesResolver'
@@ -22,6 +23,7 @@ export function resolvers(): Resolvers {
 		},
 		Mutation: {
 			singleUpload: singleUpload,
+			updateSession: updateSessionResolver,
 		},
 	}
 }
