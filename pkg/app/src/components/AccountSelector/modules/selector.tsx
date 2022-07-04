@@ -14,6 +14,7 @@ export function Selector({ onClick }: ComponentProps) {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
+	const avatarHash = md5(selectedAccount?.account?.address)
 
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -30,8 +31,8 @@ export function Selector({ onClick }: ComponentProps) {
 				sx={{ width: '48px', height: '48px' }}
 				src={
 					identity?.email
-						? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
-						: 'https://picsum.photos/200'
+						? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
+						: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
 				}
 			/>
 		)
@@ -45,7 +46,6 @@ export function Selector({ onClick }: ComponentProps) {
 			spacing={2}
 			sx={{
 				overflow: 'hidden',
-				border: `2px solid ${theme.palette.text.primary}`,
 				borderRadius: '0.5rem',
 				borderBottomLeftRadius: '2rem',
 				borderTopLeftRadius: '2rem',
@@ -56,8 +56,6 @@ export function Selector({ onClick }: ComponentProps) {
 				alignItems="center"
 				spacing={2}
 				sx={{
-					border: `2px solid ${theme.palette.text.primary}`,
-					backgroundColor: theme.palette.text.primary,
 					borderBottomRightRadius: '0.5rem',
 					borderTopRightRadius: '0.5rem',
 				}}
@@ -66,12 +64,12 @@ export function Selector({ onClick }: ComponentProps) {
 					sx={{ width: '48px', height: '48px' }}
 					src={
 						identity?.email
-							? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
-							: 'https://picsum.photos/200'
+							? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
+							: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
 					}
 				/>
 				<Stack>
-					<Typography sx={{ color: theme.palette.grey[700] }} variant="subtitle2">
+					<Typography sx={{ color: theme.palette.grey[200] }} variant="subtitle2">
 						{getAccountName(selectedAccount?.account)}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>

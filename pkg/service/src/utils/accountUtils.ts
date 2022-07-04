@@ -5,6 +5,10 @@ export function getKusamaAddressFromAddress(address: string) {
 	return encodeAddress(decodeAddress(address), 2)
 }
 
+export function getZeroAddressFromAddress(address: string) {
+	return encodeAddress(decodeAddress(address), 25)
+}
+
 export function getDecodedAddress(address: string): string {
 	try {
 		return decodeAddress(address).toString()

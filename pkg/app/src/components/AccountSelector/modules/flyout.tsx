@@ -27,7 +27,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			onClose={handleClose}
 			onClick={handleClose}
 			PaperProps={{
-				elevation: 4,
+				elevation: 0,
 				sx: {
 					overflow: 'visible',
 					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
@@ -52,21 +52,15 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 					},
 				},
 			}}
-			transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-			anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
+			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
-				<Box
-					minWidth={{
-						xs: '310px',
-						sm: '450px',
-					}}
-				>
-					<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
-				</Box>
 				<BalanceCard />
-				<Stack spacing={{ xs: 0, sm: 1 }}>
-					<Divider />
+
+				<Divider />
+
+				<Stack>
 					<MenuItem>
 						<ListItemIcon>
 							<Dashboard fontSize="small" />
@@ -102,10 +96,12 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						<ListItemIcon>
 							<Logout fontSize="small" />
 						</ListItemIcon>
-						Logout
+						Disconnect
 					</MenuItem>
-					<Divider />
 				</Stack>
+
+				<Divider />
+
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
 					{apiProvider?.chainName ?? ''}
 					{apiProviders?.length > 1 && (
