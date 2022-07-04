@@ -1,12 +1,10 @@
-import { Card, Skeleton, Stack, Typography } from '@mui/material'
-import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { Card, Stack, Typography } from '@mui/material'
 import { useBalanceByAddressAndBalanceId } from 'hooks/useBalanceByAddressAndBalanceId'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 
 export function BalanceCard() {
 	const address = useCurrentAccountAddress()
-	const balance = useBalanceByAddress(address)
 	const systemProperties = useSystemProperties()
 	const networkBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.networkCurrency)
 	const governanceBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.governanceCurrency)
@@ -15,8 +13,7 @@ export function BalanceCard() {
 
 	return (
 		<Card variant="primary" sx={{ width: '312px' }}>
-			{!balance && <Skeleton variant="rectangular" height="5rem" width={'100%'} />}
-			{balance && (
+			{
 				<Stack p={{ xs: 3, sm: 3.5 }} spacing={2}>
 					<Typography variant="overline">Balances</Typography>
 					{networkBalance && (
@@ -38,7 +35,7 @@ export function BalanceCard() {
 						</Stack>
 					)}
 				</Stack>
-			)}
+			}
 		</Card>
 	)
 }
