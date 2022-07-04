@@ -56,8 +56,10 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 	useEffect(() => {
 		if (!identity?.display_name) {
 			setIsClearDisabled(true)
+		} else {
+			setIsClearDisabled(false)
 		}
-	}, [identity?.display_name])
+	}, [identity])
 
 	return (
 		<FormProvider {...formHandler}>
