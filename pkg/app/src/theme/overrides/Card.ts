@@ -18,10 +18,24 @@ export default function Card(theme: Theme) {
 				{
 					props:{variant:'mask'},
 					style:{
+						width: '6rem',
+						height: '6rem',
+						boxShadow:'none',
 						borderRadius: Number(theme.shape.borderRadius) * 50,
-						boxShadow: 'none'
-					}
-				}
+						border:'none',
+						zIndex: 0,
+					},
+
+				},
+				{
+					props: { variant: 'dashed' },
+					style: {
+						height: '100%',
+						border: 1,
+						borderStyle: 'dashed',
+						':hover': { opacity: 0.8 },
+					},
+				},
 			]
 		},
 		MiCardHeader: {
@@ -39,6 +53,7 @@ export default function Card(theme: Theme) {
 			styleOverrides: {
 				root: {
 					position: 'relative',
+					borderRadius: Number(theme.shape.borderRadius) * 20
 				},
 			},
 		},

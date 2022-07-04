@@ -4,6 +4,7 @@ import { Theme } from '@mui/material/styles'
 
 declare module '@mui/material/Skeleton' {
 	interface SkeletonPropsVariantOverrides {
+		primary: true,
 		circle: true
 	}
 }
@@ -31,6 +32,12 @@ export default function Skeleton(theme: Theme) {
 						top: -115,
 					},
 				},
+				{
+					props:{ variant: 'primary'},
+					style:{
+						borderRadius: theme.shape.borderRadiusMd
+					}
+				}
 			],
 		},
 	}
