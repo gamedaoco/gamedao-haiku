@@ -136,7 +136,6 @@ export function OrganisationById() {
 		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box width="100%" height="100%" minHeight="90vh" padding={{ xs: 2, sm: 4 }}>
 				<TabContext value={activeStep}>
-
 					{(!loading && data) || !organizationIdState ? (
 						<Stack spacing={4}>
 							<Card
@@ -151,7 +150,7 @@ export function OrganisationById() {
 									justifyContent="center"
 									alignItems="center"
 									overflow="hidden"
->
+								>
 									<label htmlFor="header-file-upload">
 										<input
 											style={{ display: 'none' }}

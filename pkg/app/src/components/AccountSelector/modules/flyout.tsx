@@ -58,24 +58,18 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
-
-<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
-
-        <AccountCard accountState={selectedAccount} callback={openAccountSelect} />
-
-        <BalanceCard />
-
+			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
+				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
+				<BalanceCard />
 				<Divider />
-
 				<Stack>
 					<MenuItem>
 						<ListItemIcon>
 							<Dashboard fontSize="small" />
 						</ListItemIcon>
-						Dashboard
+						<Typography variant="body2">Dashboard</Typography>
 					</MenuItem>
-
-          <MenuItem>
+					<MenuItem>
 						<ListItemIcon>
 							<Topic fontSize="small" />
 						</ListItemIcon>
@@ -106,18 +100,16 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						<Typography variant="body2">Disconnect</Typography>
 					</MenuItem>
 				</Stack>
-
 				<Divider />
-
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
-          <Typography variant="body2" fontWeight="bold">
-            {apiProvider?.chainName ?? ''}
-            {apiProviders?.length > 1 && (
-              <Button onClick={openNetworkSelect}>
-                <MoreVert fontSize="small" />
-              </Button>
-            )}
-          </Typography>
+					<Typography variant="body2" fontWeight="bold">
+						{apiProvider?.chainName ?? ''}
+						{apiProviders?.length > 1 && (
+							<Button onClick={openNetworkSelect}>
+								<MoreVert fontSize="small" />
+							</Button>
+						)}
+					</Typography>
 				</Box>
 			</Stack>
 		</Menu>
