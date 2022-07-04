@@ -11,12 +11,17 @@ import type { Identity } from 'src/queries'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-import { initialValues } from './validation'
-
 interface IdentityFormProps {
 	identity: Identity
 }
-
+const initialValues = (identity: Identity) => ({
+	display: identity?.display_name || '',
+	legal: identity?.legal_name || '',
+	email: identity?.email || '',
+	riot: identity?.riot || '',
+	twitter: identity?.twitter || '',
+	web: identity?.web || '',
+})
 const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 	const resolver = useYupValidationResolver(validation)
 	const { t } = useTranslation()
@@ -30,7 +35,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 			formHandler.reset(initialValues(identity))
 		}
 	}, [identity, formHandler])
-	const [values, setValues] = useState<Identity | null>(identity)
+	const [values, setValues] = useState(null)
 
 	const submit = useCallback((data, type: 'set' | 'clear') => {
 		setValues(data)
@@ -95,7 +100,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 						<Grid container spacing={3}>
 							<Grid item md={6} xs={12}>
 								<Controller
-									name="display_name"
+									name="display"
 									control={formHandler.control}
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
@@ -107,8 +112,8 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 													borderRadius: '16px',
 												},
 											}}
-											error={!!errors?.display_name}
-											helperText={errors?.display_name?.message?.toString()}
+											error={!!errors?.display}
+											helperText={errors?.display?.message?.toString()}
 											onChange={onChange}
 											value={value}
 										/>
@@ -139,14 +144,14 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 							</Grid>
 							<Grid item md={6} xs={12}>
 								<Controller
-									name="legal_name"
+									name="legal"
 									control={formHandler.control}
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
 											placeholder="John Q Doe"
-											error={!!errors?.legal_name}
-											helperText={errors?.legal_name?.message?.toString()}
+											error={!!errors?.legal}
+											helperText={errors?.legal?.message?.toString()}
 											sx={{
 												'& fieldset': {
 													borderRadius: '16px',
