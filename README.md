@@ -60,7 +60,6 @@ After changes in the graphql package `yarn build:graphql` must be executed to re
 
 ---
 
-
 ## Steps to Commit code
 1. Run `yarn install`
 2. Run `yarn format`
@@ -73,9 +72,7 @@ After changes in the graphql package `yarn build:graphql` must be executed to re
 
 # greetings x credits x kudos
 
-- fractal.id
 - kilt.io
-- ovol
 - rmrk.app
 - substrate.io
 - zero.io

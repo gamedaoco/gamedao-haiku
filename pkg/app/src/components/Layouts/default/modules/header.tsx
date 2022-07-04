@@ -12,6 +12,8 @@ import { AccountSelector, FontIcons } from 'src/components'
 
 import { NavLink } from 'components/NavLink/navLink'
 
+const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
+
 interface ComponentProps {
 	onSidebarOpen: () => void
 }
@@ -26,10 +28,10 @@ const urls = [
 		name: 'button:navigation:campaigns',
 		path: '/campaigns',
 	},
-	{
-		name: 'button:navigation:wallet',
-		path: '/wallet',
-	},
+	// {
+	// 	name: 'button:navigation:wallet',
+	// 	path: '/wallet',
+	// },
 ]
 
 export function Header({ onSidebarOpen }: ComponentProps) {
@@ -49,15 +51,7 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
 					<NavLink href="/">
-						<FontIcons
-							name={'logo'}
-							sx={{
-								color: theme.palette.text.primary,
-								fontSize: '3rem',
-								lineHeight: 0,
-								display: 'block',
-							}}
-						/>
+						<Logo />
 					</NavLink>
 				</Box>
 

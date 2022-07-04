@@ -6,6 +6,8 @@ import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-ic
 
 import { FontIcons } from 'components/Icons/icons'
 
+const Logo = () => <img src="/svg/g-col-block.svg" height="48" />
+
 const Link = ({ href, children }) => (
 	<Box>
 		<MUILink variant="inherit" href={href} target="_blank" underline="none" rel="noreferrer" color="inherit">
@@ -68,7 +70,7 @@ export function Footer() {
 					<Grid container direction="row" mt={4} mb={4}>
 						<Grid item xs={12} md={2} mb={4}>
 							<MUILink href="/">
-								<FontIcons name={'logo'} sx={{ color: theme.palette.text.primary }} />
+								<Logo />
 							</MUILink>
 						</Grid>
 
@@ -136,9 +138,14 @@ export function Footer() {
 						<SocialLinks />
 					</Grid>
 
-					<Grid container direction="row">
-						<Typography variant="body2">
-							{`© 2019-${new Date().getFullYear()} `}GAMEDAO AG, Vaduz, Liechtenstein. Powered by ZERO.IO
+					<Grid container direction="column">
+						<Typography variant="small">
+							{`© 2019-${new Date().getFullYear()} `}GameDAO AG, Vaduz, Liechtenstein. Powered by Zero
+							Reality.
+						</Typography>
+						<Typography variant="small">
+							{process.env.APP_NAME} {process.env.APP_VERSION} build {process.env.BUILD_TIME}
+							{process.env.VERCEL_GIT_COMMIT_SHA} {process.env.VERCEL_ENV}
 						</Typography>
 					</Grid>
 				</Grid>
