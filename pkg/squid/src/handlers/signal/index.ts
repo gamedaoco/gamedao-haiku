@@ -1,5 +1,4 @@
 // Imports
-// Types
 import { IPallet } from '../../@types/palletHandler';
 import { handleProposalApprovedEvent } from './events/proposalApprovedHandler';
 import { handleProposalCreatedEvent } from './events/proposalCreatedHandler';
@@ -7,6 +6,7 @@ import { handleProposalExpiredEvent } from './events/proposalExpiredHandler';
 import { handleProposalEvent } from './events/proposalHandler';
 import { handleProposalRejectedEvent } from './events/proposalRejectedHandler';
 import { handleProposalVotedEvent } from './events/proposalVotedHandler';
+import { handleWithdrawalGrantedEvent } from './events/withdrawalGrantedHandler';
 
 // Exports
 export default {
@@ -40,6 +40,10 @@ export default {
 		{
 			action: 'ProposalRejected',
 			handler: handleProposalRejectedEvent,
+		},
+		{
+			action: 'WithdrawalGranted',
+			handler: handleWithdrawalGrantedEvent,
 		},
 	],
 } as IPallet;

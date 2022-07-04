@@ -16,7 +16,8 @@
     "signal.ProposalVoted",
     "signal.ProposalExpired",
     "signal.ProposalApproved",
-    "signal.ProposalRejected"
+    "signal.ProposalRejected",
+    "signal.WithdrawalGranted"
   ],
   "calls": [
     "control.create_org",

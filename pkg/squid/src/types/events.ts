@@ -464,3 +464,31 @@ export class SignalProposalVotedEvent {
 		return this.asV51;
 	}
 }
+
+export class SignalWithdrawalGrantedEvent {
+	constructor(private ctx: EventContext) {
+		assert(this.ctx.event.name === 'signal.WithdrawalGranted');
+	}
+
+	get isV51(): boolean {
+		return (
+			this.ctx._chain.getEventHash('signal.WithdrawalGranted') ===
+			'6a64fab7a260f3ff8d4fe197667aa7dd03417d4c6d05137596968eaf77958c63'
+		);
+	}
+
+	get asV51(): { proposalId: v51.H256; campaignId: v51.H256; orgId: v51.H256 } {
+		assert(this.isV51);
+		return this.ctx._chain.decodeEvent(this.ctx.event);
+	}
+
+	get isLatest(): boolean {
+		deprecateLatest();
+		return this.isV51;
+	}
+
+	get asLatest(): { proposalId: v51.H256; campaignId: v51.H256; orgId: v51.H256 } {
+		deprecateLatest();
+		return this.asV51;
+	}
+}
