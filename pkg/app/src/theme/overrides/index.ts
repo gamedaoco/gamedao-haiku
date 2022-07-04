@@ -47,7 +47,6 @@ import ToggleButton from './ToggleButton'
 import Tooltip from './Tooltip'
 import TreeView from './TreeView'
 import Typography from './Typography'
-import Box from './Box'
 
 // ----------------------------------------------------------------------
 
@@ -99,6 +98,5 @@ export default function ComponentsOverrides(theme: Theme) {
 		ControlLabel(theme),
 		ToggleButton(theme),
 		LoadingButton(theme),
-		Box(theme)
 	)
 }
