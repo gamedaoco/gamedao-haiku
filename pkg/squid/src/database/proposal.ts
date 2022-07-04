@@ -68,6 +68,7 @@ async function createProposal(store: Store, data: ProposalCreationData, metadata
 	proposal.state = 'Active';
 	proposal.metadata = await upsertProposalMetadata(store, proposal.id, metadata);
 
+	proposal.startBlock = data.start;
 	proposal.createdAtBlock = data.blockNumber;
 	proposal.expiryBlock = data.expiry;
 

@@ -6,4 +6,5 @@ export interface IdentityUpsertData {
 	riot: string | null;
 	image: string | null;
 	twitter: string | null;
+	web: string | null;
 }

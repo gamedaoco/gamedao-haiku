@@ -7,6 +7,7 @@ type Identity @entity {
     riot: String
     image: String
     twitter: String
+    web: String
 
     createdOrganizations: [Organization!]! @derivedFrom(field: "creatorIdentity")
     controllerOrganizations: [Organization!]! @derivedFrom(field: "controllerIdentity")
@@ -122,6 +123,7 @@ type Proposal @entity {
 
     metadata: ProposalMetadata
 
+    startBlock: Int!
     expiryBlock: Int!
     createdAtBlock: Int!
 

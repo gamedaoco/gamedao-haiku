@@ -1,10 +1,7 @@
 // Imports
-// Types
 import { IdentityUpsertData } from '../../../@types/pallets/identity/identityUpsertData';
-// Database
 import { upsertIdentity } from '../../../database/identity';
 import { encodeSigner, hexStringToString } from '../../../utils';
-// 3rd
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
 // Logic
@@ -23,6 +20,7 @@ async function handleIdentitySetEvent(context: EventHandlerContext) {
 		riot: getValue(identityData.riot?.raw),
 		image: getValue(identityData.image?.raw),
 		twitter: getValue(identityData.twitter?.raw),
+		web: getValue(identityData.web?.raw),
 	};
 
 	await upsertIdentity(context.store, upsertData.address, upsertData);
