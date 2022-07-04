@@ -10,13 +10,22 @@ const webRegularExpression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\
 export const validation = Yup.object({
 	display: Yup.string().max(32, 'Max of 32 characters').required('Display Name is Required'),
 	legal: Yup.string().max(32, 'Max of 32 characters'),
-	riot: Yup.string().max(32, 'Max of 32 characters'),
 	email: Yup.string().email('Must be a valid email').max(255),
 	web: Yup.string()
 		.notRequired()
 		.nullable()
 		.transform((curr, orig) => (orig === '' ? null : curr))
 		.matches(webRegularExpression, 'Must be a valid website'),
+	twitter: Yup.string()
+		.notRequired()
+		.nullable()
+		.transform((curr, orig) => (orig === '' ? null : curr))
+		.matches(/@(\w){2,15}(:|)/, 'Must be a valid twitter account'),
+	riot: Yup.string()
+		.notRequired()
+		.nullable()
+		.transform((curr, orig) => (orig === '' ? null : curr))
+		.matches(/@(\w){2,15}.*:(\w){2,15}/, 'Must be a valid riot account'),
 })
 export function useIdentitySetTransaction(identity): SubmittableExtrinsic {
 	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
