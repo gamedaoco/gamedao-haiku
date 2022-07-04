@@ -1,6 +1,11 @@
 import { Theme } from '@mui/material/styles'
 
 // ----------------------------------------------------------------------
+declare module '@mui/material/Paper' {
+	interface PaperPropsVariantOverrides {
+		primary: true
+	}
+}
 
 export default function Paper(theme: Theme) {
 	return {
@@ -14,6 +19,10 @@ export default function Paper(theme: Theme) {
 					props: { variant: 'outlined' },
 					style: { borderColor: theme.palette.grey[500_12] },
 				},
+				{
+					props: { variant: 'primary' },
+					style: { backgroundColor: theme.palette.background.default },
+				},
 			],
 
 			styleOverrides: {
@@ -21,7 +30,8 @@ export default function Paper(theme: Theme) {
 					backgroundImage: 'none',
 					position: 'relative',
 					boxShadow: theme.customShadows.card,
-					borderRadius: Number(theme.shape.borderRadius) * 4,
+					borderRadius: Number(theme.shape.borderRadius) * 20,
+					backgroundColor: theme.palette.background.paper,
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
