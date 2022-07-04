@@ -3837,6 +3837,7 @@ export type ProposalsByOrganizationIdSubscription = {
 		readonly id: string
 		readonly creator: string
 		readonly state: string
+		readonly start_block: number
 		readonly created_at_block: number
 		readonly expiry_block: number
 		readonly proposal_metadata?: {
@@ -3860,6 +3861,7 @@ export type ProposalByIdSubscription = {
 		readonly voting_type: any
 		readonly state: string
 		readonly created_at_block: number
+		readonly start_block: number
 		readonly expiry_block: number
 		readonly proposal_creator_identity: {
 			readonly __typename?: 'identity'
@@ -4436,6 +4438,7 @@ export const ProposalsByOrganizationIdDocument = gql`
 			id
 			creator
 			state
+			start_block
 			created_at_block
 			expiry_block
 			proposal_metadata {
@@ -4487,6 +4490,7 @@ export const ProposalByIdDocument = gql`
 			voting_type
 			state
 			created_at_block
+			start_block
 			expiry_block
 			proposal_creator_identity {
 				id

@@ -25,6 +25,9 @@ import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatus
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 import { formatAddressShort } from 'src/utils/address'
 import { NavLink } from 'src/components'
+import { useBlockNumber } from 'hooks/useBlockNumber'
+import moment from 'moment'
+import { blockTime } from 'src/constants'
 
 interface ComponentProps {
 	organization: Organization
@@ -82,7 +85,10 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 	const [selectedVote, setSelectedVote] = useState<number>(null)
 	const [openTxModal, setOpenTxModal] = useState<boolean>(false)
+	const [startDate, setStartDate] = useState<string>('')
+	const [endDate, setEndDate] = useState<string>('')
 	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
+	const blockNumber = useBlockNumber()
 
 	const { loading, data } = useProposalByIdSubscription({
 		variables: { proposalId },
@@ -110,8 +116,8 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 		const yesVotes = proposal.proposal_voters.filter((voter) => voter.voted === 1).length
 		const noVotes = proposal.proposal_voters.filter((voter) => voter.voted === 0).length
 
-		setYesPercentage((yesVotes / proposal.proposal_voters.length) * 100)
-		setNoPercentage((noVotes / proposal.proposal_voters.length) * 100)
+		setYesPercentage((yesVotes / Math.max(1, proposal.proposal_voters.length)) * 100)
+		setNoPercentage((noVotes / Math.max(1, proposal.proposal_voters.length)) * 100)
 
 		setVoterRows(
 			proposal.proposal_voters.map((voter) => ({
@@ -120,6 +126,12 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 				vote: voter.voted ? 'Yes' : 'No',
 			})),
 		)
+
+		const startDiff = (proposal.start_block - blockNumber) * blockTime
+		const endDiff = (proposal.expiry_block - blockNumber) * blockTime
+
+		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY'))
+		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY'))
 	}, [proposal])
 
 	useEffect(() => {
@@ -196,14 +208,14 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 							<Typography variant="body2">Start date</Typography>
 						</Box>
 						<Box>
-							<Typography variant="body2">22/02/2022</Typography>
+							<Typography variant="body2">{startDate}</Typography>
 						</Box>
 
 						<Box>
 							<Typography variant="body2">End date</Typography>
 						</Box>
 						<Box>
-							<Typography variant="body2">22/02/2022</Typography>
+							<Typography variant="body2">{endDate}</Typography>
 						</Box>
 
 						<Box>
