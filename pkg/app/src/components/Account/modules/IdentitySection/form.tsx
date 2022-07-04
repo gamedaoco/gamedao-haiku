@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction } from 'hooks/tx/useIdentitySetTransaction'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +18,7 @@ interface IdentityFormProps {
 
 const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 	const { t } = useTranslation()
+	const [isClearDisabled, setIsClearDisabled] = useState(false)
 	const formHandler = useForm<Identity | any>({
 		defaultValues: initialValues(identity),
 	})
@@ -27,28 +29,59 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 	}, [identity, formHandler])
 	const [values, setValues] = useState<Identity | null>(identity)
 
-	const submit = useCallback((data) => {
+	const submit = useCallback((data, type: 'set' | 'clear') => {
 		setValues(data)
-		setModalState(true)
+		if (type === 'set') {
+			setModalState((prevState) => ({ ...prevState, set: true }))
+		} else {
+			setModalState((prevState) => ({ ...prevState, clear: true }))
+		}
 	}, [])
-	const tx = useIdentitySetTransaction(values)
-	const [modalState, setModalState] = useState(false)
-	const handleModalClose = useCallback(() => {
-		setModalState(false)
-	}, [setModalState])
+	const setIdentityTx = useIdentitySetTransaction(values)
+	const clearIdentityTx = useClearIdentityTransaction()
+	const [modalState, setModalState] = useState({
+		set: false,
+		clear: false,
+	})
+	const handleModalClose = useCallback(
+		(type: 'set' | 'clear') => {
+			if (type === 'set') {
+				setModalState((prevState) => ({ ...prevState, set: false }))
+			} else {
+				setModalState((prevState) => ({ ...prevState, clear: false }))
+			}
+		},
+		[setModalState],
+	)
+	useEffect(() => {
+		if (!identity?.display_name) {
+			setIsClearDisabled(true)
+		}
+	}, [identity?.display_name])
 
 	return (
 		<FormProvider {...formHandler}>
 			<TransactionDialog
-				open={modalState}
-				onClose={handleModalClose}
-				tx={tx}
+				open={modalState.set}
+				onClose={() => handleModalClose('set')}
+				tx={setIdentityTx}
 				txMsg={{
-					pending: t('notification:transactions:createProposal:pending'),
-					success: t('notification:transactions:createProposal:success'),
-					error: t('notification:transactions:createProposal:error'),
+					pending: t('notification:transactions:setIdentity:pending'),
+					success: t('notification:transactions:setIdentity:success'),
+					error: t('notification:transactions:setIdentity:error'),
 				}}
-				txCallback={handleModalClose}
+				txCallback={() => handleModalClose('set')}
+			/>
+			<TransactionDialog
+				open={modalState.clear}
+				onClose={() => handleModalClose('clear')}
+				tx={clearIdentityTx}
+				txMsg={{
+					pending: t('notification:transactions:clearIdentity:pending'),
+					success: t('notification:transactions:clearIdentity:success'),
+					error: t('notification:transactions:clearIdentity:error'),
+				}}
+				txCallback={() => handleModalClose('clear')}
 			/>
 			<form>
 				<Card sx={{ borderRadius: '16px' }}>
@@ -202,19 +235,17 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 							<Grid item md={6} xs={12}>
 								<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: 2 }}>
 									<Button
-										// disabled={!formik.dirty}
-										// onClick={() => {
-										// 	formik.resetForm()
-										// }}
+										onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
 										type="button"
 										sx={{ m: 1 }}
 										variant="contained"
+										disabled={isClearDisabled}
 									>
 										Clear Identity
 									</Button>
 									<Button
 										type="button"
-										onClick={formHandler.handleSubmit(submit)}
+										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
 										color="primary"
 										variant="contained"
 									>
