@@ -14,7 +14,7 @@ interface MyCampaignsTabProps {
 }
 const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
 	const { data, loading } = useCampaignSubscription({
-		variables: { address: getAddressFromAccountState(accountState) },
+		variables: { address: '3ZjAeLZWrhu1uFGxgFSPUuSBJmEJZpgHHM6qJUzuHb3B9ykb' },
 	})
 	const { data: campaignContributorsData, loading: campaignContributorsLoading } =
 		useCampaignContributorsSubscription({

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Campaign } from 'src/queries'
-import { Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import Lineup from 'components/lineup'
@@ -24,22 +24,19 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 				<CardMedia
 					component="img"
 					src={parseIpfsHash(campaign?.campaign_metadata?.header, config.IPFS_GATEWAY)}
-					alt="campaign_poster"
+					alt="campaign_header"
 				/>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<Card variant="mask" />
 				</Box>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-					<CardMedia
-						component="img"
+					<Avatar
+						variant="primary"
 						sx={{
-							width: '4rem',
-							height: '4rem',
-							borderRadius: Number(theme.shape.borderRadius) * 40,
 							top: -115,
 						}}
 						src={parseIpfsHash(campaign?.campaign_metadata?.logo, config.IPFS_GATEWAY)}
-						alt="campaign_poster"
+						alt="campaign_logo"
 					/>
 				</Box>
 			</Box>

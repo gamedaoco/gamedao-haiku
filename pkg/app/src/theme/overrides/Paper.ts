@@ -43,9 +43,10 @@ export default function Paper(theme: Theme) {
 					style: {
 						width: '6rem',
 						height: '6rem',
+						boxShadow:'none',
 						//TODO: fix the  border radius
-						borderRadius: Number(theme.shape.borderRadius) * 40,
 						top: -35,
+
 						zIndex: 0,
 					},
 				},
