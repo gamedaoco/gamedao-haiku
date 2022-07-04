@@ -1,22 +1,22 @@
 // ----------------------------------------------------------------------
 import palette from './palette'
 
-declare module "@mui/material/styles" {
-  interface TypographyVariants {
-    small: React.CSSProperties;
-  }
+declare module '@mui/material/styles' {
+	interface TypographyVariants {
+		small: React.CSSProperties
+	}
 
-  // allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    small?: React.CSSProperties;
-  }
+	// allow configuration using `createTheme`
+	interface TypographyVariantsOptions {
+		small?: React.CSSProperties
+	}
 }
 
 // Update the Typography's variant prop options
-declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-		small: true;
-  }
+declare module '@mui/material/Typography' {
+	interface TypographyPropsVariantOverrides {
+		small: true
+	}
 }
 
 // ----------------------------------------------------------------------
