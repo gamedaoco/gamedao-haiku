@@ -16,20 +16,22 @@ subscription CampaignContributors($address: String!) {
                 title
                 logo
             }
-            campaign_contributors {
-                id
-                contributed
+            campaign_contributors_aggregate {
+                aggregate {
+                    sum {
+                        contributed
+                    }
+                    count
+                }
             }
             organization {
                 organization_metadata {
                     name
                 }
             }
-            deposit
             expiry
             state
             target
-            created_at_block
         }
     }
 }
@@ -37,7 +39,6 @@ subscription CampaignContributors($address: String!) {
 
 subscription campaign($address: String) {
     campaign(where: {admin_identity_id: {_eq: $address}}) {
-        deposit
         target
         campaign_metadata {
             name
@@ -45,9 +46,13 @@ subscription campaign($address: String) {
             logo
             header
         }
-        campaign_contributors {
-            contributed
-            id
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count
+            }
         }
         organization {
             organization_metadata {

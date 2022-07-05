@@ -21,11 +21,7 @@ import { useConfig } from 'hooks/useConfig'
 
 import { Scrollbar } from 'components/scrollbar'
 
-import {
-	getContributedCampaignProgress,
-	getContributedCampaignRaisedAmount,
-	getContributedCampaignTimeLeft,
-} from './contributedCampaignUtils'
+import { getContributedCampaignProgress, getContributedCampaignTimeLeft } from './contributedCampaignUtils'
 import LoadingCampaignTable from './loadingCampaignTable'
 import { abbreviateNumber } from 'src/utils/globalUtils'
 
@@ -104,7 +100,10 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 													</Box>
 												</TableCell>
 												<TableCell>
-													{campaignContributor?.campaign?.campaign_contributors?.length}
+													{
+														campaignContributor?.campaign?.campaign_contributors_aggregate
+															?.aggregate?.count
+													}
 												</TableCell>
 												<TableCell>
 													{abbreviateNumber(campaignContributor?.contributed)}
@@ -121,9 +120,9 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 
 														<Typography variant="body2">
 															{abbreviateNumber(
-																getContributedCampaignRaisedAmount(
-																	campaignContributor as Campaign_Contributor,
-																),
+																campaignContributor?.campaign
+																	?.campaign_contributors_aggregate?.aggregate?.sum
+																	?.contributed,
 															)}
 															/{abbreviateNumber(campaignContributor?.campaign?.target)}
 														</Typography>

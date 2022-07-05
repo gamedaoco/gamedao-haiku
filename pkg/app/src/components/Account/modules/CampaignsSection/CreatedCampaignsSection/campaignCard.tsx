@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles'
 
 import Lineup from 'components/lineup'
 
-import { getCampaignFunding, getCampaignProgress } from './campaignUtils'
+import { getCampaignProgress } from './campaignUtils'
 import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import { abbreviateNumber } from 'src/utils/globalUtils'
@@ -74,9 +74,11 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 					firstTitle="Funded"
 					secondTitle="Target"
 					thirdTitle="Contributor"
-					firstSubhead={abbreviateNumber(getCampaignFunding(campaign))}
+					firstSubhead={abbreviateNumber(
+						campaign?.campaign_contributors_aggregate?.aggregate?.sum?.contributed,
+					)}
 					secondSubhead={abbreviateNumber(campaign?.target)}
-					thirdSubhead={abbreviateNumber(campaign?.campaign_contributors?.length)}
+					thirdSubhead={abbreviateNumber(campaign?.campaign_contributors_aggregate?.aggregate?.count)}
 					gap="20%"
 				/>
 			</CardContent>
