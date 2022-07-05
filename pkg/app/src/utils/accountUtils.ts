@@ -15,7 +15,9 @@ export function getAccountName(account: InjectedAccount): string {
 export function getAddressFromAccountState(accountState: AccountState) {
 	return accountState?.account?.address
 }
-
+export function getNameFromAccountState(accountState: AccountState) {
+	return accountState?.account?.name
+}
 export function getKusamaAddressFromAccountState(accountState: AccountState) {
 	return encodeAddress(decodeAddress(getAddressFromAccountState(accountState)), 2)
 }
@@ -38,3 +40,10 @@ export function checkIsAddressValid(address: string): boolean {
 		return false
 	}
 }
+export const getInitials = (name = ''): string =>
+	name
+		?.replace(/\s+/, ' ')
+		?.split(' ')
+		?.slice(0, 2)
+		?.map((v) => v && v[0].toUpperCase())
+		?.join('')

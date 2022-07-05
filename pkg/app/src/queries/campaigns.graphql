@@ -6,3 +6,63 @@ subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
         }
     }
 }
+subscription CampaignContributors($address: String!) {
+    campaign_contributor(where: {identity: {address: {_eq: $address}}}) {
+        id
+        contributed
+        campaign {
+            campaign_metadata {
+                name
+                title
+                logo
+            }
+            campaign_contributors_aggregate {
+                aggregate {
+                    sum {
+                        contributed
+                    }
+                    count
+                }
+            }
+            organization {
+                organization_metadata {
+                    name
+                }
+            }
+            expiry
+            created_at_block
+            state
+            target
+        }
+    }
+}
+
+
+subscription campaign($address: String) {
+    campaign(where: {admin_identity_id: {_eq: $address}}) {
+        target
+        campaign_metadata {
+            name
+            title
+            logo
+            header
+        }
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count
+            }
+        }
+        organization {
+            organization_metadata {
+                name
+            }
+        }
+    }
+}
+
+
+
+

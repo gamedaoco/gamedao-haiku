@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
-import { Box, Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { Collectable as CollectableInterface } from 'src/@types/collectable'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 
+import LoadingCollectableCard from 'components/Account/modules/CollectablesSection/loadingCollectableCard'
 import { ModelDialog } from 'components/Collectable/modules/modelDialog'
 
 interface IpfsMetadata {
@@ -20,10 +22,11 @@ interface ComponentProps {
 // TODO extract to app config
 const RMRK_GATEWAY = 'https://rmrk.mypinata.cloud/'
 
-export function Collectable({ item }: ComponentProps) {
+const Collectable: FC<ComponentProps> = ({ item }) => {
 	const [ipfsMetadata, setIpfsMetadata] = useState<IpfsMetadata>(null)
 	const [openModel, setOpenModel] = useState<boolean>(false)
-	console.log(ipfsMetadata)
+	const theme = useTheme()
+
 	useEffect(() => {
 		if (item) {
 			fetchIpfsJson(item.metadata, RMRK_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
@@ -35,21 +38,30 @@ export function Collectable({ item }: ComponentProps) {
 	}
 
 	return (
-		<Card sx={{ width: '100%' }}>
+		<>
 			{ipfsMetadata ? (
-				<>
+				<Card
+					variant="primary"
+					sx={{
+						minHeight: '310px',
+					}}
+				>
 					<CardMedia
 						component="img"
-						sx={{ width: '100%' }}
+						sx={{ padding: 0.75 }}
 						image={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
 						alt="collectable_image"
 						onClick={() => setOpenModel(true)}
 					/>
-					<CardContent>
-						<Typography sx={{ pt: 1, px: 2, fontFamily: 'PT Serif Regular' }}>
-							{ipfsMetadata.name}
-						</Typography>
-						<Typography sx={{ pb: 1, px: 2, fontFamily: 'PT Serif Regular' }}>{item.sn}</Typography>
+					<CardContent sx={{ padding: 2 }}>
+						<Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.8 }}>
+							<Typography variant="subtitle1">
+								{ipfsMetadata.name} {item.sn}
+							</Typography>
+							<Typography variant="body2" color={theme.palette.common.white}>
+								GameDao
+							</Typography>
+						</Box>
 					</CardContent>
 					<ModelDialog
 						open={openModel}
@@ -58,12 +70,12 @@ export function Collectable({ item }: ComponentProps) {
 						poster={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
 						alt={ipfsMetadata.description}
 					/>
-				</>
+				</Card>
 			) : (
-				<Box display="flex" justifyContent="center" height="100%" alignItems="center">
-					<CircularProgress />
-				</Box>
+				<LoadingCollectableCard />
 			)}
-		</Card>
+		</>
 	)
 }
+
+export default Collectable

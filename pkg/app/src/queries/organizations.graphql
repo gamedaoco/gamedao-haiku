@@ -54,3 +54,21 @@ subscription OrganizationById($orgId: String!) {
         }
     }
 }
+subscription AccountOrganizations($address: String!) {
+    identity_by_pk(id: $address){
+        organization_members {
+            organization {
+                id
+                organization_metadata {
+                    name
+                    logo
+                }
+                access
+                controller
+                organization_members {
+                    address
+                }
+            }
+        }
+    }
+}

@@ -70,6 +70,16 @@
         "pending": "Leave organisations in progress...",
         "success": "Leave organisations successfully",
         "error": "Leave organisations failed"
+      },
+      "setIdentity": {
+        "pending": "Setting your identity in progress...",
+        "success": "Your Identity was set successfully",
+        "error": "Setting Identity failed"
+      },
+      "clearIdentity": {
+        "pending": "Clearing your identity in progress...",
+        "success": "Your Identity was cleared successfully",
+        "error": "Clearing Identity failed"
       }
     },
     "info": {

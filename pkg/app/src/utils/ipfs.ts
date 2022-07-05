@@ -2,8 +2,8 @@ import { CID, create } from 'ipfs-http-client'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
 export function parseIpfsHash(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
-	let hashPart = ipfsHash.split('/')
-	return gateway + 'ipfs/' + hashPart[hashPart.length - 1]
+	let hashPart = ipfsHash?.split('/')
+	return gateway + 'ipfs/' + hashPart?.[hashPart?.length - 1]
 }
 
 export async function fetchIpfsJson(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
