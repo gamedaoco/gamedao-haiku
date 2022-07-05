@@ -2,9 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Wallet, getWallets } from '@talisman-connect/wallets'
 import { useApiProvider } from 'hooks/useApiProvider'
+import { useLogger } from 'hooks/useLogger'
 import { SignAndNotify } from 'provider/extension/modules/signAndNotify'
 import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
+import { sessionUpdateInterval } from 'src/constants'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
+import { useUpdateSessionMutation } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
 import { WalletDialog } from 'components/WalletDialog/walletDialog'
@@ -22,7 +25,10 @@ export function ExtensionProvider({ children }) {
 		lastUsedExtension: null,
 		allowConnect: false,
 	})
+	const [updateSession] = useUpdateSessionMutation()
 	const isMountedRef = useRef<null | boolean>(null)
+	const intervalRef = useRef(null)
+	const logger = useLogger('ExtensionProvider')
 
 	// Connect and disconnect callback
 	// Set allowConnect state to trigger effect
@@ -37,6 +43,26 @@ export function ExtensionProvider({ children }) {
 			setAccountSettings({ ...accountSettings, lastUsedExtension: extensionName })
 		},
 		[accountSettings, setAccountSettings],
+	)
+
+	// Session handling
+	const updateSessionCallback = useCallback(
+		async (address: string) => {
+			if (updateSession && address) {
+				const data = await updateSession({
+					variables: {
+						address,
+					},
+				})
+
+				logger.trace(`updateSession for address ${address}, result: ${data?.data.updateSession}`)
+
+				if (!data?.data?.updateSession) {
+					logger.trace('updateSession failed')
+				}
+			}
+		},
+		[updateSession, logger],
 	)
 
 	// Change selected account callback
@@ -58,6 +84,10 @@ export function ExtensionProvider({ children }) {
 
 		return () => {
 			isMountedRef.current = false
+			if (intervalRef.current) {
+				// eslint-disable-next-line react-hooks/exhaustive-deps
+				clearInterval(intervalRef.current)
+			}
 		}
 	}, [])
 
@@ -103,6 +133,23 @@ export function ExtensionProvider({ children }) {
 			setState(EXTENSION_STATE_DEFAULT)
 		}
 	}, [apiProvider, accountSettings.allowConnect, accountSettings.lastUsedExtension])
+
+	useEffect(() => {
+		if (updateSession && accountSettings) {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current)
+			}
+
+			if (accountSettings.allowConnect && accountSettings.selectedAddress) {
+				intervalRef.current = setInterval(
+					updateSessionCallback,
+					sessionUpdateInterval,
+					accountSettings.selectedAddress,
+				)
+				updateSessionCallback(accountSettings.selectedAddress)
+			}
+		}
+	}, [updateSession, accountSettings.selectedAddress, accountSettings.allowConnect])
 
 	return (
 		<ExtensionContext.Provider

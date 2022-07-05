@@ -3,6 +3,7 @@ subscription ProposalsByOrganizationId($orgId: String!) {
         id
         creator
         state
+        start_block
         created_at_block
         expiry_block
         proposal_metadata {
@@ -19,6 +20,7 @@ subscription ProposalById($proposalId: String!) {
         voting_type
         state
         created_at_block
+        start_block
         expiry_block
         proposal_creator_identity {
             id

@@ -1,0 +1,9 @@
+subscription BalanceByAddress($address: String!) {
+    Balance(where: {address: {_eq: $address}}) {
+        address
+        balanceId
+        free
+        frozen
+        reserved
+    }
+}

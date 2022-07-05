@@ -31,6 +31,7 @@ import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
+import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
@@ -248,6 +249,17 @@ export function OrganisationById() {
 							<TabPanel value={'dashboard'}>
 								{organizationIdState ? (
 									<Overview
+										organizationId={organizationIdState}
+										isMember={isMemberState}
+										isAdmin={address === organizationState?.controller}
+									/>
+								) : (
+									<TmpOverview />
+								)}
+							</TabPanel>
+							<TabPanel value={'campaigns'}>
+								{organizationIdState ? (
+									<CampaignOverview
 										organizationId={organizationIdState}
 										isMember={isMemberState}
 										isAdmin={address === organizationState?.controller}
