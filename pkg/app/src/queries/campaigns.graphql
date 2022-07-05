@@ -30,6 +30,7 @@ subscription CampaignContributors($address: String!) {
                 }
             }
             expiry
+            created_at_block
             state
             target
         }
