@@ -1,5 +1,4 @@
 import { Campaign_Contributor } from 'src/queries'
-import moment from "moment";
 
 export function getContributedCampaignProgress(campaignContributor: Campaign_Contributor): number {
 	return (
@@ -13,6 +12,6 @@ export function getContributedCampaignTimeLeft(campaignContributor: Campaign_Con
 	const timeLeft = campaignContributor?.campaign?.expiry - campaignContributor?.campaign?.created_at_block
 	return (
 		timeLeft>0?
-			moment(timeLeft).format('D'): 'Expired'
+			timeLeft: 'Expired'
 	)
 }
