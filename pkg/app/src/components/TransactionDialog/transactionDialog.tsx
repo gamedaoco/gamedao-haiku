@@ -4,8 +4,10 @@ import { Button, Stack, Typography } from '@mui/material'
 import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import type { ISubmittableResult } from '@polkadot/types/types'
-import { Balance, useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { Balance } from 'hooks/useBalanceByAddress'
+import { useBalanceByAddressAndBalanceId } from 'hooks/useBalanceByAddressAndBalanceId'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTransaction } from 'hooks/useTransaction'
 import type { PromiseMsg } from 'src/@types/promiseMsg'
 
@@ -25,7 +27,8 @@ export function TransactionDialog({ open, onClose, tx, txMsg, txCallback }: Comp
 	const [paymentInfo, setPaymentInfo] = useState<RuntimeDispatchInfo>(null)
 	const signAndSend = useTransaction()
 	const address = useCurrentAccountAddress()
-	const balance: Balance = useBalanceByAddress(address)
+	const systemProperties = useSystemProperties()
+	const balance: Balance = useBalanceByAddressAndBalanceId(address, systemProperties?.networkCurrency)
 
 	const handleProceed = useCallback(() => {
 		signAndSend(tx, txMsg, txCallback)

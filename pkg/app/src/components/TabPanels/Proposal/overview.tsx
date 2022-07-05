@@ -46,8 +46,16 @@ const columns: GridColDef[] = [
 	},
 	{
 		...defaultGridColDef,
+		minWidth: defaultGridColDef.minWidth + 30,
 		field: 'timeLeft',
 		headerName: 'Time left',
+		renderCell: (params) => {
+			return (
+				<Typography variant="body2">
+					{!params.row.hasStarted ? 'Starts in ' : ''} {params.row.timeLeft}
+				</Typography>
+			)
+		},
 	},
 	{
 		...defaultGridColDef,
@@ -87,33 +95,44 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 	useEffect(() => {
 		if (!blockNumber) return
 
+		const getHumanTime = (seconds: number) => {
+			let timeLeft = ''
+			const expiryBlockSeconds = seconds * blockTime
+			const minutes = Math.trunc((expiryBlockSeconds % 3600) / 60)
+			const hours = Math.trunc((expiryBlockSeconds % (3600 * 24)) / 3600)
+			const days = Math.trunc(expiryBlockSeconds / (3600 * 24))
+
+			if (days > 0) {
+				timeLeft = days + 'd '
+			}
+
+			if (days > 0 || hours > 0) {
+				timeLeft += hours + 'h '
+			}
+
+			if (days > 0 || hours > 0 || minutes > 0) {
+				timeLeft += minutes + 'm '
+			}
+
+			if (timeLeft === '') {
+				timeLeft = '1m'
+			}
+
+			return timeLeft
+		}
+
 		setRows(
 			proposals.map((proposal) => {
-				const expiryBlock = proposal.created_at_block + proposal.expiry_block
-				const isExpired = blockNumber && blockNumber > expiryBlock
+				const expiryBlock = proposal.expiry_block
+				const startBlock = proposal.start_block
+				const hasStarted = blockNumber && blockNumber > startBlock
+				const hasExpired = blockNumber && blockNumber > expiryBlock
 				let timeLeft = ''
 
-				if (!isExpired) {
-					const expiryBlockSeconds = (expiryBlock - blockNumber) * blockTime
-					const minutes = Math.trunc((expiryBlockSeconds % 3600) / 60)
-					const hours = Math.trunc((expiryBlockSeconds % (3600 * 24)) / 3600)
-					const days = Math.trunc(expiryBlockSeconds / (3600 * 24))
-
-					if (days > 0) {
-						timeLeft = days + 'd '
-					}
-
-					if (days > 0 || hours > 0) {
-						timeLeft += hours + 'h '
-					}
-
-					if (days > 0 || hours > 0 || minutes > 0) {
-						timeLeft += minutes + 'm '
-					}
-
-					if (timeLeft === '') {
-						timeLeft = '1m'
-					}
+				if (!hasStarted) {
+					timeLeft = getHumanTime(startBlock - blockNumber)
+				} else if (!hasExpired) {
+					timeLeft = getHumanTime(expiryBlock - blockNumber)
 				} else {
 					timeLeft = 'Expired'
 				}
@@ -124,6 +143,7 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 					description: proposal.proposal_metadata?.description ?? '',
 					status: proposal.state,
 					timeLeft,
+					hasStarted,
 				}
 			}),
 		)
