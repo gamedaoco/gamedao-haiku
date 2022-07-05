@@ -91,7 +91,7 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 															/>
 														</Box>
 														<Box display="flex" flexDirection="column">
-															<Typography>
+															<Typography variant="subtitle2" color="white">
 																{campaignContributor?.campaign?.campaign_metadata?.name}
 															</Typography>
 															<Typography variant="body2">
@@ -118,15 +118,12 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 															)}
 															sx={{ maxHeight: 6 }}
 														/>
-
-														<Typography variant="body2">
-															{abbreviateNumber(
-																getContributedCampaignRaisedAmount(
-																	campaignContributor as Campaign_Contributor,
-																),
-															)}
-															/{abbreviateNumber(campaignContributor?.campaign?.target)}
-														</Typography>
+														{abbreviateNumber(
+															getContributedCampaignRaisedAmount(
+																campaignContributor as Campaign_Contributor,
+															),
+														)}
+														/{abbreviateNumber(campaignContributor?.campaign?.target)}
 													</Box>
 												</TableCell>
 												<TableCell>
@@ -135,7 +132,10 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 													)}
 												</TableCell>
 												<TableCell>
-													<Chip label={campaignContributor?.campaign?.state} />
+													<Chip
+														variant="campaignStatus"
+														label={campaignContributor?.campaign?.state}
+													/>
 												</TableCell>
 											</TableRow>
 										)

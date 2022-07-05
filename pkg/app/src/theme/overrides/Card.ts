@@ -1,7 +1,5 @@
 import { Theme } from '@mui/material/styles'
 
-import { PRIMARY_COLOR } from '../palette'
-
 // ----------------------------------------------------------------------
 
 export default function Card(theme: Theme) {
@@ -16,8 +14,31 @@ export default function Card(theme: Theme) {
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
+			variants:[
+				{
+					props:{variant:'mask'},
+					style:{
+						width: '6rem',
+						height: '6rem',
+						boxShadow:'none',
+						borderRadius: Number(theme.shape.borderRadius) * 50,
+						border:'none',
+						zIndex: 0,
+					},
+
+				},
+				{
+					props: { variant: 'dashed' },
+					style: {
+						height: '100%',
+						border: 1,
+						borderStyle: 'dashed',
+						':hover': { opacity: 0.8 },
+					},
+				},
+			]
 		},
-		MuiCardHeader: {
+		MiCardHeader: {
 			defaultProps: {
 				titleTypographyProps: { variant: 'h6' },
 				subheaderTypographyProps: { variant: 'body2', marginTop: theme.spacing(0.5) },
@@ -31,8 +52,8 @@ export default function Card(theme: Theme) {
 		MuiCardMedia: {
 			styleOverrides: {
 				root: {
-					borderRadius: theme.shape.borderRadiusSm,
 					position: 'relative',
+					borderRadius: Number(theme.shape.borderRadius) * 20
 				},
 			},
 		},

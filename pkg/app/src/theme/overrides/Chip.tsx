@@ -8,6 +8,7 @@ import { CloseIcon } from './CustomIcons'
 declare module '@mui/material/Chip' {
 	interface ChipPropsVariantOverrides {
 		proposalVotes: true
+		campaignStatus: true
 	}
 }
 
@@ -76,6 +77,12 @@ export default function Chip(theme: Theme) {
 						fontWeight: 700,
 						color: theme.palette.grey[800],
 						backgroundColor: theme.palette.grey[300],
+					},
+				},
+				{
+					props: { variant: 'campaignStatus' },
+					style: {
+						borderRadius: Number(theme.shape.borderRadius) * 6,
 					},
 				},
 			],

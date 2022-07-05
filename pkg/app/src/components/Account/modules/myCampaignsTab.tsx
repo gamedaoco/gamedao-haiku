@@ -3,7 +3,7 @@ import React, { FC, memo } from 'react'
 import { Box } from '@mui/material'
 import { AccountState } from 'src/@types/extension'
 import { useCampaignContributorsSubscription } from 'src/queries'
-import { Campaign, useCampaignSubscription } from 'src/queries'
+import { useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import CreatedCampaignSection from './CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
