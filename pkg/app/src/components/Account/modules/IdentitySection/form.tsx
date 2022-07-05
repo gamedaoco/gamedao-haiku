@@ -1,165 +1,284 @@
 import type { FC } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
+import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
+import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import type { Identity } from 'src/queries'
 
-import { FormValues } from './validation'
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 interface IdentityFormProps {
 	identity: Identity
 }
-
+const initialValues = (identity: Identity) => ({
+	display: identity?.display_name || '',
+	legal: identity?.legal_name || '',
+	email: identity?.email || '',
+	riot: identity?.riot || '',
+	twitter: identity?.twitter || '',
+	web: identity?.web || '',
+})
 const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
+	const resolver = useYupValidationResolver(validation)
+	const { t } = useTranslation()
+	const [isClearDisabled, setIsClearDisabled] = useState(false)
+	const formHandler = useForm<Identity | any>({
+		defaultValues: initialValues(identity),
+		resolver,
+	})
+	useEffect(() => {
+		if (identity) {
+			formHandler.reset(initialValues(identity))
+		}
+	}, [identity, formHandler])
+	const [values, setValues] = useState(null)
+
+	const submit = useCallback((data, type: 'set' | 'clear') => {
+		setValues(data)
+		if (type === 'set') {
+			setModalState((prevState) => ({ ...prevState, set: true }))
+		} else {
+			setModalState((prevState) => ({ ...prevState, clear: true }))
+		}
+	}, [])
+	const setIdentityTx = useIdentitySetTransaction(values)
+	const clearIdentityTx = useClearIdentityTransaction()
+	const [modalState, setModalState] = useState({
+		set: false,
+		clear: false,
+	})
+	const handleModalClose = useCallback(
+		(type: 'set' | 'clear') => {
+			if (type === 'set') {
+				setModalState((prevState) => ({ ...prevState, set: false }))
+			} else {
+				setModalState((prevState) => ({ ...prevState, clear: false }))
+			}
+		},
+		[setModalState],
+	)
+	useEffect(() => {
+		if (!identity?.display_name) {
+			setIsClearDisabled(true)
+		} else {
+			setIsClearDisabled(false)
+		}
+	}, [identity])
+
 	return (
-		<form>
-			<Card sx={{ borderRadius: '16px' }}>
-				<CardHeader title="Set On-chain Identity" />
-				<CardContent>
-					<Grid container spacing={3}>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="QDozer"
-								// error={Boolean(formik.touched.displayName && formik.errors.displayName)}
-								fullWidth
-								label="Display Name"
-								name="displayName"
-								// onChange={formik.handleChange}
-								required
-								// value={formik.values.displayName}
-							/>
+		<FormProvider {...formHandler}>
+			<TransactionDialog
+				open={modalState.set}
+				onClose={() => handleModalClose('set')}
+				tx={setIdentityTx}
+				txMsg={{
+					pending: t('notification:transactions:setIdentity:pending'),
+					success: t('notification:transactions:setIdentity:success'),
+					error: t('notification:transactions:setIdentity:error'),
+				}}
+				txCallback={() => handleModalClose('set')}
+			/>
+			<TransactionDialog
+				open={modalState.clear}
+				onClose={() => handleModalClose('clear')}
+				tx={clearIdentityTx}
+				txMsg={{
+					pending: t('notification:transactions:clearIdentity:pending'),
+					success: t('notification:transactions:clearIdentity:success'),
+					error: t('notification:transactions:clearIdentity:error'),
+				}}
+				txCallback={() => handleModalClose('clear')}
+			/>
+			<form>
+				<Card sx={{ borderRadius: '16px' }}>
+					<CardHeader title="Set On-chain Identity" />
+					<CardContent>
+						<Grid container spacing={3}>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="display"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											label="Display Name"
+											placeholder="QDozer"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											error={!!errors?.display}
+											helperText={errors?.display?.message?.toString()}
+											onChange={onChange}
+											value={value}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="twitter"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											label="Twitter"
+											placeholder="@TwitterHandle"
+											error={!!errors?.twitter}
+											helperText={errors?.twitter?.message?.toString()}
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="legal"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											placeholder="John Q Doe"
+											error={!!errors?.legal}
+											helperText={errors?.legal?.message?.toString()}
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label="Legal Name"
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="riot"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.riot}
+											helperText={errors?.riot?.message?.toString()}
+											placeholder="@yourname:matrix.org"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label="Riot Name"
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="email"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.email}
+											helperText={errors?.email?.message?.toString()}
+											placeholder="email@internet.com"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label="Email"
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="total_deposit"
+									control={formHandler.control}
+									render={() => (
+										<TextField
+											fullWidth
+											placeholder="email@internet.com"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											disabled
+											value="1.0000"
+											label="Total Deposit"
+											InputProps={{
+												endAdornment: <Typography>milli</Typography>,
+											}}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="web"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.web}
+											helperText={errors?.web?.message?.toString()}
+											placeholder="https://yourwebsitename.com"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label="Website"
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: 2 }}>
+									<Button
+										onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
+										type="button"
+										sx={{ m: 1 }}
+										variant="contained"
+										disabled={isClearDisabled}
+									>
+										Clear Identity
+									</Button>
+									<Button
+										type="button"
+										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
+										color="primary"
+										variant="contained"
+									>
+										Sign and Submit
+									</Button>
+								</Box>
+							</Grid>
 						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="@TwitterHandle"
-								// error={Boolean(formik.touched.twitter && formik.errors.twitter)}
-								fullWidth
-								// helperText={formik.touched.twitter && formik.errors.twitter}
-								label="Twitter"
-								name="twitter"
-								// onChange={formik.handleChange}
-								// value={formik.values.twitter}
-							/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="John Q Doe"
-								// error={Boolean(formik.touched.legalName && formik.errors.legalName)}
-								fullWidth
-								label="Legal Name"
-								name="legalName"
-								// onChange={formik.handleChange}
-								// value={formik.values.legalName}
-							/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="@yourname:matrix.org"
-								// error={Boolean(formik.touched.riot && formik.errors.riot)}
-								fullWidth
-								label="Riot Name"
-								name="riot"
-								// onChange={formik.handleChange}
-								// value={formik.values.riot}
-							/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="email@internet.com"
-								// error={Boolean(formik.touched.email && formik.errors.email)}
-								fullWidth
-								label="Email"
-								name="email"
-								// onChange={formik.handleChange}
-								// value={formik.values.email}
-							/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="1.0000"
-								// error={Boolean(formik.touched.totalDeposit && formik.errors.totalDeposit)}
-								fullWidth
-								label="Total Deposit"
-								name="totalDeposit"
-								// onChange={formik.handleChange}
-								// value={formik.values.totalDeposit}
-								InputProps={{
-									endAdornment: <Typography>milli</Typography>,
-								}}
-							/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField
-								sx={{
-									'& fieldset': {
-										borderRadius: '16px',
-									},
-								}}
-								placeholder="https://yourwebsitename.com"
-								// error={Boolean(formik.touched.web && formik.errors.web)}
-								fullWidth
-								label="Website"
-								name="web"
-								// onChange={formik.handleChange}
-								// value={formik.values.web}
-							/>
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: 2 }}>
-								<Button
-									// disabled={!formik.dirty}
-									// onClick={() => {
-									// 	formik.resetForm()
-									// }}
-									type="submit"
-									sx={{ m: 1 }}
-									variant="contained"
-								>
-									Clear Identity
-								</Button>
-								<Button
-									// onClick={formik.submitForm}
-									color="primary"
-									// disabled={formik.isSubmitting}
-									variant="contained"
-								>
-									Sign and Submit
-								</Button>
-							</Box>
-						</Grid>
-					</Grid>
-				</CardContent>
-			</Card>
-		</form>
+					</CardContent>
+				</Card>
+			</form>
+		</FormProvider>
 	)
 }
 

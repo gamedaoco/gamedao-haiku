@@ -1,12 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 
-import { Box, Card, CardContent, Container, Skeleton } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Box, Card, CardContent, Skeleton } from '@mui/material'
 
-const LoadingCampaignCard: FC = () => {
-	const theme = useTheme()
+const LoadingCampaignCard = () => {
 	return (
-		<Card sx={{ minHeight: 388 }}>
+		<Card sx={{ maxHeight: 433 }}>
 			<Skeleton height={200} sx={{ position: 'relative', bottom: 5 }} variant="rectangular" />
 			<Box
 				sx={{
@@ -14,26 +12,10 @@ const LoadingCampaignCard: FC = () => {
 					justifyContent: 'center',
 				}}
 			>
-				<Card
-					sx={{
-						position: 'relative',
-						width: '6rem',
-						height: '6rem',
-						//TODO: add border radius
-						top: -35,
-						zIndex: 0,
-					}}
-				/>
+				<Card sx={{ top: -35 }} variant="mask" />
 			</Box>
 			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-				<Skeleton
-					sx={{
-						width: '5rem',
-						height: '5rem',
-						//TODO: add border radius
-						top: -115,
-					}}
-				/>
+				<Skeleton variant="circle" />
 			</Box>
 			<CardContent sx={{ pt: 0, mt: -10 }}>
 				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -44,18 +26,15 @@ const LoadingCampaignCard: FC = () => {
 				<Box
 					sx={{
 						display: 'flex',
-						pt: 3,
-						alignContent: 'center',
 						justifyContent: 'center',
 						gap: '10%',
+						pt: 3,
 					}}
 				>
 					<Box
 						sx={{
 							display: 'flex',
 							flexDirection: 'column',
-							alignItems: 'center',
-							justifyItems: 'center',
 						}}
 					>
 						<Skeleton height={20} width={80} />
@@ -65,8 +44,6 @@ const LoadingCampaignCard: FC = () => {
 						sx={{
 							display: 'flex',
 							flexDirection: 'column',
-							alignItems: 'center',
-							justifyItems: 'center',
 						}}
 					>
 						<Skeleton height={20} width={80} />
@@ -76,8 +53,6 @@ const LoadingCampaignCard: FC = () => {
 						sx={{
 							display: 'flex',
 							flexDirection: 'column',
-							alignItems: 'center',
-							justifyItems: 'center',
 						}}
 					>
 						<Skeleton height={20} width={80} />

@@ -40,17 +40,17 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading
 				Created Campaigns
 			</Typography>
 			<Grid container sx={{ pt: 4 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
-				<Grid item style={{ marginBottom: 10, minHeight: 406 }} xs={4}>
-					<Card
-						sx={{
-							height: '100%',
-							border: 1,
-							borderStyle: 'dashed',
-							':hover': { opacity: 0.8 },
-						}}
-					>
+				<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
+					<Card variant="dashed">
 						<Button sx={{ width: '100%', height: '100%' }}>
-							<Box display="flex" flexDirection="column" justifyItems="center" alignItems="center">
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									justifyItems: 'center',
+									alignItems: 'center',
+								}}
+							>
 								<PlusIcon />
 								<Typography variant="body1" fontWeight={theme.typography.fontWeightBold} sx={{ mt: 2 }}>
 									New Campaign
@@ -63,14 +63,14 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading
 
 				{loading ? (
 					[1, 2].map((x) => (
-						<Grid item xs={4} key={x} style={{ marginBottom: 10 }}>
+						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
 							<LoadingCampaignCard />
 						</Grid>
 					))
 				) : (
 					<>
 						{data?.campaign?.map((campaign: Campaign, index: number) => (
-							<Grid item xs={4} key={index} style={{ marginBottom: 10 }}>
+							<Grid item xs={4} key={index} sx={{ marginBottom: 5 }}>
 								<CampaignCard campaign={campaign} />
 							</Grid>
 						))}

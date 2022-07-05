@@ -67,7 +67,9 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 						width={'100%'}
 						alignItems="center"
 						sx={{
-							overflow: 'scroll',
+							// TODO: find out if we need scrolling at all.
+							// overflowX: 'hidden',
+							// overflowY: 'scroll',
 							position: 'relative',
 							'&::-webkit-scrollbar': {
 								width: 0,
@@ -114,16 +116,18 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 				<Stack alignItems="center" spacing={2} width="100%">
 					{(loading || (data && selectedAccount)) && <Divider sx={{ width: '50%' }} />}
 					<Fab
-						color={'primary'}
+						// color={'primary'}
 						aria-label="add"
 						sx={{
+							background: 'none',
+							outline: `2px solid ${theme.palette.primary}`,
 							mt: 1,
 							width: '48px',
 							height: '48px',
 						}}
 						onClick={buttonCallback}
 					>
-						<AddIcon />
+						<AddIcon color="primary" />
 					</Fab>
 				</Stack>
 			</Stack>

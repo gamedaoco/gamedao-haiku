@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 
-import { Box, Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Collectable as CollectableInterface } from 'src/@types/collectable'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
@@ -39,29 +39,28 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 
 	return (
 		<>
-			{/* {item.sn} */}
 			{ipfsMetadata ? (
 				<Card
+					variant="primary"
 					sx={{
-						maxWidth: '95%',
-						backgroundColor: theme.palette.grey[700],
-						borderRadius: theme.shape.borderRadiusMd,
-						height: '310px',
+						minHeight: '310px',
 					}}
 				>
 					<CardMedia
 						component="img"
-						sx={{ width: '100%', padding: 0.75, borderRadius: theme.shape.borderRadiusMd }}
+						sx={{ padding: 0.75 }}
 						image={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
 						alt="collectable_image"
 						onClick={() => setOpenModel(true)}
 					/>
 					<CardContent sx={{ padding: 2 }}>
 						<Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.8 }}>
-							<Typography variant="body1" fontWeight={700}>
+							<Typography variant="subtitle1">
 								{ipfsMetadata.name} {item.sn}
 							</Typography>
-							<Typography variant="body2">GameDao</Typography>
+							<Typography variant="body2" color={theme.palette.common.white}>
+								GameDao
+							</Typography>
 						</Box>
 					</CardContent>
 					<ModelDialog

@@ -1,9 +1,7 @@
 import React, { FC } from 'react'
 
 import { Campaign } from 'src/queries'
-import { Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-
+import { Avatar, Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
 import Lineup from 'components/lineup'
 
 import { getCampaignProgress } from './campaignUtils'
@@ -15,50 +13,36 @@ interface CampaignCardProps {
 	campaign: Campaign
 }
 const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
-	const theme = useTheme()
 	const config = useConfig()
 
 	return (
-		<Card>
+		<Card sx={{ maxHeight: 433 }}>
 			<Box>
 				<CardMedia
 					component="img"
 					src={parseIpfsHash(campaign?.campaign_metadata?.header, config.IPFS_GATEWAY)}
-					alt="campaign_poster"
+					alt="campaign_header"
+					sx={{ maxHeight: 200 }}
 				/>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-					<Card
-						sx={{
-							position: 'relative',
-							width: '6rem',
-							height: '6rem',
-							//TODO: add border radius
-							top: -35,
-							zIndex: 0,
-						}}
-					/>
+					<Card sx={{ top: -35 }} variant="mask" />
 				</Box>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-					<CardMedia
-						component="img"
+					<Avatar
+						variant="primary"
 						sx={{
-							width: '4rem',
-							height: '4rem',
-							//TODO: add border radius
 							top: -115,
 						}}
 						src={parseIpfsHash(campaign?.campaign_metadata?.logo, config.IPFS_GATEWAY)}
-						alt="campaign_poster"
+						alt="campaign_logo"
 					/>
 				</Box>
 			</Box>
 
-			<CardContent sx={{ pt: 0, mt: -10 }}>
+			<CardContent sx={{ pt: 0, mt: -12 }}>
 				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-					<Typography fontWeight={theme.typography.fontWeightBold} variant="body1">
-						{campaign?.campaign_metadata?.title}
-					</Typography>
-					<Typography variant="body2">{campaign?.organization?.organization_metadata?.name}</Typography>
+					<Typography variant="subtitle1">{campaign?.campaign_metadata?.name}</Typography>
+					<Typography variant="body2">By {campaign?.organization?.organization_metadata?.name}</Typography>
 
 					<LinearProgress
 						variant="determinate"
@@ -66,7 +50,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 						sx={{
 							mt: 2.3,
 							pt: 1.2,
-							width: '100%',
+							width: '90%',
 						}}
 					/>
 				</Box>

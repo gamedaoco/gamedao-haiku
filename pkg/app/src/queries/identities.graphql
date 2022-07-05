@@ -7,5 +7,6 @@ query IdentityByAddress($address: String!) {
         legal_name
         riot
         twitter
+        web
     }
 }

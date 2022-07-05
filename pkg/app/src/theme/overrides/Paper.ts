@@ -3,6 +3,8 @@ import { Theme } from '@mui/material/styles'
 // ----------------------------------------------------------------------
 declare module '@mui/material/Paper' {
 	interface PaperPropsVariantOverrides {
+		dashed: true
+		mask: true
 		primary: true
 	}
 }

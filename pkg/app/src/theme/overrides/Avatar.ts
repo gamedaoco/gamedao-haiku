@@ -2,6 +2,12 @@ import { Theme } from '@mui/material/styles'
 
 // ----------------------------------------------------------------------
 
+declare module '@mui/material/Avatar' {
+	interface AvatarPropsVariantOverrides {
+		primary: true
+	}
+}
+
 export default function Avatar(theme: Theme) {
 	return {
 		MuiAvatar: {
@@ -11,6 +17,15 @@ export default function Avatar(theme: Theme) {
 					backgroundColor: theme.palette.grey[400],
 				},
 			},
+			variants:[
+				{
+					props:{variant:'primary'},
+					style:{
+						width: '4rem',
+						height: '4rem'
+					}
+				}
+			]
 		},
 		MuiAvatarGroup: {
 			styleOverrides: {
