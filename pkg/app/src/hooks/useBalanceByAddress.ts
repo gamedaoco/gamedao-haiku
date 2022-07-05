@@ -1,54 +1,48 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { useApiProvider } from 'hooks/useApiProvider'
-import { unsubRef } from 'src/utils/hooks'
-import { toUnit } from 'src/utils/token'
+import { useLogger } from 'hooks/useLogger'
+import { useSystemProperties } from 'hooks/useSystemProperties'
+import { useBalanceByAddressSubscription } from 'src/queries'
+import { formatBalanceString } from 'src/utils/balance'
 
 export interface Balance {
-	feeFrozen: number
+	frozen: number
 	free: number
-	miscFrozen: number
 	reserved: number
+	balanceId: number
 	tokenSymbol: string
 	tokenDecimals: number
 }
 
-export function useBalanceByAddress(address: string): Balance {
-	const provider = useApiProvider()
-	const unsubscribeRef = useRef(null)
-	const [balanceState, setBalanceState] = useState<Balance>(null)
+export function useBalanceByAddress(address: string): Balance[] {
+	const [balanceState, setBalanceState] = useState<Balance[]>(null)
+	const { data, error } = useBalanceByAddressSubscription({ variables: { address } })
+	const systemProperties = useSystemProperties()
+	const logger = useLogger('useBalanceByAddress')
 
 	useEffect(() => {
-		unsubRef(unsubscribeRef)
-
-		if (address && provider.apiProvider && provider.systemProperties) {
-			provider.apiProvider.query.system
-				.account(address, (result) => {
-					const data = result?.toHuman()?.data
-					if (data) {
-						Object.keys(data || {}).forEach((key) => {
-							data[key] = toUnit(
-								data[key]?.split(' ')?.[0]?.replaceAll(',', ''),
-								provider.systemProperties.tokenDecimals[provider.systemProperties.networkCurrency],
-							)
-						})
-						setBalanceState({
-							...data,
-							tokenSymbol:
-								provider.systemProperties.tokenSymbol[provider.systemProperties.networkCurrency],
-							tokenDecimals:
-								provider.systemProperties.tokenDecimals[provider.systemProperties.networkCurrency],
-						})
-					} else {
-						setBalanceState(null)
-					}
-				})
-				.then((unsub) => {
-					unsubRef(unsubscribeRef)
-					unsubscribeRef.current = unsub
-				})
+		if (error) {
+			logger.debug('Subscription error:', error)
 		}
-	}, [address, provider])
+	}, [error])
+
+	useEffect(() => {
+		if (data && systemProperties) {
+			setBalanceState(
+				data.Balance.map((balance) => {
+					const tokenDecimals = systemProperties.tokenDecimals?.[balance.balanceId] ?? 18
+					return {
+						frozen: formatBalanceString(balance.frozen, tokenDecimals),
+						free: formatBalanceString(balance.free, tokenDecimals),
+						reserved: formatBalanceString(balance.reserved, tokenDecimals),
+						balanceId: +balance.balanceId,
+						tokenSymbol: systemProperties.tokenSymbol?.[balance.balanceId] ?? '',
+						tokenDecimals: tokenDecimals,
+					} as Balance
+				}),
+			)
+		}
+	}, [data, systemProperties])
 
 	return balanceState
 }
