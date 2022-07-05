@@ -27,7 +27,6 @@ export default function Skeleton(theme: Theme) {
 					style: {
 						width: '4rem',
 						height: '4rem',
-						//TODO: add border radius
 						borderRadius: Number(theme.shape.borderRadius) * 40,
 						top: -115,
 					},
