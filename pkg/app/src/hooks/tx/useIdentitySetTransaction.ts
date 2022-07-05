@@ -46,18 +46,17 @@ export function useIdentitySetTransaction(identity): SubmittableExtrinsic {
 				}
 
 				// Data validation
-				console.log(mappedData)
 				validation.validateSync(mappedData)
 				const tx = selectedApiProvider.apiProvider.tx.identity.setIdentity(
 					selectedApiProvider?.apiProvider.createType('IdentityInfo', {
 						additional: [],
-						display: { raw: mappedData.display },
-						legal: { raw: mappedData.legal },
-						web: { raw: mappedData.web },
-						riot: { raw: mappedData.riot },
-						email: { raw: mappedData.email },
+						display: mappedData.display ? { raw: mappedData.display } : { none: null },
+						legal: mappedData.legal ? { raw: mappedData.legal } : { none: null },
+						web: mappedData.web ? { raw: mappedData.web } : { none: null },
+						riot: mappedData.riot ? { raw: mappedData.riot } : { none: null },
+						email: mappedData.email ? { raw: mappedData.email } : { none: null },
 						image: { none: null },
-						twitter: { raw: mappedData.twitter },
+						twitter: mappedData.twitter ? { raw: mappedData.twitter } : { none: null },
 					}),
 				)
 
