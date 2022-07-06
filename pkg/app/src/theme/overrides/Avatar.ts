@@ -17,15 +17,15 @@ export default function Avatar(theme: Theme) {
 					backgroundColor: theme.palette.grey[400],
 				},
 			},
-			variants:[
+			variants: [
 				{
-					props:{variant:'primary'},
-					style:{
+					props: { variant: 'primary' },
+					style: {
 						width: '4rem',
-						height: '4rem'
-					}
-				}
-			]
+						height: '4rem',
+					},
+				},
+			],
 		},
 		MuiAvatarGroup: {
 			styleOverrides: {
