@@ -13,15 +13,16 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
+import { Balance } from 'src/queries'
 
-import { Balances } from 'components/Account/mock/balances'
 import { Scrollbar } from 'components/scrollbar'
 
 interface MyBalancesCardProps {
-	balances: Balances[]
+	balances: Balance[]
 	loading: boolean
 }
-
+const balancesSymbol = ['ZERO', 'PLAY', 'GAME', 'DOT']
+const getTotal = (balance: Balance) => balance.frozen + balance.free + balance.reserved
 const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
@@ -68,11 +69,11 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 								<>
 									{balances?.map((balance, index) => (
 										<TableRow hover key={index}>
-											<TableCell>{balance?.symbol}</TableCell>
-											<TableCell>{balance.transferable}</TableCell>
-											<TableCell>{balance.locked}</TableCell>
+											<TableCell>{balancesSymbol?.[balance?.balanceId]}</TableCell>
+											<TableCell>{balance.free}</TableCell>
+											<TableCell>{balance.frozen}</TableCell>
 											<TableCell>{balance.reserved}</TableCell>
-											<TableCell>{balance.total}</TableCell>
+											<TableCell>{getTotal(balance)}</TableCell>
 											<TableCell align="right">
 												<IconButton aria-label="options">
 													<MoreVertIcon />
