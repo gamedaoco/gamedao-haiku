@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { AccountState } from 'src/@types/extension'
 import { Campaign, CampaignSubscription } from 'src/queries'
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
@@ -28,18 +27,21 @@ export const PlusIcon = () => {
 interface CreatedCampaignSectionProps {
 	data: CampaignSubscription
 	loading: boolean
-	accountState: AccountState
+	title: boolean
 }
 
-const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, accountState }) => {
+const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, title }) => {
 	const theme = useTheme()
 
 	return (
 		<Box sx={{ pb: 4 }}>
-			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold}>
-				Created Campaigns
-			</Typography>
-			<Grid container sx={{ pt: 4 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
+			{title && (
+				<Typography variant="body2" fontWeight={theme.typography.fontWeightBold}>
+					Created Campaigns
+				</Typography>
+			)}
+
+			<Grid container sx={{ pt: 2 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
 				<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
 					<Card variant="dashed">
 						<Button sx={{ width: '100%', height: '100%' }}>

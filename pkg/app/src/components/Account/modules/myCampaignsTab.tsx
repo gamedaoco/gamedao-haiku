@@ -22,7 +22,7 @@ const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
 		})
 	return (
 		<Box>
-			<CreatedCampaignSection data={data} loading={loading} accountState={accountState} />
+			<CreatedCampaignSection data={data} loading={loading} title={true} />
 			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
 	)
