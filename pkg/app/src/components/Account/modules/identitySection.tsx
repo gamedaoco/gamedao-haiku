@@ -13,16 +13,17 @@ import {
 	shortAccountAddress,
 } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
+import { useRouter } from 'next/router'
 
 interface IdentitySectionProps {
 	accountState: AccountState
-	setCurrentTab: (AccountTabs) => void
 }
 
-const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab }) => {
+const IdentitySection: FC<IdentitySectionProps> = ({ accountState }) => {
+	const { push } = useRouter()
 	const handleButtonClick = useCallback(() => {
-		setCurrentTab(AccountTabs.IDENTITY)
-	}, [setCurrentTab])
+		push(`/account/${AccountTabs.IDENTITY}`)
+	}, [push])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n

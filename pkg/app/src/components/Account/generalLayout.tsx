@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
 import { Box, Container } from '@mui/material'
 import { AccountTabs } from 'src/@types/account'
@@ -10,9 +10,9 @@ import SectionsLayout from './sectionsLayout'
 
 interface AccountPageGeneralLayoutProps {
 	accountState: AccountState
+	param: AccountTabs
 }
-const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountState }) => {
-	const [currentTab, setCurrentTab] = useState<AccountTabs>(AccountTabs.OVERVIEW)
+const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountState, param }) => {
 	return (
 		<Box
 			component="main"
@@ -22,9 +22,9 @@ const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountSt
 			}}
 		>
 			<Container>
-				<IdentitySection accountState={accountState} setCurrentTab={setCurrentTab} />
-				<TabsSection setCurrentTab={setCurrentTab} currentTab={currentTab} />
-				<SectionsLayout currentTab={currentTab} accountState={accountState} />
+				<IdentitySection accountState={accountState} />
+				<TabsSection param={param} />
+				<SectionsLayout param={param} accountState={accountState} />
 			</Container>
 		</Box>
 	)

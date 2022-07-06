@@ -2,10 +2,10 @@ import React, { ChangeEvent, FC, useCallback } from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import { AccountTabs } from 'src/@types/account'
+import { useRouter } from 'next/router'
 
 interface TabsSectionProps {
-	currentTab: AccountTabs
-	setCurrentTab: (AccountTabs) => void
+	param: AccountTabs
 }
 
 interface TabsInterface {
@@ -34,12 +34,13 @@ const tabs: TabsInterface[] = [
 		value: AccountTabs.IDENTITY,
 	},
 ]
-const TabsSection: FC<TabsSectionProps> = ({ setCurrentTab, currentTab }) => {
+const TabsSection: FC<TabsSectionProps> = ({ param }) => {
+	const { push } = useRouter()
 	const handleTabsChange = useCallback(
 		(event: ChangeEvent<{}>, value: AccountTabs): void => {
-			setCurrentTab(value)
+			push(`/account/${value}`)
 		},
-		[setCurrentTab],
+		[push],
 	)
 	return (
 		<Box sx={{ bgcolor: 'background.paper', my: 2, borderRadius: '8px' }}>
@@ -50,7 +51,7 @@ const TabsSection: FC<TabsSectionProps> = ({ setCurrentTab, currentTab }) => {
 				onChange={handleTabsChange}
 				sx={{ px: 3 }}
 				textColor="primary"
-				value={currentTab}
+				value={param || AccountTabs.OVERVIEW}
 				variant="scrollable"
 			>
 				{tabs.map((tab) => (

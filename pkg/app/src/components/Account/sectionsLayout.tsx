@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 
 import { AccountTabs } from 'src/@types/account'
 import { AccountState } from 'src/@types/extension'
@@ -11,17 +11,24 @@ import OverviewTab from './modules/overviewTab'
 
 interface SectionsLayoutProps {
 	accountState: AccountState
-	currentTab: AccountTabs
+	param: AccountTabs
 }
-const SectionsLayout: FC<SectionsLayoutProps> = ({ accountState, currentTab }) => {
-	return (
-		<>
-			{currentTab === AccountTabs.OVERVIEW && <OverviewTab accountState={accountState} />}
-			{currentTab === AccountTabs.ORGANIZATIONS && <MyOrganisationsTab accountState={accountState} />}
-			{currentTab === AccountTabs.CAMPAIGNS && <MyCampaignsTab accountState={accountState} />}
-			{currentTab === AccountTabs.COLLECTABLES && <MyCollectablesTab accountState={accountState} />}
-			{currentTab === AccountTabs.IDENTITY && <IdentityTab accountState={accountState} />}
-		</>
-	)
+const SectionsLayout: FC<SectionsLayoutProps> = ({ accountState, param }) => {
+	const reroute = useCallback(() => {
+		switch (param) {
+			case AccountTabs.CAMPAIGNS:
+				return <MyCampaignsTab accountState={accountState} />
+			case AccountTabs.ORGANIZATIONS:
+				return <MyOrganisationsTab accountState={accountState} />
+			case AccountTabs.COLLECTABLES:
+				return <MyCollectablesTab accountState={accountState} />
+			case AccountTabs.IDENTITY:
+				return <IdentityTab accountState={accountState} />
+			default:
+				return <OverviewTab accountState={accountState} />
+		}
+	}, [accountState, param])
+
+	return <>{reroute()}</>
 }
 export default SectionsLayout
