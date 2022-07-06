@@ -1,4 +1,4 @@
-query IdentityByAddress($address: String!) {
+subscription IdentityByAddress($address: String!) {
     identity_by_pk(id: $address) {
         id
         email
