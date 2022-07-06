@@ -6,7 +6,7 @@ const AccountPage = () => {
 
 	useEffect(() => {
 		push('/account/overview')
-	}, [])
+	}, [push])
 }
 
 export default AccountPage
