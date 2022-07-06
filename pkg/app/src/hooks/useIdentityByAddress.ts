@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Identity, useIdentityByAddressLazyQuery } from 'src/queries'
+import { Identity, useIdentityByAddressSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
 export interface IdentityByAddress {
@@ -10,13 +10,7 @@ export interface IdentityByAddress {
 
 export function useIdentityByAddress(address: string): IdentityByAddress {
 	const [identityState, setIdentityState] = useState<Identity>(null)
-	const [queryIdentity, { data, error, loading }] = useIdentityByAddressLazyQuery()
-
-	useEffect(() => {
-		if (address) {
-			queryIdentity({ variables: { address } })
-		}
-	}, [address])
+	const { data, error, loading } = useIdentityByAddressSubscription({ variables: { address } })
 
 	useEffect(() => {
 		if (data?.identity_by_pk) {
