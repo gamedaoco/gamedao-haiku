@@ -27,11 +27,11 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Layout } from 'components/Layouts/default/layout'
+import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
-import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
@@ -147,8 +147,8 @@ export function OrganisationById() {
 								<Grid
 									minHeight="20vh"
 									maxHeight="20vh"
+									width="100%"
 									display="grid"
-									justifyContent="center"
 									alignItems="center"
 									overflow="hidden"
 								>
@@ -162,7 +162,9 @@ export function OrganisationById() {
 										/>
 										{!organizationState?.organization_metadata?.header &&
 										!tmpOrg.headerCID?.length ? (
-											<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
+											<Box display="grid" justifyContent="center" alignItems="center">
+												<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
+											</Box>
 										) : (
 											<CardMedia
 												component="img"
