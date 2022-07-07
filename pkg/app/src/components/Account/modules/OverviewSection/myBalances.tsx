@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -13,17 +11,15 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
-import { Balance } from 'src/queries'
+import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { Scrollbar } from 'components/scrollbar'
 
-interface MyBalancesCardProps {
-	balances: Balance[]
-	loading: boolean
-}
-const balancesSymbol = ['ZERO', 'PLAY', 'GAME', 'DOT']
-const getTotal = (balance: Balance) => balance.frozen + balance.free + balance.reserved
-const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
+const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
+export function MyBalancesCard() {
+	const address = useCurrentAccountAddress()
+	const { balanceState: balances, loading } = useBalanceByAddress(address)
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
 			<CardContent>
@@ -69,7 +65,7 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 								<>
 									{balances?.map((balance, index) => (
 										<TableRow hover key={index}>
-											<TableCell>{balancesSymbol?.[balance?.balanceId]}</TableCell>
+											<TableCell>{balance?.tokenSymbol}</TableCell>
 											<TableCell>{balance.free}</TableCell>
 											<TableCell>{balance.frozen}</TableCell>
 											<TableCell>{balance.reserved}</TableCell>
@@ -90,5 +86,3 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 		</Card>
 	)
 }
-
-export default MyBalancesCard

@@ -1,23 +1,16 @@
-import React, { FC, memo } from 'react'
+import React from 'react'
 
 import { Box, Grid } from '@mui/material'
-import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
-import { AccountState } from 'src/@types/extension'
-import { Balance, Organization, useAccountOrganizationsSubscription } from 'src/queries'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 import MyAchievementsCard from './OverviewSection/myAchievements'
-import MyBalancesCard from './OverviewSection/myBalances'
-import MyCollectablesTab from './myCollectablesTab'
+import { MyBalancesCard } from './OverviewSection/myBalances'
+import { MyCollectablesTab } from './myCollectablesTab'
 
-interface OverviewTabProps {
-	accountState: AccountState
-}
-
-const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
-	const address = getAddressFromAccountState(accountState)
-	const balances = useBalanceByAddress(getAddressFromAccountState(accountState))?.slice() as unknown as Balance[]
+export function OverviewTab() {
+	const address = useCurrentAccountAddress()
 	const { data, loading } = useAccountOrganizationsSubscription({
 		variables: {
 			address: address,
@@ -31,7 +24,7 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 					<MyAchievementsCard />
 				</Grid>
 				<Grid item xs={12} md={8}>
-					<MyBalancesCard balances={balances?.slice()} loading={loading} />
+					<MyBalancesCard />
 				</Grid>
 				<Grid item xs={12}>
 					<MyOrganisationsTable
@@ -41,11 +34,9 @@ const OverviewTab: FC<OverviewTabProps> = ({ accountState }) => {
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					<MyCollectablesTab accountState={accountState} />
+					<MyCollectablesTab />
 				</Grid>
 			</Grid>
 		</Box>
 	)
 }
-
-export default memo(OverviewTab)
