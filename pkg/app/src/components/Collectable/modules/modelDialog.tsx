@@ -87,7 +87,6 @@ export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: Compon
 							camera-controls
 							ar
 							autoplay
-							auto-rotate-delay={0}
 						/>
 					</Box>
 				)}
