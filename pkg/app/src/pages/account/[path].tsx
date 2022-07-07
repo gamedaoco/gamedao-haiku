@@ -5,7 +5,7 @@ import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnecte
 import { useRouter } from 'next/router'
 import { AccountTabs } from 'src/@types/account'
 
-export function AccountPage() {
+export function AccountByTab() {
 	const { query } = useRouter()
 	const param = query?.path
 	const accountState = useCurrentAccountState()
@@ -20,4 +20,4 @@ export function AccountPage() {
 	)
 }
 
-export default AccountPage
+export default AccountByTab
