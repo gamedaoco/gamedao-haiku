@@ -36,6 +36,7 @@ import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
+	console.log('rendering')
 	const [routeState, setRouteState] = useState<string>(null)
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
 	const [proposalIdState, setProposalIdState] = useState<string>(null)
