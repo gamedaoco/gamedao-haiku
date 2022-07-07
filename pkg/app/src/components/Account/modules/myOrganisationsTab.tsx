@@ -1,19 +1,17 @@
-import React, { FC, memo, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 import { useRouter } from 'next/router'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button } from '@mui/material'
-import { AccountState } from 'src/@types/extension'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 
-interface MyOrganisationsTabProps {
-	accountState: AccountState
-}
-const MyOrganisationsTab: FC<MyOrganisationsTabProps> = ({ accountState }) => {
+export function MyOrganisationsTab() {
+	const accountState = useCurrentAccountState()
 	const address = getAddressFromAccountState(accountState)
 	const { data, loading } = useAccountOrganizationsSubscription({
 		variables: {
@@ -40,5 +38,3 @@ const MyOrganisationsTab: FC<MyOrganisationsTabProps> = ({ accountState }) => {
 		</Box>
 	)
 }
-
-export default memo(MyOrganisationsTab)
