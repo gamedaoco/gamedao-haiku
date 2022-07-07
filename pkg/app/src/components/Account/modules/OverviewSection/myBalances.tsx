@@ -64,18 +64,22 @@ export function MyBalancesCard() {
 							) : (
 								<>
 									{balances?.map((balance, index) => (
-										<TableRow hover key={index}>
-											<TableCell>{balance?.tokenSymbol}</TableCell>
-											<TableCell>{balance.free}</TableCell>
-											<TableCell>{balance.frozen}</TableCell>
-											<TableCell>{balance.reserved}</TableCell>
-											<TableCell>{getTotal(balance)}</TableCell>
-											<TableCell align="right">
-												<IconButton aria-label="options">
-													<MoreVertIcon />
-												</IconButton>
-											</TableCell>
-										</TableRow>
+										<>
+											{balance?.tokenSymbol && (
+												<TableRow hover key={index}>
+													<TableCell>{balance?.tokenSymbol}</TableCell>
+													<TableCell>{balance.free}</TableCell>
+													<TableCell>{balance.frozen}</TableCell>
+													<TableCell>{balance.reserved}</TableCell>
+													<TableCell>{getTotal(balance)}</TableCell>
+													<TableCell align="right">
+														<IconButton aria-label="options">
+															<MoreVertIcon />
+														</IconButton>
+													</TableCell>
+												</TableRow>
+											)}
+										</>
 									))}
 								</>
 							)}
