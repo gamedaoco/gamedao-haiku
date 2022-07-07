@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -13,16 +11,15 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
+import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
-import { Balances } from 'components/Account/mock/balances'
 import { Scrollbar } from 'components/scrollbar'
 
-interface MyBalancesCardProps {
-	balances: Balances[]
-	loading: boolean
-}
-
-const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
+const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
+export function MyBalancesCard() {
+	const address = useCurrentAccountAddress()
+	const balances = useBalanceByAddress(address)
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
 			<CardContent>
@@ -42,7 +39,7 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{loading ? (
+							{!balances ? (
 								<>
 									{[1, 2, 3, 4, 5]?.map((index) => (
 										<TableRow hover key={index}>
@@ -67,18 +64,22 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 							) : (
 								<>
 									{balances?.map((balance, index) => (
-										<TableRow hover key={index}>
-											<TableCell>{balance?.symbol}</TableCell>
-											<TableCell>{balance.transferable}</TableCell>
-											<TableCell>{balance.locked}</TableCell>
-											<TableCell>{balance.reserved}</TableCell>
-											<TableCell>{balance.total}</TableCell>
-											<TableCell align="right">
-												<IconButton aria-label="options">
-													<MoreVertIcon />
-												</IconButton>
-											</TableCell>
-										</TableRow>
+										<>
+											{balance?.tokenSymbol && (
+												<TableRow hover key={index}>
+													<TableCell>{balance?.tokenSymbol}</TableCell>
+													<TableCell>{balance.free}</TableCell>
+													<TableCell>{balance.frozen}</TableCell>
+													<TableCell>{balance.reserved}</TableCell>
+													<TableCell>{getTotal(balance)}</TableCell>
+													<TableCell align="right">
+														<IconButton aria-label="options">
+															<MoreVertIcon />
+														</IconButton>
+													</TableCell>
+												</TableRow>
+											)}
+										</>
 									))}
 								</>
 							)}
@@ -89,5 +90,3 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 		</Card>
 	)
 }
-
-export default MyBalancesCard
