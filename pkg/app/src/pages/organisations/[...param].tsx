@@ -27,6 +27,7 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Layout } from 'components/Layouts/default/layout'
+import { OrganizationMembersTable } from 'components/OrganizationMembers/table'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
@@ -285,6 +286,9 @@ export function OrganisationById() {
 								) : (
 									<ProposalOverview organizationId={organizationIdState} />
 								)}
+							</TabPanel>
+							<TabPanel value={'members'}>
+								<OrganizationMembersTable organizationState={organizationState} />
 							</TabPanel>
 						</Stack>
 					) : (
