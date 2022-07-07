@@ -39,6 +39,7 @@ subscription OrganizationById($orgId: String!) {
         organization_members {
             address
             identity {
+                email
                 display_name
             }
         }

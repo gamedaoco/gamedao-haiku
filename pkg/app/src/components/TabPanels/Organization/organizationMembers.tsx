@@ -106,7 +106,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 				role: owner === member?.address ? 'Prime' : 'Member',
 				email: member?.identity?.email,
 				address: shortAccountAddress(member),
-				trust: index,
+				trust: (index % 3) + 1,
 				xp: 5000 + 20 * index,
 				rep: 2000 + 23 * index,
 			})),
