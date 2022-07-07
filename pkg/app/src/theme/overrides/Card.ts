@@ -14,18 +14,17 @@ export default function Card(theme: Theme) {
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
-			variants:[
+			variants: [
 				{
-					props:{variant:'mask'},
-					style:{
+					props: { variant: 'mask' },
+					style: {
 						width: '6rem',
 						height: '6rem',
-						boxShadow:'none',
+						boxShadow: 'none',
 						borderRadius: Number(theme.shape.borderRadius) * 50,
-						border:'none',
+						border: 'none',
 						zIndex: 0,
 					},
-
 				},
 				{
 					props: { variant: 'dashed' },
@@ -36,7 +35,7 @@ export default function Card(theme: Theme) {
 						':hover': { opacity: 0.8 },
 					},
 				},
-			]
+			],
 		},
 		MiCardHeader: {
 			defaultProps: {
@@ -53,7 +52,7 @@ export default function Card(theme: Theme) {
 			styleOverrides: {
 				root: {
 					position: 'relative',
-					borderRadius: Number(theme.shape.borderRadius) * 20
+					borderRadius: Number(theme.shape.borderRadius) * 20,
 				},
 			},
 		},

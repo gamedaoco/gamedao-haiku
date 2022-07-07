@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useLogger } from 'hooks/useLogger'
 import { useNetworkContext } from 'provider/network/modules/context'
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 
 const webRegularExpression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
@@ -27,10 +28,12 @@ export const validation = Yup.object({
 		.transform((curr, orig) => (orig === '' ? null : curr))
 		.matches(/@(\w){2,15}.*:(\w){2,15}/, 'Must be a valid riot account'),
 })
-export function useIdentitySetTransaction(identity): SubmittableExtrinsic {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
+
+export function useIdentitySetTransaction(identity): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
 	const { selectedApiProvider } = useNetworkContext()
 	const logger = useLogger('useIdentitySetTransaction')
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && identity) {
@@ -60,7 +63,20 @@ export function useIdentitySetTransaction(identity): SubmittableExtrinsic {
 					}),
 				)
 
-				setTxState(tx)
+				setTxState({
+					tx,
+					currencyId: selectedApiProvider?.systemProperties?.networkCurrency,
+					deposit: '1000000000000000',
+					title: t('transactions:setIdentity:title'),
+					description: t('transactions:setIdentity:description'),
+					actionSubTitle: t('transactions:setIdentity:action_subtitle'),
+					actionSubLine: t('transactions:setIdentity:action_sub_line'),
+					txMsg: {
+						pending: t('notification:transactions:setIdentity:pending'),
+						success: t('notification:transactions:setIdentity:success'),
+						error: t('notification:transactions:setIdentity:error'),
+					},
+				})
 			} catch (e) {
 				logger.trace(e)
 				if (txState) {

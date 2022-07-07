@@ -17,6 +17,7 @@ import Container from './Container'
 import ControlLabel from './ControlLabel'
 import DataGrid from './DataGrid'
 import Dialog from './Dialog'
+import Divider from './Divider'
 import Drawer from './Drawer'
 import Fab from './Fab'
 import Grid from './Grid'
@@ -98,5 +99,6 @@ export default function ComponentsOverrides(theme: Theme) {
 		ControlLabel(theme),
 		ToggleButton(theme),
 		LoadingButton(theme),
+		Divider(theme),
 	)
 }

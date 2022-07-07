@@ -7,8 +7,10 @@ import { useLogger } from 'hooks/useLogger'
 import { useTMPProposal } from 'hooks/useTMPProposal'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
+import { useTranslation } from 'react-i18next'
 import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
+import { TransactionData } from 'src/@types/transactionData'
 import { blocksPerDay } from 'src/constants'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
@@ -118,9 +120,10 @@ function createWithdrawProposalTx(
 	)
 }
 
-export function useCreateProposalTransaction(organizationId: string): SubmittableExtrinsic {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
+export function useCreateProposalTransaction(organizationId: string): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
 	const [blockNumberState, setBlockNumberState] = useState<number>(0)
+	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
 	const data = useTMPProposal()
@@ -146,7 +149,25 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 				}
 
 				if (tx) {
-					setTxState(tx)
+					setTxState({
+						tx,
+						currencyId: selectedApiProvider?.systemProperties?.governanceCurrency,
+						deposit: fromUnit(
+							data.deposit || 1,
+							selectedApiProvider.systemProperties.tokenDecimals[
+								selectedApiProvider.systemProperties.governanceCurrency
+							],
+						),
+						title: t('transactions:createProposal:title'),
+						description: t('transactions:createProposal:description'),
+						actionSubLine: t('transactions:createProposal:action_sub_line'),
+						actionSubTitle: t('transactions:createProposal:action_subtitle'),
+						txMsg: {
+							pending: t('notification:transactions:createProposal:pending'),
+							success: t('notification:transactions:createProposal:success'),
+							error: t('notification:transactions:createProposal:error'),
+						},
+					})
 				}
 			} catch (e) {
 				logger.trace(e)

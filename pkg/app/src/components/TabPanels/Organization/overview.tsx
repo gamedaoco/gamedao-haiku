@@ -46,12 +46,7 @@ export function Overview({ organizationId, isMember, isAdmin }: ComponentProps) 
 			<TransactionDialog
 				open={showTxModalType}
 				onClose={handleCloseTxModal}
-				tx={isMember ? removeMemberTx : addMemberTx}
-				txMsg={{
-					pending: t(`notification:transactions:${isMember ? 'removeMember' : 'addMember'}:pending`),
-					success: t(`notification:transactions:${isMember ? 'removeMember' : 'addMember'}:success`),
-					error: t(`notification:transactions:${isMember ? 'removeMember' : 'addMember'}:error`),
-				}}
+				txData={isMember ? removeMemberTx : addMemberTx}
 				txCallback={handleCloseTxModal}
 			/>
 		</>

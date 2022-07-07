@@ -155,17 +155,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					{t(currentStep === 2 ? 'button:form:proposal:create' : 'button:form:next_step')}
 				</Button>
 			</Stack>
-			<TransactionDialog
-				open={modalState}
-				onClose={handleModalClose}
-				tx={tx}
-				txMsg={{
-					pending: t('notification:transactions:createProposal:pending'),
-					success: t('notification:transactions:createProposal:success'),
-					error: t('notification:transactions:createProposal:error'),
-				}}
-				txCallback={handleTxCallback}
-			/>
+			<TransactionDialog open={modalState} onClose={handleModalClose} txData={tx} txCallback={handleTxCallback} />
 		</>
 	)
 }
