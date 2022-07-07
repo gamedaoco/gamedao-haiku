@@ -19,7 +19,7 @@ import { Scrollbar } from 'components/scrollbar'
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 export function MyBalancesCard() {
 	const address = useCurrentAccountAddress()
-	const { balanceState: balances, loading } = useBalanceByAddress(address)
+	const balances = useBalanceByAddress(address)
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
 			<CardContent>
@@ -39,7 +39,7 @@ export function MyBalancesCard() {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{loading ? (
+							{!balances ? (
 								<>
 									{[1, 2, 3, 4, 5]?.map((index) => (
 										<TableRow hover key={index}>

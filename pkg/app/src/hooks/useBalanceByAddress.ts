@@ -13,13 +13,10 @@ export interface Balance {
 	tokenSymbol: string
 	tokenDecimals: number
 }
-interface UseBalanceByAddress {
-	balanceState: Balance[]
-	loading: boolean
-}
-export function useBalanceByAddress(address: string): UseBalanceByAddress {
+
+export function useBalanceByAddress(address: string): Balance[] {
 	const [balanceState, setBalanceState] = useState<Balance[]>(null)
-	const { data, error, loading } = useBalanceByAddressSubscription({ variables: { address } })
+	const { data, error } = useBalanceByAddressSubscription({ variables: { address } })
 	const systemProperties = useSystemProperties()
 	const logger = useLogger('useBalanceByAddress')
 
@@ -47,5 +44,5 @@ export function useBalanceByAddress(address: string): UseBalanceByAddress {
 		}
 	}, [data, systemProperties])
 
-	return { balanceState, loading }
+	return balanceState
 }
