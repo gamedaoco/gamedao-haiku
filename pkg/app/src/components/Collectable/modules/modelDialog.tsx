@@ -53,9 +53,6 @@ export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: Compon
 	return (
 		<Dialog
 			sx={{
-				pt: { xs: '7rem', md: '12rem', lg: '22rem' },
-				pl: { md: '5rem' },
-
 				'& .MuiDialog-container': {
 					'& .MuiPaper-root': {
 						width: '100%',
@@ -86,9 +83,11 @@ export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: Compon
 							poster={poster}
 							alt={alt}
 							shadow-intensity="1"
-							camera-controls
 							auto-rotate
+							camera-controls
 							ar
+							autoplay
+							auto-rotate-delay={0}
 						/>
 					</Box>
 				)}
