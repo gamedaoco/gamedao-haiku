@@ -63,7 +63,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				<BalanceCard />
 				<Divider />
 				<Stack>
-					<NavLink href={'/account'}>
+					<NavLink href={'/account/overview'}>
 						<MenuItem>
 							<ListItemIcon>
 								<Dashboard fontSize="small" />

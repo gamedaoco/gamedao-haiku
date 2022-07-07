@@ -30,4 +30,3 @@ export function SectionsLayout({ param }: ComponentProps) {
 
 	return <>{reroute()}</>
 }
-export default SectionsLayout
