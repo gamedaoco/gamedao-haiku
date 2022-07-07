@@ -35,7 +35,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 							}}
 						>
 							<Avatar
-								src={params.row.email ? `https://www.gravatar.com/avatar/${md5(params.row.email)}` : ''} //https://picsum.photos/100
+								src={params.row.email ? `https://www.gravatar.com/avatar/${md5(params.row.email)}` : ''}
 								sx={{
 									height: 42,
 									width: 42,
