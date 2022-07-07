@@ -1,21 +1,17 @@
-import React, { FC, memo, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import Script from 'next/script'
 
-import { useCollectablesForUserLazyQuery } from 'src/queries'
 import { Card, Typography } from '@mui/material'
-import { AccountState } from 'src/@types/extension'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useCollectablesForUserLazyQuery } from 'src/queries'
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
 
 import CollectablesList from './CollectablesSection/collectablesList'
 
-interface MyCollectablesTabProps {
-	accountState: AccountState
-}
-
-const MyCollectablesTab: FC<MyCollectablesTabProps> = ({ accountState }) => {
+export function MyCollectablesTab() {
 	const [loadCollectables, { loading, data }] = useCollectablesForUserLazyQuery()
-
+	const accountState = useCurrentAccountState()
 	useEffect(() => {
 		if (accountState) {
 			loadCollectables({ variables: { owner: getKusamaAddressFromAccountState(accountState) } })
@@ -32,5 +28,3 @@ const MyCollectablesTab: FC<MyCollectablesTabProps> = ({ accountState }) => {
 		</>
 	)
 }
-
-export default memo(MyCollectablesTab)

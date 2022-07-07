@@ -1,9 +1,8 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { AccountState } from 'src/@types/extension'
 import { Campaign, CampaignSubscription } from 'src/queries'
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
@@ -25,13 +24,12 @@ export const PlusIcon = () => {
 	)
 }
 
-interface CreatedCampaignSectionProps {
+interface ComponentProps {
 	data: CampaignSubscription
 	loading: boolean
-	accountState: AccountState
 }
 
-const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, accountState }) => {
+export function CreatedCampaignSection({ data, loading }: ComponentProps) {
 	const theme = useTheme()
 
 	return (
@@ -80,5 +78,3 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading
 		</Box>
 	)
 }
-
-export default CreatedCampaignSection

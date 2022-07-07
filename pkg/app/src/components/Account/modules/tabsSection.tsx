@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC, useCallback } from 'react'
+import React, { ChangeEvent, useCallback } from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import { AccountTabs } from 'src/@types/account'
 import { useRouter } from 'next/router'
 
-interface TabsSectionProps {
+interface ComponentProps {
 	param: AccountTabs
 }
 
@@ -34,7 +34,7 @@ const tabs: TabsInterface[] = [
 		value: AccountTabs.IDENTITY,
 	},
 ]
-const TabsSection: FC<TabsSectionProps> = ({ param }) => {
+export function TabsSection({ param }: ComponentProps) {
 	const { push } = useRouter()
 	const handleTabsChange = useCallback(
 		(event: ChangeEvent<{}>, value: AccountTabs): void => {
@@ -61,5 +61,3 @@ const TabsSection: FC<TabsSectionProps> = ({ param }) => {
 		</Box>
 	)
 }
-
-export default TabsSection

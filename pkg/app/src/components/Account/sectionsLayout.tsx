@@ -1,31 +1,30 @@
-import React, { FC, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 import { AccountTabs } from 'src/@types/account'
-import { AccountState } from 'src/@types/extension'
+import { MyCampaignsTab } from './modules/myCampaignsTab'
+import { MyCollectablesTab } from './modules/myCollectablesTab'
+import { MyOrganisationsTab } from './modules/myOrganisationsTab'
+import { OverviewTab } from './modules/overviewTab'
+import { IdentityForm } from 'components/Account/modules/IdentitySection/form'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
-import IdentityTab from './modules/identityTab'
-import MyCampaignsTab from './modules/myCampaignsTab'
-import MyCollectablesTab from './modules/myCollectablesTab'
-import MyOrganisationsTab from './modules/myOrganisationsTab'
-import OverviewTab from './modules/overviewTab'
-
-interface SectionsLayoutProps {
-	accountState: AccountState
+interface ComponentProps {
 	param: AccountTabs
 }
-const SectionsLayout: FC<SectionsLayoutProps> = ({ accountState, param }) => {
+export function SectionsLayout({ param }: ComponentProps) {
+	const accountState = useCurrentAccountAddress()
 	const reroute = useCallback(() => {
 		switch (param) {
 			case AccountTabs.CAMPAIGNS:
-				return <MyCampaignsTab accountState={accountState} />
+				return <MyCampaignsTab />
 			case AccountTabs.ORGANIZATIONS:
-				return <MyOrganisationsTab accountState={accountState} />
+				return <MyOrganisationsTab />
 			case AccountTabs.COLLECTABLES:
-				return <MyCollectablesTab accountState={accountState} />
+				return <MyCollectablesTab />
 			case AccountTabs.IDENTITY:
-				return <IdentityTab accountState={accountState} />
+				return <IdentityForm />
 			default:
-				return <OverviewTab accountState={accountState} />
+				return <OverviewTab />
 		}
 	}, [accountState, param])
 

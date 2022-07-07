@@ -1,18 +1,15 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Box, Container } from '@mui/material'
 import { AccountTabs } from 'src/@types/account'
-import { AccountState } from 'src/@types/extension'
+import { IdentitySection } from './modules/identitySection'
+import { TabsSection } from './modules/tabsSection'
+import { SectionsLayout } from './sectionsLayout'
 
-import IdentitySection from './modules/identitySection'
-import TabsSection from './modules/tabsSection'
-import SectionsLayout from './sectionsLayout'
-
-interface AccountPageGeneralLayoutProps {
-	accountState: AccountState
+interface ComponentProps {
 	param: AccountTabs
 }
-const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountState, param }) => {
+export function AccountPageGeneralLayout({ param }: ComponentProps) {
 	return (
 		<Box
 			component="main"
@@ -22,12 +19,10 @@ const AccountPageGeneralLayout: FC<AccountPageGeneralLayoutProps> = ({ accountSt
 			}}
 		>
 			<Container>
-				<IdentitySection accountState={accountState} />
+				<IdentitySection />
 				<TabsSection param={param} />
-				<SectionsLayout param={param} accountState={accountState} />
+				<SectionsLayout param={param} />
 			</Container>
 		</Box>
 	)
 }
-
-export default AccountPageGeneralLayout

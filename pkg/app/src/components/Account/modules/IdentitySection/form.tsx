@@ -1,6 +1,4 @@
-import type { FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
-
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
@@ -10,10 +8,10 @@ import { useTranslation } from 'react-i18next'
 import type { Identity } from 'src/queries'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-interface IdentityFormProps {
-	identity: Identity
-}
 const initialValues = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
@@ -22,7 +20,9 @@ const initialValues = (identity: Identity) => ({
 	twitter: identity?.twitter || '',
 	web: identity?.web || '',
 })
-const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
+export function IdentityForm() {
+	const accountState = useCurrentAccountState()
+	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 	const resolver = useYupValidationResolver(validation)
 	const { t } = useTranslation()
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
@@ -281,5 +281,3 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 		</FormProvider>
 	)
 }
-
-export default IdentityForm
