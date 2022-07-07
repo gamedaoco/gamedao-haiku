@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Providers } from 'src/provider/provider'
 import createEmotionCache from 'src/theme/createEmotionCache'
 import 'src/theme/css/toastify.css'
+import 'src/theme/css/modelViewer.css'
 
 const clientSideEmotionCache = createEmotionCache()
 
