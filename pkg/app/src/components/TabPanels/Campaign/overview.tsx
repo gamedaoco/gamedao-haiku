@@ -29,5 +29,9 @@ export function CampaignOverview({ organizationId, isMember, isAdmin, data, load
 		return <CreateCampaignPage organizationId={organizationId} cancel={onHandleCancelClicked} />
 	}
 
-	return <>{isAdmin && <CreatedCampaignSection data={data} loading={loading} title={false} />}</>
+	return (
+		<>
+			<CreatedCampaignSection data={data} loading={loading} title={true} isAdmin={isAdmin} />
+		</>
+	)
 }

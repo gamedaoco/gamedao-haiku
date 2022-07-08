@@ -20,7 +20,7 @@ export function MyCampaignsTab() {
 		})
 	return (
 		<Box>
-			<CreatedCampaignSection data={data} loading={loading} title={true} />
+			<CreatedCampaignSection data={data} loading={loading} title={true} isAdmin={true} />
 			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
 	)

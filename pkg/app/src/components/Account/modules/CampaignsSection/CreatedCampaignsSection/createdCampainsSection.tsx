@@ -20,7 +20,7 @@ export const PlusIcon = () => {
 				backgroundColor: theme.palette.grey[900],
 			}}
 		>
-			<AddIcon sx={{ color: theme.palette.grey[300] }} />
+			<AddIcon sx={{ color: theme.palette.grey[600] }} />
 		</Box>
 	)
 }
@@ -29,9 +29,10 @@ interface ComponentProps {
 	data: CampaignSubscription
 	loading: boolean
 	title: boolean
+	isAdmin: boolean
 }
 
-export function CreatedCampaignSection({ data, loading, title }: ComponentProps) {
+export function CreatedCampaignSection({ data, loading, title, isAdmin }: ComponentProps) {
 	const theme = useTheme()
 
 	return (
@@ -42,27 +43,6 @@ export function CreatedCampaignSection({ data, loading, title }: ComponentProps)
 				</Typography>
 			)}
 			<Grid container sx={{ pt: 2 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
-				<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
-					<Card variant="dashed">
-						<Button sx={{ width: '100%', height: '100%' }}>
-							<Box
-								sx={{
-									display: 'flex',
-									flexDirection: 'column',
-									justifyItems: 'center',
-									alignItems: 'center',
-								}}
-							>
-								<PlusIcon />
-								<Typography variant="body1" fontWeight={theme.typography.fontWeightBold} sx={{ mt: 2 }}>
-									New Campaign
-								</Typography>
-								<Typography variant="body1">Click here to create a new campaign</Typography>
-							</Box>
-						</Button>
-					</Card>
-				</Grid>
-
 				{loading ? (
 					[1, 2].map((x) => (
 						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
@@ -77,6 +57,28 @@ export function CreatedCampaignSection({ data, loading, title }: ComponentProps)
 							</Grid>
 						))}
 					</>
+				)}
+				{isAdmin && (
+					<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
+						<Card variant="dashed">
+							<Button sx={{ width: '100%', height: '100%' }}>
+								<Box
+									sx={{
+										display: 'flex',
+										flexDirection: 'column',
+										justifyItems: 'center',
+										alignItems: 'center',
+									}}
+								>
+									<PlusIcon />
+									<Typography variant="subtitle1" sx={{ mt: 2 }}>
+										New Campaign
+									</Typography>
+									<Typography variant="body1">Click here to create a new campaign</Typography>
+								</Box>
+							</Button>
+						</Card>
+					</Grid>
 				)}
 			</Grid>
 		</Box>
