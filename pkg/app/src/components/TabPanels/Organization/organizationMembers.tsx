@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
+import { Verified } from '@mui/icons-material'
 import { Avatar, Box, Paper, Rating, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import md5 from 'md5'
@@ -45,9 +46,12 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 							</Avatar>
 							<Box sx={{ ml: 1 }}>
 								{params.row.name}
-								<Typography color="textSecondary" variant="body2">
-									{params.row.address}
-								</Typography>
+								<Box sx={{ display: 'flex', alignItems: 'center' }}>
+									{params.row.email && <Verified color="disabled" />}
+									<Typography color="textSecondary" variant="body2" sx={{ mr: 0.2 }}>
+										{params.row.address}
+									</Typography>
+								</Box>
 							</Box>
 						</Box>
 					)
