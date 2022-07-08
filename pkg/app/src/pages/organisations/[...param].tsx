@@ -28,6 +28,7 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Layout } from 'components/Layouts/default/layout'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
+import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
@@ -285,6 +286,9 @@ export function OrganisationById() {
 								) : (
 									<ProposalOverview organizationId={organizationIdState} />
 								)}
+							</TabPanel>
+							<TabPanel value={'members'}>
+								<OrganizationMembersTable organizationState={organizationState} />
 							</TabPanel>
 						</Stack>
 					) : (

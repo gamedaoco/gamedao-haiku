@@ -39,6 +39,7 @@ subscription OrganizationById($orgId: String!) {
         organization_members {
             address
             identity {
+                email
                 display_name
             }
         }
@@ -57,6 +58,7 @@ subscription OrganizationById($orgId: String!) {
 subscription AccountOrganizations($address: String!) {
     identity_by_pk(id: $address){
         organization_members {
+            id
             organization {
                 id
                 organization_metadata {
@@ -67,6 +69,11 @@ subscription AccountOrganizations($address: String!) {
                 controller
                 organization_members {
                     address
+                    identity {
+                        display_name
+                        image
+                        email
+                    }
                 }
             }
         }
