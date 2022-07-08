@@ -1,18 +1,16 @@
-import React, { FC, memo } from 'react'
+import React from 'react'
 
 import { Box } from '@mui/material'
-import { AccountState } from 'src/@types/extension'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useCampaignContributorsSubscription } from 'src/queries'
 import { useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-import CreatedCampaignSection from './CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
+import { CreatedCampaignSection } from './CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
 import ContributedCampaignsSection from './CampaignsSection/contributedCampaignsSection/contributedCampaignsSection'
 
-interface MyCampaignsTabProps {
-	accountState: AccountState
-}
-const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
+export function MyCampaignsTab() {
+	const accountState = useCurrentAccountState()
 	const { data, loading } = useCampaignSubscription({
 		variables: { address: getAddressFromAccountState(accountState) },
 	})
@@ -27,5 +25,3 @@ const MyCampaignsTab: FC<MyCampaignsTabProps> = ({ accountState }) => {
 		</Box>
 	)
 }
-
-export default memo(MyCampaignsTab)

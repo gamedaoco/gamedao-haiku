@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Box, Dialog, Paper } from '@mui/material'
+import { Box, Dialog } from '@mui/material'
 import { fetchIpfsBlob } from 'src/utils/ipfs'
 
 interface ComponentProps {
@@ -51,49 +51,69 @@ export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: Compon
 	}, [open])
 
 	return (
-		<Dialog open={open} onClose={handleClose}>
-			<Paper>
-				<Box padding={4}>
-					{is3DModel && (
-						<>
-							{/* @ts-ignore */}
-							<model-viewer
-								src={fileState}
-								ios-src=""
-								poster={poster}
-								alt={alt}
-								shadow-intensity="1"
-								camera-controls
-								auto-rotate
-								ar
-							/>
-						</>
-					)}
-
-					{isImage && (
-						<Box
-							sx={{
-								width: '100%',
-							}}
-							component="img"
-							src={fileState ?? poster}
+		<Dialog
+			sx={{
+				'& .MuiDialog-container': {
+					'& .MuiPaper-root': {
+						width: '100%',
+						maxWidth: { sm: '68rem' },
+						height: '100%',
+						maxHeight: { xs: '20rem', sm: '40rem' },
+					},
+				},
+			}}
+			open={open}
+			onClose={handleClose}
+		>
+			<Box padding={4}>
+				{is3DModel && (
+					<Box
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							width: '100%',
+							height: '100%',
+						}}
+					>
+						{/* @ts-ignore */}
+						<model-viewer
+							src={fileState}
+							ios-src=""
+							poster={poster}
 							alt={alt}
+							shadow-intensity="1"
+							auto-rotate
+							camera-controls
+							ar
+							autoplay
 						/>
-					)}
+					</Box>
+				)}
 
-					{isVideo && (
-						<Box
-							sx={{
-								width: '100%',
-							}}
-						>
-							<video width="320" height="240" controls>
-								<source src={fileState} type={isVideo} />
-							</video>
-						</Box>
-					)}
-				</Box>
-			</Paper>
+				{isImage && (
+					<Box
+						sx={{
+							width: '100%',
+						}}
+						component="img"
+						src={fileState ?? poster}
+						alt={alt}
+					/>
+				)}
+
+				{isVideo && (
+					<Box
+						sx={{
+							width: '100%',
+						}}
+					>
+						<video width="320" height="240" controls>
+							<source src={fileState} type={isVideo} />
+						</video>
+					</Box>
+				)}
+			</Box>
 		</Dialog>
 	)
 }

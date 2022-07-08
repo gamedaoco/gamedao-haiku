@@ -1,11 +1,10 @@
-import React, { FC, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 import { AccountTabs } from 'src/@types/account'
-import { AccountState } from 'src/@types/extension'
 import {
 	getAddressFromAccountState,
 	getInitials,
@@ -13,16 +12,15 @@ import {
 	shortAccountAddress,
 } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
+import { useRouter } from 'next/router'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 
-interface IdentitySectionProps {
-	accountState: AccountState
-	setCurrentTab: (AccountTabs) => void
-}
-
-const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab }) => {
+export function IdentitySection() {
+	const { push } = useRouter()
+	const accountState = useCurrentAccountState()
 	const handleButtonClick = useCallback(() => {
-		setCurrentTab(AccountTabs.IDENTITY)
-	}, [setCurrentTab])
+		push(`/account/${AccountTabs.IDENTITY}`)
+	}, [push])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n
@@ -96,5 +94,3 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 		</Grid>
 	)
 }
-
-export default IdentitySection

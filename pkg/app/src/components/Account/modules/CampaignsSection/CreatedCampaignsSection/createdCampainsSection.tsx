@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Campaign, CampaignSubscription } from 'src/queries'
+
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
 
@@ -24,13 +25,13 @@ export const PlusIcon = () => {
 	)
 }
 
-interface CreatedCampaignSectionProps {
+interface ComponentProps {
 	data: CampaignSubscription
 	loading: boolean
 	title: boolean
 }
 
-const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading, title }) => {
+export function CreatedCampaignSection({ data, loading, title }: ComponentProps) {
 	const theme = useTheme()
 
 	return (
@@ -40,7 +41,6 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading
 					Created Campaigns
 				</Typography>
 			)}
-
 			<Grid container sx={{ pt: 2 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
 				<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
 					<Card variant="dashed">
@@ -82,5 +82,3 @@ const CreatedCampaignSection: FC<CreatedCampaignSectionProps> = ({ data, loading
 		</Box>
 	)
 }
-
-export default CreatedCampaignSection

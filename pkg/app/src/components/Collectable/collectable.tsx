@@ -63,13 +63,15 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 							</Typography>
 						</Box>
 					</CardContent>
-					<ModelDialog
-						open={openModel}
-						mediaUrl={ipfsMetadata.mediaUri}
-						handleClose={() => setOpenModel(false)}
-						poster={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
-						alt={ipfsMetadata.description}
-					/>
+					<Box display="flex" justifyContent="center" alignItems="center">
+						<ModelDialog
+							open={openModel}
+							mediaUrl={ipfsMetadata.mediaUri}
+							handleClose={() => setOpenModel(false)}
+							poster={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
+							alt={ipfsMetadata.description}
+						/>
+					</Box>
 				</Card>
 			) : (
 				<LoadingCollectableCard />

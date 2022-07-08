@@ -1,5 +1,5 @@
 import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic } from '@mui/icons-material'
-import { Box, Button, Card, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
+import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { useApiProvider } from 'hooks/useApiProvider'
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { useNetworkContext } from 'provider/network/modules/context'
@@ -63,36 +63,46 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				<BalanceCard />
 				<Divider />
 				<Stack>
-					<MenuItem>
-						<ListItemIcon>
-							<Dashboard fontSize="small" />
-						</ListItemIcon>
-						<Typography variant="body2">Dashboard</Typography>
-					</MenuItem>
-					<MenuItem>
-						<ListItemIcon>
-							<Topic fontSize="small" />
-						</ListItemIcon>
-						<Typography variant="body2">My Campaigns</Typography>
-					</MenuItem>
-					<MenuItem>
-						<ListItemIcon>
-							<Folder fontSize="small" />
-						</ListItemIcon>
-						<Typography variant="body2">My Organizations</Typography>
-					</MenuItem>
-					<MenuItem>
-						<ListItemIcon>
-							<NotificationsNone fontSize="small" />
-						</ListItemIcon>
-						<Typography variant="body2">Updates</Typography>
-					</MenuItem>
-					<MenuItem>
-						<ListItemIcon>
-							<Settings fontSize="small" />
-						</ListItemIcon>
-						<Typography variant="body2">Settings</Typography>
-					</MenuItem>
+					<NavLink href={'/account'}>
+						<MenuItem>
+							<ListItemIcon>
+								<Dashboard fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">Dashboard</Typography>
+						</MenuItem>
+					</NavLink>
+					<NavLink href={'/campaigns'}>
+						<MenuItem>
+							<ListItemIcon>
+								<Topic fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">My Campaigns</Typography>
+						</MenuItem>
+					</NavLink>
+					<NavLink href={'/organisations'}>
+						<MenuItem>
+							<ListItemIcon>
+								<Folder fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">My Organizations</Typography>
+						</MenuItem>
+					</NavLink>
+					<NavLink href={'/account/collectables'}>
+						<MenuItem>
+							<ListItemIcon>
+								<NotificationsNone fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">Collectables</Typography>
+						</MenuItem>
+					</NavLink>
+					<NavLink href={'/account/identity'}>
+						<MenuItem>
+							<ListItemIcon>
+								<Settings fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">Identity</Typography>
+						</MenuItem>
+					</NavLink>
 					<MenuItem onClick={disconnectWallet as any}>
 						<ListItemIcon>
 							<Logout fontSize="small" />
