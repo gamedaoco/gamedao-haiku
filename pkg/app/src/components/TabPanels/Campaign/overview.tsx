@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react'
 
 import { Button, Typography } from '@mui/material'
-import CreateCampaignPage from 'components/TabPanels/Campaign/create'
 import { CampaignSubscription } from 'src/queries'
-import CreatedCampaignSection from 'components/Account/modules/CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
+
+import { CreatedCampaignSection } from 'components/Account/modules/CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
+import CreateCampaignPage from 'components/TabPanels/Campaign/create'
 
 interface ComponentProps {
 	organizationId: string
