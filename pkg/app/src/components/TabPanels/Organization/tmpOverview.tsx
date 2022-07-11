@@ -205,17 +205,7 @@ export function TmpOverview() {
 					</Stack>
 				</Paper>
 			</Stack>
-			<TransactionDialog
-				open={modalState}
-				onClose={handleModalClose}
-				tx={tx}
-				txMsg={{
-					pending: t('notification:transactions:createOrganization:pending'),
-					success: t('notification:transactions:createOrganization:success'),
-					error: t('notification:transactions:createOrganization:error'),
-				}}
-				txCallback={handleTxCallback}
-			/>
+			<TransactionDialog open={modalState} onClose={handleModalClose} txData={tx} txCallback={handleTxCallback} />
 		</>
 	)
 }

@@ -39,7 +39,6 @@ export function SelectNetworkDialog({ open, onClose }: ComponentProps) {
 				}}
 				justifyContent="space-around"
 				gap={'1rem'}
-				maxWidth={{ xs: 'auto', lg: theme.breakpoints.values.lg }}
 			>
 				{apiProviders.map((apiProvider: ApiProvider) => {
 					return (

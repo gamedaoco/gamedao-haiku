@@ -4,7 +4,11 @@ import type { ISubmittableResult } from '@polkadot/types/types'
 import { to } from 'await-to-js'
 import { AccountState } from 'src/@types/extension'
 import { PromiseMsg } from 'src/@types/promiseMsg'
-import { createErrorNotification, createPromiseNotification } from 'src/utils/notificationUtils'
+import {
+	createErrorNotification,
+	createPromiseNotification,
+	createSuccessNotification,
+} from 'src/utils/notificationUtils'
 
 export async function SignAndNotify(
 	ApiProvider: ApiPromise,
@@ -57,12 +61,14 @@ export async function SignAndNotify(
 						if (callback) callback(false, result)
 						return reject()
 					} else {
+						createSuccessNotification(`${result.txHash}`)
 						if (callback) callback(true, result)
 						return resolve('')
 					}
 				}
 			}),
 		)
+
 		if (error) {
 			console.log('Transaction failing with', error)
 			createErrorNotification(error.message)

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useLogger } from 'hooks/useLogger'
 import { useNetworkContext } from 'provider/network/modules/context'
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
@@ -10,8 +11,9 @@ const validation = Yup.object().shape({
 	vote: Yup.number().required().min(0).max(1),
 })
 
-export function useSimpleVoteTransaction(proposalId: string, vote: number): SubmittableExtrinsic {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
+export function useSimpleVoteTransaction(proposalId: string, vote: number): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
+	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const logger = useLogger('useSimpleVoteTransaction')
 
@@ -29,7 +31,15 @@ export function useSimpleVoteTransaction(proposalId: string, vote: number): Subm
 
 				const tx = selectedApiProvider.apiProvider.tx.signal.simpleVote(mappedData.proposalId, mappedData.vote)
 
-				setTxState(tx)
+				setTxState({
+					tx,
+					title: t('transactions:simpleVote:title'),
+					txMsg: {
+						pending: t('notification:transactions:simpleVote:pending'),
+						success: t('notification:transactions:simpleVote:success'),
+						error: t('notification:transactions:simpleVote:error'),
+					},
+				})
 			} catch (e) {
 				logger.trace(e)
 				if (txState) {

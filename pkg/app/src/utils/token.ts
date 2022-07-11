@@ -1,13 +1,10 @@
-import { formatBalance } from '@polkadot/util'
+import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
 
 export function toUnit(balance: string, decimals: number | string): number {
-	const balanceFormatted = formatBalance(
-		balance,
-		{ withSi: false },
-		typeof decimals === 'string' ? parseInt(decimals) : decimals,
-	)
-	return parseFloat(balanceFormatted)
+	const base = new BigNumber('10').pow(typeof decimals !== 'string' ? (decimals ?? 18).toString() : decimals)
+	const value = new BigNumber(balance).div(base).toFixed(6)
+	return parseFloat(value)
 }
 
 export function fromUnit(balance: number, decimals: string): string {
