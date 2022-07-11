@@ -48,7 +48,7 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 
 	// Get diff seconds for start date
 	const startSecondsDiff = startDate.diff(moment(), 'seconds')
-	const startBlocks = blockNumber + Math.ceil(startSecondsDiff / blockTime)
+	const startBlocks = startSecondsDiff > 0 ? blockNumber + Math.ceil(startSecondsDiff / blockTime) : blockNumber
 
 	// Get diff seconds for end date
 	// min blockNumber + 1 day

@@ -33,7 +33,7 @@ const validationDescriptionSchema = Yup.string().required('* Proposal descriptio
 export const validationSchema = Yup.object().shape({
 	name: Yup.string().required(),
 	description: Yup.string().required(),
-	startDate: Yup.date().required().min(new Date()),
+	startDate: Yup.date().required(),
 	endDate: Yup.date()
 		.required()
 		.when('startDate', (startDate, schema) => {
@@ -48,7 +48,7 @@ export const validationSchema = Yup.object().shape({
 export const validationSchemaWithdrawal = Yup.object().shape({
 	name: Yup.string().required(),
 	description: Yup.string().required(),
-	startDate: Yup.date().required().min(new Date()),
+	startDate: Yup.date().required(),
 	endDate: Yup.date()
 		.required()
 		.when('startDate', (startDate, schema) => {
