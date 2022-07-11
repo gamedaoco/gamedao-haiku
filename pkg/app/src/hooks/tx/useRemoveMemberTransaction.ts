@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
 import { useNetworkContext } from 'provider/network/modules/context'
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
@@ -11,8 +12,9 @@ const validation = Yup.object().shape({
 	accountId: Yup.string().required(),
 })
 
-export function useRemoveMemberTransaction(organizationId: string) {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
+export function useRemoveMemberTransaction(organizationId: string): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
+	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
 	const logger = useLogger('useRemoveMemberTransaction')
@@ -34,7 +36,15 @@ export function useRemoveMemberTransaction(organizationId: string) {
 					mappedData.accountId,
 				)
 
-				setTxState(tx)
+				setTxState({
+					tx,
+					title: t('transactions:removeMember:title'),
+					txMsg: {
+						pending: t('notification:transactions:removeMember:pending'),
+						success: t('notification:transactions:removeMember:success'),
+						error: t('notification:transactions:removeMember:error'),
+					},
+				})
 			} catch (e) {
 				logger.trace(e)
 				if (txState) {

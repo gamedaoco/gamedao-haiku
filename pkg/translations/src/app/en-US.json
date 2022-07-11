@@ -8,7 +8,15 @@
       "wallet": "Wallet"
     },
     "ui": {
-      "connect_wallet": "Connect wallet"
+      "connect_wallet": "Connect wallet",
+      "submit": "Submit",
+      "transaction": {
+        "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
+        "get_token": "Get {{token}} here",
+        "transaction_fee": "Transaction Fee",
+        "your_balance": "Your current balance",
+        "description_toggle": "What is this used for?"
+      }
     },
     "form": {
       "next_step": "Next step",
@@ -16,6 +24,40 @@
       "proposal": {
         "create": "Create Proposal"
       }
+    }
+  },
+  "transactions": {
+    "createOrganization": {
+      "title": "Create Organisation",
+      "action_subtitle": "Organisation deposit",
+      "action_sub_line": "Deposit",
+      "description": "You need to deposit the amount so you can create an organisation. You will receive your deposit back when you close the organisation."
+    },
+    "createProposal": {
+      "title": "Create Proposal",
+      "action_subtitle": "Proposal deposit",
+      "action_sub_line": "Deposit",
+      "description": "You need to deposit the amount so you can create a proposal."
+    },
+    "simpleVote": {
+      "title": "Submit Vote"
+    },
+    "addMember": {
+      "title": "Join Organisation",
+      "action_subtitle": "Free",
+      "description": "This organisation does not require any fee."
+    },
+    "removeMember": {
+      "title": "Leave Organisation"
+    },
+    "setIdentity": {
+      "title": "Set ZERO chain identity",
+      "action_subtitle": "Deposit",
+      "action_sub_line": "Deposit",
+      "description": "You need to deposit the amount so you can create an on-chain identity."
+    },
+    "clearIdentity": {
+      "title": "Clear ZERO chain identity"
     }
   },
   "page": {

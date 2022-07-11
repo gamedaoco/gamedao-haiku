@@ -16,18 +16,18 @@ import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useSimpleVoteTransaction } from 'hooks/tx/useSimpleVoteTransaction'
+import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useDisplayValues } from 'hooks/useDisplayValues'
+import moment from 'moment'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'src/components'
+import { blockTime } from 'src/constants'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
+import { formatAddressShort } from 'src/utils/address'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
-import { formatAddressShort } from 'src/utils/address'
-import { NavLink } from 'src/components'
-import { useBlockNumber } from 'hooks/useBlockNumber'
-import moment from 'moment'
-import { blockTime } from 'src/constants'
 
 interface ComponentProps {
 	organization: Organization
@@ -307,12 +307,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			<TransactionDialog
 				open={openTxModal}
 				onClose={handleCloseTxModal}
-				tx={simpleVoteTx}
-				txMsg={{
-					pending: t('notification:transactions:simpleVote:pending'),
-					success: t('notification:transactions:simpleVote:success'),
-					error: t('notification:transactions:simpleVote:error'),
-				}}
+				txData={simpleVoteTx}
 				txCallback={handleCloseTxModal}
 			/>
 		</Stack>

@@ -5,6 +5,8 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
 import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
 import { useNetworkContext } from 'provider/network/modules/context'
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
@@ -25,8 +27,9 @@ const validation = Yup.object().shape({
 	deposit: Yup.string().required(),
 })
 
-export function useCreateOrgTransaction(): SubmittableExtrinsic {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
+export function useCreateOrgTransaction(): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
+	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
 	const data = useTmpOrganisation()
@@ -75,10 +78,27 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 					mappedData.pay_asset,
 					mappedData.member_limit,
 					mappedData.deposit,
-				)
-				setTxState(tx)
+				) as SubmittableExtrinsic
+
+				setTxState({
+					tx,
+					currencyId: mappedData.gov_asset,
+					deposit: mappedData.deposit,
+					title: t('transactions:createOrganization:title'),
+					description: t('transactions:createOrganization:description'),
+					actionSubLine: t('transactions:createOrganization:action_sub_line'),
+					actionSubTitle: t('transactions:createOrganization:action_subtitle'),
+					txMsg: {
+						pending: t('notification:transactions:createOrganization:pending'),
+						success: t('notification:transactions:createOrganization:success'),
+						error: t('notification:transactions:createOrganization:error'),
+					},
+				})
 			} catch (e) {
 				logger.trace(e)
+				if (txState) {
+					setTxState(null)
+				}
 			}
 		}
 	}, [selectedApiProvider, address, data])

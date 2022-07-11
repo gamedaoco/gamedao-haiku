@@ -1,4 +1,6 @@
+import type { FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
+
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
@@ -12,6 +14,9 @@ import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
+interface IdentityFormProps {
+	identity: Identity
+}
 const initialValues = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
@@ -74,23 +79,13 @@ export function IdentityForm() {
 			<TransactionDialog
 				open={modalState.set}
 				onClose={() => handleModalClose('set')}
-				tx={setIdentityTx}
-				txMsg={{
-					pending: t('notification:transactions:setIdentity:pending'),
-					success: t('notification:transactions:setIdentity:success'),
-					error: t('notification:transactions:setIdentity:error'),
-				}}
+				txData={setIdentityTx}
 				txCallback={() => handleModalClose('set')}
 			/>
 			<TransactionDialog
 				open={modalState.clear}
 				onClose={() => handleModalClose('clear')}
-				tx={clearIdentityTx}
-				txMsg={{
-					pending: t('notification:transactions:clearIdentity:pending'),
-					success: t('notification:transactions:clearIdentity:success'),
-					error: t('notification:transactions:clearIdentity:error'),
-				}}
+				txData={clearIdentityTx}
 				txCallback={() => handleModalClose('clear')}
 			/>
 			<form>
