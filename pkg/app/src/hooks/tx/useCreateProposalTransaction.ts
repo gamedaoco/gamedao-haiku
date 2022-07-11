@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
 import { TransactionData } from 'src/@types/transactionData'
-import { blockTime, blocksPerDay } from 'src/constants'
+import { blockTime } from 'src/constants'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
@@ -48,13 +48,12 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 
 	// Get diff seconds for start date
 	const startSecondsDiff = startDate.diff(moment(), 'seconds')
-	const startBlocks = startSecondsDiff > 0 ? blockNumber + Math.ceil(startSecondsDiff / blockTime) : blockNumber
+	const startBlocks = blockNumber + Math.ceil(startSecondsDiff / blockTime)
 
 	// Get diff seconds for end date
 	// min blockNumber + 1 day
-	const endSecondsDiff = endDate.diff(startDate, 'seconds')
-	const endBlocks =
-		endSecondsDiff > 0 ? blockNumber + Math.ceil(startSecondsDiff / blockTime) : blockNumber + blocksPerDay
+	const endSecondsDiff = endDate.diff(moment(), 'seconds')
+	const endBlocks = blockNumber + Math.ceil(endSecondsDiff / blockTime)
 
 	return { endBlocks, startBlocks }
 }
@@ -123,7 +122,6 @@ function createWithdrawProposalTx(
 
 export function useCreateProposalTransaction(organizationId: string): TransactionData {
 	const [txState, setTxState] = useState<TransactionData>(null)
-	const [blockNumberState, setBlockNumberState] = useState<number>(0)
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
@@ -132,15 +130,7 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 	const logger = useLogger('useCreateProposalTransaction')
 
 	useEffect(() => {
-		// The transaction is only regenerated every 2 minutes and not every 2-3 seconds.
-		// 40 * 3s = ~2 minutes
-		if (blockNumber && blockNumber - 40 > blockNumberState) {
-			setBlockNumberState(blockNumber)
-		}
-	}, [blockNumber])
-
-	useEffect(() => {
-		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumberState) {
+		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumber) {
 			try {
 				let tx
 				if (data.type === 0) {
@@ -174,7 +164,7 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 				logger.trace(e)
 			}
 		}
-	}, [organizationId, selectedApiProvider, address, data, blockNumberState])
+	}, [organizationId, selectedApiProvider, address, data, blockNumber])
 
 	return txState
 }

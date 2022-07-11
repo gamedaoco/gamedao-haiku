@@ -5,6 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
+import moment from 'moment'
 import { useSuccessfulCampaignByOrganisationIdSubscription } from 'src/queries'
 import * as Yup from 'yup'
 
@@ -32,15 +33,31 @@ const validationDescriptionSchema = Yup.string().required('* Proposal descriptio
 export const validationSchema = Yup.object().shape({
 	name: Yup.string().required(),
 	description: Yup.string().required(),
-	startDate: Yup.date().required(),
-	endDate: Yup.date().required(),
+	startDate: Yup.date().required().min(new Date()),
+	endDate: Yup.date()
+		.required()
+		.when('startDate', (startDate, schema) => {
+			return schema.min(
+				moment(startDate ?? new Date())
+					.add(1, 'day')
+					.toDate(),
+			)
+		}),
 })
 
 export const validationSchemaWithdrawal = Yup.object().shape({
 	name: Yup.string().required(),
 	description: Yup.string().required(),
-	startDate: Yup.date().required(),
-	endDate: Yup.date().required(),
+	startDate: Yup.date().required().min(new Date()),
+	endDate: Yup.date()
+		.required()
+		.when('startDate', (startDate, schema) => {
+			return schema.min(
+				moment(startDate ?? new Date())
+					.add(1, 'day')
+					.toDate(),
+			)
+		}),
 	campaignId: Yup.string().required(),
 	amount: Yup.number().required(),
 })
@@ -184,7 +201,9 @@ export function Description({
 					/>
 					<DateTimePicker
 						label="End date"
-						minDate={new Date()}
+						minDate={moment(startDate ?? new Date())
+							.add(1, 'day')
+							.toDate()}
 						value={endData}
 						onChange={setEndDate}
 						renderInput={(params) => <TextField {...params} />}
