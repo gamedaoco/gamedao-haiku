@@ -3,7 +3,10 @@ import React from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { Campaign, CampaignSubscription } from 'src/queries'
+import { useTranslation } from 'react-i18next'
+import { CampaignStatus } from 'src/@types/campaignStatus'
+import { Campaign, CampaignByOrganizationIdSubscription } from 'src/queries'
+import { getCampaignByStatus } from 'src/utils/campaign'
 
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
@@ -26,42 +29,39 @@ export const PlusIcon = () => {
 }
 
 interface ComponentProps {
-	data: CampaignSubscription
+	data: CampaignByOrganizationIdSubscription
 	loading: boolean
 	title: boolean
 	isAdmin: boolean
+	onCreateCampaignClicked: () => void
 }
 
-export function CreatedCampaignSection({ data, loading, title, isAdmin }: ComponentProps) {
+export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreateCampaignClicked }: ComponentProps) {
 	const theme = useTheme()
+	const { t } = useTranslation()
+	const allCampaigns = [
+		...getCampaignByStatus(data, CampaignStatus.ACTIVE),
+		...getCampaignByStatus(data, CampaignStatus.INIT),
+		...getCampaignByStatus(data, CampaignStatus.FINALIZING),
+		...getCampaignByStatus(data, CampaignStatus.SUCCESS),
+		...getCampaignByStatus(data, CampaignStatus.REVERTING),
+		...getCampaignByStatus(data, CampaignStatus.FAILED),
+		...getCampaignByStatus(data, CampaignStatus.PAUSED),
+		...getCampaignByStatus(data, CampaignStatus.LOCKED),
+	]
 
 	return (
 		<Box sx={{ pb: 4 }}>
 			{title && (
 				<Typography variant="body2" fontWeight={theme.typography.fontWeightBold}>
-					Created Campaigns
+					{t('page:campaigns:created_campaigns')}
 				</Typography>
 			)}
 			<Grid container sx={{ pt: 2 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
-				{loading ? (
-					[1, 2].map((x) => (
-						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
-							<LoadingCampaignCard />
-						</Grid>
-					))
-				) : (
-					<>
-						{data?.campaign?.map((campaign: Campaign, index: number) => (
-							<Grid item xs={4} key={index} sx={{ marginBottom: 5 }}>
-								<CampaignCard campaign={campaign} />
-							</Grid>
-						))}
-					</>
-				)}
 				{isAdmin && (
 					<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
 						<Card variant="dashed">
-							<Button sx={{ width: '100%', height: '100%' }}>
+							<Button sx={{ width: '100%', height: '100%' }} onClick={onCreateCampaignClicked}>
 								<Box
 									sx={{
 										display: 'flex',
@@ -72,13 +72,28 @@ export function CreatedCampaignSection({ data, loading, title, isAdmin }: Compon
 								>
 									<PlusIcon />
 									<Typography variant="subtitle1" sx={{ mt: 2 }}>
-										New Campaign
+										{t('page:campaigns:new_campaign')}
 									</Typography>
-									<Typography variant="body1">Click here to create a new campaign</Typography>
+									<Typography variant="body1">{t('page:campaigns:click')}</Typography>
 								</Box>
 							</Button>
 						</Card>
 					</Grid>
+				)}
+				{loading ? (
+					[1, 2].map((x) => (
+						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
+							<LoadingCampaignCard />
+						</Grid>
+					))
+				) : (
+					<>
+						{allCampaigns?.map((campaign: Campaign, index: number) => (
+							<Grid item xs={4} key={index} sx={{ marginBottom: 5 }}>
+								<CampaignCard campaign={campaign} />
+							</Grid>
+						))}
+					</>
 				)}
 			</Grid>
 		</Box>

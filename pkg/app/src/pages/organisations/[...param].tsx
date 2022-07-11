@@ -22,7 +22,7 @@ import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { Organization, useCampaignSubscription, useOrganizationByIdSubscription } from 'src/queries'
+import { Organization, useCampaignByOrganizationIdSubscription, useOrganizationByIdSubscription } from 'src/queries'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
@@ -50,8 +50,8 @@ export function OrganisationById() {
 	const theme = useTheme()
 	const config = useConfig()
 	const tmpOrg = useTmpOrganisationState()
-	const { data: campaignData, loading: campaignLoading } = useCampaignSubscription({
-		variables: { address: organizationState?.controller },
+	const { data: campaignData, loading: campaignLoading } = useCampaignByOrganizationIdSubscription({
+		variables: { orgId: organizationIdState },
 	})
 
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
