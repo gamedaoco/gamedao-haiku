@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
-import { AccountSelector, FontIcons } from 'src/components'
+import { AccountSelector } from 'src/components'
 
 import { NavLink } from 'components/NavLink/navLink'
 
@@ -28,10 +28,16 @@ const urls = [
 		name: 'button:navigation:campaigns',
 		path: '/campaigns',
 	},
-	// {
-	// 	name: 'button:navigation:wallet',
-	// 	path: '/wallet',
-	// },
+	{
+		name: 'button:navigation:documentation',
+		path: 'https://docs.gamedao.co/',
+		external: true,
+	},
+	{
+		name: 'button:navigation:faucet',
+		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
+		external: true,
+	},
 ]
 
 export function Header({ onSidebarOpen }: ComponentProps) {
@@ -59,7 +65,7 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 					{urls.map((navItem) => {
 						return (
 							<Fragment key={navItem.name}>
-								<NavLink href={navItem.path}>
+								<NavLink href={navItem.path} external={navItem.external}>
 									<Typography sx={{ cursor: 'pointer' }}>{t(navItem.name)}</Typography>
 								</NavLink>
 							</Fragment>
