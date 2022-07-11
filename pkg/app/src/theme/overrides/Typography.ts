@@ -12,7 +12,10 @@ export default function Typography(theme: Theme) {
 				gutterBottom: {
 					marginBottom: theme.spacing(1),
 				},
-				subtitle2:{
+				subtitle1: {
+					color: theme.palette.common.white,
+				},
+				subtitle2: {
 					color: theme.palette.text.secondary,
 				},
 				body1: {
@@ -24,9 +27,9 @@ export default function Typography(theme: Theme) {
 				caption: {
 					color: theme.palette.grey[500],
 				},
-				overline:{
+				overline: {
 					color: theme.palette.text.disabled,
-				}
+				},
 			},
 		},
 	}
