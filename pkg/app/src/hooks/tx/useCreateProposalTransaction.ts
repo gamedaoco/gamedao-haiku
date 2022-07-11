@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
 import { TransactionData } from 'src/@types/transactionData'
-import { blocksPerDay } from 'src/constants'
+import { blockTime, blocksPerDay } from 'src/constants'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
@@ -46,14 +46,15 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime
 	const startDate = moment(data.startDate)
 	const endDate = moment(data.endDate)
 
-	// Get diff days for start date
-	const startDayDiff = startDate.diff(moment(), 'days') + 1
-	const startBlocks = startDayDiff > 0 ? startDayDiff * blocksPerDay + blockNumber : blockNumber
+	// Get diff seconds for start date
+	const startSecondsDiff = startDate.diff(moment(), 'seconds')
+	const startBlocks = startSecondsDiff > 0 ? blockNumber + Math.ceil(startSecondsDiff / blockTime) : blockNumber
 
-	// Get diff days for end date
+	// Get diff seconds for end date
 	// min blockNumber + 1 day
-	const endDayDiff = endDate.diff(startDate, 'days')
-	const endBlocks = endDayDiff > 0 ? endDayDiff * blocksPerDay + blockNumber : blockNumber + blocksPerDay
+	const endSecondsDiff = endDate.diff(startDate, 'seconds')
+	const endBlocks =
+		endSecondsDiff > 0 ? blockNumber + Math.ceil(startSecondsDiff / blockTime) : blockNumber + blocksPerDay
 
 	return { endBlocks, startBlocks }
 }
