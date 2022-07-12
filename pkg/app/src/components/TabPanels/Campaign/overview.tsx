@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
-import { CampaignByOrganizationIdSubscription } from 'src/queries'
+import { Campaign, CampaignByOrganizationIdSubscription } from 'src/queries'
 
 import { CreatedCampaignSection } from 'components/Account/modules/CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
 import CreateCampaignPage from 'components/TabPanels/Campaign/create'
@@ -13,6 +13,7 @@ interface ComponentProps {
 }
 
 export function CampaignOverview({ organizationId, isAdmin, data, loading }: ComponentProps) {
+	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
 	const [showCreatePage, setShowCreatePage] = useState<boolean>(false)
 
 	const onCreateCampaignClicked = useCallback(() => {
@@ -30,7 +31,7 @@ export function CampaignOverview({ organizationId, isAdmin, data, loading }: Com
 	return (
 		<>
 			<CreatedCampaignSection
-				data={data}
+				data={paginatedData}
 				loading={loading}
 				title={true}
 				isAdmin={isAdmin}

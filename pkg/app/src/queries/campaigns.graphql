@@ -38,9 +38,11 @@ subscription CampaignContributors($address: String!) {
 }
 
 
-subscription campaign($address: String) {
+subscription Campaign($address: String) {
     campaign(where: {admin_identity_id: {_eq: $address}}) {
         target
+        expiry
+        state
         campaign_metadata {
             name
             title

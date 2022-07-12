@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { CampaignStatus } from 'src/@types/campaignStatus'
-import { Campaign, CampaignByOrganizationIdSubscription } from 'src/queries'
-import { getCampaignByStatus } from 'src/utils/campaign'
+import { Campaign } from 'src/queries'
 
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
@@ -29,25 +28,39 @@ export const PlusIcon = () => {
 }
 
 interface ComponentProps {
-	data: CampaignByOrganizationIdSubscription
+	data: Campaign[]
 	loading: boolean
 	title: boolean
 	isAdmin: boolean
-	onCreateCampaignClicked: () => void
+	onCreateCampaignClicked?: () => void
 }
 
 export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreateCampaignClicked }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
+
+	const getCampaignsByStatus = useCallback(
+		(data, state) => {
+			return (
+				data
+					?.filter((campaign) => campaign?.state === state)
+					?.sort((a, b) => {
+						return a?.expiry - b?.expiry
+					}) || []
+			)
+		},
+		[data],
+	)
+
 	const allCampaigns = [
-		...getCampaignByStatus(data, CampaignStatus.ACTIVE),
-		...getCampaignByStatus(data, CampaignStatus.INIT),
-		...getCampaignByStatus(data, CampaignStatus.FINALIZING),
-		...getCampaignByStatus(data, CampaignStatus.SUCCESS),
-		...getCampaignByStatus(data, CampaignStatus.REVERTING),
-		...getCampaignByStatus(data, CampaignStatus.FAILED),
-		...getCampaignByStatus(data, CampaignStatus.PAUSED),
-		...getCampaignByStatus(data, CampaignStatus.LOCKED),
+		...getCampaignsByStatus(data, CampaignStatus.ACTIVE),
+		...getCampaignsByStatus(data, CampaignStatus.INIT),
+		...getCampaignsByStatus(data, CampaignStatus.FINALIZING),
+		...getCampaignsByStatus(data, CampaignStatus.SUCCESS),
+		...getCampaignsByStatus(data, CampaignStatus.REVERTING),
+		...getCampaignsByStatus(data, CampaignStatus.FAILED),
+		...getCampaignsByStatus(data, CampaignStatus.PAUSED),
+		...getCampaignsByStatus(data, CampaignStatus.LOCKED),
 	]
 
 	return (
@@ -80,13 +93,7 @@ export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreate
 						</Card>
 					</Grid>
 				)}
-				{loading ? (
-					[1, 2].map((x) => (
-						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
-							<LoadingCampaignCard />
-						</Grid>
-					))
-				) : (
+				{
 					<>
 						{allCampaigns?.map((campaign: Campaign, index: number) => (
 							<Grid item xs={4} key={index} sx={{ marginBottom: 5 }}>
@@ -94,7 +101,14 @@ export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreate
 							</Grid>
 						))}
 					</>
-				)}
+				}
+
+				{(!allCampaigns || loading) &&
+					[1, 2].map((x) => (
+						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
+							<LoadingCampaignCard />
+						</Grid>
+					))}
 			</Grid>
 		</Box>
 	)
