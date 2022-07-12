@@ -23,7 +23,7 @@ export const abbreviateNumber: abbreviateNumberType = (number) => {
 	if (number === 0) return number
 
 	const tier = SI_PREFIXES.filter((n) => number >= n.value).pop()
-	const numberFixed = (number / tier.value).toFixed(1)
+	const numberFixed = (number / tier?.value).toFixed(1)
 
-	return `${parseInt(numberFixed)}${tier.symbol}`
+	return `${parseInt(numberFixed)}${tier?.symbol}`
 }

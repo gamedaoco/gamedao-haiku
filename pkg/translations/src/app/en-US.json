@@ -12,6 +12,8 @@
     "ui": {
       "connect_wallet": "Connect wallet",
       "submit": "Submit",
+      "create": "Create",
+      "load_more": "Load More",
       "transaction": {
         "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
         "get_token": "Get {{token}} here",

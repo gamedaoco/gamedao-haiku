@@ -3,7 +3,8 @@ import React from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { Campaign, CampaignSubscription } from 'src/queries'
+import { Campaign } from 'src/queries'
+
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
 
@@ -25,7 +26,7 @@ export const PlusIcon = () => {
 }
 
 interface ComponentProps {
-	data: CampaignSubscription
+	data: Campaign[]
 	loading: boolean
 }
 
@@ -67,7 +68,7 @@ export function CreatedCampaignSection({ data, loading }: ComponentProps) {
 					))
 				) : (
 					<>
-						{data?.campaign?.map((campaign: Campaign, index: number) => (
+						{data?.map((campaign: Campaign, index: number) => (
 							<Grid item xs={4} key={index} sx={{ marginBottom: 5 }}>
 								<CampaignCard campaign={campaign} />
 							</Grid>

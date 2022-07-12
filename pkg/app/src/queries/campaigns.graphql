@@ -66,3 +66,36 @@ subscription campaign($address: String) {
 
 
 
+subscription CampaignsPagination($limit: Int) {
+    campaign(limit: $limit) {
+        target
+        state
+        campaign_metadata {
+            name
+            title
+            logo
+            header
+        }
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count
+            }
+        }
+        organization {
+            organization_metadata {
+                name
+            }
+        }
+    }
+}
+
+subscription CampaignsPaginationCount($searchQuery: String="%") {
+    campaign_aggregate(where: {campaign_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
+        aggregate {
+            count
+        }
+    }
+}

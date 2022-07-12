@@ -1,97 +1,93 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
-import { CircularProgress } from '@mui/material'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
+import { Add, ArrowDownward } from '@mui/icons-material'
+import { Box, Button, Container, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
+import { Campaign, useCampaignsPaginationCountSubscription, useCampaignsPaginationSubscription } from 'src/queries'
 
-import { FormCampaign } from 'components/Forms/FormCampaign'
+import { CreatedCampaignSection } from 'components/Account/modules/CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
 import { Layout } from 'components/Layouts/default/layout'
 
 export function Campaigns() {
-	const [isShow, setIsShow] = useState(false)
-	// const { loading, data } = useCampaignsQuery()
-
-	const callback = (data: any) => {
-		console.log('yes gotcha', data)
-	}
-
-	const setVisible = (state: boolean) => {
-		setIsShow(!state)
-	}
-
-	const handleForm = () => {
-		setIsShow(!isShow)
-	}
-
-	// TODO: Remove after campaigns are indexed
-	const loading = false
-	const data: any = {}
-	return null
-
+	const [limit, setLimit] = useState(15)
+	const [filters, setFilters] = useState('')
+	const { data, loading } = useCampaignsPaginationSubscription({
+		variables: {
+			limit,
+		},
+	})
+	const campaignsCount = useCampaignsPaginationCountSubscription({
+		variables: { searchQuery: `%${filters ?? ''}%` },
+	})
+	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
+	const { t } = useTranslation()
+	const buttonVisibility = useMemo(
+		() => paginatedData?.length < campaignsCount?.data?.campaign_aggregate?.aggregate?.count,
+		[paginatedData?.length, campaignsCount?.data],
+	)
 	return (
-		<Layout showHeader showFooter showSidebar title="Campaigns">
+		<Layout showHeader showFooter showSidebar title="Organisation">
 			<Box
+				component="main"
 				sx={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
+					flexGrow: 1,
+					py: 8,
 				}}
 			>
-				<Box>{isShow ? <h4>Total campaigns: {6}</h4> : <h4>No campaigns yet. Create one!</h4>}</Box>
-				<Box>
-					{isShow ? (
-						<Button variant="outlined" onClick={handleForm}>
-							Close
-						</Button>
-					) : (
-						<Button variant="outlined" onClick={handleForm}>
-							New Campaign
-						</Button>
+				<Container maxWidth="xl">
+					<Box sx={{ mb: 4 }}>
+						<Grid container justifyContent="space-between" spacing={3}>
+							<Grid item>
+								<Typography variant="h3">Campaigns</Typography>
+							</Grid>
+							<Grid item>
+								<Button startIcon={<Add fontSize="small" />} variant="outlined">
+									{t('button:ui:create')}
+								</Button>
+							</Grid>
+						</Grid>
+					</Box>
+					{paginatedData?.length === 0 && !loading && (
+						<Box sx={{ mt: 2, mb: 4 }}>
+							<Typography fontWeight={700}>No campaigns found</Typography>
+							<Typography>
+								No results found for “{filters}”. Try checking for typos or using a different term.
+							</Typography>
+						</Box>
 					)}
+					<Box sx={{ mt: 2, mb: 4 }}>
+						<CreatedCampaignSection data={paginatedData} loading={loading} />
+					</Box>
+				</Container>
+				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
+						<Box
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: 'center',
+								justifyContent: 'center',
+								gap: 1.5,
+							}}
+						>
+							{buttonVisibility && (
+								<Button
+									endIcon={<ArrowDownward />}
+									onClick={() => setLimit((p) => p + 30)}
+									variant="outlined"
+								>
+									{t('button:ui:load_more')}
+								</Button>
+							)}
+							<Typography>
+								Showing {paginatedData?.length} of{' '}
+								{campaignsCount?.data?.campaign_aggregate?.aggregate.count} campaigns
+							</Typography>
+						</Box>
+					</Box>
 				</Box>
 			</Box>
-			{isShow ? (
-				<FormCampaign parentCallback={callback} isCloseCampaign={setVisible} />
-			) : (
-				<Box sx={{ p: '4rem', minHeight: '90vh' }}>
-					<Paper sx={{ p: '4rem', height: '100%', borderRadius: '.5rem' }} elevation={10}>
-						<Typography sx={{ fontWeight: '800' }} variant={'h2'}>
-							Hello. Campaigns count: {loading ? <CircularProgress /> : data?.campaigns.length}
-						</Typography>
-						{data && (
-							<ul>
-								{data.campaigns.map((campaign) => (
-									<li key={campaign.id}>
-										<div>
-											Name: {campaign.metadata.name} (Token: {campaign.tokenName})
-										</div>
-										<ul>
-											<li>isFinished: {campaign.isFinished ? 'Yes' : 'No'}</li>
-											{campaign.isFinished && (
-												<li>isFunded: {campaign.isFunded ? 'Yes' : 'No (Expired)'}</li>
-											)}
-										</ul>
-										<div>
-											Contributors:
-											<ul>
-												{campaign.contributors.map((contributor) => (
-													<li key={`${campaign.id}-${contributor.address}`}>
-														{contributor.identity.displayName ?? contributor.address}:{' '}
-														{(contributor.contributed / Math.pow(10, 18)).toPrecision(2)}{' '}
-														{campaign.tokenSymbol}
-													</li>
-												))}
-											</ul>
-										</div>
-									</li>
-								))}
-							</ul>
-						)}
-					</Paper>
-				</Box>
-			)}
 		</Layout>
 	)
 }
