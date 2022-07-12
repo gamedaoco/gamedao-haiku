@@ -20,7 +20,7 @@ const SI_PREFIXES = [
 type abbreviateNumberType = (n: number) => string | number
 
 export const abbreviateNumber: abbreviateNumberType = (number) => {
-	if (number <= 0) return number
+	if (number <= 999) return number
 
 	const tier = SI_PREFIXES.filter((n) => number >= n.value).pop()
 
