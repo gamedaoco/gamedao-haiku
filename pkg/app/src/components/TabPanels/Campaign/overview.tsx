@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { Campaign, CampaignByOrganizationIdSubscription } from 'src/queries'
 
-import { CreatedCampaignSection } from 'components/Account/modules/CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
+import { CreatedCampaignSection } from 'components/CampaignsSection/CampaignsList/campaignsList'
 import CreateCampaignPage from 'components/TabPanels/Campaign/create'
 
 interface ComponentProps {

@@ -71,7 +71,7 @@ export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreate
 				</Typography>
 			)}
 			<Grid container sx={{ pt: 2 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
-				{isAdmin && (
+				{isAdmin && onCreateCampaignClicked && (
 					<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
 						<Card variant="dashed">
 							<Button sx={{ width: '100%', height: '100%' }} onClick={onCreateCampaignClicked}>

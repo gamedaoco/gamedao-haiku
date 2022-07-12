@@ -267,7 +267,6 @@ export function OrganisationById() {
 								{organizationIdState ? (
 									<CampaignOverview
 										organizationId={organizationIdState}
-										isMember={isMemberState}
 										isAdmin={address === organizationState?.controller}
 										data={campaignData}
 										loading={campaignLoading}
