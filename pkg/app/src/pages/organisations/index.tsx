@@ -17,9 +17,9 @@ import {
 	useOrganizationsPaginationSubscription,
 } from 'src/queries'
 
+import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
-import { FiltersSection } from 'components/filtersSections/filtersSection'
 
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)

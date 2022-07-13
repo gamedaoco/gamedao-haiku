@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import { useDebouncedState } from 'hooks/useDebouncedState'
 import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
-import { SortOptionsTab } from 'components/filtersSections/sortOptionsTab'
+import { SortOptionsTab } from 'components/FiltersSections/sortOptionsTab'
 
 interface ComponentProps {
 	setFilters: (x: string | Organization_Order_By | any) => void
