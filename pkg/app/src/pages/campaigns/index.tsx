@@ -15,6 +15,7 @@ export function Campaigns() {
 	const { data, loading } = useCampaignsPaginationSubscription({
 		variables: {
 			limit,
+			searchQuery: filters,
 		},
 	})
 	const campaignsCount = useCampaignsPaginationCountSubscription({

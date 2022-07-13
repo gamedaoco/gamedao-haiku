@@ -66,8 +66,8 @@ subscription campaign($address: String) {
 
 
 
-subscription CampaignsPagination($limit: Int) {
-    campaign(limit: $limit) {
+subscription CampaignsPagination($limit: Int, $searchQuery: String="%") {
+    campaign(limit: $limit, where: {campaign_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}, {title: {_ilike: $searchQuery}}]}}) {
         target
         state
         campaign_metadata {
@@ -93,7 +93,7 @@ subscription CampaignsPagination($limit: Int) {
 }
 
 subscription CampaignsPaginationCount($searchQuery: String="%") {
-    campaign_aggregate(where: {campaign_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
+    campaign_aggregate(where: {campaign_metadata: {name: {_ilike: $searchQuery}}}) {
         aggregate {
             count
         }
