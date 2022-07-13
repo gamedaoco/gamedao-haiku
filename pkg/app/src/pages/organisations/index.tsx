@@ -7,6 +7,7 @@ import { Button, Container, Grid } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
+import { useTranslation } from 'react-i18next'
 import { Layout } from 'src/components/Layouts/default/layout'
 import {
 	Organization,
@@ -23,6 +24,7 @@ const applyPagination = (data: Organization[], rowsPerPage: number): Organizatio
 	data?.filter((x, index) => index < rowsPerPage)
 
 export function OrganisationPage() {
+	const { t } = useTranslation()
 	const enabledFeature = useOrganizationFeatures()
 	const [filters, setFilters] = useState('')
 	const [bodyCount, setBodyCount] = useState<number>(15)
@@ -86,6 +88,7 @@ export function OrganisationPage() {
 							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
 							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
 							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
+							searchPlaceHolder={t('page:organisations:search_place_holder')}
 						/>
 					</Box>
 					{paginatedData?.length === 0 && !loading && (

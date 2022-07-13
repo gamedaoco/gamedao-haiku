@@ -13,6 +13,7 @@ interface ComponentProps {
 	setFilters: (x: string) => void
 	setSortOption: (x: Organization_Order_By) => void
 	sortOptions: DisplayValueEntryString[]
+	searchPlaceHolder: string
 	showSearch?: boolean
 	showSort?: boolean
 	showFilters?: boolean
@@ -22,6 +23,7 @@ export function FiltersSection({
 	setFilters,
 	setSortOption,
 	sortOptions,
+	searchPlaceHolder,
 	showSort = true,
 	showFilters = true,
 	showSearch = true,
@@ -37,7 +39,7 @@ export function FiltersSection({
 
 	useEffect(() => {
 		setFilters(searchInputDebounced)
-	}, [searchInputDebounced])
+	}, [searchInputDebounced, setFilters])
 
 	return (
 		<Box
@@ -68,7 +70,7 @@ export function FiltersSection({
 										</InputAdornment>
 									),
 								}}
-								placeholder="Search Organisations…"
+								placeholder={searchPlaceHolder}
 							/>
 						)}
 					</Grid>

@@ -64,6 +64,7 @@
   },
   "page": {
     "organisations": {
+      "search_place_holder": "Search Organizations",
       "sort_options": {
         "mem_hi_lo": "Member: High-Low",
         "mem_lo_hi": "Member: Low-High",
