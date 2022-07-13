@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Box, Card, CardContent, Skeleton } from '@mui/material'
 
-const LoadingCampaignCard = () => {
+export function LoadingCampaignCard() {
 	return (
 		<Card sx={{ maxHeight: 433 }}>
 			<Skeleton height={200} sx={{ position: 'relative', bottom: 5 }} variant="rectangular" />
@@ -63,5 +63,3 @@ const LoadingCampaignCard = () => {
 		</Card>
 	)
 }
-
-export default LoadingCampaignCard
