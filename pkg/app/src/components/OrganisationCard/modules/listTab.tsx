@@ -3,6 +3,7 @@ import React from 'react'
 import ClearIcon from '@mui/icons-material/Clear'
 import ClearAllIcon from '@mui/icons-material/ClearAll'
 import {
+	Box,
 	Button,
 	Checkbox,
 	Divider,
@@ -12,9 +13,8 @@ import {
 	IconButton,
 	Radio,
 	RadioGroup,
+	Typography,
 } from '@mui/material'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void

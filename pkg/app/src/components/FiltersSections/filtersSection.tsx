@@ -2,9 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { Search } from '@mui/icons-material'
 import FilterListIcon from '@mui/icons-material/FilterList'
-import { Drawer, Grid, IconButton, InputAdornment, TextField } from '@mui/material'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { useDebouncedState } from 'hooks/useDebouncedState'
 import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
