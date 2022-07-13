@@ -23,18 +23,26 @@ import { FiltersSection } from 'components/filtersSections/filtersSection'
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
+interface FiltersInterface {
+	query: string
+	sortOption: Organization_Order_By
+	filters: any
+}
 export function OrganisationPage() {
 	const { t } = useTranslation()
 	const enabledFeature = useOrganizationFeatures()
-	const [filters, setFilters] = useState('')
+	const [filters, setFilters] = useState<FiltersInterface>({
+		query: '',
+		sortOption: null,
+		filters: {},
+	})
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const { data } = useDisplayValuesQuery()
-	const [sortOption, setSortOption] = useState<Organization_Order_By>(null)
 	const organizationsCount = useOrganizationsPaginationCountSubscription({
 		variables: { searchQuery: `%${filters ?? ''}%` },
 	})
 	const organizationsData = useOrganizationsPaginationSubscription({
-		variables: { first: bodyCount, orderBy: sortOption, searchQuery: `%${filters ?? ''}%` },
+		variables: { first: bodyCount, orderBy: filters.sortOption, searchQuery: `%${filters?.query ?? ''}%` },
 	})
 	const loading = organizationsCount?.loading || organizationsData?.loading
 
@@ -83,7 +91,6 @@ export function OrganisationPage() {
 						</Grid>
 						<FiltersSection
 							setFilters={setFilters}
-							setSortOption={setSortOption}
 							sortOptions={data?.displayValues?.sortOptions?.concat([])}
 							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
 							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
@@ -95,7 +102,8 @@ export function OrganisationPage() {
 						<Box sx={{ mt: 2, mb: 4 }}>
 							<Typography fontWeight={700}>No organisation found</Typography>
 							<Typography>
-								No results found for “{filters}”. Try checking for typos or using a different term.
+								No results found for “{filters?.query}”. Try checking for typos or using a different
+								term.
 							</Typography>
 						</Box>
 					)}

@@ -6,7 +6,11 @@ import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { Organization_Order_By } from 'src/queries'
 
-export function SortOptionsTab({ sortOptions, setSortOption }) {
+interface ComponentProps {
+	sortOptions: any
+	setFilters: (x: (prev) => any) => void
+}
+export function SortOptionsTab({ sortOptions, setFilters }: ComponentProps) {
 	const { t } = useTranslation()
 	const [keyState, setKeyState] = useState<string>('')
 	const [mappingState, setMappingState] = useState({})
@@ -24,9 +28,12 @@ export function SortOptionsTab({ sortOptions, setSortOption }) {
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
 			setKeyState(event.target.value)
-			setSortOption(eval(`(${mappingState[event.target.value]?.value ?? 'null'})`) as Organization_Order_By)
+			setFilters((prev) => ({
+				...prev,
+				sortOption: eval(`(${mappingState[event.target.value]?.value ?? 'null'})`) as Organization_Order_By,
+			}))
 		},
-		[setSortOption, mappingState],
+		[setFilters, mappingState],
 	)
 
 	if (!sortOptions) return null

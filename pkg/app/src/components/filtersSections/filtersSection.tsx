@@ -10,8 +10,7 @@ import { FiltersTab } from 'components/filtersSections/filtersTab'
 import { SortOptionsTab } from 'components/filtersSections/sortOptionsTab'
 
 interface ComponentProps {
-	setFilters: (x: string) => void
-	setSortOption: (x: Organization_Order_By) => void
+	setFilters: (x: string | Organization_Order_By | any) => void
 	sortOptions: DisplayValueEntryString[]
 	searchPlaceHolder: string
 	showSearch?: boolean
@@ -21,7 +20,6 @@ interface ComponentProps {
 
 export function FiltersSection({
 	setFilters,
-	setSortOption,
 	sortOptions,
 	searchPlaceHolder,
 	showSort = true,
@@ -38,7 +36,7 @@ export function FiltersSection({
 	)
 
 	useEffect(() => {
-		setFilters(searchInputDebounced)
+		setFilters((prev) => ({ ...prev, query: searchInputDebounced }))
 	}, [searchInputDebounced, setFilters])
 
 	return (
@@ -84,7 +82,7 @@ export function FiltersSection({
 							}}
 						>
 							{showFilters && <FiltersTab />}
-							{showSort && <SortOptionsTab setSortOption={setSortOption} sortOptions={sortOptions} />}
+							{showSort && <SortOptionsTab setFilters={setFilters} sortOptions={sortOptions} />}
 						</Box>
 					</Grid>
 				</Grid>
