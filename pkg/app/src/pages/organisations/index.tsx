@@ -6,6 +6,7 @@ import { Add, ArrowDownward } from '@mui/icons-material'
 import { Button, Container, Grid } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
 import { Layout } from 'src/components/Layouts/default/layout'
 import {
 	Organization,
@@ -16,12 +17,13 @@ import {
 } from 'src/queries'
 
 import { ItemList } from 'components/OrganisationCard/itemList'
-import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
+import { FiltersSection } from 'components/filtersSections/filtersSection'
 
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
 export function OrganisationPage() {
+	const enabledFeature = useOrganizationFeatures()
 	const [filters, setFilters] = useState('')
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const { data } = useDisplayValuesQuery()
@@ -81,6 +83,9 @@ export function OrganisationPage() {
 							setFilters={setFilters}
 							setSortOption={setSortOption}
 							sortOptions={data?.displayValues?.sortOptions?.concat([])}
+							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
+							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
+							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
 						/>
 					</Box>
 					{paginatedData?.length === 0 && !loading && (

@@ -3,21 +3,29 @@ import React, { useCallback, useEffect } from 'react'
 import { Search } from '@mui/icons-material'
 import { Grid, InputAdornment, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
-import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
 import { useDebouncedState } from 'hooks/useDebouncedState'
 import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
-import { FiltersTab } from 'components/OrganisationCard/modules/filtersTab'
-import { SortOptionsTab } from 'components/OrganisationCard/modules/sortOptionsTab'
+import { FiltersTab } from 'components/filtersSections/filtersTab'
+import { SortOptionsTab } from 'components/filtersSections/sortOptionsTab'
 
 interface ComponentProps {
 	setFilters: (x: string) => void
 	setSortOption: (x: Organization_Order_By) => void
 	sortOptions: DisplayValueEntryString[]
+	showSearch?: boolean
+	showSort?: boolean
+	showFilters?: boolean
 }
 
-export function FiltersSection({ setFilters, setSortOption, sortOptions }: ComponentProps) {
-	const enabledFeature = useOrganizationFeatures()
+export function FiltersSection({
+	setFilters,
+	setSortOption,
+	sortOptions,
+	showSort = true,
+	showFilters = true,
+	showSearch = true,
+}: ComponentProps) {
 	const [searchInput, searchInputDebounced, setSearchInput] = useDebouncedState<string>(500, '')
 
 	const handleSearchInputChange = useCallback(
@@ -46,7 +54,7 @@ export function FiltersSection({ setFilters, setSortOption, sortOptions }: Compo
 			>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={4}>
-						{enabledFeature.ORGANIZATION_PAGE_SHOW_SEARCH && (
+						{showSearch && (
 							<TextField
 								onChange={handleSearchInputChange}
 								value={searchInput}
@@ -73,10 +81,8 @@ export function FiltersSection({ setFilters, setSortOption, sortOptions }: Compo
 								marginLeft: 1,
 							}}
 						>
-							{enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS && <FiltersTab />}
-							{enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT && (
-								<SortOptionsTab setSortOption={setSortOption} sortOptions={sortOptions} />
-							)}
+							{showFilters && <FiltersTab />}
+							{showSort && <SortOptionsTab setSortOption={setSortOption} sortOptions={sortOptions} />}
 						</Box>
 					</Grid>
 				</Grid>
