@@ -66,7 +66,8 @@ subscription Campaign($address: String) {
 }
 
 subscription CampaignByOrganizationId($orgId: String!) {
-    campaign(where: {organization_id: {_eq: $orgId}}) {
+    campaign(where: {organization_id: {_eq: $orgId}}, order_by: { expiry: asc}) {
+        id
         target
         state
         expiry

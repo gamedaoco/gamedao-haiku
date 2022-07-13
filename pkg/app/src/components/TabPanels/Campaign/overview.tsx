@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { Campaign, CampaignByOrganizationIdSubscription } from 'src/queries'
 
-import { CreatedCampaignSection } from 'components/CampaignsSection/CampaignsList/campaignsList'
+import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
 import CreateCampaignPage from 'components/TabPanels/Campaign/create'
 
 interface ComponentProps {
@@ -30,10 +30,10 @@ export function CampaignOverview({ organizationId, isAdmin, data, loading }: Com
 
 	return (
 		<>
-			<CreatedCampaignSection
+			<CampaignsList
 				data={paginatedData}
 				loading={loading}
-				title={true}
+				title={false}
 				isAdmin={isAdmin}
 				onCreateCampaignClicked={onCreateCampaignClicked}
 			/>

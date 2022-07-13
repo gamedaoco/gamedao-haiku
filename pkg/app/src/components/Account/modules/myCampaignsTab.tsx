@@ -6,7 +6,7 @@ import { Campaign, useCampaignContributorsSubscription } from 'src/queries'
 import { useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-import { CreatedCampaignSection } from 'components/CampaignsSection/CampaignsList/campaignsList'
+import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
 import ContributedCampaignsSection from 'components/CampaignsSection/contributedCampaignsSection/contributedCampaignsSection'
 
 export function MyCampaignsTab() {
@@ -23,7 +23,7 @@ export function MyCampaignsTab() {
 
 	return (
 		<Box>
-			<CreatedCampaignSection data={paginatedData} loading={loading} title={true} isAdmin={true} />
+			<CampaignsList data={paginatedData} loading={loading} title={true} isAdmin={true} />
 			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
 	)

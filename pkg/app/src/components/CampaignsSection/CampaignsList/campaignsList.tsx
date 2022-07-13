@@ -1,31 +1,15 @@
-import React, { useCallback } from 'react'
+import React, { useEffect } from 'react'
 
-import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
-import { CampaignStatus } from 'src/@types/campaignStatus'
+import { mapping } from 'src/@types/campaignStatus'
 import { Campaign } from 'src/queries'
+
+import { PlusIcon } from 'components/Icons/plusIcon'
 
 import CampaignCard from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
-
-export const PlusIcon = () => {
-	const theme = useTheme()
-	return (
-		<Box
-			sx={{
-				borderRadius: theme.shape.borderRadiusLg,
-				maxWidth: 56,
-				maxHeight: 56,
-				padding: 2,
-				backgroundColor: theme.palette.grey[900],
-			}}
-		>
-			<AddIcon sx={{ color: theme.palette.grey[600] }} />
-		</Box>
-	)
-}
 
 interface ComponentProps {
 	data: Campaign[]
@@ -35,33 +19,13 @@ interface ComponentProps {
 	onCreateCampaignClicked?: () => void
 }
 
-export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreateCampaignClicked }: ComponentProps) {
+export function CampaignsList({ data, loading, title, isAdmin, onCreateCampaignClicked }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 
-	const getCampaignsByStatus = useCallback(
-		(data, state) => {
-			return (
-				data
-					?.filter((campaign) => campaign?.state === state)
-					?.sort((a, b) => {
-						return a?.expiry - b?.expiry
-					}) || []
-			)
-		},
-		[data],
-	)
-
-	const allCampaigns = [
-		...getCampaignsByStatus(data, CampaignStatus.ACTIVE),
-		...getCampaignsByStatus(data, CampaignStatus.INIT),
-		...getCampaignsByStatus(data, CampaignStatus.FINALIZING),
-		...getCampaignsByStatus(data, CampaignStatus.SUCCESS),
-		...getCampaignsByStatus(data, CampaignStatus.REVERTING),
-		...getCampaignsByStatus(data, CampaignStatus.FAILED),
-		...getCampaignsByStatus(data, CampaignStatus.PAUSED),
-		...getCampaignsByStatus(data, CampaignStatus.LOCKED),
-	]
+	useEffect(() => {
+		data?.sort((a, b) => (mapping?.[a.state] ?? 0) - (mapping?.[b.state] ?? 0))
+	}, [data])
 
 	return (
 		<Box sx={{ pb: 4 }}>
@@ -95,15 +59,15 @@ export function CreatedCampaignSection({ data, loading, title, isAdmin, onCreate
 				)}
 				{
 					<>
-						{allCampaigns?.map((campaign: Campaign, index: number) => (
-							<Grid item xs={4} key={index} sx={{ marginBottom: 5 }}>
+						{data?.map((campaign: Campaign) => (
+							<Grid item xs={4} key={campaign?.id} sx={{ marginBottom: 5 }}>
 								<CampaignCard campaign={campaign} />
 							</Grid>
 						))}
 					</>
 				}
 
-				{(!allCampaigns || loading) &&
+				{(!data || loading) &&
 					[1, 2].map((x) => (
 						<Grid item xs={4} key={x} sx={{ marginBottom: 5 }}>
 							<LoadingCampaignCard />
