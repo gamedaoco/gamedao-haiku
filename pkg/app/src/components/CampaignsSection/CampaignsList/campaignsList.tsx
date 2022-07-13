@@ -8,7 +8,7 @@ import { Campaign } from 'src/queries'
 
 import { PlusIcon } from 'components/Icons/plusIcon'
 
-import CampaignCard from './campaignCard'
+import { CampaignCard } from './campaignCard'
 import LoadingCampaignCard from './loadingCampaignCard'
 
 interface ComponentProps {
@@ -35,7 +35,7 @@ export function CampaignsList({ data, loading, title, isAdmin, onCreateCampaignC
 				</Typography>
 			)}
 			<Grid container sx={{ pt: 2 }} spacing={{ xs: 1, md: 2 }} columns={{ xs: 1, sm: 4, md: 12 }}>
-				{isAdmin && onCreateCampaignClicked && (
+				{isAdmin && (
 					<Grid item sx={{ marginBottom: 5, minHeight: 406 }} xs={4}>
 						<Card variant="dashed">
 							<Button sx={{ width: '100%', height: '100%' }} onClick={onCreateCampaignClicked}>

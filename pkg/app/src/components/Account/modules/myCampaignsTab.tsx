@@ -7,7 +7,7 @@ import { useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
-import ContributedCampaignsSection from 'components/CampaignsSection/contributedCampaignsSection/contributedCampaignsSection'
+import { ContributedCampaignsSection } from 'components/CampaignsSection/contributedCampaignsSection/contributedCampaignsSection'
 
 export function MyCampaignsTab() {
 	const accountState = useCurrentAccountState()
