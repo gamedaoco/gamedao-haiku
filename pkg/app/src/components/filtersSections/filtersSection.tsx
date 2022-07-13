@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { Search } from '@mui/icons-material'
-import { Grid, InputAdornment, TextField } from '@mui/material'
+import FilterListIcon from '@mui/icons-material/FilterList'
+import { Drawer, Grid, IconButton, InputAdornment, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import { useDebouncedState } from 'hooks/useDebouncedState'
 import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
-import { FiltersTab } from 'components/filtersSections/filtersTab'
 import { SortOptionsTab } from 'components/filtersSections/sortOptionsTab'
 
 interface ComponentProps {
@@ -16,6 +17,7 @@ interface ComponentProps {
 	showSearch?: boolean
 	showSort?: boolean
 	showFilters?: boolean
+	ListTab: React.FC<{ handleDrawerNavigation: () => void } | any>
 }
 
 export function FiltersSection({
@@ -25,8 +27,11 @@ export function FiltersSection({
 	showSort = true,
 	showFilters = true,
 	showSearch = true,
+	ListTab,
 }: ComponentProps) {
 	const [searchInput, searchInputDebounced, setSearchInput] = useDebouncedState<string>(500, '')
+	const [openDrawer, setOpenDrawer] = useState(false)
+	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
 
 	const handleSearchInputChange = useCallback(
 		(event) => {
@@ -81,7 +86,30 @@ export function FiltersSection({
 								marginLeft: 1,
 							}}
 						>
-							{showFilters && <FiltersTab />}
+							{showFilters && (
+								<Box
+									sx={{
+										display: 'flex',
+										justifyContent: 'space-around',
+										alignItems: 'center',
+									}}
+								>
+									<Drawer anchor={'right'} open={openDrawer} onClose={() => setOpenDrawer(false)}>
+										<ListTab handleDrawerNavigation={handleDrawerNavigation} />
+									</Drawer>
+									<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
+										Filters
+									</Typography>
+									<IconButton
+										aria-label="filters"
+										onClick={handleDrawerNavigation}
+										color="inherit"
+										sx={{ ml: 1 }}
+									>
+										<FilterListIcon fontSize={'small'} />
+									</IconButton>
+								</Box>
+							)}
 							{showSort && <SortOptionsTab setFilters={setFilters} sortOptions={sortOptions} />}
 						</Box>
 					</Grid>

@@ -18,6 +18,7 @@ import {
 } from 'src/queries'
 
 import { ItemList } from 'components/OrganisationCard/itemList'
+import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
 import { FiltersSection } from 'components/filtersSections/filtersSection'
 
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
@@ -96,6 +97,7 @@ export function OrganisationPage() {
 							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
 							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
 							searchPlaceHolder={t('page:organisations:search_place_holder')}
+							ListTab={OrganizationFiltersListTab}
 						/>
 					</Box>
 					{paginatedData?.length === 0 && !loading && (

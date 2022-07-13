@@ -49,7 +49,7 @@ export function SortOptionsTab({ sortOptions, setFilters }: ComponentProps) {
 			}}
 		>
 			<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
-				Sort By:
+				{t('label:sort_by')}
 			</Typography>
 			<Box>
 				<FormControl
