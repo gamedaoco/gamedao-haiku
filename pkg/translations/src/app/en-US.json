@@ -5,7 +5,9 @@
       "campaigns": "Campaigns",
       "organisations": "Organisations",
       "dashboard": "Dashboard",
-      "wallet": "Wallet"
+      "wallet": "Wallet",
+      "documentation": "Documentation",
+      "faucet": "Faucet"
     },
     "ui": {
       "connect_wallet": "Connect wallet",

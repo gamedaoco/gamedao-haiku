@@ -5,17 +5,22 @@ import { useRouter } from 'next/router'
 type NavLinkProps = {
 	href: string
 	children: ReactNode
+	external?: boolean
 }
 
-export function NavLink({ href, children }: NavLinkProps) {
+export function NavLink({ href, external, children }: NavLinkProps) {
 	const { push } = useRouter()
 
 	const handleClick = useCallback(
 		(e) => {
 			e.preventDefault()
-			push(href)
+			if (external) {
+				window.open(href, '_blank', 'noopener')
+			} else {
+				push(href)
+			}
 		},
-		[href, push],
+		[href, external, push],
 	)
 	return (
 		<div title={href} onClick={handleClick}>

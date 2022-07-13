@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react'
 
 import { InputAdornment, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import enLocale from 'date-fns/locale/en-US'
+import moment from 'moment'
 import { useSuccessfulCampaignByOrganisationIdSubscription } from 'src/queries'
 import * as Yup from 'yup'
 
@@ -32,14 +34,30 @@ export const validationSchema = Yup.object().shape({
 	name: Yup.string().required(),
 	description: Yup.string().required(),
 	startDate: Yup.date().required(),
-	endDate: Yup.date().required(),
+	endDate: Yup.date()
+		.required()
+		.when('startDate', (startDate, schema) => {
+			return schema.min(
+				moment(startDate ?? new Date())
+					.add(1, 'day')
+					.toDate(),
+			)
+		}),
 })
 
 export const validationSchemaWithdrawal = Yup.object().shape({
 	name: Yup.string().required(),
 	description: Yup.string().required(),
 	startDate: Yup.date().required(),
-	endDate: Yup.date().required(),
+	endDate: Yup.date()
+		.required()
+		.when('startDate', (startDate, schema) => {
+			return schema.min(
+				moment(startDate ?? new Date())
+					.add(1, 'day')
+					.toDate(),
+			)
+		}),
 	campaignId: Yup.string().required(),
 	amount: Yup.number().required(),
 })
@@ -112,7 +130,7 @@ export function Description({
 	)
 
 	return (
-		<LocalizationProvider dateAdapter={AdapterDateFns}>
+		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
 			<BaseForm
 				title={isWithdrawal ? 'Withdrawal Proposal' : 'What’s the name of your proposal?'}
 				error={errorState}
@@ -173,21 +191,23 @@ export function Description({
 					error={!!errorState}
 				/>
 				<Stack direction="row" spacing={1} justifyContent="space-between" width="100%">
-					<MobileDatePicker
+					<DateTimePicker
 						label="Start date"
-						inputFormat="dd/MM/yyyy"
 						minDate={new Date()}
 						value={startDate}
 						onChange={setStartDate}
 						renderInput={(params) => <TextField {...params} />}
+						ampm={false}
 					/>
-					<MobileDatePicker
+					<DateTimePicker
 						label="End date"
-						inputFormat="dd/MM/yyyy"
-						minDate={new Date()}
+						minDate={moment(startDate ?? new Date())
+							.add(1, 'day')
+							.toDate()}
 						value={endData}
 						onChange={setEndDate}
 						renderInput={(params) => <TextField {...params} />}
+						ampm={false}
 					/>
 				</Stack>
 			</BaseForm>
