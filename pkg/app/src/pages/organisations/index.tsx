@@ -40,10 +40,10 @@ export function OrganisationPage() {
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const { data } = useDisplayValuesQuery()
 	const organizationsCount = useOrganizationsPaginationCountSubscription({
-		variables: { searchQuery: `%${filters ?? ''}%` },
+		variables: { searchQuery: `%${filters.query ?? ''}%` },
 	})
 	const organizationsData = useOrganizationsPaginationSubscription({
-		variables: { first: bodyCount, orderBy: filters.sortOption, searchQuery: `%${filters?.query ?? ''}%` },
+		variables: { first: bodyCount, orderBy: filters.sortOption, searchQuery: `%${filters.query ?? ''}%` },
 	})
 	const loading = organizationsCount?.loading || organizationsData?.loading
 
