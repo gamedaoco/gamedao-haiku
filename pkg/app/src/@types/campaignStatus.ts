@@ -9,7 +9,7 @@ enum CampaignStatus {
 	LOCKED = 'Locked',
 }
 
-export const mapping = {
+export const CampaignsListSortMapping = {
 	[CampaignStatus.ACTIVE]: 0,
 	[CampaignStatus.INIT]: 1,
 	[CampaignStatus.FINALIZING]: 2,

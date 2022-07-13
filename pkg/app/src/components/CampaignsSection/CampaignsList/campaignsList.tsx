@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Box, Button, Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
-import { mapping } from 'src/@types/campaignStatus'
+import { CampaignsListSortMapping } from 'src/@types/campaignStatus'
 import { Campaign } from 'src/queries'
 
 import { PlusIcon } from 'components/Icons/plusIcon'
 
 import { CampaignCard } from './campaignCard'
-import LoadingCampaignCard from './loadingCampaignCard'
+import { LoadingCampaignCard } from './loadingCampaignCard'
 
 interface ComponentProps {
 	data: Campaign[]
@@ -22,9 +22,14 @@ interface ComponentProps {
 export function CampaignsList({ data, loading, title, isAdmin, onCreateCampaignClicked }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
+	const [campaigns, setCampaigns] = useState<Campaign[]>(data)
 
 	useEffect(() => {
-		data?.sort((a, b) => (mapping?.[a.state] ?? 0) - (mapping?.[b.state] ?? 0))
+		setCampaigns(
+			[...(data ?? [])].sort(
+				(a, b) => (CampaignsListSortMapping?.[a.state] ?? 0) - (CampaignsListSortMapping?.[b.state] ?? 0),
+			),
+		)
 	}, [data])
 
 	return (
@@ -59,7 +64,7 @@ export function CampaignsList({ data, loading, title, isAdmin, onCreateCampaignC
 				)}
 				{
 					<>
-						{data?.map((campaign: Campaign) => (
+						{campaigns?.map((campaign: Campaign) => (
 							<Grid item xs={4} key={campaign?.id} sx={{ marginBottom: 5 }}>
 								<CampaignCard campaign={campaign} />
 							</Grid>
