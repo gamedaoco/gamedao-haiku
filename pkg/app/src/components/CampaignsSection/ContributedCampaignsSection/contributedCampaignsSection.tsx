@@ -23,7 +23,7 @@ import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { Scrollbar } from 'components/scrollbar'
 
-import LoadingCampaignTable from './loadingCampaignTable'
+import { LoadingCampaignTable } from './loadingCampaignTable'
 
 interface ComponentProps {
 	data: CampaignContributorsSubscription

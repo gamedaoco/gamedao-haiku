@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Box, Skeleton, TableBody, TableCell, TableRow } from '@mui/material'
 
-const LoadingCampaignTable: FC = () => {
+export function LoadingCampaignTable() {
 	return (
 		<TableBody>
 			{[1, 2, 3, 4, 5]?.map((index) => (
@@ -43,5 +43,3 @@ const LoadingCampaignTable: FC = () => {
 		</TableBody>
 	)
 }
-
-export default LoadingCampaignTable
