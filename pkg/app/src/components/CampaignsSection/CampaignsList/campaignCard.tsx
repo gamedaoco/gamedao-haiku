@@ -1,19 +1,18 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Avatar, Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
 import { useConfig } from 'hooks/useConfig'
 import { Campaign } from 'src/queries'
+import { getCampaignProgress } from 'src/utils/campaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
 
 import Lineup from 'components/lineup'
 
-import { getCampaignProgress } from './campaignUtils'
-
-interface CampaignCardProps {
+interface ComponentProps {
 	campaign: Campaign
 }
-const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
+export function CampaignCard({ campaign }: ComponentProps) {
 	const config = useConfig()
 
 	return (
@@ -70,5 +69,3 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 		</Card>
 	)
 }
-
-export default CampaignCard
