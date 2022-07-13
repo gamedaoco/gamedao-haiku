@@ -1,7 +1,6 @@
 import React from 'react'
 
-import ClearIcon from '@mui/icons-material/Clear'
-import ClearAllIcon from '@mui/icons-material/ClearAll'
+import { Clear, ClearAll } from '@mui/icons-material'
 import {
 	Box,
 	Button,
@@ -27,7 +26,7 @@ export function OrganizationFiltersListTab({ handleDrawerNavigation }: Component
 					Filters
 				</Typography>
 				<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit">
-					<ClearIcon fontSize={'small'} />
+					<Clear fontSize={'small'} />
 				</IconButton>
 			</Box>
 			<Divider />
@@ -70,7 +69,7 @@ export function OrganizationFiltersListTab({ handleDrawerNavigation }: Component
 				sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', py: 3 }}
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60%' }}>
-					<Button variant="outlined" fullWidth startIcon={<ClearAllIcon />}>
+					<Button variant="outlined" fullWidth startIcon={<ClearAll />}>
 						Clear
 					</Button>
 				</Box>

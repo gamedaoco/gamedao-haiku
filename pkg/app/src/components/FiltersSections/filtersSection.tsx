@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { Search } from '@mui/icons-material'
-import FilterListIcon from '@mui/icons-material/FilterList'
+import { FilterList, Search } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { useDebouncedState } from 'hooks/useDebouncedState'
 import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
@@ -104,7 +103,7 @@ export function FiltersSection({
 										color="inherit"
 										sx={{ ml: 1 }}
 									>
-										<FilterListIcon fontSize={'small'} />
+										<FilterList fontSize={'small'} />
 									</IconButton>
 								</Box>
 							)}
