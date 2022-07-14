@@ -26,9 +26,9 @@ export function CampaignsList({ data, loading, title, isAdmin, onCreateCampaignC
 
 	useEffect(() => {
 		setCampaigns(
-			data?.sort(
+			[...(data ?? [])].sort(
 				(a, b) => (CampaignsListSortMapping?.[a.state] ?? 0) - (CampaignsListSortMapping?.[b.state] ?? 0),
-			) ?? [],
+			),
 		)
 	}, [data])
 
