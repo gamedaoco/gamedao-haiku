@@ -1,18 +1,18 @@
-import React, { FC } from 'react'
+import React from 'react'
 
-import { Campaign } from 'src/queries'
 import { Avatar, Box, Card, CardContent, CardMedia, LinearProgress, Typography } from '@mui/material'
+import { useConfig } from 'hooks/useConfig'
+import { Campaign } from 'src/queries'
+import { getCampaignProgress } from 'src/utils/campaignUtils'
+import { abbreviateNumber } from 'src/utils/globalUtils'
+import { parseIpfsHash } from 'src/utils/ipfs'
+
 import Lineup from 'components/lineup'
 
-import { getCampaignProgress } from './campaignUtils'
-import { useConfig } from 'hooks/useConfig'
-import { parseIpfsHash } from 'src/utils/ipfs'
-import { abbreviateNumber } from 'src/utils/globalUtils'
-
-interface CampaignCardProps {
+interface ComponentProps {
 	campaign: Campaign
 }
-const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
+export function CampaignCard({ campaign }: ComponentProps) {
 	const config = useConfig()
 
 	return (
@@ -59,7 +59,7 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 					secondTitle="Target"
 					thirdTitle="Contributor"
 					firstSubhead={abbreviateNumber(
-						campaign?.campaign_contributors_aggregate?.aggregate?.sum?.contributed,
+						campaign?.campaign_contributors_aggregate?.aggregate?.sum?.contributed ?? 0,
 					)}
 					secondSubhead={abbreviateNumber(campaign?.target)}
 					thirdSubhead={abbreviateNumber(campaign?.campaign_contributors_aggregate?.aggregate?.count)}
@@ -69,5 +69,3 @@ const CampaignCard: FC<CampaignCardProps> = ({ campaign }) => {
 		</Card>
 	)
 }
-
-export default CampaignCard

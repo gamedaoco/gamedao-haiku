@@ -82,6 +82,9 @@
       }
     },
     "campaigns": {
+      "created_campaigns": "Created Campaigns",
+      "new_campaign": "New Campaign",
+      "click": "Click here to create a new campaign"
     },
     "governance": {
     },
