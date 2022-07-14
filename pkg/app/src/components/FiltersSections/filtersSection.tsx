@@ -3,13 +3,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { FilterList, Search } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { useDebouncedState } from 'hooks/useDebouncedState'
+import { CampaignsSortOptions } from 'src/@types/campaign'
 import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
 import { SortOptionsTab } from 'components/FiltersSections/sortOptionsTab'
 
 interface ComponentProps {
 	setFilters: (x: string | Organization_Order_By | any) => void
-	sortOptions: DisplayValueEntryString[]
+	sortOptions: DisplayValueEntryString[] | CampaignsSortOptions[]
 	searchPlaceHolder: string
 	showSearch?: boolean
 	showSort?: boolean

@@ -101,8 +101,8 @@ subscription CampaignByOrganizationId($orgId: String!) {
 
 
 
-subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!] ) {
-    campaign(limit: $limit, where: {_or: $filters}) {
+subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!], $order_by: [campaign_order_by!]) {
+    campaign(limit: $limit, where: {_or: $filters}, order_by: $order_by) {
         target
         state
         campaign_metadata {
@@ -126,6 +126,8 @@ subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!] ) {
         }
     }
 }
+
+
 
 
 

@@ -4,9 +4,11 @@ import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
+import { CampaignsSortOptions } from 'src/@types/campaign'
 import {
 	Campaign,
 	Campaign_Bool_Exp,
+	Campaign_Order_By,
 	useCampaignsPaginationCountSubscription,
 	useCampaignsPaginationSubscription,
 } from 'src/queries'
@@ -18,14 +20,69 @@ import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/
 
 interface FiltersInterface {
 	query: string
-	sortOption: any
+	sortOption: Campaign_Order_By | string
 	filters: any
 }
 export function Campaigns() {
+	const sortOptions = useMemo<CampaignsSortOptions[]>(
+		() => [
+			{
+				key: 'target_asc',
+				text: 'Funding Target: asc',
+				value: "{ target: 'asc' }",
+			},
+			{
+				key: 'target_desc',
+				text: 'Funding Target: desc',
+				value: "{ target: 'desc' }",
+			},
+			{
+				key: 'current_funding_asc',
+				text: 'Current Funding: asc',
+				value: "{'campaign_contributors_aggregate': {'count': 'asc'}}",
+			},
+			{
+				key: 'current_funding_desc',
+				text: 'Current Funding: desc',
+				value: "{'campaign_contributors_aggregate': {'count': 'desc'}}",
+			},
+			{
+				key: 'contributors_funding_asc',
+				text: 'Contributors: low-high',
+				value: "{'campaign_contributors_aggregate': {'sum': {'contributed': 'asc'}}}",
+			},
+			{
+				key: 'contributors_funding_desc',
+				text: 'Contributors: high-low',
+				value: "{'campaign_contributors_aggregate': {'sum': {'contributed': 'desc'}}}",
+			},
+			{
+				key: 'alphabetical_asc',
+				text: 'Alphabetical: asc',
+				value: "{ 'campaign_metadata': { 'name': 'asc' } }",
+			},
+			{
+				key: 'alphabetical_desc',
+				text: 'Alphabetical: desc',
+				value: "{ 'campaign_metadata': { 'name': 'desc' } }",
+			},
+			{
+				key: 'time_left_asc',
+				text: 'Time Left: asc',
+				value: "{'expiry': 'asc'}",
+			},
+			{
+				key: 'time_left_desc',
+				text: 'Time Left: desc',
+				value: "{'expiry': 'desc'}",
+			},
+		],
+		[],
+	)
 	const [limit, setLimit] = useState(15)
 	const [filters, setFilters] = useState<FiltersInterface>({
 		query: '',
-		sortOption: '',
+		sortOption: {},
 		filters: {},
 	})
 
@@ -54,6 +111,7 @@ export function Campaigns() {
 		variables: {
 			limit,
 			filters: queryFilters,
+			order_by: filters.sortOption as Campaign_Order_By,
 		},
 	})
 	const campaignsCount = useCampaignsPaginationCountSubscription({
@@ -89,7 +147,7 @@ export function Campaigns() {
 					</Box>
 					<FiltersSection
 						setFilters={setFilters}
-						sortOptions={[]}
+						sortOptions={sortOptions}
 						searchPlaceHolder={'Search Campaigns'}
 						ListTab={OrganizationFiltersListTab}
 					/>
