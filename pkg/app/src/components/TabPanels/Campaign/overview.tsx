@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { Campaign, useCampaignByOrganizationIdSubscription } from 'src/queries'
 
 import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
-import CreateCampaignPage from 'components/TabPanels/Campaign/create'
+import { CreateCampaignPage } from 'components/TabPanels/Campaign/create'
 
 interface ComponentProps {
 	organizationId: string
