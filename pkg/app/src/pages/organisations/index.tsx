@@ -84,7 +84,7 @@ export function OrganisationPage() {
 									variant="outlined"
 									onClick={handleClickCreate}
 								>
-									Create
+									{t('button:ui:create')}
 								</Button>
 							</Grid>
 						</Grid>
@@ -100,10 +100,10 @@ export function OrganisationPage() {
 					</Box>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
-							<Typography fontWeight={700}>No organisation found</Typography>
+							<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
 							<Typography>
-								No results found for “{filters?.query}”. Try checking for typos or using a different
-								term.
+								{t('page:organisations:no_result')} “{filters?.query}”.
+								{t('page:organisations:try_checking')}
 							</Typography>
 						</Box>
 					)}
@@ -127,7 +127,7 @@ export function OrganisationPage() {
 									onClick={() => setBodyCount((p) => p + 30)}
 									variant="outlined"
 								>
-									Load More Organisations
+									{t('page:organisations:load_more')}
 								</Button>
 							)}
 							<Typography>

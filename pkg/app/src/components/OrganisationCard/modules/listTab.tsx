@@ -14,16 +14,18 @@ import {
 	RadioGroup,
 	Typography,
 } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
 }
 export function OrganizationFiltersListTab({ handleDrawerNavigation }: ComponentProps) {
+	const { t } = useTranslation()
 	return (
 		<Box sx={{ width: 280 }} role="presentation">
 			<Box sx={{ my: 2, px: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 				<Typography fontWeight="700" variant={'body1'}>
-					Filters
+					{t('label:filters')}
 				</Typography>
 				<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit">
 					<Clear fontSize={'small'} />
@@ -70,7 +72,7 @@ export function OrganizationFiltersListTab({ handleDrawerNavigation }: Component
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60%' }}>
 					<Button variant="outlined" fullWidth startIcon={<ClearAll />}>
-						Clear
+						{t('button:ui:clear')}
 					</Button>
 				</Box>
 			</Box>
