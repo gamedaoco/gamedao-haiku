@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import {
 	Box,
@@ -15,22 +15,22 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { Campaign_Contributor, CampaignContributorsSubscription } from 'src/queries'
-import { parseIpfsHash } from 'src/utils/ipfs'
 import { useConfig } from 'hooks/useConfig'
+import { CampaignContributorsSubscription, Campaign_Contributor } from 'src/queries'
+import { getContributedCampaignProgress, getContributedCampaignTimeLeft } from 'src/utils/contributedCampaignUtils'
+import { abbreviateNumber } from 'src/utils/globalUtils'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { Scrollbar } from 'components/scrollbar'
 
-import { getContributedCampaignProgress, getContributedCampaignTimeLeft } from './contributedCampaignUtils'
-import LoadingCampaignTable from './loadingCampaignTable'
-import { abbreviateNumber } from 'src/utils/globalUtils'
+import { LoadingCampaignTable } from './loadingCampaignTable'
 
-interface ContributedCampaignsSectionProps {
+interface ComponentProps {
 	data: CampaignContributorsSubscription
 	loading: boolean
 }
 
-const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ data, loading }) => {
+export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 	const theme = useTheme()
 	const config = useConfig()
 
@@ -148,5 +148,3 @@ const ContributedCampaignsSection: FC<ContributedCampaignsSectionProps> = ({ dat
 		</Box>
 	)
 }
-
-export default ContributedCampaignsSection

@@ -38,9 +38,12 @@ subscription CampaignContributors($address: String!) {
 }
 
 
-subscription campaign($address: String) {
+subscription Campaign($address: String) {
     campaign(where: {admin_identity_id: {_eq: $address}}) {
+        id
         target
+        expiry
+        state
         campaign_metadata {
             name
             title
@@ -62,6 +65,38 @@ subscription campaign($address: String) {
         }
     }
 }
+
+subscription CampaignByOrganizationId($orgId: String!) {
+    campaign(where: {organization_id: {_eq: $orgId}}, order_by: { expiry: asc}) {
+        id
+        target
+        state
+        expiry
+        campaign_metadata {
+            title
+            name
+            header
+            logo
+        }
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count
+            }
+        }
+        organization {
+            organization_metadata {
+                name
+                logo
+            }
+        }
+    }
+}
+
+
+
 
 
 
