@@ -12,6 +12,8 @@
     "ui": {
       "connect_wallet": "Connect wallet",
       "submit": "Submit",
+      "create": "Create",
+      "clear": "Clear",
       "transaction": {
         "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
         "get_token": "Get {{token}} here",
@@ -64,6 +66,10 @@
   },
   "page": {
     "organisations": {
+      "no_organisations": "No organisation found",
+      "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
+      "search_place_holder": "Search Organizations",
+      "load_more": "Load More Organisations",
       "sort_options": {
         "mem_hi_lo": "Member: High-Low",
         "mem_lo_hi": "Member: Low-High",
@@ -137,5 +143,9 @@
     },
     "error": {
     }
+  },
+  "label": {
+    "sort_by": "Sort By",
+    "filters": "Filters"
   }
 }
