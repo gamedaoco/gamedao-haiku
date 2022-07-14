@@ -101,8 +101,8 @@ subscription CampaignByOrganizationId($orgId: String!) {
 
 
 
-subscription CampaignsPagination($limit: Int, $searchQuery: String="%") {
-    campaign(limit: $limit, where: {campaign_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}, {title: {_ilike: $searchQuery}}]}}) {
+subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!] ) {
+    campaign(limit: $limit, where: {_or: $filters}) {
         target
         state
         campaign_metadata {
@@ -127,8 +127,10 @@ subscription CampaignsPagination($limit: Int, $searchQuery: String="%") {
     }
 }
 
-subscription CampaignsPaginationCount($searchQuery: String="%") {
-    campaign_aggregate(where: {campaign_metadata: {name: {_ilike: $searchQuery}}}) {
+
+
+subscription CampaignsPaginationCount($filters: [campaign_bool_exp!]) {
+    campaign_aggregate (where: {_or: $filters}) {
         aggregate {
             count
         }

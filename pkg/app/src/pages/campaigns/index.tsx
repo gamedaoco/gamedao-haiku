@@ -4,22 +4,60 @@ import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import { Campaign, useCampaignsPaginationCountSubscription, useCampaignsPaginationSubscription } from 'src/queries'
+import {
+	Campaign,
+	Campaign_Bool_Exp,
+	useCampaignsPaginationCountSubscription,
+	useCampaignsPaginationSubscription,
+} from 'src/queries'
 
-import { CreatedCampaignSection } from 'components/Account/modules/CampaignsSection/CreatedCampaignsSection/createdCampainsSection'
+import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
+import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { Layout } from 'components/Layouts/default/layout'
+import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
 
+interface FiltersInterface {
+	query: string
+	sortOption: any
+	filters: any
+}
 export function Campaigns() {
 	const [limit, setLimit] = useState(15)
-	const [filters, setFilters] = useState('')
+	const [filters, setFilters] = useState<FiltersInterface>({
+		query: '',
+		sortOption: '',
+		filters: {},
+	})
+
+	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
+		() => [
+			{
+				campaign_metadata: {
+					_or: [
+						{
+							name: {
+								_ilike: `%${filters.query ?? ''}%`,
+							},
+						},
+						{
+							title: {
+								_ilike: `%${filters.query ?? ''}%`,
+							},
+						},
+					],
+				},
+			},
+		],
+		[filters.query],
+	)
 	const { data, loading } = useCampaignsPaginationSubscription({
 		variables: {
 			limit,
-			searchQuery: filters,
+			filters: queryFilters,
 		},
 	})
 	const campaignsCount = useCampaignsPaginationCountSubscription({
-		variables: { searchQuery: `%${filters ?? ''}%` },
+		variables: { filters: queryFilters },
 	})
 	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
 	const { t } = useTranslation()
@@ -49,16 +87,23 @@ export function Campaigns() {
 							</Grid>
 						</Grid>
 					</Box>
+					<FiltersSection
+						setFilters={setFilters}
+						sortOptions={[]}
+						searchPlaceHolder={'Search Campaigns'}
+						ListTab={OrganizationFiltersListTab}
+					/>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
 							<Typography fontWeight={700}>No campaigns found</Typography>
 							<Typography>
-								No results found for “{filters}”. Try checking for typos or using a different term.
+								No results found for “{filters.query}”. Try checking for typos or using a different
+								term.
 							</Typography>
 						</Box>
 					)}
 					<Box sx={{ mt: 2, mb: 4 }}>
-						<CreatedCampaignSection data={paginatedData} loading={loading} />
+						<CampaignsList data={paginatedData} loading={loading} isAdmin={false} title={false} />
 					</Box>
 				</Container>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
