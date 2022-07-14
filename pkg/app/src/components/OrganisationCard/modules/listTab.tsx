@@ -1,34 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import ClearIcon from '@mui/icons-material/Clear'
-import ClearAllIcon from '@mui/icons-material/ClearAll'
-import FilterListIcon from '@mui/icons-material/FilterList'
+import { Clear, ClearAll } from '@mui/icons-material'
 import {
+	Box,
 	Button,
 	Checkbox,
 	Divider,
-	Drawer,
 	FormControl,
 	FormControlLabel,
 	FormGroup,
 	IconButton,
 	Radio,
 	RadioGroup,
+	Typography,
 } from '@mui/material'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
 
-export function FiltersTab() {
-	const [openDrawer, setOpenDrawer] = useState(false)
-	const handleDrawerNavigation = () => setOpenDrawer((prevState) => !prevState)
-	const ListTab = () => (
+interface ComponentProps {
+	handleDrawerNavigation: () => void
+}
+export function OrganizationFiltersListTab({ handleDrawerNavigation }: ComponentProps) {
+	const { t } = useTranslation()
+	return (
 		<Box sx={{ width: 280 }} role="presentation">
 			<Box sx={{ my: 2, px: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 				<Typography fontWeight="700" variant={'body1'}>
-					Filters
+					{t('label:filters')}
 				</Typography>
 				<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit">
-					<ClearIcon fontSize={'small'} />
+					<Clear fontSize={'small'} />
 				</IconButton>
 			</Box>
 			<Divider />
@@ -71,30 +71,11 @@ export function FiltersTab() {
 				sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', py: 3 }}
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60%' }}>
-					<Button variant="outlined" fullWidth startIcon={<ClearAllIcon />}>
-						Clear
+					<Button variant="outlined" fullWidth startIcon={<ClearAll />}>
+						{t('button:ui:clear')}
 					</Button>
 				</Box>
 			</Box>
-		</Box>
-	)
-	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'space-around',
-				alignItems: 'center',
-			}}
-		>
-			<Drawer anchor={'right'} open={openDrawer} onClose={() => setOpenDrawer(false)}>
-				<ListTab />
-			</Drawer>
-			<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
-				Filters
-			</Typography>
-			<IconButton aria-label="filters" onClick={handleDrawerNavigation} color="inherit" sx={{ ml: 1 }}>
-				<FilterListIcon fontSize={'small'} />
-			</IconButton>
 		</Box>
 	)
 }
