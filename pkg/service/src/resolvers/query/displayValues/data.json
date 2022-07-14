@@ -267,12 +267,12 @@
     {
       "key": "alphabetical_asc",
       "text": "page:campaigns:sort_options:alphabetical_asc",
-      "value": "{ 'campaign_metadata': { 'name': 'asc' } }"
+      "value": "{ 'campaign_metadata': { 'title': 'asc' } }"
     },
     {
       "key": "alphabetical_desc",
       "text": "page:campaigns:sort_options:alphabetical_desc",
-      "value": "{ 'campaign_metadata': { 'name': 'desc' } }"
+      "value": "{ 'campaign_metadata': { 'title': 'desc' } }"
     },
     {
       "key": "time_left_asc",
