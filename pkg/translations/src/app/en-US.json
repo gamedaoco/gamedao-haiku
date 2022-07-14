@@ -67,8 +67,7 @@
   "page": {
     "organisations": {
       "no_organisations": "No organisation found",
-      "no_result": "No results found for",
-      "try_checking": "Try checking for typos or using a different term.",
+      "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
       "search_place_holder": "Search Organizations",
       "load_more": "Load More Organisations",
       "sort_options": {

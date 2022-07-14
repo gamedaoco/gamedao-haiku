@@ -101,10 +101,7 @@ export function OrganisationPage() {
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
 							<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
-							<Typography>
-								{t('page:organisations:no_result')} “{filters?.query}”.
-								{t('page:organisations:try_checking')}
-							</Typography>
+							<Typography>{t('page:organisations:no_result', { query: filters?.query })}</Typography>
 						</Box>
 					)}
 					<ItemList items={paginatedData} loading={loading} />
