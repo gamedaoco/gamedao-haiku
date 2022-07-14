@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AddIcon from '@mui/icons-material/Add'
+import { Add } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
@@ -16,7 +16,7 @@ export function PlusIcon() {
 				backgroundColor: theme.palette.grey[900],
 			}}
 		>
-			<AddIcon sx={{ color: theme.palette.grey[600] }} />
+			<Add sx={{ color: theme.palette.grey[600] }} />
 		</Box>
 	)
 }
