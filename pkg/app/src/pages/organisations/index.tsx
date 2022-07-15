@@ -90,7 +90,7 @@ export function OrganisationPage() {
 						</Grid>
 						<FiltersSection
 							setFilters={setFilters}
-							sortOptions={data?.displayValues?.sortOptions?.concat([])}
+							sortOptions={data?.displayValues?.organizationSortOptions?.concat([])}
 							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
 							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
 							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}

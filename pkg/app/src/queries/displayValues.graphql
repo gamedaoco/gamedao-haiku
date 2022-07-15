@@ -56,7 +56,12 @@ query DisplayValues {
             text
             flag
         }
-        sortOptions {
+        organizationSortOptions {
+            key
+            value
+            text
+        }
+        campaignSortOptions {
             key
             value
             text
