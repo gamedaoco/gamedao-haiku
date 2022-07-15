@@ -10,8 +10,6 @@ import {
 	FormControlLabel,
 	FormGroup,
 	IconButton,
-	Radio,
-	RadioGroup,
 	Typography,
 } from '@mui/material'
 import { useNetworkContext } from 'provider/network/modules/context'
@@ -24,14 +22,14 @@ interface ComponentProps {
 	setFilters: () => void
 }
 
-interface FundingTargetInterface {
+interface FiltersInterface {
 	text: string
 	value: Campaign_Bool_Exp
 }
 export function CampaignFiltersTab({ handleDrawerNavigation, setFilters }: ComponentProps) {
 	const { selectedApiProvider } = useNetworkContext()
 
-	const fundingTargets = useMemo<FundingTargetInterface[]>(
+	const fundingTargets = useMemo<FiltersInterface[]>(
 		() => [
 			{
 				text: '< 1,000 $',
@@ -143,7 +141,75 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters }: Compo
 		],
 		[selectedApiProvider.systemProperties.networkCurrency, selectedApiProvider.systemProperties.tokenDecimals],
 	)
-
+	const campaignStatuses = useMemo<FiltersInterface[]>(
+		() => [
+			{
+				text: 'Success',
+				value: {
+					state: {
+						_eq: 'Success',
+					},
+				},
+			},
+			{
+				text: 'Failed',
+				value: {
+					state: {
+						_eq: 'Failed',
+					},
+				},
+			},
+			{
+				text: 'Locked',
+				value: {
+					state: {
+						_eq: 'Locked',
+					},
+				},
+			},
+			{
+				text: 'Reverting',
+				value: {
+					state: {
+						_eq: 'Reverting',
+					},
+				},
+			},
+			{
+				text: 'Init',
+				value: {
+					state: {
+						_eq: 'Init',
+					},
+				},
+			},
+			{
+				text: 'Active',
+				value: {
+					state: {
+						_eq: 'Active',
+					},
+				},
+			},
+			{
+				text: 'Paused',
+				value: {
+					state: {
+						_eq: 'Paused',
+					},
+				},
+			},
+			{
+				text: 'Finalizing',
+				value: {
+					state: {
+						_eq: 'Finalizing',
+					},
+				},
+			},
+		],
+		[],
+	)
 	const { t } = useTranslation()
 	return (
 		<Box sx={{ width: 280 }} role="presentation">
@@ -176,15 +242,11 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters }: Compo
 				</Typography>
 				<Box sx={{ px: 2 }}>
 					<FormControl>
-						<RadioGroup
-							aria-labelledby="demo-radio-buttons-group-label"
-							defaultValue="female"
-							name="radio-buttons-group"
-						>
-							<FormControlLabel value="female" control={<Radio />} label="Option 1" />
-							<FormControlLabel value="male" control={<Radio />} label="Option 2" />
-							<FormControlLabel value="other" control={<Radio />} label="Option 3" />
-						</RadioGroup>
+						<FormGroup>
+							{campaignStatuses.map((x, index) => (
+								<FormControlLabel key={index} control={<Checkbox />} label={x.text} />
+							))}
+						</FormGroup>
 					</FormControl>
 				</Box>
 			</Box>
