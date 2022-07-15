@@ -1,3 +1,4 @@
+import { formatBalance } from '@polkadot/util'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
 
@@ -10,4 +11,8 @@ export function toUnit(balance: string, decimals: number | string): number {
 export function fromUnit(balance: number, decimals: string): string {
 	const base = new BN(10).pow(new BN(decimals))
 	return new BN(balance).mul(base).toString()
+}
+
+export function toUnitSi(balance: string, decimals: number | string): string {
+	return formatBalance(balance, { withSi: true }, typeof decimals === 'string' ? parseInt(decimals) : decimals)
 }

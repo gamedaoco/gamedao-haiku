@@ -138,11 +138,11 @@ const GRADIENTS = {
 }
 
 const CHART_COLORS = {
-	violet: ['#826AF9', '#9E86FF', '#D0AEFF', '#F7D2FF'],
-	blue: ['#2D99FF', '#83CFFF', '#A5F3FF', '#CCFAFF'],
-	green: ['#2CD9C5', '#60F1C8', '#A4F7CC', '#C0F2DC'],
-	yellow: ['#FFE700', '#FFEF5A', '#FFF7AE', '#FFF3D6'],
-	red: ['#FF6C40', '#FF8F6D', '#FFBD98', '#FFF2D4'],
+	violet: ['#F7D2FF', '#D0AEFF', '#9E86FF', '#826AF9'],
+	blue: ['#CCFAFF', '#A5F3FF', '#83CFFF', '#2D99FF'],
+	green: ['#C0F2DC', '#A4F7CC', '#60F1C8', '#2CD9C5'],
+	yellow: ['#FFF3D6', '#FFF7AE', '#FFEF5A', '#FFE700'],
+	red: ['#FFF2D4', '#FFBD98', '#FF8F6D', '#FF6C40'],
 }
 
 const COMMON = {
