@@ -12,6 +12,9 @@ export default function Typography(theme: Theme) {
 				gutterBottom: {
 					marginBottom: theme.spacing(1),
 				},
+				subtitle1: {
+					color: theme.palette.common.white,
+				},
 				subtitle2: {
 					color: theme.palette.text.secondary,
 				},

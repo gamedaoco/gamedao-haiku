@@ -1,15 +1,20 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
-import { Button, Typography } from '@mui/material'
-import CreateCampaignPage from 'components/TabPanels/Campaign/create'
+import { Campaign, useCampaignByOrganizationIdSubscription } from 'src/queries'
+
+import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
+import { CreateCampaignPage } from 'components/TabPanels/Campaign/create'
 
 interface ComponentProps {
 	organizationId: string
-	isMember: boolean
 	isAdmin: boolean
 }
 
-export function CampaignOverview({ organizationId, isMember, isAdmin }: ComponentProps) {
+export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
+	const { data, loading } = useCampaignByOrganizationIdSubscription({
+		variables: { orgId: organizationId },
+	})
+	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
 	const [showCreatePage, setShowCreatePage] = useState<boolean>(false)
 
 	const onCreateCampaignClicked = useCallback(() => {
@@ -26,11 +31,13 @@ export function CampaignOverview({ organizationId, isMember, isAdmin }: Componen
 
 	return (
 		<>
-			{isAdmin && (
-				<Button variant="contained" onClick={onCreateCampaignClicked}>
-					Create Campaign
-				</Button>
-			)}
+			<CampaignsList
+				data={paginatedData}
+				loading={loading}
+				title={false}
+				isAdmin={isAdmin}
+				onCreateCampaignClicked={onCreateCampaignClicked}
+			/>
 		</>
 	)
 }

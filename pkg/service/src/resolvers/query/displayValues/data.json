@@ -211,7 +211,7 @@
       "value": 0
     }
   ],
-  "sortOptions": [
+  "organizationSortOptions": [
     {
       "text": "page:organisations:sort_options:mem_hi_lo",
       "key": "memberLimit_DESC",
@@ -231,6 +231,58 @@
       "text": "page:organisations:sort_options:created_old",
       "key": "createdAtBlock_ASC",
       "value": "{ created_at_block: 'asc' }"
+    }
+  ],
+  "campaignSortOptions": [
+    {
+      "key": "target_asc",
+      "text": "page:campaigns:sort_options:target_asc",
+      "value": "{ target: 'asc' }"
+    },
+    {
+      "key": "target_desc",
+      "text": "page:campaigns:sort_options:target_desc",
+      "value": "{ target: 'desc' }"
+    },
+    {
+      "key": "current_funding_asc",
+      "text": "page:campaigns:sort_options:current_funding_asc",
+      "value": "{'campaign_contributors_aggregate': {'count': 'asc'}}"
+    },
+    {
+      "key": "current_funding_desc",
+      "text": "page:campaigns:sort_options:current_funding_desc",
+      "value": "{'campaign_contributors_aggregate': {'count': 'desc'}}"
+    },
+    {
+      "key": "contributors_funding_asc",
+      "text": "page:campaigns:sort_options:contributors_funding_asc",
+      "value": "{'campaign_contributors_aggregate': {'sum': {'contributed': 'asc'}}}"
+    },
+    {
+      "key": "contributors_funding_desc",
+      "text": "page:campaigns:sort_options:contributors_funding_desc",
+      "value": "{'campaign_contributors_aggregate': {'sum': {'contributed': 'desc'}}}"
+    },
+    {
+      "key": "alphabetical_asc",
+      "text": "page:campaigns:sort_options:alphabetical_asc",
+      "value": "{ 'campaign_metadata': { 'name': 'asc' } }"
+    },
+    {
+      "key": "alphabetical_desc",
+      "text": "page:campaigns:sort_options:alphabetical_desc",
+      "value": "{ 'campaign_metadata': { 'name': 'desc' } }"
+    },
+    {
+      "key": "time_left_asc",
+      "text": "page:campaigns:sort_options:time_left_asc",
+      "value": "{'expiry': 'asc'}"
+    },
+    {
+      "key": "time_left_desc",
+      "text": "page:campaigns:sort_options:time_left_desc",
+      "value": "{'expiry': 'desc'}"
     }
   ]
 }

@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Add, ArrowDownward } from '@mui/icons-material'
-import { Button, Container, Grid } from '@mui/material'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
+import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
+import { useTranslation } from 'react-i18next'
 import { Layout } from 'src/components/Layouts/default/layout'
 import {
 	Organization,
@@ -15,22 +15,33 @@ import {
 	useOrganizationsPaginationSubscription,
 } from 'src/queries'
 
+import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { ItemList } from 'components/OrganisationCard/itemList'
-import { FiltersSection } from 'components/OrganisationCard/modules/filtersSection'
+import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
 
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
+interface FiltersInterface {
+	query: string
+	sortOption: Organization_Order_By
+	filters: any
+}
 export function OrganisationPage() {
-	const [filters, setFilters] = useState('')
+	const { t } = useTranslation()
+	const enabledFeature = useOrganizationFeatures()
+	const [filters, setFilters] = useState<FiltersInterface>({
+		query: '',
+		sortOption: null,
+		filters: {},
+	})
 	const [bodyCount, setBodyCount] = useState<number>(15)
 	const { data } = useDisplayValuesQuery()
-	const [sortOption, setSortOption] = useState<Organization_Order_By>(null)
 	const organizationsCount = useOrganizationsPaginationCountSubscription({
-		variables: { searchQuery: `%${filters ?? ''}%` },
+		variables: { searchQuery: `%${filters.query ?? ''}%` },
 	})
 	const organizationsData = useOrganizationsPaginationSubscription({
-		variables: { first: bodyCount, orderBy: sortOption, searchQuery: `%${filters ?? ''}%` },
+		variables: { first: bodyCount, orderBy: filters.sortOption, searchQuery: `%${filters.query ?? ''}%` },
 	})
 	const loading = organizationsCount?.loading || organizationsData?.loading
 
@@ -73,22 +84,24 @@ export function OrganisationPage() {
 									variant="outlined"
 									onClick={handleClickCreate}
 								>
-									Create
+									{t('button:ui:create')}
 								</Button>
 							</Grid>
 						</Grid>
 						<FiltersSection
 							setFilters={setFilters}
-							setSortOption={setSortOption}
 							sortOptions={data?.displayValues?.sortOptions?.concat([])}
+							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
+							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
+							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
+							searchPlaceHolder={t('page:organisations:search_place_holder')}
+							ListTab={OrganizationFiltersListTab}
 						/>
 					</Box>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
-							<Typography fontWeight={700}>No organisation found</Typography>
-							<Typography>
-								No results found for “{filters}”. Try checking for typos or using a different term.
-							</Typography>
+							<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
+							<Typography>{t('page:organisations:no_result', { query: filters?.query })}</Typography>
 						</Box>
 					)}
 					<ItemList items={paginatedData} loading={loading} />
@@ -111,7 +124,7 @@ export function OrganisationPage() {
 									onClick={() => setBodyCount((p) => p + 30)}
 									variant="outlined"
 								>
-									Load More Organisations
+									{t('page:organisations:load_more')}
 								</Button>
 							)}
 							<Typography>

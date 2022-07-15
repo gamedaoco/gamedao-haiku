@@ -12,6 +12,8 @@
     "ui": {
       "connect_wallet": "Connect wallet",
       "submit": "Submit",
+      "create": "Create",
+      "clear": "Clear",
       "transaction": {
         "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
         "get_token": "Get {{token}} here",
@@ -64,6 +66,10 @@
   },
   "page": {
     "organisations": {
+      "no_organisations": "No organisation found",
+      "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
+      "search_place_holder": "Search Organizations",
+      "load_more": "Load More Organisations",
       "sort_options": {
         "mem_hi_lo": "Member: High-Low",
         "mem_lo_hi": "Member: Low-High",
@@ -76,6 +82,21 @@
       }
     },
     "campaigns": {
+      "created_campaigns": "Created Campaigns",
+      "new_campaign": "New Campaign",
+      "click": "Click here to create a new campaign",
+      "sort_options": {
+        "target_asc": "Funding Target: asc",
+        "target_desc": "Funding Target: desc",
+        "current_funding_asc": "Current Funding: asc",
+        "current_funding_desc": "Current Funding: desc",
+        "contributors_funding_asc": "Contributors: low-high",
+        "contributors_funding_desc": "Contributors: high-low",
+        "alphabetical_asc": "Alphabetical: asc",
+        "alphabetical_desc": "Alphabetical: desc",
+        "time_left_asc": "Time Left: asc",
+        "time_left_desc": "Time Left: desc"
+      }
     },
     "governance": {
     },
@@ -137,5 +158,9 @@
     },
     "error": {
     }
+  },
+  "label": {
+    "sort_by": "Sort By",
+    "filters": "Filters"
   }
 }
