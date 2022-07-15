@@ -1,5 +1,5 @@
 import type { Features } from '../../../@types/schema'
-import jsonData from './features.json'
+import jsonData from './features.json' assert { type: 'json' }
 
 interface ResolverArgs {
 	env: string
