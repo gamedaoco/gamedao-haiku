@@ -1,7 +1,7 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
 import { cryptoWaitReady } from '@polkadot/util-crypto'
 
-import ZeroTypes from '../chainTypes/zero-types.json'
+import ZeroTypes from '../chainTypes/zero-types.json' assert { type: 'json' }
 import { DbClient } from './dbClient'
 
 const dbClient = DbClient.Instance
