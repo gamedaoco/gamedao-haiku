@@ -30,6 +30,23 @@
       }
     }
   },
+  "label": {
+    "sort_by": "Sort By",
+    "filters": "Filters",
+    "by_organization": "By {{organizationName}}",
+    "backers": "Backers:",
+    "funded": "Funded:",
+    "campaign_status": {
+      "init": "Init",
+      "active": "Active",
+      "paused": "Paused",
+      "finalizing": "Finalizing",
+      "reverting": "Reverting",
+      "success": "Success",
+      "failed": "Failed",
+      "locked": "Locked"
+    }
+  },
   "transactions": {
     "createOrganization": {
       "title": "Create Organisation",
@@ -158,9 +175,5 @@
     },
     "error": {
     }
-  },
-  "label": {
-    "sort_by": "Sort By",
-    "filters": "Filters"
   }
 }
