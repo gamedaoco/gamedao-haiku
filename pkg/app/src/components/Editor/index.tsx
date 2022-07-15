@@ -1,13 +1,34 @@
 import { ReactNode } from 'react'
 
+import dynamic from 'next/dynamic'
+
 import { Box, BoxProps } from '@mui/material'
 import { styled } from '@mui/material/styles'
-// import ReactQuill, { Quill } from 'react-quill'
 import { ReactQuillProps } from 'react-quill/lib'
 
-// import EditorToolbar, { formats, redoChange, undoChange } from './EditorToolbar'
+import { EditorToolbar, formats } from './EditorToolbar'
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+	ssr: false,
+	loading: () => (
+		<Box
+			sx={{
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+				position: 'absolute',
+				bgcolor: 'background.paper',
+			}}
+		>
+			Loading...
+		</Box>
+	),
+})
 
 const RootStyle = styled(Box)(({ theme }) => ({
+	overflow: 'hidden',
+	position: 'relative',
 	borderRadius: theme.shape.borderRadius,
 	border: `solid 1px ${theme.palette.grey[500_32]}`,
 	'& .ql-container.ql-snow': {
@@ -30,37 +51,22 @@ const RootStyle = styled(Box)(({ theme }) => ({
 	},
 }))
 
-export interface ComponentProps extends ReactQuillProps {
-	id?: string
+export interface Props extends ReactQuillProps {
+	id: string
 	error?: boolean
 	simple?: boolean
 	helperText?: ReactNode
 	sx?: BoxProps
 }
-
-export function Editor({
-	id = 'minimal-quill',
-	error,
-	value,
-	onChange,
-	simple = false,
-	helperText,
-	sx,
-	...other
-}: ComponentProps) {
+export function Editor({ id, error, value, onChange, simple = false, helperText, sx, ...other }: Props) {
 	const modules = {
-		toolbar: {
-			container: `#${id}`,
-			// handlers: {
-			// 	undo: undoChange,
-			// 	redo: redoChange,
-			// },
-		},
+		toolbar: `#${id}`,
 		history: {
 			delay: 500,
 			maxStack: 100,
 			userOnly: true,
 		},
+		syntax: false,
 		clipboard: {
 			matchVisual: false,
 		},
@@ -76,16 +82,15 @@ export function Editor({
 					...sx,
 				}}
 			>
-				test
-				{/*<EditorToolbar id={id} isSimple={simple} />*/}
-				{/*<ReactQuill*/}
-				{/*	value={value}*/}
-				{/*	onChange={onChange}*/}
-				{/*	modules={modules}*/}
-				{/*	formats={formats}*/}
-				{/*	placeholder="Write something awesome..."*/}
-				{/*	{...other}*/}
-				{/*/>*/}
+				<EditorToolbar id={id} isSimple={simple} />
+				<ReactQuill
+					value={value}
+					onChange={onChange}
+					modules={modules}
+					formats={formats}
+					placeholder="Write something awesome..."
+					{...other}
+				/>
 			</RootStyle>
 
 			{helperText && helperText}

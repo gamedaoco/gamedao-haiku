@@ -1,8 +1,6 @@
 import { styled } from '@mui/material/styles'
 
-// ----------------------------------------------------------------------
-
-const EditorToolbarStyle = styled('div')(({ theme }) => {
+export const EditorToolbarStyle = styled('div')(({ theme }) => {
 	const isRTL = theme.direction === 'rtl'
 
 	return {
@@ -129,5 +127,3 @@ const EditorToolbarStyle = styled('div')(({ theme }) => {
 		},
 	}
 })
-
-export default EditorToolbarStyle

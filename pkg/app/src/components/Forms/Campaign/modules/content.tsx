@@ -34,6 +34,21 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 		uploadBannerImage(files[0])
 	}, [])
 
+	const handleChangedEditorValue = useCallback((value: string) => {
+		if (setContent) {
+			try {
+				validationContentSchema.validateSync(value)
+				setErrorState(null)
+			} catch (err) {
+				setErrorState(err.message)
+			}
+
+			setContent(value)
+		}
+
+		console.log(value)
+	}, [])
+
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
 			{/* Upload Banner */}
@@ -61,7 +76,12 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 			{/*	Editor */}
 			<Stack gap={3}>
 				<Typography variant="subtitle2">Content</Typography>
-				<Editor />
+				<Editor
+					id={'createCampaignEditor'}
+					value={content}
+					onChange={handleChangedEditorValue}
+					error={!!errorState}
+				/>
 			</Stack>
 		</Stack>
 	)
