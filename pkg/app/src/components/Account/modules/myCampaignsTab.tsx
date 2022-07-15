@@ -2,14 +2,16 @@ import React, { useMemo } from 'react'
 
 import { Box } from '@mui/material'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { Campaign, useCampaignContributorsSubscription } from 'src/queries'
-import { useCampaignSubscription } from 'src/queries'
+import { useTranslation } from 'react-i18next'
+import { Campaign, useCampaignContributorsSubscription, useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
+import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { ContributedCampaignsSection } from 'components/CampaignsSection/ContributedCampaignsSection/contributedCampaignsSection'
 
 export function MyCampaignsTab() {
+	const { t } = useTranslation()
+
 	const accountState = useCurrentAccountState()
 	const { data, loading } = useCampaignSubscription({
 		variables: { address: getAddressFromAccountState(accountState) },
@@ -23,7 +25,12 @@ export function MyCampaignsTab() {
 
 	return (
 		<Box>
-			<CampaignsList data={paginatedData} loading={loading} title={true} isAdmin={true} />
+			<CampaignsList
+				campaigns={paginatedData}
+				loading={loading}
+				title={t('page:campaigns:created_campaigns')}
+				showCreate={true}
+			/>
 			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
 	)

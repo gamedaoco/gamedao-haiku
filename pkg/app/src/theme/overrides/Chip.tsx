@@ -82,7 +82,19 @@ export default function Chip(theme: Theme) {
 				{
 					props: { variant: 'campaignStatus' },
 					style: {
-						borderRadius: Number(theme.shape.borderRadius) * 6,
+						borderRadius: `${Number(theme.shape.borderRadius) * 20}px 0px`,
+						...theme.typography.overline,
+						textTransform: 'uppercase',
+
+						'&.MuiChip-colorPrimary': {
+							backgroundColor: theme.palette.chart.green[3],
+							color: theme.palette.grey[800],
+						},
+
+						'&.MuiChip-colorSecondary': {
+							backgroundColor: theme.palette.chart.red[3],
+							color: theme.palette.common.white,
+						},
 					},
 				},
 			],

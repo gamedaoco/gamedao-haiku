@@ -31,6 +31,7 @@ subscription CampaignContributors($address: String!) {
             }
             expiry
             created_at_block
+            token_symbol
             state
             target
         }
@@ -72,6 +73,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
         target
         state
         expiry
+        token_symbol
         campaign_metadata {
             title
             name
@@ -83,7 +85,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
                 sum {
                     contributed
                 }
-                count
+                count(distinct: true)
             }
         }
         organization {
@@ -91,6 +93,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
                 name
                 logo
             }
+            pay_asset
         }
     }
 }
