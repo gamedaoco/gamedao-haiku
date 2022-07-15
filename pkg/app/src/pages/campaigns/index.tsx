@@ -4,6 +4,7 @@ import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
+import { CampaignFiltersInterface } from 'src/@types/campaign'
 import {
 	Campaign,
 	Campaign_Bool_Exp,
@@ -13,53 +14,52 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
+import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { CampaignFiltersTab } from 'components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
-import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { Layout } from 'components/Layouts/default/layout'
 
-interface CampaignFiltersInterface {
-	query: string
-	sortOption: Campaign_Order_By | string
-	filters: any
-}
 export function Campaigns() {
 	const { data: displayValuesData } = useDisplayValuesQuery()
 	const [limit, setLimit] = useState(15)
 	const [filters, setFilters] = useState<CampaignFiltersInterface>({
 		query: '',
 		sortOption: {},
-		filters: {},
+		filters: [],
 	})
 
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
-				_or: [
+				_and: [
 					{
-						campaign_metadata: {
-							_or: [
-								{
-									name: {
-										_ilike: `%${filters.query ?? ''}%`,
-									},
-								},
-								{
-									title: {
-										_ilike: `%${filters.query ?? ''}%`,
-									},
-								},
-							],
-						},
-					},
-					{
-						organization: {
-							organization_metadata: {
-								name: {
-									_ilike: `%${filters.query ?? ''}%`,
+						_or: [
+							{
+								campaign_metadata: {
+									_or: [
+										{
+											name: {
+												_ilike: `%${filters.query ?? ''}%`,
+											},
+										},
+										{
+											title: {
+												_ilike: `%${filters.query ?? ''}%`,
+											},
+										},
+									],
 								},
 							},
-						},
+							{
+								organization: {
+									organization_metadata: {
+										name: {
+											_ilike: `%${filters.query ?? ''}%`,
+										},
+									},
+								},
+							},
+						],
 					},
 				],
 			},
@@ -106,6 +106,7 @@ export function Campaigns() {
 					</Box>
 					<FiltersSection
 						setFilters={setFilters}
+						filters={filters}
 						sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
 						searchPlaceHolder={'Search Campaigns'}
 						ListTab={CampaignFiltersTab}
@@ -113,14 +114,16 @@ export function Campaigns() {
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
 							<Typography fontWeight={700}>No campaigns found</Typography>
-							<Typography>
-								No results found for “{filters.query}”. Try checking for typos or using a different
-								term.
-							</Typography>
+							{filters.query && (
+								<Typography>
+									No results found for “{filters.query}”. Try checking for typos or using a different
+									term.
+								</Typography>
+							)}
 						</Box>
 					)}
 					<Box sx={{ mt: 2, mb: 4 }}>
-						<CampaignsList data={paginatedData} loading={loading} isAdmin={false} title={false} />
+						<CampaignsList loading={loading} campaigns={paginatedData} />
 					</Box>
 				</Container>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

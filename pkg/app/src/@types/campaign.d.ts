@@ -1,4 +1,4 @@
-import { Campaign_Order_By } from 'src/queries'
+import { Campaign_Bool_Exp, Campaign_Order_By } from 'src/queries'
 
 export interface TmpCampaign {
 	name: string
@@ -14,4 +14,9 @@ export interface CampaignsSortOptions {
 	text: string
 	value: Campaign_Order_By | string
 	key: string
+}
+export interface CampaignFiltersInterface {
+	query: string
+	sortOption: Campaign_Order_By | string
+	filters: Campaign_Bool_Exp[]
 }

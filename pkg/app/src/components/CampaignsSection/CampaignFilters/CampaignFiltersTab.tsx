@@ -20,13 +20,14 @@ import { fromUnit } from 'src/utils/token'
 interface ComponentProps {
 	handleDrawerNavigation: () => void
 	setFilters: () => void
+	filters: Campaign_Bool_Exp[]
 }
 
 interface FiltersInterface {
 	text: string
 	value: Campaign_Bool_Exp
 }
-export function CampaignFiltersTab({ handleDrawerNavigation, setFilters }: ComponentProps) {
+export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters }: ComponentProps) {
 	const { selectedApiProvider } = useNetworkContext()
 
 	const fundingTargets = useMemo<FiltersInterface[]>(
