@@ -93,7 +93,10 @@ export function FiltersSection({
 									}}
 								>
 									<Drawer anchor={'right'} open={openDrawer} onClose={() => setOpenDrawer(false)}>
-										<ListTab handleDrawerNavigation={handleDrawerNavigation} />
+										<ListTab
+											handleDrawerNavigation={handleDrawerNavigation}
+											setFilters={setFilters}
+										/>
 									</Drawer>
 									<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
 										Filters

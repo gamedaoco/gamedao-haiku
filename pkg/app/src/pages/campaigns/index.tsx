@@ -13,12 +13,12 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
+import { CampaignFiltersTab } from 'components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
 import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { Layout } from 'components/Layouts/default/layout'
-import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
 
-interface FiltersInterface {
+interface CampaignFiltersInterface {
 	query: string
 	sortOption: Campaign_Order_By | string
 	filters: any
@@ -26,7 +26,7 @@ interface FiltersInterface {
 export function Campaigns() {
 	const { data: displayValuesData } = useDisplayValuesQuery()
 	const [limit, setLimit] = useState(15)
-	const [filters, setFilters] = useState<FiltersInterface>({
+	const [filters, setFilters] = useState<CampaignFiltersInterface>({
 		query: '',
 		sortOption: {},
 		filters: {},
@@ -108,7 +108,7 @@ export function Campaigns() {
 						setFilters={setFilters}
 						sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
 						searchPlaceHolder={'Search Campaigns'}
-						ListTab={OrganizationFiltersListTab}
+						ListTab={CampaignFiltersTab}
 					/>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>

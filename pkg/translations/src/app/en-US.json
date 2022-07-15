@@ -97,6 +97,10 @@
         "alphabetical_desc": "Alphabetical: desc",
         "time_left_asc": "Time Left: asc",
         "time_left_desc": "Time Left: desc"
+      },
+      "filters": {
+        "funding_target": "Funding Target",
+        "status": "Status"
       }
     },
     "governance": {
