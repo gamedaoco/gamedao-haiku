@@ -71,6 +71,7 @@
     "react-hook-form": "^7.32.2",
     "react-i18next": "^11.17.2",
     "react-icons": "^4.4.0",
+    "react-lazy-load-image-component": "^1.5.4",
     "react-toastify": "^9.0.5",
     "utf8": "^3.0.0",
     "yup": "^0.32.11"

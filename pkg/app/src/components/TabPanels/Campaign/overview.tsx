@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { Campaign, useCampaignByOrganizationIdSubscription } from 'src/queries'
 
-import { CampaignsList } from 'components/CampaignsSection/CampaignsList/campaignsList'
+import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { CreateCampaignPage } from 'components/TabPanels/Campaign/create'
 
 interface ComponentProps {
@@ -17,7 +17,7 @@ export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
 	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
 	const [showCreatePage, setShowCreatePage] = useState<boolean>(false)
 
-	const onCreateCampaignClicked = useCallback(() => {
+	const onCreateCallback = useCallback(() => {
 		setShowCreatePage(true)
 	}, [])
 
@@ -32,11 +32,10 @@ export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
 	return (
 		<>
 			<CampaignsList
-				data={paginatedData}
+				campaigns={paginatedData}
 				loading={loading}
-				title={false}
-				isAdmin={isAdmin}
-				onCreateCampaignClicked={onCreateCampaignClicked}
+				showCreate={isAdmin}
+				createCallback={onCreateCallback}
 			/>
 		</>
 	)
