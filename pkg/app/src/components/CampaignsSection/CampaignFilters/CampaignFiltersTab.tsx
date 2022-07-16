@@ -12,10 +12,8 @@ import {
 	IconButton,
 	Typography,
 } from '@mui/material'
-import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { Campaign_Bool_Exp } from 'src/queries'
-import { fromUnit } from 'src/utils/token'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
@@ -28,120 +26,6 @@ interface FiltersInterface {
 	value: Campaign_Bool_Exp
 }
 export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters }: ComponentProps) {
-	const { selectedApiProvider } = useNetworkContext()
-
-	const fundingTargets = useMemo<FiltersInterface[]>(
-		() => [
-			{
-				text: '< 1,000 $',
-				value: {
-					target: {
-						_lt: fromUnit(
-							1000,
-							selectedApiProvider.systemProperties.tokenDecimals[
-								selectedApiProvider.systemProperties.networkCurrency
-							],
-						),
-					},
-				},
-			},
-			{
-				text: '1,000 $ - 9,999 $',
-				value: {
-					_and: [
-						{
-							target: {
-								_gte: fromUnit(
-									1000,
-									selectedApiProvider.systemProperties.tokenDecimals[
-										selectedApiProvider.systemProperties.networkCurrency
-									],
-								),
-							},
-						},
-						{
-							target: {
-								_lte: fromUnit(
-									9999,
-									selectedApiProvider.systemProperties.tokenDecimals[
-										selectedApiProvider.systemProperties.networkCurrency
-									],
-								),
-							},
-						},
-					],
-				},
-			},
-			{
-				text: '10,000 $ - 99,999 $',
-				value: {
-					_and: [
-						{
-							target: {
-								_gte: fromUnit(
-									10000,
-									selectedApiProvider.systemProperties.tokenDecimals[
-										selectedApiProvider.systemProperties.networkCurrency
-									],
-								),
-							},
-						},
-						{
-							target: {
-								_lte: fromUnit(
-									99999,
-									selectedApiProvider.systemProperties.tokenDecimals[
-										selectedApiProvider.systemProperties.networkCurrency
-									],
-								),
-							},
-						},
-					],
-				},
-			},
-			{
-				text: '100,000 $ - 499,999 $',
-				value: {
-					_and: [
-						{
-							target: {
-								_gte: fromUnit(
-									100000,
-									selectedApiProvider.systemProperties.tokenDecimals[
-										selectedApiProvider.systemProperties.networkCurrency
-									],
-								),
-							},
-						},
-						{
-							target: {
-								_lte: fromUnit(
-									49999,
-									selectedApiProvider.systemProperties.tokenDecimals[
-										selectedApiProvider.systemProperties.networkCurrency
-									],
-								),
-							},
-						},
-					],
-				},
-			},
-			{
-				text: '> 500,000 $',
-				value: {
-					target: {
-						_gt: fromUnit(
-							500000,
-							selectedApiProvider.systemProperties.tokenDecimals[
-								selectedApiProvider.systemProperties.networkCurrency
-							],
-						),
-					},
-				},
-			},
-		],
-		[selectedApiProvider.systemProperties.networkCurrency, selectedApiProvider.systemProperties.tokenDecimals],
-	)
 	const campaignStatuses = useMemo<FiltersInterface[]>(
 		() => [
 			{
@@ -223,20 +107,6 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 				</IconButton>
 			</Box>
 			<Divider />
-			<Box sx={{ px: 4, mt: 2 }}>
-				<Typography fontWeight="700" variant={'body1'}>
-					{t('page:campaigns:filters:funding_target')}
-				</Typography>
-				<Box sx={{ px: 2 }}>
-					<FormControl>
-						<FormGroup>
-							{fundingTargets.map((x, index) => (
-								<FormControlLabel key={index} control={<Checkbox />} label={x.text} />
-							))}
-						</FormGroup>
-					</FormControl>
-				</Box>
-			</Box>
 			<Box sx={{ px: 4, mt: 2 }}>
 				<Typography fontWeight="700" variant={'body1'}>
 					{t('page:campaigns:filters:status')}
