@@ -61,5 +61,10 @@ query DisplayValues {
             value
             text
         }
+        campaignSortOptions {
+            key
+            value
+            text
+        }
     }
 }
