@@ -107,6 +107,7 @@ type DisplayValues {
     countries: [DisplayValueEntryCountry]
     organizationSortOptions: [DisplayValueEntryString]
     campaignSortOptions: [DisplayValueEntryString]
+    campaignFilters: [DisplayValueEntryString]
 }
 
 type File {

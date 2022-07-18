@@ -284,5 +284,47 @@
       "text": "page:campaigns:sort_options:time_left_desc",
       "value": "{'expiry': 'desc'}"
     }
+  ],
+  "campaignFilters": [
+    {
+      "key": "state_success",
+      "text": "Success",
+      "value": "{'state': {'_eq': 'Success'}}"
+    },
+    {
+      "key": "state_failed",
+      "text": "Failed",
+      "value": "{'state': {'_eq': 'Failed'}}"
+    },
+    {
+      "key": "state_locked",
+      "text": "Locked",
+      "value": "{'state': {'_eq': 'Locked'}}"
+    },
+    {
+      "key": "state_reverting",
+      "text": "Reverting",
+      "value": "{'state': {'_eq': 'Reverting'}}"
+    },
+    {
+      "key": "state_init",
+      "text": "Init",
+      "value": "{'state': {'_eq': 'Init'}}"
+    },
+    {
+      "key": "state_active",
+      "text": "Active",
+      "value": "{'state': {'_eq': 'Active'}}"
+    },
+    {
+      "key": "state_paused",
+      "text": "Paused",
+      "value": "{'state': {'_eq': 'Paused'}}"
+    },
+    {
+      "key": "state_finalizing",
+      "text": "Finalizing",
+      "value": "{'state': {'_eq': 'Finalizing'}}"
+    }
   ]
 }
