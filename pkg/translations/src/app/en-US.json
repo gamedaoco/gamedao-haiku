@@ -115,6 +115,16 @@
         "time_left_desc": "Time Left: desc"
       }
     },
+    "campaign_details": {
+      "time_left": "TIME LEFT",
+      "backers": "BACKERS",
+      "protocol": "PROTOCOL",
+      "category": "CATEGORY",
+      "raised": "RAISED",
+      "target": "TARGET",
+      "overview": "OVERVIEW",
+      "reasons_to_invest": "REASON TO INVEST"
+    },
     "governance": {
     },
     "dao": {
