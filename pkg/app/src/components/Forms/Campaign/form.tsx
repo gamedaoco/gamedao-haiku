@@ -158,7 +158,7 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					disabled={checkNextButtonState()}
 					sx={{ flexGrow: { xs: 1, sm: 0 } }}
 				>
-					{currentStep === 2 ? 'Save campaign' : 'Next step'}
+					{currentStep === 2 ? 'Publish now' : 'Next step'}
 				</Button>
 			</Stack>
 		</>

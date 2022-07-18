@@ -20,18 +20,19 @@ import { useTranslation } from 'react-i18next'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import * as Yup from 'yup'
 
-import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
 
 const validationTargetSchema = Yup.number()
+	.required()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
 
 const validationDepositSchema = Yup.number()
+	.required()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
 
-const validationEmailSchema = Yup.string().email()
+const validationEmailSchema = Yup.string().email().required()
 
 export const validationSchema = Yup.object().shape({
 	target: validationTargetSchema,
@@ -136,17 +137,13 @@ export function Settings({
 	const handleEmailChanged = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
-				validationEmailSchema?.validateSync(value)
 				if (setEmail) {
 					setEmail(value)
 				}
 			} catch (e) {}
 		},
-		[setEmail, validationEmailSchema, t],
+		[setEmail, t],
 	)
 
 	const handleCurrencyChanged = useCallback((event) => {
