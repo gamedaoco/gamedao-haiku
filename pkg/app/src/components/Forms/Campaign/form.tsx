@@ -1,9 +1,11 @@
 import { useCallback } from 'react'
 
 import { Button, Stack } from '@mui/material'
-
-import { Name, validationSchema as nameValidationSchema } from './modules/name'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
+import { uploadFileToIpfs } from 'src/utils/ipfs'
+
+import { Content, validationSchema as contentValidationSchema } from './modules/content'
+import { Name, validationSchema as nameValidationSchema } from './modules/name'
 
 interface ComponentProps {
 	currentStep: number
@@ -12,7 +14,7 @@ interface ComponentProps {
 }
 
 export function Form({ cancel, currentStep, setStep }: ComponentProps) {
-	const tmpOrgState = useTmpCampaignState()
+	const tmpCampaignState = useTmpCampaignState()
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
@@ -36,12 +38,29 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		}
 	}, [currentStep, setStep])
 
+	const handleUploadBannerImage = useCallback((file: File) => {
+		;(async (): Promise<string> => {
+			const bannerFile = new File([await file.arrayBuffer()], file.name)
+			const cid = await uploadFileToIpfs(bannerFile)
+			return cid.toString()
+		})().then((cid) => tmpCampaignState.setBannerCid(cid))
+	}, [])
+
+	const handleSetContent = useCallback((content: string) => {
+		tmpCampaignState.setContent(content)
+	}, [])
+
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
 				return !nameValidationSchema.isValidSync({
-					name: tmpOrgState.name,
-					description: tmpOrgState.description,
+					name: tmpCampaignState.name,
+					description: tmpCampaignState.description,
+				})
+			case 1:
+				return !contentValidationSchema.isValidSync({
+					banner: tmpCampaignState.bannerCid,
+					content: tmpCampaignState.content,
 				})
 		}
 		return false
@@ -59,10 +78,18 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		<>
 			{currentStep === 0 && (
 				<Name
-					name={tmpOrgState.name}
-					setName={tmpOrgState.setName}
-					description={tmpOrgState.description}
-					setDescription={tmpOrgState.setDescription}
+					name={tmpCampaignState.name}
+					setName={tmpCampaignState.setName}
+					description={tmpCampaignState.description}
+					setDescription={tmpCampaignState.setDescription}
+				/>
+			)}
+			{currentStep === 1 && (
+				<Content
+					bannerCid={tmpCampaignState.bannerCid}
+					content={tmpCampaignState.content}
+					uploadBannerImage={handleUploadBannerImage}
+					setContent={handleSetContent}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
