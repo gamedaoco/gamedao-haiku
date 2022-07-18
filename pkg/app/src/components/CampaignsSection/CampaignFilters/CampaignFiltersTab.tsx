@@ -40,7 +40,6 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 		},
 		[setFilters],
 	)
-	console.log(filters)
 	const checkIfSelected = useCallback<(x) => boolean>(
 		(x) => {
 			return filters.filter((e) => JSON.stringify(e) === JSON.stringify(x.value)).length > 0
