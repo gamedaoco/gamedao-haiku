@@ -49,6 +49,8 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
+			<Typography variant={'h6'}>Campaign Content</Typography>
+
 			{/* Upload Banner */}
 			<Stack gap={3}>
 				<Typography variant="subtitle2">Banner</Typography>

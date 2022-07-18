@@ -6,6 +6,7 @@ import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
+import { Settings, validationSchema as settingsValidationSchema } from './modules/settings'
 
 interface ComponentProps {
 	currentStep: number
@@ -50,6 +51,22 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		tmpCampaignState.setContent(content)
 	}, [])
 
+	const handleSetTargetAmount = useCallback((target: number) => {
+		tmpCampaignState.setTarget(target)
+	}, [])
+
+	const handleSetDepositAmount = useCallback((deposit: number) => {
+		tmpCampaignState.setDeposit(deposit)
+	}, [])
+
+	const handleSetEmail = useCallback((email: string) => {
+		tmpCampaignState.setEmail(email)
+	}, [])
+
+	const handeSetProtocol = useCallback((protocol: number) => {
+		tmpCampaignState.setProtocol(protocol)
+	}, [])
+
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
@@ -61,6 +78,12 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 				return !contentValidationSchema.isValidSync({
 					banner: tmpCampaignState.bannerCid,
 					content: tmpCampaignState.content,
+				})
+			case 2:
+				return !settingsValidationSchema.isValidSync({
+					target: tmpCampaignState.target,
+					deposit: tmpCampaignState.deposit,
+					email: tmpCampaignState.email,
 				})
 		}
 		return false
@@ -90,6 +113,19 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					content={tmpCampaignState.content}
 					uploadBannerImage={handleUploadBannerImage}
 					setContent={handleSetContent}
+				/>
+			)}
+
+			{currentStep === 2 && (
+				<Settings
+					targetAmount={tmpCampaignState.target}
+					setTargetAmount={handleSetTargetAmount}
+					depositAmount={tmpCampaignState.deposit}
+					setDepositAmount={handleSetDepositAmount}
+					email={tmpCampaignState.email}
+					setEmail={handleSetEmail}
+					flowProtocol={tmpCampaignState.protocol}
+					setFlowProtocol={handeSetProtocol}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
