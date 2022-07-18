@@ -25,13 +25,27 @@ export function Campaigns() {
 	const [filters, setFilters] = useState<CampaignFiltersInterface>({
 		query: '',
 		sortOption: {},
-		filters: [],
+		filters: [
+			{
+				state: {
+					_eq: 'Success',
+				},
+			},
+			{
+				state: {
+					_eq: 'Failed',
+				},
+			},
+		],
 	})
 
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
 				_and: [
+					{
+						_or: [...filters.filters],
+					},
 					{
 						_or: [
 							{
@@ -64,7 +78,7 @@ export function Campaigns() {
 				],
 			},
 		],
-		[filters.query],
+		[filters.filters, filters.query],
 	)
 	const { data, loading } = useCampaignsPaginationSubscription({
 		variables: {
