@@ -98,8 +98,34 @@ subscription CampaignByOrganizationId($orgId: String!) {
     }
 }
 
-
-
+subscription CampaignById($campaignId: String!) {
+    campaign(where: {id: {_eq: $campaignId}}) {
+        id
+        expiry
+        target
+        deposit
+        state
+        protocol
+        token_symbol
+        campaign_metadata {
+            description
+            header
+            name,
+            markdown
+        }
+        campaign_contributors_aggregate {
+            aggregate {
+                count
+                sum {
+                    contributed
+                }
+            }
+        }
+        organization {
+            controller
+        }
+    }
+}
 
 
 
