@@ -13,6 +13,7 @@
       "connect_wallet": "Connect wallet",
       "submit": "Submit",
       "create": "Create",
+      "load_more": "Load More",
       "clear": "Clear",
       "transaction": {
         "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
@@ -113,6 +114,10 @@
         "alphabetical_desc": "Alphabetical: desc",
         "time_left_asc": "Time Left: asc",
         "time_left_desc": "Time Left: desc"
+      },
+      "filters": {
+        "funding_target": "Funding Target",
+        "status": "Status"
       }
     },
     "campaign_details": {

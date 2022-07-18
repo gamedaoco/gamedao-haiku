@@ -1,3 +1,4 @@
+import { TMPCampaign } from 'src/@types/campaign'
 import type { TMPOrganisation } from 'src/@types/organisation'
 import { TMPProposal } from 'src/@types/proposal'
 import { Environment } from 'src/queries'
@@ -41,4 +42,11 @@ export const defaultValuesTMPProposal: TMPProposal = {
 	campaignId: '',
 	amount: 0,
 	metaDataCID: '',
+}
+
+export const defaultValuesTmpCampaign: TMPCampaign = {
+	name: '',
+	description: '',
+	bannerCid: '',
+	content: '',
 }
