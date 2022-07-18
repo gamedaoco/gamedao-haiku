@@ -4,7 +4,6 @@ import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import { Organization_Order_By } from 'src/queries'
 
 interface ComponentProps {
 	sortOptions: any
@@ -30,7 +29,7 @@ export function SortOptionsTab({ sortOptions, setFilters }: ComponentProps) {
 			setKeyState(event.target.value)
 			setFilters((prev) => ({
 				...prev,
-				sortOption: eval(`(${mappingState[event.target.value]?.value ?? 'null'})`) as Organization_Order_By,
+				sortOption: eval(`(${mappingState[event.target.value]?.value ?? 'null'})`),
 			}))
 		},
 		[setFilters, mappingState],
