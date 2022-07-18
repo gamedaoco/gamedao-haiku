@@ -22,7 +22,9 @@
         "transaction_fee": "Transaction Fee",
         "your_balance": "Your current balance",
         "description_toggle": "What is this used for?"
-      }
+      },
+      "create_campaign": "Create your first Campaign",
+      "explore_campaigns": "Explore Campaigns"
     },
     "form": {
       "next_step": "Next step",
@@ -85,6 +87,7 @@
   },
   "page": {
     "organisations": {
+      "no_campaigns": "No Campaigns Yet",
       "no_organisations": "No organisation found",
       "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
       "search_place_holder": "Search Organizations",
