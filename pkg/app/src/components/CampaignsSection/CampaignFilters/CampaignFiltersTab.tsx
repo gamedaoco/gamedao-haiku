@@ -13,7 +13,7 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Campaign_Bool_Exp } from 'src/queries'
+import { Campaign_Bool_Exp, useDisplayValuesQuery } from 'src/queries'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
@@ -21,79 +21,11 @@ interface ComponentProps {
 	filters: Campaign_Bool_Exp[]
 }
 
-interface FiltersInterface {
-	text: string
-	value: Campaign_Bool_Exp
-}
 export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters }: ComponentProps) {
-	const campaignStatuses = useMemo<FiltersInterface[]>(
-		() => [
-			{
-				text: 'Success',
-				value: {
-					state: {
-						_eq: 'Success',
-					},
-				},
-			},
-			{
-				text: 'Failed',
-				value: {
-					state: {
-						_eq: 'Failed',
-					},
-				},
-			},
-			{
-				text: 'Locked',
-				value: {
-					state: {
-						_eq: 'Locked',
-					},
-				},
-			},
-			{
-				text: 'Reverting',
-				value: {
-					state: {
-						_eq: 'Reverting',
-					},
-				},
-			},
-			{
-				text: 'Init',
-				value: {
-					state: {
-						_eq: 'Init',
-					},
-				},
-			},
-			{
-				text: 'Active',
-				value: {
-					state: {
-						_eq: 'Active',
-					},
-				},
-			},
-			{
-				text: 'Paused',
-				value: {
-					state: {
-						_eq: 'Paused',
-					},
-				},
-			},
-			{
-				text: 'Finalizing',
-				value: {
-					state: {
-						_eq: 'Finalizing',
-					},
-				},
-			},
-		],
-		[],
+	const { data } = useDisplayValuesQuery()
+	const campaignStatuses = useMemo(
+		() => data.displayValues.campaignFilters?.map((x) => ({ ...x, value: eval(`(${x?.value ?? 'null'})`) })),
+		[data],
 	)
 	const updateFilters = useCallback(
 		(e) => {
@@ -109,7 +41,7 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 		[setFilters],
 	)
 	console.log(filters)
-	const checkIfSelected = useCallback<(x: FiltersInterface) => boolean>(
+	const checkIfSelected = useCallback<(x) => boolean>(
 		(x) => {
 			return filters.filter((e) => JSON.stringify(e) === JSON.stringify(x.value)).length > 0
 		},
@@ -134,11 +66,11 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 				<Box sx={{ px: 2 }}>
 					<FormControl>
 						<FormGroup>
-							{campaignStatuses.map((x, index) => (
+							{campaignStatuses?.map((x, index) => (
 								<FormControlLabel
 									key={index}
 									checked={checkIfSelected(x)}
-									value={JSON.stringify(x.value)}
+									value={JSON.stringify(x?.value)}
 									control={<Checkbox />}
 									label={x.text}
 									onChange={updateFilters}

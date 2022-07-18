@@ -25,7 +25,7 @@ export function Campaigns() {
 	const [filters, setFilters] = useState<CampaignFiltersInterface>({
 		query: '',
 		sortOption: {},
-		filters: [{ state: { _eq: 'Success' } }],
+		filters: [],
 	})
 
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
