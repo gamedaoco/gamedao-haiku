@@ -10,11 +10,6 @@ export interface TmpCampaignState extends TmpCampaign {
 	setDescription: (string) => void
 	clearAll: () => void
 }
-export interface CampaignsSortOptions {
-	text: string
-	value: Campaign_Order_By | string
-	key: string
-}
 export interface CampaignFiltersInterface {
 	query: string
 	sortOption: Campaign_Order_By | string
