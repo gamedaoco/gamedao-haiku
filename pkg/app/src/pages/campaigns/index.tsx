@@ -25,27 +25,18 @@ export function Campaigns() {
 	const [filters, setFilters] = useState<CampaignFiltersInterface>({
 		query: '',
 		sortOption: {},
-		filters: [
-			{
-				state: {
-					_eq: 'Success',
-				},
-			},
-			{
-				state: {
-					_eq: 'Failed',
-				},
-			},
-		],
+		filters: [{ state: { _eq: 'Success' } }],
 	})
 
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
 				_and: [
-					{
-						_or: [...filters.filters],
-					},
+					filters.filters.length
+						? {
+								_or: [...filters.filters],
+						  }
+						: {},
 					{
 						_or: [
 							{
