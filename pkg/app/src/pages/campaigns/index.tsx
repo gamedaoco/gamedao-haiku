@@ -34,7 +34,7 @@ export function Campaigns() {
 				_and: [
 					filters.filters.length
 						? {
-								_or: [...filters.filters],
+								_or: [...filters.filters] as Campaign_Bool_Exp[],
 						  }
 						: {},
 					{

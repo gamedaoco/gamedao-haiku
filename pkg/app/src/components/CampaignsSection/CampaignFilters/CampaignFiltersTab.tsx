@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
 import { Clear, ClearAll } from '@mui/icons-material'
 import {
@@ -17,7 +17,7 @@ import { Campaign_Bool_Exp } from 'src/queries'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
-	setFilters: () => void
+	setFilters: (p: (prev) => any) => void
 	filters: Campaign_Bool_Exp[]
 }
 
@@ -95,6 +95,26 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 		],
 		[],
 	)
+	const updateFilters = useCallback(
+		(e) => {
+			if (e.target.checked) {
+				setFilters((prev) => ({ ...prev, filters: [...prev.filters, JSON.parse(e.target.value)] }))
+			} else {
+				setFilters((prev) => ({
+					...prev,
+					filters: prev.filters.filter((item) => JSON.stringify(item) !== e.target.value),
+				}))
+			}
+		},
+		[setFilters],
+	)
+	console.log(filters)
+	const checkIfSelected = useCallback<(x: FiltersInterface) => boolean>(
+		(x) => {
+			return filters.filter((e) => JSON.stringify(e) === JSON.stringify(x.value)).length > 0
+		},
+		[filters],
+	)
 	const { t } = useTranslation()
 	return (
 		<Box sx={{ width: 280 }} role="presentation">
@@ -115,7 +135,14 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 					<FormControl>
 						<FormGroup>
 							{campaignStatuses.map((x, index) => (
-								<FormControlLabel key={index} control={<Checkbox />} label={x.text} />
+								<FormControlLabel
+									key={index}
+									checked={checkIfSelected(x)}
+									value={JSON.stringify(x.value)}
+									control={<Checkbox />}
+									label={x.text}
+									onChange={updateFilters}
+								/>
 							))}
 						</FormGroup>
 					</FormControl>
@@ -128,7 +155,12 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 				sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', py: 3 }}
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '60%' }}>
-					<Button variant="outlined" fullWidth startIcon={<ClearAll />}>
+					<Button
+						variant="outlined"
+						fullWidth
+						startIcon={<ClearAll />}
+						onClick={() => setFilters((prev) => ({ ...prev, filters: [] }))}
+					>
 						{t('button:ui:clear')}
 					</Button>
 				</Box>

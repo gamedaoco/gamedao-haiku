@@ -18,5 +18,5 @@ export interface CampaignsSortOptions {
 export interface CampaignFiltersInterface {
 	query: string
 	sortOption: Campaign_Order_By | string
-	filters: Campaign_Bool_Exp[]
+	filters: Campaign_Bool_Exp[] | string[]
 }
