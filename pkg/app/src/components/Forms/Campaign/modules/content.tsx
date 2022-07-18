@@ -1,13 +1,11 @@
 import React, { useCallback, useState } from 'react'
 
 import { AddAPhoto } from '@mui/icons-material'
-import { CardMedia, Paper, Stack, Typography } from '@mui/material'
+import { CardMedia, Input, Paper, Stack, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import * as Yup from 'yup'
-
-import { Editor } from 'components/Editor'
 
 import { Dropzone } from '../../../Dropzone/dropzone'
 
@@ -34,8 +32,10 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 		uploadBannerImage(files[0])
 	}, [])
 
-	const handleChangedEditorValue = useCallback((value: string) => {
+	const handleContentChanged = useCallback((event) => {
 		if (setContent) {
+			const value = event.target.value
+
 			try {
 				validationContentSchema.validateSync(value)
 				setErrorState(null)
@@ -45,8 +45,6 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 
 			setContent(value)
 		}
-
-		console.log(value)
 	}, [])
 
 	return (
@@ -76,12 +74,8 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 			{/*	Editor */}
 			<Stack gap={3}>
 				<Typography variant="subtitle2">Content</Typography>
-				<Editor
-					id={'createCampaignEditor'}
-					value={content}
-					onChange={handleChangedEditorValue}
-					error={!!errorState}
-				/>
+				{/*	ToDo: Replace with real editor */}
+				<Input onChange={handleContentChanged} value={content} multiline={true} error={!!errorState} />
 			</Stack>
 		</Stack>
 	)

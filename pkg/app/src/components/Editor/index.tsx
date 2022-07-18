@@ -59,6 +59,9 @@ export interface Props extends ReactQuillProps {
 	sx?: BoxProps
 }
 export function Editor({ id, error, value, onChange, simple = false, helperText, sx, ...other }: Props) {
+	// ToDo: Fix editor
+	return null
+
 	const modules = {
 		toolbar: `#${id}`,
 		history: {
