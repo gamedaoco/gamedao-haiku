@@ -88,7 +88,7 @@ export function Campaigns() {
 		[paginatedData?.length, campaignsCount?.data],
 	)
 	return (
-		<Layout showHeader showFooter showSidebar title="Organisation">
+		<Layout showHeader showFooter showSidebar title="Campaigns">
 			<Box
 				component="main"
 				sx={{
