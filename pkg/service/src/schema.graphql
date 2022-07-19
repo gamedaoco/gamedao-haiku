@@ -104,6 +104,7 @@ type DisplayValues {
     protocolTypes: [DisplayValueEntryNumber]
     projectDurations: [DisplayValueEntryNumber]
     memberships: [DisplayValueEntryNumber]
+    campaignFundingCategories: [DisplayValueEntryNumber]
     countries: [DisplayValueEntryCountry]
     organizationSortOptions: [DisplayValueEntryString]
     campaignSortOptions: [DisplayValueEntryString]
