@@ -23,7 +23,10 @@ export function useTmpCampaignState(): TMPCampaignState {
 		`TmpCam${address}-usage-of-funds`,
 		defaultValues.usageOfFunds,
 	)
-	const [currency, setCurrency] = useLocalStorage<string>(`TmpCam${address}-currency`, defaultValues.currency)
+	const [currencyId, setCurrencyId] = useLocalStorage<number>(
+		`TmpCam${address}-currency-id`,
+		defaultValues.currencyId,
+	)
 	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
 	const [governance, setGovernance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
 	const [metadataCid, setMetadataCid] = useLocalStorage<string>(
@@ -42,7 +45,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setTarget(defaultValues.target)
 		setProtocol(defaultValues.protocol)
 		setUsageOfFunds(defaultValues.usageOfFunds)
-		setCurrency(defaultValues.currency)
+		setCurrencyId(defaultValues.currencyId)
 		setEndDate(defaultValues.endDate)
 		setGovernance(defaultValues.governance)
 		setMetadataCid(defaultValues.metadataCid)
@@ -56,7 +59,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setTarget,
 		setProtocol,
 		setUsageOfFunds,
-		setCurrency,
+		setCurrencyId,
 		setEndDate,
 		setGovernance,
 		setMetadataCid,
@@ -72,7 +75,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		target: target,
 		protocol: protocol,
 		usageOfFunds: usageOfFunds,
-		currency: currency,
+		currencyId: currencyId,
 		endDate: endDate,
 		governance: governance,
 		metadataCid: metadataCid,
@@ -85,7 +88,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setTarget: setTarget,
 		setProtocol: setProtocol,
 		setUsageOfFunds: setUsageOfFunds,
-		setCurrency: setCurrency,
+		setCurrencyId: setCurrencyId,
 		setEndDate: setEndDate,
 		setGovernance: setGovernance,
 		setMetadataCid: setMetadataCid,

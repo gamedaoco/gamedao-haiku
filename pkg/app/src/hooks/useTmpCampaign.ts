@@ -17,7 +17,7 @@ export function useTmpCampaign(): TMPCampaign {
 	const [target] = useLocalStorage<number>(`TmpCam${address}-target`, defaultValues.target)
 	const [protocol] = useLocalStorage<number>(`TmpCam${address}-protocol`, defaultValues.protocol)
 	const [usageOfFunds] = useLocalStorage<string>(`TmpCam${address}-usage-of-funds`, defaultValues.usageOfFunds)
-	const [currency] = useLocalStorage<string>(`TmpCam${address}-currency`, defaultValues.currency)
+	const [currencyId] = useLocalStorage<number>(`TmpCam${address}-currency-id`, defaultValues.currencyId)
 	const [endDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
 	const [governance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
 	const [metadataCid] = useLocalStorage<string>(`TmpCam${address}-metadata-cid`, defaultValues.metadataCid)
@@ -32,7 +32,7 @@ export function useTmpCampaign(): TMPCampaign {
 		target: target,
 		protocol: protocol,
 		usageOfFunds: usageOfFunds,
-		currency: currency,
+		currencyId: currencyId,
 		endDate: endDate,
 		governance: governance,
 		metadataCid: metadataCid,
@@ -49,7 +49,7 @@ export function useTmpCampaign(): TMPCampaign {
 			target: target,
 			protocol: protocol,
 			usageOfFunds: usageOfFunds,
-			currency: currency,
+			currencyId: currencyId,
 			endDate: endDate,
 			governance: governance,
 			metadataCid: metadataCid,
@@ -64,7 +64,7 @@ export function useTmpCampaign(): TMPCampaign {
 		target,
 		protocol,
 		usageOfFunds,
-		currency,
+		currencyId,
 		endDate,
 		governance,
 		metadataCid,

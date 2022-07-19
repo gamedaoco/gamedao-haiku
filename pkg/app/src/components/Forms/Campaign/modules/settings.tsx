@@ -21,6 +21,7 @@ import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransact
 import { useDisplayValues } from 'hooks/useDisplayValues'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import moment from 'moment'
+import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { useDisplayValuesQuery } from 'src/queries'
 import { createWarningNotification } from 'src/utils/notificationUtils'
@@ -57,8 +58,8 @@ interface ComponentProps {
 	setTargetAmount: (number) => void
 	depositAmount: number
 	setDepositAmount: (number) => void
-	currency: string
-	setCurrency: (currency) => void
+	currencyId: number
+	setCurrencyId: (currencyId) => void
 	usageOfFunds: string
 	setUsageOfFunds: (usageOfFunds) => void
 	endDate: Date
@@ -80,14 +81,14 @@ export function Settings({
 	usageOfFunds,
 	endDate,
 	setEndDate,
-	currency,
-	setCurrency,
+	currencyId,
+	setCurrencyId,
 	governance,
 	setGovernance,
 	termsConditionAccepted,
 	setTermsConditionAccepted,
 }: ComponentProps) {
-	const { paymentCurrencies, tokenDecimals, tokenSymbol } = useSystemProperties()
+	const { selectedApiProvider } = useNetworkContext()
 	const displayValues = useDisplayValues()
 	const { t } = useTranslation()
 	const [currencies, setCurrencies] = useState([])
@@ -133,12 +134,12 @@ export function Settings({
 		(event) => {
 			const value = event.target.value
 			try {
-				if (setCurrency) {
-					setCurrency(value)
+				if (setCurrencyId) {
+					setCurrencyId(value)
 				}
 			} catch (e) {}
 		},
-		[setCurrency, t],
+		[setCurrencyId, t],
 	)
 
 	const handleUsageOfFundsChanged = useCallback(
@@ -157,7 +158,6 @@ export function Settings({
 		(event) => {
 			const value = event.target.checked
 			try {
-				console.log(value)
 				if (setGovernance) {
 					setGovernance(value)
 				}
@@ -179,16 +179,20 @@ export function Settings({
 	)
 
 	useEffect(() => {
+		if (!selectedApiProvider || !selectedApiProvider.systemProperties) return
+
+		const { paymentCurrencies, tokenSymbol } = selectedApiProvider.systemProperties
+		const currencies = paymentCurrencies instanceof Array ? paymentCurrencies : [paymentCurrencies]
 		setCurrencies(
-			[paymentCurrencies].map((currencyIndex) => {
+			currencies.map((currencyIndex) => {
 				return {
 					key: tokenSymbol[currencyIndex],
 					text: tokenSymbol[currencyIndex],
-					value: tokenSymbol[currencyIndex],
+					value: currencyIndex,
 				}
 			}),
 		)
-	}, [paymentCurrencies, tokenDecimals, tokenSymbol])
+	}, [selectedApiProvider])
 
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
@@ -222,16 +226,27 @@ export function Settings({
 						value={targetAmount}
 						label="Funding target*"
 						InputProps={{
-							endAdornment: <Typography variant="body2">GAME</Typography>,
+							endAdornment: (
+								<Typography variant="body2">
+									{currencyId
+										? selectedApiProvider?.systemProperties?.tokenSymbol[currencyId] ?? ''
+										: ''}
+								</Typography>
+							),
 						}}
 						variant="outlined"
 						sx={{ flex: 1 }}
 					/>
 					<FormControl sx={{ flex: 1 }}>
 						<InputLabel id="currency">Currency*</InputLabel>
-						<Select value={currency} onChange={handleCurrencyChanged} labelId="currency" label="Currency*">
+						<Select
+							value={currencyId}
+							onChange={handleCurrencyChanged}
+							labelId="currency"
+							label="Currency*"
+						>
 							{currencies.map((x) => (
-								<MenuItem value={x.key} key={x.key}>
+								<MenuItem value={x.value} key={x.key}>
 									{t(x.text)}
 								</MenuItem>
 							))}
@@ -248,7 +263,7 @@ export function Settings({
 							label="Usage of funds*"
 						>
 							{displayValues?.campaignFundingCategories?.map((x) => (
-								<MenuItem value={x.key} key={x.key}>
+								<MenuItem value={x.value} key={x.key}>
 									{t(x.text)}
 								</MenuItem>
 							))}

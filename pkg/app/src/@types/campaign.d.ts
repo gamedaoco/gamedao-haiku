@@ -10,7 +10,7 @@ export interface TMPCampaign {
 	deposit: number
 	protocol: number
 	usageOfFunds: string
-	currency: string
+	currencyId: number
 	endDate: Date
 	governance: number
 	metadataCid: string
@@ -26,7 +26,7 @@ export interface TMPCampaignState extends TMPCampaign {
 	setDeposit: (number) => void
 	setProtocol: (number) => void
 	setUsageOfFunds: (string) => void
-	setCurrency: (string) => void
+	setCurrencyId: (number) => void
 	setEndDate: (date) => void
 	setGovernance: (number) => void
 	setMetadataCid: (string) => void

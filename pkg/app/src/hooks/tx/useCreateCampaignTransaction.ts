@@ -32,7 +32,6 @@ const validation = Yup.object().shape({
 })
 
 export function useCreateCampaignTransaction(): TransactionData {
-	const { tokenSymbol } = useSystemProperties()
 	const [txState, setTxState] = useState<TransactionData>(null)
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
@@ -48,28 +47,27 @@ export function useCreateCampaignTransaction(): TransactionData {
 				const endSecondsDiff = moment(data.endDate).diff(moment(), 'seconds')
 				const endBlock = blockNumber + Math.ceil(endSecondsDiff / blockTime)
 
+				const currencySymbol = selectedApiProvider.systemProperties.tokenSymbol?.[data.currencyId] ?? ''
 				const mappedData = {
 					orgId: data.orgId,
 					adminId: address,
 					name: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 					target: fromUnit(
 						data.target,
-						selectedApiProvider.systemProperties.tokenDecimals[
-							selectedApiProvider.systemProperties.networkCurrency
-						],
+						selectedApiProvider.systemProperties.tokenDecimals?.[data.currencyId] ?? 18,
 					),
 					deposit: fromUnit(
 						data.deposit,
 						selectedApiProvider.systemProperties.tokenDecimals[
-							selectedApiProvider.systemProperties.networkCurrency
+							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
 					expiry: endBlock,
 					protocol: data.protocol,
 					governance: data.governance ? 1 : 0,
 					cid: data.metadataCid,
-					tokenSymbol: data.currency,
-					tokenName: data.currency,
+					tokenSymbol: currencySymbol,
+					tokenName: currencySymbol,
 				}
 
 				// Data validation
@@ -91,7 +89,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 
 				setTxState({
 					tx,
-					currencyId: (tokenSymbol as any as string[]).indexOf(data.currency),
+					currencyId: selectedApiProvider.systemProperties.governanceCurrency,
 					deposit: mappedData.deposit,
 					title: t('transactions:createCampaign:title'),
 					description: t('transactions:createCampaign:description'),

@@ -104,8 +104,8 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		tmpCampaignState.setUsageOfFunds(usageOfFunds)
 	}, [])
 
-	const handleSetCurrency = useCallback((currency: string) => {
-		tmpCampaignState.setCurrency(currency)
+	const handleSetCurrencyId = useCallback((currencyId: number) => {
+		tmpCampaignState.setCurrencyId(currencyId)
 	}, [])
 
 	const handeSetEndDate = useCallback((endDate: Date) => {
@@ -142,6 +142,16 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 	const handleCloseTxModal = useCallback(() => {
 		setTxModalState(false)
 	}, [setTxModalState])
+
+	const handleTxCallback = useCallback(
+		(state) => {
+			if (state) {
+				tmpCampaignState.clearAll()
+				cancel()
+			}
+		},
+		[setTxModalState],
+	)
 
 	const checkBackButtonState = () => {
 		return currentStep == 0
@@ -180,8 +190,8 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 					setFlowProtocol={handeSetProtocol}
 					usageOfFunds={tmpCampaignState.usageOfFunds}
 					setUsageOfFunds={handeSetUsageOfFunds}
-					currency={tmpCampaignState.currency}
-					setCurrency={handleSetCurrency}
+					currencyId={tmpCampaignState.currencyId}
+					setCurrencyId={handleSetCurrencyId}
 					endDate={tmpCampaignState.endDate}
 					setEndDate={handeSetEndDate}
 					governance={tmpCampaignState.governance}
@@ -228,7 +238,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 				open={txModalState}
 				onClose={handleCloseTxModal}
 				txData={createCampaignTx}
-				txCallback={handleCloseTxModal}
+				txCallback={handleTxCallback}
 			/>
 		</>
 	)
