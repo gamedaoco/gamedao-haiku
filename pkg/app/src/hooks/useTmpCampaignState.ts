@@ -24,6 +24,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 	)
 	const [currency, setCurrency] = useLocalStorage<string>(`TmpCam${address}-currency`, defaultValues.currency)
 	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
+	const [governance, setGovernance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
 
 	// Clear state
 	const clearAll = useCallback(() => {
@@ -37,6 +38,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setUsageOfFunds(defaultValues.usageOfFunds)
 		setCurrency(defaultValues.currency)
 		setEndDate(defaultValues.endDate)
+		setGovernance(defaultValues.governance)
 	}, [
 		setNameState,
 		setDescription,
@@ -48,6 +50,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setUsageOfFunds,
 		setCurrency,
 		setEndDate,
+		setGovernance,
 	])
 
 	return {
@@ -61,6 +64,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		usageOfFunds: usageOfFunds,
 		currency: currency,
 		endDate: endDate,
+		governance: governance,
 		setName: setNameState,
 		setDescription: setDescription,
 		setBannerCid: setBannerCid,
@@ -71,6 +75,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setUsageOfFunds: setUsageOfFunds,
 		setCurrency: setCurrency,
 		setEndDate: setEndDate,
+		setGovernance: setGovernance,
 		clearAll: clearAll,
 	}
 }

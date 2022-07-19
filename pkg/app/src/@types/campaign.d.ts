@@ -11,6 +11,7 @@ export interface TMPCampaign {
 	usageOfFunds: string
 	currency: string
 	endDate: Date
+	governance: number
 }
 
 export interface TMPCampaignState extends TMPCampaign {
@@ -24,6 +25,7 @@ export interface TMPCampaignState extends TMPCampaign {
 	setUsageOfFunds: (string) => void
 	setCurrency: (string) => void
 	setEndDate: (date) => void
+	setGovernance: (number) => void
 	clearAll: () => void
 }
 export interface CampaignFiltersInterface {

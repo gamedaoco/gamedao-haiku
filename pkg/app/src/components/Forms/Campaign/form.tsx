@@ -75,6 +75,10 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		tmpCampaignState.setEndDate(endDate)
 	}, [])
 
+	const handeSetGovernance = useCallback((governance: number) => {
+		tmpCampaignState.setGovernance(governance)
+	}, [])
+
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
@@ -137,6 +141,8 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					setCurrency={handleSetCurrency}
 					endDate={tmpCampaignState.endDate}
 					setEndDate={handeSetEndDate}
+					governance={tmpCampaignState.governance}
+					setGovernance={handeSetGovernance}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">

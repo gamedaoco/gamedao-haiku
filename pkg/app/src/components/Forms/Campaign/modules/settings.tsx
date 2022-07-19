@@ -1,7 +1,18 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { InfoRounded } from '@mui/icons-material'
-import { FormControl, InputLabel, MenuItem, Paper, Select, Stack, TextField, Typography } from '@mui/material'
+import {
+	Checkbox,
+	FormControl,
+	FormControlLabel,
+	InputLabel,
+	MenuItem,
+	Paper,
+	Select,
+	Stack,
+	TextField,
+	Typography,
+} from '@mui/material'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -48,14 +59,9 @@ interface ComponentProps {
 	setUsageOfFunds: (usageOfFunds) => void
 	endDate: Date
 	setEndDate: (endDate) => void
+	governance: number
+	setGovernance: (governance) => void
 }
-
-const currencies = [
-	{
-		key: 'GAME',
-		text: 'GAME',
-	},
-]
 
 const USAGE_OF_FUNDS = [
 	{
@@ -97,10 +103,12 @@ export function Settings({
 	setEndDate,
 	currency,
 	setCurrency,
+	governance,
+	setGovernance,
 }: ComponentProps) {
-	const systemProperties = useSystemProperties()
+	const { paymentCurrencies, tokenDecimals, tokenSymbol } = useSystemProperties()
 	const { t } = useTranslation()
-	console.log(systemProperties)
+	const [currencies, setCurrencies] = useState([])
 
 	const handleTargetAmountChange = useCallback(
 		(event) => {
@@ -149,6 +157,7 @@ export function Settings({
 		},
 		[setCurrency, t],
 	)
+
 	const handleUsageOfFundsChanged = useCallback(
 		(event) => {
 			const value = event.target.value
@@ -160,6 +169,31 @@ export function Settings({
 		},
 		[setUsageOfFunds, t],
 	)
+
+	const handleGovernanceChecked = useCallback(
+		(event) => {
+			const value = event.target.checked
+			try {
+				console.log(value)
+				if (setGovernance) {
+					setGovernance(value)
+				}
+			} catch (e) {}
+		},
+		[setGovernance, t],
+	)
+
+	useEffect(() => {
+		setCurrencies(
+			[paymentCurrencies].map((currencyIndex) => {
+				return {
+					key: tokenSymbol[currencyIndex],
+					text: tokenSymbol[currencyIndex],
+					value: currencyIndex,
+				}
+			}),
+		)
+	}, [paymentCurrencies, tokenDecimals, tokenSymbol])
 
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
@@ -238,6 +272,13 @@ export function Settings({
 					variant="outlined"
 					sx={{ flex: 1 }}
 				/>
+
+				<FormControlLabel
+					sx={{ display: 'block' }}
+					control={<Checkbox checked={!!governance} onChange={handleGovernanceChecked} />}
+					label="DAO Governance"
+				/>
+
 				<Stack display={'flex'} direction={'row'} alignItems={'center'} gap={1}>
 					<InfoRounded />
 					<Typography variant={'caption'}>
