@@ -1,6 +1,7 @@
 import { Campaign_Bool_Exp, Campaign_Order_By } from 'src/queries'
 
 export interface TMPCampaign {
+	orgId: string
 	name: string
 	description: string
 	bannerCid: string
@@ -12,9 +13,11 @@ export interface TMPCampaign {
 	currency: string
 	endDate: Date
 	governance: number
+	metadataCid: string
 }
 
 export interface TMPCampaignState extends TMPCampaign {
+	setOrgId: (name) => void
 	setName: (name) => void
 	setDescription: (string) => void
 	setBannerCid: (string) => void
@@ -26,6 +29,7 @@ export interface TMPCampaignState extends TMPCampaign {
 	setCurrency: (string) => void
 	setEndDate: (date) => void
 	setGovernance: (number) => void
+	setMetadataCid: (string) => void
 	clearAll: () => void
 }
 export interface CampaignFiltersInterface {

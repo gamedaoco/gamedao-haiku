@@ -44,7 +44,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback }: Compone
 		if (txData && address) {
 			txData?.tx.paymentInfo(address).then(setPaymentInfo)
 		}
-	}, [txData, address])
+	}, [txData])
 
 	if (!txData || !networkBalance) {
 		return null

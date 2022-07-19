@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { InfoRounded } from '@mui/icons-material'
 import {
@@ -17,13 +17,17 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
+import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
+import { useDisplayValues } from 'hooks/useDisplayValues'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
+import { useDisplayValuesQuery } from 'src/queries'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import * as Yup from 'yup'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 const validationTargetSchema = Yup.number()
 	.required()
@@ -35,15 +39,15 @@ const validationDepositSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
 
-const validationEmailSchema = Yup.string().email().required()
-
 const validationEndDateSchema = Yup.date().required().min(moment().add(1, 'day').toDate())
+
+const validationTermsConditionSchema = Yup.boolean().isTrue()
 
 export const validationSchema = Yup.object().shape({
 	target: validationTargetSchema,
 	deposit: validationDepositSchema,
-	email: validationEmailSchema,
 	endDate: validationEndDateSchema,
+	termsCondition: validationTermsConditionSchema,
 })
 
 interface ComponentProps {
@@ -61,34 +65,9 @@ interface ComponentProps {
 	setEndDate: (endDate) => void
 	governance: number
 	setGovernance: (governance) => void
+	termsConditionAccepted: boolean
+	setTermsConditionAccepted: (governance) => void
 }
-
-const USAGE_OF_FUNDS = [
-	{
-		key: '0',
-		text: 'Video Game',
-	},
-	{
-		key: '1',
-		text: 'Mobile Game',
-	},
-	{
-		key: '2',
-		text: 'Soundtrack',
-	},
-	{
-		key: '3',
-		text: '3D',
-	},
-	{
-		key: '4',
-		text: 'Artworks',
-	},
-	{
-		key: '5',
-		text: 'DLC',
-	},
-]
 
 export function Settings({
 	flowProtocol,
@@ -105,10 +84,14 @@ export function Settings({
 	setCurrency,
 	governance,
 	setGovernance,
+	termsConditionAccepted,
+	setTermsConditionAccepted,
 }: ComponentProps) {
 	const { paymentCurrencies, tokenDecimals, tokenSymbol } = useSystemProperties()
+	const displayValues = useDisplayValues()
 	const { t } = useTranslation()
 	const [currencies, setCurrencies] = useState([])
+	const minDate = useMemo(() => moment(new Date()).add(5, 'day').toDate(), [])
 
 	const handleTargetAmountChange = useCallback(
 		(event) => {
@@ -183,13 +166,25 @@ export function Settings({
 		[setGovernance, t],
 	)
 
+	const handleTermsAndConditionChecked = useCallback(
+		(event) => {
+			const value = event.target.checked
+			try {
+				if (setTermsConditionAccepted) {
+					setTermsConditionAccepted(value)
+				}
+			} catch (e) {}
+		},
+		[setTermsConditionAccepted, t],
+	)
+
 	useEffect(() => {
 		setCurrencies(
 			[paymentCurrencies].map((currencyIndex) => {
 				return {
 					key: tokenSymbol[currencyIndex],
 					text: tokenSymbol[currencyIndex],
-					value: currencyIndex,
+					value: tokenSymbol[currencyIndex],
 				}
 			}),
 		)
@@ -252,7 +247,7 @@ export function Settings({
 							labelId="usage-of-funds"
 							label="Usage of funds*"
 						>
-							{USAGE_OF_FUNDS.map((x) => (
+							{displayValues?.campaignFundingCategories?.map((x) => (
 								<MenuItem value={x.key} key={x.key}>
 									{t(x.text)}
 								</MenuItem>
@@ -276,7 +271,7 @@ export function Settings({
 				<FormControlLabel
 					sx={{ display: 'block' }}
 					control={<Checkbox checked={!!governance} onChange={handleGovernanceChecked} />}
-					label="DAO Governance"
+					label="Handle collected funds by governance voting"
 				/>
 
 				<Stack display={'flex'} direction={'row'} alignItems={'center'} gap={1}>
@@ -289,16 +284,23 @@ export function Settings({
 
 			<Stack gap={4}>
 				<Typography variant={'subtitle2'}>Date</Typography>
+
 				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
 					<DateTimePicker
 						label="End date"
-						minDate={moment(new Date()).add(30, 'day').toDate()}
-						value={endDate}
+						minDate={minDate}
+						value={endDate ?? minDate}
 						onChange={setEndDate}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}
 					/>
 				</LocalizationProvider>
+
+				<FormControlLabel
+					sx={{ display: 'block' }}
+					control={<Checkbox checked={termsConditionAccepted} onChange={handleTermsAndConditionChecked} />}
+					label="I Accept the terms & conditions of GameDAO"
+				/>
 			</Stack>
 		</Stack>
 	)

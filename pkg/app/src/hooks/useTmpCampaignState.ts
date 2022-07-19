@@ -8,6 +8,7 @@ import { defaultValuesTmpCampaign as defaultValues } from 'src/constants'
 // TODO: Replace store logic with db for cross device storage
 export function useTmpCampaignState(): TMPCampaignState {
 	const address = useCurrentAccountAddress()
+	const [orgId, setOrgId] = useLocalStorage<string>(`TmpCam${address}-org-id`, defaultValues.orgId)
 	const [nameState, setNameState] = useLocalStorage<string>(`TmpCam${address}-nameState`, defaultValues.name)
 	const [description, setDescription] = useLocalStorage<string>(
 		`TmpCam${address}-description`,
@@ -25,9 +26,14 @@ export function useTmpCampaignState(): TMPCampaignState {
 	const [currency, setCurrency] = useLocalStorage<string>(`TmpCam${address}-currency`, defaultValues.currency)
 	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
 	const [governance, setGovernance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
+	const [metadataCid, setMetadataCid] = useLocalStorage<string>(
+		`TmpCam${address}-metadata-cid`,
+		defaultValues.metadataCid,
+	)
 
 	// Clear state
 	const clearAll = useCallback(() => {
+		setOrgId(defaultValues.orgId)
 		setNameState(defaultValues.name)
 		setDescription(defaultValues.description)
 		setBannerCid(defaultValues.bannerCid)
@@ -39,7 +45,9 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setCurrency(defaultValues.currency)
 		setEndDate(defaultValues.endDate)
 		setGovernance(defaultValues.governance)
+		setMetadataCid(defaultValues.metadataCid)
 	}, [
+		setOrgId,
 		setNameState,
 		setDescription,
 		setBannerCid,
@@ -51,9 +59,11 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setCurrency,
 		setEndDate,
 		setGovernance,
+		setMetadataCid,
 	])
 
 	return {
+		orgId: orgId,
 		name: nameState,
 		description: description,
 		bannerCid: bannerCid,
@@ -65,6 +75,8 @@ export function useTmpCampaignState(): TMPCampaignState {
 		currency: currency,
 		endDate: endDate,
 		governance: governance,
+		metadataCid: metadataCid,
+		setOrgId: setOrgId,
 		setName: setNameState,
 		setDescription: setDescription,
 		setBannerCid: setBannerCid,
@@ -76,6 +88,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setCurrency: setCurrency,
 		setEndDate: setEndDate,
 		setGovernance: setGovernance,
+		setMetadataCid: setMetadataCid,
 		clearAll: clearAll,
 	}
 }

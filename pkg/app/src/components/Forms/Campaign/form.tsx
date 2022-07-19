@@ -1,21 +1,32 @@
-import { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { Button, Stack } from '@mui/material'
+import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
+
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
 import { Settings, validationSchema as settingsValidationSchema } from './modules/settings'
 
 interface ComponentProps {
+	organizationId: string
 	currentStep: number
 	cancel: () => void
 	setStep: (step) => void
 }
 
-export function Form({ cancel, currentStep, setStep }: ComponentProps) {
+export function Form({ organizationId, cancel, currentStep, setStep }: ComponentProps) {
 	const tmpCampaignState = useTmpCampaignState()
+	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
+	const [txModalState, setTxModalState] = useState<boolean>(false)
+	const createCampaignTx = useCreateCampaignTransaction()
+
+	useEffect(() => {
+		tmpCampaignState.setOrgId(organizationId)
+	}, [organizationId])
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
@@ -29,13 +40,39 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		}
 	}, [currentStep, setStep])
 
+	const handleTxModal = useCallback(() => {
+		;(async () => {
+			const file = new File(
+				[
+					JSON.stringify({
+						name: tmpCampaignState.name,
+						markdown: tmpCampaignState.content,
+						description: tmpCampaignState.description,
+						logo: tmpCampaignState.bannerCid,
+						title: '',
+						header: '',
+						email: '',
+					}),
+				],
+				`${tmpCampaignState.name}-metadata.json`,
+				{
+					type: 'text/plain',
+				},
+			)
+
+			const cid = await uploadFileToIpfs(file)
+			tmpCampaignState.setMetadataCid(cid.toString())
+			setTxModalState(true)
+		})()
+	}, [])
+
 	const handleNext = useCallback(() => {
 		if (currentStep < 2 && setStep) {
 			setStep(currentStep + 1)
 		}
 
 		if (currentStep == 2) {
-			console.log('done')
+			handleTxModal()
 		}
 	}, [currentStep, setStep])
 
@@ -95,10 +132,16 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 				return !settingsValidationSchema.isValidSync({
 					target: tmpCampaignState.target,
 					deposit: tmpCampaignState.deposit,
+					endDate: tmpCampaignState.endDate,
+					termsCondition: termsConditionAccepted,
 				})
 		}
 		return false
 	}
+
+	const handleCloseTxModal = useCallback(() => {
+		setTxModalState(false)
+	}, [setTxModalState])
 
 	const checkBackButtonState = () => {
 		return currentStep == 0
@@ -143,6 +186,8 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					setEndDate={handeSetEndDate}
 					governance={tmpCampaignState.governance}
 					setGovernance={handeSetGovernance}
+					termsConditionAccepted={termsConditionAccepted}
+					setTermsConditionAccepted={setTermsConditionAccepted}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
@@ -178,6 +223,13 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					{currentStep === 2 ? 'Publish now' : 'Next step'}
 				</Button>
 			</Stack>
+
+			<TransactionDialog
+				open={txModalState}
+				onClose={handleCloseTxModal}
+				txData={createCampaignTx}
+				txCallback={handleCloseTxModal}
+			/>
 		</>
 	)
 }
