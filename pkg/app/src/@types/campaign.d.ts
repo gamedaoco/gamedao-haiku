@@ -1,3 +1,5 @@
+import { Campaign_Bool_Exp, Campaign_Order_By } from 'src/queries'
+
 export interface TMPCampaign {
 	name: string
 	description: string
@@ -19,4 +21,9 @@ export interface TMPCampaignState extends TMPCampaign {
 	setEmail: (string) => void
 	setProtocol: (number) => void
 	clearAll: () => void
+}
+export interface CampaignFiltersInterface {
+	query: string
+	sortOption: Campaign_Order_By | string
+	filters: Campaign_Bool_Exp[] | string[]
 }

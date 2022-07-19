@@ -18,8 +18,9 @@ import { useTranslation } from 'react-i18next'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
+	filters: any
 }
-export function OrganizationFiltersListTab({ handleDrawerNavigation }: ComponentProps) {
+export function OrganizationFiltersListTab({ handleDrawerNavigation, filters }: ComponentProps) {
 	const { t } = useTranslation()
 	return (
 		<Box sx={{ width: 280 }} role="presentation">

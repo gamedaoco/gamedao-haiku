@@ -3,23 +3,26 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { FilterList, Search } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { useDebouncedState } from 'hooks/useDebouncedState'
-import { DisplayValueEntryString, Organization_Order_By } from 'src/queries'
+import { CampaignFiltersInterface } from 'src/@types/campaign'
+import { Campaign_Bool_Exp, DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
 import { SortOptionsTab } from 'components/FiltersSections/sortOptionsTab'
 
 interface ComponentProps {
 	setFilters: (x: string | Organization_Order_By | any) => void
 	sortOptions: DisplayValueEntryString[]
+	filters?: CampaignFiltersInterface
 	searchPlaceHolder: string
 	showSearch?: boolean
 	showSort?: boolean
 	showFilters?: boolean
-	ListTab: React.FC<{ handleDrawerNavigation: () => void } | any>
+	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: Campaign_Bool_Exp[] } | any>
 }
 
 export function FiltersSection({
 	setFilters,
 	sortOptions,
+	filters,
 	searchPlaceHolder,
 	showSort = true,
 	showFilters = true,
@@ -92,7 +95,11 @@ export function FiltersSection({
 									}}
 								>
 									<Drawer anchor={'right'} open={openDrawer} onClose={() => setOpenDrawer(false)}>
-										<ListTab handleDrawerNavigation={handleDrawerNavigation} />
+										<ListTab
+											handleDrawerNavigation={handleDrawerNavigation}
+											setFilters={setFilters}
+											filters={filters.filters}
+										/>
 									</Drawer>
 									<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
 										Filters
