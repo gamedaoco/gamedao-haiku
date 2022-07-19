@@ -52,12 +52,13 @@ export function CampaignDetailsContent({
 	)
 
 	return (
-		<Card sx={{ p: { sm: '1rem' }, height: '100%' }}>
-			<Stack direction={{ xs: 'column', sm: 'row' }} height="100%" alignItems="stretch">
-				<Box height="30vh" sx={{ width: { xs: '100%', sm: '50%' }, height: '100%' }}>
+		<Card sx={{ p: { sm: '1rem' } }}>
+			<Stack direction={{ xs: 'column', sm: 'row' }} alignItems="stretch">
+				<Box sx={{ width: { xs: '100%', sm: '50%' } }}>
 					<Image
 						src={header}
 						alt="Campaign header"
+						ratio="16/9"
 						disabledEffect={true}
 						sx={{ borderRadius: Number(theme.shape.borderRadius) * 20 }}
 						onError={(event) => (event.target.style.display = 'none')}
