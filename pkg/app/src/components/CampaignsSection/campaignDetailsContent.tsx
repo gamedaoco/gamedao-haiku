@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react'
 
-import { Box, Button, Card, CardContent, CardMedia, Divider, LinearProgress, Stack, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Divider, LinearProgress, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
 import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
-import { parseIpfsHash } from 'src/utils/ipfs'
 import { toUnit } from 'src/utils/token'
+
+import { Image } from 'components/Image/image'
 
 interface ComponentProps {
 	title: string
@@ -54,7 +55,13 @@ export function CampaignDetailsContent({
 		<Card sx={{ p: { sm: '1rem' }, height: '100%' }}>
 			<Stack direction={{ xs: 'column', sm: 'row' }} height="100%" alignItems="stretch">
 				<Box height="30vh" sx={{ width: { xs: '100%', sm: '50%' }, height: '100%' }}>
-					<CardMedia component="img" src={header} alt="logo" />
+					<Image
+						src={header}
+						alt="Campaign header"
+						disabledEffect={true}
+						sx={{ borderRadius: Number(theme.shape.borderRadius) * 20 }}
+						onError={(event) => (event.target.style.display = 'none')}
+					/>
 				</Box>
 				<CardContent sx={{ pt: '0.5rem', width: { xs: '100%', sm: '50%' } }}>
 					<Typography variant="h4">{title}</Typography>
@@ -68,26 +75,26 @@ export function CampaignDetailsContent({
 						justifyContent="space-between"
 					>
 						<Stack direction="column" justifyContent="center" alignItems="center">
-							<Typography variant="overline">{t('campaign_details:time_left')}</Typography>
+							<Typography variant="overline">{t('page:campaign_details:time_left')}</Typography>
 							<Typography variant="body1">{duration}</Typography>
 						</Stack>
 						<Stack direction="column" justifyContent="center" alignItems="center">
-							<Typography variant="overline">{t('campaign_details:backers')}</Typography>
+							<Typography variant="overline">{t('page:campaign_details:backers')}</Typography>
 							<Typography variant="body1">{abbreviateNumber(backers)}</Typography>
 						</Stack>
 						<Stack direction="column" justifyContent="center" alignItems="center">
-							<Typography variant="overline">{t('campaign_details:protocol')}</Typography>
+							<Typography variant="overline">{t('page:campaign_details:protocol')}</Typography>
 							<Typography variant="body1">{protocol}</Typography>
 						</Stack>
 						<Stack direction="column" justifyContent="center" alignItems="center">
-							<Typography variant="overline">{t('campaign_details:category')}</Typography>
+							<Typography variant="overline">{t('page:campaign_details:category')}</Typography>
 							<Typography variant="body1">Gaming</Typography>
 						</Stack>
 					</Stack>
 
 					<Stack direction="row" justifyContent="space-between" pt="2rem">
 						<Stack direction="column">
-							<Typography variant="overline">Raised</Typography>
+							<Typography variant="overline">{t('page:campaign_details:raised')}</Typography>
 							<Box>
 								<Typography display="inline-block" variant="body1">
 									{`${funded} ${systemProperties?.tokenSymbol?.[currencyId] ?? ''}`}
@@ -98,17 +105,17 @@ export function CampaignDetailsContent({
 							<Typography variant="body2">{progress ?? 18}%</Typography>
 						</Stack>
 						<Stack direction="column" alignItems="flex-end">
-							<Typography variant="overline">Target</Typography>
+							<Typography variant="overline">{t('page:campaign_details:target')}</Typography>
 							<Typography variant="body1">{`${aim}  ${
 								systemProperties?.tokenSymbol?.[currencyId] ?? ''
 							}`}</Typography>
 						</Stack>
 					</Stack>
 					<LinearProgress variant="determinate" color="inherit" value={progress} />
-					{!isAdmin && (
-						<Stack direction="column" mt="2rem">
+					{!isAdmin && duration !== 'Expired' && (
+						<Stack mt="2rem" alignItems="center">
 							<Button variant="contained" sx={{ width: { xs: '100%', sm: '50%' } }}>
-								Contribute now
+								{t('button:ui:contribute_now')}
 							</Button>
 						</Stack>
 					)}
