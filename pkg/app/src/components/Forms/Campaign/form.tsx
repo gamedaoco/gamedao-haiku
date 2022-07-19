@@ -59,12 +59,20 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		tmpCampaignState.setDeposit(deposit)
 	}, [])
 
-	const handleSetEmail = useCallback((email: string) => {
-		tmpCampaignState.setEmail(email)
-	}, [])
-
 	const handeSetProtocol = useCallback((protocol: number) => {
 		tmpCampaignState.setProtocol(protocol)
+	}, [])
+
+	const handeSetUsageOfFunds = useCallback((usageOfFunds: string) => {
+		tmpCampaignState.setUsageOfFunds(usageOfFunds)
+	}, [])
+
+	const handleSetCurrency = useCallback((currency: string) => {
+		tmpCampaignState.setCurrency(currency)
+	}, [])
+
+	const handeSetEndDate = useCallback((endDate: Date) => {
+		tmpCampaignState.setEndDate(endDate)
 	}, [])
 
 	const checkNextButtonState = () => {
@@ -83,7 +91,6 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 				return !settingsValidationSchema.isValidSync({
 					target: tmpCampaignState.target,
 					deposit: tmpCampaignState.deposit,
-					email: tmpCampaignState.email,
 				})
 		}
 		return false
@@ -122,10 +129,14 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					setTargetAmount={handleSetTargetAmount}
 					depositAmount={tmpCampaignState.deposit}
 					setDepositAmount={handleSetDepositAmount}
-					email={tmpCampaignState.email}
-					setEmail={handleSetEmail}
 					flowProtocol={tmpCampaignState.protocol}
 					setFlowProtocol={handeSetProtocol}
+					usageOfFunds={tmpCampaignState.usageOfFunds}
+					setUsageOfFunds={handeSetUsageOfFunds}
+					currency={tmpCampaignState.currency}
+					setCurrency={handleSetCurrency}
+					endDate={tmpCampaignState.endDate}
+					setEndDate={handeSetEndDate}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">

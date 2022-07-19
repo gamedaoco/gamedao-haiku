@@ -17,8 +17,13 @@ export function useTmpCampaignState(): TMPCampaignState {
 	const [content, setContent] = useLocalStorage<string>(`TmpCam${address}-content`, defaultValues.content)
 	const [deposit, setDeposit] = useLocalStorage<number>(`TmpCam${address}-deposit`, defaultValues.deposit)
 	const [target, setTarget] = useLocalStorage<number>(`TmpCam${address}-target`, defaultValues.target)
-	const [email, setEmail] = useLocalStorage<string>(`TmpCam${address}-email`, defaultValues.email)
 	const [protocol, setProtocol] = useLocalStorage<number>(`TmpCam${address}-protocol`, defaultValues.protocol)
+	const [usageOfFunds, setUsageOfFunds] = useLocalStorage<string>(
+		`TmpCam${address}-usage-of-funds`,
+		defaultValues.usageOfFunds,
+	)
+	const [currency, setCurrency] = useLocalStorage<string>(`TmpCam${address}-currency`, defaultValues.currency)
+	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
 
 	// Clear state
 	const clearAll = useCallback(() => {
@@ -26,7 +31,24 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setDescription(defaultValues.description)
 		setBannerCid(defaultValues.bannerCid)
 		setContent(defaultValues.content)
-	}, [setNameState, setDescription, setBannerCid, setContent])
+		setDeposit(defaultValues.deposit)
+		setTarget(defaultValues.target)
+		setProtocol(defaultValues.protocol)
+		setUsageOfFunds(defaultValues.usageOfFunds)
+		setCurrency(defaultValues.currency)
+		setEndDate(defaultValues.endDate)
+	}, [
+		setNameState,
+		setDescription,
+		setBannerCid,
+		setContent,
+		setDeposit,
+		setTarget,
+		setProtocol,
+		setUsageOfFunds,
+		setCurrency,
+		setEndDate,
+	])
 
 	return {
 		name: nameState,
@@ -35,16 +57,20 @@ export function useTmpCampaignState(): TMPCampaignState {
 		content: content,
 		deposit: deposit,
 		target: target,
-		email: email,
 		protocol: protocol,
+		usageOfFunds: usageOfFunds,
+		currency: currency,
+		endDate: endDate,
 		setName: setNameState,
 		setDescription: setDescription,
 		setBannerCid: setBannerCid,
 		setContent: setContent,
 		setDeposit: setDeposit,
 		setTarget: setTarget,
-		setEmail: setEmail,
 		setProtocol: setProtocol,
+		setUsageOfFunds: setUsageOfFunds,
+		setCurrency: setCurrency,
+		setEndDate: setEndDate,
 		clearAll: clearAll,
 	}
 }

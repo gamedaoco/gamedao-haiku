@@ -1,21 +1,13 @@
 import React, { useCallback } from 'react'
 
-import { InfoRounded, Person } from '@mui/icons-material'
-import {
-	Box,
-	Checkbox,
-	Divider,
-	FormControl,
-	FormControlLabel,
-	InputLabel,
-	MenuItem,
-	Paper,
-	Select,
-	Stack,
-	TextField,
-	Typography,
-} from '@mui/material'
+import { InfoRounded } from '@mui/icons-material'
+import { FormControl, InputLabel, MenuItem, Paper, Select, Stack, TextField, Typography } from '@mui/material'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import enLocale from 'date-fns/locale/en-US'
 import { useSystemProperties } from 'hooks/useSystemProperties'
+import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import * as Yup from 'yup'
@@ -34,10 +26,13 @@ const validationDepositSchema = Yup.number()
 
 const validationEmailSchema = Yup.string().email().required()
 
+const validationEndDateSchema = Yup.date().required().min(moment().add(1, 'day').toDate())
+
 export const validationSchema = Yup.object().shape({
 	target: validationTargetSchema,
 	deposit: validationDepositSchema,
 	email: validationEmailSchema,
+	endDate: validationEndDateSchema,
 })
 
 interface ComponentProps {
@@ -47,8 +42,12 @@ interface ComponentProps {
 	setTargetAmount: (number) => void
 	depositAmount: number
 	setDepositAmount: (number) => void
-	email: string
-	setEmail: (email) => void
+	currency: string
+	setCurrency: (currency) => void
+	usageOfFunds: string
+	setUsageOfFunds: (usageOfFunds) => void
+	endDate: Date
+	setEndDate: (endDate) => void
 }
 
 const currencies = [
@@ -58,7 +57,7 @@ const currencies = [
 	},
 ]
 
-const usageOfFunds = [
+const USAGE_OF_FUNDS = [
 	{
 		key: '0',
 		text: 'Video Game',
@@ -92,11 +91,16 @@ export function Settings({
 	setTargetAmount,
 	depositAmount,
 	setDepositAmount,
-	email,
-	setEmail,
+	setUsageOfFunds,
+	usageOfFunds,
+	endDate,
+	setEndDate,
+	currency,
+	setCurrency,
 }: ComponentProps) {
 	const systemProperties = useSystemProperties()
 	const { t } = useTranslation()
+	console.log(systemProperties)
 
 	const handleTargetAmountChange = useCallback(
 		(event) => {
@@ -134,24 +138,28 @@ export function Settings({
 		[setDepositAmount, validationDepositSchema, t],
 	)
 
-	const handleEmailChanged = useCallback(
+	const handleCurrencyChanged = useCallback(
 		(event) => {
 			const value = event.target.value
 			try {
-				if (setEmail) {
-					setEmail(value)
+				if (setCurrency) {
+					setCurrency(value)
 				}
 			} catch (e) {}
 		},
-		[setEmail, t],
+		[setCurrency, t],
 	)
-
-	const handleCurrencyChanged = useCallback((event) => {
-		console.log(event)
-	}, [])
-	const handleUsageOfFundsChanged = useCallback((event) => {
-		console.log(event)
-	}, [])
+	const handleUsageOfFundsChanged = useCallback(
+		(event) => {
+			const value = event.target.value
+			try {
+				if (setUsageOfFunds) {
+					setUsageOfFunds(value)
+				}
+			} catch (e) {}
+		},
+		[setUsageOfFunds, t],
+	)
 
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
@@ -192,12 +200,7 @@ export function Settings({
 					/>
 					<FormControl sx={{ flex: 1 }}>
 						<InputLabel id="currency">Currency*</InputLabel>
-						<Select
-							value={currencies[0].key}
-							onChange={handleCurrencyChanged}
-							labelId="currency"
-							label="Currency*"
-						>
+						<Select value={currency} onChange={handleCurrencyChanged} labelId="currency" label="Currency*">
 							{currencies.map((x) => (
 								<MenuItem value={x.key} key={x.key}>
 									{t(x.text)}
@@ -210,12 +213,12 @@ export function Settings({
 					<FormControl sx={{ flex: 1 }}>
 						<InputLabel id="usage-of-funds">Usage of funds*</InputLabel>
 						<Select
-							value={usageOfFunds[0].key}
+							value={usageOfFunds}
 							onChange={handleUsageOfFundsChanged}
 							labelId="usage-of-funds"
 							label="Usage of funds*"
 						>
-							{usageOfFunds.map((x) => (
+							{USAGE_OF_FUNDS.map((x) => (
 								<MenuItem value={x.key} key={x.key}>
 									{t(x.text)}
 								</MenuItem>
@@ -244,15 +247,17 @@ export function Settings({
 			</Stack>
 
 			<Stack gap={4}>
-				<Typography variant={'subtitle2'}>Date & Contact</Typography>
-				<TextField
-					fullWidth
-					onChange={handleEmailChanged}
-					value={email}
-					label="Contact email*"
-					variant="outlined"
-					sx={{ flex: 1 }}
-				/>
+				<Typography variant={'subtitle2'}>Date</Typography>
+				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
+					<DateTimePicker
+						label="End date"
+						minDate={moment(new Date()).add(30, 'day').toDate()}
+						value={endDate}
+						onChange={setEndDate}
+						renderInput={(params) => <TextField {...params} />}
+						ampm={false}
+					/>
+				</LocalizationProvider>
 			</Stack>
 		</Stack>
 	)

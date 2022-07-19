@@ -7,8 +7,10 @@ export interface TMPCampaign {
 	content: string
 	target: number
 	deposit: number
-	email: string
 	protocol: number
+	usageOfFunds: string
+	currency: string
+	endDate: Date
 }
 
 export interface TMPCampaignState extends TMPCampaign {
@@ -18,8 +20,10 @@ export interface TMPCampaignState extends TMPCampaign {
 	setContent: (string) => void
 	setTarget: (number) => void
 	setDeposit: (number) => void
-	setEmail: (string) => void
 	setProtocol: (number) => void
+	setUsageOfFunds: (string) => void
+	setCurrency: (string) => void
+	setEndDate: (date) => void
 	clearAll: () => void
 }
 export interface CampaignFiltersInterface {

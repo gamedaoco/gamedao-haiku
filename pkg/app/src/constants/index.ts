@@ -51,6 +51,8 @@ export const defaultValuesTmpCampaign: TMPCampaign = {
 	content: '',
 	target: 0,
 	deposit: 0,
-	email: '',
 	protocol: 0,
+	usageOfFunds: '',
+	endBlock: 0,
+	currency: '',
 }
