@@ -211,6 +211,58 @@
       "value": 0
     }
   ],
+  "campaignFundingCategories": [
+    {
+      "key": "0",
+      "text": "Game",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Content Pack / DLC",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "Concept",
+      "value": 2
+    },
+    {
+      "key": "3",
+      "text": "Audio / Music / SFX",
+      "value": 3
+    },
+    {
+      "key": "4",
+      "text": "Video / Motion Graphics",
+      "value": 4
+    },
+    {
+      "key": "5",
+      "text": "2D / 3D / GFX / Artwork",
+      "value": 5
+    },
+    {
+      "key": "6",
+      "text": "Team",
+      "value": 6
+    },
+    {
+      "key": "7",
+      "text": "Merch",
+      "value": 7
+    },
+    {
+      "key": "8",
+      "text": "Hardware",
+      "value": 8
+    },
+    {
+      "key": "9",
+      "text": "Other",
+      "value": 9
+    }
+  ],
   "organizationSortOptions": [
     {
       "text": "page:organisations:sort_options:mem_hi_lo",

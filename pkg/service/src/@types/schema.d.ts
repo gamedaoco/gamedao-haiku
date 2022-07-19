@@ -75,17 +75,20 @@ export type DisplayValueEntryString = DisplayValueEntry & {
 
 export type DisplayValues = {
 	readonly __typename?: 'DisplayValues'
+	readonly campaignFilters?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
+	readonly campaignFundingCategories?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly campaignSortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly collateralTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly countries?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryCountry>>>
 	readonly daoBodies?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly daoFeeModel?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly daoMemberGovernance?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly memberships?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly organizationSortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly projectDurations?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
-	readonly sortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 }
 
@@ -412,6 +415,21 @@ export type DisplayValuesResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['DisplayValues'] = ResolversParentTypes['DisplayValues'],
 > = ResolversObject<{
+	campaignFilters?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
+	campaignFundingCategories?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	campaignSortOptions?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
 	collateralTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,
@@ -442,6 +460,11 @@ export type DisplayValuesResolvers<
 		ParentType,
 		ContextType
 	>
+	organizationSortOptions?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
 	projectDurations?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,
@@ -459,11 +482,6 @@ export type DisplayValuesResolvers<
 	>
 	protocolTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
-		ParentType,
-		ContextType
-	>
-	sortOptions?: Resolver<
-		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
 		ParentType,
 		ContextType
 	>
