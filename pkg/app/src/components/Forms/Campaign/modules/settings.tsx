@@ -17,18 +17,14 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
-import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useDisplayValues } from 'hooks/useDisplayValues'
-import { useSystemProperties } from 'hooks/useSystemProperties'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
-import { useDisplayValuesQuery } from 'src/queries'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import * as Yup from 'yup'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
-import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 const validationTargetSchema = Yup.number()
 	.required()
@@ -105,9 +101,7 @@ export function Settings({
 				if (setTargetAmount) {
 					setTargetAmount(value < 0 ? 0 : value)
 				}
-			} catch (e) {
-				createWarningNotification(t(e.message))
-			}
+			} catch (e) {}
 		},
 		[setTargetAmount, validationTargetSchema, t],
 	)
@@ -123,9 +117,7 @@ export function Settings({
 				if (setDepositAmount) {
 					setDepositAmount(value < 0 ? 0 : value)
 				}
-			} catch (e) {
-				createWarningNotification(t(e.message))
-			}
+			} catch (e) {}
 		},
 		[setDepositAmount, validationDepositSchema, t],
 	)
