@@ -25,12 +25,7 @@ export function MyCampaignsTab() {
 
 	return (
 		<Box>
-			<CampaignsList
-				campaigns={paginatedData}
-				loading={loading}
-				title={t('page:campaigns:created_campaigns')}
-				showCreate={false}
-			/>
+			<CampaignsList campaigns={paginatedData} loading={loading} title={t('page:campaigns:created_campaigns')} />
 			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
 	)
