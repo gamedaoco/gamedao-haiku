@@ -3,19 +3,20 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Add as AddIcon, HowToVote } from '@mui/icons-material'
-import { Box, Button, Chip, Paper, Stack, Typography } from '@mui/material'
+import { Box, Button, Paper, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { blockTime } from 'src/constants'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
 
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'components/TabPanels/Organization/createProposal'
-import { blockTime } from 'src/constants'
 
 interface ComponentProps {
 	organizationId: string
+	isMember: boolean
 }
 
 const defaultGridColDef = {
@@ -70,7 +71,7 @@ const columns: GridColDef[] = [
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
-export function ProposalOverview({ organizationId }: ComponentProps) {
+export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	const { push } = useRouter()
 
 	const [showFormState, setShowFormState] = useState<boolean>(false)
@@ -165,7 +166,7 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 		<Stack component={Paper} padding={4} spacing={2}>
 			<Stack direction="row" spacing={1} justifyContent="space-between">
 				<Typography variant="h6">Proposals</Typography>
-				{address && enabledFeatures.CREATE_PROPOSAL && (
+				{address && enabledFeatures.CREATE_PROPOSAL && isMember && (
 					<Button variant="outlined" onClick={handleCreateButtonClick}>
 						<AddIcon /> Create Proposal
 					</Button>
