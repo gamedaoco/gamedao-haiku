@@ -283,7 +283,7 @@ export function OrganisationById() {
 										goBack={() => handleTabSelect('proposals')}
 									/>
 								) : (
-									<ProposalOverview organizationId={organizationIdState} />
+									<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
 								)}
 							</TabPanel>
 							<TabPanel value={'members'}>
