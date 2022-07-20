@@ -6,6 +6,7 @@ declare module '@mui/material/Paper' {
 		dashed: true
 		mask: true
 		primary: true
+		secondary: true
 	}
 }
 
@@ -24,6 +25,14 @@ export default function Paper(theme: Theme) {
 				{
 					props: { variant: 'primary' },
 					style: { backgroundColor: theme.palette.background.default },
+				},
+				{
+					props: { variant: 'secondary' },
+					style: {
+						backgroundColor: theme.palette.background.neutral,
+						borderBottomRightRadius: 0,
+						borderBottomLeftRadius: 0,
+					},
 				},
 			],
 

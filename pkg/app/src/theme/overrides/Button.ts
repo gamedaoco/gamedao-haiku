@@ -2,6 +2,12 @@ import { Theme } from '@mui/material/styles'
 
 // ----------------------------------------------------------------------
 
+declare module '@mui/material/Button' {
+	interface ButtonPropsVariantOverrides {
+		secondary: true
+	}
+}
+
 export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
@@ -10,6 +16,12 @@ export default function Button(theme: Theme) {
 					props: { variant: 'outlined' },
 					style: {
 						color: 'primary' ? theme.palette.common.white : theme.palette.text.secondary,
+					},
+				},
+				{
+					props: { variant: 'secondary' },
+					style: {
+						color: theme.palette.common.white,
 					},
 				},
 			],
