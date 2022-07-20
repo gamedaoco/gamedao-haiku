@@ -29,7 +29,7 @@ export function MyCampaignsTab() {
 				campaigns={paginatedData}
 				loading={loading}
 				title={t('page:campaigns:created_campaigns')}
-				showCreate={true}
+				showCreate={false}
 			/>
 			<ContributedCampaignsSection data={campaignContributorsData} loading={campaignContributorsLoading} />
 		</Box>
