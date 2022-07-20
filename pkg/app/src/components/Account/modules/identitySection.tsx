@@ -7,7 +7,6 @@ import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/ma
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
-import { useExtensionContext } from 'provider/extension/modules/context'
 import { AccountTabs } from 'src/@types/account'
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
@@ -18,9 +17,8 @@ export function IdentitySection() {
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)
 	}, [push])
-	const { selectedAccount } = useExtensionContext()
-	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
-	const avatarHash = md5(selectedAccount?.account?.address)
+	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
+	const avatarHash = md5(getAddressFromAccountState(accountState))
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n
 		navigator.clipboard
