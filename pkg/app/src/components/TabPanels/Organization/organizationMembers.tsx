@@ -5,7 +5,7 @@ import { Avatar, Box, Paper, Rating, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import md5 from 'md5'
 import { Organization } from 'src/queries'
-import { getInitials, shortAccountAddress } from 'src/utils/accountUtils'
+import { shortAccountAddress } from 'src/utils/accountUtils'
 
 interface ComponentProps {
 	organizationState: Organization
@@ -36,14 +36,18 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 							}}
 						>
 							<Avatar
-								src={params.row.email ? `https://www.gravatar.com/avatar/${md5(params.row.email)}` : ''}
-								sx={{
-									height: 42,
-									width: 42,
-								}}
-							>
-								{getInitials(params.row.name)}
-							</Avatar>
+								sx={{ height: 42, width: 42 }}
+								src={
+									params?.row?.email
+										? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(
+												params.row.email,
+										  )}.svg`
+										: `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(
+												params?.row?.address,
+										  )}.svg`
+								}
+							/>
+
 							<Box sx={{ ml: 1 }}>
 								{params.row.name}
 								<Box sx={{ display: 'flex', alignItems: 'center' }}>
