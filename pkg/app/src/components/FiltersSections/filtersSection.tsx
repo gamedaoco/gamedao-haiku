@@ -16,6 +16,7 @@ interface ComponentProps {
 	showSearch?: boolean
 	showSort?: boolean
 	showFilters?: boolean
+	filtersOptions?: DisplayValueEntryString[]
 	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: Campaign_Bool_Exp[] } | any>
 }
 
@@ -27,6 +28,7 @@ export function FiltersSection({
 	showSort = true,
 	showFilters = true,
 	showSearch = true,
+	filtersOptions,
 	ListTab,
 }: ComponentProps) {
 	const [searchInput, searchInputDebounced, setSearchInput] = useDebouncedState<string>(500, '')
@@ -99,6 +101,7 @@ export function FiltersSection({
 											handleDrawerNavigation={handleDrawerNavigation}
 											setFilters={setFilters}
 											filters={filters.filters}
+											filtersOptions={filtersOptions}
 										/>
 									</Drawer>
 									<Typography sx={{ fontWeight: '700' }} variant={'body2'}>
