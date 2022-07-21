@@ -37,15 +37,9 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 						>
 							<Avatar
 								sx={{ height: 42, width: 42 }}
-								src={
-									params?.row?.email
-										? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(
-												params.row.email,
-										  )}.svg`
-										: `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(
-												params?.row?.address,
-										  )}.svg`
-								}
+								src={`https://avatars.dicebear.com/api/pixel-art-neutral/${md5(
+									params?.row?.email || params?.row?.address,
+								)}.svg`}
 							/>
 
 							<Box sx={{ ml: 1 }}>
