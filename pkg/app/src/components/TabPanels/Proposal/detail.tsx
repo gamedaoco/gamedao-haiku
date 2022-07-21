@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { ArrowBack, HowToVote, Launch } from '@mui/icons-material'
 import {
 	Box,
@@ -76,6 +78,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const [proposal, setProposal] = useState(null)
 	const [proposalTypeName, setProposalTypeName] = useState(null)
 	const [proposalVotingTypeName, setProposalVotingTypeName] = useState(null)
+	const { push } = useRouter()
 
 	const [yesPercentage, setYesPercentage] = useState(0)
 	const [noPercentage, setNoPercentage] = useState(0)
@@ -106,6 +109,10 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 	useEffect(() => {
 		if (loading) return
+
+		if (!data?.proposal?.[0]) {
+			push('/')
+		}
 
 		setProposal(data?.proposal?.[0] ?? null)
 	}, [loading, data])
