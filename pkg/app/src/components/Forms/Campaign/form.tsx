@@ -111,13 +111,16 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		tmpCampaignState.setCurrencyId(currencyId)
 	}, [])
 
-	const handeSetEndDate = useCallback((endDate: Date) => {
-		const endSecondsDiff = moment(endDate).diff(moment(), 'seconds')
-		const endBlock = blockNumber + Math.ceil(endSecondsDiff / blockTime)
+	const handeSetEndDate = useCallback(
+		(endDate: Date) => {
+			const endSecondsDiff = moment(endDate).diff(moment(), 'seconds')
+			const endBlock = blockNumber + Math.ceil(endSecondsDiff / blockTime)
 
-		tmpCampaignState.setExpiryBlock(endBlock);
-		tmpCampaignState.setEndDate(endDate)
-	}, [tmpCampaignState, blockNumber])
+			tmpCampaignState.setExpiryBlock(endBlock)
+			tmpCampaignState.setEndDate(endDate)
+		},
+		[tmpCampaignState, blockNumber],
+	)
 
 	const handeSetGovernance = useCallback((governance: number) => {
 		tmpCampaignState.setGovernance(governance)
