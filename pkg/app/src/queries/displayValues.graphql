@@ -50,6 +50,11 @@ query DisplayValues {
             value
             text
         }
+        campaignFundingCategories {
+            key
+            value
+            text
+        }
         countries {
             key
             value

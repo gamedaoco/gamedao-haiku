@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+
 import { Stack, Step, StepLabel, Stepper } from '@mui/material'
+
 import { Form } from 'components/Forms/Campaign/form'
 
 interface ComponentProps {
@@ -34,7 +36,7 @@ export function CreateCampaignPage({ organizationId, cancel }: ComponentProps) {
 					</Step>
 				))}
 			</Stepper>
-			<Form currentStep={activeStep} cancel={cancel} setStep={setActiveStep} />
+			<Form organizationId={organizationId} currentStep={activeStep} cancel={cancel} setStep={setActiveStep} />
 		</Stack>
 	)
 }
