@@ -1,19 +1,15 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
+
+import { useRouter } from 'next/router'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 import { AccountTabs } from 'src/@types/account'
-import {
-	getAddressFromAccountState,
-	getInitials,
-	getNameFromAccountState,
-	shortAccountAddress,
-} from 'src/utils/accountUtils'
+import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
-import { useRouter } from 'next/router'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 
 export function IdentitySection() {
 	const { push } = useRouter()
@@ -22,6 +18,8 @@ export function IdentitySection() {
 		push(`/account/${AccountTabs.IDENTITY}`)
 	}, [push])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
+	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
+
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n
 		navigator.clipboard
@@ -43,11 +41,6 @@ export function IdentitySection() {
 				}}
 			>
 				<Avatar
-					src={
-						identity?.email
-							? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
-							: 'https://picsum.photos/200'
-					}
 					sx={{
 						height: {
 							md: 128,
@@ -58,11 +51,13 @@ export function IdentitySection() {
 							md: 128,
 							sx: 48,
 						},
-						border: '3px gray solid',
 					}}
-				>
-					{getInitials(getNameFromAccountState(accountState))}
-				</Avatar>
+					src={
+						identity?.email
+							? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
+							: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+					}
+				/>
 				<div>
 					<Typography sx={{ typography: { sm: 'body1', md: 'h4' } }} fontWeight="700">
 						{getNameFromAccountState(accountState)}
