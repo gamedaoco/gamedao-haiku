@@ -126,6 +126,8 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 					deposit: tmpCampaignState.deposit,
 					endDate: tmpCampaignState.endDate,
 					termsCondition: termsConditionAccepted,
+					currencyId: tmpCampaignState.currencyId,
+					usageOfFunds: tmpCampaignState.usageOfFunds,
 				})
 		}
 		return false

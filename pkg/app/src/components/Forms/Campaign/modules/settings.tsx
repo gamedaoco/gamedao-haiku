@@ -21,7 +21,6 @@ import { useDisplayValues } from 'hooks/useDisplayValues'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
-import { createWarningNotification } from 'src/utils/notificationUtils'
 import * as Yup from 'yup'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
@@ -40,11 +39,17 @@ const validationEndDateSchema = Yup.date().required().min(moment().add(1, 'day')
 
 const validationTermsConditionSchema = Yup.boolean().isTrue()
 
+const validationCurrencyIdSchema = Yup.number().required()
+
+const validationUsageOfFundsSchema = Yup.number().required()
+
 export const validationSchema = Yup.object().shape({
 	target: validationTargetSchema,
 	deposit: validationDepositSchema,
 	endDate: validationEndDateSchema,
 	termsCondition: validationTermsConditionSchema,
+	currencyId: validationCurrencyIdSchema,
+	usageOfFunds: validationUsageOfFundsSchema,
 })
 
 interface ComponentProps {
@@ -126,24 +131,26 @@ export function Settings({
 		(event) => {
 			const value = event.target.value
 			try {
+				validationCurrencyIdSchema?.validateSync(value)
 				if (setCurrencyId) {
 					setCurrencyId(value)
 				}
 			} catch (e) {}
 		},
-		[setCurrencyId, t],
+		[setCurrencyId, validationCurrencyIdSchema, t],
 	)
 
 	const handleUsageOfFundsChanged = useCallback(
 		(event) => {
 			const value = event.target.value
 			try {
+				validationUsageOfFundsSchema?.validateSync(value)
 				if (setUsageOfFunds) {
 					setUsageOfFunds(value)
 				}
 			} catch (e) {}
 		},
-		[setUsageOfFunds, t],
+		[setUsageOfFunds, validationUsageOfFundsSchema, t],
 	)
 
 	const handleGovernanceChecked = useCallback(
