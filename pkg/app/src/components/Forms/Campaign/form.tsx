@@ -79,13 +79,16 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		}
 	}, [tmpCampaignState, currentStep, setStep])
 
-	const handleUploadBannerImage = useCallback((file: File) => {
-		;(async (): Promise<string> => {
-			const bannerFile = new File([await file.arrayBuffer()], file.name)
-			const cid = await uploadFileToIpfs(bannerFile)
-			return cid.toString()
-		})().then((cid) => tmpCampaignState.setBannerCid(cid))
-	}, [tmpCampaignState])
+	const handleUploadBannerImage = useCallback(
+		(file: File) => {
+			;(async (): Promise<string> => {
+				const bannerFile = new File([await file.arrayBuffer()], file.name)
+				const cid = await uploadFileToIpfs(bannerFile)
+				return cid.toString()
+			})().then((cid) => tmpCampaignState.setBannerCid(cid))
+		},
+		[tmpCampaignState],
+	)
 
 	const handeSetEndDate = useCallback(
 		(endDate: Date) => {
@@ -98,9 +101,12 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		[tmpCampaignState, blockNumber],
 	)
 
-	const handeSetGovernance = useCallback((governance: number) => {
-		tmpCampaignState.setGovernance(governance)
-	}, [tmpCampaignState])
+	const handeSetGovernance = useCallback(
+		(governance: number) => {
+			tmpCampaignState.setGovernance(governance)
+		},
+		[tmpCampaignState],
+	)
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
