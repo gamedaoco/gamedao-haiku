@@ -39,7 +39,7 @@ const validationEndDateSchema = Yup.date().required().min(moment().add(1, 'day')
 
 const validationTermsConditionSchema = Yup.boolean().isTrue()
 
-const validationCurrencyIdSchema = Yup.number().required()
+const validationCurrencyIdSchema = Yup.number().required().min(0)
 
 const validationUsageOfFundsSchema = Yup.number().required()
 
