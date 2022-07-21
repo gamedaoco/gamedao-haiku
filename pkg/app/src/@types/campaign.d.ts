@@ -12,7 +12,6 @@ export interface TMPCampaign {
 	usageOfFunds: string
 	currencyId: number
 	endDate: Date
-	expiryBlock: number
 	governance: number
 	metadataCid: string
 }
@@ -29,7 +28,6 @@ export interface TMPCampaignState extends TMPCampaign {
 	setUsageOfFunds: (string) => void
 	setCurrencyId: (number) => void
 	setEndDate: (date) => void
-	setExpiryBlock: (expiryBlock) => void
 	setGovernance: (number) => void
 	setMetadataCid: (string) => void
 	clearAll: () => void

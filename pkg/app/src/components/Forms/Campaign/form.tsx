@@ -10,9 +10,6 @@ import { TransactionDialog } from 'components/TransactionDialog/transactionDialo
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
 import { Settings, validationSchema as settingsValidationSchema } from './modules/settings'
-import moment from 'moment'
-import { blockTime } from 'src/constants'
-import { useBlockNumber } from 'hooks/useBlockNumber'
 
 interface ComponentProps {
 	organizationId: string
@@ -26,7 +23,6 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
-	const blockNumber = useBlockNumber()
 
 	useEffect(() => {
 		tmpCampaignState.setOrgId(organizationId)
@@ -88,17 +84,6 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 			})().then((cid) => tmpCampaignState.setBannerCid(cid))
 		},
 		[tmpCampaignState],
-	)
-
-	const handeSetEndDate = useCallback(
-		(endDate: Date) => {
-			const endSecondsDiff = moment(endDate).diff(moment(), 'seconds')
-			const endBlock = blockNumber + Math.ceil(endSecondsDiff / blockTime)
-
-			tmpCampaignState.setExpiryBlock(endBlock)
-			tmpCampaignState.setEndDate(endDate)
-		},
-		[tmpCampaignState, blockNumber],
 	)
 
 	const handeSetGovernance = useCallback(
@@ -187,7 +172,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 					currencyId={tmpCampaignState.currencyId}
 					setCurrencyId={tmpCampaignState.setCurrencyId}
 					endDate={tmpCampaignState.endDate}
-					setEndDate={handeSetEndDate}
+					setEndDate={tmpCampaignState.setEndDate}
 					governance={tmpCampaignState.governance}
 					setGovernance={handeSetGovernance}
 					termsConditionAccepted={termsConditionAccepted}
