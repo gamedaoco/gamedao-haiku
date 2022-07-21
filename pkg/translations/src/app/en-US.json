@@ -15,6 +15,7 @@
       "create": "Create",
       "load_more": "Load More",
       "clear": "Clear",
+      "back_to_all_campaigns": "back to all campaigns",
       "transaction": {
         "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
         "get_token": "Get {{token}} here",
@@ -23,7 +24,8 @@
         "description_toggle": "What is this used for?"
       },
       "create_campaign": "Create your first Campaign",
-      "explore_campaigns": "Explore Campaigns"
+      "explore_campaigns": "Explore Campaigns",
+      "contribute_now": "Contribute now"
     },
     "form": {
       "next_step": "Next step",
@@ -128,6 +130,16 @@
         "funding_target": "Funding Target",
         "status": "Status"
       }
+    },
+    "campaign_details": {
+      "time_left": "TIME LEFT",
+      "backers": "BACKERS",
+      "protocol": "PROTOCOL",
+      "category": "CATEGORY",
+      "raised": "RAISED",
+      "target": "TARGET",
+      "overview": "OVERVIEW",
+      "reasons_to_invest": "REASON TO INVEST"
     },
     "governance": {
     },

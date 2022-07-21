@@ -14,5 +14,8 @@ export function fromUnit(balance: number, decimals: string): string {
 }
 
 export function toUnitSi(balance: string, decimals: number | string): string {
-	return formatBalance(balance, { withSi: true }, typeof decimals === 'string' ? parseInt(decimals) : decimals)
+	return formatBalance(balance, {
+		withSi: true,
+		decimals: typeof decimals === 'string' ? parseInt(decimals) : decimals,
+	})
 }

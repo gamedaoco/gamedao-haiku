@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 
-import { Add, ArrowDownward } from '@mui/icons-material'
+import { ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
@@ -101,11 +101,6 @@ export function Campaigns() {
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
 								<Typography variant="h3">Campaigns</Typography>
-							</Grid>
-							<Grid item>
-								<Button startIcon={<Add fontSize="small" />} variant="outlined">
-									{t('button:ui:create')}
-								</Button>
 							</Grid>
 						</Grid>
 					</Box>
