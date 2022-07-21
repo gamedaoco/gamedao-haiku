@@ -40,39 +40,38 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		}
 	}, [currentStep, setStep])
 
-	const handleTxModal = useCallback(() => {
-		;(async () => {
-			const file = new File(
-				[
-					JSON.stringify({
-						name: tmpCampaignState.name,
-						markdown: tmpCampaignState.content,
-						description: tmpCampaignState.description,
-						logo: tmpCampaignState.bannerCid,
-						title: '',
-						header: '',
-						email: '',
-					}),
-				],
-				`${tmpCampaignState.name}-metadata.json`,
-				{
-					type: 'text/plain',
-				},
-			)
-
-			const cid = await uploadFileToIpfs(file)
-			tmpCampaignState.setMetadataCid(cid.toString())
-			setTxModalState(true)
-		})()
-	}, [])
-
 	const handleNext = useCallback(() => {
 		if (currentStep < 2 && setStep) {
 			setStep(currentStep + 1)
 		}
 
+		if (currentStep == 1) {
+			;(async () => {
+				const file = new File(
+					[
+						JSON.stringify({
+							name: tmpCampaignState.name,
+							markdown: tmpCampaignState.content,
+							description: tmpCampaignState.description,
+							logo: tmpCampaignState.bannerCid,
+							title: '',
+							header: '',
+							email: '',
+						}),
+					],
+					`${tmpCampaignState.name}-metadata.json`,
+					{
+						type: 'text/plain',
+					},
+				)
+
+				const cid = await uploadFileToIpfs(file)
+				tmpCampaignState.setMetadataCid(cid.toString())
+			})()
+		}
+
 		if (currentStep == 2) {
-			handleTxModal()
+			setTxModalState(true)
 		}
 	}, [currentStep, setStep])
 
