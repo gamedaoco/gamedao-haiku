@@ -30,13 +30,13 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 
 	useEffect(() => {
 		tmpCampaignState.setOrgId(organizationId)
-	}, [organizationId])
+	}, [tmpCampaignState, organizationId])
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
 			cancel()
 		}
-	}, [currentStep])
+	}, [cancel, currentStep])
 
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {
@@ -77,7 +77,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		if (currentStep == 2) {
 			setTxModalState(true)
 		}
-	}, [currentStep, setStep])
+	}, [tmpCampaignState, currentStep, setStep])
 
 	const handleUploadBannerImage = useCallback((file: File) => {
 		;(async (): Promise<string> => {
@@ -85,31 +85,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 			const cid = await uploadFileToIpfs(bannerFile)
 			return cid.toString()
 		})().then((cid) => tmpCampaignState.setBannerCid(cid))
-	}, [])
-
-	const handleSetContent = useCallback((content: string) => {
-		tmpCampaignState.setContent(content)
-	}, [])
-
-	const handleSetTargetAmount = useCallback((target: number) => {
-		tmpCampaignState.setTarget(target)
-	}, [])
-
-	const handleSetDepositAmount = useCallback((deposit: number) => {
-		tmpCampaignState.setDeposit(deposit)
-	}, [])
-
-	const handeSetProtocol = useCallback((protocol: number) => {
-		tmpCampaignState.setProtocol(protocol)
-	}, [])
-
-	const handeSetUsageOfFunds = useCallback((usageOfFunds: string) => {
-		tmpCampaignState.setUsageOfFunds(usageOfFunds)
-	}, [])
-
-	const handleSetCurrencyId = useCallback((currencyId: number) => {
-		tmpCampaignState.setCurrencyId(currencyId)
-	}, [])
+	}, [tmpCampaignState])
 
 	const handeSetEndDate = useCallback(
 		(endDate: Date) => {
@@ -124,7 +100,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 
 	const handeSetGovernance = useCallback((governance: number) => {
 		tmpCampaignState.setGovernance(governance)
-	}, [])
+	}, [tmpCampaignState])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
@@ -160,7 +136,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 				cancel()
 			}
 		},
-		[setTxModalState],
+		[tmpCampaignState, setTxModalState],
 	)
 
 	const checkBackButtonState = () => {
@@ -184,24 +160,24 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 			{currentStep === 1 && (
 				<Content
 					bannerCid={tmpCampaignState.bannerCid}
-					content={tmpCampaignState.content}
 					uploadBannerImage={handleUploadBannerImage}
-					setContent={handleSetContent}
+					content={tmpCampaignState.content}
+					setContent={tmpCampaignState.setContent}
 				/>
 			)}
 
 			{currentStep === 2 && (
 				<Settings
 					targetAmount={tmpCampaignState.target}
-					setTargetAmount={handleSetTargetAmount}
+					setTargetAmount={tmpCampaignState.setTarget}
 					depositAmount={tmpCampaignState.deposit}
-					setDepositAmount={handleSetDepositAmount}
+					setDepositAmount={tmpCampaignState.setDeposit}
 					flowProtocol={tmpCampaignState.protocol}
-					setFlowProtocol={handeSetProtocol}
+					setFlowProtocol={tmpCampaignState.setProtocol}
 					usageOfFunds={tmpCampaignState.usageOfFunds}
-					setUsageOfFunds={handeSetUsageOfFunds}
+					setUsageOfFunds={tmpCampaignState.setUsageOfFunds}
 					currencyId={tmpCampaignState.currencyId}
-					setCurrencyId={handleSetCurrencyId}
+					setCurrencyId={tmpCampaignState.setCurrencyId}
 					endDate={tmpCampaignState.endDate}
 					setEndDate={handeSetEndDate}
 					governance={tmpCampaignState.governance}
