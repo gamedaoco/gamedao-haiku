@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -18,7 +18,8 @@ export function IdentitySection() {
 		push(`/account/${AccountTabs.IDENTITY}`)
 	}, [push])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const avatarHash = md5(getAddressFromAccountState(accountState))
+	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
+
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n
 		navigator.clipboard
