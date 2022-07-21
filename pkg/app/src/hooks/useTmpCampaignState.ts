@@ -28,6 +28,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		defaultValues.currencyId,
 	)
 	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
+	const [expiryBlock, setExpiryBlock] = useLocalStorage<number>(`TmpCam${address}-expiry-block`, defaultValues.expiryBlock)
 	const [governance, setGovernance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
 	const [metadataCid, setMetadataCid] = useLocalStorage<string>(
 		`TmpCam${address}-metadata-cid`,
@@ -47,6 +48,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setUsageOfFunds(defaultValues.usageOfFunds)
 		setCurrencyId(defaultValues.currencyId)
 		setEndDate(defaultValues.endDate)
+		setExpiryBlock(defaultValues.expiryBlock)
 		setGovernance(defaultValues.governance)
 		setMetadataCid(defaultValues.metadataCid)
 	}, [
@@ -61,6 +63,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setUsageOfFunds,
 		setCurrencyId,
 		setEndDate,
+		setExpiryBlock,
 		setGovernance,
 		setMetadataCid,
 	])
@@ -77,6 +80,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		usageOfFunds: usageOfFunds,
 		currencyId: currencyId,
 		endDate: endDate,
+		expiryBlock: expiryBlock,
 		governance: governance,
 		metadataCid: metadataCid,
 		setOrgId: setOrgId,
@@ -90,6 +94,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setUsageOfFunds: setUsageOfFunds,
 		setCurrencyId: setCurrencyId,
 		setEndDate: setEndDate,
+		setExpiryBlock: setExpiryBlock,
 		setGovernance: setGovernance,
 		setMetadataCid: setMetadataCid,
 		clearAll: clearAll,

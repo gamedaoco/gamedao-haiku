@@ -38,15 +38,11 @@ export function useCreateCampaignTransaction(): TransactionData {
 	const address = useCurrentAccountAddress()
 	const data = useTmpCampaign()
 	const logger = useLogger('useCreateCampaignTransaction')
-	const blockNumber = useBlockNumber()
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && data && address) {
 			try {
 				// Data mapping
-				const endSecondsDiff = moment(data.endDate).diff(moment(), 'seconds')
-				const endBlock = blockNumber + Math.ceil(endSecondsDiff / blockTime)
-
 				const currencySymbol = selectedApiProvider.systemProperties.tokenSymbol?.[data.currencyId] ?? ''
 				const mappedData = {
 					orgId: data.orgId,
@@ -62,7 +58,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
-					expiry: endBlock,
+					expiry: data.expiryBlock,
 					protocol: data.protocol,
 					governance: data.governance ? 1 : 0,
 					cid: data.metadataCid,
@@ -108,7 +104,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 				}
 			}
 		}
-	}, [selectedApiProvider, address, data, blockNumber])
+	}, [selectedApiProvider, address, data])
 
 	return txState
 }
