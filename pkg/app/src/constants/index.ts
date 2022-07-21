@@ -56,7 +56,6 @@ export const defaultValuesTmpCampaign: TMPCampaign = {
 	governance: 0,
 	usageOfFunds: '',
 	endDate: new Date(),
-	expiryBlock: 0,
 	currencyId: -1,
 	metadataCid: '',
 }
