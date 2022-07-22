@@ -18,7 +18,7 @@ export function useSimpleVoteTransaction(proposalId: string, vote: number): Tran
 	const logger = useLogger('useSimpleVoteTransaction')
 
 	useEffect(() => {
-		if (selectedApiProvider?.apiProvider && proposalId && vote) {
+		if (selectedApiProvider?.apiProvider && proposalId && vote != null) {
 			try {
 				// Data mapping
 				const mappedData = {
