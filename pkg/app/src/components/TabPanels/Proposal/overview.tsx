@@ -8,8 +8,8 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { blockTime } from 'src/constants'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
+import { getTimeFromBlock } from 'src/utils/campaignUtils'
 
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'components/TabPanels/Organization/createProposal'
@@ -96,32 +96,6 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	useEffect(() => {
 		if (!blockNumber) return
 
-		const getHumanTime = (seconds: number) => {
-			let timeLeft = ''
-			const expiryBlockSeconds = seconds * blockTime
-			const minutes = Math.trunc((expiryBlockSeconds % 3600) / 60)
-			const hours = Math.trunc((expiryBlockSeconds % (3600 * 24)) / 3600)
-			const days = Math.trunc(expiryBlockSeconds / (3600 * 24))
-
-			if (days > 0) {
-				timeLeft = days + 'd '
-			}
-
-			if (days > 0 || hours > 0) {
-				timeLeft += hours + 'h '
-			}
-
-			if (days > 0 || hours > 0 || minutes > 0) {
-				timeLeft += minutes + 'm '
-			}
-
-			if (timeLeft === '') {
-				timeLeft = '1m'
-			}
-
-			return timeLeft
-		}
-
 		setRows(
 			proposals.map((proposal) => {
 				const expiryBlock = proposal.expiry_block
@@ -131,9 +105,9 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				let timeLeft = ''
 
 				if (!hasStarted) {
-					timeLeft = getHumanTime(startBlock - blockNumber)
+					timeLeft = getTimeFromBlock(blockNumber, startBlock)
 				} else if (!hasExpired) {
-					timeLeft = getHumanTime(expiryBlock - blockNumber)
+					timeLeft = getTimeFromBlock(blockNumber, expiryBlock)
 				} else {
 					timeLeft = 'Expired'
 				}
