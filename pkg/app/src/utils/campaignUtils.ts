@@ -16,6 +16,6 @@ export function getTimeFromBlock(currentBlock: number, endBlock: number): string
 		return null
 	}
 
-	const seconds = Math.ceil(blockDiff / 3)
+	const seconds = Math.ceil(blockDiff * 3)
 	return moment.duration(moment().diff(moment().add(seconds, 'seconds'))).humanize()
 }
