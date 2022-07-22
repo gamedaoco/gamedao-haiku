@@ -26,7 +26,7 @@ export function ContributeSection({ currencyId, deposit, setDeposit }: Component
 			} else if (value > currencyBalance?.free) {
 				value = currencyBalance?.free
 			}
-			console.warn(value)
+
 			setDeposit(value)
 		},
 		[setDeposit, currencyBalance],
