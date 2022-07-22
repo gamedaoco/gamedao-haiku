@@ -124,9 +124,10 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 		const noVotes = proposal.proposal_voters.filter((voter) => voter.voted === 0).length
 
 		const voteYes = +((yesVotes / Math.max(1, proposal.proposal_voters.length)) * 100).toPrecision(2)
+		const voteNo = +((noVotes / Math.max(1, proposal.proposal_voters.length)) * 100).toPrecision(2)
 
-		setYesPercentage(yesVotes ? voteYes : 0)
-		setNoPercentage(noVotes ? 100 % voteYes : 0)
+		setYesPercentage(voteYes)
+		setNoPercentage(voteNo)
 
 		setVoterRows(
 			proposal.proposal_voters.map((voter) => ({
