@@ -21,15 +21,15 @@ export function CampaignById() {
 	const { t } = useTranslation()
 	const theme = useTheme()
 	const systemProperties = useSystemProperties()
+	const address = useCurrentAccountAddress()
 	const config = useConfig()
 	const { query } = useRouter()
 	const { back } = useRouter()
 	const [value, setValue] = useState<string>('overview')
 	const [campaignId, setCampaignId] = useState<string>(null)
 	const { data } = useCampaignByIdSubscription({
-		variables: { campaignId: campaignId },
+		variables: { campaignId: campaignId, address: address },
 	})
-	const address = useCurrentAccountAddress()
 	const currencyId = useMemo(
 		() => systemProperties?.tokenSymbol?.indexOf(data?.campaign?.[0]?.token_symbol) ?? 0,
 		[systemProperties, data?.campaign?.[0]?.token_symbol],
@@ -63,6 +63,7 @@ export function CampaignById() {
 			</NavLink>
 			<Box sx={{ p: '2rem' }}>
 				<CampaignDetailsContent
+					id={campaignId}
 					title={data?.campaign?.[0]?.campaign_metadata?.name}
 					header={parseIpfsHash(data?.campaign[0]?.campaign_metadata?.header, config.IPFS_GATEWAY)}
 					description={data?.campaign?.[0]?.campaign_metadata?.description}
@@ -75,6 +76,7 @@ export function CampaignById() {
 					expiry={data?.campaign?.[0]?.expiry}
 					protocol={data?.campaign?.[0]?.protocol}
 					isAdmin={address === data?.campaign?.[0]?.organization?.controller}
+					hasContributed={data?.campaign?.[0]?.userContributedCount?.aggregate?.count > 0}
 				/>
 			</Box>
 			<Box sx={{ px: '2rem', pb: '4rem', pt: 0 }}>
