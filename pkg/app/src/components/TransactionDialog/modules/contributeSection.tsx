@@ -19,14 +19,14 @@ export function ContributeSection({ currencyId, deposit, setDeposit }: Component
 
 	const handleDepositChange = useCallback(
 		(event) => {
-			let value = event.target.value
+			let value = Math.round(event.target.value?.replace(`,`, '.'))
 
 			if (value < 1) {
 				value = 1
 			} else if (value > currencyBalance?.free) {
 				value = currencyBalance?.free
 			}
-
+			console.warn(value)
 			setDeposit(value)
 		},
 		[setDeposit, currencyBalance],
