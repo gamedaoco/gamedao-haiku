@@ -25,7 +25,8 @@
       },
       "create_campaign": "Create your first Campaign",
       "explore_campaigns": "Explore Campaigns",
-      "contribute_now": "Contribute now"
+      "contribute_now": "Contribute now",
+      "contribute_again": "Contribute again"
     },
     "form": {
       "next_step": "Next step",
@@ -41,6 +42,7 @@
     "by_organization": "By {{organizationName}}",
     "backers": "Backers:",
     "funded": "Funded:",
+    "amount": "Amount",
     "campaign_status": {
       "init": "Init",
       "active": "Active",
@@ -84,6 +86,11 @@
     },
     "clearIdentity": {
       "title": "Clear ZERO chain identity"
+    },
+    "contribute": {
+      "title": "Contribute to this campaign",
+      "action_subtitle": "Funding summary",
+      "action_sub_line": "Deposit"
     }
   },
   "page": {
@@ -133,7 +140,8 @@
       "raised": "RAISED",
       "target": "TARGET",
       "overview": "OVERVIEW",
-      "reasons_to_invest": "REASON TO INVEST"
+      "reasons_to_invest": "REASON TO INVEST",
+      "contribute_to_campaign_help_text": "Your funds will be reserved until the campaign is funded or expired."
     },
     "governance": {
     },
@@ -182,6 +190,11 @@
         "pending": "Clearing your identity in progress...",
         "success": "Your Identity was cleared successfully",
         "error": "Clearing Identity failed"
+      },
+      "contribute": {
+        "pending": "Contribute in progress...",
+        "success": "Successfully contributed",
+        "error": "Contribute failed"
       }
     },
     "info": {
