@@ -8,8 +8,7 @@ export function BalanceCard() {
 	const systemProperties = useSystemProperties()
 	const networkBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.networkCurrency)
 	const governanceBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.governanceCurrency)
-	// TODO fix value in graphql 2 === Play
-	const paymentBalance = useBalanceByAddressAndBalanceId(address, 2)
+	const paymentBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.paymentCurrencies)
 
 	return (
 		<Card variant="primary" sx={{ width: '312px' }}>

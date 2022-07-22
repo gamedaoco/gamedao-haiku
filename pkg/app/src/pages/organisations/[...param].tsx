@@ -55,6 +55,10 @@ export function OrganisationById() {
 		defaultMatches: true,
 	})
 
+	const handleInvalidUrl = useCallback(() => {
+		push('/')
+	}, [push])
+
 	const handleTabSelect = useCallback(
 		(newPath) => {
 			if (organizationIdState) {
@@ -86,10 +90,16 @@ export function OrganisationById() {
 			if (param.length == 1) {
 				setRouteState(param[0])
 			} else if (param.length >= 2) {
+				if (!param[0].startsWith('0x')) {
+					handleInvalidUrl()
+				}
 				setOrganizationIdState(param[0])
 				setRouteState(param[1])
 
 				if (param.length >= 3) {
+					if (!param[2].startsWith('0x')) {
+						handleInvalidUrl()
+					}
 					setProposalIdState(param[2])
 				}
 			}
@@ -124,7 +134,7 @@ export function OrganisationById() {
 
 	useEffect(() => {
 		if (data) {
-			setOrganizationState(data.organization?.[0] as Organization)
+			!data.organization?.[0] ? handleInvalidUrl() : setOrganizationState(data.organization?.[0] as Organization)
 		}
 	}, [data])
 
@@ -283,7 +293,7 @@ export function OrganisationById() {
 										goBack={() => handleTabSelect('proposals')}
 									/>
 								) : (
-									<ProposalOverview organizationId={organizationIdState} />
+									<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
 								)}
 							</TabPanel>
 							<TabPanel value={'members'}>

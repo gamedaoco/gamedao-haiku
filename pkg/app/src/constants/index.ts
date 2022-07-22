@@ -45,8 +45,17 @@ export const defaultValuesTMPProposal: TMPProposal = {
 }
 
 export const defaultValuesTmpCampaign: TMPCampaign = {
+	orgId: '',
 	name: '',
 	description: '',
 	bannerCid: '',
 	content: '',
+	target: 0,
+	deposit: 0,
+	protocol: 0,
+	governance: 0,
+	usageOfFunds: '',
+	endDate: new Date(),
+	currencyId: -1,
+	metadataCid: '',
 }

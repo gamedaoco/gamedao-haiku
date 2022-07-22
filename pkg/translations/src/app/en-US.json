@@ -59,6 +59,12 @@
       "action_sub_line": "Deposit",
       "description": "You need to deposit the amount so you can create an organisation. You will receive your deposit back when you close the organisation."
     },
+    "createCampaign": {
+      "title": "Create Campaign",
+      "action_subtitle": "Campaign deposit",
+      "action_sub_line": "Deposit",
+      "description": "You need to deposit the amount so you can create an campaign. We will return the deposit back to the treasury in case the campaign is not successful."
+    },
     "createProposal": {
       "title": "Create Proposal",
       "action_subtitle": "Proposal deposit",
@@ -150,6 +156,11 @@
     "transactions": {
       "createOrganization": {
         "pending": "Summoning your Organization...",
+        "success": "The beast is unleashed!",
+        "error": "Summoning failed, check your Mana."
+      },
+      "createCampaign": {
+        "pending": "Summoning your Campaign...",
         "success": "The beast is unleashed!",
         "error": "Summoning failed, check your Mana."
       },

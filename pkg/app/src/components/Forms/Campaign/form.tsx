@@ -1,26 +1,38 @@
-import { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { Button, Stack } from '@mui/material'
+import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
+import { Settings, validationSchema as settingsValidationSchema } from './modules/settings'
 
 interface ComponentProps {
+	organizationId: string
 	currentStep: number
 	cancel: () => void
 	setStep: (step) => void
 }
 
-export function Form({ cancel, currentStep, setStep }: ComponentProps) {
+export function Form({ organizationId, cancel, currentStep, setStep }: ComponentProps) {
 	const tmpCampaignState = useTmpCampaignState()
+	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
+	const [txModalState, setTxModalState] = useState<boolean>(false)
+	const createCampaignTx = useCreateCampaignTransaction()
+
+	useEffect(() => {
+		tmpCampaignState.setOrgId(organizationId)
+	}, [tmpCampaignState, organizationId])
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
 			cancel()
 		}
-	}, [currentStep])
+	}, [cancel, currentStep])
 
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {
@@ -33,22 +45,53 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 			setStep(currentStep + 1)
 		}
 
-		if (currentStep == 2) {
-			console.log('done')
+		if (currentStep == 1) {
+			;(async () => {
+				const file = new File(
+					[
+						JSON.stringify({
+							name: tmpCampaignState.name,
+							markdown: tmpCampaignState.content,
+							description: tmpCampaignState.description,
+							logo: '',
+							title: '',
+							header: tmpCampaignState.bannerCid,
+							email: '',
+						}),
+					],
+					`${tmpCampaignState.name}-metadata.json`,
+					{
+						type: 'text/plain',
+					},
+				)
+
+				const cid = await uploadFileToIpfs(file)
+				tmpCampaignState.setMetadataCid(cid.toString())
+			})()
 		}
-	}, [currentStep, setStep])
 
-	const handleUploadBannerImage = useCallback((file: File) => {
-		;(async (): Promise<string> => {
-			const bannerFile = new File([await file.arrayBuffer()], file.name)
-			const cid = await uploadFileToIpfs(bannerFile)
-			return cid.toString()
-		})().then((cid) => tmpCampaignState.setBannerCid(cid))
-	}, [])
+		if (currentStep == 2) {
+			setTxModalState(true)
+		}
+	}, [tmpCampaignState, currentStep, setStep])
 
-	const handleSetContent = useCallback((content: string) => {
-		tmpCampaignState.setContent(content)
-	}, [])
+	const handleUploadBannerImage = useCallback(
+		(file: File) => {
+			;(async (): Promise<string> => {
+				const bannerFile = new File([await file.arrayBuffer()], file.name)
+				const cid = await uploadFileToIpfs(bannerFile)
+				return cid.toString()
+			})().then((cid) => tmpCampaignState.setBannerCid(cid))
+		},
+		[tmpCampaignState],
+	)
+
+	const handeSetGovernance = useCallback(
+		(governance: number) => {
+			tmpCampaignState.setGovernance(governance)
+		},
+		[tmpCampaignState],
+	)
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
@@ -62,9 +105,32 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					banner: tmpCampaignState.bannerCid,
 					content: tmpCampaignState.content,
 				})
+			case 2:
+				return !settingsValidationSchema.isValidSync({
+					target: tmpCampaignState.target,
+					deposit: tmpCampaignState.deposit,
+					endDate: tmpCampaignState.endDate,
+					termsCondition: termsConditionAccepted,
+					currencyId: tmpCampaignState.currencyId,
+					usageOfFunds: tmpCampaignState.usageOfFunds,
+				})
 		}
 		return false
 	}
+
+	const handleCloseTxModal = useCallback(() => {
+		setTxModalState(false)
+	}, [setTxModalState])
+
+	const handleTxCallback = useCallback(
+		(state) => {
+			if (state) {
+				tmpCampaignState.clearAll()
+				cancel()
+			}
+		},
+		[tmpCampaignState, setTxModalState],
+	)
 
 	const checkBackButtonState = () => {
 		return currentStep == 0
@@ -87,9 +153,30 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 			{currentStep === 1 && (
 				<Content
 					bannerCid={tmpCampaignState.bannerCid}
-					content={tmpCampaignState.content}
 					uploadBannerImage={handleUploadBannerImage}
-					setContent={handleSetContent}
+					content={tmpCampaignState.content}
+					setContent={tmpCampaignState.setContent}
+				/>
+			)}
+
+			{currentStep === 2 && (
+				<Settings
+					targetAmount={tmpCampaignState.target}
+					setTargetAmount={tmpCampaignState.setTarget}
+					depositAmount={tmpCampaignState.deposit}
+					setDepositAmount={tmpCampaignState.setDeposit}
+					flowProtocol={tmpCampaignState.protocol}
+					setFlowProtocol={tmpCampaignState.setProtocol}
+					usageOfFunds={tmpCampaignState.usageOfFunds}
+					setUsageOfFunds={tmpCampaignState.setUsageOfFunds}
+					currencyId={tmpCampaignState.currencyId}
+					setCurrencyId={tmpCampaignState.setCurrencyId}
+					endDate={tmpCampaignState.endDate}
+					setEndDate={tmpCampaignState.setEndDate}
+					governance={tmpCampaignState.governance}
+					setGovernance={handeSetGovernance}
+					termsConditionAccepted={termsConditionAccepted}
+					setTermsConditionAccepted={setTermsConditionAccepted}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
@@ -122,9 +209,16 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					disabled={checkNextButtonState()}
 					sx={{ flexGrow: { xs: 1, sm: 0 } }}
 				>
-					{currentStep === 2 ? 'Save campaign' : 'Next step'}
+					{currentStep === 2 ? 'Publish now' : 'Next step'}
 				</Button>
 			</Stack>
+
+			<TransactionDialog
+				open={txModalState}
+				onClose={handleCloseTxModal}
+				txData={createCampaignTx}
+				txCallback={handleTxCallback}
+			/>
 		</>
 	)
 }

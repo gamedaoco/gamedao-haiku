@@ -98,6 +98,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
     }
 }
 
+
 subscription CampaignById($campaignId: String!) {
     campaign(where: {id: {_eq: $campaignId}}) {
         id
@@ -126,7 +127,6 @@ subscription CampaignById($campaignId: String!) {
         }
     }
 }
-
 
 
 
