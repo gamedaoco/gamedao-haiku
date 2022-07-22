@@ -18,6 +18,7 @@ interface ComponentProps {
 	showFilters?: boolean
 	filtersOptions?: DisplayValueEntryString[]
 	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: Campaign_Bool_Exp[] } | any>
+	defaultOption?: string
 }
 
 export function FiltersSection({
@@ -29,6 +30,7 @@ export function FiltersSection({
 	showFilters = true,
 	showSearch = true,
 	filtersOptions,
+	defaultOption,
 	ListTab,
 }: ComponentProps) {
 	const [searchInput, searchInputDebounced, setSearchInput] = useDebouncedState<string>(500, '')
@@ -117,7 +119,13 @@ export function FiltersSection({
 									</IconButton>
 								</Box>
 							)}
-							{showSort && <SortOptionsTab setFilters={setFilters} sortOptions={sortOptions} />}
+							{showSort && (
+								<SortOptionsTab
+									setFilters={setFilters}
+									sortOptions={sortOptions}
+									defaultOption={defaultOption}
+								/>
+							)}
 						</Box>
 					</Grid>
 				</Grid>

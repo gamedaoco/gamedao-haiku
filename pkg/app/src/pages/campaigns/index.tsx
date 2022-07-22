@@ -129,6 +129,7 @@ export function Campaigns() {
 						searchPlaceHolder={'Search Campaigns'}
 						ListTab={CampaignFiltersTab}
 						filtersOptions={filtersOptions}
+						defaultOption={'time_left_desc'}
 					/>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
