@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
+import { useTranslation } from 'react-i18next'
 import { CampaignContributorsSubscription, Campaign_Contributor } from 'src/queries'
 import { getContributedCampaignProgress, getContributedCampaignTimeLeft } from 'src/utils/contributedCampaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
@@ -33,28 +34,29 @@ interface ComponentProps {
 export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 	const theme = useTheme()
 	const config = useConfig()
+	const { t } = useTranslation()
 
 	return (
 		<Box>
 			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold} sx={{ pb: 4 }}>
-				Contributed Campaigns
+				{t('page:account:campaigns:contributed_campaigns')}
 			</Typography>
 			<Card>
 				<CardContent>
 					<Typography variant="h6" sx={{ mb: 2 }}>
-						Campaign Contributions
+						{t('page:account:campaigns:campaign_contributions')}
 					</Typography>
 
 					<Scrollbar>
 						<Table>
 							<TableHead>
 								<TableRow>
-									<TableCell>Name</TableCell>
-									<TableCell>Contributors</TableCell>
-									<TableCell>Investment</TableCell>
-									<TableCell>Raised/Goal</TableCell>
-									<TableCell>Time left</TableCell>
-									<TableCell>Status</TableCell>
+									<TableCell>{t('page:account:campaigns:name')}</TableCell>
+									<TableCell>{t('page:account:campaigns:contributors')}</TableCell>
+									<TableCell>{t('page:account:campaigns:investment')}</TableCell>
+									<TableCell>{t('page:account:campaigns:raised_goal')}</TableCell>
+									<TableCell>{t('page:account:campaigns:time_left')}</TableCell>
+									<TableCell>{t('page:account:campaigns:status')}</TableCell>
 								</TableRow>
 							</TableHead>
 							{loading ? (

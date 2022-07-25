@@ -39,6 +39,10 @@
       "back": "Back",
       "proposal": {
         "create": "Create Proposal"
+      },
+      "identity": {
+        "clear": "Clear Identity",
+        "submit": "Sign and Submit"
       }
     }
   },
@@ -59,7 +63,12 @@
       "success": "Success",
       "failed": "Failed",
       "locked": "Locked"
-    }
+    },
+    "display_name": "Display Name",
+    "legal_name": "Legal Name",
+    "email": "Email",
+    "total_deposit": "Total Deposit",
+    "website": "Website"
   },
   "transactions": {
     "createOrganization": {
@@ -130,6 +139,16 @@
         "role": "Role",
         "prime": "Prime",
         "member": "Member"
+      },
+      "campaigns": {
+        "contributed_campaigns": "Contributed Campaigns",
+        "campaign_contributions": "Campaign Contributions",
+        "name": "Name",
+        "contributors": "Contributors",
+        "investment": "Investment",
+        "raised_goal": "Raised/Goal",
+        "time_left": "Time Left",
+        "status": "Status"
       }
     },
     "organisations": {
