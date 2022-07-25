@@ -90,6 +90,8 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const [openTxModal, setOpenTxModal] = useState<boolean>(false)
 	const [startDate, setStartDate] = useState<string>('')
 	const [endDate, setEndDate] = useState<string>('')
+	const [showMore, setShowMore] = useState<boolean>(false)
+	const [showButton, setShowButton] = useState<boolean>(false)
 	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
 
@@ -107,6 +109,10 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 		setOpenTxModal(false)
 	}, [setOpenTxModal])
 
+	const handleShowMore = useCallback(() => {
+		setShowMore((prev) => !prev)
+	}, [setShowMore])
+
 	useEffect(() => {
 		if (loading) return
 
@@ -116,6 +122,12 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 		setProposal(data?.proposal?.[0] ?? null)
 	}, [loading, data])
+
+	useEffect(() => {
+		if (proposal?.proposal_metadata?.description?.length > 250) {
+			setShowButton(true)
+		}
+	}, [proposal?.proposal_metadata?.description?.length])
 
 	useEffect(() => {
 		if (!proposal) return
@@ -182,10 +194,16 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 						{matches && <Chip color="secondary" label={proposalTypeName} variant="outlined" />}
 					</Stack>
-					<Typography variant="body1">{proposal.proposal_metadata?.description ?? ''}</Typography>
-					<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined">
-						Show more
-					</Button>
+					<Typography variant="body1">
+						{showMore
+							? proposal?.proposal_metadata?.description ?? ''
+							: proposal?.proposal_metadata?.description?.substring(0, 250) ?? ''}
+					</Typography>
+					{showButton && (
+						<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined" onClick={handleShowMore}>
+							{showMore ? `${t('button:ui:show_less')}` : `${t('button:ui:show_more')}`}
+						</Button>
+					)}
 				</Stack>
 			</Stack>
 
@@ -272,18 +290,25 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			</Stack>
 
 			{/* Cast vote */}
-			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
-				<Stack direction="row" justifyContent="space-between">
-					<Typography variant="h6">Cast your vote</Typography>
+			{proposal?.state === 'Active' && (
+				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="h6">Cast your vote</Typography>
+					</Stack>
+					<Stack paddingLeft={4} paddingRight={4} spacing={4}>
+						<RadioItem title={'Yes'} value={1} selectedValue={selectedVote} onChange={setSelectedVote} />
+						<RadioItem title={'No'} value={0} selectedValue={selectedVote} onChange={setSelectedVote} />
+						<Button
+							fullWidth={true}
+							variant="contained"
+							disabled={!simpleVoteTx}
+							onClick={handleOpenTxModal}
+						>
+							Vote
+						</Button>
+					</Stack>
 				</Stack>
-				<Stack paddingLeft={4} paddingRight={4} spacing={4}>
-					<RadioItem title={'Yes'} value={1} selectedValue={selectedVote} onChange={setSelectedVote} />
-					<RadioItem title={'No'} value={0} selectedValue={selectedVote} onChange={setSelectedVote} />
-					<Button fullWidth={true} variant="contained" disabled={!simpleVoteTx} onClick={handleOpenTxModal}>
-						Vote
-					</Button>
-				</Stack>
-			</Stack>
+			)}
 
 			{/* Voter list */}
 			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>
