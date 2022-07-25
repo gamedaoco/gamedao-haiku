@@ -18,7 +18,7 @@ interface ComponentProps {
 	setDescription: (description) => void
 	startDate: Date
 	setStartDate: (date) => void
-	endData: Date
+	endDate: Date
 	setEndDate: (date) => void
 	amount: number
 	setAmount: (number) => void
@@ -69,7 +69,7 @@ export function Description({
 	setDescription,
 	startDate,
 	setStartDate,
-	endData,
+	endDate,
 	setEndDate,
 	amount,
 	setAmount,
@@ -204,7 +204,7 @@ export function Description({
 						minDate={moment(startDate ?? new Date())
 							.add(1, 'day')
 							.toDate()}
-						value={endData}
+						value={endDate}
 						onChange={setEndDate}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}
