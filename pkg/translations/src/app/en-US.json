@@ -7,7 +7,13 @@
       "dashboard": "Dashboard",
       "wallet": "Wallet",
       "documentation": "Documentation",
-      "faucet": "Faucet"
+      "faucet": "Faucet",
+      "overview": "Overview",
+      "my_organisations": "My Organisations",
+      "my_campaigns": "My Campaigns",
+      "my_collectables": "My Collectables",
+      "identity": "Identity",
+      "set_on_chain_identity": "Set On-Chain Identity"
     },
     "ui": {
       "connect_wallet": "Connect wallet",
@@ -37,6 +43,7 @@
     }
   },
   "label": {
+    "my_collectables": "My Collectables",
     "sort_by": "Sort By",
     "filters": "Filters",
     "by_organization": "By {{organizationName}}",
@@ -100,6 +107,31 @@
     }
   },
   "page": {
+    "account": {
+      "title": "My Account",
+      "achievements": {
+        "title": "My Achievements",
+        "description": "Level up by using our protocols and collaborating with the community."
+      },
+      "balances": {
+        "title": "My Balances",
+        "token": "Token",
+        "transferable": "Transferable",
+        "locked": "Locked",
+        "reserved": "Reserved",
+        "total": "Total"
+      },
+      "organisations": {
+        "title": "Organisations",
+        "name": "Name",
+        "members": "Members",
+        "value_locked": "Value Locked",
+        "access": "Access",
+        "role": "Role",
+        "prime": "Prime",
+        "member": "Member"
+      }
+    },
     "organisations": {
       "no_campaigns": "No Campaigns Yet",
       "no_organisations": "No organisation found",
@@ -209,6 +241,7 @@
       }
     },
     "info": {
+      "address_copied": "Address Copied to Clipboard"
     },
     "success": {
     },
