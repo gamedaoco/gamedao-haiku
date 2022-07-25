@@ -16,6 +16,8 @@
       "load_more": "Load More",
       "clear": "Clear",
       "back_to_all_campaigns": "back to all campaigns",
+      "show_more": "Show More",
+      "show_less": "Show Less",
       "transaction": {
         "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
         "get_token": "Get {{token}} here",
