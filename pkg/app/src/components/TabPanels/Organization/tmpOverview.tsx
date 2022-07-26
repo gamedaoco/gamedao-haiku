@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
-import { Button, Divider, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Button, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import type { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
@@ -173,7 +173,17 @@ export function TmpOverview() {
 						<Stack direction="row" alignItems="center" spacing={2}>
 							<Info />
 							<Typography>
-								Deploy organization on chain A min deposit of 5 GAME is needed. Get GAME here.
+								Deploy organization on chain A min deposit of 5 GAME is needed.{' '}
+								<Link
+									textAlign="center"
+									href="https://discord.com/channels/273529551483699200/772045307021885452"
+									rel="noreferrer"
+									target="_blank"
+									underline="always"
+									sx={{ whiteSpace: 'nowrap' }}
+								>
+									Get GAME here.
+								</Link>
 							</Typography>
 						</Stack>
 						<Stack

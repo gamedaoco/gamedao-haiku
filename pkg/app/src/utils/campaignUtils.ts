@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 import moment from 'moment'
+import { blockTime } from 'src/constants'
 
 export function getCampaignProgress(target: string, contributed: string): number {
 	const bnTarget = new BigNumber(target ?? '0')
@@ -16,6 +17,6 @@ export function getTimeFromBlock(currentBlock: number, endBlock: number): string
 		return null
 	}
 
-	const seconds = Math.ceil(blockDiff * 3)
+	const seconds = Math.ceil(blockDiff * blockTime)
 	return moment.duration(moment().diff(moment().add(seconds, 'seconds'))).humanize()
 }
