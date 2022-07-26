@@ -68,7 +68,9 @@
     "legal_name": "Legal Name",
     "email": "Email",
     "total_deposit": "Total Deposit",
-    "website": "Website"
+    "website": "Website",
+    "campaigns": "Campaigns",
+    "search_campaigns": "Search Campaigns"
   },
   "transactions": {
     "createOrganization": {
@@ -171,7 +173,10 @@
     "campaigns": {
       "created_campaigns": "Created Campaigns",
       "new_campaign": "New Campaign",
+      "no_campaigns": "No campaigns found",
       "click": "Click here to create a new campaign",
+      "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
+      "showing_results": "Showing  {{count1}} of {{count2}} campaigns",
       "sort_options": {
         "target_asc": "Funding Target: asc",
         "target_desc": "Funding Target: desc",
