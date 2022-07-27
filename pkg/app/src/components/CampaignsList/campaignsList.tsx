@@ -11,14 +11,12 @@ import { PlusIcon } from 'components/Icons/plusIcon'
 
 interface ComponentProps {
 	campaigns: Campaign[]
-	title?: string
 	loading?: boolean
 	showCreate?: boolean
 	createCallback?: () => void
 }
 
-export function CampaignsList({ campaigns, showCreate, loading, title, createCallback }: ComponentProps) {
-	const theme = useTheme()
+export function CampaignsList({ campaigns, showCreate, loading, createCallback }: ComponentProps) {
 	const { t } = useTranslation()
 	const [campaignsState, setCampaignsState] = useState<Campaign[]>()
 
@@ -32,12 +30,6 @@ export function CampaignsList({ campaigns, showCreate, loading, title, createCal
 
 	return (
 		<Box>
-			{title && (
-				<Typography marginBottom={2} variant="body2" fontWeight={theme.typography.fontWeightBold}>
-					{title}
-				</Typography>
-			)}
-
 			{loading && (
 				<Stack justifyContent="center" width="100%" alignItems="center" padding={4}>
 					<CircularProgress />

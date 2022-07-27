@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import {
 	Box,
@@ -15,11 +15,16 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useConfig } from 'hooks/useConfig'
+import { useSystemProperties } from 'hooks/useSystemProperties'
+import { useTranslation } from 'react-i18next'
 import { CampaignContributorsSubscription, Campaign_Contributor } from 'src/queries'
+import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
 import { getContributedCampaignProgress, getContributedCampaignTimeLeft } from 'src/utils/contributedCampaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
+import { toUnit } from 'src/utils/token'
 
 import { Scrollbar } from 'components/scrollbar'
 
@@ -33,6 +38,8 @@ interface ComponentProps {
 export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 	const theme = useTheme()
 	const config = useConfig()
+	const systemProperties = useSystemProperties()
+	const blockNumber = useBlockNumber()
 
 	return (
 		<Box>
@@ -106,6 +113,12 @@ export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 													}
 												</TableCell>
 												<TableCell>
+													{/*{abbreviateNumber(*/}
+													{/*	toUnit(*/}
+													{/*		campaignContributor?.contributed,*/}
+													{/*		systemProperties?.tokenDecimals?.[currencyId] ?? 18,*/}
+													{/*	),*/}
+													{/*)}*/}
 													{abbreviateNumber(campaignContributor?.contributed)}
 												</TableCell>
 												<TableCell>
