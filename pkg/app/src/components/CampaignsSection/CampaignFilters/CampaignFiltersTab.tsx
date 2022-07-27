@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 
 import { Clear, ClearAll } from '@mui/icons-material'
 import {
@@ -13,20 +13,16 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Campaign_Bool_Exp, useDisplayValuesQuery } from 'src/queries'
+import { Campaign_Bool_Exp, DisplayValueEntryString } from 'src/queries'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
 	setFilters: (p: (prev) => any) => void
 	filters: Campaign_Bool_Exp[]
+	filtersOptions: DisplayValueEntryString[]
 }
 
-export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters }: ComponentProps) {
-	const { data } = useDisplayValuesQuery()
-	const campaignStatuses = useMemo(
-		() => data.displayValues.campaignFilters?.map((x) => ({ ...x, value: eval(`(${x?.value ?? 'null'})`) })),
-		[data],
-	)
+export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters, filtersOptions }: ComponentProps) {
 	const updateFilters = useCallback(
 		(e) => {
 			if (e.target.checked) {
@@ -65,7 +61,7 @@ export function CampaignFiltersTab({ handleDrawerNavigation, setFilters, filters
 				<Box sx={{ px: 2 }}>
 					<FormControl>
 						<FormGroup>
-							{campaignStatuses?.map((x, index) => (
+							{filtersOptions?.map((x, index) => (
 								<FormControlLabel
 									key={index}
 									checked={checkIfSelected(x)}

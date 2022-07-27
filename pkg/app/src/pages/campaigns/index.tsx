@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
@@ -9,6 +9,7 @@ import {
 	Campaign,
 	Campaign_Bool_Exp,
 	Campaign_Order_By,
+	DisplayValueEntryString,
 	useCampaignsPaginationCountSubscription,
 	useCampaignsPaginationSubscription,
 	useDisplayValuesQuery,
@@ -27,7 +28,24 @@ export function Campaigns() {
 		sortOption: {},
 		filters: [],
 	})
-
+	const filtersOptions = useMemo<DisplayValueEntryString[]>(
+		() =>
+			displayValuesData?.displayValues?.campaignFilters?.map((x) => ({
+				...x,
+				value: eval(`(${x?.value ?? 'null'})`),
+			})),
+		[displayValuesData],
+	)
+	useEffect(() => {
+		if (filtersOptions) {
+			setFilters((prev) => ({
+				...prev,
+				filters: filtersOptions
+					?.filter((x) => x?.key !== 'state_failed')
+					?.map((x) => JSON.parse(JSON.stringify(x?.value))),
+			}))
+		}
+	}, [filtersOptions, setFilters])
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
@@ -110,6 +128,8 @@ export function Campaigns() {
 						sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
 						searchPlaceHolder={'Search Campaigns'}
 						ListTab={CampaignFiltersTab}
+						filtersOptions={filtersOptions}
+						defaultOption={'time_left_desc'}
 					/>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>

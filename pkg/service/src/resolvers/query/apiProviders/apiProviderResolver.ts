@@ -16,18 +16,18 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 
 		return {
 			types: chainClient.types,
-			wsProviderUrl: chainClient.url,
+			wsProviderUrl: process.env.CHAIN_RPC_URL_OVERRIDE || chainClient.url,
 			chainProperties: {
-				ss58Format: ss58Format as any,
-				tokenSymbol: tokenSymbol as any,
-				tokenDecimals: tokenDecimals as any,
+				ss58Format: (ss58Format as any) ?? 25,
+				tokenSymbol: (tokenSymbol as any) ?? ['ZERO'],
+				tokenDecimals: (tokenDecimals as any) ?? [18],
 
 				// TODO: Remove hardcoded values
 				networkCurrency: 0, // 0 = ZERO
-				governanceCurrency: 2, // 1 = GAME
-				paymentCurrencies: 1, // 13 = PLAY
+				governanceCurrency: 2, // 2 = GAME
+				paymentCurrencies: 1, // 1 = PLAY
 			},
-			name: systemName.toHuman() as any,
+			name: (systemName.toHuman() as any) ?? 'ZERO',
 		}
 	} catch (err) {
 		console.error('apiProviderResolver error', err)

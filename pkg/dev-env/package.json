@@ -1,0 +1,24 @@
+{
+  "name": "@gamedao-haiku/dev-env",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM')\"",
+    "hasura:import": "node hasura-import.js",
+    "start": "docker-compose up -d && docker-compose logs -f",
+    "stop": "docker-compose down"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@polkadot/api": "^8.14.1",
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "http-proxy": "^1.18.1",
+    "http-proxy-ws": "^1.18.5",
+    "mkcert": "^1.5.0",
+    "node-fetch": "2",
+    "superagent": "^8.0.0"
+  }
+}
