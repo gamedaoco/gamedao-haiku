@@ -106,7 +106,12 @@
     "yes": "Yes",
     "no": "No",
     "cast_your_vote": "Cast your vote",
-    "votes": "Votes"
+    "votes": "Votes",
+    "name": "Name",
+    "role": "Role",
+    "members": "Members",
+    "prime": "Prime",
+    "member": "Member"
   },
   "transactions": {
     "createOrganization": {
