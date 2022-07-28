@@ -8,6 +8,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
 import { getTimeFromBlock } from 'src/utils/campaignUtils'
 
@@ -82,6 +83,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	const { loading, data } = useProposalsByOrganizationIdSubscription({
 		variables: { orgId: organizationId },
 	})
+	const { t } = useTranslation()
 	const enabledFeatures = useProposalFeatures()
 	const address = useCurrentAccountAddress()
 
@@ -142,7 +144,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				<Typography variant="h6">Proposals</Typography>
 				{address && enabledFeatures.CREATE_PROPOSAL && isMember && (
 					<Button variant="outlined" onClick={handleCreateButtonClick}>
-						<AddIcon /> Create Proposal
+						<AddIcon /> {t('button:ui:create_proposal')}
 					</Button>
 				)}
 			</Stack>

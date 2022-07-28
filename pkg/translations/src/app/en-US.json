@@ -38,7 +38,10 @@
       "contribute_now": "Contribute now",
       "contribute_again": "Contribute again",
       "join_organization": "Join Organization",
-      "leave_organization": "Leave Organization"
+      "leave_organization": "Leave Organization",
+      "create_proposal": "Create Proposal",
+      "show_more": "Show More",
+      "vote": "Vote"
     },
     "form": {
       "next_step": "Next step",
@@ -90,7 +93,20 @@
     "organization_level_description": "Your organization is currently on the level Padavan. Reach another {{xp}}XP to reach the next level!",
     "deploy_organization_min_deposit": "Deploy organization on chain A min deposit of {{value}} GAME is needed.",
     "get_token_here": "Get {{token}} here.",
-    "deploy_organization": "Deploy Organization"
+    "deploy_organization": "Deploy Organization",
+    "proposal_by": "by {{creator}}",
+    "information": "Information",
+    "creator": "Creator",
+    "start_date": "Start date",
+    "end_date": "End date",
+    "proposal_type": "Proposal Type",
+    "voting_type": "Voting Type",
+    "block_number": "Block Number",
+    "current_results": "Current results",
+    "yes": "Yes",
+    "no": "No",
+    "cast_your_vote": "Cast your vote",
+    "votes": "Votes"
   },
   "transactions": {
     "createOrganization": {

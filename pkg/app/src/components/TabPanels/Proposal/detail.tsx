@@ -176,9 +176,11 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 							<Stack direction="row" alignItems="center" spacing={1}>
 								<HowToVote fontSize="large" />
 								<Typography sx={{ wordBreak: 'break-all' }} variant="body1">
-									by{' '}
-									{proposal.proposal_creator_identity.display_name ??
-										formatAddressShort(proposal.proposal_creator_identity.id)}
+									{t('label:proposal_by', {
+										creator:
+											proposal.proposal_creator_identity.display_name ??
+											formatAddressShort(proposal.proposal_creator_identity.id),
+									})}
 								</Typography>
 							</Stack>
 						</Stack>
@@ -187,7 +189,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 					</Stack>
 					<Typography variant="body1">{proposal.proposal_metadata?.description ?? ''}</Typography>
 					<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined">
-						Show more
+						{t('button:ui:show_more')}
 					</Button>
 				</Stack>
 			</Stack>
@@ -195,7 +197,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			{/* Metadata right side */}
 			<Stack spacing={2} flex={1}>
 				<Stack component={Paper} padding={4} spacing={3}>
-					<Typography variant="h6">Information</Typography>
+					<Typography variant="h6">{t('label:information')}</Typography>
 
 					<Box
 						sx={{
@@ -205,7 +207,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 						}}
 					>
 						<Box>
-							<Typography variant="body2">Creator</Typography>
+							<Typography variant="body2">{t('label:creator')}</Typography>
 						</Box>
 						<Box>
 							<Typography variant="body2">
@@ -215,35 +217,35 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 						</Box>
 
 						<Box>
-							<Typography variant="body2">Start date</Typography>
+							<Typography variant="body2">{t('label:start_date')}</Typography>
 						</Box>
 						<Box>
 							<Typography variant="body2">{startDate}</Typography>
 						</Box>
 
 						<Box>
-							<Typography variant="body2">End date</Typography>
+							<Typography variant="body2">{t('label:end_date')}</Typography>
 						</Box>
 						<Box>
 							<Typography variant="body2">{endDate}</Typography>
 						</Box>
 
 						<Box>
-							<Typography variant="body2">Proposal Type</Typography>
+							<Typography variant="body2">{t('label:proposal_type')}</Typography>
 						</Box>
 						<Box>
 							<Typography variant="body2">{proposalTypeName}</Typography>
 						</Box>
 
 						<Box>
-							<Typography variant="body2">Voting Type</Typography>
+							<Typography variant="body2">{t('label:voting_type')}</Typography>
 						</Box>
 						<Box>
 							<Typography variant="body2">{proposalVotingTypeName}</Typography>
 						</Box>
 
 						<Box>
-							<Typography variant="body2">Block number</Typography>
+							<Typography variant="body2">{t('label:block_number')}</Typography>
 						</Box>
 						<NavLink
 							href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fbeeblebrox.zero.io%2Fnode#/explorer/query/${proposal.created_at_block}`}
@@ -256,17 +258,17 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 					</Box>
 				</Stack>
 				<Stack component={Paper} padding={4} spacing={3}>
-					<Typography variant="h6">Current results</Typography>
+					<Typography variant="h6">{t('label:current_results')}</Typography>
 					<Stack spacing={1}>
 						<Stack direction="row" justifyContent="space-between">
-							<Typography variant="body2">Yes</Typography>
+							<Typography variant="body2">{t('label:yes')}</Typography>
 							<Typography variant="body2">{yesPercentage}%</Typography>
 						</Stack>
 						<LinearProgress variant="determinate" value={yesPercentage} />
 					</Stack>
 					<Stack spacing={1}>
 						<Stack direction="row" justifyContent="space-between">
-							<Typography variant="body2">No</Typography>
+							<Typography variant="body2">{t('label:no')}</Typography>
 							<Typography variant="body2">{noPercentage}%</Typography>
 						</Stack>
 						<LinearProgress variant="determinate" value={noPercentage} />
@@ -277,13 +279,23 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			{/* Cast vote */}
 			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
 				<Stack direction="row" justifyContent="space-between">
-					<Typography variant="h6">Cast your vote</Typography>
+					<Typography variant="h6">{t('label:cast_your_vote')}</Typography>
 				</Stack>
 				<Stack paddingLeft={4} paddingRight={4} spacing={4}>
-					<RadioItem title={'Yes'} value={1} selectedValue={selectedVote} onChange={setSelectedVote} />
-					<RadioItem title={'No'} value={0} selectedValue={selectedVote} onChange={setSelectedVote} />
+					<RadioItem
+						title={t('label:yes')}
+						value={1}
+						selectedValue={selectedVote}
+						onChange={setSelectedVote}
+					/>
+					<RadioItem
+						title={t('label:no')}
+						value={0}
+						selectedValue={selectedVote}
+						onChange={setSelectedVote}
+					/>
 					<Button fullWidth={true} variant="contained" disabled={!simpleVoteTx} onClick={handleOpenTxModal}>
-						Vote
+						{t('button:ui:vote')}
 					</Button>
 				</Stack>
 			</Stack>
@@ -291,7 +303,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			{/* Voter list */}
 			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>
 				<Stack direction="row" spacing={1}>
-					<Typography variant="h6">Votes</Typography>
+					<Typography variant="h6">{t('label:votes')}</Typography>
 					<Chip size="small" variant="proposalVotes" label={proposal.proposal_voters.length} />
 				</Stack>
 				<Stack paddingLeft={4} paddingRight={4}>
