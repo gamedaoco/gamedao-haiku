@@ -18,7 +18,7 @@ services:
     command:
       [
         "/usr/local/bin/subzero",
-        "--chain=/subzero/customSpec.json",
+        "--dev",
         "--unsafe-ws-external",
         "--rpc-cors=all",
         "--ws-external",
@@ -165,7 +165,10 @@ services:
       CHAIN_RPC_URL_OVERRIDE: "ws://localhost:9944"
       DATABASE_URL: "postgresql://postgres:postgres@gamedao-service-postgres:5432/postgres?schema=public"
     depends_on:
-      - "gamedao-service-postgres"
+      gamedao-service-postgres:
+        condition: service_started
+      indexer-ready-state:
+        condition: service_healthy
     ports:
       - 4090:4000
 
