@@ -113,7 +113,10 @@
     "role": "Role",
     "members": "Members",
     "prime": "Prime",
-    "member": "Member"
+    "member": "Member",
+    "joined": "Joined",
+    "open": "Open",
+    "invitation": "Invitation"
   },
   "transactions": {
     "createOrganization": {
@@ -202,6 +205,7 @@
       "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
       "search_place_holder": "Search Organizations",
       "load_more": "Load More Organisations",
+      "showing_results": "Showing {{count1}} of {{count2}} organisations",
       "sort_options": {
         "mem_hi_lo": "Member: High-Low",
         "mem_lo_hi": "Member: Low-High",
