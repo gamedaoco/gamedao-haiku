@@ -36,7 +36,9 @@
       "create_campaign": "Create your first Campaign",
       "explore_campaigns": "Explore Campaigns",
       "contribute_now": "Contribute now",
-      "contribute_again": "Contribute again"
+      "contribute_again": "Contribute again",
+      "join_organization": "Join Organization",
+      "leave_organization": "Leave Organization"
     },
     "form": {
       "next_step": "Next step",
