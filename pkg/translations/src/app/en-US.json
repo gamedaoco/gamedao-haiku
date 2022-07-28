@@ -77,7 +77,18 @@
     "search_campaigns": "Search Campaigns",
     "update_photo": "Update photo",
     "n_members": "{{n}} Member",
-    "treasury_address": "Treasury Address: {{address}}"
+    "treasury_address": "Treasury Address: {{address}}",
+    "complete_your_organization": "Complete your Organization",
+    "tmp_organization_description": "To start using your organization and deploy it on the chain, please complete following steps and earn experience points!",
+    "add_logo_and_banner": "Add a logo and banner",
+    "click_placeholder_upload": "Click on the placeholder to upload an image",
+    "save_organization_on_chain": "Save organization on chain",
+    "deploy_organization_to_chain": "Deploy your organization onto the chain",
+    "total_received_xp": "Receive Total {{xp}}XP",
+    "organization_level_description": "Your organization is currently on the level Padavan. Reach another {{xp}}XP to reach the next level!",
+    "deploy_organization_min_deposit": "Deploy organization on chain A min deposit of {{value}} GAME is needed.",
+    "get_token_here": "Get {{token}} here.",
+    "deploy_organization": "Deploy Organization"
   },
   "transactions": {
     "createOrganization": {
