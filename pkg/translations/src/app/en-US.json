@@ -13,7 +13,11 @@
       "my_campaigns": "My Campaigns",
       "my_collectables": "My Collectables",
       "identity": "Identity",
-      "set_on_chain_identity": "Set On-Chain Identity"
+      "set_on_chain_identity": "Set On-Chain Identity",
+      "proposals": "Proposals",
+      "members": "Members",
+      "treasury": "Treasury",
+      "settings": "Settings"
     },
     "ui": {
       "connect_wallet": "Connect wallet",
@@ -70,7 +74,10 @@
     "total_deposit": "Total Deposit",
     "website": "Website",
     "campaigns": "Campaigns",
-    "search_campaigns": "Search Campaigns"
+    "search_campaigns": "Search Campaigns",
+    "update_photo": "Update photo",
+    "n_members": "{{n}} Member",
+    "treasury_address": "Treasury Address: {{address}}"
   },
   "transactions": {
     "createOrganization": {
