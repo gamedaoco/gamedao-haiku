@@ -45,7 +45,9 @@
     },
     "form": {
       "next_step": "Next step",
+      "save_organization": "Save organization",
       "back": "Back",
+      "cancel": "Cancel",
       "proposal": {
         "create": "Create Proposal"
       },
