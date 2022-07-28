@@ -27,8 +27,8 @@ async function handleCampaignCreatedEvent(context: EventHandlerContext) {
 
 	// Get id
 	let id;
-	if (campaignCreatedEventData.isV51) {
-		id = hashToHexString(campaignCreatedEventData.asV51.campaignId);
+	if (campaignCreatedEventData.isV56) {
+		id = hashToHexString(campaignCreatedEventData.asV56.campaignId);
 	} else {
 		console.error(`Unknown version of campaign created event!`);
 		return;

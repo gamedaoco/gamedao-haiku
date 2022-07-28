@@ -12,11 +12,11 @@ async function handleAddMemberEvent(context: EventHandlerContext) {
 	// Get versioned instance
 	const addMemberData = new ControlAddMemberEvent(context);
 
-	if (addMemberData.isV51) {
+	if (addMemberData.isV56) {
 		await addOrganizationMember(
 			context.store,
-			hashToHexString(addMemberData.asV51.orgId),
-			addressCodec.encode(addMemberData.asV51.accountId),
+			hashToHexString(addMemberData.asV56.orgId),
+			addressCodec.encode(addMemberData.asV56.accountId),
 		);
 	} else {
 		console.error(`Unknown version of add member event!`);

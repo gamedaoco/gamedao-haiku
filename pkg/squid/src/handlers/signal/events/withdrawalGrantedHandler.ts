@@ -11,8 +11,8 @@ async function handleWithdrawalGrantedEvent(context: EventHandlerContext) {
 
 	// Get id
 	let id;
-	if (withdrawalGrantedEventData.isV51) {
-		id = hashToHexString(withdrawalGrantedEventData.asV51.proposalId);
+	if (withdrawalGrantedEventData.isV56) {
+		id = hashToHexString(withdrawalGrantedEventData.asV56.proposalId);
 	} else {
 		console.error(`Unknown version of withdrawal granted event!`);
 		return;

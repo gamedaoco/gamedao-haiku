@@ -16,45 +16,25 @@ function getOrganizationCreationData(context: EventHandlerContext): Organization
 		});
 
 		// Get versioned data
-		if (createData.isV51) {
-			const v51Data = createData.asV51;
+		if (createData.isV55) {
+			const v55 = createData.asV55;
 			return {
-				name: v51Data.name.toString(),
-				cid: v51Data.cid.toString(),
+				name: v55.name.toString(),
+				cid: v55.cid.toString(),
 
-				controller: addressCodec.encode(v51Data.controller),
+				controller: addressCodec.encode(v55.controllerId),
 
-				orgType: v51Data.orgType,
-				access: v51Data.access,
-				feeModel: v51Data.feeModel,
-				fee: v51Data.fee,
+				orgType: v55.orgType,
+				access: v55.access,
+				feeModel: v55.feeModel,
+				fee: v55.fee,
 
-				govAsset: v51Data.govAsset,
-				payAsset: v51Data.payAsset,
+				govAsset: v55.govAsset,
+				payAsset: v55.payAsset,
 
-				memberLimit: v51Data.memberLimit,
+				memberLimit: v55.memberLimit,
 				blockNumber: context.block.height,
-				deposit: BigInt(0),
-			};
-		} else if (createData.isV55) {
-			const v52Data = createData.asV55;
-			return {
-				name: v52Data.name.toString(),
-				cid: v52Data.cid.toString(),
-
-				controller: addressCodec.encode(v52Data.controllerId),
-
-				orgType: v52Data.orgType,
-				access: v52Data.access,
-				feeModel: v52Data.feeModel,
-				fee: v52Data.fee,
-
-				govAsset: v52Data.govAsset,
-				payAsset: v52Data.payAsset,
-
-				memberLimit: v52Data.memberLimit,
-				blockNumber: context.block.height,
-				deposit: v52Data.deposit,
+				deposit: v55.deposit ?? 0n,
 			};
 		} else {
 			console.error(`Unknown version of create organization extrinsic!`);

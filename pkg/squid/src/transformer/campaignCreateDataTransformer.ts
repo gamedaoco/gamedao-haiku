@@ -16,36 +16,20 @@ function getCampaignCreationData(context: EventHandlerContext): CampaignCreation
 		});
 
 		// Get versioned data
-		if (createData.isV51) {
-			const v51Data = createData.asV51;
+		if (createData.isV56) {
+			const v56Data = createData.asV56;
 			return {
-				org: hashToHexString(v51Data.org),
-				admin: addressCodec.encode(v51Data.admin),
-				name: v51Data.name.toString(),
-				target: v51Data.target,
-				deposit: v51Data.deposit,
-				expiry: v51Data.expiry,
-				protocol: v51Data.protocol,
-				governance: v51Data.governance,
-				cid: v51Data.cid.toString(),
-				tokenSymbol: v51Data.tokenSymbol.toString(),
-				tokenName: v51Data.tokenName.toString(),
-				blockNumber: context.block.height,
-			};
-		} else if (createData.isV55) {
-			const v52Data = createData.asV55;
-			return {
-				org: hashToHexString(v52Data.orgId),
-				admin: addressCodec.encode(v52Data.adminId),
-				name: v52Data.name.toString(),
-				target: v52Data.target,
-				deposit: v52Data.deposit,
-				expiry: v52Data.expiry,
-				protocol: v52Data.protocol,
-				governance: v52Data.governance,
-				cid: v52Data.cid.toString(),
-				tokenSymbol: v52Data.tokenSymbol.toString(),
-				tokenName: v52Data.tokenName.toString(),
+				org: hashToHexString(v56Data.orgId),
+				admin: addressCodec.encode(v56Data.adminId),
+				name: v56Data.name.toString(),
+				target: v56Data.target,
+				deposit: v56Data.deposit,
+				expiry: v56Data.expiry,
+				protocol: v56Data.protocol,
+				governance: v56Data.governance,
+				cid: v56Data.cid.toString(),
+				tokenSymbol: v56Data.tokenSymbol.toString(),
+				tokenName: v56Data.tokenName.toString(),
 				blockNumber: context.block.height,
 			};
 		} else {

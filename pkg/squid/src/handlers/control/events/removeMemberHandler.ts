@@ -12,11 +12,11 @@ async function handleRemoveMemberEvent(context: EventHandlerContext) {
 	// Get versioned instance
 	const removeMemberData = new ControlRemoveMemberEvent(context);
 
-	if (removeMemberData.isV51) {
+	if (removeMemberData.isV56) {
 		await removeOrganizationMember(
 			context.store,
-			hashToHexString(removeMemberData.asV51.orgId),
-			addressCodec.encode(removeMemberData.asV51.accountId),
+			hashToHexString(removeMemberData.asV56.orgId),
+			addressCodec.encode(removeMemberData.asV56.accountId),
 		);
 	} else {
 		console.error(`Unknown version of remove member event!`);

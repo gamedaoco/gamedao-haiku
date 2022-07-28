@@ -18,10 +18,10 @@ async function handleCampaignContributedEvent(context: EventHandlerContext) {
 	let contribution: bigint | null = null;
 
 	// Load data
-	if (campaignCreatedEventData.isV51) {
-		campaignId = hashToHexString(campaignCreatedEventData.asV51.campaignId);
-		contributorAddress = addressCodec.encode(campaignCreatedEventData.asV51.sender);
-		contribution = campaignCreatedEventData.asV51.contribution;
+	if (campaignCreatedEventData.isV56) {
+		campaignId = hashToHexString(campaignCreatedEventData.asV56.campaignId);
+		contributorAddress = addressCodec.encode(campaignCreatedEventData.asV56.sender);
+		contribution = campaignCreatedEventData.asV56.contribution;
 	} else {
 		console.error(`Unknown version of contribute campaign event!`);
 		return;
