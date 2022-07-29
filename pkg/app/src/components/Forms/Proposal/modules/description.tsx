@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { InputAdornment, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -112,6 +112,20 @@ export function Description({
 		},
 		[setDescription, setErrorState],
 	)
+	useEffect(() => {
+		setStartDate(new Date())
+		setEndDate(
+			moment(startDate ?? new Date())
+				.add(1, 'day')
+				.toDate(),
+		)
+	}, [])
+
+	useEffect(() => {
+		return () => {
+			if (startDate) setEndDate(moment(startDate).add(1, 'day').toDate())
+		}
+	}, [startDate])
 
 	const handleAmountChange = useCallback(
 		(event) => {

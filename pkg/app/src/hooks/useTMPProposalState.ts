@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
@@ -18,8 +18,8 @@ export function useTMPProposalState(): TMPProposalState {
 		`TmpProposal-${address}-description`,
 		defaultValues.description,
 	)
-	const [startDate, setStartDate] = useState<Date>(defaultValues.startDate)
-	const [endDate, setEndDate] = useState<Date>(defaultValues.endDate)
+	const [startDate, setStartDate] = useLocalStorage<Date>(`TmpProposal-${address}-startDate`, defaultValues.startDate)
+	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpProposal-${address}-endDate`, defaultValues.endDate)
 	const [majority, setMajority] = useLocalStorage<number>(`TmpProposal-${address}-majority`, defaultValues.majority)
 	const [deposit, setDeposit] = useLocalStorage<number>(`TmpProposal-${address}-deposit`, defaultValues.deposit)
 	const [campaignId, setCampaignId] = useLocalStorage<string>(
