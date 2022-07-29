@@ -4,10 +4,12 @@ import { Box, Button, Card, CardContent, Divider, LinearProgress, Stack, Typogra
 import { useTheme } from '@mui/material/styles'
 import { useContributeTransaction } from 'hooks/tx/useContributeTransaction'
 import { useBlockNumber } from 'hooks/useBlockNumber'
+import { useConfig } from 'hooks/useConfig'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
 import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
+import { parseIpfsHash } from 'src/utils/ipfs'
 import { toUnit } from 'src/utils/token'
 
 import { Image } from 'components/Image/image'
@@ -69,18 +71,22 @@ export function CampaignDetailsContent({
 	)
 	const tx = useContributeTransaction(id, contributeState, currencyId)
 
+	const config = useConfig()
+	const campaignHeader = useMemo(
+		() => (header?.length ? parseIpfsHash(header, config.IPFS_GATEWAY) : ''),
+		[config.IPFS_GATEWAY, header],
+	)
 	return (
 		<>
 			<Card sx={{ p: { sm: '1rem' } }}>
 				<Stack direction={{ xs: 'column', sm: 'row' }} alignItems="stretch">
 					<Box sx={{ width: { xs: '100%', sm: '50%' } }}>
 						<Image
-							src={header}
+							src={campaignHeader}
 							alt="Campaign header"
 							ratio="16/9"
 							disabledEffect={true}
 							sx={{ borderRadius: Number(theme.shape.borderRadius) * 20 }}
-							onError={(event) => (event.target.style.display = 'none')}
 						/>
 					</Box>
 					<CardContent sx={{ pt: '0.5rem', width: { xs: '100%', sm: '50%' } }}>

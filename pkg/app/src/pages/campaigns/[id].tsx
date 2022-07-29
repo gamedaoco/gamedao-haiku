@@ -6,14 +6,12 @@ import { ArrowBack } from '@mui/icons-material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Button, Paper, Tab, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components'
 import { Layout } from 'src/components/Layouts/default/layout'
 import { useCampaignByIdSubscription } from 'src/queries'
-import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { CampaignDetailsContent } from 'components/CampaignsSection/campaignDetailsContent'
 
@@ -22,7 +20,6 @@ export function CampaignById() {
 	const theme = useTheme()
 	const systemProperties = useSystemProperties()
 	const address = useCurrentAccountAddress()
-	const config = useConfig()
 	const { query } = useRouter()
 	const { back } = useRouter()
 	const [value, setValue] = useState<string>('overview')
@@ -65,7 +62,7 @@ export function CampaignById() {
 				<CampaignDetailsContent
 					id={campaignId}
 					title={data?.campaign?.[0]?.campaign_metadata?.name}
-					header={parseIpfsHash(data?.campaign[0]?.campaign_metadata?.header, config.IPFS_GATEWAY)}
+					header={data?.campaign[0]?.campaign_metadata?.header}
 					description={data?.campaign?.[0]?.campaign_metadata?.description}
 					backers={data?.campaign?.[0]?.campaign_contributors_aggregate?.aggregate?.count ?? 0}
 					target={data?.campaign?.[0]?.target}
