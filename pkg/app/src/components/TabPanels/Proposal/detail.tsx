@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -26,6 +26,7 @@ import { NavLink } from 'src/components'
 import { blockTime } from 'src/constants'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
 import { formatAddressShort } from 'src/utils/address'
+import { isProposalActive } from 'src/utils/proposalUtils'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
@@ -94,7 +95,10 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const [showButton, setShowButton] = useState<boolean>(false)
 	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
-
+	const canVote = useMemo(
+		() => isProposalActive(blockNumber, proposal?.start_block),
+		[blockNumber, proposal?.start_block],
+	)
 	const { loading, data } = useProposalByIdSubscription({
 		variables: { proposalId },
 	})
@@ -290,7 +294,7 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			</Stack>
 
 			{/* Cast vote */}
-			{proposal?.state === 'Active' && (
+			{canVote && (
 				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
 					<Stack direction="row" justifyContent="space-between">
 						<Typography variant="h6">Cast your vote</Typography>
