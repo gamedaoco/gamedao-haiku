@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
@@ -21,6 +22,7 @@ export function TmpOverview() {
 	const tmpOrgState = useTmpOrganisationState()
 	const { t } = useTranslation()
 	const tx = useCreateOrgTransaction()
+	const { push } = useRouter()
 
 	const handleModalOpen = useCallback(() => {
 		setModalState(true)
@@ -43,6 +45,13 @@ export function TmpOverview() {
 			if (state) {
 				// The transaction was successful, clear state
 				tmpOrgState?.clearAll()
+				result.events.forEach(({ event: { data, method, section } }) => {
+					if (section === 'control' && method === 'OrgCreated') {
+						setTimeout(function () {
+							push(`/organisations/${data[1].toHex()}/dashboard`)
+						}, 3000)
+					}
+				})
 			}
 		},
 		[tmpOrgState.clearAll],
