@@ -17,6 +17,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
+import { useConfig } from 'hooks/useConfig'
 import { useDisplayValues } from 'hooks/useDisplayValues'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
@@ -35,7 +36,14 @@ const validationDepositSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
 
-const validationEndDateSchema = Yup.date().required().min(moment().add(1, 'day').toDate())
+const getValidationEndDateSchema = (minExpiry) =>
+	Yup.date()
+		.required()
+		.min(
+			moment()
+				.add(minExpiry ?? 0, 'seconds')
+				.toDate(),
+		)
 
 const validationTermsConditionSchema = Yup.boolean().isTrue()
 
@@ -43,14 +51,16 @@ const validationCurrencyIdSchema = Yup.number().required().min(0)
 
 const validationUsageOfFundsSchema = Yup.number().required()
 
-export const validationSchema = Yup.object().shape({
-	target: validationTargetSchema,
-	deposit: validationDepositSchema,
-	endDate: validationEndDateSchema,
-	termsCondition: validationTermsConditionSchema,
-	currencyId: validationCurrencyIdSchema,
-	usageOfFunds: validationUsageOfFundsSchema,
-})
+export function getValidationSchema(minExpiry: number | string) {
+	return Yup.object().shape({
+		target: validationTargetSchema,
+		deposit: validationDepositSchema,
+		endDate: getValidationEndDateSchema(minExpiry),
+		termsCondition: validationTermsConditionSchema,
+		currencyId: validationCurrencyIdSchema,
+		usageOfFunds: validationUsageOfFundsSchema,
+	})
+}
 
 interface ComponentProps {
 	flowProtocol: number
@@ -91,9 +101,16 @@ export function Settings({
 }: ComponentProps) {
 	const { selectedApiProvider } = useNetworkContext()
 	const displayValues = useDisplayValues()
+	const config = useConfig()
 	const { t } = useTranslation()
 	const [currencies, setCurrencies] = useState([])
-	const minDate = useMemo(() => moment(new Date()).add(5, 'day').toDate(), [])
+	const minDate = useMemo(
+		() =>
+			moment(new Date())
+				.add(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
+				.toDate(),
+		[],
+	)
 
 	const handleTargetAmountChange = useCallback(
 		(event) => {
