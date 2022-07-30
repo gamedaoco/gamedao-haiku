@@ -101,7 +101,7 @@ function createWithdrawProposalTx(
 		cid: data.metaDataCID,
 		amount: fromUnit(
 			data.amount,
-			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.networkCurrency],
+			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.paymentCurrencies],
 		),
 		start: blockTime.startBlocks,
 		expiry: blockTime.endBlocks,
