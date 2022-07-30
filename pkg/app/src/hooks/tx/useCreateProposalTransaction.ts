@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
 import { TransactionData } from 'src/@types/transactionData'
-import { blockTime } from 'src/constants'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
@@ -41,7 +40,7 @@ const withdrawProposalValidation = Yup.object().shape({
 })
 
 // Calculation for start and end block (BlockTime / blockNumbers) form Date
-function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime {
+function getBlockTimeFromDate(data: TMPProposal, blockNumber: number, blockTime): BlockTime {
 	// Convert date to moment date.
 	const startDate = moment(data.startDate)
 	const endDate = moment(data.endDate)
@@ -63,8 +62,9 @@ function createGeneralProposalTx(
 	data: TMPProposal,
 	blockNumber: number,
 	organizationId: string,
+	targetBlockTime: number,
 ): SubmittableExtrinsic {
-	const blockTime = getBlockTimeFromDate(data, blockNumber)
+	const blockTime = getBlockTimeFromDate(data, blockNumber, targetBlockTime)
 
 	// Data mapping
 	const mappedData = {
@@ -91,8 +91,9 @@ function createWithdrawProposalTx(
 	selectedApiProvider: ApiProvider,
 	data: TMPProposal,
 	blockNumber: number,
+	targetBlockTime: number,
 ): SubmittableExtrinsic {
-	const blockTime = getBlockTimeFromDate(data, blockNumber)
+	const blockTime = getBlockTimeFromDate(data, blockNumber, targetBlockTime)
 
 	// Data mapping
 	const mappedData = {
@@ -134,9 +135,20 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 			try {
 				let tx
 				if (data.type === 0) {
-					tx = createGeneralProposalTx(selectedApiProvider, data, blockNumber, organizationId)
+					tx = createGeneralProposalTx(
+						selectedApiProvider,
+						data,
+						blockNumber,
+						organizationId,
+						selectedApiProvider.systemProperties?.blockTargetTime,
+					)
 				} else if (data.type === 1) {
-					tx = createWithdrawProposalTx(selectedApiProvider, data, blockNumber)
+					tx = createWithdrawProposalTx(
+						selectedApiProvider,
+						data,
+						blockNumber,
+						selectedApiProvider.systemProperties?.blockTargetTime,
+					)
 				}
 
 				if (tx) {

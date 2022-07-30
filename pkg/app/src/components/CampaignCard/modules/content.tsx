@@ -23,7 +23,10 @@ export function Content({ title, organisationName, backers, target, contributed,
 	const systemProperties = useSystemProperties()
 	const blockNumber = useBlockNumber()
 	const progress = useMemo(() => getCampaignProgress(target, contributed), [contributed, target])
-	const duration = useMemo(() => getTimeFromBlock(blockNumber, expiry), [blockNumber, expiry])
+	const duration = useMemo(
+		() => getTimeFromBlock(blockNumber, expiry, systemProperties?.blockTargetTime),
+		[blockNumber, expiry],
+	)
 	const funded = useMemo(
 		() => abbreviateNumber(toUnit(contributed, systemProperties?.tokenDecimals?.[currencyId] ?? 18)),
 		[contributed, systemProperties, currencyId],

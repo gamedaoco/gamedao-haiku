@@ -9,6 +9,7 @@ export interface SystemProperties {
 	governanceCurrency: number
 	networkCurrency: number
 	paymentCurrencies: number
+	blockTargetTime: number
 }
 
 export interface ApiProvider {
