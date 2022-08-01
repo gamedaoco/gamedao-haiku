@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
@@ -9,6 +10,7 @@ import type { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTranslation } from 'react-i18next'
+import { useOrganizationByIdSubscription } from 'src/queries'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
@@ -21,6 +23,9 @@ export function TmpOverview() {
 	const tmpOrgState = useTmpOrganisationState()
 	const { t } = useTranslation()
 	const tx = useCreateOrgTransaction()
+	const { push } = useRouter()
+	const [orgId, setOrgId] = useState<string>(null)
+	const { data: organizationByIdData, loading } = useOrganizationByIdSubscription({ variables: { orgId } })
 
 	const handleModalOpen = useCallback(() => {
 		setModalState(true)
@@ -43,10 +48,21 @@ export function TmpOverview() {
 			if (state) {
 				// The transaction was successful, clear state
 				tmpOrgState?.clearAll()
+				result.events.forEach(({ event: { data, method, section } }) => {
+					if (section === 'control' && method === 'OrgCreated') {
+						setOrgId(data?.[1]?.toHex())
+					}
+				})
 			}
 		},
 		[tmpOrgState.clearAll],
 	)
+
+	useEffect(() => {
+		if (orgId && organizationByIdData && !loading) {
+			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+		}
+	}, [orgId, organizationByIdData])
 
 	return (
 		<>
