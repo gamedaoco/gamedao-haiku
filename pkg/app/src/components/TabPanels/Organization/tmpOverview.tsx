@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
@@ -9,6 +10,7 @@ import type { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTranslation } from 'react-i18next'
+import { useOrganizationByIdSubscription } from 'src/queries'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
@@ -21,6 +23,9 @@ export function TmpOverview() {
 	const tmpOrgState = useTmpOrganisationState()
 	const { t } = useTranslation()
 	const tx = useCreateOrgTransaction()
+	const { push } = useRouter()
+	const [orgId, setOrgId] = useState<string>(null)
+	const { data: organizationByIdData, loading } = useOrganizationByIdSubscription({ variables: { orgId } })
 
 	const handleModalOpen = useCallback(() => {
 		setModalState(true)
@@ -43,10 +48,24 @@ export function TmpOverview() {
 			if (state) {
 				// The transaction was successful, clear state
 				tmpOrgState?.clearAll()
+				result.events.forEach(({ event: { data, method, section } }) => {
+					if (section === 'control' && method === 'OrgCreated') {
+						setOrgId(data[1].toHex())
+						if (organizationByIdData && !loading) {
+							push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+						}
+					}
+				})
 			}
 		},
 		[tmpOrgState.clearAll],
 	)
+
+	useEffect(() => {
+		if (organizationByIdData && !loading) {
+			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+		}
+	}, [organizationByIdData])
 
 	return (
 		<>
@@ -54,8 +73,11 @@ export function TmpOverview() {
 				<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
 					<Paper sx={{ width: '100%' }}>
 						<Stack height="100%" spacing={1} padding={{ xs: 2, md: 4 }}>
-							<Typography variant="h6">{t('label:complete_your_organization')}</Typography>
-							<Typography variant="body2">{t('label:tmp_organization_description')}</Typography>
+							<Typography variant="h6">Complete your Organization</Typography>
+							<Typography variant="body2">
+								To start using your oganization and deploy it on the chain, please complete following
+								steps and earn experience points!
+							</Typography>
 							<Timeline position="right">
 								<TimelineItem sx={{ '&:before': { display: 'none' } }}>
 									<TimelineSeparator>
@@ -65,7 +87,7 @@ export function TmpOverview() {
 									<TimelineContent>
 										<Stack direction="row" justifyContent="space-between" height="100%">
 											<Typography variant="subtitle2" sx={{ textDecoration: 'line-through' }}>
-												{t('transactions:createOrganization:title')}
+												Create organization
 											</Typography>
 											<Typography variant="subtitle2">+15XP</Typography>
 										</Stack>
@@ -86,7 +108,7 @@ export function TmpOverview() {
 															: 'unset',
 													}}
 												>
-													{t('label:add_logo_and_banner')}
+													Add a logo and banner
 												</Typography>
 												<Typography
 													variant="body2"
@@ -96,7 +118,7 @@ export function TmpOverview() {
 															: 'unset',
 													}}
 												>
-													{t('label:click_placeholder_upload')}
+													Click on the placeholder to upload an image
 												</Typography>
 											</Stack>
 											<Typography variant="subtitle2">+15XP</Typography>
@@ -113,16 +135,12 @@ export function TmpOverview() {
 									<TimelineContent>
 										<Stack direction="row" justifyContent="space-between">
 											<Stack spacing={1}>
-												<Typography variant="subtitle2">
-													{t('label:save_organization_on_chain')}
-												</Typography>
+												<Typography variant="subtitle2">Save organization on chain</Typography>
 												<Typography variant="body2">
-													{t('label:deploy_organization_to_chain')}
+													Deploy your organization onto the chain
 												</Typography>
 											</Stack>
-											<Typography variant="subtitle2">
-												{t('label:total_received_xp', { xp: 50 })}
-											</Typography>
+											<Typography variant="subtitle2">Receive Total 50XP</Typography>
 										</Stack>
 									</TimelineContent>
 								</TimelineItem>
@@ -163,7 +181,8 @@ export function TmpOverview() {
 								DAO Padawan
 							</Typography>
 							<Typography variant="caption" textAlign="center">
-								{t('label:organization_level_description', { xp: 40 })}
+								Your organization is currently on the level Padavan. Reach another 40XP to reach the
+								next level!
 							</Typography>
 						</Stack>
 					</Paper>
@@ -173,7 +192,7 @@ export function TmpOverview() {
 						<Stack direction="row" alignItems="center" spacing={2}>
 							<Info />
 							<Typography>
-								{t('label:deploy_organization_min_deposit', { value: 5 })}
+								Deploy organization on chain A min deposit of 5 GAME is needed.{' '}
 								<Link
 									textAlign="center"
 									href="https://discord.com/channels/273529551483699200/772045307021885452"
@@ -182,7 +201,7 @@ export function TmpOverview() {
 									underline="always"
 									sx={{ whiteSpace: 'nowrap' }}
 								>
-									{t('label:get_token_here', { token: 'GAME' })}
+									Get GAME here.
 								</Link>
 							</Typography>
 						</Stack>
@@ -209,7 +228,7 @@ export function TmpOverview() {
 								disabled={!tx}
 								onClick={handleModalOpen}
 							>
-								{t('label:deploy_organization')}
+								Deploy Organization
 							</Button>
 						</Stack>
 					</Stack>
