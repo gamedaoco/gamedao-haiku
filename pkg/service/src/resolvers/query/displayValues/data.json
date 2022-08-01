@@ -267,12 +267,12 @@
     {
       "text": "page:organisations:sort_options:mem_hi_lo",
       "key": "memberCount_DESC",
-      "value": "{ 'orderBy': { 'organization_members_aggregate': { 'count': 'desc'} } }"
+      "value": "{ 'organization_members_aggregate': { 'count': 'desc'} }"
     },
     {
       "text": "page:organisations:sort_options:mem_lo_hi",
       "key": "memberCount_ASC",
-      "value": "{ 'orderBy': { 'organization_members_aggregate': { 'count': 'asc'} } }"
+      "value": "{ 'organization_members_aggregate': { 'count': 'asc'} }"
     },
     {
       "text": "page:organisations:sort_options:created_new",
