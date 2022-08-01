@@ -4,11 +4,12 @@ import { useRouter } from 'next/router'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button } from '@mui/material'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useTranslation } from 'react-i18next'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 
 export function MyOrganisationsTab() {
 	const accountState = useCurrentAccountState()
@@ -18,6 +19,7 @@ export function MyOrganisationsTab() {
 			address: address,
 		},
 	})
+	const { t } = useTranslation()
 	const router = useRouter()
 	const createOrganization = useCallback(() => {
 		router.push('/organisations/create')
@@ -32,7 +34,7 @@ export function MyOrganisationsTab() {
 				sx={{ alignSelf: 'end', mb: 2 }}
 				onClick={createOrganization}
 			>
-				Create
+				{t('button:ui:create')}
 			</Button>
 			<MyOrganisationsTable organisations={organisations as Organization[]} loading={loading} />
 		</Box>

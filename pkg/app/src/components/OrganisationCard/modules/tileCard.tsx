@@ -5,6 +5,7 @@ import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/mat
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components/NavLink/navLink'
 import { Organization } from 'src/queries'
 import { parseIpfsHash } from 'src/utils/ipfs'
@@ -17,7 +18,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 	const theme = useTheme()
 	const config = useConfig()
 	const address = useCurrentAccountAddress()
-
+	const { t } = useTranslation()
 	const SubHeader = useMemo(() => {
 		return (
 			<Box
@@ -37,9 +38,9 @@ export const TileCard = ({ item }: ComponentPros) => {
 					}}
 				>
 					<Person fontSize={'small'} />
-					<span>{`${item?.organization_members?.length} ${
-						item?.organization_members?.length > 1 ? 'Members' : 'Member'
-					} `}</span>
+					<span>{`${item?.organization_members?.length} ${t(
+						`label:${item?.organization_members?.length > 1 ? 'members' : 'member'}`,
+					)} `}</span>
 				</Box>
 				<Box
 					sx={{
@@ -60,12 +61,12 @@ export const TileCard = ({ item }: ComponentPros) => {
 						{item?.organization_members?.find((member) => member.address === address) ? (
 							<>
 								<Check fontSize={'small'} />
-								<span>{'Joined'}</span>
+								<span>{t('label:joined')}</span>
 							</>
 						) : (
 							<>
 								<Key fontSize={'small'} />
-								<span>{item?.access === 'Open' ? 'Open' : 'Invitation'}</span>
+								<span>{t(`label:${item?.access === 'Open' ? 'open' : 'invitation'}`)}</span>
 							</>
 						)}
 					</Box>
