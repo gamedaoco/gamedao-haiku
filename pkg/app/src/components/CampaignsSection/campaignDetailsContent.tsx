@@ -48,7 +48,11 @@ export function CampaignDetailsContent({
 	const systemProperties = useSystemProperties()
 	const blockNumber = useBlockNumber()
 	const progress = useMemo(() => getCampaignProgress(target, contributed), [contributed, target])
-	const duration = useMemo(() => getTimeFromBlock(blockNumber, expiry), [blockNumber, expiry]) ?? 'Expired'
+	const duration =
+		useMemo(
+			() => getTimeFromBlock(blockNumber, expiry, systemProperties?.blockTargetTime),
+			[blockNumber, expiry],
+		) ?? 'Expired'
 	const [contributeState, setContributeState] = useState<number>(1)
 	const [showTxModalState, setShowTxModalState] = useState<boolean>(false)
 

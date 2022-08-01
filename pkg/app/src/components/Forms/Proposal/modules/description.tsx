@@ -5,6 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
+import { useConfig } from 'hooks/useConfig'
 import moment from 'moment'
 import { useSuccessfulCampaignByOrganisationIdSubscription } from 'src/queries'
 import * as Yup from 'yup'
@@ -30,37 +31,42 @@ interface ComponentProps {
 
 const validationNameSchema = Yup.string().required('* Proposal name is required')
 const validationDescriptionSchema = Yup.string().required('* Proposal description is required')
-export const validationSchema = Yup.object().shape({
-	name: Yup.string().required(),
-	description: Yup.string().required(),
-	startDate: Yup.date().required(),
-	endDate: Yup.date()
-		.required()
-		.when('startDate', (startDate, schema) => {
-			return schema.min(
-				moment(startDate ?? new Date())
-					.add(1, 'day')
-					.toDate(),
-			)
-		}),
-})
 
-export const validationSchemaWithdrawal = Yup.object().shape({
-	name: Yup.string().required(),
-	description: Yup.string().required(),
-	startDate: Yup.date().required(),
-	endDate: Yup.date()
-		.required()
-		.when('startDate', (startDate, schema) => {
-			return schema.min(
-				moment(startDate ?? new Date())
-					.add(1, 'day')
-					.toDate(),
-			)
-		}),
-	campaignId: Yup.string().required(),
-	amount: Yup.number().required(),
-})
+export function getValidationSchema(minExpiry: number | string) {
+	return Yup.object().shape({
+		name: Yup.string().required(),
+		description: Yup.string().required(),
+		startDate: Yup.date().required(),
+		endDate: Yup.date()
+			.required()
+			.when('startDate', (startDate, schema) => {
+				return schema.min(
+					moment(startDate ?? new Date())
+						.add(minExpiry ?? 0, 'seconds')
+						.toDate(),
+				)
+			}),
+	})
+}
+
+export function getValidationSchemaWithdrawal(minExpiry: number | string) {
+	return Yup.object().shape({
+		name: Yup.string().required(),
+		description: Yup.string().required(),
+		startDate: Yup.date().required(),
+		endDate: Yup.date()
+			.required()
+			.when('startDate', (startDate, schema) => {
+				return schema.min(
+					moment(startDate ?? new Date())
+						.add(minExpiry ?? 0, 'seconds')
+						.toDate(),
+				)
+			}),
+		campaignId: Yup.string().required(),
+		amount: Yup.number().required(),
+	})
+}
 
 export function Description({
 	name,
@@ -80,6 +86,7 @@ export function Description({
 }: ComponentProps) {
 	const [errorState, setErrorState] = useState<string>()
 	const { data } = useSuccessfulCampaignByOrganisationIdSubscription({ variables: { orgId: organizationId } })
+	const config = useConfig()
 
 	const handleNameChange = useCallback(
 		(event) => {
@@ -202,7 +209,7 @@ export function Description({
 					<DateTimePicker
 						label="End date"
 						minDate={moment(startDate ?? new Date())
-							.add(1, 'day')
+							.add(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 							.toDate()}
 						value={endData}
 						onChange={setEndDate}
