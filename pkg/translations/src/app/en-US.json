@@ -204,6 +204,7 @@
       }
     },
     "organisations": {
+      "title": "Organisations",
       "no_campaigns": "No Campaigns Yet",
       "no_organisations": "No organisation found",
       "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
