@@ -51,9 +51,6 @@ export function TmpOverview() {
 				result.events.forEach(({ event: { data, method, section } }) => {
 					if (section === 'control' && method === 'OrgCreated') {
 						setOrgId(data?.[1]?.toHex())
-						if (organizationByIdData && !loading) {
-							push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
-						}
 					}
 				})
 			}
@@ -62,10 +59,10 @@ export function TmpOverview() {
 	)
 
 	useEffect(() => {
-		if (organizationByIdData && !loading) {
+		if (orgId && organizationByIdData && !loading) {
 			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
 		}
-	}, [organizationByIdData, loading])
+	}, [orgId, organizationByIdData])
 
 	return (
 		<>
