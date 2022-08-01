@@ -60,6 +60,7 @@
     }
   },
   "label": {
+    "dashboard": "Dashboard",
     "connect_wallet": "To use GameDAO DApp, the Polkadot or Talisman Extension is required. Please connect your wallet or install the Extension.",
     "my_collectables": "My Collectables",
     "sort_by": "Sort By",

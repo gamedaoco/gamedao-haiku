@@ -11,7 +11,7 @@ export function NoWalletConnected() {
 	}, [])
 	const { t } = useTranslation()
 	return (
-		<Layout showHeader showFooter showSidebar title="Dashboard">
+		<Layout showHeader showFooter showSidebar title={t('label:dashboard')}>
 			<Stack component={Paper} elevation={10} spacing={4} padding={4} marginY={4}>
 				<Typography
 					variant="h3"
