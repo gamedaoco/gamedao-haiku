@@ -49,7 +49,10 @@ export function CampaignDetailsContent({
 	const theme = useTheme()
 	const systemProperties = useSystemProperties()
 	const blockNumber = useBlockNumber()
-	const progress = useMemo(() => getCampaignProgress(target, contributed), [contributed, target])
+	const progress = useMemo(
+		() => (getCampaignProgress(target, contributed) > 100 ? 100 : getCampaignProgress(target, contributed)),
+		[contributed, target],
+	)
 	const duration =
 		useMemo(
 			() => getTimeFromBlock(blockNumber, expiry, systemProperties?.blockTargetTime),
