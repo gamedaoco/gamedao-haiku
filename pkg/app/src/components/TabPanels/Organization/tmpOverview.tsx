@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -10,7 +10,7 @@ import type { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTranslation } from 'react-i18next'
-import { useOrganizationByIdSubscription } from 'src/queries'
+import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
@@ -26,6 +26,7 @@ export function TmpOverview() {
 	const { push } = useRouter()
 	const [orgId, setOrgId] = useState<string>(null)
 	const { data: organizationByIdData, loading } = useOrganizationByIdSubscription({ variables: { orgId } })
+	const [orgState, setOrgByIdState] = useState<Organization>()
 
 	const handleModalOpen = useCallback(() => {
 		setModalState(true)
@@ -60,6 +61,13 @@ export function TmpOverview() {
 		},
 		[tmpOrgState.clearAll],
 	)
+
+	useEffect(() => {
+		if (organizationByIdData && !loading) {
+			setOrgByIdState(organizationByIdData?.organization?.[0] as Organization)
+			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+		}
+	}, [organizationByIdData])
 
 	return (
 		<>
