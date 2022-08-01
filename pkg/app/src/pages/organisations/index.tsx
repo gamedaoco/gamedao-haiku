@@ -64,7 +64,7 @@ export function OrganisationPage() {
 	}, [push])
 
 	return (
-		<Layout showHeader showFooter showSidebar title="Organisation">
+		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
 			<Box
 				component="main"
 				sx={{
