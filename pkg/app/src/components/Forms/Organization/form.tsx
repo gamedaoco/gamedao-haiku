@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import { Button, Stack } from '@mui/material'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTranslation } from 'react-i18next'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
 import { Controller } from './modules/controller'
@@ -18,7 +19,7 @@ interface ComponentProps {
 export function Form({ currentStep, setStep }: ComponentProps) {
 	const tmpOrgState = useTmpOrganisationState()
 	const { push } = useRouter()
-
+	const { t } = useTranslation()
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0) {
 			push('/organisations')
@@ -96,7 +97,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 					sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
 					onClick={handleBack}
 				>
-					Back
+					{t('button:form:back')}
 				</Button>
 				<Button
 					size="large"
@@ -108,7 +109,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 					}}
 					onClick={handleCancel}
 				>
-					Cancel
+					{t('button:form:cancel')}
 				</Button>
 
 				<Button
@@ -118,7 +119,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 					disabled={checkNextButtonState()}
 					sx={{ flexGrow: { xs: 1, sm: 0 } }}
 				>
-					{currentStep === 2 ? 'Save organization' : 'Next step'}
+					{t(`button:form:${currentStep === 2 ? 'save_organization' : 'next_step'}`)}
 				</Button>
 			</Stack>
 		</>

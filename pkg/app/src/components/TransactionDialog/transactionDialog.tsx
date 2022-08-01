@@ -118,7 +118,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 				<Link
 					textAlign="center"
 					color="textPrimary"
-					href="https://discord.gg/P7NHWGzJ7r"
+					href="https://discord.com/channels/273529551483699200/772045307021885452"
 					rel="noreferrer"
 					target="_blank"
 					underline="always"

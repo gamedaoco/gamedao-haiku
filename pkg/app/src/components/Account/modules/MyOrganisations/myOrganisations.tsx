@@ -18,6 +18,7 @@ import {
 } from '@mui/material'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
 import { Organization } from 'src/queries'
 import { getInitials } from 'src/utils/accountUtils'
 import { reformatNumber } from 'src/utils/globalUtils'
@@ -42,7 +43,7 @@ const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, ti
 		},
 		[router],
 	)
-
+	const { t } = useTranslation()
 	const isAdmin = useCallback((address: string) => address === selectedAddress, [selectedAddress])
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
@@ -56,11 +57,11 @@ const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, ti
 					<Table sx={{ minWidth: 700 }}>
 						<TableHead>
 							<TableRow sx={{ borderRadius: '8px' }}>
-								<TableCell>Name</TableCell>
-								<TableCell>Members</TableCell>
-								<TableCell>Value Locked</TableCell>
-								<TableCell>Access</TableCell>
-								<TableCell>Role</TableCell>
+								<TableCell>{t('page:account:organisations:name')}</TableCell>
+								<TableCell>{t('page:account:organisations:members')}</TableCell>
+								<TableCell>{t('page:account:organisations:value_locked')}</TableCell>
+								<TableCell>{t('page:account:organisations:access')}</TableCell>
+								<TableCell>{t('page:account:organisations:role')}</TableCell>
 								<TableCell align="right"></TableCell>
 							</TableRow>
 						</TableHead>
@@ -97,7 +98,13 @@ const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, ti
 										</TableCell>
 										<TableCell>{reformatNumber(12321, 2)}</TableCell>
 										<TableCell>{organisation.access}</TableCell>
-										<TableCell>{isAdmin(organisation?.controller) ? 'Prime' : 'Member'}</TableCell>
+										<TableCell>
+											{t(
+												`page:account:organisations:${
+													isAdmin(organisation?.controller) ? 'prime' : 'member'
+												}`,
+											)}
+										</TableCell>
 										{isAdmin(organisation?.controller) ? (
 											<TableCell align="right">
 												<IconButton

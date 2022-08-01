@@ -9,13 +9,13 @@ export function getCampaignProgress(target: string, contributed: string): number
 	return parseFloat(percent.toString())
 }
 
-export function getTimeFromBlock(currentBlock: number, endBlock: number): string {
+export function getTimeFromBlock(currentBlock: number, endBlock: number, targetBlockTime: number): string {
 	const blockDiff = endBlock - currentBlock
 
 	if (blockDiff <= 0) {
 		return null
 	}
 
-	const seconds = Math.ceil(blockDiff * 3)
+	const seconds = Math.ceil(blockDiff * (targetBlockTime ?? 3))
 	return moment.duration(moment().diff(moment().add(seconds, 'seconds'))).humanize()
 }

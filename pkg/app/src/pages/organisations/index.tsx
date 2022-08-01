@@ -64,7 +64,7 @@ export function OrganisationPage() {
 	}, [push])
 
 	return (
-		<Layout showHeader showFooter showSidebar title="Organisation">
+		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
 			<Box
 				component="main"
 				sx={{
@@ -76,7 +76,7 @@ export function OrganisationPage() {
 					<Box sx={{ mb: 4 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
-								<Typography variant="h3">Organisations</Typography>
+								<Typography variant="h3">{t('page:organisations:title')}</Typography>
 							</Grid>
 							<Grid item>
 								<Button
@@ -129,8 +129,10 @@ export function OrganisationPage() {
 								</Button>
 							)}
 							<Typography>
-								Showing {paginatedData?.length} of{' '}
-								{organizationsCount?.data?.organization_aggregate?.aggregate.count} organisations
+								{t('page:organisations:showing_results', {
+									count1: paginatedData?.length,
+									count2: organizationsCount?.data?.organization_aggregate?.aggregate.count,
+								})}
 							</Typography>
 						</Box>
 					</Box>

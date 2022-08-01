@@ -26,6 +26,7 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 				networkCurrency: 0, // 0 = ZERO
 				governanceCurrency: 2, // 2 = GAME
 				paymentCurrencies: 1, // 1 = PLAY
+				blockTargetTime: 3, // 3 = 3s Rococo 12
 			},
 			name: (systemName.toHuman() as any) ?? 'ZERO',
 		}
