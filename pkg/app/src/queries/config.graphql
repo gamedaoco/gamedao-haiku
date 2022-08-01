@@ -9,6 +9,8 @@ query Config($env: Environment!) {
         CONTACT
         IPFS_GATEWAY
         LOG_LEVEL
+        PROPOSAL_MIN_EXPIRY_IN_SECONDS
+        CAMPAIGN_MIN_EXPIRY_IN_SECONDS
     }
 }
 
@@ -24,6 +26,7 @@ query ApiProviderConfig {
             ss58Format
             tokenDecimals
             tokenSymbol
+            blockTargetTime
         }
     }
 }

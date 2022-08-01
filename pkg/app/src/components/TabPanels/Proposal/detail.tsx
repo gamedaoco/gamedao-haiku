@@ -20,10 +20,10 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useSimpleVoteTransaction } from 'hooks/tx/useSimpleVoteTransaction'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useDisplayValues } from 'hooks/useDisplayValues'
+import { useSystemProperties } from 'hooks/useSystemProperties'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components'
-import { blockTime } from 'src/constants'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
 import { formatAddressShort } from 'src/utils/address'
 
@@ -75,6 +75,7 @@ const rowHeight = 80
 export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const displayValues = useDisplayValues()
 	const { t } = useTranslation()
+	const systemProperties = useSystemProperties()
 	const [proposal, setProposal] = useState(null)
 	const [proposalTypeName, setProposalTypeName] = useState(null)
 	const [proposalVotingTypeName, setProposalVotingTypeName] = useState(null)
@@ -137,8 +138,8 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			})),
 		)
 
-		const startDiff = (proposal.start_block - blockNumber) * blockTime
-		const endDiff = (proposal.expiry_block - blockNumber) * blockTime
+		const startDiff = (proposal.start_block - blockNumber) * (systemProperties.blockTargetTime ?? 3)
+		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties.blockTargetTime ?? 3)
 
 		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY'))
 		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY'))
