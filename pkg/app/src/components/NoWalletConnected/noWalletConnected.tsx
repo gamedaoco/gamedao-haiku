@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 
 import { Button, Paper, Stack, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 import { Layout } from 'components/Layouts/default/layout'
 
@@ -8,9 +9,9 @@ export function NoWalletConnected() {
 	const openUrl = useCallback((url: string) => {
 		window.open(url, '_blank', 'noopener').focus()
 	}, [])
-
+	const { t } = useTranslation()
 	return (
-		<Layout showHeader showFooter showSidebar title="Dashboard">
+		<Layout showHeader showFooter showSidebar title={t('label:dashboard')}>
 			<Stack component={Paper} elevation={10} spacing={4} padding={4} marginY={4}>
 				<Typography
 					variant="h3"
@@ -21,26 +22,29 @@ export function NoWalletConnected() {
 						fontWeight: 800,
 					}}
 				>
-					To use GameDAO DApp, the Polkadot or Talisman Extension is required. Please connect your wallet or
-					install the Extension.
+					{t('label:connect_wallet')}
 				</Typography>
 				<Stack direction="row" justifyContent="end" spacing={4}>
 					<Button size="small" onClick={() => openUrl('https://docs.gamedao.co/')}>
-						Learn More
+						{t('button:ui:learn_more')}
 					</Button>
 					<Button
 						size="small"
 						variant="outlined"
 						onClick={() => openUrl('https://polkadot.js.org/extension/')}
 					>
-						Download Polkadot Extension
+						{t('button:ui:download_extension', {
+							extension: 'Polkadot',
+						})}
 					</Button>
 					<Button
 						size="small"
 						variant="outlined"
 						onClick={() => openUrl('https://polkadot.js.org/extension/')}
 					>
-						Download Talisman Extension
+						{t('button:ui:download_extension', {
+							extension: 'Talisman',
+						})}
 					</Button>
 				</Stack>
 			</Stack>
