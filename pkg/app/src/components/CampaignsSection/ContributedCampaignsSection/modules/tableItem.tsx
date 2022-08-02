@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 
 import { Box, CardMedia, LinearProgress, TableCell, TableRow, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useConfig } from 'hooks/useConfig'
 import { useSystemProperties } from 'hooks/useSystemProperties'
@@ -18,6 +19,7 @@ interface ComponentProps {
 
 export function TableItem({ campaignContributor }: ComponentProps) {
 	const config = useConfig()
+	const theme = useTheme()
 	const systemProperties = useSystemProperties()
 	const blockNumber = useBlockNumber()
 	const currencyId = useMemo(
@@ -72,6 +74,7 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 							sx={{
 								width: 64,
 								height: 64,
+								borderRadius: Number(theme.shape.borderRadius) * 8,
 							}}
 							src={parseIpfsHash(
 								campaignContributor?.campaign?.campaign_metadata?.header,
@@ -96,7 +99,7 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 				<Box display="flex" flexDirection="column" sx={{ mt: 2 }}>
 					<LinearProgress variant="determinate" value={progress} sx={{ maxHeight: 6 }} />
 
-					<Typography variant="body2">
+					<Typography variant="body2" color={theme.palette.common.white}>
 						{funded}/{target} {systemProperties?.tokenSymbol?.[currencyId] ?? ''}
 					</Typography>
 				</Box>
