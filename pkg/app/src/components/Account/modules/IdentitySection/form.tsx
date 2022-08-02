@@ -1,22 +1,18 @@
-import type { FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import type { Identity } from 'src/queries'
-
-import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-interface IdentityFormProps {
-	identity: Identity
-}
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+
 const initialValues = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
@@ -90,7 +86,7 @@ export function IdentityForm() {
 			/>
 			<form>
 				<Card sx={{ borderRadius: '16px' }}>
-					<CardHeader title="Set On-chain Identity" />
+					<CardHeader title={t('button:navigation:set_on_chain_identity')} />
 					<CardContent>
 						<Grid container spacing={3}>
 							<Grid item md={6} xs={12}>
@@ -100,7 +96,7 @@ export function IdentityForm() {
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
-											label="Display Name"
+											label={t('label:display_name')}
 											placeholder="QDozer"
 											sx={{
 												'& fieldset': {
@@ -154,7 +150,7 @@ export function IdentityForm() {
 											}}
 											onChange={onChange}
 											value={value}
-											label="Legal Name"
+											label={t('label:legal_name')}
 										/>
 									)}
 								/>
@@ -198,7 +194,7 @@ export function IdentityForm() {
 											}}
 											onChange={onChange}
 											value={value}
-											label="Email"
+											label={t('label:email')}
 										/>
 									)}
 								/>
@@ -218,7 +214,7 @@ export function IdentityForm() {
 											}}
 											disabled
 											value="1.0000"
-											label="Total Deposit"
+											label={t('label:total_deposit')}
 											InputProps={{
 												endAdornment: <Typography>milli</Typography>,
 											}}
@@ -243,7 +239,7 @@ export function IdentityForm() {
 											}}
 											onChange={onChange}
 											value={value}
-											label="Website"
+											label={t('label:website')}
 										/>
 									)}
 								/>
@@ -257,7 +253,7 @@ export function IdentityForm() {
 										variant="contained"
 										disabled={isClearDisabled}
 									>
-										Clear Identity
+										{t('button:form:identity:clear')}
 									</Button>
 									<Button
 										type="button"
@@ -265,7 +261,7 @@ export function IdentityForm() {
 										color="primary"
 										variant="contained"
 									>
-										Sign and Submit
+										{t('button:form:identity:submit')}
 									</Button>
 								</Box>
 							</Grid>

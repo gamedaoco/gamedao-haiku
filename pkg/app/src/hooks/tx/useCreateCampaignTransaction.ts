@@ -4,15 +4,11 @@ import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
-import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTmpCampaign } from 'hooks/useTmpCampaign'
-import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
-import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
-import { blockTime } from 'src/constants'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
@@ -45,7 +41,8 @@ export function useCreateCampaignTransaction(): TransactionData {
 			try {
 				// Data mapping
 				const endSecondsDiff = moment(data.endDate).diff(moment(), 'seconds')
-				const endBlock = blockNumber + Math.ceil(endSecondsDiff / blockTime)
+				const endBlock =
+					blockNumber + Math.ceil(endSecondsDiff / selectedApiProvider.systemProperties.blockTargetTime)
 
 				const currencySymbol = selectedApiProvider.systemProperties.tokenSymbol?.[data.currencyId] ?? ''
 				const mappedData = {

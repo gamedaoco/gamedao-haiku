@@ -8,8 +8,9 @@ import { useTranslation } from 'react-i18next'
 interface ComponentProps {
 	sortOptions: any
 	setFilters: (x: (prev) => any) => void
+	defaultOption?: string
 }
-export function SortOptionsTab({ sortOptions, setFilters }: ComponentProps) {
+export function SortOptionsTab({ sortOptions, setFilters, defaultOption }: ComponentProps) {
 	const { t } = useTranslation()
 	const [keyState, setKeyState] = useState<string>('')
 	const [mappingState, setMappingState] = useState({})
@@ -23,7 +24,15 @@ export function SortOptionsTab({ sortOptions, setFilters }: ComponentProps) {
 			setMappingState(mapping)
 		}
 	}, [sortOptions])
-
+	useEffect(() => {
+		if (sortOptions && defaultOption && !keyState) {
+			setKeyState(sortOptions?.filter(({ key }) => key === defaultOption)?.[0]?.key)
+			setFilters((prev) => ({
+				...prev,
+				sortOption: eval(`(${sortOptions?.filter(({ key }) => key === defaultOption)?.[0]?.value ?? 'null'})`),
+			}))
+		}
+	}, [defaultOption, sortOptions, keyState])
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
 			setKeyState(event.target.value)

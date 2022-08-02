@@ -266,13 +266,13 @@
   "organizationSortOptions": [
     {
       "text": "page:organisations:sort_options:mem_hi_lo",
-      "key": "memberLimit_DESC",
-      "value": "{ member_limit: 'desc' }"
+      "key": "memberCount_DESC",
+      "value": "{ organization_members_aggregate: { 'count': 'desc'} }"
     },
     {
       "text": "page:organisations:sort_options:mem_lo_hi",
-      "key": "memberLimit_ASC",
-      "value": "{ member_limit: 'asc' }"
+      "key": "memberCount_ASC",
+      "value": "{ organization_members_aggregate: { 'count': 'asc'} }"
     },
     {
       "text": "page:organisations:sort_options:created_new",

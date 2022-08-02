@@ -4,6 +4,7 @@ import { Verified } from '@mui/icons-material'
 import { Avatar, Box, Paper, Rating, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import md5 from 'md5'
+import { useTranslation } from 'react-i18next'
 import { Organization } from 'src/queries'
 import { shortAccountAddress } from 'src/utils/accountUtils'
 
@@ -20,12 +21,13 @@ const defaultGridColDef = {
 
 const rowHeight = 80
 export function OrganizationMembersTable({ organizationState }: ComponentProps) {
+	const { t } = useTranslation()
 	const columns = useMemo<GridColDef[]>(
 		() => [
 			{
 				...defaultGridColDef,
 				field: 'name',
-				headerName: 'Name',
+				headerName: t('label:name'),
 				flex: 1,
 				renderCell: (params) => {
 					return (
@@ -58,7 +60,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 			{
 				...defaultGridColDef,
 				field: 'role',
-				headerName: 'Role',
+				headerName: t('label:role'),
 				renderCell: (params) => {
 					return <Typography variant="body2">{params.row.role}</Typography>
 				},
@@ -91,7 +93,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 				},
 			},
 		],
-		[],
+		[t],
 	)
 
 	const pageSizeOptions = [5, 10, 20, 30]
@@ -105,7 +107,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 			members?.map((member, index) => ({
 				id: member?.address,
 				name: member?.identity?.display_name,
-				role: owner === member?.address ? 'Prime' : 'Member',
+				role: owner === t(`label:${member?.address ? 'prime' : 'member'}`),
 				email: member?.identity?.email,
 				address: shortAccountAddress(member),
 				trust: (index % 3) + 1,
@@ -118,7 +120,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 	return (
 		<Stack component={Paper} padding={4} spacing={2}>
 			<Stack direction="row" spacing={1} justifyContent="space-between">
-				<Typography variant="h6">Members</Typography>
+				<Typography variant="h6">{t('label:members')}</Typography>
 			</Stack>
 			<Box sx={{ height: 550 }}>
 				<DataGrid

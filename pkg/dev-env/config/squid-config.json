@@ -1,0 +1,6 @@
+{
+  "chainRPC": "ws://subzero:9944",
+  "archiveGQL": "http://indexer-gateway:8080/v1/graphql",
+  "startBlock": 0,
+  "networkAddressPrefix": 25
+}

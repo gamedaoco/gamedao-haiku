@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useCallback } from 'react'
+import React, { ChangeEvent, useCallback, useMemo } from 'react'
+
+import { useRouter } from 'next/router'
 
 import { Box, Tab, Tabs } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { AccountTabs } from 'src/@types/account'
-import { useRouter } from 'next/router'
 
 interface ComponentProps {
 	param: AccountTabs
@@ -12,29 +14,34 @@ interface TabsInterface {
 	label: string
 	value: AccountTabs
 }
-const tabs: TabsInterface[] = [
-	{
-		label: 'Overview',
-		value: AccountTabs.OVERVIEW,
-	},
-	{
-		label: 'My Organizations',
-		value: AccountTabs.ORGANIZATIONS,
-	},
-	{
-		label: 'My Campaigns',
-		value: AccountTabs.CAMPAIGNS,
-	},
-	{
-		label: 'My Collectables',
-		value: AccountTabs.COLLECTABLES,
-	},
-	{
-		label: 'Identity',
-		value: AccountTabs.IDENTITY,
-	},
-]
+
 export function TabsSection({ param }: ComponentProps) {
+	const { t } = useTranslation()
+	const tabs = useMemo<TabsInterface[]>(
+		() => [
+			{
+				label: t('button:navigation:overview'),
+				value: AccountTabs.OVERVIEW,
+			},
+			{
+				label: t('button:navigation:my_organisations'),
+				value: AccountTabs.ORGANIZATIONS,
+			},
+			{
+				label: t('button:navigation:my_campaigns'),
+				value: AccountTabs.CAMPAIGNS,
+			},
+			{
+				label: t('button:navigation:my_collectables'),
+				value: AccountTabs.COLLECTABLES,
+			},
+			{
+				label: t('button:navigation:identity'),
+				value: AccountTabs.IDENTITY,
+			},
+		],
+		[t],
+	)
 	const { push } = useRouter()
 	const handleTabsChange = useCallback(
 		(event: ChangeEvent<{}>, value: AccountTabs): void => {

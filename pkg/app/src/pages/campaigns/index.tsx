@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
@@ -9,6 +9,7 @@ import {
 	Campaign,
 	Campaign_Bool_Exp,
 	Campaign_Order_By,
+	DisplayValueEntryString,
 	useCampaignsPaginationCountSubscription,
 	useCampaignsPaginationSubscription,
 	useDisplayValuesQuery,
@@ -27,7 +28,24 @@ export function Campaigns() {
 		sortOption: {},
 		filters: [],
 	})
-
+	const filtersOptions = useMemo<DisplayValueEntryString[]>(
+		() =>
+			displayValuesData?.displayValues?.campaignFilters?.map((x) => ({
+				...x,
+				value: eval(`(${x?.value ?? 'null'})`),
+			})),
+		[displayValuesData],
+	)
+	useEffect(() => {
+		if (filtersOptions) {
+			setFilters((prev) => ({
+				...prev,
+				filters: filtersOptions
+					?.filter((x) => x?.key !== 'state_failed')
+					?.map((x) => JSON.parse(JSON.stringify(x?.value))),
+			}))
+		}
+	}, [filtersOptions, setFilters])
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
@@ -88,7 +106,7 @@ export function Campaigns() {
 		[paginatedData?.length, campaignsCount?.data],
 	)
 	return (
-		<Layout showHeader showFooter showSidebar title="Campaigns">
+		<Layout showHeader showFooter showSidebar title={t('labels:campaigns')}>
 			<Box
 				component="main"
 				sx={{
@@ -100,7 +118,7 @@ export function Campaigns() {
 					<Box sx={{ mb: 4 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
-								<Typography variant="h3">Campaigns</Typography>
+								<Typography variant="h3">{t('label:campaigns')}</Typography>
 							</Grid>
 						</Grid>
 					</Box>
@@ -108,17 +126,16 @@ export function Campaigns() {
 						setFilters={setFilters}
 						filters={filters}
 						sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
-						searchPlaceHolder={'Search Campaigns'}
+						searchPlaceHolder={t('label:search_campaigns')}
 						ListTab={CampaignFiltersTab}
+						filtersOptions={filtersOptions}
+						defaultOption={'time_left_desc'}
 					/>
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
-							<Typography fontWeight={700}>No campaigns found</Typography>
+							<Typography fontWeight={700}>{t('page:campaigns:no_campaigns')}</Typography>
 							{filters.query && (
-								<Typography>
-									No results found for “{filters.query}”. Try checking for typos or using a different
-									term.
-								</Typography>
+								<Typography>{t('page:campaigns:no_result', { query: filters.query })}</Typography>
 							)}
 						</Box>
 					)}
@@ -147,8 +164,10 @@ export function Campaigns() {
 								</Button>
 							)}
 							<Typography>
-								Showing {paginatedData?.length} of{' '}
-								{campaignsCount?.data?.campaign_aggregate?.aggregate.count} campaigns
+								{t('page:campaigns:showing_results', {
+									count1: paginatedData?.length,
+									count2: campaignsCount?.data?.campaign_aggregate?.aggregate.count,
+								})}
 							</Typography>
 						</Box>
 					</Box>

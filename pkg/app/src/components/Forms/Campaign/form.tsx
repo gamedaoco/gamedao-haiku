@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { Button, Stack } from '@mui/material'
 import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
+import { useConfig } from 'hooks/useConfig'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
@@ -9,7 +10,7 @@ import { TransactionDialog } from 'components/TransactionDialog/transactionDialo
 
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
-import { Settings, validationSchema as settingsValidationSchema } from './modules/settings'
+import { Settings, getValidationSchema as getSettingsValidationSchema } from './modules/settings'
 
 interface ComponentProps {
 	organizationId: string
@@ -20,6 +21,7 @@ interface ComponentProps {
 
 export function Form({ organizationId, cancel, currentStep, setStep }: ComponentProps) {
 	const tmpCampaignState = useTmpCampaignState()
+	const config = useConfig()
 	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
@@ -106,7 +108,7 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 					content: tmpCampaignState.content,
 				})
 			case 2:
-				return !settingsValidationSchema.isValidSync({
+				return !getSettingsValidationSchema(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS).isValidSync({
 					target: tmpCampaignState.target,
 					deposit: tmpCampaignState.deposit,
 					endDate: tmpCampaignState.endDate,
