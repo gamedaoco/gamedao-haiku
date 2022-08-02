@@ -14,7 +14,7 @@ subscription CampaignContributors($address: String!) {
             campaign_metadata {
                 name
                 title
-                logo
+                header
             }
             campaign_contributors_aggregate {
                 aggregate {
