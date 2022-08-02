@@ -1,5 +1,4 @@
 // Imports
-// Types
 import { CampaignMetadata } from '../@types/ipfs/campaignMetadata';
 import { fetchJsonByCid } from './ipfs';
 

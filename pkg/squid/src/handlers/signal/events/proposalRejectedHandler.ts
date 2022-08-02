@@ -11,8 +11,8 @@ async function handleProposalRejectedEvent(context: EventHandlerContext) {
 
 	// Get id
 	let id;
-	if (proposalRejectedEventData.isV56) {
-		id = hashToHexString(proposalRejectedEventData.asV56.proposalId);
+	if (proposalRejectedEventData.isV58) {
+		id = hashToHexString(proposalRejectedEventData.asV58.proposalId);
 	} else {
 		console.error(`Unknown version of proposal rejected event!`);
 		return;

@@ -1,7 +1,6 @@
 import assert from 'assert';
 import { CallContext, Result, deprecateLatest } from './support';
-import * as v55 from './v55';
-import * as v56 from './v56';
+import * as v58 from './v58';
 
 export class ControlCreateOrgCall {
 	constructor(private ctx: CallContext) {
@@ -31,7 +30,7 @@ export class ControlCreateOrgCall {
 	 *
 	 * Weight: `O(1)`
 	 */
-	get isV56(): boolean {
+	get isV58(): boolean {
 		return (
 			this.ctx._chain.getCallHash('control.create_org') ===
 			'72bef6a8437e2c665d4546e43c3451ff7d802debe4f99c1040c863f2afb2c0cd'
@@ -61,113 +60,43 @@ export class ControlCreateOrgCall {
 	 *
 	 * Weight: `O(1)`
 	 */
-	get asV56(): {
-		controllerId: v56.AccountId32;
+	get asV58(): {
+		controllerId: v58.AccountId32;
 		name: Uint8Array;
 		cid: Uint8Array;
-		orgType: v56.OrgType;
-		access: v56.AccessModel;
-		feeModel: v56.FeeModel;
+		orgType: v58.OrgType;
+		access: v58.AccessModel;
+		feeModel: v58.FeeModel;
 		fee: bigint;
-		govAsset: v56.CurrencyId;
-		payAsset: v56.CurrencyId;
+		govAsset: v58.CurrencyId;
+		payAsset: v58.CurrencyId;
 		memberLimit: bigint;
 		deposit: bigint | undefined;
 	} {
-		assert(this.isV56);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
-	}
-
-	/**
-	 * Create an on chain organization
-	 *
-	 * Parameters:
-	 * - `origin`: Org creator.
-	 * - `controller_id`: Org controller.
-	 * - `name`: Org name.
-	 * - `cid`: IPFS content identifier.
-	 * - `org_type`: Individual | Company | Dao | Hybrid.
-	 * - `access`: Open (anyone can join) | Voting (membership voting) |
-	 * 	Controller (controller invites).
-	 * - `fee_model`: NoFees | Reserve (amount reserved in user account) |
-	 * 	Transfer (amount transfered to Org treasury).
-	 * - `fee`: fees amount to be applied to new members based on fee model (in Protocol tokens).
-	 * - `gov_asset`: control assets to empower actors.
-	 * - `pay_asset`: asset used for payments.
-	 * - `member_limit`: max members, if 0 == no limit.
-	 * - `deposit`: initial deposit for the org treasury (in Protocol tokens).
-	 *
-	 * Emits `OrgCreated` event when successful.
-	 *
-	 * Weight: `O(1)`
-	 */
-	get isV55(): boolean {
-		return (
-			this.ctx._chain.getCallHash('control.create_org') ===
-			'9edf5b9e4cb0364148f5f748221fb4f00b43e146853afb1e7687455005ed72e7'
-		);
-	}
-
-	/**
-	 * Create an on chain organization
-	 *
-	 * Parameters:
-	 * - `origin`: Org creator.
-	 * - `controller_id`: Org controller.
-	 * - `name`: Org name.
-	 * - `cid`: IPFS content identifier.
-	 * - `org_type`: Individual | Company | Dao | Hybrid.
-	 * - `access`: Open (anyone can join) | Voting (membership voting) |
-	 * 	Controller (controller invites).
-	 * - `fee_model`: NoFees | Reserve (amount reserved in user account) |
-	 * 	Transfer (amount transfered to Org treasury).
-	 * - `fee`: fees amount to be applied to new members based on fee model (in Protocol tokens).
-	 * - `gov_asset`: control assets to empower actors.
-	 * - `pay_asset`: asset used for payments.
-	 * - `member_limit`: max members, if 0 == no limit.
-	 * - `deposit`: initial deposit for the org treasury (in Protocol tokens).
-	 *
-	 * Emits `OrgCreated` event when successful.
-	 *
-	 * Weight: `O(1)`
-	 */
-	get asV55(): {
-		controllerId: v55.AccountId32;
-		name: Uint8Array;
-		cid: Uint8Array;
-		orgType: v55.OrgType;
-		access: v55.AccessModel;
-		feeModel: v55.FeeModel;
-		fee: bigint;
-		govAsset: number;
-		payAsset: number;
-		memberLimit: bigint;
-		deposit: bigint | undefined;
-	} {
-		assert(this.isV55);
+		assert(this.isV58);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV55;
+		return this.isV58;
 	}
 
 	get asLatest(): {
-		controllerId: v55.AccountId32;
+		controllerId: v58.AccountId32;
 		name: Uint8Array;
 		cid: Uint8Array;
-		orgType: v55.OrgType;
-		access: v55.AccessModel;
-		feeModel: v55.FeeModel;
+		orgType: v58.OrgType;
+		access: v58.AccessModel;
+		feeModel: v58.FeeModel;
 		fee: bigint;
-		govAsset: number;
-		payAsset: number;
+		govAsset: v58.CurrencyId;
+		payAsset: v58.CurrencyId;
 		memberLimit: bigint;
 		deposit: bigint | undefined;
 	} {
 		deprecateLatest();
-		return this.asV55;
+		return this.asV58;
 	}
 }
 
@@ -186,7 +115,7 @@ export class FlowContributeCall {
 	 *
 	 * Weight: O(1)
 	 */
-	get isV56(): boolean {
+	get isV58(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.contribute') ===
 			'35bde54551e073c690aea459d53b33dc6aa20c27dc77adb7a7d131d352f68540'
@@ -203,19 +132,19 @@ export class FlowContributeCall {
 	 *
 	 * Weight: O(1)
 	 */
-	get asV56(): { campaignId: v56.H256; contribution: bigint } {
-		assert(this.isV56);
+	get asV58(): { campaignId: v58.H256; contribution: bigint } {
+		assert(this.isV58);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV56;
+		return this.isV58;
 	}
 
-	get asLatest(): { campaignId: v56.H256; contribution: bigint } {
+	get asLatest(): { campaignId: v58.H256; contribution: bigint } {
 		deprecateLatest();
-		return this.asV56;
+		return this.asV58;
 	}
 }
 
@@ -244,7 +173,7 @@ export class FlowCreateCampaignCall {
 	 *
 	 * Weight: `O(log n)`
 	 */
-	get isV56(): boolean {
+	get isV58(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.create_campaign') ===
 			'548b4652cb7480edaf5d64431696136d5b4d32d71d836d3e0670defc3437742d'
@@ -271,43 +200,43 @@ export class FlowCreateCampaignCall {
 	 *
 	 * Weight: `O(log n)`
 	 */
-	get asV56(): {
-		orgId: v56.H256;
-		adminId: v56.AccountId32;
+	get asV58(): {
+		orgId: v58.H256;
+		adminId: v58.AccountId32;
 		name: Uint8Array;
 		target: bigint;
 		deposit: bigint;
 		expiry: number;
-		protocol: v56.FlowProtocol;
-		governance: v56.FlowGovernance;
+		protocol: v58.FlowProtocol;
+		governance: v58.FlowGovernance;
 		cid: Uint8Array;
 		tokenSymbol: Uint8Array;
 		tokenName: Uint8Array;
 	} {
-		assert(this.isV56);
+		assert(this.isV58);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV56;
+		return this.isV58;
 	}
 
 	get asLatest(): {
-		orgId: v56.H256;
-		adminId: v56.AccountId32;
+		orgId: v58.H256;
+		adminId: v58.AccountId32;
 		name: Uint8Array;
 		target: bigint;
 		deposit: bigint;
 		expiry: number;
-		protocol: v56.FlowProtocol;
-		governance: v56.FlowGovernance;
+		protocol: v58.FlowProtocol;
+		governance: v58.FlowGovernance;
 		cid: Uint8Array;
 		tokenSymbol: Uint8Array;
 		tokenName: Uint8Array;
 	} {
 		deprecateLatest();
-		return this.asV56;
+		return this.asV58;
 	}
 }
 
@@ -326,7 +255,7 @@ export class FlowUpdateStateCall {
 	 *
 	 * Weight: O(log n)
 	 */
-	get isV56(): boolean {
+	get isV58(): boolean {
 		return (
 			this.ctx._chain.getCallHash('flow.update_state') ===
 			'c64752f2d1ab8a2192e339d44ff98337d7d71317a35d873b4eaa5122665216a8'
@@ -343,19 +272,19 @@ export class FlowUpdateStateCall {
 	 *
 	 * Weight: O(log n)
 	 */
-	get asV56(): { campaignId: v56.H256; state: v56.FlowState } {
-		assert(this.isV56);
+	get asV58(): { campaignId: v58.H256; state: v58.FlowState } {
+		assert(this.isV58);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV56;
+		return this.isV58;
 	}
 
-	get asLatest(): { campaignId: v56.H256; state: v56.FlowState } {
+	get asLatest(): { campaignId: v58.H256; state: v58.FlowState } {
 		deprecateLatest();
-		return this.asV56;
+		return this.asV58;
 	}
 }
 
@@ -380,7 +309,7 @@ export class SignalGeneralProposalCall {
 	 *
 	 * Weight: O(1)
 	 */
-	get isV56(): boolean {
+	get isV58(): boolean {
 		return (
 			this.ctx._chain.getCallHash('signal.general_proposal') ===
 			'6288e6d7ea1e66ac8f48f8c15e15b0e7913454ed573fca61a600ed52c9a54a2b'
@@ -400,19 +329,19 @@ export class SignalGeneralProposalCall {
 	 *
 	 * Weight: O(1)
 	 */
-	get asV56(): { orgId: v56.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
-		assert(this.isV56);
+	get asV58(): { orgId: v58.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
+		assert(this.isV58);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV56;
+		return this.isV58;
 	}
 
-	get asLatest(): { orgId: v56.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
+	get asLatest(): { orgId: v58.H256; title: Uint8Array; cid: Uint8Array; start: number; expiry: number } {
 		deprecateLatest();
-		return this.asV56;
+		return this.asV58;
 	}
 }
 
@@ -441,7 +370,7 @@ export class SignalWithdrawProposalCall {
 	 *
 	 * Weight: O(1)
 	 */
-	get isV56(): boolean {
+	get isV58(): boolean {
 		return (
 			this.ctx._chain.getCallHash('signal.withdraw_proposal') ===
 			'181f7eb8207b336afbe94515eda27a95279f858acd7d7758f752172ae750eb7a'
@@ -465,25 +394,25 @@ export class SignalWithdrawProposalCall {
 	 *
 	 * Weight: O(1)
 	 */
-	get asV56(): {
-		campaignId: v56.H256;
+	get asV58(): {
+		campaignId: v58.H256;
 		title: Uint8Array;
 		cid: Uint8Array;
 		amount: bigint;
 		start: number;
 		expiry: number;
 	} {
-		assert(this.isV56);
+		assert(this.isV58);
 		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
 	}
 
 	get isLatest(): boolean {
 		deprecateLatest();
-		return this.isV56;
+		return this.isV58;
 	}
 
 	get asLatest(): {
-		campaignId: v56.H256;
+		campaignId: v58.H256;
 		title: Uint8Array;
 		cid: Uint8Array;
 		amount: bigint;
@@ -491,6 +420,6 @@ export class SignalWithdrawProposalCall {
 		expiry: number;
 	} {
 		deprecateLatest();
-		return this.asV56;
+		return this.asV58;
 	}
 }

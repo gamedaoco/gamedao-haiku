@@ -27,9 +27,9 @@ async function handleOrgCreatedEvent(context: EventHandlerContext) {
 
 	// Get id
 	let id;
-	if (organizationCreatedEventData.isV56) {
-		id = hashToHexString(organizationCreatedEventData.asV56.orgId);
-		callCreateData.treasury = addressCodec.encode(organizationCreatedEventData.asV56.treasuryId);
+	if (organizationCreatedEventData.isV58) {
+		id = hashToHexString(organizationCreatedEventData.asV58.orgId);
+		callCreateData.treasury = addressCodec.encode(organizationCreatedEventData.asV58.treasuryId);
 	} else {
 		console.error(`Unknown version of organization created event!`);
 		return;

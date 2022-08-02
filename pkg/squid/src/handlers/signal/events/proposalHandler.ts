@@ -13,8 +13,8 @@ async function handleProposalEvent(context: EventHandlerContext) {
 
 	// Get id
 	let proposalId: string;
-	if (proposalEventData.isV56) {
-		proposalId = hashToHexString(proposalEventData.asV56.proposalId);
+	if (proposalEventData.isV58) {
+		proposalId = hashToHexString(proposalEventData.asV58.proposalId);
 	} else {
 		console.error(`Unknown version of ProposalCreated event!`);
 		return;

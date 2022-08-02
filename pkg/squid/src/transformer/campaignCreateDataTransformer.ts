@@ -16,20 +16,20 @@ function getCampaignCreationData(context: EventHandlerContext): CampaignCreation
 		});
 
 		// Get versioned data
-		if (createData.isV56) {
-			const v56Data = createData.asV56;
+		if (createData.isV58) {
+			const v58Data = createData.asV58;
 			return {
-				org: hashToHexString(v56Data.orgId),
-				admin: addressCodec.encode(v56Data.adminId),
-				name: v56Data.name.toString(),
-				target: v56Data.target,
-				deposit: v56Data.deposit,
-				expiry: v56Data.expiry,
-				protocol: v56Data.protocol,
-				governance: v56Data.governance,
-				cid: v56Data.cid.toString(),
-				tokenSymbol: v56Data.tokenSymbol.toString(),
-				tokenName: v56Data.tokenName.toString(),
+				org: hashToHexString(v58Data.orgId),
+				admin: addressCodec.encode(v58Data.adminId),
+				name: v58Data.name.toString(),
+				target: v58Data.target,
+				deposit: v58Data.deposit,
+				expiry: v58Data.expiry,
+				protocol: v58Data.protocol,
+				governance: v58Data.governance,
+				cid: v58Data.cid.toString(),
+				tokenSymbol: v58Data.tokenSymbol.toString(),
+				tokenName: v58Data.tokenName.toString(),
 				blockNumber: context.block.height,
 			};
 		} else {

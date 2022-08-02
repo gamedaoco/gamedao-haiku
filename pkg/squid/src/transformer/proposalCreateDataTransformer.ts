@@ -27,14 +27,14 @@ function getSimpleProposalCreationData(context: EventHandlerContext): ProposalCr
 
 	// Get versioned data
 	let result: ProposalCreationData | null = null;
-	if (createData.isV56) {
-		const v56Data = createData.asV56;
+	if (createData.isV58) {
+		const v58Data = createData.asV58;
 		result = {
-			orgId: hashToHexString(v56Data.orgId),
-			title: v56Data.title.toString(),
-			cid: v56Data.cid.toString(),
-			start: v56Data.start,
-			expiry: v56Data.expiry,
+			orgId: hashToHexString(v58Data.orgId),
+			title: v58Data.title.toString(),
+			cid: v58Data.cid.toString(),
+			start: v58Data.start,
+			expiry: v58Data.expiry,
 		} as ProposalCreationData;
 	} else {
 		console.error(`Unknown version of create general proposal extrinsic!`);
@@ -61,20 +61,20 @@ function getWithdrawProposalCreationData(context: EventHandlerContext): Proposal
 	});
 
 	// Get versioned data
-	if (createData.isV56) {
-		const v56Data = createData.asV56;
+	if (createData.isV58) {
+		const v58Data = createData.asV58;
 		return {
-			campaignId: hashToHexString(v56Data.campaignId),
-			title: v56Data.title.toString(),
-			cid: v56Data.cid.toString(),
-			start: v56Data.start,
-			expiry: v56Data.expiry,
+			campaignId: hashToHexString(v58Data.campaignId),
+			title: v58Data.title.toString(),
+			cid: v58Data.cid.toString(),
+			start: v58Data.start,
+			expiry: v58Data.expiry,
 
 			// ToDo: Find better solution? (Maybe put these values in event on chain)
 			type: 3,
 			votingType: 0,
 
-			withdrawAmount: v56Data.amount,
+			withdrawAmount: v58Data.amount,
 
 			signer: encodeSigner(context.extrinsic!.signer),
 			blockNumber: context.block.height,

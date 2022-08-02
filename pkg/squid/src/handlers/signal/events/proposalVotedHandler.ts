@@ -12,8 +12,8 @@ async function handleProposalVotedEvent(context: EventHandlerContext) {
 
 	// Get vote data
 	let voteData: ProposalSimpleVoteData | null = null;
-	if (proposalVotedEventData.isV56) {
-		const v51Data = proposalVotedEventData.asV56;
+	if (proposalVotedEventData.isV58) {
+		const v51Data = proposalVotedEventData.asV58;
 		voteData = {
 			proposalId: hashToHexString(v51Data.proposalId),
 			voter: addressCodec.encode(v51Data.senderId),

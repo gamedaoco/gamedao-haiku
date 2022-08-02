@@ -16,6 +16,7 @@ const rl = readline.createInterface({
 })
 
 async function updateBalance(api, signer, address) {
+	console.log(api.tx.currencies.updateBalance)
 	await api.tx.sudo.sudo(api.tx.currencies.updateBalance(address, 0, '100000000000000000000')).signAndSend(signer)
 	await sleep(4000)
 	await api.tx.sudo.sudo(api.tx.currencies.updateBalance(address, 1, '100000000000000000000')).signAndSend(signer)
