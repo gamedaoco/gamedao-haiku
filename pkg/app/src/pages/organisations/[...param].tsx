@@ -6,6 +6,7 @@ import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
 import {
 	Avatar,
+	Button,
 	Card,
 	CardContent,
 	CardMedia,
@@ -196,6 +197,7 @@ export function OrganisationById() {
 									alignItems="center"
 									justifyContent={isMd ? 'flex-start' : 'center'}
 									sx={{
+										width: '100%',
 										position: isMd ? 'absolute' : 'relative',
 										left: '2rem',
 										bottom: '2rem',
@@ -235,15 +237,29 @@ export function OrganisationById() {
 										</Avatar>
 									</label>
 
-									<Stack spacing={1}>
-										<Typography variant="h4">
-											{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
-										</Typography>
-										<Typography>
-											{t('label:n_members', {
-												n: organizationState?.organization_members?.length ?? 1,
-											})}
-										</Typography>
+									<Stack
+										spacing={2}
+										sx={{
+											width: '100%',
+											justifyContent: { xs: 'space-between', sm: 'flex-start' },
+										}}
+										direction="row"
+									>
+										<Stack spacing={1} sx={{ flex: 0.9 }}>
+											<Typography variant="h4">
+												{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
+											</Typography>
+											<Typography>
+												{t('label:n_members', {
+													n: organizationState?.organization_members?.length ?? 1,
+												})}
+											</Typography>
+										</Stack>
+										<Stack>
+											{!isMemberState && (
+												<Button variant="contained">{t('button:ui:join_organization')}</Button>
+											)}
+										</Stack>
 									</Stack>
 								</Stack>
 								<CardContent sx={{ maxWidth: isMd ? '60%' : '100%', marginLeft: 'auto' }}>
