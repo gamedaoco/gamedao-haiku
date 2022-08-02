@@ -6,7 +6,7 @@ export function getCampaignProgress(target: string, contributed: string): number
 	const bnContributed = new BigNumber(contributed ?? '0')
 	const percent = bnContributed.div(bnTarget).times(100).toFixed(2)
 
-	return parseFloat(percent.toString())
+	return parseFloat(percent.toString()) > 100 ? 100 : parseFloat(percent.toString())
 }
 
 export function getTimeFromBlock(currentBlock: number, endBlock: number, targetBlockTime: number): string {
