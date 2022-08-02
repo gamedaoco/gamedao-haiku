@@ -43,8 +43,8 @@
             "explore_campaigns": "Explore Campaigns",
             "contribute_now": "Contribute now",
             "contribute_again": "Contribute again",
-            "join_organization": "Join Organization",
-            "leave_organization": "Leave Organization",
+            "join_organization": "Join Organisation",
+            "leave_organization": "Leave Organisation",
             "create_proposal": "Create Proposal",
             "show_more": "Show More",
             "show_less": "Show Less",
@@ -59,7 +59,7 @@
         "form": {
             "publish_now": "Publish Now",
             "next_step": "Next step",
-            "save_organization": "Save organization",
+            "save_organization": "Save Organisation",
             "back": "Back",
             "cancel": "Cancel",
             "proposal": {
