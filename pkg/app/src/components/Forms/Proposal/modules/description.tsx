@@ -130,7 +130,12 @@ export function Description({
 
 	useEffect(() => {
 		return () => {
-			if (startDate) setEndDate(moment(startDate).add(1, 'day').toDate())
+			if (startDate)
+				setEndDate(
+					moment(startDate ?? new Date())
+						.add(1, 'day')
+						.toDate(),
+				)
 		}
 	}, [startDate])
 
