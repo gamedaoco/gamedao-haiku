@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Box, Grid } from '@mui/material'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
@@ -11,6 +12,7 @@ import { MyCollectablesTab } from './myCollectablesTab'
 
 export function OverviewTab() {
 	const address = useCurrentAccountAddress()
+	const { t } = useTranslation()
 	const { data, loading } = useAccountOrganizationsSubscription({
 		variables: {
 			address: address,
@@ -29,7 +31,7 @@ export function OverviewTab() {
 				<Grid item xs={12}>
 					<MyOrganisationsTable
 						organisations={organisations as Organization[]}
-						title={'Organisations'}
+						title={t('page:account:organisations:title')}
 						loading={loading}
 					/>
 				</Grid>

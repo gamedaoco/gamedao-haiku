@@ -8,6 +8,8 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
+import { useSystemProperties } from 'hooks/useSystemProperties'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
 import { getTimeFromBlock } from 'src/utils/campaignUtils'
 
@@ -73,7 +75,7 @@ const rowHeight = 80
 
 export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	const { push } = useRouter()
-
+	const systemProperties = useSystemProperties()
 	const [showFormState, setShowFormState] = useState<boolean>(false)
 	const [pageSize, setPageSize] = useState<number>(10)
 	const [rows, setRows] = useState<any[]>([])
@@ -82,6 +84,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	const { loading, data } = useProposalsByOrganizationIdSubscription({
 		variables: { orgId: organizationId },
 	})
+	const { t } = useTranslation()
 	const enabledFeatures = useProposalFeatures()
 	const address = useCurrentAccountAddress()
 
@@ -105,9 +108,9 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				let timeLeft = ''
 
 				if (!hasStarted) {
-					timeLeft = getTimeFromBlock(blockNumber, startBlock)
+					timeLeft = getTimeFromBlock(blockNumber, startBlock, systemProperties?.blockTargetTime)
 				} else if (!hasExpired) {
-					timeLeft = getTimeFromBlock(blockNumber, expiryBlock)
+					timeLeft = getTimeFromBlock(blockNumber, expiryBlock, systemProperties?.blockTargetTime)
 				} else {
 					timeLeft = 'Expired'
 				}
@@ -142,7 +145,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				<Typography variant="h6">Proposals</Typography>
 				{address && enabledFeatures.CREATE_PROPOSAL && isMember && (
 					<Button variant="outlined" onClick={handleCreateButtonClick}>
-						<AddIcon /> Create Proposal
+						<AddIcon /> {t('button:ui:create_proposal')}
 					</Button>
 				)}
 			</Stack>

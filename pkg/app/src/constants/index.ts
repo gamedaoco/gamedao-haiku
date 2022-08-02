@@ -7,12 +7,6 @@ export const ENVIRONMENT: Environment = (
 	process.env.NEXT_PUBLIC_ENVIRONMENT || 'production'
 ).toUpperCase() as Environment
 
-// Durations will be converted to blocks
-// where 1 day == (60 / 3) * 60 * 24 == 28800 blocks
-export const blockTime: number = 3
-export const blocksPerDay: number = (24 * 60 * 60) / blockTime
-export const blockFactor: number = blockTime * (60 / blockTime) * 60 * 24
-
 export const sessionUpdateInterval: number = 5 * 60 * 1000
 
 export const defaultValuesTmpOrganisation: TMPOrganisation = {

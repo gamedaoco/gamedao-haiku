@@ -7,12 +7,14 @@ import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/ma
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
+import { useTranslation } from 'react-i18next'
 import { AccountTabs } from 'src/@types/account'
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
 export function IdentitySection() {
 	const { push } = useRouter()
+	const { t } = useTranslation()
 	const accountState = useCurrentAccountState()
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)
@@ -21,12 +23,10 @@ export function IdentitySection() {
 	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
 
 	const handleCopyAddress = useCallback(() => {
-		// TODO: Add i18n
 		navigator.clipboard
 			.writeText(getAddressFromAccountState(accountState))
-			.then(() => createInfoNotification('Address Copied to Clipboard'))
-	}, [accountState])
-
+			.then(() => createInfoNotification(t('notification:info:address_copied')))
+	}, [accountState, t])
 	return (
 		<Grid container justifyContent="space-between" spacing={3}>
 			<Grid
@@ -82,7 +82,7 @@ export function IdentitySection() {
 						variant="contained"
 						onClick={handleButtonClick}
 					>
-						Set On-Chain Identity
+						{t('button:navigation:set_on_chain_identity')}
 					</Button>
 				</div>
 			</Grid>

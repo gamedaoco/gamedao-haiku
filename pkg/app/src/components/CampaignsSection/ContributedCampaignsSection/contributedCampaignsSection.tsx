@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import {
 	Box,
@@ -15,16 +15,12 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useConfig } from 'hooks/useConfig'
-import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
 import { CampaignContributorsSubscription, Campaign_Contributor } from 'src/queries'
-import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
 import { getContributedCampaignProgress, getContributedCampaignTimeLeft } from 'src/utils/contributedCampaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
-import { toUnit } from 'src/utils/token'
 
 import { Scrollbar } from 'components/scrollbar'
 
@@ -38,30 +34,29 @@ interface ComponentProps {
 export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 	const theme = useTheme()
 	const config = useConfig()
-	const systemProperties = useSystemProperties()
-	const blockNumber = useBlockNumber()
+	const { t } = useTranslation()
 
 	return (
 		<Box>
 			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold} sx={{ pb: 4 }}>
-				Contributed Campaigns
+				{t('page:account:campaigns:contributed_campaigns')}
 			</Typography>
 			<Card>
 				<CardContent>
 					<Typography variant="h6" sx={{ mb: 2 }}>
-						Campaign Contributions
+						{t('page:account:campaigns:campaign_contributions')}
 					</Typography>
 
 					<Scrollbar>
 						<Table>
 							<TableHead>
 								<TableRow>
-									<TableCell>Name</TableCell>
-									<TableCell>Contributors</TableCell>
-									<TableCell>Investment</TableCell>
-									<TableCell>Raised/Goal</TableCell>
-									<TableCell>Time left</TableCell>
-									<TableCell>Status</TableCell>
+									<TableCell>{t('page:account:campaigns:name')}</TableCell>
+									<TableCell>{t('page:account:campaigns:contributors')}</TableCell>
+									<TableCell>{t('page:account:campaigns:investment')}</TableCell>
+									<TableCell>{t('page:account:campaigns:raised_goal')}</TableCell>
+									<TableCell>{t('page:account:campaigns:time_left')}</TableCell>
+									<TableCell>{t('page:account:campaigns:status')}</TableCell>
 								</TableRow>
 							</TableHead>
 							{loading ? (
@@ -113,12 +108,6 @@ export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 													}
 												</TableCell>
 												<TableCell>
-													{/*{abbreviateNumber(*/}
-													{/*	toUnit(*/}
-													{/*		campaignContributor?.contributed,*/}
-													{/*		systemProperties?.tokenDecimals?.[currencyId] ?? 18,*/}
-													{/*	),*/}
-													{/*)}*/}
 													{abbreviateNumber(campaignContributor?.contributed)}
 												</TableCell>
 												<TableCell>

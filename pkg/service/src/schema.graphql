@@ -66,6 +66,8 @@ type Config {
     CONTACT: String
     IPFS_GATEWAY: String
     LOG_LEVEL: LogLevel
+    PROPOSAL_MIN_EXPIRY_IN_SECONDS: String
+    CAMPAIGN_MIN_EXPIRY_IN_SECONDS: String
 }
 
 
@@ -130,6 +132,7 @@ type ChainProperties {
     networkCurrency: Int!
     governanceCurrency: Int!
     paymentCurrencies: Int!
+    blockTargetTime: Int!
 }
 
 type ApiProvider {
