@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { Button, Stack } from '@mui/material'
+import { Box, Button, Stack } from '@mui/material'
 import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
@@ -181,38 +181,44 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 					setTermsConditionAccepted={setTermsConditionAccepted}
 				/>
 			)}
-			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
-				<Button
-					size="large"
-					variant="outlined"
-					color="primary"
-					sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
-					onClick={handleBack}
-				>
-					Back
-				</Button>
-				<Button
-					size="large"
-					variant="outlined"
-					color="primary"
-					sx={{
-						display: checkBackButtonState() ? 'block' : 'none',
-						flexGrow: { xs: 1, sm: 0 },
-					}}
-					onClick={handleCancel}
-				>
-					Cancel
-				</Button>
-
-				<Button
-					size="large"
-					variant="contained"
-					onClick={handleNext}
-					disabled={checkNextButtonState()}
-					sx={{ flexGrow: { xs: 1, sm: 0 } }}
-				>
-					{currentStep === 2 ? 'Publish now' : 'Next step'}
-				</Button>
+			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-start' } }} direction="row">
+				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
+					<Button
+						size="large"
+						variant="outlined"
+						color="primary"
+						sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
+						onClick={handleBack}
+					>
+						Back
+					</Button>
+					<Button
+						size="large"
+						variant="outlined"
+						color="primary"
+						sx={{
+							display: checkBackButtonState() ? 'block' : 'none',
+							flexGrow: { xs: 1, sm: 0 },
+						}}
+						onClick={handleCancel}
+					>
+						Cancel
+					</Button>
+				</Box>
+				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+					<Button size="large" variant="outlined" disabled={checkNextButtonState()}>
+						Save as Draft
+					</Button>
+					<Button
+						size="large"
+						variant="contained"
+						onClick={handleNext}
+						disabled={checkNextButtonState()}
+						sx={{ ml: 2 }}
+					>
+						{currentStep === 2 ? 'Publish now' : 'Next step'}
+					</Button>
+				</Box>
 			</Stack>
 
 			<TransactionDialog
