@@ -83,8 +83,9 @@ export default function Chip(theme: Theme) {
 				{
 					props: { variant: 'campaignStatus' },
 					style: {
-						borderRadius: Number(theme.shape.borderRadius) * 20,
+						borderRadius: `${Number(theme.shape.borderRadius) * 20}px 0px`,
 						...theme.typography.overline,
+						textTransform: 'uppercase',
 
 						'&.MuiChip-colorPrimary': {
 							backgroundColor: theme.palette.chart.green[3],
@@ -102,7 +103,6 @@ export default function Chip(theme: Theme) {
 					style: {
 						borderRadius: Number(theme.shape.borderRadius) * 10,
 						...theme.typography.overline,
-						textTransform: 'uppercase',
 
 						'&.MuiChip-colorPrimary': {
 							backgroundColor: theme.palette.success.main,
