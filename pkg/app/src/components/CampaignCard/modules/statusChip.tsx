@@ -21,13 +21,21 @@ export function StatusChip({ status, variant }: ComponentProps) {
 		let color = 'primary'
 		switch (status) {
 			case CampaignStatus.ACTIVE:
-				color = 'info'
-				break
+				if (variant === 'campaignState') {
+					color = 'info'
+					break
+				} else {
+					return null
+				}
 			case CampaignStatus.FINALIZING:
+				color = 'primary'
+				break
 			case CampaignStatus.SUCCESS:
 				color = 'primary'
 				break
 			case CampaignStatus.REVERTING:
+				color = 'secondary'
+				break
 			case CampaignStatus.FAILED:
 				color = 'secondary'
 				break
