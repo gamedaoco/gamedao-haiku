@@ -119,25 +119,6 @@ export function Description({
 		},
 		[setDescription, setErrorState],
 	)
-	useEffect(() => {
-		setStartDate(new Date())
-		setEndDate(
-			moment(startDate ?? new Date())
-				.add(1, 'day')
-				.toDate(),
-		)
-	}, [])
-
-	useEffect(() => {
-		return () => {
-			if (startDate)
-				setEndDate(
-					moment(startDate ?? new Date())
-						.add(1, 'day')
-						.toDate(),
-				)
-		}
-	}, [startDate])
 
 	const handleAmountChange = useCallback(
 		(event) => {
@@ -154,6 +135,17 @@ export function Description({
 		},
 		[setCampaignId],
 	)
+	useEffect(() => {
+		setStartDate(new Date())
+		setEndDate(moment(new Date()).add(1, 'day').toDate())
+	}, [])
+
+	useEffect(() => {
+		return () => {
+			if (startDate) setEndDate(moment(startDate).add(1, 'day').toDate())
+		}
+	}, [startDate])
+	console.log('START DATE', startDate)
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>

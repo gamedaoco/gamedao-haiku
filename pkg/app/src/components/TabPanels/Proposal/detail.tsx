@@ -98,8 +98,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
 	const isActive = useMemo(
-		() => isProposalActive(blockNumber, proposal?.start_block),
-		[blockNumber, proposal?.start_block],
+		() => isProposalActive(blockNumber, proposal?.start_block, proposal?.expiry_block),
+		[blockNumber, proposal?.start_block, proposal?.expiry_block],
 	)
 
 	const { loading, data } = useProposalByIdSubscription({
@@ -149,8 +149,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 			})),
 		)
 
-		const startDiff = (proposal.start_block - blockNumber) * (systemProperties.blockTargetTime ?? 3)
-		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties.blockTargetTime ?? 3)
+		const startDiff = (proposal.start_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
+		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
 
 		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY'))
 		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY'))
