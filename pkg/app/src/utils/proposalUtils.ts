@@ -1,3 +1,3 @@
-export function isProposalActive(blockTime: number, proposalStartBlockTime: number) {
-	return blockTime >= proposalStartBlockTime
+export function isProposalActive(blockTime: number, proposalStartBlockTime: number, proposalExpiryBlockTime: number) {
+	return blockTime >= proposalStartBlockTime && blockTime < proposalExpiryBlockTime
 }
