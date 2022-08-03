@@ -32,8 +32,8 @@ type Organization @entity {
     feeModel: String!
     type: String!
     fee: BigInt!
-    govAsset: Int!
-    payAsset: Int!
+    govAsset: String!
+    payAsset: String!
     memberLimit: BigInt!
     metadata: OrganizationMetadata
     createdAtBlock: Int!
