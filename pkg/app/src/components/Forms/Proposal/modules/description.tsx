@@ -145,7 +145,6 @@ export function Description({
 			if (startDate) setEndDate(moment(startDate).add(1, 'day').toDate())
 		}
 	}, [startDate])
-	console.log('START DATE', startDate)
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
