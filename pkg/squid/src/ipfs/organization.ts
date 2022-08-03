@@ -1,5 +1,4 @@
 // Imports
-// Types
 import { OrganizationMetadata } from '../@types/ipfs/organizationMetadata';
 import { fetchJsonByCid } from './ipfs';
 

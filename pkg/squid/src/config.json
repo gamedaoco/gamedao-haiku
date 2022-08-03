@@ -1,6 +1,6 @@
 {
   "startBlock": -1,
   "networkAddressPrefix": 25,
-  "chainRPC": "wss://beeblebrox.zero.io/node",
-  "archiveGQL": "https://beeblebrox.zero.io/archiver/v1/graphql"
+  "chainRPC": "ws://127.0.0.1:9944",
+  "archiveGQL": "http://127.0.0.1:4010/v1/graphql"
 }

@@ -11,8 +11,8 @@ async function handleProposalExpiredEvent(context: EventHandlerContext) {
 
 	// Get id
 	let id;
-	if (proposalExpiredEventData.isV51) {
-		id = hashToHexString(proposalExpiredEventData.asV51.proposalId);
+	if (proposalExpiredEventData.isV58) {
+		id = hashToHexString(proposalExpiredEventData.asV58.proposalId);
 	} else {
 		console.error(`Unknown version of proposal expired event!`);
 		return;
