@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
-import { Box, Button, Modal, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack } from '@mui/material'
 import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useConfig } from 'hooks/useConfig'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
+import ConfirmationModal from 'components/Modals/ConfirmationModal'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
@@ -26,20 +27,6 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
 	const [openModal, setOpenModal] = useState(false)
-	const style = useMemo(
-		() => ({
-			position: 'absolute' as 'absolute',
-			top: '50%',
-			left: '50%',
-			transform: 'translate(-50%, -50%)',
-			width: 400,
-			bgcolor: 'background.paper',
-			border: '2px solid #000',
-			boxShadow: 24,
-			p: 4,
-		}),
-		[],
-	)
 
 	useEffect(() => {
 		tmpCampaignState.setOrgId(organizationId)
@@ -166,29 +153,15 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 
 	return (
 		<>
-			<Modal
+			<ConfirmationModal
+				title="Are you sure?"
+				confirmButtonText={'Yes, Cancel Now'}
+				cancelButtonText={'No, Continue'}
+				confirmButtonCallback={handleCancelButton}
+				cancelButtonCallback={handleClose}
 				open={openModal}
-				onClose={() => {}}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
-			>
-				<Box sx={style}>
-					<Typography id="modal-modal-title" variant="h6" component="h2">
-						Are you sure?
-					</Typography>
-					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-						All your progress will be lost. Maybe save it as draft and continue later
-					</Typography>
-					<Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-						<Button variant="contained" color="error" onClick={handleCancelButton}>
-							Yes, Cancel Now
-						</Button>
-						<Button variant="contained" color="primary" onClick={handleClose}>
-							No, Continue
-						</Button>
-					</Box>
-				</Box>
-			</Modal>
+				description={'All your progress will be lost. Maybe save it as draft and continue later'}
+			/>
 			{currentStep === 0 && (
 				<Name
 					name={tmpCampaignState.name}
