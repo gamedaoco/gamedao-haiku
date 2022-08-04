@@ -6,7 +6,7 @@ import { CampaignStatus } from 'src/@types/campaignStatus'
 
 interface Data {
 	text: string
-	color: 'primary' | 'secondary'
+	color: 'primary' | 'secondary' | 'info'
 }
 
 interface ComponentProps {
@@ -26,6 +26,9 @@ export function StatusChip({ status }: ComponentProps) {
 			case CampaignStatus.REVERTING:
 			case CampaignStatus.FAILED:
 				color = 'secondary'
+				break
+			case CampaignStatus.Draft:
+				color = 'info'
 				break
 			default:
 				return null

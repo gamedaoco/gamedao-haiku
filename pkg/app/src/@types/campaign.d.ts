@@ -31,7 +31,9 @@ export interface TMPCampaignState extends TMPCampaign {
 	setGovernance: (number) => void
 	setMetadataCid: (string) => void
 	clearAll: () => void
+	restoreDraft: (draft: TMPCampaign) => void
 }
+
 export interface CampaignFiltersInterface {
 	query: string
 	sortOption: Campaign_Order_By | string

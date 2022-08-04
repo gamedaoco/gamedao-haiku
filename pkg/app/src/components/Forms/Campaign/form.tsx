@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Stack } from '@mui/material'
 import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useConfig } from 'hooks/useConfig'
+import { useSaveCampaignDraft } from 'hooks/useSaveCampaignDraft'
+import { useTmpCampaign } from 'hooks/useTmpCampaign'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
@@ -15,20 +17,29 @@ import { Settings, getValidationSchema as getSettingsValidationSchema } from './
 interface ComponentProps {
 	organizationId: string
 	currentStep: number
+	draftId?: string
 	cancel: () => void
 	setStep: (step) => void
 }
 
-export function Form({ organizationId, cancel, currentStep, setStep }: ComponentProps) {
+export function Form({ organizationId, cancel, currentStep, setStep, draftId }: ComponentProps) {
 	const tmpCampaignState = useTmpCampaignState()
+	const tmpCampaign = useTmpCampaign()
 	const config = useConfig()
 	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
+	const { addDraft, drafts } = useSaveCampaignDraft(organizationId)
 
 	useEffect(() => {
 		tmpCampaignState.setOrgId(organizationId)
 	}, [tmpCampaignState, organizationId])
+
+	useEffect(() => {
+		if (draftId && drafts[draftId]) {
+			tmpCampaignState.restoreDraft({ ...drafts[draftId], orgId: organizationId })
+		}
+	}, [draftId, drafts])
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
@@ -94,6 +105,10 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		},
 		[tmpCampaignState],
 	)
+
+	const handleSaveDraft = useCallback(() => {
+		addDraft(tmpCampaign)
+	}, [addDraft, tmpCampaign])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
@@ -203,6 +218,18 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 				>
 					Cancel
 				</Button>
+
+				{currentStep === 2 && (
+					<Button
+						size="large"
+						variant="contained"
+						onClick={handleSaveDraft}
+						disabled={checkNextButtonState()}
+						sx={{ flexGrow: { xs: 1, sm: 0 } }}
+					>
+						Save Draft
+					</Button>
+				)}
 
 				<Button
 					size="large"

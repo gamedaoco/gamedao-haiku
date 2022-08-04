@@ -65,6 +65,39 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setMetadataCid,
 	])
 
+	const restoreDraft = useCallback(
+		(draft: TMPCampaignState) => {
+			setOrgId(draft.orgId)
+			setNameState(draft.name)
+			setDescription(draft.description)
+			setBannerCid(draft.bannerCid)
+			setContent(draft.content)
+			setDeposit(draft.deposit)
+			setTarget(draft.target)
+			setProtocol(draft.protocol)
+			setUsageOfFunds(draft.usageOfFunds)
+			setCurrencyId(draft.currencyId)
+			setEndDate(draft.endDate)
+			setGovernance(draft.governance)
+			setMetadataCid(draft.metadataCid)
+		},
+		[
+			setOrgId,
+			setNameState,
+			setDescription,
+			setBannerCid,
+			setContent,
+			setDeposit,
+			setTarget,
+			setProtocol,
+			setUsageOfFunds,
+			setCurrencyId,
+			setEndDate,
+			setGovernance,
+			setMetadataCid,
+		],
+	)
+
 	return {
 		orgId: orgId,
 		name: nameState,
@@ -93,5 +126,6 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setGovernance: setGovernance,
 		setMetadataCid: setMetadataCid,
 		clearAll: clearAll,
+		restoreDraft: restoreDraft,
 	}
 }

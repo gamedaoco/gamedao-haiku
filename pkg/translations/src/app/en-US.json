@@ -77,7 +77,8 @@
             "reverting": "Reverting",
             "success": "Success",
             "failed": "Failed",
-            "locked": "Locked"
+            "locked": "Locked",
+            "draft": "Draft"
         },
         "display_name": "Display Name",
         "legal_name": "Legal Name",
@@ -307,7 +308,8 @@
             }
         },
         "info": {
-            "address_copied": "Address Copied to Clipboard"
+            "address_copied": "Address Copied to Clipboard",
+            "draft_saved": "Draft has been saved"
         },
         "warning": {
             "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
