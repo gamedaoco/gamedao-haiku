@@ -273,12 +273,12 @@
             "createProposal": {
                 "pending": "Summoning your Proposal...",
                 "success": "Proposal created",
-                "error": "Voting failed"
+                "error": "Summoning failed, check your Mana."
             },
             "simpleVote": {
                 "pending": "Voting in progress...",
                 "success": "Voted",
-                "error": "Summoning failed, check your Mana."
+                "error": "Voting failed"
             },
             "addMember": {
                 "pending": "Join organisations in progress...",
