@@ -43,7 +43,8 @@
             "leave_organization": "Leave Organization",
             "create_proposal": "Create Proposal",
             "show_more": "Show More",
-            "vote": "Vote"
+            "vote": "Vote",
+            "save_draft": "Save Draft"
         },
         "form": {
             "next_step": "Next step",

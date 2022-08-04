@@ -6,6 +6,7 @@ import { useConfig } from 'hooks/useConfig'
 import { useSaveCampaignDraft } from 'hooks/useSaveCampaignDraft'
 import { useTmpCampaign } from 'hooks/useTmpCampaign'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
+import { useTranslation } from 'react-i18next'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
@@ -30,6 +31,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
 	const { addDraft, drafts } = useSaveCampaignDraft(organizationId)
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		tmpCampaignState.setOrgId(organizationId)
@@ -222,12 +224,12 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 				{currentStep === 2 && (
 					<Button
 						size="large"
-						variant="contained"
+						variant="outlined"
 						onClick={handleSaveDraft}
 						disabled={checkNextButtonState()}
 						sx={{ flexGrow: { xs: 1, sm: 0 } }}
 					>
-						Save Draft
+						{t('ui:save_draft')}
 					</Button>
 				)}
 
