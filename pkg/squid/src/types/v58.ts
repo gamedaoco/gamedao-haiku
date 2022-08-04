@@ -2,6 +2,8 @@ import type { Result } from './support';
 
 export type H256 = Uint8Array;
 
+export type AccountId32 = Uint8Array;
+
 export type FlowState =
 	| FlowState_Init
 	| FlowState_Active
@@ -43,8 +45,6 @@ export interface FlowState_Failed {
 export interface FlowState_Locked {
 	__kind: 'Locked';
 }
-
-export type AccountId32 = Uint8Array;
 
 export type OrgType = OrgType_Individual | OrgType_Company | OrgType_Dao | OrgType_Hybrid;
 
@@ -92,6 +92,13 @@ export interface FeeModel_Transfer {
 	__kind: 'Transfer';
 }
 
+export type CurrencyId = CurrencyId_Token;
+
+export interface CurrencyId_Token {
+	__kind: 'Token';
+	value: TokenSymbol;
+}
+
 export type FlowProtocol =
 	| FlowProtocol_Grant
 	| FlowProtocol_Raise
@@ -132,4 +139,91 @@ export interface FlowGovernance_No {
 
 export interface FlowGovernance_Yes {
 	__kind: 'Yes';
+}
+
+export type TokenSymbol =
+	| TokenSymbol_ZERO
+	| TokenSymbol_PLAY
+	| TokenSymbol_GAME
+	| TokenSymbol_ACA
+	| TokenSymbol_AUSD
+	| TokenSymbol_DOT
+	| TokenSymbol_LDOT
+	| TokenSymbol_KAR
+	| TokenSymbol_KUSD
+	| TokenSymbol_KSM
+	| TokenSymbol_LKSM
+	| TokenSymbol_TAI
+	| TokenSymbol_BNC
+	| TokenSymbol_VSKSM
+	| TokenSymbol_PHA
+	| TokenSymbol_KINT
+	| TokenSymbol_KBTC;
+
+export interface TokenSymbol_ZERO {
+	__kind: 'ZERO';
+}
+
+export interface TokenSymbol_PLAY {
+	__kind: 'PLAY';
+}
+
+export interface TokenSymbol_GAME {
+	__kind: 'GAME';
+}
+
+export interface TokenSymbol_ACA {
+	__kind: 'ACA';
+}
+
+export interface TokenSymbol_AUSD {
+	__kind: 'AUSD';
+}
+
+export interface TokenSymbol_DOT {
+	__kind: 'DOT';
+}
+
+export interface TokenSymbol_LDOT {
+	__kind: 'LDOT';
+}
+
+export interface TokenSymbol_KAR {
+	__kind: 'KAR';
+}
+
+export interface TokenSymbol_KUSD {
+	__kind: 'KUSD';
+}
+
+export interface TokenSymbol_KSM {
+	__kind: 'KSM';
+}
+
+export interface TokenSymbol_LKSM {
+	__kind: 'LKSM';
+}
+
+export interface TokenSymbol_TAI {
+	__kind: 'TAI';
+}
+
+export interface TokenSymbol_BNC {
+	__kind: 'BNC';
+}
+
+export interface TokenSymbol_VSKSM {
+	__kind: 'VSKSM';
+}
+
+export interface TokenSymbol_PHA {
+	__kind: 'PHA';
+}
+
+export interface TokenSymbol_KINT {
+	__kind: 'KINT';
+}
+
+export interface TokenSymbol_KBTC {
+	__kind: 'KBTC';
 }

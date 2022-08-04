@@ -1,5 +1,4 @@
 // Imports
-// Types
 import { IPalletActionHandler, IPalletEventHandler, IPalletExtrinsicHandler } from './@types/palletHandler';
 import pallets from './handlers';
 

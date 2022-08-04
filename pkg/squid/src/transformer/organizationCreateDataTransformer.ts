@@ -2,7 +2,6 @@
 import { OrganizationCreationData } from '../@types/pallets/control/orgCreationData';
 import { ControlCreateOrgCall } from '../types/calls';
 import { addressCodec } from '../utils';
-// Types
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
 // Functions
@@ -16,45 +15,25 @@ function getOrganizationCreationData(context: EventHandlerContext): Organization
 		});
 
 		// Get versioned data
-		if (createData.isV51) {
-			const v51Data = createData.asV51;
+		if (createData.isV58) {
+			const v58 = createData.asV58;
 			return {
-				name: v51Data.name.toString(),
-				cid: v51Data.cid.toString(),
+				name: v58.name.toString(),
+				cid: v58.cid.toString(),
 
-				controller: addressCodec.encode(v51Data.controller),
+				controller: addressCodec.encode(v58.controllerId),
 
-				orgType: v51Data.orgType,
-				access: v51Data.access,
-				feeModel: v51Data.feeModel,
-				fee: v51Data.fee,
+				orgType: v58.orgType,
+				access: v58.access,
+				feeModel: v58.feeModel,
+				fee: v58.fee,
 
-				govAsset: v51Data.govAsset,
-				payAsset: v51Data.payAsset,
+				govAsset: v58.govAsset.value.__kind,
+				payAsset: v58.payAsset.value.__kind,
 
-				memberLimit: v51Data.memberLimit,
+				memberLimit: v58.memberLimit,
 				blockNumber: context.block.height,
-				deposit: BigInt(0),
-			};
-		} else if (createData.isV55) {
-			const v52Data = createData.asV55;
-			return {
-				name: v52Data.name.toString(),
-				cid: v52Data.cid.toString(),
-
-				controller: addressCodec.encode(v52Data.controllerId),
-
-				orgType: v52Data.orgType,
-				access: v52Data.access,
-				feeModel: v52Data.feeModel,
-				fee: v52Data.fee,
-
-				govAsset: v52Data.govAsset,
-				payAsset: v52Data.payAsset,
-
-				memberLimit: v52Data.memberLimit,
-				blockNumber: context.block.height,
-				deposit: v52Data.deposit,
+				deposit: v58.deposit ?? 0n,
 			};
 		} else {
 			console.error(`Unknown version of create organization extrinsic!`);

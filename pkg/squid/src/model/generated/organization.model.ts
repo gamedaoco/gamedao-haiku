@@ -55,11 +55,11 @@ export class Organization {
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	fee!: bigint;
 
-	@Column_('int4', { nullable: false })
-	govAsset!: number;
+	@Column_('text', { nullable: false })
+	govAsset!: string;
 
-	@Column_('int4', { nullable: false })
-	payAsset!: number;
+	@Column_('text', { nullable: false })
+	payAsset!: string;
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	memberLimit!: bigint;
