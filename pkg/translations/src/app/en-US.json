@@ -43,7 +43,8 @@
             "leave_organization": "Leave Organization",
             "create_proposal": "Create Proposal",
             "show_more": "Show More",
-            "vote": "Vote"
+            "vote": "Vote",
+            "save_draft": "Save Draft"
         },
         "form": {
             "next_step": "Next step",
@@ -77,7 +78,8 @@
             "reverting": "Reverting",
             "success": "Success",
             "failed": "Failed",
-            "locked": "Locked"
+            "locked": "Locked",
+            "draft": "Draft"
         },
         "display_name": "Display Name",
         "legal_name": "Legal Name",
@@ -272,13 +274,13 @@
             },
             "createProposal": {
                 "pending": "Summoning your Proposal...",
-                "success": "Voted",
-                "error": "Voting failed"
+                "success": "Proposal created",
+                "error": "Summoning failed, check your Mana."
             },
             "simpleVote": {
                 "pending": "Voting in progress...",
-                "success": "Proposal created",
-                "error": "Summoning failed, check your Mana."
+                "success": "Voted",
+                "error": "Voting failed"
             },
             "addMember": {
                 "pending": "Join organisations in progress...",
@@ -307,7 +309,8 @@
             }
         },
         "info": {
-            "address_copied": "Address Copied to Clipboard"
+            "address_copied": "Address Copied to Clipboard",
+            "draft_saved": "Draft has been saved"
         },
         "warning": {
             "min_1_game_fee": "Please enter a minimum fee of 1 GAME",

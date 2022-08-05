@@ -18,7 +18,7 @@ services:
     command:
       [
         "/usr/local/bin/subzero",
-        "--dev",
+        "--alice",
         "--unsafe-ws-external",
         "--rpc-cors=all",
         "--ws-external",
@@ -27,6 +27,10 @@ services:
         "unsafe",
         "--ws-port",
         "9944",
+        "--chain",
+        "/subzero/customSpec.json",
+        "--pruning",
+        "archive"
       ]
     ports:
       - "9944:9944"

@@ -17,12 +17,9 @@ async function handleCampaignUpdatedEvent(context: EventHandlerContext) {
 	let state: string | null = null;
 
 	// Load data
-	if (campaignUpdatedEventData.isV51) {
-		campaignId = hashToHexString(campaignUpdatedEventData.asV51.campaignId);
-		state = campaignUpdatedEventData.asV51.state.__kind;
-	} else if (campaignUpdatedEventData.isV55) {
-		campaignId = hashToHexString(campaignUpdatedEventData.asV55.campaignId);
-		state = campaignUpdatedEventData.asV55.state.__kind;
+	if (campaignUpdatedEventData.isV58) {
+		campaignId = hashToHexString(campaignUpdatedEventData.asV58.campaignId);
+		state = campaignUpdatedEventData.asV58.state.__kind;
 	} else {
 		console.error(`Unknown version of update campaign event!`);
 		return;

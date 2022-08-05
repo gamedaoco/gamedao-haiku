@@ -7,4 +7,5 @@ export enum CampaignStatus {
 	SUCCESS = 'Success',
 	FAILED = 'Failed',
 	LOCKED = 'Locked',
+	Draft = 'Draft',
 }

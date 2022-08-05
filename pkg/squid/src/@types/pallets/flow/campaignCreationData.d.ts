@@ -1,4 +1,4 @@
-import * as v51 from '../../../types/v51';
+import * as v58 from '../../../types/v58';
 
 export type CampaignCreationData = {
 	org: string;
@@ -7,8 +7,8 @@ export type CampaignCreationData = {
 	target: bigint;
 	deposit: bigint;
 	expiry: number;
-	protocol: v51.FlowProtocol;
-	governance: v51.FlowGovernance;
+	protocol: v58.FlowProtocol;
+	governance: v58.FlowGovernance;
 	cid: string | null;
 	tokenSymbol: string;
 	tokenName: string;

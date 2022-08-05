@@ -39,6 +39,9 @@ export function StatusChip({ status, variant }: ComponentProps) {
 			case CampaignStatus.FAILED:
 				color = 'secondary'
 				break
+			case CampaignStatus.Draft:
+				color = 'info'
+				break
 			default:
 				return null
 		}
