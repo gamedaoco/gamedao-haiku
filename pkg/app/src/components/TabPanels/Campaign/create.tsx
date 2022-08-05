@@ -7,6 +7,7 @@ import { Form } from 'components/Forms/Campaign/form'
 interface ComponentProps {
 	organizationId: string
 	cancel: () => void
+	draftId?: string
 }
 
 const steps = [
@@ -24,7 +25,7 @@ const steps = [
 	},
 ]
 
-export function CreateCampaignPage({ organizationId, cancel }: ComponentProps) {
+export function CreateCampaignPage({ organizationId, cancel, draftId }: ComponentProps) {
 	const [activeStep, setActiveStep] = useState<number>(0)
 
 	return (
@@ -36,7 +37,13 @@ export function CreateCampaignPage({ organizationId, cancel }: ComponentProps) {
 					</Step>
 				))}
 			</Stepper>
-			<Form organizationId={organizationId} currentStep={activeStep} cancel={cancel} setStep={setActiveStep} />
+			<Form
+				organizationId={organizationId}
+				currentStep={activeStep}
+				cancel={cancel}
+				setStep={setActiveStep}
+				draftId={draftId}
+			/>
 		</Stack>
 	)
 }

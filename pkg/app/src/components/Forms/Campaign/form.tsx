@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { Box, Button, Stack } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useConfig } from 'hooks/useConfig'
+import { useSaveCampaignDraft } from 'hooks/useSaveCampaignDraft'
+import { useTmpCampaign } from 'hooks/useTmpCampaign'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
+import { useTranslation } from 'react-i18next'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
-import ConfirmationModal from 'components/Modals/ConfirmationModal'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
@@ -16,25 +18,34 @@ import { Settings, getValidationSchema as getSettingsValidationSchema } from './
 interface ComponentProps {
 	organizationId: string
 	currentStep: number
+	draftId?: string
 	cancel: () => void
 	setStep: (step) => void
 }
 
-export function Form({ organizationId, cancel, currentStep, setStep }: ComponentProps) {
+export function Form({ organizationId, cancel, currentStep, setStep, draftId }: ComponentProps) {
 	const tmpCampaignState = useTmpCampaignState()
+	const tmpCampaign = useTmpCampaign()
 	const config = useConfig()
 	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
-	const [openModal, setOpenModal] = useState(false)
+	const { addDraft, drafts } = useSaveCampaignDraft(organizationId)
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		tmpCampaignState.setOrgId(organizationId)
 	}, [tmpCampaignState, organizationId])
 
+	useEffect(() => {
+		if (draftId && drafts[draftId]) {
+			tmpCampaignState.restoreDraft({ ...drafts[draftId], orgId: organizationId })
+		}
+	}, [draftId, drafts])
+
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
-			setOpenModal(true)
+			cancel()
 		}
 	}, [cancel, currentStep])
 
@@ -97,6 +108,10 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		[tmpCampaignState],
 	)
 
+	const handleSaveDraft = useCallback(() => {
+		addDraft(tmpCampaign)
+	}, [addDraft, tmpCampaign])
+
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
@@ -121,9 +136,6 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 		}
 		return false
 	}
-	const handleClose = useCallback(() => {
-		setOpenModal(false)
-	}, [])
 
 	const handleCloseTxModal = useCallback(() => {
 		setTxModalState(false)
@@ -142,10 +154,6 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 	const checkBackButtonState = () => {
 		return currentStep == 0
 	}
-	const handleCancelButton = useCallback(() => {
-		cancel()
-		setOpenModal(false)
-	}, [cancel])
 
 	if ([0, 1, 2].indexOf(currentStep) === -1) {
 		return null
@@ -153,15 +161,6 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 
 	return (
 		<>
-			<ConfirmationModal
-				title="Are you sure?"
-				confirmButtonText={'Yes, Cancel Now'}
-				cancelButtonText={'No, Continue'}
-				confirmButtonCallback={handleCancelButton}
-				cancelButtonCallback={handleClose}
-				open={openModal}
-				description={'All your progress will be lost. Maybe save it as draft and continue later'}
-			/>
 			{currentStep === 0 && (
 				<Name
 					name={tmpCampaignState.name}
@@ -199,44 +198,50 @@ export function Form({ organizationId, cancel, currentStep, setStep }: Component
 					setTermsConditionAccepted={setTermsConditionAccepted}
 				/>
 			)}
-			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-start' } }} direction="row">
-				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
+			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
+				<Button
+					size="large"
+					variant="outlined"
+					color="primary"
+					sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
+					onClick={handleBack}
+				>
+					Back
+				</Button>
+				<Button
+					size="large"
+					variant="outlined"
+					color="primary"
+					sx={{
+						display: checkBackButtonState() ? 'block' : 'none',
+						flexGrow: { xs: 1, sm: 0 },
+					}}
+					onClick={handleCancel}
+				>
+					Cancel
+				</Button>
+
+				{currentStep === 2 && (
 					<Button
 						size="large"
 						variant="outlined"
-						color="primary"
-						sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
-						onClick={handleBack}
-					>
-						Back
-					</Button>
-					<Button
-						size="large"
-						variant="outlined"
-						color="primary"
-						sx={{
-							display: checkBackButtonState() ? 'block' : 'none',
-							flexGrow: { xs: 1, sm: 0 },
-						}}
-						onClick={handleCancel}
-					>
-						Cancel
-					</Button>
-				</Box>
-				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-					<Button size="large" variant="outlined" disabled={checkNextButtonState()}>
-						Save as Draft
-					</Button>
-					<Button
-						size="large"
-						variant="contained"
-						onClick={handleNext}
+						onClick={handleSaveDraft}
 						disabled={checkNextButtonState()}
-						sx={{ ml: 2 }}
+						sx={{ flexGrow: { xs: 1, sm: 0 } }}
 					>
-						{currentStep === 2 ? 'Publish now' : 'Next step'}
+						{t('button:ui:save_draft')}
 					</Button>
-				</Box>
+				)}
+
+				<Button
+					size="large"
+					variant="contained"
+					onClick={handleNext}
+					disabled={checkNextButtonState()}
+					sx={{ flexGrow: { xs: 1, sm: 0 } }}
+				>
+					{currentStep === 2 ? 'Publish now' : 'Next step'}
+				</Button>
 			</Stack>
 
 			<TransactionDialog
