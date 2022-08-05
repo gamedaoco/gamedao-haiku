@@ -229,7 +229,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 						disabled={checkNextButtonState()}
 						sx={{ flexGrow: { xs: 1, sm: 0 } }}
 					>
-						{t('ui:save_draft')}
+						{t('button:ui:save_draft')}
 					</Button>
 				)}
 
