@@ -153,7 +153,7 @@ export class BalanceManager {
 		// TODO: Refactor get real balance ids from chain
 		const createCurrencyId = (token: string) =>
 			chainClient.api.createType('ZeroPrimitivesCurrencyCurrencyId', { Token: token })
-		const keys = [createCurrencyId('ZERO'), createCurrencyId('PLAY'), createCurrencyId('GAME')]
+		const keys = [createCurrencyId('PLAY'), createCurrencyId('GAME')]
 
 		const queries: any = []
 		addresses.forEach((address) => {
@@ -162,7 +162,7 @@ export class BalanceManager {
 
 		this.unsubscribeTokens = await chainClient.api.queryMulti(queries, (balances) => {
 			// ToDo: Exchange array
-			this.handleTokenBalances([0, 1, 2], addresses, balances)
+			this.handleTokenBalances([1, 2], addresses, balances)
 		})
 	}
 }
