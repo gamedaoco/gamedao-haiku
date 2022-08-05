@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { Card } from '@mui/material'
 import { useConfig } from 'hooks/useConfig'
 import { useSystemProperties } from 'hooks/useSystemProperties'
+import { CampaignStatus } from 'src/@types/campaignStatus'
 import type { Campaign } from 'src/queries'
 import { parseIpfsHash } from 'src/utils/ipfs'
 
@@ -25,8 +26,11 @@ export function CampaignCard({ campaign }: ComponentProps) {
 	)
 
 	const handleClick = useCallback(() => {
-		push(`/campaigns/${campaign?.id}`)
-	}, [push, campaign?.id])
+		if (campaign?.state === CampaignStatus.Draft) {
+			return push(`/organisations/${campaign?.organization?.id}/campaigns?draft=${campaign?.id}`)
+		}
+		return push(`/campaigns/${campaign?.id}`)
+	}, [push, campaign?.id, campaign?.state])
 
 	if (!campaign) {
 		return null

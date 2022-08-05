@@ -11,13 +11,21 @@ import { PlusIcon } from 'components/Icons/plusIcon'
 
 interface ComponentProps {
 	campaigns: Campaign[]
+	draftCampaigns?: Campaign[]
 	title?: string
 	loading?: boolean
 	showCreate?: boolean
 	createCallback?: () => void
 }
 
-export function CampaignsList({ campaigns, showCreate, loading, title, createCallback }: ComponentProps) {
+export function CampaignsList({
+	campaigns,
+	showCreate,
+	loading,
+	title,
+	draftCampaigns,
+	createCallback,
+}: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const [campaignsState, setCampaignsState] = useState<Campaign[]>()
@@ -72,6 +80,12 @@ export function CampaignsList({ campaigns, showCreate, loading, title, createCal
 				)}
 
 				{campaignsState?.map((campaign: Campaign) => (
+					<Fragment key={campaign?.id}>
+						<CampaignCard campaign={campaign} />
+					</Fragment>
+				))}
+
+				{draftCampaigns?.map((campaign: Campaign) => (
 					<Fragment key={campaign?.id}>
 						<CampaignCard campaign={campaign} />
 					</Fragment>
