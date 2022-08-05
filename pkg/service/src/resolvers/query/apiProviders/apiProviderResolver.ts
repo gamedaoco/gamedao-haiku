@@ -15,7 +15,7 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 		const systemName = await chainClient.api.rpc.system.chain()
 
 		return {
-			types: chainClient.types,
+			types: '{}',
 			wsProviderUrl: process.env.CHAIN_RPC_URL_OVERRIDE || chainClient.url,
 			chainProperties: {
 				ss58Format: (ss58Format as any) ?? 25,
