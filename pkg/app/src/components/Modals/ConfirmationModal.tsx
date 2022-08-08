@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Box, Button, Modal, Typography } from '@mui/material'
 
-interface ComponentInterface {
+interface ComponentProps {
 	title: string
 	description?: string
 	confirmButtonText: string
@@ -12,7 +12,7 @@ interface ComponentInterface {
 	cancelButtonCallback: () => void
 	open: boolean
 }
-const ConfirmationModal = ({
+export function ConfirmationModal({
 	title,
 	description,
 	confirmButtonText,
@@ -21,7 +21,7 @@ const ConfirmationModal = ({
 	closeCallback = () => {},
 	cancelButtonCallback,
 	open,
-}: ComponentInterface) => {
+}: ComponentProps) {
 	return (
 		<Modal
 			open={open}
@@ -62,5 +62,3 @@ const ConfirmationModal = ({
 		</Modal>
 	)
 }
-
-export default ConfirmationModal
