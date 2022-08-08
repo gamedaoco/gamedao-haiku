@@ -7,7 +7,7 @@ import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
 import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
-import { fromUnit } from 'src/utils/token'
+import { createTokenType, fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
 
@@ -20,8 +20,8 @@ const validation = Yup.object().shape({
 	fee_model: Yup.number().required().min(0).max(2),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	fee: Yup.string().required(),
-	gov_asset: Yup.number().required().min(0),
-	pay_asset: Yup.number().required().min(0),
+	gov_asset: Yup.object().required(),
+	pay_asset: Yup.object().required(),
 	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	deposit: Yup.string().required(),
@@ -52,8 +52,18 @@ export function useCreateOrgTransaction(): TransactionData {
 							selectedApiProvider.systemProperties.networkCurrency
 						],
 					),
-					gov_asset: selectedApiProvider.systemProperties.governanceCurrency,
-					pay_asset: selectedApiProvider.systemProperties.paymentCurrencies,
+					gov_asset: createTokenType(
+						selectedApiProvider.apiProvider,
+						selectedApiProvider.systemProperties.tokenSymbol[
+							selectedApiProvider.systemProperties.governanceCurrency
+						],
+					),
+					pay_asset: createTokenType(
+						selectedApiProvider.apiProvider,
+						selectedApiProvider.systemProperties.tokenSymbol[
+							selectedApiProvider.systemProperties.paymentCurrencies
+						],
+					),
 					member_limit: data.memberLimit,
 					deposit: fromUnit(
 						data.deposit,
