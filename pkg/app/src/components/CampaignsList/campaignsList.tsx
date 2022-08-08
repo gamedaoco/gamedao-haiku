@@ -12,7 +12,6 @@ import { PlusIcon } from 'components/Icons/plusIcon'
 interface ComponentProps {
 	campaigns: Campaign[]
 	draftCampaigns?: Campaign[]
-	title?: string
 	loading?: boolean
 	showCreate?: boolean
 	createCallback?: () => void
@@ -22,7 +21,6 @@ export function CampaignsList({
 	campaigns,
 	showCreate,
 	loading,
-	title,
 	draftCampaigns,
 	createCallback,
 }: ComponentProps) {
@@ -40,12 +38,6 @@ export function CampaignsList({
 
 	return (
 		<Box>
-			{title && (
-				<Typography marginBottom={2} variant="body2" fontWeight={theme.typography.fontWeightBold}>
-					{title}
-				</Typography>
-			)}
-
 			{loading && (
 				<Stack justifyContent="center" width="100%" alignItems="center" padding={4}>
 					<CircularProgress />

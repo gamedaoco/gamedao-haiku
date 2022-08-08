@@ -23,7 +23,7 @@ export function Header({ organizationImage, headerImage, status }: ComponentProp
 					zIndex: 1,
 				}}
 			>
-				<StatusChip status={status} />
+				<StatusChip status={status} variant="campaignStatus" />
 			</Box>
 			<SvgIconStyle
 				src={shapeAvatar.src}

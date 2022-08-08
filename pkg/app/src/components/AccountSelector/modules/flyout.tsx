@@ -71,7 +71,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
 					</NavLink>
-					<NavLink href={'/campaigns'}>
+					<NavLink href={'/account/campaigns'}>
 						<MenuItem>
 							<ListItemIcon>
 								<Topic fontSize="small" />

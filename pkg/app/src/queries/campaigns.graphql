@@ -14,7 +14,7 @@ subscription CampaignContributors($address: String!) {
             campaign_metadata {
                 name
                 title
-                logo
+                header
             }
             campaign_contributors_aggregate {
                 aggregate {
@@ -43,26 +43,29 @@ subscription Campaign($address: String) {
     campaign(where: {admin_identity_id: {_eq: $address}}) {
         id
         target
-        expiry
         state
+        expiry
+        token_symbol
         campaign_metadata {
-            name
             title
-            logo
+            name
             header
+            logo
         }
         campaign_contributors_aggregate {
             aggregate {
                 sum {
                     contributed
                 }
-                count
+                count(distinct: true)
             }
         }
         organization {
             organization_metadata {
                 name
+                logo
             }
+            pay_asset
         }
     }
 }
