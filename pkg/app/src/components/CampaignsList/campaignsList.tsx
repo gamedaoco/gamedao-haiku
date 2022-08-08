@@ -17,13 +17,7 @@ interface ComponentProps {
 	createCallback?: () => void
 }
 
-export function CampaignsList({
-	campaigns,
-	showCreate,
-	loading,
-	draftCampaigns,
-	createCallback,
-}: ComponentProps) {
+export function CampaignsList({ campaigns, showCreate, loading, draftCampaigns, createCallback }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const [campaignsState, setCampaignsState] = useState<Campaign[]>()

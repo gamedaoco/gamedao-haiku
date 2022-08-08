@@ -34,7 +34,7 @@ export function useCreateOrgTransaction(): TransactionData {
 	const address = useCurrentAccountAddress()
 	const data = useTmpOrganisation()
 	const logger = useLogger('useCreateOrgTransaction')
-
+	console.log(txState)
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && data && address) {
 			try {
@@ -49,7 +49,7 @@ export function useCreateOrgTransaction(): TransactionData {
 					fee: fromUnit(
 						data.feeAmount,
 						selectedApiProvider.systemProperties.tokenDecimals[
-							selectedApiProvider.systemProperties.networkCurrency
+							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
 					gov_asset: createTokenType(
@@ -68,7 +68,7 @@ export function useCreateOrgTransaction(): TransactionData {
 					deposit: fromUnit(
 						data.deposit,
 						selectedApiProvider.systemProperties.tokenDecimals[
-							selectedApiProvider.systemProperties.networkCurrency
+							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
 				}
