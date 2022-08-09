@@ -36,6 +36,7 @@ import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
+import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
@@ -357,6 +358,9 @@ export function OrganisationById() {
 							</TabPanel>
 							<TabPanel value={'members'}>
 								<OrganizationMembersTable organizationState={organizationState} />
+							</TabPanel>
+							<TabPanel value={'settings'}>
+								<SettingsOverview organizationState={organizationState} />
 							</TabPanel>
 						</Stack>
 					) : (
