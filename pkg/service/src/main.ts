@@ -8,6 +8,7 @@ import { BalanceManager } from './modules/balanceManager'
 import { ChainClient } from './modules/chainClient'
 import { DbClient } from './modules/dbClient'
 import { SessionManager } from './modules/sessionManager'
+import { updateSessionResolver } from './resolvers/mutation/updateSessionResolver'
 import { resolvers } from './resolvers/resolvers'
 
 const chainClient = ChainClient.Instance
@@ -26,7 +27,6 @@ async function startServer() {
 
 	const server = new ApolloServer({
 		typeDefs,
-
 		resolvers: resolvers(),
 		cache: 'bounded',
 	})

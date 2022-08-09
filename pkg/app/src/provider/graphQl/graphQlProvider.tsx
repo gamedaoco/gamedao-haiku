@@ -5,7 +5,7 @@ import { createClient } from 'graphql-ws'
 
 const wsLink = new GraphQLWsLink(
 	createClient({
-		url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT?.replace('https://', 'wss://'),
+		url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT?.replace('http://', 'ws://').replace('https://', 'wss://'),
 		webSocketImpl: require('websocket').w3cwebsocket,
 	}),
 )

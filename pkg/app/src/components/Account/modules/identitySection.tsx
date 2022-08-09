@@ -1,36 +1,32 @@
-import React, { FC, useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
+
+import { useRouter } from 'next/router'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
+import { useTranslation } from 'react-i18next'
 import { AccountTabs } from 'src/@types/account'
-import { AccountState } from 'src/@types/extension'
-import {
-	getAddressFromAccountState,
-	getInitials,
-	getNameFromAccountState,
-	shortAccountAddress,
-} from 'src/utils/accountUtils'
+import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
-interface IdentitySectionProps {
-	accountState: AccountState
-	setCurrentTab: (AccountTabs) => void
-}
-
-const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab }) => {
+export function IdentitySection() {
+	const { push } = useRouter()
+	const { t } = useTranslation()
+	const accountState = useCurrentAccountState()
 	const handleButtonClick = useCallback(() => {
-		setCurrentTab(AccountTabs.IDENTITY)
-	}, [setCurrentTab])
+		push(`/account/${AccountTabs.IDENTITY}`)
+	}, [push])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
+	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
+
 	const handleCopyAddress = useCallback(() => {
-		// TODO: Add i18n
 		navigator.clipboard
 			.writeText(getAddressFromAccountState(accountState))
-			.then(() => createInfoNotification('Address Copied to Clipboard'))
-	}, [accountState])
-
+			.then(() => createInfoNotification(t('notification:info:address_copied')))
+	}, [accountState, t])
 	return (
 		<Grid container justifyContent="space-between" spacing={3}>
 			<Grid
@@ -45,11 +41,6 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 				}}
 			>
 				<Avatar
-					src={
-						identity?.email
-							? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
-							: 'https://picsum.photos/200'
-					}
 					sx={{
 						height: {
 							md: 128,
@@ -60,11 +51,13 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 							md: 128,
 							sx: 48,
 						},
-						border: '3px gray solid',
 					}}
-				>
-					{getInitials(getNameFromAccountState(accountState))}
-				</Avatar>
+					src={
+						identity?.email
+							? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
+							: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+					}
+				/>
 				<div>
 					<Typography sx={{ typography: { sm: 'body1', md: 'h4' } }} fontWeight="700">
 						{getNameFromAccountState(accountState)}
@@ -89,12 +82,10 @@ const IdentitySection: FC<IdentitySectionProps> = ({ accountState, setCurrentTab
 						variant="contained"
 						onClick={handleButtonClick}
 					>
-						Set On-Chain Identity
+						{t('button:navigation:set_on_chain_identity')}
 					</Button>
 				</div>
 			</Grid>
 		</Grid>
 	)
 }
-
-export default IdentitySection

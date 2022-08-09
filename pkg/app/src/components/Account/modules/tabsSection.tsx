@@ -1,45 +1,53 @@
-import React, { ChangeEvent, FC, useCallback } from 'react'
+import React, { ChangeEvent, useCallback, useMemo } from 'react'
+
+import { useRouter } from 'next/router'
 
 import { Box, Tab, Tabs } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { AccountTabs } from 'src/@types/account'
 
-interface TabsSectionProps {
-	currentTab: AccountTabs
-	setCurrentTab: (AccountTabs) => void
+interface ComponentProps {
+	param: AccountTabs
 }
 
 interface TabsInterface {
 	label: string
 	value: AccountTabs
 }
-const tabs: TabsInterface[] = [
-	{
-		label: 'Overview',
-		value: AccountTabs.OVERVIEW,
-	},
-	{
-		label: 'My Organizations',
-		value: AccountTabs.ORGANIZATIONS,
-	},
-	{
-		label: 'My Campaigns',
-		value: AccountTabs.CAMPAIGNS,
-	},
-	{
-		label: 'My Collectables',
-		value: AccountTabs.COLLECTABLES,
-	},
-	{
-		label: 'Identity',
-		value: AccountTabs.IDENTITY,
-	},
-]
-const TabsSection: FC<TabsSectionProps> = ({ setCurrentTab, currentTab }) => {
+
+export function TabsSection({ param }: ComponentProps) {
+	const { t } = useTranslation()
+	const tabs = useMemo<TabsInterface[]>(
+		() => [
+			{
+				label: t('button:navigation:overview'),
+				value: AccountTabs.OVERVIEW,
+			},
+			{
+				label: t('button:navigation:my_organisations'),
+				value: AccountTabs.ORGANIZATIONS,
+			},
+			{
+				label: t('button:navigation:my_campaigns'),
+				value: AccountTabs.CAMPAIGNS,
+			},
+			{
+				label: t('button:navigation:my_collectables'),
+				value: AccountTabs.COLLECTABLES,
+			},
+			{
+				label: t('button:navigation:identity'),
+				value: AccountTabs.IDENTITY,
+			},
+		],
+		[t],
+	)
+	const { push } = useRouter()
 	const handleTabsChange = useCallback(
 		(event: ChangeEvent<{}>, value: AccountTabs): void => {
-			setCurrentTab(value)
+			push(`/account/${value}`)
 		},
-		[setCurrentTab],
+		[push],
 	)
 	return (
 		<Box sx={{ bgcolor: 'background.paper', my: 2, borderRadius: '8px' }}>
@@ -50,7 +58,7 @@ const TabsSection: FC<TabsSectionProps> = ({ setCurrentTab, currentTab }) => {
 				onChange={handleTabsChange}
 				sx={{ px: 3 }}
 				textColor="primary"
-				value={currentTab}
+				value={param || AccountTabs.OVERVIEW}
 				variant="scrollable"
 			>
 				{tabs.map((tab) => (
@@ -60,5 +68,3 @@ const TabsSection: FC<TabsSectionProps> = ({ setCurrentTab, currentTab }) => {
 		</Box>
 	)
 }
-
-export default TabsSection

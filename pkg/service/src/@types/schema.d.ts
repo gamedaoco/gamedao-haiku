@@ -25,6 +25,7 @@ export type ApiProvider = {
 
 export type ChainProperties = {
 	readonly __typename?: 'ChainProperties'
+	readonly blockTargetTime: Scalars['Int']
 	readonly governanceCurrency: Scalars['Int']
 	readonly networkCurrency: Scalars['Int']
 	readonly paymentCurrencies: Scalars['Int']
@@ -35,9 +36,11 @@ export type ChainProperties = {
 
 export type Config = {
 	readonly __typename?: 'Config'
+	readonly CAMPAIGN_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']>
 	readonly CONTACT?: Maybe<Scalars['String']>
 	readonly IPFS_GATEWAY?: Maybe<Scalars['String']>
 	readonly LOG_LEVEL?: Maybe<LogLevel>
+	readonly PROPOSAL_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']>
 	readonly SITE_DESCRIPTION?: Maybe<Scalars['String']>
 	readonly SITE_IMAGE?: Maybe<Scalars['String']>
 	readonly SITE_NAME?: Maybe<Scalars['String']>
@@ -75,17 +78,20 @@ export type DisplayValueEntryString = DisplayValueEntry & {
 
 export type DisplayValues = {
 	readonly __typename?: 'DisplayValues'
+	readonly campaignFilters?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
+	readonly campaignFundingCategories?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly campaignSortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly collateralTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly countries?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryCountry>>>
 	readonly daoBodies?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly daoFeeModel?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly daoMemberGovernance?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly memberships?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly organizationSortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly projectDurations?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
-	readonly sortOptions?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryString>>>
 	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 }
 
@@ -339,6 +345,7 @@ export type ChainPropertiesResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['ChainProperties'] = ResolversParentTypes['ChainProperties'],
 > = ResolversObject<{
+	blockTargetTime?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	governanceCurrency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	networkCurrency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 	paymentCurrencies?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
@@ -352,9 +359,11 @@ export type ConfigResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Config'] = ResolversParentTypes['Config'],
 > = ResolversObject<{
+	CAMPAIGN_MIN_EXPIRY_IN_SECONDS?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	CONTACT?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	IPFS_GATEWAY?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	LOG_LEVEL?: Resolver<Maybe<ResolversTypes['LogLevel']>, ParentType, ContextType>
+	PROPOSAL_MIN_EXPIRY_IN_SECONDS?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	SITE_DESCRIPTION?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	SITE_IMAGE?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
 	SITE_NAME?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -412,6 +421,21 @@ export type DisplayValuesResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['DisplayValues'] = ResolversParentTypes['DisplayValues'],
 > = ResolversObject<{
+	campaignFilters?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
+	campaignFundingCategories?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
+		ParentType,
+		ContextType
+	>
+	campaignSortOptions?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
 	collateralTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,
@@ -442,6 +466,11 @@ export type DisplayValuesResolvers<
 		ParentType,
 		ContextType
 	>
+	organizationSortOptions?: Resolver<
+		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
+		ParentType,
+		ContextType
+	>
 	projectDurations?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,
@@ -459,11 +488,6 @@ export type DisplayValuesResolvers<
 	>
 	protocolTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
-		ParentType,
-		ContextType
-	>
-	sortOptions?: Resolver<
-		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryString']>>>,
 		ParentType,
 		ContextType
 	>

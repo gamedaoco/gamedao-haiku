@@ -15,19 +15,20 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 		const systemName = await chainClient.api.rpc.system.chain()
 
 		return {
-			types: chainClient.types,
-			wsProviderUrl: chainClient.url,
+			types: '{}',
+			wsProviderUrl: process.env.CHAIN_RPC_URL_OVERRIDE || chainClient.url,
 			chainProperties: {
-				ss58Format: ss58Format as any,
-				tokenSymbol: tokenSymbol as any,
-				tokenDecimals: tokenDecimals as any,
+				ss58Format: (ss58Format as any) ?? 25,
+				tokenSymbol: (tokenSymbol as any) ?? ['ZERO'],
+				tokenDecimals: (tokenDecimals as any) ?? [18],
 
 				// TODO: Remove hardcoded values
 				networkCurrency: 0, // 0 = ZERO
-				governanceCurrency: 1, // 1 = GAME
-				paymentCurrencies: 13, // 13 = aUSD
+				governanceCurrency: 2, // 2 = GAME
+				paymentCurrencies: 1, // 1 = PLAY
+				blockTargetTime: 3, // 3 = 3s Rococo 12
 			},
-			name: systemName.toHuman() as any,
+			name: (systemName.toHuman() as any) ?? 'ZERO',
 		}
 	} catch (err) {
 		console.error('apiProviderResolver error', err)

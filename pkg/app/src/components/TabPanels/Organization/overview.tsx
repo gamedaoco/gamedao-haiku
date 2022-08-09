@@ -28,30 +28,25 @@ export function Overview({ organizationId, isMember, isAdmin }: ComponentProps) 
 
 	return (
 		<>
-			<Typography>Overview</Typography>
+			<Typography>{t('button:navigation:overview')}</Typography>
 			{!isMember && (
 				<>
 					<Button variant="contained" disabled={!addMemberTx} onClick={handleOpenTxModal}>
-						Join Organization
+						{t('button:ui:join_organization')}
 					</Button>
 				</>
 			)}
 			{isMember && !isAdmin && (
 				<>
 					<Button variant="contained" disabled={!removeMemberTx} onClick={handleOpenTxModal}>
-						Leave Organization
+						{t('button:ui:leave_organization')}
 					</Button>
 				</>
 			)}
 			<TransactionDialog
 				open={showTxModalType}
 				onClose={handleCloseTxModal}
-				tx={isMember ? removeMemberTx : addMemberTx}
-				txMsg={{
-					pending: t(`notification:transactions:${isMember ? 'removeMember' : 'addMember'}:pending`),
-					success: t(`notification:transactions:${isMember ? 'removeMember' : 'addMember'}:success`),
-					error: t(`notification:transactions:${isMember ? 'removeMember' : 'addMember'}:error`),
-				}}
+				txData={isMember ? removeMemberTx : addMemberTx}
 				txCallback={handleCloseTxModal}
 			/>
 		</>

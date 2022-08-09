@@ -66,25 +66,25 @@ declare module '@mui/material' {
 
 // SETUP COLORS
 const PRIMARY = {
-	lighter: '#A276E8',
-	light: '#8C56E2',
-	main: '#7535DC',
-	dark: '#5B27CD',
-	darker: '#4C20C6',
-}
-const SECONDARY = {
-	lighter: '#D6E4FF',
-	light: '#84A9FF',
-	main: '#3366FF',
-	dark: '#1939B7',
-	darker: '#091A7A',
-}
-const INFO = {
 	lighter: '#62F6E9',
 	light: '#3BEDED',
 	main: '#00D0E2',
 	dark: '#00A2C2',
 	darker: '#007BA2',
+}
+const SECONDARY = {
+	lighter: '#EBEBEB',
+	light: '#C1C1C1',
+	main: '#999999',
+	dark: '#686868',
+	darker: '#424242',
+}
+const INFO = {
+	lighter: '#D6E4FF',
+	light: '#84A9FF',
+	main: '#3366FF',
+	dark: '#1939B7',
+	darker: '#091A7A',
 }
 const SUCCESS = {
 	lighter: '#D7F366',
@@ -138,11 +138,11 @@ const GRADIENTS = {
 }
 
 const CHART_COLORS = {
-	violet: ['#826AF9', '#9E86FF', '#D0AEFF', '#F7D2FF'],
-	blue: ['#2D99FF', '#83CFFF', '#A5F3FF', '#CCFAFF'],
-	green: ['#2CD9C5', '#60F1C8', '#A4F7CC', '#C0F2DC'],
-	yellow: ['#FFE700', '#FFEF5A', '#FFF7AE', '#FFF3D6'],
-	red: ['#FF6C40', '#FF8F6D', '#FFBD98', '#FFF2D4'],
+	violet: ['#F7D2FF', '#D0AEFF', '#9E86FF', '#826AF9'],
+	blue: ['#CCFAFF', '#A5F3FF', '#83CFFF', '#2D99FF'],
+	green: ['#C0F2DC', '#A4F7CC', '#60F1C8', '#2CD9C5'],
+	yellow: ['#FFF3D6', '#FFF7AE', '#FFEF5A', '#FFE700'],
+	red: ['#FFF2D4', '#FFBD98', '#FF8F6D', '#FF6C40'],
 }
 
 const COMMON = {

@@ -50,16 +50,31 @@ query DisplayValues {
             value
             text
         }
+        campaignFundingCategories {
+            key
+            value
+            text
+        }
         countries {
             key
             value
             text
             flag
         }
-        sortOptions {
+        organizationSortOptions {
             key
             value
             text
+        }
+        campaignSortOptions {
+            key
+            value
+            text
+        }
+        campaignFilters {
+            key
+            text
+            value
         }
     }
 }

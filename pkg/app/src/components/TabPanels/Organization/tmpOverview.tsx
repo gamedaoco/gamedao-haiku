@@ -1,14 +1,16 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
-import { Button, Divider, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Button, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import type { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useTranslation } from 'react-i18next'
+import { useOrganizationByIdSubscription } from 'src/queries'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
@@ -21,6 +23,9 @@ export function TmpOverview() {
 	const tmpOrgState = useTmpOrganisationState()
 	const { t } = useTranslation()
 	const tx = useCreateOrgTransaction()
+	const { push } = useRouter()
+	const [orgId, setOrgId] = useState<string>(null)
+	const { data: organizationByIdData, loading } = useOrganizationByIdSubscription({ variables: { orgId } })
 
 	const handleModalOpen = useCallback(() => {
 		setModalState(true)
@@ -43,10 +48,21 @@ export function TmpOverview() {
 			if (state) {
 				// The transaction was successful, clear state
 				tmpOrgState?.clearAll()
+				result.events.forEach(({ event: { data, method, section } }) => {
+					if (section === 'control' && method === 'OrgCreated') {
+						setOrgId(data?.[1]?.toHex())
+					}
+				})
 			}
 		},
 		[tmpOrgState.clearAll],
 	)
+
+	useEffect(() => {
+		if (orgId && organizationByIdData && !loading) {
+			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+		}
+	}, [orgId, organizationByIdData])
 
 	return (
 		<>
@@ -54,11 +70,8 @@ export function TmpOverview() {
 				<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
 					<Paper sx={{ width: '100%' }}>
 						<Stack height="100%" spacing={1} padding={{ xs: 2, md: 4 }}>
-							<Typography variant="h6">Complete your Organization</Typography>
-							<Typography variant="body2">
-								To start using your oganization and deploy it on the chain, please complete following
-								steps and earn experience points!
-							</Typography>
+							<Typography variant="h6">{t('label:complete_your_organization')}</Typography>
+							<Typography variant="body2">{t('label:tmp_organization_description')}</Typography>
 							<Timeline position="right">
 								<TimelineItem sx={{ '&:before': { display: 'none' } }}>
 									<TimelineSeparator>
@@ -68,7 +81,7 @@ export function TmpOverview() {
 									<TimelineContent>
 										<Stack direction="row" justifyContent="space-between" height="100%">
 											<Typography variant="subtitle2" sx={{ textDecoration: 'line-through' }}>
-												Create organization
+												{t('transactions:createOrganization:title')}
 											</Typography>
 											<Typography variant="subtitle2">+15XP</Typography>
 										</Stack>
@@ -89,7 +102,7 @@ export function TmpOverview() {
 															: 'unset',
 													}}
 												>
-													Add a logo and banner
+													{t('label:add_logo_and_banner')}
 												</Typography>
 												<Typography
 													variant="body2"
@@ -99,7 +112,7 @@ export function TmpOverview() {
 															: 'unset',
 													}}
 												>
-													Click on the placeholder to upload an image
+													{t('label:click_placeholder_upload')}
 												</Typography>
 											</Stack>
 											<Typography variant="subtitle2">+15XP</Typography>
@@ -116,12 +129,16 @@ export function TmpOverview() {
 									<TimelineContent>
 										<Stack direction="row" justifyContent="space-between">
 											<Stack spacing={1}>
-												<Typography variant="subtitle2">Save organization on chain</Typography>
+												<Typography variant="subtitle2">
+													{t('label:save_organization_on_chain')}
+												</Typography>
 												<Typography variant="body2">
-													Deploy your organization onto the chain
+													{t('label:deploy_organization_to_chain')}
 												</Typography>
 											</Stack>
-											<Typography variant="subtitle2">Receive Total 50XP</Typography>
+											<Typography variant="subtitle2">
+												{t('label:total_received_xp', { xp: 50 })}
+											</Typography>
 										</Stack>
 									</TimelineContent>
 								</TimelineItem>
@@ -162,8 +179,7 @@ export function TmpOverview() {
 								DAO Padawan
 							</Typography>
 							<Typography variant="caption" textAlign="center">
-								Your organization is currently on the level Padavan. Reach another 40XP to reach the
-								next level!
+								{t('label:organization_level_description', { xp: 40 })}
 							</Typography>
 						</Stack>
 					</Paper>
@@ -173,7 +189,17 @@ export function TmpOverview() {
 						<Stack direction="row" alignItems="center" spacing={2}>
 							<Info />
 							<Typography>
-								Deploy organization on chain A min deposit of 5 GAME is needed. Get GAME here.
+								{t('label:deploy_organization_min_deposit', { value: 5 })}
+								<Link
+									textAlign="center"
+									href="https://discord.com/channels/273529551483699200/772045307021885452"
+									rel="noreferrer"
+									target="_blank"
+									underline="always"
+									sx={{ whiteSpace: 'nowrap' }}
+								>
+									{t('label:get_token_here', { token: 'GAME' })}
+								</Link>
 							</Typography>
 						</Stack>
 						<Stack
@@ -199,23 +225,13 @@ export function TmpOverview() {
 								disabled={!tx}
 								onClick={handleModalOpen}
 							>
-								Deploy Organization
+								{t('label:deploy_organization')}
 							</Button>
 						</Stack>
 					</Stack>
 				</Paper>
 			</Stack>
-			<TransactionDialog
-				open={modalState}
-				onClose={handleModalClose}
-				tx={tx}
-				txMsg={{
-					pending: t('notification:transactions:createOrganization:pending'),
-					success: t('notification:transactions:createOrganization:success'),
-					error: t('notification:transactions:createOrganization:error'),
-				}}
-				txCallback={handleTxCallback}
-			/>
+			<TransactionDialog open={modalState} onClose={handleModalClose} txData={tx} txCallback={handleTxCallback} />
 		</>
 	)
 }

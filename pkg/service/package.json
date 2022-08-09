@@ -26,12 +26,12 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.5.0",
-    "@polkadot/api": "^8.10.1",
-    "@polkadot/util-crypto": "^9.6.2",
-    "@prisma/client": "^4.0.0",
-    "apollo-server": "^3.6.4",
-    "apollo-server-core": "^3.9.0",
-    "apollo-server-express": "^3.9.0",
+    "@polkadot/api": "^8.13.1",
+    "@polkadot/util-crypto": "^10.0.2",
+    "@prisma/client": "^4.1.0",
+    "apollo-server": "^3.10.0",
+    "apollo-server-core": "^3.10.0",
+    "apollo-server-express": "^3.10.0",
     "dotenv": "^16.0.1",
     "eventemitter3": "^4.0.7",
     "express": "^4.18.1",
@@ -41,9 +41,9 @@
     "graphql-request": "^4.3.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-upload": "13.0.0",
-    "graphql-ws": "^5.9.0",
+    "graphql-ws": "^5.9.1",
     "ipfs-http-client": "^57.0.1",
-    "prisma": "^4.0.0",
-    "ws": "^8.8.0"
+    "prisma": "^4.1.0",
+    "ws": "^8.8.1"
   }
 }

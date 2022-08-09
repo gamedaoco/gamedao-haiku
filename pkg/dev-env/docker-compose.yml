@@ -1,0 +1,198 @@
+services:
+  #############################################################################
+  ## Global services
+  dev-redis:
+    image: redis:6.0-alpine
+    restart: always
+    ports:
+      - "6379"
+
+  #############################################################################
+  ## Zero node
+  subzero:
+    image: playzero/subzero:latest
+    container_name: subzero
+    restart: unless-stopped
+    volumes:
+      - "./config/customSpec.json:/subzero/customSpec.json"
+    command:
+      [
+        "/usr/local/bin/subzero",
+        "--alice",
+        "--unsafe-ws-external",
+        "--rpc-cors=all",
+        "--ws-external",
+        "--rpc-external",
+        "--rpc-methods",
+        "unsafe",
+        "--ws-port",
+        "9944",
+        "--chain",
+        "/subzero/customSpec.json",
+        "--pruning",
+        "archive"
+      ]
+    ports:
+      - "9944:9944"
+
+  #  subzero-ready-state:
+  #    image: ubuntu
+  #    command: bash -c "apt-get update && apt-get install -y curl && tail -f /dev/null"
+  #    depends_on:
+  #      - subzero
+  #    healthcheck:
+  #      test: [ "CMD", "-v", "http://subzero:9944" ]
+  #      interval: 30s
+  #      timeout: 20s
+  #      retries: 10
+
+  #############################################################################
+  ## Indexer
+  indexer-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+  indexer:
+    image: subsquid/hydra-indexer:5
+    restart: unless-stopped
+    environment:
+      - WORKERS_NUMBER=2
+      - DB_NAME=indexer
+      - DB_HOST=indexer-db
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_PORT=5432
+      - REDIS_URI=redis://dev-redis:6379/0
+      - FORCE_HEIGHT=true
+      - BLOCK_HEIGHT=0
+      - WS_PROVIDER_ENDPOINT_URI=ws://subzero:9944
+      - BUNDLE_TYPES=/configs/typesBundle.json
+    volumes:
+      - "./config/typesBundle.json:/configs/typesBundle.json"
+    depends_on:
+      subzero:
+        condition: service_started
+      indexer-db:
+        condition: service_started
+      dev-redis:
+        condition: service_started
+    #      subzero-ready-state:
+    #        condition: service_healthy
+    command: >
+      sh -c "yarn db:bootstrap && yarn start:prod"
+
+  indexer-status-service:
+    image: subsquid/hydra-indexer-status-service:5
+    restart: unless-stopped
+    depends_on:
+      - dev-redis
+    environment:
+      REDIS_URI: redis://dev-redis:6379/0
+      PORT: 8081
+
+  indexer-gateway:
+    image: subsquid/hydra-indexer-gateway:5
+    restart: unless-stopped
+    depends_on:
+      - dev-redis
+      - indexer-db
+      - indexer-status-service
+      - indexer
+    ports:
+      - "4010:8080"
+    environment:
+      - DEV_MODE=true
+      - DB_NAME=indexer
+      - DB_HOST=indexer-db
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_PORT=5432
+      - HYDRA_INDEXER_STATUS_SERVICE=http://indexer-status-service:8081/status
+
+  indexer-ready-state:
+    image: ubuntu
+    command: bash -c "apt-get update && apt-get install -y curl && tail -f /dev/null"
+    depends_on:
+      - indexer-gateway
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://indexer-gateway:8080/console" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  #############################################################################
+  ## GraphQL / squid
+
+  squid-postgres:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ## Service
+  squid-service:
+    build: '../squid'
+    volumes:
+      - "./config/squid-config.json:/squid/lib/config.json:ro"
+    environment:
+      DB_HOST: squid-postgres
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASS: postgres
+    depends_on:
+      squid-postgres:
+        condition: service_started
+      indexer-ready-state:
+        condition: service_healthy
+
+  gamedao-service-postgres:
+    image: postgres:14
+    restart: always
+    ports:
+      - 55322:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+
+  ## Gamedao graph service
+  gamedao-graph-service:
+    build: '../service'
+    environment:
+      IPFS_API_URL: "https://ipfs.infura.io:5001/api/v0"
+      IPFS_CLIENT_ID: "1v04L2wj5JmI0JgKF5KztV0oN8o"
+      IPFS_CLIENT_SECRET: "85547c6003abb67a6335469d1aa6a3a3"
+      SERVER_PORT: 4000
+      CHAIN_RPC_URL: "ws://subzero:9944"
+      CHAIN_RPC_URL_OVERRIDE: "ws://localhost:9944"
+      DATABASE_URL: "postgresql://postgres:postgres@gamedao-service-postgres:5432/postgres?schema=public"
+    depends_on:
+      gamedao-service-postgres:
+        condition: service_started
+      indexer-ready-state:
+        condition: service_healthy
+    ports:
+      - 4090:4000
+
+  ## Hasura
+  squid-graphql-engine:
+    image: hasura/graphql-engine:latest
+    depends_on:
+      - "squid-postgres"
+      - "squid-service"
+      - "gamedao-graph-service"
+      - "gamedao-service-postgres"
+    restart: always
+    ports:
+      - 9080:8080
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@squid-postgres:5432/postgres
+      PG_DATABASE_URL: postgres://postgres:postgres@squid-postgres:5432/postgres
+      PG_SERVICE_DATABASE_URL: postgres://postgres:postgres@gamedao-service-postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "false"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: "mypassword123"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public

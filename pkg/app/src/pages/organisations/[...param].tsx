@@ -22,12 +22,14 @@ import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTranslation } from 'react-i18next'
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Layout } from 'components/Layouts/default/layout'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
+import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
@@ -54,6 +56,10 @@ export function OrganisationById() {
 		defaultMatches: true,
 	})
 
+	const handleInvalidUrl = useCallback(() => {
+		push('/')
+	}, [push])
+
 	const handleTabSelect = useCallback(
 		(newPath) => {
 			if (organizationIdState) {
@@ -67,7 +73,7 @@ export function OrganisationById() {
 		},
 		[organizationIdState, push],
 	)
-
+	const { t } = useTranslation()
 	const handleUploadImage = useCallback(async (event, setter) => {
 		const files = event.target.files
 		if (!files || files.length === 0) {
@@ -85,10 +91,16 @@ export function OrganisationById() {
 			if (param.length == 1) {
 				setRouteState(param[0])
 			} else if (param.length >= 2) {
+				if (!param[0].startsWith('0x')) {
+					handleInvalidUrl()
+				}
 				setOrganizationIdState(param[0])
 				setRouteState(param[1])
 
 				if (param.length >= 3) {
+					if (!param[2].startsWith('0x')) {
+						handleInvalidUrl()
+					}
 					setProposalIdState(param[2])
 				}
 			}
@@ -123,7 +135,7 @@ export function OrganisationById() {
 
 	useEffect(() => {
 		if (data) {
-			setOrganizationState(data.organization?.[0] as Organization)
+			!data.organization?.[0] ? handleInvalidUrl() : setOrganizationState(data.organization?.[0] as Organization)
 		}
 	}, [data])
 
@@ -134,7 +146,7 @@ export function OrganisationById() {
 	}, [organizationState, address])
 
 	return (
-		<Layout showHeader showFooter showSidebar title="Organisation">
+		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
 			<Box width="100%" height="100%" minHeight="90vh" padding={{ xs: 2, sm: 4 }}>
 				<TabContext value={activeStep}>
 					{(!loading && data) || !organizationIdState ? (
@@ -218,7 +230,7 @@ export function OrganisationById() {
 										>
 											<Stack spacing={1} alignItems="center">
 												<AddAPhoto sx={{ height: '20px', width: '20px' }} />
-												<Typography>Update photo</Typography>
+												<Typography>{t('label:update_photo')}</Typography>
 											</Stack>
 										</Avatar>
 									</label>
@@ -228,7 +240,9 @@ export function OrganisationById() {
 											{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
 										</Typography>
 										<Typography>
-											{organizationState?.organization_members?.length ?? 1} Member
+											{t('label:n_members', {
+												n: organizationState?.organization_members?.length ?? 1,
+											})}
 										</Typography>
 									</Stack>
 								</Stack>
@@ -239,12 +253,32 @@ export function OrganisationById() {
 										onChange={(_, value) => handleTabSelect(value)}
 										scrollButtons="auto"
 									>
-										<Tab label="Overview" value={'dashboard'} />
-										<Tab label="Campaigns" value={'campaigns'} disabled={!organizationIdState} />
-										<Tab label="proposals" value={'proposals'} disabled={!organizationIdState} />
-										<Tab label="members" value={'members'} disabled={!organizationIdState} />
-										<Tab label="treasury" value={'treasury'} disabled={!organizationIdState} />
-										<Tab label="settings" value={'settings'} disabled={!organizationIdState} />
+										<Tab label={t('button:navigation:overview')} value={'dashboard'} />
+										<Tab
+											label={t('button:navigation:campaigns')}
+											value={'campaigns'}
+											disabled={!organizationIdState}
+										/>
+										<Tab
+											label={t('button:navigation:proposals')}
+											value={'proposals'}
+											disabled={!organizationIdState}
+										/>
+										<Tab
+											label={t('button:navigation:members')}
+											value={'members'}
+											disabled={!organizationIdState}
+										/>
+										<Tab
+											label={t('button:navigation:treasury')}
+											value={'treasury'}
+											disabled={!organizationIdState}
+										/>
+										<Tab
+											label={t('button:navigation:settings')}
+											value={'settings'}
+											disabled={!organizationIdState}
+										/>
 									</Tabs>
 								</CardContent>
 							</Card>
@@ -263,7 +297,6 @@ export function OrganisationById() {
 								{organizationIdState ? (
 									<CampaignOverview
 										organizationId={organizationIdState}
-										isMember={isMemberState}
 										isAdmin={address === organizationState?.controller}
 									/>
 								) : (
@@ -272,7 +305,9 @@ export function OrganisationById() {
 							</TabPanel>
 							<TabPanel value={'treasury'}>
 								{organizationState && (
-									<Typography>Treasury Address: {organizationState.treasury}</Typography>
+									<Typography>
+										{t('label:treasury_address', { address: organizationState.treasury })}
+									</Typography>
 								)}
 							</TabPanel>
 							<TabPanel value={'proposals'}>
@@ -283,8 +318,11 @@ export function OrganisationById() {
 										goBack={() => handleTabSelect('proposals')}
 									/>
 								) : (
-									<ProposalOverview organizationId={organizationIdState} />
+									<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
 								)}
+							</TabPanel>
+							<TabPanel value={'members'}>
+								<OrganizationMembersTable organizationState={organizationState} />
 							</TabPanel>
 						</Stack>
 					) : (

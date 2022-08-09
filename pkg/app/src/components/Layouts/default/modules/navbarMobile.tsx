@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useCallback } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -26,11 +26,6 @@ interface ComponentProps {
 // TODO: Extract to features / graphql
 const urls = [
 	{
-		name: 'button:navigation:dashboard',
-		path: '/dashboard',
-		icon: 'dashboard',
-	},
-	{
 		name: 'button:navigation:organisations',
 		path: '/organisations',
 		icon: 'organization',
@@ -41,9 +36,16 @@ const urls = [
 		icon: 'campaign',
 	},
 	{
-		name: 'button:navigation:wallet',
-		path: '/wallet',
-		icon: 'wallet',
+		name: 'button:navigation:documentation',
+		path: 'https://docs.gamedao.co/',
+		icon: 'document',
+		external: true,
+	},
+	{
+		name: 'button:navigation:faucet',
+		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
+		icon: 'store',
+		external: true,
 	},
 ]
 
@@ -59,6 +61,17 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const { push } = useRouter()
+
+	const handleClick = useCallback(
+		(url, external) => {
+			if (external) {
+				window.open(url, '_blank', 'noopener')
+			} else {
+				push(url)
+			}
+		},
+		[push],
+	)
 
 	return (
 		<Drawer
@@ -80,7 +93,7 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 					{urls.map((navItem) => {
 						return (
 							<Fragment key={navItem.name}>
-								<ListItemButton onClick={() => push(navItem.path)}>
+								<ListItemButton onClick={() => handleClick(navItem.path, navItem.external)}>
 									<ListItemIcon>
 										<FontIcons name={navItem.icon} />
 									</ListItemIcon>

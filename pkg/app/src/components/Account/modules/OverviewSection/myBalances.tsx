@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -13,36 +11,37 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
+import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
 
-import { Balances } from 'components/Account/mock/balances'
 import { Scrollbar } from 'components/scrollbar'
 
-interface MyBalancesCardProps {
-	balances: Balances[]
-	loading: boolean
-}
-
-const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
+const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
+export function MyBalancesCard() {
+	const address = useCurrentAccountAddress()
+	const balances = useBalanceByAddress(address)
+	const { t } = useTranslation()
 	return (
 		<Card sx={{ borderRadius: '16px' }}>
 			<CardContent>
 				<Typography fontWeight="700" variant="h5" sx={{ my: 1 }}>
-					My Balances
+					{t('page:account:balances:title')}
 				</Typography>
 				<Scrollbar>
 					<Table sx={{ minWidth: 700 }}>
 						<TableHead>
 							<TableRow sx={{ borderRadius: '8px' }}>
-								<TableCell>Token</TableCell>
-								<TableCell>Transferable</TableCell>
-								<TableCell>Locked</TableCell>
-								<TableCell>Reserved</TableCell>
-								<TableCell>Total</TableCell>
+								<TableCell>{t('page:account:balances:token')}</TableCell>
+								<TableCell>{t('page:account:balances:transferable')}</TableCell>
+								<TableCell>{t('page:account:balances:locked')}</TableCell>
+								<TableCell>{t('page:account:balances:reserved')}</TableCell>
+								<TableCell>{t('page:account:balances:total')}</TableCell>
 								<TableCell align="right"></TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{loading ? (
+							{!balances ? (
 								<>
 									{[1, 2, 3, 4, 5]?.map((index) => (
 										<TableRow hover key={index}>
@@ -67,18 +66,22 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 							) : (
 								<>
 									{balances?.map((balance, index) => (
-										<TableRow hover key={index}>
-											<TableCell>{balance?.symbol}</TableCell>
-											<TableCell>{balance.transferable}</TableCell>
-											<TableCell>{balance.locked}</TableCell>
-											<TableCell>{balance.reserved}</TableCell>
-											<TableCell>{balance.total}</TableCell>
-											<TableCell align="right">
-												<IconButton aria-label="options">
-													<MoreVertIcon />
-												</IconButton>
-											</TableCell>
-										</TableRow>
+										<>
+											{balance?.tokenSymbol && (
+												<TableRow hover key={index}>
+													<TableCell>{balance?.tokenSymbol}</TableCell>
+													<TableCell>{balance.free}</TableCell>
+													<TableCell>{balance.frozen}</TableCell>
+													<TableCell>{balance.reserved}</TableCell>
+													<TableCell>{getTotal(balance)}</TableCell>
+													<TableCell align="right">
+														<IconButton aria-label="options">
+															<MoreVertIcon />
+														</IconButton>
+													</TableCell>
+												</TableRow>
+											)}
+										</>
 									))}
 								</>
 							)}
@@ -89,5 +92,3 @@ const MyBalancesCard: FC<MyBalancesCardProps> = ({ balances, loading }) => {
 		</Card>
 	)
 }
-
-export default MyBalancesCard

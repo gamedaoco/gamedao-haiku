@@ -27,23 +27,14 @@ function getSimpleProposalCreationData(context: EventHandlerContext): ProposalCr
 
 	// Get versioned data
 	let result: ProposalCreationData | null = null;
-	if (createData.isV51) {
-		const v51Data = createData.asV51;
+	if (createData.isV58) {
+		const v58Data = createData.asV58;
 		result = {
-			orgId: hashToHexString(v51Data.campaignId), // Not sure about this one, but we don't use it
-			title: v51Data.title.toString(),
-			cid: v51Data.cid.toString(),
-			start: v51Data.start,
-			expiry: v51Data.expiry,
-		} as ProposalCreationData;
-	} else if (createData.isV55) {
-		const v55Data = createData.asV55;
-		result = {
-			orgId: hashToHexString(v55Data.orgId),
-			title: v55Data.title.toString(),
-			cid: v55Data.cid.toString(),
-			start: v55Data.start,
-			expiry: v55Data.expiry,
+			orgId: hashToHexString(v58Data.orgId),
+			title: v58Data.title.toString(),
+			cid: v58Data.cid.toString(),
+			start: v58Data.start,
+			expiry: v58Data.expiry,
 		} as ProposalCreationData;
 	} else {
 		console.error(`Unknown version of create general proposal extrinsic!`);
@@ -70,20 +61,20 @@ function getWithdrawProposalCreationData(context: EventHandlerContext): Proposal
 	});
 
 	// Get versioned data
-	if (createData.isV51) {
-		const v51Data = createData.asV51;
+	if (createData.isV58) {
+		const v58Data = createData.asV58;
 		return {
-			campaignId: hashToHexString(v51Data.campaignId),
-			title: v51Data.title.toString(),
-			cid: v51Data.cid.toString(),
-			start: v51Data.start,
-			expiry: v51Data.expiry,
+			campaignId: hashToHexString(v58Data.campaignId),
+			title: v58Data.title.toString(),
+			cid: v58Data.cid.toString(),
+			start: v58Data.start,
+			expiry: v58Data.expiry,
 
 			// ToDo: Find better solution? (Maybe put these values in event on chain)
 			type: 3,
 			votingType: 0,
 
-			withdrawAmount: v51Data.amount,
+			withdrawAmount: v58Data.amount,
 
 			signer: encodeSigner(context.extrinsic!.signer),
 			blockNumber: context.block.height,

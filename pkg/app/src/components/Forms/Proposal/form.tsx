@@ -5,14 +5,15 @@ import { useRouter } from 'next/router'
 import { Button, Stack } from '@mui/material'
 import { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateProposalTransaction } from 'hooks/tx/useCreateProposalTransaction'
+import { useConfig } from 'hooks/useConfig'
 import { useTMPProposalState } from 'hooks/useTMPProposalState'
 import { useTranslation } from 'react-i18next'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import {
 	Description,
-	validationSchema as descriptionValidationSchema,
-	validationSchemaWithdrawal as descriptionValidationSchemaWithdrawal,
+	getValidationSchema as getDescriptionValidationSchema,
+	getValidationSchemaWithdrawal as getDescriptionValidationSchemaWithdrawal,
 } from 'components/Forms/Proposal/modules/description'
 import { Majority } from 'components/Forms/Proposal/modules/majority'
 import { Type } from 'components/Forms/Proposal/modules/type'
@@ -28,6 +29,7 @@ interface ComponentProps {
 export function Form({ currentStep, setStep, organizationId, onClose }: ComponentProps) {
 	const [modalState, setModalState] = useState<boolean>(false)
 	const { push } = useRouter()
+	const config = useConfig()
 	const tmpProposalState = useTMPProposalState()
 	const tx = useCreateProposalTransaction(organizationId)
 	const { t } = useTranslation()
@@ -90,7 +92,9 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 		switch (currentStep) {
 			case 1:
 				if (tmpProposalState.type == 1) {
-					return !descriptionValidationSchemaWithdrawal.isValidSync({
+					return !getDescriptionValidationSchemaWithdrawal(
+						config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS,
+					).isValidSync({
 						name: tmpProposalState.name,
 						description: tmpProposalState.description,
 						startDate: tmpProposalState.startDate,
@@ -99,7 +103,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 						amount: tmpProposalState.amount,
 					})
 				} else {
-					return !descriptionValidationSchema.isValidSync({
+					return !getDescriptionValidationSchema(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS).isValidSync({
 						name: tmpProposalState.name,
 						description: tmpProposalState.description,
 						startDate: tmpProposalState.startDate,
@@ -155,17 +159,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					{t(currentStep === 2 ? 'button:form:proposal:create' : 'button:form:next_step')}
 				</Button>
 			</Stack>
-			<TransactionDialog
-				open={modalState}
-				onClose={handleModalClose}
-				tx={tx}
-				txMsg={{
-					pending: t('notification:transactions:createProposal:pending'),
-					success: t('notification:transactions:createProposal:success'),
-					error: t('notification:transactions:createProposal:error'),
-				}}
-				txCallback={handleTxCallback}
-			/>
+			<TransactionDialog open={modalState} onClose={handleModalClose} txData={tx} txCallback={handleTxCallback} />
 		</>
 	)
 }

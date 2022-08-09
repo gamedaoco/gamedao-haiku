@@ -1,4 +1,4 @@
-import { Theme } from '@mui/material/styles'
+import { Theme, alpha } from '@mui/material/styles'
 
 //
 import { CloseIcon } from './CustomIcons'
@@ -9,6 +9,7 @@ declare module '@mui/material/Chip' {
 	interface ChipPropsVariantOverrides {
 		proposalVotes: true
 		campaignStatus: true
+		campaignState: true
 	}
 }
 
@@ -82,7 +83,45 @@ export default function Chip(theme: Theme) {
 				{
 					props: { variant: 'campaignStatus' },
 					style: {
-						borderRadius: Number(theme.shape.borderRadius) * 6,
+						borderRadius: `${Number(theme.shape.borderRadius) * 20}px 0px`,
+						...theme.typography.overline,
+						textTransform: 'uppercase',
+
+						'&.MuiChip-colorPrimary': {
+							backgroundColor: theme.palette.chart.green[3],
+							color: theme.palette.grey[800],
+						},
+
+						'&.MuiChip-colorSecondary': {
+							backgroundColor: theme.palette.chart.red[3],
+							color: theme.palette.common.white,
+						},
+
+						'&.MuiChip-colorInfo': {
+							backgroundColor: theme.palette.secondary.dark,
+							color: theme.palette.grey['800'],
+						},
+					},
+				},
+				{
+					props: { variant: 'campaignState' },
+					style: {
+						borderRadius: Number(theme.shape.borderRadius) * 10,
+						...theme.typography.overline,
+
+						'&.MuiChip-colorPrimary': {
+							backgroundColor: theme.palette.success.main,
+							color: theme.palette.grey[800],
+						},
+						'&.MuiChip-colorInfo': {
+							backgroundColor: alpha(theme.palette.success.main, 0.16),
+							color: theme.palette.success.dark,
+						},
+
+						'&.MuiChip-colorSecondary': {
+							backgroundColor: theme.palette.success.main,
+							color: theme.palette.grey[800],
+						},
 					},
 				},
 			],

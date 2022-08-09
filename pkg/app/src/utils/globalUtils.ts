@@ -10,20 +10,22 @@ export const reformatNumber: reformatNumberFuncType = (n, d = 1) => {
 const SI_PREFIXES = [
 	{ value: 1, symbol: '' },
 	{ value: 1e3, symbol: 'k' },
-	{ value: 1e6, symbol: 'M' },
-	{ value: 1e9, symbol: 'G' },
-	{ value: 1e12, symbol: 'T' },
-	{ value: 1e15, symbol: 'P' },
-	{ value: 1e18, symbol: 'E' },
+	{ value: 1e6, symbol: 'm' },
+	{ value: 1e9, symbol: 'b' },
+	{ value: 1e12, symbol: 't' },
+	{ value: 1e15, symbol: 'q' },
+	{ value: 1e18, symbol: 'Q' },
 ]
 
 type abbreviateNumberType = (n: number) => string | number
 
 export const abbreviateNumber: abbreviateNumberType = (number) => {
-	if (number === 0) return number
+	if (number <= 999) return number
 
 	const tier = SI_PREFIXES.filter((n) => number >= n.value).pop()
-	const numberFixed = (number / tier.value).toFixed(1)
 
-	return `${parseInt(numberFixed)}${tier.symbol}`
+	const numberFixed = parseFloat((number / tier?.value).toFixed(1).toString())
+	const final = numberFixed.toString().replace('.', ',')
+
+	return `${final}${tier?.symbol}`
 }

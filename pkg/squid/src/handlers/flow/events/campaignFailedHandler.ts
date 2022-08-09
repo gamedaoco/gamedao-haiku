@@ -16,8 +16,8 @@ async function handleCampaignFailedEvent(context: EventHandlerContext) {
 	let campaignId: string | null = null;
 
 	// Load data
-	if (campaignFailedEventData.isV51) {
-		campaignId = hashToHexString(campaignFailedEventData.asV51.campaignId);
+	if (campaignFailedEventData.isV58) {
+		campaignId = hashToHexString(campaignFailedEventData.asV58.campaignId);
 	} else {
 		console.error(`Unknown version of failed campaign event!`);
 		return;

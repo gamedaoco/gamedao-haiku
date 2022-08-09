@@ -1,19 +1,18 @@
-import type { FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import type { Identity } from 'src/queries'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-interface IdentityFormProps {
-	identity: Identity
-}
 const initialValues = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
@@ -22,7 +21,9 @@ const initialValues = (identity: Identity) => ({
 	twitter: identity?.twitter || '',
 	web: identity?.web || '',
 })
-const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
+export function IdentityForm() {
+	const accountState = useCurrentAccountState()
+	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 	const resolver = useYupValidationResolver(validation)
 	const { t } = useTranslation()
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
@@ -74,28 +75,18 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 			<TransactionDialog
 				open={modalState.set}
 				onClose={() => handleModalClose('set')}
-				tx={setIdentityTx}
-				txMsg={{
-					pending: t('notification:transactions:setIdentity:pending'),
-					success: t('notification:transactions:setIdentity:success'),
-					error: t('notification:transactions:setIdentity:error'),
-				}}
+				txData={setIdentityTx}
 				txCallback={() => handleModalClose('set')}
 			/>
 			<TransactionDialog
 				open={modalState.clear}
 				onClose={() => handleModalClose('clear')}
-				tx={clearIdentityTx}
-				txMsg={{
-					pending: t('notification:transactions:clearIdentity:pending'),
-					success: t('notification:transactions:clearIdentity:success'),
-					error: t('notification:transactions:clearIdentity:error'),
-				}}
+				txData={clearIdentityTx}
 				txCallback={() => handleModalClose('clear')}
 			/>
 			<form>
 				<Card sx={{ borderRadius: '16px' }}>
-					<CardHeader title="Set On-chain Identity" />
+					<CardHeader title={t('button:navigation:set_on_chain_identity')} />
 					<CardContent>
 						<Grid container spacing={3}>
 							<Grid item md={6} xs={12}>
@@ -105,7 +96,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
-											label="Display Name"
+											label={t('label:display_name')}
 											placeholder="QDozer"
 											sx={{
 												'& fieldset': {
@@ -159,7 +150,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 											}}
 											onChange={onChange}
 											value={value}
-											label="Legal Name"
+											label={t('label:legal_name')}
 										/>
 									)}
 								/>
@@ -203,7 +194,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 											}}
 											onChange={onChange}
 											value={value}
-											label="Email"
+											label={t('label:email')}
 										/>
 									)}
 								/>
@@ -223,7 +214,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 											}}
 											disabled
 											value="1.0000"
-											label="Total Deposit"
+											label={t('label:total_deposit')}
 											InputProps={{
 												endAdornment: <Typography>milli</Typography>,
 											}}
@@ -248,7 +239,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 											}}
 											onChange={onChange}
 											value={value}
-											label="Website"
+											label={t('label:website')}
 										/>
 									)}
 								/>
@@ -262,7 +253,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 										variant="contained"
 										disabled={isClearDisabled}
 									>
-										Clear Identity
+										{t('button:form:identity:clear')}
 									</Button>
 									<Button
 										type="button"
@@ -270,7 +261,7 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 										color="primary"
 										variant="contained"
 									>
-										Sign and Submit
+										{t('button:form:identity:submit')}
 									</Button>
 								</Box>
 							</Grid>
@@ -281,5 +272,3 @@ const IdentityForm: FC<IdentityFormProps> = ({ identity }) => {
 		</FormProvider>
 	)
 }
-
-export default IdentityForm

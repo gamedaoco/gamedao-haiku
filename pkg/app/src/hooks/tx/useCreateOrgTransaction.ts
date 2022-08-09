@@ -5,7 +5,9 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
 import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
 import { useNetworkContext } from 'provider/network/modules/context'
-import { fromUnit } from 'src/utils/token'
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
+import { createTokenType, fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
 
@@ -18,20 +20,21 @@ const validation = Yup.object().shape({
 	fee_model: Yup.number().required().min(0).max(2),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	fee: Yup.string().required(),
-	gov_asset: Yup.number().required().min(0),
-	pay_asset: Yup.number().required().min(0),
+	gov_asset: Yup.object().required(),
+	pay_asset: Yup.object().required(),
 	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	deposit: Yup.string().required(),
 })
 
-export function useCreateOrgTransaction(): SubmittableExtrinsic {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
+export function useCreateOrgTransaction(): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
+	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
 	const data = useTmpOrganisation()
 	const logger = useLogger('useCreateOrgTransaction')
-
+	console.log(txState)
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && data && address) {
 			try {
@@ -46,16 +49,26 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 					fee: fromUnit(
 						data.feeAmount,
 						selectedApiProvider.systemProperties.tokenDecimals[
-							selectedApiProvider.systemProperties.networkCurrency
+							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
-					gov_asset: selectedApiProvider.systemProperties.governanceCurrency,
-					pay_asset: selectedApiProvider.systemProperties.paymentCurrencies,
+					gov_asset: createTokenType(
+						selectedApiProvider.apiProvider,
+						selectedApiProvider.systemProperties.tokenSymbol[
+							selectedApiProvider.systemProperties.governanceCurrency
+						],
+					),
+					pay_asset: createTokenType(
+						selectedApiProvider.apiProvider,
+						selectedApiProvider.systemProperties.tokenSymbol[
+							selectedApiProvider.systemProperties.paymentCurrencies
+						],
+					),
 					member_limit: data.memberLimit,
 					deposit: fromUnit(
 						data.deposit,
 						selectedApiProvider.systemProperties.tokenDecimals[
-							selectedApiProvider.systemProperties.networkCurrency
+							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
 				}
@@ -75,10 +88,27 @@ export function useCreateOrgTransaction(): SubmittableExtrinsic {
 					mappedData.pay_asset,
 					mappedData.member_limit,
 					mappedData.deposit,
-				)
-				setTxState(tx)
+				) as SubmittableExtrinsic
+
+				setTxState({
+					tx,
+					currencyId: mappedData.gov_asset,
+					deposit: mappedData.deposit,
+					title: t('transactions:createOrganization:title'),
+					description: t('transactions:createOrganization:description'),
+					actionSubLine: t('transactions:createOrganization:action_sub_line'),
+					actionSubTitle: t('transactions:createOrganization:action_subtitle'),
+					txMsg: {
+						pending: t('notification:transactions:createOrganization:pending'),
+						success: t('notification:transactions:createOrganization:success'),
+						error: t('notification:transactions:createOrganization:error'),
+					},
+				})
 			} catch (e) {
 				logger.trace(e)
+				if (txState) {
+					setTxState(null)
+				}
 			}
 		}
 	}, [selectedApiProvider, address, data])

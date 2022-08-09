@@ -211,16 +211,68 @@
       "value": 0
     }
   ],
-  "sortOptions": [
+  "campaignFundingCategories": [
+    {
+      "key": "0",
+      "text": "Game",
+      "value": 0
+    },
+    {
+      "key": "1",
+      "text": "Content Pack / DLC",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "Concept",
+      "value": 2
+    },
+    {
+      "key": "3",
+      "text": "Audio / Music / SFX",
+      "value": 3
+    },
+    {
+      "key": "4",
+      "text": "Video / Motion Graphics",
+      "value": 4
+    },
+    {
+      "key": "5",
+      "text": "2D / 3D / GFX / Artwork",
+      "value": 5
+    },
+    {
+      "key": "6",
+      "text": "Team",
+      "value": 6
+    },
+    {
+      "key": "7",
+      "text": "Merch",
+      "value": 7
+    },
+    {
+      "key": "8",
+      "text": "Hardware",
+      "value": 8
+    },
+    {
+      "key": "9",
+      "text": "Other",
+      "value": 9
+    }
+  ],
+  "organizationSortOptions": [
     {
       "text": "page:organisations:sort_options:mem_hi_lo",
-      "key": "memberLimit_DESC",
-      "value": "{ member_limit: 'desc' }"
+      "key": "memberCount_DESC",
+      "value": "{ organization_members_aggregate: { 'count': 'desc'} }"
     },
     {
       "text": "page:organisations:sort_options:mem_lo_hi",
-      "key": "memberLimit_ASC",
-      "value": "{ member_limit: 'asc' }"
+      "key": "memberCount_ASC",
+      "value": "{ organization_members_aggregate: { 'count': 'asc'} }"
     },
     {
       "text": "page:organisations:sort_options:created_new",
@@ -231,6 +283,100 @@
       "text": "page:organisations:sort_options:created_old",
       "key": "createdAtBlock_ASC",
       "value": "{ created_at_block: 'asc' }"
+    }
+  ],
+  "campaignSortOptions": [
+    {
+      "key": "target_asc",
+      "text": "page:campaigns:sort_options:target_asc",
+      "value": "{ target: 'asc' }"
+    },
+    {
+      "key": "target_desc",
+      "text": "page:campaigns:sort_options:target_desc",
+      "value": "{ target: 'desc' }"
+    },
+    {
+      "key": "current_funding_asc",
+      "text": "page:campaigns:sort_options:current_funding_asc",
+      "value": "{'campaign_contributors_aggregate': {'count': 'asc'}}"
+    },
+    {
+      "key": "current_funding_desc",
+      "text": "page:campaigns:sort_options:current_funding_desc",
+      "value": "{'campaign_contributors_aggregate': {'count': 'desc'}}"
+    },
+    {
+      "key": "contributors_funding_asc",
+      "text": "page:campaigns:sort_options:contributors_funding_asc",
+      "value": "{'campaign_contributors_aggregate': {'sum': {'contributed': 'asc'}}}"
+    },
+    {
+      "key": "contributors_funding_desc",
+      "text": "page:campaigns:sort_options:contributors_funding_desc",
+      "value": "{'campaign_contributors_aggregate': {'sum': {'contributed': 'desc'}}}"
+    },
+    {
+      "key": "alphabetical_asc",
+      "text": "page:campaigns:sort_options:alphabetical_asc",
+      "value": "{ 'campaign_metadata': { 'name': 'asc' } }"
+    },
+    {
+      "key": "alphabetical_desc",
+      "text": "page:campaigns:sort_options:alphabetical_desc",
+      "value": "{ 'campaign_metadata': { 'name': 'desc' } }"
+    },
+    {
+      "key": "time_left_asc",
+      "text": "page:campaigns:sort_options:time_left_asc",
+      "value": "{'expiry': 'asc'}"
+    },
+    {
+      "key": "time_left_desc",
+      "text": "page:campaigns:sort_options:time_left_desc",
+      "value": "{'expiry': 'desc'}"
+    }
+  ],
+  "campaignFilters": [
+    {
+      "key": "state_success",
+      "text": "Success",
+      "value": "{'state': {'_eq': 'Success'}}"
+    },
+    {
+      "key": "state_failed",
+      "text": "Failed",
+      "value": "{'state': {'_eq': 'Failed'}}"
+    },
+    {
+      "key": "state_locked",
+      "text": "Locked",
+      "value": "{'state': {'_eq': 'Locked'}}"
+    },
+    {
+      "key": "state_reverting",
+      "text": "Reverting",
+      "value": "{'state': {'_eq': 'Reverting'}}"
+    },
+    {
+      "key": "state_init",
+      "text": "Init",
+      "value": "{'state': {'_eq': 'Init'}}"
+    },
+    {
+      "key": "state_active",
+      "text": "Active",
+      "value": "{'state': {'_eq': 'Active'}}"
+    },
+    {
+      "key": "state_paused",
+      "text": "Paused",
+      "value": "{'state': {'_eq': 'Paused'}}"
+    },
+    {
+      "key": "state_finalizing",
+      "text": "Finalizing",
+      "value": "{'state': {'_eq': 'Finalizing'}}"
     }
   ]
 }

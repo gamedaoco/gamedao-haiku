@@ -1,24 +1,53 @@
-import { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { Button, Stack } from '@mui/material'
-
-import { Name, validationSchema as nameValidationSchema } from './modules/name'
+import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
+import { useConfig } from 'hooks/useConfig'
+import { useSaveCampaignDraft } from 'hooks/useSaveCampaignDraft'
+import { useTmpCampaign } from 'hooks/useTmpCampaign'
 import { useTmpCampaignState } from 'hooks/useTmpCampaignState'
+import { useTranslation } from 'react-i18next'
+import { uploadFileToIpfs } from 'src/utils/ipfs'
+
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+
+import { Content, validationSchema as contentValidationSchema } from './modules/content'
+import { Name, validationSchema as nameValidationSchema } from './modules/name'
+import { Settings, getValidationSchema as getSettingsValidationSchema } from './modules/settings'
 
 interface ComponentProps {
+	organizationId: string
 	currentStep: number
+	draftId?: string
 	cancel: () => void
 	setStep: (step) => void
 }
 
-export function Form({ cancel, currentStep, setStep }: ComponentProps) {
-	const tmpOrgState = useTmpCampaignState()
+export function Form({ organizationId, cancel, currentStep, setStep, draftId }: ComponentProps) {
+	const tmpCampaignState = useTmpCampaignState()
+	const tmpCampaign = useTmpCampaign()
+	const config = useConfig()
+	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
+	const [txModalState, setTxModalState] = useState<boolean>(false)
+	const createCampaignTx = useCreateCampaignTransaction()
+	const { addDraft, drafts } = useSaveCampaignDraft(organizationId)
+	const { t } = useTranslation()
+
+	useEffect(() => {
+		tmpCampaignState.setOrgId(organizationId)
+	}, [tmpCampaignState, organizationId])
+
+	useEffect(() => {
+		if (draftId && drafts[draftId]) {
+			tmpCampaignState.restoreDraft({ ...drafts[draftId], orgId: organizationId })
+		}
+	}, [draftId, drafts])
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
 			cancel()
 		}
-	}, [currentStep])
+	}, [cancel, currentStep])
 
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {
@@ -31,21 +60,96 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 			setStep(currentStep + 1)
 		}
 
-		if (currentStep == 2) {
-			console.log('done')
+		if (currentStep == 1) {
+			;(async () => {
+				const file = new File(
+					[
+						JSON.stringify({
+							name: tmpCampaignState.name,
+							markdown: tmpCampaignState.content,
+							description: tmpCampaignState.description,
+							logo: '',
+							title: '',
+							header: tmpCampaignState.bannerCid,
+							email: '',
+						}),
+					],
+					`${tmpCampaignState.name}-metadata.json`,
+					{
+						type: 'text/plain',
+					},
+				)
+
+				const cid = await uploadFileToIpfs(file)
+				tmpCampaignState.setMetadataCid(cid.toString())
+			})()
 		}
-	}, [currentStep, setStep])
+
+		if (currentStep == 2) {
+			setTxModalState(true)
+		}
+	}, [tmpCampaignState, currentStep, setStep])
+
+	const handleUploadBannerImage = useCallback(
+		(file: File) => {
+			;(async (): Promise<string> => {
+				const bannerFile = new File([await file.arrayBuffer()], file.name)
+				const cid = await uploadFileToIpfs(bannerFile)
+				return cid.toString()
+			})().then((cid) => tmpCampaignState.setBannerCid(cid))
+		},
+		[tmpCampaignState],
+	)
+
+	const handeSetGovernance = useCallback(
+		(governance: number) => {
+			tmpCampaignState.setGovernance(governance)
+		},
+		[tmpCampaignState],
+	)
+
+	const handleSaveDraft = useCallback(() => {
+		addDraft(tmpCampaign)
+	}, [addDraft, tmpCampaign])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 0:
 				return !nameValidationSchema.isValidSync({
-					name: tmpOrgState.name,
-					description: tmpOrgState.description,
+					name: tmpCampaignState.name,
+					description: tmpCampaignState.description,
+				})
+			case 1:
+				return !contentValidationSchema.isValidSync({
+					banner: tmpCampaignState.bannerCid,
+					content: tmpCampaignState.content,
+				})
+			case 2:
+				return !getSettingsValidationSchema(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS).isValidSync({
+					target: tmpCampaignState.target,
+					deposit: tmpCampaignState.deposit,
+					endDate: tmpCampaignState.endDate,
+					termsCondition: termsConditionAccepted,
+					currencyId: tmpCampaignState.currencyId,
+					usageOfFunds: tmpCampaignState.usageOfFunds,
 				})
 		}
 		return false
 	}
+
+	const handleCloseTxModal = useCallback(() => {
+		setTxModalState(false)
+	}, [setTxModalState])
+
+	const handleTxCallback = useCallback(
+		(state) => {
+			if (state) {
+				tmpCampaignState.clearAll()
+				cancel()
+			}
+		},
+		[tmpCampaignState, setTxModalState],
+	)
 
 	const checkBackButtonState = () => {
 		return currentStep == 0
@@ -59,10 +163,39 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 		<>
 			{currentStep === 0 && (
 				<Name
-					name={tmpOrgState.name}
-					setName={tmpOrgState.setName}
-					description={tmpOrgState.description}
-					setDescription={tmpOrgState.setDescription}
+					name={tmpCampaignState.name}
+					setName={tmpCampaignState.setName}
+					description={tmpCampaignState.description}
+					setDescription={tmpCampaignState.setDescription}
+				/>
+			)}
+			{currentStep === 1 && (
+				<Content
+					bannerCid={tmpCampaignState.bannerCid}
+					uploadBannerImage={handleUploadBannerImage}
+					content={tmpCampaignState.content}
+					setContent={tmpCampaignState.setContent}
+				/>
+			)}
+
+			{currentStep === 2 && (
+				<Settings
+					targetAmount={tmpCampaignState.target}
+					setTargetAmount={tmpCampaignState.setTarget}
+					depositAmount={tmpCampaignState.deposit}
+					setDepositAmount={tmpCampaignState.setDeposit}
+					flowProtocol={tmpCampaignState.protocol}
+					setFlowProtocol={tmpCampaignState.setProtocol}
+					usageOfFunds={tmpCampaignState.usageOfFunds}
+					setUsageOfFunds={tmpCampaignState.setUsageOfFunds}
+					currencyId={tmpCampaignState.currencyId}
+					setCurrencyId={tmpCampaignState.setCurrencyId}
+					endDate={tmpCampaignState.endDate}
+					setEndDate={tmpCampaignState.setEndDate}
+					governance={tmpCampaignState.governance}
+					setGovernance={handeSetGovernance}
+					termsConditionAccepted={termsConditionAccepted}
+					setTermsConditionAccepted={setTermsConditionAccepted}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
@@ -88,6 +221,18 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					Cancel
 				</Button>
 
+				{currentStep === 2 && (
+					<Button
+						size="large"
+						variant="outlined"
+						onClick={handleSaveDraft}
+						disabled={checkNextButtonState()}
+						sx={{ flexGrow: { xs: 1, sm: 0 } }}
+					>
+						{t('button:ui:save_draft')}
+					</Button>
+				)}
+
 				<Button
 					size="large"
 					variant="contained"
@@ -95,9 +240,16 @@ export function Form({ cancel, currentStep, setStep }: ComponentProps) {
 					disabled={checkNextButtonState()}
 					sx={{ flexGrow: { xs: 1, sm: 0 } }}
 				>
-					{currentStep === 2 ? 'Save campaign' : 'Next step'}
+					{currentStep === 2 ? 'Publish now' : 'Next step'}
 				</Button>
 			</Stack>
+
+			<TransactionDialog
+				open={txModalState}
+				onClose={handleCloseTxModal}
+				txData={createCampaignTx}
+				txCallback={handleTxCallback}
+			/>
 		</>
 	)
 }

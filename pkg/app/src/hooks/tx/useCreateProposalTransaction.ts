@@ -7,9 +7,10 @@ import { useLogger } from 'hooks/useLogger'
 import { useTMPProposal } from 'hooks/useTMPProposal'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
+import { useTranslation } from 'react-i18next'
 import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
-import { blocksPerDay } from 'src/constants'
+import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
@@ -39,19 +40,19 @@ const withdrawProposalValidation = Yup.object().shape({
 })
 
 // Calculation for start and end block (BlockTime / blockNumbers) form Date
-function getBlockTimeFromDate(data: TMPProposal, blockNumber: number): BlockTime {
+function getBlockTimeFromDate(data: TMPProposal, blockNumber: number, blockTime): BlockTime {
 	// Convert date to moment date.
 	const startDate = moment(data.startDate)
 	const endDate = moment(data.endDate)
 
-	// Get diff days for start date
-	const startDayDiff = startDate.diff(moment(), 'days') + 1
-	const startBlocks = startDayDiff > 0 ? startDayDiff * blocksPerDay + blockNumber : blockNumber
+	// Get diff seconds for start date
+	const startSecondsDiff = startDate.diff(moment(), 'seconds')
+	const startBlocks = startSecondsDiff > 0 ? blockNumber + Math.ceil(startSecondsDiff / blockTime) : blockNumber
 
-	// Get diff days for end date
+	// Get diff seconds for end date
 	// min blockNumber + 1 day
-	const endDayDiff = endDate.diff(startDate, 'days')
-	const endBlocks = endDayDiff > 0 ? endDayDiff * blocksPerDay + blockNumber : blockNumber + blocksPerDay
+	const endSecondsDiff = endDate.diff(moment(), 'seconds')
+	const endBlocks = blockNumber + Math.ceil(endSecondsDiff / blockTime)
 
 	return { endBlocks, startBlocks }
 }
@@ -61,8 +62,9 @@ function createGeneralProposalTx(
 	data: TMPProposal,
 	blockNumber: number,
 	organizationId: string,
+	targetBlockTime: number,
 ): SubmittableExtrinsic {
-	const blockTime = getBlockTimeFromDate(data, blockNumber)
+	const blockTime = getBlockTimeFromDate(data, blockNumber, targetBlockTime)
 
 	// Data mapping
 	const mappedData = {
@@ -89,8 +91,9 @@ function createWithdrawProposalTx(
 	selectedApiProvider: ApiProvider,
 	data: TMPProposal,
 	blockNumber: number,
+	targetBlockTime: number,
 ): SubmittableExtrinsic {
-	const blockTime = getBlockTimeFromDate(data, blockNumber)
+	const blockTime = getBlockTimeFromDate(data, blockNumber, targetBlockTime)
 
 	// Data mapping
 	const mappedData = {
@@ -99,7 +102,7 @@ function createWithdrawProposalTx(
 		cid: data.metaDataCID,
 		amount: fromUnit(
 			data.amount,
-			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.networkCurrency],
+			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.paymentCurrencies],
 		),
 		start: blockTime.startBlocks,
 		expiry: blockTime.endBlocks,
@@ -118,9 +121,9 @@ function createWithdrawProposalTx(
 	)
 }
 
-export function useCreateProposalTransaction(organizationId: string): SubmittableExtrinsic {
-	const [txState, setTxState] = useState<SubmittableExtrinsic>(null)
-	const [blockNumberState, setBlockNumberState] = useState<number>(0)
+export function useCreateProposalTransaction(organizationId: string): TransactionData {
+	const [txState, setTxState] = useState<TransactionData>(null)
+	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
 	const data = useTMPProposal()
@@ -128,31 +131,52 @@ export function useCreateProposalTransaction(organizationId: string): Submittabl
 	const logger = useLogger('useCreateProposalTransaction')
 
 	useEffect(() => {
-		// The transaction is only regenerated every 2 minutes and not every 2-3 seconds.
-		// 40 * 3s = ~2 minutes
-		if (blockNumber && blockNumber - 40 > blockNumberState) {
-			setBlockNumberState(blockNumber)
-		}
-	}, [blockNumber])
-
-	useEffect(() => {
-		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumberState) {
+		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumber) {
 			try {
 				let tx
 				if (data.type === 0) {
-					tx = createGeneralProposalTx(selectedApiProvider, data, blockNumber, organizationId)
+					tx = createGeneralProposalTx(
+						selectedApiProvider,
+						data,
+						blockNumber,
+						organizationId,
+						selectedApiProvider.systemProperties?.blockTargetTime,
+					)
 				} else if (data.type === 1) {
-					tx = createWithdrawProposalTx(selectedApiProvider, data, blockNumber)
+					tx = createWithdrawProposalTx(
+						selectedApiProvider,
+						data,
+						blockNumber,
+						selectedApiProvider.systemProperties?.blockTargetTime,
+					)
 				}
 
 				if (tx) {
-					setTxState(tx)
+					setTxState({
+						tx,
+						currencyId: selectedApiProvider?.systemProperties?.governanceCurrency,
+						deposit: fromUnit(
+							data.deposit || 1,
+							selectedApiProvider.systemProperties.tokenDecimals[
+								selectedApiProvider.systemProperties.governanceCurrency
+							],
+						),
+						title: t('transactions:createProposal:title'),
+						description: t('transactions:createProposal:description'),
+						actionSubLine: t('transactions:createProposal:action_sub_line'),
+						actionSubTitle: t('transactions:createProposal:action_subtitle'),
+						txMsg: {
+							pending: t('notification:transactions:createProposal:pending'),
+							success: t('notification:transactions:createProposal:success'),
+							error: t('notification:transactions:createProposal:error'),
+						},
+					})
 				}
 			} catch (e) {
 				logger.trace(e)
 			}
 		}
-	}, [organizationId, selectedApiProvider, address, data, blockNumberState])
+	}, [organizationId, selectedApiProvider, address, data, blockNumber])
 
 	return txState
 }

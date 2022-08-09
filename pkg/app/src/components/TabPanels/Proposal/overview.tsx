@@ -3,19 +3,22 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Add as AddIcon, HowToVote } from '@mui/icons-material'
-import { Box, Button, Chip, Paper, Stack, Typography } from '@mui/material'
+import { Box, Button, Paper, Stack, Typography } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
+import { useSystemProperties } from 'hooks/useSystemProperties'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
+import { getTimeFromBlock } from 'src/utils/campaignUtils'
 
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'components/TabPanels/Organization/createProposal'
-import { blockTime } from 'src/constants'
 
 interface ComponentProps {
 	organizationId: string
+	isMember: boolean
 }
 
 const defaultGridColDef = {
@@ -70,9 +73,9 @@ const columns: GridColDef[] = [
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
-export function ProposalOverview({ organizationId }: ComponentProps) {
+export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	const { push } = useRouter()
-
+	const systemProperties = useSystemProperties()
 	const [showFormState, setShowFormState] = useState<boolean>(false)
 	const [pageSize, setPageSize] = useState<number>(10)
 	const [rows, setRows] = useState<any[]>([])
@@ -81,6 +84,7 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 	const { loading, data } = useProposalsByOrganizationIdSubscription({
 		variables: { orgId: organizationId },
 	})
+	const { t } = useTranslation()
 	const enabledFeatures = useProposalFeatures()
 	const address = useCurrentAccountAddress()
 
@@ -95,32 +99,6 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 	useEffect(() => {
 		if (!blockNumber) return
 
-		const getHumanTime = (seconds: number) => {
-			let timeLeft = ''
-			const expiryBlockSeconds = seconds * blockTime
-			const minutes = Math.trunc((expiryBlockSeconds % 3600) / 60)
-			const hours = Math.trunc((expiryBlockSeconds % (3600 * 24)) / 3600)
-			const days = Math.trunc(expiryBlockSeconds / (3600 * 24))
-
-			if (days > 0) {
-				timeLeft = days + 'd '
-			}
-
-			if (days > 0 || hours > 0) {
-				timeLeft += hours + 'h '
-			}
-
-			if (days > 0 || hours > 0 || minutes > 0) {
-				timeLeft += minutes + 'm '
-			}
-
-			if (timeLeft === '') {
-				timeLeft = '1m'
-			}
-
-			return timeLeft
-		}
-
 		setRows(
 			proposals.map((proposal) => {
 				const expiryBlock = proposal.expiry_block
@@ -130,9 +108,9 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 				let timeLeft = ''
 
 				if (!hasStarted) {
-					timeLeft = getHumanTime(startBlock - blockNumber)
+					timeLeft = getTimeFromBlock(blockNumber, startBlock, systemProperties?.blockTargetTime)
 				} else if (!hasExpired) {
-					timeLeft = getHumanTime(expiryBlock - blockNumber)
+					timeLeft = getTimeFromBlock(blockNumber, expiryBlock, systemProperties?.blockTargetTime)
 				} else {
 					timeLeft = 'Expired'
 				}
@@ -165,9 +143,9 @@ export function ProposalOverview({ organizationId }: ComponentProps) {
 		<Stack component={Paper} padding={4} spacing={2}>
 			<Stack direction="row" spacing={1} justifyContent="space-between">
 				<Typography variant="h6">Proposals</Typography>
-				{address && enabledFeatures.CREATE_PROPOSAL && (
+				{address && enabledFeatures.CREATE_PROPOSAL && isMember && (
 					<Button variant="outlined" onClick={handleCreateButtonClick}>
-						<AddIcon /> Create Proposal
+						<AddIcon /> {t('button:ui:create_proposal')}
 					</Button>
 				)}
 			</Stack>

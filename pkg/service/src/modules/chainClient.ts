@@ -1,7 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
 import { cryptoWaitReady } from '@polkadot/util-crypto'
 
-import ZeroTypes from '../chainTypes/zero-types.json'
 import { DbClient } from './dbClient'
 
 const dbClient = DbClient.Instance
@@ -18,10 +17,6 @@ export class ChainClient {
 
 	public get initialized() {
 		return this.isInitialized
-	}
-
-	public get types(): string {
-		return JSON.stringify(ZeroTypes)
 	}
 
 	public get url(): string {
@@ -46,7 +41,6 @@ export class ChainClient {
 
 			this.apiProvider = await ApiPromise.create({
 				provider: new WsProvider(this.url),
-				types: ZeroTypes,
 				throwOnConnect: true,
 			})
 
