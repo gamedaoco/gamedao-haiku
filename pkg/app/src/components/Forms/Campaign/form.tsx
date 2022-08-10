@@ -169,10 +169,10 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 	return (
 		<>
 			<ConfirmationModal
-				title="Are you sure?"
-				description="All your progress will be lost. Maybe save it as a draft and continue later"
-				confirmButtonText="Yes, cancel now"
-				cancelButtonText="No, continue"
+				title={t('label:are_you_sure')}
+				description={t('label:progress_will_be_lost')}
+				confirmButtonText={t('button:ui:yes_cancel_now')}
+				cancelButtonText={t('button:ui:no_continue')}
 				confirmButtonCallback={handleCancel}
 				cancelButtonCallback={handleCloseModal}
 				open={openModal}
@@ -223,7 +223,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 						sx={{ display: checkBackButtonState() ? 'none' : 'block', flexGrow: { xs: 1, sm: 0 } }}
 						onClick={handleBack}
 					>
-						Back
+						{t('button:form:back')}
 					</Button>
 					<Button
 						size="large"
@@ -235,7 +235,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 						}}
 						onClick={handleOpenModal}
 					>
-						Cancel
+						{t('button:form:cancel')}
 					</Button>
 				</Box>
 
@@ -258,7 +258,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 					disabled={checkNextButtonState()}
 					sx={{ flexGrow: { xs: 1, sm: 0 } }}
 				>
-					{currentStep === 2 ? 'Publish now' : 'Next step'}
+					{t(`button:ui:${currentStep === 2 ? 'publish_now' : 'next_step'}`)}
 				</Button>
 			</Stack>
 

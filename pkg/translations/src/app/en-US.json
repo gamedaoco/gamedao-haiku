@@ -20,6 +20,8 @@
             "settings": "Settings"
         },
         "ui": {
+            "no_continue": "No, continue",
+            "yes_cancel_now": "Yes, cancel now",
             "learn_more": "Learn More",
             "download_extension": "Download {{extension}} Extension.",
             "connect_wallet": "Connect wallet",
@@ -47,6 +49,7 @@
             "save_draft": "Save Draft"
         },
         "form": {
+            "publish_now": "Publish Now",
             "next_step": "Next step",
             "save_organization": "Save organization",
             "back": "Back",
@@ -61,6 +64,8 @@
         }
     },
     "label": {
+        "are_you_sure": "Are you sure?",
+        "progress_will_be_lost": "All your progress will be lost. Maybe save it as a draft and continue later",
         "dashboard": "Dashboard",
         "connect_wallet": "To use GameDAO DApp, the Polkadot or Talisman Extension is required. Please connect your wallet or install the Extension.",
         "my_collectables": "My Collectables",
