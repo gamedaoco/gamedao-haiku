@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { InputAdornment, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -19,7 +19,7 @@ interface ComponentProps {
 	setDescription: (description) => void
 	startDate: Date
 	setStartDate: (date) => void
-	endData: Date
+	endDate: Date
 	setEndDate: (date) => void
 	amount: number
 	setAmount: (number) => void
@@ -75,7 +75,7 @@ export function Description({
 	setDescription,
 	startDate,
 	setStartDate,
-	endData,
+	endDate,
 	setEndDate,
 	amount,
 	setAmount,
@@ -135,6 +135,16 @@ export function Description({
 		},
 		[setCampaignId],
 	)
+	useEffect(() => {
+		setStartDate(new Date())
+		setEndDate(moment(new Date()).add(1, 'day').toDate())
+	}, [])
+
+	useEffect(() => {
+		return () => {
+			if (startDate) setEndDate(moment(startDate).add(1, 'day').toDate())
+		}
+	}, [startDate])
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
@@ -211,7 +221,7 @@ export function Description({
 						minDate={moment(startDate ?? new Date())
 							.add(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 							.toDate()}
-						value={endData}
+						value={endDate}
 						onChange={setEndDate}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}

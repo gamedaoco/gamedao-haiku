@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
 import { formatAddressShort } from 'src/utils/address'
+import { isProposalActive } from 'src/utils/proposalUtils'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
@@ -34,6 +35,7 @@ import { TransactionDialog } from 'components/TransactionDialog/transactionDialo
 interface ComponentProps {
 	organization: Organization
 	proposalId: string
+	isMember: boolean
 	goBack: () => void
 }
 
@@ -72,7 +74,7 @@ const columns: GridColDef[] = [
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
-export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
+export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps) {
 	const displayValues = useDisplayValues()
 	const { t } = useTranslation()
 	const systemProperties = useSystemProperties()
@@ -91,8 +93,14 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const [openTxModal, setOpenTxModal] = useState<boolean>(false)
 	const [startDate, setStartDate] = useState<string>('')
 	const [endDate, setEndDate] = useState<string>('')
+	const [showMore, setShowMore] = useState<boolean>(false)
+	const [showButton, setShowButton] = useState<boolean>(false)
 	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
+	const isActive = useMemo(
+		() => isProposalActive(blockNumber, proposal?.start_block, proposal?.expiry_block),
+		[blockNumber, proposal?.start_block, proposal?.expiry_block],
+	)
 
 	const { loading, data } = useProposalByIdSubscription({
 		variables: { proposalId },
@@ -107,6 +115,17 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 	const handleCloseTxModal = useCallback(() => {
 		setOpenTxModal(false)
 	}, [setOpenTxModal])
+	const handleShowMore = useCallback(() => {
+		setShowMore((prev) => !prev)
+	}, [setShowMore])
+
+	const buttonContent = useMemo(
+		() =>
+			showMore
+				? proposal?.proposal_metadata?.description ?? ''
+				: `${proposal?.proposal_metadata?.description?.slice(0, 700)}` ?? '',
+		[proposal?.proposal_metadata?.description, showMore],
+	)
 
 	useEffect(() => {
 		if (loading) return
@@ -138,11 +157,11 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			})),
 		)
 
-		const startDiff = (proposal.start_block - blockNumber) * (systemProperties.blockTargetTime ?? 3)
-		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties.blockTargetTime ?? 3)
+		const startDiff = (proposal.start_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
+		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
 
-		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY'))
-		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY'))
+		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
+		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
 	}, [proposal])
 
 	useEffect(() => {
@@ -158,6 +177,12 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			setProposalVotingTypeName(votingTypeName)
 		}
 	}, [displayValues, proposal])
+
+	useEffect(() => {
+		if (proposal?.proposal_metadata?.description?.length > 350) {
+			setShowButton(true)
+		}
+	}, [proposal?.proposal_metadata?.description?.length])
 
 	return !loading && proposal ? (
 		<Stack direction="row" flexWrap="wrap" gap={3}>
@@ -188,10 +213,12 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 
 						{matches && <Chip color="secondary" label={proposalTypeName} variant="outlined" />}
 					</Stack>
-					<Typography variant="body1">{proposal.proposal_metadata?.description ?? ''}</Typography>
-					<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined">
-						{t('button:ui:show_more')}
-					</Button>
+					<Typography variant="body1">{buttonContent}</Typography>
+					{showButton && (
+						<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined" onClick={handleShowMore}>
+							{showMore ? `${t('button:ui:show_less')}` : `${t('button:ui:show_more')}`}
+						</Button>
+					)}
 				</Stack>
 			</Stack>
 
@@ -278,28 +305,35 @@ export function ProposalDetail({ proposalId, goBack }: ComponentProps) {
 			</Stack>
 
 			{/* Cast vote */}
-			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
-				<Stack direction="row" justifyContent="space-between">
-					<Typography variant="h6">{t('label:cast_your_vote')}</Typography>
+			{isActive && isMember && (
+				<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="h6">{t('label:cast_your_vote')}</Typography>
+					</Stack>
+					<Stack paddingLeft={4} paddingRight={4} spacing={4}>
+						<RadioItem
+							title={t('label:yes')}
+							value={1}
+							selectedValue={selectedVote}
+							onChange={setSelectedVote}
+						/>
+						<RadioItem
+							title={t('label:no')}
+							value={0}
+							selectedValue={selectedVote}
+							onChange={setSelectedVote}
+						/>
+						<Button
+							fullWidth={true}
+							variant="contained"
+							disabled={!simpleVoteTx}
+							onClick={handleOpenTxModal}
+						>
+							{t('button:ui:vote')}
+						</Button>
+					</Stack>
 				</Stack>
-				<Stack paddingLeft={4} paddingRight={4} spacing={4}>
-					<RadioItem
-						title={t('label:yes')}
-						value={1}
-						selectedValue={selectedVote}
-						onChange={setSelectedVote}
-					/>
-					<RadioItem
-						title={t('label:no')}
-						value={0}
-						selectedValue={selectedVote}
-						onChange={setSelectedVote}
-					/>
-					<Button fullWidth={true} variant="contained" disabled={!simpleVoteTx} onClick={handleOpenTxModal}>
-						{t('button:ui:vote')}
-					</Button>
-				</Stack>
-			</Stack>
+			)}
 
 			{/* Voter list */}
 			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>

@@ -315,6 +315,7 @@ export function OrganisationById() {
 									<ProposalDetail
 										organization={organizationState}
 										proposalId={proposalIdState}
+										isMember={isMemberState}
 										goBack={() => handleTabSelect('proposals')}
 									/>
 								) : (

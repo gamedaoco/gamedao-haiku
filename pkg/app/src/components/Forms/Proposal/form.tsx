@@ -132,7 +132,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					setDescription={tmpProposalState.setDescription}
 					startDate={tmpProposalState.startDate}
 					setStartDate={tmpProposalState.setStartDate}
-					endData={tmpProposalState.endDate}
+					endDate={tmpProposalState.endDate}
 					amount={tmpProposalState.amount}
 					setAmount={tmpProposalState.setAmount}
 					campaignId={tmpProposalState.campaignId}

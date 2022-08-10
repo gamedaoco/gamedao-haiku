@@ -43,6 +43,7 @@
             "leave_organization": "Leave Organization",
             "create_proposal": "Create Proposal",
             "show_more": "Show More",
+            "show_less": "Show Less",
             "vote": "Vote",
             "save_draft": "Save Draft"
         },
