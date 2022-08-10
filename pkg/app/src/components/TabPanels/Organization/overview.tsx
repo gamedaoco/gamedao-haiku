@@ -1,9 +1,7 @@
-import { useCallback, useState } from 'react'
-
 import { Button, Typography } from '@mui/material'
-import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
@@ -11,31 +9,27 @@ interface ComponentProps {
 	organizationId: string
 	isMember: boolean
 	isAdmin: boolean
+	handleOpenTxModal: () => void
+	handleCloseTxModal: () => void
+	showTxModalType: boolean
+	addMemberTx: TransactionData
 }
 
-export function Overview({ organizationId, isMember, isAdmin }: ComponentProps) {
-	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
-	const addMemberTx = useAddMemberTransaction(organizationId)
+export function Overview({
+	organizationId,
+	isMember,
+	isAdmin,
+	handleOpenTxModal,
+	handleCloseTxModal,
+	showTxModalType,
+	addMemberTx,
+}: ComponentProps) {
 	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
-
-	const handleOpenTxModal = useCallback(() => {
-		setShowTxModalType(true)
-	}, [setShowTxModalType])
-	const handleCloseTxModal = useCallback(() => {
-		setShowTxModalType(false)
-	}, [setShowTxModalType])
 
 	return (
 		<>
 			<Typography>{t('button:navigation:overview')}</Typography>
-			{!isMember && (
-				<>
-					<Button variant="contained" disabled={!addMemberTx} onClick={handleOpenTxModal}>
-						{t('button:ui:join_organization')}
-					</Button>
-				</>
-			)}
 			{isMember && !isAdmin && (
 				<>
 					<Button variant="contained" disabled={!removeMemberTx} onClick={handleOpenTxModal}>

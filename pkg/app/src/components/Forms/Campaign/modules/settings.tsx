@@ -241,15 +241,6 @@ export function Settings({
 						onChange={handleTargetAmountChange}
 						value={targetAmount}
 						label="Funding target*"
-						InputProps={{
-							endAdornment: (
-								<Typography variant="body2">
-									{currencyId
-										? selectedApiProvider?.systemProperties?.tokenSymbol[currencyId] ?? ''
-										: ''}
-								</Typography>
-							),
-						}}
 						variant="outlined"
 						sx={{ flex: 1 }}
 					/>
