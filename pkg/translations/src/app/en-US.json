@@ -219,6 +219,63 @@
             "search_place_holder": "Search Organizations",
             "load_more": "Load More Organisations",
             "showing_results": "Showing {{count1}} of {{count2}} organisations",
+            "settings": {
+                "about": {
+                    "title": "About Organization",
+                    "description": "Description",
+                    "website": "Website",
+                    "country": "Country",
+                    "tags": "tags",
+                    "description_error": "* Campaign Description is required",
+                    "cta_button": "Update About Organization"
+                },
+                "access_type": {
+                    "title": "Access type",
+                    "radio_button_open": {
+                        "title": "Open",
+                        "description": "Anyone can join the organization."
+                    },
+                    "radio_button_private": {
+                        "title": "Private",
+                        "description": "Whitelisted and/or applicants can join the organization."
+                    },
+                    "whitelist": "Whitelist (Members can be added later)",
+                    "application": "Application",
+                    "cta_button": "Update access type"
+                },
+                "member_type": {
+                    "title": "Member type",
+                    "sub_title": "Will your organization collect a fee for members to join?",
+                    "radio_button_no_fee": {
+                        "title": "No Fee",
+                        "description": "Members can join the organization without a fee"
+                    },
+                    "radio_button_fee": {
+                        "title": "Fee",
+                        "description": "When members join the organization they pay a fee"
+                    },
+                    "fee_amount": "Fee amount",
+                    "cta_button": "Update Member type"
+                },
+                "member_limit": {
+                    "title": "Member Limit",
+                    "sub_title": "How many members can join the organization?",
+                    "description": "Leave 0 if the limit is unlimited",
+                    "cta_button": "Update Member limit"
+                },
+                "control": {
+                    "title": "Who will control the organization?",
+                    "radio_button_entity": {
+                        "title": "One Entity",
+                        "description": "A single entity can take decisions on behalf of the organization."
+                    },
+                    "radio_button_community": {
+                        "title": "Community",
+                        "description": "The community will take decisions together as a group."
+                    },
+                    "cta_button": "Update organization controller"
+                }
+            },
             "sort_options": {
                 "mem_hi_lo": "Member: High-Low",
                 "mem_lo_hi": "Member: Low-High",
@@ -239,12 +296,12 @@
                 "oceania": "Oceania",
                 "other": "Other"
             },
-            "tags":{
+            "tags": {
                 "gaming_guild": "Gaming Guild",
                 "game_studio": "Game Studio",
                 "investment_syndicate": "Investment Syndicate",
                 "publisher": "Publisher",
-                "fans": "Fans",
+                "fan": "Fans",
                 "creator_dao": "Creator DAO",
                 "indie_games": "Indie Games",
                 "web3": "Web3",
@@ -343,7 +400,8 @@
         "warning": {
             "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
             "max_1m_game_fee": "Please consider charging a maximum of 1M GAME",
-            "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users"
+            "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users",
+            "higher_current_member_limit": "The Member Limit cannot exceed the previous limit"
         }
     }
 }

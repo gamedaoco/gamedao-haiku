@@ -34,7 +34,7 @@ export function useCreateOrgTransaction(): TransactionData {
 	const address = useCurrentAccountAddress()
 	const data = useTmpOrganisation()
 	const logger = useLogger('useCreateOrgTransaction')
-	console.log(txState)
+
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && data && address) {
 			try {

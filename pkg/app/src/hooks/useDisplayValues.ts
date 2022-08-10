@@ -11,5 +11,5 @@ export function useDisplayValues(): DisplayValues {
 		}
 	}, [error])
 
-	return loading ? null : data?.displayValues ?? null
+	return (loading ? null : data?.displayValues ?? null) as DisplayValues
 }
