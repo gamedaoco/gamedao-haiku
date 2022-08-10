@@ -223,6 +223,28 @@
                 "fee_lo_hi": "Fee: Low-High",
                 "cont_asc": "Controller: Ascending",
                 "cont_desc": "Controller: Descending"
+            },
+            "countries": {
+                "worldwide": "Worldwide",
+                "europe": "Europe",
+                "north_america": "North America",
+                "south_america": "South America",
+                "africa": "Africa",
+                "asia": "Asia",
+                "oceania": "Oceania",
+                "other": "Other"
+            },
+            "tags":{
+                "gaming_guild": "Gaming Guild",
+                "game_studio": "Game Studio",
+                "investment_syndicate": "Investment Syndicate",
+                "publisher": "Publisher",
+                "fans": "Fans",
+                "creator_dao": "Creator DAO",
+                "indie_games": "Indie Games",
+                "web3": "Web3",
+                "collectables": "Collectables",
+                "content_creators": "Content Creators"
             }
         },
         "campaigns": {

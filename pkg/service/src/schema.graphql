@@ -91,7 +91,6 @@ type DisplayValueEntryString implements DisplayValueEntry{
 type DisplayValueEntryCountry implements DisplayValueEntry{
     key: String!
     text: String!
-    flag: String!
     value: String!
 }
 
@@ -111,6 +110,7 @@ type DisplayValues {
     organizationSortOptions: [DisplayValueEntryString]
     campaignSortOptions: [DisplayValueEntryString]
     campaignFilters: [DisplayValueEntryString]
+    tags: [DisplayValueEntryNumber]
 }
 
 type File {
