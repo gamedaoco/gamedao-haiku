@@ -119,6 +119,14 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 		setShowMore((prev) => !prev)
 	}, [setShowMore])
 
+	const buttonContent = useMemo(
+		() =>
+			showMore
+				? proposal?.proposal_metadata?.description ?? ''
+				: `${proposal?.proposal_metadata?.description?.slice(0, 700)}` ?? '',
+		[proposal?.proposal_metadata?.description, showMore],
+	)
+
 	useEffect(() => {
 		if (loading) return
 
@@ -205,11 +213,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 
 						{matches && <Chip color="secondary" label={proposalTypeName} variant="outlined" />}
 					</Stack>
-					<Typography variant="body1">
-						{showMore
-							? proposal?.proposal_metadata?.description ?? ''
-							: `${proposal?.proposal_metadata?.description?.slice(0, 700)}` ?? ''}
-					</Typography>
+					<Typography variant="body1">{buttonContent}</Typography>
 					{showButton && (
 						<Button sx={{ alignSelf: 'center' }} size="large" variant="outlined" onClick={handleShowMore}>
 							{showMore ? `${t('button:ui:show_less')}` : `${t('button:ui:show_more')}`}
