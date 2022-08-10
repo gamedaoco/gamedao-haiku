@@ -11,13 +11,13 @@ import { PlusIcon } from 'components/Icons/plusIcon'
 
 interface ComponentProps {
 	campaigns: Campaign[]
-	title?: string
+	draftCampaigns?: Campaign[]
 	loading?: boolean
 	showCreate?: boolean
 	createCallback?: () => void
 }
 
-export function CampaignsList({ campaigns, showCreate, loading, title, createCallback }: ComponentProps) {
+export function CampaignsList({ campaigns, showCreate, loading, draftCampaigns, createCallback }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const [campaignsState, setCampaignsState] = useState<Campaign[]>()
@@ -32,12 +32,6 @@ export function CampaignsList({ campaigns, showCreate, loading, title, createCal
 
 	return (
 		<Box>
-			{title && (
-				<Typography marginBottom={2} variant="body2" fontWeight={theme.typography.fontWeightBold}>
-					{title}
-				</Typography>
-			)}
-
 			{loading && (
 				<Stack justifyContent="center" width="100%" alignItems="center" padding={4}>
 					<CircularProgress />
@@ -72,6 +66,12 @@ export function CampaignsList({ campaigns, showCreate, loading, title, createCal
 				)}
 
 				{campaignsState?.map((campaign: Campaign) => (
+					<Fragment key={campaign?.id}>
+						<CampaignCard campaign={campaign} />
+					</Fragment>
+				))}
+
+				{draftCampaigns?.map((campaign: Campaign) => (
 					<Fragment key={campaign?.id}>
 						<CampaignCard campaign={campaign} />
 					</Fragment>

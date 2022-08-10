@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
+import { useExtensionContext } from 'provider/extension/modules/context'
 import { useTranslation } from 'react-i18next'
 import { Layout } from 'src/components/Layouts/default/layout'
 import {
@@ -53,6 +54,7 @@ export function OrganisationPage() {
 
 	const paginatedData = applyPagination(organizationsData?.data?.organization?.slice() as Organization[], bodyCount)
 	const { push } = useRouter()
+	const { w3Enabled, connectWallet, selectedAccount } = useExtensionContext()
 
 	const buttonVisibility = useMemo(
 		() => paginatedData?.length < organizationsCount?.data?.organization_aggregate?.aggregate?.count,
@@ -60,8 +62,12 @@ export function OrganisationPage() {
 	)
 
 	const handleClickCreate = useCallback(() => {
-		push('/organisations/create')
-	}, [push])
+		if (w3Enabled === false) {
+			connectWallet()
+		} else if (selectedAccount) {
+			push('/organisations/create')
+		}
+	}, [w3Enabled, connectWallet, selectedAccount, push])
 
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>

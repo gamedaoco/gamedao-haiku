@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Wallet, getWallets } from '@talisman-connect/wallets'
+import { Wallet } from '@talisman-connect/wallets'
 import { useApiProvider } from 'hooks/useApiProvider'
 import { useLogger } from 'hooks/useLogger'
 import { SignAndNotify } from 'provider/extension/modules/signAndNotify'
@@ -9,6 +9,7 @@ import { sessionUpdateInterval } from 'src/constants'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useUpdateSessionMutation } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
+import { getWallets } from 'src/walletOverrides/wallets'
 
 import { WalletDialog } from 'components/WalletDialog/walletDialog'
 

@@ -1,3 +1,4 @@
+import { ApiPromise } from '@polkadot/api'
 import { formatBalance } from '@polkadot/util'
 import BigNumber from 'bignumber.js'
 import BN from 'bn.js'
@@ -17,5 +18,11 @@ export function toUnitSi(balance: string, decimals: number | string): string {
 	return formatBalance(balance, {
 		withSi: true,
 		decimals: typeof decimals === 'string' ? parseInt(decimals) : decimals,
+	})
+}
+
+export function createTokenType(apiProvider: ApiPromise, token: string): any {
+	return apiProvider.createType('ZeroPrimitivesCurrencyCurrencyId', {
+		Token: token,
 	})
 }

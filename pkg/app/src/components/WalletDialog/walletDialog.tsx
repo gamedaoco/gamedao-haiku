@@ -43,10 +43,10 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						<Fragment key={wallet.extensionName}>
 							<WalletCard
 								imageSrc={wallet.logo?.src}
-								name={wallet.extensionName}
+								name={wallet.title || wallet.extensionName}
 								url={wallet.installUrl}
 								callback={() => callback(wallet.extensionName)}
-								connectable={supportedWallets.indexOf(wallet) !== -1}
+								connectable={wallet.installed}
 							/>
 						</Fragment>
 					)
