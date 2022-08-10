@@ -159,42 +159,42 @@
     {
       "key": "0",
       "text": "page:organisations:countries:worldwide",
-      "value": 0
+      "value": "0"
     },
     {
       "key": "1",
       "text": "page:organisations:countries:europe",
-      "value": 1
+      "value": "1"
     },
     {
       "key": "2",
       "text": "page:organisations:countries:north_america",
-      "value": 2
+      "value": "2"
     },
     {
       "key": "3",
       "text": "page:organisations:countries:south_america",
-      "value": 3
+      "value": "3"
     },
     {
       "key": "4",
       "text": "page:organisations:countries:africa",
-      "value": 4
+      "value": "4"
     },
     {
       "key": "5",
       "text": "page:organisations:countries:asia",
-      "value": 5
+      "value": "5"
     },
     {
       "key": "6",
       "text": "page:organisations:countries:oceania",
-      "value": 6
+      "value": "6"
     },
     {
       "key": "7",
       "text": "page:organisations:countries:other",
-      "value": 7
+      "value": "7"
     }
   ],
   "projectDurations": [
@@ -391,52 +391,52 @@
   ],
   "tags": [
     {
-      "key": 0,
-      "text":  "page:organisations:tags:gaming_guild",
+      "key": "0",
+      "text": "page:organisations:tags:gaming_guild",
       "value": 0
     },
     {
-      "key": 1,
+      "key": "1",
       "text": "page:organisations:tags:game_studio",
       "value": 1
     },
     {
-      "key": 2,
+      "key": "2",
       "text": "page:organisations:tags:investment_syndicate",
       "value": 2
     },
     {
-      "key": 3,
+      "key": "3",
       "text": "page:organisations:tags:publisher",
       "value": 3
     },
     {
-      "key": 4,
+      "key": "4",
       "text": "page:organisations:tags:fan",
       "value": 4
     },
     {
-      "key": 5,
+      "key": "5",
       "text": "page:organisations:tags:creator_dao",
       "value": 5
     },
     {
-      "key": 6,
+      "key": "6",
       "text": "page:organisations:tags:indie_games",
       "value": 6
     },
     {
-      "key": 7,
+      "key": "7",
       "text": "page:organisations:tags:web3",
       "value": 7
     },
     {
-      "key": 8,
+      "key": "8",
       "text": "page:organisations:tags:collectables",
       "value": 8
     },
     {
-      "key": 9,
+      "key": "9",
       "text": "page:organisations:tags:content_creators",
       "value": 9
     }
