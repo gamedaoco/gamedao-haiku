@@ -152,8 +152,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 		const startDiff = (proposal.start_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
 		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
 
-		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY'))
-		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY'))
+		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
+		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
 	}, [proposal])
 
 	useEffect(() => {
