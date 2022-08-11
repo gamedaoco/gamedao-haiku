@@ -223,8 +223,18 @@ export function Overview({
 							height="100%"
 							divider={<Divider orientation="vertical" flexItem />}
 						>
-							<RadialChartContainer color={theme.palette.success.main} series={[74.3]} />
-							<RadialChartContainer color={theme.palette.error.main} series={[25.7]} />
+							<RadialChartContainer
+								color={theme.palette.success.main}
+								series={[74.3]}
+								type="Funded"
+								count={234}
+							/>
+							<RadialChartContainer
+								color={theme.palette.error.main}
+								series={[25.7]}
+								type="Failed"
+								count={62}
+							/>
 						</Stack>
 					</Paper>
 				</Stack>

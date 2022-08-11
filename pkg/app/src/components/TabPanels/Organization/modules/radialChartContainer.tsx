@@ -7,9 +7,11 @@ import { RadialChart } from 'components/Charts/radialBar'
 interface ComponentProps {
 	color: string
 	series: any
+	type: string
+	count: number
 }
 
-export function RadialChartContainer({ color, series }: ComponentProps) {
+export function RadialChartContainer({ color, series, type, count }: ComponentProps) {
 	return (
 		<Stack direction={{ xs: 'column', md: 'row' }} width="50%">
 			<Stack
@@ -31,8 +33,8 @@ export function RadialChartContainer({ color, series }: ComponentProps) {
 				position="relative"
 				bottom={{ xs: 30, md: 0 }}
 			>
-				<Typography variant="h4">62</Typography>
-				<Typography variant="body2">Funded</Typography>
+				<Typography variant="h4">{count}</Typography>
+				<Typography variant="body2">{type}</Typography>
 			</Stack>
 		</Stack>
 	)
