@@ -31,7 +31,7 @@ export function RadialChartContainer({ color, series }: ComponentProps) {
 				position="relative"
 				bottom={{ xs: 30, md: 0 }}
 			>
-				<Typography variant="h4">234</Typography>
+				<Typography variant="h4">62</Typography>
 				<Typography variant="body2">Funded</Typography>
 			</Stack>
 		</Stack>
