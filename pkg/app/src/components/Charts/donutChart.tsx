@@ -18,7 +18,7 @@ export function DonutChart({ series }: ComponentProps) {
 				show: false,
 			},
 		},
-		colors: [theme.palette.primary.main, theme.palette.warning.main, theme.palette.error.main],
+		colors: [theme.palette.primary.main, theme.palette.success.main, theme.palette.error.main],
 		dataLabels: {
 			enabled: false,
 		},
