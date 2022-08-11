@@ -9,25 +9,11 @@ interface ComponentProps {
 	title: string
 	total: string
 	increase: number
+	series: any
+	categories: any
 }
-const series = [
-	{
-		name: 'members',
-		data: [0, 7, 3, 8, 2],
-	},
-]
 
-export function ChartContainer({ title, total, increase }: ComponentProps) {
-	const chartSeries = series
-
-	const categories = [
-		'2022-07-19T00:00:00.000Z',
-		'2022-07-20T01:30:00.000Z',
-		'2022-07-21T02:30:00.000Z',
-		'2022-07-22T03:30:00.000Z',
-		'2022-07-23T04:30:00.000Z',
-	]
-
+export function AreaChartContainer({ title, total, increase, series, categories }: ComponentProps) {
 	return (
 		<Paper sx={{ maxHeight: '210px' }}>
 			<Stack direction="row" justifyContent="space-between" p={3}>
@@ -57,7 +43,7 @@ export function ChartContainer({ title, total, increase }: ComponentProps) {
 			<Stack direction="row" position="relative" left="0.6rem" bottom={{ xs: '2.3rem', md: '3rem' }} height={80}>
 				<Stack width="20%"></Stack>
 				<Stack width="80%">
-					<AreaChart categories={categories} series={chartSeries} height={130} />
+					<AreaChart categories={categories} series={series} height={130} />
 				</Stack>
 			</Stack>
 		</Paper>

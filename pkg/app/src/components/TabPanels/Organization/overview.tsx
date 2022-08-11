@@ -2,12 +2,14 @@ import React from 'react'
 
 import { ChevronRight, Verified } from '@mui/icons-material'
 import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Button, Paper, Stack, Typography } from '@mui/material'
+import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 
-import { ChartContainer } from 'components/TabPanels/Organization/modules/chartContainer'
+import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
+import { RadialChartContainer } from 'components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 interface ComponentProps {
@@ -29,9 +31,28 @@ export function Overview({
 	showTxModalType,
 	addMemberTx,
 }: ComponentProps) {
+	const theme = useTheme()
 	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
-
+	const series1 = [
+		{
+			name: 'Members',
+			data: [0, 7, 3, 8, 2],
+		},
+	]
+	const categories = [
+		'2022-07-19T00:00:00.000Z',
+		'2022-07-20T01:30:00.000Z',
+		'2022-07-21T02:30:00.000Z',
+		'2022-07-22T03:30:00.000Z',
+		'2022-07-23T04:30:00.000Z',
+	]
+	const series2 = [
+		{
+			name: 'Balance',
+			data: [0, 10, 20, 13, 5],
+		},
+	]
 	return (
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} minHeight="284px" spacing={{ xs: 2, md: 4 }}>
@@ -66,7 +87,12 @@ export function Overview({
 							</Stack>
 						</Stack>
 
-						<Stack direction="row" pt="1rem" justifyContent={{ xs: 'center', sm: 'flex-start' }}>
+						<Stack
+							direction={{ xs: 'column', sm: 'row' }}
+							pt="1rem"
+							justifyContent={{ xs: 'center', sm: 'flex-start' }}
+							spacing={1}
+						>
 							{!isMember && (
 								<>
 									<Button
@@ -90,6 +116,19 @@ export function Overview({
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
 										{t('button:ui:leave_organization')}
+									</Button>
+								</>
+							)}
+							{(isMember || isAdmin) && (
+								<>
+									<Button
+										variant="outlined"
+										size="large"
+										disabled={!removeMemberTx}
+										onClick={handleOpenTxModal}
+										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
+									>
+										Change Settings
 									</Button>
 								</>
 							)}
@@ -140,7 +179,13 @@ export function Overview({
 							Go to Members <ChevronRight />
 						</Button>
 					</Stack>
-					<ChartContainer title="Total Members" total="3.458" increase={2.6} />
+					<AreaChartContainer
+						title="Total Members"
+						total="3.458"
+						increase={2.6}
+						series={series1}
+						categories={categories}
+					/>
 				</Stack>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
@@ -149,7 +194,13 @@ export function Overview({
 							Go to Treasury <ChevronRight />
 						</Button>
 					</Stack>
-					<ChartContainer title="Total Balance" total="$18,765" increase={2} />
+					<AreaChartContainer
+						title="Total Balance"
+						total="$18,765"
+						increase={2}
+						series={series2}
+						categories={categories}
+					/>
 				</Stack>
 			</Stack>
 			<Stack
@@ -165,6 +216,17 @@ export function Overview({
 							View all <ChevronRight />
 						</Button>
 					</Stack>
+					<Paper sx={{ height: '174px' }}>
+						<Stack
+							direction="row"
+							width="100%"
+							height="100%"
+							divider={<Divider orientation="vertical" flexItem />}
+						>
+							<RadialChartContainer color={theme.palette.success.main} series={[74.3]} />
+							<RadialChartContainer color={theme.palette.error.main} series={[25.7]} />
+						</Stack>
+					</Paper>
 				</Stack>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
@@ -173,6 +235,18 @@ export function Overview({
 							View all <ChevronRight />
 						</Button>
 					</Stack>
+					<Paper sx={{ height: '174px' }}>
+						<Stack
+							direction="row"
+							width="100%"
+							height="100%"
+							divider={<Divider orientation="vertical" flexItem />}
+						>
+							<Stack width="33.3%"></Stack>
+							<Stack width="33.3%"></Stack>
+							<Stack width="33.3%"></Stack>
+						</Stack>
+					</Paper>
 				</Stack>
 			</Stack>
 
