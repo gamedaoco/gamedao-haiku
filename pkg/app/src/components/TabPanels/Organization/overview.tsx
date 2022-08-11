@@ -8,6 +8,7 @@ import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 
+import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
 import { RadialChartContainer } from 'components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
@@ -246,15 +247,8 @@ export function Overview({
 						</Button>
 					</Stack>
 					<Paper sx={{ height: '174px' }}>
-						<Stack
-							direction="row"
-							width="100%"
-							height="100%"
-							divider={<Divider orientation="vertical" flexItem />}
-						>
-							<Stack width="33.3%"></Stack>
-							<Stack width="33.3%"></Stack>
-							<Stack width="33.3%"></Stack>
+						<Stack direction="row" width="100%" height="100%" justifyContent="center" alignItems="center">
+							<DonutChart series={[10, 10, 20]} />
 						</Stack>
 					</Paper>
 				</Stack>
