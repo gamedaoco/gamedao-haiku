@@ -7,7 +7,7 @@ import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 
-// import { ChartContainer } from 'components/TabPanels/Organization/modules/chartContainer'
+import { ChartContainer } from 'components/TabPanels/Organization/modules/chartContainer'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 interface ComponentProps {
@@ -140,7 +140,7 @@ export function Overview({
 							Go to Members <ChevronRight />
 						</Button>
 					</Stack>
-					{/*<ChartContainer title="Total Members" total="3.458" increase={2.6} />*/}
+					<ChartContainer title="Total Members" total="3.458" increase={2.6} />
 				</Stack>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
@@ -149,7 +149,7 @@ export function Overview({
 							Go to Treasury <ChevronRight />
 						</Button>
 					</Stack>
-					{/*<ChartContainer title="Total Balance" total="$18,765" increase={2} />*/}
+					<ChartContainer title="Total Balance" total="$18,765" increase={2} />
 				</Stack>
 			</Stack>
 			<Stack
