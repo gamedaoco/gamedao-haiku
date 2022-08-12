@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material/styles'
 import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
+import { Organization } from 'src/queries'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -16,6 +17,7 @@ import { RadialChartContainer } from 'components/TabPanels/Organization/modules/
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 interface ComponentProps {
+	organization: Organization
 	organizationId: string
 	isMember: boolean
 	isAdmin: boolean
@@ -26,6 +28,7 @@ interface ComponentProps {
 }
 
 export function Overview({
+	organization,
 	organizationId,
 	isMember,
 	isAdmin,
@@ -57,8 +60,10 @@ export function Overview({
 			data: [0, 10, 20, 13, 5],
 		},
 	]
+	const [isReadMore, setIsReadMore] = useState<boolean>(true)
+	const [showButton, setShowButton] = useState<boolean>(false)
 
-	const handleChangeSettings = useCallback(
+	const handleChangeRoute = useCallback(
 		(newPath) => {
 			if (organizationId) {
 				push(`${organizationId}/${newPath}`)
@@ -69,22 +74,40 @@ export function Overview({
 		[organizationId, push],
 	)
 
+	const toggleReadMore = useCallback(() => {
+		setIsReadMore((prev) => !prev)
+	}, [setIsReadMore])
+
+	const description = useMemo(
+		() =>
+			isReadMore
+				? organization?.organization_metadata?.description?.slice(0, 150)
+				: organization?.organization_metadata?.description,
+		[isReadMore, organization?.organization_metadata?.description],
+	)
+
+	useEffect(() => {
+		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
+	}, [organization?.organization_metadata?.description?.length])
+
 	return (
 		<>
-			<Stack direction={{ xs: 'column', md: 'row' }} minHeight="284px" spacing={{ xs: 2, md: 4 }}>
-				<Paper sx={{ width: { xs: '100%', md: '68%' }, height: '100%' }}>
-					<Stack height="100%" spacing={1} padding={3}>
-						<Typography variant="h6" pb="1.5rem">
+			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
+				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }}>
+					<Stack minHeight="284px" spacing={1} padding={3}>
+						<Typography variant="h6" pb="1rem">
 							About
 						</Typography>
-
 						<Typography variant="body2">
-							AcrocalLypse isn’t only a PFP collectible that will take you on missions throughout the
-							Acrocalypse galaxy, but the key that opens the door to next-generation digital utility, ✨
-							good vibes ✨, future mints and more. Join our DAO and become a croc... Buckle up, Crocs!{' '}
+							{description}
+							{showButton && (
+								<span style={{ cursor: 'pointer' }} onClick={toggleReadMore} className="read-or-hide">
+									{isReadMore ? '...Read More' : ' Show Less'}
+								</span>
+							)}
 						</Typography>
 
-						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1.5rem">
+						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1rem">
 							<Stack direction="row" spacing={1}>
 								<Label />
 								<Typography variant="body2">Tag1, Tag2, Tag3, ...</Typography>
@@ -129,7 +152,7 @@ export function Overview({
 										variant="outlined"
 										size="large"
 										disabled={!removeMemberTx}
-										onClick={() => handleChangeSettings('settings')}
+										onClick={() => handleChangeRoute('settings')}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
 										Change Settings
@@ -139,11 +162,11 @@ export function Overview({
 						</Stack>
 					</Stack>
 				</Paper>
-				<Paper sx={{ width: { xs: '100%', md: '32%' }, height: '100%' }}>
+				<Paper sx={{ width: { xs: '100%', md: '35%' }, height: '100%' }}>
 					<Stack height="100%" spacing={1} padding={3}>
 						<Typography variant="h6">Organisation Rules</Typography>
 
-						<Stack direction="column" spacing={3} pt="1rem" pb="1rem">
+						<Stack direction="column" spacing={3} pt="1rem">
 							<Stack direction="row" spacing={1}>
 								<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
 								<Stack direction="column">
@@ -179,7 +202,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Members</Typography>
-						<Button color="secondary" onClick={() => handleChangeSettings('members')}>
+						<Button color="secondary" onClick={() => handleChangeRoute('members')}>
 							Go to Members <ChevronRight />
 						</Button>
 					</Stack>
@@ -194,7 +217,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Treasury</Typography>
-						<Button color="secondary" onClick={() => handleChangeSettings('treasury')}>
+						<Button color="secondary" onClick={() => handleChangeRoute('treasury')}>
 							Go to Treasury <ChevronRight />
 						</Button>
 					</Stack>
@@ -216,7 +239,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Campaigns</Typography>
-						<Button color="secondary" onClick={() => handleChangeSettings('campaigns')}>
+						<Button color="secondary" onClick={() => handleChangeRoute('campaigns')}>
 							View all <ChevronRight />
 						</Button>
 					</Stack>
@@ -245,7 +268,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Votings</Typography>
-						<Button color="secondary" onClick={() => handleChangeSettings('proposals')}>
+						<Button color="secondary" onClick={() => handleChangeRoute('proposals')}>
 							View all <ChevronRight />
 						</Button>
 					</Stack>
