@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+
+import { useRouter } from 'next/router'
 
 import { ChevronRight, Verified } from '@mui/icons-material'
 import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
@@ -35,6 +37,7 @@ export function Overview({
 	const theme = useTheme()
 	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
+	const { push } = useRouter()
 	const series1 = [
 		{
 			name: 'Members',
@@ -54,6 +57,18 @@ export function Overview({
 			data: [0, 10, 20, 13, 5],
 		},
 	]
+
+	const handleChangeSettings = useCallback(
+		(newPath) => {
+			if (organizationId) {
+				push(`${organizationId}/${newPath}`)
+			} else {
+				push(newPath)
+			}
+		},
+		[organizationId, push],
+	)
+
 	return (
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} minHeight="284px" spacing={{ xs: 2, md: 4 }}>
@@ -107,26 +122,14 @@ export function Overview({
 									</Button>
 								</>
 							)}
-							{isMember && !isAdmin && (
-								<>
-									<Button
-										variant="outlined"
-										size="large"
-										disabled={!removeMemberTx}
-										onClick={handleOpenTxModal}
-										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
-									>
-										{t('button:ui:leave_organization')}
-									</Button>
-								</>
-							)}
+
 							{(isMember || isAdmin) && (
 								<>
 									<Button
 										variant="outlined"
 										size="large"
 										disabled={!removeMemberTx}
-										onClick={handleOpenTxModal}
+										onClick={() => handleChangeSettings('settings')}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
 										Change Settings
@@ -176,7 +179,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Members</Typography>
-						<Button color="secondary">
+						<Button color="secondary" onClick={() => handleChangeSettings('members')}>
 							Go to Members <ChevronRight />
 						</Button>
 					</Stack>
@@ -191,7 +194,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Treasury</Typography>
-						<Button color="secondary">
+						<Button color="secondary" onClick={() => handleChangeSettings('treasury')}>
 							Go to Treasury <ChevronRight />
 						</Button>
 					</Stack>
@@ -213,7 +216,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Campaigns</Typography>
-						<Button color="secondary">
+						<Button color="secondary" onClick={() => handleChangeSettings('campaigns')}>
 							View all <ChevronRight />
 						</Button>
 					</Stack>
@@ -242,7 +245,7 @@ export function Overview({
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">Votings</Typography>
-						<Button color="secondary">
+						<Button color="secondary" onClick={() => handleChangeSettings('proposals')}>
 							View all <ChevronRight />
 						</Button>
 					</Stack>
