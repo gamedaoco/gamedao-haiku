@@ -90,11 +90,13 @@ export function Overview({
 		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
 	}, [organization?.organization_metadata?.description?.length])
 
+	console.log('DATA:', organization)
+
 	return (
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
 				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }}>
-					<Stack minHeight="284px" spacing={1} padding={3}>
+					<Stack minHeight={284} spacing={1} padding={3}>
 						<Typography variant="h6" pb="1rem">
 							About
 						</Typography>
@@ -108,19 +110,19 @@ export function Overview({
 						</Typography>
 
 						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1rem">
-							<Stack direction="row" spacing={1}>
+							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<Label />
 								<Typography variant="body2">Tag1, Tag2, Tag3, ...</Typography>
 							</Stack>
-							<Stack direction="row" spacing={1}>
+							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<FmdGood />
 								<Typography variant="body2">USA</Typography>
 							</Stack>
-							<Stack direction="row" spacing={1}>
+							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<VpnKey />
 								<Typography variant="body2">Public</Typography>
 							</Stack>
-							<Stack direction="row" spacing={1}>
+							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
 								<Typography variant="body2">acrocalypse.xyz</Typography>
 							</Stack>
@@ -162,32 +164,39 @@ export function Overview({
 						</Stack>
 					</Stack>
 				</Paper>
-				<Paper sx={{ width: { xs: '100%', md: '35%' }, height: '100%' }}>
+				<Paper sx={{ width: { xs: '100%', md: '35%' }, minHeight: 284 }}>
 					<Stack height="100%" spacing={1} padding={3}>
 						<Typography variant="h6">Organisation Rules</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
-							<Stack direction="row" spacing={1}>
-								<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
-								<Stack direction="column">
-									<Typography variant="subtitle1">No Membership Fee</Typography>
-									<Typography variant="body2">Members can join for free.</Typography>
+							{organization?.fee_model === 'NoFees' && (
+								<Stack direction="row" spacing={1}>
+									<Verified sx={{ width: 33, height: 31.5, color: theme.palette.success.main }} />
+									<Stack direction="column">
+										<Typography variant="subtitle1">No Membership Fee</Typography>
+										<Typography variant="body2">Members can join for free.</Typography>
+									</Stack>
 								</Stack>
-							</Stack>
-							<Stack direction="row" spacing={1}>
-								<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
-								<Stack direction="column">
-									<Typography variant="subtitle1">No Membership Fee</Typography>
-									<Typography variant="body2">Members can join for free.</Typography>
+							)}
+
+							{organization?.member_limit === 0 && (
+								<Stack direction="row" spacing={1}>
+									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
+									<Stack direction="column">
+										<Typography variant="subtitle1">Open Access</Typography>
+										<Typography variant="body2">Anyone can join this organization.</Typography>
+									</Stack>
 								</Stack>
-							</Stack>
-							<Stack direction="row" spacing={1}>
-								<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
-								<Stack direction="column">
-									<Typography variant="subtitle1">No Membership Fee</Typography>
-									<Typography variant="body2">Members can join for free.</Typography>
+							)}
+							{organization?.access === 'Open' && (
+								<Stack direction="row" spacing={1}>
+									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
+									<Stack direction="column">
+										<Typography variant="subtitle1">No Member Limit</Typography>
+										<Typography variant="body2">We’re open for everyone!</Typography>
+									</Stack>
 								</Stack>
-							</Stack>
+							)}
 						</Stack>
 					</Stack>
 				</Paper>
@@ -243,7 +252,7 @@ export function Overview({
 							View all <ChevronRight />
 						</Button>
 					</Stack>
-					<Paper sx={{ height: '174px' }}>
+					<Paper sx={{ height: 174 }}>
 						<Stack
 							direction="row"
 							width="100%"
@@ -272,7 +281,7 @@ export function Overview({
 							View all <ChevronRight />
 						</Button>
 					</Stack>
-					<Paper sx={{ height: '174px' }}>
+					<Paper sx={{ height: 174 }}>
 						<Stack direction="row" width="100%" height="100%" justifyContent="center" alignItems="center">
 							<DonutChart series={[10, 10, 20]} />
 						</Stack>
