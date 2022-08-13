@@ -56,7 +56,6 @@ export type DisplayValueEntry = {
 
 export type DisplayValueEntryCountry = DisplayValueEntry & {
 	readonly __typename?: 'DisplayValueEntryCountry'
-	readonly flag: Scalars['String']
 	readonly key: Scalars['String']
 	readonly text: Scalars['String']
 	readonly value: Scalars['String']
@@ -92,6 +91,7 @@ export type DisplayValues = {
 	readonly projectTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly proposalTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly protocolTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
+	readonly tags?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 	readonly votingTypes?: Maybe<ReadonlyArray<Maybe<DisplayValueEntryNumber>>>
 }
 
@@ -390,7 +390,6 @@ export type DisplayValueEntryCountryResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['DisplayValueEntryCountry'] = ResolversParentTypes['DisplayValueEntryCountry'],
 > = ResolversObject<{
-	flag?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	value?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -491,6 +490,7 @@ export type DisplayValuesResolvers<
 		ParentType,
 		ContextType
 	>
+	tags?: Resolver<Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>, ParentType, ContextType>
 	votingTypes?: Resolver<
 		Maybe<ReadonlyArray<Maybe<ResolversTypes['DisplayValueEntryNumber']>>>,
 		ParentType,

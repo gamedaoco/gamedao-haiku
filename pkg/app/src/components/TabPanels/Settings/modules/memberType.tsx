@@ -10,7 +10,6 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 import { toUnit } from 'src/utils/token'
 import { RadioItem } from 'components/Forms/modules/radioItem'
 
-
 const validationFeeSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
