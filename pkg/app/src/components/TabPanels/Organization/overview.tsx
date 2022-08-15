@@ -86,11 +86,54 @@ export function Overview({
 		[isReadMore, organization?.organization_metadata?.description],
 	)
 
+	const access = useMemo(
+		() =>
+			organization?.access === 'Open'
+				? {
+						title: 'Open Access',
+						text: 'Anyone can join this organization.',
+						status: 'Public',
+				  }
+				: {
+						title: 'Private Access',
+						text: 'Approved applicants can join the organisation.',
+						status: 'Private',
+				  },
+		[organization?.access],
+	)
+
+	const feeModel = useMemo(() => {
+		if (organization?.fee_model === 'NoFees') {
+			return {
+				title: 'No Membership Fee',
+				text: 'Members can join for free.',
+			}
+		} else if (organization?.fee_model === 'Reserve') {
+			return {
+				title: 'Reserved Membership Fee',
+				text: 'The fee will be locked and payed back if a member leaves the DAO.',
+			}
+		} else if (organization?.fee_model === 'Transferred') {
+			return {
+				title: 'Transferred Membership Fee',
+				text: 'Members pay a fee to join this organisation.',
+			}
+		}
+	}, [organization?.fee_model])
+
+	const memberLimit = useMemo(
+		() =>
+			organization?.member_limit === 0
+				? { title: 'No Member Limit', text: 'Unlimited Members can join this organisation.' }
+				: {
+						title: 'Member Limit',
+						text: `Only ${organization?.member_limit} members can join this organisation.`,
+				  },
+		[organization?.member_limit],
+	)
 	useEffect(() => {
 		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
 	}, [organization?.organization_metadata?.description?.length])
-
-	console.log('DATA:', organization)
 
 	return (
 		<>
@@ -120,11 +163,13 @@ export function Overview({
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<VpnKey />
-								<Typography variant="body2">Public</Typography>
+								<Typography variant="body2">{access.status} </Typography>
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
-								<Typography variant="body2">acrocalypse.xyz</Typography>
+								<Typography variant="body2">
+									{organization?.organization_metadata?.website || 'acrocalypse.xyz'}
+								</Typography>
 							</Stack>
 						</Stack>
 
@@ -169,31 +214,32 @@ export function Overview({
 						<Typography variant="h6">Organisation Rules</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
-							{organization?.fee_model === 'NoFees' && (
+							{organization?.fee_model && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: 33, height: 31.5, color: theme.palette.success.main }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">No Membership Fee</Typography>
-										<Typography variant="body2">Members can join for free.</Typography>
+										<Typography variant="subtitle1">{feeModel.title}</Typography>
+										<Typography variant="body2">{feeModel.text}</Typography>
 									</Stack>
 								</Stack>
 							)}
 
-							{organization?.member_limit === 0 && (
+							{organization?.access && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">Open Access</Typography>
-										<Typography variant="body2">Anyone can join this organization.</Typography>
+										<Typography variant="subtitle1">{access.title}</Typography>
+										<Typography variant="body2">{access.text}</Typography>
 									</Stack>
 								</Stack>
 							)}
-							{organization?.access === 'Open' && (
+
+							{organization?.member_limit !== 'undefined' && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">No Member Limit</Typography>
-										<Typography variant="body2">We’re open for everyone!</Typography>
+										<Typography variant="subtitle1">{memberLimit.title}</Typography>
+										<Typography variant="body2">{memberLimit.text}</Typography>
 									</Stack>
 								</Stack>
 							)}
@@ -217,7 +263,7 @@ export function Overview({
 					</Stack>
 					<AreaChartContainer
 						title="Total Members"
-						total="3.458"
+						total={organization?.organization_members_aggregate?.aggregate?.count}
 						increase={2.6}
 						series={series1}
 						categories={categories}
