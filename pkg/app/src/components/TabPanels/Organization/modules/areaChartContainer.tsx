@@ -7,7 +7,7 @@ import { AreaChart } from 'components/Charts/areaChart'
 
 interface ComponentProps {
 	title: string
-	total: string
+	total: number | string
 	increase: number
 	series: any
 	categories: any
