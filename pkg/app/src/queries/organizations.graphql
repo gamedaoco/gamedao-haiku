@@ -53,6 +53,11 @@ subscription OrganizationById($orgId: String!) {
             repo
             website
         }
+        organization_members_aggregate {
+            aggregate {
+                count
+            }
+        }
     }
 }
 subscription AccountOrganizations($address: String!) {
