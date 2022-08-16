@@ -10,6 +10,8 @@ import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { Organization } from 'src/queries'
+import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
+import { getProposalTypesCount } from 'src/utils/proposalUtils'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -131,9 +133,26 @@ export function Overview({
 				  },
 		[organization?.member_limit],
 	)
+
+	const statesPercentages = useMemo(
+		() =>
+			getCampaignStatusPercentage(
+				organization?.campaigns_aggregate?.aggregate?.count,
+				organization?.campaigns_aggregate?.nodes,
+			),
+		[organization?.campaigns_aggregate?.aggregate?.count, organization?.campaigns_aggregate?.nodes],
+	)
+
+	const proposalTypesCount = useMemo(
+		() => getProposalTypesCount(organization?.proposals_aggregate?.nodes),
+		[organization?.proposals_aggregate?.nodes],
+	)
+
 	useEffect(() => {
 		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
 	}, [organization?.organization_metadata?.description?.length])
+
+	console.log(proposalTypesCount)
 
 	return (
 		<>
@@ -307,15 +326,15 @@ export function Overview({
 						>
 							<RadialChartContainer
 								color={theme.palette.success.main}
-								series={[74.3]}
+								series={[statesPercentages.successPercentage]}
 								type="Funded"
-								count={234}
+								count={statesPercentages.successPercentage / 100}
 							/>
 							<RadialChartContainer
 								color={theme.palette.error.main}
-								series={[25.7]}
+								series={[statesPercentages.failedPercentage]}
 								type="Failed"
-								count={62}
+								count={statesPercentages.successPercentage / 100}
 							/>
 						</Stack>
 					</Paper>
@@ -329,7 +348,7 @@ export function Overview({
 					</Stack>
 					<Paper sx={{ height: 174 }}>
 						<Stack direction="row" width="100%" height="100%" justifyContent="center" alignItems="center">
-							<DonutChart series={[10, 10, 20]} />
+							<DonutChart series={proposalTypesCount} />
 						</Stack>
 					</Paper>
 				</Stack>
