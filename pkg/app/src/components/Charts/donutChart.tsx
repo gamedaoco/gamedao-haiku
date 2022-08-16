@@ -1,5 +1,6 @@
 import { useTheme } from '@mui/material/styles'
 import type { ApexOptions } from 'apexcharts'
+import { useTranslation } from 'react-i18next'
 
 import { Chart } from './chart'
 
@@ -9,6 +10,8 @@ interface ComponentProps {
 
 export function DonutChart({ series }: ComponentProps) {
 	const theme = useTheme()
+
+	const { t } = useTranslation()
 
 	const chartOptions: ApexOptions = {
 		chart: {
@@ -26,7 +29,11 @@ export function DonutChart({ series }: ComponentProps) {
 			opacity: 1,
 		},
 
-		labels: ['General Proposal', 'Withdrawal Proposal', 'Spending Proposal'],
+		labels: [
+			t('page:organisations:general_proposal'),
+			t('page:organisations:withdrawal_proposal'),
+			t('page:organisations:spending_proposal'),
+		],
 		legend: {
 			labels: {
 				colors: theme.palette.text.secondary,

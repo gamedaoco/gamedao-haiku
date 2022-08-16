@@ -92,14 +92,14 @@ export function Overview({
 		() =>
 			organization?.access === 'Open'
 				? {
-						title: 'Open Access',
-						text: 'Anyone can join this organization.',
-						status: 'Public',
+						title: t('page:organisations:organisation_rules:open:title'),
+						text: t('page:organisations:organisation_rules:open:text'),
+						status: t('page:organisations:organisation_rules:open:status'),
 				  }
 				: {
-						title: 'Private Access',
-						text: 'Approved applicants can join the organisation.',
-						status: 'Private',
+						title: t('page:organisations:organisation_rules:private:title'),
+						text: t('page:organisations:organisation_rules:private:text'),
+						status: t('page:organisations:organisation_rules:private:status'),
 				  },
 		[organization?.access],
 	)
@@ -107,18 +107,18 @@ export function Overview({
 	const feeModel = useMemo(() => {
 		if (organization?.fee_model === 'NoFees') {
 			return {
-				title: 'No Membership Fee',
-				text: 'Members can join for free.',
+				title: t('page:organisations:organisation_rules:no_fee:title'),
+				text: t('page:organisations:organisation_rules:no_fee:text'),
 			}
 		} else if (organization?.fee_model === 'Reserve') {
 			return {
-				title: 'Reserved Membership Fee',
-				text: 'The fee will be locked and payed back if a member leaves the DAO.',
+				title: t('page:organisations:organisation_rules:reserved_fee:title'),
+				text: t('page:organisations:organisation_rules:reserved_fee:text'),
 			}
 		} else if (organization?.fee_model === 'Transferred') {
 			return {
-				title: 'Transferred Membership Fee',
-				text: 'Members pay a fee to join this organisation.',
+				title: t('page:organisations:organisation_rules:transferred_fee:title'),
+				text: t('page:organisations:organisation_rules:transferred_fee:text'),
 			}
 		}
 	}, [organization?.fee_model])
@@ -126,10 +126,15 @@ export function Overview({
 	const memberLimit = useMemo(
 		() =>
 			organization?.member_limit === 0
-				? { title: 'No Member Limit', text: 'Unlimited Members can join this organisation.' }
+				? {
+						title: t('page:organisations:organisation_rules:no_member_limit:title'),
+						text: t('page:organisations:organisation_rules:no_member_limit:text'),
+				  }
 				: {
-						title: 'Member Limit',
-						text: `Only ${organization?.member_limit} members can join this organisation.`,
+						title: t('page:organisations:organisation_rules:member_limit:title'),
+						text: ` ${t('page:organisations:organisation_rules:member_limit:only')} ${
+							organization?.member_limit
+						}  ${t('page:organisations:organisation_rules:member_limit:text')}`,
 				  },
 		[organization?.member_limit],
 	)
@@ -158,9 +163,9 @@ export function Overview({
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
 				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }}>
-					<Stack minHeight={284} spacing={1} padding={3}>
+					<Stack minHeight={307} spacing={1} padding={3}>
 						<Typography variant="h6" pb="1rem">
-							About
+							{t('page:organisations:about')}
 						</Typography>
 						<Typography variant="body2">
 							{description}
@@ -201,11 +206,11 @@ export function Overview({
 							{!isMember && (
 								<>
 									<Button
-										size="large"
 										variant="outlined"
+										size="large"
 										disabled={!addMemberTx}
 										onClick={handleOpenTxModal}
-										sx={{ width: '50%' }}
+										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
 										{t('button:ui:join_organization')}
 									</Button>
@@ -221,7 +226,7 @@ export function Overview({
 										onClick={() => handleChangeRoute('settings')}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
-										Change Settings
+										{t('button:ui:change_settings')}
 									</Button>
 								</>
 							)}
@@ -230,7 +235,7 @@ export function Overview({
 				</Paper>
 				<Paper sx={{ width: { xs: '100%', md: '35%' }, minHeight: 284 }}>
 					<Stack height="100%" spacing={1} padding={3}>
-						<Typography variant="h6">Organisation Rules</Typography>
+						<Typography variant="h6">{t('page:organisations:organisations_rules')}</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
 							{organization?.fee_model && (
@@ -275,9 +280,9 @@ export function Overview({
 			>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
-						<Typography variant="h5">Members</Typography>
+						<Typography variant="h5">{t('label:members')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('members')}>
-							Go to Members <ChevronRight />
+							{t('button:ui:go_to_members')} <ChevronRight />
 						</Button>
 					</Stack>
 					<AreaChartContainer
@@ -290,9 +295,9 @@ export function Overview({
 				</Stack>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
-						<Typography variant="h5">Treasury</Typography>
+						<Typography variant="h5">{t('label:treasury')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('treasury')}>
-							Go to Treasury <ChevronRight />
+							{t('button:ui:go_to_members')} <ChevronRight />
 						</Button>
 					</Stack>
 					<AreaChartContainer
@@ -312,9 +317,9 @@ export function Overview({
 			>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
-						<Typography variant="h5">Campaigns</Typography>
+						<Typography variant="h5">{t('label:campaigns')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('campaigns')}>
-							View all <ChevronRight />
+							{t('button:ui:view_all')} <ChevronRight />
 						</Button>
 					</Stack>
 					<Paper sx={{ height: 174 }}>
@@ -341,9 +346,9 @@ export function Overview({
 				</Stack>
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
-						<Typography variant="h5">Votings</Typography>
+						<Typography variant="h5">{t('page:organisations:votings')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('proposals')}>
-							View all <ChevronRight />
+							{t('button:ui:view_all')} <ChevronRight />
 						</Button>
 					</Stack>
 					<Paper sx={{ height: 174 }}>

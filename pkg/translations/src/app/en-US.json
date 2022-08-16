@@ -47,7 +47,11 @@
             "show_more": "Show More",
             "show_less": "Show Less",
             "vote": "Vote",
-            "save_draft": "Save Draft"
+            "save_draft": "Save Draft",
+            "go_to_members": "Go to Members",
+            "go_to_treasury": "Go to Treasury",
+            "view_all": "View All",
+            "change_settings": "Change Settings"
         },
         "form": {
             "publish_now": "Publish Now",
@@ -93,6 +97,7 @@
         "total_deposit": "Total Deposit",
         "website": "Website",
         "campaigns": "Campaigns",
+        "treasury": "Treasury",
         "search_campaigns": "Search Campaigns",
         "update_photo": "Update photo",
         "n_members": "{{n}} Member",
@@ -219,6 +224,45 @@
             "search_place_holder": "Search Organizations",
             "load_more": "Load More Organisations",
             "showing_results": "Showing {{count1}} of {{count2}} organisations",
+            "votings": "Votings",
+            "organisations_rules": "Organisation Rules",
+            "about": "About",
+            "general_proposal": "General Proposal",
+            "withdrawal_proposal": "Withdrawal Proposal",
+            "spending_proposal": "Spending Proposal",
+            "organisation_rules": {
+                "open": {
+                    "title": "Open Access",
+                    "text": "Anyone can join this organization.",
+                    "status": "Public"
+                },
+                "private": {
+                    "title": "Private Access",
+                    "text": "Approved applicants can join the organisation.",
+                    "status": "Private"
+                },
+                "no_fee": {
+                    "title": "No Membership Fee",
+                    "text": "Members can join for free."
+                },
+                "reserved_fee": {
+                    "title": "Reserved Membership Fee",
+                    "text": "The fee will be locked and payed back if a member leaves the DAO."
+                },
+                "transferred_fee": {
+                    "title": "Transferred Membership Fee",
+                    "text": "Members pay a fee to join this organisation."
+                },
+                "no_member_limit": {
+                    "title": "No Member Limit",
+                    "text":" Unlimited Members can join this organisation."
+                },
+                "member_limit": {
+                    "title": "Member Limit",
+                    "text": "members can join this organisation",
+                    "only": "Only"
+                }
+            },
             "settings": {
                 "about": {
                     "title": "About Organization",
