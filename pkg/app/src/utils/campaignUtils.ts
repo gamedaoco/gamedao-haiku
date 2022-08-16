@@ -19,3 +19,15 @@ export function getTimeFromBlock(currentBlock: number, endBlock: number, targetB
 	const seconds = Math.ceil(blockDiff * (targetBlockTime ?? 3))
 	return moment.duration(moment().diff(moment().add(seconds, 'seconds'))).humanize()
 }
+
+export function getCampaignStatusPercentage(total, states) {
+	const arr = states?.map((obj) => obj.state)
+	const count = arr?.reduce((accumulator, value) => {
+		return { ...accumulator, [value]: (accumulator[value] || 0) + 1 }
+	}, {})
+
+	return {
+		successPercentage: (count?.Success / total) * 100 || 0,
+		failedPercentage: (count?.Failed / total) * 100 || 0,
+	}
+}
