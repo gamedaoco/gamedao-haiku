@@ -53,6 +53,27 @@ subscription OrganizationById($orgId: String!) {
             repo
             website
         }
+        organization_members_aggregate {
+            aggregate {
+                count
+            }
+        }
+        campaigns_aggregate {
+            aggregate {
+                count
+            }
+            nodes {
+                state
+            }
+        }
+        proposals_aggregate {
+            nodes {
+                type
+            }
+            aggregate {
+                count
+            }
+        }
     }
 }
 subscription AccountOrganizations($address: String!) {
