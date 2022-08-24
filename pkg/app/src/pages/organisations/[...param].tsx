@@ -315,6 +315,7 @@ export function OrganisationById() {
 							<TabPanel value={'dashboard'}>
 								{organizationIdState ? (
 									<Overview
+										organization={organizationState}
 										organizationId={organizationIdState}
 										isMember={isMemberState}
 										isAdmin={address === organizationState?.controller}
