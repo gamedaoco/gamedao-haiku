@@ -4,11 +4,12 @@ import { Wallet } from '@talisman-connect/wallets'
 import { useApiProvider } from 'hooks/useApiProvider'
 import { useLogger } from 'hooks/useLogger'
 import { SignAndNotify } from 'provider/extension/modules/signAndNotify'
+import { useTranslation } from 'react-i18next'
 import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
 import { sessionUpdateInterval } from 'src/constants'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useUpdateSessionMutation } from 'src/queries'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification, createWarningNotification } from 'src/utils/notificationUtils'
 import { getWallets } from 'src/walletOverrides/wallets'
 
 import { WalletDialog } from 'components/WalletDialog/walletDialog'
@@ -18,6 +19,7 @@ import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)
+	const { t } = useTranslation()
 	const apiProvider = useApiProvider()
 	const [supportedWalletsState, setSupportedWalletsState] = useState<Wallet[]>()
 	const [allSupportedWalletsState, setAllSupportedWalletsState] = useState<Wallet[]>()
@@ -120,6 +122,16 @@ export function ExtensionProvider({ children }) {
 								...accountSettings,
 								selectedAddress: extensionState.selectedAccount?.account?.address,
 							})
+						}
+
+						if (extensionState.selectedAccount === null) {
+							createWarningNotification(
+								t('notification:warning:no_accounts_in_wallet', {
+									name: accountSettings.lastUsedExtension,
+								}),
+							)
+							disconnectWalletCallback()
+							return
 						}
 
 						setState(extensionState)
