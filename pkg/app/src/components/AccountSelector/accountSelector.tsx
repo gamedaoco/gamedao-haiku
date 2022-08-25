@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
-import { Box, Button } from '@mui/material'
+import { Box, Button, useMediaQuery, useTheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useExtensionContext } from 'src/provider/extension/modules/context'
 
@@ -8,8 +8,6 @@ import { Flyout } from 'components/AccountSelector/modules/flyout'
 import { Selector } from 'components/AccountSelector/modules/selector'
 import { SelectAccountDialog } from 'components/SelectAccountDialog/selectAccountDialog'
 import { SelectNetworkDialog } from 'components/SelectNetworkDialog/selectNetworkDialog'
-
-import { useMediaQuery, useTheme } from '@mui/material'
 
 export function AccountSelector() {
 	const theme = useTheme()
@@ -53,7 +51,7 @@ export function AccountSelector() {
 	}, [setNetworkSelectOpenState])
 
 	// Show connect button
-	if (w3Enabled === false) {
+	if (w3Enabled === false || selectedAccount === null) {
 		return isMd ? (
 			<Button variant="contained" onClick={connectWallet as any}>
 				{t('button:ui:connect_wallet')}
