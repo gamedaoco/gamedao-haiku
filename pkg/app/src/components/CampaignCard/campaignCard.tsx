@@ -44,6 +44,8 @@ export function CampaignCard({ campaign }: ComponentProps) {
 				)}
 				headerImage={parseIpfsHash(campaign?.campaign_metadata?.header, config.IPFS_GATEWAY)}
 				status={campaign?.state}
+				id={campaign?.id}
+				orgId={campaign?.organization?.id}
 			/>
 
 			<Content
