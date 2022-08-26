@@ -11,33 +11,36 @@ declare module '@mui/material/Button' {
 export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
+
 			variants: [
-				{
-					props: { variant: 'outlined' },
-					style: {
-						color: 'primary' ? theme.palette.common.white : theme.palette.text.secondary,
-					},
-				},
-				{
-					props: { variant: 'secondary' },
-					style: {
-						color: theme.palette.common.white,
-					},
-				},
+				// {
+				// 	props: { variant: 'outlined' },
+				// 	style: {
+				// 		color: 'primary' ? theme.palette.common.white : theme.palette.text.secondary,
+				// 	},
+				// },
+				// {
+				// 	props: { variant: 'secondary' },
+				// 	style: {
+				// 		color: theme.palette.common.white,
+				// 	},
+				// },
 			],
+
 			styleOverrides: {
 				root: {
 					borderRadius: Number(theme.shape.borderRadius) * 10,
 					'&:hover': {
 						boxShadow: 'none',
 					},
-					borderColor: theme.palette.text.secondary,
 				},
 
 				sizeLarge: {
 					height: 48,
 				},
-				// contained
+
+			// 	// contained
+
 				containedInherit: {
 					color: theme.palette.grey[800],
 					boxShadow: theme.customShadows.z8,
@@ -45,6 +48,7 @@ export default function Button(theme: Theme) {
 						backgroundColor: theme.palette.grey[400],
 					},
 				},
+
 				containedPrimary: {
 					boxShadow: theme.customShadows.primary,
 				},
@@ -63,18 +67,20 @@ export default function Button(theme: Theme) {
 				containedError: {
 					boxShadow: theme.customShadows.error,
 				},
-				// outlined
-				outlinedInherit: {
-					border: `1px solid ${theme.palette.grey[500_32]}`,
-					'&:hover': {
-						backgroundColor: theme.palette.action.hover,
-					},
-				},
-				textInherit: {
-					'&:hover': {
-						backgroundColor: theme.palette.action.hover,
-					},
-				},
+
+			// 	// outlined
+			// 	outlinedInherit: {
+			// 		border: `1px solid ${theme.palette.grey[500_32]}`,
+			// 		'&:hover': {
+			// 			backgroundColor: theme.palette.action.hover,
+			// 		},
+			// 	},
+			// 	textInherit: {
+			// 		'&:hover': {
+			// 			backgroundColor: theme.palette.action.hover,
+			// 		},
+			// 	},
+
 			},
 		},
 	}
