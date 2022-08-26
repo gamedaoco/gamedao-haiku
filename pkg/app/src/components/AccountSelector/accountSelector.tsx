@@ -53,7 +53,7 @@ export function AccountSelector() {
 	// Show connect button
 	if (w3Enabled === false || selectedAccount === null) {
 		return isMd ? (
-			<Button variant="outlined" color="primary" size="small" onClick={connectWallet as any}>
+			<Button variant="outlined" size="small" onClick={connectWallet as any}>
 				{t('button:ui:connect_wallet')}
 			</Button>
 		) : (
