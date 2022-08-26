@@ -351,6 +351,11 @@
         "web3": "Web3",
         "collectables": "Collectables",
         "content_creators": "Content Creators"
+      },
+      "treasury": {
+        "assets": "All Assets",
+        "transactions_income": "Transaction History - Income",
+        "transactions_outgoing": "Transaction History - Outgoing"
       }
     },
     "campaigns": {
