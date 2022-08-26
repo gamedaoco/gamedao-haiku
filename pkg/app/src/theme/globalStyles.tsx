@@ -85,6 +85,7 @@ export default function GlobalStyles() {
 					WebkitFilter: 'blur(0)',
 					filter: 'blur(0)',
 				},
+				'& .MuiStepIcon-active': { color: 'black' },
 			}}
 		/>
 	)
