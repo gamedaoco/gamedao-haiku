@@ -42,7 +42,6 @@ export default function Button(theme: Theme) {
 			// 	// contained
 
 				containedInherit: {
-					color: theme.palette.grey[800],
 					boxShadow: theme.customShadows.z8,
 					'&:hover': {
 						backgroundColor: theme.palette.grey[400],
@@ -51,21 +50,27 @@ export default function Button(theme: Theme) {
 
 				containedPrimary: {
 					boxShadow: theme.customShadows.primary,
+					color: theme.palette.grey[800],
 				},
 				containedSecondary: {
 					boxShadow: theme.customShadows.secondary,
+					color: theme.palette.grey[800],
 				},
 				containedInfo: {
 					boxShadow: theme.customShadows.info,
+					color: theme.palette.grey[800],
 				},
 				containedSuccess: {
 					boxShadow: theme.customShadows.success,
+					color: theme.palette.grey[800],
 				},
 				containedWarning: {
 					boxShadow: theme.customShadows.warning,
+					color: theme.palette.grey[800],
 				},
 				containedError: {
 					boxShadow: theme.customShadows.error,
+					color: theme.palette.grey[800],
 				},
 
 			// 	// outlined
