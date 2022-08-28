@@ -1,6 +1,7 @@
 import { FC, useCallback } from 'react'
 
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { Edit } from '@mui/icons-material'
 import {
@@ -53,15 +54,13 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 				{/*
 					TODO: needs translation keys
 				*/}
-				{!organisations && (
+				{!organisations || organisations?.length < 1 ? (
 					<Typography variant="h7">
 						You are not member of any Organisation yet.
 						<br />
-						<a href="/organisations">Join one or create one here!</a>.
+						<Link href="/organisations">Join one or create one here!</Link>.
 					</Typography>
-				)}
-
-				{organisations && (
+				) : (
 					<Scrollbar>
 						<Table sx={{ minWidth: 700 }}>
 							<TableHead>
