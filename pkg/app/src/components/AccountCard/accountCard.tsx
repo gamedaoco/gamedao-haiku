@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import Check from '@mui/icons-material/CheckOutlined'
 import Verified from '@mui/icons-material/Verified'
@@ -20,6 +20,7 @@ interface ComponentProps {
 export function AccountCard({ accountState, active, selectable, callback }: ComponentProps) {
 	const { accounts, selectAccount, selectedAccount } = useExtensionContext()
 	const { identity, loading } = useIdentityByAddress(accountState?.account?.address)
+	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
 
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n
