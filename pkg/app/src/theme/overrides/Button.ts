@@ -39,8 +39,6 @@ export default function Button(theme: Theme) {
 					height: 48,
 				},
 
-			// 	// contained
-
 				containedInherit: {
 					boxShadow: theme.customShadows.z8,
 					'&:hover': {

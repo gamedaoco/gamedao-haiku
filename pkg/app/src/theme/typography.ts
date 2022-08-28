@@ -76,6 +76,7 @@ const typography = {
 		lineHeight: 1.5,
 		fontSize: pxToRem(18),
 		...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
+		marginBottom: '1rem'
 	},
 	h6: {
 		fontWeight: 600,
@@ -108,6 +109,7 @@ const typography = {
 	caption: {
 		lineHeight: 1.5,
 		fontSize: pxToRem(12),
+		marginBottom: '1rem'
 	},
 	overline: {
 		fontWeight: 800,

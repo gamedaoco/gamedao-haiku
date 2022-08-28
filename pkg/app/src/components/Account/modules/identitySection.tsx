@@ -34,7 +34,7 @@ export function IdentitySection() {
 				sx={{
 					alignItems: {
 						sm: 'top',
-						md: 'center',
+						// md: 'center',
 					},
 					display: 'flex',
 					overflow: 'hidden',
@@ -43,12 +43,12 @@ export function IdentitySection() {
 				<Avatar
 					sx={{
 						height: {
-							md: 128,
+							md: 64,
 							sx: 48,
 						},
 						mr: 2,
 						width: {
-							md: 128,
+							md: 64,
 							sx: 48,
 						},
 					}}
@@ -59,31 +59,27 @@ export function IdentitySection() {
 					}
 				/>
 				<div>
-					<Typography sx={{ typography: { sm: 'body1', md: 'h4' } }} fontWeight="700">
-						{getNameFromAccountState(accountState)}
-					</Typography>
+					<Typography variant="h6">{getNameFromAccountState(accountState)}</Typography>
 					<Box
 						sx={{
 							display: 'flex',
 							alignItems: 'center',
 						}}
 					>
-						<Chip label={shortAccountAddress(accountState?.account)} size="medium" />
+						{shortAccountAddress(accountState?.account)}
 						<IconButton aria-label="copy" onClick={handleCopyAddress}>
 							<ContentCopyIcon fontSize="small" />
 						</IconButton>
 					</Box>
+					{/*
 					<Button
-						sx={{
-							mt: 1,
-							px: 5,
-						}}
-						style={{ borderRadius: 50 }}
-						variant="contained"
+						size="xs"
+						variant="outlined"
 						onClick={handleButtonClick}
 					>
 						{t('button:navigation:set_on_chain_identity')}
 					</Button>
+*/}
 				</div>
 			</Grid>
 		</Grid>

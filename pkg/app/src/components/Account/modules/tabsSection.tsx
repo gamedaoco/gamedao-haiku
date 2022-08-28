@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react'
 
 import { useRouter } from 'next/router'
+import { useTheme } from '@mui/material/styles'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +17,7 @@ interface TabsInterface {
 }
 
 export function TabsSection({ param }: ComponentProps) {
+	const { theme } = useTheme()
 	const { t } = useTranslation()
 	const tabs = useMemo<TabsInterface[]>(
 		() => [
@@ -60,6 +62,7 @@ export function TabsSection({ param }: ComponentProps) {
 				textColor="primary"
 				value={param || AccountTabs.OVERVIEW}
 				variant="scrollable"
+				align="left"
 			>
 				{tabs.map((tab) => (
 					<Tab key={tab.value} label={tab.label} value={tab.value} />

@@ -25,6 +25,14 @@ export default function Avatar(theme: Theme) {
 						height: '4rem',
 					},
 				},
+				{
+					props: { variant: 'achievement' },
+					style: {
+						backgroundColor: 'transparent',
+						outline: `1px solid ${ theme.palette.primary.main }`,
+						color: theme.palette.primary.main
+					},
+				},
 			],
 		},
 		MuiAvatarGroup: {

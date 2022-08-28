@@ -45,6 +45,8 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				<title>{title ? `${title} · ${config?.SITE_NAME}` : `${config?.SITE_NAME}`}</title>
 			</Head>
 
+			{/* TODO: Fix sidebar growth and footer order */}
+
 			{showSidebar && (
 				<Sidebar
 					showHeader={showHeader}
@@ -62,11 +64,12 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				))}
 
 			{showHeader && <Box height={90} />}
+			{!isMd && <Box height={45} />}
+
 			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>
 				<Box display="flex" flex="1 1 auto" overflow="hidden">
-					<Box flex="1 1 auto" height="100%" overflow="auto">
+					<Box flex="1 1 auto" height="100%" overflowX="hidden">
 						<Box>{noContainer ? children : <Container>{children}</Container>}</Box>
-
 						{showFooter && <Footer />}
 					</Box>
 				</Box>

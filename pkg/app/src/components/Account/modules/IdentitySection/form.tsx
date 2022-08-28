@@ -86,8 +86,9 @@ export function IdentityForm() {
 			/>
 			<form>
 				<Card sx={{ borderRadius: '16px' }}>
-					<CardHeader title={t('button:navigation:set_on_chain_identity')} />
 					<CardContent>
+						<Typography variant="h5">{t('button:navigation:set_on_chain_identity')}</Typography>
+
 						<Grid container spacing={3}>
 							<Grid item md={6} xs={12}>
 								<Controller
@@ -206,7 +207,7 @@ export function IdentityForm() {
 									render={() => (
 										<TextField
 											fullWidth
-											placeholder="email@internet.com"
+											placeholder="1"
 											sx={{
 												'& fieldset': {
 													borderRadius: '16px',
@@ -244,8 +245,15 @@ export function IdentityForm() {
 									)}
 								/>
 							</Grid>
-							<Grid item md={6} xs={12}>
-								<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: 2 }}>
+							<Grid item md={12} xs={12}>
+								<Box
+									sx={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										alignItems: 'center',
+										gap: 2,
+									}}
+								>
 									<Button
 										onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
 										type="button"
