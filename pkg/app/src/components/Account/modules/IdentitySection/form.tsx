@@ -13,13 +13,14 @@ import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-const initialValues = (identity: Identity) => ({
+const initialState = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
 	email: identity?.email || '',
 	riot: identity?.riot || '',
 	twitter: identity?.twitter || '',
 	web: identity?.web || '',
+	discord: identity?.discord || '',
 })
 export function IdentityForm() {
 	const accountState = useCurrentAccountState()
@@ -28,12 +29,12 @@ export function IdentityForm() {
 	const { t } = useTranslation()
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
 	const formHandler = useForm<Identity | any>({
-		defaultValues: initialValues(identity),
+		defaultValues: initialState(identity),
 		resolver,
 	})
 	useEffect(() => {
 		if (identity) {
-			formHandler.reset(initialValues(identity))
+			formHandler.reset(initialState(identity))
 		}
 	}, [identity, formHandler])
 	const [values, setValues] = useState(null)
@@ -98,7 +99,7 @@ export function IdentityForm() {
 										<TextField
 											fullWidth
 											label={t('label:display_name')}
-											placeholder="QDozer"
+											placeholder="JupiterMoon"
 											sx={{
 												'& fieldset': {
 													borderRadius: '16px',
@@ -114,34 +115,12 @@ export function IdentityForm() {
 							</Grid>
 							<Grid item md={6} xs={12}>
 								<Controller
-									name="twitter"
-									control={formHandler.control}
-									render={({ field: { onChange, value }, formState: { errors } }) => (
-										<TextField
-											fullWidth
-											label="Twitter"
-											placeholder="@TwitterHandle"
-											error={!!errors?.twitter}
-											helperText={errors?.twitter?.message?.toString()}
-											sx={{
-												'& fieldset': {
-													borderRadius: '16px',
-												},
-											}}
-											onChange={onChange}
-											value={value}
-										/>
-									)}
-								/>
-							</Grid>
-							<Grid item md={6} xs={12}>
-								<Controller
 									name="legal"
 									control={formHandler.control}
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
-											placeholder="John Q Doe"
+											placeholder="Jupiter Moon"
 											error={!!errors?.legal}
 											helperText={errors?.legal?.message?.toString()}
 											sx={{
@@ -152,28 +131,6 @@ export function IdentityForm() {
 											onChange={onChange}
 											value={value}
 											label={t('label:legal_name')}
-										/>
-									)}
-								/>
-							</Grid>
-							<Grid item md={6} xs={12}>
-								<Controller
-									name="riot"
-									control={formHandler.control}
-									render={({ field: { onChange, value }, formState: { errors } }) => (
-										<TextField
-											fullWidth
-											error={!!errors?.riot}
-											helperText={errors?.riot?.message?.toString()}
-											placeholder="@yourname:matrix.org"
-											sx={{
-												'& fieldset': {
-													borderRadius: '16px',
-												},
-											}}
-											onChange={onChange}
-											value={value}
-											label="Riot Name"
 										/>
 									)}
 								/>
@@ -202,6 +159,117 @@ export function IdentityForm() {
 							</Grid>
 							<Grid item md={6} xs={12}>
 								<Controller
+									name="web"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.web}
+											helperText={errors?.web?.message?.toString()}
+											placeholder="https://yourwebsitename.com"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label={t('label:website')}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="discord"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.discord}
+											helperText={errors?.discord?.message?.toString()}
+											placeholder=""
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label={t('label:discord')}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="twitter"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											label="Twitter"
+											placeholder="@TwitterHandle"
+											error={!!errors?.twitter}
+											helperText={errors?.twitter?.message?.toString()}
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="web3name"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.web3name}
+											helperText={errors?.web3name?.message?.toString()}
+											placeholder="@w3n:yourname"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label="web3name"
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
+									name="riot"
+									control={formHandler.control}
+									render={({ field: { onChange, value }, formState: { errors } }) => (
+										<TextField
+											fullWidth
+											error={!!errors?.riot}
+											helperText={errors?.riot?.message?.toString()}
+											placeholder="@yourname:matrix.org"
+											sx={{
+												'& fieldset': {
+													borderRadius: '16px',
+												},
+											}}
+											onChange={onChange}
+											value={value}
+											label="Riot Name"
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid item md={6} xs={12}></Grid>
+							<Grid item md={6} xs={12}>
+								<Controller
 									name="total_deposit"
 									control={formHandler.control}
 									render={() => (
@@ -223,28 +291,6 @@ export function IdentityForm() {
 									)}
 								/>
 							</Grid>
-							<Grid item md={6} xs={12}>
-								<Controller
-									name="web"
-									control={formHandler.control}
-									render={({ field: { onChange, value }, formState: { errors } }) => (
-										<TextField
-											fullWidth
-											error={!!errors?.web}
-											helperText={errors?.web?.message?.toString()}
-											placeholder="https://yourwebsitename.com"
-											sx={{
-												'& fieldset': {
-													borderRadius: '16px',
-												},
-											}}
-											onChange={onChange}
-											value={value}
-											label={t('label:website')}
-										/>
-									)}
-								/>
-							</Grid>
 							<Grid item md={12} xs={12}>
 								<Box
 									sx={{
@@ -254,22 +300,27 @@ export function IdentityForm() {
 										gap: 2,
 									}}
 								>
-									<Button
-										onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
-										type="button"
-										sx={{ m: 1 }}
-										variant="contained"
-										disabled={isClearDisabled}
-									>
-										{t('button:form:identity:clear')}
-									</Button>
+									{!isClearDisabled && (
+										<Button
+											onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
+											type="button"
+											sx={{ m: 1 }}
+											variant="outlined"
+											color="secondary"
+											disabled={isClearDisabled}
+										>
+											{t('button:form:identity:clear')}
+										</Button>
+									)}
 									<Button
 										type="button"
 										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
 										color="primary"
-										variant="contained"
+										variant={!isClearDisabled ? 'outlined' : 'contained'}
 									>
-										{t('button:form:identity:submit')}
+										{!isClearDisabled
+											? t('button:form:identity:update')
+											: t('button:form:identity:submit')}
 									</Button>
 								</Box>
 							</Grid>

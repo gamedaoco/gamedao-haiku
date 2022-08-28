@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 
 import { useRouter } from 'next/router'
 
+import Verified from '@mui/icons-material/Verified'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
@@ -59,7 +60,12 @@ export function IdentitySection() {
 					}
 				/>
 				<div>
-					<Typography variant="h6">{getNameFromAccountState(accountState)}</Typography>
+					<Typography variant="h6">
+						{getNameFromAccountState(accountState)}&nbsp;
+						{identity?.email && (
+							<Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" color="disabled" />
+						)}
+					</Typography>
 					<Box
 						sx={{
 							display: 'flex',

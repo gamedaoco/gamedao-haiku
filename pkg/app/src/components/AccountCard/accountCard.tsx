@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 
-import { Check, Verified } from '@mui/icons-material'
+import Check from '@mui/icons-material/CheckOutlined'
+import Verified from '@mui/icons-material/Verified'
 import { Avatar, Button, Card, Skeleton, Stack, Typography } from '@mui/material'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
@@ -64,14 +65,19 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 							}}
 							src={
 								identity?.email
-									? `https://www.gravatar.com/avatar/${md5(identity?.email)}`
-									: 'https://picsum.photos/200'
+									? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
+									: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
 							}
 						/>
 						<Stack>
-							<Typography variant="subtitle2">{getAccountName(accountState?.account)}</Typography>
+							<Typography variant="h6">
+								{getAccountName(accountState?.account)}
+								&nbsp;
+								{identity?.email && (
+									<Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" color="disabled" />
+								)}
+							</Typography>
 							<Stack direction="row" alignItems="center" spacing={0.5} pr={2}>
-								{identity?.email && <Verified color="disabled" />}
 								<Typography variant="body2">{shortAccountAddress(accountState?.account)}</Typography>
 							</Stack>
 						</Stack>
