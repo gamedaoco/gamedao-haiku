@@ -2,29 +2,31 @@ import { useCallback } from 'react'
 
 import { Check } from '@mui/icons-material'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/material'
-import { useNetworkContext } from 'provider/network/modules/context'
-import type { ApiProvider } from 'src/@types/network'
+import { useGraphQlContext } from 'provider/graphQl/modules/context'
+import { useTranslation } from 'react-i18next'
+import { Endpoint } from 'src/@types/graphql'
 
 interface ComponentProps {
-	apiProvider: ApiProvider
+	endpoint: Endpoint
 	active?: boolean
 	callback: () => void
 }
 
-export function NetworkCard({ apiProvider, active, callback }: ComponentProps) {
-	const { selectApiProvider } = useNetworkContext()
+export function NetworkCard({ endpoint, active, callback }: ComponentProps) {
+	const { selectEndpoint } = useGraphQlContext()
+	const { t } = useTranslation()
 
 	const handleButtonClick = useCallback(() => {
-		if (apiProvider) {
-			selectApiProvider(apiProvider)
+		if (endpoint) {
+			selectEndpoint(endpoint)
 		}
 
 		if (callback) {
 			callback()
 		}
-	}, [selectApiProvider, apiProvider, callback])
+	}, [selectEndpoint, endpoint, callback])
 
-	if (!apiProvider) {
+	if (!endpoint) {
 		return null
 	}
 
@@ -37,14 +39,14 @@ export function NetworkCard({ apiProvider, active, callback }: ComponentProps) {
 						width: { md: '48px !important' },
 						height: { md: '48px !important' },
 					}}
-					src={'https://picsum.photos/200'}
+					src={endpoint?.image}
 				/>
-				<Typography variant="subtitle2">{apiProvider.chainName}</Typography>
+				<Typography variant="subtitle2">{endpoint.name}</Typography>
 				{active ? (
 					<Check sx={{ display: 'block', marginLeft: 'auto !important' }} />
 				) : (
 					<Button onClick={handleButtonClick} variant="outlined" sx={{ marginLeft: 'auto !important' }}>
-						<Typography>Select</Typography>
+						<Typography>{t('button:ui:select')}</Typography>
 					</Button>
 				)}
 			</Stack>

@@ -27,6 +27,7 @@
             "download_extension": "Download {{extension}} Extension.",
             "connect_wallet": "Connect wallet",
             "submit": "Submit",
+            "select": "Select",
             "create": "Create",
             "load_more": "Load More",
             "clear": "Clear",
@@ -451,6 +452,9 @@
             "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users",
             "higher_current_member_limit": "The Member Limit cannot exceed the previous limit",
             "no_accounts_in_wallet": "Sorry you don't have any accounts in your wallet extension: {{name}}"
+        },
+        "error": {
+            "graphql_connection_error": "Connection to network {{name}} cannot be established please use a different network"
         }
     }
 }
