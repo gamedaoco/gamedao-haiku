@@ -1,8 +1,7 @@
 import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic } from '@mui/icons-material'
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
-import { useApiProvider } from 'hooks/useApiProvider'
 import { useExtensionContext } from 'provider/extension/modules/context'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useGraphQlContext } from 'provider/graphQl/modules/context'
 
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
@@ -18,8 +17,8 @@ interface ComponentProps {
 
 export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNetworkSelect }: ComponentProps) {
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
-	const { apiProviders } = useNetworkContext()
-	const apiProvider = useApiProvider()
+	const { endpoints, selectedEndpoint } = useGraphQlContext()
+
 	return (
 		<Menu
 			anchorEl={anchorEl}
@@ -113,8 +112,8 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				<Divider />
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
 					<Typography variant="body2" fontWeight="bold">
-						{apiProvider?.chainName ?? ''}
-						{apiProviders?.length > 1 && (
+						{selectedEndpoint?.name ?? ''}
+						{endpoints?.length > 1 && (
 							<Button onClick={openNetworkSelect}>
 								<MoreVert fontSize="small" />
 							</Button>

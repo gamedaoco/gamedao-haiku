@@ -10,20 +10,20 @@ import { SettingsProvider } from './settings/settingsProvider'
 
 export function Providers({ children }) {
 	return (
-		<GraphQlProvider>
-			<AppProvider>
+		<SettingsProvider>
+			<ThemeProvider>
 				<LanguageProvider>
-					<SettingsProvider>
-						<ThemeProvider>
+					<GraphQlProvider>
+						<AppProvider>
 							<ReadyProvider>
 								<NetworkProvider>
 									<ExtensionProvider>{children}</ExtensionProvider>
 								</NetworkProvider>
 							</ReadyProvider>
-						</ThemeProvider>
-					</SettingsProvider>
+						</AppProvider>
+					</GraphQlProvider>
 				</LanguageProvider>
-			</AppProvider>
-		</GraphQlProvider>
+			</ThemeProvider>
+		</SettingsProvider>
 	)
 }
