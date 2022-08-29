@@ -1,36 +1,27 @@
 // libs
 import { Grid, Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import React, { useState, useMemo, useEffect } from 'react'
+
+// Subscriptions
+import { getAssetsSubscription, TreasuryAsset } from '../modules/mock-data'
 
 // modules
 import { Asset } from './asset'
 
-interface ComponentProps {}
+interface ComponentProps {
+	address: string
+}
 
-export function Assets({}: ComponentProps) {
+export function Assets({ address }: ComponentProps) {
 	const { t } = useTranslation()
-	const assetsData = [
-		{
-			name: 'ZERO',
-			quantity: 714000064,
-			image: 'zero.png',
-		},
-		{
-			name: 'PLAY',
-			quantity: 1350000197,
-			image: 'play.png',
-		},
-		{
-			name: 'GAME',
-			quantity: 1720000361,
-			image: 'game.png',
-		},
-		{
-			name: 'aUSD',
-			quantity: 2.6566,
-			image: 'ausd.png',
-		},
-	]
+
+	const [assetsData, setAssetsData] = useState<TreasuryAsset[]>([])
+
+	useEffect(() => {
+		const data = getAssetsSubscription()
+		setAssetsData(data)
+	}, [])
 
 	return (
 		<>

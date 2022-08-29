@@ -10,9 +10,11 @@ interface ComponentProps {
 	series: any
 	height: number
 	width?: number
+	colors?: string[]
+	fills?: string[]
 }
 
-export function AreaChart({ categories, series, height }: ComponentProps) {
+export function AreaChart({ categories, series, height, colors = null, fills = null }: ComponentProps) {
 	const theme = useTheme()
 
 	const chartOptions: ApexOptions = useMemo(
@@ -24,12 +26,12 @@ export function AreaChart({ categories, series, height }: ComponentProps) {
 					show: false,
 				},
 			},
-			colors: [theme.palette.primary.main],
+			colors: colors || [theme.palette.primary.main],
 			dataLabels: {
 				enabled: false,
 			},
 			fill: {
-				colors: [alpha(theme.palette.primary.main, 0.2)],
+				colors: fills || [alpha(theme.palette.primary.main, 0.2)],
 			},
 			grid: {
 				borderColor: 'transparent',
