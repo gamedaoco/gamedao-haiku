@@ -21,9 +21,9 @@ const productionEndpoints: Endpoints = [
 	},
 	{
 		image: '/img/zero.png',
-		name: 'Rococo',
-		url: 'http://ec2-18-157-161-178.eu-central-1.compute.amazonaws.com:9080/v1/graphql',
-		healthCheck: 'http://ec2-18-157-161-178.eu-central-1.compute.amazonaws.com:9080/healthz',
+		name: 'Dev parachain',
+		url: 'https://graph.dev.para.sub.zero.io/',
+		healthCheck: 'https://graph.dev.para.sub.zero.io//health',
 	},
 ]
 
