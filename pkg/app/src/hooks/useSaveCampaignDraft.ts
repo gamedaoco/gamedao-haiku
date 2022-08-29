@@ -39,6 +39,7 @@ export function useSaveCampaignDraft(orgId: string): CampaignDraft {
 			const newDraftState = { ...draftState }
 			delete newDraftState[draftId]
 			setDraftState(newDraftState)
+			createInfoNotification(t('notification:info:draft_deleted'))
 		},
 		[draftState, setDraftState],
 	)

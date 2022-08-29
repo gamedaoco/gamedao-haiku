@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import { ConfirmationModal } from 'components/Modals/ConfirmationModal'
+import { ConfirmDeleteCampaignDraft } from 'components/Modals/confirmDeleteCampaignDraft'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
@@ -25,11 +26,12 @@ interface ComponentProps {
 }
 
 export function Form({ organizationId, cancel, currentStep, setStep, draftId }: ComponentProps) {
-	const [openModal, setOpenModal] = useState(false)
+	const [openModal, setOpenModal] = useState<boolean>(false)
+	const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState<boolean>(false)
 	const tmpCampaignState = useTmpCampaignState()
 	const tmpCampaign = useTmpCampaign()
 	const config = useConfig()
-	const [termsConditionAccepted, setTermsConditionAccepted] = useState(false)
+	const [termsConditionAccepted, setTermsConditionAccepted] = useState<boolean>(false)
 	const [txModalState, setTxModalState] = useState<boolean>(false)
 	const createCampaignTx = useCreateCampaignTransaction()
 	const { addDraft, drafts } = useSaveCampaignDraft(organizationId)
@@ -113,6 +115,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 
 	const handleSaveDraft = useCallback(() => {
 		addDraft(tmpCampaign)
+		cancel()
 	}, [addDraft, tmpCampaign])
 
 	const checkNextButtonState = () => {
@@ -155,9 +158,18 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 	const handleCloseModal = useCallback(() => {
 		setOpenModal(false)
 	}, [])
+
 	const handleOpenModal = useCallback(() => {
 		setOpenModal(true)
 	}, [])
+
+	const handleConfirmDeleteModalOnClose = useCallback((result: boolean) => {
+		setOpenConfirmDeleteModal(false)
+		if (result) {
+			cancel()
+		}
+	}, [])
+
 	const checkBackButtonState = () => {
 		return currentStep == 0
 	}
@@ -239,12 +251,23 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 					</Button>
 				</Box>
 
-				{currentStep === 2 && (
+				{draftId && (
+					<Button
+						size="large"
+						variant="outlined"
+						color="error"
+						onClick={() => setOpenConfirmDeleteModal(true)}
+						sx={{ flexGrow: { xs: 1, sm: 0 } }}
+					>
+						{t('button:ui:delete_draft')}
+					</Button>
+				)}
+
+				{currentStep > 0 && (
 					<Button
 						size="large"
 						variant="outlined"
 						onClick={handleSaveDraft}
-						disabled={checkNextButtonState()}
 						sx={{ flexGrow: { xs: 1, sm: 0 } }}
 					>
 						{t('button:ui:save_draft')}
@@ -258,7 +281,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 					disabled={checkNextButtonState()}
 					sx={{ flexGrow: { xs: 1, sm: 0 } }}
 				>
-					{t(`button:ui:${currentStep === 2 ? 'publish_now' : 'next_step'}`)}
+					{t(`button:form:${currentStep === 2 ? 'publish_now' : 'next_step'}`)}
 				</Button>
 			</Stack>
 
@@ -267,6 +290,12 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 				onClose={handleCloseTxModal}
 				txData={createCampaignTx}
 				txCallback={handleTxCallback}
+			/>
+			<ConfirmDeleteCampaignDraft
+				orgId={organizationId}
+				id={draftId}
+				onClose={handleConfirmDeleteModalOnClose}
+				open={openConfirmDeleteModal}
 			/>
 		</>
 	)
