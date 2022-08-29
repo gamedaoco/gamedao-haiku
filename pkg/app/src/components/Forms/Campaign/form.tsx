@@ -263,12 +263,11 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 					</Button>
 				)}
 
-				{currentStep === 2 && (
+				{currentStep > 0 && (
 					<Button
 						size="large"
 						variant="outlined"
 						onClick={handleSaveDraft}
-						disabled={checkNextButtonState()}
 						sx={{ flexGrow: { xs: 1, sm: 0 } }}
 					>
 						{t('button:ui:save_draft')}
