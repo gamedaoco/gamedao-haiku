@@ -14,7 +14,6 @@ export function AppPage() {
 				<Paper sx={{ p: ['2rem', '4rem'], height: '100%', borderRadius: '.75rem' }} elevation={0}>
 					<Typography sx={{ fontWeight: '800' }} variant={'h3'}>
 						Welcome to GameDAO
-						<Editor />
 					</Typography>
 				</Paper>
 			</Box>
