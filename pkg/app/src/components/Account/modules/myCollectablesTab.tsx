@@ -29,7 +29,7 @@ export function MyCollectablesTab() {
 						TODO: needs translation keys
 					*/}
 				{data && (
-					<Typography variant="h7">
+					<Typography variant="body1">
 						You do not own any collectables yet.
 						<br />
 					</Typography>

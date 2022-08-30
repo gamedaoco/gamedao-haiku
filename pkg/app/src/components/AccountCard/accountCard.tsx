@@ -75,7 +75,7 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 								{getAccountName(accountState?.account)}
 								&nbsp;
 								{identity?.email && (
-									<Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" color="disabled" />
+									<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
 								)}
 							</Typography>
 							<Stack direction="row" alignItems="center" spacing={0.5} pr={2}>

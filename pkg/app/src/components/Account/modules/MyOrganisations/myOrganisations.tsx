@@ -55,7 +55,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 					TODO: needs translation keys
 				*/}
 				{!organisations || organisations?.length < 1 ? (
-					<Typography variant="h7">
+					<Typography variant="body1">
 						You are not member of any Organisation yet.
 						<br />
 						<Link href="/organisations">Join one or create one here!</Link>.
