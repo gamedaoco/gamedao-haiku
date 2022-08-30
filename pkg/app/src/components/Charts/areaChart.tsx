@@ -10,62 +10,62 @@ interface ComponentProps {
 	series: any
 	height: number
 	width?: number
-	colors?: string[]
-	fills?: string[]
+	options?: any
 }
 
-export function AreaChart({ categories, series, height, colors = null, fills = null }: ComponentProps) {
+export function AreaChart({ categories, series, height, options = null }: ComponentProps) {
 	const theme = useTheme()
 
 	const chartOptions: ApexOptions = useMemo(
-		() => ({
-			chart: {
-				background: 'transparent',
-				stacked: false,
-				toolbar: {
-					show: false,
+		() =>
+			options || {
+				chart: {
+					background: 'transparent',
+					stacked: false,
+					toolbar: {
+						show: false,
+					},
 				},
-			},
-			colors: colors || [theme.palette.primary.main],
-			dataLabels: {
-				enabled: false,
-			},
-			fill: {
-				colors: fills || [alpha(theme.palette.primary.main, 0.2)],
-			},
-			grid: {
-				borderColor: 'transparent',
-				strokeDashArray: 0,
-			},
-			stroke: {
-				curve: 'smooth',
-			},
-			theme: {
-				mode: theme.palette.mode,
-			},
-			xaxis: {
-				type: 'datetime',
-				axisBorder: {
-					show: false,
+				colors: [theme.palette.primary.main],
+				dataLabels: {
+					enabled: false,
 				},
-				axisTicks: {
-					show: false,
+				fill: {
+					colors: [alpha(theme.palette.primary.main, 0.2)],
 				},
-				categories: categories,
+				grid: {
+					borderColor: 'transparent',
+					strokeDashArray: 0,
+				},
+				stroke: {
+					curve: 'smooth',
+				},
+				theme: {
+					mode: theme.palette.mode,
+				},
+				xaxis: {
+					type: 'datetime',
+					axisBorder: {
+						show: false,
+					},
+					axisTicks: {
+						show: false,
+					},
+					categories: categories,
 
-				labels: {
+					labels: {
+						show: false,
+					},
+				},
+				tooltip: {
+					x: {
+						format: 'dd/MM/yy',
+					},
+				},
+				yaxis: {
 					show: false,
 				},
 			},
-			tooltip: {
-				x: {
-					format: 'dd/MM/yy',
-				},
-			},
-			yaxis: {
-				show: false,
-			},
-		}),
 		[categories],
 	)
 

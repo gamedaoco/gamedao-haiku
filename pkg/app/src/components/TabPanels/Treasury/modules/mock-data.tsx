@@ -12,10 +12,21 @@ export function getCurrentBalanceSubscription() {
 	}
 }
 
+export type HistoricBalanceItem = {
+	readonly name: string
+	readonly data: number[]
+}
+
 export function getHistoricBalanceSubscription() {
 	return [
-		[19, 19, 22, 32, 54, 54, 52, 65, 80, 85, 75, 50],
-		[35, 42, 60, 50, 42, 40, 42, 38, 25, 19, 18, 17],
+		{
+			name: 'Income',
+			data: [19, 19, 22, 32, 54, 54, 52, 65, 80, 85, 75, 50],
+		},
+		{
+			name: 'Outgoing',
+			data: [35, 42, 60, 50, 42, 40, 42, 38, 25, 19, 18, 17],
+		},
 	]
 }
 
