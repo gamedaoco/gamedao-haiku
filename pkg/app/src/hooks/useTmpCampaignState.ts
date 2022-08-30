@@ -27,6 +27,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		`TmpCam${address}-currency-id`,
 		defaultValues.currencyId,
 	)
+	const [startDate, setStartDate] = useLocalStorage<Date>(`TmpCam${address}-start-date`, defaultValues.startDate)
 	const [endDate, setEndDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
 	const [governance, setGovernance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
 	const [metadataCid, setMetadataCid] = useLocalStorage<string>(
@@ -46,6 +47,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setProtocol(defaultValues.protocol)
 		setUsageOfFunds(defaultValues.usageOfFunds)
 		setCurrencyId(defaultValues.currencyId)
+		setStartDate(defaultValues.startDate)
 		setEndDate(defaultValues.endDate)
 		setGovernance(defaultValues.governance)
 		setMetadataCid(defaultValues.metadataCid)
@@ -60,6 +62,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setProtocol,
 		setUsageOfFunds,
 		setCurrencyId,
+		setStartDate,
 		setEndDate,
 		setGovernance,
 		setMetadataCid,
@@ -77,6 +80,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 			setProtocol(draft.protocol)
 			setUsageOfFunds(draft.usageOfFunds)
 			setCurrencyId(draft.currencyId)
+			setStartDate(draft.startDate)
 			setEndDate(draft.endDate)
 			setGovernance(draft.governance)
 			setMetadataCid(draft.metadataCid)
@@ -92,6 +96,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 			setProtocol,
 			setUsageOfFunds,
 			setCurrencyId,
+			setStartDate,
 			setEndDate,
 			setGovernance,
 			setMetadataCid,
@@ -109,6 +114,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		protocol: protocol,
 		usageOfFunds: usageOfFunds,
 		currencyId: currencyId,
+		startDate: startDate,
 		endDate: endDate,
 		governance: governance,
 		metadataCid: metadataCid,
@@ -122,6 +128,7 @@ export function useTmpCampaignState(): TMPCampaignState {
 		setProtocol: setProtocol,
 		setUsageOfFunds: setUsageOfFunds,
 		setCurrencyId: setCurrencyId,
+		setStartDate: setStartDate,
 		setEndDate: setEndDate,
 		setGovernance: setGovernance,
 		setMetadataCid: setMetadataCid,

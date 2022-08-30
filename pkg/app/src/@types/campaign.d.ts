@@ -11,6 +11,7 @@ export interface TMPCampaign {
 	protocol: number
 	usageOfFunds: string
 	currencyId: number
+	startDate: Date
 	endDate: Date
 	governance: number
 	metadataCid: string
@@ -27,6 +28,7 @@ export interface TMPCampaignState extends TMPCampaign {
 	setProtocol: (number) => void
 	setUsageOfFunds: (string) => void
 	setCurrencyId: (number) => void
+	setStartDate: (date) => void
 	setEndDate: (date) => void
 	setGovernance: (number) => void
 	setMetadataCid: (string) => void

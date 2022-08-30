@@ -55,6 +55,7 @@ export function getValidationSchema(minExpiry: number | string) {
 	return Yup.object().shape({
 		target: validationTargetSchema,
 		deposit: validationDepositSchema,
+		startDate: Yup.date().required(),
 		endDate: getValidationEndDateSchema(minExpiry),
 		termsCondition: validationTermsConditionSchema,
 		currencyId: validationCurrencyIdSchema,
@@ -73,6 +74,8 @@ interface ComponentProps {
 	setCurrencyId: (currencyId) => void
 	usageOfFunds: string
 	setUsageOfFunds: (usageOfFunds) => void
+	startDate: Date
+	setStartDate: (startDate) => void
 	endDate: Date
 	setEndDate: (endDate) => void
 	governance: number
@@ -90,6 +93,8 @@ export function Settings({
 	setDepositAmount,
 	setUsageOfFunds,
 	usageOfFunds,
+	startDate,
+	setStartDate,
 	endDate,
 	setEndDate,
 	currencyId,
@@ -104,12 +109,30 @@ export function Settings({
 	const config = useConfig()
 	const { t } = useTranslation()
 	const [currencies, setCurrencies] = useState([])
-	const minDate = useMemo(
+
+	const minStartDate = useMemo(
 		() =>
 			moment(new Date())
 				.add(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 				.toDate(),
 		[],
+	)
+
+	const minEndDate = useMemo(
+		() =>
+			moment(startDate ?? new Date())
+				.add(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
+				.toDate(),
+		[startDate],
+	)
+
+	// TODO: add to graphql
+	const maxEndDate = useMemo(
+		() =>
+			moment(startDate ?? new Date())
+				.add(60, 'days')
+				.toDate(),
+		[startDate],
 	)
 
 	const handleTargetAmountChange = useCallback(
@@ -308,14 +331,25 @@ export function Settings({
 				<Typography variant={'subtitle2'}>Date</Typography>
 
 				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
-					<DateTimePicker
-						label="End date"
-						minDate={minDate}
-						value={endDate ?? minDate}
-						onChange={setEndDate}
-						renderInput={(params) => <TextField {...params} />}
-						ampm={false}
-					/>
+					<Stack direction="row" spacing={1} justifyContent="space-between" width="100%">
+						<DateTimePicker
+							label="Start date"
+							minDate={minStartDate}
+							value={startDate ?? minStartDate}
+							onChange={setStartDate}
+							renderInput={(params) => <TextField {...params} />}
+							ampm={false}
+						/>
+						<DateTimePicker
+							label="End date"
+							minDate={minEndDate}
+							maxDate={maxEndDate}
+							value={endDate ?? minEndDate}
+							onChange={setEndDate}
+							renderInput={(params) => <TextField {...params} />}
+							ampm={false}
+						/>
+					</Stack>
 				</LocalizationProvider>
 
 				<FormControlLabel
