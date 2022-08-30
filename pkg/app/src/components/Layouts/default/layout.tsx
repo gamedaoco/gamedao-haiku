@@ -68,7 +68,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 
 			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>
 				<Box display="flex" flex="1 1 auto" overflow="hidden">
-					<Box flex="1 1 auto" height="100%" overflowX="hidden">
+					<Box flex="1 1 auto" height="100%" overflow="hidden">
 						<Box>{noContainer ? children : <Container>{children}</Container>}</Box>
 						{showFooter && <Footer />}
 					</Box>
