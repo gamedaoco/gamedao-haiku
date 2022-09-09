@@ -218,6 +218,8 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 					setUsageOfFunds={tmpCampaignState.setUsageOfFunds}
 					currencyId={tmpCampaignState.currencyId}
 					setCurrencyId={tmpCampaignState.setCurrencyId}
+					startDate={tmpCampaignState.startDate}
+					setStartDate={tmpCampaignState.setStartDate}
 					endDate={tmpCampaignState.endDate}
 					setEndDate={tmpCampaignState.setEndDate}
 					governance={tmpCampaignState.governance}
