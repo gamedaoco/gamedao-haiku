@@ -21,6 +21,7 @@ const initialState = (identity: Identity) => ({
 	twitter: identity?.twitter || '',
 	web: identity?.web || '',
 	discord: identity?.discord || '',
+	web3name: identity?.web3name || '',
 })
 export function IdentityForm() {
 	const accountState = useCurrentAccountState()
