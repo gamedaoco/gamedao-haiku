@@ -134,6 +134,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 				return !getSettingsValidationSchema(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS).isValidSync({
 					target: tmpCampaignState.target,
 					deposit: tmpCampaignState.deposit,
+					startDate: tmpCampaignState.startDate,
 					endDate: tmpCampaignState.endDate,
 					termsCondition: termsConditionAccepted,
 					currencyId: tmpCampaignState.currencyId,

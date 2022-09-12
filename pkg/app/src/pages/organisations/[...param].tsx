@@ -26,7 +26,6 @@ import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
-
 export function OrganisationById() {
 	const { query, push } = useRouter()
 	const [routeState, setRouteState] = useState<string>(null)
