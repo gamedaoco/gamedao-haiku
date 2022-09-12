@@ -26,7 +26,6 @@ import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
-
 export function OrganisationById() {
 	const { query, push } = useRouter()
 	const [routeState, setRouteState] = useState<string>(null)
@@ -304,6 +303,7 @@ export function OrganisationById() {
 											right: 0,
 											bottom: 0,
 											background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) -1.23%, #000000 80%)',
+											pointerEvents: 'none',
 										}}
 									></Box>
 								</Grid>
