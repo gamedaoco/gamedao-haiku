@@ -11,7 +11,6 @@ declare module '@mui/material/Button' {
 export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
-
 			variants: [
 				// {
 				// 	props: { variant: 'outlined' },
@@ -71,19 +70,18 @@ export default function Button(theme: Theme) {
 					color: theme.palette.grey[800],
 				},
 
-			// 	// outlined
-			// 	outlinedInherit: {
-			// 		border: `1px solid ${theme.palette.grey[500_32]}`,
-			// 		'&:hover': {
-			// 			backgroundColor: theme.palette.action.hover,
-			// 		},
-			// 	},
-			// 	textInherit: {
-			// 		'&:hover': {
-			// 			backgroundColor: theme.palette.action.hover,
-			// 		},
-			// 	},
-
+				// 	// outlined
+				// 	outlinedInherit: {
+				// 		border: `1px solid ${theme.palette.grey[500_32]}`,
+				// 		'&:hover': {
+				// 			backgroundColor: theme.palette.action.hover,
+				// 		},
+				// 	},
+				// 	textInherit: {
+				// 		'&:hover': {
+				// 			backgroundColor: theme.palette.action.hover,
+				// 		},
+				// 	},
 			},
 		},
 	}

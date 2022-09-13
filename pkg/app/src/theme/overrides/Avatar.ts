@@ -30,8 +30,8 @@ export default function Avatar(theme: Theme) {
 					props: { variant: 'achievement' },
 					style: {
 						backgroundColor: 'transparent',
-						outline: `1px solid ${ theme.palette.primary.main }`,
-						color: theme.palette.primary.main
+						outline: `1px solid ${theme.palette.primary.main}`,
+						color: theme.palette.primary.main,
 					},
 				},
 			],
