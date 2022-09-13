@@ -14,6 +14,7 @@ import { Layout } from 'src/components/Layouts/default/layout'
 import { useCampaignByIdSubscription } from 'src/queries'
 
 import { CampaignDetailsContent } from 'components/CampaignsSection/campaignDetailsContent'
+import Editor from 'components/Editor'
 
 export function CampaignById() {
 	const { t } = useTranslation()
@@ -99,7 +100,7 @@ export function CampaignById() {
 									{t('campaign_details:overview')}
 								</Typography>
 								<Typography variant="body1" mt="1rem">
-									{data?.campaign?.[0]?.campaign_metadata?.markdown}
+									<Editor value={data?.campaign?.[0]?.campaign_metadata?.markdown} readOnly={true} />
 								</Typography>
 							</Box>
 						</TabPanel>
