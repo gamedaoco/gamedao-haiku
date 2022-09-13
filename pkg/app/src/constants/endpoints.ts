@@ -23,7 +23,13 @@ const productionEndpoints: Endpoints = [
 		image: '/img/zero.png',
 		name: 'Dev parachain',
 		url: 'https://graph.dev.para.sub.zero.io/',
-		healthCheck: 'https://graph.dev.para.sub.zero.io//health',
+		healthCheck: 'https://graph.dev.para.sub.zero.io/health',
+	},
+	{
+		image: '/img/zero.png',
+		name: 'Rococo Parachain',
+		url: 'https://graph.staging.para.sub.zero.io',
+		healthCheck: 'https://graph.staging.para.sub.zero.io/health',
 	},
 ]
 

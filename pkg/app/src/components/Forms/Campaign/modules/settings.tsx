@@ -137,15 +137,12 @@ export function Settings({
 
 	const handleTargetAmountChange = useCallback(
 		(event) => {
-			const value = event.target.value
-			if (!value) {
-				return
-			}
+			let value = event.target.value
 			try {
-				validationTargetSchema?.validateSync(value)
 				if (setTargetAmount) {
 					setTargetAmount(value < 0 ? 0 : value)
 				}
+				validationTargetSchema?.validateSync(value)
 			} catch (e) {}
 		},
 		[setTargetAmount, validationTargetSchema, t],
@@ -153,15 +150,12 @@ export function Settings({
 
 	const handleDepositAmountChange = useCallback(
 		(event) => {
-			const value = event.target.value
-			if (!value) {
-				return
-			}
+			let value = event.target.value
 			try {
-				validationDepositSchema?.validateSync(value)
 				if (setDepositAmount) {
 					setDepositAmount(value < 0 ? 0 : value)
 				}
+				validationDepositSchema?.validateSync(value)
 			} catch (e) {}
 		},
 		[setDepositAmount, validationDepositSchema, t],
@@ -262,7 +256,7 @@ export function Settings({
 						fullWidth
 						type="number"
 						onChange={handleTargetAmountChange}
-						value={targetAmount}
+						value={targetAmount ?? ''}
 						label="Funding target*"
 						variant="outlined"
 						sx={{ flex: 1 }}
@@ -304,7 +298,7 @@ export function Settings({
 					fullWidth
 					type="number"
 					onChange={handleDepositAmountChange}
-					value={depositAmount}
+					value={depositAmount ?? ''}
 					label="Deposit*"
 					InputProps={{
 						endAdornment: <Typography variant="body2">GAME</Typography>,

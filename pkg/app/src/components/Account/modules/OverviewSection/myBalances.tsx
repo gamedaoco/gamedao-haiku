@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -18,6 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { Scrollbar } from 'components/scrollbar'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
+
 export function MyBalancesCard() {
 	const address = useCurrentAccountAddress()
 	const balances = useBalanceByAddress(address)
@@ -29,9 +32,9 @@ export function MyBalancesCard() {
 					{t('page:account:balances:title')}
 				</Typography>
 				<Scrollbar>
-					<Table sx={{ minWidth: 700 }}>
+					<Table>
 						<TableHead>
-							<TableRow sx={{ borderRadius: '8px' }}>
+							<TableRow>
 								<TableCell>{t('page:account:balances:token')}</TableCell>
 								<TableCell>{t('page:account:balances:transferable')}</TableCell>
 								<TableCell>{t('page:account:balances:locked')}</TableCell>
@@ -44,7 +47,7 @@ export function MyBalancesCard() {
 							{!balances ? (
 								<>
 									{[1, 2, 3, 4, 5]?.map((index) => (
-										<TableRow hover key={index}>
+										<TableRow hover key={`skeleton_${index}`}>
 											<TableCell>
 												<Skeleton width={50} />
 											</TableCell>
@@ -66,9 +69,9 @@ export function MyBalancesCard() {
 							) : (
 								<>
 									{balances?.map((balance, index) => (
-										<>
+										<Fragment key={balance?.tokenSymbol ?? index}>
 											{balance?.tokenSymbol && (
-												<TableRow hover key={index}>
+												<TableRow hover>
 													<TableCell>{balance?.tokenSymbol}</TableCell>
 													<TableCell>{balance.free}</TableCell>
 													<TableCell>{balance.frozen}</TableCell>
@@ -81,7 +84,7 @@ export function MyBalancesCard() {
 													</TableCell>
 												</TableRow>
 											)}
-										</>
+										</Fragment>
 									))}
 								</>
 							)}
