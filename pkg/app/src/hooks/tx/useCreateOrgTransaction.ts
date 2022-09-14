@@ -12,17 +12,16 @@ import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
-	controller_id: Yup.string().required(),
 	name: Yup.string().required(),
 	cid: Yup.string().required(),
-	org_type: Yup.number().required().min(0).max(3),
-	access: Yup.number().required().min(0).max(2),
-	fee_model: Yup.number().required().min(0).max(2),
+	org_type: Yup.string().required(),
+	access: Yup.string().required(),
+	fee_model: Yup.string().required(),
+	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	fee: Yup.string().required(),
 	gov_asset: Yup.object().required(),
 	pay_asset: Yup.object().required(),
-	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	deposit: Yup.string().required(),
 })
@@ -40,12 +39,13 @@ export function useCreateOrgTransaction(): TransactionData {
 			try {
 				// Data mapping
 				const mappedData = {
-					controller_id: address,
 					name: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 					cid: data.metaDataCID,
-					org_type: data.type,
-					access: data.mode,
-					fee_model: data.feeMode,
+					org_type: selectedApiProvider.apiProvider.createType('GamedaoControlOrgType', data.type),
+					access: selectedApiProvider.apiProvider.createType('GamedaoControlAccessModel', data.mode),
+					fee_model: selectedApiProvider.apiProvider.createType('GamedaoControlFeeModel', data.feeMode),
+					member_limit: data.memberLimit,
+
 					fee: fromUnit(
 						data.feeAmount,
 						selectedApiProvider.systemProperties.tokenDecimals[
@@ -64,7 +64,6 @@ export function useCreateOrgTransaction(): TransactionData {
 							selectedApiProvider.systemProperties.paymentCurrencies
 						],
 					),
-					member_limit: data.memberLimit,
 					deposit: fromUnit(
 						data.deposit,
 						selectedApiProvider.systemProperties.tokenDecimals[
@@ -77,22 +76,21 @@ export function useCreateOrgTransaction(): TransactionData {
 				validation.validateSync(mappedData)
 
 				const tx = selectedApiProvider.apiProvider.tx.control.createOrg(
-					mappedData.controller_id,
 					mappedData.name,
 					mappedData.cid,
 					mappedData.org_type,
 					mappedData.access,
 					mappedData.fee_model,
+					mappedData.member_limit,
 					mappedData.fee,
 					mappedData.gov_asset,
 					mappedData.pay_asset,
-					mappedData.member_limit,
 					mappedData.deposit,
 				) as SubmittableExtrinsic
 
 				setTxState({
 					tx,
-					currencyId: mappedData.gov_asset,
+					currencyId: selectedApiProvider.systemProperties.governanceCurrency,
 					deposit: mappedData.deposit,
 					title: t('transactions:createOrganization:title'),
 					description: t('transactions:createOrganization:description'),

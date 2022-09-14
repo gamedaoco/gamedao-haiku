@@ -14,16 +14,10 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/img/zero.png',
-		name: 'Beeblebrox',
-		url: 'https://beeblebrox.zero.io/graph/v1/graphql',
-		healthCheck: 'https://beeblebrox.zero.io/graph/healthz',
-		default: true,
-	},
-	{
-		image: '/img/zero.png',
 		name: 'Dev parachain',
 		url: 'https://graph.dev.para.sub.zero.io/',
 		healthCheck: 'https://graph.dev.para.sub.zero.io/health',
+		default: true,
 	},
 	{
 		image: '/img/zero.png',
