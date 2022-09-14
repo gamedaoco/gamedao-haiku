@@ -24,7 +24,16 @@ export function MyCollectablesTab() {
 		<>
 			<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
 			<Card sx={{ padding: 4 }}>
-				<Typography variant="h6">{t('label:my_collectables')}</Typography>
+				<Typography variant="h5">{t('label:my_collectables')}</Typography>
+				{/*
+						TODO: needs translation keys
+					*/}
+				{data && (
+					<Typography variant="body1">
+						You do not own any collectables yet.
+						<br />
+					</Typography>
+				)}
 				<CollectablesList loading={loading} items={data} />
 			</Card>
 		</>

@@ -9,6 +9,9 @@ type Identity @entity {
     twitter: String
     web: String
 
+    web3name: String
+    discord: String
+
     createdOrganizations: [Organization!]! @derivedFrom(field: "creatorIdentity")
     controllerOrganizations: [Organization!]! @derivedFrom(field: "controllerIdentity")
     organizationMembers: [OrganizationMember!]! @derivedFrom(field: "identity")

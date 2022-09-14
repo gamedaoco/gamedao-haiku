@@ -27,6 +27,14 @@ export const validation = Yup.object({
 		.nullable()
 		.transform((curr, orig) => (orig === '' ? null : curr))
 		.matches(/@(\w){2,15}.*:(\w){2,15}/, 'Must be a valid riot account'),
+	web3name: Yup.string()
+		.notRequired()
+		.nullable()
+		.transform((curr, orig) => (orig === '' ? null : curr)),
+	discord: Yup.string()
+		.notRequired()
+		.nullable()
+		.transform((curr, orig) => (orig === '' ? null : curr)),
 })
 
 export function useIdentitySetTransaction(identity): TransactionData {
@@ -46,6 +54,8 @@ export function useIdentitySetTransaction(identity): TransactionData {
 					riot: identity.riot,
 					twitter: identity.twitter,
 					web: identity.web,
+					web3name: identity.web3name,
+					discord: identity.discord,
 				}
 
 				// Data validation
@@ -60,6 +70,8 @@ export function useIdentitySetTransaction(identity): TransactionData {
 						email: mappedData.email ? { raw: mappedData.email } : { none: null },
 						image: { none: null },
 						twitter: mappedData.twitter ? { raw: mappedData.twitter } : { none: null },
+						web3name: mappedData.web3name ? { raw: mappedData.web3name } : { none: null },
+						discord: mappedData.discord ? { raw: mappedData.discord } : { none: null },
 					}),
 				)
 

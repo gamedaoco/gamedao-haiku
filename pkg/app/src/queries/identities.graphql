@@ -8,5 +8,7 @@ subscription IdentityByAddress($address: String!) {
         riot
         twitter
         web
+        web3name
+        discord
     }
 }
