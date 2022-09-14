@@ -17,5 +17,5 @@ services:
       IPFS_CLIENT_ID: 1v04L2wj5JmI0JgKF5KztV0oN8o
       IPFS_CLIENT_SECRET: 85547c6003abb67a6335469d1aa6a3a3
       SERVER_PORT: 5000
-      CHAIN_RPC_URL: wss://beeblebrox.zero.io/node
+      CHAIN_RPC_URL: wss://node.dev.para.sub.zero.io
       DATABASE_URL: "postgresql://postgres:postgres@db:5432/postgres?schema=public"
