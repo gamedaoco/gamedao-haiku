@@ -1,10 +1,10 @@
+import { Fragment } from 'react'
 import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTranslation } from 'react-i18next'
-
-// import { Scrollbar } from 'components/scrollbar'
-
 import { useTheme } from '@mui/material/styles'
+
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
 	CardContent,
@@ -17,7 +17,6 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 
@@ -95,6 +94,7 @@ export function MyBalancesCard() {
 						)}
 					</TableBody>
 				</Table>
+
 			</CardContent>
 		</Card>
 	)

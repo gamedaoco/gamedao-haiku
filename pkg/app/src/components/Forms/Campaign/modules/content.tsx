@@ -7,6 +7,8 @@ import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import * as Yup from 'yup'
 
+import Editor from 'components/Editor'
+
 import { Dropzone } from '../../../Dropzone/dropzone'
 
 interface ComponentProps {
@@ -32,10 +34,8 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 		uploadBannerImage(files[0])
 	}, [])
 
-	const handleContentChanged = useCallback((event) => {
+	const handleContentChanged = useCallback((value) => {
 		if (setContent) {
-			const value = event.target.value
-
 			try {
 				validationContentSchema.validateSync(value)
 				setErrorState(null)
@@ -76,8 +76,7 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 			{/*	Editor */}
 			<Stack gap={3}>
 				<Typography variant="subtitle2">Content</Typography>
-				{/*	ToDo: Replace with real editor */}
-				<Input onChange={handleContentChanged} value={content} multiline={true} error={!!errorState} />
+				<Editor onChange={handleContentChanged} error={!!errorState} value={content} />
 			</Stack>
 		</Stack>
 	)
