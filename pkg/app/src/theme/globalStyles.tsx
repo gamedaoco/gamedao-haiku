@@ -27,14 +27,14 @@ export default function GlobalStyles() {
 					scrollBehavior: 'smooth',
 					WebkitOverflowScrolling: 'touch',
 					scrollbarWidth: 'thin',
-					scrollbarColor: 'rgba( 255, 0, 255, 1 )',
+					scrollbarColor: theme.palette.primary.darker,
 				},
 				'::-webkit-scrollbar': {
-					width: '2px',
-					background: 'black',
+					width: '8px',
+					background: 'transparent',
 				},
 				'::-webkit-scrollbar-thumb': {
-					background: 'rgba( 255, 0, 255, 1 )',
+					background: theme.palette.primary.darker,
 				},
 				body: {
 					width: '100%',
@@ -84,6 +84,12 @@ export default function GlobalStyles() {
 				'.blur-up.lazyloaded ': {
 					WebkitFilter: 'blur(0)',
 					filter: 'blur(0)',
+				},
+				a: {
+					color: theme.palette.text.primary,
+				},
+				'a:hover': {
+					color: theme.palette.primary.main,
 				},
 			}}
 		/>

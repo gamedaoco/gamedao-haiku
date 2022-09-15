@@ -1,4 +1,12 @@
-import { Dashboard, Folder, Logout, MoreVert, NotificationsNone, Settings, Topic } from '@mui/icons-material'
+import {
+	PanoramaFishEyeOutlined as Dashboard, // or DashboardOutlined
+	CastleOutlined as Folder, // or AccountBalanceOutlined
+	Logout,
+	MoreVert,
+	ExtensionOutlined as NotificationsNone, //or CategoryOultined
+	Fingerprint as Settings,
+	SportsEsportsOutlined as Topic,
+} from '@mui/icons-material'
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { useGraphQlContext } from 'provider/graphQl/modules/context'
@@ -70,20 +78,20 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
 					</NavLink>
-					<NavLink href={'/account/campaigns'}>
-						<MenuItem>
-							<ListItemIcon>
-								<Topic fontSize="small" />
-							</ListItemIcon>
-							<Typography variant="body2">My Campaigns</Typography>
-						</MenuItem>
-					</NavLink>
 					<NavLink href={'/organisations'}>
 						<MenuItem>
 							<ListItemIcon>
 								<Folder fontSize="small" />
 							</ListItemIcon>
-							<Typography variant="body2">My Organizations</Typography>
+							<Typography variant="body2">Organizations</Typography>
+						</MenuItem>
+					</NavLink>
+					<NavLink href={'/account/campaigns'}>
+						<MenuItem>
+							<ListItemIcon>
+								<Topic fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">Campaigns</Typography>
 						</MenuItem>
 					</NavLink>
 					<NavLink href={'/account/collectables'}>

@@ -17,6 +17,8 @@ async function handleIdentityClearedEvent(context: EventHandlerContext) {
 		image: null,
 		twitter: null,
 		web: null,
+		web3name: null,
+		discord: null,
 	};
 
 	await upsertIdentity(context.store, upsertData.address, upsertData);

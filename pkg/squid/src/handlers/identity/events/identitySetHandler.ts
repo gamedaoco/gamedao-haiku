@@ -21,6 +21,8 @@ async function handleIdentitySetEvent(context: EventHandlerContext) {
 		image: getValue(identityData.image?.raw),
 		twitter: getValue(identityData.twitter?.raw),
 		web: getValue(identityData.web?.raw),
+		web3name: getValue(identityData.web3name?.raw),
+		discord: getValue(identityData.discord?.raw),
 	};
 
 	await upsertIdentity(context.store, upsertData.address, upsertData);
