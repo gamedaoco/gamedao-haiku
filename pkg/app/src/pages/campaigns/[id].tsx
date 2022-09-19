@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components'
 import { Layout } from 'src/components/Layouts/default/layout'
 import { useCampaignByIdSubscription } from 'src/queries'
+import { filterXSS } from 'xss'
 
 import { CampaignDetailsContent } from 'components/CampaignsSection/campaignDetailsContent'
 import Editor from 'components/Editor'
@@ -99,9 +100,13 @@ export function CampaignById() {
 								<Typography variant="overline" color={theme.palette.common.white}>
 									{t('campaign_details:overview')}
 								</Typography>
-								<Typography variant="body1" mt="1rem">
-									<Editor value={data?.campaign?.[0]?.campaign_metadata?.markdown} readOnly={true} />
-								</Typography>
+								<Typography
+									variant="body1"
+									mt="1rem"
+									dangerouslySetInnerHTML={{
+										__html: filterXSS(data?.campaign?.[0]?.campaign_metadata?.markdown ?? ''),
+									}}
+								></Typography>
 							</Box>
 						</TabPanel>
 					</TabContext>
