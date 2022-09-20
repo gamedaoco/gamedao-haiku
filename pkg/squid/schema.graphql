@@ -111,12 +111,12 @@ type CampaignContributor @entity {
 
 type Proposal @entity {
     id: ID!
-	creator: String!
+    creator: String!
     creatorIdentity: Identity!
-	organization: Organization!
-	campaign: Campaign
+    organization: Organization!
+    campaign: Campaign
     type: Int!
-	deposit: BigInt!
+    deposit: BigInt!
     state: String!
     voting: Voting!
     start: Int!
@@ -124,10 +124,10 @@ type Proposal @entity {
     createdAtBlock: Int!
 
     amount: BigInt
-	currencyId: String
-	beneficiary: String
+    currencyId: String
+    beneficiary: String
     beneficiaryIdentity: Identity
-	slashingRule: String
+    slashingRule: String
 
     metadata: ProposalMetadata
 }
@@ -140,7 +140,7 @@ type ProposalMetadata @entity {
 
 type Voting @entity {
     id: ID!
-	unit: String!
+    unit: String!
     scale: String!
     eligible: BigInt!
     participating: BigInt!
