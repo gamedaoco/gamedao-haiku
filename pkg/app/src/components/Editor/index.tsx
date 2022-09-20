@@ -12,6 +12,7 @@ import { parseIpfsHash } from 'src/utils/ipfs'
 import { EditorWrapper } from 'components/Editor/editorWrapper'
 
 import EditorToolbar, { formats } from './editorToolbar'
+import { useConfig } from 'hooks/useConfig'
 
 const ReactQuill = dynamic(
 	async () => {
@@ -42,6 +43,7 @@ export interface Props extends ReactQuillProps {
 let _id = 1
 export default function Editor({ error, value, onChange, simple = false, helperText, sx, ...other }: Props) {
 	const id = useMemo(() => `teq${_id++}`, [])
+	const config = useConfig()
 
 	const modules = useMemo(() => {
 		const data = {
@@ -80,7 +82,10 @@ export default function Editor({ error, value, onChange, simple = false, helperT
 			for (const img of images) {
 				// Possibility to show loading spinner while upload
 				img.classList.add('loading')
-				img.setAttribute('src', parseIpfsHash(await uploadBase64File(img.getAttribute('src'))))
+				img.setAttribute(
+					'src',
+					parseIpfsHash(await uploadBase64File(img.getAttribute('src')), config.IPFS_GATEWAY),
+				)
 				img.classList.remove('loading')
 			}
 
