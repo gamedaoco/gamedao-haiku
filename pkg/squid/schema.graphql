@@ -10,7 +10,7 @@ type Identity @entity {
     web: String
 
     createdOrganizations: [Organization!]! @derivedFrom(field: "creatorIdentity")
-    controllerOrganizations: [Organization!]! @derivedFrom(field: "controllerIdentity")
+    controllerOrganizations: [Organization!]! @derivedFrom(field: "primeIdentity")
     organizationMembers: [OrganizationMember!]! @derivedFrom(field: "identity")
 
     createdCampaigns: [Campaign!]! @derivedFrom(field: "creatorIdentity")
@@ -24,16 +24,17 @@ type Organization @entity {
     id: ID!
     creator: String!
     creatorIdentity: Identity!
-    controller: String!
-    controllerIdentity: Identity!
+    prime: String!
+    primeIdentity: Identity!
     treasury: String!
     treasuryIdentity: Identity!
-    access: String!
+    accessModel: String!
     feeModel: String!
     type: String!
-    fee: BigInt!
-    govAsset: String!
-    payAsset: String!
+    state: String!
+    membershipFee: BigInt!
+    govCurrency: String!
+    payCurrency: String!
     memberLimit: BigInt!
     metadata: OrganizationMetadata
     createdAtBlock: Int!
@@ -71,11 +72,12 @@ type Campaign @entity {
     adminIdentity: Identity!
     target: BigInt!
     deposit: BigInt!
+    start: Int!
     expiry: Int!
     protocol: String!
     governance: String!
-    tokenSymbol: String!
-    tokenName: String!
+    tokenSymbol: String
+    tokenName: String
 
     state: String!
 
@@ -109,35 +111,25 @@ type CampaignContributor @entity {
 
 type Proposal @entity {
     id: ID!
-    organization: Organization!
-    campaign: Campaign
-
-    creator: String!
+	creator: String!
     creatorIdentity: Identity!
-
+	organization: Organization!
+	campaign: Campaign
     type: Int!
-    data: ProposalTypeData
-
-    votingType: Int!
+	deposit: BigInt!
     state: String!
-
-    metadata: ProposalMetadata
-
-    startBlock: Int!
-    expiryBlock: Int!
+    voting: Voting!
+    start: Int!
+    expiry: Int!
     createdAtBlock: Int!
 
-    voters: [ProposalVoter!]! @derivedFrom(field: "proposal")
-}
+    amount: BigInt
+	currencyId: String
+	beneficiary: String
+    beneficiaryIdentity: Identity
+	slashingRule: String
 
-type ProposalVoter @entity {
-    id: ID!
-    proposal: Proposal!
-
-    address: String!
-    identity: Identity!
-
-    voted: BigInt!
+    metadata: ProposalMetadata
 }
 
 type ProposalMetadata @entity {
@@ -146,13 +138,26 @@ type ProposalMetadata @entity {
     description: String!
 }
 
-type ProposalTypeGeneralData {
-    type: Int!
+type Voting @entity {
+    id: ID!
+	unit: String!
+    scale: String!
+    eligible: BigInt!
+    participating: BigInt!
+    yes: BigInt!
+    no: BigInt!
+    quorum: String
+    majority: String!
+    ayes: [ProposalVoter!]! @derivedFrom(field: "voting")
+    nays: [ProposalVoter!]! @derivedFrom(field: "voting")
 }
 
-type ProposalTypeWithdrawalData {
-    type: Int!
-    withdrawAmount: BigInt!
+type ProposalVoter @entity {
+    id: ID!
+    voting: Voting!
+    address: String!
+    identity: Identity!
+    power: BigInt!
+    amount: BigInt
+    voted: Boolean!
 }
-
-union ProposalTypeData = ProposalTypeGeneralData | ProposalTypeWithdrawalData
