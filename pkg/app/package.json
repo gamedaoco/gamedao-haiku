@@ -76,6 +76,7 @@
     "react-toastify": "^9.0.7",
     "react-quill": "^2.0.0",
     "utf8": "^3.0.0",
+    "xss": "^1.0.14",
     "yup": "^0.32.11"
   },
   "devDependencies": {
