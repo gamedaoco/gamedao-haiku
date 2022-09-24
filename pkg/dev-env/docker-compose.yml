@@ -120,17 +120,6 @@ services:
       - subzero-relay-a
       - subzero-relay-b
 
-  #  subzero-ready-state:
-  #    image: ubuntu
-  #    command: bash -c "apt-get update && apt-get install -y curl && tail -f /dev/null"
-  #    depends_on:
-  #      - subzero
-  #    healthcheck:
-  #      test: [ "CMD", "-v", "http://subzero:9944" ]
-  #      interval: 30s
-  #      timeout: 20s
-  #      retries: 10
-
   #############################################################################
   ## Indexer
   indexer-db:
@@ -152,7 +141,7 @@ services:
       - REDIS_URI=redis://dev-redis:6379/0
       - FORCE_HEIGHT=true
       - BLOCK_HEIGHT=0
-      - WS_PROVIDER_ENDPOINT_URI=ws://subzero-relay-a:9944
+      - WS_PROVIDER_ENDPOINT_URI=ws://subzero-parachain-a:9944
     depends_on:
       subzero-relay-a:
         condition: service_started
@@ -245,11 +234,11 @@ services:
   gamedao-graph-service:
     build: '../service'
     environment:
-      IPFS_API_URL: "https://ipfs.infura.io:5001/api/v0"
-      IPFS_CLIENT_ID: "1v04L2wj5JmI0JgKF5KztV0oN8o"
-      IPFS_CLIENT_SECRET: "85547c6003abb67a6335469d1aa6a3a3"
+      IPFS_API_URL: "${IPFS_API_URL}"
+      IPFS_CLIENT_ID: "${IPFS_CLIENT_ID}"
+      IPFS_CLIENT_SECRET: "${IPFS_CLIENT_SECRET}"
       SERVER_PORT: 4000
-      CHAIN_RPC_URL: "ws://subzero-relay-a:9944"
+      CHAIN_RPC_URL: "ws://subzero-parachain-a:9944"
       CHAIN_RPC_URL_OVERRIDE: "ws://localhost:9944"
       DATABASE_URL: "postgresql://postgres:postgres@gamedao-service-postgres:5432/postgres?schema=public"
     depends_on:
