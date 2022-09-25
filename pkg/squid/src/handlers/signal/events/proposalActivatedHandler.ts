@@ -1,12 +1,12 @@
-import { SignalExpiredEvent } from '../../../types/events';
+import { SignalActivatedEvent } from '../../../types/events';
 import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getProposal } from '../../../database/getters';
 
 
-async function handleProposalExpiredEvent(context: EventHandlerContext) {
-	let eventName = 'Signal.Expired';
-	let raw_event = new SignalExpiredEvent(context);
+async function handleProposalActivatedEvent(context: EventHandlerContext) {
+	let eventName = 'Signal.Activated';
+	let raw_event = new SignalActivatedEvent(context);
 
 	if (!raw_event.isV60) {
 		console.error(`Unknown version: ${eventName}`);
@@ -19,9 +19,9 @@ async function handleProposalExpiredEvent(context: EventHandlerContext) {
 	let proposal = await getProposal(store, proposalId);
 	if (!proposal) return;
 
-	proposal.state = 'Expired';
+	proposal.state = 'Active';
 
 	await store.save(proposal);
 }
 
-export { handleProposalExpiredEvent };
+export { handleProposalActivatedEvent };

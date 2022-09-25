@@ -1,12 +1,12 @@
-import { FlowFailedEvent } from '../../../types/events';
+import { FlowActivatedEvent } from '../../../types/events';
+import { getCampaign } from '../../../database/getters';
 import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
-import { getCampaign } from '../../../database/getters';
 
 
-async function handleCampaignFailedEvent(context: EventHandlerContext) {
-	let eventName = 'Flow.Failed';
-	let raw_event = new FlowFailedEvent(context);
+async function handleCampaignActivatedEvent(context: EventHandlerContext) {
+	let eventName = 'Flow.Activated';
+	let raw_event = new FlowActivatedEvent(context);
 
 	if (!raw_event.isV60) {
 		console.error(`Unknown version: ${eventName}`);
@@ -16,12 +16,11 @@ async function handleCampaignFailedEvent(context: EventHandlerContext) {
 	let event = raw_event.asV60;
 
 	let campaignId = hashToHexString(event.campaignId);
-
 	let campaign = await getCampaign(store, campaignId);
 	if (!campaign) return;
 	
-	campaign.state = 'Failed';
+	campaign.state = 'Active';
 	await store.save(campaign);
 }
 
-export { handleCampaignFailedEvent };
+export { handleCampaignActivatedEvent };

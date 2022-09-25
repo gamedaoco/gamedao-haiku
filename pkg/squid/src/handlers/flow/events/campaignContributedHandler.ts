@@ -1,35 +1,40 @@
-// Imports
-// Database
-import { addCampaignContributorContribution } from '../../../database/campaignContributor';
-// Types
-import { FlowCampaignContributedEvent } from '../../../types/events';
-import { addressCodec, hashToHexString } from '../../../utils';
-// 3rd
+import { FlowContributedEvent } from '../../../types/events';
+import { CampaignContributor } from '../../../model';
+import { upsertIdentity } from '../../../database/identity';
+import {addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { getCampaign, getCampaignContributor } from '../../../database/getters';
 
-// Functions
+
 async function handleCampaignContributedEvent(context: EventHandlerContext) {
-	// Get versioned instance
-	const campaignCreatedEventData = new FlowCampaignContributedEvent(context);
-
-	// Define data
-	let campaignId: string | null = null;
-	let contributorAddress: string | null = null;
-	let contribution: bigint | null = null;
-
-	// Load data
-	if (campaignCreatedEventData.isV58) {
-		campaignId = hashToHexString(campaignCreatedEventData.asV58.campaignId);
-		contributorAddress = addressCodec.encode(campaignCreatedEventData.asV58.sender);
-		contribution = campaignCreatedEventData.asV58.contribution;
-	} else {
-		console.error(`Unknown version of contribute campaign event!`);
+	let eventName = 'Flow.Contributed';
+	let raw_event = new FlowContributedEvent(context);
+	if (!raw_event.isV60) {
+		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
+	let store = context.store;
+	let event = raw_event.asV60;
 
-	// Create/Update contributor
-	await addCampaignContributorContribution(context.store, campaignId, contributorAddress, contribution);
+	let contributor = addressCodec.encode(event.sender);
+	let campaignId = hashToHexString(event.campaignId);
+	let campaign = await getCampaign(store, campaignId);
+	if (!campaign) return;
+
+	let campaignContributor = await getCampaignContributor(store, campaignId, contributor);
+	if (!campaignContributor) {
+		campaignContributor = new CampaignContributor();
+
+		campaignContributor.id = `${campaignId}-${contributor}`.toLowerCase();
+		campaignContributor.campaign = campaign;
+		campaignContributor.address = contributor;
+		campaignContributor.identity = await upsertIdentity(store, contributor, null);
+		campaignContributor.contributed = event.contribution;
+	} else {
+		campaignContributor.contributed += event.contribution;
+	}
+
+	await store.save(campaignContributor);
 }
 
-// Exports
 export { handleCampaignContributedEvent };

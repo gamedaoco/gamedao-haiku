@@ -1,26 +1,27 @@
-// Imports
-import { updateProposalState } from '../../../database/proposal';
-import { SignalProposalRejectedEvent } from '../../../types/events';
+import { SignalRejectedEvent } from '../../../types/events';
 import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { getProposal } from '../../../database/getters';
 
-// Functions
+
 async function handleProposalRejectedEvent(context: EventHandlerContext) {
-	// Get versioned instance
-	const proposalRejectedEventData = new SignalProposalRejectedEvent(context);
+	let eventName = 'Signal.Rejected';
+	let raw_event = new SignalRejectedEvent(context);
 
-	// Get id
-	let id;
-	if (proposalRejectedEventData.isV58) {
-		id = hashToHexString(proposalRejectedEventData.asV58.proposalId);
-	} else {
-		console.error(`Unknown version of proposal rejected event!`);
+	if (!raw_event.isV60) {
+		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
+	let store = context.store;
+	let event = raw_event.asV60;
 
-	// Update proposal
-	await updateProposalState(context.store, id, 'Rejected');
+	let proposalId = hashToHexString(event.proposalId);
+	let proposal = await getProposal(store, proposalId);
+	if (!proposal) return;
+
+	proposal.state = 'Rejected';
+
+	await store.save(proposal);
 }
 
-// Exports
 export { handleProposalRejectedEvent };

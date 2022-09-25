@@ -32,12 +32,13 @@ type Organization @entity {
     feeModel: String!
     type: String!
     state: String!
-    membershipFee: BigInt!
+    membershipFee: BigInt
     govCurrency: String!
     payCurrency: String!
-    memberLimit: BigInt!
+    memberLimit: Int!
     metadata: OrganizationMetadata
     createdAtBlock: Int!
+    updatedAtBlock: Int!
     deposit: BigInt!
 
     members: [OrganizationMember!] @derivedFrom(field: "organization")
@@ -115,7 +116,7 @@ type Proposal @entity {
     creatorIdentity: Identity!
     organization: Organization!
     campaign: Campaign
-    type: Int!
+    type: String!
     deposit: BigInt!
     state: String!
     voting: Voting!
@@ -142,14 +143,10 @@ type Voting @entity {
     id: ID!
     unit: String!
     scale: String!
-    eligible: BigInt!
-    participating: BigInt!
     yes: BigInt!
     no: BigInt!
     quorum: String
     majority: String!
-    ayes: [ProposalVoter!]! @derivedFrom(field: "voting")
-    nays: [ProposalVoter!]! @derivedFrom(field: "voting")
 }
 
 type ProposalVoter @entity {

@@ -1,29 +1,84 @@
-// Imports
-import { SignalProposalCreatedEvent } from '../../../types/events';
-import { hashToHexString } from '../../../utils';
-import { sharedCreateProposalHandler } from './sharedCreateProposalHandler';
+import { SignalCreatedEvent } from '../../../types/events';
+import { SignalProposalCall } from '../../../types/calls';
+import { fetchProposalMetadata } from '../../../ipfs/getters';
+import { upsertIdentity } from '../../../database/identity';
+import { getOrg, getCampaign, getVoting } from '../../../database/getters';
+import { upsertProposalMetadata } from '../../../database/metadata';
+import { Proposal, Voting } from '../../../model';
+import { addressCodec, encodeSigner, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { getProposal } from '../../../database/getters';
 
-// Functions
+
 async function handleProposalCreatedEvent(context: EventHandlerContext) {
-	if (!context.extrinsic) return;
-
-	// Get versioned instance
-	const proposalCreatedEventData = new SignalProposalCreatedEvent(context);
-
-	// Get id
-	let proposalId;
-	if (proposalCreatedEventData.isV58) {
-		proposalId = hashToHexString(proposalCreatedEventData.asV58.proposalId);
-	} else if (proposalCreatedEventData.isV58) {
-		proposalId = hashToHexString(proposalCreatedEventData.asV58.proposalId);
-	} else {
-		console.error(`Unknown version of ProposalCreated event!`);
+	let eventName = 'Signal.Created';
+	if (!context.extrinsic) {
+		console.error(`No extrinsic in the context: ${eventName}`);
 		return;
 	}
+	let raw_event = new SignalCreatedEvent(context);
+	let raw_call = new SignalProposalCall({
+		_chain: context._chain,
+		block: context.block,
+		extrinsic: context.extrinsic,
+	});
+	if (!raw_event.isV60 || !raw_call.isV60) {
+		console.error(`Unknown version: ${eventName}`);
+		return;
+	}
+	let store = context.store;
+	let event = raw_event.asV60;
+	let call = raw_call.asV60;
 
-	await sharedCreateProposalHandler(context, proposalId);
+	let proposalId = hashToHexString(event.proposalId);
+	let votingId = proposalId;
+	let orgId = hashToHexString(call.orgId);
+
+	let proposal_exists = await getProposal(store, proposalId);
+	let voting_exists = await getVoting(store, votingId);
+	let org = await getOrg(store, orgId);
+	if (proposal_exists || voting_exists || !org) return;
+
+	let creator = encodeSigner(context.extrinsic!.signer);
+	let beneficiary = call.beneficiary ? addressCodec.encode(call.beneficiary) as string : null;
+	let start = call.start ?? context.block.height;
+	let campaign = call.campaignId ? await getCampaign(store, hashToHexString(call.campaignId)) : null;
+
+	let voting = new Voting();
+	voting.id = votingId;
+	voting.unit = call.unit.__kind;
+    voting.scale = call.scale.__kind;
+    voting.yes = 0n;
+    voting.no = 0n;
+    voting.quorum = call.quorum?.toString();
+    voting.majority = call.majority.__kind;
+	await store.save(voting);
+	
+	let proposal = new Proposal();
+	proposal.id = proposalId;
+	proposal.creator = creator;
+	proposal.creatorIdentity = await upsertIdentity(store, creator, null);
+	proposal.organization = org;
+	proposal.campaign = campaign;
+	proposal.type = call.proposalType.__kind;
+	proposal.start = start;
+	proposal.expiry = call.expiry;
+	proposal.createdAtBlock = context.block.height;
+	proposal.amount = call.amount;
+	proposal.currencyId = call.currencyId?.__kind;
+	proposal.beneficiary = beneficiary;
+	proposal.beneficiaryIdentity = beneficiary ? await upsertIdentity(store, beneficiary, null) : null;
+	proposal.slashingRule = 'Automated';
+	proposal.deposit = call.deposit ?? BigInt(100 * 10^10);		// MinProposalDeposit = 100 * dollar(GAME);
+	proposal.state = start > context.block.height ? 'Created' : 'Active';
+	proposal.voting = voting;
+
+	// Check if cid is valid, fetch metadata from ipfs
+	let metadata = await fetchProposalMetadata(call.cid.toString(), orgId);
+	if (metadata) {
+		proposal.metadata = await upsertProposalMetadata(store, call.cid.toString(), metadata);
+	}
+	await store.save(proposal);
 }
 
-// Exports
 export { handleProposalCreatedEvent };
