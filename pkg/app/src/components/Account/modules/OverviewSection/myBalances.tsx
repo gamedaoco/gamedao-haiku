@@ -94,7 +94,6 @@ export function MyBalancesCard() {
 						)}
 					</TableBody>
 				</Table>
-
 			</CardContent>
 		</Card>
 	)
