@@ -39,6 +39,12 @@ export class Identity {
   @Column_("text", {nullable: true})
   web!: string | undefined | null
 
+  @Column_("text", {nullable: true})
+  web3name!: string | undefined | null
+
+  @Column_("text", {nullable: true})
+  discord!: string | undefined | null
+
   @OneToMany_(() => Organization, e => e.creatorIdentity)
   createdOrganizations!: Organization[]
 

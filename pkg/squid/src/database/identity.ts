@@ -30,6 +30,8 @@ async function upsertIdentity(store: Store, identity: string, data: IdentityUpse
 		entity.image = data.image;
 		entity.twitter = data.twitter;
 		entity.web = data.web;
+		entity.web3name = data.web3name;
+		entity.discord = data.discord;
 	}
 
 	await store.save(entity);
