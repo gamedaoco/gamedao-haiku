@@ -11,13 +11,7 @@ interface ComponentProps {
 }
 export function AccountPageGeneralLayout({ param }: ComponentProps) {
 	return (
-		<Box
-			component="main"
-			sx={{
-				flexGrow: 1,
-				py: 8,
-			}}
-		>
+		<Box component="main" sx={{ flexGrow: 1, py: 8 }}>
 			<Container>
 				<IdentitySection />
 				<TabsSection param={param} />

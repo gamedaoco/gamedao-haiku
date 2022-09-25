@@ -69,11 +69,14 @@ export function Selector({ onClick }: ComponentProps) {
 					}
 				/>
 				<Stack>
-					<Typography sx={{ color: theme.palette.grey[200] }} variant="subtitle2">
+					<Typography variant="subtitle2">
 						{getAccountName(selectedAccount?.account)}
+						&nbsp;
+						{identity?.email && (
+							<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
+						)}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>
-						{identity?.email && <Verified color="secondary" />}
 						<Typography sx={{ color: theme.palette.grey[700] }} variant="body2">
 							{shortAccountAddress(selectedAccount?.account)}
 						</Typography>

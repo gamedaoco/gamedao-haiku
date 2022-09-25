@@ -1,7 +1,8 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import { useMemo } from 'react'
 
-export const EditorWrapper = styled(Box)(({ theme }) => ({
+export const EditorWrapperStyled = styled(Box)(({ theme }) => ({
 	overflow: 'hidden',
 	position: 'relative',
 	borderRadius: theme.shape.borderRadius,
@@ -25,3 +26,29 @@ export const EditorWrapper = styled(Box)(({ theme }) => ({
 		},
 	},
 }))
+
+export const EditorWrapper = ({ readOnly, sx, children }) => {
+	const styles = useMemo(() => {
+		const styles: any = {}
+
+		if (readOnly) {
+			styles.borderRadius = 0
+			styles.border = 'none'
+		}
+
+		return styles
+	}, [readOnly])
+
+	return (
+		<>
+			<EditorWrapperStyled
+				sx={{
+					...sx,
+					...styles,
+				}}
+			>
+				{children}
+			</EditorWrapperStyled>
+		</>
+	)
+}

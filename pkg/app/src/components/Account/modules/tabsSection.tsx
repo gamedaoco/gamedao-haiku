@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react'
 
 import { useRouter } from 'next/router'
+import { useTheme } from '@mui/material/styles'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +17,7 @@ interface TabsInterface {
 }
 
 export function TabsSection({ param }: ComponentProps) {
+	const theme = useTheme()
 	const { t } = useTranslation()
 	const tabs = useMemo<TabsInterface[]>(
 		() => [
@@ -50,7 +52,7 @@ export function TabsSection({ param }: ComponentProps) {
 		[push],
 	)
 	return (
-		<Box sx={{ bgcolor: 'background.paper', my: 2, borderRadius: '8px' }}>
+		<Box sx={{ bgcolor: theme.palette.background.paper, my: 2, borderRadius: '8px' }}>
 			<Tabs
 				scrollButtons
 				allowScrollButtonsMobile

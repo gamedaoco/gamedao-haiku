@@ -13,6 +13,7 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 		const { tokenDecimals, tokenSymbol, ss58Format } = systemProperties.toHuman()
 
 		const systemName = await chainClient.api.rpc.system.chain()
+		const blockDuration = ((await chainClient.api.call.auraApi.slotDuration()) as any).toNumber() / 1000
 
 		return {
 			types: '{}',
@@ -26,7 +27,7 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 				networkCurrency: 0, // 0 = ZERO
 				governanceCurrency: 2, // 2 = GAME
 				paymentCurrencies: 1, // 1 = PLAY
-				blockTargetTime: 3, // 3 = 3s Rococo 12
+				blockTargetTime: blockDuration ?? 12,
 			},
 			name: (systemName.toHuman() as any) ?? 'ZERO',
 		}
