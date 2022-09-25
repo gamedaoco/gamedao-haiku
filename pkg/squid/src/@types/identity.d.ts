@@ -7,4 +7,6 @@ export interface IdentityUpsertData {
 	image: string | null;
 	twitter: string | null;
 	web: string | null;
+	web3name: string | null;
+	discord: string | null;
 }
