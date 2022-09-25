@@ -18,7 +18,8 @@
     "format:verify": "prettier --parser babel-ts --check pkg/**/*.{ts,tsx}",
     "build:graphql": "yarn workspace @gamedao-haiku/app generate",
     "build:frontend": "yarn workspace @gamedao-haiku/app build",
-    "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend"
+    "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",
+    "commit": "git-cz"
   },
   "publishConfig": {
     "access": "public"
@@ -43,14 +44,12 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-customizable"
-    },
-    "cz-customizable": {
-      "config": "./node_modules/@picgo/bump-version/.cz-config.js"
+      "path": "@commitlint/cz-commitlint"
     }
   },
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn format:verify"
     }
