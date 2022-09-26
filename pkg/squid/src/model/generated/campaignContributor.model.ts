@@ -1,34 +1,28 @@
-import {
-	Entity as Entity_,
-	Column as Column_,
-	PrimaryColumn as PrimaryColumn_,
-	ManyToOne as ManyToOne_,
-	Index as Index_,
-} from 'typeorm';
-import * as marshal from './marshal';
-import { Campaign } from './campaign.model';
-import { Identity } from './identity.model';
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_} from "typeorm"
+import * as marshal from "./marshal"
+import {Campaign} from "./campaign.model"
+import {Identity} from "./identity.model"
 
 @Entity_()
 export class CampaignContributor {
-	constructor(props?: Partial<CampaignContributor>) {
-		Object.assign(this, props);
-	}
+  constructor(props?: Partial<CampaignContributor>) {
+    Object.assign(this, props)
+  }
 
-	@PrimaryColumn_()
-	id!: string;
+  @PrimaryColumn_()
+  id!: string
 
-	@Index_()
-	@ManyToOne_(() => Campaign, { nullable: false })
-	campaign!: Campaign;
+  @Index_()
+  @ManyToOne_(() => Campaign, {nullable: false})
+  campaign!: Campaign
 
-	@Column_('text', { nullable: false })
-	address!: string;
+  @Column_("text", {nullable: false})
+  address!: string
 
-	@Index_()
-	@ManyToOne_(() => Identity, { nullable: false })
-	identity!: Identity;
+  @Index_()
+  @ManyToOne_(() => Identity, {nullable: false})
+  identity!: Identity
 
-	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	contributed!: bigint;
+  @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
+  contributed!: bigint
 }

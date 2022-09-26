@@ -1,14 +1,11 @@
-// Imports
-// 3rd
-// Types
-import { IdentityUpsertData } from '../@types/pallets/identity/identityUpsertData';
-// Database
+import { IdentityUpsertData } from '../@types/identity';
+
 import { Identity } from '../model';
-// Helpers
+
 import { get } from './helper';
 import { Store } from '@subsquid/substrate-processor';
 
-// Functions
+
 function getIdentity(store: Store, identity: string): Promise<Identity | null> {
 	return get(store, Identity, identity);
 }
@@ -25,7 +22,6 @@ async function upsertIdentity(store: Store, identity: string, data: IdentityUpse
 		entity.address = identity;
 	}
 
-	// Set data
 	if (data) {
 		entity.displayName = data.displayName;
 		entity.legalName = data.legalName;
@@ -34,9 +30,10 @@ async function upsertIdentity(store: Store, identity: string, data: IdentityUpse
 		entity.image = data.image;
 		entity.twitter = data.twitter;
 		entity.web = data.web;
+		entity.web3name = data.web3name;
+		entity.discord = data.discord;
 	}
 
-	// Save identity
 	await store.save(entity);
 
 	return entity;

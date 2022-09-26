@@ -1,11 +1,9 @@
-// Imports
-// Types
 import { IPallet } from '../../@types/palletHandler';
-import { handleAddMemberEvent } from './events/addMemberHandler';
+import { handleMemberAddedEvent } from './events/memberAddedHandler';
 import { handleOrgCreatedEvent } from './events/orgCreatedHandler';
-import { handleRemoveMemberEvent } from './events/removeMemberHandler';
+import { handleMemberRemovedEvent } from './events/memberRemovedHandler';
+import { handleOrgUpdatedEvent } from './events/orgUpdatedHandler';
 
-// Exports
 export default {
 	name: 'control',
 	extrinsicHandlers: [],
@@ -14,13 +12,26 @@ export default {
 			action: 'OrgCreated',
 			handler: handleOrgCreatedEvent,
 		},
+		// TODO: OrgEnabled, OrgDisabled
+		// {
+		// 	action: 'OrgEnabled',
+		// 	handler: handleOrgEnabledEvent,
+		// },
+		// {
+		// 	action: 'OrgDisabled',
+		// 	handler: handleOrgDisabledEvent,
+		// },
 		{
-			action: 'AddMember',
-			handler: handleAddMemberEvent,
+			action: 'OrgUpdated',
+			handler: handleOrgUpdatedEvent,
 		},
 		{
-			action: 'RemoveMember',
-			handler: handleRemoveMemberEvent,
+			action: 'MemberAdded',
+			handler: handleMemberAddedEvent,
+		},
+		{
+			action: 'MemberRemoved',
+			handler: handleMemberRemovedEvent,
 		},
 	],
 } as IPallet;
