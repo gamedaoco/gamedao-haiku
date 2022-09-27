@@ -77,16 +77,15 @@ export function useCreateOrgTransaction(): TransactionData {
 				validation.validateSync(mappedData)
 
 				const tx = selectedApiProvider.apiProvider.tx.control.createOrg(
-					mappedData.controller_id,
 					mappedData.name,
 					mappedData.cid,
 					mappedData.org_type,
 					mappedData.access,
 					mappedData.fee_model,
+					mappedData.member_limit,
 					mappedData.fee,
 					mappedData.gov_asset,
 					mappedData.pay_asset,
-					mappedData.member_limit,
 					mappedData.deposit,
 				) as SubmittableExtrinsic
 
