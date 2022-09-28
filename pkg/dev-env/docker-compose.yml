@@ -72,6 +72,7 @@ services:
       - "--ws-port=9944"
       - "--unsafe-ws-external"
       - "--rpc-cors=all"
+      - "--pruning=archive"
       - "--bootnodes=/dns/subzero-relay-a/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
     volumes:
       - "./node/chainspec:/chainspec"
