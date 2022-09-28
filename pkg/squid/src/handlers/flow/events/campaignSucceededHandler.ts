@@ -3,7 +3,6 @@ import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getCampaign } from '../../../database/getters';
 
-
 async function handleCampaignSucceededEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Succeeded';
 	let raw_event = new FlowSucceededEvent(context);
@@ -19,7 +18,7 @@ async function handleCampaignSucceededEvent(context: EventHandlerContext) {
 
 	let campaign = await getCampaign(store, campaignId);
 	if (!campaign) return;
-	
+
 	campaign.state = 'Succeeded';
 	await store.save(campaign);
 }

@@ -3,7 +3,6 @@ import { getOrgMember } from '../../../database/getters';
 import { hashToHexString, addressCodec } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-
 async function handleMemberRemovedEvent(context: EventHandlerContext) {
 	let eventName = 'Control.MemberAdded';
 	let raw_event = new ControlMemberRemovedEvent(context);

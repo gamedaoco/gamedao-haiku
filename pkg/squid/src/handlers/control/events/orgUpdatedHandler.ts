@@ -4,7 +4,6 @@ import { getOrg } from '../../../database/getters';
 import { addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-
 async function handleOrgUpdatedEvent(context: EventHandlerContext) {
 	let eventName = 'Control.OrgCreated';
 	if (!context.extrinsic) {
@@ -22,7 +21,7 @@ async function handleOrgUpdatedEvent(context: EventHandlerContext) {
 	let orgId = hashToHexString(event.orgId);
 	let org = await getOrg(store, orgId);
 	if (!org) return;
-	
+
 	if (event.primeId) {
 		let primeId = addressCodec.encode(event.primeId);
 		org.prime = primeId;

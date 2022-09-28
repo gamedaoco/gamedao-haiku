@@ -3,7 +3,6 @@ import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getCampaign } from '../../../database/getters';
 
-
 async function handleCampaignFailedEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Failed';
 	let raw_event = new FlowFailedEvent(context);
@@ -19,7 +18,7 @@ async function handleCampaignFailedEvent(context: EventHandlerContext) {
 
 	let campaign = await getCampaign(store, campaignId);
 	if (!campaign) return;
-	
+
 	campaign.state = 'Failed';
 	await store.save(campaign);
 }

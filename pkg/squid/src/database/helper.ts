@@ -1,7 +1,6 @@
 import { EntityConstructor } from '../@types/entity';
 import { Store } from '@subsquid/substrate-processor';
 
-
 export async function get<TModel>(
 	store: Store,
 	entityConstructor: EntityConstructor<TModel>,

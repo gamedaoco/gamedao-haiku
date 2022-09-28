@@ -1,10 +1,9 @@
 import { FlowContributedEvent } from '../../../types/events';
 import { CampaignContributor } from '../../../model';
 import { upsertIdentity } from '../../../database/identity';
-import {addressCodec, hashToHexString } from '../../../utils';
+import { addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getCampaign, getCampaignContributor } from '../../../database/getters';
-
 
 async function handleCampaignContributedEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Contributed';

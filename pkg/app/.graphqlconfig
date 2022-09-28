@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "https://beeblebrox.zero.io/graph/v1/graphql",
+        "url": "http://host.docker.internal:9080/v1/graphql",
         "headers": {
         },
         "introspect": true

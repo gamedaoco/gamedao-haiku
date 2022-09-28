@@ -27,7 +27,7 @@ async function fetchMetadata(cid: string, id: string, name: string, metadata: Me
 			}
 		}
 	} catch (e) {
-		console.log(e)
+		console.log(e);
 	}
 	return metadata;
 }

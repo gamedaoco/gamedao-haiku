@@ -1,4 +1,4 @@
-schema: https://beeblebrox.zero.io/graph/v1/graphql
+schema: http://host.docker.internal:9080/v1/graphql
 overwrite: true
 
 generates:
