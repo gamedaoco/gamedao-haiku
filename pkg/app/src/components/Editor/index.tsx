@@ -12,6 +12,7 @@ import { parseIpfsHash } from 'src/utils/ipfs'
 import { EditorWrapper } from 'components/Editor/editorWrapper'
 
 import EditorToolbar, { formats } from './editorToolbar'
+import { useConfig } from 'hooks/useConfig'
 
 const ReactQuill = dynamic(
 	async () => {
@@ -42,13 +43,10 @@ export interface Props extends ReactQuillProps {
 let _id = 1
 export default function Editor({ error, value, onChange, simple = false, helperText, sx, ...other }: Props) {
 	const id = useMemo(() => `teq${_id++}`, [])
+	const config = useConfig()
 
-	const modules = useMemo(
-		() => ({
-			toolbar: {
-				container: `#${id}`,
-				modules: ['image'],
-			},
+	const modules = useMemo(() => {
+		const data = {
 			history: {
 				delay: 500,
 				maxStack: 100,
@@ -58,23 +56,36 @@ export default function Editor({ error, value, onChange, simple = false, helperT
 			clipboard: {
 				matchVisual: false,
 			},
-			imageResize: {
+		} as any
+
+		if (!other.readOnly) {
+			data.toolbar = {
+				container: `#${id}`,
+				modules: ['image'],
+			}
+			data.imageResize = {
 				displaySize: true,
-			},
-			imageDrop: true,
-		}),
-		[],
-	)
+			}
+			data.imageDrop = true
+		}
+
+		return data
+	}, [other])
 
 	const handleChange = useCallback(
 		async (text, delta, source, editor) => {
+			if (other.readOnly) return
+
 			const quillContainer = document.querySelector(`#${id}`).parentNode.nextSibling.childNodes[0] as Element
 
 			const images = Array.from(quillContainer.querySelectorAll('img[src^="data:"]:not(.loading)')) as any
 			for (const img of images) {
 				// Possibility to show loading spinner while upload
 				img.classList.add('loading')
-				img.setAttribute('src', parseIpfsHash(await uploadBase64File(img.getAttribute('src'))))
+				img.setAttribute(
+					'src',
+					parseIpfsHash(await uploadBase64File(img.getAttribute('src')), config.IPFS_GATEWAY),
+				)
 				img.classList.remove('loading')
 			}
 
@@ -94,14 +105,16 @@ export default function Editor({ error, value, onChange, simple = false, helperT
 					}),
 					...sx,
 				}}
+				readOnly={other.readOnly}
 			>
-				<EditorToolbar id={id} isSimple={simple} />
+				{!other.readOnly && <EditorToolbar id={id} isSimple={simple} />}
 				<ReactQuill
 					value={value}
 					onChange={handleChange}
 					modules={modules}
 					formats={formats}
 					placeholder="Write something awesome..."
+					theme={other.readOnly ? 'bubble' : 'snow'}
 					{...other}
 				/>
 			</EditorWrapper>

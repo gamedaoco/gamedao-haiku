@@ -1,40 +1,27 @@
-// Imports
-// Database
-import { getCampaign } from '../../../database/campaign';
-// Types
-import { FlowCampaignFailedEvent } from '../../../types/events';
+import { FlowFailedEvent } from '../../../types/events';
 import { hashToHexString } from '../../../utils';
-// 3rd
 import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { getCampaign } from '../../../database/getters';
 
-// Functions
+
 async function handleCampaignFailedEvent(context: EventHandlerContext) {
-	// Get versioned instance
-	const campaignFailedEventData = new FlowCampaignFailedEvent(context);
+	let eventName = 'Flow.Failed';
+	let raw_event = new FlowFailedEvent(context);
 
-	// Define data
-	let campaignId: string | null = null;
-
-	// Load data
-	if (campaignFailedEventData.isV58) {
-		campaignId = hashToHexString(campaignFailedEventData.asV58.campaignId);
-	} else {
-		console.error(`Unknown version of failed campaign event!`);
+	if (!raw_event.isV60) {
+		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
+	let store = context.store;
+	let event = raw_event.asV60;
 
-	// Get campaign
-	const campaign = await getCampaign(context.store, campaignId);
-	if (!campaign) {
-		console.error(`Unknown campaign ${campaignId}!`);
-		return;
-	}
+	let campaignId = hashToHexString(event.campaignId);
 
+	let campaign = await getCampaign(store, campaignId);
+	if (!campaign) return;
+	
 	campaign.state = 'Failed';
-
-	// Save campaign
-	await context.store.save(campaign);
+	await store.save(campaign);
 }
 
-// Exports
 export { handleCampaignFailedEvent };

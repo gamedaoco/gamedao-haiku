@@ -4,27 +4,40 @@
   "typesBundle": "zeroTypesBundle.json",
   "events": [
     "control.OrgCreated",
-    "control.AddMember",
-    "control.RemoveMember",
-    "flow.CampaignCreated",
-    "flow.CampaignContributed",
-    "flow.CampaignFailed",
-    "flow.CampaignFinalized",
-    "flow.CampaignUpdated",
-    "signal.ProposalCreated",
-    "signal.Proposal",
-    "signal.ProposalVoted",
-    "signal.ProposalExpired",
-    "signal.ProposalApproved",
-    "signal.ProposalRejected",
-    "signal.WithdrawalGranted"
+    "control.OrgEnabled",
+    "control.OrgDisabled",
+    "control.OrgUpdated",
+    "control.MemberAdded",
+    "control.MemberRemoved",
+    "control.FundsSpended",
+
+    "flow.Created",
+    "flow.Activated",
+    "flow.Contributed",
+    "flow.Succeeded",
+    "flow.Failed",
+
+    "signal.Voted",
+    "signal.Created",
+    "signal.Activated",
+    "signal.Accepted",
+    "signal.Rejected",
+    "signal.Expired",
+    "signal.Aborted",
+    "signal.Finalized"
   ],
   "calls": [
     "control.create_org",
+    "control.update_org",
+    "control.enable_org",
+    "control.add_member",
+    "control.remove_member",
+    "control.spend_funds",
+
     "flow.create_campaign",
     "flow.contribute",
-    "flow.update_state",
-    "signal.general_proposal",
-    "signal.withdraw_proposal"
+
+    "signal.proposal",
+    "signal.vote"
   ]
 }

@@ -1,10 +1,9 @@
-// Imports
-import { IdentityUpsertData } from '../../../@types/pallets/identity/identityUpsertData';
+import { IdentityUpsertData } from '../../../@types/identity';
 import { upsertIdentity } from '../../../database/identity';
-import { encodeSigner, hexStringToString } from '../../../utils';
+import { encodeSigner } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-// Logic
+
 async function handleIdentityClearedEvent(context: EventHandlerContext) {
 	if (!context.extrinsic) return;
 
@@ -24,5 +23,4 @@ async function handleIdentityClearedEvent(context: EventHandlerContext) {
 	await upsertIdentity(context.store, upsertData.address, upsertData);
 }
 
-// Exports
 export { handleIdentityClearedEvent };

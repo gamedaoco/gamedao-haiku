@@ -9,42 +9,117 @@ services:
 
   #############################################################################
   ## Zero node
-  subzero:
-    image: playzero/subzero:latest
-    container_name: subzero
-    restart: unless-stopped
-    volumes:
-      - "./config/customSpec.json:/subzero/customSpec.json"
+  subzero-relay-a:
+    image: parity/polkadot:v0.9.25
+    user: "0:0"
     command:
-      [
-        "/usr/local/bin/subzero",
-        "--alice",
-        "--unsafe-ws-external",
-        "--rpc-cors=all",
-        "--ws-external",
-        "--rpc-external",
-        "--rpc-methods",
-        "unsafe",
-        "--ws-port",
-        "9944",
-        "--chain",
-        "/subzero/customSpec.json",
-        "--pruning",
-        "archive"
-      ]
+      - "--alice"
+      - "--node-key=0000000000000000000000000000000000000000000000000000000000000001"
+      - "--validator"
+      - "--base-path=/tmp/relay/alice"
+      - "--chain=/chainspec/rococo-local-raw.json"
+      - "--port=30333"
+      - "--ws-port=9944"
+      - "--unsafe-ws-external"
+      - "--rpc-cors=all"
+    volumes:
+      - "./node/chainspec:/chainspec"
+      - "./node/tmp:/tmp"
     ports:
       - "9944:9944"
 
-  #  subzero-ready-state:
-  #    image: ubuntu
-  #    command: bash -c "apt-get update && apt-get install -y curl && tail -f /dev/null"
-  #    depends_on:
-  #      - subzero
-  #    healthcheck:
-  #      test: [ "CMD", "-v", "http://subzero:9944" ]
-  #      interval: 30s
-  #      timeout: 20s
-  #      retries: 10
+  subzero-relay-b:
+    image: parity/polkadot:v0.9.25
+    user: "0:0"
+    command:
+      - "--bob"
+      - "--node-key=0000000000000000000000000000000000000000000000000000000000000002"
+      - "--validator"
+      - "--base-path=/tmp/relay/bob"
+      - "--chain=/chainspec/rococo-local-raw.json"
+      - "--port=30333"
+      - "--ws-port=9944"
+      - "--unsafe-ws-external"
+      - "--rpc-cors=all"
+      - "--bootnodes=/dns/subzero-relay-a/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+    volumes:
+      - "./node/chainspec:/chainspec"
+      - "./node/tmp:/tmp"
+    ports:
+      - "9945:9944"
+
+  subzero-parachain-a:
+    image: playzero/subzero:3.1.60
+    user: "0:0"
+    command:
+      - "/usr/local/bin/subzero-collator"
+      - "--alice"
+      - "--node-key=0000000000000000000000000000000000000000000000000000000000000001"
+      - "--collator"
+      - "--force-authoring"
+      - "--chain=/chainspec/subzero-parachain-raw.json"
+      - "--base-path=/tmp/parachain/alice"
+      - "--port=40333"
+      - "--ws-port=8844"
+      - "--unsafe-ws-external"
+      - "--rpc-cors=all"
+      - "--prometheus-port=9615"
+      - "--prometheus-external"
+      - "--"
+      - "--execution=wasm"
+      - "--chain=/chainspec/rococo-local-raw.json"
+      - "--port=30343"
+      - "--ws-port=9944"
+      - "--unsafe-ws-external"
+      - "--rpc-cors=all"
+      - "--pruning=archive"
+      - "--bootnodes=/dns/subzero-relay-a/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+    volumes:
+      - "./node/chainspec:/chainspec"
+      - "./node/tmp:/tmp"
+    ports:
+      - "9954:9944"
+      - "9955:8844"
+      - "9615:9615"
+    depends_on:
+      - subzero-relay-a
+      - subzero-relay-b
+
+  subzero-parachain-b:
+    image: playzero/subzero:3.1.60
+    user: "0:0"
+    command:
+      - "/usr/local/bin/subzero-collator"
+      - "--bob"
+      - "--node-key=0000000000000000000000000000000000000000000000000000000000000002"
+      - "--collator"
+      - "--force-authoring"
+      - "--chain=/chainspec/subzero-parachain-raw.json"
+      - "--base-path=/tmp/parachain/bob"
+      - "--port=40333"
+      - "--ws-port=8844"
+      - "--unsafe-ws-external"
+      - "--rpc-cors=all"
+      - "--prometheus-port=9615"
+      - "--prometheus-external"
+      - "--"
+      - "--execution=wasm"
+      - "--chain=/chainspec/rococo-local-raw.json"
+      - "--port=30343"
+      - "--ws-port=9944"
+      - "--unsafe-ws-external"
+      - "--rpc-cors=all"
+      - "--bootnodes=/dns/relay-chain-a/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+    volumes:
+      - "./node/chainspec:/chainspec"
+      - "./node/tmp:/tmp"
+    ports:
+      - "9956:9944"
+      - "9957:8844"
+      - "9616:9615"
+    depends_on:
+      - subzero-relay-a
+      - subzero-relay-b
 
   #############################################################################
   ## Indexer
@@ -53,6 +128,7 @@ services:
     environment:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
+
   indexer:
     image: subsquid/hydra-indexer:5
     restart: unless-stopped
@@ -66,21 +142,19 @@ services:
       - REDIS_URI=redis://dev-redis:6379/0
       - FORCE_HEIGHT=true
       - BLOCK_HEIGHT=0
-      - WS_PROVIDER_ENDPOINT_URI=ws://subzero:9944
-      - BUNDLE_TYPES=/configs/typesBundle.json
-    volumes:
-      - "./config/typesBundle.json:/configs/typesBundle.json"
+      - WS_PROVIDER_ENDPOINT_URI=ws://subzero-parachain-a:9944
     depends_on:
-      subzero:
+      subzero-relay-a:
+        condition: service_started
+      subzero-relay-b:
+        condition: service_started
+      subzero-parachain-a:
         condition: service_started
       indexer-db:
         condition: service_started
       dev-redis:
         condition: service_started
-    #      subzero-ready-state:
-    #        condition: service_healthy
-    command: >
-      sh -c "yarn db:bootstrap && yarn start:prod"
+    command: sh -c "yarn db:bootstrap && yarn start:prod"
 
   indexer-status-service:
     image: subsquid/hydra-indexer-status-service:5
@@ -131,7 +205,7 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
 
-    ## Service
+  ## Service
   squid-service:
     build: '../squid'
     volumes:
@@ -157,15 +231,15 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
 
-  ## Gamedao graph service
+  ## GameDAO graph service
   gamedao-graph-service:
     build: '../service'
     environment:
-      IPFS_API_URL: "https://ipfs.infura.io:5001/api/v0"
-      IPFS_CLIENT_ID: "1v04L2wj5JmI0JgKF5KztV0oN8o"
-      IPFS_CLIENT_SECRET: "85547c6003abb67a6335469d1aa6a3a3"
+      IPFS_API_URL: "${IPFS_API_URL}"
+      IPFS_CLIENT_ID: "${IPFS_CLIENT_ID}"
+      IPFS_CLIENT_SECRET: "${IPFS_CLIENT_SECRET}"
       SERVER_PORT: 4000
-      CHAIN_RPC_URL: "ws://subzero:9944"
+      CHAIN_RPC_URL: "ws://subzero-parachain-a:9944"
       CHAIN_RPC_URL_OVERRIDE: "ws://localhost:9944"
       DATABASE_URL: "postgresql://postgres:postgres@gamedao-service-postgres:5432/postgres?schema=public"
     depends_on:

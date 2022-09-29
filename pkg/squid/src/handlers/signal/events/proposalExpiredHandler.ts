@@ -1,26 +1,27 @@
-// Imports
-import { updateProposalState } from '../../../database/proposal';
-import { SignalProposalExpiredEvent } from '../../../types/events';
+import { SignalExpiredEvent } from '../../../types/events';
 import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { getProposal } from '../../../database/getters';
 
-// Functions
+
 async function handleProposalExpiredEvent(context: EventHandlerContext) {
-	// Get versioned instance
-	const proposalExpiredEventData = new SignalProposalExpiredEvent(context);
+	let eventName = 'Signal.Expired';
+	let raw_event = new SignalExpiredEvent(context);
 
-	// Get id
-	let id;
-	if (proposalExpiredEventData.isV58) {
-		id = hashToHexString(proposalExpiredEventData.asV58.proposalId);
-	} else {
-		console.error(`Unknown version of proposal expired event!`);
+	if (!raw_event.isV60) {
+		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
+	let store = context.store;
+	let event = raw_event.asV60;
 
-	// Update proposal
-	await updateProposalState(context.store, id, 'Expired');
+	let proposalId = hashToHexString(event.proposalId);
+	let proposal = await getProposal(store, proposalId);
+	if (!proposal) return;
+
+	proposal.state = 'Expired';
+
+	await store.save(proposal);
 }
 
-// Exports
 export { handleProposalExpiredEvent };
