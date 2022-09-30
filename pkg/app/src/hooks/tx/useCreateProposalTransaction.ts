@@ -14,6 +14,8 @@ import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
+import { ApiPromise } from '@polkadot/api'
+import { PROPOSAL_MAJORITIES, PROPOSAL_TYPES, PROPOSAL_UNITS } from 'src/constants/proposal'
 
 interface BlockTime {
 	startBlocks: number
@@ -21,22 +23,23 @@ interface BlockTime {
 }
 
 // Validations
-const generalProposalValidation = Yup.object().shape({
+const proposalValidation = Yup.object().shape({
+	proposalType: Yup.mixed().required(),
 	orgId: Yup.string().required(),
 	title: Yup.string().required(),
 	cid: Yup.string().required(),
-	start: Yup.number().required(),
 	expiry: Yup.number().required(),
-})
+	majority: Yup.mixed().required(),
+	unit: Yup.mixed().required(),
+	scale: Yup.mixed().required(),
 
-const withdrawProposalValidation = Yup.object().shape({
-	campaignId: Yup.string().required(),
-	title: Yup.string().required(),
-	cid: Yup.string().required(),
-	// Is actually a number but with 18 digits and yum has no support for big number
-	amount: Yup.string().required(),
-	start: Yup.number().required(),
-	expiry: Yup.number().required(),
+	start: Yup.number().nullable(),
+	quorum: Yup.number().nullable(),
+	deposit: Yup.string().nullable(),
+	campaignId: Yup.string().nullable(),
+	amount: Yup.string().nullable(),
+	beneficiary: Yup.string().nullable(),
+	currencyId: Yup.mixed().nullable(),
 })
 
 // Calculation for start and end block (BlockTime / blockNumbers) form Date
@@ -57,68 +60,21 @@ function getBlockTimeFromDate(data: TMPProposal, blockNumber: number, blockTime)
 	return { endBlocks, startBlocks }
 }
 
-function createGeneralProposalTx(
-	selectedApiProvider: ApiProvider,
-	data: TMPProposal,
-	blockNumber: number,
-	organizationId: string,
-	targetBlockTime: number,
-): SubmittableExtrinsic {
-	const blockTime = getBlockTimeFromDate(data, blockNumber, targetBlockTime)
-
-	// Data mapping
-	const mappedData = {
-		orgId: organizationId,
-		title: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
-		cid: data.metaDataCID,
-		start: blockTime.startBlocks,
-		expiry: blockTime.endBlocks,
-	}
-
-	// Data validation
-	generalProposalValidation.validateSync(mappedData)
-
-	return selectedApiProvider.apiProvider.tx.signal.generalProposal(
-		mappedData.orgId,
-		mappedData.title,
-		mappedData.cid,
-		mappedData.start,
-		mappedData.expiry,
-	)
+function createProposalType(apiProvider: ApiPromise, type: number) {
+	return apiProvider.createType('GamedaoSignalProposalType', PROPOSAL_TYPES[type])
 }
 
-function createWithdrawProposalTx(
-	selectedApiProvider: ApiProvider,
-	data: TMPProposal,
-	blockNumber: number,
-	targetBlockTime: number,
-): SubmittableExtrinsic {
-	const blockTime = getBlockTimeFromDate(data, blockNumber, targetBlockTime)
+function createMajorityType(apiProvider: ApiPromise, type: number) {
+	return apiProvider.createType('GamedaoSignalMajority', PROPOSAL_MAJORITIES[type])
+}
 
-	// Data mapping
-	const mappedData = {
-		campaignId: data.campaignId,
-		title: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
-		cid: data.metaDataCID,
-		amount: fromUnit(
-			data.amount,
-			selectedApiProvider.systemProperties.tokenDecimals[selectedApiProvider.systemProperties.paymentCurrencies],
-		),
-		start: blockTime.startBlocks,
-		expiry: blockTime.endBlocks,
-	}
+function createUnitType(apiProvider: ApiPromise, type: number) {
+	return apiProvider.createType('GamedaoSignalUnit', PROPOSAL_UNITS[type])
+}
 
-	// Data validation
-	withdrawProposalValidation.validateSync(mappedData)
-
-	return selectedApiProvider.apiProvider.tx.signal.withdrawProposal(
-		mappedData.campaignId,
-		mappedData.title,
-		mappedData.cid,
-		mappedData.amount,
-		mappedData.start,
-		mappedData.expiry,
-	)
+function createScaleType(apiProvider: ApiPromise) {
+	// ToDo: Later we need to support Quadratic
+	return apiProvider.createType('GamedaoSignalScale', 'Linear')
 }
 
 export function useCreateProposalTransaction(organizationId: string): TransactionData {
@@ -133,23 +89,63 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 	useEffect(() => {
 		if (organizationId && selectedApiProvider?.apiProvider && data && blockNumber) {
 			try {
-				let tx
-				if (data.type === 0) {
-					tx = createGeneralProposalTx(
-						selectedApiProvider,
-						data,
-						blockNumber,
-						organizationId,
-						selectedApiProvider.systemProperties?.blockTargetTime,
-					)
-				} else if (data.type === 1) {
-					tx = createWithdrawProposalTx(
-						selectedApiProvider,
-						data,
-						blockNumber,
-						selectedApiProvider.systemProperties?.blockTargetTime,
-					)
+				const blockTime = getBlockTimeFromDate(
+					data,
+					blockNumber,
+					selectedApiProvider.systemProperties?.blockTargetTime,
+				)
+
+				// Data mapping
+				const mappedData = {
+					proposalType: createProposalType(selectedApiProvider.apiProvider, data.type),
+					orgId: organizationId,
+					title: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
+					cid: data.metaDataCID,
+					expiry: blockTime.endBlocks,
+					majority: createMajorityType(selectedApiProvider.apiProvider, data.majority),
+					unit: createUnitType(selectedApiProvider.apiProvider, data.type),
+					scale: createScaleType(selectedApiProvider.apiProvider),
+
+					start: blockTime.startBlocks + 5,
+					quorum: null,
+					deposit: fromUnit(
+						data.deposit,
+						selectedApiProvider.systemProperties.tokenDecimals[
+							selectedApiProvider.systemProperties.governanceCurrency
+						],
+					),
+					campaignId: data.campaignId ?? null,
+					amount:
+						fromUnit(
+							data.amount,
+							selectedApiProvider.systemProperties.tokenDecimals[
+								selectedApiProvider.systemProperties.governanceCurrency
+							],
+						) ?? null,
+					beneficiary: null,
+					currencyId: null,
 				}
+
+				// Data validation
+				proposalValidation.validateSync(mappedData)
+
+				let tx = selectedApiProvider.apiProvider.tx.signal.proposal(
+					mappedData.proposalType,
+					mappedData.orgId,
+					mappedData.title,
+					mappedData.cid,
+					mappedData.expiry,
+					mappedData.majority,
+					mappedData.unit,
+					mappedData.scale,
+					mappedData.start,
+					mappedData.quorum,
+					mappedData.deposit,
+					mappedData.campaignId,
+					mappedData.amount,
+					mappedData.beneficiary,
+					mappedData.currencyId,
+				)
 
 				if (tx) {
 					setTxState({
