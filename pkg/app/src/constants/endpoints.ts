@@ -14,23 +14,22 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/img/zero.png',
-		name: 'Dev Parachain',
+		name: 'development',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
-		// ToDo: Change health check
-		healthCheck: 'https://beeblebrox.zero.io/graph/healthz',
+		healthCheck: 'https://graph.dev.sub.zero.io/graph/health',
 		default: true,
 	},
 	{
 		image: '/img/zero.png',
-		name: 'Beeblebrox',
-		url: 'https://beeblebrox.zero.io/graph/v1/graphql',
-		healthCheck: 'https://beeblebrox.zero.io/graph/healthz',
+		name: 'staging',
+		url: 'https://graph.stage.sub.zero.io/v1/graphql',
+		healthCheck: 'https://graph.stage.sub.zero.io/graph/health',
 	},
 	{
 		image: '/img/zero.png',
-		name: 'Rococo Parachain',
-		url: 'https://graph.staging.para.sub.zero.io',
-		healthCheck: 'https://graph.staging.para.sub.zero.io/health',
+		name: 'rococo',
+		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
+		healthCheck: 'https://graph.rococo.sub.zero.io/graph/health',
 	},
 ]
 
