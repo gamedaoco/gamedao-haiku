@@ -7,7 +7,6 @@ import { addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getProposal } from '../../../database/getters';
 
-
 async function handleProposalVotedEvent(context: EventHandlerContext) {
 	let eventName = 'Signal.Voted';
 	if (!context.extrinsic) {
@@ -21,13 +20,13 @@ async function handleProposalVotedEvent(context: EventHandlerContext) {
 		block: context.block,
 		extrinsic: context.extrinsic,
 	});
-	if (!raw_event.isV60 || !raw_call.isV60) {
+	if (!raw_event.isV61 || !raw_call.isV61) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV60;
-	let call = raw_call.asV60;
+	let event = raw_event.asV61;
+	let call = raw_call.asV61;
 
 	let proposalId = hashToHexString(event.proposalId);
 	let votingId = proposalId;
@@ -53,7 +52,6 @@ async function handleProposalVotedEvent(context: EventHandlerContext) {
 	voter.power = event.votePower;
 	voter.voted = event.voted;
 	await store.save(voter);
-
 }
 
 export { handleProposalVotedEvent };

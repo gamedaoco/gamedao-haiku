@@ -21,7 +21,7 @@ export function AppProvider({ children }) {
 
 	useEffect(() => {
 		if (featureQueryResult.error) {
-			console.error('The app config could not be retrieved', 'error', featureQueryResult.error)
+			console.error('The app features could not be retrieved', 'error', featureQueryResult.error)
 		}
 	}, [featureQueryResult.error])
 

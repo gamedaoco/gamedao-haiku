@@ -17,11 +17,11 @@ const validation = Yup.object().shape({
 	org_type: Yup.string().required(),
 	access: Yup.string().required(),
 	fee_model: Yup.string().required(),
-	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	fee: Yup.string().required(),
-	gov_asset: Yup.object().required(),
-	pay_asset: Yup.object().required(),
+	gov_currency: Yup.object().required(),
+	pay_currency: Yup.object().required(),
+	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	deposit: Yup.string().required(),
 })
@@ -41,6 +41,7 @@ export function useCreateOrgTransaction(): TransactionData {
 				const mappedData = {
 					name: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 					cid: data.metaDataCID,
+					access_model: data.mode,
 					org_type: selectedApiProvider.apiProvider.createType('GamedaoControlOrgType', data.type),
 					access: selectedApiProvider.apiProvider.createType('GamedaoControlAccessModel', data.mode),
 					fee_model: selectedApiProvider.apiProvider.createType('GamedaoControlFeeModel', data.feeMode),
@@ -52,13 +53,13 @@ export function useCreateOrgTransaction(): TransactionData {
 							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
-					gov_asset: createTokenType(
+					gov_currency: createTokenType(
 						selectedApiProvider.apiProvider,
 						selectedApiProvider.systemProperties.tokenSymbol[
 							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
-					pay_asset: createTokenType(
+					pay_currency: createTokenType(
 						selectedApiProvider.apiProvider,
 						selectedApiProvider.systemProperties.tokenSymbol[
 							selectedApiProvider.systemProperties.paymentCurrencies
@@ -79,12 +80,12 @@ export function useCreateOrgTransaction(): TransactionData {
 					mappedData.name,
 					mappedData.cid,
 					mappedData.org_type,
-					mappedData.access,
+					mappedData.access_model,
 					mappedData.fee_model,
 					mappedData.member_limit,
 					mappedData.fee,
-					mappedData.gov_asset,
-					mappedData.pay_asset,
+					mappedData.gov_currency,
+					mappedData.pay_currency,
 					mappedData.deposit,
 				) as SubmittableExtrinsic
 

@@ -8,7 +8,6 @@ import { Organization } from '../../../model';
 import { addressCodec, encodeSigner, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-
 async function handleOrgCreatedEvent(context: EventHandlerContext) {
 	let eventName = 'Control.OrgCreated';
 	if (!context.extrinsic) {
@@ -21,13 +20,13 @@ async function handleOrgCreatedEvent(context: EventHandlerContext) {
 		block: context.block,
 		extrinsic: context.extrinsic,
 	});
-	if (!raw_event.isV60 || !raw_call.isV60) {
+	if (!raw_event.isV61 || !raw_call.isV61) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV60;
-	let call = raw_call.asV60;
+	let event = raw_event.asV61;
+	let call = raw_call.asV61;
 
 	let orgId = hashToHexString(event.orgId);
 	let treasury = addressCodec.encode(event.treasuryId) as string;
@@ -37,7 +36,7 @@ async function handleOrgCreatedEvent(context: EventHandlerContext) {
 
 	let org_exists = await getOrg(store, orgId);
 	if (org_exists) return;
-	
+
 	let org = new Organization();
 	org.id = orgId;
 	org.creator = signer;
@@ -55,10 +54,10 @@ async function handleOrgCreatedEvent(context: EventHandlerContext) {
 
 	// TODO: migrate to FireSquid => use typegen Constants
 	org.state = 'Active';
-	org.govCurrency = call.govCurrency?.value.__kind ?? 'GAME';		// ProtocolTokenId
-	org.payCurrency = call.payCurrency?.value.__kind ?? 'PLAY';		// PaymentTokenId
-	org.memberLimit = call.memberLimit ?? 1000;						// MaxMembers
-	org.deposit = call.deposit ?? BigInt(10^10);					// 1 GAME Dollar
+	org.govCurrency = call.govCurrency?.value.__kind ?? 'GAME'; // ProtocolTokenId
+	org.payCurrency = call.payCurrency?.value.__kind ?? 'PLAY'; // PaymentTokenId
+	org.memberLimit = call.memberLimit ?? 1000; // MaxMembers
+	org.deposit = call.deposit ?? BigInt(10 ^ 10); // 1 GAME Dollar
 
 	// Check if cid is valid, fetch metadata from ipfs
 	let metadata = await fetchOrgMetadata(call.cid.toString(), orgId);

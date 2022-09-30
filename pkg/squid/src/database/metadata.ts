@@ -8,9 +8,7 @@ import { CampaignMetadata, OrganizationMetadata, ProposalMetadata } from '../mod
 import { get } from './helper';
 import { Store } from '@subsquid/substrate-processor';
 
-
-async function upsertOrganizationMetadata(store: Store, metadataId: string, data: IpfsOrgMetadata | null,
-) {
+async function upsertOrganizationMetadata(store: Store, metadataId: string, data: IpfsOrgMetadata | null) {
 	let metadata = await get(store, OrganizationMetadata, metadataId);
 	if (!metadata) {
 		metadata = new OrganizationMetadata();
