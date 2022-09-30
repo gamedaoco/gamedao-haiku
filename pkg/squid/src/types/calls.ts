@@ -1,6 +1,6 @@
 import assert from 'assert'
 import {CallContext, Result, deprecateLatest} from './support'
-import * as v60 from './v60'
+import * as v61 from './v61'
 
 export class ControlAddMemberCall {
   constructor(private ctx: CallContext) {
@@ -20,7 +20,7 @@ export class ControlAddMemberCall {
    * 
    * Weight: `O(log n)`
    */
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('control.add_member') === '605eac3ab5ba75dcb2e8e5b628cfa200c62828d80eb5d3d3b468c7cdecf64ddb'
   }
 
@@ -37,19 +37,19 @@ export class ControlAddMemberCall {
    * 
    * Weight: `O(log n)`
    */
-  get asV60(): {orgId: v60.H256, who: v60.AccountId32} {
-    assert(this.isV60)
+  get asV61(): {orgId: v61.H256, who: v61.AccountId32} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {orgId: v60.H256, who: v60.AccountId32} {
+  get asLatest(): {orgId: v61.H256, who: v61.AccountId32} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -80,8 +80,8 @@ export class ControlCreateOrgCall {
    * 
    * Weight: `O(1)`
    */
-  get isV60(): boolean {
-    return this.ctx._chain.getCallHash('control.create_org') === '32c958c6fe0b62e58040453945ec841fa302cb24810196bdf9f2aa7448fef7e4'
+  get isV61(): boolean {
+    return this.ctx._chain.getCallHash('control.create_org') === 'b761eaddc60f34b98d46b70969d16e33e84cc146820668c59f7d7434a00cbbb9'
   }
 
   /**
@@ -106,19 +106,19 @@ export class ControlCreateOrgCall {
    * 
    * Weight: `O(1)`
    */
-  get asV60(): {name: Uint8Array, cid: Uint8Array, orgType: v60.OrgType, accessModel: v60.AccessModel, feeModel: v60.FeeModel, memberLimit: (number | undefined), membershipFee: (bigint | undefined), govCurrency: (v60.CurrencyId | undefined), payCurrency: (v60.CurrencyId | undefined), deposit: (bigint | undefined)} {
-    assert(this.isV60)
+  get asV61(): {name: Uint8Array, cid: Uint8Array, orgType: v61.OrgType, accessModel: v61.AccessModel, feeModel: v61.FeeModel, memberLimit: (number | undefined), membershipFee: (bigint | undefined), govCurrency: (v61.CurrencyId | undefined), payCurrency: (v61.CurrencyId | undefined), deposit: (bigint | undefined)} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {name: Uint8Array, cid: Uint8Array, orgType: v60.OrgType, accessModel: v60.AccessModel, feeModel: v60.FeeModel, memberLimit: (number | undefined), membershipFee: (bigint | undefined), govCurrency: (v60.CurrencyId | undefined), payCurrency: (v60.CurrencyId | undefined), deposit: (bigint | undefined)} {
+  get asLatest(): {name: Uint8Array, cid: Uint8Array, orgType: v61.OrgType, accessModel: v61.AccessModel, feeModel: v61.FeeModel, memberLimit: (number | undefined), membershipFee: (bigint | undefined), govCurrency: (v61.CurrencyId | undefined), payCurrency: (v61.CurrencyId | undefined), deposit: (bigint | undefined)} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -140,7 +140,7 @@ export class ControlEnableOrgCall {
    * 
    * Weight: `O(1)`
    */
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('control.enable_org') === 'b9796c19f14245cb5d424cb9d2f6dbb57fecb5ca5170883939bc418fa3a260d8'
   }
 
@@ -157,19 +157,19 @@ export class ControlEnableOrgCall {
    * 
    * Weight: `O(1)`
    */
-  get asV60(): {orgId: v60.H256} {
-    assert(this.isV60)
+  get asV61(): {orgId: v61.H256} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {orgId: v60.H256} {
+  get asLatest(): {orgId: v61.H256} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -191,7 +191,7 @@ export class ControlRemoveMemberCall {
    * 
    * Weight: `O(log n)`
    */
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('control.remove_member') === '605eac3ab5ba75dcb2e8e5b628cfa200c62828d80eb5d3d3b468c7cdecf64ddb'
   }
 
@@ -208,19 +208,19 @@ export class ControlRemoveMemberCall {
    * 
    * Weight: `O(log n)`
    */
-  get asV60(): {orgId: v60.H256, who: v60.AccountId32} {
-    assert(this.isV60)
+  get asV61(): {orgId: v61.H256, who: v61.AccountId32} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {orgId: v60.H256, who: v60.AccountId32} {
+  get asLatest(): {orgId: v61.H256, who: v61.AccountId32} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -244,8 +244,8 @@ export class ControlSpendFundsCall {
    * 
    * Weight: `O(1)`
    */
-  get isV60(): boolean {
-    return this.ctx._chain.getCallHash('control.spend_funds') === '680a7f896adf67cdfc0cc0100420c7c6a1e8118084d97810f438d75c69016216'
+  get isV61(): boolean {
+    return this.ctx._chain.getCallHash('control.spend_funds') === 'de116e395f5dd0db3172926911835fc2b54f5e5432ee71f8248f7eee9d1dffe3'
   }
 
   /**
@@ -263,19 +263,19 @@ export class ControlSpendFundsCall {
    * 
    * Weight: `O(1)`
    */
-  get asV60(): {orgId: v60.H256, currencyId: v60.CurrencyId, beneficiary: v60.AccountId32, amount: bigint} {
-    assert(this.isV60)
+  get asV61(): {orgId: v61.H256, currencyId: v61.CurrencyId, beneficiary: v61.AccountId32, amount: bigint} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {orgId: v60.H256, currencyId: v60.CurrencyId, beneficiary: v60.AccountId32, amount: bigint} {
+  get asLatest(): {orgId: v61.H256, currencyId: v61.CurrencyId, beneficiary: v61.AccountId32, amount: bigint} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -303,7 +303,7 @@ export class ControlUpdateOrgCall {
    * 
    * Weight: `O(1)`
    */
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('control.update_org') === 'fa253ba8b2a6cabe3189ec3a9fd8d2928af0e1bc12efa0b2f51904d382397c98'
   }
 
@@ -326,19 +326,19 @@ export class ControlUpdateOrgCall {
    * 
    * Weight: `O(1)`
    */
-  get asV60(): {orgId: v60.H256, primeId: (v60.AccountId32 | undefined), orgType: (v60.OrgType | undefined), accessModel: (v60.AccessModel | undefined), memberLimit: (number | undefined), feeModel: (v60.FeeModel | undefined), membershipFee: (bigint | undefined)} {
-    assert(this.isV60)
+  get asV61(): {orgId: v61.H256, primeId: (v61.AccountId32 | undefined), orgType: (v61.OrgType | undefined), accessModel: (v61.AccessModel | undefined), memberLimit: (number | undefined), feeModel: (v61.FeeModel | undefined), membershipFee: (bigint | undefined)} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {orgId: v60.H256, primeId: (v60.AccountId32 | undefined), orgType: (v60.OrgType | undefined), accessModel: (v60.AccessModel | undefined), memberLimit: (number | undefined), feeModel: (v60.FeeModel | undefined), membershipFee: (bigint | undefined)} {
+  get asLatest(): {orgId: v61.H256, primeId: (v61.AccountId32 | undefined), orgType: (v61.OrgType | undefined), accessModel: (v61.AccessModel | undefined), memberLimit: (number | undefined), feeModel: (v61.FeeModel | undefined), membershipFee: (bigint | undefined)} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -357,7 +357,7 @@ export class FlowContributeCall {
    * 
    * Weight: O(1)
    */
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('flow.contribute') === '35bde54551e073c690aea459d53b33dc6aa20c27dc77adb7a7d131d352f68540'
   }
 
@@ -371,19 +371,19 @@ export class FlowContributeCall {
    * 
    * Weight: O(1)
    */
-  get asV60(): {campaignId: v60.H256, contribution: bigint} {
-    assert(this.isV60)
+  get asV61(): {campaignId: v61.H256, contribution: bigint} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {campaignId: v60.H256, contribution: bigint} {
+  get asLatest(): {campaignId: v61.H256, contribution: bigint} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -417,7 +417,7 @@ export class FlowCreateCampaignCall {
    * 
    * Weight: `O(1)`
    */
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('flow.create_campaign') === 'c9f740ca2f598a88223de690445f81cc5bd3d60101f812046545d137cbc2d4cc'
   }
 
@@ -446,19 +446,19 @@ export class FlowCreateCampaignCall {
    * 
    * Weight: `O(1)`
    */
-  get asV60(): {orgId: v60.H256, adminId: v60.AccountId32, name: Uint8Array, target: bigint, deposit: bigint, expiry: number, protocol: v60.FlowProtocol, governance: v60.FlowGovernance, cid: Uint8Array, start: (number | undefined), tokenSymbol: (Uint8Array | undefined), tokenName: (Uint8Array | undefined)} {
-    assert(this.isV60)
+  get asV61(): {orgId: v61.H256, adminId: v61.AccountId32, name: Uint8Array, target: bigint, deposit: bigint, expiry: number, protocol: v61.FlowProtocol, governance: v61.FlowGovernance, cid: Uint8Array, start: (number | undefined), tokenSymbol: (Uint8Array | undefined), tokenName: (Uint8Array | undefined)} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {orgId: v60.H256, adminId: v60.AccountId32, name: Uint8Array, target: bigint, deposit: bigint, expiry: number, protocol: v60.FlowProtocol, governance: v60.FlowGovernance, cid: Uint8Array, start: (number | undefined), tokenSymbol: (Uint8Array | undefined), tokenName: (Uint8Array | undefined)} {
+  get asLatest(): {orgId: v61.H256, adminId: v61.AccountId32, name: Uint8Array, target: bigint, deposit: bigint, expiry: number, protocol: v61.FlowProtocol, governance: v61.FlowGovernance, cid: Uint8Array, start: (number | undefined), tokenSymbol: (Uint8Array | undefined), tokenName: (Uint8Array | undefined)} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -467,23 +467,23 @@ export class SignalProposalCall {
     assert(this.ctx.extrinsic.name === 'signal.proposal')
   }
 
-  get isV60(): boolean {
-    return this.ctx._chain.getCallHash('signal.proposal') === '754c9374f1bb0fad08349cf32ab445cc3049fd96ac4088033d81f486a2696f83'
+  get isV61(): boolean {
+    return this.ctx._chain.getCallHash('signal.proposal') === '6dd65c02bf66c1de0e8bc23a4cd50420c5df4ff4baebe2021d78efd4ad41e98d'
   }
 
-  get asV60(): {proposalType: v60.ProposalType, orgId: v60.H256, title: Uint8Array, cid: Uint8Array, expiry: number, majority: v60.Majority, unit: v60.Unit, scale: v60.Scale, start: (number | undefined), quorum: (v60.Permill | undefined), deposit: (bigint | undefined), campaignId: (v60.H256 | undefined), amount: (bigint | undefined), beneficiary: (v60.AccountId32 | undefined), currencyId: (v60.CurrencyId | undefined)} {
-    assert(this.isV60)
+  get asV61(): {proposalType: v61.ProposalType, orgId: v61.H256, title: Uint8Array, cid: Uint8Array, expiry: number, majority: v61.Majority, unit: v61.Unit, scale: v61.Scale, start: (number | undefined), quorum: (v61.Permill | undefined), deposit: (bigint | undefined), campaignId: (v61.H256 | undefined), amount: (bigint | undefined), beneficiary: (v61.AccountId32 | undefined), currencyId: (v61.CurrencyId | undefined)} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {proposalType: v60.ProposalType, orgId: v60.H256, title: Uint8Array, cid: Uint8Array, expiry: number, majority: v60.Majority, unit: v60.Unit, scale: v60.Scale, start: (number | undefined), quorum: (v60.Permill | undefined), deposit: (bigint | undefined), campaignId: (v60.H256 | undefined), amount: (bigint | undefined), beneficiary: (v60.AccountId32 | undefined), currencyId: (v60.CurrencyId | undefined)} {
+  get asLatest(): {proposalType: v61.ProposalType, orgId: v61.H256, title: Uint8Array, cid: Uint8Array, expiry: number, majority: v61.Majority, unit: v61.Unit, scale: v61.Scale, start: (number | undefined), quorum: (v61.Permill | undefined), deposit: (bigint | undefined), campaignId: (v61.H256 | undefined), amount: (bigint | undefined), beneficiary: (v61.AccountId32 | undefined), currencyId: (v61.CurrencyId | undefined)} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }
 
@@ -492,22 +492,22 @@ export class SignalVoteCall {
     assert(this.ctx.extrinsic.name === 'signal.vote')
   }
 
-  get isV60(): boolean {
+  get isV61(): boolean {
     return this.ctx._chain.getCallHash('signal.vote') === 'bd01187272ea169a48a8d7026e7d5656782ba5d0c500d610c99c1d39528c6890'
   }
 
-  get asV60(): {proposalId: v60.H256, approve: boolean, deposit: (bigint | undefined)} {
-    assert(this.isV60)
+  get asV61(): {proposalId: v61.H256, approve: boolean, deposit: (bigint | undefined)} {
+    assert(this.isV61)
     return this.ctx._chain.decodeCall(this.ctx.extrinsic)
   }
 
   get isLatest(): boolean {
     deprecateLatest()
-    return this.isV60
+    return this.isV61
   }
 
-  get asLatest(): {proposalId: v60.H256, approve: boolean, deposit: (bigint | undefined)} {
+  get asLatest(): {proposalId: v61.H256, approve: boolean, deposit: (bigint | undefined)} {
     deprecateLatest()
-    return this.asV60
+    return this.asV61
   }
 }

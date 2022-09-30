@@ -11,6 +11,11 @@ export interface CurrencyId_Token {
   value: TokenSymbol
 }
 
+export interface CurrencyId_ForeignAsset {
+  __kind: 'ForeignAsset'
+  value: number
+}
+
 export type OrgType = OrgType_Individual | OrgType_Company | OrgType_Dao | OrgType_Hybrid
 
 export interface OrgType_Individual {
@@ -143,7 +148,7 @@ export interface Scale_Quadratic {
 
 export type Permill = number
 
-export type TokenSymbol = TokenSymbol_ZERO | TokenSymbol_PLAY | TokenSymbol_GAME | TokenSymbol_ACA | TokenSymbol_AUSD | TokenSymbol_DOT | TokenSymbol_LDOT | TokenSymbol_KAR | TokenSymbol_KUSD | TokenSymbol_KSM | TokenSymbol_LKSM | TokenSymbol_TAI | TokenSymbol_BNC | TokenSymbol_VSKSM | TokenSymbol_PHA | TokenSymbol_KINT | TokenSymbol_KBTC
+export type TokenSymbol = TokenSymbol_ZERO | TokenSymbol_PLAY | TokenSymbol_GAME | TokenSymbol_DOT
 
 export interface TokenSymbol_ZERO {
   __kind: 'ZERO'
@@ -157,58 +162,6 @@ export interface TokenSymbol_GAME {
   __kind: 'GAME'
 }
 
-export interface TokenSymbol_ACA {
-  __kind: 'ACA'
-}
-
-export interface TokenSymbol_AUSD {
-  __kind: 'AUSD'
-}
-
 export interface TokenSymbol_DOT {
   __kind: 'DOT'
-}
-
-export interface TokenSymbol_LDOT {
-  __kind: 'LDOT'
-}
-
-export interface TokenSymbol_KAR {
-  __kind: 'KAR'
-}
-
-export interface TokenSymbol_KUSD {
-  __kind: 'KUSD'
-}
-
-export interface TokenSymbol_KSM {
-  __kind: 'KSM'
-}
-
-export interface TokenSymbol_LKSM {
-  __kind: 'LKSM'
-}
-
-export interface TokenSymbol_TAI {
-  __kind: 'TAI'
-}
-
-export interface TokenSymbol_BNC {
-  __kind: 'BNC'
-}
-
-export interface TokenSymbol_VSKSM {
-  __kind: 'VSKSM'
-}
-
-export interface TokenSymbol_PHA {
-  __kind: 'PHA'
-}
-
-export interface TokenSymbol_KINT {
-  __kind: 'KINT'
-}
-
-export interface TokenSymbol_KBTC {
-  __kind: 'KBTC'
 }
