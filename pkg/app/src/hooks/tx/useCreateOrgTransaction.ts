@@ -17,13 +17,12 @@ const validation = Yup.object().shape({
 	org_type: Yup.string().required(),
 	access: Yup.string().required(),
 	fee_model: Yup.string().required(),
-	// Is actually a number but with 18 digits and yum has no support for big number
 	fee: Yup.string().required(),
-	gov_currency: Yup.object().required(),
-	pay_currency: Yup.object().required(),
 	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	deposit: Yup.string().required(),
+	gov_currency: Yup.mixed().required(),
+	pay_currency: Yup.mixed().required(),
 })
 
 export function useCreateOrgTransaction(): TransactionData {
@@ -41,12 +40,10 @@ export function useCreateOrgTransaction(): TransactionData {
 				const mappedData = {
 					name: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 					cid: data.metaDataCID,
-					access_model: data.mode,
 					org_type: selectedApiProvider.apiProvider.createType('GamedaoControlOrgType', data.type),
 					access: selectedApiProvider.apiProvider.createType('GamedaoControlAccessModel', data.mode),
 					fee_model: selectedApiProvider.apiProvider.createType('GamedaoControlFeeModel', data.feeMode),
 					member_limit: data.memberLimit,
-
 					fee: fromUnit(
 						data.feeAmount,
 						selectedApiProvider.systemProperties.tokenDecimals[
@@ -80,7 +77,7 @@ export function useCreateOrgTransaction(): TransactionData {
 					mappedData.name,
 					mappedData.cid,
 					mappedData.org_type,
-					mappedData.access_model,
+					mappedData.access,
 					mappedData.fee_model,
 					mappedData.member_limit,
 					mappedData.fee,
