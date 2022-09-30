@@ -11,7 +11,8 @@ import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
-import * as Yup from 'yup'
+import * as Yup from 'yup';
+
 
 const validation = Yup.object().shape({
 	orgId: Yup.string().required(),
@@ -20,8 +21,8 @@ const validation = Yup.object().shape({
 	target: Yup.string().required(),
 	deposit: Yup.string().required(),
 	expiry: Yup.number().required(),
-	protocol: Yup.object().required(),
-	governance: Yup.object().required(),
+	protocol: Yup.mixed().required(),
+	governance: Yup.mixed().required(),
 	cid: Yup.string().required(),
 	start: Yup.number().required(),
 	tokenSymbol: Yup.string().required(),
@@ -69,8 +70,8 @@ export function useCreateCampaignTransaction(): TransactionData {
 						],
 					),
 					expiry: endBlock,
-					protocol: selectedApiProvider.api.createType('GamedaoFlowFlowProtocol', data.protocol),
-					governance: selectedApiProvider.api.createType(
+					protocol: selectedApiProvider.apiProvider.createType('GamedaoFlowFlowProtocol', data.protocol),
+					governance: selectedApiProvider.apiProvider.createType(
 						'GamedaoFlowFlowGovernance',
 						data.governance ? 1 : 0,
 					),
