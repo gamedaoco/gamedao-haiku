@@ -20,6 +20,9 @@ export function StatusChip({ status, variant }: ComponentProps) {
 		let text = t(`label:campaign_status:${status?.toLowerCase()}`)
 		let color = 'primary'
 		switch (status) {
+			case CampaignStatus.INIT:
+				color = 'error'
+				break
 			case CampaignStatus.ACTIVE:
 				if (variant === 'campaignState') {
 					color = 'info'

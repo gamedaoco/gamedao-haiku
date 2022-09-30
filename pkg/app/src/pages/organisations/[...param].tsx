@@ -239,15 +239,17 @@ export function OrganisationById() {
 											</Typography>
 										</Stack>
 										<Stack>
-											{!isMemberState && (
-												<Button
-													variant="contained"
-													disabled={!addMemberTx}
-													onClick={handleOpenTxModal}
-												>
-													{t('button:ui:join_organization')}
-												</Button>
-											)}
+											{organizationState &&
+												!isMemberState &&
+												address !== organizationState?.creator && (
+													<Button
+														variant="contained"
+														disabled={!addMemberTx}
+														onClick={handleOpenTxModal}
+													>
+														{t('button:ui:join_organization')}
+													</Button>
+												)}
 										</Stack>
 									</Stack>
 								</Stack>
