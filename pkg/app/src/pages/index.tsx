@@ -1,13 +1,10 @@
 import React from 'react'
-
+import { Layout } from 'components/Layouts/default/layout'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import Editor from 'components/Editor'
-import { Layout } from 'components/Layouts/default/layout'
-
-export function AppPage() {
+export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar>
 			<Box sx={{ pt: ['5rem', '5rem', '2rem'], pb: '1rem', minHeight: '90vh' }}>
@@ -21,4 +18,4 @@ export function AppPage() {
 	)
 }
 
-export default AppPage
+export default Page
