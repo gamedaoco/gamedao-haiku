@@ -1,10 +1,10 @@
 {
-  "name": "Beeblebrox GraphQL Schema",
+  "name": "Dev GraphQL Schema",
   "schemaPath": "schema.graphql",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://host.docker.internal:9080/v1/graphql",
+        "url": "https://graph.dev.sub.zero.io/v1/graphql",
         "headers": {
         },
         "introspect": true

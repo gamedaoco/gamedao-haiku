@@ -1,4 +1,4 @@
-schema: http://host.docker.internal:9080/v1/graphql
+schema: https://graph.dev.sub.zero.io/v1/graphql
 overwrite: true
 
 generates:

@@ -7,7 +7,7 @@
 #        canEdit
 #        role
 #      }
-#      access
+#      access_model
 #      metadata {
 #        logo
 #        name
