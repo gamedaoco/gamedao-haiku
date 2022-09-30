@@ -23,8 +23,8 @@ export function NavLink({ href, external, children }: NavLinkProps) {
 		[href, external, push],
 	)
 	return (
-		<div title={href} onClick={handleClick}>
+		<a title={href} onClick={handleClick}>
 			{children}
-		</div>
+		</a>
 	)
 }

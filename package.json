@@ -18,7 +18,9 @@
     "format:verify": "prettier --parser babel-ts --check pkg/**/*.{ts,tsx}",
     "build:graphql": "yarn workspace @gamedao-haiku/app generate",
     "build:frontend": "yarn workspace @gamedao-haiku/app build",
-    "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend"
+    "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",
+    "commit": "git-cz",
+    "analyze": "ANALYZE=true wsrun -p @gamedao-haiku/app -c build"
   },
   "publishConfig": {
     "access": "public"
@@ -27,6 +29,7 @@
     "@changesets/cli": "^2.23.2",
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@commitlint/cz-commitlint": "^17.1.2",
     "@commitlint/prompt-cli": "^17.0.0",
     "@picgo/bump-version": "^1.0.3",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
@@ -43,14 +46,12 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-customizable"
-    },
-    "cz-customizable": {
-      "config": "./node_modules/@picgo/bump-version/.cz-config.js"
+      "path": "@commitlint/cz-commitlint"
     }
   },
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn format:verify"
     }

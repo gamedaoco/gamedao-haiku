@@ -297,7 +297,7 @@ export function Overview({
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('label:treasury')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('treasury')}>
-							{t('button:ui:go_to_members')} <ChevronRight />
+							{t('button:ui:go_to_treasury')} <ChevronRight />
 						</Button>
 					</Stack>
 					<AreaChartContainer
