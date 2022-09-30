@@ -32,7 +32,7 @@ export function SettingsOverview({ organizationState }: ComponentProps) {
 			</Grid>
 			<Grid item xs={12}>
 				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw">
-					<MemberType feeType={organizationState?.fee_model} feeAmount={organizationState?.fee_model} />
+					<MemberType feeType={organizationState?.fee_model} feeAmount={+organizationState?.fee_model} />
 				</Stack>
 			</Grid>
 			<Grid item xs={12}>

@@ -19,7 +19,7 @@ const validation = Yup.object().shape({
 	access_model: Yup.number().required().min(0).max(2),
 	fee_model: Yup.number().required().min(0).max(2),
 	// Is actually a number but with 18 digits and yum has no support for big number
-	fee_model: Yup.string().required(),
+	fee: Yup.string().required(),
 	gov_currency: Yup.object().required(),
 	pay_currency: Yup.object().required(),
 	member_limit: Yup.number().required().min(0),
@@ -46,7 +46,7 @@ export function useCreateOrgTransaction(): TransactionData {
 					org_type: data.type,
 					access_model: data.mode,
 					fee_model: data.feeMode,
-					fee_model: fromUnit(
+					fee: fromUnit(
 						data.feeAmount,
 						selectedApiProvider.systemProperties.tokenDecimals[
 							selectedApiProvider.systemProperties.governanceCurrency
@@ -83,7 +83,7 @@ export function useCreateOrgTransaction(): TransactionData {
 					mappedData.org_type,
 					mappedData.access_model,
 					mappedData.fee_model,
-					mappedData.fee_model,
+					mappedData.fee,
 					mappedData.gov_currency,
 					mappedData.pay_currency,
 					mappedData.member_limit,
