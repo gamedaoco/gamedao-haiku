@@ -7,12 +7,12 @@ async function handleCampaignActivatedEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Activated';
 	let raw_event = new FlowActivatedEvent(context);
 
-	if (!raw_event.isV60) {
+	if (!raw_event.isV61) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV60;
+	let event = raw_event.asV61;
 
 	let campaignId = hashToHexString(event.campaignId);
 	let campaign = await getCampaign(store, campaignId);
