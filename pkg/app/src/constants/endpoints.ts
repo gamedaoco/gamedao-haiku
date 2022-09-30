@@ -14,16 +14,22 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/img/zero.png',
-		name: 'Dev Parachain',
+		name: 'development',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		default: true,
 	},
 	{
 		image: '/img/zero.png',
-		name: 'Rococo Parachain',
-		url: 'https://graph.staging.para.sub.zero.io',
-		healthCheck: 'https://graph.staging.para.sub.zero.io/health',
+		name: 'staging',
+		url: 'https://graph.stage.sub.zero.io/v1/graphql',
+		healthCheck: 'https://graph.stage.sub.zero.io/health',
+	},
+	{
+		image: '/img/zero.png',
+		name: 'rococo',
+		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
+		healthCheck: 'https://graph.rococo.sub.zero.io/health',
 	},
 ]
 
