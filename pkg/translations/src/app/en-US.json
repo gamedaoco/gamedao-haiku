@@ -1,467 +1,475 @@
 {
-  "button": {
-    "navigation": {
-      "governance": "Governance",
-      "campaigns": "Campaigns",
-      "organisations": "Organisations",
-      "dashboard": "Dashboard",
-      "wallet": "Wallet",
-      "documentation": "Documentation",
-      "faucet": "Faucet",
-      "overview": "Overview",
-      "my_organisations": "My Organisations",
-      "my_campaigns": "My Campaigns",
-      "my_collectables": "My Collectables",
-      "identity": "Identity",
-      "set_on_chain_identity": "Set On-Chain Identity",
-      "proposals": "Proposals",
-      "members": "Members",
-      "treasury": "Treasury",
-      "settings": "Settings"
+    "button": {
+        "navigation": {
+            "governance": "Governance",
+            "campaigns": "Campaigns",
+            "organisations": "Organisations",
+            "dashboard": "Dashboard",
+            "wallet": "Wallet",
+            "documentation": "Documentation",
+            "faucet": "Faucet",
+            "overview": "Overview",
+            "my_organisations": "My Organisations",
+            "my_campaigns": "My Campaigns",
+            "my_collectables": "My Collectables",
+            "identity": "Identity",
+            "set_on_chain_identity": "Set On-Chain Identity",
+            "proposals": "Proposals",
+            "members": "Members",
+            "treasury": "Treasury",
+            "settings": "Settings"
+        },
+        "ui": {
+            "no_continue": "No, continue",
+            "yes_cancel_now": "Yes, cancel now",
+            "yes_delete_now": "Yes, delete now",
+            "learn_more": "Learn More",
+            "download_extension": "Download {{extension}} Extension.",
+            "connect_wallet": "Connect wallet",
+            "submit": "Submit",
+            "select": "Select",
+            "create": "Create",
+            "load_more": "Load More",
+            "clear": "Clear",
+            "back_to_all_campaigns": "back to all campaigns",
+            "transaction": {
+                "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
+                "get_token": "Get {{token}} here",
+                "transaction_fee": "Transaction Fee",
+                "your_balance": "Your current balance",
+                "description_toggle": "What is this used for?"
+            },
+            "create_campaign": "Create your first Campaign",
+            "explore_campaigns": "Explore Campaigns",
+            "contribute_now": "Contribute now",
+            "contribute_again": "Contribute again",
+            "join_organization": "Join Organization",
+            "leave_organization": "Leave Organization",
+            "create_proposal": "Create Proposal",
+            "show_more": "Show More",
+            "show_less": "Show Less",
+            "vote": "Vote",
+            "save_draft": "Save Draft",
+            "delete_draft": "Delete Draft",
+            "go_to_members": "Go to Members",
+            "go_to_treasury": "Go to Treasury",
+            "view_all": "View All",
+            "change_settings": "Change Settings"
+        },
+        "form": {
+            "publish_now": "Publish Now",
+            "next_step": "Next step",
+            "save_organization": "Save organization",
+            "back": "Back",
+            "cancel": "Cancel",
+            "proposal": {
+                "create": "Create Proposal"
+            },
+            "identity": {
+                "clear": "Clear Identity",
+                "submit": "Sign and Submit"
+            }
+        }
     },
-    "ui": {
-      "no_continue": "No, continue",
-      "yes_cancel_now": "Yes, cancel now",
-      "learn_more": "Learn More",
-      "download_extension": "Download {{extension}} Extension.",
-      "connect_wallet": "Connect wallet",
-      "submit": "Submit",
-      "create": "Create",
-      "load_more": "Load More",
-      "clear": "Clear",
-      "back_to_all_campaigns": "back to all campaigns",
-      "transaction": {
-        "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
-        "get_token": "Get {{token}} here",
-        "transaction_fee": "Transaction Fee",
-        "your_balance": "Your current balance",
-        "description_toggle": "What is this used for?"
-      },
-      "create_campaign": "Create your first Campaign",
-      "explore_campaigns": "Explore Campaigns",
-      "contribute_now": "Contribute now",
-      "contribute_again": "Contribute again",
-      "join_organization": "Join Organization",
-      "leave_organization": "Leave Organization",
-      "create_proposal": "Create Proposal",
-      "show_more": "Show More",
-      "show_less": "Show Less",
-      "vote": "Vote",
-      "save_draft": "Save Draft",
-      "go_to_members": "Go to Members",
-      "go_to_treasury": "Go to Treasury",
-      "view_all": "View All",
-      "change_settings": "Change Settings"
-    },
-    "form": {
-      "publish_now": "Publish Now",
-      "next_step": "Next step",
-      "save_organization": "Save organization",
-      "back": "Back",
-      "cancel": "Cancel",
-      "proposal": {
-        "create": "Create Proposal"
-      },
-      "identity": {
-        "clear": "Clear Identity",
-        "submit": "Sign and Submit"
-      }
-    }
-  },
-  "label": {
-    "are_you_sure": "Are you sure?",
-    "progress_will_be_lost": "All your progress will be lost. Maybe save it as a draft and continue later",
-    "dashboard": "Dashboard",
-    "connect_wallet": "To use GameDAO DApp, the Polkadot or Talisman Extension is required. Please connect your wallet or install the Extension.",
-    "my_collectables": "My Collectables",
-    "sort_by": "Sort By",
-    "filters": "Filters",
-    "by_organization": "By {{organizationName}}",
-    "backers": "Backers:",
-    "funded": "Funded:",
-    "amount": "Amount",
-    "campaign_status": {
-      "init": "Init",
-      "active": "Active",
-      "paused": "Paused",
-      "finalizing": "Finalizing",
-      "reverting": "Reverting",
-      "success": "Success",
-      "failed": "Failed",
-      "locked": "Locked",
-      "draft": "Draft"
-    },
-    "display_name": "Display Name",
-    "legal_name": "Legal Name",
-    "email": "Email",
-    "total_deposit": "Total Deposit",
-    "website": "Website",
-    "campaigns": "Campaigns",
-    "treasury": "Treasury",
-    "search_campaigns": "Search Campaigns",
-    "update_photo": "Update photo",
-    "n_members": "{{n}} Member",
-    "treasury_address": "Treasury Address: {{address}}",
-    "complete_your_organization": "Complete your Organization",
-    "tmp_organization_description": "To start using your organization and deploy it on the chain, please complete following steps and earn experience points!",
-    "add_logo_and_banner": "Add a logo and banner",
-    "click_placeholder_upload": "Click on the placeholder to upload an image",
-    "save_organization_on_chain": "Save organization on chain",
-    "deploy_organization_to_chain": "Deploy your organization onto the chain",
-    "total_received_xp": "Receive Total {{xp}}XP",
-    "organization_level_description": "Your organization is currently on the level Padavan. Reach another {{xp}}XP to reach the next level!",
-    "deploy_organization_min_deposit": "Deploy organization on chain A min deposit of {{value}} GAME is needed.",
-    "get_token_here": "Get {{token}} here.",
-    "deploy_organization": "Save on chain",
-    "proposal_by": "by {{creator}}",
-    "information": "Information",
-    "creator": "Creator",
-    "start_date": "Start date",
-    "end_date": "End date",
-    "proposal_type": "Proposal Type",
-    "voting_type": "Voting Type",
-    "block_number": "Block Number",
-    "current_results": "Current results",
-    "yes": "Yes",
-    "no": "No",
-    "cast_your_vote": "Cast your vote",
-    "votes": "Votes",
-    "name": "Name",
-    "role": "Role",
-    "members": "Members",
-    "prime": "Prime",
-    "member": "Member",
-    "joined": "Joined",
-    "open": "Open",
-    "invitation": "Invitation",
-    "currency": "Currency",
-    "source": "Source",
-    "type": "Type",
-    "hash": "Hash"
-  },
-  "transactions": {
-    "createOrganization": {
-      "title": "Create Organisation",
-      "action_subtitle": "Organisation deposit",
-      "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an organisation. You will receive your deposit back when you close the organisation."
-    },
-    "createCampaign": {
-      "title": "Create Campaign",
-      "action_subtitle": "Campaign deposit",
-      "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an campaign. We will return the deposit back to the treasury in case the campaign is not successful."
-    },
-    "createProposal": {
-      "title": "Create Proposal",
-      "action_subtitle": "Proposal deposit",
-      "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create a proposal."
-    },
-    "simpleVote": {
-      "title": "Submit Vote"
-    },
-    "addMember": {
-      "title": "Join Organisation",
-      "action_subtitle": "Free",
-      "description": "This organisation does not require any fee."
-    },
-    "removeMember": {
-      "title": "Leave Organisation"
-    },
-    "setIdentity": {
-      "title": "Set ZERO chain identity",
-      "action_subtitle": "Deposit",
-      "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an on-chain identity."
-    },
-    "clearIdentity": {
-      "title": "Clear ZERO chain identity"
-    },
-    "contribute": {
-      "title": "Contribute to this campaign",
-      "action_subtitle": "Funding summary",
-      "action_sub_line": "Deposit"
-    }
-  },
-  "page": {
-    "account": {
-      "title": "My Account",
-      "achievements": {
-        "title": "My Achievements",
-        "description": "Level up by using our protocols and collaborating with the community."
-      },
-      "balances": {
-        "title": "My Balances",
-        "token": "Token",
-        "transferable": "Transferable",
-        "locked": "Locked",
-        "reserved": "Reserved",
-        "total": "Total"
-      },
-      "organisations": {
-        "title": "Organisations",
+    "label": {
+        "are_you_sure": "Are you sure?",
+        "progress_will_be_lost": "All your progress will be lost. Maybe save it as a draft and continue later",
+        "campaign_draft_will_be_deleted": "Your draft campaign will be deleted.",
+        "dashboard": "Dashboard",
+        "connect_wallet": "To use GameDAO DApp, the Polkadot or Talisman Extension is required. Please connect your wallet or install the Extension.",
+        "my_collectables": "My Collectables",
+        "sort_by": "Sort By",
+        "filters": "Filters",
+        "by_organization": "By {{organizationName}}",
+        "backers": "Backers:",
+        "funded": "Funded:",
+        "amount": "Amount",
+        "campaign_status": {
+            "init": "Init",
+            "active": "Active",
+            "paused": "Paused",
+            "finalizing": "Finalizing",
+            "reverting": "Reverting",
+            "success": "Success",
+            "failed": "Failed",
+            "locked": "Locked",
+            "draft": "Draft"
+        },
+        "display_name": "Display Name",
+        "legal_name": "Legal Name",
+        "email": "Email",
+        "total_deposit": "Total Deposit",
+        "website": "Website",
+        "campaigns": "Campaigns",
+        "treasury": "Treasury",
+        "search_campaigns": "Search Campaigns",
+        "update_photo": "Update photo",
+        "n_members": "{{n}} Member",
+        "treasury_address": "Treasury Address: {{address}}",
+        "complete_your_organization": "Complete your Organization",
+        "tmp_organization_description": "To start using your organization and deploy it on the chain, please complete following steps and earn experience points!",
+        "add_logo_and_banner": "Add a logo and banner",
+        "click_placeholder_upload": "Click on the placeholder to upload an image",
+        "save_organization_on_chain": "Save organization on chain",
+        "deploy_organization_to_chain": "Deploy your organization onto the chain",
+        "total_received_xp": "Receive Total {{xp}}XP",
+        "organization_level_description": "Your organization is currently on the level Padavan. Reach another {{xp}}XP to reach the next level!",
+        "deploy_organization_min_deposit": "Deploy organization on chain A min deposit of {{value}} GAME is needed.",
+        "get_token_here": "Get {{token}} here.",
+        "deploy_organization": "Save on chain",
+        "proposal_by": "by {{creator}}",
+        "information": "Information",
+        "creator": "Creator",
+        "start_date": "Start date",
+        "end_date": "End date",
+        "proposal_type": "Proposal Type",
+        "voting_type": "Voting Type",
+        "block_number": "Block Number",
+        "current_results": "Current results",
+        "yes": "Yes",
+        "no": "No",
+        "cast_your_vote": "Cast your vote",
+        "votes": "Votes",
         "name": "Name",
-        "members": "Members",
-        "value_locked": "Value Locked",
-        "access": "Access",
         "role": "Role",
+        "members": "Members",
         "prime": "Prime",
-        "member": "Member"
-      },
-      "campaigns": {
-        "contributed_campaigns": "Contributed Campaigns",
-        "campaign_contributions": "Campaign Contributions",
-        "name": "Name",
-        "contributors": "Contributors",
-        "investment": "Investment",
-        "raised_goal": "Raised/Goal",
-        "time_left": "Time Left",
-        "status": "Status"
-      }
+        "member": "Member",
+        "joined": "Joined",
+        "open": "Open",
+        "invitation": "Invitation",
+        "currency": "Currency",
+        "source": "Source",
+        "type": "Type",
+        "hash": "Hash"
     },
-    "organisations": {
-      "title": "Organisations",
-      "no_campaigns": "No Campaigns Yet",
-      "no_organisations": "No organisation found",
-      "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
-      "search_place_holder": "Search Organizations",
-      "load_more": "Load More Organisations",
-      "showing_results": "Showing {{count1}} of {{count2}} organisations",
-      "votings": "Votings",
-      "organisations_rules": "Organisation Rules",
-      "about": "About",
-      "general_proposal": "General Proposal",
-      "withdrawal_proposal": "Withdrawal Proposal",
-      "spending_proposal": "Spending Proposal",
-      "organisation_rules": {
-        "open": {
-          "title": "Open Access",
-          "text": "Anyone can join this organization.",
-          "status": "Public"
-        },
-        "private": {
-          "title": "Private Access",
-          "text": "Approved applicants can join the organisation.",
-          "status": "Private"
-        },
-        "no_fee": {
-          "title": "No Membership Fee",
-          "text": "Members can join for free."
-        },
-        "reserved_fee": {
-          "title": "Reserved Membership Fee",
-          "text": "The fee will be locked and payed back if a member leaves the DAO."
-        },
-        "transferred_fee": {
-          "title": "Transferred Membership Fee",
-          "text": "Members pay a fee to join this organisation."
-        },
-        "no_member_limit": {
-          "title": "No Member Limit",
-          "text": " Unlimited Members can join this organisation."
-        },
-        "member_limit": {
-          "title": "Member Limit",
-          "text": "members can join this organisation",
-          "only": "Only"
-        }
-      },
-      "settings": {
-        "about": {
-          "title": "About Organization",
-          "description": "Description",
-          "website": "Website",
-          "country": "Country",
-          "tags": "tags",
-          "description_error": "* Campaign Description is required",
-          "cta_button": "Update About Organization"
-        },
-        "access_type": {
-          "title": "Access type",
-          "radio_button_open": {
-            "title": "Open",
-            "description": "Anyone can join the organization."
-          },
-          "radio_button_private": {
-            "title": "Private",
-            "description": "Whitelisted and/or applicants can join the organization."
-          },
-          "whitelist": "Whitelist (Members can be added later)",
-          "application": "Application",
-          "cta_button": "Update access type"
-        },
-        "member_type": {
-          "title": "Member type",
-          "sub_title": "Will your organization collect a fee for members to join?",
-          "radio_button_no_fee": {
-            "title": "No Fee",
-            "description": "Members can join the organization without a fee"
-          },
-          "radio_button_fee": {
-            "title": "Fee",
-            "description": "When members join the organization they pay a fee"
-          },
-          "fee_amount": "Fee amount",
-          "cta_button": "Update Member type"
-        },
-        "member_limit": {
-          "title": "Member Limit",
-          "sub_title": "How many members can join the organization?",
-          "description": "Leave 0 if the limit is unlimited",
-          "cta_button": "Update Member limit"
-        },
-        "control": {
-          "title": "Who will control the organization?",
-          "radio_button_entity": {
-            "title": "One Entity",
-            "description": "A single entity can take decisions on behalf of the organization."
-          },
-          "radio_button_community": {
-            "title": "Community",
-            "description": "The community will take decisions together as a group."
-          },
-          "cta_button": "Update organization controller"
-        }
-      },
-      "sort_options": {
-        "mem_hi_lo": "Member: High-Low",
-        "mem_lo_hi": "Member: Low-High",
-        "created_new": "Created: Newest first",
-        "created_old": "Created: Oldest first",
-        "fee_hi_lo": "Fee: High-Low",
-        "fee_lo_hi": "Fee: Low-High",
-        "cont_asc": "Controller: Ascending",
-        "cont_desc": "Controller: Descending"
-      },
-      "countries": {
-        "worldwide": "Worldwide",
-        "europe": "Europe",
-        "north_america": "North America",
-        "south_america": "South America",
-        "africa": "Africa",
-        "asia": "Asia",
-        "oceania": "Oceania",
-        "other": "Other"
-      },
-      "tags": {
-        "gaming_guild": "Gaming Guild",
-        "game_studio": "Game Studio",
-        "investment_syndicate": "Investment Syndicate",
-        "publisher": "Publisher",
-        "fan": "Fans",
-        "creator_dao": "Creator DAO",
-        "indie_games": "Indie Games",
-        "web3": "Web3",
-        "collectables": "Collectables",
-        "content_creators": "Content Creators"
-      },
-      "treasury": {
-        "assets": "All Assets",
-        "transactions_income": "Transaction History - Income",
-        "transactions_outgoing": "Transaction History - Outgoing",
-        "total": "Total",
-        "income": "Income",
-        "outgoing": "Outgoing",
-        "treasury_balance": "Treasury Balance",
-        "treasury_by_year": "Treasury by Year",
-        "than_last_year": "than last year"
-      }
-    },
-    "campaigns": {
-      "created_campaigns": "Created Campaigns",
-      "new_campaign": "New Campaign",
-      "no_campaigns": "No campaigns found",
-      "click": "Click here to create a new campaign",
-      "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
-      "showing_results": "Showing  {{count1}} of {{count2}} campaigns",
-      "sort_options": {
-        "target_asc": "Funding Target: asc",
-        "target_desc": "Funding Target: desc",
-        "current_funding_asc": "Current Funding: asc",
-        "current_funding_desc": "Current Funding: desc",
-        "contributors_funding_asc": "Contributors: low-high",
-        "contributors_funding_desc": "Contributors: high-low",
-        "alphabetical_asc": "Alphabetical: asc",
-        "alphabetical_desc": "Alphabetical: desc",
-        "time_left_asc": "Time Left: asc",
-        "time_left_desc": "Time Left: desc"
-      },
-      "filters": {
-        "funding_target": "Funding Target",
-        "status": "Status"
-      }
-    },
-    "campaign_details": {
-      "time_left": "TIME LEFT",
-      "backers": "BACKERS",
-      "protocol": "PROTOCOL",
-      "category": "CATEGORY",
-      "raised": "RAISED",
-      "target": "TARGET",
-      "overview": "OVERVIEW",
-      "reasons_to_invest": "REASON TO INVEST",
-      "contribute_to_campaign_help_text": "Your funds will be reserved until the campaign is funded or expired."
-    }
-  },
-  "notification": {
     "transactions": {
-      "createOrganization": {
-        "pending": "Summoning your Organization...",
-        "success": "The beast is unleashed!",
-        "error": "Summoning failed, check your Mana."
-      },
-      "createCampaign": {
-        "pending": "Summoning your Campaign...",
-        "success": "The beast is unleashed!",
-        "error": "Summoning failed, check your Mana."
-      },
-      "createProposal": {
-        "pending": "Summoning your Proposal...",
-        "success": "Proposal created",
-        "error": "Summoning failed, check your Mana."
-      },
-      "simpleVote": {
-        "pending": "Voting in progress...",
-        "success": "Voted",
-        "error": "Voting failed"
-      },
-      "addMember": {
-        "pending": "Join organisations in progress...",
-        "success": "Join organisations successfully",
-        "error": "Join organisations failed"
-      },
-      "removeMember": {
-        "pending": "Leave organisations in progress...",
-        "success": "Leave organisations successfully",
-        "error": "Leave organisations failed"
-      },
-      "setIdentity": {
-        "pending": "Setting your identity in progress...",
-        "success": "Your Identity was set successfully",
-        "error": "Setting Identity failed"
-      },
-      "clearIdentity": {
-        "pending": "Clearing your identity in progress...",
-        "success": "Your Identity was cleared successfully",
-        "error": "Clearing Identity failed"
-      },
-      "contribute": {
-        "pending": "Contribute in progress...",
-        "success": "Successfully contributed",
-        "error": "Contribute failed"
-      }
+        "createOrganization": {
+            "title": "Create Organisation",
+            "action_subtitle": "Organisation deposit",
+            "action_sub_line": "Deposit",
+            "description": "You need to deposit the amount so you can create an organisation. You will receive your deposit back when you close the organisation."
+        },
+        "createCampaign": {
+            "title": "Create Campaign",
+            "action_subtitle": "Campaign deposit",
+            "action_sub_line": "Deposit",
+            "description": "You need to deposit the amount so you can create an campaign. We will return the deposit back to the treasury in case the campaign is not successful."
+        },
+        "createProposal": {
+            "title": "Create Proposal",
+            "action_subtitle": "Proposal deposit",
+            "action_sub_line": "Deposit",
+            "description": "You need to deposit the amount so you can create a proposal."
+        },
+        "simpleVote": {
+            "title": "Submit Vote"
+        },
+        "addMember": {
+            "title": "Join Organisation",
+            "action_subtitle": "Free",
+            "description": "This organisation does not require any fee."
+        },
+        "removeMember": {
+            "title": "Leave Organisation"
+        },
+        "setIdentity": {
+            "title": "Set ZERO chain identity",
+            "action_subtitle": "Deposit",
+            "action_sub_line": "Deposit",
+            "description": "You need to deposit the amount so you can create an on-chain identity."
+        },
+        "clearIdentity": {
+            "title": "Clear ZERO chain identity"
+        },
+        "contribute": {
+            "title": "Contribute to this campaign",
+            "action_subtitle": "Funding summary",
+            "action_sub_line": "Deposit"
+        }
     },
-    "info": {
-      "address_copied": "Address Copied to Clipboard",
-      "draft_saved": "Draft has been saved"
+    "page": {
+        "account": {
+            "title": "My Account",
+            "achievements": {
+                "title": "My Achievements",
+                "description": "Level up by using our protocols and collaborating with the community."
+            },
+            "balances": {
+                "title": "My Balances",
+                "token": "Token",
+                "transferable": "Transferable",
+                "locked": "Locked",
+                "reserved": "Reserved",
+                "total": "Total"
+            },
+            "organisations": {
+                "title": "Organisations",
+                "name": "Name",
+                "members": "Members",
+                "value_locked": "Value Locked",
+                "access": "Access",
+                "role": "Role",
+                "prime": "Prime",
+                "member": "Member"
+            },
+            "campaigns": {
+                "contributed_campaigns": "Contributed Campaigns",
+                "campaign_contributions": "Campaign Contributions",
+                "name": "Name",
+                "contributors": "Contributors",
+                "investment": "Investment",
+                "raised_goal": "Raised/Goal",
+                "time_left": "Time Left",
+                "status": "Status"
+            }
+        },
+        "organisations": {
+            "title": "Organisations",
+            "no_campaigns": "No Campaigns Yet",
+            "no_organisations": "No organisation found",
+            "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
+            "search_place_holder": "Search Organizations",
+            "load_more": "Load More Organisations",
+            "showing_results": "Showing {{count1}} of {{count2}} organisations",
+            "votings": "Votings",
+            "organisations_rules": "Organisation Rules",
+            "about": "About",
+            "general_proposal": "General Proposal",
+            "withdrawal_proposal": "Withdrawal Proposal",
+            "spending_proposal": "Spending Proposal",
+            "organisation_rules": {
+                "open": {
+                    "title": "Open Access",
+                    "text": "Anyone can join this organization.",
+                    "status": "Public"
+                },
+                "private": {
+                    "title": "Private Access",
+                    "text": "Approved applicants can join the organisation.",
+                    "status": "Private"
+                },
+                "no_fee": {
+                    "title": "No Membership Fee",
+                    "text": "Members can join for free."
+                },
+                "reserved_fee": {
+                    "title": "Reserved Membership Fee",
+                    "text": "The fee will be locked and payed back if a member leaves the DAO."
+                },
+                "transferred_fee": {
+                    "title": "Transferred Membership Fee",
+                    "text": "Members pay a fee to join this organisation."
+                },
+                "no_member_limit": {
+                    "title": "No Member Limit",
+                    "text": " Unlimited Members can join this organisation."
+                },
+                "member_limit": {
+                    "title": "Member Limit",
+                    "text": "members can join this organisation",
+                    "only": "Only"
+                }
+            },
+            "settings": {
+                "about": {
+                    "title": "About Organization",
+                    "description": "Description",
+                    "website": "Website",
+                    "country": "Country",
+                    "tags": "tags",
+                    "description_error": "* Campaign Description is required",
+                    "cta_button": "Update About Organization"
+                },
+                "access_type": {
+                    "title": "Access type",
+                    "radio_button_open": {
+                        "title": "Open",
+                        "description": "Anyone can join the organization."
+                    },
+                    "radio_button_private": {
+                        "title": "Private",
+                        "description": "Whitelisted and/or applicants can join the organization."
+                    },
+                    "whitelist": "Whitelist (Members can be added later)",
+                    "application": "Application",
+                    "cta_button": "Update access type"
+                },
+                "member_type": {
+                    "title": "Member type",
+                    "sub_title": "Will your organization collect a fee for members to join?",
+                    "radio_button_no_fee": {
+                        "title": "No Fee",
+                        "description": "Members can join the organization without a fee"
+                    },
+                    "radio_button_fee": {
+                        "title": "Fee",
+                        "description": "When members join the organization they pay a fee"
+                    },
+                    "fee_amount": "Fee amount",
+                    "cta_button": "Update Member type"
+                },
+                "member_limit": {
+                    "title": "Member Limit",
+                    "sub_title": "How many members can join the organization?",
+                    "description": "Leave 0 if the limit is unlimited",
+                    "cta_button": "Update Member limit"
+                },
+                "control": {
+                    "title": "Who will control the organization?",
+                    "radio_button_entity": {
+                        "title": "One Entity",
+                        "description": "A single entity can take decisions on behalf of the organization."
+                    },
+                    "radio_button_community": {
+                        "title": "Community",
+                        "description": "The community will take decisions together as a group."
+                    },
+                    "cta_button": "Update organization controller"
+                }
+            },
+            "sort_options": {
+                "mem_hi_lo": "Member: High-Low",
+                "mem_lo_hi": "Member: Low-High",
+                "created_new": "Created: Newest first",
+                "created_old": "Created: Oldest first",
+                "fee_hi_lo": "Fee: High-Low",
+                "fee_lo_hi": "Fee: Low-High",
+                "cont_asc": "Controller: Ascending",
+                "cont_desc": "Controller: Descending"
+            },
+            "countries": {
+                "worldwide": "Worldwide",
+                "europe": "Europe",
+                "north_america": "North America",
+                "south_america": "South America",
+                "africa": "Africa",
+                "asia": "Asia",
+                "oceania": "Oceania",
+                "other": "Other"
+            },
+            "tags": {
+                "gaming_guild": "Gaming Guild",
+                "game_studio": "Game Studio",
+                "investment_syndicate": "Investment Syndicate",
+                "publisher": "Publisher",
+                "fan": "Fans",
+                "creator_dao": "Creator DAO",
+                "indie_games": "Indie Games",
+                "web3": "Web3",
+                "collectables": "Collectables",
+                "content_creators": "Content Creators"
+            },
+            "treasury": {
+              "assets": "All Assets",
+              "transactions_income": "Transaction History - Income",
+              "transactions_outgoing": "Transaction History - Outgoing",
+              "total": "Total",
+              "income": "Income",
+              "outgoing": "Outgoing",
+              "treasury_balance": "Treasury Balance",
+              "treasury_by_year": "Treasury by Year",
+              "than_last_year": "than last year"
+            }
+        },
+        "campaigns": {
+            "created_campaigns": "Created Campaigns",
+            "new_campaign": "New Campaign",
+            "no_campaigns": "No campaigns found",
+            "click": "Click here to create a new campaign",
+            "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
+            "showing_results": "Showing  {{count1}} of {{count2}} campaigns",
+            "sort_options": {
+                "target_asc": "Funding Target: asc",
+                "target_desc": "Funding Target: desc",
+                "current_funding_asc": "Current Funding: asc",
+                "current_funding_desc": "Current Funding: desc",
+                "contributors_funding_asc": "Contributors: low-high",
+                "contributors_funding_desc": "Contributors: high-low",
+                "alphabetical_asc": "Alphabetical: asc",
+                "alphabetical_desc": "Alphabetical: desc",
+                "time_left_asc": "Time Left: asc",
+                "time_left_desc": "Time Left: desc"
+            },
+            "filters": {
+                "funding_target": "Funding Target",
+                "status": "Status"
+            }
+        },
+        "campaign_details": {
+            "time_left": "TIME LEFT",
+            "backers": "BACKERS",
+            "protocol": "PROTOCOL",
+            "category": "CATEGORY",
+            "raised": "RAISED",
+            "target": "TARGET",
+            "overview": "OVERVIEW",
+            "reasons_to_invest": "REASON TO INVEST",
+            "contribute_to_campaign_help_text": "Your funds will be reserved until the campaign is funded or expired."
+        }
     },
-    "warning": {
-      "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
-      "max_1m_game_fee": "Please consider charging a maximum of 1M GAME",
-      "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users",
-      "higher_current_member_limit": "The Member Limit cannot exceed the previous limit",
-      "no_accounts_in_wallet": "Sorry you don't have any accounts in your wallet extension: {{name}}"
+    "notification": {
+        "transactions": {
+            "createOrganization": {
+                "pending": "Summoning your Organization...",
+                "success": "The beast is unleashed!",
+                "error": "Summoning failed, check your Mana."
+            },
+            "createCampaign": {
+                "pending": "Summoning your Campaign...",
+                "success": "The beast is unleashed!",
+                "error": "Summoning failed, check your Mana."
+            },
+            "createProposal": {
+                "pending": "Summoning your Proposal...",
+                "success": "Proposal created",
+                "error": "Summoning failed, check your Mana."
+            },
+            "simpleVote": {
+                "pending": "Voting in progress...",
+                "success": "Voted",
+                "error": "Voting failed"
+            },
+            "addMember": {
+                "pending": "Join organisations in progress...",
+                "success": "Join organisations successfully",
+                "error": "Join organisations failed"
+            },
+            "removeMember": {
+                "pending": "Leave organisations in progress...",
+                "success": "Leave organisations successfully",
+                "error": "Leave organisations failed"
+            },
+            "setIdentity": {
+                "pending": "Setting your identity in progress...",
+                "success": "Your Identity was set successfully",
+                "error": "Setting Identity failed"
+            },
+            "clearIdentity": {
+                "pending": "Clearing your identity in progress...",
+                "success": "Your Identity was cleared successfully",
+                "error": "Clearing Identity failed"
+            },
+            "contribute": {
+                "pending": "Contribute in progress...",
+                "success": "Successfully contributed",
+                "error": "Contribute failed"
+            }
+        },
+        "info": {
+            "address_copied": "Address Copied to Clipboard",
+            "draft_saved": "Draft has been saved",
+            "draft_deleted": "Draft has been deleted"
+        },
+        "warning": {
+            "min_1_game_fee": "Please enter a minimum fee of 1 GAME",
+            "max_1m_game_fee": "Please consider charging a maximum of 1M GAME",
+            "max_1m_member_limit": "Limiting to more than 1M users will be available after you reached 1M users",
+            "higher_current_member_limit": "The Member Limit cannot exceed the previous limit",
+            "no_accounts_in_wallet": "Sorry you don't have any accounts in your wallet extension: {{name}}"
+        },
+        "error": {
+            "graphql_connection_error": "Connection to network {{name}} cannot be established please use a different network"
+        }
     }
-  }
 }

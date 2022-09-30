@@ -1,10 +1,9 @@
-// Imports
-import { IdentityUpsertData } from '../../../@types/pallets/identity/identityUpsertData';
+import { IdentityUpsertData } from '../../../@types/identity';
 import { upsertIdentity } from '../../../database/identity';
 import { encodeSigner, hexStringToString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-// Logic
+
 async function handleIdentitySetEvent(context: EventHandlerContext) {
 	if (!context.extrinsic) return;
 
@@ -21,10 +20,11 @@ async function handleIdentitySetEvent(context: EventHandlerContext) {
 		image: getValue(identityData.image?.raw),
 		twitter: getValue(identityData.twitter?.raw),
 		web: getValue(identityData.web?.raw),
+		web3name: getValue(identityData.web3name?.raw),
+		discord: getValue(identityData.discord?.raw),
 	};
 
 	await upsertIdentity(context.store, upsertData.address, upsertData);
 }
 
-// Exports
 export { handleIdentitySetEvent };

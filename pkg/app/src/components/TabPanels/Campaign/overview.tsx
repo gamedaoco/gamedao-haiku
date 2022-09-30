@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
+
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useSaveCampaignDraft } from 'hooks/useSaveCampaignDraft'
 import { Campaign, useCampaignByOrganizationIdSubscription } from 'src/queries'
@@ -65,7 +66,7 @@ export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
 		)
 	}
 
-	return !loading && paginatedData?.length ? (
+	return !loading && (paginatedData?.length || draftsState.length) ? (
 		<CampaignsList
 			campaigns={paginatedData}
 			draftCampaigns={draftsState}

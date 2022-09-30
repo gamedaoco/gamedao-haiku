@@ -4,20 +4,7 @@ import { useRouter } from 'next/router'
 
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
-import {
-	Avatar,
-	Button,
-	Card,
-	CardContent,
-	CardMedia,
-	CircularProgress,
-	Grid,
-	Stack,
-	Tab,
-	Tabs,
-	useMediaQuery,
-} from '@mui/material'
-import Box from '@mui/material/Box'
+import { Avatar, Box, Button, CircularProgress, Grid, Paper, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
@@ -29,6 +16,7 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
+import { Image } from 'components/Image/image'
 import { Layout } from 'components/Layouts/default/layout'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
@@ -161,55 +149,31 @@ export function OrganisationById() {
 				<TabContext value={activeStep}>
 					{(!loading && data) || !organizationIdState ? (
 						<Stack spacing={4}>
-							<Card
+							<Paper
 								sx={{
 									position: 'relative',
 								}}
 							>
-								<Grid
-									minHeight="20vh"
-									maxHeight="20vh"
-									width="100%"
-									display="grid"
-									alignItems="center"
-									overflow="hidden"
-								>
-									<label htmlFor="header-file-upload">
-										<input
-											style={{ display: 'none' }}
-											accept="image/*"
-											id="header-file-upload"
-											type="file"
-											onChange={(event) => handleUploadImage(event, tmpOrg.setHeaderCID)}
-										/>
-										{!organizationState?.organization_metadata?.header &&
-										!tmpOrg.headerCID?.length ? (
-											<Box display="grid" justifyContent="center" alignItems="center">
-												<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
-											</Box>
-										) : (
-											<CardMedia
-												component="img"
-												src={parseIpfsHash(
-													organizationState?.organization_metadata?.header ??
-														tmpOrg.headerCID,
-													config.IPFS_GATEWAY,
-												)}
-												alt="logo"
-											/>
-										)}
-									</label>
-								</Grid>
 								<Stack
-									direction="row"
+									direction={isMd ? 'row' : 'column'}
 									spacing={4}
 									alignItems="center"
 									justifyContent={isMd ? 'flex-start' : 'center'}
 									sx={{
-										width: '100%',
-										position: isMd ? 'absolute' : 'relative',
-										left: '2rem',
-										bottom: '2rem',
+										top: '5%',
+										left: 0,
+										right: 0,
+										zIndex: 99,
+										position: 'absolute',
+										marginTop: theme.spacing(5),
+										[theme.breakpoints.up('md')]: {
+											top: 'unset',
+											right: 'auto',
+											display: 'flex',
+											alignItems: 'center',
+											left: theme.spacing(3),
+											bottom: theme.spacing(3),
+										},
 									}}
 								>
 									<label htmlFor="logo-file-upload">
@@ -218,6 +182,7 @@ export function OrganisationById() {
 											accept="image/*"
 											id="logo-file-upload"
 											type="file"
+											disabled={!!organizationIdState}
 											onChange={(event) => handleUploadImage(event, tmpOrg.setLogoCID)}
 										/>
 										<Avatar
@@ -248,6 +213,7 @@ export function OrganisationById() {
 
 									<Stack
 										spacing={2}
+										px={isMd ? 0 : 2}
 										sx={{
 											width: '100%',
 											justifyContent: { xs: 'space-between', sm: 'flex-start' },
@@ -255,10 +221,19 @@ export function OrganisationById() {
 										direction="row"
 									>
 										<Stack spacing={1} sx={{ flex: 0.9 }}>
-											<Typography variant="h4">
+											<Typography
+												variant="h4"
+												sx={{
+													whiteSpace: 'nowrap',
+												}}
+											>
 												{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
 											</Typography>
-											<Typography>
+											<Typography
+												sx={{
+													whiteSpace: 'nowrap',
+												}}
+											>
 												{t('label:n_members', {
 													n: organizationState?.organization_members?.length ?? 1,
 												})}
@@ -277,7 +252,64 @@ export function OrganisationById() {
 										</Stack>
 									</Stack>
 								</Stack>
-								<CardContent sx={{ maxWidth: isMd ? '60%' : '100%', marginLeft: 'auto' }}>
+								<Grid
+									height={isMd ? '20vh' : '40vh'}
+									width="100%"
+									display="grid"
+									alignItems="center"
+									overflow="hidden"
+									position="relative"
+									sx={{
+										height: '40vh',
+										[theme.breakpoints.up('sm')]: {
+											height: '25vh',
+										},
+
+										[theme.breakpoints.up('md')]: {
+											height: '20vh',
+										},
+									}}
+								>
+									<label htmlFor="header-file-upload">
+										<input
+											style={{ display: 'none' }}
+											accept="image/*"
+											id="header-file-upload"
+											type="file"
+											disabled={!!organizationIdState}
+											onChange={(event) => handleUploadImage(event, tmpOrg.setHeaderCID)}
+										/>
+										{!organizationState?.organization_metadata?.header &&
+										!tmpOrg.headerCID?.length ? (
+											<Box display="grid" justifyContent="center" alignItems="center">
+												<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
+											</Box>
+										) : (
+											<Image
+												src={parseIpfsHash(
+													organizationState?.organization_metadata?.header ??
+														tmpOrg.headerCID,
+													config.IPFS_GATEWAY,
+												)}
+												alt="logo"
+												sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+											/>
+										)}
+									</label>
+									<Box
+										sx={{
+											position: 'absolute',
+											top: 0,
+											left: 0,
+											right: 0,
+											bottom: 0,
+											background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) -1.23%, #000000 80%)',
+											pointerEvents: 'none',
+										}}
+									></Box>
+								</Grid>
+
+								<Box sx={{ maxWidth: isMd ? '60%' : '100%', marginLeft: 'auto' }}>
 									<Tabs
 										variant="scrollable"
 										value={activeStep}
@@ -311,8 +343,8 @@ export function OrganisationById() {
 											disabled={!organizationIdState}
 										/>
 									</Tabs>
-								</CardContent>
-							</Card>
+								</Box>
+							</Paper>
 							<TabPanel value={'dashboard'}>
 								{organizationIdState ? (
 									<Overview

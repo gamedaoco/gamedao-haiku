@@ -1,56 +1,71 @@
-// Imports
-import { CampaignMetadata } from '../../../@types/ipfs/campaignMetadata';
-// Database
-import { createCampaign } from '../../../database/campaign';
-import { fetchCampaignMetadata } from '../../../ipfs/campaign';
-import { getCampaignCreationData } from '../../../transformer/campaignCreateDataTransformer';
-// Types
-import { FlowCampaignCreatedEvent } from '../../../types/events';
-import { encodeSigner, hashToHexString } from '../../../utils';
-// Helpers
-import { isCIDValid } from '../../../utils';
-// 3rd
+import { FlowCreatedEvent } from '../../../types/events';
+import { FlowCreateCampaignCall } from '../../../types/calls';
+import { fetchCampaignMetadata } from '../../../ipfs/getters';
+import { upsertIdentity } from '../../../database/identity';
+import { getOrg } from '../../../database/getters';
+import { upsertCampaignMetadata } from '../../../database/metadata';
+import { Campaign } from '../../../model';
+import { addressCodec, encodeSigner, hashToHexString, isCIDValid } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { getCampaign } from '../../../database/getters';
 
-// Functions
+
 async function handleCampaignCreatedEvent(context: EventHandlerContext) {
-	if (!context.extrinsic) return;
-
-	// Get versioned call
-	const callCreateData = getCampaignCreationData(context);
-	if (!callCreateData) return;
-
-	callCreateData.blockNumber = context.block.height;
-
-	// Get versioned instance
-	const campaignCreatedEventData = new FlowCampaignCreatedEvent(context);
-
-	// Get id
-	let id;
-	if (campaignCreatedEventData.isV58) {
-		id = hashToHexString(campaignCreatedEventData.asV58.campaignId);
-	} else {
-		console.error(`Unknown version of campaign created event!`);
+	let eventName = 'Flow.Created';
+	if (!context.extrinsic) {
+		console.error(`No extrinsic in the context: ${eventName}`);
 		return;
 	}
+	let raw_event = new FlowCreatedEvent(context);
+	let raw_call = new FlowCreateCampaignCall({
+		_chain: context._chain,
+		block: context.block,
+		extrinsic: context.extrinsic,
+	});
+	if (!raw_event.isV60 || !raw_call.isV60) {
+		console.error(`Unknown version: ${eventName}`);
+		return;
+	}
+	let store = context.store;
+	let event = raw_event.asV60;
+	let call = raw_call.asV60;
 
-	// Load body metadata
-	let metadata: CampaignMetadata | null = null;
-	try {
-		if (!isCIDValid(callCreateData.cid)) {
-			console.error(`Couldn't fetch metadata of campaign ${id}, invalid cid`);
-			callCreateData.cid = null;
-		} else {
-			metadata = await fetchCampaignMetadata(callCreateData.cid as string);
-			if (!metadata) {
-				console.error(`Couldn't fetch metadata of campaign ${id}`);
-			}
-		}
-	} catch (e) {}
+	let campaignId = hashToHexString(event.campaignId);
+	let orgId = hashToHexString(call.orgId);
 
-	// Create campaign
-	await createCampaign(context.store, id, encodeSigner(context.extrinsic.signer), callCreateData, metadata);
+	let campaign_exists = await getCampaign(store, campaignId);
+	let org = await getOrg(store, orgId);
+	if (campaign_exists || !org) return;
+
+	let creator = encodeSigner(context.extrinsic!.signer);
+	let admin = addressCodec.encode(call.adminId);
+	let start = call.start ?? context.block.height;
+	
+	let campaign = new Campaign();
+	campaign.id = campaignId;
+	campaign.organization = org;
+	campaign.creator = creator;
+	campaign.creatorIdentity = await upsertIdentity(store, creator, null);
+	campaign.admin = admin
+	campaign.adminIdentity = await upsertIdentity(store, admin, null);
+	campaign.target = call.target;
+	campaign.deposit = call.deposit;
+	campaign.start = call.start ?? context.block.height;
+	campaign.expiry = call.expiry;
+	campaign.protocol = call.protocol.__kind;
+	campaign.governance = call.governance.__kind;
+	campaign.tokenSymbol = call.tokenSymbol?.toString();
+	campaign.tokenName = call.tokenName?.toString();
+	campaign.state = start > context.block.height ? 'Created' : 'Active';
+	campaign.createdAtBlock = context.block.height;
+
+	// Check if cid is valid, fetch metadata from ipfs
+	let metadata = await fetchCampaignMetadata(call.cid.toString(), orgId);
+	if (metadata) {
+		campaign.metadata = await upsertCampaignMetadata(store, call.cid.toString(), metadata);
+	}
+
+	await store.save(campaign);
 }
 
-// Exports
 export { handleCampaignCreatedEvent };

@@ -1,9 +1,8 @@
 import { Fragment, useEffect } from 'react'
 
 import { Grid } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useNetworkContext } from 'provider/network/modules/context'
-import type { ApiProvider } from 'src/@types/network'
+import { useGraphQlContext } from 'provider/graphQl/modules/context'
+import { Endpoint } from 'src/@types/graphql'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { NetworkCard } from 'components/SelectNetworkDialog/modules/networkCard'
@@ -14,23 +13,22 @@ interface ComponentProps {
 }
 
 export function SelectNetworkDialog({ open, onClose }: ComponentProps) {
-	const { selectedApiProvider, apiProviders } = useNetworkContext()
-	const theme = useTheme()
+	const { endpoints, selectedEndpoint } = useGraphQlContext()
 
 	useEffect(() => {
-		if (open && apiProviders?.length === 1) {
+		if (open && endpoints?.length === 1) {
 			// We do not have another network that we can use
 			onClose()
 		}
-	}, [open, apiProviders, onClose])
+	}, [open, endpoints, onClose])
 
-	// There is no network available
-	if (!apiProviders?.length) {
+	// There are no networks available
+	if (!endpoints?.length) {
 		return null
 	}
 
 	return (
-		<BaseDialog title="Select wallet" open={open} onClose={onClose}>
+		<BaseDialog title="Select network" open={open} onClose={onClose}>
 			<Grid
 				display={'grid'}
 				gridTemplateColumns={{
@@ -40,12 +38,12 @@ export function SelectNetworkDialog({ open, onClose }: ComponentProps) {
 				justifyContent="space-around"
 				gap={'1rem'}
 			>
-				{apiProviders.map((apiProvider: ApiProvider) => {
+				{endpoints.map((endpoint: Endpoint) => {
 					return (
-						<Fragment key={apiProvider.chainName}>
+						<Fragment key={endpoint.url}>
 							<NetworkCard
-								apiProvider={apiProvider}
-								active={selectedApiProvider === apiProvider}
+								endpoint={endpoint}
+								active={selectedEndpoint === endpoint}
 								callback={onClose}
 							/>
 						</Fragment>

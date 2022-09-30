@@ -10,6 +10,7 @@ declare module '@mui/material/Chip' {
 		proposalVotes: true
 		campaignStatus: true
 		campaignState: true
+		campaignCard: true
 	}
 }
 
@@ -101,6 +102,14 @@ export default function Chip(theme: Theme) {
 							backgroundColor: theme.palette.secondary.dark,
 							color: theme.palette.grey['800'],
 						},
+					},
+				},
+				{
+					props: { variant: 'campaignCard' },
+					style: {
+						borderRadius: `0px ${Number(theme.shape.borderRadius) * 20}px`,
+						...theme.typography.overline,
+						backgroundColor: theme.palette.error.dark,
 					},
 				},
 				{

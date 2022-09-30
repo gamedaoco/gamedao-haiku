@@ -1,3 +1,9 @@
+import { Fragment } from 'react'
+import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
+import { useTheme } from '@mui/material/styles'
+
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -11,83 +17,83 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
-import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTranslation } from 'react-i18next'
-
-import { Scrollbar } from 'components/scrollbar'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
+
 export function MyBalancesCard() {
+	const theme = useTheme()
 	const address = useCurrentAccountAddress()
 	const balances = useBalanceByAddress(address)
 	const { t } = useTranslation()
+
 	return (
-		<Card sx={{ borderRadius: '16px' }}>
+		<Card sx={{ minHeight: '100%' }}>
 			<CardContent>
-				<Typography fontWeight="700" variant="h5" sx={{ my: 1 }}>
-					{t('page:account:balances:title')}
-				</Typography>
-				<Scrollbar>
-					<Table sx={{ minWidth: 700 }}>
-						<TableHead>
-							<TableRow sx={{ borderRadius: '8px' }}>
-								<TableCell>{t('page:account:balances:token')}</TableCell>
-								<TableCell>{t('page:account:balances:transferable')}</TableCell>
-								<TableCell>{t('page:account:balances:locked')}</TableCell>
-								<TableCell>{t('page:account:balances:reserved')}</TableCell>
-								<TableCell>{t('page:account:balances:total')}</TableCell>
-								<TableCell align="right"></TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{!balances ? (
-								<>
-									{[1, 2, 3, 4, 5]?.map((index) => (
-										<TableRow hover key={index}>
-											<TableCell>
-												<Skeleton width={50} />
-											</TableCell>
-											<TableCell>
-												<Skeleton width={80} />
-											</TableCell>
-											<TableCell>
-												<Skeleton width={50} />
-											</TableCell>
-											<TableCell align="right">
-												<Skeleton width={50} />
-											</TableCell>
-											<TableCell align="right">
-												<Skeleton width={50} />
-											</TableCell>
-										</TableRow>
-									))}
-								</>
-							) : (
-								<>
-									{balances?.map((balance, index) => (
-										<>
-											{balance?.tokenSymbol && (
-												<TableRow hover key={index}>
-													<TableCell>{balance?.tokenSymbol}</TableCell>
-													<TableCell>{balance.free}</TableCell>
-													<TableCell>{balance.frozen}</TableCell>
-													<TableCell>{balance.reserved}</TableCell>
-													<TableCell>{getTotal(balance)}</TableCell>
-													<TableCell align="right">
-														<IconButton aria-label="options">
-															<MoreVertIcon />
-														</IconButton>
-													</TableCell>
-												</TableRow>
-											)}
-										</>
-									))}
-								</>
-							)}
-						</TableBody>
-					</Table>
-				</Scrollbar>
+				<Typography variant="h5">{t('page:account:balances:title')}</Typography>
+
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableCell align="left" sx={{ backgroundColor: 'transparent' }}>
+								{t('page:account:balances:token')}
+							</TableCell>
+							<TableCell align="right" sx={{ backgroundColor: 'transparent' }}>
+								{t('page:account:balances:transferable')}
+							</TableCell>
+							<TableCell align="right" sx={{ backgroundColor: 'transparent' }}>
+								{t('page:account:balances:locked')}
+							</TableCell>
+							<TableCell align="right" sx={{ backgroundColor: 'transparent' }}>
+								{t('page:account:balances:reserved')}
+							</TableCell>
+							<TableCell align="right" sx={{ backgroundColor: 'transparent' }}>
+								{t('page:account:balances:total')}
+							</TableCell>
+						</TableRow>
+					</TableHead>
+
+					<TableBody>
+						{!balances ? (
+							<>
+								{[...Array(3).keys()]?.map((index) => (
+									<TableRow sx={{ borderTop: '1px dotted white' }} hover key={index}>
+										<TableCell>
+											<Skeleton width={50} />
+										</TableCell>
+										<TableCell align="right">
+											<Skeleton width={80} />
+										</TableCell>
+										<TableCell align="right">
+											<Skeleton width={50} />
+										</TableCell>
+										<TableCell align="right">
+											<Skeleton width={50} />
+										</TableCell>
+										<TableCell align="right">
+											<Skeleton width={50} />
+										</TableCell>
+									</TableRow>
+								))}
+							</>
+						) : (
+							<>
+								{balances?.map((balance, index) => (
+									<>
+										{balance?.tokenSymbol && (
+											<TableRow hover key={index} sx={{ borderTop: '1px dotted white' }}>
+												<TableCell>{balance?.tokenSymbol}</TableCell>
+												<TableCell align="right">{balance.free}</TableCell>
+												<TableCell align="right">{balance.frozen}</TableCell>
+												<TableCell align="right">{balance.reserved}</TableCell>
+												<TableCell align="right">{getTotal(balance)}</TableCell>
+											</TableRow>
+										)}
+									</>
+								))}
+							</>
+						)}
+					</TableBody>
+				</Table>
 			</CardContent>
 		</Card>
 	)

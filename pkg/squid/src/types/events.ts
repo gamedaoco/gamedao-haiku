@@ -1,555 +1,557 @@
-import assert from 'assert';
-import { EventContext, Result, deprecateLatest } from './support';
-import * as v58 from './v58';
+import assert from 'assert'
+import {EventContext, Result, deprecateLatest} from './support'
+import * as v60 from './v60'
 
-export class ControlAddMemberEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'control.AddMember');
-	}
+export class ControlFundsSpendedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.FundsSpended')
+  }
 
-	/**
-	 * A member has been added to the Org.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('control.AddMember') ===
-			'e3ecfdf4ae9b50fc2755d1f9db55966f6a1b2d7d7dad41bf1d26118a9f3c59fe'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.FundsSpended') === 'bceb89f4c64eff5d47f54b026422201e4dde27058f479eb251ee1eb37fddd4f9'
+  }
 
-	/**
-	 * A member has been added to the Org.
-	 */
-	get asV58(): { orgId: v58.H256; accountId: v58.AccountId32; addedAt: number } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {orgId: v60.H256, beneficiary: v60.AccountId32, amount: bigint, currencyId: v60.CurrencyId, blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { orgId: v58.H256; accountId: v58.AccountId32; addedAt: number } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {orgId: v60.H256, beneficiary: v60.AccountId32, amount: bigint, currencyId: v60.CurrencyId, blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
+}
+
+export class ControlMemberAddedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.MemberAdded')
+  }
+
+  /**
+   * A member has been added to the Org.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.MemberAdded') === 'c57cca31f3dcf3e0516f54aad1cbcd104d3e4afc717e4fb5667c8c9e8b1d1e27'
+  }
+
+  /**
+   * A member has been added to the Org.
+   */
+  get asV60(): {orgId: v60.H256, who: v60.AccountId32, blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
+
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
+
+  get asLatest(): {orgId: v60.H256, who: v60.AccountId32, blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
+}
+
+export class ControlMemberRemovedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.MemberRemoved')
+  }
+
+  /**
+   * A member has been removed from the Org.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.MemberRemoved') === 'c57cca31f3dcf3e0516f54aad1cbcd104d3e4afc717e4fb5667c8c9e8b1d1e27'
+  }
+
+  /**
+   * A member has been removed from the Org.
+   */
+  get asV60(): {orgId: v60.H256, who: v60.AccountId32, blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
+
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
+
+  get asLatest(): {orgId: v60.H256, who: v60.AccountId32, blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
 export class ControlOrgCreatedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'control.OrgCreated');
-	}
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.OrgCreated')
+  }
 
-	/**
-	 * Org was successfully created.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('control.OrgCreated') ===
-			'8b455a07160eae124684c58db55014bb7e6b9c3520cbcd5ae2dad54b50829dc6'
-		);
-	}
+  /**
+   * Org was successfully created.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.OrgCreated') === '6dc87039cf7ad8828c149f473dd3d7aabd1dd4c9e85e2f729bf294df9474ccc1'
+  }
 
-	/**
-	 * Org was successfully created.
-	 */
-	get asV58(): {
-		senderId: v58.AccountId32;
-		orgId: v58.H256;
-		treasuryId: v58.AccountId32;
-		createdAt: number;
-		realmIndex: bigint;
-	} {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Org was successfully created.
+   */
+  get asV60(): {orgId: v60.H256, creator: v60.AccountId32, treasuryId: v60.AccountId32, createdAt: number, realmIndex: bigint} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): {
-		senderId: v58.AccountId32;
-		orgId: v58.H256;
-		treasuryId: v58.AccountId32;
-		createdAt: number;
-		realmIndex: bigint;
-	} {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {orgId: v60.H256, creator: v60.AccountId32, treasuryId: v60.AccountId32, createdAt: number, realmIndex: bigint} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class ControlRemoveMemberEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'control.RemoveMember');
-	}
+export class ControlOrgDisabledEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.OrgDisabled')
+  }
 
-	/**
-	 * A member has been removed from the Org.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('control.RemoveMember') ===
-			'5d42b282f05739070f0f410d441cfe9c3bd6d3d47ad9292d5c6497e6157b58d2'
-		);
-	}
+  /**
+   * Org was disabled and it's state become Inactive.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.OrgDisabled') === '21ea0c8f2488eafafdea1de92b54cd17d8b1caff525e37616abf0ff93f11531d'
+  }
 
-	/**
-	 * A member has been removed from the Org.
-	 */
-	get asV58(): { orgId: v58.H256; accountId: v58.AccountId32; removedAt: number } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Org was disabled and it's state become Inactive.
+   */
+  get asV60(): v60.H256 {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { orgId: v58.H256; accountId: v58.AccountId32; removedAt: number } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): v60.H256 {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class FlowCampaignContributedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'flow.CampaignContributed');
-	}
+export class ControlOrgEnabledEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.OrgEnabled')
+  }
 
-	/**
-	 * Campaign was contributed.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('flow.CampaignContributed') ===
-			'd8db14008bc916744d2223c9ae64c77e900996ff702695e41ec566ede7ee72db'
-		);
-	}
+  /**
+   * Org was enabled and it's state become Active.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.OrgEnabled') === '21ea0c8f2488eafafdea1de92b54cd17d8b1caff525e37616abf0ff93f11531d'
+  }
 
-	/**
-	 * Campaign was contributed.
-	 */
-	get asV58(): { campaignId: v58.H256; sender: v58.AccountId32; contribution: bigint; blockNumber: number } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Org was enabled and it's state become Active.
+   */
+  get asV60(): v60.H256 {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { campaignId: v58.H256; sender: v58.AccountId32; contribution: bigint; blockNumber: number } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): v60.H256 {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class FlowCampaignCreatedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'flow.CampaignCreated');
-	}
+export class ControlOrgUpdatedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'control.OrgUpdated')
+  }
 
-	/**
-	 * Campaign was successfully created.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('flow.CampaignCreated') ===
-			'ff2ecea79f1fe30537e2d7e89f486cb3705ec64411ac17525c02b4c7369601c4'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('control.OrgUpdated') === '56e286ff0883c501a4abbab304815f66e27195e490410248f38fdd3ec39562a4'
+  }
 
-	/**
-	 * Campaign was successfully created.
-	 */
-	get asV58(): {
-		campaignId: v58.H256;
-		creator: v58.AccountId32;
-		admin: v58.AccountId32;
-		target: bigint;
-		deposit: bigint;
-		expiry: number;
-		name: Uint8Array;
-	} {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {orgId: v60.H256, primeId: (v60.AccountId32 | undefined), orgType: (v60.OrgType | undefined), accessModel: (v60.AccessModel | undefined), memberLimit: (number | undefined), feeModel: (v60.FeeModel | undefined), membershipFee: (bigint | undefined), blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): {
-		campaignId: v58.H256;
-		creator: v58.AccountId32;
-		admin: v58.AccountId32;
-		target: bigint;
-		deposit: bigint;
-		expiry: number;
-		name: Uint8Array;
-	} {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {orgId: v60.H256, primeId: (v60.AccountId32 | undefined), orgType: (v60.OrgType | undefined), accessModel: (v60.AccessModel | undefined), memberLimit: (number | undefined), feeModel: (v60.FeeModel | undefined), membershipFee: (bigint | undefined), blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class FlowCampaignFailedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'flow.CampaignFailed');
-	}
+export class FlowActivatedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'flow.Activated')
+  }
 
-	/**
-	 * Campaign failed - successfully reverted.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('flow.CampaignFailed') ===
-			'8f85cbd834ab8bd616c9a81d472f2cc6b0ee0111a1b6eddf44030d7d5d5b742d'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('flow.Activated') === '1298080916d3502103b1b010f17c51ff90da4cfa7278463486275e928c258bc5'
+  }
 
-	/**
-	 * Campaign failed - successfully reverted.
-	 */
-	get asV58(): { campaignId: v58.H256; campaignBalance: bigint; blockNumber: number; success: boolean } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {campaignId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { campaignId: v58.H256; campaignBalance: bigint; blockNumber: number; success: boolean } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {campaignId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class FlowCampaignFinalizedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'flow.CampaignFinalized');
-	}
+export class FlowContributedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'flow.Contributed')
+  }
 
-	/**
-	 * Campaign was finalized.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('flow.CampaignFinalized') ===
-			'8f85cbd834ab8bd616c9a81d472f2cc6b0ee0111a1b6eddf44030d7d5d5b742d'
-		);
-	}
+  /**
+   * Campaign was contributed.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('flow.Contributed') === 'd8db14008bc916744d2223c9ae64c77e900996ff702695e41ec566ede7ee72db'
+  }
 
-	/**
-	 * Campaign was finalized.
-	 */
-	get asV58(): { campaignId: v58.H256; campaignBalance: bigint; blockNumber: number; success: boolean } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Campaign was contributed.
+   */
+  get asV60(): {campaignId: v60.H256, sender: v60.AccountId32, contribution: bigint, blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { campaignId: v58.H256; campaignBalance: bigint; blockNumber: number; success: boolean } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {campaignId: v60.H256, sender: v60.AccountId32, contribution: bigint, blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class FlowCampaignUpdatedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'flow.CampaignUpdated');
-	}
+export class FlowCreatedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'flow.Created')
+  }
 
-	/**
-	 * Campaign was updated with a new state.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('flow.CampaignUpdated') ===
-			'267fba49ebebc21ce2eb1619b84a079d4feeea75659223b0a0dc69ec79b12f5d'
-		);
-	}
+  /**
+   * Campaign was successfully created.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('flow.Created') === 'ff2ecea79f1fe30537e2d7e89f486cb3705ec64411ac17525c02b4c7369601c4'
+  }
 
-	/**
-	 * Campaign was updated with a new state.
-	 */
-	get asV58(): { campaignId: v58.H256; state: v58.FlowState; blockNumber: number } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Campaign was successfully created.
+   */
+  get asV60(): {campaignId: v60.H256, creator: v60.AccountId32, admin: v60.AccountId32, target: bigint, deposit: bigint, expiry: number, name: Uint8Array} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { campaignId: v58.H256; state: v58.FlowState; blockNumber: number } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {campaignId: v60.H256, creator: v60.AccountId32, admin: v60.AccountId32, target: bigint, deposit: bigint, expiry: number, name: Uint8Array} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalProposalEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.Proposal');
-	}
+export class FlowFailedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'flow.Failed')
+  }
 
-	/**
-	 * Proposal was successfully created (ex. General proposal).
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.Proposal') ===
-			'fe8c739a512a2ccc7bb867443cc59e1edebaee76fbf1d9752e1b2137c1681253'
-		);
-	}
+  /**
+   * Campaign failed - successfully reverted.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('flow.Failed') === '8c26af8c0dbcf4eedccfc26b2eaa166ab0f2b6cd9cb14b67768380ced0d0251b'
+  }
 
-	/**
-	 * Proposal was successfully created (ex. General proposal).
-	 */
-	get asV58(): { senderId: v58.AccountId32; proposalId: v58.H256 } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Campaign failed - successfully reverted.
+   */
+  get asV60(): {campaignId: v60.H256, campaignBalance: bigint, blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { senderId: v58.AccountId32; proposalId: v58.H256 } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {campaignId: v60.H256, campaignBalance: bigint, blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalProposalApprovedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.ProposalApproved');
-	}
+export class FlowSucceededEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'flow.Succeeded')
+  }
 
-	/**
-	 * Proposal was approved after the voting.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.ProposalApproved') ===
-			'6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
-		);
-	}
+  /**
+   * Campaign was finalized.
+   */
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('flow.Succeeded') === '8c26af8c0dbcf4eedccfc26b2eaa166ab0f2b6cd9cb14b67768380ced0d0251b'
+  }
 
-	/**
-	 * Proposal was approved after the voting.
-	 */
-	get asV58(): { proposalId: v58.H256 } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  /**
+   * Campaign was finalized.
+   */
+  get asV60(): {campaignId: v60.H256, campaignBalance: bigint, blockNumber: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { proposalId: v58.H256 } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {campaignId: v60.H256, campaignBalance: bigint, blockNumber: number} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalProposalCreatedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.ProposalCreated');
-	}
+export class SignalAbortedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Aborted')
+  }
 
-	/**
-	 * Proposal was successfully created (ex. Withdrawal proposal).
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.ProposalCreated') ===
-			'057e4f0385c918485bc4d94917efedd4070a0420a25fbaf3fd33a64f9f2cdfbe'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Aborted') === '6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+  }
 
-	/**
-	 * Proposal was successfully created (ex. Withdrawal proposal).
-	 */
-	get asV58(): {
-		senderId: v58.AccountId32;
-		orgId: v58.H256;
-		campaignId: v58.H256 | undefined;
-		proposalId: v58.H256;
-		amount: bigint;
-		expiry: number;
-	} {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {proposalId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): {
-		senderId: v58.AccountId32;
-		orgId: v58.H256;
-		campaignId: v58.H256 | undefined;
-		proposalId: v58.H256;
-		amount: bigint;
-		expiry: number;
-	} {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {proposalId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalProposalExpiredEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.ProposalExpired');
-	}
+export class SignalAcceptedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Accepted')
+  }
 
-	/**
-	 * Proposal was expired, not finalized before expiry block number.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.ProposalExpired') ===
-			'6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Accepted') === '6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+  }
 
-	/**
-	 * Proposal was expired, not finalized before expiry block number.
-	 */
-	get asV58(): { proposalId: v58.H256 } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {proposalId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { proposalId: v58.H256 } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {proposalId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalProposalRejectedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.ProposalRejected');
-	}
+export class SignalActivatedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Activated')
+  }
 
-	/**
-	 * Proposal was rejected after the voting.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.ProposalRejected') ===
-			'6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Activated') === '6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+  }
 
-	/**
-	 * Proposal was rejected after the voting.
-	 */
-	get asV58(): { proposalId: v58.H256 } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {proposalId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { proposalId: v58.H256 } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {proposalId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalProposalVotedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.ProposalVoted');
-	}
+export class SignalCreatedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Created')
+  }
 
-	/**
-	 * Proposal was voted.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.ProposalVoted') ===
-			'b9f0b54a4b7147462f039614c0aa5d0456be0d2838509b049b8c6db3b333100d'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Created') === 'a32001d595a80cd793e2fb41d5441290f20cdb8b2c9e5bccb6809adc21ae606a'
+  }
 
-	/**
-	 * Proposal was voted.
-	 */
-	get asV58(): { senderId: v58.AccountId32; proposalId: v58.H256; vote: boolean } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {account: v60.AccountId32, proposalId: v60.H256, orgId: v60.H256, campaignId: (v60.H256 | undefined), amount: (bigint | undefined), start: number, expiry: number} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { senderId: v58.AccountId32; proposalId: v58.H256; vote: boolean } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {account: v60.AccountId32, proposalId: v60.H256, orgId: v60.H256, campaignId: (v60.H256 | undefined), amount: (bigint | undefined), start: number, expiry: number} {
+    deprecateLatest()
+    return this.asV60
+  }
 }
 
-export class SignalWithdrawalGrantedEvent {
-	constructor(private ctx: EventContext) {
-		assert(this.ctx.event.name === 'signal.WithdrawalGranted');
-	}
+export class SignalExpiredEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Expired')
+  }
 
-	/**
-	 * Balance was unlocked for the Withdrawal proposal.
-	 */
-	get isV58(): boolean {
-		return (
-			this.ctx._chain.getEventHash('signal.WithdrawalGranted') ===
-			'6a64fab7a260f3ff8d4fe197667aa7dd03417d4c6d05137596968eaf77958c63'
-		);
-	}
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Expired') === '6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+  }
 
-	/**
-	 * Balance was unlocked for the Withdrawal proposal.
-	 */
-	get asV58(): { proposalId: v58.H256; campaignId: v58.H256; orgId: v58.H256 } {
-		assert(this.isV58);
-		return this.ctx._chain.decodeEvent(this.ctx.event);
-	}
+  get asV60(): {proposalId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
 
-	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV58;
-	}
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
 
-	get asLatest(): { proposalId: v58.H256; campaignId: v58.H256; orgId: v58.H256 } {
-		deprecateLatest();
-		return this.asV58;
-	}
+  get asLatest(): {proposalId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
+}
+
+export class SignalFinalizedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Finalized')
+  }
+
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Finalized') === '6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+  }
+
+  get asV60(): {proposalId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
+
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
+
+  get asLatest(): {proposalId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
+}
+
+export class SignalRejectedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Rejected')
+  }
+
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Rejected') === '6e72a97ae5b806677fe57a7494d12e2b9c7eb6bf41b48bb46554771f71d3e1cc'
+  }
+
+  get asV60(): {proposalId: v60.H256} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
+
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
+
+  get asLatest(): {proposalId: v60.H256} {
+    deprecateLatest()
+    return this.asV60
+  }
+}
+
+export class SignalVotedEvent {
+  constructor(private ctx: EventContext) {
+    assert(this.ctx.event.name === 'signal.Voted')
+  }
+
+  get isV60(): boolean {
+    return this.ctx._chain.getEventHash('signal.Voted') === 'c017b1f31028a2d6a927c9c9de81e8be0f84cc28fdc5daba87b671932d1be3be'
+  }
+
+  get asV60(): {account: v60.AccountId32, proposalId: v60.H256, voted: boolean, yes: bigint, no: bigint, votePower: bigint} {
+    assert(this.isV60)
+    return this.ctx._chain.decodeEvent(this.ctx.event)
+  }
+
+  get isLatest(): boolean {
+    deprecateLatest()
+    return this.isV60
+  }
+
+  get asLatest(): {account: v60.AccountId32, proposalId: v60.H256, voted: boolean, yes: bigint, no: bigint, votePower: bigint} {
+    deprecateLatest()
+    return this.asV60
+  }
 }

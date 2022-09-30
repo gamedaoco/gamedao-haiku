@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
-import { TMPCampaign, TMPCampaignState } from 'src/@types/campaign'
+import { TMPCampaign } from 'src/@types/campaign'
 import { defaultValuesTmpCampaign as defaultValues } from 'src/constants'
 
 // TODO: Replace store logic with db for cross device storage
@@ -18,6 +18,7 @@ export function useTmpCampaign(): TMPCampaign {
 	const [protocol] = useLocalStorage<number>(`TmpCam${address}-protocol`, defaultValues.protocol)
 	const [usageOfFunds] = useLocalStorage<string>(`TmpCam${address}-usage-of-funds`, defaultValues.usageOfFunds)
 	const [currencyId] = useLocalStorage<number>(`TmpCam${address}-currency-id`, defaultValues.currencyId)
+	const [startDate] = useLocalStorage<Date>(`TmpCam${address}-start-date`, defaultValues.startDate)
 	const [endDate] = useLocalStorage<Date>(`TmpCam${address}-end-date`, defaultValues.endDate)
 	const [governance] = useLocalStorage<number>(`TmpCam${address}-governance`, defaultValues.governance)
 	const [metadataCid] = useLocalStorage<string>(`TmpCam${address}-metadata-cid`, defaultValues.metadataCid)
@@ -33,6 +34,7 @@ export function useTmpCampaign(): TMPCampaign {
 		protocol: protocol,
 		usageOfFunds: usageOfFunds,
 		currencyId: currencyId,
+		startDate: startDate,
 		endDate: endDate,
 		governance: governance,
 		metadataCid: metadataCid,
@@ -51,6 +53,7 @@ export function useTmpCampaign(): TMPCampaign {
 			usageOfFunds: usageOfFunds,
 			currencyId: currencyId,
 			endDate: endDate,
+			startDate: startDate,
 			governance: governance,
 			metadataCid: metadataCid,
 		})
@@ -65,6 +68,7 @@ export function useTmpCampaign(): TMPCampaign {
 		protocol,
 		usageOfFunds,
 		currencyId,
+		startDate,
 		endDate,
 		governance,
 		metadataCid,

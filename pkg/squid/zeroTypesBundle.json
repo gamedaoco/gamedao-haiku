@@ -51,7 +51,6 @@
         },
         "Body": {
           "id": "Hash",
-          "controller": "AccountId",
           "index": "u128",
           "creator": "AccountId",
           "name": "Vec<u8>",
@@ -152,7 +151,7 @@
     {
       "minmax": [
         19,
-        50
+        null
       ],
       "types": {
         "Address": "MultiAddress",
@@ -164,47 +163,56 @@
           "providers": "RefCount",
           "data": "AccountData"
         },
+        "Timestamp": "Moment",
+        "Entity": {
+          "account": "AccountId",
+          "index": "u128",
+          "cid": "Vec<u8>",
+          "created": "BlockNumber",
+          "mutated": "BlockNumber"
+        },
+        "EntityProperty": {
+          "value": "u64",
+          "mutated": "BlockNumber"
+        },
+        "Space": {
+          "id": "H256",
+          "dna": "H256",
+          "price": "Balance",
+          "gen": "u64"
+        },
+        "SpaceId": "Hash",
+        "HypaspaceId": "Hash",
+        "HypaspaceMetadata": {
+          "name": "Vec<u8>"
+        },
+        "Item": {
+          "CommodityId": "CommodityId",
+          "CommodityInfo": "CommodityInfo"
+        },
+        "ItemId": "Hash",
+        "ItemInfo": {
+          "dob": "u64",
+          "dna": "Hash"
+        },
         "Body": {
           "id": "Hash",
           "index": "u128",
           "creator": "AccountId",
           "name": "Vec<u8>",
           "cid": "Vec<u8>",
-          "body": "ControlType",
+          "body": "u8",
           "created": "BlockNumber",
           "mutated": "BlockNumber"
         },
         "BConfig": {
-          "fee_model": "ControlFeeModel",
+          "fee_model": "u8",
           "fee": "Balance",
           "gov_asset": "u8",
           "pay_asset": "u8",
-          "access": "ControlAccessModel",
-          "member_limit": "u64"
+          "member_limit": "u64",
+          "access": "u8"
         },
-        "ControlType": "u8",
-        "ControlState": "u8",
-        "ControlMemberState": "u8",
-        "ControlFeeModel": "u8",
-        "ControlAccessModel": "u8",
-        "Proposal": {
-          "proposal_id": "Hash",
-          "context_id": "Hash",
-          "proposal_type": "ProposalType",
-          "voting_type": "VotingType",
-          "start": "BlockNumber",
-          "expiry": "BlockNumber"
-        },
-        "ProposalMetadata": {
-          "title": "Vec<u8>",
-          "cid": "Vec<u8>",
-          "amount": "Balance"
-        },
-        "ProposalState": "u8",
-        "ProposalType": "u8",
-        "VotingType": "u8",
-        "TitleText": "Vec<u8>",
-        "CID": "Vec<u8>",
         "Campaign": {
           "id": "Hash",
           "org": "Hash",
@@ -214,22 +222,34 @@
           "deposit": "Balance",
           "expiry": "BlockNumber",
           "cap": "Balance",
-          "protocol": "FlowProtocol",
-          "governance": "FlowGovernance",
+          "protocol": "u8",
+          "governance": "u8",
           "cid": "Vec<u8>",
           "token_symbol": "Vec<u8>",
           "token_name": "Vec<u8>",
           "created": "Timestamp"
         },
-        "FlowProtocol": "u8",
-        "FlowGovernance": "u8",
-        "FlowState": "u8",
-        "State": "FlowState",
-        "campaign_id": "Hash",
-        "contribution": "Balance",
-        "Timestamp": "Moment",
+        "Proposal": {
+          "proposal_id": "Hash",
+          "context_id": "Hash",
+          "proposal_type": "u8",
+          "voting_type": "u8",
+          "status": "u8",
+          "start": "BlockNumber",
+          "expiry": "BlockNumber"
+        },
+        "ProposalMetadata": {
+          "title": "Vec<u8>",
+          "cid": "Vec<u8>",
+          "amount": "Balance"
+        },
         "EventMessage": "Vec<u8>",
         "Nonce": "u64",
+        "TitleText": "Vec<u8>",
+        "CID": "Vec<u8>",
+        "ProposalType": "u8",
+        "ProposalState": "u8",
+        "VotingType": "u8",
         "RealmIndex": "u64",
         "ClassIndex": "u64",
         "ItemIndex": "u64",
@@ -261,191 +281,17 @@
           "created": "BlockNumber",
           "mutated": "BlockNumber"
         },
-        "MomentOf": "Moment",
-        "TangramItem": {
-          "dob": "MomentOf",
+        "Tangram": {
+          "dob": "Moment",
           "dna": "Hash"
         },
         "TangramMetadata": {
-          "realm": "RealmIndex",
-          "class": "ClassIndex",
           "name": "Vec<u8>",
+          "owner": "AccountId",
           "cid": "Vec<u8>"
         },
         "TangramId": "Hash",
-        "TangramItemOf": "TangramItem",
-        "Entity": {
-          "account": "AccountId",
-          "index": "u128",
-          "cid": "Vec<u8>",
-          "created": "BlockNumber",
-          "mutated": "BlockNumber"
-        },
-        "EntityProperty": {
-          "value": "u64",
-          "mutated": "BlockNumber"
-        }
-      }
-    },
-    {
-      "minmax": [
-        51,
-        null
-      ],
-      "types": {
-        "Org": {
-          "id": "Hash",
-          "index": "u128",
-          "creator": "AccountId",
-          "name": "Vec<u8>",
-          "cid": "Vec<u8>",
-          "org_type": "OrgType",
-          "created": "BlockNumber",
-          "mutated": "BlockNumber"
-        },
-        "OrgConfig": {
-          "fee_model": "FeeModel",
-          "fee": "Balance",
-          "gov_asset": "u8",
-          "pay_asset": "u8",
-          "access": "AccessModel",
-          "member_limit": "u64"
-        },
-        "OrgType": {
-          "_enum": [
-            "Individual",
-            "Company",
-            "Dao",
-            "Hybrid"
-          ]
-        },
-        "ControlState": {
-          "_enum": [
-            "Inactive",
-            "Active",
-            "Locked"
-          ]
-        },
-        "ControlMemberState": {
-          "_enum": [
-            "Inactive",
-            "Active",
-            "Pending",
-            "Kicked",
-            "Banned",
-            "Exited"
-          ]
-        },
-        "FeeModel": {
-          "_enum": [
-            "NoFees",
-            "Reserve",
-            "Rransfer"
-          ]
-        },
-        "AccessModel": {
-          "_enum": [
-            "Open",
-            "Voting",
-            "Controller"
-          ]
-        },
-        "Campaign": {
-          "id": "Hash",
-          "org": "Hash",
-          "name": "Vec<u8>",
-          "owner": "AccountId",
-          "admin": "AccountId",
-          "deposit": "Balance",
-          "expiry": "BlockNumber",
-          "cap": "Balance",
-          "protocol": "FlowProtocol",
-          "governance": "FlowGovernance",
-          "cid": "Vec<u8>",
-          "token_symbol": "Vec<u8>",
-          "token_name": "Vec<u8>",
-          "created": "Moment"
-        },
-        "FlowProtocol": {
-          "_enum": [
-            "Grant",
-            "Raise",
-            "Lend",
-            "Loan",
-            "Share",
-            "Pool"
-          ]
-        },
-        "FlowGovernance": {
-          "_enum": [
-            "No",
-            "Yes"
-          ]
-        },
-        "FlowState": {
-          "_enum": [
-            "Init",
-            "Active",
-            "Paused",
-            "Success",
-            "Failed",
-            "Locked"
-          ]
-        },
-        "Entity": {
-          "account": "AccountId",
-          "index": "u128",
-          "cid": "Vec<u8>",
-          "created": "BlockNumber",
-          "mutated": "BlockNumber"
-        },
-        "EntityProperty": {
-          "value": "u64",
-          "mutated": "BlockNumber"
-        },
-        "Proposal": {
-          "proposal_id": "Hash",
-          "campaign_id": "Hash",
-          "proposal_type": "ProposalType",
-          "voting_type": "VotingType",
-          "start": "BlockNumber",
-          "expiry": "BlockNumber"
-        },
-        "ProposalMetadata": {
-          "title": "Vec<u8>",
-          "cid": "Vec<u8>",
-          "amount": "Balance"
-        },
-        "ProposalState": {
-          "_enum": [
-            "Init",
-            "Active",
-            "Accepted",
-            "Rejected",
-            "Expired",
-            "Aborted",
-            "Finalized"
-          ]
-        },
-        "ProposalType": {
-          "_enum": [
-            "General",
-            "Multiple",
-            "Member",
-            "Withdrawal",
-            "Spending"
-          ]
-        },
-        "VotingType": {
-          "_enum": [
-            "Simple",
-            "Token",
-            "Absolute",
-            "Quadratic",
-            "Ranked",
-            "Conviction"
-          ]
-        }
+        "TangramItemOf": "Tangram"
       }
     }
   ]
