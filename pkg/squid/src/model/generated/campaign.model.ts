@@ -47,6 +47,9 @@ export class Campaign {
 	deposit!: bigint;
 
 	@Column_('int4', { nullable: false })
+	start!: number;
+
+	@Column_('int4', { nullable: false })
 	expiry!: number;
 
 	@Column_('text', { nullable: false })
@@ -55,11 +58,11 @@ export class Campaign {
 	@Column_('text', { nullable: false })
 	governance!: string;
 
-	@Column_('text', { nullable: false })
-	tokenSymbol!: string;
+	@Column_('text', { nullable: true })
+	tokenSymbol!: string | undefined | null;
 
-	@Column_('text', { nullable: false })
-	tokenName!: string;
+	@Column_('text', { nullable: true })
+	tokenName!: string | undefined | null;
 
 	@Column_('text', { nullable: false })
 	state!: string;

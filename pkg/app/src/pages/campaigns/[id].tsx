@@ -15,7 +15,6 @@ import { useCampaignByIdSubscription } from 'src/queries'
 import { filterXSS } from 'xss'
 
 import { CampaignDetailsContent } from 'components/CampaignsSection/campaignDetailsContent'
-import Editor from 'components/Editor'
 
 export function CampaignById() {
 	const { t } = useTranslation()
@@ -74,7 +73,7 @@ export function CampaignById() {
 					currencyId={currencyId}
 					expiry={data?.campaign?.[0]?.expiry}
 					protocol={data?.campaign?.[0]?.protocol}
-					isAdmin={address === data?.campaign?.[0]?.organization?.controller}
+					isAdmin={address === data?.campaign?.[0]?.organization?.creator}
 					hasContributed={data?.campaign?.[0]?.userContributedCount?.aggregate?.count > 0}
 				/>
 			</Box>

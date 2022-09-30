@@ -30,11 +30,11 @@ export class Organization {
 	creatorIdentity!: Identity;
 
 	@Column_('text', { nullable: false })
-	controller!: string;
+	prime!: string;
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	controllerIdentity!: Identity;
+	primeIdentity!: Identity;
 
 	@Column_('text', { nullable: false })
 	treasury!: string;
@@ -44,7 +44,7 @@ export class Organization {
 	treasuryIdentity!: Identity;
 
 	@Column_('text', { nullable: false })
-	access!: string;
+	accessModel!: string;
 
 	@Column_('text', { nullable: false })
 	feeModel!: string;
@@ -52,17 +52,20 @@ export class Organization {
 	@Column_('text', { nullable: false })
 	type!: string;
 
-	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	fee!: bigint;
+	@Column_('text', { nullable: false })
+	state!: string;
+
+	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: true })
+	membershipFee!: bigint | undefined | null;
 
 	@Column_('text', { nullable: false })
-	govAsset!: string;
+	govCurrency!: string;
 
 	@Column_('text', { nullable: false })
-	payAsset!: string;
+	payCurrency!: string;
 
-	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	memberLimit!: bigint;
+	@Column_('int4', { nullable: false })
+	memberLimit!: number;
 
 	@Index_()
 	@ManyToOne_(() => OrganizationMetadata, { nullable: true })
@@ -70,6 +73,9 @@ export class Organization {
 
 	@Column_('int4', { nullable: false })
 	createdAtBlock!: number;
+
+	@Column_('int4', { nullable: false })
+	updatedAtBlock!: number;
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
 	deposit!: bigint;

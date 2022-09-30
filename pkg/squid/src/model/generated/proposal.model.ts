@@ -4,15 +4,13 @@ import {
 	PrimaryColumn as PrimaryColumn_,
 	ManyToOne as ManyToOne_,
 	Index as Index_,
-	OneToMany as OneToMany_,
 } from 'typeorm';
 import * as marshal from './marshal';
+import { Identity } from './identity.model';
 import { Organization } from './organization.model';
 import { Campaign } from './campaign.model';
-import { Identity } from './identity.model';
-import { ProposalTypeData, fromJsonProposalTypeData } from './_proposalTypeData';
+import { Voting } from './voting.model';
 import { ProposalMetadata } from './proposalMetadata.model';
-import { ProposalVoter } from './proposalVoter.model';
 
 @Entity_()
 export class Proposal {
@@ -23,6 +21,13 @@ export class Proposal {
 	@PrimaryColumn_()
 	id!: string;
 
+	@Column_('text', { nullable: false })
+	creator!: string;
+
+	@Index_()
+	@ManyToOne_(() => Identity, { nullable: false })
+	creatorIdentity!: Identity;
+
 	@Index_()
 	@ManyToOne_(() => Organization, { nullable: false })
 	organization!: Organization;
@@ -32,43 +37,44 @@ export class Proposal {
 	campaign!: Campaign | undefined | null;
 
 	@Column_('text', { nullable: false })
-	creator!: string;
+	type!: string;
 
-	@Index_()
-	@ManyToOne_(() => Identity, { nullable: false })
-	creatorIdentity!: Identity;
-
-	@Column_('int4', { nullable: false })
-	type!: number;
-
-	@Column_('jsonb', {
-		transformer: {
-			to: (obj) => (obj == null ? undefined : obj.toJSON()),
-			from: (obj) => (obj == null ? undefined : fromJsonProposalTypeData(obj)),
-		},
-		nullable: true,
-	})
-	data!: ProposalTypeData | undefined | null;
-
-	@Column_('int4', { nullable: false })
-	votingType!: number;
+	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
+	deposit!: bigint;
 
 	@Column_('text', { nullable: false })
 	state!: string;
 
 	@Index_()
-	@ManyToOne_(() => ProposalMetadata, { nullable: true })
-	metadata!: ProposalMetadata | undefined | null;
+	@ManyToOne_(() => Voting, { nullable: false })
+	voting!: Voting;
 
 	@Column_('int4', { nullable: false })
-	startBlock!: number;
+	start!: number;
 
 	@Column_('int4', { nullable: false })
-	expiryBlock!: number;
+	expiry!: number;
 
 	@Column_('int4', { nullable: false })
 	createdAtBlock!: number;
 
-	@OneToMany_(() => ProposalVoter, (e) => e.proposal)
-	voters!: ProposalVoter[];
+	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: true })
+	amount!: bigint | undefined | null;
+
+	@Column_('text', { nullable: true })
+	currencyId!: string | undefined | null;
+
+	@Column_('text', { nullable: true })
+	beneficiary!: string | undefined | null;
+
+	@Index_()
+	@ManyToOne_(() => Identity, { nullable: true })
+	beneficiaryIdentity!: Identity | undefined | null;
+
+	@Column_('text', { nullable: true })
+	slashingRule!: string | undefined | null;
+
+	@Index_()
+	@ManyToOne_(() => ProposalMetadata, { nullable: true })
+	metadata!: ProposalMetadata | undefined | null;
 }

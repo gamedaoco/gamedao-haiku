@@ -6,7 +6,7 @@ import {
 	Index as Index_,
 } from 'typeorm';
 import * as marshal from './marshal';
-import { Proposal } from './proposal.model';
+import { Voting } from './voting.model';
 import { Identity } from './identity.model';
 
 @Entity_()
@@ -19,8 +19,8 @@ export class ProposalVoter {
 	id!: string;
 
 	@Index_()
-	@ManyToOne_(() => Proposal, { nullable: false })
-	proposal!: Proposal;
+	@ManyToOne_(() => Voting, { nullable: false })
+	voting!: Voting;
 
 	@Column_('text', { nullable: false })
 	address!: string;
@@ -30,5 +30,11 @@ export class ProposalVoter {
 	identity!: Identity;
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	voted!: bigint;
+	power!: bigint;
+
+	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: true })
+	amount!: bigint | undefined | null;
+
+	@Column_('bool', { nullable: false })
+	voted!: boolean;
 }

@@ -1,36 +1,33 @@
-// Imports
-// Types
 import { IPallet } from '../../@types/palletHandler';
 import { handleCampaignContributedEvent } from './events/campaignContributedHandler';
 import { handleCampaignCreatedEvent } from './events/campaignCreatedHandler';
 import { handleCampaignFailedEvent } from './events/campaignFailedHandler';
-import { handleCampaignFinalizedEvent } from './events/campaignFinalizedHandler';
-import { handleCampaignUpdatedEvent } from './events/campaignUpdatedHandler';
+import { handleCampaignActivatedEvent } from './events/campaignActivatedHandler';
+import { handleCampaignSucceededEvent } from './events/campaignSucceededHandler';
 
-// Exports
 export default {
 	name: 'flow',
 	extrinsicHandlers: [],
 	eventHandlers: [
 		{
-			action: 'CampaignCreated',
+			action: 'Created',
 			handler: handleCampaignCreatedEvent,
 		},
 		{
-			action: 'CampaignContributed',
+			action: 'Activated',
+			handler: handleCampaignActivatedEvent,
+		},
+		{
+			action: 'Contributed',
 			handler: handleCampaignContributedEvent,
 		},
 		{
-			action: 'CampaignFailed',
+			action: 'Succeeded',
+			handler: handleCampaignSucceededEvent,
+		},
+		{
+			action: 'Failed',
 			handler: handleCampaignFailedEvent,
-		},
-		{
-			action: 'CampaignFinalized',
-			handler: handleCampaignFinalizedEvent,
-		},
-		{
-			action: 'CampaignUpdated',
-			handler: handleCampaignUpdatedEvent,
 		},
 	],
 } as IPallet;

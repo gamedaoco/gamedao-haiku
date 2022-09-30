@@ -44,10 +44,16 @@ export class Identity {
 	@Column_('text', { nullable: true })
 	web!: string | undefined | null;
 
+	@Column_('text', { nullable: true })
+	web3name!: string | undefined | null;
+
+	@Column_('text', { nullable: true })
+	discord!: string | undefined | null;
+
 	@OneToMany_(() => Organization, (e) => e.creatorIdentity)
 	createdOrganizations!: Organization[];
 
-	@OneToMany_(() => Organization, (e) => e.controllerIdentity)
+	@OneToMany_(() => Organization, (e) => e.primeIdentity)
 	controllerOrganizations!: Organization[];
 
 	@OneToMany_(() => OrganizationMember, (e) => e.identity)

@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react'
 
-import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { Edit } from '@mui/icons-material'
 import {
@@ -34,6 +34,7 @@ interface MyOrganisationsTableProps {
 	organisations: Organization[]
 	title?: string
 }
+
 export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, title, loading }) => {
 	const config = useConfig()
 	const router = useRouter()
@@ -68,7 +69,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 									<TableCell>{t('page:account:organisations:name')}</TableCell>
 									<TableCell>{t('page:account:organisations:members')}</TableCell>
 									<TableCell>{t('page:account:organisations:value_locked')}</TableCell>
-									<TableCell>{t('page:account:organisations:access')}</TableCell>
+									<TableCell>{t('page:account:organisations:access_model')}</TableCell>
 									<TableCell>{t('page:account:organisations:role')}</TableCell>
 									<TableCell align="right"></TableCell>
 								</TableRow>
@@ -107,15 +108,15 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 												{reformatNumber(organisation?.organization_members?.length, 2)}
 											</TableCell>
 											<TableCell>{reformatNumber(12321, 2)}</TableCell>
-											<TableCell>{organisation.access}</TableCell>
+											<TableCell>{organisation.access_model}</TableCell>
 											<TableCell>
 												{t(
 													`page:account:organisations:${
-														isAdmin(organisation?.controller) ? 'prime' : 'member'
+														isAdmin(organisation?.creator) ? 'prime' : 'member'
 													}`,
 												)}
 											</TableCell>
-											{isAdmin(organisation?.controller) ? (
+											{isAdmin(organisation?.creator) ? (
 												<TableCell align="right">
 													<IconButton
 														aria-label="edit"

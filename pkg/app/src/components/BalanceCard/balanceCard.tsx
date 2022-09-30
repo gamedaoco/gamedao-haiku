@@ -11,9 +11,9 @@ export function BalanceCard() {
 	const paymentBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.paymentCurrencies)
 
 	return (
-		<Card variant="primary" sx={{ width: '312px' }}>
+		<Card sx={{ boxShadow: 'none', borderRadius: 0 }}>
 			{
-				<Stack p={{ xs: 3, sm: 3.5 }} spacing={2}>
+				<Stack spacing={2}>
 					<Typography variant="overline">Balances</Typography>
 					{networkBalance && (
 						<Stack direction="row" justifyContent="space-between">

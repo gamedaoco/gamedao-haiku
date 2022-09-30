@@ -66,12 +66,16 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
+				{/*
 				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
+*/}
 				<BalanceCard />
+
 				<Divider />
-				<Stack>
+
+				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
 					<NavLink href={'/account'}>
-						<MenuItem>
+						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Dashboard fontSize="small" />
 							</ListItemIcon>
@@ -79,7 +83,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						</MenuItem>
 					</NavLink>
 					<NavLink href={'/organisations'}>
-						<MenuItem>
+						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Folder fontSize="small" />
 							</ListItemIcon>
@@ -87,7 +91,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						</MenuItem>
 					</NavLink>
 					<NavLink href={'/account/campaigns'}>
-						<MenuItem>
+						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Topic fontSize="small" />
 							</ListItemIcon>
@@ -95,7 +99,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						</MenuItem>
 					</NavLink>
 					<NavLink href={'/account/collectables'}>
-						<MenuItem>
+						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<NotificationsNone fontSize="small" />
 							</ListItemIcon>
@@ -103,20 +107,22 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						</MenuItem>
 					</NavLink>
 					<NavLink href={'/account/identity'}>
-						<MenuItem>
+						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Settings fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Identity</Typography>
 						</MenuItem>
 					</NavLink>
-					<MenuItem onClick={disconnectWallet as any}>
+					<MenuItem onClick={disconnectWallet as any} sx={{ p: 0 }}>
 						<ListItemIcon>
 							<Logout fontSize="small" />
 						</ListItemIcon>
 						<Typography variant="body2">Disconnect</Typography>
 					</MenuItem>
 				</Stack>
+
+				{/*
 				<Divider />
 				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
 					<Typography variant="body2" fontWeight="bold">
@@ -128,6 +134,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						)}
 					</Typography>
 				</Box>
+*/}
 			</Stack>
 		</Menu>
 	)

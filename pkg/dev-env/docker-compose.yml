@@ -72,6 +72,7 @@ services:
       - "--ws-port=9944"
       - "--unsafe-ws-external"
       - "--rpc-cors=all"
+      - "--pruning=archive"
       - "--bootnodes=/dns/subzero-relay-a/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
     volumes:
       - "./node/chainspec:/chainspec"
@@ -141,7 +142,7 @@ services:
       - REDIS_URI=redis://dev-redis:6379/0
       - FORCE_HEIGHT=true
       - BLOCK_HEIGHT=0
-      - WS_PROVIDER_ENDPOINT_URI=ws://subzero-parachain-a:9944
+      - WS_PROVIDER_ENDPOINT_URI=ws://subzero-parachain-a:8844
     depends_on:
       subzero-relay-a:
         condition: service_started
@@ -238,7 +239,7 @@ services:
       IPFS_CLIENT_ID: "${IPFS_CLIENT_ID}"
       IPFS_CLIENT_SECRET: "${IPFS_CLIENT_SECRET}"
       SERVER_PORT: 4000
-      CHAIN_RPC_URL: "ws://subzero-parachain-a:9944"
+      CHAIN_RPC_URL: "ws://subzero-parachain-a:8844"
       CHAIN_RPC_URL_OVERRIDE: "ws://localhost:9944"
       DATABASE_URL: "postgresql://postgres:postgres@gamedao-service-postgres:5432/postgres?schema=public"
     depends_on:
