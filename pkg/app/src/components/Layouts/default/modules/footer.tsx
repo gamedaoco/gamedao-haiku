@@ -1,4 +1,5 @@
 import React from 'react'
+import NextLink from 'next/link'
 
 import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -134,14 +135,14 @@ export function Footer() {
 						</Grid>
 					</Grid>
 
-					<Grid container direction="row">
-						<SocialLinks />
-					</Grid>
-
 					<Grid container direction="column">
 						<Typography variant="small">
 							{`© 2019-${new Date().getFullYear()} `}GameDAO AG, Vaduz, Liechtenstein. Powered by Zero
 							Reality.
+						</Typography>
+						<Typography variant="small">
+							<NextLink href="/imprint">Imprint</NextLink>.{' '}
+							<NextLink href="/tos">Terms + Conditions</NextLink>.
 						</Typography>
 						<Typography variant="small">
 							{process.env.APP_NAME} {process.env.APP_VERSION} build {process.env.BUILD_TIME}

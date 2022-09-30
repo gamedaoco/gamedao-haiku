@@ -5,7 +5,6 @@ import { handleCampaignFailedEvent } from './events/campaignFailedHandler';
 import { handleCampaignActivatedEvent } from './events/campaignActivatedHandler';
 import { handleCampaignSucceededEvent } from './events/campaignSucceededHandler';
 
-
 export default {
 	name: 'flow',
 	extrinsicHandlers: [],

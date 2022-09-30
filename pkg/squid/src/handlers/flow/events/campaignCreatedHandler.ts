@@ -9,7 +9,6 @@ import { addressCodec, encodeSigner, hashToHexString, isCIDValid } from '../../.
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getCampaign } from '../../../database/getters';
 
-
 async function handleCampaignCreatedEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Created';
 	if (!context.extrinsic) {
@@ -22,13 +21,13 @@ async function handleCampaignCreatedEvent(context: EventHandlerContext) {
 		block: context.block,
 		extrinsic: context.extrinsic,
 	});
-	if (!raw_event.isV60 || !raw_call.isV60) {
+	if (!raw_event.isV61 || !raw_call.isV61) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV60;
-	let call = raw_call.asV60;
+	let event = raw_event.asV61;
+	let call = raw_call.asV61;
 
 	let campaignId = hashToHexString(event.campaignId);
 	let orgId = hashToHexString(call.orgId);
@@ -40,13 +39,13 @@ async function handleCampaignCreatedEvent(context: EventHandlerContext) {
 	let creator = encodeSigner(context.extrinsic!.signer);
 	let admin = addressCodec.encode(call.adminId);
 	let start = call.start ?? context.block.height;
-	
+
 	let campaign = new Campaign();
 	campaign.id = campaignId;
 	campaign.organization = org;
 	campaign.creator = creator;
 	campaign.creatorIdentity = await upsertIdentity(store, creator, null);
-	campaign.admin = admin
+	campaign.admin = admin;
 	campaign.adminIdentity = await upsertIdentity(store, admin, null);
 	campaign.target = call.target;
 	campaign.deposit = call.deposit;

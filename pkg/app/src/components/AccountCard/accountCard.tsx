@@ -54,13 +54,16 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 	}
 
 	return (
-		<Card variant="primary" sx={{ maxWidth: '312px' }} onClick={handleCopyAddress}>
+		<Card sx={{ maxWidth: '312px', boxShadow: 'none' }} onClick={handleCopyAddress}>
 			<Stack p={{ xs: 3, sm: 3.5 }} justifyContent="" direction="row" alignItems="center">
-				{loading && <Skeleton variant="rectangular" height="3rem" width={'100%'} />}
+				{
+					// loading && <Skeleton variant="rectangular" height="3rem" width={'100%'} />
+				}
 				{!loading && (
 					<>
 						<Avatar
 							sx={{
+								// WTF!!!1!?!?
 								width: { md: '48px !important' },
 								height: { md: '48px !important' },
 							}}

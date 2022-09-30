@@ -1,20 +1,19 @@
 import { FlowContributedEvent } from '../../../types/events';
 import { CampaignContributor } from '../../../model';
 import { upsertIdentity } from '../../../database/identity';
-import {addressCodec, hashToHexString } from '../../../utils';
+import { addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getCampaign, getCampaignContributor } from '../../../database/getters';
-
 
 async function handleCampaignContributedEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Contributed';
 	let raw_event = new FlowContributedEvent(context);
-	if (!raw_event.isV60) {
+	if (!raw_event.isV61) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV60;
+	let event = raw_event.asV61;
 
 	let contributor = addressCodec.encode(event.sender);
 	let campaignId = hashToHexString(event.campaignId);

@@ -11,6 +11,7 @@ import { shortAccountAddress } from 'src/utils/accountUtils'
 interface ComponentProps {
 	organizationState: Organization
 }
+
 const defaultGridColDef = {
 	minWidth: 140,
 	editable: false,
@@ -20,6 +21,7 @@ const defaultGridColDef = {
 }
 
 const rowHeight = 80
+
 export function OrganizationMembersTable({ organizationState }: ComponentProps) {
 	const { t } = useTranslation()
 	const columns = useMemo<GridColDef[]>(
@@ -98,7 +100,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 
 	const pageSizeOptions = [5, 10, 20, 30]
 	const members = useMemo(() => organizationState?.organization_members?.slice(), [organizationState])
-	const owner = organizationState?.controller
+	const owner = organizationState?.creator
 	const [pageSize, setPageSize] = useState<number>(10)
 	const [rows, setRows] = useState<any[]>([])
 	useEffect(() => {

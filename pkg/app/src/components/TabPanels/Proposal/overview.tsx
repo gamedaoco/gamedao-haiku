@@ -8,8 +8,8 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTranslation } from 'react-i18next'
 import { useSystemProperties } from 'hooks/useSystemProperties'
+import { useTranslation } from 'react-i18next'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
 import { getTimeFromBlock } from 'src/utils/campaignUtils'
 
@@ -101,8 +101,8 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 
 		setRows(
 			proposals.map((proposal) => {
-				const expiryBlock = proposal.expiry_block
-				const startBlock = proposal.start_block
+				const expiryBlock = proposal.expiry
+				const startBlock = proposal.start
 				const hasStarted = blockNumber && blockNumber > startBlock
 				const hasExpired = blockNumber && blockNumber > expiryBlock
 				let timeLeft = ''

@@ -5,7 +5,6 @@ import { Identity } from '../model';
 import { get } from './helper';
 import { Store } from '@subsquid/substrate-processor';
 
-
 function getIdentity(store: Store, identity: string): Promise<Identity | null> {
 	return get(store, Identity, identity);
 }

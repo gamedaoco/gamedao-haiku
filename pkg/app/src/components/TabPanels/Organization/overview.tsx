@@ -88,9 +88,9 @@ export function Overview({
 		[isReadMore, organization?.organization_metadata?.description],
 	)
 
-	const access = useMemo(
+	const access_model = useMemo(
 		() =>
-			organization?.access === 'Open'
+			organization?.access_model === 'Open'
 				? {
 						title: t('page:organisations:organisation_rules:open:title'),
 						text: t('page:organisations:organisation_rules:open:text'),
@@ -101,7 +101,7 @@ export function Overview({
 						text: t('page:organisations:organisation_rules:private:text'),
 						status: t('page:organisations:organisation_rules:private:status'),
 				  },
-		[organization?.access],
+		[organization?.access_model],
 	)
 
 	const feeModel = useMemo(() => {
@@ -187,7 +187,7 @@ export function Overview({
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<VpnKey />
-								<Typography variant="body2">{access.status} </Typography>
+								<Typography variant="body2">{access_model.status} </Typography>
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
@@ -248,17 +248,17 @@ export function Overview({
 								</Stack>
 							)}
 
-							{organization?.access && (
+							{organization?.access_model && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{access.title}</Typography>
-										<Typography variant="body2">{access.text}</Typography>
+										<Typography variant="subtitle1">{access_model.title}</Typography>
+										<Typography variant="body2">{access_model.text}</Typography>
 									</Stack>
 								</Stack>
 							)}
 
-							{organization?.member_limit !== 'undefined' && (
+							{organization?.member_limit && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
 									<Stack direction="column">
@@ -297,7 +297,7 @@ export function Overview({
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('label:treasury')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('treasury')}>
-							{t('button:ui:go_to_members')} <ChevronRight />
+							{t('button:ui:go_to_treasury')} <ChevronRight />
 						</Button>
 					</Stack>
 					<AreaChartContainer

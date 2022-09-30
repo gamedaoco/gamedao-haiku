@@ -16,12 +16,12 @@ const validation = Yup.object().shape({
 	name: Yup.string().required(),
 	cid: Yup.string().required(),
 	org_type: Yup.number().required().min(0).max(3),
-	access: Yup.number().required().min(0).max(2),
+	access_model: Yup.number().required().min(0).max(2),
 	fee_model: Yup.number().required().min(0).max(2),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	fee: Yup.string().required(),
-	gov_asset: Yup.object().required(),
-	pay_asset: Yup.object().required(),
+	gov_currency: Yup.object().required(),
+	pay_currency: Yup.object().required(),
 	member_limit: Yup.number().required().min(0),
 	// Is actually a number but with 18 digits and yum has no support for big number
 	deposit: Yup.string().required(),
@@ -44,7 +44,7 @@ export function useCreateOrgTransaction(): TransactionData {
 					name: typeof data.name === 'string' ? utf8Encode(data.name) : data.name,
 					cid: data.metaDataCID,
 					org_type: data.type,
-					access: data.mode,
+					access_model: data.mode,
 					fee_model: data.feeMode,
 					fee: fromUnit(
 						data.feeAmount,
@@ -52,13 +52,13 @@ export function useCreateOrgTransaction(): TransactionData {
 							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
-					gov_asset: createTokenType(
+					gov_currency: createTokenType(
 						selectedApiProvider.apiProvider,
 						selectedApiProvider.systemProperties.tokenSymbol[
 							selectedApiProvider.systemProperties.governanceCurrency
 						],
 					),
-					pay_asset: createTokenType(
+					pay_currency: createTokenType(
 						selectedApiProvider.apiProvider,
 						selectedApiProvider.systemProperties.tokenSymbol[
 							selectedApiProvider.systemProperties.paymentCurrencies
@@ -81,18 +81,18 @@ export function useCreateOrgTransaction(): TransactionData {
 					mappedData.name,
 					mappedData.cid,
 					mappedData.org_type,
-					mappedData.access,
+					mappedData.access_model,
 					mappedData.fee_model,
 					mappedData.fee,
-					mappedData.gov_asset,
-					mappedData.pay_asset,
+					mappedData.gov_currency,
+					mappedData.pay_currency,
 					mappedData.member_limit,
 					mappedData.deposit,
 				) as SubmittableExtrinsic
 
 				setTxState({
 					tx,
-					currencyId: mappedData.gov_asset,
+					currencyId: mappedData.gov_currency,
 					deposit: mappedData.deposit,
 					title: t('transactions:createOrganization:title'),
 					description: t('transactions:createOrganization:description'),

@@ -4,7 +4,6 @@ import { getOrg } from '../../../database/getters';
 import { addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-
 async function handleOrgUpdatedEvent(context: EventHandlerContext) {
 	let eventName = 'Control.OrgCreated';
 	if (!context.extrinsic) {
@@ -12,17 +11,17 @@ async function handleOrgUpdatedEvent(context: EventHandlerContext) {
 		return;
 	}
 	let raw_event = new ControlOrgUpdatedEvent(context);
-	if (!raw_event.isV60) {
+	if (!raw_event.isV61) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV60;
+	let event = raw_event.asV61;
 
 	let orgId = hashToHexString(event.orgId);
 	let org = await getOrg(store, orgId);
 	if (!org) return;
-	
+
 	if (event.primeId) {
 		let primeId = addressCodec.encode(event.primeId);
 		org.prime = primeId;

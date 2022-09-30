@@ -351,7 +351,7 @@ export function OrganisationById() {
 										organization={organizationState}
 										organizationId={organizationIdState}
 										isMember={isMemberState}
-										isAdmin={address === organizationState?.controller}
+										isAdmin={address === organizationState?.creator}
 										handleCloseTxModal={handleCloseTxModal}
 										handleOpenTxModal={handleOpenTxModal}
 										showTxModalType={showTxModalType}
@@ -365,7 +365,7 @@ export function OrganisationById() {
 								{organizationIdState ? (
 									<CampaignOverview
 										organizationId={organizationIdState}
-										isAdmin={address === organizationState?.controller}
+										isAdmin={address === organizationState?.creator}
 									/>
 								) : (
 									<TmpOverview />

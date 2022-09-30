@@ -8,7 +8,6 @@ import { handleProposalAbortedEvent } from './events/proposalAbortedHandler';
 import { handleProposalFinalizedEvent } from './events/proposalFinalizedHandler';
 import { handleProposalVotedEvent } from './events/proposalVotedHandler';
 
-
 export default {
 	name: 'signal',
 	extrinsicHandlers: [],
