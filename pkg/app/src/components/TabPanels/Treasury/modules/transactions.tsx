@@ -90,7 +90,11 @@ export function Transactions({ type, data }: ComponentProps) {
 				headerName: t('label:amount'),
 				minWidth: 120,
 				renderCell: (params) => {
-					return <Typography variant="body1">{params.row.amount}</Typography>
+					return (
+						<Typography variant="body1" style={type !== 'in' && { color: theme.palette.warning.main }}>
+							{`${type === 'in' ? '+' : '-'} ${params.row.amount}`}
+						</Typography>
+					)
 				},
 			},
 			{
@@ -190,7 +194,7 @@ export function Transactions({ type, data }: ComponentProps) {
 				renderCell: (params) => {
 					return <Typography variant="body1">{params.row.date}</Typography>
 				},
-			},
+			} /*, Removing 3 dots as they are useless right now, saving code for when there is functionality
 			{
 				minWidth: 30,
 				maxWidth: 30,
@@ -209,7 +213,7 @@ export function Transactions({ type, data }: ComponentProps) {
 						></Box>
 					)
 				},
-			},
+			},*/,
 		],
 		[t],
 	)

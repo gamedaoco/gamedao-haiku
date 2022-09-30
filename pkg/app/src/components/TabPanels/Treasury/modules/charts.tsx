@@ -60,6 +60,9 @@ export function Charts({ address }: ComponentProps) {
 				show: false,
 			},
 		},
+		legend: {
+			show: false,
+		},
 		colors: [theme.palette.success.main, theme.palette.warning.main],
 		dataLabels: {
 			enabled: false,
