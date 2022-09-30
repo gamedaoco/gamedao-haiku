@@ -17,7 +17,18 @@ sitemap({
 	},
 })
 
-module.exports = {
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    // If you use `MDXProvider`, uncomment the following line.
+    // providerImportSource: "@mdx-js/react",
+  },
+})
+
+module.exports = withMDX({
+	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 	reactStrictMode: true,
 	env: {
 		BUILD_TIME: dateStr.toString(),
@@ -28,8 +39,9 @@ module.exports = {
 		VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
 		VERCEL_ENV: process.env.VERCEL_ENV || ''
 	},
-	poweredByHeader: 'gamedao.co loves you',
+	poweredByHeader: false,
 	experiments: {
 		topLevelAwait: true,
 	},
-}
+})
+

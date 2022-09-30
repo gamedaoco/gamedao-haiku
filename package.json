@@ -19,7 +19,8 @@
     "build:graphql": "yarn workspace @gamedao-haiku/app generate",
     "build:frontend": "yarn workspace @gamedao-haiku/app build",
     "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "analyze": "ANALYZE=true wsrun -p @gamedao-haiku/app -c build"
   },
   "publishConfig": {
     "access": "public"
