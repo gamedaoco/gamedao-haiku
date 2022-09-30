@@ -3,7 +3,6 @@ import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getProposal } from '../../../database/getters';
 
-
 async function handleProposalRejectedEvent(context: EventHandlerContext) {
 	let eventName = 'Signal.Rejected';
 	let raw_event = new SignalRejectedEvent(context);

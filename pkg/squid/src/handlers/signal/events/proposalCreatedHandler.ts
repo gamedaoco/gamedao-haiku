@@ -9,7 +9,6 @@ import { addressCodec, encodeSigner, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getProposal } from '../../../database/getters';
 
-
 async function handleProposalCreatedEvent(context: EventHandlerContext) {
 	let eventName = 'Signal.Created';
 	if (!context.extrinsic) {
@@ -40,20 +39,20 @@ async function handleProposalCreatedEvent(context: EventHandlerContext) {
 	if (proposal_exists || voting_exists || !org) return;
 
 	let creator = encodeSigner(context.extrinsic!.signer);
-	let beneficiary = call.beneficiary ? addressCodec.encode(call.beneficiary) as string : null;
+	let beneficiary = call.beneficiary ? (addressCodec.encode(call.beneficiary) as string) : null;
 	let start = call.start ?? context.block.height;
 	let campaign = call.campaignId ? await getCampaign(store, hashToHexString(call.campaignId)) : null;
 
 	let voting = new Voting();
 	voting.id = votingId;
 	voting.unit = call.unit.__kind;
-    voting.scale = call.scale.__kind;
-    voting.yes = 0n;
-    voting.no = 0n;
-    voting.quorum = call.quorum?.toString();
-    voting.majority = call.majority.__kind;
+	voting.scale = call.scale.__kind;
+	voting.yes = 0n;
+	voting.no = 0n;
+	voting.quorum = call.quorum?.toString();
+	voting.majority = call.majority.__kind;
 	await store.save(voting);
-	
+
 	let proposal = new Proposal();
 	proposal.id = proposalId;
 	proposal.creator = creator;
@@ -69,7 +68,7 @@ async function handleProposalCreatedEvent(context: EventHandlerContext) {
 	proposal.beneficiary = beneficiary;
 	proposal.beneficiaryIdentity = beneficiary ? await upsertIdentity(store, beneficiary, null) : null;
 	proposal.slashingRule = 'Automated';
-	proposal.deposit = call.deposit ?? BigInt(100 * 10^10);		// MinProposalDeposit = 100 * dollar(GAME);
+	proposal.deposit = call.deposit ?? BigInt((100 * 10) ^ 10); // MinProposalDeposit = 100 * dollar(GAME);
 	proposal.state = start > context.block.height ? 'Created' : 'Active';
 	proposal.voting = voting;
 

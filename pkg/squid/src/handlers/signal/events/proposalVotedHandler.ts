@@ -7,7 +7,6 @@ import { addressCodec, hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getProposal } from '../../../database/getters';
 
-
 async function handleProposalVotedEvent(context: EventHandlerContext) {
 	let eventName = 'Signal.Voted';
 	if (!context.extrinsic) {
@@ -53,7 +52,6 @@ async function handleProposalVotedEvent(context: EventHandlerContext) {
 	voter.power = event.votePower;
 	voter.voted = event.voted;
 	await store.save(voter);
-
 }
 
 export { handleProposalVotedEvent };

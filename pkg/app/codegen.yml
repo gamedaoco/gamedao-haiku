@@ -1,4 +1,4 @@
-schema: https://beeblebrox.zero.io/graph/v1/graphql
+schema: https://graph.dev.sub.zero.io/v1/graphql
 overwrite: true
 
 generates:

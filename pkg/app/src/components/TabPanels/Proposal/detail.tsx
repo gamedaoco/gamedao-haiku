@@ -98,8 +98,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
 	const isActive = useMemo(
-		() => isProposalActive(blockNumber, proposal?.start_block, proposal?.expiry_block),
-		[blockNumber, proposal?.start_block, proposal?.expiry_block],
+		() => isProposalActive(blockNumber, proposal?.start, proposal?.expiry),
+		[blockNumber, proposal?.start, proposal?.expiry],
 	)
 
 	const { loading, data } = useProposalByIdSubscription({
@@ -140,25 +140,25 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	useEffect(() => {
 		if (!proposal) return
 
-		const yesVotes = proposal.proposal_voters.filter((voter) => voter.voted === 1).length
-		const noVotes = proposal.proposal_voters.filter((voter) => voter.voted === 0).length
+		const yesVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted === 1).length
+		const noVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted === 0).length
 
-		const voteYes = +((yesVotes / Math.max(1, proposal.proposal_voters.length)) * 100).toPrecision(2)
-		const voteNo = +((noVotes / Math.max(1, proposal.proposal_voters.length)) * 100).toPrecision(2)
+		const voteYes = +((yesVotes / Math.max(1, proposal.voting.proposal_voters.length)) * 100).toPrecision(2)
+		const voteNo = +((noVotes / Math.max(1, proposal.voting.proposal_voters.length)) * 100).toPrecision(2)
 
 		setYesPercentage(voteYes)
 		setNoPercentage(voteNo)
 
 		setVoterRows(
-			proposal.proposal_voters.map((voter) => ({
+			proposal.voting.proposal_voters.map((voter) => ({
 				id: voter.identity.id,
 				member: voter.identity.display_name,
 				vote: voter.voted ? 'Yes' : 'No',
 			})),
 		)
 
-		const startDiff = (proposal.start_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
-		const endDiff = (proposal.expiry_block - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
+		const startDiff = (proposal.start - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
+		const endDiff = (proposal.expiry - blockNumber) * (systemProperties?.blockTargetTime ?? 3)
 
 		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
 		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
@@ -172,7 +172,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 			setProposalTypeName(`${typeName} Proposal`)
 		}
 
-		const votingTypeName = displayValues?.votingTypes.find((pt) => pt.value === proposal!.voting_type)?.text ?? ''
+		const votingTypeName = displayValues?.votingTypes.find((pt) => pt.value === proposal!.type)?.text ?? ''
 		if (votingTypeName) {
 			setProposalVotingTypeName(votingTypeName)
 		}
@@ -204,8 +204,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 								<Typography sx={{ wordBreak: 'break-all' }} variant="body1">
 									{t('label:proposal_by', {
 										creator:
-											proposal.proposal_creator_identity.display_name ??
-											formatAddressShort(proposal.proposal_creator_identity.id),
+											proposal.identity.display_name ?? formatAddressShort(proposal.identity.id),
 									})}
 								</Typography>
 							</Stack>
@@ -239,8 +238,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						</Box>
 						<Box>
 							<Typography variant="body2">
-								{proposal.proposal_creator_identity.display_name ??
-									formatAddressShort(proposal.proposal_creator_identity.id, 6)}
+								{proposal.identity.display_name ?? formatAddressShort(proposal.identity.id, 6)}
 							</Typography>
 						</Box>
 
@@ -266,7 +264,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						</Box>
 
 						<Box>
-							<Typography variant="body2">{t('label:voting_type')}</Typography>
+							<Typography variant="body2">{t('label:type')}</Typography>
 						</Box>
 						<Box>
 							<Typography variant="body2">{proposalVotingTypeName}</Typography>
@@ -339,7 +337,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2} gap={2}>
 				<Stack direction="row" spacing={1}>
 					<Typography variant="h6">{t('label:votes')}</Typography>
-					<Chip size="small" variant="proposalVotes" label={proposal.proposal_voters.length} />
+					<Chip size="small" variant="proposalVotes" label={proposal.voting.proposal_voters.length} />
 				</Stack>
 				<Stack paddingLeft={4} paddingRight={4}>
 					<Box sx={{ height: 550 }}>

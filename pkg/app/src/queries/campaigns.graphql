@@ -65,7 +65,7 @@ subscription Campaign($address: String) {
                 name
                 logo
             }
-            pay_asset
+            pay_currency
         }
     }
 }
@@ -96,7 +96,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
                 name
                 logo
             }
-            pay_asset
+            pay_currency
         }
     }
 }
@@ -131,7 +131,7 @@ subscription CampaignById($campaignId: String!, $address: String = "") {
             }
         }
         organization {
-            controller
+            creator
         }
     }
 }
@@ -164,7 +164,7 @@ subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!], $o
                 name
                 logo
             }
-            pay_asset
+            pay_currency
         }
     }
 }

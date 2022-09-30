@@ -5,7 +5,6 @@ import { OrganizationMember } from '../../../model';
 import { hashToHexString, addressCodec } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-
 async function handleMemberAddedEvent(context: EventHandlerContext) {
 	let eventName = 'Control.MemberAdded';
 	let raw_event = new ControlMemberAddedEvent(context);

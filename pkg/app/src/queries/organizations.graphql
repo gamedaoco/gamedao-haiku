@@ -14,7 +14,7 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
             description
             logo
         }
-        access
+        access_model
         creator
         organization_members{
             address
@@ -24,16 +24,16 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
 
 subscription OrganizationById($orgId: String!) {
     organization(where: { id: {_eq: $orgId}}) {
-        access
-        controller
+        access_model
+        creator
         created_at_block
         creator
-        fee
         fee_model
-        gov_asset
+        fee_model
+        gov_currency
         id
         member_limit
-        pay_asset
+        pay_currency
         treasury
         type
         organization_members {
@@ -86,8 +86,8 @@ subscription AccountOrganizations($address: String!) {
                     name
                     logo
                 }
-                access
-                controller
+                access_model
+                creator
                 organization_members {
                     address
                     identity {

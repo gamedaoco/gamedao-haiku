@@ -3,7 +3,6 @@ import { upsertIdentity } from '../../../database/identity';
 import { encodeSigner } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 
-
 async function handleIdentityClearedEvent(context: EventHandlerContext) {
 	if (!context.extrinsic) return;
 

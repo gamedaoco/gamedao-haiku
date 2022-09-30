@@ -3,7 +3,6 @@ import { hashToHexString } from '../../../utils';
 import { EventHandlerContext } from '@subsquid/substrate-processor';
 import { getProposal } from '../../../database/getters';
 
-
 async function handleProposalExpiredEvent(context: EventHandlerContext) {
 	let eventName = 'Signal.Expired';
 	let raw_event = new SignalExpiredEvent(context);
