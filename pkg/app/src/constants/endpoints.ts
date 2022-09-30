@@ -16,20 +16,20 @@ const productionEndpoints: Endpoints = [
 		image: '/img/zero.png',
 		name: 'development',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.dev.sub.zero.io/graph/health',
+		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		default: true,
 	},
 	{
 		image: '/img/zero.png',
 		name: 'staging',
 		url: 'https://graph.stage.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.stage.sub.zero.io/graph/health',
+		healthCheck: 'https://graph.stage.sub.zero.io/health',
 	},
 	{
 		image: '/img/zero.png',
 		name: 'rococo',
 		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.rococo.sub.zero.io/graph/health',
+		healthCheck: 'https://graph.rococo.sub.zero.io/health',
 	},
 ]
 
