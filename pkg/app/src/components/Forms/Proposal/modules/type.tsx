@@ -39,7 +39,7 @@ export function Type({ selected, setSelected }: ComponentProps) {
 				value={2}
 				selectedValue={selected}
 				onChange={setSelected}
-				disabled={!enabledFeature.CREATE_SPENDING_PROPOSAL}
+				disabled={false && !enabledFeature.CREATE_SPENDING_PROPOSAL}
 			/>
 		</BaseForm>
 	)

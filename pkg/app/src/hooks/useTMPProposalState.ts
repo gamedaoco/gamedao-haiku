@@ -31,6 +31,14 @@ export function useTMPProposalState(): TMPProposalState {
 		`TmpProposal-${address}-metaDataCID`,
 		defaultValues.metaDataCID,
 	)
+	const [currencyId, setCurrencyId] = useLocalStorage<number>(
+		`TmpProposal-${address}-currencyId`,
+		defaultValues.currencyId,
+	)
+	const [beneficiaryAddress, setBeneficiaryAddress] = useLocalStorage<string>(
+		`TmpProposal-${address}-beneficiaryAddress`,
+		defaultValues.beneficiaryAddress,
+	)
 
 	// Clear state after re
 	const clearAll = useCallback(() => {
@@ -44,6 +52,8 @@ export function useTMPProposalState(): TMPProposalState {
 		setCampaignId(defaultValues.campaignId)
 		setAmount(defaultValues.amount)
 		setMetaDataCID(defaultValues.metaDataCID)
+		setCurrencyId(defaultValues.currencyId)
+		setBeneficiaryAddress(defaultValues.beneficiaryAddress)
 	}, [
 		setSelectedType,
 		setNameState,
@@ -55,6 +65,8 @@ export function useTMPProposalState(): TMPProposalState {
 		setCampaignId,
 		setAmount,
 		setMetaDataCID,
+		setCurrencyId,
+		setBeneficiaryAddress,
 	])
 
 	return {
@@ -68,6 +80,8 @@ export function useTMPProposalState(): TMPProposalState {
 		campaignId: campaignId,
 		amount: amount,
 		metaDataCID: metaDataCID,
+		currencyId: currencyId,
+		beneficiaryAddress: beneficiaryAddress,
 		setType: setSelectedType,
 		setName: setNameState,
 		setDescription: setDescription,
@@ -78,6 +92,8 @@ export function useTMPProposalState(): TMPProposalState {
 		setCampaignId: setCampaignId,
 		setAmount: setAmount,
 		setMetaDataCID: setMetaDataCID,
+		setCurrencyId: setCurrencyId,
+		setBeneficiaryAddress: setBeneficiaryAddress,
 		clearAll: clearAll,
 	}
 }

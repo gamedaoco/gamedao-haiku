@@ -22,6 +22,7 @@ import { useDisplayValues } from 'hooks/useDisplayValues'
 import moment from 'moment'
 import { useNetworkContext } from 'provider/network/modules/context'
 import { useTranslation } from 'react-i18next'
+import { getCurrenciesForSelect } from 'src/utils/forms/currencyUtils'
 import * as Yup from 'yup'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
@@ -212,19 +213,7 @@ export function Settings({
 	)
 
 	useEffect(() => {
-		if (!selectedApiProvider || !selectedApiProvider.systemProperties) return
-
-		const { paymentCurrencies, tokenSymbol } = selectedApiProvider.systemProperties
-		const currencies = paymentCurrencies instanceof Array ? paymentCurrencies : [paymentCurrencies]
-		setCurrencies(
-			currencies.map((currencyIndex) => {
-				return {
-					key: tokenSymbol[currencyIndex],
-					text: tokenSymbol[currencyIndex],
-					value: currencyIndex,
-				}
-			}),
-		)
+		setCurrencies(getCurrenciesForSelect(selectedApiProvider))
 	}, [selectedApiProvider])
 
 	return (
