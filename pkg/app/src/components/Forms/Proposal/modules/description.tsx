@@ -310,18 +310,20 @@ export function Description({
 								</Select>
 							</FormControl>
 						</Stack>
-						<TextField
-							disabled={true}
-							InputProps={{
-								startAdornment: (
-									<Stack direction={'row'} flexShrink={0} alignItems={'center'} gap={1}>
-										<Inbox />
-										{`${organization?.organization_metadata?.name} Treasury`}
-									</Stack>
-								),
-								endAdornment: <>{organization?.treasury}</>,
-							}}
-						/>
+						{organization && (
+							<TextField
+								disabled={true}
+								InputProps={{
+									startAdornment: (
+										<Stack direction={'row'} flexShrink={0} alignItems={'center'} gap={1}>
+											<Inbox />
+											{`${organization?.organization_metadata?.name} Treasury`}
+										</Stack>
+									),
+									endAdornment: <>{organization?.treasury}</>,
+								}}
+							/>
+						)}
 						<TextField
 							fullWidth
 							variant="outlined"
