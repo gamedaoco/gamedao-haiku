@@ -396,47 +396,47 @@
     "notification": {
         "transactions": {
             "createOrganization": {
-                "pending": "Summoning your Organization...",
+                "pending": "Summoning your Organization…",
                 "success": "The beast is unleashed!",
                 "error": "Summoning failed, check your Mana."
             },
             "createCampaign": {
-                "pending": "Summoning your Campaign...",
+                "pending": "Summoning your Campaign…",
                 "success": "The beast is unleashed!",
                 "error": "Summoning failed, check your Mana."
             },
             "createProposal": {
-                "pending": "Summoning your Proposal...",
+                "pending": "Summoning your Proposal…",
                 "success": "Proposal created",
                 "error": "Summoning failed, check your Mana."
             },
             "simpleVote": {
-                "pending": "Voting in progress...",
+                "pending": "Voting in progress…",
                 "success": "Voted",
                 "error": "Voting failed"
             },
             "addMember": {
-                "pending": "Join organisations in progress...",
+                "pending": "Join organisations in progress…",
                 "success": "Join organisations successfully",
                 "error": "Join organisations failed"
             },
             "removeMember": {
-                "pending": "Leave organisations in progress...",
+                "pending": "Leave organisations in progress…",
                 "success": "Leave organisations successfully",
                 "error": "Leave organisations failed"
             },
             "setIdentity": {
-                "pending": "Setting your identity in progress...",
+                "pending": "Setting your identity in progress…",
                 "success": "Your Identity was set successfully",
                 "error": "Setting Identity failed"
             },
             "clearIdentity": {
-                "pending": "Clearing your identity in progress...",
+                "pending": "Clearing your identity in progress…",
                 "success": "Your Identity was cleared successfully",
                 "error": "Clearing Identity failed"
             },
             "contribute": {
-                "pending": "Contribute in progress...",
+                "pending": "Contribute in progress…",
                 "success": "Successfully contributed",
                 "error": "Contribute failed"
             }
