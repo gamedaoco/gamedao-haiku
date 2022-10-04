@@ -284,13 +284,14 @@ export function Description({
 									label="Amount*"
 									type="number"
 									value={amount}
-									InputProps={{
-										endAdornment: (
-											<Button variant={'outlined'} color={'secondary'}>
-												Max
-											</Button>
-										),
-									}}
+									// ToDo: We need treasury balance for the Max button
+									// InputProps={{
+									// 	endAdornment: (
+									// 		<Button variant={'outlined'} color={'secondary'}>
+									// 			Max
+									// 		</Button>
+									// 	),
+									// }}
 									onChange={handleAmountChange}
 								/>
 							</FormControl>
