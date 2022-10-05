@@ -2,7 +2,7 @@ import { CampaignStatus } from 'src/@types/campaignStatus'
 
 export const CampaignsListSortMapping = {
 	[CampaignStatus.ACTIVE]: 0,
-	[CampaignStatus.INIT]: 1,
+	[CampaignStatus.Created]: 1,
 	[CampaignStatus.FINALIZING]: 2,
 	[CampaignStatus.SUCCESS]: 3,
 	[CampaignStatus.REVERTING]: 4,
