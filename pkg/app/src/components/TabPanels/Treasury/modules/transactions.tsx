@@ -31,7 +31,12 @@ const rowHeight = 50
 
 function CustomToolbar() {
 	return (
-		<GridToolbarContainer>
+		<GridToolbarContainer
+			sx={{
+				borderTopLeftRadius: '20px',
+				borderTopRightRadius: '20px',
+			}}
+		>
 			<GridToolbarFilterButton />
 			<GridToolbarExport />
 		</GridToolbarContainer>
@@ -119,6 +124,7 @@ export function Transactions({ type, data }: ComponentProps) {
 				headerName: type === 'in' ? t('label:source') : t('label:target'),
 				minWidth: 220,
 				renderCell: (params) => {
+					const coinImage = params.row.image ? params.row.image.toLowerCase() : 'btc'
 					return (
 						<Box
 							sx={{
@@ -127,7 +133,7 @@ export function Transactions({ type, data }: ComponentProps) {
 							}}
 						>
 							<Image
-								src={`/img/currency/${params.row.image || 'default'}.png`}
+								src={`/svg/coins/${coinImage}.svg`}
 								alt="currency"
 								style={{ height: '40px', width: '40px', flexShrink: 0 }}
 							/>

@@ -41,22 +41,22 @@ export function getAssetsSubscription(): TreasuryAsset[] {
 		{
 			name: 'ZERO',
 			quantity: 714000064,
-			image: 'zero.png',
+			image: 'zero',
 		},
 		{
 			name: 'PLAY',
 			quantity: 1350000197,
-			image: 'play.png',
+			image: 'play',
 		},
 		{
 			name: 'GAME',
 			quantity: 1720000361,
-			image: 'game.png',
+			image: 'game',
 		},
 		{
 			name: 'aUSD',
 			quantity: 2.6566,
-			image: 'ausd.png',
+			image: 'ausd',
 		},
 	]
 }
