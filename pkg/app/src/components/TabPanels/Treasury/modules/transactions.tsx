@@ -124,7 +124,7 @@ export function Transactions({ type, data }: ComponentProps) {
 				headerName: type === 'in' ? t('label:source') : t('label:target'),
 				minWidth: 220,
 				renderCell: (params) => {
-					const coinImage = params.row.image ? params.row.image.toLowerCase() : 'btc'
+					const coinImage = params.row.image ? params.row.image.toLowerCase() : 'default'
 					return (
 						<Box
 							sx={{
