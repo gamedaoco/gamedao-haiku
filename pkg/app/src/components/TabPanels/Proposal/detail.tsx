@@ -17,7 +17,7 @@ import {
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
-import { useSimpleVoteTransaction } from 'hooks/tx/useSimpleVoteTransaction'
+import { useVoteTransaction } from 'hooks/tx/useVoteTransaction'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useDisplayValues } from 'hooks/useDisplayValues'
 import { useSystemProperties } from 'hooks/useSystemProperties'
@@ -95,7 +95,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	const [endDate, setEndDate] = useState<string>('')
 	const [showMore, setShowMore] = useState<boolean>(false)
 	const [showButton, setShowButton] = useState<boolean>(false)
-	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
+	const simpleVoteTx = useVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
 	const isActive = useMemo(
 		() => isProposalActive(blockNumber, proposal?.start, proposal?.expiry),

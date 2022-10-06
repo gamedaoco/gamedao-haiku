@@ -11,7 +11,8 @@ import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
-import * as Yup from 'yup'
+import * as Yup from 'yup';
+
 
 const validation = Yup.object().shape({
 	orgId: Yup.string().required(),
@@ -20,9 +21,10 @@ const validation = Yup.object().shape({
 	target: Yup.string().required(),
 	deposit: Yup.string().required(),
 	expiry: Yup.number().required(),
-	protocol: Yup.number().required(),
-	governance: Yup.number().required(),
+	protocol: Yup.mixed().required(),
+	governance: Yup.mixed().required(),
 	cid: Yup.string().required(),
+	start: Yup.number().required(),
 	tokenSymbol: Yup.string().required(),
 	tokenName: Yup.string().required(),
 })
@@ -40,6 +42,14 @@ export function useCreateCampaignTransaction(): TransactionData {
 		if (selectedApiProvider?.apiProvider && data && address && blockNumber) {
 			try {
 				// Data mapping
+				// Get diff seconds for start date
+				const startSecondsDiff = moment(data.startDate).diff(moment(), 'seconds')
+				const startBlocks =
+					startSecondsDiff > 0
+						? blockNumber +
+						  Math.ceil(startSecondsDiff / selectedApiProvider.systemProperties.blockTargetTime)
+						: blockNumber
+
 				const endSecondsDiff = moment(data.endDate).diff(moment(), 'seconds')
 				const endBlock =
 					blockNumber + Math.ceil(endSecondsDiff / selectedApiProvider.systemProperties.blockTargetTime)
@@ -60,9 +70,13 @@ export function useCreateCampaignTransaction(): TransactionData {
 						],
 					),
 					expiry: endBlock,
-					protocol: data.protocol,
-					governance: data.governance ? 1 : 0,
+					protocol: selectedApiProvider.apiProvider.createType('GamedaoFlowFlowProtocol', data.protocol),
+					governance: selectedApiProvider.apiProvider.createType(
+						'GamedaoFlowFlowGovernance',
+						data.governance ? 1 : 0,
+					),
 					cid: data.metadataCid,
+					start: startBlocks,
 					tokenSymbol: currencySymbol,
 					tokenName: currencySymbol,
 				}
@@ -80,6 +94,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 					mappedData.protocol,
 					mappedData.governance,
 					mappedData.cid,
+					mappedData.start,
 					mappedData.tokenSymbol,
 					mappedData.tokenName,
 				) as SubmittableExtrinsic

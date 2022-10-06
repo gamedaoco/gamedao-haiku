@@ -9,13 +9,14 @@ import * as Yup from 'yup'
 const validation = Yup.object().shape({
 	proposalId: Yup.string().required(),
 	vote: Yup.number().required().min(0).max(1),
+	deposit: Yup.string().nullable(),
 })
 
-export function useSimpleVoteTransaction(proposalId: string, vote: number): TransactionData {
+export function useVoteTransaction(proposalId: string, vote: number): TransactionData {
 	const [txState, setTxState] = useState<TransactionData>(null)
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
-	const logger = useLogger('useSimpleVoteTransaction')
+	const logger = useLogger('useVoteTransaction')
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && proposalId && vote != null) {
@@ -24,12 +25,17 @@ export function useSimpleVoteTransaction(proposalId: string, vote: number): Tran
 				const mappedData = {
 					proposalId: proposalId,
 					vote: vote,
+					deposit: null,
 				}
 
 				// Data validation
 				validation.validateSync(mappedData)
 
-				const tx = selectedApiProvider.apiProvider.tx.signal.simpleVote(mappedData.proposalId, mappedData.vote)
+				const tx = selectedApiProvider.apiProvider.tx.signal.vote(
+					mappedData.proposalId,
+					mappedData.vote,
+					mappedData.deposit,
+				)
 
 				setTxState({
 					tx,

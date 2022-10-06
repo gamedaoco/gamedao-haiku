@@ -102,6 +102,11 @@ export default function Chip(theme: Theme) {
 							backgroundColor: theme.palette.secondary.dark,
 							color: theme.palette.grey['800'],
 						},
+
+						'&.MuiChip-colorStatus': {
+							backgroundColor: theme.palette.chart.blue[3],
+							color: theme.palette.grey['800'],
+						},
 					},
 				},
 				{
