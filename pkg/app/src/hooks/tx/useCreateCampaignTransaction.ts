@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
-import * as Yup from 'yup';
-
+import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
 	orgId: Yup.string().required(),

@@ -61,6 +61,11 @@ export function Transactions({ type, data }: ComponentProps) {
 				backgroundColor: alpha(theme.palette.primary.dark, 0.3),
 				color: theme.palette.primary.dark,
 			},
+			default: {
+				borderRadius: '8px',
+				backgroundColor: alpha(theme.palette.success.dark, 0.3),
+				color: theme.palette.success.dark,
+			},
 		},
 		out: {
 			spending: {
@@ -73,17 +78,16 @@ export function Transactions({ type, data }: ComponentProps) {
 				backgroundColor: alpha(theme.palette.info.dark, 0.3),
 				color: theme.palette.info.dark,
 			},
+			default: {
+				borderRadius: '8px',
+				backgroundColor: alpha(theme.palette.success.dark, 0.3),
+				color: theme.palette.success.dark,
+			},
 		},
 	}
 
 	const columns = useMemo<GridColDef[]>(
 		() => [
-			{
-				minWidth: 10,
-				maxWidth: 10,
-				field: '',
-				sortable: false,
-			},
 			{
 				...defaultGridColDef,
 				field: 'amount',
@@ -91,7 +95,10 @@ export function Transactions({ type, data }: ComponentProps) {
 				minWidth: 120,
 				renderCell: (params) => {
 					return (
-						<Typography variant="body1" style={type !== 'in' && { color: theme.palette.warning.main }}>
+						<Typography
+							variant="body1"
+							style={{ color: type === 'in' ? theme.palette.success.main : theme.palette.warning.main }}
+						>
 							{`${type === 'in' ? '+' : '-'} ${params.row.amount}`}
 						</Typography>
 					)
@@ -145,7 +152,7 @@ export function Transactions({ type, data }: ComponentProps) {
 					return (
 						<Box
 							sx={{
-								...typeStyles[type][params.row.type.toLowerCase()],
+								...typeStyles[type || 'in'][params.row.type.toLowerCase() || 'default'],
 								paddingLeft: '10px',
 								paddingRight: '10px',
 							}}
@@ -155,7 +162,9 @@ export function Transactions({ type, data }: ComponentProps) {
 								variant="caption"
 								sx={{
 									fontWeight: 'bold',
-									color: typeStyles[type][params.row.type.toLowerCase()]['color'],
+									color: typeStyles[type || 'in'][params.row.type.toLowerCase() || 'default'][
+										'color'
+									],
 								}}
 							>
 								{params.row.type}
@@ -168,7 +177,7 @@ export function Transactions({ type, data }: ComponentProps) {
 				...defaultGridColDef,
 				field: 'hash',
 				sortable: false,
-				minWidth: 200,
+				minWidth: 250,
 				headerName: t('label:hash'),
 				renderCell: (params) => {
 					return (
@@ -244,11 +253,12 @@ export function Transactions({ type, data }: ComponentProps) {
 			<Stack component={Paper} padding={4} spacing={6} sx={{ boxShadow: 'none', padding: 0 }}>
 				<Box sx={{ height: 350 }}>
 					<DataGrid
+						disableSelectionOnClick
 						loading={!data.length}
 						rows={rows}
 						columns={columns}
 						pageSize={pageSize}
-						rowsPerPageOptions={pageSizeOptions}
+						rowsPerPageOptions={data.length > 10 ? pageSizeOptions : []}
 						isCellEditable={() => false}
 						hideFooterSelectedRowCount={true}
 						getRowHeight={() => {
@@ -259,6 +269,11 @@ export function Transactions({ type, data }: ComponentProps) {
 						}}
 						components={{
 							Toolbar: CustomToolbar,
+						}}
+						sx={{
+							'&.MuiDataGrid-root .MuiDataGrid-cell:focus-within': {
+								outline: 'none !important',
+							},
 						}}
 					/>
 				</Box>
