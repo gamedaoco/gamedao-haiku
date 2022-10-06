@@ -42,7 +42,9 @@ export function GraphQlProvider({ children }) {
 				.then((response) => {
 					if (response.ok) {
 						setHealthCheck(HealthCheckStatus.OK)
-						setClient(createApolloClient(selectedEndpoint))
+						createApolloClient(selectedEndpoint).then((client) => {
+							setClient(client)
+						})
 					} else {
 						setHealthCheck(HealthCheckStatus.ERROR)
 					}
