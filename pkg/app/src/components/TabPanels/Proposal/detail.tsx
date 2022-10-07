@@ -97,11 +97,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	const [showButton, setShowButton] = useState<boolean>(false)
 	const simpleVoteTx = useVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
-	const isActive = useMemo(
-		() => isProposalActive(blockNumber, proposal?.start, proposal?.expiry),
-		[blockNumber, proposal?.start, proposal?.expiry],
-	)
-
+	const isActive = useMemo(() => isProposalActive(blockNumber, proposal), [blockNumber, proposal])
 	const { loading, data } = useProposalByIdSubscription({
 		variables: { proposalId },
 	})
