@@ -9,6 +9,8 @@ export interface TMPProposal {
 	campaignId: string
 	amount: number
 	metaDataCID: string
+	currencyId: number
+	beneficiaryAddress: string
 }
 
 export interface TMPProposalState extends TMPProposal {
@@ -22,5 +24,7 @@ export interface TMPProposalState extends TMPProposal {
 	setMetaDataCID: (string) => void
 	setCampaignId: (string) => void
 	setAmount: (number) => void
+	setCurrencyId: (number) => void
+	setBeneficiaryAddress: (string) => void
 	clearAll: () => void
 }

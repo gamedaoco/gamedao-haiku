@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { ApiPromise } from '@polkadot/api'
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
@@ -11,11 +12,10 @@ import { useTranslation } from 'react-i18next'
 import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
 import { TransactionData } from 'src/@types/transactionData'
-import { fromUnit } from 'src/utils/token'
+import { PROPOSAL_KEYS, PROPOSAL_MAJORITIES, PROPOSAL_TYPES, PROPOSAL_UNITS } from 'src/constants/proposal'
+import { createTokenType, fromUnit } from 'src/utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
-import { ApiPromise } from '@polkadot/api'
-import { PROPOSAL_MAJORITIES, PROPOSAL_TYPES, PROPOSAL_UNITS } from 'src/constants/proposal'
 
 interface BlockTime {
 	startBlocks: number
@@ -122,8 +122,14 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 								selectedApiProvider.systemProperties.governanceCurrency
 							],
 						) ?? null,
-					beneficiary: null,
-					currencyId: null,
+					beneficiary: data.type === PROPOSAL_KEYS.Spending ? data.beneficiaryAddress : null,
+					currencyId:
+						data.type === PROPOSAL_KEYS.Spending
+							? createTokenType(
+									selectedApiProvider.apiProvider,
+									selectedApiProvider.systemProperties.tokenSymbol[data.currencyId],
+							  )
+							: null,
 				}
 
 				// Data validation
