@@ -135,7 +135,7 @@ export function Transactions({ type, data }: ComponentProps) {
 							<Image
 								src={`/svg/coins/${coinImage}.svg`}
 								alt="currency"
-								style={{ height: '40px', width: '40px', flexShrink: 0 }}
+								style={{ height: '30px', width: '30px', flexShrink: 0 }}
 							/>
 
 							<Box sx={{ ml: 1 }}>
