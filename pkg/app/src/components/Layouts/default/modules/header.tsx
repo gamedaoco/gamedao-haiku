@@ -55,13 +55,13 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 					height: '90px',
 				}}
 			>
-				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%', paddingRight: '20px' }}>
 					<NavLink href="/">
 						<Logo />
 					</NavLink>
 				</Box>
 
-				<Stack direction="row" alignItems="center" spacing={4} minWidth="60%">
+				<Stack direction="row" alignItems="center" spacing={4} minWidth="50%">
 					{urls.map((navItem) => {
 						return (
 							<Fragment key={navItem.name}>
