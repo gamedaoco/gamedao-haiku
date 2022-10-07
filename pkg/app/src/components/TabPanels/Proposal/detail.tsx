@@ -140,8 +140,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	useEffect(() => {
 		if (!proposal) return
 
-		const yesVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted === 1).length
-		const noVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted === 0).length
+		const yesVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted).length
+		const noVotes = proposal.voting.proposal_voters.filter((voter) => !voter.voted).length
 
 		const voteYes = +((yesVotes / Math.max(1, proposal.voting.proposal_voters.length)) * 100).toPrecision(2)
 		const voteNo = +((noVotes / Math.max(1, proposal.voting.proposal_voters.length)) * 100).toPrecision(2)
@@ -167,10 +167,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	useEffect(() => {
 		if (!proposal) return
 
-		const typeName = displayValues?.proposalTypes.find((pt) => pt.value === proposal!.type)?.text
-		if (typeName) {
-			setProposalTypeName(`${typeName} Proposal`)
-		}
+		setProposalTypeName(`${proposal.type} Proposal`)
 
 		const votingTypeName = displayValues?.votingTypes.find((pt) => pt.value === proposal!.type)?.text ?? ''
 		if (votingTypeName) {
@@ -263,12 +260,12 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 							<Typography variant="body2">{proposalTypeName}</Typography>
 						</Box>
 
-						<Box>
-							<Typography variant="body2">{t('label:type')}</Typography>
-						</Box>
-						<Box>
-							<Typography variant="body2">{proposalVotingTypeName}</Typography>
-						</Box>
+						{/*<Box>*/}
+						{/*	<Typography variant="body2">{t('label:type')}</Typography>*/}
+						{/*</Box>*/}
+						{/*<Box>*/}
+						{/*	<Typography variant="body2">{proposalVotingTypeName}</Typography>*/}
+						{/*</Box>*/}
 
 						<Box>
 							<Typography variant="body2">{t('label:block_number')}</Typography>

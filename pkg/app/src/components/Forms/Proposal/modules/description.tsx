@@ -187,6 +187,32 @@ export function Description({
 		[setBeneficiaryAddress, setErrorState],
 	)
 
+	const handleStartDateChanged = useCallback(
+		(event) => {
+			if (isNaN(event)) {
+				return
+			}
+
+			if (setStartDate) {
+				setStartDate(event)
+			}
+		},
+		[setStartDate, setErrorState],
+	)
+
+	const handleEndDateChanged = useCallback(
+		(event) => {
+			if (isNaN(event)) {
+				return
+			}
+
+			if (setEndDate) {
+				setEndDate(event)
+			}
+		},
+		[setEndDate, setErrorState],
+	)
+
 	const handleCampaignChange = useCallback(
 		(event) => {
 			const value = event.target.value
@@ -359,7 +385,7 @@ export function Description({
 						label="Start date"
 						minDate={new Date()}
 						value={startDate}
-						onChange={setStartDate}
+						onChange={handleStartDateChanged}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}
 					/>
@@ -369,7 +395,7 @@ export function Description({
 							.add(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 							.toDate()}
 						value={endDate}
-						onChange={setEndDate}
+						onChange={handleEndDateChanged}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}
 					/>

@@ -163,6 +163,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					setSelected={tmpProposalState.setMajority}
 					deposit={tmpProposalState.deposit}
 					setDeposit={tmpProposalState.setDeposit}
+					type={tmpProposalState.type}
 				/>
 			)}
 			<Stack spacing={2} justifyContent="flex-end" direction="row">

@@ -13,7 +13,7 @@ export const PROPOSAL_TYPES = {
 export const PROPOSAL_UNITS = {
 	[PROPOSAL_KEYS.General]: 'Account',
 	[PROPOSAL_KEYS.Withdrawal]: 'Account',
-	[PROPOSAL_KEYS.Spending]: 'Token',
+	[PROPOSAL_KEYS.Spending]: 'Account',
 }
 
 export const CREATE_PROPOSAL_TYPE_TITLES = {
@@ -26,4 +26,10 @@ export const PROPOSAL_MAJORITIES = {
 	0: 'Simple',
 	1: 'Relative',
 	2: 'Absolute',
+}
+
+export const PROPOSAL_CREATE_DEPOSIT = {
+	[PROPOSAL_KEYS.General]: 100,
+	[PROPOSAL_KEYS.Withdrawal]: 100,
+	[PROPOSAL_KEYS.Spending]: 100,
 }
