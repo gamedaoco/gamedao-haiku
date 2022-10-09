@@ -7,12 +7,12 @@ async function handleProposalActivatedEvent(context: EventHandlerContext) {
 	let eventName = 'Signal.Activated';
 	let raw_event = new SignalActivatedEvent(context);
 
-	if (!raw_event.isV61) {
+	if (!raw_event.isV62) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV61;
+	let event = raw_event.asV62;
 
 	let proposalId = hashToHexString(event.proposalId);
 	let proposal = await getProposal(store, proposalId);
