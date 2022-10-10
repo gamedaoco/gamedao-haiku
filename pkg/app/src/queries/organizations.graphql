@@ -78,6 +78,7 @@ subscription OrganizationById($orgId: String!) {
 }
 subscription AccountOrganizations($address: String!) {
     identity_by_pk(id: $address){
+        id
         organization_members {
             id
             organization {
