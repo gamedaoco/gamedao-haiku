@@ -1,4 +1,4 @@
-export enum CampaignState {
+export enum CampaignStatus {
 	CREATED = 'Created',
 	ACTIVE = 'Active',
 	PAUSED = 'Paused',
