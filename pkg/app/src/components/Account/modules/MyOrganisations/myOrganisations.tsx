@@ -48,7 +48,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 	const { t } = useTranslation()
 	const isAdmin = useCallback((address: string) => address === selectedAddress, [selectedAddress])
 	return (
-		<Card sx={{ borderRadius: '16px' }}>
+		<Card sx={{ borderRadius: '16px' }} variant={'glass'}>
 			<CardContent>
 				{title && <Typography variant="h5">{title}</Typography>}
 

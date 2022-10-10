@@ -4,7 +4,7 @@ import { Box, Card, CardContent, CardMedia, Skeleton } from '@mui/material'
 
 const LoadingCollectableCard: FC = () => {
 	return (
-		<Card variant="primary" sx={{ minHeight: '300px' }}>
+		<Card variant="glass" sx={{ minHeight: '300px' }}>
 			<CardMedia sx={{ padding: 0.75 }}>
 				<Skeleton variant="primary" sx={{ height: 190 }} animation="wave" />
 			</CardMedia>

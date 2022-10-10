@@ -27,7 +27,7 @@ export function MyBalancesCard() {
 	const { t } = useTranslation()
 
 	return (
-		<Card sx={{ minHeight: '100%' }}>
+		<Card sx={{ minHeight: '100%' }} variant={'glass'}>
 			<CardContent>
 				<Typography variant="h5">{t('page:account:balances:title')}</Typography>
 

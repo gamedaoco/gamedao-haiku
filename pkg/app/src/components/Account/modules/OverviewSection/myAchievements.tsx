@@ -13,7 +13,7 @@ export const MyAchievementsCard = () => {
 	const { t } = useTranslation()
 
 	return (
-		<Card sx={{ display: 'flex' }}>
+		<Card sx={{ display: 'flex' }} variant={'glass'}>
 			<CardContent>
 				<Typography variant="h5">{t('page:account:achievements:title')}</Typography>
 				<Typography variant="caption">{t('page:account:achievements:description')}</Typography>

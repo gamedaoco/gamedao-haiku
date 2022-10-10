@@ -52,7 +52,8 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 					showHeader={showHeader}
 					onClose={handleSidebarClose}
 					open={isMd ? false : openSidebar}
-					variant={isMd ? 'permanent' : 'temporary'}
+					variant={'permanent'}
+					// variant={isMd ? 'permanent' : 'temporary'}
 				/>
 			)}
 
@@ -70,10 +71,10 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				<Box display="flex" flex="1 1 auto" overflow="hidden">
 					<Box flex="1 1 auto" height="100%" overflow="hidden">
 						<Box>{noContainer ? children : <Container>{children}</Container>}</Box>
-						{showFooter && <Footer />}
 					</Box>
 				</Box>
 			</Box>
+			{showFooter && <Footer />}
 		</>
 	)
 }

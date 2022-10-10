@@ -87,7 +87,7 @@ export function IdentityForm() {
 				txCallback={() => handleModalClose('clear')}
 			/>
 			<form>
-				<Card sx={{ borderRadius: '16px' }}>
+				<Card sx={{ borderRadius: '16px' }} variant={'glass'}>
 					<CardContent>
 						<Typography variant="h5">{t('button:navigation:set_on_chain_identity')}</Typography>
 

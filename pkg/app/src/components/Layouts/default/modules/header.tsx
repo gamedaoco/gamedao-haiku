@@ -45,23 +45,24 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 	const { t } = useTranslation()
 
 	return (
-		<AppBar position="fixed" elevation={0}>
+		<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>
 			<Toolbar
 				sx={{
-					backgroundColor: theme.palette.background.default,
+					backgroundColor: `rgba(0,0,0,0.5)`,
+					// backgroundColor: theme.palette.background.default,
 					borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					height: '90px',
 				}}
 			>
-				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-					<NavLink href="/">
-						<Logo />
-					</NavLink>
-				</Box>
-
 				<Stack direction="row" alignItems="center" spacing={4} minWidth="60%">
+					<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+						<NavLink href="/">
+							<Logo />
+						</NavLink>
+					</Box>
+
 					{urls.map((navItem) => {
 						return (
 							<Fragment key={navItem.name}>

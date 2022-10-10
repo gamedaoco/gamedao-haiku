@@ -1,10 +1,24 @@
 import { Theme } from '@mui/material/styles'
 
-// ----------------------------------------------------------------------
+declare module '@mui/material/Tab' {
+	interface TabPropsVariantOverrides {
+		glass: true
+	}
+}
 
 export default function Tabs(theme: Theme) {
 	return {
 		MuiTab: {
+			variants: [
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+					},
+				},
+			],
 			styleOverrides: {
 				root: {
 					padding: 0,
@@ -40,6 +54,16 @@ export default function Tabs(theme: Theme) {
 			},
 		},
 		MuiTabPanel: {
+			variants: [
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+					},
+				},
+			],
 			styleOverrides: {
 				root: {
 					padding: 0,

@@ -61,7 +61,7 @@ export function TabsSection({ param }: ComponentProps) {
 				sx={{ px: 3 }}
 				textColor="primary"
 				value={param || AccountTabs.OVERVIEW}
-				variant="scrollable"
+				variant="glass"
 			>
 				{tabs.map((tab) => (
 					<Tab key={tab.value} label={tab.label} value={tab.value} />

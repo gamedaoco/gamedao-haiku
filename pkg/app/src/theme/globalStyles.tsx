@@ -28,6 +28,22 @@ export default function GlobalStyles() {
 					WebkitOverflowScrolling: 'touch',
 					scrollbarWidth: 'thin',
 					scrollbarColor: theme.palette.primary.darker,
+
+					backgroundSize: '100% 100%',
+					backgroundPosition:
+						'0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px',
+					backgroundImage: `
+						radial-gradient(18% 28% at 24% 50%, #CE00fa33 7%, #073AFF00 100%),
+						radial-gradient(18% 28% at 18% 71%, #00000059 6%, #073AFF00 100%),
+						radial-gradient(70% 53% at 36% 76%, #73003366 0%, #073AFF00 100%),
+						radial-gradient(42% 53% at 15% 94%, #000000ff 7%, #073AFF00 100%),
+						radial-gradient(42% 53% at 34% 72%, #000000ff 7%, #073AFF00 100%),
+						radial-gradient(18% 28% at 35% 87%, #000000ff 7%, #073AFF00 100%),
+						radial-gradient(31% 43% at 7% 98%, #000000ff 24%, #073AFF00 100%),
+						radial-gradient(21% 37% at 72% 23%, #D3006D33 24%, #073AFF00 100%),
+						radial-gradient(35% 56% at 91% 74%, #8A400066 9%, #073AFF00 100%),
+						radial-gradient(74% 86% at 67% 38%, #6D00AE66 24%, #073AFF00 100%),
+						linear-gradient(125deg, #220000FF 1%, #330033FF 100%)`,
 				},
 				'::-webkit-scrollbar': {
 					width: '8px',
@@ -39,6 +55,7 @@ export default function GlobalStyles() {
 				body: {
 					width: '100%',
 					height: '100%',
+					background: `transparent`,
 				},
 				'#__next': {
 					width: '100%',

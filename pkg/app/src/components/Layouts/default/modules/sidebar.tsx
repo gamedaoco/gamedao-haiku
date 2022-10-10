@@ -53,14 +53,16 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 					top: showHeader ? 90 : 0,
 					bottom: 0,
 					height: 'auto',
-					backgroundColor: theme.palette.background.default,
+					background: `transparent`,
+					// backgroundColor: theme.palette.background.default,
 					borderRight: `1px solid ${theme.palette.grey[500_32]}`,
 					borderRadius: 0,
+					boxShadow: `none`,
 				},
 			}}
 		>
-			<Stack pb={3} alignItems="center" height="100%" width="100%">
-				{(loading || (data && selectedAccount)) && (
+			<Stack pt={2} pb={3} alignItems="center" height="100%" width="100%">
+				{(loading || (data?.organization > 0 && selectedAccount)) && (
 					<Stack
 						spacing={2}
 						py={2}
@@ -113,8 +115,12 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 								})}
 					</Stack>
 				)}
+
 				<Stack alignItems="center" spacing={2} width="100%">
-					{(loading || (data && selectedAccount)) && <Divider sx={{ width: '50%' }} />}
+					{(loading || (data?.organization.length > 0 && selectedAccount)) && (
+						<Divider sx={{ width: '50%' }} />
+					)}
+
 					<Fab
 						// color={'primary'}
 						aria-label="add"
