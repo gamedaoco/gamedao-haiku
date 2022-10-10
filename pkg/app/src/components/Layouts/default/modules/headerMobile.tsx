@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
+import Link from 'next/link'
 
 import { Menu, MoreVert } from '@mui/icons-material'
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, MenuItem } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -64,9 +65,11 @@ export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 							left: '50%',
 						}}
 					>
-						<NavLink href="/">
-							<Logo />
-						</NavLink>
+						<MenuItem>
+							<Link href="/">
+								<Logo />
+							</Link>
+						</MenuItem>
 					</Box>
 					<Button
 						onClick={handleMenuOpen}

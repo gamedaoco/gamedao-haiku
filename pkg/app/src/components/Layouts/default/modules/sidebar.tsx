@@ -41,6 +41,8 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 		}
 	}, [error])
 
+	if (data?.organization.length < 1) return null
+
 	return (
 		<Drawer
 			anchor="left"

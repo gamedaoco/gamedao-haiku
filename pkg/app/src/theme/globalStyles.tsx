@@ -104,9 +104,11 @@ export default function GlobalStyles() {
 				},
 				a: {
 					color: theme.palette.text.primary,
+					textDecoration: 'none',
 				},
 				'a:hover': {
 					color: theme.palette.primary.main,
+					textDecoration: 'none',
 				},
 			}}
 		/>
