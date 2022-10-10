@@ -35,7 +35,7 @@ export function IdentitySection() {
 				sx={{
 					alignItems: {
 						sm: 'top',
-						// md: 'center',
+						md: 'center',
 					},
 					display: 'flex',
 					overflow: 'hidden',
@@ -44,13 +44,13 @@ export function IdentitySection() {
 				<Avatar
 					sx={{
 						height: {
-							md: 64,
-							sx: 48,
+							md: 48,
+							sx: 24,
 						},
 						mr: 2,
 						width: {
-							md: 64,
-							sx: 48,
+							md: 48,
+							sx: 24,
 						},
 					}}
 					src={

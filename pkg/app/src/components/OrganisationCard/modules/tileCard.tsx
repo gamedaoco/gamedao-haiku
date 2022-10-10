@@ -87,6 +87,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 					width: '100%',
 					height: '100%',
 				}}
+				variant={{'glass'}}
 			>
 				<CardHeader
 					avatar={

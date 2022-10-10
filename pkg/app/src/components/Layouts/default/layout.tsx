@@ -70,11 +70,11 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>
 				<Box display="flex" flex="1 1 auto" overflow="hidden">
 					<Box flex="1 1 auto" height="100%" overflow="hidden">
-						<Box>{noContainer ? children : <Container>{children}</Container>}</Box>
+						<Box>{noContainer ? children : <Container sx={{ minHeight:`calc( 100vh - 90px )` }} >{children}</Container>}</Box>
+						{showFooter && <Footer />}
 					</Box>
 				</Box>
 			</Box>
-			{showFooter && <Footer />}
 		</>
 	)
 }

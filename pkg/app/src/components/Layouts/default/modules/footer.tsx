@@ -57,8 +57,9 @@ export function Footer() {
 			py={3}
 			px={1}
 			sx={{
-				borderTop: `1px solid ${theme.palette.grey[500_32]}`,
-				backgroundColor: theme.palette.background.default,
+				// borderTop: `1px solid ${theme.palette.grey[500_32]}`,
+				// backgroundColor: theme.palette.background.default,
+				backgroundColor:`#00000099`,
 
 				// TODO: 2075 Create custom component for Links or create style override
 				a: { opacity: 0.8, textShadow: '15px pink' },

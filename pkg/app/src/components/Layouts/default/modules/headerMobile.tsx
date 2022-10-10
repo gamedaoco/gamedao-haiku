@@ -31,10 +31,11 @@ export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 
 	return (
 		<>
-			<AppBar position="fixed" elevation={0}>
+			<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>
 				<Toolbar
 					sx={{
-						backgroundColor: theme.palette.background.default,
+						backgroundColor:`#00000099`,
+						// backgroundColor: theme.palette.background.default,
 						borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
 						justifyContent: 'space-between',
 						alignItems: 'center',
