@@ -21,8 +21,8 @@ export function StatusChip({ status, variant }: ComponentProps) {
 		let color = 'primary'
 
 		switch (status) {
-			case CampaignStatus.Created:
-				color = 'error'
+			case CampaignStatus.CREATED:
+				color = 'info'
 				break
 			case CampaignStatus.ACTIVE:
 				if (variant === 'campaignState') {
