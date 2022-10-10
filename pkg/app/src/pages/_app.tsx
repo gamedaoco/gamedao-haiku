@@ -59,7 +59,6 @@ function HeadAndMetaTags() {
 }
 
 export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
-
 	const router = useRouter()
 
 	useEffect(() => {
