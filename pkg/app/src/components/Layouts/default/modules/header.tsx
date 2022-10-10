@@ -48,7 +48,7 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 		<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>
 			<Toolbar
 				sx={{
-					backgroundColor:`#00000099`,
+					backgroundColor: `#00000099`,
 					// backgroundColor: `rgba(0,0,0,0.5)`,
 					// backgroundColor: theme.palette.background.default,
 					// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
