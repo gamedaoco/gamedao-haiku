@@ -369,9 +369,9 @@
       "value": "{'state': {'_eq': 'Reverting'}}"
     },
     {
-      "key": "state_init",
-      "text": "Init",
-      "value": "{'state': {'_eq': 'Init'}}"
+      "key": "state_created",
+      "text": "Created",
+      "value": "{'state': {'_eq': 'Created'}}"
     },
     {
       "key": "state_active",
