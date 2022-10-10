@@ -264,6 +264,7 @@ export function Transactions({ type, data }: ComponentProps) {
 						rows={rows}
 						columns={columns}
 						pageSize={pageSize}
+						hideFooterPagination={data.length > 10 ? false : true}
 						rowsPerPageOptions={data.length > 10 ? pageSizeOptions : []}
 						isCellEditable={() => false}
 						hideFooterSelectedRowCount={true}
