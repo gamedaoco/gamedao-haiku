@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import * as Fathom from 'fathom-client'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import { useConfig } from 'hooks/useConfig'
@@ -56,7 +59,27 @@ function HeadAndMetaTags() {
 }
 
 export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
-	log.info(`❤️  Welcome to GameDAO`)
+
+	const router = useRouter()
+
+	useEffect(() => {
+		log.info(`❤️  Welcome to GameDAO`)
+		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
+	}, [])
+
+	useEffect(() => {
+		Fathom.load('XLUUAYWU', {
+			url: 'https://brilliant-truthful.gamedao.co/script.js',
+			includedDomains: ['gamedao.co'],
+		})
+		function onRouteChangeComplete() {
+			Fathom.trackPageview()
+		}
+		router.events.on('routeChangeComplete', onRouteChangeComplete)
+		return () => {
+			router.events.off('routeChangeComplete', onRouteChangeComplete)
+		}
+	}, [])
 
 	return (
 		<CacheProvider value={emotionCache}>
