@@ -1,5 +1,8 @@
-export function isProposalActive(blockTime: number, proposalStartBlockTime: number, proposalExpiryBlockTime: number) {
-	return blockTime >= proposalStartBlockTime && blockTime < proposalExpiryBlockTime
+import { Proposal } from 'src/queries'
+
+export function isProposalActive(blockTime: number, proposal: Proposal) {
+	if (!proposal) return false
+	return blockTime >= proposal.start && blockTime < proposal.expiry && proposal.state === 'Active'
 }
 
 export function getProposalTypesCount(proposals) {

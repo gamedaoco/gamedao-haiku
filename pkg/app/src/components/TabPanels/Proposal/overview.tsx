@@ -104,7 +104,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				const expiryBlock = proposal.expiry
 				const startBlock = proposal.start
 				const hasStarted = blockNumber && blockNumber > startBlock
-				const hasExpired = blockNumber && blockNumber > expiryBlock
+				const hasExpired = (blockNumber && blockNumber > expiryBlock) || proposal.state !== 'Active'
 				let timeLeft = ''
 
 				if (!hasStarted) {

@@ -9,6 +9,7 @@ interface ComponentProps {
 export function ProposalStatusChip({ status }: ComponentProps) {
 	switch (status) {
 		case 'Init':
+		case 'Created':
 			return <Chip color="secondary" label="Init" variant="outlined" />
 		case 'Active':
 			return <Chip color="secondary" label="Active" />

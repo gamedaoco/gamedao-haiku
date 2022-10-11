@@ -19,9 +19,10 @@ export function StatusChip({ status, variant }: ComponentProps) {
 	const data: Data | null = useMemo(() => {
 		let text = t(`label:campaign_status:${status?.toLowerCase()}`)
 		let color = 'primary'
+
 		switch (status) {
-			case CampaignStatus.INIT:
-				color = 'error'
+			case CampaignStatus.CREATED:
+				color = 'info'
 				break
 			case CampaignStatus.ACTIVE:
 				if (variant === 'campaignState') {
