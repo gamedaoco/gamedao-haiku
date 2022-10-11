@@ -39,6 +39,7 @@ subscription OrganizationById($orgId: String!) {
         organization_members {
             address
             identity {
+                id
                 email
                 display_name
             }
@@ -68,6 +69,7 @@ subscription OrganizationById($orgId: String!) {
         }
         proposals_aggregate {
             nodes {
+                id
                 type
             }
             aggregate {
