@@ -48,7 +48,8 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 	const router = useRouter()
 
 	return (
-		<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>
+		<AppBar position="static" elevation={0} style={{ background: 'transparent', boxShadow: 'none' }}>
+			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
 			<Toolbar
 				sx={{
 					backgroundColor: `#00000099`,
