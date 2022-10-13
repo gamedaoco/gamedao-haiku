@@ -56,21 +56,30 @@ export function MyBalancesCard() {
 						{!balances ? (
 							<>
 								{[...Array(3).keys()]?.map((index) => (
-									<TableRow sx={{ borderTop: '1px dotted white' }} hover key={index}>
+									<TableRow
+										sx={{ borderTop: `1px solid ${theme.palette.grey[500_32]}` }}
+										hover
+										key={index}
+									>
 										<TableCell>
-											<Skeleton width={50} />
+											{' '}
+											<Skeleton width={50} />{' '}
 										</TableCell>
 										<TableCell align="right">
-											<Skeleton width={80} />
+											{' '}
+											<Skeleton width={80} />{' '}
 										</TableCell>
 										<TableCell align="right">
-											<Skeleton width={50} />
+											{' '}
+											<Skeleton width={50} />{' '}
 										</TableCell>
 										<TableCell align="right">
-											<Skeleton width={50} />
+											{' '}
+											<Skeleton width={50} />{' '}
 										</TableCell>
 										<TableCell align="right">
-											<Skeleton width={50} />
+											{' '}
+											<Skeleton width={50} />{' '}
 										</TableCell>
 									</TableRow>
 								))}
@@ -80,7 +89,11 @@ export function MyBalancesCard() {
 								{balances?.map((balance, index) => (
 									<>
 										{balance?.tokenSymbol && (
-											<TableRow hover key={index} sx={{ borderTop: '1px dotted white' }}>
+											<TableRow
+												hover
+												key={index}
+												sx={{ borderTop: `1px solid ${theme.palette.grey[500_32]}` }}
+											>
 												<TableCell>{balance?.tokenSymbol}</TableCell>
 												<TableCell align="right">{balance.free}</TableCell>
 												<TableCell align="right">{balance.frozen}</TableCell>

@@ -313,6 +313,7 @@ export function IdentityForm() {
 											{t('button:form:identity:clear')}
 										</Button>
 									)}
+									<Box />
 									<Button
 										type="button"
 										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
