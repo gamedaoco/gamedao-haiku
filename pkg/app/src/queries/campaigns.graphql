@@ -61,6 +61,7 @@ subscription Campaign($address: String) {
             }
         }
         organization {
+            id
             organization_metadata {
                 name
                 logo
@@ -92,6 +93,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
             }
         }
         organization {
+            id
             organization_metadata {
                 name
                 logo
@@ -131,6 +133,7 @@ subscription CampaignById($campaignId: String!, $address: String = "") {
             }
         }
         organization {
+            id
             creator
         }
     }
@@ -160,6 +163,7 @@ subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!], $o
             }
         }
         organization {
+            id
             organization_metadata {
                 name
                 logo

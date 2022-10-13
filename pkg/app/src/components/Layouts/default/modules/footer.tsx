@@ -17,37 +17,6 @@ const Link = ({ href, children }) => (
 	</Box>
 )
 
-const SocialLinks = () => (
-	<Stack
-		mb={2}
-		sx={{
-			// TODO: 2075 Create custom component for Links or create style override
-			a: { opacity: 0.8, textShadow: '15px pink' },
-			'a:hover': { color: '#fcf', opacity: 1, textShadow: '0 0 5px #f3f', borderBottom: '1px dotted #f3f' },
-			'*': { transitionTimingFunction: 'ease-in-out;', transitionDuration: '150ms' },
-		}}
-	>
-		<Typography>Connect with us</Typography>
-		<Stack direction="row" spacing={1}>
-			<Link href="https://discord.gg/P7NHWGzJ7r">
-				<SiDiscord />
-			</Link>
-			<Link href="https://t.me/gamedaoco">
-				<SiTelegram />
-			</Link>
-			<Link href="https://twitter.com/gamedaoco">
-				<SiTwitter />
-			</Link>
-			<Link href="https://github.com/gamedaoco">
-				<SiGithub />
-			</Link>
-			<Link href="https://www.linkedin.com/company/gamedaoco">
-				<SiLinkedin />
-			</Link>
-		</Stack>
-	</Stack>
-)
-
 export function Footer() {
 	const theme = useTheme()
 
@@ -59,7 +28,7 @@ export function Footer() {
 			sx={{
 				// borderTop: `1px solid ${theme.palette.grey[500_32]}`,
 				// backgroundColor: theme.palette.background.default,
-				backgroundColor: `#00000099`,
+				backgroundColor: `#00000069`,
 
 				// TODO: 2075 Create custom component for Links or create style override
 				a: { opacity: 0.8, textShadow: '15px pink' },
@@ -69,7 +38,7 @@ export function Footer() {
 		>
 			<Container>
 				<Grid columns={12}>
-					<Grid container direction="row" mt={4} mb={4}>
+					<Grid container direction="row" mt={2} mb={4}>
 						<Grid item xs={12} md={2} mb={4}>
 							<MUILink href="/">
 								<Logo />

@@ -32,7 +32,14 @@ export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 
 	return (
 		<>
-			<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>
+			<AppBar
+				position="static"
+				elevation={0}
+				sx={{
+					borderRadius: 0,
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}
+			>
 				<Toolbar
 					sx={{
 						backgroundColor: `#00000099`,

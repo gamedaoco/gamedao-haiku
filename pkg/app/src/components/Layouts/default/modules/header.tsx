@@ -3,7 +3,7 @@ import Link from 'src/components/Link'
 import { useRouter } from 'next/router'
 
 import MenuIcon from '@mui/icons-material/Menu'
-import { Button, Typography, MenuItem } from '@mui/material'
+import { Button, Typography, MenuItem, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -15,6 +15,7 @@ import { AccountSelector } from 'src/components'
 import { NavLink } from 'components/NavLink/navLink'
 
 const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
+const LogoSM = () => <img src="/svg/g-col.svg" height="16px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
@@ -46,9 +47,20 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const router = useRouter()
+	const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
+		defaultMatches: true,
+	})
 
 	return (
-		<AppBar position="static" elevation={0} style={{ background: 'transparent', boxShadow: 'none' }}>
+		<AppBar
+			position="static"
+			elevation={0}
+			style={{
+				background: 'transparent',
+				boxShadow: 'none',
+				zIndex: (theme) => theme.zIndex.drawer + 1,
+			}}
+		>
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
 			<Toolbar
 				sx={{
@@ -62,12 +74,10 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 				}}
 			>
 				<Stack direction="row" alignItems="center" spacing={4} minWidth="60%">
-					<Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-						<MenuItem>
+					<Box>
+						<MenuItem sx={{ p: 0, m: 0 }}>
 							<Link href="/">
-								<Typography>
-									<Logo />
-								</Typography>
+								<Typography>{isLg ? <Logo /> : <LogoSM />}</Typography>
 							</Link>
 						</MenuItem>
 					</Box>

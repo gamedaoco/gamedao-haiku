@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react'
 import Head from 'next/head'
 import { useConfig } from 'hooks/useConfig'
 
-import { Box, Container, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
 
 import { HeaderMobile } from 'components/Layouts/default/modules/headerMobile'
 
@@ -45,42 +45,43 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				<title>{title ? `${title} · ${config?.SITE_NAME}` : `${config?.SITE_NAME}`}</title>
 			</Head>
 
-			{/* TODO: Fix sidebar growth and footer order */}
+			<Box>
+				{showHeader &&
+					(isMd ? (
+						<Header onSidebarOpen={handleSidebarOpen} />
+					) : (
+						<HeaderMobile onSidebarOpen={handleSidebarOpen} />
+					))}
 
-			{showSidebar && (
-				<Sidebar
-					showHeader={showHeader}
-					onClose={handleSidebarClose}
-					open={isMd ? false : openSidebar}
-					variant={'permanent'}
-					// variant={isMd ? 'permanent' : 'temporary'}
-				/>
-			)}
+				{/*{showHeader && <Box height={90} />}*/}
+				{/*{!isMd && <Box height={45} />}*/}
 
-			{showHeader &&
-				(isMd ? (
-					<Header onSidebarOpen={handleSidebarOpen} />
-				) : (
-					<HeaderMobile onSidebarOpen={handleSidebarOpen} />
-				))}
+				<Box>
+					<Stack direction="row" spacing={0} sx={{ minHeight: `calc( 100vh - 90px )` }}>
+						{showSidebar && (
+							<Box sx={{ minWidth: 90, minHeight: `calc( 100vh - 90px )` }}>
+								<Sidebar
+								// showHeader={ showHeader ? true : null }
+								// onClose={ handleSidebarClose }
+								// open={ isMd ? false : openSidebar }
+								// variant={'permanent'}
+								// variant={ isMd ? 'permanent' : 'temporary' }
+								/>
+							</Box>
+						)}
 
-			{showHeader && <Box height={90} />}
-			{!isMd && <Box height={45} />}
-
-			<Box display="flex" flex="1 1 auto" overflow="hidden" paddingLeft={{ md: showSidebar ? '90px' : 0 }}>
-				<Box display="flex" flex="1 1 auto" overflow="hidden">
-					<Box flex="1 1 auto" height="100%" overflow="hidden">
-						<Box>
-							{noContainer ? (
-								children
-							) : (
-								<Container sx={{ minHeight: `calc( 100vh - 90px )` }}>{children}</Container>
-							)}
-						</Box>
-						{showFooter && <Footer />}
-					</Box>
+						{noContainer ? (
+							children
+						) : (
+							<Box p={[2, 4]} style={{ width: '100%', minHeight: `calc( 100vh - 90px )` }}>
+								{children}
+							</Box>
+						)}
+					</Stack>
 				</Box>
 			</Box>
+
+			{showFooter && <Footer />}
 		</>
 	)
 }

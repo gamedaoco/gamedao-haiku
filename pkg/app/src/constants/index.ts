@@ -36,6 +36,8 @@ export const defaultValuesTMPProposal: TMPProposal = {
 	campaignId: '',
 	amount: 0,
 	metaDataCID: '',
+	currencyId: 0,
+	beneficiaryAddress: '',
 }
 
 export const defaultValuesTmpCampaign: TMPCampaign = {
