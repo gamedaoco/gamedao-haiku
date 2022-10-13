@@ -268,6 +268,7 @@ export function Transactions({ type, data }: ComponentProps) {
 						rowsPerPageOptions={data.length > 10 ? pageSizeOptions : []}
 						isCellEditable={() => false}
 						hideFooterSelectedRowCount={true}
+						disableColumnFilter
 						getRowHeight={() => {
 							return rowHeight
 						}}
