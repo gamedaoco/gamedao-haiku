@@ -75,11 +75,10 @@ export function OrganisationPage() {
 				component="main"
 				sx={{
 					flexGrow: 1,
-					py: 8,
 				}}
 			>
 				<Container maxWidth="xl">
-					<Box sx={{ mb: 4 }}>
+					<Box sx={{ mb: 2 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
 								<Typography variant="h3">{t('page:organisations:title')}</Typography>
@@ -94,55 +93,69 @@ export function OrganisationPage() {
 								</Button>
 							</Grid>
 						</Grid>
-						<FiltersSection
-							setFilters={setFilters}
-							filters={filters.filters}
-							sortOptions={data?.displayValues?.organizationSortOptions?.concat([])}
-							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
-							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
-							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
-							searchPlaceHolder={t('page:organisations:search_place_holder')}
-							ListTab={OrganizationFiltersListTab}
-						/>
 					</Box>
-					{paginatedData?.length === 0 && !loading && (
-						<Box sx={{ mt: 2, mb: 4 }}>
-							<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
-							<Typography>{t('page:organisations:no_result', { query: filters?.query })}</Typography>
-						</Box>
-					)}
-					<ItemList items={paginatedData} loading={loading} />
-				</Container>
 
-				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								alignItems: 'center',
-								justifyContent: 'center',
-								gap: 1.5,
-							}}
-						>
-							{buttonVisibility && (
-								<Button
-									endIcon={<ArrowDownward />}
-									onClick={() => setBodyCount((p) => p + 30)}
-									variant="outlined"
-								>
-									{t('page:organisations:load_more')}
-								</Button>
+					{organizationsCount?.data?.campaign_aggregate?.aggregate.count > 0 ? (
+						<>
+							<FiltersSection
+								setFilters={setFilters}
+								filters={filters.filters}
+								sortOptions={data?.displayValues?.organizationSortOptions?.concat([])}
+								showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
+								showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
+								showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
+								searchPlaceHolder={t('page:organisations:search_place_holder')}
+								ListTab={OrganizationFiltersListTab}
+							/>
+
+							{paginatedData?.length === 0 && !loading && (
+								<Box sx={{ mb: 4 }}>
+									<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
+									<Typography>
+										{t('page:organisations:no_result', { query: filters?.query })}
+									</Typography>
+								</Box>
 							)}
-							<Typography>
-								{t('page:organisations:showing_results', {
-									count1: paginatedData?.length,
-									count2: organizationsCount?.data?.organization_aggregate?.aggregate.count,
-								})}
-							</Typography>
-						</Box>
-					</Box>
-				</Box>
+
+							<Box sx={{ mb: 4 }}>
+								<ItemList items={paginatedData} loading={loading} />
+							</Box>
+
+							<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+								<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
+									<Box
+										sx={{
+											display: 'flex',
+											flexDirection: 'column',
+											alignItems: 'center',
+											justifyContent: 'center',
+											gap: 1.5,
+										}}
+									>
+										{buttonVisibility && (
+											<Button
+												endIcon={<ArrowDownward />}
+												onClick={() => setBodyCount((p) => p + 30)}
+												variant="outlined"
+											>
+												{t('page:organisations:load_more')}
+											</Button>
+										)}
+										<Typography>
+											{t('page:organisations:showing_results', {
+												count1: paginatedData?.length,
+												count2: organizationsCount?.data?.organization_aggregate?.aggregate
+													.count,
+											})}
+										</Typography>
+									</Box>
+								</Box>
+							</Box>
+						</>
+					) : (
+						<>No Organisations yet — why not create one!</>
+					)}
+				</Container>
 			</Box>
 		</Layout>
 	)
