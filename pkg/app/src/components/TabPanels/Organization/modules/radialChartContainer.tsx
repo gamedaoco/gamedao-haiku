@@ -23,7 +23,7 @@ export function RadialChartContainer({ color, series, type, count }: ComponentPr
 				left={{ md: 20 }}
 				bottom={{ xs: 15, md: 0 }}
 			>
-				<RadialChart color={color} series={series} />
+				<RadialChart colors={[color]} series={series} />
 			</Stack>
 			<Stack
 				direction="column"

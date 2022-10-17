@@ -19,6 +19,7 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 import { Image } from 'components/Image/image'
 import { Layout } from 'components/Layouts/default/layout'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
+import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
 import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
@@ -373,11 +374,7 @@ export function OrganisationById() {
 								)}
 							</TabPanel>
 							<TabPanel value={'treasury'}>
-								{organizationState && (
-									<Typography>
-										{t('label:treasury_address', { address: organizationState.treasury })}
-									</Typography>
-								)}
+								{organizationState && <TreasuryOverview address={organizationState.treasury} />}
 							</TabPanel>
 							<TabPanel value={'proposals'}>
 								{proposalIdState && organizationState ? (
