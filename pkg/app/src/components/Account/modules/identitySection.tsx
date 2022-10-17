@@ -55,8 +55,8 @@ export function IdentitySection() {
 					}}
 					src={
 						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
+							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
 					}
 				/>
 				<div>

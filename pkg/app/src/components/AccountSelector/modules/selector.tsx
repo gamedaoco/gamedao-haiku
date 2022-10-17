@@ -31,8 +31,8 @@ export function Selector({ onClick }: ComponentProps) {
 				sx={{ width: '48px', height: '48px' }}
 				src={
 					identity?.email
-						? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
-						: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+						? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
+						: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
 				}
 			/>
 		)
@@ -64,8 +64,8 @@ export function Selector({ onClick }: ComponentProps) {
 					sx={{ width: '48px', height: '48px' }}
 					src={
 						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
+							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
 					}
 				/>
 				<Stack>

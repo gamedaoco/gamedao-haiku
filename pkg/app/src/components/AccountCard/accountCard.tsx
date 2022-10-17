@@ -61,6 +61,7 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 				}
 				{!loading && (
 					<>
+						123123
 						<Avatar
 							sx={{
 								// WTF!!!1!?!?
@@ -69,8 +70,8 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 							}}
 							src={
 								identity?.email
-									? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
-									: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+									? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
+									: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
 							}
 						/>
 						<Stack>
