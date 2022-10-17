@@ -1,8 +1,11 @@
 import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
 
+import Open from '@mui/icons-material/Apps'
+import Close from '@mui/icons-material/Close'
 import { Menu, MoreVert } from '@mui/icons-material'
 import { Button, Stack, MenuItem } from '@mui/material'
+
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -16,9 +19,10 @@ const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
+	sidebarOpen: boolean
 }
 
-export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
+export function HeaderMobile({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const theme = useTheme()
 	const [openMenu, setOpenMenu] = useState<boolean>(false)
 
@@ -61,7 +65,7 @@ export function HeaderMobile({ onSidebarOpen }: ComponentProps) {
 							padding: 1,
 						}}
 					>
-						<MoreVert />
+						{sidebarOpen ? <Close /> : <Open />}
 					</Button>
 					<Box
 						sx={{

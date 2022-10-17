@@ -1,24 +1,26 @@
 import React, { Fragment } from 'react'
-import Link from 'src/components/Link'
+import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 
+import Link from 'components/Link'
+import { AccountSelector } from 'components/AccountSelector/accountSelector'
+import { NavLink } from 'components/NavLink/navLink'
+
+import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
+
 import { Button, Typography, MenuItem, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
-import { useTheme } from '@mui/material/styles'
-import { useTranslation } from 'react-i18next'
-import { AccountSelector } from 'src/components'
-
-import { NavLink } from 'components/NavLink/navLink'
 
 const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
 const LogoSM = () => <img src="/svg/g-col.svg" height="16px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
+	sidebarOpen: boolean
 }
 
 // TODO: Extract to features / graphql
@@ -43,7 +45,7 @@ const urls = [
 	},
 ]
 
-export function Header({ onSidebarOpen }: ComponentProps) {
+export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const router = useRouter()
@@ -73,11 +75,11 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 					height: '90px',
 				}}
 			>
-				<Stack direction="row" alignItems="center" spacing={4} minWidth="60%">
+				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
 					<Box>
 						<MenuItem sx={{ p: 0, m: 0 }}>
 							<Link href="/">
-								<Typography>{isLg ? <Logo /> : <LogoSM />}</Typography>
+								<Typography sx={{ mx: 2 }}>{isLg ? <Logo /> : <LogoSM />}</Typography>
 							</Link>
 						</MenuItem>
 					</Box>

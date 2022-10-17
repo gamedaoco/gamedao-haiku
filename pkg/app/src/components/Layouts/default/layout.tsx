@@ -29,15 +29,11 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
-	const [openSidebar, setOpenSidebar] = useState<boolean>(false)
+	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 
-	const handleSidebarOpen = useCallback(() => {
-		setOpenSidebar(true)
-	}, [setOpenSidebar])
-
-	const handleSidebarClose = useCallback(() => {
-		setOpenSidebar(false)
-	}, [setOpenSidebar])
+	const toggleSidebar = useCallback(() => {
+		setOpenSidebar(!sidebarOpen)
+	}, [setOpenSidebar, sidebarOpen])
 
 	return (
 		<>
@@ -48,9 +44,9 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			<Box>
 				{showHeader &&
 					(isMd ? (
-						<Header onSidebarOpen={handleSidebarOpen} />
+						<Header onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
 					) : (
-						<HeaderMobile onSidebarOpen={handleSidebarOpen} />
+						<HeaderMobile onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
 					))}
 
 				{/*{showHeader && <Box height={90} />}*/}
@@ -58,15 +54,9 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 
 				<Box>
 					<Stack direction="row" spacing={0} sx={{ minHeight: `calc( 100vh - 90px )` }}>
-						{showSidebar && (
+						{showSidebar && (isMd || sidebarOpen) && (
 							<Box sx={{ minWidth: 90, minHeight: `calc( 100vh - 90px )` }}>
-								<Sidebar
-								// showHeader={ showHeader ? true : null }
-								// onClose={ handleSidebarClose }
-								// open={ isMd ? false : openSidebar }
-								// variant={'permanent'}
-								// variant={ isMd ? 'permanent' : 'temporary' }
-								/>
+								<Sidebar />
 							</Box>
 						)}
 

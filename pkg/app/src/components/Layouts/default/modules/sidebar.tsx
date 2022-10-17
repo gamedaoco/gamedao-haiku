@@ -1,4 +1,5 @@
 import React, { Fragment, useCallback, useEffect } from 'react'
+import { Logger } from 'lib/logger'
 
 import { useRouter } from 'next/router'
 
@@ -19,6 +20,8 @@ interface ComponentProps {
 	variant: 'permanent' | 'persistent' | 'temporary' | undefined
 }
 
+const log = Logger('HAIKU')
+
 export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) {
 	const theme = useTheme()
 	const address = useCurrentAccountAddress()
@@ -37,11 +40,9 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 	useEffect(() => {
 		if (error) {
 			createErrorNotification('The information for the sidebar could not be retrieved')
-			console.error(error)
+			log.error(error)
 		}
 	}, [error])
-
-	// if (data?.organization.length < 1) return null
 
 	return (
 		<Stack
@@ -52,7 +53,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			width="100%"
 			sx={{ borderRight: `1px solid ${theme.palette.grey[500_32]}` }}
 		>
-			{(loading || (data?.organization > 0 && selectedAccount)) && (
+			{(loading || (data?.organization && selectedAccount)) && (
 				<Stack
 					spacing={2}
 					py={2}
@@ -74,7 +75,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 							bottom: 0,
 							left: 0,
 							right: 0,
-							backgroundImage: `linear-gradient(to bottom,transparent 0%, ${theme.palette.background.default})`,
+							// backgroundImage: `linear-gradient(to bottom,transparent 0%, ${theme.palette.background.default})`,
 						},
 					}}
 				>
@@ -87,6 +88,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 							}}
 						/>
 					)}
+
 					{selectedAccount &&
 						(data?.organization?.slice() as any)
 							?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
