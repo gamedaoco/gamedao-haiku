@@ -1,9 +1,8 @@
 import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useBalanceByAddress } from 'hooks/useBalanceByAddress'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material/styles'
-
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {
 	Card,
@@ -25,6 +24,8 @@ export function MyBalancesCard() {
 	const address = useCurrentAccountAddress()
 	const balances = useBalanceByAddress(address)
 	const { t } = useTranslation()
+
+	console.log(balances)
 
 	return (
 		<Card sx={{ minHeight: '100%' }} variant={'glass'}>
@@ -87,21 +88,17 @@ export function MyBalancesCard() {
 						) : (
 							<>
 								{balances?.map((balance, index) => (
-									<>
-										{balance?.tokenSymbol && (
-											<TableRow
-												hover
-												key={index}
-												sx={{ borderTop: `1px solid ${theme.palette.grey[500_32]}` }}
-											>
-												<TableCell>{balance?.tokenSymbol}</TableCell>
-												<TableCell align="right">{balance.free}</TableCell>
-												<TableCell align="right">{balance.frozen}</TableCell>
-												<TableCell align="right">{balance.reserved}</TableCell>
-												<TableCell align="right">{getTotal(balance)}</TableCell>
-											</TableRow>
-										)}
-									</>
+									<TableRow
+										hover
+										key={index}
+										sx={{ borderTop: `1px solid ${theme.palette.grey[500_32]}` }}
+									>
+										<TableCell>{balance?.tokenSymbol}</TableCell>
+										<TableCell align="right">{balance.free}</TableCell>
+										<TableCell align="right">{balance.frozen}</TableCell>
+										<TableCell align="right">{balance.reserved}</TableCell>
+										<TableCell align="right">{getTotal(balance)}</TableCell>
+									</TableRow>
 								))}
 							</>
 						)}

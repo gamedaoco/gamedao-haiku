@@ -29,17 +29,19 @@ export function useBalanceByAddress(address: string): Balance[] {
 	useEffect(() => {
 		if (data && systemProperties) {
 			setBalanceState(
-				data.Balance.map((balance) => {
-					const tokenDecimals = systemProperties.tokenDecimals?.[balance.balanceId] ?? 18
-					return {
-						frozen: formatBalanceString(balance.frozen, tokenDecimals),
-						free: formatBalanceString(balance.free, tokenDecimals),
-						reserved: formatBalanceString(balance.reserved, tokenDecimals),
-						balanceId: +balance.balanceId,
-						tokenSymbol: systemProperties.tokenSymbol?.[balance.balanceId] ?? '',
-						tokenDecimals: tokenDecimals,
-					} as Balance
-				}),
+				data.Balance
+					.sort((a, b) => a.balanceId < b.balanceId ? -1 : a.balanceId > b.balanceId ? 1 : 0)
+					.map((balance) => {
+						const tokenDecimals = systemProperties.tokenDecimals?.[balance.balanceId] ?? 18
+						return {
+							frozen: formatBalanceString(balance.frozen, tokenDecimals),
+							free: formatBalanceString(balance.free, tokenDecimals),
+							reserved: formatBalanceString(balance.reserved, tokenDecimals),
+							balanceId: +balance.balanceId,
+							tokenSymbol: systemProperties.tokenSymbol?.[balance.balanceId] ?? '',
+							tokenDecimals: tokenDecimals,
+						} as Balance
+					}),
 			)
 		}
 	}, [data, systemProperties])
