@@ -1,12 +1,14 @@
 import { CID, create } from 'ipfs-http-client'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
-export function parseIpfsHash(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
-	let hashPart = ipfsHash?.split('/')
-	return gateway + 'ipfs/' + hashPart?.[hashPart?.length - 1]
+const GATEWAY = 'https://ipfs.sub.zero.io/ipfs/'
+
+export function parseIpfsHash(ipfsHash: string, gateway: string = GATEWAY) {
+	const hashPart = ipfsHash?.split('/')
+	return `${gateway}${hashPart?.[hashPart?.length - 1]}`
 }
 
-export async function fetchIpfsJson(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
+export async function fetchIpfsJson(ipfsHash: string, gateway: string = GATEWAY) {
 	try {
 		const response = await fetch(parseIpfsHash(ipfsHash, gateway), { method: 'GET' })
 		return await response.json()
@@ -17,7 +19,7 @@ export async function fetchIpfsJson(ipfsHash: string, gateway: string = 'https:/
 	return null
 }
 
-export async function fetchIpfsBlob(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
+export async function fetchIpfsBlob(ipfsHash: string, gateway: string = GATEWAY) {
 	try {
 		const response = await fetch(parseIpfsHash(ipfsHash, gateway), { method: 'GET' })
 		return await response.blob()

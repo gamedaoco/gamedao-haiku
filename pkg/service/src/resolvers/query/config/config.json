@@ -8,7 +8,7 @@
     "TW_SITE_CREATOR": "@zerodotio",
     "TW_SITE_IMAGE": "https://gamedao.co/img/tw-preview.jpg",
     "CONTACT": "hey@gamedao.co",
-    "IPFS_GATEWAY": "https://gamedao.infura-ipfs.io/",
+    "IPFS_GATEWAY": "https://ipfs.sub.zero.io/",
     "LOG_LEVEL": "INFO",
     "PROPOSAL_MIN_EXPIRY_IN_SECONDS": 300,
     "CAMPAIGN_MIN_EXPIRY_IN_SECONDS": 300
