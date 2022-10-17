@@ -73,7 +73,7 @@ export default class MyDocument extends Document {
 				>
 					<Main />
 					<NextScript />
-{/*					<style jsx global>{`
+					{/*					<style jsx global>{`
 						#__next {
 							height: 100%;
 						}

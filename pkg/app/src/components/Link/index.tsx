@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 interface Props {
 	href: string
-	target: string
+	target?: string
 	children: ReactNode
 }
 

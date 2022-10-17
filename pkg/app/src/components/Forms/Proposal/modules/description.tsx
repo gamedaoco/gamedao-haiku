@@ -257,6 +257,7 @@ export function Description({
 		)
 			return
 
+		console.log(organizationData.organization[0])
 		setOrganization(organizationData.organization[0])
 	}, [organizationData])
 

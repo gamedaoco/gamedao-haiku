@@ -70,8 +70,6 @@ export function OrganisationPage() {
 		}
 	}, [w3Enabled, connectWallet, selectedAccount, push])
 
-	console.log(paginatedData, loading)
-
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
 			<Box component="main" sx={{ flexGrow: 1 }}>

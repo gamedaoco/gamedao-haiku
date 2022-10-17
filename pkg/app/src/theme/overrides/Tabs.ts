@@ -44,6 +44,16 @@ export default function Tabs(theme: Theme) {
 					borderRadius: '50%',
 				},
 			},
+			variants: [
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+					},
+				},
+			],
 		},
 		MuiTabScrollButton: {
 			styleOverrides: {

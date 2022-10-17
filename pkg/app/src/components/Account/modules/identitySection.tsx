@@ -62,9 +62,7 @@ export function IdentitySection() {
 				<div>
 					<Typography variant="h6">
 						{getNameFromAccountState(accountState)}&nbsp;
-						{identity?.email && (
-							<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
-						)}
+						{identity?.email && <Verified sx={{ verticalAlign: 'middle' }} fontSize="inherit" />}
 					</Typography>
 					<Box
 						sx={{

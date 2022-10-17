@@ -61,7 +61,6 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 				}
 				{!loading && (
 					<>
-						123123
 						<Avatar
 							sx={{
 								// WTF!!!1!?!?
