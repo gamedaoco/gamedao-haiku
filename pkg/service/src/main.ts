@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-express'
+import { createPrometheusExporterPlugin } from '@bmatei/apollo-prometheus-exporter'
 import 'dotenv/config'
 import express from 'express'
 import * as fs from 'fs'
@@ -25,14 +26,16 @@ async function startServer() {
 	await sessionManager.Initialize()
 	await balanceManager.Initialize()
 
+	const app = express()
+	const prometheusExporterPlugin = createPrometheusExporterPlugin({ app });
+
 	const server = new ApolloServer({
 		typeDefs,
 		resolvers: resolvers(),
 		cache: 'bounded',
+		plugins: [prometheusExporterPlugin]
 	})
 	await server.start()
-
-	const app = express()
 
 	// This middleware should be added before calling `applyMiddleware`.
 	app.use(graphqlUploadExpress())
