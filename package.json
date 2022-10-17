@@ -51,7 +51,6 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg-disabled": "exec < /dev/tty && npx cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn format:verify"
     }

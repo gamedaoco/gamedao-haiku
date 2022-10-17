@@ -11,7 +11,7 @@ const Component = ({ href, target, children }: Props) => {
 	return (
 		<>
 			{target ? (
-				<a target="_blank" href={href}>
+				<a target="_blank" rel="noreferrer" href={href}>
 					{children}
 				</a>
 			) : (
