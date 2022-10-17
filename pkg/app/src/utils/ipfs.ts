@@ -1,11 +1,11 @@
 import { CID, create } from 'ipfs-http-client'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
-const GATEWAY = 'https://ipfs.sub.zero.io/ipfs/'
+const GATEWAY = 'https://ipfs.sub.zero.io/'
 
 export function parseIpfsHash(ipfsHash: string, gateway: string = GATEWAY) {
 	const hashPart = ipfsHash?.split('/')
-	return `${gateway}${hashPart?.[hashPart?.length - 1]}`
+	return `${gateway}/ipfs/${hashPart?.[hashPart?.length - 1]}`
 }
 
 export async function fetchIpfsJson(ipfsHash: string, gateway: string = GATEWAY) {
