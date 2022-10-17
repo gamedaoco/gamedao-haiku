@@ -4,7 +4,19 @@ import { useRouter } from 'next/router'
 
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
-import { Avatar, Box, Button, CircularProgress, Grid, Paper, Stack, Tab, Tabs, useMediaQuery } from '@mui/material'
+import {
+	Container,
+	Avatar,
+	Box,
+	Button,
+	CircularProgress,
+	Grid,
+	Paper,
+	Stack,
+	Tab,
+	Tabs,
+	useMediaQuery,
+} from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
@@ -28,27 +40,31 @@ import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
+	const theme = useTheme()
+	const config = useConfig()
+
 	const [routeState, setRouteState] = useState<string>(null)
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
 	const [proposalIdState, setProposalIdState] = useState<string>(null)
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const [isMemberState, setIsMemberState] = useState<boolean>(false)
+
 	const { loading, data } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
 	})
 	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 	const addMemberTx = useAddMemberTransaction(organizationIdState)
 	const address = useCurrentAccountAddress()
-	const theme = useTheme()
-	const config = useConfig()
 	const tmpOrg = useTmpOrganisationState()
+
 	const handleOpenTxModal = useCallback(() => {
 		setShowTxModalType(true)
 	}, [setShowTxModalType])
 	const handleCloseTxModal = useCallback(() => {
 		setShowTxModalType(false)
 	}, [setShowTxModalType])
+
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
@@ -143,272 +159,289 @@ export function OrganisationById() {
 	}, [organizationState, address])
 
 	return (
-		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
-			<Box width="100%" height="100%" minHeight="90vh" padding={{ xs: 2, sm: 4 }}>
-				<TabContext value={activeStep}>
-					{(!loading && data) || !organizationIdState ? (
-						<Stack spacing={4}>
-							<Paper
-								sx={{
-									position: 'relative',
-								}}
-							>
-								<Stack
-									direction={isMd ? 'row' : 'column'}
-									spacing={4}
-									alignItems="center"
-									justifyContent={isMd ? 'flex-start' : 'center'}
+		<Layout
+			showHeader
+			showFooter
+			showSidebar
+			title={organizationState?.organization_metadata?.name ?? tmpOrg.name ?? t('page:organisations:title')}
+		>
+			<Box component="main" sx={{ flexGrow: 1 }}>
+				<Container maxWidth="xl">
+					<TabContext value={activeStep}>
+						{(!loading && data) || !organizationIdState ? (
+							<Stack spacing={4}>
+								<Paper
 									sx={{
-										top: '5%',
-										left: 0,
-										right: 0,
-										zIndex: 99,
-										position: 'absolute',
-										marginTop: theme.spacing(5),
-										[theme.breakpoints.up('md')]: {
-											top: 'unset',
-											right: 'auto',
-											display: 'flex',
-											alignItems: 'center',
-											left: theme.spacing(3),
-											bottom: theme.spacing(3),
-										},
+										position: 'relative',
 									}}
 								>
-									<label htmlFor="logo-file-upload">
-										<input
-											style={{ display: 'none' }}
-											accept="image/*"
-											id="logo-file-upload"
-											type="file"
-											disabled={!!organizationIdState}
-											onChange={(event) => handleUploadImage(event, tmpOrg.setLogoCID)}
-										/>
-										<Avatar
-											sx={(theme) => ({
-												width: '7rem',
-												height: '7rem',
-												backgroundColor: theme.palette.background.default,
-												outline: `1px dashed ${theme.palette.grey['500']} !important`,
-												outlineOffset: '5px',
-												cursor: 'pointer',
-											})}
-											srcSet={
-												organizationState?.organization_metadata?.logo || tmpOrg.logoCID?.length
-													? parseIpfsHash(
-															organizationState?.organization_metadata?.logo ||
-																tmpOrg.logoCID,
-															config.IPFS_GATEWAY,
-													  )
-													: null
-											}
-										>
-											<Stack spacing={1} alignItems="center">
-												<AddAPhoto sx={{ height: '20px', width: '20px' }} />
-												<Typography>{t('label:update_photo')}</Typography>
-											</Stack>
-										</Avatar>
-									</label>
-
 									<Stack
-										spacing={2}
-										px={isMd ? 0 : 2}
+										direction={isMd ? 'row' : 'column'}
+										spacing={4}
+										alignItems="center"
+										justifyContent={isMd ? 'flex-start' : 'center'}
 										sx={{
-											width: '100%',
-											justifyContent: { xs: 'space-between', sm: 'flex-start' },
-										}}
-										direction="row"
-									>
-										<Stack spacing={1} sx={{ flex: 0.9 }}>
-											<Typography
-												variant="h4"
-												sx={{
-													whiteSpace: 'nowrap',
-												}}
-											>
-												{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
-											</Typography>
-											<Typography
-												sx={{
-													whiteSpace: 'nowrap',
-												}}
-											>
-												{t('label:n_members', {
-													n: organizationState?.organization_members?.length ?? 1,
-												})}
-											</Typography>
-										</Stack>
-										<Stack>
-											{organizationState &&
-												!isMemberState &&
-												address !== organizationState?.creator && (
-													<Button
-														variant="contained"
-														disabled={!addMemberTx}
-														onClick={handleOpenTxModal}
-													>
-														{t('button:ui:join_organization')}
-													</Button>
-												)}
-										</Stack>
-									</Stack>
-								</Stack>
-								<Grid
-									height={isMd ? '20vh' : '40vh'}
-									width="100%"
-									display="grid"
-									alignItems="center"
-									overflow="hidden"
-									position="relative"
-									sx={{
-										height: '40vh',
-										[theme.breakpoints.up('sm')]: {
-											height: '25vh',
-										},
-
-										[theme.breakpoints.up('md')]: {
-											height: '20vh',
-										},
-									}}
-								>
-									<label htmlFor="header-file-upload">
-										<input
-											style={{ display: 'none' }}
-											accept="image/*"
-											id="header-file-upload"
-											type="file"
-											disabled={!!organizationIdState}
-											onChange={(event) => handleUploadImage(event, tmpOrg.setHeaderCID)}
-										/>
-										{!organizationState?.organization_metadata?.header &&
-										!tmpOrg.headerCID?.length ? (
-											<Box display="grid" justifyContent="center" alignItems="center">
-												<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
-											</Box>
-										) : (
-											<Image
-												src={parseIpfsHash(
-													organizationState?.organization_metadata?.header ??
-														tmpOrg.headerCID,
-													config.IPFS_GATEWAY,
-												)}
-												alt="logo"
-												sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-											/>
-										)}
-									</label>
-									<Box
-										sx={{
-											position: 'absolute',
-											top: 0,
+											top: '5%',
 											left: 0,
 											right: 0,
-											bottom: 0,
-											background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) -1.23%, #000000 80%)',
-											pointerEvents: 'none',
+											zIndex: 99,
+											position: 'absolute',
+											marginTop: theme.spacing(5),
+											[theme.breakpoints.up('md')]: {
+												top: 'unset',
+												right: 'auto',
+												display: 'flex',
+												alignItems: 'center',
+												left: theme.spacing(3),
+												bottom: theme.spacing(3),
+											},
 										}}
-									></Box>
-								</Grid>
-
-								<Box sx={{ maxWidth: isMd ? '60%' : '100%', marginLeft: 'auto' }}>
-									<Tabs
-										variant="scrollable"
-										value={activeStep}
-										onChange={(_, value) => handleTabSelect(value)}
-										scrollButtons="auto"
 									>
-										<Tab label={t('button:navigation:overview')} value={'dashboard'} />
-										<Tab
-											label={t('button:navigation:campaigns')}
-											value={'campaigns'}
-											disabled={!organizationIdState}
+										<label htmlFor="logo-file-upload">
+											<input
+												style={{ display: 'none' }}
+												accept="image/*"
+												id="logo-file-upload"
+												type="file"
+												disabled={!!organizationIdState}
+												onChange={(event) => handleUploadImage(event, tmpOrg.setLogoCID)}
+											/>
+											<Avatar
+												sx={(theme) => ({
+													width: '7rem',
+													height: '7rem',
+													backgroundColor: theme.palette.background.default,
+													// outline: `1px dashed ${theme.palette.grey['500']} !important`,
+													outlineOffset: '5px',
+													cursor: 'pointer',
+												})}
+												srcSet={
+													organizationState?.organization_metadata?.logo ||
+													tmpOrg.logoCID?.length
+														? parseIpfsHash(
+																organizationState?.organization_metadata?.logo ||
+																	tmpOrg.logoCID,
+																config.IPFS_GATEWAY,
+														  )
+														: null
+												}
+											>
+												<Stack spacing={1} alignItems="center">
+													<AddAPhoto sx={{ height: '20px', width: '20px' }} />
+													<Typography>{t('label:update_photo')}</Typography>
+												</Stack>
+											</Avatar>
+										</label>
+
+										<Stack
+											spacing={2}
+											px={isMd ? 0 : 2}
+											sx={{
+												width: '100%',
+												justifyContent: { xs: 'space-between', sm: 'flex-start' },
+											}}
+											direction="row"
+										>
+											<Stack spacing={1} sx={{ flex: 0.9 }}>
+												<Typography
+													variant="h4"
+													sx={{
+														whiteSpace: 'nowrap',
+													}}
+												>
+													{organizationState?.organization_metadata?.name ??
+														tmpOrg.name ??
+														''}
+												</Typography>
+												<Typography
+													sx={{
+														whiteSpace: 'nowrap',
+													}}
+												>
+													{t('label:n_members', {
+														n: organizationState?.organization_members?.length ?? 1,
+													})}
+												</Typography>
+											</Stack>
+											{/*											<Stack>
+												{organizationState &&
+													!isMemberState &&
+													address !== organizationState?.creator && (
+														<Button
+															variant="contained"
+															disabled={!addMemberTx}
+															onClick={handleOpenTxModal}
+														>
+															{t('button:ui:join_organization')}
+														</Button>
+													)}
+											</Stack>
+*/}
+										</Stack>
+									</Stack>
+									<Grid
+										height={isMd ? '20vh' : '40vh'}
+										width="100%"
+										display="grid"
+										alignItems="center"
+										overflow="hidden"
+										position="relative"
+										sx={{
+											height: '40vh',
+											[theme.breakpoints.up('sm')]: {
+												height: '25vh',
+											},
+
+											[theme.breakpoints.up('md')]: {
+												height: '20vh',
+											},
+										}}
+									>
+										<label htmlFor="header-file-upload">
+											<input
+												style={{ display: 'none' }}
+												accept="image/*"
+												id="header-file-upload"
+												type="file"
+												disabled={!!organizationIdState}
+												onChange={(event) => handleUploadImage(event, tmpOrg.setHeaderCID)}
+											/>
+											{!organizationState?.organization_metadata?.header &&
+											!tmpOrg.headerCID?.length ? (
+												<Box display="grid" justifyContent="center" alignItems="center">
+													<AddAPhoto
+														sx={{ height: '44px', width: '44px', cursor: 'pointer' }}
+													/>
+												</Box>
+											) : (
+												<Image
+													src={parseIpfsHash(
+														organizationState?.organization_metadata?.header ??
+															tmpOrg.headerCID,
+														config.IPFS_GATEWAY,
+													)}
+													alt="logo"
+													sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+												/>
+											)}
+										</label>
+										<Box
+											sx={{
+												position: 'absolute',
+												top: 0,
+												left: 0,
+												right: 0,
+												bottom: 0,
+												background:
+													'linear-gradient(180deg, rgba(0, 0, 0, 0) -1.23%, #000000 80%)',
+												pointerEvents: 'none',
+											}}
+										></Box>
+									</Grid>
+
+									<Box sx={{ maxWidth: isMd ? '60%' : '100%', marginLeft: 'auto' }}>
+										<Tabs
+											variant="scrollable"
+											value={activeStep}
+											onChange={(_, value) => handleTabSelect(value)}
+											scrollButtons="auto"
+										>
+											<Tab label={t('button:navigation:overview')} value={'dashboard'} />
+											<Tab
+												label={t('button:navigation:campaigns')}
+												value={'campaigns'}
+												disabled={!organizationIdState}
+											/>
+											<Tab
+												label={t('button:navigation:proposals')}
+												value={'proposals'}
+												disabled={!organizationIdState}
+											/>
+											<Tab
+												label={t('button:navigation:members')}
+												value={'members'}
+												disabled={!organizationIdState}
+											/>
+											<Tab
+												label={t('button:navigation:treasury')}
+												value={'treasury'}
+												disabled={!organizationIdState}
+											/>
+											<Tab
+												label={t('button:navigation:settings')}
+												value={'settings'}
+												disabled={!organizationIdState}
+											/>
+										</Tabs>
+									</Box>
+								</Paper>
+								<TabPanel value={'dashboard'}>
+									{organizationIdState ? (
+										<Overview
+											organization={organizationState}
+											organizationId={organizationIdState}
+											isMember={isMemberState}
+											isAdmin={address === organizationState?.creator}
+											handleCloseTxModal={handleCloseTxModal}
+											handleOpenTxModal={handleOpenTxModal}
+											showTxModalType={showTxModalType}
+											addMemberTx={addMemberTx}
 										/>
-										<Tab
-											label={t('button:navigation:proposals')}
-											value={'proposals'}
-											disabled={!organizationIdState}
+									) : (
+										<TmpOverview />
+									)}
+								</TabPanel>
+								<TabPanel value={'campaigns'}>
+									{organizationIdState ? (
+										<CampaignOverview
+											organizationId={organizationIdState}
+											isAdmin={address === organizationState?.creator}
 										/>
-										<Tab
-											label={t('button:navigation:members')}
-											value={'members'}
-											disabled={!organizationIdState}
+									) : (
+										<TmpOverview />
+									)}
+								</TabPanel>
+								<TabPanel value={'treasury'}>
+									{organizationState && (
+										<Typography>
+											{t('label:treasury_address', { address: organizationState.treasury })}
+										</Typography>
+									)}
+								</TabPanel>
+								<TabPanel value={'proposals'}>
+									{proposalIdState && organizationState ? (
+										<ProposalDetail
+											organization={organizationState}
+											proposalId={proposalIdState}
+											isMember={isMemberState}
+											goBack={() => handleTabSelect('proposals')}
 										/>
-										<Tab
-											label={t('button:navigation:treasury')}
-											value={'treasury'}
-											disabled={!organizationIdState}
+									) : (
+										<ProposalOverview
+											organizationId={organizationIdState}
+											isMember={isMemberState}
 										/>
-										<Tab
-											label={t('button:navigation:settings')}
-											value={'settings'}
-											disabled={!organizationIdState}
-										/>
-									</Tabs>
-								</Box>
-							</Paper>
-							<TabPanel value={'dashboard'}>
-								{organizationIdState ? (
-									<Overview
-										organization={organizationState}
-										organizationId={organizationIdState}
-										isMember={isMemberState}
-										isAdmin={address === organizationState?.creator}
-										handleCloseTxModal={handleCloseTxModal}
-										handleOpenTxModal={handleOpenTxModal}
-										showTxModalType={showTxModalType}
-										addMemberTx={addMemberTx}
-									/>
-								) : (
-									<TmpOverview />
-								)}
-							</TabPanel>
-							<TabPanel value={'campaigns'}>
-								{organizationIdState ? (
-									<CampaignOverview
-										organizationId={organizationIdState}
-										isAdmin={address === organizationState?.creator}
-									/>
-								) : (
-									<TmpOverview />
-								)}
-							</TabPanel>
-							<TabPanel value={'treasury'}>
-								{organizationState && (
-									<Typography>
-										{t('label:treasury_address', { address: organizationState.treasury })}
-									</Typography>
-								)}
-							</TabPanel>
-							<TabPanel value={'proposals'}>
-								{proposalIdState && organizationState ? (
-									<ProposalDetail
-										organization={organizationState}
-										proposalId={proposalIdState}
-										isMember={isMemberState}
-										goBack={() => handleTabSelect('proposals')}
-									/>
-								) : (
-									<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
-								)}
-							</TabPanel>
-							<TabPanel value={'members'}>
-								<OrganizationMembersTable organizationState={organizationState} />
-							</TabPanel>
-							<TabPanel value={'settings'}>
-								<SettingsOverview organizationState={organizationState} />
-							</TabPanel>
-						</Stack>
-					) : (
-						<CircularProgress
-							sx={{
-								position: 'absolute',
-								top: '50%',
-								left: '50%',
-								transform: 'translate(-50%, -50%)',
-							}}
-						/>
-					)}
-				</TabContext>
+									)}
+								</TabPanel>
+								<TabPanel value={'members'}>
+									<OrganizationMembersTable organizationState={organizationState} />
+								</TabPanel>
+								<TabPanel value={'settings'}>
+									<SettingsOverview organizationState={organizationState} />
+								</TabPanel>
+							</Stack>
+						) : (
+							<CircularProgress
+								sx={{
+									position: 'absolute',
+									top: '50%',
+									left: '50%',
+									transform: 'translate(-50%, -50%)',
+								}}
+							/>
+						)}
+					</TabContext>
+				</Container>
 			</Box>
 		</Layout>
 	)

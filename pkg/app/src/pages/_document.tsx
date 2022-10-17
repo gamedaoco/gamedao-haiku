@@ -62,7 +62,7 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Inter:400,600,800&display=swap"
 					/>
-					<link rel="stylesheet" href="/iconfont.css" />
+					{/*<link rel="stylesheet" href="/iconfont.css" />*/}
 				</Head>
 				<body
 					style={{

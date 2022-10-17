@@ -7,9 +7,7 @@ export function Page() {
 		<Layout showHeader showFooter showSidebar>
 			<Box component="main" sx={{ flexGrow: 1 }}>
 				<Container maxWidth="xl">
-					<Typography sx={{ fontWeight: '800' }} variant={'h3'}>
-						Welcome.
-					</Typography>
+					<Typography variant={'h3'}>Welcome.</Typography>
 				</Container>
 			</Box>
 		</Layout>

@@ -47,13 +47,13 @@ function HeadAndMetaTags() {
 
 			<meta property="twitter:domain" content="app.gamedao.co" />
 			<meta property="twitter:url" content="https://app.gamedao.co/" />
+			<meta property="twitter:image" content={config?.SITE_IMAGE} />
 
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:creator" content={config?.TW_SITE_CREATOR} />
 			<meta name="twitter:site" content={config?.TW_SITE_NAME} />
 			<meta name="twitter:title" content={config?.SITE_TITLE} />
 			<meta name="twitter:description" content={config?.SITE_DESCRIPTION} />
-			<meta property="twitter:image" content={config?.SITE_IMAGE} />
 		</Head>
 	)
 }

@@ -28,6 +28,7 @@ interface FiltersInterface {
 	sortOption: Organization_Order_By
 	filters: any
 }
+
 export function OrganisationPage() {
 	const { t } = useTranslation()
 	const enabledFeature = useOrganizationFeatures()
@@ -69,14 +70,11 @@ export function OrganisationPage() {
 		}
 	}, [w3Enabled, connectWallet, selectedAccount, push])
 
+	console.log(paginatedData, loading)
+
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
-			<Box
-				component="main"
-				sx={{
-					flexGrow: 1,
-				}}
-			>
+			<Box component="main" sx={{ flexGrow: 1 }}>
 				<Container maxWidth="xl">
 					<Box sx={{ mb: 2 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
@@ -95,7 +93,7 @@ export function OrganisationPage() {
 						</Grid>
 					</Box>
 
-					{organizationsCount?.data?.campaign_aggregate?.aggregate.count > 0 ? (
+					{organizationsCount?.data?.organization_aggregate?.aggregate.count > 0 ? (
 						<>
 							<FiltersSection
 								setFilters={setFilters}
@@ -153,7 +151,7 @@ export function OrganisationPage() {
 							</Box>
 						</>
 					) : (
-						<>No Organisations yet — why not create one!</>
+						<>No Organisations yet — why not create one?</>
 					)}
 				</Container>
 			</Box>
