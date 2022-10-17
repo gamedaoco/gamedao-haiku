@@ -10,7 +10,7 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components'
-import { Layout } from 'src/components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
 import { useCampaignByIdSubscription } from 'src/queries'
 import { filterXSS } from 'xss'
 

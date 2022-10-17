@@ -7,7 +7,7 @@ import { AccountTabs } from 'src/@types/account'
 import { AccountPageGeneralLayout } from 'components/Account/generalLayout'
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 export function AccountByTab() {

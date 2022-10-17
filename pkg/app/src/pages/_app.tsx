@@ -78,7 +78,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 		return () => {
 			router.events.off('routeChangeComplete', onRouteChangeComplete)
 		}
-	}, [])
+	}, [router.events])
 
 	return (
 		<CacheProvider value={emotionCache}>

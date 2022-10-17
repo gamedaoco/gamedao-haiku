@@ -11,13 +11,13 @@ import { useExtensionContext } from 'provider/extension/modules/context'
 import { useSidebarSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
-import { OrganizationButtonMemoized } from 'components/Layouts/default/modules/organizationButton'
+import { OrganizationButtonMemoized } from 'layouts/default/modules/organizationButton'
 
 interface ComponentProps {
-	showHeader: boolean
-	onClose: () => void
-	open: boolean
-	variant: 'permanent' | 'persistent' | 'temporary' | undefined
+	showHeader?: boolean
+	onClose?: () => void
+	open?: boolean
+	variant?: 'permanent' | 'persistent' | 'temporary' | undefined
 }
 
 const log = Logger('HAIKU')

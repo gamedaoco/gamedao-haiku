@@ -60,7 +60,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 			style={{
 				background: 'transparent',
 				boxShadow: 'none',
-				zIndex: (theme) => theme.zIndex.drawer + 1,
+				// zIndex: (theme) => theme.zIndex.drawer + 1,
 			}}
 		>
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
@@ -88,7 +88,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						return (
 							<MenuItem key={navItem.name} selected={router.pathname.includes(navItem.path)}>
 								<Link href={navItem.path} target={navItem.path.includes('http') ? '_blank' : null}>
-									<Typography variant="link">{t(navItem.name)}</Typography>
+									<Typography>{t(navItem.name)}</Typography>
 								</Link>
 							</MenuItem>
 						)

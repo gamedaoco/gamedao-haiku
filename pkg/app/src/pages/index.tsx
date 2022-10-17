@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Container, Typography } from '@mui/material'
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
 
 export function Page() {
 	return (

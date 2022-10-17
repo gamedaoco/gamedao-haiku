@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useRouter } from 'next/router'
+
+import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
+import { useConfig } from 'hooks/useConfig'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
@@ -19,17 +25,13 @@ import {
 } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
-import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
-import { useConfig } from 'hooks/useConfig'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { useTranslation } from 'react-i18next'
+
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Image } from 'components/Image/image'
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
 import { Overview } from 'components/TabPanels/Organization/overview'

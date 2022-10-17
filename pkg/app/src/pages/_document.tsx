@@ -73,14 +73,14 @@ export default class MyDocument extends Document {
 				>
 					<Main />
 					<NextScript />
-					<style jsx global>{`
+{/*					<style jsx global>{`
 						#__next {
 							height: 100%;
 						}
 						* {
 							color: red !important;
 						}
-					`}</style>
+					`}</style>*/}
 				</body>
 			</Html>
 		)

@@ -7,7 +7,7 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
 import { useExtensionContext } from 'provider/extension/modules/context'
 import { useTranslation } from 'react-i18next'
-import { Layout } from 'src/components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
 import {
 	Organization,
 	Organization_Order_By,

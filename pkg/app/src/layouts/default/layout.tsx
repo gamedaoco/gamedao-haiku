@@ -5,8 +5,7 @@ import { useConfig } from 'hooks/useConfig'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
 
-import { HeaderMobile } from 'components/Layouts/default/modules/headerMobile'
-
+import { HeaderMobile } from './modules/headerMobile'
 import { Footer } from './modules/footer'
 import { Header } from './modules/header'
 import { Sidebar } from './modules/sidebar'

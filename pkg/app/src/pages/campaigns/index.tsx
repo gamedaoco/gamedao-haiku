@@ -18,7 +18,7 @@ import {
 import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { CampaignFiltersTab } from 'components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
 
 export function Campaigns() {
 	const { data: displayValuesData } = useDisplayValuesQuery()

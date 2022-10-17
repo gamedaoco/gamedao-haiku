@@ -4,15 +4,15 @@ import Link from 'next/link'
 import Open from '@mui/icons-material/Apps'
 import Close from '@mui/icons-material/Close'
 import { Menu, MoreVert } from '@mui/icons-material'
-import { Button, Stack, MenuItem } from '@mui/material'
 
+import { Button, Stack, MenuItem } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/material/styles'
-import { AccountSelector, FontIcons } from 'src/components'
 
-import { NavbarMobile } from 'components/Layouts/default/modules/navbarMobile'
+import { NavbarMobile } from 'layouts/default/modules/navbarMobile'
+import { AccountSelector, FontIcons } from 'src/components'
 import { NavLink } from 'components/NavLink/navLink'
 
 const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
