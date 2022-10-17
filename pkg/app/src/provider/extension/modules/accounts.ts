@@ -20,7 +20,7 @@ export async function initializeAccounts(
 
 	try {
 		// Enable wallet
-		await wallet.enable('GameDao')
+		await wallet.enable('GameDAO')
 		const extension: InjectedExtension = wallet.extension
 		if (!extension) {
 			throw new Error('The wallet connection is unauthorized')

@@ -7,8 +7,8 @@ export default function Tabs(theme: Theme) {
 				root: {
 					padding: 0,
 					fontWeight: theme.typography.fontWeightMedium,
-					borderTopLeftRadius: theme.shape.borderRadius,
-					borderTopRightRadius: theme.shape.borderRadius,
+					// borderTopLeftRadius: theme.shape.borderRadius,
+					// borderTopRightRadius: theme.shape.borderRadius,
 					'&.Mui-selected': {
 						color: theme.palette.text.primary,
 					},
@@ -41,6 +41,7 @@ export default function Tabs(theme: Theme) {
 			styleOverrides: {
 				root: {
 					padding: 0,
+					borderRadius: '50%',
 				},
 			},
 		},
@@ -48,7 +49,7 @@ export default function Tabs(theme: Theme) {
 			styleOverrides: {
 				root: {
 					width: 48,
-					// borderRadius: '50%',
+					borderRadius: '50%',
 				},
 			},
 		},

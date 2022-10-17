@@ -12,6 +12,7 @@ interface ComponentProps {
 }
 
 export function ItemList({ items, loading }: ComponentProps) {
+	console.log(items, loading)
 	return (
 		<Grid
 			sx={{
