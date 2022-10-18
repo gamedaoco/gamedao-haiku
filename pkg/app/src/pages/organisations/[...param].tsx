@@ -167,8 +167,7 @@ export function OrganisationById() {
 			showSidebar
 			title={organizationState?.organization_metadata?.name ?? tmpOrg.name ?? t('page:organisations:title')}
 		>
-			<Box component="main" sx={{ flexGrow: 1 }}>
-				<Container maxWidth="xl">
+
 					<TabContext value={activeStep}>
 						{(!loading && data) || !organizationIdState ? (
 							<Stack spacing={4}>
@@ -443,8 +442,7 @@ export function OrganisationById() {
 							/>
 						)}
 					</TabContext>
-				</Container>
-			</Box>
+
 		</Layout>
 	)
 }

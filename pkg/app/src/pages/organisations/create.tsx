@@ -10,8 +10,7 @@ export function CreateOrganisationPage() {
 	const { t } = useTranslation()
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
-			<Box component="main" sx={{ flexGrow: 1 }}>
-				<Container maxWidth="xl">
+
 					<Box sx={{ mb: 4 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
@@ -34,8 +33,7 @@ export function CreateOrganisationPage() {
 							<Form currentStep={activeStep} setStep={setActiveStep} />
 						</Stack>
 					</Box>
-				</Container>
-			</Box>
+
 		</Layout>
 	)
 }

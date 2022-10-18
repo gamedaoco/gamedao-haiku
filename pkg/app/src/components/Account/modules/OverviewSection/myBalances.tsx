@@ -20,12 +20,11 @@ import {
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 
 export function MyBalancesCard() {
+
 	const theme = useTheme()
 	const address = useCurrentAccountAddress()
 	const balances = useBalanceByAddress(address)
 	const { t } = useTranslation()
-
-	console.log(balances)
 
 	return (
 		<Card sx={{ minHeight: '100%' }} variant={'glass'}>

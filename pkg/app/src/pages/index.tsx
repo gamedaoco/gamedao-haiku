@@ -5,11 +5,9 @@ import { Layout } from 'layouts/default/layout'
 export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar>
-			<Box component="main" sx={{ flexGrow: 1 }}>
-				<Container maxWidth="xl">
-					<Typography variant={'h3'}>Welcome.</Typography>
-				</Container>
-			</Box>
+
+			<Typography variant={'h3'}>Welcome.</Typography>
+
 		</Layout>
 	)
 }

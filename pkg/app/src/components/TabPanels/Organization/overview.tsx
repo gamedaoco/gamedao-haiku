@@ -157,8 +157,6 @@ export function Overview({
 		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
 	}, [organization?.organization_metadata?.description?.length])
 
-	console.log(proposalTypesCount)
-
 	return (
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>

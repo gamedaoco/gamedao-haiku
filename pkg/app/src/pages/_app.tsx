@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { AppProps, NextWebVitalsMetric } from 'next/app'
+import { AppProps } from 'next/app'
+// import { NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import * as Fathom from 'fathom-client'
@@ -90,8 +91,8 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 	)
 }
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-	log.trace(metric)
-}
+// export function reportWebVitals(metric: NextWebVitalsMetric) {
+// 	log.trace(metric)
+// }
 
 export default MyApp

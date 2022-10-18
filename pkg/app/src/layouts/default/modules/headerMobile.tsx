@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react'
-import Link from 'next/link'
+import Link from 'components/Link'
 
 import Open from '@mui/icons-material/Apps'
 import Close from '@mui/icons-material/Close'
 import { Menu, MoreVert } from '@mui/icons-material'
 
-import { Button, Stack, MenuItem } from '@mui/material'
+import { Button, Stack, MenuItem, Typography } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -78,7 +78,9 @@ export function HeaderMobile({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 					>
 						<MenuItem>
 							<Link href="/">
-								<Logo />
+								<Typography>
+									<Logo />
+								</Typography>
 							</Link>
 						</MenuItem>
 					</Box>

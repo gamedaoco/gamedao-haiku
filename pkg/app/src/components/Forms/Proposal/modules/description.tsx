@@ -257,9 +257,10 @@ export function Description({
 		)
 			return
 
-		console.log(organizationData.organization[0])
-		setOrganization(organizationData.organization[0])
+		// setOrganization(organizationData.organization[0])
 	}, [organizationData])
+
+	// console.log( 'organizationData.organization[0]', organizationData?.organization[0] )
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
@@ -296,7 +297,7 @@ export function Description({
 							onChange={handleAmountChange}
 						/>
 						<Typography variant="h5" textAlign="center">
-							What’s the name of your proposal?
+							What’s the title of your proposal?
 						</Typography>
 					</>
 				)}

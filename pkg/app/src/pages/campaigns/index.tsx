@@ -108,13 +108,7 @@ export function Campaigns() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title={t('labels:campaigns')}>
-			<Box
-				component="main"
-				sx={{
-					flexGrow: 1,
-				}}
-			>
-				<Container maxWidth="xl">
+
 					<Box sx={{ mb: 2 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
@@ -184,8 +178,7 @@ export function Campaigns() {
 					) : (
 						<>No Campaigns yet — why not create one!</>
 					)}
-				</Container>
-			</Box>
+
 		</Layout>
 	)
 }

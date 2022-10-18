@@ -8,19 +8,19 @@ interface Props {
 }
 
 const Component = ({ href, target, children }: Props) => {
-	return (
-		<>
-			{target ? (
-				<a target="_blank" rel="noreferrer" href={href}>
-					{children}
-				</a>
-			) : (
-				<a>
-					<Link href={href}>{children}</Link>
-				</a>
-			)}
-		</>
+
+	return target
+	? (
+		<a target="_blank" rel="noreferrer" href={href}>
+			{children}
+		</a>
 	)
+	: (
+		<a>
+			<Link href={href}>{children}</Link>
+		</a>
+	)
+
 }
 
 export default Component

@@ -22,13 +22,7 @@ export function AccountByTab() {
 
 	return (
 		<Layout showHeader showSidebar title={t('page:account:title')}>
-			<Box
-				component="main"
-				sx={{
-					flexGrow: 1,
-				}}
-			>
-				<Container maxWidth="xl">
+
 					<Box sx={{ mb: 2 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
@@ -39,8 +33,7 @@ export function AccountByTab() {
 					</Box>
 
 					<AccountPageGeneralLayout param={param as AccountTabs} />
-				</Container>
-			</Box>
+
 		</Layout>
 	)
 }

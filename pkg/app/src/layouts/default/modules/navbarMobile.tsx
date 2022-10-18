@@ -1,6 +1,11 @@
 import React, { Fragment, useCallback } from 'react'
 
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
+import { useTheme } from '@mui/material/styles'
+
+import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+import { Close } from '@mui/icons-material'
 
 import {
 	Box,
@@ -12,11 +17,15 @@ import {
 	Link as MUILink,
 	Stack,
 	Typography,
+	Toolbar,
+	MenuItem
 } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useTranslation } from 'react-i18next'
-import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+
 import { FontIcons } from 'src/components'
+
+import Link from 'components/Link'
+
+const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
 
 interface ComponentProps {
 	onClose: () => void
@@ -49,13 +58,13 @@ const urls = [
 	},
 ]
 
-const Link = ({ href, children }) => (
-	<Box>
-		<MUILink variant="inherit" href={href} target="_blank" underline="none" rel="noreferrer" color="inherit">
-			{children}
-		</MUILink>
-	</Box>
-)
+// const Link = ({ href, children }) => (
+// 	<Box>
+// 		<MUILink variant="inherit" href={href} target="_blank" underline="none" rel="noreferrer" color="inherit">
+// 			{children}
+// 		</MUILink>
+// 	</Box>
+// )
 
 export function NavbarMobile({ onClose, open }: ComponentProps) {
 	const theme = useTheme()
@@ -76,18 +85,64 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 	return (
 		<Drawer
 			anchor="right"
-			onClose={onClose}
+			// onClose={onClose}
 			open={open}
-			variant="temporary"
+			// variant="temporary"
+			transitionDuration={0}
+			hideBackdrop={true}
 			sx={{
 				'& .MuiPaper-root': {
-					width: '80vw',
+					width: '100vw',
 					bottom: 0,
 					height: 'auto',
-					backgroundColor: theme.palette.background.paper,
+					backgroundColor: `#000000`, //theme.palette.background.paper,
 				},
 			}}
 		>
+
+				<Toolbar
+					sx={{
+						// backgroundColor: `#00000099`,
+						// backgroundColor: theme.palette.background.default,
+						// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						position: 'relative',
+						height: '90px',
+					}}
+				>
+					<Box></Box>
+					<Box
+						sx={{
+							display: 'flex',
+							alignItems: 'center',
+							position: 'absolute',
+							transform: 'translateX(-50%)',
+							left: '50%',
+						}}
+					>
+						<MenuItem>
+							<Link href="/">
+								<Typography>
+									<Logo />
+								</Typography>
+							</Link>
+						</MenuItem>
+					</Box>
+					<Button
+						onClick={onClose}
+						aria-label="Menu"
+						sx={{
+							color: theme.palette.text.primary,
+							borderRadius: 2,
+							minWidth: 'auto',
+							padding: 1,
+						}}
+					>
+						<Close />
+					</Button>
+				</Toolbar>
+
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
 					{urls.map((navItem) => {
@@ -109,18 +164,18 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 					<Box alignItems="center">
 						<Typography textAlign="center">Need help?</Typography>
 						<Typography pb={2} textAlign="center">
-							Check the docs!
+							Read the docs!
 						</Typography>
 						<Button
 							variant="outlined"
-							color="info"
+							// color="info"
 							onClick={() => window.open('https://docs.gamedao.co').focus()}
 						>
 							Documentation
 						</Button>
 					</Box>
 
-					<Stack direction="row" spacing={2}>
+{/*					<Stack direction="row" spacing={4}>
 						<Link href="https://discord.gg/P7NHWGzJ7r">
 							<SiDiscord size="25" />
 						</Link>
@@ -136,7 +191,7 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 						<Link href="https://www.linkedin.com/company/gamedaoco">
 							<SiLinkedin size="25" />
 						</Link>
-					</Stack>
+					</Stack>*/}
 				</Stack>
 			</Stack>
 		</Drawer>

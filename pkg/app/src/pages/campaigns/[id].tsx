@@ -53,12 +53,14 @@ export function CampaignById() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
+
 			<NavLink href="/campaigns">
 				<Button variant="secondary" sx={{ mt: '5rem', ml: '1rem' }} onClick={handleClick}>
 					<ArrowBack sx={{ mr: '1rem' }} />
 					{t('button:ui:back_to_all_campaigns')}
 				</Button>
 			</NavLink>
+
 			<Box sx={{ p: '2rem' }}>
 				<CampaignDetailsContent
 					id={campaignId}
@@ -77,6 +79,7 @@ export function CampaignById() {
 					hasContributed={data?.campaign?.[0]?.userContributedCount?.aggregate?.count > 0}
 				/>
 			</Box>
+
 			<Box sx={{ px: '2rem', pb: '4rem', pt: 0 }}>
 				<Paper sx={{ pt: 0, height: '100%' }}>
 					<TabContext value={value}>
@@ -111,6 +114,7 @@ export function CampaignById() {
 					</TabContext>
 				</Paper>
 			</Box>
+
 		</Layout>
 	)
 }

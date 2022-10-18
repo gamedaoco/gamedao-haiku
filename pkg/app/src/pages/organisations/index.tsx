@@ -72,8 +72,7 @@ export function OrganisationPage() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
-			<Box component="main" sx={{ flexGrow: 1 }}>
-				<Container maxWidth="xl">
+
 					<Box sx={{ mb: 2 }}>
 						<Grid container justifyContent="space-between" spacing={3}>
 							<Grid item>
@@ -151,8 +150,7 @@ export function OrganisationPage() {
 					) : (
 						<>No Organisations yet — why not create one?</>
 					)}
-				</Container>
-			</Box>
+
 		</Layout>
 	)
 }
