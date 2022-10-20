@@ -25,7 +25,7 @@ import { FontIcons } from 'src/components'
 
 import Link from 'components/Link'
 
-const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
+const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
 
 interface ComponentProps {
 	onClose: () => void
