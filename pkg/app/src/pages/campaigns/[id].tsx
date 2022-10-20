@@ -53,7 +53,6 @@ export function CampaignById() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
-
 			<NavLink href="/campaigns">
 				<Button variant="secondary" sx={{ mt: '5rem', ml: '1rem' }} onClick={handleClick}>
 					<ArrowBack sx={{ mr: '1rem' }} />
@@ -114,7 +113,6 @@ export function CampaignById() {
 					</TabContext>
 				</Paper>
 			</Box>
-
 		</Layout>
 	)
 }

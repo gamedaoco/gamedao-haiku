@@ -47,6 +47,17 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 		}
 	}, [])
 
+	// // //
+	const handleUploadImage = useCallback(async (event, setter) => {
+		const files = event.target.files
+		if (!files || files.length === 0) {
+			return createWarningNotification('No file selected')
+		}
+
+		const cid = await uploadFileToIpfs(files[0])
+		setter(cid.toString())
+	}, [])
+
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
 			<Typography variant={'h6'}>Campaign Content</Typography>
@@ -55,7 +66,16 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 			<Stack gap={3}>
 				<Typography variant="subtitle2">Banner</Typography>
 				<section className="container">
-					<Dropzone onFilesSelected={onBannerSelected} options={{ maxFiles: 1, accept: { 'image/*': [] } }}>
+					{/*<Dropzone onFilesSelected={onBannerSelected} options={{ maxFiles: 1, accept: { 'image/*': [] } }}>*/}
+					<label htmlFor="header-file-upload">
+						<input
+							style={{ display: 'none' }}
+							accept="image/*"
+							id="header-file-upload"
+							type="file"
+							// disabled={!!organizationIdState}
+							onChange={(event) => handleUploadImage(event, tmpOrg.setHeaderCID)}
+						/>
 						{bannerCid ? (
 							<CardMedia
 								sx={{ height: '155px' }}
@@ -69,7 +89,8 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 								<Typography variant="body2">Upload your Campaign Banner</Typography>
 							</Box>
 						)}
-					</Dropzone>
+					</label>
+					{/*</Dropzone>*/}
 				</section>
 			</Stack>
 

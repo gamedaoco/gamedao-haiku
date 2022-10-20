@@ -5,9 +5,7 @@ import { Layout } from 'layouts/default/layout'
 export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar>
-
 			<Typography variant={'h3'}>Welcome.</Typography>
-
 		</Layout>
 	)
 }

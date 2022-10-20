@@ -15,8 +15,8 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
-const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
-const LogoSM = () => <img src="/svg/g-col.svg" height="16px" />
+const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
@@ -33,11 +33,16 @@ const urls = [
 		name: 'button:navigation:campaigns',
 		path: '/campaigns',
 	},
+	// {
+	// 	name: 'button:navigation:quests',
+	// 	path: '/quests',
+	// },
 	{
 		name: 'button:navigation:documentation',
 		path: 'https://docs.gamedao.co/',
 		external: true,
 	},
+	/* TODO: should be shown when not on a production network: */
 	{
 		name: 'button:navigation:faucet',
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
@@ -77,9 +82,9 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 			>
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
 					<Box>
-						<MenuItem sx={{ p: 0, m: 0 }}>
+						<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
 							<Link href="/">
-								<Typography sx={{ mx: 2 }}>{isLg ? <Logo /> : <LogoSM />}</Typography>
+								<Typography sx={{ ml: 1, minWidth: 32 }}>{isLg ? <Logo /> : <LogoSM />}</Typography>
 							</Link>
 						</MenuItem>
 					</Box>

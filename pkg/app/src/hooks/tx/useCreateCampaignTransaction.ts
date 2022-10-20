@@ -24,8 +24,8 @@ const validation = Yup.object().shape({
 	governance: Yup.mixed().required(),
 	cid: Yup.string().required(),
 	start: Yup.number().required(),
-	tokenSymbol: Yup.string().required(),
-	tokenName: Yup.string().required(),
+	tokenSymbol: Yup.string(),
+	tokenName: Yup.string(),
 })
 
 export function useCreateCampaignTransaction(): TransactionData {

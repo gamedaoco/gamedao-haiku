@@ -66,7 +66,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
-{/*
+				{/*
 				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
 */}
 				<BalanceCard />

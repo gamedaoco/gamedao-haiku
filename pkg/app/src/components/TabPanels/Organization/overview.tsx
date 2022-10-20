@@ -177,7 +177,7 @@ export function Overview({
 						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1rem">
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<Label />
-								<Typography variant="body2">Tag1, Tag2, Tag3, ...</Typography>
+								<Typography variant="body2">Game, RPG, Desktop</Typography>
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<FmdGood />
@@ -190,7 +190,7 @@ export function Overview({
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
 								<Typography variant="body2">
-									{organization?.organization_metadata?.website || 'acrocalypse.xyz'}
+									{organization?.organization_metadata?.website || 'gamedao.co'}
 								</Typography>
 							</Stack>
 						</Stack>

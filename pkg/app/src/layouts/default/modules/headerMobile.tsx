@@ -15,7 +15,7 @@ import { NavbarMobile } from 'layouts/default/modules/navbarMobile'
 import { AccountSelector, FontIcons } from 'src/components'
 import { NavLink } from 'components/NavLink/navLink'
 
-const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
+const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void

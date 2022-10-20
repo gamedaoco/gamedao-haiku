@@ -18,7 +18,7 @@ import {
 	Stack,
 	Typography,
 	Toolbar,
-	MenuItem
+	MenuItem,
 } from '@mui/material'
 
 import { FontIcons } from 'src/components'
@@ -99,49 +99,48 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 				},
 			}}
 		>
-
-				<Toolbar
+			<Toolbar
+				sx={{
+					// backgroundColor: `#00000099`,
+					// backgroundColor: theme.palette.background.default,
+					// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					position: 'relative',
+					height: '90px',
+				}}
+			>
+				<Box></Box>
+				<Box
 					sx={{
-						// backgroundColor: `#00000099`,
-						// backgroundColor: theme.palette.background.default,
-						// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
-						justifyContent: 'space-between',
+						display: 'flex',
 						alignItems: 'center',
-						position: 'relative',
-						height: '90px',
+						position: 'absolute',
+						transform: 'translateX(-50%)',
+						left: '50%',
 					}}
 				>
-					<Box></Box>
-					<Box
-						sx={{
-							display: 'flex',
-							alignItems: 'center',
-							position: 'absolute',
-							transform: 'translateX(-50%)',
-							left: '50%',
-						}}
-					>
-						<MenuItem>
-							<Link href="/">
-								<Typography>
-									<Logo />
-								</Typography>
-							</Link>
-						</MenuItem>
-					</Box>
-					<Button
-						onClick={onClose}
-						aria-label="Menu"
-						sx={{
-							color: theme.palette.text.primary,
-							borderRadius: 2,
-							minWidth: 'auto',
-							padding: 1,
-						}}
-					>
-						<Close />
-					</Button>
-				</Toolbar>
+					<MenuItem>
+						<Link href="/">
+							<Typography>
+								<Logo />
+							</Typography>
+						</Link>
+					</MenuItem>
+				</Box>
+				<Button
+					onClick={onClose}
+					aria-label="Menu"
+					sx={{
+						color: theme.palette.text.primary,
+						borderRadius: 2,
+						minWidth: 'auto',
+						padding: 1,
+					}}
+				>
+					<Close />
+				</Button>
+			</Toolbar>
 
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
@@ -175,7 +174,7 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 						</Button>
 					</Box>
 
-{/*					<Stack direction="row" spacing={4}>
+					{/*					<Stack direction="row" spacing={4}>
 						<Link href="https://discord.gg/P7NHWGzJ7r">
 							<SiDiscord size="25" />
 						</Link>

@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 
 import Head from 'next/head'
 import { useConfig } from 'hooks/useConfig'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
 
@@ -30,6 +31,8 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 	})
 	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 
+	const connected = useCurrentAccountAddress()
+
 	const toggleSidebar = useCallback(() => {
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
@@ -53,7 +56,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 
 				<Box>
 					<Stack direction="row" spacing={0} sx={{ minHeight: `calc( 100vh - 90px )` }}>
-						{showSidebar && (isMd || sidebarOpen) && (
+						{showSidebar && (isMd || sidebarOpen) && connected && (
 							<Box sx={{ minWidth: 90, minHeight: `calc( 100vh - 90px )` }}>
 								<Sidebar />
 							</Box>
@@ -64,9 +67,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 						) : (
 							<Box p={[2, 4]} style={{ width: '100%', minHeight: `calc( 100vh - 90px )` }}>
 								<Box component="main" sx={{ flexGrow: 1 }}>
-									<Container maxWidth="xl">
-										{children}
-									</Container>
+									<Container maxWidth="xl">{children}</Container>
 								</Box>
 							</Box>
 						)}

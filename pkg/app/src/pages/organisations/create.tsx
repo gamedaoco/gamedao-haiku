@@ -10,30 +10,28 @@ export function CreateOrganisationPage() {
 	const { t } = useTranslation()
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
+			<Box sx={{ mb: 4 }}>
+				<Grid container justifyContent="space-between" spacing={3}>
+					<Grid item>
+						<Typography variant="h3">{t('page:organisations:create')}</Typography>
+					</Grid>
+					<Grid item></Grid>
+				</Grid>
+			</Box>
 
-					<Box sx={{ mb: 4 }}>
-						<Grid container justifyContent="space-between" spacing={3}>
-							<Grid item>
-								<Typography variant="h3">{t('page:organisations:create')}</Typography>
-							</Grid>
-							<Grid item></Grid>
-						</Grid>
-					</Box>
+			<Box justifyContent="center" alignItems="center">
+				<Stack spacing={[4, 6]} minWidth={['100%', '40vw']}>
+					<Stepper activeStep={activeStep}>
+						{[1, 2, 3].map((step) => (
+							<Step key={step}>
+								<StepLabel />
+							</Step>
+						))}
+					</Stepper>
 
-					<Box justifyContent="center" alignItems="center">
-						<Stack spacing={[4, 6]} minWidth={['100%', '40vw']}>
-							<Stepper activeStep={activeStep}>
-								{[1, 2, 3].map((step) => (
-									<Step key={step}>
-										<StepLabel />
-									</Step>
-								))}
-							</Stepper>
-
-							<Form currentStep={activeStep} setStep={setActiveStep} />
-						</Stack>
-					</Box>
-
+					<Form currentStep={activeStep} setStep={setActiveStep} />
+				</Stack>
+			</Box>
 		</Layout>
 	)
 }
