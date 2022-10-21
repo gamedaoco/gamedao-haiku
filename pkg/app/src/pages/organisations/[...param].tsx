@@ -171,13 +171,16 @@ export function OrganisationById() {
 				{(!loading && data) || !organizationIdState ? (
 					<Stack spacing={4}>
 						<Paper
+							variant={'glass'}
 							sx={{
 								position: 'relative',
+								background: '#000000aa',
+								backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), #000000aa)`,
 							}}
 						>
 							<Stack
 								direction={isMd ? 'row' : 'column'}
-								spacing={4}
+								spacing={2}
 								alignItems="center"
 								justifyContent={isMd ? 'flex-start' : 'center'}
 								sx={{
@@ -211,8 +214,7 @@ export function OrganisationById() {
 											width: '7rem',
 											height: '7rem',
 											backgroundColor: theme.palette.background.default,
-											// outline: `1px dashed ${theme.palette.grey['500']} !important`,
-											outlineOffset: '5px',
+											outline: `5px solid #000000aa`,
 											cursor: 'pointer',
 										})}
 										srcSet={
@@ -241,16 +243,12 @@ export function OrganisationById() {
 									}}
 									direction="row"
 								>
-									<Stack spacing={1} sx={{ flex: 0.9 }}>
-										<Typography
-											variant="h4"
-											sx={{
-												whiteSpace: 'nowrap',
-											}}
-										>
+									<Stack spacing={0} sx={{ flex: 0.9 }}>
+										<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
 											{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
 										</Typography>
 										<Typography
+											// variant='small'
 											sx={{
 												whiteSpace: 'nowrap',
 											}}
@@ -276,6 +274,7 @@ export function OrganisationById() {
 */}
 								</Stack>
 							</Stack>
+
 							<Grid
 								height={isMd ? '20vh' : '40vh'}
 								width="100%"
@@ -314,9 +313,18 @@ export function OrganisationById() {
 												config.IPFS_GATEWAY,
 											)}
 											alt="logo"
-											sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+											sx={{
+												borderRadius: Number(theme.shape.borderRadius) * 20,
+												position: 'absolute',
+												top: 0,
+												left: 0,
+												right: 0,
+												bottom: 0,
+											}}
 										/>
 									)}
+									{/*
+									 */}
 								</label>
 								<Box
 									sx={{
@@ -331,12 +339,15 @@ export function OrganisationById() {
 								></Box>
 							</Grid>
 
-							<Box sx={{ maxWidth: isMd ? '60%' : '100%', marginLeft: 'auto' }}>
+							<Box px={4}>
 								<Tabs
-									variant="scrollable"
+									// variant="scrollable"
+									// scrollButtons="auto"
+									fullWidth={true}
+									// indicatorColor="secondary"
+									centered
 									value={activeStep}
 									onChange={(_, value) => handleTabSelect(value)}
-									scrollButtons="auto"
 								>
 									<Tab label={t('button:navigation:overview')} value={'dashboard'} />
 									<Tab
@@ -367,6 +378,7 @@ export function OrganisationById() {
 								</Tabs>
 							</Box>
 						</Paper>
+
 						<TabPanel value={'dashboard'}>
 							{organizationIdState ? (
 								<Overview
@@ -383,6 +395,7 @@ export function OrganisationById() {
 								<TmpOverview />
 							)}
 						</TabPanel>
+
 						<TabPanel value={'campaigns'}>
 							{organizationIdState ? (
 								<CampaignOverview
@@ -393,14 +406,16 @@ export function OrganisationById() {
 								<TmpOverview />
 							)}
 						</TabPanel>
-						<TabPanel value={'treasury'}>
+
+						<TabPanel value={'treasury'} variant={'glass'}>
 							{organizationState && (
 								<Typography>
 									{t('label:treasury_address', { address: organizationState.treasury })}
 								</Typography>
 							)}
 						</TabPanel>
-						<TabPanel value={'proposals'}>
+
+						<TabPanel value={'proposals'} variant={'glass'}>
 							{proposalIdState && organizationState ? (
 								<ProposalDetail
 									organization={organizationState}
@@ -412,9 +427,11 @@ export function OrganisationById() {
 								<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
 							)}
 						</TabPanel>
+
 						<TabPanel value={'members'}>
 							<OrganizationMembersTable organizationState={organizationState} />
 						</TabPanel>
+
 						<TabPanel value={'settings'}>
 							<SettingsOverview organizationState={organizationState} />
 						</TabPanel>

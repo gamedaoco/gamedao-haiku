@@ -65,16 +65,16 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 			style={{
 				background: 'transparent',
 				boxShadow: 'none',
+				borderRadius: 0,
 				// zIndex: (theme) => theme.zIndex.drawer + 1,
 			}}
 		>
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
 			<Toolbar
 				sx={{
-					backgroundColor: `#00000099`,
 					// backgroundColor: `rgba(0,0,0,0.5)`,
-					// backgroundColor: theme.palette.background.default,
-					// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
+					// backgroundColor: theme.palette.primary,
+					borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					height: '90px',

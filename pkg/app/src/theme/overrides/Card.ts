@@ -16,7 +16,8 @@ export default function Card(theme: Theme) {
 					position: 'relative',
 					boxShadow: theme.customShadows.card,
 					borderRadius: Number(theme.shape.borderRadius) * 20,
-					borderColor: theme.palette.grey[500],
+					// borderColor: theme.palette.grey[500],
+					border: `1px solid #ffffff22`,
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
@@ -47,6 +48,7 @@ export default function Card(theme: Theme) {
 						backgroundColor: `#00000011`, //theme.palette.background.neutral,
 						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
 						backdropFilter: `blur(10px)`,
+						border: `1px solid #ffffff11`,
 					},
 				},
 			],

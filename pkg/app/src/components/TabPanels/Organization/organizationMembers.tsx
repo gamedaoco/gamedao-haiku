@@ -123,7 +123,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 	}, [members])
 
 	return (
-		<Stack component={Paper} padding={4} spacing={2}>
+		<Stack component={Paper} padding={4} spacing={2} variant={'glass'}>
 			<Stack direction="row" spacing={1} justifyContent="space-between">
 				<Typography variant="h6">{t('label:members')}</Typography>
 			</Stack>
