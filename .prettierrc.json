@@ -11,11 +11,11 @@
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
     "<THIRD_PARTY_MODULES>",
+    "^utils/(.*)$",
+    "^@fontsource/(.*)$",
     "next-seo.config", 
     "^components/(.*)$",
-    "^utils/(.*)$",
     "^assets/(.*)$",
-    "^@fontsource/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,

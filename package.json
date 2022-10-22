@@ -20,7 +20,8 @@
     "build:frontend": "yarn workspace @gamedao-haiku/app build",
     "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",
     "commit": "git-cz",
-    "analyze": "ANALYZE=true wsrun -p @gamedao-haiku/app -c build"
+    "analyze": "ANALYZE=true wsrun -p @gamedao-haiku/app -c build",
+    "sb": "wsrun -p @gamedao-haiku/app -c storybook"
   },
   "publishConfig": {
     "access": "public"
@@ -51,7 +52,6 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn format:verify"
     }
