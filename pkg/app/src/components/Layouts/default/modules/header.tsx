@@ -12,6 +12,8 @@ import { AccountSelector } from 'src/components'
 
 import { NavLink } from 'components/NavLink/navLink'
 
+import Feedback from 'components/Feedback'
+
 const Logo = () => <img src="/svg/g-col-wht-wide.svg" height="16px" />
 
 interface ComponentProps {
@@ -74,6 +76,7 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
+					<Feedback />
 					<AccountSelector />
 					<Box sx={{ display: { xs: 'block', md: 'none' } }} marginLeft={4}>
 						<Button
