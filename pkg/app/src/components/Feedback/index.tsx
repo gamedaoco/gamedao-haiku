@@ -14,7 +14,7 @@ import Button from '@mui/material/Button'
 import Message from '@mui/icons-material/ChatBubbleOutline'
 import Tooltip from '@mui/material/Tooltip'
 
-interface FlyoutProps {
+interface ComponentProps {
 	anchorEl: Element
 	open: boolean
 	handleClose: () => void
