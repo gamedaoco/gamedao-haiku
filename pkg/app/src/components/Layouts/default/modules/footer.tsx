@@ -104,7 +104,7 @@ export function Footer() {
 								<Link href="https://fractal.id">fractal id</Link>
 								<br />
 								<Link href="https://github.com/gamedaoco">github</Link>
-								<Link href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Falphaville.zero.io#/explorer">
+								<Link href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fnode.dev.sub.zero.io#/explorer">
 									Polkadot Explorer
 								</Link>
 							</Typography>
