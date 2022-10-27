@@ -39,3 +39,5 @@ const productionEndpoints: Endpoints = [
 
 export const ENDPOINTS: Endpoints =
 	ENVIRONMENT === Environment.Development ? [...developmentEndpoints, ...productionEndpoints] : productionEndpoints
+
+export const getConnectedEndpoint = () => ENDPOINTS.find((e) => e.default)

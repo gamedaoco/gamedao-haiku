@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
-import { ENDPOINTS } from 'src/constants/endpoints'
+import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { FontIcons } from 'components/Icons/icons'
 
@@ -51,7 +51,7 @@ const SocialLinks = () => (
 
 export function Footer() {
 	const theme = useTheme()
-	const { chain } = ENDPOINTS.find((e) => e.default)
+	const { chain } = getConnectedEndpoint()
 
 	return (
 		<Box
