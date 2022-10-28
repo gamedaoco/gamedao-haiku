@@ -27,6 +27,7 @@ import { NavLink } from 'src/components'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
 import { formatAddressShort } from 'src/utils/address'
 import { isProposalActive } from 'src/utils/proposalUtils'
+import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
@@ -103,6 +104,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	})
 
 	const theme = useTheme()
+	const { chain } = getConnectedEndpoint()
 	const matches = useMediaQuery(theme.breakpoints.up('lg'))
 
 	const handleOpenTxModal = useCallback(() => {
@@ -267,7 +269,10 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 							<Typography variant="body2">{t('label:block_number')}</Typography>
 						</Box>
 						<NavLink
-							href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fbeeblebrox.zero.io%2Fnode#/explorer/query/${proposal.created_at_block}`}
+							href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
+								chain.toLowerCase(),
+							)}#/explorer/query/${proposal.created_at_block}`}
+							external={true}
 						>
 							<Stack direction="row" spacing={1}>
 								<Typography variant="body2">{proposal.created_at_block.toLocaleString()}</Typography>
