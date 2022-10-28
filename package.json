@@ -21,7 +21,8 @@
     "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",
     "commit": "git-cz",
     "analyze": "ANALYZE=true wsrun -p @gamedao-haiku/app -c build",
-    "sb": "wsrun -p @gamedao-haiku/app -c storybook"
+    "sb": "wsrun -p @gamedao-haiku/app -c storybook",
+    "reset": "rm -rf **/node_modules"
   },
   "publishConfig": {
     "access": "public"
