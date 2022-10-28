@@ -44,7 +44,9 @@ export async function initializeAccounts(
 
 		return {
 			w3Enabled: true,
+			// @ts-ignore
 			accounts,
+			// @ts-ignore
 			selectedAccount,
 			connectWallet: null,
 			disconnectWallet: null,
