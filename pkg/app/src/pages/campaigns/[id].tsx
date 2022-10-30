@@ -1,28 +1,31 @@
 import React, { SyntheticEvent, useCallback, useEffect, useMemo, useState } from 'react'
-
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
+import { useTheme } from '@mui/material/styles'
+import { filterXSS } from 'xss'
+
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useSystemProperties } from 'hooks/useSystemProperties'
+import { useCampaignByIdSubscription } from 'src/queries'
+
+import { Layout } from 'layouts/default/layout'
+import { NavLink } from 'src/components'
 
 import { ArrowBack } from '@mui/icons-material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Button, Paper, Tab, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useSystemProperties } from 'hooks/useSystemProperties'
-import { useTranslation } from 'react-i18next'
-import { NavLink } from 'src/components'
-import { Layout } from 'layouts/default/layout'
-import { useCampaignByIdSubscription } from 'src/queries'
-import { filterXSS } from 'xss'
 
 import { CampaignDetailsContent } from 'components/CampaignsSection/campaignDetailsContent'
 
 export function CampaignById() {
 	const { t } = useTranslation()
-	const theme = useTheme()
-	const systemProperties = useSystemProperties()
-	const address = useCurrentAccountAddress()
 	const { query } = useRouter()
 	const { back } = useRouter()
+	const theme = useTheme()
+
+	const systemProperties = useSystemProperties()
+	const address = useCurrentAccountAddress()
+
 	const [value, setValue] = useState<string>('overview')
 	const [campaignId, setCampaignId] = useState<string>(null)
 	const { data } = useCampaignByIdSubscription({

@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-
 import { useRouter } from 'next/router'
-
+import { useTranslation } from 'react-i18next'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
@@ -27,11 +28,9 @@ import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
 
-import { Image } from 'components/Image/image'
 import { Layout } from 'layouts/default/layout'
+import { Image } from 'components/Image/image'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
 import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
@@ -45,6 +44,7 @@ export function OrganisationById() {
 	const { query, push } = useRouter()
 	const theme = useTheme()
 	const config = useConfig()
+	const { t } = useTranslation()
 
 	const [routeState, setRouteState] = useState<string>(null)
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
@@ -52,14 +52,14 @@ export function OrganisationById() {
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const [isMemberState, setIsMemberState] = useState<boolean>(false)
+	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 
 	const { loading, data } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
 	})
-	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 	const addMemberTx = useAddMemberTransaction(organizationIdState)
 	const address = useCurrentAccountAddress()
-	const tmpOrg = useTmpOrganisationState()
+	const cache = useTmpOrganisationState()
 
 	const handleOpenTxModal = useCallback(() => {
 		setShowTxModalType(true)
@@ -89,7 +89,6 @@ export function OrganisationById() {
 		},
 		[organizationIdState, push],
 	)
-	const { t } = useTranslation()
 	const handleUploadImage = useCallback(async (event, setter) => {
 		const files = event.target.files
 		if (!files || files.length === 0) {
@@ -131,23 +130,23 @@ export function OrganisationById() {
 
 	// Update and upload metadata
 	useEffect(() => {
-		if (tmpOrg.name && tmpOrg.description && tmpOrg.logoCID && tmpOrg.headerCID) {
+		if (cache.name && cache.description && cache.logoCID && cache.headerCID) {
 			const metaData = {
-				name: tmpOrg.name,
-				description: tmpOrg.description,
-				logo: tmpOrg.logoCID,
-				header: tmpOrg.headerCID,
+				name: cache.name,
+				description: cache.description,
+				logo: cache.logoCID,
+				header: cache.headerCID,
 			}
 			;(async (): Promise<string> => {
-				const file = new File([JSON.stringify(metaData)], `${tmpOrg.name}-metadata.json`, {
+				const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 					type: 'text/plain',
 				})
 
 				const cid = await uploadFileToIpfs(file)
 				return cid.toString()
-			})().then((cid) => tmpOrg.setMetaDataCID(cid))
+			})().then((cid) => cache.setMetaDataCID(cid))
 		}
-	}, [tmpOrg.name, tmpOrg.description, tmpOrg.logoCID, tmpOrg.headerCID])
+	}, [cache.name, cache.description, cache.logoCID, cache.headerCID])
 
 	useEffect(() => {
 		if (data) {
@@ -161,12 +160,14 @@ export function OrganisationById() {
 		}
 	}, [organizationState, address])
 
+	console.log('data', data)
+
 	return (
 		<Layout
 			showHeader
 			showFooter
 			showSidebar
-			title={organizationState?.organization_metadata?.name ?? tmpOrg.name ?? t('page:organisations:title')}
+			title={organizationState?.organization_metadata?.name ?? cache.name ?? t('page:organisations:title')}
 		>
 			<TabContext value={activeStep}>
 				{(!loading && data) || !organizationIdState ? (
@@ -208,7 +209,7 @@ export function OrganisationById() {
 										id="logo-file-upload"
 										type="file"
 										disabled={!!organizationIdState}
-										onChange={(event) => handleUploadImage(event, tmpOrg.setLogoCID)}
+										onChange={(event) => handleUploadImage(event, cache.setLogoCID)}
 									/>
 									<Avatar
 										sx={(theme) => ({
@@ -219,10 +220,9 @@ export function OrganisationById() {
 											cursor: 'pointer',
 										})}
 										srcSet={
-											organizationState?.organization_metadata?.logo || tmpOrg.logoCID?.length
+											organizationState?.organization_metadata?.logo || cache.logoCID?.length
 												? parseIpfsHash(
-														organizationState?.organization_metadata?.logo ||
-															tmpOrg.logoCID,
+														organizationState?.organization_metadata?.logo || cache.logoCID,
 														config.IPFS_GATEWAY,
 												  )
 												: null
@@ -246,7 +246,7 @@ export function OrganisationById() {
 								>
 									<Stack spacing={0} sx={{ flex: 0.9 }}>
 										<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
-											{organizationState?.organization_metadata?.name ?? tmpOrg.name ?? ''}
+											{organizationState?.organization_metadata?.name ?? cache.name ?? ''}
 										</Typography>
 										<Typography
 											// variant='small'
@@ -301,16 +301,16 @@ export function OrganisationById() {
 										id="header-file-upload"
 										type="file"
 										disabled={!!organizationIdState}
-										onChange={(event) => handleUploadImage(event, tmpOrg.setHeaderCID)}
+										onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
 									/>
-									{!organizationState?.organization_metadata?.header && !tmpOrg.headerCID?.length ? (
+									{!organizationState?.organization_metadata?.header && !cache.headerCID?.length ? (
 										<Box display="grid" justifyContent="center" alignItems="center">
 											<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
 										</Box>
 									) : (
 										<Image
 											src={parseIpfsHash(
-												organizationState?.organization_metadata?.header ?? tmpOrg.headerCID,
+												organizationState?.organization_metadata?.header ?? cache.headerCID,
 												config.IPFS_GATEWAY,
 											)}
 											alt="logo"
@@ -409,7 +409,7 @@ export function OrganisationById() {
 							)}
 						</TabPanel>
 
-						<TabPanel value={'treasury'} variant={'glass'}>
+						<TabPanel value={'treasury'}>
 							{organizationState && (
 								<Typography>
 									{t('label:treasury_address', { address: organizationState.treasury })}
@@ -417,7 +417,7 @@ export function OrganisationById() {
 							)}
 						</TabPanel>
 
-						<TabPanel value={'proposals'} variant={'glass'}>
+						<TabPanel value={'proposals'}>
 							{proposalIdState && organizationState ? (
 								<ProposalDetail
 									organization={organizationState}

@@ -59,7 +59,7 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 		setter(cid.toString())
 	}, [])
 
-	console.log('cache.bannerCID', cache.bannerCID)
+	console.log('cache', cache)
 
 	return (
 		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
@@ -76,7 +76,7 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 								accept="image/*"
 								id="header-file-upload"
 								type="file"
-								onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
+								onChange={(event) => handleUploadImage(event, cache.setBannerCid)}
 							/>
 							{cache.bannerCid || bannerCid ? (
 								<CardMedia

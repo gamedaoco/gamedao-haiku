@@ -40,6 +40,7 @@ const productionEndpoints: Endpoints = [
 		name: 'Mainnet',
 		url: 'https://graph.prod.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.prod.sub.zero.io/health',
+		chain: 'wss://node.prod.sub.zero.io',
 	},
 
 ]
