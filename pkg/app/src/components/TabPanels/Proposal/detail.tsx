@@ -27,6 +27,7 @@ import { NavLink } from 'src/components'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
 import { formatAddressShort } from 'src/utils/address'
 import { isProposalActive } from 'src/utils/proposalUtils'
+import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
@@ -109,6 +110,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	// console.log( 'useConfig', config, sp )
 
 	const theme = useTheme()
+	const { chain } = getConnectedEndpoint()
 	const matches = useMediaQuery(theme.breakpoints.up('lg'))
 
 	const handleOpenTxModal = useCallback(() => {
@@ -278,7 +280,10 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						{/* TODO: get ws url for connected network */}
 
 						<NavLink
-							href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fnode.dev.sub.zero.io%2Fnode#/explorer/query/${proposal.created_at_block}`}
+							href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
+								chain.toLowerCase(),
+							)}#/explorer/query/${proposal.created_at_block}`}
+							external={true}
 						>
 							<Stack direction="row" spacing={1}>
 								<Typography variant="body2">{proposal.expiry.toLocaleString()}</Typography>

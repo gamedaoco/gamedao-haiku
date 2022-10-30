@@ -33,6 +33,7 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 import { Image } from 'components/Image/image'
 import { Layout } from 'layouts/default/layout'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
+import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
 import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
 import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
@@ -360,6 +361,7 @@ export function OrganisationById() {
 										value={'proposals'}
 										disabled={!organizationIdState}
 									/>
+
 									<Tab
 										label={t('button:navigation:members')}
 										value={'members'}

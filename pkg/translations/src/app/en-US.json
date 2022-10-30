@@ -137,7 +137,11 @@
     "member": "Member",
     "joined": "Joined",
     "open": "Open",
-    "invitation": "Invitation"
+    "invitation": "Invitation",
+    "currency": "Currency",
+    "source": "Source",
+    "type": "Type",
+    "hash": "Hash"
   },
   "transactions": {
     "createOrganization": {
@@ -355,7 +359,19 @@
         "web3": "Web3",
         "collectables": "Collectables",
         "content_creators": "Content Creators"
+      },
+      "treasury": {
+        "assets": "All Assets",
+        "transactions_income": "Transaction History - Income",
+        "transactions_outgoing": "Transaction History - Outgoing",
+        "total": "Total",
+        "income": "Income",
+        "outgoing": "Outgoing",
+        "treasury_balance": "Treasury Balance",
+        "treasury_by_year": "Treasury by Year",
+        "than_last_year": "than last year"
       }
+    
     },
     "campaigns": {
       "created_campaigns": "Created Campaigns",

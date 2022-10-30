@@ -257,7 +257,7 @@ export function Overview({
 								</Stack>
 							)}
 
-							{organization?.member_limit && (
+							{(organization?.member_limit || organization?.member_limit === 0) && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
 									<Stack direction="column">
