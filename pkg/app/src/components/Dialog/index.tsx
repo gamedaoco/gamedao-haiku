@@ -9,19 +9,22 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 interface ComponentProps {
 	state: boolean
-	callback: typeof Function
 	title?: string
 	message?: string
 	buttonText?: string
 }
 
-export default function AlertDialog({ state = false, callback, title, message, buttonText }: ComponentProps) {
+export default function AlertDialog({ state = false, title, message, buttonText }: ComponentProps) {
 	const [open, setOpen] = React.useState(state)
+
+	const handleClose = () => {
+		setOpen(false)
+	}
 
 	return (
 		<Dialog
 			open={open}
-			onClose={callback}
+			onClose={handleClose}
 			aria-labelledby="alert-dialog-title"
 			aria-describedby="alert-dialog-description"
 		>
@@ -30,7 +33,7 @@ export default function AlertDialog({ state = false, callback, title, message, b
 				<DialogContentText id="alert-dialog-description">{message || ''}</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={callback} autoFocus>
+				<Button onClick={handleClose} autoFocus>
 					{buttonText || 'Dismiss'}
 				</Button>
 			</DialogActions>
