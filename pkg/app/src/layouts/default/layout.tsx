@@ -24,13 +24,12 @@ interface ComponentProps {
 const SITE_NAME = 'GameDAO'
 
 export function Layout({ showHeader, showFooter, showSidebar, children, noContainer, title }: ComponentProps) {
+	const [sidebarOpen, setOpenSidebar] = useState<boolean>(true)
 	const config = useConfig()
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
-	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
-
 	const connected = useCurrentAccountAddress()
 
 	const toggleSidebar = useCallback(() => {

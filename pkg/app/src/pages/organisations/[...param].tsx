@@ -344,7 +344,7 @@ export function OrganisationById() {
 								<Tabs
 									// variant="scrollable"
 									// scrollButtons="auto"
-									fullWidth={true}
+									// fullWidth={true}
 									// indicatorColor="secondary"
 									centered
 									value={activeStep}

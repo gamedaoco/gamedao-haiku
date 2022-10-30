@@ -13,9 +13,9 @@ const Component = ({ href, target, children }: Props) => {
 			{children}
 		</a>
 	) : (
-		<a>
+		<>
 			<Link href={href}>{children}</Link>
-		</a>
+		</>
 	)
 }
 

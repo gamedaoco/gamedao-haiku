@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { useLogger } from 'hooks/useLogger'
-import { useSystemProperties } from 'hooks/useSystemProperties'
+import { useLogger } from 'src/hooks/useLogger'
+import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useBalanceByAddressSubscription } from 'src/queries'
 import { formatBalanceString } from 'src/utils/balance'
 

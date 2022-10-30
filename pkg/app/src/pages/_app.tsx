@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
 import { AppProps } from 'next/app'
-// import { NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+
 import * as Fathom from 'fathom-client'
 
-import { CacheProvider, EmotionCache } from '@emotion/react'
+import { Providers } from 'src/providers'
 import { useConfig } from 'hooks/useConfig'
 import { Logger } from 'lib/logger'
-// Toastify styles + custom styles overrides
-import 'react-toastify/dist/ReactToastify.css'
-import { Providers } from 'src/provider/provider'
+
 import createEmotionCache from 'src/theme/createEmotionCache'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import 'react-toastify/dist/ReactToastify.css'
 import 'src/theme/css/toastify.css'
 import 'src/theme/css/modelViewer.css'
 

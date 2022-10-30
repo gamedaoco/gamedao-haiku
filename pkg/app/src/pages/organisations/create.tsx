@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { Container, Box, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import { Layout } from 'layouts/default/layout'
 import { Form } from 'components/Forms/Organization/form'
-import { Container, Box, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
 
 export function CreateOrganisationPage() {
 	const [activeStep, setActiveStep] = useState<number>(0)

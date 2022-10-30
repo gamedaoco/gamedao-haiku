@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { AppContext } from 'provider/app/modules/context'
+import { AppContext } from 'providers/app/modules/context'
 import { ENVIRONMENT } from 'src/constants'
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 

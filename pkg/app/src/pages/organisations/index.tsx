@@ -1,13 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
 import { useRouter } from 'next/router'
-
-import { Add, ArrowDownward } from '@mui/icons-material'
-import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
-import { useExtensionContext } from 'provider/extension/modules/context'
 import { useTranslation } from 'react-i18next'
-import { Layout } from 'layouts/default/layout'
+
+import { useExtensionContext } from 'providers/extension/modules/context'
+import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
 import {
 	Organization,
 	Organization_Order_By,
@@ -16,6 +12,9 @@ import {
 	useOrganizationsPaginationSubscription,
 } from 'src/queries'
 
+import { Add, ArrowDownward } from '@mui/icons-material'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
+import { Layout } from 'layouts/default/layout'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
@@ -31,13 +30,15 @@ interface FiltersInterface {
 
 export function OrganisationPage() {
 	const { t } = useTranslation()
-	const enabledFeature = useOrganizationFeatures()
+
 	const [filters, setFilters] = useState<FiltersInterface>({
 		query: '',
 		sortOption: null,
 		filters: {},
 	})
 	const [bodyCount, setBodyCount] = useState<number>(15)
+
+	const enabledFeature = useOrganizationFeatures()
 	const { data } = useDisplayValuesQuery()
 	const organizationsCount = useOrganizationsPaginationCountSubscription({
 		variables: { searchQuery: `%${filters.query ?? ''}%` },
@@ -45,6 +46,7 @@ export function OrganisationPage() {
 	const organizationsData = useOrganizationsPaginationSubscription({
 		variables: { first: bodyCount, orderBy: filters.sortOption, searchQuery: `%${filters.query ?? ''}%` },
 	})
+
 	const loading = organizationsCount?.loading || organizationsData?.loading
 
 	useEffect(() => {

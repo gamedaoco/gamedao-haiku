@@ -7,7 +7,7 @@ import { Add as AddIcon } from '@mui/icons-material'
 import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useExtensionContext } from 'provider/extension/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
 import { useSidebarSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
@@ -17,16 +17,16 @@ interface ComponentProps {
 	showHeader?: boolean
 	onClose?: () => void
 	open?: boolean
-	variant?: 'permanent' | 'persistent' | 'temporary' | undefined
 }
 
 const log = Logger('HAIKU')
 
-export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) {
+export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 	const theme = useTheme()
 	const address = useCurrentAccountAddress()
 	const { push } = useRouter()
 	const { w3Enabled, connectWallet, selectedAccount } = useExtensionContext()
+
 	const { error, loading, data } = useSidebarSubscription({ variables: { address } })
 
 	const buttonCallback = useCallback(() => {
@@ -46,8 +46,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 
 	return (
 		<Stack
-			pt={2}
-			pb={3}
+			py={3}
 			alignItems="center"
 			height="100%"
 			width="100%"
@@ -56,7 +55,7 @@ export function Sidebar({ showHeader, onClose, open, variant }: ComponentProps) 
 			{(loading || (data?.organization && selectedAccount)) && (
 				<Stack
 					spacing={2}
-					py={2}
+					pb={2}
 					width={'100%'}
 					alignItems="center"
 					sx={{

@@ -1,8 +1,8 @@
-import { AppProvider } from 'provider/app/appProvider'
-import { GraphQlProvider } from 'provider/graphQl/graphQlProvider'
-import { LanguageProvider } from 'provider/language/languageProvider'
-import { ReadyProvider } from 'provider/ready/readyProvider'
-import { ThemeProvider } from 'provider/theme/themeProvider'
+import { AppProvider } from 'providers/app/appProvider'
+import { GraphQlProvider } from 'providers/graphQl/graphQlProvider'
+import { LanguageProvider } from 'providers/language/languageProvider'
+import { ReadyProvider } from 'providers/ready/readyProvider'
+import { ThemeProvider } from 'providers/theme/themeProvider'
 
 import { ExtensionProvider } from './extension/extensionProvider'
 import { NetworkProvider } from './network/networkProvider'
@@ -27,3 +27,5 @@ export function Providers({ children }) {
 		</SettingsProvider>
 	)
 }
+
+export default Providers

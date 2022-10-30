@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 import { CircularProgress, Stack, Typography } from '@mui/material'
-import { useAppContext } from 'provider/app/modules/context'
+import { useAppContext } from 'providers/app/modules/context'
 
 interface ComponentProps {
 	children: ReactNode

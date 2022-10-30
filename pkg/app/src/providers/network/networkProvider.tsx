@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { useAppContext } from 'provider/app/modules/context'
-import { initializeApis, keepAlive } from 'provider/network/modules/network'
+import { useAppContext } from 'providers/app/modules/context'
+import { initializeApis, keepAlive } from 'providers/network/modules/network'
 import type { ApiProvider } from 'src/@types/network'
 
 import { NetworkContext } from './modules/context'

@@ -8,8 +8,8 @@ import {
 	SportsEsportsOutlined as Topic,
 } from '@mui/icons-material'
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
-import { useExtensionContext } from 'provider/extension/modules/context'
-import { useGraphQlContext } from 'provider/graphQl/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
+import { useGraphQlContext } from 'providers/graphQl/modules/context'
 
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
