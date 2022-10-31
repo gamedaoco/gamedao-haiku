@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 
 import type { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import type { ISubmittableResult } from '@polkadot/types/types'
-import { useExtensionContext } from 'provider/extension/modules/context'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import type { PromiseMsg } from 'src/@types/promiseMsg'
 import { TFunction } from 'i18next'
 

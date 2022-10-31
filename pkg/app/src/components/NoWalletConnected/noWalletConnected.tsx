@@ -1,9 +1,7 @@
 import { useCallback } from 'react'
-
-import { Button, Paper, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
+import { Button, Paper, Stack, Typography } from '@mui/material'
 
 export function NoWalletConnected() {
 	const openUrl = useCallback((url: string) => {

@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 
 import { Box, Button, useMediaQuery, useTheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useExtensionContext } from 'src/provider/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/modules/context'
 
 import { Flyout } from 'components/AccountSelector/modules/flyout'
 import { Selector } from 'components/AccountSelector/modules/selector'

@@ -19,7 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
 import { useConfig } from 'hooks/useConfig'
 import moment from 'moment'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { CREATE_PROPOSAL_TYPE_TITLES, PROPOSAL_KEYS } from 'src/constants/proposal'
 import {
@@ -257,8 +257,10 @@ export function Description({
 		)
 			return
 
-		setOrganization(organizationData.organization[0])
+		// setOrganization(organizationData.organization[0])
 	}, [organizationData])
+
+	// console.log( 'organizationData.organization[0]', organizationData?.organization[0] )
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
@@ -295,7 +297,7 @@ export function Description({
 							onChange={handleAmountChange}
 						/>
 						<Typography variant="h5" textAlign="center">
-							What’s the name of your proposal?
+							What’s the title of your proposal?
 						</Typography>
 					</>
 				)}
