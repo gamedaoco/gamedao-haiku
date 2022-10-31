@@ -20,7 +20,7 @@ import enLocale from 'date-fns/locale/en-US'
 import { useConfig } from 'hooks/useConfig'
 import { useDisplayValues } from 'hooks/useDisplayValues'
 import moment from 'moment'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 

@@ -5,7 +5,7 @@ import Verified from '@mui/icons-material/Verified'
 import { Avatar, Button, Card, Skeleton, Stack, Typography } from '@mui/material'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
-import { useExtensionContext } from 'provider/extension/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
 import type { AccountState } from 'src/@types/extension'
 import { getAccountName, getAddressFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
@@ -69,8 +69,8 @@ export function AccountCard({ accountState, active, selectable, callback }: Comp
 							}}
 							src={
 								identity?.email
-									? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
-									: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+									? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
+									: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
 							}
 						/>
 						<Stack>

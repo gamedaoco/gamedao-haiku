@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { AccountSelector } from 'src/components'
 
-import { NavLink } from 'components/NavLink/navLink'
+import { Link } from 'components/Link'
 
 import Feedback from 'components/Feedback'
 
@@ -58,18 +58,18 @@ export function Header({ onSidebarOpen }: ComponentProps) {
 				}}
 			>
 				<Box sx={{ display: 'flex', alignItems: 'center', height: '100%', paddingRight: '20px' }}>
-					<NavLink href="/">
+					<Link href="/">
 						<Logo />
-					</NavLink>
+					</Link>
 				</Box>
 
 				<Stack direction="row" alignItems="center" spacing={4} minWidth="50%">
 					{urls.map((navItem) => {
 						return (
 							<Fragment key={navItem.name}>
-								<NavLink href={navItem.path} external={navItem.external}>
+								<Link href={navItem.path} external={navItem.external}>
 									<Typography sx={{ cursor: 'pointer' }}>{t(navItem.name)}</Typography>
-								</NavLink>
+								</Link>
 							</Fragment>
 						)
 					})}

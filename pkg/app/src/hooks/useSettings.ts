@@ -1,3 +1,3 @@
-import { useSettingsContext } from 'src/provider/settings/modules/context'
+import { useSettingsContext } from 'src/providers/settings/modules/context'
 
 export const useSettings = useSettingsContext

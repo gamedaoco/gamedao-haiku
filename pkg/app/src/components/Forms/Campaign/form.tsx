@@ -86,6 +86,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 				)
 
 				const cid = await uploadFileToIpfs(file)
+				console.log('cid', cid)
 				tmpCampaignState.setMetadataCid(cid.toString())
 			})()
 		}

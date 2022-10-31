@@ -40,21 +40,24 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 							}}
 						>
 							<Avatar
-								sx={{ height: 42, width: 42 }}
-								src={`https://avatars.dicebear.com/api/pixel-art-neutral/${md5(
+								sx={{ height: 48, width: 48 }}
+								src={`https://avatars.dicebear.com/api/pixel-art/${md5(
 									params?.row?.email || params?.row?.address,
 								)}.svg`}
 							/>
 
-							<Box sx={{ ml: 1 }}>
-								{params.row.name}
-								<Box sx={{ display: 'flex', alignItems: 'center' }}>
-									{params.row.email && <Verified color="disabled" />}
-									<Typography color="textSecondary" variant="body2" sx={{ mr: 0.2 }}>
-										{params.row.address}
-									</Typography>
-								</Box>
-							</Box>
+							<Stack sx={{ ml: 1 }}>
+								<Typography variant="h6">
+									{params.row.name}
+									&nbsp;
+									{params.row.email && (
+										<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
+									)}
+								</Typography>
+								<Stack direction="row" alignItems="center" spacing={0.5} pr={2}>
+									<Typography variant="body2">{params.row.address}</Typography>
+								</Stack>
+							</Stack>
 						</Box>
 					)
 				},
@@ -120,7 +123,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 	}, [members])
 
 	return (
-		<Stack component={Paper} padding={4} spacing={2}>
+		<Stack component={Paper} padding={4} spacing={2} variant={'glass'}>
 			<Stack direction="row" spacing={1} justifyContent="space-between">
 				<Typography variant="h6">{t('label:members')}</Typography>
 			</Stack>

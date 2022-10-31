@@ -64,6 +64,7 @@ subscription OrganizationById($orgId: String!) {
                 count
             }
             nodes {
+                id
                 state
             }
         }

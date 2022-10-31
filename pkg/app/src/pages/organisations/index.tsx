@@ -1,13 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
 import { useRouter } from 'next/router'
-
-import { Add, ArrowDownward } from '@mui/icons-material'
-import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
-import { useExtensionContext } from 'provider/extension/modules/context'
 import { useTranslation } from 'react-i18next'
-import { Layout } from 'src/components/Layouts/default/layout'
+
+import { useExtensionContext } from 'providers/extension/modules/context'
+import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
 import {
 	Organization,
 	Organization_Order_By,
@@ -16,6 +12,9 @@ import {
 	useOrganizationsPaginationSubscription,
 } from 'src/queries'
 
+import { Add, ArrowDownward } from '@mui/icons-material'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
+import { Layout } from 'layouts/default/layout'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
@@ -28,15 +27,18 @@ interface FiltersInterface {
 	sortOption: Organization_Order_By
 	filters: any
 }
+
 export function OrganisationPage() {
 	const { t } = useTranslation()
-	const enabledFeature = useOrganizationFeatures()
+
 	const [filters, setFilters] = useState<FiltersInterface>({
 		query: '',
 		sortOption: null,
 		filters: {},
 	})
 	const [bodyCount, setBodyCount] = useState<number>(15)
+
+	const enabledFeature = useOrganizationFeatures()
 	const { data } = useDisplayValuesQuery()
 	const organizationsCount = useOrganizationsPaginationCountSubscription({
 		variables: { searchQuery: `%${filters.query ?? ''}%` },
@@ -44,6 +46,7 @@ export function OrganisationPage() {
 	const organizationsData = useOrganizationsPaginationSubscription({
 		variables: { first: bodyCount, orderBy: filters.sortOption, searchQuery: `%${filters.query ?? ''}%` },
 	})
+
 	const loading = organizationsCount?.loading || organizationsData?.loading
 
 	useEffect(() => {
@@ -71,79 +74,76 @@ export function OrganisationPage() {
 
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
-			<Box
-				component="main"
-				sx={{
-					flexGrow: 1,
-					py: 8,
-				}}
-			>
-				<Container maxWidth="xl">
-					<Box sx={{ mb: 4 }}>
-						<Grid container justifyContent="space-between" spacing={3}>
-							<Grid item>
-								<Typography variant="h3">{t('page:organisations:title')}</Typography>
-							</Grid>
-							<Grid item>
-								<Button
-									startIcon={<Add fontSize="small" />}
-									variant="outlined"
-									onClick={handleClickCreate}
-								>
-									{t('button:ui:create')}
-								</Button>
-							</Grid>
-						</Grid>
-						<FiltersSection
-							setFilters={setFilters}
-							filters={filters.filters}
-							sortOptions={data?.displayValues?.organizationSortOptions?.concat([])}
-							showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
-							showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
-							showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
-							searchPlaceHolder={t('page:organisations:search_place_holder')}
-							ListTab={OrganizationFiltersListTab}
-						/>
-					</Box>
+			<Box sx={{ mb: 2 }}>
+				<Grid container justifyContent="space-between" spacing={3}>
+					<Grid item>
+						<Typography variant="h3">{t('page:organisations:title')}</Typography>
+					</Grid>
+					<Grid item>
+						<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleClickCreate}>
+							{t('button:ui:create')}
+						</Button>
+					</Grid>
+				</Grid>
+			</Box>
+
+			{organizationsCount?.data?.organization_aggregate?.aggregate.count > 0 ? (
+				<>
+					<FiltersSection
+						setFilters={setFilters}
+						filters={filters.filters}
+						sortOptions={data?.displayValues?.organizationSortOptions?.concat([])}
+						showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
+						showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
+						showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
+						searchPlaceHolder={t('page:organisations:search_place_holder')}
+						ListTab={OrganizationFiltersListTab}
+					/>
+
 					{paginatedData?.length === 0 && !loading && (
-						<Box sx={{ mt: 2, mb: 4 }}>
+						<Box sx={{ mb: 4 }}>
 							<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
 							<Typography>{t('page:organisations:no_result', { query: filters?.query })}</Typography>
 						</Box>
 					)}
-					<ItemList items={paginatedData} loading={loading} />
-				</Container>
 
-				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								alignItems: 'center',
-								justifyContent: 'center',
-								gap: 1.5,
-							}}
-						>
-							{buttonVisibility && (
-								<Button
-									endIcon={<ArrowDownward />}
-									onClick={() => setBodyCount((p) => p + 30)}
-									variant="outlined"
-								>
-									{t('page:organisations:load_more')}
-								</Button>
-							)}
-							<Typography>
-								{t('page:organisations:showing_results', {
-									count1: paginatedData?.length,
-									count2: organizationsCount?.data?.organization_aggregate?.aggregate.count,
-								})}
-							</Typography>
+					<Box sx={{ mb: 4 }}>
+						<ItemList items={paginatedData} loading={loading} />
+					</Box>
+
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+						<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'center',
+									justifyContent: 'center',
+									gap: 1.5,
+								}}
+							>
+								{buttonVisibility && (
+									<Button
+										endIcon={<ArrowDownward />}
+										onClick={() => setBodyCount((p) => p + 30)}
+										variant="outlined"
+									>
+										{t('page:organisations:load_more')}
+									</Button>
+								)}
+								<Typography>
+									{t('page:organisations:showing_results', {
+										count1: paginatedData?.length,
+										count2: organizationsCount?.data?.organization_aggregate?.aggregate.count,
+									})}
+								</Typography>
+							</Box>
 						</Box>
 					</Box>
-				</Box>
-			</Box>
+				</>
+			) : (
+				<>No Organisations yet — why not create one?</>
+			)}
 		</Layout>
 	)
 }

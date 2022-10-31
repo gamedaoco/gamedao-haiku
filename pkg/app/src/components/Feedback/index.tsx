@@ -70,9 +70,9 @@ export const FeedbackButton = () => {
 
 	return (
 		<>
-			<Box sx={{ py: 1, mx: 2 }} ref={anchorRef}>
+			<Box sx={{ p: 0, m: 0 }} ref={anchorRef}>
 				<Button onClick={toggleFlyout} disabled={messageEnabled ? null : true}>
-					<Message />
+					<Message sx={{ fontSize: 20 }} />
 				</Button>
 			</Box>
 			<Backdrop

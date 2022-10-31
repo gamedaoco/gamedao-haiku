@@ -8,12 +8,12 @@ import {
 	SportsEsportsOutlined as Topic,
 } from '@mui/icons-material'
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
-import { useExtensionContext } from 'provider/extension/modules/context'
-import { useGraphQlContext } from 'provider/graphQl/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
+import { useGraphQlContext } from 'providers/graphQl/modules/context'
 
 import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
-import { NavLink } from 'components/NavLink/navLink'
+import Link from 'components/Link'
 
 interface ComponentProps {
 	anchorEl: Element
@@ -74,46 +74,46 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				<Divider />
 
 				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
-					<NavLink href={'/account'}>
+					<Link href={'/account'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Dashboard fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
-					</NavLink>
-					<NavLink href={'/organisations'}>
+					</Link>
+					<Link href={'/organisations'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Folder fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Organizations</Typography>
 						</MenuItem>
-					</NavLink>
-					<NavLink href={'/account/campaigns'}>
+					</Link>
+					<Link href={'/account/campaigns'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Topic fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Campaigns</Typography>
 						</MenuItem>
-					</NavLink>
-					<NavLink href={'/account/collectables'}>
+					</Link>
+					<Link href={'/account/collectables'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<NotificationsNone fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Collectables</Typography>
 						</MenuItem>
-					</NavLink>
-					<NavLink href={'/account/identity'}>
+					</Link>
+					<Link href={'/account/identity'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Settings fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Identity</Typography>
 						</MenuItem>
-					</NavLink>
+					</Link>
 					<MenuItem onClick={disconnectWallet as any} sx={{ p: 0 }}>
 						<ListItemIcon>
 							<Logout fontSize="small" />

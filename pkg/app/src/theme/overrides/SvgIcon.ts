@@ -1,7 +1,5 @@
 import { Theme } from '@mui/material/styles'
 
-// ----------------------------------------------------------------------
-
 export default function SvgIcon(theme: Theme) {
 	return {
 		MuiSvgIcon: {

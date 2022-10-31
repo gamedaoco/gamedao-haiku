@@ -157,12 +157,10 @@ export function Overview({
 		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
 	}, [organization?.organization_metadata?.description?.length])
 
-	console.log(proposalTypesCount)
-
 	return (
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
-				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }}>
+				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }} variant={'glass'}>
 					<Stack minHeight={307} spacing={1} padding={3}>
 						<Typography variant="h6" pb="1rem">
 							{t('page:organisations:about')}
@@ -179,7 +177,7 @@ export function Overview({
 						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1rem">
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<Label />
-								<Typography variant="body2">Tag1, Tag2, Tag3, ...</Typography>
+								<Typography variant="body2">Game, RPG, Desktop</Typography>
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<FmdGood />
@@ -192,7 +190,7 @@ export function Overview({
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
 								<Typography variant="body2">
-									{organization?.organization_metadata?.website || 'acrocalypse.xyz'}
+									{organization?.organization_metadata?.website || 'gamedao.co'}
 								</Typography>
 							</Stack>
 						</Stack>
@@ -233,7 +231,8 @@ export function Overview({
 						</Stack>
 					</Stack>
 				</Paper>
-				<Paper sx={{ width: { xs: '100%', md: '35%' }, minHeight: 284 }}>
+
+				<Paper sx={{ width: { xs: '100%', md: '35%' }, minHeight: 284 }} variant={'glass'}>
 					<Stack height="100%" spacing={1} padding={3}>
 						<Typography variant="h6">{t('page:organisations:organisations_rules')}</Typography>
 
@@ -293,6 +292,7 @@ export function Overview({
 						categories={categories}
 					/>
 				</Stack>
+
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('label:treasury')}</Typography>
@@ -309,6 +309,7 @@ export function Overview({
 					/>
 				</Stack>
 			</Stack>
+
 			<Stack
 				direction={{ xs: 'column', sm: 'row' }}
 				alignItems={{ xs: 'center', sm: 'flex-start' }}
@@ -322,7 +323,7 @@ export function Overview({
 							{t('button:ui:view_all')} <ChevronRight />
 						</Button>
 					</Stack>
-					<Paper sx={{ height: 174 }}>
+					<Paper sx={{ height: 174 }} variant={'glass'}>
 						<Stack
 							direction="row"
 							width="100%"
@@ -344,6 +345,7 @@ export function Overview({
 						</Stack>
 					</Paper>
 				</Stack>
+
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('page:organisations:votings')}</Typography>
@@ -351,7 +353,7 @@ export function Overview({
 							{t('button:ui:view_all')} <ChevronRight />
 						</Button>
 					</Stack>
-					<Paper sx={{ height: 174 }}>
+					<Paper sx={{ height: 174 }} variant={'glass'}>
 						<Stack direction="row" width="100%" height="100%" justifyContent="center" alignItems="center">
 							<DonutChart series={proposalTypesCount} />
 						</Stack>
