@@ -1,5 +1,16 @@
 import React, { Fragment, useCallback } from 'react'
 
+import {
+	RiShieldLine,
+	RiSwordLine,
+	RiTreasureMapLine,
+	RiVipDiamondLine,
+	RiBookOpenLine,
+	RiDropLine,
+	RiExchangeFundsLine,
+	RiAwardLine,
+} from 'react-icons/ri'
+
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material/styles'
@@ -37,14 +48,22 @@ const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
 		path: '/organisations',
+		icon: <RiShieldLine />,
 	},
 	{
 		name: 'Quests', //'button:navigation:quests',
 		path: '/quests',
+		icon: <RiTreasureMapLine />,
 	},
+	// {
+	// 	name: 'Achievements', //'button:navigation:quests',
+	// 	path: '/achievements',
+	// 	icon: <RiAwardLine/>
+	// },
 	{
 		name: 'Campaigns', // button:navigation:campaigns',
 		path: '/campaigns',
+		icon: <RiExchangeFundsLine />,
 	},
 ]
 
@@ -52,12 +71,12 @@ const rightNav = [
 	{
 		name: 'Loot', //'button:navigation:faucet',
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
-		external: true,
+		icon: <RiDropLine />,
 	},
 	{
 		name: 'Docs', //'button:navigation:documentation',
 		path: 'https://docs.gamedao.co/',
-		external: true,
+		icon: <RiBookOpenLine />,
 	},
 ]
 
@@ -147,28 +166,28 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
-					{leftNav.map((navItem) => {
+					{leftNav.map((item) => {
 						return (
-							<Fragment key={navItem.name}>
-								<ListItemButton onClick={() => handleClick(navItem.path, navItem.external)}>
-									<ListItemIcon>
-										<FontIcons name={navItem.icon} />
-									</ListItemIcon>
-									<ListItemText primary={t(navItem.name)} />
-								</ListItemButton>
+							<Fragment key={item.name}>
+								<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+									<ListItemButton>
+										{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+										<ListItemText>{t(item.name)}</ListItemText>
+									</ListItemButton>
+								</Link>
 							</Fragment>
 						)
 					})}
 					<br />
 					<br />
-					{rightNav.map((navItem) => {
+					{rightNav.map((item) => {
 						return (
-							<Fragment key={navItem.name}>
-								<ListItemButton onClick={() => handleClick(navItem.path, navItem.external)}>
-									<ListItemIcon>
-										<FontIcons name={navItem.icon} />
-									</ListItemIcon>
-									<ListItemText primary={t(navItem.name)} />
+							<Fragment key={item.name}>
+								<ListItemButton>
+									{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+									<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+										<Typography>{t(item.name)}</Typography>
+									</Link>
 								</ListItemButton>
 							</Fragment>
 						)

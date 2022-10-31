@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 
@@ -8,8 +8,19 @@ import Feedback from 'components/Feedback'
 
 import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
+import {
+	RiShieldLine,
+	RiSwordLine,
+	RiTreasureMapLine,
+	RiVipDiamondLine,
+	RiBookOpenLine,
+	RiDropLine,
+	RiExchangeFundsLine,
+	RiAwardLine,
+	RiChat1Line,
+} from 'react-icons/ri'
 
-import { Button, Typography, MenuItem, useMediaQuery } from '@mui/material'
+import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -23,19 +34,26 @@ interface ComponentProps {
 	sidebarOpen: boolean
 }
 
-// TODO: Extract to features / graphql
 const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
 		path: '/organisations',
+		icon: <RiShieldLine />,
 	},
 	{
 		name: 'Quests', //'button:navigation:quests',
 		path: '/quests',
+		icon: <RiTreasureMapLine />,
 	},
+	// {
+	// 	name: 'Achievements', //'button:navigation:quests',
+	// 	path: '/achievements',
+	// 	icon: <RiAwardLine/>
+	// },
 	{
 		name: 'Campaigns', // button:navigation:campaigns',
 		path: '/campaigns',
+		icon: <RiExchangeFundsLine />,
 	},
 ]
 
@@ -43,12 +61,12 @@ const rightNav = [
 	{
 		name: 'Loot', //'button:navigation:faucet',
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
-		external: true,
+		icon: <RiDropLine />,
 	},
 	{
 		name: 'Docs', //'button:navigation:documentation',
 		path: 'https://docs.gamedao.co/',
-		external: true,
+		icon: <RiBookOpenLine />,
 	},
 ]
 
@@ -56,9 +74,17 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const router = useRouter()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
 	const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
 		defaultMatches: true,
 	})
+
+	const [showFeedback, setFeedback] = useState(false)
+	const anchorRef = useRef(null)
+	const openFeedback = () => setFeedback(true)
+	const closeFeedback = () => setFeedback(false)
 
 	return (
 		<AppBar
@@ -91,29 +117,35 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						</MenuItem>
 					</Box>
 
-					{leftNav.map((navItem) => {
+					{leftNav.map((item) => {
 						return (
-							<MenuItem key={navItem.name} selected={router.pathname.includes(navItem.path)}>
-								<Link href={navItem.path} target={navItem.path.includes('http') ? '_blank' : null}>
-									<Typography>{t(navItem.name)}</Typography>
-								</Link>
-							</MenuItem>
+							<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+								<MenuItem key={item.name} selected={router.pathname.includes(item.path)}>
+									{item.icon && <ListItemIcon sx={{ mx: 0 }}> {item.icon} </ListItemIcon>}
+									{<ListItemText>{t(item.name)}</ListItemText>}
+								</MenuItem>
+							</Link>
 						)
 					})}
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
-					{rightNav.map((navItem) => {
+					{rightNav.map((item) => {
 						return (
-							<MenuItem key={navItem.name} selected={router.pathname.includes(navItem.path)}>
-								<Link href={navItem.path} target={navItem.path.includes('http') ? '_blank' : null}>
-									<Typography>{t(navItem.name)}</Typography>
-								</Link>
-							</MenuItem>
+							<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+								<Button key={item.name} selected={router.pathname.includes(item.path)}>
+									{item.icon && item.icon}
+									{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
+								</Button>
+							</Link>
 						)
 					})}
 
-					<Feedback />
+					<Button ref={anchorRef} onClick={openFeedback}>
+						<RiChat1Line />
+						{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
+					</Button>
+					{showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />}
 
 					<MenuItem>
 						<AccountSelector />

@@ -13,26 +13,28 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Message from '@mui/icons-material/ChatBubbleOutline'
 import Tooltip from '@mui/material/Tooltip'
+import TextareaAutosize from '@mui/material/TextareaAutosize'
+import Typography from '@mui/material/Typography'
 
-interface ComponentProps {
+interface FlyoutProps {
 	anchorEl: Element
 	open: boolean
 	handleClose: () => void
+	handleSend: () => void
 }
 
-const Flyout = ({ anchorEl, open, handleClose }: ComponentProps) => {
+const Flyout = ({ anchorEl, open, handleClose, handleSend }: FlyoutProps) => {
 	return (
 		<Menu
 			anchorEl={anchorEl}
 			id="feedback-menu"
-			open={open}
+			open={true}
 			onClose={handleClose}
-			onClick={handleClose}
 			PaperProps={{
 				elevation: 0,
 				sx: {
-					minWidth: 480,
-					minHeight: 240,
+					width: 'auto',
+					height: 'auto',
 					// overflow: 'hidden',
 					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
 					borderRadius: '1rem',
@@ -53,36 +55,42 @@ const Flyout = ({ anchorEl, open, handleClose }: ComponentProps) => {
 			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
-			<Card p={[2, 4]}>
-				<Stack>Hello</Stack>
+			<Card p={[2]}>
+				<Stack spacing={2}>
+					<Typography>Send us some Feedback!</Typography>
+					<TextareaAutosize
+						minRows={8}
+						maxRows={8}
+						aria-label="maximum height"
+						placeholder="Maximum 4 rows"
+						defaultValue=""
+						style={{ width: '100%' }}
+					/>
+					<Button onClick={handleSend} disabled={false}>
+						Send
+					</Button>
+				</Stack>
 			</Card>
 		</Menu>
 	)
 }
 
-export const FeedbackButton = () => {
-	const [messageEnabled, setMessageEnabled] = useState(true)
-	const [showFlyout, setFlyout] = useState(false)
-	const [sending, setSending] = useState(false)
+interface FeedbackProps {
+	anchorRef: Element
+	close: () => void
+}
 
-	const anchorRef = useRef(null)
-	const toggleFlyout = () => setFlyout(!showFlyout)
+export const FeedbackButton = ({ close, anchorRef }: FeedbackProps) => {
+	const [messageEnabled, setMessageEnabled] = useState(true)
+	const [sending, setSending] = useState(false)
+	const handleSend = (e) => close()
 
 	return (
 		<>
-			<Box sx={{ p: 0, m: 0 }} ref={anchorRef}>
-				<Button onClick={toggleFlyout} disabled={messageEnabled ? null : true}>
-					<Message sx={{ fontSize: 20 }} />
-				</Button>
-			</Box>
-			<Backdrop
-				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-				open={showFlyout}
-				onClick={toggleFlyout}
-			>
+			<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} onClick={close}>
 				{sending && <CircularProgress color="inherit" />}
 			</Backdrop>
-			<Flyout anchorEl={anchorRef?.current} handleClose={toggleFlyout} open={showFlyout} />
+			<Flyout anchorEl={anchorRef} handleClose={close} handleSend={handleSend} />
 		</>
 	)
 }
