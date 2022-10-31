@@ -1,7 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react'
-
-import { ApolloServerErrorCode } from '@apollo/server/errors'
-
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
