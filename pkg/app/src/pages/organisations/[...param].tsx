@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
+
+import { ApolloServerErrorCode } from '@apollo/server/errors'
+
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
@@ -163,7 +166,7 @@ export function OrganisationById() {
 		}
 	}, [organizationState, address])
 
-	if (error) throw new Error(error)
+	if (error) console.log('==== Error ====\n', error)
 
 	return error ? (
 		<>Error</>
