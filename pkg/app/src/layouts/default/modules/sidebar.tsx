@@ -50,80 +50,94 @@ export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 			alignItems="center"
 			height="100%"
 			width="100%"
+			justifyContent="space-between"
 			sx={{ borderRight: `1px solid ${theme.palette.grey[500_32]}` }}
 		>
-			{(loading || (data?.organization && selectedAccount)) && (
-				<Stack
-					spacing={2}
-					pb={2}
-					width={'100%'}
-					alignItems="center"
-					sx={{
-						// TODO: find out if we need scrolling at all.
-						// overflowX: 'hidden',
-						// overflowY: 'scroll',
-						position: 'relative',
-						'&::-webkit-scrollbar': {
-							width: 0,
-							background: 'transparent',
-						},
-						':after': {
-							position: 'absolute',
-							content: '""',
-							height: '2rem',
-							bottom: 0,
-							left: 0,
-							right: 0,
-							// backgroundImage: `linear-gradient(to bottom,transparent 0%, ${theme.palette.background.default})`,
-						},
-					}}
-				>
-					{loading && (
-						<CircularProgress
-							sx={{
-								width: '48px',
-								height: '48px',
-								margin: 'auto',
-							}}
-						/>
+			<Stack>
+				{(loading || (data?.organization && selectedAccount)) && (
+					<Stack
+						spacing={2}
+						pb={2}
+						width={'100%'}
+						alignItems="center"
+						sx={{
+							// TODO: find out if we need scrolling at all.
+							// overflowX: 'hidden',
+							// overflowY: 'scroll',
+							position: 'relative',
+							'&::-webkit-scrollbar': {
+								width: 0,
+								background: 'transparent',
+							},
+							':after': {
+								position: 'absolute',
+								content: '""',
+								height: '2rem',
+								bottom: 0,
+								left: 0,
+								right: 0,
+								// backgroundImage: `linear-gradient(to bottom,transparent 0%, ${theme.palette.background.default})`,
+							},
+						}}
+					>
+						{loading && (
+							<CircularProgress
+								sx={{
+									width: '48px',
+									height: '48px',
+									margin: 'auto',
+								}}
+							/>
+						)}
+
+						{selectedAccount &&
+							(data?.organization?.slice() as any)
+								?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
+								?.map((organization) => {
+									return (
+										<Fragment key={organization?.id}>
+											<OrganizationButtonMemoized
+												id={organization?.id}
+												logo={organization?.metadata?.logo}
+												name={organization?.metadata?.name}
+												active={location?.pathname?.indexOf(organization?.id) >= 0}
+												notification={false}
+											/>
+										</Fragment>
+									)
+								})}
+					</Stack>
+				)}
+
+				<Stack alignItems="center" spacing={2} width="100%">
+					{(loading || (data?.organization.length > 0 && selectedAccount)) && (
+						<Divider sx={{ width: '50%' }} />
 					)}
 
-					{selectedAccount &&
-						(data?.organization?.slice() as any)
-							?.sort((a, b) => a.metadata?.name?.localeCompare(b.metadata?.name))
-							?.map((organization) => {
-								return (
-									<Fragment key={organization?.id}>
-										<OrganizationButtonMemoized
-											id={organization?.id}
-											logo={organization?.metadata?.logo}
-											name={organization?.metadata?.name}
-											active={location?.pathname?.indexOf(organization?.id) >= 0}
-											notification={false}
-										/>
-									</Fragment>
-								)
-							})}
+					<Fab
+						// color={'primary'}
+						aria-label="add"
+						sx={{
+							background: 'none',
+							outline: `2px solid ${theme.palette.primary}`,
+							mt: 1,
+							width: '48px',
+							height: '48px',
+						}}
+						onClick={buttonCallback}
+					>
+						<AddIcon color="primary" />
+					</Fab>
 				</Stack>
-			)}
+			</Stack>
 
-			<Stack alignItems="center" spacing={2} width="100%">
-				{(loading || (data?.organization.length > 0 && selectedAccount)) && <Divider sx={{ width: '50%' }} />}
-
-				<Fab
-					// color={'primary'}
-					aria-label="add"
-					sx={{
-						background: 'none',
-						outline: `2px solid ${theme.palette.primary}`,
-						mt: 1,
-						width: '48px',
-						height: '48px',
-					}}
-					onClick={buttonCallback}
-				>
-					<AddIcon color="primary" />
-				</Fab>
+			<Stack>
+				{/*
+					helper icons
+					- feedback
+					- docs
+					- faucet
+				*/}
 			</Stack>
 		</Stack>
 	)
