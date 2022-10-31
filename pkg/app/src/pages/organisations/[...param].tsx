@@ -350,7 +350,7 @@ export function OrganisationById() {
 									// variant="scrollable"
 									// scrollButtons="auto"
 									// fullWidth={true}
-									// indicatorColor="secondary"
+									// indicatorColor="#ff00ff"
 									centered
 									value={activeStep}
 									onChange={(_, value) => handleTabSelect(value)}

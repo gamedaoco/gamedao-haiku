@@ -10,7 +10,7 @@ export default function Tabs(theme: Theme) {
 					// borderTopLeftRadius: theme.shape.borderRadius,
 					// borderTopRightRadius: theme.shape.borderRadius,
 					'&.Mui-selected': {
-						color: theme.palette.text.primary,
+						color: theme.palette.primary.main,
 					},
 					'&:not(:last-of-type)': {
 						marginRight: theme.spacing(5),
@@ -33,7 +33,8 @@ export default function Tabs(theme: Theme) {
 				},
 				textColorInherit: {
 					opacity: 1,
-					color: theme.palette.text.secondary,
+					// color: theme.palette.text.secondary,
+					color: theme.palette.text.primary,
 				},
 			},
 		},
@@ -66,7 +67,8 @@ export default function Tabs(theme: Theme) {
 		MuiTabIndicator: {
 			styleOverrides: {
 				root: {
-					color: 'pink',
+					color: theme.palette.text.primary,
+					borderWidth: '10px',
 				},
 			},
 		},

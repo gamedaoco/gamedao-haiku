@@ -26,26 +26,26 @@ interface ComponentProps {
 // TODO: Extract to features / graphql
 const urls = [
 	{
-		name: 'button:navigation:organisations',
+		name: 'Guilds', // 'button:navigation:organisations',
 		path: '/organisations',
 	},
 	{
-		name: 'button:navigation:campaigns',
+		name: 'Crates', // button:navigation:campaigns',
 		path: '/campaigns',
 	},
-	// {
-	// 	name: 'button:navigation:quests',
-	// 	path: '/quests',
-	// },
 	{
-		name: 'button:navigation:documentation',
-		path: 'https://docs.gamedao.co/',
-		external: true,
+		name: 'Quests', //'button:navigation:quests',
+		path: '/quests',
 	},
 	/* TODO: should be shown when not on a production network: */
 	{
-		name: 'button:navigation:faucet',
+		name: 'Drops', //'button:navigation:faucet',
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
+		external: true,
+	},
+	{
+		name: 'Docs', //'button:navigation:documentation',
+		path: 'https://docs.gamedao.co/',
 		external: true,
 	},
 ]
