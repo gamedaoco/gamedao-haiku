@@ -33,7 +33,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 	const depositBalance: Balance = useBalanceByAddressAndBalanceId(address, txData?.currencyId)
 
 	const handleProceed = useCallback(() => {
-		signAndSend(txData?.tx, txData?.txMsg, txCallback)
+		signAndSend(txData?.tx, txData?.txMsg, txCallback, t)
 		onClose()
 	}, [signAndSend, onClose, txData, txCallback])
 

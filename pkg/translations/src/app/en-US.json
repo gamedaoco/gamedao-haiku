@@ -455,6 +455,11 @@
         "pending": "Contribute in progress…",
         "success": "Successfully contributed",
         "error": "Contribute failed"
+      },
+      "errors": {
+        "control":{
+          "WrongOrganizationType": "An invalid Organization type has been selected"
+        }
       }
     },
     "info": {
