@@ -42,21 +42,24 @@ import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
-	const theme = useTheme()
 	const config = useConfig()
+	const theme = useTheme()
 	const { t } = useTranslation()
 
 	const [routeState, setRouteState] = useState<string>(null)
+	const [activeStep, setActiveStep] = useState<string>('dashboard')
+
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
 	const [proposalIdState, setProposalIdState] = useState<string>(null)
-	const [activeStep, setActiveStep] = useState<string>('dashboard')
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const [isMemberState, setIsMemberState] = useState<boolean>(false)
-	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 
-	const { loading, data } = useOrganizationByIdSubscription({
+	const { loading, data, error } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
 	})
+
+	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
+
 	const addMemberTx = useAddMemberTransaction(organizationIdState)
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
@@ -160,9 +163,11 @@ export function OrganisationById() {
 		}
 	}, [organizationState, address])
 
-	console.log('data', data)
+	if (error) throw new Error(error)
 
-	return (
+	return error ? (
+		<>Error</>
+	) : (
 		<Layout
 			showHeader
 			showFooter
