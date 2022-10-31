@@ -35,7 +35,7 @@ export function IdentitySection() {
 				sx={{
 					alignItems: {
 						sm: 'top',
-						// md: 'center',
+						md: 'center',
 					},
 					display: 'flex',
 					overflow: 'hidden',
@@ -44,27 +44,25 @@ export function IdentitySection() {
 				<Avatar
 					sx={{
 						height: {
-							md: 64,
-							sx: 48,
+							md: 48,
+							sx: 24,
 						},
 						mr: 2,
 						width: {
-							md: 64,
-							sx: 48,
+							md: 48,
+							sx: 24,
 						},
 					}}
 					src={
 						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art-neutral/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art-neutral/${avatarHash}.svg`
+							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
+							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
 					}
 				/>
 				<div>
 					<Typography variant="h6">
 						{getNameFromAccountState(accountState)}&nbsp;
-						{identity?.email && (
-							<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
-						)}
+						{identity?.email && <Verified sx={{ verticalAlign: 'middle' }} fontSize="inherit" />}
 					</Typography>
 					<Box
 						sx={{

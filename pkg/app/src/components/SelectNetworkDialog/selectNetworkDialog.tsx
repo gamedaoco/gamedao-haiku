@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react'
 
 import { Grid } from '@mui/material'
-import { useGraphQlContext } from 'provider/graphQl/modules/context'
+import { useGraphQlContext } from 'providers/graphQl/modules/context'
 import { Endpoint } from 'src/@types/graphql'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'

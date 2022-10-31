@@ -4,11 +4,15 @@ import type { ApexOptions } from 'apexcharts'
 import { Chart } from './chart'
 
 interface ComponentProps {
-	color: string
+	colors: string[]
+	labels?: string[]
 	series: any
+	height?: number
+	plotOptions?: any
+	stroke?: any
 }
 
-export function RadialChart({ color, series }: ComponentProps) {
+export function RadialChart({ colors, series, labels, height = 160, plotOptions = {}, stroke = {} }: ComponentProps) {
 	const theme = useTheme()
 
 	const chartOptions: ApexOptions = {
@@ -19,11 +23,12 @@ export function RadialChart({ color, series }: ComponentProps) {
 				show: false,
 			},
 		},
-		colors: [color],
+		colors: colors,
 		fill: {
 			opacity: 1,
 		},
-		labels: [],
+		stroke: stroke,
+		labels: labels || [],
 		plotOptions: {
 			radialBar: {
 				dataLabels: {
@@ -43,11 +48,12 @@ export function RadialChart({ color, series }: ComponentProps) {
 					background: theme.palette.background.default,
 				},
 			},
+			...plotOptions,
 		},
 		theme: {
 			mode: theme.palette.mode,
 		},
 	}
 
-	return <Chart height={160} options={chartOptions} series={series} type="radialBar" />
+	return <Chart height={height} options={chartOptions} series={series} type="radialBar" />
 }

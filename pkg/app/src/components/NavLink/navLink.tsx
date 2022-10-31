@@ -1,5 +1,4 @@
 import { ReactNode, useCallback } from 'react'
-
 import { useRouter } from 'next/router'
 
 type NavLinkProps = {
@@ -23,7 +22,7 @@ export function NavLink({ href, external, children }: NavLinkProps) {
 		[href, external, push],
 	)
 	return (
-		<a title={href} onClick={handleClick}>
+		<a title={href} onClick={handleClick} style={{ cursor: 'pointer' }}>
 			{children}
 		</a>
 	)

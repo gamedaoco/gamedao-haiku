@@ -99,9 +99,10 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 				>
 					{t('button:form:back')}
 				</Button>
+
 				<Button
 					size="large"
-					variant="outlined"
+					// variant="outlined"
 					color="primary"
 					sx={{
 						display: checkBackButtonState() ? 'block' : 'none',

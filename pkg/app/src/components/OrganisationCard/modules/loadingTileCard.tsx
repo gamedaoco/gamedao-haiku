@@ -60,6 +60,7 @@ export function LoadingTileCard() {
 				maxWidth: '344px',
 				cursor: 'pointer',
 			}}
+			variant={'glass'}
 		>
 			<CardHeader
 				avatar={<Skeleton variant="circular" width={64} height={64} />}

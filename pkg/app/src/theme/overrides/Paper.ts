@@ -7,6 +7,7 @@ declare module '@mui/material/Paper' {
 		mask: true
 		primary: true
 		secondary: true
+		glass: true
 	}
 }
 
@@ -14,7 +15,7 @@ export default function Paper(theme: Theme) {
 	return {
 		MuiPaper: {
 			defaultProps: {
-				elevation: 0,
+				elevation: 10,
 			},
 
 			variants: [
@@ -32,6 +33,16 @@ export default function Paper(theme: Theme) {
 						backgroundColor: theme.palette.background.neutral,
 						borderBottomRightRadius: 0,
 						borderBottomLeftRadius: 0,
+					},
+				},
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+						border: `1px solid #ffffff11`,
+						// border: `5px solid #00000011`,
 					},
 				},
 			],

@@ -46,3 +46,4 @@ yarn-error.log*
 .vercel
 
 **/sitemap.xml
+.vscode/settings.json

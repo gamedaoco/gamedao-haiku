@@ -23,7 +23,7 @@ export function MyCollectablesTab() {
 	return (
 		<>
 			<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
-			<Card sx={{ padding: 4 }}>
+			<Card sx={{ padding: 4 }} variant={'glass'}>
 				<Typography variant="h5">{t('label:my_collectables')}</Typography>
 				{/*
 						TODO: needs translation keys
