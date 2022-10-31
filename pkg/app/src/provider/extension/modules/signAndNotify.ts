@@ -9,6 +9,7 @@ import {
 	createPromiseNotification,
 	createSuccessNotification,
 } from 'src/utils/notificationUtils'
+import { TFunction } from 'i18next'
 
 export async function SignAndNotify(
 	ApiProvider: ApiPromise,
@@ -16,6 +17,7 @@ export async function SignAndNotify(
 	tx: SubmittableExtrinsic,
 	msg: PromiseMsg,
 	callback?: (state: boolean, result: ISubmittableResult) => void,
+	t?: TFunction,
 ) {
 	const promise = new Promise(async (resolve, reject) => {
 		if (!ApiProvider) {
@@ -45,14 +47,24 @@ export async function SignAndNotify(
 								if ((error as any).isModule) {
 									const decoded = ApiProvider.registry.findMetaError((error as any).asModule)
 									const { docs, method, section } = decoded
+									const docsMessage = docs.join(' ')
+									const translationMessage = t
+										? t(`notification:transactions:errors:${section}:${method}`)
+										: null
+									const errorMessage = translationMessage || docsMessage
 									console.log(
-										`Wallet Transaction Result : LOG ${section}.${method}: ${docs.join(' ')}`,
+										`Wallet Transaction Result : LOG ${section}.${method}: ${[
+											translationMessage,
+											docsMessage,
+										].join('; ')}`,
 									)
-
-									createErrorNotification(docs.join(' '))
+									createErrorNotification(
+										`${section}.${method}${errorMessage ? ': ' + errorMessage : ''}.`,
+									)
 								} else {
 									// Other, CannotLookup, BadOrigin, no extra info
 									console.log('Wallet Transaction Result:', error.toString())
+									createErrorNotification(error.toString())
 								}
 							},
 						)
