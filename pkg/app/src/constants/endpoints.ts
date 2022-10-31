@@ -15,7 +15,7 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/img/zero.png',
-		name: 'development',
+		name: 'Developent',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		chain: 'wss://node.dev.sub.zero.io',
@@ -23,18 +23,26 @@ const productionEndpoints: Endpoints = [
 	},
 	{
 		image: '/img/zero.png',
-		name: 'staging',
+		name: 'Staging',
 		url: 'https://graph.stage.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.stage.sub.zero.io/health',
 		chain: 'wss://node.stage.sub.zero.io',
 	},
 	{
 		image: '/img/zero.png',
-		name: 'rococo',
+		name: 'Rococo',
 		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.rococo.sub.zero.io/health',
 		chain: 'wss://node.rococo.sub.zero.io',
 	},
+	{
+		image: '/img/zero.png',
+		name: 'Mainnet',
+		url: 'https://graph.prod.sub.zero.io/v1/graphql',
+		healthCheck: 'https://graph.prod.sub.zero.io/health',
+		chain: 'wss://node.prod.sub.zero.io',
+	},
+
 ]
 
 export const ENDPOINTS: Endpoints =

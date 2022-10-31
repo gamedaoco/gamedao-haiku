@@ -6,7 +6,7 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
 import { useTmpCampaign } from 'hooks/useTmpCampaign'
 import moment from 'moment'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'
@@ -24,8 +24,8 @@ const validation = Yup.object().shape({
 	governance: Yup.mixed().required(),
 	cid: Yup.string().required(),
 	start: Yup.number().required(),
-	tokenSymbol: Yup.string().required(),
-	tokenName: Yup.string().required(),
+	tokenSymbol: Yup.string(),
+	tokenName: Yup.string(),
 })
 
 export function useCreateCampaignTransaction(): TransactionData {

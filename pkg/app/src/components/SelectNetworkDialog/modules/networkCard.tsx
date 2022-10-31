@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 
 import { Check } from '@mui/icons-material'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/material'
-import { useGraphQlContext } from 'provider/graphQl/modules/context'
+import { useGraphQlContext } from 'providers/graphQl/modules/context'
 import { useTranslation } from 'react-i18next'
 import { Endpoint } from 'src/@types/graphql'
 

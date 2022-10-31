@@ -12,6 +12,7 @@ export function BaseForm({ title, children, error }: ComponentProps) {
 	return (
 		<Stack
 			component={Paper}
+			variant="glass"
 			p={{ xs: 3, sm: 6 }}
 			spacing={{ xs: 2, sm: 4 }}
 			width="100%"

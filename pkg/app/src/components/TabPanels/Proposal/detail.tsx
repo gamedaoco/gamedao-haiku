@@ -33,6 +33,8 @@ import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
+import { useApiProvider } from 'hooks/useApiProvider'
+
 interface ComponentProps {
 	organization: Organization
 	proposalId: string
@@ -102,6 +104,10 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	const { loading, data } = useProposalByIdSubscription({
 		variables: { proposalId },
 	})
+
+	// const config = useApiProvider()
+	// const sp = useSystemProperties()
+	// console.log( 'useConfig', config, sp )
 
 	const theme = useTheme()
 	const { chain } = getConnectedEndpoint()
@@ -265,9 +271,14 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						{/*	<Typography variant="body2">{proposalVotingTypeName}</Typography>*/}
 						{/*</Box>*/}
 
+						{/* TODO we need ( start block AND ) endblock and explorer should link to endblock so user can inspect */}
+
 						<Box>
-							<Typography variant="body2">{t('label:block_number')}</Typography>
+							<Typography variant="body2">End {t('label:block_number')}</Typography>
 						</Box>
+
+						{/* TODO: get ws url for connected network */}
+
 						<NavLink
 							href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
 								chain.toLowerCase(),
@@ -275,7 +286,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 							external={true}
 						>
 							<Stack direction="row" spacing={1}>
-								<Typography variant="body2">{proposal.created_at_block.toLocaleString()}</Typography>
+								<Typography variant="body2">{proposal.expiry.toLocaleString()}</Typography>
 								<Launch fontSize="small" />
 							</Stack>
 						</NavLink>

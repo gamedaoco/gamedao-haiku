@@ -1,13 +1,17 @@
-import { AppProps, NextWebVitalsMetric } from 'next/app'
+import { useEffect } from 'react'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import { CacheProvider, EmotionCache } from '@emotion/react'
+import * as Fathom from 'fathom-client'
+
+import { Providers } from 'src/providers'
 import { useConfig } from 'hooks/useConfig'
 import { Logger } from 'lib/logger'
-// Toastify styles + custom styles overrides
-import 'react-toastify/dist/ReactToastify.css'
-import { Providers } from 'src/provider/provider'
+
 import createEmotionCache from 'src/theme/createEmotionCache'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import 'react-toastify/dist/ReactToastify.css'
 import 'src/theme/css/toastify.css'
 import 'src/theme/css/modelViewer.css'
 
@@ -44,19 +48,38 @@ function HeadAndMetaTags() {
 
 			<meta property="twitter:domain" content="app.gamedao.co" />
 			<meta property="twitter:url" content="https://app.gamedao.co/" />
+			<meta property="twitter:image" content={config?.SITE_IMAGE} />
 
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:creator" content={config?.TW_SITE_CREATOR} />
 			<meta name="twitter:site" content={config?.TW_SITE_NAME} />
 			<meta name="twitter:title" content={config?.SITE_TITLE} />
 			<meta name="twitter:description" content={config?.SITE_DESCRIPTION} />
-			<meta property="twitter:image" content={config?.SITE_IMAGE} />
 		</Head>
 	)
 }
 
 export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
-	log.info(`❤️  Welcome to GameDAO`)
+	const router = useRouter()
+
+	useEffect(() => {
+		log.info(`❤️  Welcome to GameDAO`)
+		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
+	}, [])
+
+	useEffect(() => {
+		Fathom.load('XLUUAYWU', {
+			url: 'https://brilliant-truthful.gamedao.co/script.js',
+			includedDomains: ['gamedao.co'],
+		})
+		function onRouteChangeComplete() {
+			Fathom.trackPageview()
+		}
+		router.events.on('routeChangeComplete', onRouteChangeComplete)
+		return () => {
+			router.events.off('routeChangeComplete', onRouteChangeComplete)
+		}
+	}, [router.events])
 
 	return (
 		<CacheProvider value={emotionCache}>
@@ -68,8 +91,8 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 	)
 }
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-	log.trace(metric)
-}
+// export function reportWebVitals(metric: NextWebVitalsMetric) {
+// 	log.trace(metric)
+// }
 
 export default MyApp

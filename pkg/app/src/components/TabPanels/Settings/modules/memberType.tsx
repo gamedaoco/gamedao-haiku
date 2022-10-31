@@ -5,7 +5,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import { toUnit } from 'src/utils/token'
 import { RadioItem } from 'components/Forms/modules/radioItem'
