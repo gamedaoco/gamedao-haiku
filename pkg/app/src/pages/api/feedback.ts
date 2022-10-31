@@ -8,7 +8,7 @@ const log = Logger('API')
 
 const ID = process.env.DISCOID
 const TOKEN = process.env.DISCOTOKEN
-const discord = new Discord.WebhookClient(ID, TOKEN)
+const discord = new Discord.WebhookClient({ id: ID, token: TOKEN })
 
 export default async (
 	req: NextApiRequest,
@@ -19,7 +19,7 @@ export default async (
 
 	if ( method === 'POST' && msg !== null ) {
 
-		discord.send(msg)
+		discord.send({ content: msg })
 		log.info(`message sent`)
 		res.status(200).send('ok')
 

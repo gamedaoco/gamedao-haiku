@@ -133,7 +133,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 					{rightNav.map((item) => {
 						return (
 							<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
-								<Button key={item.name} selected={router.pathname.includes(item.path)}>
+								<Button key={item.name}>
 									{item.icon && item.icon}
 									{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
 								</Button>

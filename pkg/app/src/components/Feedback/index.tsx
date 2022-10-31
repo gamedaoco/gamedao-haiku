@@ -16,20 +16,20 @@ import Tooltip from '@mui/material/Tooltip'
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import Typography from '@mui/material/Typography'
 
-interface FlyoutProps {
-	anchorEl: Element
-	open: boolean
-	handleClose: () => void
-	handleSend: () => void
-}
+// interface FlyoutProps {
+// 	anchorEl: Element
+// 	open: boolean
+// 	handleClose: () => void
+// 	handleSend: () => void
+// }
 
-const Flyout = ({ anchorEl, open, handleClose, handleSend }: FlyoutProps) => {
+const Flyout = ({ anchorEl, handleClose, handleSend }) => {
 	return (
 		<Menu
 			anchorEl={anchorEl}
 			id="feedback-menu"
 			open={true}
-			onClose={handleClose}
+			onClose={handleClose()}
 			PaperProps={{
 				elevation: 0,
 				sx: {
@@ -66,7 +66,7 @@ const Flyout = ({ anchorEl, open, handleClose, handleSend }: FlyoutProps) => {
 						defaultValue=""
 						style={{ width: '100%' }}
 					/>
-					<Button onClick={handleSend} disabled={false}>
+					<Button onClick={handleSend()} disabled={false}>
 						Send
 					</Button>
 				</Stack>
@@ -75,22 +75,22 @@ const Flyout = ({ anchorEl, open, handleClose, handleSend }: FlyoutProps) => {
 	)
 }
 
-interface FeedbackProps {
-	anchorRef: Element
-	close: () => void
-}
+// interface FeedbackProps {
+// 	anchorRef: Element
+// 	close: () => void
+// }
 
-export const FeedbackButton = ({ close, anchorRef }: FeedbackProps) => {
+export const FeedbackButton = ({ close, anchorRef }) => {
 	const [messageEnabled, setMessageEnabled] = useState(true)
 	const [sending, setSending] = useState(false)
-	const handleSend = (e) => close()
+	const handleSend = () => close()
 
 	return (
 		<>
 			<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} onClick={close}>
 				{sending && <CircularProgress color="inherit" />}
 			</Backdrop>
-			<Flyout anchorEl={anchorRef} handleClose={close} handleSend={handleSend} />
+			<Flyout anchorEl={anchorRef} handleClose={close()} handleSend={handleSend()} />
 		</>
 	)
 }
