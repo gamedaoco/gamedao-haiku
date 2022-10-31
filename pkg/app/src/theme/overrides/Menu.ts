@@ -12,7 +12,7 @@ export default function Menu(theme: Theme) {
 						borderBottom: `2px solid ${theme.palette.primary.main}`,
 						'&:hover': {
 							backgroundColor: 'transparent',
-							borderBottom: `2px solid ${theme.palette.text.secondary}`,
+							borderBottom: `2px solid ${theme.palette.primary.darker}`,
 						},
 					},
 				},

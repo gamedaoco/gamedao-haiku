@@ -1,5 +1,16 @@
 import React, { Fragment, useCallback } from 'react'
 
+import {
+	RiShieldLine,
+	RiSwordLine,
+	RiTreasureMapLine,
+	RiVipDiamondLine,
+	RiBookOpenLine,
+	RiDropLine,
+	RiExchangeFundsLine,
+	RiAwardLine,
+} from 'react-icons/ri'
+
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material/styles'
@@ -33,28 +44,39 @@ interface ComponentProps {
 }
 
 // TODO: Extract to features / graphql
-const urls = [
+const leftNav = [
 	{
-		name: 'button:navigation:organisations',
+		name: 'Guilds', // 'button:navigation:organisations',
 		path: '/organisations',
-		icon: 'organization',
+		icon: <RiShieldLine />,
 	},
 	{
-		name: 'button:navigation:campaigns',
+		name: 'Quests', //'button:navigation:quests',
+		path: '/quests',
+		icon: <RiTreasureMapLine />,
+	},
+	// {
+	// 	name: 'Achievements', //'button:navigation:quests',
+	// 	path: '/achievements',
+	// 	icon: <RiAwardLine/>
+	// },
+	{
+		name: 'Campaigns', // button:navigation:campaigns',
 		path: '/campaigns',
-		icon: 'campaign',
+		icon: <RiExchangeFundsLine />,
 	},
+]
+
+const rightNav = [
 	{
-		name: 'button:navigation:documentation',
-		path: 'https://docs.gamedao.co/',
-		icon: 'document',
-		external: true,
-	},
-	{
-		name: 'button:navigation:faucet',
+		name: 'Loot', //'button:navigation:faucet',
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
-		icon: 'store',
-		external: true,
+		icon: <RiDropLine />,
+	},
+	{
+		name: 'Docs', //'button:navigation:documentation',
+		path: 'https://docs.gamedao.co/',
+		icon: <RiBookOpenLine />,
 	},
 ]
 
@@ -144,14 +166,28 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
-					{urls.map((navItem) => {
+					{leftNav.map((item) => {
 						return (
-							<Fragment key={navItem.name}>
-								<ListItemButton onClick={() => handleClick(navItem.path, navItem.external)}>
-									<ListItemIcon>
-										<FontIcons name={navItem.icon} />
-									</ListItemIcon>
-									<ListItemText primary={t(navItem.name)} />
+							<Fragment key={item.name}>
+								<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+									<ListItemButton>
+										{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+										<ListItemText>{t(item.name)}</ListItemText>
+									</ListItemButton>
+								</Link>
+							</Fragment>
+						)
+					})}
+					<br />
+					<br />
+					{rightNav.map((item) => {
+						return (
+							<Fragment key={item.name}>
+								<ListItemButton>
+									{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+									<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+										<Typography>{t(item.name)}</Typography>
+									</Link>
 								</ListItemButton>
 							</Fragment>
 						)
