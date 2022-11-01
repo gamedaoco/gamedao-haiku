@@ -44,13 +44,12 @@ const productionEndpoints: Endpoints = [
 		chain: 'wss://node.prod.sub.zero.io',
 		default: ( ENVIRONMENT === Environment.Production ) ? true : false,
 	},
-
 ]
 
 export const ENDPOINTS: Endpoints =
+
 	ENVIRONMENT === Environment.Development
 	? [...developmentEndpoints, ...productionEndpoints]
 	: productionEndpoints
 
 export const getConnectedEndpoint = () => ENDPOINTS.find((e) => e.default)
-
