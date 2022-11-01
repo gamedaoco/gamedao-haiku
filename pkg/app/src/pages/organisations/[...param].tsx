@@ -163,11 +163,9 @@ export function OrganisationById() {
 		}
 	}, [organizationState, address])
 
-	if (error) console.log('==== Error ====\n', error)
+	if (error) console.log('==== Error ====>\n', error)
 
-	return error ? (
-		<>Error</>
-	) : (
+	return (
 		<Layout
 			showHeader
 			showFooter
