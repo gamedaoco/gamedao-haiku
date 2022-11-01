@@ -1,6 +1,8 @@
 import React from 'react'
 import NextLink from 'next/link'
 
+import { ENVIRONMENT } from 'src/constants'
+
 import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
@@ -8,7 +10,7 @@ import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { FontIcons } from 'components/Icons/icons'
 
-const Logo = () => <img src="/svg/g-col-block.svg" height="48" />
+const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" />
 
 const Link = ({ href, children }) => (
 	<Box>
@@ -113,16 +115,16 @@ export function Footer() {
 
 					<Grid container direction="column">
 						<Typography variant="small">
-							{`© 2019-${new Date().getFullYear()} `}GameDAO AG, Vaduz, Liechtenstein. Powered by Zero
-							Reality.
-						</Typography>
-						<Typography variant="small">
-							<NextLink href="/imprint">Imprint</NextLink>.{' '}
+							{`© 2019-${new Date().getFullYear()} `}GameDAO AG, Vaduz, Liechtenstein. Powered by{' '}
+							<a href="https://zero.io">Zero Reality</a>. <NextLink href="/imprint">Imprint</NextLink>.{' '}
 							<NextLink href="/tos">Terms + Conditions</NextLink>.
 						</Typography>
 						<Typography variant="small">
 							{process.env.APP_NAME} {process.env.APP_VERSION} build {process.env.BUILD_TIME}
-							{process.env.VERCEL_GIT_COMMIT_SHA} {process.env.VERCEL_ENV}
+							{' — '}
+							{process.env.VERCEL_GIT_COMMIT_SHA} {' — '} {process.env.VERCEL_ENV}
+							{' — '}
+							ENVIRONMENT: {ENVIRONMENT}
 						</Typography>
 					</Grid>
 				</Grid>
