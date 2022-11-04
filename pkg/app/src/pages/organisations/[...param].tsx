@@ -413,11 +413,7 @@ export function OrganisationById() {
 						</TabPanel>
 
 						<TabPanel value={'treasury'}>
-							{organizationState && (
-								<Typography>
-									{t('label:treasury_address', { address: organizationState.treasury })}
-								</Typography>
-							)}
+							{organizationState && <TreasuryOverview address={organizationState.treasury} />}
 						</TabPanel>
 
 						<TabPanel value={'proposals'}>
