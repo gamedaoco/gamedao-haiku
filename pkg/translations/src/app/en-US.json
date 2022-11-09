@@ -9,9 +9,9 @@
             "documentation": "Documentation",
             "faucet": "Faucet",
             "overview": "Overview",
-            "my_organisations": "My Organisations",
-            "my_campaigns": "My Campaigns",
-            "my_collectables": "My Collectables",
+            "my_organisations": "Organisations",
+            "my_campaigns": "Campaigns",
+            "my_collectables": "Collectables",
             "identity": "Identity",
             "set_on_chain_identity": "Set On-Chain Identity",
             "proposals": "Proposals",
@@ -162,7 +162,7 @@
             "title": "Submit Vote"
         },
         "addMember": {
-            "title": "Join Organisation",
+            "title": "Join",
             "action_subtitle": "Free",
             "description": "This organisation does not require any fee."
         },
@@ -170,10 +170,10 @@
             "title": "Leave Organisation"
         },
         "setIdentity": {
-            "title": "Set ZERO chain identity",
+            "title": "Claim Identity",
             "action_subtitle": "Deposit",
             "action_sub_line": "Deposit",
-            "description": "You need to deposit the amount so you can create an on-chain identity."
+            "description": "You need to deposit a small collateral to claim your on-chain identity."
         },
         "clearIdentity": {
             "title": "Clear ZERO chain identity"
@@ -186,13 +186,13 @@
     },
     "page": {
         "account": {
-            "title": "My Account",
+            "title": "Account",
             "achievements": {
-                "title": "My Achievements",
+                "title": "Achievements",
                 "description": "Level up by using our protocols and collaborating with the community."
             },
             "balances": {
-                "title": "My Balances",
+                "title": "Balances",
                 "token": "Token",
                 "transferable": "Transferable",
                 "locked": "Locked",
@@ -454,7 +454,7 @@
             "no_accounts_in_wallet": "Sorry you don't have any accounts in your wallet extension: {{name}}"
         },
         "error": {
-            "graphql_connection_error": "Connection to network {{name}} cannot be established please use a different network"
+            "graphql_connection_error": "Connection to network {{name}} cannot be established, please use a different network."
         }
     }
 }
