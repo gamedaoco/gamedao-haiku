@@ -101,6 +101,8 @@
     "total_deposit": "Total Deposit",
     "website": "Website",
     "campaigns": "Campaigns",
+    "campaign": "Campaign",
+    "campaign_name": "Campaign name",
     "treasury": "Treasury",
     "search_campaigns": "Search Campaigns",
     "update_photo": "Update photo",
@@ -141,7 +143,10 @@
     "currency": "Currency",
     "source": "Source",
     "type": "Type",
-    "hash": "Hash"
+    "hash": "Hash",
+    "proposal_description": "Proposal Description",
+    "proposal_name": "Proposal Name",
+    "send_to_address": "Send to address"
   },
   "transactions": {
     "createOrganization": {
@@ -407,6 +412,46 @@
       "overview": "OVERVIEW",
       "reasons_to_invest": "REASON TO INVEST",
       "contribute_to_campaign_help_text": "Your funds will be reserved until the campaign is funded or expired."
+    },
+    "proposals": {
+      "settings": {
+        "voting_type": "What type of voting do you need?",
+        "simple_majority": {
+          "title": "Simple majority",
+          "description": "The option with more votes than all other options together wins"
+        },
+        "relative_majority": {
+          "title": "Relative majority",
+          "description": "The option with the most single votes wins"
+        },
+        "absolute_majority": {
+          "title": "Absolute majority",
+          "description": "The option with votes of more than 50% of eligible member votes wins"
+        },
+        "min_deposit": "A min deposit of {{quantity}} {{coin}} is needed",
+        "proposal_type": "What type of proposal do you need?",
+        "create_general_proposal": {
+          "title": "General Proposal  ( Deposit {{quantity}} {{coin}} )",
+          "description": "'Select for all types of proposals except withdrawal'"
+        },
+        "create_withdraw_proposal": {
+          "title": "Withdrawal Proposal  ( Deposit {{quantity}} {{coin}} )",
+          "description": "'Select to withdrawal from a campaign'"
+        },
+        "create_spending_proposal": {
+          "title": "Spending Proposal  ( Deposit {{quantity}} {{coin}} )",
+          "description": "'Select for all types of proposals except withdrawal'"
+        },
+        "create_title": "What’s the title of your proposal?",
+        "create_description": "Add a description to your proposal",
+        "no_campaign": "No campaign available"
+      },
+      "forms": {
+        "validations": {
+          "proposal_name": "Proposal name is required",
+          "proposal_description": "Proposal description is required"
+        }
+      }
     }
   },
   "notification": {
