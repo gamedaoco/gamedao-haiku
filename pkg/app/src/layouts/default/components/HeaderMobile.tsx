@@ -11,7 +11,7 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/material/styles'
 
-import { NavbarMobile } from 'layouts/default/modules/navbarMobile'
+import { NavbarMobile } from './navbarMobile'
 import { AccountSelector, FontIcons } from 'src/components'
 import { NavLink } from 'components/NavLink/navLink'
 

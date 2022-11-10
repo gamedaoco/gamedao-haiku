@@ -1,17 +1,17 @@
 import React, { Fragment, useCallback, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { Logger } from 'lib/logger'
 
-import { useRouter } from 'next/router'
-
-import { Add as AddIcon } from '@mui/icons-material'
-import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { useSidebarSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
-import { OrganizationButtonMemoized } from 'layouts/default/modules/organizationButton'
+import { Add as AddIcon } from '@mui/icons-material'
+import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+
+import { OrganizationButtonMemoized } from './OrganizationButton'
 
 interface ComponentProps {
 	showHeader?: boolean

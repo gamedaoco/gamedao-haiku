@@ -1,4 +1,6 @@
 import React, { Fragment, useCallback } from 'react'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 import {
 	RiShieldLine,
@@ -10,12 +12,9 @@ import {
 	RiExchangeFundsLine,
 	RiAwardLine,
 } from 'react-icons/ri'
-
-import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
-import { useTheme } from '@mui/material/styles'
-
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+
+import { useTheme } from '@mui/material/styles'
 import { Close } from '@mui/icons-material'
 
 import {
@@ -33,7 +32,6 @@ import {
 } from '@mui/material'
 
 import { FontIcons } from 'src/components'
-
 import Link from 'components/Link'
 
 const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />

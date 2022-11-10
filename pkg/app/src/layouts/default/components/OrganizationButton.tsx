@@ -2,9 +2,10 @@ import { memo, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Avatar, Box, Tooltip } from '@mui/material'
 import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
+
+import { Avatar, Box, Tooltip } from '@mui/material'
 
 interface ComponentProps {
 	id: string

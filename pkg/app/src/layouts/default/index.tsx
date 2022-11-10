@@ -6,10 +6,11 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
 
-import { HeaderMobile } from './modules/headerMobile'
-import { Footer } from './modules/footer'
-import { Header } from './modules/header'
-import { Sidebar } from './modules/sidebar'
+import { TopBar } from './components/TopBar'
+import { Header } from './components/Header'
+import { HeaderMobile } from './components/HeaderMobile'
+import { Footer } from './components/Footer'
+import { Sidebar } from './components/Sidebar'
 
 interface ComponentProps {
 	showHeader?: boolean
@@ -36,6 +37,8 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
 
+	const spacing = showHeader ? `calc( 100vh - 90px )` : `100vh`
+
 	return (
 		<>
 			<Head>
@@ -43,6 +46,8 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			</Head>
 
 			<Box>
+				<TopBar />
+
 				{showHeader &&
 					(isMd ? (
 						<Header onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
@@ -54,9 +59,9 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 				{/*{!isMd && <Box height={45} />}*/}
 
 				<Box>
-					<Stack direction="row" spacing={0} sx={{ minHeight: `calc( 100vh - 90px )` }}>
+					<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
 						{showSidebar && (isMd || sidebarOpen) && connected && (
-							<Box sx={{ minWidth: 90, minHeight: `calc( 100vh - 90px )` }}>
+							<Box sx={{ minWidth: 90, minHeight: spacing }}>
 								<Sidebar />
 							</Box>
 						)}
@@ -64,9 +69,11 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 						{noContainer ? (
 							children
 						) : (
-							<Box p={[2, 4]} style={{ width: '100%', minHeight: `calc( 100vh - 90px )` }}>
+							<Box p={[2, 4]} style={{ width: '100%', minHeight: spacing }}>
 								<Box component="main" sx={{ flexGrow: 1 }}>
-									<Container maxWidth="xl">{children}</Container>
+									<Container maxWidth="xl" sx={{ border: 0 }}>
+										{children}
+									</Container>
 								</Box>
 							</Box>
 						)}
