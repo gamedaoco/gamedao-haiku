@@ -61,7 +61,7 @@ export function FiltersSection({
 					m: 1.5,
 				}}
 			>
-				<Grid container spacing={3}>
+				<Grid container spacing={3} alignItems="center">
 					<Grid item xs={12} md={4}>
 						{showSearch && (
 							<TextField

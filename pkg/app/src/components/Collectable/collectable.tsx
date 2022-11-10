@@ -5,7 +5,8 @@ import { useTheme } from '@mui/material/styles'
 import { Collectable as CollectableInterface } from 'src/@types/collectable'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 
-import LoadingCollectableCard from 'components/Account/modules/CollectablesSection/loadingCollectableCard'
+import Loader from 'containers/Account/components/Collectables/Loader'
+
 import { ModelDialog } from 'components/Collectable/modules/modelDialog'
 
 interface IpfsMetadata {

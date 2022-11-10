@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
-
-import { ChevronRight, Verified } from '@mui/icons-material'
-import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTranslation } from 'react-i18next'
-import { TransactionData } from 'src/@types/transactionData'
+import { useTheme } from '@mui/material/styles'
+
 import { Organization } from 'src/queries'
 import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
 import { getProposalTypesCount } from 'src/utils/proposalUtils'
+import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
+
+import { ChevronRight, Verified, FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
+import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
+import { TransactionData } from 'src/@types/transactionData'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -43,6 +43,7 @@ export function Overview({
 	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
 	const { push } = useRouter()
+
 	const series1 = [
 		{
 			name: 'Members',
@@ -62,6 +63,7 @@ export function Overview({
 			data: [0, 10, 20, 13, 5],
 		},
 	]
+
 	const [isReadMore, setIsReadMore] = useState<boolean>(true)
 	const [showButton, setShowButton] = useState<boolean>(false)
 
@@ -181,7 +183,7 @@ export function Overview({
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<FmdGood />
-								<Typography variant="body2">USA</Typography>
+								<Typography variant="body2">Earth</Typography>
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<VpnKey />

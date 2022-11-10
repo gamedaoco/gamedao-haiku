@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/default'
 import { Button, Paper, Stack, Typography } from '@mui/material'
 
 export function NoWalletConnected() {

@@ -4,7 +4,8 @@ import {
 	Logout,
 	MoreVert,
 	ExtensionOutlined as NotificationsNone, //or CategoryOultined
-	Fingerprint as Settings,
+	Fingerprint as Identity,
+	SettingsOutlined as Settings,
 	SportsEsportsOutlined as Topic,
 } from '@mui/icons-material'
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
@@ -109,9 +110,17 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 					<Link href={'/account/identity'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
-								<Settings fontSize="small" />
+								<Identity fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Identity</Typography>
+						</MenuItem>
+					</Link>
+					<Link href={'/account/settings'}>
+						<MenuItem sx={{ p: 0 }}>
+							<ListItemIcon>
+								<Settings fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="body2">Settings</Typography>
 						</MenuItem>
 					</Link>
 					<MenuItem onClick={disconnectWallet as any} sx={{ p: 0 }}>

@@ -19,6 +19,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 	const config = useConfig()
 	const address = useCurrentAccountAddress()
 	const { t } = useTranslation()
+
 	const SubHeader = useMemo(() => {
 		return (
 			<Box
@@ -93,7 +94,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 					avatar={
 						<Avatar
 							src={parseIpfsHash(item?.organization_metadata?.logo, config.IPFS_GATEWAY)}
-							sx={{ width: 64, height: 64 }}
+							sx={{ width: 48, height: 48 }}
 						>
 							{item?.organization_metadata?.name?.slice(0, 1)}
 						</Avatar>
