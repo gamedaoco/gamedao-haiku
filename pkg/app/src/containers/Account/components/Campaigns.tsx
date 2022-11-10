@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react'
 
-import { Box, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useTranslation } from 'react-i18next'
 import { Campaign, useCampaignContributorsSubscription, useCampaignSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
+import { Box, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+
 import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { ContributedCampaignsSection } from 'components/CampaignsSection/ContributedCampaignsSection/contributedCampaignsSection'
 import { CampaignEmptyState } from 'components/CampaignsSection/campaignEmptyState'
 
-export function MyCampaignsTab() {
+export function Campaigns() {
 	const { t } = useTranslation()
 	const theme = useTheme()
 	const accountState = useCurrentAccountState()

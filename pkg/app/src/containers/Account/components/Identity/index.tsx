@@ -23,7 +23,8 @@ const initialState = (identity: Identity) => ({
 	discord: identity?.discord || '',
 	web3name: identity?.web3name || '',
 })
-export function IdentityForm() {
+
+export function Identity() {
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 	const resolver = useYupValidationResolver(validation)

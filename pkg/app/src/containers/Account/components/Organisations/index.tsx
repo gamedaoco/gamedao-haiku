@@ -27,7 +27,7 @@ import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { Scrollbar } from 'components/scrollbar'
 
-import LoadingTable from './loadingTable'
+import Loader from './Loader'
 
 interface MyOrganisationsTableProps {
 	loading: boolean
@@ -36,17 +36,22 @@ interface MyOrganisationsTableProps {
 }
 
 export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, title, loading }) => {
+
+	const { t } = useTranslation()
 	const config = useConfig()
 	const router = useRouter()
 	const selectedAddress = useCurrentAccountAddress()
+
 	const editOrganization = useCallback(
 		(id: string) => {
 			router?.push(`/organisations/${id}/settings`)
 		},
 		[router],
 	)
-	const { t } = useTranslation()
-	const isAdmin = useCallback((address: string) => address === selectedAddress, [selectedAddress])
+	const isAdmin = useCallback(
+		(address: string) => address === selectedAddress, [selectedAddress]
+	)
+
 	return (
 		<Card sx={{ borderRadius: '16px' }} variant={'glass'}>
 			<CardContent>
@@ -75,7 +80,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 								</TableRow>
 							</TableHead>
 							{loading ? (
-								<LoadingTable />
+								<Loader />
 							) : (
 								<TableBody>
 									{organisations?.map((organisation, index) => (

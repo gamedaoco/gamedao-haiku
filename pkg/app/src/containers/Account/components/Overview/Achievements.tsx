@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/FavoriteBorder'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEventsOutlined'
 import ShieldIcon from '@mui/icons-material/ShieldOutlined'
 
-export const MyAchievementsCard = () => {
+export const Achievements = () => {
 	const theme = useTheme()
 	const { t } = useTranslation()
 
@@ -43,4 +43,4 @@ export const MyAchievementsCard = () => {
 	)
 }
 
-export default MyAchievementsCard
+export default Achievements

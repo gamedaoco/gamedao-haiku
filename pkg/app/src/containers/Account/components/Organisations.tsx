@@ -9,9 +9,9 @@ import { useTranslation } from 'react-i18next'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-import MyOrganisationsTable from './MyOrganisations/myOrganisations'
+import OrganisationsTable from './Organisations/'
 
-export function MyOrganisationsTab() {
+export function Organisations() {
 	const accountState = useCurrentAccountState()
 	const address = getAddressFromAccountState(accountState)
 	const { data, loading } = useAccountOrganizationsSubscription({
@@ -36,7 +36,7 @@ export function MyOrganisationsTab() {
 			>
 				{t('button:ui:create')}
 			</Button>
-			<MyOrganisationsTable organisations={organisations as Organization[]} loading={loading} />
+			<OrganisationsTable organisations={organisations as Organization[]} loading={loading} />
 		</Box>
 	)
 }

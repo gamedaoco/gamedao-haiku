@@ -19,7 +19,8 @@ import {
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 
-export function MyBalancesCard() {
+export function Balances() {
+
 	const theme = useTheme()
 	const address = useCurrentAccountAddress()
 	const balances = useBalanceByAddress(address)
@@ -106,3 +107,5 @@ export function MyBalancesCard() {
 		</Card>
 	)
 }
+
+export default Balances

@@ -1,19 +1,17 @@
 import React, { FC, memo } from 'react'
-
-import { CollectablesForUserQuery } from 'src/queries'
-import { Grid } from '@mui/material'
 import type { Collectable as CollectableInterface } from 'src/@types/collectable'
+import { CollectablesForUserQuery } from 'src/queries'
 
+import { Grid } from '@mui/material'
 import Collectable from 'components/Collectable/collectable'
-
-import LoadingCollectableCard from './loadingCollectableCard'
+import Loader from './Loader'
 
 interface CollectablesListProps {
 	loading: boolean
 	items: CollectablesForUserQuery
 }
 
-const CollectablesList: FC<CollectablesListProps> = ({ loading, items }) => {
+const Collectables: FC<CollectablesListProps> = ({ loading, items }) => {
 	if (!Array.isArray(items?.rmrkNfts) && !loading) return null
 
 	return (
@@ -21,7 +19,7 @@ const CollectablesList: FC<CollectablesListProps> = ({ loading, items }) => {
 			{loading ? (
 				[1, 2, 3].map((x) => (
 					<Grid item xs={12 / 5} key={x}>
-						<LoadingCollectableCard />
+						<Loader />
 					</Grid>
 				))
 			) : (
@@ -37,4 +35,4 @@ const CollectablesList: FC<CollectablesListProps> = ({ loading, items }) => {
 	)
 }
 
-export default memo(CollectablesList)
+export default memo(Collectables)

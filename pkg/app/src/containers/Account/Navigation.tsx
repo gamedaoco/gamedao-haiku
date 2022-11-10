@@ -1,25 +1,28 @@
 import React, { ChangeEvent, useCallback, useMemo } from 'react'
-
 import { useRouter } from 'next/router'
-import { useTheme } from '@mui/material/styles'
-
-import { Box, Tab, Tabs } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+
+import { useTheme } from '@mui/material/styles'
+import { Box, Tab, Tabs } from '@mui/material'
+import { Identity } from '@mui/icons-material'
 import { AccountTabs } from 'src/@types/account'
 
-interface ComponentProps {
+interface Props {
 	param: AccountTabs
 }
 
-interface TabsInterface {
+interface ITabs {
 	label: string
 	value: AccountTabs
 }
 
-export function TabsSection({ param }: ComponentProps) {
+export function Navigation({ param }: Props) {
+
 	const theme = useTheme()
 	const { t } = useTranslation()
-	const tabs = useMemo<TabsInterface[]>(
+	const { push } = useRouter()
+
+	const tabs = useMemo<ITabs[]>(
 		() => [
 			{
 				label: t('button:navigation:overview'),
@@ -41,10 +44,14 @@ export function TabsSection({ param }: ComponentProps) {
 				label: t('button:navigation:identity'),
 				value: AccountTabs.IDENTITY,
 			},
+			{
+				label: t('button:navigation:settings'),
+				value: AccountTabs.SETTINGS,
+			},
 		],
 		[t],
 	)
-	const { push } = useRouter()
+
 	const handleTabsChange = useCallback(
 		(event: ChangeEvent<{}>, value: AccountTabs): void => {
 			push(`/account/${value}`)
@@ -63,8 +70,8 @@ export function TabsSection({ param }: ComponentProps) {
 				value={param || AccountTabs.OVERVIEW}
 				// variant="glass"
 			>
-				{tabs.map((tab) => (
-					<Tab key={tab.value} label={tab.label} value={tab.value} />
+				{ tabs.map( tab => (
+					<Tab key={tab.label} label={tab.label} value={tab.value} />
 				))}
 			</Tabs>
 		</Box>
