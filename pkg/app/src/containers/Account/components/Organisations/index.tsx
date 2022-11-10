@@ -36,7 +36,6 @@ interface MyOrganisationsTableProps {
 }
 
 export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, title, loading }) => {
-
 	const { t } = useTranslation()
 	const config = useConfig()
 	const router = useRouter()
@@ -48,9 +47,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 		},
 		[router],
 	)
-	const isAdmin = useCallback(
-		(address: string) => address === selectedAddress, [selectedAddress]
-	)
+	const isAdmin = useCallback((address: string) => address === selectedAddress, [selectedAddress])
 
 	return (
 		<Card sx={{ borderRadius: '16px' }} variant={'glass'}>

@@ -29,7 +29,6 @@ import FavoriteIcon from '@mui/icons-material/FavoriteBorder'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEventsOutlined'
 import ShieldIcon from '@mui/icons-material/ShieldOutlined'
 
-
 export function Header() {
 	const { push } = useRouter()
 	const { t } = useTranslation()
@@ -46,9 +45,8 @@ export function Header() {
 			.then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [accountState, t])
 	return (
-		<Grid container justifyContent="space-between" spacing={[2,4]}>
-
-			<Grid item sx={{ alignItems: { sm: 'top', md: 'center', }, display: 'flex', overflow: 'hidden', }} >
+		<Grid container justifyContent="space-between" spacing={[2, 4]}>
+			<Grid item sx={{ alignItems: { sm: 'top', md: 'center' }, display: 'flex', overflow: 'hidden' }}>
 				<Avatar
 					sx={{
 						height: {
@@ -83,7 +81,7 @@ export function Header() {
 							<ContentCopyIcon fontSize="small" />
 						</IconButton>
 					</Box>
-{/*
+					{/*
 						<Button
 							size="xs"
 							variant="outlined"
@@ -92,7 +90,7 @@ export function Header() {
 							{t('button:navigation:set_on_chain_identity')}
 						</Button>
 */}
-					</Box>
+				</Box>
 			</Grid>
 			<Grid
 				item
@@ -103,28 +101,25 @@ export function Header() {
 					},
 					display: 'flex',
 				}}
-
 			>
-
-					<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2.5, pr: 3 }}>
-						<Avatar variant="achievement">
-							<EmojiEventsIcon />
-						</Avatar>
-						<Typography fontWeight="700">9000 XP</Typography>
-					</Box>
-					<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2, pr: 3 }}>
-						<Avatar variant="achievement">
-							<FavoriteIcon />
-						</Avatar>
-						<Typography fontWeight="700">1337 Reputation</Typography>
-					</Box>
-					<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 3 }}>
-						<Avatar variant="achievement">
-							<ShieldIcon />
-						</Avatar>
-						<Typography fontWeight="700">42 Trust</Typography>
-					</Box>
-
+				<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2.5, pr: 3 }}>
+					<Avatar variant="achievement">
+						<EmojiEventsIcon />
+					</Avatar>
+					<Typography fontWeight="700">9000 XP</Typography>
+				</Box>
+				<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2, pr: 3 }}>
+					<Avatar variant="achievement">
+						<FavoriteIcon />
+					</Avatar>
+					<Typography fontWeight="700">1337 Reputation</Typography>
+				</Box>
+				<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 3 }}>
+					<Avatar variant="achievement">
+						<ShieldIcon />
+					</Avatar>
+					<Typography fontWeight="700">42 Trust</Typography>
+				</Box>
 			</Grid>
 		</Grid>
 	)

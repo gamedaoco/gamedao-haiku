@@ -14,7 +14,6 @@ import { Collectables } from './Collectables'
 import { Organisations } from './Organisations'
 
 export function Overview() {
-
 	const theme = useTheme()
 	const address = useCurrentAccountAddress()
 	const { t } = useTranslation()
@@ -24,9 +23,7 @@ export function Overview() {
 			address: address,
 		},
 	})
-	const organisations = data?.identity_by_pk?.organization_members?.map(
-		({ organization }) => organization
-	)?.slice()
+	const organisations = data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice()
 
 	return (
 		<Box>
@@ -50,7 +47,6 @@ export function Overview() {
 				<Grid item xs={12}>
 					<Collectables />
 				</Grid>
-
 			</Grid>
 		</Box>
 	)

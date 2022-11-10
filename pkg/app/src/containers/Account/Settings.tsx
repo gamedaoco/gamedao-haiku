@@ -6,11 +6,7 @@ interface ComponentProps {
 	args: AccountTabs
 }
 export function Settings({ args }: ComponentProps) {
-	return (
-		<Box>
-
-		</Box>
-	)
+	return <Box></Box>
 }
 
 export default Settings

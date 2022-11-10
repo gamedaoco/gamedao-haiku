@@ -17,7 +17,6 @@ interface ITabs {
 }
 
 export function Navigation({ param }: Props) {
-
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const { push } = useRouter()
@@ -70,7 +69,7 @@ export function Navigation({ param }: Props) {
 				value={param || AccountTabs.OVERVIEW}
 				// variant="glass"
 			>
-				{ tabs.map( tab => (
+				{tabs.map((tab) => (
 					<Tab key={tab.label} label={tab.label} value={tab.value} />
 				))}
 			</Tabs>
