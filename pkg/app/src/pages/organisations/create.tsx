@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Container, Box, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/default'
 import { Form } from 'components/Forms/Organization/form'
 
 export function CreateOrganisationPage() {

@@ -4,13 +4,13 @@ import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useTranslation } from 'react-i18next'
 import { AccountTabs } from 'src/@types/account'
 
-import { AccountPageGeneralLayout } from 'components/Account/generalLayout'
-import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
+import { Layout } from 'layouts/default'
+import Account from 'containers/Account'
 
-import { Layout } from 'layouts/default/layout'
+import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
-export function AccountByTab() {
+export function Page() {
 	const { t } = useTranslation()
 	const { query } = useRouter()
 	const param = query?.path
@@ -25,15 +25,17 @@ export function AccountByTab() {
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">Dashboard</Typography>
+						<Typography variant="h3">
+							{param && param !== `overview` ? `${t('page:account:title')} — x` : t('page:account:title')}
+						</Typography>
 					</Grid>
 					<Grid item></Grid>
 				</Grid>
 			</Box>
 
-			<AccountPageGeneralLayout param={param as AccountTabs} />
+			<Account param={param as AccountTabs} />
 		</Layout>
 	)
 }
 
-export default AccountByTab
+export default Page

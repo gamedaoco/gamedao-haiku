@@ -29,7 +29,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/default'
 import { Image } from 'components/Image/image'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'

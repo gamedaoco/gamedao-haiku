@@ -12,9 +12,11 @@ import {
 	useOrganizationsPaginationSubscription,
 } from 'src/queries'
 
+import { Layout } from 'layouts/default'
+
 import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { Layout } from 'layouts/default/layout'
+
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
@@ -75,7 +77,7 @@ export function OrganisationPage() {
 	return (
 		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
 			<Box sx={{ mb: 2 }}>
-				<Grid container justifyContent="space-between" spacing={3}>
+				<Grid container justifyContent="space-between" alignItems="center" spacing={3}>
 					<Grid item>
 						<Typography variant="h3">{t('page:organisations:title')}</Typography>
 					</Grid>
@@ -96,7 +98,7 @@ export function OrganisationPage() {
 						showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
 						showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
 						showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
-						searchPlaceHolder={t('page:organisations:search_place_holder')}
+						searchPlaceHolder={'Find Organisations...' || t('page:organisations:search_place_holder')}
 						ListTab={OrganizationFiltersListTab}
 					/>
 
@@ -122,21 +124,22 @@ export function OrganisationPage() {
 									gap: 1.5,
 								}}
 							>
-								{buttonVisibility && (
-									<Button
-										endIcon={<ArrowDownward />}
-										onClick={() => setBodyCount((p) => p + 30)}
-										variant="outlined"
-									>
-										{t('page:organisations:load_more')}
-									</Button>
-								)}
-								<Typography>
+								<Typography variant="body2">
 									{t('page:organisations:showing_results', {
 										count1: paginatedData?.length,
 										count2: organizationsCount?.data?.organization_aggregate?.aggregate.count,
 									})}
 								</Typography>
+
+								{buttonVisibility && (
+									<Button
+										endIcon={<ArrowDownward />}
+										onClick={() => setBodyCount((p) => p + 30)}
+										// variant="outlined"
+									>
+										{t('page:organisations:load_more')}
+									</Button>
+								)}
 							</Box>
 						</Box>
 					</Box>
