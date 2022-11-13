@@ -55,8 +55,11 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn format:staged"
+      "pre-commit": "yarn lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,html,css}": "yarn format"
   },
   "commitlint": {
     "extends": [
