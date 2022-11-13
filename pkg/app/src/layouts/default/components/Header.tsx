@@ -8,15 +8,28 @@ import Feedback from 'components/Feedback'
 
 import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
+
 import {
-	RiShieldLine,
+	PanoramaFishEyeOutlined as Dashboard, // or DashboardOutlined
+	CastleOutlined as Folder, // or AccountBalanceOutlined
+	Logout,
+	MoreVert,
+	ExtensionOutlined as NotificationsNone, //or CategoryOultined
+	Fingerprint as Identity,
+	SettingsOutlined as Settings,
+	SportsEsportsOutlined as Topic,
+} from '@mui/icons-material'
+
+import {
+	RiShieldLine as Guilds,
+	RiTreasureMapLine as Quests,
+	RiGamepadLine as Campaigns,
+	RiAwardLine as Achievements,
+	RiVipDiamondLine as Store,
 	RiSwordLine,
-	RiTreasureMapLine,
-	RiVipDiamondLine,
 	RiBookOpenLine,
 	RiDropLine,
 	RiExchangeFundsLine,
-	RiAwardLine,
 	RiChat1Line,
 } from 'react-icons/ri'
 
@@ -26,8 +39,8 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
-const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
+const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
+const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height="16px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
@@ -38,22 +51,27 @@ const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
 		path: '/organisations',
-		icon: <RiShieldLine />,
-	},
-	{
-		name: 'Quests', //'button:navigation:quests',
-		path: '/quests',
-		icon: <RiTreasureMapLine />,
+		icon: <Guilds />,
 	},
 	// {
-	// 	name: 'Achievements', //'button:navigation:quests',
-	// 	path: '/achievements',
-	// 	icon: <RiAwardLine/>
+	// 	name: 'Quests', //'button:navigation:quests',
+	// 	path: '/quests',
+	// 	icon: <Quests />,
 	// },
 	{
 		name: 'Campaigns', // button:navigation:campaigns',
 		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
+		icon: <Campaigns />,
+	},
+	// {
+	// 	name: 'Achievements', //'button:navigation:quests',
+	// 	path: '/achievements',
+	// 	icon: <Achievements/>
+	// },
+	{
+		name: 'Store',
+		path: '/store',
+		icon: <Store />,
 	},
 ]
 
@@ -151,10 +169,12 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						)
 					})}
 
-					<Button ref={anchorRef} onClick={openFeedback}>
-						<RiChat1Line />
-						{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
-					</Button>
+					{showFeedback && (
+						<Button ref={anchorRef} onClick={openFeedback}>
+							<RiChat1Line />
+							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
+						</Button>
+					)}
 					{showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />}
 
 					<MenuItem>

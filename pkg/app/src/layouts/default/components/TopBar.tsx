@@ -3,9 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import Link from 'components/Link'
 
-import { AccountSelector } from 'components/AccountSelector/accountSelector'
-import Feedback from 'components/Feedback'
-
 import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
@@ -25,7 +22,25 @@ import {
 	RiCopperCoinLine, // ZERO
 	RiCopperDiamondLine, // GAME
 	RiMoneyDollarCircleLine, // USD
+	RiCheckboxBlankCircleLine as Dashboard,
+	RiFingerprintLine as Identity,
+	RiGamepadLine as Campaigns,
 } from 'react-icons/ri'
+import {
+	// RiShieldLine as Guilds,
+	// RiTreasureMapLine as Quests,
+	// RiGamepadLine as Campaigns,
+	// RiAwardLine as Achievements,
+	RiVipDiamondLine as Store,
+} from 'react-icons/ri'
+import {
+	CastleOutlined as Folder, // or AccountBalanceOutlined
+	Logout,
+	MoreVert,
+	ExtensionOutlined as NotificationsNone, //or CategoryOultined
+	SettingsOutlined as Settings,
+	SportsEsportsOutlined as Topic,
+} from '@mui/icons-material'
 
 import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
@@ -33,13 +48,12 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
-const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
-
 interface ComponentProps {
 	onSidebarOpen: () => void
 	sidebarOpen: boolean
 }
+
+const lerp = (start, end) => Math.round(Math.max(start, end) - Math.min(start, end) / 2)
 
 const left = [
 	{
@@ -52,23 +66,34 @@ const left = [
 		path: '/quests',
 		icon: <RiTreasureMapLine />,
 	},
-	{
+	/*	{
 		name: 'Achievements', //'button:navigation:quests',
 		path: '/achievements',
 		icon: <RiTrophyLine />,
-	},
+	},*/
 	{
 		name: 'Campaigns', // button:navigation:campaigns',
 		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
+		icon: <Campaigns />,
+	},
+	{
+		name: 'Store',
+		path: '/store',
+		icon: <Store />,
 	},
 ]
 
 const fn = [
 	{
 		name: 'Feedback', //'button:navigation:faucet',
-		path: '/feedback',
+		path: '/service/feedback',
 		icon: <RiChat1Line />,
+		color: '#ffffff',
+	},
+	{
+		name: 'Dashboard', //'button:navigation:faucet',
+		path: '/account/overview',
+		icon: <Dashboard />,
 		color: '#ffffff',
 	},
 ]
@@ -146,32 +171,15 @@ export function TopBar({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const router = useRouter()
-	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-		defaultMatches: true,
-	})
-	const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
-		defaultMatches: true,
-	})
-
-	const [showFeedback, setFeedback] = useState(false)
-	const anchorRef = useRef(null)
-	const openFeedback = () => setFeedback(true)
-	const closeFeedback = () => setFeedback(false)
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
+	const isLg = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
 
 	return (
 		<AppBar
 			position="sticky"
-			style={{ background: 'rgba(0,0,0,1)', borderRadius: 0, p: 0, m: 0, boxShadow: '0px 5px 15px #00000099' }}
+			style={{ background: '#000', borderRadius: 0, p: 0, m: 0, boxShadow: '0px 5px 15px #00000099' }}
 		>
-			<Toolbar
-				sx={{
-					// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					p: 0,
-					m: -2,
-				}}
-			>
+			<Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center', p: 0, m: -2 }}>
 				<Stack ml={2} display="flex" direction="row" justifyContent="left" alignItems="center">
 					<Items items={left} />
 				</Stack>

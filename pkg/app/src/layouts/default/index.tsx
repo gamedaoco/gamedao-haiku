@@ -37,6 +37,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
 
+	const showTopBar = true
 	const spacing = showHeader ? `calc( 100vh - 90px )` : `100vh`
 
 	return (
@@ -46,7 +47,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			</Head>
 
 			<Box>
-				<TopBar />
+				{showTopBar && <TopBar />}
 
 				{showHeader &&
 					(isMd ? (
@@ -54,9 +55,6 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 					) : (
 						<HeaderMobile onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
 					))}
-
-				{/*{showHeader && <Box height={90} />}*/}
-				{/*{!isMd && <Box height={45} />}*/}
 
 				<Box>
 					<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
