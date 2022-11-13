@@ -27,13 +27,13 @@ async function startServer() {
 	await balanceManager.Initialize()
 
 	const app = express()
-	const prometheusExporterPlugin = createPrometheusExporterPlugin({ app });
+	const prometheusExporterPlugin = createPrometheusExporterPlugin({ app })
 
 	const server = new ApolloServer({
 		typeDefs,
 		resolvers: resolvers(),
 		cache: 'bounded',
-		plugins: [prometheusExporterPlugin]
+		plugins: [prometheusExporterPlugin],
 	})
 	await server.start()
 

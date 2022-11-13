@@ -101,26 +101,7 @@ export function Header() {
 					},
 					display: 'flex',
 				}}
-			>
-				<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2.5, pr: 3 }}>
-					<Avatar variant="achievement">
-						<EmojiEventsIcon />
-					</Avatar>
-					<Typography fontWeight="700">9000 XP</Typography>
-				</Box>
-				<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 2, pr: 3 }}>
-					<Avatar variant="achievement">
-						<FavoriteIcon />
-					</Avatar>
-					<Typography fontWeight="700">1337 Reputation</Typography>
-				</Box>
-				<Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: 3 }}>
-					<Avatar variant="achievement">
-						<ShieldIcon />
-					</Avatar>
-					<Typography fontWeight="700">42 Trust</Typography>
-				</Box>
-			</Grid>
+			></Grid>
 		</Grid>
 	)
 }

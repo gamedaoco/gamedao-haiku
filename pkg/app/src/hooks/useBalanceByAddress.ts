@@ -30,8 +30,8 @@ export function useBalanceByAddress(address: string): Balance[] {
 		if (data && systemProperties) {
 			setBalanceState(
 				data.Balance
-				// @ts-ignore
-					.sort((a, b) => a.balanceId < b.balanceId ? -1 : a.balanceId > b.balanceId ? 1 : 0)
+					// @ts-ignore
+					.sort((a, b) => (a.balanceId < b.balanceId ? -1 : a.balanceId > b.balanceId ? 1 : 0))
 					.map((balance) => {
 						const tokenDecimals = systemProperties.tokenDecimals?.[balance.balanceId] ?? 18
 						return {
