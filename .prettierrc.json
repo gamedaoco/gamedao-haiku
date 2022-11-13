@@ -5,7 +5,7 @@
   "printWidth": 120,
   "tabWidth": 4,
   "useTabs": true,
-  "parser": "typescript",
+  "parser": "babel-ts",
   "semi": false,
   "importOrder": [
     "^(react/(.*)$)|^(react$)",
