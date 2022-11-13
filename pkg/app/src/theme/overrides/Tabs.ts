@@ -7,8 +7,9 @@ export default function Tabs(theme: Theme) {
 				root: {
 					padding: 0,
 					fontWeight: theme.typography.fontWeightMedium,
-					// borderTopLeftRadius: theme.shape.borderRadius,
-					// borderTopRightRadius: theme.shape.borderRadius,
+					borderTopLeftRadius: 0,
+					borderTopRightRadius: 0,
+					// borderRadius: 0, //theme.shape.borderRadiusLg,
 					'&.Mui-selected': {
 						color: theme.palette.primary.main,
 					},
@@ -42,7 +43,7 @@ export default function Tabs(theme: Theme) {
 			styleOverrides: {
 				root: {
 					padding: 0,
-					borderRadius: '50%',
+					borderRadius: 0,
 				},
 			},
 			// variants: [
@@ -60,7 +61,7 @@ export default function Tabs(theme: Theme) {
 			styleOverrides: {
 				root: {
 					width: 48,
-					borderRadius: '50%',
+					// borderRadius: '50%',
 				},
 			},
 		},
@@ -69,6 +70,7 @@ export default function Tabs(theme: Theme) {
 				root: {
 					color: theme.palette.text.primary,
 					borderWidth: '10px',
+					boxShadow: '0px 15px 30px #0ff',
 				},
 			},
 		},

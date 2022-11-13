@@ -4,7 +4,7 @@ import { Theme } from '@mui/material/styles'
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
-		secondary: true
+		micro: true
 	}
 }
 
@@ -12,23 +12,24 @@ export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
 			variants: [
-				// {
-				// 	props: { variant: 'outlined' },
-				// 	style: {
-				// 		color: 'primary' ? theme.palette.common.white : theme.palette.text.secondary,
-				// 	},
-				// },
-				// {
-				// 	props: { variant: 'secondary' },
-				// 	style: {
-				// 		color: theme.palette.common.white,
-				// 	},
-				// },
+				{
+					props: { variant: 'micro' },
+					style: {
+						height: '20px',
+						fontSize: '10px',
+						background: 'none',
+						boxShadow: theme.customShadows.primary,
+						border: `1px solid ${theme.palette.grey[500_32]}`,
+						borderRadius: theme.shape.borderRadiusLg,
+						// p: `1rem`,
+						// m: `1rem`,
+					},
+				},
 			],
 
 			styleOverrides: {
 				root: {
-					borderRadius: Number(theme.shape.borderRadius) * 10,
+					borderRadius: theme.shape.borderRadiusLg,
 					'&:hover': {
 						boxShadow: 'none',
 					},
@@ -37,6 +38,9 @@ export default function Button(theme: Theme) {
 				sizeLarge: {
 					height: 48,
 				},
+				sizeXs: {
+					height: '15px',
+				},
 
 				containedInherit: {
 					boxShadow: theme.customShadows.z8,
@@ -44,7 +48,6 @@ export default function Button(theme: Theme) {
 						backgroundColor: theme.palette.grey[400],
 					},
 				},
-
 				containedPrimary: {
 					boxShadow: theme.customShadows.primary,
 					color: theme.palette.grey[800],
