@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	title: 'Pages/Home',
 	// component: Page,
