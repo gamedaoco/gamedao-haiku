@@ -179,10 +179,12 @@ export function OrganisationById() {
 							variant={'glass'}
 							sx={{
 								position: 'relative',
-								background: '#000000aa',
+								background: '#000000ee',
 								backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), #000000aa)`,
 							}}
 						>
+							{/* PROFILE PIC */}
+							{/* PROFILE PIC */}
 							<Stack
 								direction={isMd ? 'row' : 'column'}
 								spacing={2}
@@ -262,22 +264,29 @@ export function OrganisationById() {
 											})}
 										</Typography>
 									</Stack>
-									{/*											<Stack>
-												{organizationState &&
-													!isMemberState &&
-													address !== organizationState?.creator && (
-														<Button
-															variant="contained"
-															disabled={!addMemberTx}
-															onClick={handleOpenTxModal}
-														>
-															{t('button:ui:join_organization')}
-														</Button>
-													)}
-											</Stack>
-*/}
+									<Stack>
+										{organizationState && isMemberState && address !== organizationState?.creator && (
+											<Button
+												// variant="micro"
+												disabled={!addMemberTx}
+												onClick={handleOpenTxModal}
+											>
+												{
+													'join' //t('button:ui:join_organization')
+												}
+											</Button>
+										)}
+									</Stack>
 								</Stack>
 							</Stack>
+							{/*
+							 */}
+
+							{/* HEADER IMAGE */}
+							{/* HEADER IMAGE */}
+
+							{/*
+							 */}
 
 							<Grid
 								height={isMd ? '20vh' : '40vh'}
@@ -287,6 +296,7 @@ export function OrganisationById() {
 								overflow="hidden"
 								position="relative"
 								sx={{
+									borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
 									height: '40vh',
 									[theme.breakpoints.up('sm')]: {
 										height: '25vh',
@@ -318,7 +328,6 @@ export function OrganisationById() {
 											)}
 											alt="logo"
 											sx={{
-												borderRadius: Number(theme.shape.borderRadius) * 20,
 												position: 'absolute',
 												top: 0,
 												left: 0,
@@ -327,8 +336,6 @@ export function OrganisationById() {
 											}}
 										/>
 									)}
-									{/*
-									 */}
 								</label>
 								<Box
 									sx={{
@@ -337,15 +344,17 @@ export function OrganisationById() {
 										left: 0,
 										right: 0,
 										bottom: 0,
-										background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) -1.23%, #000000 80%)',
+										background:
+											'linear-gradient(182deg, rgba(0, 0, 0, 0) -1.23%, rgba(0,0,0,.9) 80%)',
+										backgroundBlendMode: 'multiply',
 										pointerEvents: 'none',
 									}}
 								></Box>
 							</Grid>
 
-							<Box px={4}>
+							<Box px={4} sx={{ borderRadius: 0 }}>
 								<Tabs
-									// variant="scrollable"
+									// variant="contentheader"
 									// scrollButtons="auto"
 									// fullWidth={true}
 									// indicatorColor="#ff00ff"

@@ -58,10 +58,17 @@ export default class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
+					<link rel="preconnect" href="https://fonts.googleapis.com" />
+					<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 					<link
+						href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+						rel="stylesheet"
+					/>
+					{/*					<link
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Inter:400,600,800&display=swap"
 					/>
+*/}{' '}
 					{/*<link rel="stylesheet" href="/iconfont.css" />*/}
 				</Head>
 				<body
