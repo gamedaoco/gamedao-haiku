@@ -4,27 +4,27 @@ import {
 	PrimaryColumn as PrimaryColumn_,
 	ManyToOne as ManyToOne_,
 	Index as Index_,
-} from 'typeorm';
-import { Organization } from './organization.model';
-import { Identity } from './identity.model';
+} from 'typeorm'
+import { Organization } from './organization.model'
+import { Identity } from './identity.model'
 
 @Entity_()
 export class OrganizationMember {
 	constructor(props?: Partial<OrganizationMember>) {
-		Object.assign(this, props);
+		Object.assign(this, props)
 	}
 
 	@PrimaryColumn_()
-	id!: string;
+	id!: string
 
 	@Index_()
 	@ManyToOne_(() => Organization, { nullable: false })
-	organization!: Organization;
+	organization!: Organization
 
 	@Column_('text', { nullable: false })
-	address!: string;
+	address!: string
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	identity!: Identity;
+	identity!: Identity
 }

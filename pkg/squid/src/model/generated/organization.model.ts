@@ -5,87 +5,87 @@ import {
 	ManyToOne as ManyToOne_,
 	Index as Index_,
 	OneToMany as OneToMany_,
-} from 'typeorm';
-import * as marshal from './marshal';
-import { Identity } from './identity.model';
-import { OrganizationMetadata } from './organizationMetadata.model';
-import { OrganizationMember } from './organizationMember.model';
-import { Campaign } from './campaign.model';
-import { Proposal } from './proposal.model';
+} from 'typeorm'
+import * as marshal from './marshal'
+import { Identity } from './identity.model'
+import { OrganizationMetadata } from './organizationMetadata.model'
+import { OrganizationMember } from './organizationMember.model'
+import { Campaign } from './campaign.model'
+import { Proposal } from './proposal.model'
 
 @Entity_()
 export class Organization {
 	constructor(props?: Partial<Organization>) {
-		Object.assign(this, props);
+		Object.assign(this, props)
 	}
 
 	@PrimaryColumn_()
-	id!: string;
+	id!: string
 
 	@Column_('text', { nullable: false })
-	creator!: string;
+	creator!: string
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	creatorIdentity!: Identity;
+	creatorIdentity!: Identity
 
 	@Column_('text', { nullable: false })
-	prime!: string;
+	prime!: string
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	primeIdentity!: Identity;
+	primeIdentity!: Identity
 
 	@Column_('text', { nullable: false })
-	treasury!: string;
+	treasury!: string
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	treasuryIdentity!: Identity;
+	treasuryIdentity!: Identity
 
 	@Column_('text', { nullable: false })
-	accessModel!: string;
+	accessModel!: string
 
 	@Column_('text', { nullable: false })
-	feeModel!: string;
+	feeModel!: string
 
 	@Column_('text', { nullable: false })
-	type!: string;
+	type!: string
 
 	@Column_('text', { nullable: false })
-	state!: string;
+	state!: string
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: true })
-	membershipFee!: bigint | undefined | null;
+	membershipFee!: bigint | undefined | null
 
 	@Column_('text', { nullable: false })
-	govCurrency!: string;
+	govCurrency!: string
 
 	@Column_('text', { nullable: false })
-	payCurrency!: string;
+	payCurrency!: string
 
 	@Column_('int4', { nullable: false })
-	memberLimit!: number;
+	memberLimit!: number
 
 	@Index_()
 	@ManyToOne_(() => OrganizationMetadata, { nullable: true })
-	metadata!: OrganizationMetadata | undefined | null;
+	metadata!: OrganizationMetadata | undefined | null
 
 	@Column_('int4', { nullable: false })
-	createdAtBlock!: number;
+	createdAtBlock!: number
 
 	@Column_('int4', { nullable: false })
-	updatedAtBlock!: number;
+	updatedAtBlock!: number
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	deposit!: bigint;
+	deposit!: bigint
 
 	@OneToMany_(() => OrganizationMember, (e) => e.organization)
-	members!: OrganizationMember[];
+	members!: OrganizationMember[]
 
 	@OneToMany_(() => Campaign, (e) => e.organization)
-	campaigns!: Campaign[];
+	campaigns!: Campaign[]
 
 	@OneToMany_(() => Proposal, (e) => e.organization)
-	proposals!: Proposal[];
+	proposals!: Proposal[]
 }

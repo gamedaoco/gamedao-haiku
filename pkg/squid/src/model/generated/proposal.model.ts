@@ -4,77 +4,77 @@ import {
 	PrimaryColumn as PrimaryColumn_,
 	ManyToOne as ManyToOne_,
 	Index as Index_,
-} from 'typeorm';
-import * as marshal from './marshal';
-import { Identity } from './identity.model';
-import { Organization } from './organization.model';
-import { Campaign } from './campaign.model';
-import { Voting } from './voting.model';
-import { ProposalMetadata } from './proposalMetadata.model';
+} from 'typeorm'
+import * as marshal from './marshal'
+import { Identity } from './identity.model'
+import { Organization } from './organization.model'
+import { Campaign } from './campaign.model'
+import { Voting } from './voting.model'
+import { ProposalMetadata } from './proposalMetadata.model'
 
 @Entity_()
 export class Proposal {
 	constructor(props?: Partial<Proposal>) {
-		Object.assign(this, props);
+		Object.assign(this, props)
 	}
 
 	@PrimaryColumn_()
-	id!: string;
+	id!: string
 
 	@Column_('text', { nullable: false })
-	creator!: string;
+	creator!: string
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	creatorIdentity!: Identity;
+	creatorIdentity!: Identity
 
 	@Index_()
 	@ManyToOne_(() => Organization, { nullable: false })
-	organization!: Organization;
+	organization!: Organization
 
 	@Index_()
 	@ManyToOne_(() => Campaign, { nullable: true })
-	campaign!: Campaign | undefined | null;
+	campaign!: Campaign | undefined | null
 
 	@Column_('text', { nullable: false })
-	type!: string;
+	type!: string
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	deposit!: bigint;
+	deposit!: bigint
 
 	@Column_('text', { nullable: false })
-	state!: string;
+	state!: string
 
 	@Index_()
 	@ManyToOne_(() => Voting, { nullable: false })
-	voting!: Voting;
+	voting!: Voting
 
 	@Column_('int4', { nullable: false })
-	start!: number;
+	start!: number
 
 	@Column_('int4', { nullable: false })
-	expiry!: number;
+	expiry!: number
 
 	@Column_('int4', { nullable: false })
-	createdAtBlock!: number;
+	createdAtBlock!: number
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: true })
-	amount!: bigint | undefined | null;
+	amount!: bigint | undefined | null
 
 	@Column_('text', { nullable: true })
-	currencyId!: string | undefined | null;
+	currencyId!: string | undefined | null
 
 	@Column_('text', { nullable: true })
-	beneficiary!: string | undefined | null;
+	beneficiary!: string | undefined | null
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: true })
-	beneficiaryIdentity!: Identity | undefined | null;
+	beneficiaryIdentity!: Identity | undefined | null
 
 	@Column_('text', { nullable: true })
-	slashingRule!: string | undefined | null;
+	slashingRule!: string | undefined | null
 
 	@Index_()
 	@ManyToOne_(() => ProposalMetadata, { nullable: true })
-	metadata!: ProposalMetadata | undefined | null;
+	metadata!: ProposalMetadata | undefined | null
 }

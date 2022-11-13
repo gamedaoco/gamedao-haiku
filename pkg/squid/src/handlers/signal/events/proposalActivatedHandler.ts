@@ -1,26 +1,26 @@
-import { SignalActivatedEvent } from '../../../types/events';
-import { hashToHexString } from '../../../utils';
-import { EventHandlerContext } from '@subsquid/substrate-processor';
-import { getProposal } from '../../../database/getters';
+import { SignalActivatedEvent } from '../../../types/events'
+import { hashToHexString } from '../../../utils'
+import { EventHandlerContext } from '@subsquid/substrate-processor'
+import { getProposal } from '../../../database/getters'
 
 async function handleProposalActivatedEvent(context: EventHandlerContext) {
-	let eventName = 'Signal.Activated';
-	let raw_event = new SignalActivatedEvent(context);
+	let eventName = 'Signal.Activated'
+	let raw_event = new SignalActivatedEvent(context)
 
 	if (!raw_event.isV62) {
-		console.error(`Unknown version: ${eventName}`);
-		return;
+		console.error(`Unknown version: ${eventName}`)
+		return
 	}
-	let store = context.store;
-	let event = raw_event.asV62;
+	let store = context.store
+	let event = raw_event.asV62
 
-	let proposalId = hashToHexString(event.proposalId);
-	let proposal = await getProposal(store, proposalId);
-	if (!proposal) return;
+	let proposalId = hashToHexString(event.proposalId)
+	let proposal = await getProposal(store, proposalId)
+	if (!proposal) return
 
-	proposal.state = 'Active';
+	proposal.state = 'Active'
 
-	await store.save(proposal);
+	await store.save(proposal)
 }
 
-export { handleProposalActivatedEvent };
+export { handleProposalActivatedEvent }

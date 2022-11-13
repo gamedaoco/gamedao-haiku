@@ -7,7 +7,7 @@ import { addressCodec, hashToHexString } from '../../../utils'
 import { EventHandlerContext } from '@subsquid/substrate-processor'
 import { getProposal } from '../../../database/getters'
 
-async function handleProposalVotedEvent(context: EventHandlerContext) {
+export async function handlePropertyUpdated(context: EventHandlerContext) {
 	let eventName = 'Signal.Voted'
 	if (!context.extrinsic) {
 		console.error(`No extrinsic in the context: ${eventName}`)
@@ -53,5 +53,3 @@ async function handleProposalVotedEvent(context: EventHandlerContext) {
 	voter.voted = event.voted
 	await store.save(voter)
 }
-
-export { handleProposalVotedEvent }

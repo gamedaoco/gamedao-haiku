@@ -4,37 +4,37 @@ import {
 	PrimaryColumn as PrimaryColumn_,
 	ManyToOne as ManyToOne_,
 	Index as Index_,
-} from 'typeorm';
-import * as marshal from './marshal';
-import { Voting } from './voting.model';
-import { Identity } from './identity.model';
+} from 'typeorm'
+import * as marshal from './marshal'
+import { Voting } from './voting.model'
+import { Identity } from './identity.model'
 
 @Entity_()
 export class ProposalVoter {
 	constructor(props?: Partial<ProposalVoter>) {
-		Object.assign(this, props);
+		Object.assign(this, props)
 	}
 
 	@PrimaryColumn_()
-	id!: string;
+	id!: string
 
 	@Index_()
 	@ManyToOne_(() => Voting, { nullable: false })
-	voting!: Voting;
+	voting!: Voting
 
 	@Column_('text', { nullable: false })
-	address!: string;
+	address!: string
 
 	@Index_()
 	@ManyToOne_(() => Identity, { nullable: false })
-	identity!: Identity;
+	identity!: Identity
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: false })
-	power!: bigint;
+	power!: bigint
 
 	@Column_('numeric', { transformer: marshal.bigintTransformer, nullable: true })
-	amount!: bigint | undefined | null;
+	amount!: bigint | undefined | null
 
 	@Column_('bool', { nullable: false })
-	voted!: boolean;
+	voted!: boolean
 }

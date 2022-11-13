@@ -1,10 +1,10 @@
 // Imports
-import { IPalletActionHandler, IPalletEventHandler, IPalletExtrinsicHandler } from './@types/palletHandler';
-import pallets from './handlers';
+import { IPalletActionHandler, IPalletEventHandler, IPalletExtrinsicHandler } from './@types/palletHandler'
+import pallets from './handlers'
 
 // Data
-const extrinsicHandlers: IPalletExtrinsicHandler[] = [];
-const eventHandlers: IPalletEventHandler[] = [];
+const extrinsicHandlers: IPalletExtrinsicHandler[] = []
+const eventHandlers: IPalletEventHandler[] = []
 
 // Collect all handlers
 pallets.forEach((pallet) => {
@@ -14,14 +14,14 @@ pallets.forEach((pallet) => {
 				action: `${pallet.name}.${handler.action}`,
 				options: handler.options,
 				handler: handler.handler,
-			});
-		});
-	};
+			})
+		})
+	}
 
 	// Merge them into main arrays
-	mergeHandlers(pallet.extrinsicHandlers, extrinsicHandlers);
-	mergeHandlers(pallet.eventHandlers, eventHandlers);
-});
+	mergeHandlers(pallet.extrinsicHandlers, extrinsicHandlers)
+	mergeHandlers(pallet.eventHandlers, eventHandlers)
+})
 
 // Exports
-export { extrinsicHandlers, eventHandlers };
+export { extrinsicHandlers, eventHandlers }

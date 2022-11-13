@@ -1,65 +1,65 @@
-import type { Result } from './support';
+import type { Result } from './support'
 
-export type H256 = Uint8Array;
+export type H256 = Uint8Array
 
-export type AccountId32 = Uint8Array;
+export type AccountId32 = Uint8Array
 
-export type CurrencyId = CurrencyId_Token;
+export type CurrencyId = CurrencyId_Token
 
 export interface CurrencyId_Token {
-	__kind: 'Token';
-	value: TokenSymbol;
+	__kind: 'Token'
+	value: TokenSymbol
 }
 
 export interface CurrencyId_ForeignAsset {
-	__kind: 'ForeignAsset';
-	value: number;
+	__kind: 'ForeignAsset'
+	value: number
 }
 
-export type OrgType = OrgType_Individual | OrgType_Company | OrgType_Dao | OrgType_Hybrid;
+export type OrgType = OrgType_Individual | OrgType_Company | OrgType_Dao | OrgType_Hybrid
 
 export interface OrgType_Individual {
-	__kind: 'Individual';
+	__kind: 'Individual'
 }
 
 export interface OrgType_Company {
-	__kind: 'Company';
+	__kind: 'Company'
 }
 
 export interface OrgType_Dao {
-	__kind: 'Dao';
+	__kind: 'Dao'
 }
 
 export interface OrgType_Hybrid {
-	__kind: 'Hybrid';
+	__kind: 'Hybrid'
 }
 
-export type AccessModel = AccessModel_Open | AccessModel_Voting | AccessModel_Prime;
+export type AccessModel = AccessModel_Open | AccessModel_Voting | AccessModel_Prime
 
 export interface AccessModel_Open {
-	__kind: 'Open';
+	__kind: 'Open'
 }
 
 export interface AccessModel_Voting {
-	__kind: 'Voting';
+	__kind: 'Voting'
 }
 
 export interface AccessModel_Prime {
-	__kind: 'Prime';
+	__kind: 'Prime'
 }
 
-export type FeeModel = FeeModel_NoFees | FeeModel_Reserve | FeeModel_Transfer;
+export type FeeModel = FeeModel_NoFees | FeeModel_Reserve | FeeModel_Transfer
 
 export interface FeeModel_NoFees {
-	__kind: 'NoFees';
+	__kind: 'NoFees'
 }
 
 export interface FeeModel_Reserve {
-	__kind: 'Reserve';
+	__kind: 'Reserve'
 }
 
 export interface FeeModel_Transfer {
-	__kind: 'Transfer';
+	__kind: 'Transfer'
 }
 
 export type FlowProtocol =
@@ -68,106 +68,106 @@ export type FlowProtocol =
 	| FlowProtocol_Lend
 	| FlowProtocol_Loan
 	| FlowProtocol_Share
-	| FlowProtocol_Pool;
+	| FlowProtocol_Pool
 
 export interface FlowProtocol_Grant {
-	__kind: 'Grant';
+	__kind: 'Grant'
 }
 
 export interface FlowProtocol_Raise {
-	__kind: 'Raise';
+	__kind: 'Raise'
 }
 
 export interface FlowProtocol_Lend {
-	__kind: 'Lend';
+	__kind: 'Lend'
 }
 
 export interface FlowProtocol_Loan {
-	__kind: 'Loan';
+	__kind: 'Loan'
 }
 
 export interface FlowProtocol_Share {
-	__kind: 'Share';
+	__kind: 'Share'
 }
 
 export interface FlowProtocol_Pool {
-	__kind: 'Pool';
+	__kind: 'Pool'
 }
 
-export type FlowGovernance = FlowGovernance_No | FlowGovernance_Yes;
+export type FlowGovernance = FlowGovernance_No | FlowGovernance_Yes
 
 export interface FlowGovernance_No {
-	__kind: 'No';
+	__kind: 'No'
 }
 
 export interface FlowGovernance_Yes {
-	__kind: 'Yes';
+	__kind: 'Yes'
 }
 
-export type ProposalType = ProposalType_General | ProposalType_Withdrawal | ProposalType_Spending;
+export type ProposalType = ProposalType_General | ProposalType_Withdrawal | ProposalType_Spending
 
 export interface ProposalType_General {
-	__kind: 'General';
+	__kind: 'General'
 }
 
 export interface ProposalType_Withdrawal {
-	__kind: 'Withdrawal';
+	__kind: 'Withdrawal'
 }
 
 export interface ProposalType_Spending {
-	__kind: 'Spending';
+	__kind: 'Spending'
 }
 
-export type Majority = Majority_Simple | Majority_Relative | Majority_Absolute;
+export type Majority = Majority_Simple | Majority_Relative | Majority_Absolute
 
 export interface Majority_Simple {
-	__kind: 'Simple';
+	__kind: 'Simple'
 }
 
 export interface Majority_Relative {
-	__kind: 'Relative';
+	__kind: 'Relative'
 }
 
 export interface Majority_Absolute {
-	__kind: 'Absolute';
+	__kind: 'Absolute'
 }
 
-export type Unit = Unit_Account | Unit_Token;
+export type Unit = Unit_Account | Unit_Token
 
 export interface Unit_Account {
-	__kind: 'Account';
+	__kind: 'Account'
 }
 
 export interface Unit_Token {
-	__kind: 'Token';
+	__kind: 'Token'
 }
 
-export type Scale = Scale_Linear | Scale_Quadratic;
+export type Scale = Scale_Linear | Scale_Quadratic
 
 export interface Scale_Linear {
-	__kind: 'Linear';
+	__kind: 'Linear'
 }
 
 export interface Scale_Quadratic {
-	__kind: 'Quadratic';
+	__kind: 'Quadratic'
 }
 
-export type Permill = number;
+export type Permill = number
 
-export type TokenSymbol = TokenSymbol_ZERO | TokenSymbol_PLAY | TokenSymbol_GAME | TokenSymbol_DOT;
+export type TokenSymbol = TokenSymbol_ZERO | TokenSymbol_PLAY | TokenSymbol_GAME | TokenSymbol_DOT
 
 export interface TokenSymbol_ZERO {
-	__kind: 'ZERO';
+	__kind: 'ZERO'
 }
 
 export interface TokenSymbol_PLAY {
-	__kind: 'PLAY';
+	__kind: 'PLAY'
 }
 
 export interface TokenSymbol_GAME {
-	__kind: 'GAME';
+	__kind: 'GAME'
 }
 
 export interface TokenSymbol_DOT {
-	__kind: 'DOT';
+	__kind: 'DOT'
 }

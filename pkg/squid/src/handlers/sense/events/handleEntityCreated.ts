@@ -1,15 +1,18 @@
+import { EventHandlerContext } from '@subsquid/substrate-processor'
+
+import { addressCodec, encodeSigner, hashToHexString } from '../../../utils'
+import { Proposal, Voting } from '../../../model'
 import { SignalCreatedEvent } from '../../../types/events'
 import { SignalProposalCall } from '../../../types/calls'
-import { fetchProposalMetadata } from '../../../ipfs/getters'
-import { upsertIdentity } from '../../../database/identity'
-import { getOrg, getCampaign, getVoting } from '../../../database/getters'
-import { upsertProposalMetadata } from '../../../database/metadata'
-import { Proposal, Voting } from '../../../model'
-import { addressCodec, encodeSigner, hashToHexString } from '../../../utils'
-import { EventHandlerContext } from '@subsquid/substrate-processor'
-import { getProposal } from '../../../database/getters'
 
-async function handleProposalCreatedEvent(context: EventHandlerContext) {
+import { fetchProposalMetadata } from '../../../ipfs/getters'
+
+import { getProposal } from '../../../database/getters'
+import { getOrg, getCampaign, getVoting } from '../../../database/getters'
+import { upsertIdentity } from '../../../database/identity'
+import { upsertProposalMetadata } from '../../../database/metadata'
+
+export async function handleEntityCreated(context: EventHandlerContext) {
 	let eventName = 'Signal.Created'
 	if (!context.extrinsic) {
 		console.error(`No extrinsic in the context: ${eventName}`)
@@ -79,5 +82,3 @@ async function handleProposalCreatedEvent(context: EventHandlerContext) {
 	}
 	await store.save(proposal)
 }
-
-export { handleProposalCreatedEvent }

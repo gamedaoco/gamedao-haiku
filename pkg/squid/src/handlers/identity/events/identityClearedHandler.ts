@@ -1,10 +1,10 @@
-import { IdentityUpsertData } from '../../../@types/identity';
-import { upsertIdentity } from '../../../database/identity';
-import { encodeSigner } from '../../../utils';
-import { EventHandlerContext } from '@subsquid/substrate-processor';
+import { IdentityUpsertData } from '../../../@types/identity'
+import { upsertIdentity } from '../../../database/identity'
+import { encodeSigner } from '../../../utils'
+import { EventHandlerContext } from '@subsquid/substrate-processor'
 
 async function handleIdentityClearedEvent(context: EventHandlerContext) {
-	if (!context.extrinsic) return;
+	if (!context.extrinsic) return
 
 	const upsertData: IdentityUpsertData = {
 		address: encodeSigner(context.extrinsic.signer),
@@ -17,9 +17,9 @@ async function handleIdentityClearedEvent(context: EventHandlerContext) {
 		web: null,
 		web3name: null,
 		discord: null,
-	};
+	}
 
-	await upsertIdentity(context.store, upsertData.address, upsertData);
+	await upsertIdentity(context.store, upsertData.address, upsertData)
 }
 
-export { handleIdentityClearedEvent };
+export { handleIdentityClearedEvent }

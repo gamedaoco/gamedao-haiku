@@ -1,8 +1,8 @@
-import { IPallet } from '../../@types/palletHandler';
-import { handleMemberAddedEvent } from './events/memberAddedHandler';
-import { handleOrgCreatedEvent } from './events/orgCreatedHandler';
-import { handleMemberRemovedEvent } from './events/memberRemovedHandler';
-import { handleOrgUpdatedEvent } from './events/orgUpdatedHandler';
+import { IPallet } from '../../@types/palletHandler'
+import { handleMemberAddedEvent } from './events/memberAddedHandler'
+import { handleOrgCreatedEvent } from './events/orgCreatedHandler'
+import { handleMemberRemovedEvent } from './events/memberRemovedHandler'
+import { handleOrgUpdatedEvent } from './events/orgUpdatedHandler'
 
 export default {
 	name: 'control',
@@ -34,4 +34,4 @@ export default {
 			handler: handleMemberRemovedEvent,
 		},
 	],
-} as IPallet;
+} as IPallet

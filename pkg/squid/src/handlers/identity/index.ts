@@ -1,6 +1,6 @@
-import { IPallet } from '../../@types/palletHandler';
-import { handleIdentitySetEvent } from './events/identitySetHandler';
-import { handleIdentityClearedEvent } from './events/identityClearedHandler';
+import { IPallet } from '../../@types/palletHandler'
+import { handleIdentitySetEvent } from './events/identitySetHandler'
+import { handleIdentityClearedEvent } from './events/identityClearedHandler'
 
 export default {
 	name: 'identity',
@@ -15,4 +15,4 @@ export default {
 			handler: handleIdentityClearedEvent,
 		},
 	],
-} as IPallet;
+} as IPallet

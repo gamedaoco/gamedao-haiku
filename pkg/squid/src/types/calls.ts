@@ -1,10 +1,10 @@
-import assert from 'assert';
-import { CallContext, Result, deprecateLatest } from './support';
-import * as v62 from './v62';
+import assert from 'assert'
+import { CallContext, Result, deprecateLatest } from './support'
+import * as v62 from './v62'
 
 export class ControlAddMemberCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'control.addMember' || this.ctx.extrinsic.name === 'control.add_member');
+		assert(this.ctx.extrinsic.name === 'control.addMember' || this.ctx.extrinsic.name === 'control.add_member')
 	}
 
 	/**
@@ -22,7 +22,7 @@ export class ControlAddMemberCall {
 		return (
 			this.ctx._chain.getCallHash('control.add_member') ===
 			'605eac3ab5ba75dcb2e8e5b628cfa200c62828d80eb5d3d3b468c7cdecf64ddb'
-		);
+		)
 	}
 
 	/**
@@ -37,24 +37,24 @@ export class ControlAddMemberCall {
 	 * Weight: `O(log n)`
 	 */
 	get asV62(): { orgId: v62.H256; who: v62.AccountId32 } {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): { orgId: v62.H256; who: v62.AccountId32 } {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class ControlCreateOrgCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'control.createOrg' || this.ctx.extrinsic.name === 'control.create_org');
+		assert(this.ctx.extrinsic.name === 'control.createOrg' || this.ctx.extrinsic.name === 'control.create_org')
 	}
 
 	/**
@@ -83,7 +83,7 @@ export class ControlCreateOrgCall {
 		return (
 			this.ctx._chain.getCallHash('control.create_org') ===
 			'b761eaddc60f34b98d46b70969d16e33e84cc146820668c59f7d7434a00cbbb9'
-		);
+		)
 	}
 
 	/**
@@ -109,46 +109,46 @@ export class ControlCreateOrgCall {
 	 * Weight: `O(1)`
 	 */
 	get asV62(): {
-		name: Uint8Array;
-		cid: Uint8Array;
-		orgType: v62.OrgType;
-		accessModel: v62.AccessModel;
-		feeModel: v62.FeeModel;
-		memberLimit: number | undefined;
-		membershipFee: bigint | undefined;
-		govCurrency: v62.CurrencyId | undefined;
-		payCurrency: v62.CurrencyId | undefined;
-		deposit: bigint | undefined;
+		name: Uint8Array
+		cid: Uint8Array
+		orgType: v62.OrgType
+		accessModel: v62.AccessModel
+		feeModel: v62.FeeModel
+		memberLimit: number | undefined
+		membershipFee: bigint | undefined
+		govCurrency: v62.CurrencyId | undefined
+		payCurrency: v62.CurrencyId | undefined
+		deposit: bigint | undefined
 	} {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): {
-		name: Uint8Array;
-		cid: Uint8Array;
-		orgType: v62.OrgType;
-		accessModel: v62.AccessModel;
-		feeModel: v62.FeeModel;
-		memberLimit: number | undefined;
-		membershipFee: bigint | undefined;
-		govCurrency: v62.CurrencyId | undefined;
-		payCurrency: v62.CurrencyId | undefined;
-		deposit: bigint | undefined;
+		name: Uint8Array
+		cid: Uint8Array
+		orgType: v62.OrgType
+		accessModel: v62.AccessModel
+		feeModel: v62.FeeModel
+		memberLimit: number | undefined
+		membershipFee: bigint | undefined
+		govCurrency: v62.CurrencyId | undefined
+		payCurrency: v62.CurrencyId | undefined
+		deposit: bigint | undefined
 	} {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class ControlEnableOrgCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'control.enableOrg' || this.ctx.extrinsic.name === 'control.enable_org');
+		assert(this.ctx.extrinsic.name === 'control.enableOrg' || this.ctx.extrinsic.name === 'control.enable_org')
 	}
 
 	/**
@@ -168,7 +168,7 @@ export class ControlEnableOrgCall {
 		return (
 			this.ctx._chain.getCallHash('control.enable_org') ===
 			'b9796c19f14245cb5d424cb9d2f6dbb57fecb5ca5170883939bc418fa3a260d8'
-		);
+		)
 	}
 
 	/**
@@ -185,18 +185,18 @@ export class ControlEnableOrgCall {
 	 * Weight: `O(1)`
 	 */
 	get asV62(): { orgId: v62.H256 } {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): { orgId: v62.H256 } {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
@@ -204,7 +204,7 @@ export class ControlRemoveMemberCall {
 	constructor(private ctx: CallContext) {
 		assert(
 			this.ctx.extrinsic.name === 'control.removeMember' || this.ctx.extrinsic.name === 'control.remove_member',
-		);
+		)
 	}
 
 	/**
@@ -222,7 +222,7 @@ export class ControlRemoveMemberCall {
 		return (
 			this.ctx._chain.getCallHash('control.remove_member') ===
 			'605eac3ab5ba75dcb2e8e5b628cfa200c62828d80eb5d3d3b468c7cdecf64ddb'
-		);
+		)
 	}
 
 	/**
@@ -237,24 +237,24 @@ export class ControlRemoveMemberCall {
 	 * Weight: `O(log n)`
 	 */
 	get asV62(): { orgId: v62.H256; who: v62.AccountId32 } {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): { orgId: v62.H256; who: v62.AccountId32 } {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class ControlSpendFundsCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'control.spendFunds' || this.ctx.extrinsic.name === 'control.spend_funds');
+		assert(this.ctx.extrinsic.name === 'control.spendFunds' || this.ctx.extrinsic.name === 'control.spend_funds')
 	}
 
 	/**
@@ -276,7 +276,7 @@ export class ControlSpendFundsCall {
 		return (
 			this.ctx._chain.getCallHash('control.spend_funds') ===
 			'de116e395f5dd0db3172926911835fc2b54f5e5432ee71f8248f7eee9d1dffe3'
-		);
+		)
 	}
 
 	/**
@@ -295,24 +295,24 @@ export class ControlSpendFundsCall {
 	 * Weight: `O(1)`
 	 */
 	get asV62(): { orgId: v62.H256; currencyId: v62.CurrencyId; beneficiary: v62.AccountId32; amount: bigint } {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): { orgId: v62.H256; currencyId: v62.CurrencyId; beneficiary: v62.AccountId32; amount: bigint } {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class ControlUpdateOrgCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'control.updateOrg' || this.ctx.extrinsic.name === 'control.update_org');
+		assert(this.ctx.extrinsic.name === 'control.updateOrg' || this.ctx.extrinsic.name === 'control.update_org')
 	}
 
 	/**
@@ -338,7 +338,7 @@ export class ControlUpdateOrgCall {
 		return (
 			this.ctx._chain.getCallHash('control.update_org') ===
 			'fa253ba8b2a6cabe3189ec3a9fd8d2928af0e1bc12efa0b2f51904d382397c98'
-		);
+		)
 	}
 
 	/**
@@ -361,40 +361,40 @@ export class ControlUpdateOrgCall {
 	 * Weight: `O(1)`
 	 */
 	get asV62(): {
-		orgId: v62.H256;
-		primeId: v62.AccountId32 | undefined;
-		orgType: v62.OrgType | undefined;
-		accessModel: v62.AccessModel | undefined;
-		memberLimit: number | undefined;
-		feeModel: v62.FeeModel | undefined;
-		membershipFee: bigint | undefined;
+		orgId: v62.H256
+		primeId: v62.AccountId32 | undefined
+		orgType: v62.OrgType | undefined
+		accessModel: v62.AccessModel | undefined
+		memberLimit: number | undefined
+		feeModel: v62.FeeModel | undefined
+		membershipFee: bigint | undefined
 	} {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): {
-		orgId: v62.H256;
-		primeId: v62.AccountId32 | undefined;
-		orgType: v62.OrgType | undefined;
-		accessModel: v62.AccessModel | undefined;
-		memberLimit: number | undefined;
-		feeModel: v62.FeeModel | undefined;
-		membershipFee: bigint | undefined;
+		orgId: v62.H256
+		primeId: v62.AccountId32 | undefined
+		orgType: v62.OrgType | undefined
+		accessModel: v62.AccessModel | undefined
+		memberLimit: number | undefined
+		feeModel: v62.FeeModel | undefined
+		membershipFee: bigint | undefined
 	} {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class FlowContributeCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'flow.contribute');
+		assert(this.ctx.extrinsic.name === 'flow.contribute')
 	}
 
 	/**
@@ -411,7 +411,7 @@ export class FlowContributeCall {
 		return (
 			this.ctx._chain.getCallHash('flow.contribute') ===
 			'35bde54551e073c690aea459d53b33dc6aa20c27dc77adb7a7d131d352f68540'
-		);
+		)
 	}
 
 	/**
@@ -425,24 +425,24 @@ export class FlowContributeCall {
 	 * Weight: O(1)
 	 */
 	get asV62(): { campaignId: v62.H256; contribution: bigint } {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): { campaignId: v62.H256; contribution: bigint } {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class FlowCreateCampaignCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'flow.createCampaign' || this.ctx.extrinsic.name === 'flow.create_campaign');
+		assert(this.ctx.extrinsic.name === 'flow.createCampaign' || this.ctx.extrinsic.name === 'flow.create_campaign')
 	}
 
 	/**
@@ -474,7 +474,7 @@ export class FlowCreateCampaignCall {
 		return (
 			this.ctx._chain.getCallHash('flow.create_campaign') ===
 			'c9f740ca2f598a88223de690445f81cc5bd3d60101f812046545d137cbc2d4cc'
-		);
+		)
 	}
 
 	/**
@@ -503,131 +503,131 @@ export class FlowCreateCampaignCall {
 	 * Weight: `O(1)`
 	 */
 	get asV62(): {
-		orgId: v62.H256;
-		adminId: v62.AccountId32;
-		name: Uint8Array;
-		target: bigint;
-		deposit: bigint;
-		expiry: number;
-		protocol: v62.FlowProtocol;
-		governance: v62.FlowGovernance;
-		cid: Uint8Array;
-		start: number | undefined;
-		tokenSymbol: Uint8Array | undefined;
-		tokenName: Uint8Array | undefined;
+		orgId: v62.H256
+		adminId: v62.AccountId32
+		name: Uint8Array
+		target: bigint
+		deposit: bigint
+		expiry: number
+		protocol: v62.FlowProtocol
+		governance: v62.FlowGovernance
+		cid: Uint8Array
+		start: number | undefined
+		tokenSymbol: Uint8Array | undefined
+		tokenName: Uint8Array | undefined
 	} {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): {
-		orgId: v62.H256;
-		adminId: v62.AccountId32;
-		name: Uint8Array;
-		target: bigint;
-		deposit: bigint;
-		expiry: number;
-		protocol: v62.FlowProtocol;
-		governance: v62.FlowGovernance;
-		cid: Uint8Array;
-		start: number | undefined;
-		tokenSymbol: Uint8Array | undefined;
-		tokenName: Uint8Array | undefined;
+		orgId: v62.H256
+		adminId: v62.AccountId32
+		name: Uint8Array
+		target: bigint
+		deposit: bigint
+		expiry: number
+		protocol: v62.FlowProtocol
+		governance: v62.FlowGovernance
+		cid: Uint8Array
+		start: number | undefined
+		tokenSymbol: Uint8Array | undefined
+		tokenName: Uint8Array | undefined
 	} {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class SignalProposalCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'signal.proposal');
+		assert(this.ctx.extrinsic.name === 'signal.proposal')
 	}
 
 	get isV62(): boolean {
 		return (
 			this.ctx._chain.getCallHash('signal.proposal') ===
 			'6dd65c02bf66c1de0e8bc23a4cd50420c5df4ff4baebe2021d78efd4ad41e98d'
-		);
+		)
 	}
 
 	get asV62(): {
-		proposalType: v62.ProposalType;
-		orgId: v62.H256;
-		title: Uint8Array;
-		cid: Uint8Array;
-		expiry: number;
-		majority: v62.Majority;
-		unit: v62.Unit;
-		scale: v62.Scale;
-		start: number | undefined;
-		quorum: v62.Permill | undefined;
-		deposit: bigint | undefined;
-		campaignId: v62.H256 | undefined;
-		amount: bigint | undefined;
-		beneficiary: v62.AccountId32 | undefined;
-		currencyId: v62.CurrencyId | undefined;
+		proposalType: v62.ProposalType
+		orgId: v62.H256
+		title: Uint8Array
+		cid: Uint8Array
+		expiry: number
+		majority: v62.Majority
+		unit: v62.Unit
+		scale: v62.Scale
+		start: number | undefined
+		quorum: v62.Permill | undefined
+		deposit: bigint | undefined
+		campaignId: v62.H256 | undefined
+		amount: bigint | undefined
+		beneficiary: v62.AccountId32 | undefined
+		currencyId: v62.CurrencyId | undefined
 	} {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): {
-		proposalType: v62.ProposalType;
-		orgId: v62.H256;
-		title: Uint8Array;
-		cid: Uint8Array;
-		expiry: number;
-		majority: v62.Majority;
-		unit: v62.Unit;
-		scale: v62.Scale;
-		start: number | undefined;
-		quorum: v62.Permill | undefined;
-		deposit: bigint | undefined;
-		campaignId: v62.H256 | undefined;
-		amount: bigint | undefined;
-		beneficiary: v62.AccountId32 | undefined;
-		currencyId: v62.CurrencyId | undefined;
+		proposalType: v62.ProposalType
+		orgId: v62.H256
+		title: Uint8Array
+		cid: Uint8Array
+		expiry: number
+		majority: v62.Majority
+		unit: v62.Unit
+		scale: v62.Scale
+		start: number | undefined
+		quorum: v62.Permill | undefined
+		deposit: bigint | undefined
+		campaignId: v62.H256 | undefined
+		amount: bigint | undefined
+		beneficiary: v62.AccountId32 | undefined
+		currencyId: v62.CurrencyId | undefined
 	} {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
 
 export class SignalVoteCall {
 	constructor(private ctx: CallContext) {
-		assert(this.ctx.extrinsic.name === 'signal.vote');
+		assert(this.ctx.extrinsic.name === 'signal.vote')
 	}
 
 	get isV62(): boolean {
 		return (
 			this.ctx._chain.getCallHash('signal.vote') ===
 			'bd01187272ea169a48a8d7026e7d5656782ba5d0c500d610c99c1d39528c6890'
-		);
+		)
 	}
 
 	get asV62(): { proposalId: v62.H256; approve: boolean; deposit: bigint | undefined } {
-		assert(this.isV62);
-		return this.ctx._chain.decodeCall(this.ctx.extrinsic);
+		assert(this.isV62)
+		return this.ctx._chain.decodeCall(this.ctx.extrinsic)
 	}
 
 	get isLatest(): boolean {
-		deprecateLatest();
-		return this.isV62;
+		deprecateLatest()
+		return this.isV62
 	}
 
 	get asLatest(): { proposalId: v62.H256; approve: boolean; deposit: bigint | undefined } {
-		deprecateLatest();
-		return this.asV62;
+		deprecateLatest()
+		return this.asV62
 	}
 }
