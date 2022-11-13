@@ -407,6 +407,22 @@
       "overview": "OVERVIEW",
       "reasons_to_invest": "REASON TO INVEST",
       "contribute_to_campaign_help_text": "Your funds will be reserved until the campaign is funded or expired."
+    },
+    "proposals": {
+      "settings": {
+        "simple_majority": {
+          "title": "Simple majority",
+          "description": "The option with more votes than all other options together wins"
+        },
+        "relative_majority": {
+          "title": "Relative majority",
+          "description": "The option with the most single votes wins"
+        },
+        "absolute_majority": {
+          "title": "Absolute majority",
+          "description": "The option with votes of more than 50% of eligible member votes wins"
+        }
+      }
     }
   },
   "notification": {
