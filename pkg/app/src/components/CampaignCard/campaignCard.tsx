@@ -30,7 +30,7 @@ export function CampaignCard({ campaign }: ComponentProps) {
 			return push(`/organisations/${campaign?.organization?.id}/campaigns?draft=${campaign?.id}`)
 		}
 		return push(`/campaigns/${campaign?.id}`)
-	}, [push, campaign?.id, campaign?.state])
+	}, [push, campaign])
 
 	if (!campaign) {
 		return null

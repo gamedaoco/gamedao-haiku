@@ -32,7 +32,7 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 	)
 	const duration = useMemo(
 		() => getTimeFromBlock(blockNumber, campaignContributor?.campaign?.expiry, systemProperties?.blockTargetTime),
-		[blockNumber, campaignContributor?.campaign?.expiry],
+		[blockNumber, campaignContributor?.campaign?.expiry, systemProperties?.blockTargetTime],
 	)
 	const target = useMemo(
 		() =>
@@ -42,7 +42,7 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 					systemProperties?.tokenDecimals?.[currencyId < 0 ? 0 : currencyId] ?? 18,
 				),
 			),
-		[campaignContributor?.campaign?.target, systemProperties, currencyId],
+		[campaignContributor?.campaign?.target, systemProperties?.tokenDecimals, currencyId],
 	)
 	const funded = useMemo(
 		() =>
@@ -52,7 +52,11 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 					systemProperties?.tokenDecimals?.[currencyId < 0 ? 0 : currencyId] ?? 18,
 				),
 			),
-		[campaignContributor?.campaign?.campaign_contributors_aggregate?.aggregate?.sum, systemProperties, currencyId],
+		[
+			campaignContributor?.campaign?.campaign_contributors_aggregate?.aggregate?.sum,
+			systemProperties?.tokenDecimals,
+			currencyId,
+		],
 	)
 	const contributed = useMemo(
 		() =>

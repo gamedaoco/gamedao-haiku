@@ -66,7 +66,7 @@ export function AreaChart({ categories, series, height, options = null }: Compon
 					show: false,
 				},
 			},
-		[categories],
+		[categories, options, theme.palette.mode, theme.palette.primary.main],
 	)
 
 	return <Chart options={chartOptions} height={height} series={series} type="area" />

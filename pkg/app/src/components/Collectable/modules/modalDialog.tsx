@@ -24,7 +24,7 @@ async function blobToBase64(blob) {
 	})
 }
 
-export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: ComponentProps) {
+export function ModalDialog({ open, mediaUrl, handleClose, alt, poster }: ComponentProps) {
 	const [fileState, setFileState] = useState<string>()
 	const [is3DModel, setIs3DModel] = useState<boolean>(false)
 	const [isImage, setIsImage] = useState<boolean>(false)
@@ -48,7 +48,7 @@ export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: Compon
 				blobToBase64(data).then(setFileState)
 			})
 		}
-	}, [open])
+	}, [open, handleClose, mediaUrl])
 
 	return (
 		<Dialog

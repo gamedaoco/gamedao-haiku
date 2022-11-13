@@ -25,7 +25,7 @@ export function Dropzone({ children, options, onFilesSelected }: ComponentProps)
 
 	useEffect(() => {
 		onFilesSelected(acceptedFiles)
-	}, [acceptedFiles])
+	}, [acceptedFiles, onFilesSelected])
 
 	return <StyledDropzone {...getRootProps()}>{children}</StyledDropzone>
 }

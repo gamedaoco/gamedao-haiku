@@ -16,6 +16,7 @@ interface ComponentProps {
 
 export function StatusChip({ status, variant }: ComponentProps) {
 	const { t } = useTranslation()
+
 	const data: Data | null = useMemo(() => {
 		let text = t(`label:campaign_status:${status?.toLowerCase()}`)
 		let color = 'primary'
@@ -51,7 +52,7 @@ export function StatusChip({ status, variant }: ComponentProps) {
 		}
 
 		return { text, color } as Data
-	}, [status, t])
+	}, [status, t, variant])
 
 	if (!data) {
 		return null

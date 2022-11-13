@@ -18,7 +18,7 @@ export function CampaignEmptyState({ isAdmin, setShowCreatePage }: ComponentProp
 	}, [push])
 	const onCreateCallback = useCallback(() => {
 		setShowCreatePage(true)
-	}, [])
+	}, [setShowCreatePage])
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 			<Box

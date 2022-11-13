@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { Box, Card, CardContent, CardMedia, Skeleton } from '@mui/material'
 
-const LoadingCollectableCard: FC = () => {
+const Loader: FC = () => {
 	return (
 		<Card variant="glass" sx={{ minHeight: '300px' }}>
 			<CardMedia sx={{ padding: 0.75 }}>
@@ -19,4 +19,4 @@ const LoadingCollectableCard: FC = () => {
 	)
 }
 
-export default LoadingCollectableCard
+export default Loader

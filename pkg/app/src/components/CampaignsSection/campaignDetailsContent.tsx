@@ -53,7 +53,7 @@ export function CampaignDetailsContent({
 	const duration =
 		useMemo(
 			() => getTimeFromBlock(blockNumber, expiry, systemProperties?.blockTargetTime),
-			[blockNumber, expiry],
+			[blockNumber, expiry, systemProperties?.blockTargetTime],
 		) ?? 'Expired'
 	const [contributeState, setContributeState] = useState<number>(1)
 	const [showTxModalState, setShowTxModalState] = useState<boolean>(false)

@@ -7,7 +7,7 @@ import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 
 import Loader from 'containers/Account/components/Collectables/Loader'
 
-import { ModelDialog } from 'components/Collectable/modules/modelDialog'
+import { ModelDialog } from 'components/Collectable/modules/modalDialog'
 
 interface IpfsMetadata {
 	description: string
@@ -75,7 +75,7 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 					</Box>
 				</Card>
 			) : (
-				<LoadingCollectableCard />
+				<Loader />
 			)}
 		</>
 	)
