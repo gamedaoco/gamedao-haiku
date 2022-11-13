@@ -1,4 +1,6 @@
 import { memo, useCallback } from 'react'
+import Image from 'next/image'
+
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -84,7 +86,7 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 						alt={name}
 						src={parseIpfsHash(logo ?? '', config.IPFS_GATEWAY)}
 					>
-						<img src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} />
+						<Image src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} alt={name} />
 					</Avatar>
 				</Link>
 			</Box>

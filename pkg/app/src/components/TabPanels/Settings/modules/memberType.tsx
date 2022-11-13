@@ -45,7 +45,7 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 				createWarningNotification(t(e.message))
 			}
 		},
-		[setFeeAmountValue, validationFeeSchema, t],
+		[setFeeAmountValue, t],
 	)
 
 	useEffect(() => {
@@ -59,7 +59,7 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 				),
 			)
 		}
-	}, [feeAmount])
+	}, [feeAmount, selectedApiProvider])
 
 	console.log(selectedFee)
 

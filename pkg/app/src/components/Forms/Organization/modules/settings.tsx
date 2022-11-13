@@ -60,7 +60,7 @@ export function Settings({
 				createWarningNotification(t(e.message))
 			}
 		},
-		[setMemberLimit, validationMemberLimitSchema, t],
+		[setMemberLimit, t],
 	)
 
 	const handleFeeAmountChange = useCallback(
@@ -78,7 +78,7 @@ export function Settings({
 				createWarningNotification(t(e.message))
 			}
 		},
-		[setFeeAmount, validationFeeSchema, t],
+		[setFeeAmount, t],
 	)
 
 	const handleWhitelistChange = useCallback(

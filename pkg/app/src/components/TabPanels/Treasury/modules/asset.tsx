@@ -14,7 +14,8 @@ export function Asset({ name, quantity, image }: ComponentProps) {
 	return (
 		<Stack component={Paper} padding={4} spacing={6} sx={{ boxShadow: 'none', textAlign: 'center' }}>
 			<Box mb={2}>
-				<img src={`/svg/coins/${image}.svg`} style={{ margin: 'auto', height: '40px' }} />
+				{/* eslint-disable @next/next/no-img-element */}
+				<img src={`/svg/coins/${image}.svg`} alt={name} style={{ margin: 'auto', height: '40px' }} />
 			</Box>
 			<Box style={{ marginTop: 0 }}>
 				<Typography variant="h6">{quantity.toLocaleString()}</Typography>

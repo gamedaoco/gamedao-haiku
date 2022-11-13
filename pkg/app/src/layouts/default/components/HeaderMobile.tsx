@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react'
+
 import Link from 'components/Link'
 
 import { useTheme } from '@mui/material/styles'
@@ -9,7 +10,8 @@ import { AppBar, Box, Toolbar } from '@mui/material'
 import { NavbarMobile } from './navbarMobile'
 import { AccountSelector, FontIcons } from 'src/components'
 
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+/* eslint-disable @next/next/no-img-element */
+const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void

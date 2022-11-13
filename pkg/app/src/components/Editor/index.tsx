@@ -70,7 +70,7 @@ export default function Editor({ error, value, onChange, simple = false, helperT
 		}
 
 		return data
-	}, [other])
+	}, [other, id])
 
 	const handleChange = useCallback(
 		async (text, delta, source, editor) => {
@@ -93,7 +93,7 @@ export default function Editor({ error, value, onChange, simple = false, helperT
 				onChange(text, delta, source, editor)
 			}
 		},
-		[onChange],
+		[onChange, config.IPFS_GATEWAY, id, other.readOnly],
 	)
 
 	return (

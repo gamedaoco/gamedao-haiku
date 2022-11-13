@@ -34,7 +34,7 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 				createWarningNotification(t(e.message))
 			}
 		},
-		[setMemberLimitValue, validationMemberLimitSchema, t],
+		[setMemberLimitValue, t, memberLimit],
 	)
 
 	useEffect(() => {

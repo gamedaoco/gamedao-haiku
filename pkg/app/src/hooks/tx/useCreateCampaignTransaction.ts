@@ -119,7 +119,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 				}
 			}
 		}
-	}, [selectedApiProvider, address, data, blockNumber])
+	}, [selectedApiProvider, address, data, blockNumber, logger, t, txState])
 
 	return txState
 }

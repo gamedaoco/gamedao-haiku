@@ -87,3 +87,5 @@ export function AccountSelector() {
 
 	return null
 }
+
+export default AccountSelector

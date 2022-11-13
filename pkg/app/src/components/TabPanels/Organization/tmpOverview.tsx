@@ -40,7 +40,7 @@ export function TmpOverview() {
 			const value = event.target.value
 			tmpOrgState?.setDeposit(value < 5 ? 5 : value)
 		},
-		[tmpOrgState?.setDeposit],
+		[tmpOrgState],
 	)
 
 	const handleTxCallback = useCallback(
@@ -55,14 +55,14 @@ export function TmpOverview() {
 				})
 			}
 		},
-		[tmpOrgState.clearAll],
+		[tmpOrgState],
 	)
 
 	useEffect(() => {
 		if (orgId && organizationByIdData && !loading) {
 			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
 		}
-	}, [orgId, organizationByIdData])
+	}, [orgId, organizationByIdData, loading, push])
 
 	return (
 		<>

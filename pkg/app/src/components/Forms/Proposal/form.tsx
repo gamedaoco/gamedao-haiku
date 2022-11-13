@@ -49,7 +49,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 			}
 			setModalState(false)
 		},
-		[tmpProposalState?.clearAll, onClose, setModalState],
+		[tmpProposalState, onClose, setModalState],
 	)
 
 	const handleBack = useCallback(() => {
@@ -88,7 +88,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 		if (currentStep == 2) {
 			setModalState(true)
 		}
-	}, [currentStep, setStep, push, uploadMetadata, setModalState])
+	}, [currentStep, setStep, uploadMetadata, setModalState])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {

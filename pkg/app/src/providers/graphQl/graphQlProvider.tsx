@@ -59,7 +59,7 @@ export function GraphQlProvider({ children }) {
 		if (healthCheck === HealthCheckStatus.ERROR) {
 			createErrorNotification(t('notification:error:graphql_connection_error', { name: selectedEndpoint?.name }))
 		}
-	}, [healthCheck])
+	}, [healthCheck, selectedEndpoint?.name, t])
 
 	if (healthCheck === HealthCheckStatus.ERROR) {
 		return (

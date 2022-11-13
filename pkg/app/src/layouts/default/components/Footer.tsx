@@ -10,7 +10,8 @@ import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { FontIcons } from 'components/Icons/icons'
 
-const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" />
+/* eslint-disable @next/next/no-img-element */
+const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" alt="GameDAO" />
 
 const Link = ({ href, children }) => (
 	<Box>

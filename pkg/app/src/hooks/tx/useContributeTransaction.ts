@@ -58,7 +58,7 @@ export function useContributeTransaction(campaignId: string, contribution: numbe
 				}
 			}
 		}
-	}, [selectedApiProvider, campaignId, contribution, currencyId])
+	}, [selectedApiProvider, campaignId, contribution, currencyId, logger, t, txState])
 
 	return txState
 }

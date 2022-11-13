@@ -32,7 +32,7 @@ export function useClearIdentityTransaction(): TransactionData {
 				}
 			}
 		}
-	}, [selectedApiProvider])
+	}, [selectedApiProvider, logger, t, txState, setTxState])
 
 	return txState
 }

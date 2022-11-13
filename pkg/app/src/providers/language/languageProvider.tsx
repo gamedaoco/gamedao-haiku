@@ -15,7 +15,7 @@ export function LanguageProvider({ children }: ComponentProps) {
 		if (!i18n) {
 			getI18next().then(setI18n)
 		}
-	}, [])
+	}, [i18n])
 
 	if (!i18n) {
 		return null

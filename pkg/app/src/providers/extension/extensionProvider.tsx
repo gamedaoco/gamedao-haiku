@@ -145,7 +145,16 @@ export function ExtensionProvider({ children }) {
 			// Reset accounts and state
 			setState(EXTENSION_STATE_DEFAULT)
 		}
-	}, [apiProvider, accountSettings.allowConnect, accountSettings.lastUsedExtension])
+	}, [
+		apiProvider,
+		accountSettings.allowConnect,
+		accountSettings.lastUsedExtension,
+		accountSettings,
+		disconnectWalletCallback,
+		setAccountSettings,
+		supportedWalletsState,
+		t,
+	])
 
 	useEffect(() => {
 		if (updateSession && accountSettings) {
@@ -162,7 +171,13 @@ export function ExtensionProvider({ children }) {
 				updateSessionCallback(accountSettings.selectedAddress)
 			}
 		}
-	}, [updateSession, accountSettings.selectedAddress, accountSettings.allowConnect])
+	}, [
+		updateSession,
+		accountSettings.selectedAddress,
+		accountSettings.allowConnect,
+		accountSettings,
+		updateSessionCallback,
+	])
 
 	return (
 		<ExtensionContext.Provider

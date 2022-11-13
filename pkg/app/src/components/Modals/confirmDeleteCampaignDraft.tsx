@@ -22,7 +22,7 @@ export function ConfirmDeleteCampaignDraft({ id, orgId, open, onClose }: Compone
 			deleteDraft(id)
 			onClose(true)
 		},
-		[id, deleteDraft],
+		[id, deleteDraft, onClose],
 	)
 
 	return (

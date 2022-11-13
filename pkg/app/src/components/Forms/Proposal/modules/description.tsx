@@ -197,7 +197,7 @@ export function Description({
 				setStartDate(event)
 			}
 		},
-		[setStartDate, setErrorState],
+		[setStartDate],
 	)
 
 	const handleEndDateChanged = useCallback(
@@ -210,7 +210,7 @@ export function Description({
 				setEndDate(event)
 			}
 		},
-		[setEndDate, setErrorState],
+		[setEndDate],
 	)
 
 	const handleCampaignChange = useCallback(
@@ -231,19 +231,19 @@ export function Description({
 				}
 			} catch (e) {}
 		},
-		[setCurrencyId, validationCurrencyIdSchema],
+		[setCurrencyId],
 	)
 
 	useEffect(() => {
 		setStartDate(new Date())
 		setEndDate(moment(new Date()).add(1, 'day').toDate())
-	}, [])
+	}, [setStartDate, setEndDate])
 
 	useEffect(() => {
 		return () => {
 			if (startDate) setEndDate(moment(startDate).add(1, 'day').toDate())
 		}
-	}, [startDate])
+	}, [startDate, setEndDate])
 
 	useEffect(() => {
 		setCurrencies(getCurrenciesForSelect(selectedApiProvider))

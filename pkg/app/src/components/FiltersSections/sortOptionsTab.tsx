@@ -32,7 +32,7 @@ export function SortOptionsTab({ sortOptions, setFilters, defaultOption }: Compo
 				sortOption: eval(`(${sortOptions?.filter(({ key }) => key === defaultOption)?.[0]?.value ?? 'null'})`),
 			}))
 		}
-	}, [defaultOption, sortOptions, keyState])
+	}, [defaultOption, sortOptions, keyState, setFilters])
 	const handleChange = useCallback(
 		(event: SelectChangeEvent) => {
 			setKeyState(event.target.value)

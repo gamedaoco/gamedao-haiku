@@ -36,7 +36,7 @@ export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
 			push(`/organisations/${organizationId}/campaigns`)
 		}
 		setShowCreatePage(false)
-	}, [setShowCreatePage, query?.draft, organizationId])
+	}, [setShowCreatePage, query?.draft, organizationId, push])
 
 	useEffect(() => {
 		if (saveDraft?.drafts && !saveDraft?.loading) {
@@ -48,13 +48,13 @@ export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
 		} else {
 			setDraftsState([])
 		}
-	}, [saveDraft?.drafts, saveDraft?.loading])
+	}, [saveDraft?.drafts, saveDraft?.loading, blockNumber, saveDraft])
 
 	useEffect(() => {
 		if (query?.draft) {
 			onCreateCallback()
 		}
-	}, [query?.draft])
+	}, [query?.draft, onCreateCallback])
 
 	if (showCreatePage) {
 		return (

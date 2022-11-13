@@ -120,7 +120,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 				rep: 2000 + 23 * index,
 			})),
 		)
-	}, [members])
+	}, [members, owner, t])
 
 	return (
 		<Stack component={Paper} padding={4} spacing={2} variant={'glass'}>

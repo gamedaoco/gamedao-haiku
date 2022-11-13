@@ -1,4 +1,5 @@
 import React, { Fragment, useCallback } from 'react'
+
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
@@ -34,7 +35,8 @@ import {
 import { FontIcons } from 'src/components'
 import Link from 'components/Link'
 
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+/* eslint-disable @next/next/no-img-element */
+const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
 
 interface ComponentProps {
 	onClose: () => void

@@ -33,15 +33,12 @@ export function CampaignById() {
 	})
 	const currencyId = useMemo(
 		() => systemProperties?.tokenSymbol?.indexOf(data?.campaign?.[0]?.token_symbol) ?? 0,
-		[systemProperties, data?.campaign?.[0]?.token_symbol],
+		[systemProperties, data?.campaign?.[0]?.token_symbol, data?.campaign],
 	)
 
-	const handleChange = useCallback(
-		(event: SyntheticEvent, newValue: string) => {
-			setValue(newValue)
-		},
-		[value],
-	)
+	const handleChange = useCallback((event: SyntheticEvent, newValue: string) => {
+		setValue(newValue)
+	}, [])
 
 	const handleClick = useCallback(() => {
 		back()

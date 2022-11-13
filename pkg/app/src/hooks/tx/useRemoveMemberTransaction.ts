@@ -52,7 +52,7 @@ export function useRemoveMemberTransaction(organizationId: string): TransactionD
 				}
 			}
 		}
-	}, [selectedApiProvider, address, organizationId])
+	}, [selectedApiProvider, address, organizationId, logger, t, txState])
 
 	return txState
 }

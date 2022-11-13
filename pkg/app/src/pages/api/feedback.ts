@@ -10,7 +10,7 @@ const ID = process.env.DISCOID
 const TOKEN = process.env.DISCOTOKEN
 const discord = new Discord.WebhookClient({ id: ID, token: TOKEN })
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const feedback = async (req: NextApiRequest, res: NextApiResponse) => {
 	const { method, msg } = req.body
 
 	if (method === 'POST' && msg !== null) {
@@ -22,3 +22,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		res.status(400).send('unauthorized')
 	}
 }
+export default feedback

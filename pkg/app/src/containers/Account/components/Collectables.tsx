@@ -20,7 +20,7 @@ export function Collectables() {
 		if (account) {
 			loadCollectables({ variables: { owner: getKusamaAddress(account) } })
 		}
-	}, [account])
+	}, [account, loadCollectables])
 
 	return <Box></Box>
 }

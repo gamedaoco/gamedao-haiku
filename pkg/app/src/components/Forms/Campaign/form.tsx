@@ -45,7 +45,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 		if (draftId && drafts[draftId]) {
 			tmpCampaignState.restoreDraft({ ...drafts[draftId], orgId: organizationId })
 		}
-	}, [draftId, drafts])
+	}, [draftId, drafts, tmpCampaignState, organizationId])
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0 && cancel) {
@@ -117,7 +117,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 	const handleSaveDraft = useCallback(() => {
 		addDraft(tmpCampaign)
 		cancel()
-	}, [addDraft, tmpCampaign])
+	}, [addDraft, tmpCampaign, cancel])
 
 	const checkNextButtonState = () => {
 		switch (currentStep) {
@@ -155,7 +155,7 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 				cancel()
 			}
 		},
-		[tmpCampaignState, setTxModalState],
+		[tmpCampaignState, cancel],
 	)
 	const handleCloseModal = useCallback(() => {
 		setOpenModal(false)
@@ -165,12 +165,15 @@ export function Form({ organizationId, cancel, currentStep, setStep, draftId }: 
 		setOpenModal(true)
 	}, [])
 
-	const handleConfirmDeleteModalOnClose = useCallback((result: boolean) => {
-		setOpenConfirmDeleteModal(false)
-		if (result) {
-			cancel()
-		}
-	}, [])
+	const handleConfirmDeleteModalOnClose = useCallback(
+		(result: boolean) => {
+			setOpenConfirmDeleteModal(false)
+			if (result) {
+				cancel()
+			}
+		},
+		[cancel],
+	)
 
 	const checkBackButtonState = () => {
 		return currentStep == 0

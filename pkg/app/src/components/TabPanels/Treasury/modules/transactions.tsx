@@ -230,7 +230,7 @@ export function Transactions({ type, data }: ComponentProps) {
 				},
 			},*/,
 		],
-		[t],
+		[t, theme.palette.success.main, theme.palette.warning.main, type, typeStyles],
 	)
 
 	const gridData = useMemo(() => data?.slice(), [data])

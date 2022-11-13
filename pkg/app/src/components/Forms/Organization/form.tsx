@@ -24,7 +24,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		if (currentStep === 0) {
 			push('/organisations')
 		}
-	}, [currentStep])
+	}, [currentStep, push])
 
 	const handleBack = useCallback(() => {
 		if (currentStep > 0 && setStep) {

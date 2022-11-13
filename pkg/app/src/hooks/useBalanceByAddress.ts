@@ -24,7 +24,7 @@ export function useBalanceByAddress(address: string): Balance[] {
 		if (error) {
 			logger.debug('Subscription error:', error)
 		}
-	}, [error])
+	}, [error, logger])
 
 	useEffect(() => {
 		if (data && systemProperties) {

@@ -103,7 +103,7 @@ export function Overview({
 						text: t('page:organisations:organisation_rules:private:text'),
 						status: t('page:organisations:organisation_rules:private:status'),
 				  },
-		[organization?.access_model],
+		[organization?.access_model, t],
 	)
 
 	const feeModel = useMemo(() => {
@@ -123,7 +123,7 @@ export function Overview({
 				text: t('page:organisations:organisation_rules:transferred_fee:text'),
 			}
 		}
-	}, [organization?.fee_model])
+	}, [organization?.fee_model, t])
 
 	const memberLimit = useMemo(
 		() =>
@@ -138,7 +138,7 @@ export function Overview({
 							organization?.member_limit
 						}  ${t('page:organisations:organisation_rules:member_limit:text')}`,
 				  },
-		[organization?.member_limit],
+		[organization?.member_limit, t],
 	)
 
 	const statesPercentages = useMemo(

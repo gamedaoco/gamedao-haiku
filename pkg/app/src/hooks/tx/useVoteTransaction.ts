@@ -53,7 +53,7 @@ export function useVoteTransaction(proposalId: string, vote: number): Transactio
 				}
 			}
 		}
-	}, [selectedApiProvider, proposalId, vote])
+	}, [selectedApiProvider, proposalId, vote, logger, t, txState])
 
 	return txState
 }

@@ -28,7 +28,7 @@ function getRatio(ratio = '1/1') {
 	}[ratio]
 }
 
-export function Image({ ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ComponentProps) {
+export const Image = ({ ratio, disabledEffect = false, effect = 'blur', sx, ...rest }: ComponentProps) => {
 	if (ratio) {
 		return (
 			<Box
@@ -58,7 +58,7 @@ export function Image({ ratio, disabledEffect = false, effect = 'blur', sx, ...o
 					effect={disabledEffect ? undefined : effect}
 					placeholderSrc={placeHolder.src}
 					sx={{ width: 1, height: 1, objectFit: 'cover' }}
-					{...other}
+					{...rest}
 				/>
 			</Box>
 		)
@@ -81,8 +81,10 @@ export function Image({ ratio, disabledEffect = false, effect = 'blur', sx, ...o
 				effect={disabledEffect ? undefined : effect}
 				placeholderSrc={placeHolder.src}
 				sx={{ width: 1, height: 1, objectFit: 'cover' }}
-				{...other}
+				{...rest}
 			/>
 		</Box>
 	)
 }
+
+export default Image

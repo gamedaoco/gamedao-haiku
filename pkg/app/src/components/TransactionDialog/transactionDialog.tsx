@@ -35,13 +35,13 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 	const handleProceed = useCallback(() => {
 		signAndSend(txData?.tx, txData?.txMsg, txCallback, t)
 		onClose()
-	}, [signAndSend, onClose, txData, txCallback])
+	}, [signAndSend, onClose, txData, txCallback, t])
 
 	useEffect(() => {
 		if (txData && address) {
 			txData?.tx.paymentInfo(address).then(setPaymentInfo)
 		}
-	}, [txData])
+	}, [txData, address])
 
 	if (!txData || !networkBalance) {
 		return null

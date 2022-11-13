@@ -125,7 +125,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				}
 			}),
 		)
-	}, [proposals, blockNumber])
+	}, [proposals, blockNumber, systemProperties?.blockTargetTime])
 
 	const handleCreateButtonClick = useCallback(() => {
 		setShowFormState(true)

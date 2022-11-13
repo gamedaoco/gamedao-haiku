@@ -115,7 +115,7 @@ export function Settings({
 			moment(new Date())
 				.add(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 				.toDate(),
-		[],
+		[config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS],
 	)
 
 	const minEndDate = useMemo(
@@ -123,7 +123,7 @@ export function Settings({
 			moment(startDate ?? new Date())
 				.add(config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 				.toDate(),
-		[startDate],
+		[startDate, config?.CAMPAIGN_MIN_EXPIRY_IN_SECONDS],
 	)
 
 	// TODO: add to graphql
@@ -145,7 +145,7 @@ export function Settings({
 				validationTargetSchema?.validateSync(value)
 			} catch (e) {}
 		},
-		[setTargetAmount, validationTargetSchema, t],
+		[setTargetAmount],
 	)
 
 	const handleDepositAmountChange = useCallback(
@@ -158,7 +158,7 @@ export function Settings({
 				validationDepositSchema?.validateSync(value)
 			} catch (e) {}
 		},
-		[setDepositAmount, validationDepositSchema, t],
+		[setDepositAmount],
 	)
 
 	const handleCurrencyChanged = useCallback(
@@ -171,7 +171,7 @@ export function Settings({
 				}
 			} catch (e) {}
 		},
-		[setCurrencyId, validationCurrencyIdSchema, t],
+		[setCurrencyId],
 	)
 
 	const handleUsageOfFundsChanged = useCallback(
@@ -184,7 +184,7 @@ export function Settings({
 				}
 			} catch (e) {}
 		},
-		[setUsageOfFunds, validationUsageOfFundsSchema, t],
+		[setUsageOfFunds],
 	)
 
 	const handleGovernanceChecked = useCallback(
@@ -196,7 +196,7 @@ export function Settings({
 				}
 			} catch (e) {}
 		},
-		[setGovernance, t],
+		[setGovernance],
 	)
 
 	const handleTermsAndConditionChecked = useCallback(
@@ -208,7 +208,7 @@ export function Settings({
 				}
 			} catch (e) {}
 		},
-		[setTermsConditionAccepted, t],
+		[setTermsConditionAccepted],
 	)
 
 	useEffect(() => {

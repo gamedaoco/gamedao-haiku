@@ -139,7 +139,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 		}
 
 		setProposal(data?.proposal?.[0] ?? null)
-	}, [loading, data])
+	}, [loading, data, push])
 
 	useEffect(() => {
 		if (!proposal) return
@@ -166,7 +166,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 
 		setStartDate(moment().add(startDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
 		setEndDate(moment().add(endDiff, 'seconds').format('DD/MM/YYYY hh:mm'))
-	}, [proposal])
+	}, [proposal, blockNumber, systemProperties?.blockTargetTime])
 
 	useEffect(() => {
 		if (!proposal) return

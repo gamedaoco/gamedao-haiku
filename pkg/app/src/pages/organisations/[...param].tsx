@@ -123,7 +123,7 @@ export function OrganisationById() {
 				}
 			}
 		}
-	}, [query])
+	}, [query, handleInvalidUrl])
 
 	useEffect(() => {
 		if (routeState) {
@@ -149,13 +149,13 @@ export function OrganisationById() {
 				return cid.toString()
 			})().then((cid) => cache.setMetaDataCID(cid))
 		}
-	}, [cache.name, cache.description, cache.logoCID, cache.headerCID])
+	}, [cache, cache.name, cache.description, cache.logoCID, cache.headerCID])
 
 	useEffect(() => {
 		if (data) {
 			!data.organization?.[0] ? handleInvalidUrl() : setOrganizationState(data.organization?.[0] as Organization)
 		}
-	}, [data])
+	}, [data, handleInvalidUrl])
 
 	useEffect(() => {
 		if (address && organizationState) {

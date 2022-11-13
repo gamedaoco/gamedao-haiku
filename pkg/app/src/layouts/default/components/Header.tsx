@@ -1,9 +1,11 @@
 import React, { Fragment, useState, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 
+import { useTranslation } from 'react-i18next'
+
 import Link from 'components/Link'
-import { AccountSelector } from 'components/AccountSelector/accountSelector'
+import Image from 'components/Image'
+import AccountSelector from 'components/AccountSelector/accountSelector'
 import Feedback from 'components/Feedback'
 
 import { useTheme } from '@mui/material/styles'
@@ -39,8 +41,10 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
-const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
-const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height="16px" />
+/* eslint-disable @next/next/no-img-element */
+const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" alt="GameDAO" />
+/* eslint-disable @next/next/no-img-element */
+const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height="16px" alt="GameDAO" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void

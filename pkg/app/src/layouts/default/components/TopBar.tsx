@@ -139,8 +139,8 @@ const right = [
 
 const Items = ({ items }) => {
 	return items.map((item) => (
-		<Box>
-			<Link key={item.name} href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+		<Box key={item.name}>
+			<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
 				<Button>
 					<Typography
 						pr={0.5}

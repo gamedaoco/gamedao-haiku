@@ -31,23 +31,29 @@ export function Content({ bannerCid, content, uploadBannerImage, setContent }: C
 	const config = useConfig()
 	const cache = useTmpCampaignState()
 
-	const onBannerSelected = useCallback((files: File[]) => {
-		if (files.length === 0) return
-		uploadBannerImage(files[0])
-	}, [])
+	const onBannerSelected = useCallback(
+		(files: File[]) => {
+			if (files.length === 0) return
+			uploadBannerImage(files[0])
+		},
+		[uploadBannerImage],
+	)
 
-	const handleContentChanged = useCallback((value) => {
-		if (setContent) {
-			try {
-				validationContentSchema.validateSync(value)
-				setErrorState(null)
-			} catch (err) {
-				setErrorState(err.message)
+	const handleContentChanged = useCallback(
+		(value) => {
+			if (setContent) {
+				try {
+					validationContentSchema.validateSync(value)
+					setErrorState(null)
+				} catch (err) {
+					setErrorState(err.message)
+				}
+
+				setContent(value)
 			}
-
-			setContent(value)
-		}
-	}, [])
+		},
+		[setContent],
+	)
 
 	const handleUploadImage = useCallback(async (event, setter) => {
 		const files = event.target.files

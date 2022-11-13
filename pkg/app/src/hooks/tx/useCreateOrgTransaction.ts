@@ -107,7 +107,7 @@ export function useCreateOrgTransaction(): TransactionData {
 				}
 			}
 		}
-	}, [selectedApiProvider, address, data])
+	}, [selectedApiProvider, address, data, logger, t, txState])
 
 	return txState
 }

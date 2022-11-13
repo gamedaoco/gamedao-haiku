@@ -22,7 +22,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 			// Automatically use the 1st wallet if only one is available
 			callback(supportedWallets[0].extensionName)
 		}
-	}, [supportedWallets, open])
+	}, [supportedWallets, open, callback])
 
 	// No There is no wallet available
 	if (!allSupportedWallets?.length) {

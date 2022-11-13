@@ -17,20 +17,20 @@ export function Content({ param }: ComponentProps) {
 	const accountState = useCurrentAccountAddress()
 	const reroute = useCallback(() => {
 		switch (param) {
-			// case AccountTabs.CAMPAIGNS:
-			// 	return <Campaigns />
-			// case AccountTabs.ORGANIZATIONS:
-			// 	return <Organisations />
-			// case AccountTabs.COLLECTABLES:
-			// 	return <Collectables />
-			// case AccountTabs.IDENTITY:
-			// 	return <Identity />
-			// case AccountTabs.SETTINGS:
-			// 	return <Settings />
+			case AccountTabs.CAMPAIGNS:
+				return <Campaigns />
+			case AccountTabs.ORGANIZATIONS:
+				return <Organisations />
+			case AccountTabs.COLLECTABLES:
+				return <Collectables />
+			case AccountTabs.IDENTITY:
+				return <Identity />
+			case AccountTabs.SETTINGS:
+				return <Settings />
 			default:
 				return <Overview />
 		}
-	}, [accountState, param])
+	}, [param])
 
 	return <>{reroute()}</>
 }

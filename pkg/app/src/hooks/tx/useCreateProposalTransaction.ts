@@ -178,7 +178,7 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 				logger.trace(e)
 			}
 		}
-	}, [organizationId, selectedApiProvider, address, data, blockNumber])
+	}, [organizationId, selectedApiProvider, address, data, blockNumber, logger, t])
 
 	return txState
 }

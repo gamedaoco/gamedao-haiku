@@ -41,7 +41,7 @@ export function useSaveCampaignDraft(orgId: string): CampaignDraft {
 			setDraftState(newDraftState)
 			createInfoNotification(t('notification:info:draft_deleted'))
 		},
-		[draftState, setDraftState],
+		[draftState, setDraftState, t],
 	)
 
 	const handleGetCampaign = useCallback(
