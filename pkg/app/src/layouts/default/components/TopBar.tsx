@@ -175,10 +175,7 @@ export function TopBar({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const isLg = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
 
 	return (
-		<AppBar
-			position="sticky"
-			style={{ background: '#000', borderRadius: 0, p: 0, m: 0, boxShadow: '0px 5px 15px #00000099' }}
-		>
+		<AppBar position="sticky" style={{ background: '#000', borderRadius: 0, boxShadow: '0px 5px 15px #00000099' }}>
 			<Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center', p: 0, m: -2 }}>
 				<Stack ml={2} display="flex" direction="row" justifyContent="left" alignItems="center">
 					<Items items={left} />

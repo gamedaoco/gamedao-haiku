@@ -25,7 +25,7 @@ interface ComponentProps {
 const SITE_NAME = 'GameDAO'
 
 export function Layout({ showHeader, showFooter, showSidebar, children, noContainer, title }: ComponentProps) {
-	const [sidebarOpen, setOpenSidebar] = useState<boolean>(true)
+	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 	const config = useConfig()
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -47,7 +47,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			</Head>
 
 			<Box>
-				{showTopBar && <TopBar />}
+				{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}
 
 				{showHeader &&
 					(isMd ? (

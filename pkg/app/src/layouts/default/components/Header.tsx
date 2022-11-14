@@ -4,8 +4,9 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import Link from 'components/Link'
-import Image from 'components/Image'
+// import Image from 'components/Image'
 import AccountSelector from 'components/AccountSelector/accountSelector'
+import { Flyout } from 'components/AccountSelector/modules/flyout'
 import Feedback from 'components/Feedback'
 
 import { useTheme } from '@mui/material/styles'
@@ -103,10 +104,18 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 		defaultMatches: true,
 	})
 
+	const featureFeedback = false
+	const featureAccount = false
+
 	const [showFeedback, setFeedback] = useState(false)
+	const [showAccount, setAccount] = useState(false)
+
 	const anchorRef = useRef(null)
 	const openFeedback = () => setFeedback(true)
 	const closeFeedback = () => setFeedback(false)
+	const accountAnchorRef = useRef(null)
+	const openAccount = () => setAccount(true)
+	const closeAccount = () => setAccount(false)
 
 	return (
 		<AppBar
@@ -173,13 +182,29 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						)
 					})}
 
-					{showFeedback && (
+					{featureFeedback && (
 						<Button ref={anchorRef} onClick={openFeedback}>
 							<RiChat1Line />
 							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
 					)}
 					{showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />}
+
+					{featureAccount && (
+						<Button ref={accountAnchorRef} onClick={openAccount}>
+							<Dashboard fontSize={'inherit'} />
+							{/*isLg && <Typography sx={{ pl: 2, mr: 2 }}></Typography>*/}
+						</Button>
+					)}
+					{showAccount && (
+						<Flyout
+							anchorEl={accountAnchorRef?.current}
+							open={showAccount}
+							handleClose={closeAccount}
+							openAccountSelect={() => {}}
+							openNetworkSelect={() => {}}
+						/>
+					)}
 
 					<MenuItem>
 						<AccountSelector />

@@ -1,14 +1,12 @@
 import React, { useCallback, useState } from 'react'
 
-import Link from 'components/Link'
-
 import { useTheme } from '@mui/material/styles'
-import { Open, Close, Menu, MoreVert } from '@mui/icons-material'
-import { Button, Stack, MenuItem, Typography } from '@mui/material'
-import { AppBar, Box, Toolbar } from '@mui/material'
+import { Close, Menu, MoreVert, Apps as Open } from '@mui/icons-material'
+import { AppBar, Box, Toolbar, Button, Stack, MenuItem, Typography } from '@mui/material'
 
-import { NavbarMobile } from './navbarMobile'
+import Link from 'components/Link'
 import { AccountSelector, FontIcons } from 'src/components'
+import { NavbarMobile } from './NavbarMobile'
 
 /* eslint-disable @next/next/no-img-element */
 const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
