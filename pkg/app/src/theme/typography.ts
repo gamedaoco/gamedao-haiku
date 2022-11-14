@@ -3,11 +3,13 @@
 declare module '@mui/material/styles' {
 	interface TypographyVariants {
 		small: React.CSSProperties
+		btn: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
 	interface TypographyVariantsOptions {
 		small?: React.CSSProperties
+		btn: React.CSSProperties
 	}
 }
 
@@ -15,6 +17,7 @@ declare module '@mui/material/styles' {
 declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
 		small: true
+		btn: true
 	}
 }
 
@@ -29,7 +32,7 @@ function responsiveFontSizes({ sm, md, lg }: { sm: number; md: number; lg: numbe
 		'@media (min-width:600px)': {
 			fontSize: pxToRem(sm),
 		},
-		'@edia (min-width:900px)': {
+		'@media (min-width:900px)': {
 			fontSize: pxToRem(md),
 		},
 		'@media (min-width:1200px)': {
@@ -131,7 +134,7 @@ const typography = {
 		fontSize: pxToRem(12),
 		textTransform: 'uppercase',
 	},
-	button: {
+	btn: {
 		fontFamily: FONT_UI,
 		fontWeight: FONT_REGULAR,
 		lineHeight: 24 / 14,

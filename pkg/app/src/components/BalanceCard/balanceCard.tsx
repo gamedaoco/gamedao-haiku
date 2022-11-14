@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import { Card, Stack, Typography } from '@mui/material'
 import { useBalanceByAddressAndBalanceId } from 'hooks/useBalanceByAddressAndBalanceId'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
@@ -15,24 +17,18 @@ export function BalanceCard() {
 			{
 				<Stack spacing={2}>
 					<Typography variant="overline">Balances</Typography>
-					{networkBalance && (
-						<Stack direction="row" justifyContent="space-between">
-							<Typography variant="body2">{networkBalance.tokenSymbol}</Typography>
-							<Typography variant="body2">{networkBalance.free}</Typography>
-						</Stack>
-					)}
-					{governanceBalance && (
-						<Stack direction="row" justifyContent="space-between">
-							<Typography variant="body2">{governanceBalance.tokenSymbol}</Typography>
-							<Typography variant="body2">{governanceBalance.free}</Typography>
-						</Stack>
-					)}
-					{paymentBalance && (
-						<Stack direction="row" justifyContent="space-between">
-							<Typography variant="body2">{paymentBalance.tokenSymbol}</Typography>
-							<Typography variant="body2">{paymentBalance.free}</Typography>
-						</Stack>
-					)}
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="body2">{networkBalance?.tokenSymbol || '...'}</Typography>
+						<Typography variant="body2">{networkBalance?.free}</Typography>
+					</Stack>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="body2">{governanceBalance?.tokenSymbol || '...'}</Typography>
+						<Typography variant="body2">{governanceBalance?.free}</Typography>
+					</Stack>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography variant="body2">{paymentBalance?.tokenSymbol || '...'}</Typography>
+						<Typography variant="body2">{paymentBalance?.free}</Typography>
+					</Stack>
 				</Stack>
 			}
 		</Card>

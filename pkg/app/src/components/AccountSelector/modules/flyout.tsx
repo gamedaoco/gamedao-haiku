@@ -11,9 +11,11 @@ import {
 import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { useGraphQlContext } from 'providers/graphQl/modules/context'
+import { useTheme } from '@mui/material/styles'
 
-import { AccountCard } from 'components/AccountCard/accountCard'
+// import { AccountCard } from 'components/AccountCard/accountCard'
 import { BalanceCard } from 'components/BalanceCard/balanceCard'
+
 import Link from 'components/Link'
 
 interface ComponentProps {
@@ -25,6 +27,8 @@ interface ComponentProps {
 }
 
 export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNetworkSelect }: ComponentProps) {
+	const theme = useTheme()
+
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
 	const { endpoints, selectedEndpoint } = useGraphQlContext()
 
@@ -39,9 +43,11 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				elevation: 0,
 				sx: {
 					overflow: 'visible',
-					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-					mt: { xs: '1.25rem', sm: '1rem' },
-					borderRadius: '1rem',
+					filter: 'drop-shadow(0px 15px 35px rgba(0,0,0,0.32))',
+					mt: { xs: '1.25rem', sm: '0.5rem' },
+					borderRadius: theme.shape.borderRadiusLg,
+					borderTopLeftRadius: 0,
+					borderTopRightRadius: 0,
 					'& .MuiAvatar-root': {
 						width: 32,
 						height: 32,
@@ -49,40 +55,37 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 						mr: 1,
 					},
 
-					'&:before': {
-						content: '""',
-						display: 'block',
-						position: 'absolute',
-						top: 0,
-						right: 60,
-						width: 10,
-						height: 10,
-						bgcolor: 'background.paper',
-						transform: 'translateY(-50%) rotate(45deg)',
-						zIndex: 0,
-					},
+					// '&:before': {
+					// 	content: '""',
+					// 	display: 'block',
+					// 	position: 'absolute',
+					// 	top: 0,
+					// 	left: '50%',
+					// 	width: 10,
+					// 	height: 10,
+					// 	bgcolor: 'background.paper',
+					// 	transform: 'translateY(-50%) rotate(45deg)',
+					// 	zIndex: 0,
+					// },
 				},
 			}}
-			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
-			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+			transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+			anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 		>
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
-				{/*
-				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
-*/}
+				{/*<AccountCard accountState={selectedAccount} callback={openAccountSelect} />*/}
 				<BalanceCard />
-
 				<Divider />
 
 				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
-					<Link href={'/account'}>
+					{/*					<Link href={'/account'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Dashboard fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
-					</Link>
+					</Link>*/}
 					<Link href={'/organisations'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>

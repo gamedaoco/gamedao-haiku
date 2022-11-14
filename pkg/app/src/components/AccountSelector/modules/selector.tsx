@@ -1,4 +1,4 @@
-import { ExpandMore, Verified } from '@mui/icons-material'
+import { ExpandMore, ExpandLess, Verified } from '@mui/icons-material'
 import { Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
@@ -8,9 +8,10 @@ import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
 
 interface ComponentProps {
 	onClick: () => void
+	open?: boolean
 }
 
-export function Selector({ onClick }: ComponentProps) {
+export function Selector({ onClick, open }: ComponentProps) {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
@@ -83,9 +84,7 @@ export function Selector({ onClick }: ComponentProps) {
 					</Stack>
 				</Stack>
 			</Stack>
-			<Box display="grid">
-				<ExpandMore />
-			</Box>
+			<Box display="grid">{open ? <ExpandLess /> : <ExpandMore />}</Box>
 			<Box />
 		</Stack>
 	)

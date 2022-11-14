@@ -26,7 +26,7 @@ export function Page() {
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
 						<Typography variant="h3">
-							{param && param !== `overview` ? `${t('page:account:title')} — x` : t('page:account:title')}
+							{param && param !== `overview` ? `${t('page:account:title')}` : t('page:account:title')}
 						</Typography>
 					</Grid>
 					<Grid item></Grid>

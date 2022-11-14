@@ -7,7 +7,7 @@ import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 
 import Loader from 'containers/Account/components/Collectables/Loader'
 
-import { ModelDialog } from 'components/Collectable/modules/modalDialog'
+import { ModalDialog } from 'components/Collectable/modules/modalDialog'
 
 interface IpfsMetadata {
 	description: string
@@ -65,7 +65,7 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 						</Box>
 					</CardContent>
 					<Box display="flex" justifyContent="center" alignItems="center">
-						<ModelDialog
+						<ModalDialog
 							open={openModel}
 							mediaUrl={ipfsMetadata.mediaUri}
 							handleClose={() => setOpenModel(false)}

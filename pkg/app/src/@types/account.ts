@@ -4,4 +4,5 @@ export enum AccountTabs {
 	CAMPAIGNS = 'campaigns',
 	COLLECTABLES = 'collectables',
 	IDENTITY = 'identity',
+	SETTINGS = 'settings',
 }

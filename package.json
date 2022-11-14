@@ -18,6 +18,8 @@
     "format": "prettier --parser babel-ts --write --check 'pkg/**/*.{ts,tsx}'",
     "format:verify": "prettier --parser babel-ts --check 'pkg/**/*.{ts,tsx}'",
     "format:staged": "pretty-quick --staged --pattern 'pkg/**/*.{ts,tsx}'",
+    "lint": "yarn lint:app",
+    "lint:app": "yarn eslint 'pkg/app/src'",
     "build:graphql": "yarn workspace @gamedao-haiku/app generate",
     "build:frontend": "yarn workspace @gamedao-haiku/app build",
     "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",

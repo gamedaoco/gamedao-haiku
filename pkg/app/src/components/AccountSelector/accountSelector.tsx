@@ -4,8 +4,8 @@ import { Box, Button, useMediaQuery, useTheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useExtensionContext } from 'src/providers/extension/modules/context'
 
-import { Flyout } from 'components/AccountSelector/modules/flyout'
-import { Selector } from 'components/AccountSelector/modules/selector'
+import { Flyout } from './modules/flyout'
+import { Selector } from './modules/selector'
 import { SelectAccountDialog } from 'components/SelectAccountDialog/selectAccountDialog'
 import { SelectNetworkDialog } from 'components/SelectNetworkDialog/selectNetworkDialog'
 
@@ -70,7 +70,7 @@ export function AccountSelector() {
 		return (
 			<>
 				<Box ref={anchorRef}>
-					<Selector onClick={handleOpenFlyout} />
+					<Selector onClick={handleOpenFlyout} open={flyoutOpenState} />
 				</Box>
 				<Flyout
 					anchorEl={anchorRef?.current}

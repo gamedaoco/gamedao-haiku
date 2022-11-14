@@ -67,7 +67,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 						) : (
 							<>
 								<Key fontSize={'small'} />
-								<span>{t(`label:${item?.access_model === 'Open' ? 'open' : 'invitation'}`)}</span>
+								<span>{t(`label:${item?.access_model === 'Open' ? 'open' : 'whitelist'}`)}</span>
 							</>
 						)}
 					</Box>

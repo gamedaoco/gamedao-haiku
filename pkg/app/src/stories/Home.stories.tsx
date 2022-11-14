@@ -1,6 +1,6 @@
 import React from 'react'
 import { Providers } from 'src/providers'
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/default'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'

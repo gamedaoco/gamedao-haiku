@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Box, Button, Card, Divider, Link, Stack, Typography } from '@mui/material'
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import type { ISubmittableResult } from '@polkadot/types/types'
-import { Balance } from 'hooks/useBalanceByAddress'
+import { TBalance } from 'hooks/useBalanceByAddress'
 import { useBalanceByAddressAndBalanceId } from 'hooks/useBalanceByAddressAndBalanceId'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
@@ -29,8 +29,8 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 	const signAndSend = useTransaction()
 	const address = useCurrentAccountAddress()
 	const systemProperties = useSystemProperties()
-	const networkBalance: Balance = useBalanceByAddressAndBalanceId(address, systemProperties?.networkCurrency)
-	const depositBalance: Balance = useBalanceByAddressAndBalanceId(address, txData?.currencyId)
+	const networkBalance: TBalance = useBalanceByAddressAndBalanceId(address, systemProperties?.networkCurrency)
+	const depositBalance: TBalance = useBalanceByAddressAndBalanceId(address, txData?.currencyId)
 
 	const handleProceed = useCallback(() => {
 		signAndSend(txData?.tx, txData?.txMsg, txCallback, t)

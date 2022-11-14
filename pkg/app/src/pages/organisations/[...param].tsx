@@ -38,7 +38,7 @@ import { Overview } from 'components/TabPanels/Organization/overview'
 import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
-import { SettingsOverview } from 'components/TabPanels/Settings/settings'
+import { SettingsOverview } from 'components/TabPanels/Settings/overview'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()

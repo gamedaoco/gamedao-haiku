@@ -1,0 +1,6 @@
+subscription SettingsByAddress($address: String!) {
+    settings_by_pk(id: $address) {
+        id
+        type # org or individual
+    }
+}

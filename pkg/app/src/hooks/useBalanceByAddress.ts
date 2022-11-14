@@ -5,7 +5,7 @@ import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useBalanceByAddressSubscription } from 'src/queries'
 import { formatBalanceString } from 'src/utils/balance'
 
-export interface Balance {
+export type TBalance = {
 	frozen: number
 	free: number
 	reserved: number
@@ -14,8 +14,17 @@ export interface Balance {
 	tokenDecimals: number
 }
 
-export function useBalanceByAddress(address: string): Balance[] {
-	const [balanceState, setBalanceState] = useState<Balance[]>(null)
+const balanceDefault: TBalance = {
+	frozen: 0,
+	free: 0,
+	reserved: 0,
+	balanceId: 0,
+	tokenSymbol: '...',
+	tokenDecimals: 0,
+}
+
+export function useBalanceByAddress(address: string): TBalance[] {
+	const [balanceState, setBalanceState] = useState<TBalance[]>(null)
 	const { data, error } = useBalanceByAddressSubscription({ variables: { address } })
 	const systemProperties = useSystemProperties()
 	const logger = useLogger('useBalanceByAddress')
@@ -41,7 +50,7 @@ export function useBalanceByAddress(address: string): Balance[] {
 							balanceId: +balance.balanceId,
 							tokenSymbol: systemProperties.tokenSymbol?.[balance.balanceId] ?? '',
 							tokenDecimals: tokenDecimals,
-						} as Balance
+						} as TBalance
 					}),
 			)
 		}

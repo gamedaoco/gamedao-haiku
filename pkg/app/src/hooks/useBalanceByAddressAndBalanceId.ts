@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { Balance, useBalanceByAddress } from 'hooks/useBalanceByAddress'
+import { TBalance, useBalanceByAddress } from 'hooks/useBalanceByAddress'
 
-export function useBalanceByAddressAndBalanceId(address: string, balanceId: number): Balance {
-	const [balanceState, setBalanceState] = useState<Balance>(null)
+export function useBalanceByAddressAndBalanceId(address: string, balanceId: number): TBalance {
+	const [balanceState, setBalanceState] = useState<TBalance>(null)
 	const balance = useBalanceByAddress(address)
 
 	useEffect(() => {
