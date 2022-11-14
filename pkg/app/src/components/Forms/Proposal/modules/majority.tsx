@@ -5,7 +5,6 @@ import { Person } from '@mui/icons-material'
 import { InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { PROPOSAL_CREATE_DEPOSIT } from 'src/constants/proposal'
-import { useTranslation } from 'react-i18next'
 
 import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
