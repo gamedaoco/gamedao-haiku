@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Person } from '@mui/icons-material'
 import { InputAdornment, Stack, TextField, Typography } from '@mui/material'
@@ -33,8 +34,8 @@ export function Majority({ selected, setSelected, deposit, setDeposit, type }: C
 		<BaseForm title={t('page:proposals:settings:voting_type')}>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={'Simple majority'}
-				description={'The option with the most single votes wins'}
+				title={t('page:proposals:settings:simple_majority:title')}
+				description={t('page:proposals:settings:simple_majority:description')}
 				value={0}
 				selectedValue={selected}
 				onChange={setSelected}
@@ -42,8 +43,8 @@ export function Majority({ selected, setSelected, deposit, setDeposit, type }: C
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={'Relative majority'}
-				description={'The option with the most single votes wins'}
+				title={t('page:proposals:settings:relative_majority:title')}
+				description={t('page:proposals:settings:relative_majority:description')}
 				value={1}
 				selectedValue={selected}
 				onChange={setSelected}
@@ -51,8 +52,8 @@ export function Majority({ selected, setSelected, deposit, setDeposit, type }: C
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={'Absolute majority'}
-				description={'The option with the most single votes wins'}
+				title={t('page:proposals:settings:absolute_majority:title')}
+				description={t('page:proposals:settings:absolute_majority:description')}
 				value={2}
 				selectedValue={selected}
 				onChange={setSelected}
