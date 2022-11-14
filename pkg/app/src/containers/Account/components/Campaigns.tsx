@@ -39,3 +39,5 @@ export function Campaigns() {
 		</Box>
 	)
 }
+
+export default Campaigns

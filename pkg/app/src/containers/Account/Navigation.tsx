@@ -2,9 +2,7 @@ import React, { ChangeEvent, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
-import { useTheme } from '@mui/material/styles'
 import { Box, Tab, Tabs } from '@mui/material'
-import { Identity } from '@mui/icons-material'
 import { AccountTabs } from 'src/@types/account'
 
 interface Props {
@@ -17,7 +15,6 @@ interface ITabs {
 }
 
 export function Navigation({ param }: Props) {
-	const theme = useTheme()
 	const { t } = useTranslation()
 	const { push } = useRouter()
 
@@ -57,8 +54,9 @@ export function Navigation({ param }: Props) {
 		},
 		[push],
 	)
+
 	return (
-		<Box sx={{ my: 2, borderRadius: '8px' }}>
+		<Box sx={{ my: 2 }}>
 			<Tabs
 				scrollButtons
 				allowScrollButtonsMobile
@@ -67,10 +65,9 @@ export function Navigation({ param }: Props) {
 				sx={{ px: 3 }}
 				textColor="primary"
 				value={param || AccountTabs.OVERVIEW}
-				// variant="glass"
 			>
-				{tabs.map((tab) => (
-					<Tab key={tab.label} label={tab.label} value={tab.value} />
+				{tabs.map((tab, i) => (
+					<Tab key={i} label={tab.label} value={tab.value} />
 				))}
 			</Tabs>
 		</Box>

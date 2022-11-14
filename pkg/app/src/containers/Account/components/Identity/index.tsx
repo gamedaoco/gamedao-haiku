@@ -1,19 +1,19 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
+import type { Identity as TIdentity } from 'src/queries'
 
-import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
-import { Controller, FormProvider, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
-import type { Identity } from 'src/queries'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
+import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-const initialState = (identity: Identity) => ({
+const initialState = (identity: TIdentity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
 	email: identity?.email || '',
@@ -25,36 +25,52 @@ const initialState = (identity: Identity) => ({
 })
 
 export function Identity() {
+	const { t } = useTranslation()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
+	const clearIdentityTx = useClearIdentityTransaction()
+
 	const resolver = useYupValidationResolver(validation)
-	const { t } = useTranslation()
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
-	const formHandler = useForm<Identity | any>({
+
+	const [values, setValues] = useState(null)
+	const setIdentityTx = useIdentitySetTransaction(values)
+
+	const [modalState, setModalState] = useState({
+		set: false,
+		clear: false,
+	})
+	const formHandler = useForm<TIdentity | any>({
 		defaultValues: initialState(identity),
 		resolver,
 	})
+
+	const submit = useCallback(
+		(data, type: 'set' | 'clear') => {
+			setValues(data)
+			if (type === 'set') {
+				setModalState((prevState) => ({ ...prevState, set: true }))
+			} else {
+				setModalState((prevState) => ({ ...prevState, clear: true }))
+			}
+		},
+		[setModalState],
+	)
+
+	useEffect(() => {
+		if (!identity?.display_name) {
+			setIsClearDisabled(true)
+		} else {
+			setIsClearDisabled(false)
+		}
+	}, [identity?.display_name])
+
 	useEffect(() => {
 		if (identity) {
 			formHandler.reset(initialState(identity))
 		}
 	}, [identity, formHandler])
-	const [values, setValues] = useState(null)
 
-	const submit = useCallback((data, type: 'set' | 'clear') => {
-		setValues(data)
-		if (type === 'set') {
-			setModalState((prevState) => ({ ...prevState, set: true }))
-		} else {
-			setModalState((prevState) => ({ ...prevState, clear: true }))
-		}
-	}, [])
-	const setIdentityTx = useIdentitySetTransaction(values)
-	const clearIdentityTx = useClearIdentityTransaction()
-	const [modalState, setModalState] = useState({
-		set: false,
-		clear: false,
-	})
 	const handleModalClose = useCallback(
 		(type: 'set' | 'clear') => {
 			if (type === 'set') {
@@ -65,13 +81,6 @@ export function Identity() {
 		},
 		[setModalState],
 	)
-	useEffect(() => {
-		if (!identity?.display_name) {
-			setIsClearDisabled(true)
-		} else {
-			setIsClearDisabled(false)
-		}
-	}, [identity])
 
 	return (
 		<FormProvider {...formHandler}>
@@ -88,7 +97,7 @@ export function Identity() {
 				txCallback={() => handleModalClose('clear')}
 			/>
 			<form>
-				<Card sx={{ borderRadius: '16px' }} variant={'glass'}>
+				<Card variant={'glass'}>
 					<CardContent>
 						<Typography variant="h5">{t('button:navigation:set_on_chain_identity')}</Typography>
 
@@ -293,6 +302,7 @@ export function Identity() {
 									)}
 								/>
 							</Grid>
+
 							<Grid item md={12} xs={12}>
 								<Box
 									sx={{
@@ -334,3 +344,5 @@ export function Identity() {
 		</FormProvider>
 	)
 }
+
+export default Identity

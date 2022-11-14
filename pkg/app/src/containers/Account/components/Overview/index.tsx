@@ -8,10 +8,10 @@ import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 import { useTheme } from '@mui/material/styles'
 import { Box, Grid } from '@mui/material'
 
-import { Achievements } from './Overview/Achievements'
-import { Balances } from './Overview/Balances'
-import { Collectables } from './Collectables'
-import { Organisations } from './Organisations'
+import { Achievements } from './Achievements'
+import { Balances } from './Balances'
+import OrganisationsTable from '../Organisations/OrganisationsTable'
+import Collectables from '../Collectables'
 
 export function Overview() {
 	const theme = useTheme()
@@ -37,7 +37,7 @@ export function Overview() {
 				</Grid>
 
 				<Grid item xs={12}>
-					<Organisations
+					<OrganisationsTable
 						organisations={organisations as Organization[]}
 						title={t('page:account:organisations:title')}
 						loading={loading}

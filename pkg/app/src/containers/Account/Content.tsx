@@ -1,20 +1,18 @@
 import React, { useCallback } from 'react'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { AccountTabs } from 'src/@types/account'
 
-import { Overview } from './components/Overview'
-import { Organisations } from './components/Organisations'
-import { Campaigns } from './components/Campaigns'
-import { Collectables } from './components/Collectables'
-import { Identity } from './components/Identity'
-import { Settings } from './components/Identity'
+import Overview from './components/Overview'
+import Organisations from './components/Organisations'
+import Campaigns from './components/Campaigns'
+import Collectables from './components/Collectables'
+import Identity from './components/Identity'
+import Settings from './components/Settings'
 
-interface ComponentProps {
+interface Props {
 	param: AccountTabs
 }
 
-export function Content({ param }: ComponentProps) {
-	const accountState = useCurrentAccountAddress()
+export function Content({ param }: Props) {
 	const reroute = useCallback(() => {
 		switch (param) {
 			case AccountTabs.CAMPAIGNS:

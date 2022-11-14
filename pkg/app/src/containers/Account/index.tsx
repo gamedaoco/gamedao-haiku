@@ -6,14 +6,14 @@ import { Navigation } from './Navigation'
 import { Content } from './Content'
 
 interface Props {
-	args: AccountTabs
+	param: AccountTabs
 }
-export function Account({ args }: Props) {
+export function Account({ param }: Props) {
 	return (
 		<>
 			<Header />
-			<Navigation param={args} />
-			<Content param={args} />
+			<Navigation param={param} />
+			<Content param={param} />
 		</>
 	)
 }

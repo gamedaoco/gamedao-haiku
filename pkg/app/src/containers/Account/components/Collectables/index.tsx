@@ -1,38 +1,32 @@
-import React, { FC, memo } from 'react'
-import type { Collectable as CollectableInterface } from 'src/@types/collectable'
-import { CollectablesForUserQuery } from 'src/queries'
+import React, { useEffect } from 'react'
+import Script from 'next/script'
 
-import { Grid } from '@mui/material'
-import Collectable from 'components/Collectable/collectable'
-import Loader from './Loader'
+import { useTranslation } from 'react-i18next'
+import { useCollectablesForUserLazyQuery as useCollectables } from 'src/queries'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { getKusamaAddressFromAccountState as getKusamaAddress } from 'src/utils/accountUtils'
 
-interface CollectablesListProps {
-	loading: boolean
-	items: CollectablesForUserQuery
-}
+import { Box, Card, Typography } from '@mui/material'
 
-const Collectables: FC<CollectablesListProps> = ({ loading, items }) => {
-	if (!Array.isArray(items?.rmrkNfts) && !loading) return null
+import CollectablesGrid from './CollectablesGrid'
+
+export function Collectables() {
+	const { t } = useTranslation()
+	const [loadCollectables, { loading, data }] = useCollectables()
+
+	const account = useCurrentAccountState()
+
+	useEffect(() => {
+		if (account) {
+			loadCollectables({ variables: { owner: getKusamaAddress(account) } })
+		}
+	}, [account, loadCollectables])
 
 	return (
-		<Grid container sx={{ pt: 3 }} spacing={{ xs: 2 }} columns={{ xs: 2, sm: 8, md: 12 }}>
-			{loading ? (
-				[1, 2, 3].map((x) => (
-					<Grid item xs={12 / 5} key={x}>
-						<Loader />
-					</Grid>
-				))
-			) : (
-				<>
-					{items?.rmrkNfts.map((item: CollectableInterface) => (
-						<Grid item xs={12 / 5} key={item.id}>
-							<Collectable item={item} />
-						</Grid>
-					))}
-				</>
-			)}
-		</Grid>
+		<Box>
+			<CollectablesGrid loading={loading} items={data} />
+		</Box>
 	)
 }
 
-export default memo(Collectables)
+export default Collectables
