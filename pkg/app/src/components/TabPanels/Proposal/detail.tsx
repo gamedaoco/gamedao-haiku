@@ -17,7 +17,7 @@ import {
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
-import { useSimpleVoteTransaction } from 'hooks/tx/useSimpleVoteTransaction'
+import { useVoteTransaction } from 'hooks/tx/useVoteTransaction'
 import { useBlockNumber } from 'hooks/useBlockNumber'
 import { useDisplayValues } from 'hooks/useDisplayValues'
 import { useSystemProperties } from 'hooks/useSystemProperties'
@@ -27,10 +27,13 @@ import { NavLink } from 'src/components'
 import { Organization, useProposalByIdSubscription } from 'src/queries'
 import { formatAddressShort } from 'src/utils/address'
 import { isProposalActive } from 'src/utils/proposalUtils'
+import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+
+import { useApiProvider } from 'hooks/useApiProvider'
 
 interface ComponentProps {
 	organization: Organization
@@ -95,18 +98,19 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	const [endDate, setEndDate] = useState<string>('')
 	const [showMore, setShowMore] = useState<boolean>(false)
 	const [showButton, setShowButton] = useState<boolean>(false)
-	const simpleVoteTx = useSimpleVoteTransaction(proposalId, selectedVote)
+	const simpleVoteTx = useVoteTransaction(proposalId, selectedVote)
 	const blockNumber = useBlockNumber()
-	const isActive = useMemo(
-		() => isProposalActive(blockNumber, proposal?.start, proposal?.expiry),
-		[blockNumber, proposal?.start, proposal?.expiry],
-	)
-
+	const isActive = useMemo(() => isProposalActive(blockNumber, proposal), [blockNumber, proposal])
 	const { loading, data } = useProposalByIdSubscription({
 		variables: { proposalId },
 	})
 
+	// const config = useApiProvider()
+	// const sp = useSystemProperties()
+	// console.log( 'useConfig', config, sp )
+
 	const theme = useTheme()
+	const { chain } = getConnectedEndpoint()
 	const matches = useMediaQuery(theme.breakpoints.up('lg'))
 
 	const handleOpenTxModal = useCallback(() => {
@@ -140,8 +144,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	useEffect(() => {
 		if (!proposal) return
 
-		const yesVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted === 1).length
-		const noVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted === 0).length
+		const yesVotes = proposal.voting.proposal_voters.filter((voter) => voter.voted).length
+		const noVotes = proposal.voting.proposal_voters.filter((voter) => !voter.voted).length
 
 		const voteYes = +((yesVotes / Math.max(1, proposal.voting.proposal_voters.length)) * 100).toPrecision(2)
 		const voteNo = +((noVotes / Math.max(1, proposal.voting.proposal_voters.length)) * 100).toPrecision(2)
@@ -167,10 +171,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	useEffect(() => {
 		if (!proposal) return
 
-		const typeName = displayValues?.proposalTypes.find((pt) => pt.value === proposal!.type)?.text
-		if (typeName) {
-			setProposalTypeName(`${typeName} Proposal`)
-		}
+		setProposalTypeName(`${proposal.type} Proposal`)
 
 		const votingTypeName = displayValues?.votingTypes.find((pt) => pt.value === proposal!.type)?.text ?? ''
 		if (votingTypeName) {
@@ -263,21 +264,29 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 							<Typography variant="body2">{proposalTypeName}</Typography>
 						</Box>
 
-						<Box>
-							<Typography variant="body2">{t('label:type')}</Typography>
-						</Box>
-						<Box>
-							<Typography variant="body2">{proposalVotingTypeName}</Typography>
-						</Box>
+						{/*<Box>*/}
+						{/*	<Typography variant="body2">{t('label:type')}</Typography>*/}
+						{/*</Box>*/}
+						{/*<Box>*/}
+						{/*	<Typography variant="body2">{proposalVotingTypeName}</Typography>*/}
+						{/*</Box>*/}
+
+						{/* TODO we need ( start block AND ) endblock and explorer should link to endblock so user can inspect */}
 
 						<Box>
-							<Typography variant="body2">{t('label:block_number')}</Typography>
+							<Typography variant="body2">End {t('label:block_number')}</Typography>
 						</Box>
+
+						{/* TODO: get ws url for connected network */}
+
 						<NavLink
-							href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fbeeblebrox.zero.io%2Fnode#/explorer/query/${proposal.created_at_block}`}
+							href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
+								chain.toLowerCase(),
+							)}#/explorer/query/${proposal.created_at_block}`}
+							external={true}
 						>
 							<Stack direction="row" spacing={1}>
-								<Typography variant="body2">{proposal.created_at_block.toLocaleString()}</Typography>
+								<Typography variant="body2">{proposal.expiry.toLocaleString()}</Typography>
 								<Launch fontSize="small" />
 							</Stack>
 						</NavLink>

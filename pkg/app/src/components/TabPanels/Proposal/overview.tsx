@@ -104,7 +104,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 				const expiryBlock = proposal.expiry
 				const startBlock = proposal.start
 				const hasStarted = blockNumber && blockNumber > startBlock
-				const hasExpired = blockNumber && blockNumber > expiryBlock
+				const hasExpired = (blockNumber && blockNumber > expiryBlock) || proposal.state !== 'Active'
 				let timeLeft = ''
 
 				if (!hasStarted) {
@@ -140,7 +140,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 	}
 
 	return (
-		<Stack component={Paper} padding={4} spacing={2}>
+		<Stack component={Paper} padding={4} spacing={2} variant={'glass'}>
 			<Stack direction="row" spacing={1} justifyContent="space-between">
 				<Typography variant="h6">Proposals</Typography>
 				{address && enabledFeatures.CREATE_PROPOSAL && isMember && (

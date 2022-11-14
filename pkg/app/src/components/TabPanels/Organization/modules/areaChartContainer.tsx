@@ -15,7 +15,7 @@ interface ComponentProps {
 
 export function AreaChartContainer({ title, total, increase, series, categories }: ComponentProps) {
 	return (
-		<Paper sx={{ maxHeight: '210px' }}>
+		<Paper sx={{ maxHeight: '210px' }} variant={'glass'}>
 			<Stack direction="row" justifyContent="space-between" p={3}>
 				<Stack direction="column">
 					<Typography variant="subtitle1">{title}</Typography>

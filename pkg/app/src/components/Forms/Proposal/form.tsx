@@ -8,11 +8,13 @@ import { useCreateProposalTransaction } from 'hooks/tx/useCreateProposalTransact
 import { useConfig } from 'hooks/useConfig'
 import { useTMPProposalState } from 'hooks/useTMPProposalState'
 import { useTranslation } from 'react-i18next'
+import { PROPOSAL_KEYS } from 'src/constants/proposal'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import {
 	Description,
 	getValidationSchema as getDescriptionValidationSchema,
+	getDescriptionValidationSchemaSpending,
 	getValidationSchemaWithdrawal as getDescriptionValidationSchemaWithdrawal,
 } from 'components/Forms/Proposal/modules/description'
 import { Majority } from 'components/Forms/Proposal/modules/majority'
@@ -91,7 +93,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 	const checkNextButtonState = () => {
 		switch (currentStep) {
 			case 1:
-				if (tmpProposalState.type == 1) {
+				if (tmpProposalState.type == PROPOSAL_KEYS.Withdrawal) {
 					return !getDescriptionValidationSchemaWithdrawal(
 						config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS,
 					).isValidSync({
@@ -102,6 +104,16 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 						campaignId: tmpProposalState.campaignId,
 						amount: tmpProposalState.amount,
 					})
+				} else if (tmpProposalState.type == PROPOSAL_KEYS.Spending) {
+					return !getDescriptionValidationSchemaSpending(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS).isValidSync({
+						name: tmpProposalState.name,
+						description: tmpProposalState.description,
+						startDate: tmpProposalState.startDate,
+						endDate: tmpProposalState.endDate,
+						currencyId: tmpProposalState.currencyId,
+						amount: tmpProposalState.amount,
+						beneficiaryAddress: tmpProposalState.beneficiaryAddress,
+					})
 				} else {
 					return !getDescriptionValidationSchema(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS).isValidSync({
 						name: tmpProposalState.name,
@@ -110,7 +122,6 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 						endDate: tmpProposalState.endDate,
 					})
 				}
-
 			case 2:
 				return !tx
 		}
@@ -126,6 +137,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 			{currentStep === 0 && <Type selected={tmpProposalState.type} setSelected={tmpProposalState.setType} />}
 			{currentStep === 1 && (
 				<Description
+					type={tmpProposalState.type}
 					name={tmpProposalState.name}
 					setName={tmpProposalState.setName}
 					description={tmpProposalState.description}
@@ -138,8 +150,11 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					campaignId={tmpProposalState.campaignId}
 					setCampaignId={tmpProposalState.setCampaignId}
 					setEndDate={tmpProposalState.setEndDate}
+					currencyId={tmpProposalState.currencyId}
+					setCurrencyId={tmpProposalState.setCurrencyId}
+					beneficiaryAddress={tmpProposalState.beneficiaryAddress}
+					setBeneficiaryAddress={tmpProposalState.setBeneficiaryAddress}
 					organizationId={organizationId}
-					isWithdrawal={tmpProposalState.type == 1}
 				/>
 			)}
 			{currentStep === 2 && (
@@ -148,6 +163,7 @@ export function Form({ currentStep, setStep, organizationId, onClose }: Componen
 					setSelected={tmpProposalState.setMajority}
 					deposit={tmpProposalState.deposit}
 					setDeposit={tmpProposalState.setDeposit}
+					type={tmpProposalState.type}
 				/>
 			)}
 			<Stack spacing={2} justifyContent="flex-end" direction="row">
