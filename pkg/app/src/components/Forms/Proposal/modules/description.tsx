@@ -270,13 +270,15 @@ export function Description({
 						<TextField
 							fullWidth
 							variant="outlined"
-							label="Campaign"
-							placeholder="Campaign name"
+							label={t('label:campaign')}
+							placeholder={t('label:campaign_name')}
 							select
 							value={campaignId}
 							onChange={handleCampaignChange}
 						>
-							{data?.campaign?.length === 0 && <MenuItem>No campaign available</MenuItem>}
+							{data?.campaign?.length === 0 && (
+								<MenuItem>{t('page:proposals:settings:no_campaign')}</MenuItem>
+							)}
 							{data?.campaign?.map((campaign) => {
 								return (
 									<MenuItem key={campaign.id} value={campaign.id}>
@@ -288,7 +290,7 @@ export function Description({
 						<TextField
 							fullWidth
 							variant="outlined"
-							label="Amount"
+							label={t('label:amount')}
 							type="number"
 							InputProps={{
 								endAdornment: <InputAdornment position="start">GAME</InputAdornment>,
@@ -297,7 +299,7 @@ export function Description({
 							onChange={handleAmountChange}
 						/>
 						<Typography variant="h5" textAlign="center">
-							What’s the title of your proposal?
+							{t('page:proposals:settings:create_title')}
 						</Typography>
 					</>
 				)}
@@ -309,7 +311,7 @@ export function Description({
 								<TextField
 									fullWidth
 									variant="outlined"
-									label="Amount*"
+									label={`${t('label:amount')}*`}
 									type="number"
 									value={amount}
 									// ToDo: We need treasury balance for the Max button
@@ -324,12 +326,12 @@ export function Description({
 								/>
 							</FormControl>
 							<FormControl sx={{ flex: 1 }}>
-								<InputLabel id="currency">Currency*</InputLabel>
+								<InputLabel id="currency">{t('label:currency')}*</InputLabel>
 								<Select
 									value={currencyId}
 									onChange={handleCurrencyChanged}
 									labelId="currency"
-									label="Currency*"
+									label={`${t('label:currency')}*`}
 								>
 									{currencies.map((x) => (
 										<MenuItem value={x.value} key={x.key}>
@@ -356,11 +358,11 @@ export function Description({
 						<TextField
 							fullWidth
 							variant="outlined"
-							label={'send to address'}
+							label={t('label:send_to_address')}
 							value={beneficiaryAddress}
 							onChange={handleBeneficiaryAddressChanged}
 						/>
-						<Typography variant={'subtitle2'}>Add a description to your proposal</Typography>
+						<Typography variant={'subtitle2'}>{t('page:proposals:settings:create_description')}</Typography>
 					</Stack>
 				)}
 
@@ -368,7 +370,7 @@ export function Description({
 					fullWidth
 					onChange={handleNameChange}
 					value={name}
-					label="Proposal Name"
+					label={t('label:proposal_name')}
 					variant="outlined"
 					error={!!errorState}
 				/>
@@ -378,13 +380,13 @@ export function Description({
 					minRows={4}
 					onChange={handleDescriptionChange}
 					value={description}
-					label="Proposal Description"
+					label={t('label:proposal_description')}
 					variant="outlined"
 					error={!!errorState}
 				/>
 				<Stack direction="row" spacing={1} justifyContent="space-between" width="100%">
 					<DateTimePicker
-						label="Start date"
+						label={t('label:start_date')}
 						minDate={new Date()}
 						value={startDate}
 						onChange={handleStartDateChanged}
@@ -392,7 +394,7 @@ export function Description({
 						ampm={false}
 					/>
 					<DateTimePicker
-						label="End date"
+						label={t('label:end_date')}
 						minDate={moment(startDate ?? new Date())
 							.add(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 							.toDate()}

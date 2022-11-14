@@ -30,7 +30,7 @@ export function Majority({ selected, setSelected, deposit, setDeposit, type }: C
 	)
 
 	return (
-		<BaseForm title={'What type of voting do you need?'}>
+		<BaseForm title={t('page:proposals:settings:voting_type')}>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
 				title={t('page:proposals:settings:simple_majority:title')}
@@ -59,7 +59,13 @@ export function Majority({ selected, setSelected, deposit, setDeposit, type }: C
 				disabled={!(enabledFeature as any).CREATE_PROPOSAL_ABSOLUTE_MAJORITY}
 			/>
 			<Stack alignItems="center" justifyContent="space-between" spacing={1} direction="row" width="100%">
-				<Typography>A min deposit of {PROPOSAL_CREATE_DEPOSIT[type]} GAME is needed.</Typography>
+				<Typography>
+					{t('page:proposals:settings:min_deposit', {
+						quantity: PROPOSAL_CREATE_DEPOSIT[type],
+						coin: 'GAME',
+					})}
+					.
+				</Typography>
 				<TextField
 					variant="outlined"
 					label="Deposit"

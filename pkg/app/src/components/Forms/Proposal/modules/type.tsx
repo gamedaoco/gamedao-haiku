@@ -1,6 +1,7 @@
 import { Person } from '@mui/icons-material'
 import { useProposalFeatures } from 'hooks/featureToggle/useProposalFeatures'
 import { PROPOSAL_CREATE_DEPOSIT, PROPOSAL_KEYS } from 'src/constants/proposal'
+import { useTranslation } from 'react-i18next'
 
 import { BaseForm } from 'components/Forms/baseForm'
 import { RadioItem } from 'components/Forms/modules/radioItem'
@@ -12,13 +13,17 @@ interface ComponentProps {
 
 export function Type({ selected, setSelected }: ComponentProps) {
 	const enabledFeature = useProposalFeatures()
+	const { t } = useTranslation()
 
 	return (
-		<BaseForm title={'What type of proposal do you need?'}>
+		<BaseForm title={t('page:proposals:settings:proposal_type')}>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={`General Proposal  ( Deposit ${PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.General]} GAME )`}
-				description={'Select for all types of proposals except withdrawal'}
+				title={t('page:proposals:settings:create_general_proposal.title', {
+					quantity: PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.General],
+					coin: 'GAME',
+				})}
+				description={t('page:proposals:settings:create_general_proposal.description')}
 				value={0}
 				selectedValue={selected}
 				onChange={setSelected}
@@ -26,8 +31,11 @@ export function Type({ selected, setSelected }: ComponentProps) {
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={`Withdrawal Proposal  ( Deposit ${PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.Withdrawal]} GAME )`}
-				description={'Select to withdrawal from a campaign'}
+				title={t('page:proposals:settings:create_withdraw_proposal.title', {
+					quantity: PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.Withdrawal],
+					coin: 'GAME',
+				})}
+				description={t('page:proposals:settings:create_withdraw_proposal.description')}
 				value={1}
 				selectedValue={selected}
 				onChange={setSelected}
@@ -35,8 +43,11 @@ export function Type({ selected, setSelected }: ComponentProps) {
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px ' }} />}
-				title={`Spending Proposal  ( Deposit ${PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.Spending]} GAME )`}
-				description={'Select for all types of proposals except withdrawal'}
+				title={t('page:proposals:settings:create_spending_proposal.title', {
+					quantity: PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.Spending],
+					coin: 'GAME',
+				})}
+				description={t('page:proposals:settings:create_spending_proposal.description')}
 				value={2}
 				selectedValue={selected}
 				onChange={setSelected}
