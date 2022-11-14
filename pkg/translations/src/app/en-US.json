@@ -1,23 +1,75 @@
 {
-  "button": {
-    "navigation": {
-      "governance": "Governance",
-      "campaigns": "Campaigns",
-      "organisations": "Organisations",
-      "dashboard": "Dashboard",
-      "wallet": "Wallet",
-      "documentation": "Documentation",
-      "faucet": "Faucet",
-      "overview": "Overview",
-      "my_organisations": "My Organisations",
-      "my_campaigns": "My Campaigns",
-      "my_collectables": "My Collectables",
-      "identity": "Identity",
-      "set_on_chain_identity": "Set On-Chain Identity",
-      "proposals": "Proposals",
-      "members": "Members",
-      "treasury": "Treasury",
-      "settings": "Settings"
+    "button": {
+        "navigation": {
+            "governance": "Governance",
+            "campaigns": "Campaigns",
+            "organisations": "Organisations",
+            "dashboard": "Dashboard",
+            "wallet": "Wallet",
+            "documentation": "Documentation",
+            "faucet": "Faucet",
+            "overview": "Overview",
+            "my_organisations": "Organisations",
+            "my_campaigns": "Campaigns",
+            "my_collectables": "Collectables",
+            "identity": "Identity",
+            "set_on_chain_identity": "Set On-Chain Identity",
+            "proposals": "Proposals",
+            "members": "Members",
+            "treasury": "Treasury",
+            "settings": "Settings"
+        },
+        "ui": {
+            "no_continue": "No, continue",
+            "yes_cancel_now": "Yes, cancel now",
+            "yes_delete_now": "Yes, delete now",
+            "learn_more": "Learn More",
+            "download_extension": "Download {{extension}} Extension.",
+            "connect_wallet": "Connect wallet",
+            "submit": "Submit",
+            "select": "Select",
+            "create": "Create",
+            "load_more": "Load More",
+            "clear": "Clear",
+            "back_to_all_campaigns": "back to all campaigns",
+            "transaction": {
+                "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
+                "get_token": "Get {{token}} here",
+                "transaction_fee": "Transaction Fee",
+                "your_balance": "Your current balance",
+                "description_toggle": "What is this used for?"
+            },
+            "create_campaign": "Create your first Campaign",
+            "explore_campaigns": "Explore Campaigns",
+            "contribute_now": "Contribute now",
+            "contribute_again": "Contribute again",
+            "join_organization": "Join Organisation",
+            "leave_organization": "Leave Organisation",
+            "create_proposal": "Create Proposal",
+            "show_more": "Show More",
+            "show_less": "Show Less",
+            "vote": "Vote",
+            "save_draft": "Save Draft",
+            "delete_draft": "Delete Draft",
+            "go_to_members": "Go to Members",
+            "go_to_treasury": "Go to Treasury",
+            "view_all": "View All",
+            "change_settings": "Change Settings"
+        },
+        "form": {
+            "publish_now": "Publish Now",
+            "next_step": "Next step",
+            "save_organization": "Save Organisation",
+            "back": "Back",
+            "cancel": "Cancel",
+            "proposal": {
+                "create": "Create Proposal"
+            },
+            "identity": {
+                "clear": "Clear Identity",
+                "submit": "Sign and Submit"
+            }
+        }
     },
     "ui": {
       "no_continue": "No, continue",
@@ -56,21 +108,6 @@
       "view_all": "View All",
       "change_settings": "Change Settings"
     },
-    "form": {
-      "publish_now": "Publish Now",
-      "next_step": "Next step",
-      "save_organization": "Save Organisation",
-      "back": "Back",
-      "cancel": "Cancel",
-      "proposal": {
-        "create": "Create Proposal"
-      },
-      "identity": {
-        "clear": "Clear Identity",
-        "submit": "Sign and Submit"
-      }
-    }
-  },
   "label": {
     "are_you_sure": "Are you sure?",
     "progress_will_be_lost": "All your progress will be lost. Maybe save it as a draft and continue later",
@@ -171,7 +208,7 @@
       "title": "Submit Vote"
     },
     "addMember": {
-      "title": "Join Organisation",
+      "title": "Join",
       "action_subtitle": "Free",
       "description": "This organisation does not require any fee."
     },
@@ -179,11 +216,11 @@
       "title": "Leave Organisation"
     },
     "setIdentity": {
-      "title": "Set ZERO chain identity",
+      "title": "Claim Identity",
       "action_subtitle": "Deposit",
       "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an on-chain identity."
-    },
+      "description": "You need to deposit a small collateral to claim your on-chain identity."
+  },
     "clearIdentity": {
       "title": "Clear ZERO chain identity"
     },
@@ -195,18 +232,18 @@
   },
   "page": {
     "account": {
-      "title": "My Account",
+      "title": "Account",
       "achievements": {
-        "title": "My Achievements",
-        "description": "Level up by using our protocols and collaborating with the community."
+          "title": "Achievements",
+          "description": "Level up by using our protocols and collaborating with the community."
       },
       "balances": {
-        "title": "My Balances",
-        "token": "Token",
-        "transferable": "Transferable",
-        "locked": "Locked",
-        "reserved": "Reserved",
-        "total": "Total"
+          "title": "Balances",
+          "token": "Token",
+          "transferable": "Transferable",
+          "locked": "Locked",
+          "reserved": "Reserved",
+          "total": "Total"
       },
       "organisations": {
         "title": "Organisations",
