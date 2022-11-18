@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
+
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
-import type { Identity as TIdentity } from 'src/queries'
+import type { Identity } from 'src/queries'
 
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
@@ -9,11 +11,14 @@ import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 
-import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { Fingerprint } from '@mui/icons-material'
+import { InputAdornment } from '@mui/material'
+import IconButton from '@mui/material/IconButton'
+
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-const initialState = (identity: TIdentity) => ({
+const initialState = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
 	email: identity?.email || '',
@@ -24,24 +29,25 @@ const initialState = (identity: TIdentity) => ({
 	web3name: identity?.web3name || '',
 })
 
-export function Identity() {
+export function IdentityView() {
 	const { t } = useTranslation()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const clearIdentityTx = useClearIdentityTransaction()
+
+	const [isClearDisabled, setIsClearDisabled] = useState(false)
+	const [values, setValues] = useState(null)
 
 	const resolver = useYupValidationResolver(validation)
-	const [isClearDisabled, setIsClearDisabled] = useState(false)
-
-	const [values, setValues] = useState(null)
 	const setIdentityTx = useIdentitySetTransaction(values)
+	// const clearIdentityTx = useClearIdentityTransaction()
 
 	const [modalState, setModalState] = useState({
 		set: false,
 		clear: false,
 	})
-	const formHandler = useForm<TIdentity | any>({
-		defaultValues: initialState(identity),
+
+	const formHandler = useForm<Identity | any>({
+		defaultValues: initialState(identity || null),
 		resolver,
 	})
 
@@ -90,18 +96,28 @@ export function Identity() {
 				txData={setIdentityTx}
 				txCallback={() => handleModalClose('set')}
 			/>
+			{/*
 			<TransactionDialog
 				open={modalState.clear}
 				onClose={() => handleModalClose('clear')}
 				txData={clearIdentityTx}
 				txCallback={() => handleModalClose('clear')}
 			/>
+*/}
 			<form>
 				<Card variant={'glass'}>
 					<CardContent>
-						<Typography variant="h5">{t('button:navigation:set_on_chain_identity')}</Typography>
-
 						<Grid container spacing={3}>
+							<Grid item md={6} xs={12}>
+								<Typography variant="h5">
+									{'Identity' /*t('button:navigation:set_on_chain_identity')*/}
+								</Typography>
+								<Typography variant="body" pb={4}>
+									Your Identity is individual to you, like your passport. Increase Reputation and
+									Trust linking additional social identifiers.
+								</Typography>
+							</Grid>
+							<Grid item md={6} xs={12}></Grid>
 							<Grid item md={6} xs={12}>
 								<Controller
 									name="display"
@@ -110,12 +126,7 @@ export function Identity() {
 										<TextField
 											fullWidth
 											label={t('label:display_name')}
-											placeholder="JupiterMoon"
-											sx={{
-												'& fieldset': {
-													borderRadius: '16px',
-												},
-											}}
+											placeholder="Jupiter Moon"
 											error={!!errors?.display}
 											helperText={errors?.display?.message?.toString()}
 											onChange={onChange}
@@ -345,4 +356,4 @@ export function Identity() {
 	)
 }
 
-export default Identity
+export default IdentityView

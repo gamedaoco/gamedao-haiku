@@ -1,7 +1,9 @@
-import React, { Fragment, useState, useRef } from 'react'
+import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import Link from 'components/Link'
+
+import { useGraphQlContext } from 'providers/graphQl/modules/context'
 
 import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -25,7 +27,12 @@ import {
 	RiCheckboxBlankCircleLine as Dashboard,
 	RiFingerprintLine as Identity,
 	RiGamepadLine as Campaigns,
+	RiKeyLine as Wallet,
+	RiEmotionHappyLine as Net,
 } from 'react-icons/ri'
+// import {
+// 	IoPlanetOutline,
+// } from 'react-icons/io'
 import {
 	// RiShieldLine as Guilds,
 	// RiTreasureMapLine as Quests,
@@ -138,33 +145,35 @@ const right = [
 ]
 
 const Items = ({ items }) => {
-	return items.map((item) => (
-		<Box key={item.name}>
-			<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
-				<Button>
-					<Typography
-						pr={0.5}
-						fontSize="10px"
-						display="flex"
-						justifyContent="center"
-						alignItems="center"
-						sx={{ color: item.color || 'inherit' }}
-					>
-						{item.icon}
-					</Typography>
-					<Typography
-						fontSize="10px"
-						display="flex"
-						justifyContent="center"
-						alignItems="center"
-						sx={{ color: item.color || 'inherit' }}
-					>
-						{item.name}
-					</Typography>
-				</Button>
-			</Link>
-		</Box>
-	))
+	return items
+		? items.map((item) => (
+				<Box key={item.name}>
+					<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+						<Button>
+							<Typography
+								pr={0.5}
+								fontSize="10px"
+								display="flex"
+								justifyContent="center"
+								alignItems="center"
+								sx={{ color: item.color || 'inherit' }}
+							>
+								{item.icon}
+							</Typography>
+							<Typography
+								fontSize="10px"
+								display="flex"
+								justifyContent="center"
+								alignItems="center"
+								sx={{ color: item.color || 'inherit' }}
+							>
+								{item.name}
+							</Typography>
+						</Button>
+					</Link>
+				</Box>
+		  ))
+		: null
 }
 
 export function TopBar({ onSidebarOpen, sidebarOpen }: ComponentProps) {
@@ -173,6 +182,20 @@ export function TopBar({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const router = useRouter()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
 	const isLg = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
+	const { endpoints, selectedEndpoint } = useGraphQlContext()
+
+	const [tool, setTool] = useState(null)
+
+	useEffect(() => {
+		if (!selectedEndpoint) return null
+		setTool([
+			{
+				icon: <Net />,
+				name: selectedEndpoint.name,
+				path: '/set/network',
+			},
+		])
+	}, [selectedEndpoint])
 
 	return (
 		<AppBar position="sticky" style={{ background: '#000', borderRadius: 0, boxShadow: '0px 5px 15px #00000099' }}>
@@ -180,10 +203,12 @@ export function TopBar({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				<Stack ml={2} display="flex" direction="row" justifyContent="left" alignItems="center">
 					<Items items={left} />
 				</Stack>
-				<Stack display="flex" direction="row" justifyContent="right" alignItems="center"></Stack>
-				<Stack display="flex" direction="row" justifyContent="right" alignItems="center" mr={2}>
+				<Stack display="flex" direction="row" justifyContent="right" alignItems="center">
 					<Items items={mid} />
 					<Items items={right} />
+				</Stack>
+				<Stack display="flex" direction="row" justifyContent="right" alignItems="center" mr={2}>
+					<Items items={tool} />
 					<Items items={fn} />
 				</Stack>
 			</Toolbar>

@@ -86,7 +86,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
 					</Link>*/}
-					<Link href={'/organisations'}>
+					<Link href={'/account/organizations'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Folder fontSize="small" />

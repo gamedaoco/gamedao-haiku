@@ -7,15 +7,13 @@ interface Props {
 	children: ReactNode
 }
 
-const Component = ({ href, target, children }: Props) => {
+const Component = ({ href, target = null, children }: Props) => {
 	return target ? (
 		<a target="_blank" rel="noreferrer" href={href}>
 			{children}
 		</a>
 	) : (
-		<>
-			<Link href={href}>{children}</Link>
-		</>
+		<Link href={href}>{children}</Link>
 	)
 }
 

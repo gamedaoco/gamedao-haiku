@@ -1,3 +1,12 @@
+subscription OrgNames($searchQuery: String="%") {
+  organization {
+    id
+    organization_metadata {
+      name
+    }
+  }
+}
+
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
     organization_aggregate(where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
         aggregate {
@@ -43,6 +52,7 @@ subscription OrganizationById($orgId: String!) {
                 email
                 display_name
             }
+            # state
         }
         organization_metadata {
             description

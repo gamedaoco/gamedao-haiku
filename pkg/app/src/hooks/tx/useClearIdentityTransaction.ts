@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useLogger } from 'hooks/useLogger'
 import { useNetworkContext } from 'providers/network/modules/context'
-import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 
 export function useClearIdentityTransaction(): TransactionData {

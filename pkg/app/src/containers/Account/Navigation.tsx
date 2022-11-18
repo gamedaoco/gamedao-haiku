@@ -40,10 +40,10 @@ export function Navigation({ param }: Props) {
 				label: t('button:navigation:identity'),
 				value: AccountTabs.IDENTITY,
 			},
-			{
-				label: t('button:navigation:settings'),
-				value: AccountTabs.SETTINGS,
-			},
+			// {
+			// 	label: t('button:navigation:settings'),
+			// 	value: AccountTabs.SETTINGS,
+			// },
 		],
 		[t],
 	)

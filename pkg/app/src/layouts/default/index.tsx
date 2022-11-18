@@ -17,6 +17,7 @@ interface ComponentProps {
 	showFooter?: boolean
 	showSidebar?: boolean
 	noContainer?: boolean
+	noBorder?: boolean
 	title?: string
 	children?: React.ReactNode
 }
@@ -24,7 +25,15 @@ interface ComponentProps {
 // TODO: Should not be here/ configs and co
 const SITE_NAME = 'GameDAO'
 
-export function Layout({ showHeader, showFooter, showSidebar, children, noContainer, title }: ComponentProps) {
+export function Layout({
+	showHeader,
+	showFooter,
+	showSidebar,
+	children,
+	noContainer,
+	title,
+	noBorder,
+}: ComponentProps) {
 	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 	const config = useConfig()
 	const theme = useTheme()
@@ -67,9 +76,9 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 						{noContainer ? (
 							children
 						) : (
-							<Box p={[2, 4]} style={{ width: '100%', minHeight: spacing }}>
+							<Box p={noBorder ? 0 : [2, 4]} style={{ width: '100%', minHeight: spacing }}>
 								<Box component="main" sx={{ flexGrow: 1 }}>
-									<Container maxWidth="xl" sx={{ border: 0 }}>
+									<Container disableGutters maxWidth="xl" sx={{ border: 0 }}>
 										{children}
 									</Container>
 								</Box>

@@ -217,7 +217,7 @@ export function Overview({
 								</>
 							)}
 
-							{(isMember || isAdmin) && (
+							{/*							{(isMember || isAdmin) && (
 								<>
 									<Button
 										variant="outlined"
@@ -229,7 +229,7 @@ export function Overview({
 										{t('button:ui:change_settings')}
 									</Button>
 								</>
-							)}
+							)}*/}
 						</Stack>
 					</Stack>
 				</Paper>
