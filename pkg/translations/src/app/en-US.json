@@ -344,8 +344,12 @@
             "title": "No Fee",
             "description": "Members can join the organization without a fee"
           },
-          "radio_button_fee": {
-            "title": "Fee",
+          "radio_button_reserve_fee": {
+            "title": "Reserve fee ",
+            "description": "The fee will be locked when a member joins this organisation and unlocked when leaving"
+          },
+          "radio_button_transfer_fee": {
+            "title": "Transfer fee",
             "description": "When members join the organization they pay a fee"
           },
           "fee_amount": "Fee amount",
