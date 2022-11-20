@@ -1,6 +1,3 @@
-// import React, { useCallback, useState } from 'react'
-// import { useRouter } from 'next/router'
-// import { useTranslation } from 'react-i18next'
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 // import { useConfig } from 'hooks/useConfig'
@@ -39,7 +36,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import { Box, Tab, Tabs } from '@mui/material'
-import { OrganizationTabs } from 'src/@types/organisation'
+import { OrganizationTabs } from 'src/@types/enums'
 
 interface Props {
 	param: AccountTabs
@@ -50,52 +47,57 @@ interface ITabs {
 	value: OrganizationTabs
 }
 
-export function Navigation({ param }: Props) {
+export function Navigation() {
 	const { t } = useTranslation()
-	const { push } = useRouter()
-	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
+	const { query, push } = useRouter()
+
+	const param: OrganizationTabs = query.param || OrganizationTabs.OVERVIEW
+	const id: string = query.id
+
+	const [isMember, setIsMember] = useState<boolean>(false)
+	const [isPrimeOrCouncil, setIsPrimeOrCouncil] = useState<boolean>(false)
 
 	const tabs = useMemo<ITabs[]>(
 		() => [
 			{
 				label: t('button:navigation:overview'),
 				value: OrganizationTabs.OVERVIEW,
-				disabled: !organizationIdState,
+				disabled: !isMember,
 			},
 			{
 				label: t('button:navigation:campaigns'),
 				value: OrganizationTabs.CAMPAIGNS,
-				disabled: !organizationIdState,
+				disabled: !isMember,
 			},
 			{
 				label: t('button:navigation:governance'),
 				value: OrganizationTabs.GOVERNANCE,
-				disabled: !organizationIdState,
+				disabled: !isMember,
 			},
 			{
 				label: t('button:navigation:members'),
 				value: OrganizationTabs.MEMBERS,
-				disabled: !organizationIdState,
+				disabled: !isMember,
 			},
 			{
 				label: t('button:navigation:treasury'),
 				value: OrganizationTabs.TREASURY,
-				disabled: !organizationIdState,
+				disabled: !isMember,
 			},
 			{
 				label: t('button:navigation:settings'),
 				value: OrganizationTabs.SETTINGS,
-				disabled: !organizationIdState,
+				disabled: !isMember,
 			},
 		],
 		[t],
 	)
 
 	const handleTabsChange = useCallback(
-		(event: ChangeEvent<{}>, value: OrganizationTabs): void => {
-			push(`/org/${value}`)
+		(event: ChangeEvent<{}>, param: OrganizationTabs): void => {
+			push(`/org/${query.id}/${param}`)
 		},
-		[push],
+		[query, push],
 	)
 
 	return (
@@ -108,7 +110,7 @@ export function Navigation({ param }: Props) {
 				onChange={handleTabsChange}
 				sx={{ px: 3 }}
 				textColor="primary"
-				value={param || OrganizationTabs.OVERVIEW}
+				value={param}
 			>
 				{tabs.map((tab, i) => (
 					<Tab key={i} label={tab.label} value={tab.value} disabled={!tab.disabled} />

@@ -65,6 +65,7 @@ type OrganizationMember @entity {
     organization: Organization!
     address: String!
     identity: Identity!
+    state: String!
 }
 
 type Campaign @entity {

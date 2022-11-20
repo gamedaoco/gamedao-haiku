@@ -1,6 +1,7 @@
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material/styles'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography, TabPanel } from '@mui/material'
 
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
@@ -12,8 +13,20 @@ import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/overview'
 
 export function Governance() {
-	const theme = useTheme()
-	const { t } = useTranslation()
+	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
+	const [proposalIdState, setProposalIdState] = useState<string>(null)
+	const [organizationState, setOrganizationState] = useState<Organization>()
+	const [isMemberState, setIsMemberState] = useState<boolean>(false)
+	const { loading, data, error } = useOrganizationByIdSubscription({
+		variables: { orgId: organizationIdState },
+	})
+	const address = useCurrentAccountAddress()
+
+	useEffect(() => {
+		if (address && organizationState) {
+			setIsMemberState(organizationState.organization_members.some((member) => member.address === address))
+		}
+	}, [organizationState, address])
 
 	return (
 		<TabPanel value={'proposals'}>

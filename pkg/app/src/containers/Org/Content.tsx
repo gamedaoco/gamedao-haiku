@@ -1,35 +1,40 @@
-import React, { useCallback } from 'react'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-import { OrganizationTabs } from 'src/@types/organisation'
+import { OrganizationTabs } from 'src/@types/enums'
 
 import Overview from './components/Overview'
 import Governance from './components/Governance'
 import Campaigns from './components/Campaigns'
 import Collectables from './components/Treasury'
-import Identity from './components/Members'
+import Members from './components/Members'
 import Settings from './components/Settings'
 
-interface Props {
-	param: ContainerTabs
+type Props = {
+	param: OrganizationTabs
 }
 
-export function Content({ param }: Props) {
-	const reroute = useCallback(() => {
+export const Content = () => {
+	const { query } = useRouter()
+
+	const Component = ({ param }: OrganizationTabs) => {
 		switch (param) {
-			case ContainerTabs.GOVERNANCE:
+			case OrganizationTabs.GOVERNANCE:
 				return <Governance />
-			case ContainerTabs.CAMPAIGNS:
+			case OrganizationTabs.CAMPAIGNS:
 				return <Campaigns />
-			case ContainerTabs.TREASURY:
+			case OrganizationTabs.TREASURY:
 				return <Treasury />
-			case ContainerTabs.MEMBERS:
+			case OrganizationTabs.MEMBERS:
 				return <Members />
-			case ContainerTabs.SETTINGS:
+			case OrganizationTabs.SETTINGS:
 				return <Settings />
 			default:
 				return <Overview />
 		}
-	}, [param])
+	}
 
-	return <>{reroute()}</>
+	return <Component param={query.param} />
 }
+
+export default Content
