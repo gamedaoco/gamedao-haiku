@@ -33,49 +33,40 @@ export function IdentityView() {
 	const { t } = useTranslation()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-
-	const [isClearDisabled, setIsClearDisabled] = useState(false)
-	const [values, setValues] = useState(null)
-
-	const resolver = useYupValidationResolver(validation)
 	const setIdentityTx = useIdentitySetTransaction(values)
 	// const clearIdentityTx = useClearIdentityTransaction()
+
+	const [isClearDisabled, setIsClearDisabled] = useState(false)
+
+	const [values, setValues] = useState(null)
+	const resolver = useYupValidationResolver(validation)
+	const formHandler = useForm<Identity | any>({
+		defaultValues: initialState(identity),
+		resolver,
+	})
+
+	useEffect(() => {
+		if (values) console.log('values', values)
+	}, [values])
 
 	const [modalState, setModalState] = useState({
 		set: false,
 		clear: false,
 	})
 
-	const formHandler = useForm<Identity | any>({
-		defaultValues: initialState(identity || null),
-		resolver,
-	})
+	// useEffect(() => {
+	// 	if (!identity?.display_name) {
+	// 		setIsClearDisabled(true)
+	// 	} else {
+	// 		setIsClearDisabled(false)
+	// 	}
+	// }, [identity?.display_name])
 
-	const submit = useCallback(
-		(data, type: 'set' | 'clear') => {
-			setValues(data)
-			if (type === 'set') {
-				setModalState((prevState) => ({ ...prevState, set: true }))
-			} else {
-				setModalState((prevState) => ({ ...prevState, clear: true }))
-			}
-		},
-		[setModalState],
-	)
-
-	useEffect(() => {
-		if (!identity?.display_name) {
-			setIsClearDisabled(true)
-		} else {
-			setIsClearDisabled(false)
-		}
-	}, [identity?.display_name])
-
-	useEffect(() => {
-		if (identity) {
-			formHandler.reset(initialState(identity))
-		}
-	}, [identity, formHandler])
+	// useEffect(() => {
+	// 	if (identity) {
+	// 		formHandler.reset(initialState(identity))
+	// 	}
+	// }, [identity, formHandler])
 
 	const handleModalClose = useCallback(
 		(type: 'set' | 'clear') => {
@@ -87,6 +78,27 @@ export function IdentityView() {
 		},
 		[setModalState],
 	)
+
+	// const submit = (data,type) => {
+	// 	setValues(data)
+	// 	if (type === 'set') {
+	// 		setModalState({ ...modalState, set: true })
+	// 	} else {
+	// 		setModalState({ ...modalState, clear: true })
+	// 	}
+	// }
+
+	// const submit = useCallback(
+	// 	(data, type: 'set' | 'clear') => {
+	// 		setValues(data)
+	// 		if (type === 'set') {
+	// 			setModalState((prevState) => ({ ...prevState, set: true }))
+	// 		} else {
+	// 			setModalState((prevState) => ({ ...prevState, clear: true }))
+	// 		}
+	// 	},
+	// 	[values],
+	// )
 
 	return (
 		<FormProvider {...formHandler}>
@@ -112,7 +124,7 @@ export function IdentityView() {
 								<Typography variant="h5">
 									{'Identity' /*t('button:navigation:set_on_chain_identity')*/}
 								</Typography>
-								<Typography variant="body" pb={4}>
+								<Typography variant="body1" pb={4}>
 									Your Identity is individual to you, like your passport. Increase Reputation and
 									Trust linking additional social identifiers.
 								</Typography>
