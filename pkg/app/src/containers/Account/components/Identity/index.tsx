@@ -33,12 +33,12 @@ export function IdentityView() {
 	const { t } = useTranslation()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const setIdentityTx = useIdentitySetTransaction(values)
 	// const clearIdentityTx = useClearIdentityTransaction()
 
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
 
 	const [values, setValues] = useState(null)
+	const setIdentityTx = useIdentitySetTransaction(values)
 	const resolver = useYupValidationResolver(validation)
 	const formHandler = useForm<Identity | any>({
 		defaultValues: initialState(identity),
