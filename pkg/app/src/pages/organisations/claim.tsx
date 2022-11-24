@@ -15,7 +15,7 @@ export const Page = () => {
 			{list &&
 				list.map((item, i) => {
 					return (
-						<Link href={`/organisations/${item.id}`}>
+						<Link key={i} href={`/organisations/${item.id}`}>
 							<Typography variant={'caption'} key={i}>
 								{item.name} — {item.id}
 								<br />
