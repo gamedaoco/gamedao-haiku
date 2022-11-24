@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Person } from '@mui/icons-material'
 import { Box, Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
@@ -12,8 +12,9 @@ import { RadioItem } from 'components/Forms/modules/radioItem'
 const validationFeeSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
+	.required()
 
-const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit')
+const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit').required()
 
 interface ComponentProps {
 	selectedMode: number
@@ -45,37 +46,34 @@ export function Settings({
 	setFeeAmount,
 }: ComponentProps) {
 	const { t } = useTranslation()
+
+	const [memberLimitChangeError, setMemberLimitChangeError] = useState(null)
 	const handleMemberLimitChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
+				if (setMemberLimit) setMemberLimit(value < 0 ? 0 : value)
+				if (!value) return setMemberLimitChangeError(t('label:required'))
 				validationMemberLimitSchema?.validateSync(value)
-				if (setMemberLimit) {
-					setMemberLimit(value < 0 ? 0 : value)
-				}
+				setMemberLimitChangeError(null)
 			} catch (e) {
-				createWarningNotification(t(e.message))
+				setMemberLimitChangeError(t(e.message))
 			}
 		},
 		[setMemberLimit, validationMemberLimitSchema, t],
 	)
 
+	const [feeAmountChangeError, setFeeAmountChangeError] = useState(null)
 	const handleFeeAmountChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
+				if (setFeeAmount) setFeeAmount(value < 0 ? 0 : value)
+				if (!value) return setFeeAmountChangeError(t('label:required'))
 				validationFeeSchema?.validateSync(value)
-				if (setFeeAmount) {
-					setFeeAmount(value < 0 ? 0 : value)
-				}
+				setFeeAmountChangeError(null)
 			} catch (e) {
-				createWarningNotification(t(e.message))
+				setFeeAmountChangeError(t(e.message))
 			}
 		},
 		[setFeeAmount, validationFeeSchema, t],
@@ -173,6 +171,8 @@ export function Settings({
 						endAdornment: <Typography variant="body2">GAME</Typography>,
 					}}
 					variant="outlined"
+					error={!!feeAmountChangeError}
+					helperText={feeAmountChangeError}
 				/>
 			)}
 
@@ -194,6 +194,8 @@ export function Settings({
 				value={memberLimit}
 				label="Member limit"
 				variant="outlined"
+				error={!!memberLimitChangeError}
+				helperText={memberLimitChangeError}
 			/>
 		</BaseForm>
 	)
