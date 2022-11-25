@@ -119,7 +119,11 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 
 					{leftNav.map((item) => {
 						return (
-							<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+							<Link
+								href={item.path}
+								key={item.name}
+								target={item.path.includes('http') ? '_blank' : null}
+							>
 								<MenuItem key={item.name} selected={router.pathname.includes(item.path)}>
 									{item.icon && <ListItemIcon sx={{ mx: 0 }}> {item.icon} </ListItemIcon>}
 									{<ListItemText>{t(item.name)}</ListItemText>}
@@ -132,7 +136,11 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				<Stack direction="row" justifyContent="end" alignItems="center">
 					{rightNav.map((item) => {
 						return (
-							<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+							<Link
+								href={item.path}
+								key={item.name}
+								target={item.path.includes('http') ? '_blank' : null}
+							>
 								<Button key={item.name}>
 									{item.icon && item.icon}
 									{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
