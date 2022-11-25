@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
 import { useNetworkContext } from 'providers/network/modules/context'
-import { createWarningNotification } from 'src/utils/notificationUtils'
 import { toUnit } from 'src/utils/token'
 import { RadioItem } from 'components/Forms/modules/radioItem'
 
 const validationFeeSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
+	.required()
 
 interface ComponentProps {
 	feeType: string
@@ -31,19 +31,17 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 	const { selectedApiProvider } = useNetworkContext()
 	const { t } = useTranslation()
 
+	const [feeAmountChangeError, setFeeAmountChangeError] = useState(null)
 	const handleFeeAmountChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
+				if (setFeeAmountValue) setFeeAmountValue(value < 0 ? 0 : value)
+				if (!value) return setFeeAmountChangeError(t('label:required'))
 				validationFeeSchema?.validateSync(value)
-				if (setFeeAmountValue) {
-					setFeeAmountValue(value < 0 ? 0 : value)
-				}
+				setFeeAmountChangeError(null)
 			} catch (e) {
-				createWarningNotification(t(e.message))
+				setFeeAmountChangeError(t(e.message))
 			}
 		},
 		[setFeeAmountValue, validationFeeSchema, t],
@@ -107,6 +105,8 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 						endAdornment: <Typography variant="body2">GAME</Typography>,
 					}}
 					variant="outlined"
+					error={!!feeAmountChangeError}
+					helperText={feeAmountChangeError}
 				/>
 			)}
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
