@@ -42,7 +42,7 @@
     "@polkadot/types": "^9.6.1",
     "@talisman-connect/wallets": "^1.1.3",
     "apexcharts": "^3.35.3",
-    "apollo-server-core": "^3.10.1",
+    "apollo-server-core": "^3.11.1",
     "apollo-server-micro": "^3.10.0",
     "apollo3-cache-persist": "^0.14.1",
     "await-to-js": "^3.0.0",
