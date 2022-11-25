@@ -6,7 +6,7 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 
 	if (!chainClient.initialized) {
 		console.log('Chain client is not initialized')
-		process.exit(0)
+		process.exit(1)
 	}
 
 	const systemProperties = await chainClient.api.rpc.system.properties()
