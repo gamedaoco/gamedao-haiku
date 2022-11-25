@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'

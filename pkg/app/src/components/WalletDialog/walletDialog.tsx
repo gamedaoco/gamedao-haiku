@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react'
 
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useExtensionContext } from 'provider/extension/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { WalletCard } from 'components/WalletDialog/modules/walletCard'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useLogger } from 'hooks/useLogger'
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { fromUnit } from 'src/utils/token'

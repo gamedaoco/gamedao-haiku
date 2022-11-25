@@ -39,6 +39,7 @@ subscription OrganizationById($orgId: String!) {
         organization_members {
             address
             identity {
+                id
                 email
                 display_name
             }
@@ -63,11 +64,13 @@ subscription OrganizationById($orgId: String!) {
                 count
             }
             nodes {
+                id
                 state
             }
         }
         proposals_aggregate {
             nodes {
+                id
                 type
             }
             aggregate {
@@ -78,6 +81,7 @@ subscription OrganizationById($orgId: String!) {
 }
 subscription AccountOrganizations($address: String!) {
     identity_by_pk(id: $address){
+        id
         organization_members {
             id
             organization {

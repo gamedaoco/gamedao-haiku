@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react'
 
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useExtensionContext } from 'provider/extension/modules/context'
+import { useExtensionContext } from 'providers/extension/modules/context'
 import { AccountState } from 'src/@types/extension'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 

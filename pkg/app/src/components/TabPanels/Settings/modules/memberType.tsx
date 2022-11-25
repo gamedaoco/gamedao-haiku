@@ -5,7 +5,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
-import { useNetworkContext } from 'provider/network/modules/context'
+import { useNetworkContext } from 'providers/network/modules/context'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 import { toUnit } from 'src/utils/token'
 import { RadioItem } from 'components/Forms/modules/radioItem'
@@ -22,6 +22,7 @@ interface ComponentProps {
 const feeTypes = {
 	NoFees: '0',
 	Reserve: '1',
+	Transfer: '2',
 }
 
 export function MemberType({ feeType, feeAmount }: ComponentProps) {
@@ -61,8 +62,6 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 		}
 	}, [feeAmount])
 
-	console.log(selectedFee)
-
 	return (
 		<>
 			<Stack>
@@ -80,10 +79,18 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 				onChange={setSelectedFee}
 			/>
 			<RadioItem
-				icon={<People sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_fee:description')}
+				icon={<Person sx={{ width: '40px', height: '40px' }} />}
+				title={t('page:organisations:settings:member_type:radio_button_reserve_fee:title')}
+				description={t('page:organisations:settings:member_type:radio_button_reserve_fee:description')}
 				value={'1'}
+				selectedValue={selectedFee || feeTypes[feeType]}
+				onChange={setSelectedFee}
+			/>
+			<RadioItem
+				icon={<People sx={{ width: '40px', height: '40px' }} />}
+				title={t('page:organisations:settings:member_type:radio_button_transfer_fee:title')}
+				description={t('page:organisations:settings:member_type:radio_button_transfer_fee:description')}
+				value={'2'}
 				selectedValue={selectedFee || feeTypes[feeType]}
 				onChange={setSelectedFee}
 			/>

@@ -12,7 +12,7 @@ interface ComponentProps {
 
 const organizationTypes = {
 	Individual: '0',
-	Company: '1',
+	Dao: '2',
 }
 
 export function Control({ organizationType }: ComponentProps) {
@@ -34,7 +34,7 @@ export function Control({ organizationType }: ComponentProps) {
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
 				title={t('page:organisations:settings:control:radio_button_community:title')}
 				description={t('page:organisations:settings:control:radio_button_community:description')}
-				value={'1'}
+				value={'2'}
 				selectedValue={selectedOrganizationType || organizationTypes[organizationType]}
 				onChange={setSelectedOrganizationType}
 			/>

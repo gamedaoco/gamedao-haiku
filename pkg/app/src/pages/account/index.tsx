@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-
 import { useRouter } from 'next/router'
-
 import { AccountTabs } from 'src/@types/account'
 
 export function AccountPage() {

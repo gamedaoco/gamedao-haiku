@@ -52,7 +52,7 @@ export function TabsSection({ param }: ComponentProps) {
 		[push],
 	)
 	return (
-		<Box sx={{ bgcolor: theme.palette.background.paper, my: 2, borderRadius: '8px' }}>
+		<Box sx={{ my: 2, borderRadius: '8px' }}>
 			<Tabs
 				scrollButtons
 				allowScrollButtonsMobile
@@ -61,7 +61,7 @@ export function TabsSection({ param }: ComponentProps) {
 				sx={{ px: 3 }}
 				textColor="primary"
 				value={param || AccountTabs.OVERVIEW}
-				variant="scrollable"
+				// variant="glass"
 			>
 				{tabs.map((tab) => (
 					<Tab key={tab.value} label={tab.label} value={tab.value} />

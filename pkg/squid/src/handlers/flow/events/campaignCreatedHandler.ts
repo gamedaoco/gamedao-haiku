@@ -21,13 +21,13 @@ async function handleCampaignCreatedEvent(context: EventHandlerContext) {
 		block: context.block,
 		extrinsic: context.extrinsic,
 	});
-	if (!raw_event.isV61 || !raw_call.isV61) {
+	if (!raw_event.isV62 || !raw_call.isV62) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV61;
-	let call = raw_call.asV61;
+	let event = raw_event.asV62;
+	let call = raw_call.asV62;
 
 	let campaignId = hashToHexString(event.campaignId);
 	let orgId = hashToHexString(call.orgId);
