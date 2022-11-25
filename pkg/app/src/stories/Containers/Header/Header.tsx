@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button } from './Button'
+import Button from '../../../components/Button'
 import './header.css'
 
 type User = {
@@ -36,12 +36,12 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
 						<span className="welcome">
 							Welcome, <b>{user.name}</b>!
 						</span>
-						<Button size="small" onClick={onLogout} label="Log out" />
+						<Button onClick={onLogout}>Log out</Button>
 					</>
 				) : (
 					<>
-						<Button size="small" onClick={onLogin} label="Log in" />
-						<Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+						<Button onClick={onLogin}>Log in</Button>
+						<Button onClick={onCreateAccount}>Sign up</Button>
 					</>
 				)}
 			</div>

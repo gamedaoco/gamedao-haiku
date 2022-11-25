@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
 export default {
-	title: 'Pages/Home',
+	title: 'Layouts/Home',
 	// component: Page,
 	parameters: {
 		// More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
