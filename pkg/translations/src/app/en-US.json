@@ -121,6 +121,7 @@
     "backers": "Backers:",
     "funded": "Funded:",
     "amount": "Amount",
+    "required": "This field is required",
     "campaign_status": {
       "created": "Created",
       "active": "Active",

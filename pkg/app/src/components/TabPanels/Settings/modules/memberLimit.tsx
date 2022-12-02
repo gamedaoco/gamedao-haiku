@@ -4,9 +4,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
-import { createWarningNotification } from 'src/utils/notificationUtils'
-
-const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit')
+const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit').required()
 
 interface ComponentProps {
 	memberLimit: number
@@ -16,22 +14,20 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 	const [memberLimitValue, setMemberLimitValue] = useState<number>(memberLimit)
 	const { t } = useTranslation()
 
+	const [memberLimitError, setMemberLimitError] = useState(null)
 	const handleMemberLimitChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
+				if (setMemberLimitValue) setMemberLimitValue(value < 0 ? 0 : value)
+				if (!value) return setMemberLimitError(t('label:required'))
 				validationMemberLimitSchema?.validateSync(value)
-				if (setMemberLimitValue) {
-					setMemberLimitValue(value < 0 ? 0 : value)
-				}
 				if (memberLimit !== 0 && value > memberLimit) {
-					throw { message: 'notification:warning:higher_current_member_limit' }
+					setMemberLimitError(t('notification:warning:higher_current_member_limit'))
 				}
+				setMemberLimitError(null)
 			} catch (e) {
-				createWarningNotification(t(e.message))
+				setMemberLimitError(t(e.message))
 			}
 		},
 		[setMemberLimitValue, validationMemberLimitSchema, t],
@@ -63,6 +59,8 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 				value={memberLimitValue}
 				label={t('page:organisations:settings:member_limit:title')}
 				variant="outlined"
+				error={!!memberLimitError}
+				helperText={memberLimitError}
 			/>
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
 				<Button
