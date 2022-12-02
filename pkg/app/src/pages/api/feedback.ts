@@ -10,7 +10,7 @@ const ID = process.env.DISCOID
 const TOKEN = process.env.DISCOTOKEN
 const discord = new Discord.WebhookClient({ id: ID, token: TOKEN })
 
-export default async (
+const Feedback = async (
 	req: NextApiRequest,
 	res: NextApiResponse
 ) => {
@@ -31,3 +31,5 @@ export default async (
 	}
 
 }
+
+export default Feedback

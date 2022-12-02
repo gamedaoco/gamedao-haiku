@@ -65,6 +65,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 	useEffect(() => {
 		log.info(`❤️  Welcome to GameDAO`)
 		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
+		log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
 	}, [])
 
 	useEffect(() => {

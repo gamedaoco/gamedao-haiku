@@ -115,7 +115,7 @@ export function Overview({
 				title: t('page:organisations:organisation_rules:reserved_fee:title'),
 				text: t('page:organisations:organisation_rules:reserved_fee:text'),
 			}
-		} else if (organization?.fee_model === 'Transferred') {
+		} else if (organization?.fee_model === 'Transfer') {
 			return {
 				title: t('page:organisations:organisation_rules:transferred_fee:title'),
 				text: t('page:organisations:organisation_rules:transferred_fee:text'),
@@ -210,7 +210,11 @@ export function Overview({
 										onClick={handleOpenTxModal}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
-										{t('button:ui:join_organization')}
+										{organization?.access_model === 'Open' ? (
+											t('button:ui:join_organization')
+										) : (
+											<>Apply</>
+										)}
 									</Button>
 								</>
 							)}
