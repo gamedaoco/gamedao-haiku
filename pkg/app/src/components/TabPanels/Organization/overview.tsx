@@ -104,9 +104,6 @@ export function Overview({
 		[organization?.access_model],
 	)
 
-	console.log(organization?.fee_model)
-	console.log(organization?.fee_model)
-
 	const feeModel = useMemo(() => {
 		if (organization?.fee_model === 'NoFees') {
 			return {
