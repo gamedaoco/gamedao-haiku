@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'components/Link'
 import { useEffect } from 'react'
-import { useVanityList } from 'hooks/useOrganization'
+// import { useVanityList } from 'hooks/useOrganization'
 
 import { Typography } from '@mui/material'
 import { Layout } from 'layouts/default/layout'
 
 export const Page = () => {
-	const list = useVanityList()
+	const list = [] //useVanityList()
 
 	return (
 		<Layout showHeader showFooter showSidebar>
