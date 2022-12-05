@@ -1,12 +1,22 @@
-import { CampaignStatus } from 'src/@types/campaignStatus'
+export enum CampaignState {
+	CREATED = 'Created',
+	ACTIVE = 'Active',
+	PAUSED = 'Paused',
+	FINALIZING = 'Finalizing',
+	REVERTING = 'Reverting',
+	SUCCESS = 'Success',
+	FAILED = 'Failed',
+	LOCKED = 'Locked',
+	Draft = 'Draft',
+}
 
 export const CampaignsListSortMapping = {
-	[CampaignStatus.ACTIVE]: 0,
-	[CampaignStatus.CREATED]: 1,
-	[CampaignStatus.FINALIZING]: 2,
-	[CampaignStatus.SUCCESS]: 3,
-	[CampaignStatus.REVERTING]: 4,
-	[CampaignStatus.FAILED]: 5,
-	[CampaignStatus.PAUSED]: 6,
-	[CampaignStatus.LOCKED]: 7,
+	[CampaignState.ACTIVE]: 0,
+	[CampaignState.CREATED]: 1,
+	[CampaignState.FINALIZING]: 2,
+	[CampaignState.SUCCESS]: 3,
+	[CampaignState.REVERTING]: 4,
+	[CampaignState.FAILED]: 5,
+	[CampaignState.PAUSED]: 6,
+	[CampaignState.LOCKED]: 7,
 }

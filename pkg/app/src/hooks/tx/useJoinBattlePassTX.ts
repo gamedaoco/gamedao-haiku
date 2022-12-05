@@ -12,7 +12,7 @@ const validation = Yup.object().shape({
 	accountId: Yup.string().required(),
 })
 
-export function useAddMemberTransaction(organizationId: string): TransactionData {
+export function useJoinBattlePassTX(organizationId: string): TransactionData {
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const [txState, setTxState] = useState<TransactionData>(null)
@@ -39,7 +39,7 @@ export function useAddMemberTransaction(organizationId: string): TransactionData
 
 				setTxState({
 					tx,
-					title: t('transactions:addMember:title'),
+					title: 'Join BattlePass',
 					description: t('transactions:addMember:description'),
 					actionSubTitle: t('transactions:addMember:action_subtitle'),
 					txMsg: {

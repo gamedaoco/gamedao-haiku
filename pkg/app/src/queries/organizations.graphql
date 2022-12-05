@@ -31,6 +31,78 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
     }
 }
 
+# subscription OrganizationByName($name: String!) {
+#     organization(where: {organization_metadata: {name: {_eq: $name}}}) {
+#         organization_metadata {
+#             name
+#             # TODO: add slug for resolver
+#             # slug
+#         }
+#     }
+# }
+
+subscription OrganizationByName($name: String!) {
+    organization(where: {organization_metadata: {name: {_eq: $name}}}) {
+        access_model
+        creator
+        created_at_block
+        creator
+        fee_model
+        fee_model
+        gov_currency
+        id
+        member_limit
+        pay_currency
+        treasury
+        type
+        organization_members {
+            address
+            identity {
+                id
+                email
+                display_name
+            }
+            # TODO:
+            # state
+        }
+        organization_metadata {
+            description
+            email
+            # TODO: cid
+            id
+            logo
+            header
+            name
+            repo
+            website
+            # todo: add slug
+        }
+        organization_members_aggregate {
+            aggregate {
+                count
+            }
+        }
+        campaigns_aggregate {
+            aggregate {
+                count
+            }
+            nodes {
+                id
+                state
+            }
+        }
+        proposals_aggregate {
+            nodes {
+                id
+                type
+            }
+            aggregate {
+                count
+            }
+        }
+    }
+}
+
 subscription OrganizationById($orgId: String!) {
     organization(where: { id: {_eq: $orgId}}) {
         access_model
