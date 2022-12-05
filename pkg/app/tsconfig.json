@@ -29,11 +29,14 @@
       "config/*": [
         "src/config/*"
       ],
+      "constants/*": [
+        "src/constants/*"
+      ],
       "components/*": [
         "src/components/*"
       ],
-      "containers/*": [
-        "src/containers/*"
+      "dapps/*": [
+        "src/dapps/*"
       ],
       "data/*": [
         "src/data/*"

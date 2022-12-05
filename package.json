@@ -68,7 +68,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,html,css}": "yarn format"
+    "*.{js,jsx,ts,tsx}": "yarn format"
   },
   "commitlint": {
     "extends": [
