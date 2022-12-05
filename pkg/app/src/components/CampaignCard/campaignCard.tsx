@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Card } from '@mui/material'
 import { useConfig } from 'hooks/useConfig'
 import { useSystemProperties } from 'hooks/useSystemProperties'
-import { CampaignStatus } from 'src/@types/campaignStatus'
+import { CampaignState } from 'src/constants/campaign'
 import type { Campaign } from 'src/queries'
 import { parseIpfsHash } from 'src/utils/ipfs'
 

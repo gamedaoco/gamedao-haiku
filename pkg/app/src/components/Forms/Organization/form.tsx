@@ -38,8 +38,8 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		}
 
 		if (currentStep == 2) {
-			createInfoNotification('Organisation was saved')
-			push('/organisations/dashboard')
+			createInfoNotification('Organization was saved')
+			push('/organizations/dashboard')
 		}
 	}, [currentStep, setStep, push])
 

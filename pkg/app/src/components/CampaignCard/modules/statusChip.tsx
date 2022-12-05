@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { Chip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { CampaignStatus } from 'src/@types/campaignStatus'
+import { CampaignState } from 'src/constants/campaign'
 
 interface Data {
 	text: string
@@ -11,7 +11,7 @@ interface Data {
 
 interface ComponentProps {
 	status: string
-	variant: 'campaignStatus' | 'campaignState'
+	variant: 'CampaignState' | 'campaignState'
 }
 
 export function StatusChip({ status, variant }: ComponentProps) {
@@ -22,29 +22,29 @@ export function StatusChip({ status, variant }: ComponentProps) {
 		let color = 'primary'
 
 		switch (status) {
-			case CampaignStatus.CREATED:
+			case CampaignState.CREATED:
 				color = 'info'
 				break
-			case CampaignStatus.ACTIVE:
+			case CampaignState.ACTIVE:
 				if (variant === 'campaignState') {
 					color = 'info'
 					break
 				} else {
 					return null
 				}
-			case CampaignStatus.FINALIZING:
+			case CampaignState.FINALIZING:
 				color = 'primary'
 				break
-			case CampaignStatus.SUCCESS:
+			case CampaignState.SUCCESS:
 				color = 'primary'
 				break
-			case CampaignStatus.REVERTING:
+			case CampaignState.REVERTING:
 				color = 'secondary'
 				break
-			case CampaignStatus.FAILED:
+			case CampaignState.FAILED:
 				color = 'secondary'
 				break
-			case CampaignStatus.Draft:
+			case CampaignState.Draft:
 				color = 'info'
 				break
 			default:

@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles'
 import { Collectable as CollectableInterface } from 'src/@types/collectable'
 import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 
-import Loader from 'containers/Account/components/Collectables/Loader'
+import Loader from 'dapps/Account/components/Collectables/Loader'
 
 import { ModalDialog } from 'components/Collectable/modules/modalDialog'
 

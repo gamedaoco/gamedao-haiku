@@ -71,10 +71,9 @@ export function Selector({ onClick, open }: ComponentProps) {
 				/>
 				<Stack>
 					<Typography variant="subtitle2">
-						{getAccountName(selectedAccount?.account)}
-						&nbsp;
-						{identity?.email && (
-							<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
+						{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
+						{identity?.display_name && (
+							<Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" color="disabled" />
 						)}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>

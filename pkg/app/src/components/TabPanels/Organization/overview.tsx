@@ -4,10 +4,10 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material/styles'
 
-import { Organization } from 'src/queries'
+import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
 import { getProposalTypesCount } from 'src/utils/proposalUtils'
-import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { ChevronRight, Verified, FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
 import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
@@ -18,70 +18,49 @@ import { AreaChartContainer } from 'components/TabPanels/Organization/modules/ar
 import { RadialChartContainer } from 'components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-interface ComponentProps {
-	organization: Organization
-	organizationId: string
-	isMember: boolean
-	isAdmin: boolean
-	handleOpenTxModal: () => void
-	handleCloseTxModal: () => void
-	showTxModalType: boolean
-	addMemberTx: TransactionData
+//
+
+const series1 = [{ name: 'Members', data: [0, 7, 3, 8, 2] }]
+const categories = [
+	'2022-07-19T00:00:00.000Z',
+	'2022-07-20T01:30:00.000Z',
+	'2022-07-21T02:30:00.000Z',
+	'2022-07-22T03:30:00.000Z',
+	'2022-07-23T04:30:00.000Z',
+]
+const series2 = [{ name: 'Balance', data: [0, 10, 20, 13, 5] }]
+
+//
+
+type TProps = {
+	id: string
 }
 
-export function Overview({
-	organization,
-	organizationId,
-	isMember,
-	isAdmin,
-	handleOpenTxModal,
-	handleCloseTxModal,
-	showTxModalType,
-	addMemberTx,
-}: ComponentProps) {
+export const Overview = ({ id }: TProps) => {
 	const theme = useTheme()
-	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
 	const { push } = useRouter()
 
-	const series1 = [
-		{
-			name: 'Members',
-			data: [0, 7, 3, 8, 2],
-		},
-	]
-	const categories = [
-		'2022-07-19T00:00:00.000Z',
-		'2022-07-20T01:30:00.000Z',
-		'2022-07-21T02:30:00.000Z',
-		'2022-07-22T03:30:00.000Z',
-		'2022-07-23T04:30:00.000Z',
-	]
-	const series2 = [
-		{
-			name: 'Balance',
-			data: [0, 10, 20, 13, 5],
-		},
-	]
+	const [organization, setOrganization] = useState<Organization>(null)
+	const { loading, data, error } = useOrganizationByIdSubscription({
+		variables: { orgId: id },
+	})
+	const address = useCurrentAccountAddress()
+	const [isMember, setIsMember] = useState<boolean>(false)
+	const [isPrime, setIsPrime] = useState<boolean>(false)
+	useEffect(() => {
+		if (address && organization) {
+			setIsMember(organization.organization_members.some((member) => member.address === address))
+			setIsPrime(organization.prime === address)
+		}
+	}, [])
+
+	// content
 
 	const [isReadMore, setIsReadMore] = useState<boolean>(true)
-	const [showButton, setShowButton] = useState<boolean>(false)
-
-	const handleChangeRoute = useCallback(
-		(newPath) => {
-			if (organizationId) {
-				push(`${organizationId}/${newPath}`)
-			} else {
-				push(newPath)
-			}
-		},
-		[organizationId, push],
-	)
-
 	const toggleReadMore = useCallback(() => {
 		setIsReadMore((prev) => !prev)
 	}, [setIsReadMore])
-
 	const description = useMemo(
 		() =>
 			isReadMore
@@ -89,6 +68,8 @@ export function Overview({
 				: organization?.organization_metadata?.description,
 		[isReadMore, organization?.organization_metadata?.description],
 	)
+
+	const [showButton, setShowButton] = useState<boolean>(false)
 
 	const access_model = useMemo(
 		() =>
@@ -134,9 +115,8 @@ export function Overview({
 				  }
 				: {
 						title: t('page:organisations:organisation_rules:member_limit:title'),
-						text: ` ${t('page:organisations:organisation_rules:member_limit:only')} ${
-							organization?.member_limit
-						}  ${t('page:organisations:organisation_rules:member_limit:text')}`,
+						text: ` ${t('page:organisations:organisation_rules:member_limit:only')}
+						${t('page:organisations:organisation_rules:member_limit:text')}`,
 				  },
 		[organization?.member_limit, t],
 	)
@@ -196,41 +176,6 @@ export function Overview({
 								</Typography>
 							</Stack>
 						</Stack>
-
-						<Stack
-							direction={{ xs: 'column', sm: 'row' }}
-							pt="1rem"
-							justifyContent={{ xs: 'center', sm: 'flex-start' }}
-							spacing={1}
-						>
-							{!isMember && (
-								<>
-									<Button
-										variant="outlined"
-										size="large"
-										disabled={!addMemberTx}
-										onClick={handleOpenTxModal}
-										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
-									>
-										{t('button:ui:join_organization')}
-									</Button>
-								</>
-							)}
-
-							{/*							{(isMember || isAdmin) && (
-								<>
-									<Button
-										variant="outlined"
-										size="large"
-										disabled={!removeMemberTx}
-										onClick={() => handleChangeRoute('settings')}
-										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
-									>
-										{t('button:ui:change_settings')}
-									</Button>
-								</>
-							)}*/}
-						</Stack>
 					</Stack>
 				</Paper>
 
@@ -239,7 +184,7 @@ export function Overview({
 						<Typography variant="h6">{t('page:organisations:organisations_rules')}</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
-							{organization?.fee_model && (
+							{feeModel && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: 33, height: 31.5, color: theme.palette.success.main }} />
 									<Stack direction="column">
@@ -363,12 +308,14 @@ export function Overview({
 				</Stack>
 			</Stack>
 
-			<TransactionDialog
+			{/*			<TransactionDialog
 				open={showTxModalType}
 				onClose={handleCloseTxModal}
 				txData={isMember ? removeMemberTx : addMemberTx}
 				txCallback={handleCloseTxModal}
-			/>
+			/>*/}
 		</>
 	)
 }
+
+export default Overview

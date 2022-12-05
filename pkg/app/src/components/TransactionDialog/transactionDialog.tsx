@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { Box, Button, Card, Divider, Link, Stack, Typography } from '@mui/material'
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import type { ISubmittableResult } from '@polkadot/types/types'
+
+import { TransactionData } from 'src/@types/transactionData'
+import { formatBalanceString } from 'src/utils/balance'
+
 import { TBalance } from 'hooks/useBalanceByAddress'
 import { useBalanceByAddressAndBalanceId } from 'hooks/useBalanceByAddressAndBalanceId'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTransaction } from 'hooks/useTransaction'
-import { useTranslation } from 'react-i18next'
-import { TransactionData } from 'src/@types/transactionData'
-import { formatBalanceString } from 'src/utils/balance'
 
+import { Box, Button, Card, Divider, Link, Stack, Typography } from '@mui/material'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 
 interface ComponentProps {
@@ -26,6 +28,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 	const { t } = useTranslation()
 	const [showDescription, setShowDescription] = useState<boolean>(false)
 	const [paymentInfo, setPaymentInfo] = useState<RuntimeDispatchInfo>(null)
+
 	const signAndSend = useTransaction()
 	const address = useCurrentAccountAddress()
 	const systemProperties = useSystemProperties()
@@ -35,7 +38,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 	const handleProceed = useCallback(() => {
 		signAndSend(txData?.tx, txData?.txMsg, txCallback, t)
 		onClose()
-	}, [signAndSend, onClose, txData, txCallback, t])
+	}, [txData, txCallback, t])
 
 	useEffect(() => {
 		if (txData && address) {

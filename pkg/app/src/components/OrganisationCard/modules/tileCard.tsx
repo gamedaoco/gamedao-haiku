@@ -77,7 +77,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 	}, [item, address, t])
 
 	return (
-		<NavLink href={`/organisations/${item.id}/dashboard`}>
+		<NavLink href={`/v1/${item.id}`}>
 			<Card
 				sx={{
 					border: '1px solid transparent',

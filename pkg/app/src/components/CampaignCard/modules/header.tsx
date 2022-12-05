@@ -2,8 +2,7 @@ import React, { useCallback, useState } from 'react'
 
 import { DeleteOutlined } from '@mui/icons-material'
 import { Avatar, Box, Chip } from '@mui/material'
-import { CampaignStatus } from 'src/@types/campaignStatus'
-
+import { CampaignState } from 'src/constants/campaign'
 import { StatusChip } from 'components/CampaignCard/modules/statusChip'
 import { Image } from 'components/Image/image'
 import { ConfirmDeleteCampaignDraft } from 'components/Modals/confirmDeleteCampaignDraft'
