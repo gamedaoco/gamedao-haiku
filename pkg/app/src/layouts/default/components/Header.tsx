@@ -55,7 +55,7 @@ interface ComponentProps {
 const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
-		path: '/organisations',
+		path: '/guilds',
 		icon: <Guilds />,
 	},
 	// {
@@ -63,21 +63,21 @@ const leftNav = [
 	// 	path: '/quests',
 	// 	icon: <Quests />,
 	// },
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <Campaigns />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <Campaigns />,
+	// },
 	// {
 	// 	name: 'Achievements', //'button:navigation:quests',
 	// 	path: '/achievements',
 	// 	icon: <Achievements/>
 	// },
-	{
-		name: 'Store',
-		path: '/store',
-		icon: <Store />,
-	},
+	// {
+	// 	name: 'Store',
+	// 	path: '/store',
+	// 	icon: <Store />,
+	// },
 ]
 
 const rightNav = [
@@ -174,7 +174,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 								href={item.path}
 								target={item.path.includes('http') ? '_blank' : null}
 							>
-								<Button>
+								<Button type="xs">
 									{item.icon && item.icon}
 									{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
 								</Button>

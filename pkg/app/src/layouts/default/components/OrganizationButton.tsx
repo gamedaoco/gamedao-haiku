@@ -20,10 +20,10 @@ interface ComponentProps {
 export function OrganizationButton({ id, logo, name, active, notification }: ComponentProps) {
 	const { push } = useRouter()
 	const config = useConfig()
-	const url = `/organisations/${id}/dashboard`
-	const navigateCall = useCallback(() => {
-		push(`/organisations/${id}/dashboard`)
-	}, [id, push])
+	const url = `/v1/${id}`
+	// const navigateCall = useCallback(() => {
+	// 	push(`/organizations/${id}`)
+	// }, [id, push])
 
 	return (
 		<Tooltip title={name}>

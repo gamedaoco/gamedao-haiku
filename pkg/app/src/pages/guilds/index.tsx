@@ -70,7 +70,7 @@ export function OrganisationPage() {
 		if (w3Enabled === false) {
 			connectWallet()
 		} else if (selectedAccount) {
-			push('/organisations/create')
+			push('/guilds/create')
 		}
 	}, [w3Enabled, connectWallet, selectedAccount, push])
 
@@ -79,7 +79,7 @@ export function OrganisationPage() {
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" alignItems="center" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">{t('page:organisations:title')}</Typography>
+						<Typography variant="h3">Guilds</Typography>
 					</Grid>
 					<Grid item>
 						<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleClickCreate}>
@@ -98,7 +98,7 @@ export function OrganisationPage() {
 						showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
 						showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
 						showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
-						searchPlaceHolder={'Find Organisations...' || t('page:organisations:search_place_holder')}
+						searchPlaceHolder={'Find Guilds...' || t('page:organisations:search_place_holder')}
 						ListTab={OrganizationFiltersListTab}
 					/>
 

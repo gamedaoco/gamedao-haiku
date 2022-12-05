@@ -47,24 +47,24 @@ interface ComponentProps {
 const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
-		path: '/organisations',
+		path: '/guilds',
 		icon: <RiShieldLine />,
 	},
-	{
-		name: 'Quests', //'button:navigation:quests',
-		path: '/quests',
-		icon: <RiTreasureMapLine />,
-	},
+	// {
+	// 	name: 'Quests', //'button:navigation:quests',
+	// 	path: '/quests',
+	// 	icon: <RiTreasureMapLine />,
+	// },
 	// {
 	// 	name: 'Achievements', //'button:navigation:quests',
 	// 	path: '/achievements',
 	// 	icon: <RiAwardLine/>
 	// },
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiExchangeFundsLine />,
+	// },
 ]
 
 const rightNav = [
