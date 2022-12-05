@@ -9,12 +9,14 @@ import { Loader } from 'components/Loader'
 
 export function Page() {
 	const { query, push } = useRouter()
-	const id = query.id
+	const id = query?.id[0]
 	const resolve = id.startsWith('0x')
 
-	const { loading, data, error } = resolve
-		? useOrganizationByIdSubscription({ variables: { orgId: id } })
-		: useOrganizationByNameSubscription({ variables: { name: id } })
+	const { loading, data, error } = useOrganizationByIdSubscription({ variables: { orgId: id } })
+
+	// const { loading, data, error } = resolve
+	// 	? useOrganizationByIdSubscription({ variables: { orgId: id } })
+	// 	: useOrganizationByNameSubscription({ variables: { name: id } })
 
 	useEffect(() => {
 		if (!data?.organization) return

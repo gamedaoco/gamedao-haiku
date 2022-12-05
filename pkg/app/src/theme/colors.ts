@@ -1,4 +1,4 @@
-const colors = [
+export const colors = [
 	{ name: 'Turqoise Dream/0', description: '', color: 'rgba(255, 255, 255, 1)' },
 	{ name: 'Turqoise Dream/1', description: '', color: 'rgba(231, 245, 240, 1)' },
 	{ name: 'Turqoise Dream/2', description: '', color: 'rgba(207, 235, 224, 1)' },

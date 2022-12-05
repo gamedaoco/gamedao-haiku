@@ -58,18 +58,18 @@ export function Navigation({ id, path }: Props) {
 	const tabs = useMemo<ITabs[]>(
 		() =>
 			[
-				isBattlePass
-					? {
-							label: 'Battlepass',
-							value: ContentTabs.BATTLEPASS,
-							disabled: !isBattlePass,
-					  }
-					: null,
 				isMember
 					? {
 							label: 'Overview',
 							value: ContentTabs.OVERVIEW,
 							disabled: !isMember,
+					  }
+					: null,
+				isBattlePass
+					? {
+							label: 'Battlepass',
+							value: ContentTabs.BATTLEPASS,
+							disabled: !isBattlePass,
 					  }
 					: null,
 				isPrime
@@ -107,7 +107,7 @@ export function Navigation({ id, path }: Props) {
 					allowScrollButtonsMobile
 					// textColor="primary"
 					// indicatorColor="primary"
-					sx={{ pl: isMd ? '200px' : 0 }}
+					sx={{ pl: isMd ? '200px' : 0, height: 60 }}
 					onChange={handleTabChange}
 					value={path || ContentTabs.OVERVIEW}
 				>

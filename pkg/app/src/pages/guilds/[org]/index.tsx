@@ -8,7 +8,7 @@ export function Page() {
 	const { query, push } = useRouter()
 
 	const { loading, data, error } = useOrganizationByNameSubscription({
-		variables: { name: query.org },
+		variables: { name: query.org[0] },
 	})
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ export function Page() {
 		if (data) {
 			push(`/guilds/${query.org}/${OrganizationTabs.OVERVIEW}`)
 		}
-	}, [query.org, data, push])
+	}, [query.org, data, push, error])
 
 	return loading ? <Loader /> : null
 }

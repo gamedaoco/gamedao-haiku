@@ -45,7 +45,8 @@ import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/overview'
 
-export function useParam(): NextRouter['param'] {
+//NextRouter['param']
+export function useParam() {
 	const { query } = useRouter()
 	const routerRef = useRef(query)
 	routerRef.current = query
@@ -62,13 +63,13 @@ export function useParam(): NextRouter['param'] {
 export function OrganisationById() {
 	const router = useRouter()
 	const { query, push } = useRouter()
-	const org = query.org
-	const tab = query.tab || OrganizationTabs.OVERVIEW
+	const org = query.org[0]
+	const tab = query.tab[0]
 
 	// resolve path hash to slug url
 
 	const hashToSlug = (hash: string) => {
-		const slug = (organization && organization?.organization_metadata?.name.replace(' ', '').toLowercase()) || null
+		const slug = (organization && organization?.organization_metadata?.name.replace(' ', '').toLowerCase()) || null
 		console.log('slug', slug)
 	}
 
@@ -86,7 +87,7 @@ export function OrganisationById() {
 	const [organization, setOrganization] = useState<Organization>(null)
 	const [orgName, setOrgName] = useState('')
 
-	const addMemberTx = useAddMemberTransaction(org || null)
+	const addMemberTx = useAddMemberTransaction(org)
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState() || null
 
@@ -197,7 +198,7 @@ export function OrganisationById() {
 		if (data) {
 			!data.organization?.[0] ? push('/organizations') : setOrganization(data.organization?.[0] as Organization)
 		}
-	}, [data?.organization])
+	}, [data, data.organization, push])
 
 	useEffect(() => {
 		if (organization?.organization_metadata?.name || cache.name) {
@@ -205,7 +206,7 @@ export function OrganisationById() {
 		} else {
 			setOrgName(t('page:organisations:title'))
 		}
-	}, [organization?.organization_metadata?.name, cache.name])
+	}, [organization?.organization_metadata?.name, cache.name, t])
 
 	console.log('================================')
 	// console.log('org',organization)
@@ -429,16 +430,16 @@ export function OrganisationById() {
 						</Paper>
 
 						<TabPanel value={OrganizationTabs.OVERVIEW}>
-							{org ? (
+							{org && organization ? (
 								<Overview
-									organization={organization}
-									organizationId={org}
-									isMember={isMember}
-									isAdmin={address === organization?.creator}
-									handleCloseTxModal={handleCloseTxModal}
-									handleOpenTxModal={handleOpenTxModal}
-									showTxModalType={showTxModalType}
-									addMemberTx={addMemberTx}
+									// organization={organization}
+									id={org}
+									// isMember={isMember}
+									// isAdmin={address === organization?.creator}
+									// handleCloseTxModal={handleCloseTxModal}
+									// handleOpenTxModal={handleOpenTxModal}
+									// showTxModalType={showTxModalType}
+									// addMemberTx={addMemberTx}
 								/>
 							) : (
 								<TmpOverview />
@@ -484,7 +485,7 @@ export function OrganisationById() {
 
 						*/}
 						<TabPanel value={OrganizationTabs.SETTINGS}>
-							<SettingsOverview organization={organization} />
+							<SettingsOverview />
 						</TabPanel>
 					</Stack>
 				) : (

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { OrganizationTabs } from 'src/@types/enums'
+import { OrganizationTabs } from 'constants/organization'
 
 export function Page() {
 	const { query, push } = useRouter()
