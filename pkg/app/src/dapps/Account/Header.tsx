@@ -1,20 +1,25 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
 
-import { AccountTabs } from 'src/@types/account'
+import { AccountTabs } from 'constants/account'
 
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
+import type { Identity } from 'src/queries'
+import { useIdentityByAddressSubscription } from 'src/queries'
 
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
+
 import Verified from '@mui/icons-material/Verified'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
-import { Avatar, Box, Button, Chip, Grid, IconButton, Typography, Stack } from '@mui/material'
-
+import FavoriteIcon from '@mui/icons-material/FavoriteBorder'
+import EmojiEventsIcon from '@mui/icons-material/EmojiEventsOutlined'
+import ShieldIcon from '@mui/icons-material/ShieldOutlined'
 import {
 	PanoramaFishEyeOutlined as Dashboard, // or DashboardOutlined
 	CastleOutlined as Folder, // or AccountBalanceOutlined
@@ -25,40 +30,39 @@ import {
 	SettingsOutlined as Settings,
 	SportsEsportsOutlined as Topic,
 } from '@mui/icons-material'
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEventsOutlined'
-import ShieldIcon from '@mui/icons-material/ShieldOutlined'
+
+import { Avatar, Box, Button, Chip, Grid, IconButton, Typography, Stack } from '@mui/material'
 
 export function Header() {
 	const { push } = useRouter()
 	const { t } = useTranslation()
+
+	const address = useCurrentAccountAddress()
+
+	// subscribe to identity
+	const { loading, data, error } = useIdentityByAddressSubscription({
+		variables: { address: address },
+	})
+	const [identity, setIdentity] = useState<Identity>(data?.identity_by_pk)
+
+	useEffect(() => {
+		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
+		setIdentity(data?.identity_by_pk)
+	}, [data?.identity_by_pk])
+
+	const avatarHash = useMemo(() => md5(address), [address])
+
 	const accountState = useCurrentAccountState()
-	const handleButtonClick = useCallback(() => {
-		push(`/account/${AccountTabs.IDENTITY}`)
-	}, [push])
-	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
 
 	const handleCopyAddress = useCallback(() => {
-		navigator.clipboard
-			.writeText(getAddressFromAccountState(accountState))
-			.then(() => createInfoNotification(t('notification:info:address_copied')))
-	}, [accountState, t])
+		navigator.clipboard.writeText(address).then(() => createInfoNotification(t('notification:info:address_copied')))
+	}, [address, t])
+
 	return (
 		<Grid container justifyContent="space-between" spacing={[2, 4]}>
 			<Grid item sx={{ alignItems: { sm: 'top', md: 'center' }, display: 'flex', overflow: 'hidden' }}>
 				<Avatar
-					sx={{
-						height: {
-							md: 48,
-							sx: 24,
-						},
-						mr: 2,
-						width: {
-							md: 48,
-							sx: 24,
-						},
-					}}
+					sx={{ height: { md: 48, sx: 24 }, mr: 2, width: { md: 48, sx: 24 } }}
 					src={
 						identity?.email
 							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
@@ -67,29 +71,15 @@ export function Header() {
 				/>
 				<Box>
 					<Typography variant="h6">
-						{getNameFromAccountState(accountState)}&nbsp;
-						{identity?.email && <Verified sx={{ verticalAlign: 'middle' }} fontSize="inherit" />}
+						{identity?.display_name || getNameFromAccountState(accountState)}&nbsp;
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" />}
 					</Typography>
-					<Box
-						sx={{
-							display: 'flex',
-							alignItems: 'center',
-						}}
-					>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
 						{shortAccountAddress(accountState?.account)}
 						<IconButton aria-label="copy" onClick={handleCopyAddress}>
 							<ContentCopyIcon fontSize="small" />
 						</IconButton>
 					</Box>
-					{/*
-						<Button
-							size="xs"
-							variant="outlined"
-							onClick={handleButtonClick}
-						>
-							{t('button:navigation:set_on_chain_identity')}
-						</Button>
-*/}
 				</Box>
 			</Grid>
 			<Grid

@@ -1,6 +1,4 @@
-// import React from 'react'
-import { AccountTabs } from 'src/@types/account'
-// import { Box, Container } from '@mui/material'
+import { AccountTabs } from 'constants/account'
 import { Header } from './Header'
 import { Navigation } from './Navigation'
 import { Content } from './Content'

@@ -21,7 +21,6 @@ import {
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTranslation } from 'react-i18next'
-import { Organization } from 'src/queries'
 import { getInitials } from 'src/utils/accountUtils'
 import { reformatNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
@@ -30,26 +29,40 @@ import { Scrollbar } from 'components/scrollbar'
 
 import Loader from './Loader'
 
-interface MyOrganisationsTableProps {
-	loading: boolean
-	organisations: Organization[]
+import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
+
+interface MyOrganizationsTableProps {
+	// loading: boolean
+	// organizations: Organization[]
 	title?: string
 }
 
-export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisations, title, loading }) => {
+export const MyOrganizationsTable: FC<MyOrganizationsTableProps> = ({ title }) => {
 	const { t } = useTranslation()
 	const theme = useTheme()
 	const config = useConfig()
 	const router = useRouter()
-	const selectedAddress = useCurrentAccountAddress()
+
+	const address = useCurrentAccountAddress()
+	// const accountState = useCurrentAccountState()
+	// const address = getAddressFromAccountState(accountState)
 
 	const editOrganization = useCallback(
 		(id: string) => {
-			router?.push(`/organisations/${id}/settings`)
+			router?.push(`/organizations/${id}/settings`)
 		},
 		[router],
 	)
-	const isAdmin = useCallback((address: string) => address === selectedAddress, [selectedAddress])
+	const isAdmin = useCallback((adminAddress: string) => adminAddress === address, [address])
+
+	const { data, loading } = useAccountOrganizationsSubscription({
+		variables: {
+			address: address,
+		},
+	})
+	const organizations = data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice()
+
+	console.log(organizations)
 
 	return (
 		<Card variant={'glass'}>
@@ -59,11 +72,11 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 				{/*
 					TODO: needs translation keys
 				*/}
-				{!organisations || organisations?.length < 1 ? (
+				{!organizations || organizations?.length < 1 ? (
 					<Typography variant="body1">
 						You are not a member of any DAO yet.
 						<br />
-						<Link href="/organisations">Join one or create one here!</Link>.
+						<Link href="/organizations">Join one or create one here!</Link>.
 					</Typography>
 				) : (
 					<Scrollbar>
@@ -82,7 +95,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 								<Loader />
 							) : (
 								<TableBody>
-									{organisations?.map((organisation, index) => (
+									{organizations?.map((organization, index) => (
 										<TableRow hover key={index}>
 											<TableCell>
 												<Box
@@ -93,7 +106,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 												>
 													<Avatar
 														src={parseIpfsHash(
-															organisation?.organization_metadata?.logo,
+															organization?.organization_metadata?.logo,
 															config.IPFS_GATEWAY,
 														)}
 														sx={{
@@ -101,7 +114,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 															width: 42,
 														}}
 													>
-														{getInitials(organisation?.organization_metadata?.logo)}
+														{getInitials(organization?.organization_metadata?.logo)}
 													</Avatar>
 													<Box sx={{ ml: 1 }}>
 														{organisation?.organization_metadata?.name}
@@ -109,22 +122,22 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 												</Box>
 											</TableCell>
 											<TableCell>
-												{reformatNumber(organisation?.organization_members?.length, 2)}
+												{reformatNumber(organization?.organization_members?.length, 2)}
 											</TableCell>
 											<TableCell>{reformatNumber(12321, 2)}</TableCell>
-											<TableCell>{organisation.access_model}</TableCell>
+											<TableCell>{organization.access_model}</TableCell>
 											<TableCell>
 												{t(
 													`page:account:organisations:${
-														isAdmin(organisation?.creator) ? 'prime' : 'member'
+														isAdmin(organization?.creator) ? 'prime' : 'member'
 													}`,
 												)}
 											</TableCell>
-											{isAdmin(organisation?.creator) ? (
+											{isAdmin(organization?.creator) ? (
 												<TableCell align="right">
 													<IconButton
 														aria-label="edit"
-														onClick={() => editOrganization(organisation?.id)}
+														onClick={() => editOrganization(organization?.id)}
 													>
 														<Edit />
 													</IconButton>
@@ -144,4 +157,4 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 	)
 }
 
-export default MyOrganisationsTable
+export default MyOrganizationsTable

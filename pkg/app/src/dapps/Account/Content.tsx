@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
-import { AccountTabs } from 'src/@types/account'
+import { AccountTabs } from 'constants/account'
 
 import Overview from './components/Overview'
-import Organisations from './components/Organisations'
+import Organizations from './components/Organizations'
 import Campaigns from './components/Campaigns'
 import Collectables from './components/Collectables'
 import Identity from './components/Identity'
@@ -18,7 +18,7 @@ export function Content({ param }: Props) {
 			case AccountTabs.CAMPAIGNS:
 				return <Campaigns />
 			case AccountTabs.ORGANIZATIONS:
-				return <Organisations />
+				return <Organizations />
 			case AccountTabs.COLLECTABLES:
 				return <Collectables />
 			case AccountTabs.IDENTITY:

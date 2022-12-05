@@ -2,14 +2,18 @@ import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
+// import { getAddressFromAccountState } from 'src/utils/accountUtils'
+
 import type { Identity } from 'src/queries'
+import { useIdentityByAddressSubscription } from 'src/queries'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
+
+// import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+// import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 
 import { Fingerprint } from '@mui/icons-material'
 import { InputAdornment } from '@mui/material'
@@ -31,12 +35,20 @@ const initialState = (identity: Identity) => ({
 
 export function IdentityView() {
 	const { t } = useTranslation()
-	const accountState = useCurrentAccountState()
-	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const setIdentityTx = useIdentitySetTransaction(values)
-	// const clearIdentityTx = useClearIdentityTransaction()
 
-	const [isClearDisabled, setIsClearDisabled] = useState(false)
+	const address = useCurrentAccountAddress()
+
+	// subscribe to identity
+	const { loading, data, error } = useIdentityByAddressSubscription({
+		variables: { address: address },
+	})
+	const [identity, setIdentity] = useState<Identity>(data?.identity_by_pk)
+	useEffect(() => {
+		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
+		setIdentity(data?.identity_by_pk)
+	}, [data?.identity_by_pk])
+
+	// ui and actions
 
 	const [values, setValues] = useState(null)
 	const resolver = useYupValidationResolver(validation)
@@ -44,16 +56,17 @@ export function IdentityView() {
 		defaultValues: initialState(identity),
 		resolver,
 	})
-
-	useEffect(() => {
-		if (values) console.log('values', values)
-	}, [values])
+	const setIdentityTx = useIdentitySetTransaction(values)
 
 	const [modalState, setModalState] = useState({
 		set: false,
 		clear: false,
 	})
 
+	// clear identity
+
+	const [isClearDisabled, setIsClearDisabled] = useState(false)
+	// const clearIdentityTx = useClearIdentityTransaction()
 	// useEffect(() => {
 	// 	if (!identity?.display_name) {
 	// 		setIsClearDisabled(true)
@@ -62,22 +75,23 @@ export function IdentityView() {
 	// 	}
 	// }, [identity?.display_name])
 
-	// useEffect(() => {
-	// 	if (identity) {
-	// 		formHandler.reset(initialState(identity))
-	// 	}
-	// }, [identity, formHandler])
+	useEffect(() => {
+		if (identity) {
+			formHandler.reset(initialState(identity))
+		}
+	}, [identity?.display_name])
 
-	const handleModalClose = useCallback(
-		(type: 'set' | 'clear') => {
-			if (type === 'set') {
-				setModalState((prevState) => ({ ...prevState, set: false }))
-			} else {
-				setModalState((prevState) => ({ ...prevState, clear: false }))
-			}
-		},
-		[setModalState],
-	)
+	// useEffect(() => {
+	// 	if (values) console.log('values', values)
+	// }, [values])
+
+	const handleModalClose = useCallback((type: 'set' | 'clear') => {
+		if (type === 'set') {
+			setModalState((prevState) => ({ ...prevState, set: false }))
+		} else {
+			setModalState((prevState) => ({ ...prevState, clear: false }))
+		}
+	}, [])
 
 	// const submit = (data,type) => {
 	// 	setValues(data)
@@ -88,17 +102,14 @@ export function IdentityView() {
 	// 	}
 	// }
 
-	// const submit = useCallback(
-	// 	(data, type: 'set' | 'clear') => {
-	// 		setValues(data)
-	// 		if (type === 'set') {
-	// 			setModalState((prevState) => ({ ...prevState, set: true }))
-	// 		} else {
-	// 			setModalState((prevState) => ({ ...prevState, clear: true }))
-	// 		}
-	// 	},
-	// 	[values],
-	// )
+	const submit = useCallback((data, type: 'set' | 'clear') => {
+		setValues(data)
+		if (type === 'set') {
+			setModalState((prevState) => ({ ...prevState, set: true }))
+		} else {
+			setModalState((prevState) => ({ ...prevState, clear: true }))
+		}
+	}, [])
 
 	return (
 		<FormProvider {...formHandler}>
@@ -108,14 +119,7 @@ export function IdentityView() {
 				txData={setIdentityTx}
 				txCallback={() => handleModalClose('set')}
 			/>
-			{/*
-			<TransactionDialog
-				open={modalState.clear}
-				onClose={() => handleModalClose('clear')}
-				txData={clearIdentityTx}
-				txCallback={() => handleModalClose('clear')}
-			/>
-*/}
+
 			<form>
 				<Card variant={'glass'}>
 					<CardContent>

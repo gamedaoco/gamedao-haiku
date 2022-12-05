@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import { Box, Tab, Tabs } from '@mui/material'
-import { AccountTabs } from 'src/@types/account'
+import { AccountTabs } from 'constants/account'
 
 interface Props {
 	param: AccountTabs
@@ -24,18 +24,18 @@ export function Navigation({ param }: Props) {
 				label: t('button:navigation:overview'),
 				value: AccountTabs.OVERVIEW,
 			},
-			{
-				label: t('button:navigation:my_organisations'),
-				value: AccountTabs.ORGANIZATIONS,
-			},
-			{
-				label: t('button:navigation:my_campaigns'),
-				value: AccountTabs.CAMPAIGNS,
-			},
-			{
-				label: t('button:navigation:my_collectables'),
-				value: AccountTabs.COLLECTABLES,
-			},
+			// {
+			// 	label: t('button:navigation:my_organisations'),
+			// 	value: AccountTabs.ORGANIZATIONS,
+			// },
+			// {
+			// 	label: t('button:navigation:my_campaigns'),
+			// 	value: AccountTabs.CAMPAIGNS,
+			// },
+			// {
+			// 	label: t('button:navigation:my_collectables'),
+			// 	value: AccountTabs.COLLECTABLES,
+			// },
 			{
 				label: t('button:navigation:identity'),
 				value: AccountTabs.IDENTITY,
