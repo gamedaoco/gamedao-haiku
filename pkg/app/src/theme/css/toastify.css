@@ -11,9 +11,9 @@
             #ff4ea7 88%,
             #ff00df 100%
     ) !important;
-    border-radius: 8px;
+    border-radius: 1px;
 }
 
 .Toastify__toast {
-    border-radius: 8px;
+    border-radius: 1px;
 }

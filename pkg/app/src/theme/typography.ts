@@ -4,12 +4,16 @@ declare module '@mui/material/styles' {
 	interface TypographyVariants {
 		small: React.CSSProperties
 		btn: React.CSSProperties
+		shield: React.CSSProperties
+		poster: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
 	interface TypographyVariantsOptions {
 		small?: React.CSSProperties
-		btn: React.CSSProperties
+		btn?: React.CSSProperties
+		shield?: React.CSSProperties
+		poster?: React.CSSProperties
 	}
 }
 
@@ -18,6 +22,8 @@ declare module '@mui/material/Typography' {
 	interface TypographyPropsVariantOverrides {
 		small: true
 		btn: true
+		shield: true
+		poster: true
 	}
 }
 
@@ -80,7 +86,7 @@ const typography = {
 		...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
 	},
 	h4: {
-		fontFamily: FONT_PRIMARY,
+		fontFamily: FONT_HEADER,
 		fontWeight: FONT_BOLD,
 		lineHeight: 1.5,
 		fontSize: pxToRem(20),
@@ -147,6 +153,21 @@ const typography = {
 		lineHeight: 24 / 14,
 		fontSize: pxToRem(10),
 		textTransform: 'capitalize',
+	},
+	shield: {
+		fontFamily: FONT_HEADER,
+		fontWeight: FONT_BOLD,
+		lineHeight: 1.5,
+		fontSize: pxToRem(20),
+		...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
+	},
+	poster: {
+		fontFamily: FONT_UI,
+		fontWeight: FONT_BOLD,
+		lineHeight: 1.1,
+		fontSize: 250,
+		letterSpacing: -2,
+		// ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
 	},
 } as const
 

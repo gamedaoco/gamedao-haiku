@@ -5,6 +5,9 @@ import { Theme } from '@mui/material/styles'
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
 		micro: true
+		grey: true
+		lemon: true
+		pink: true
 	}
 }
 
@@ -23,6 +26,43 @@ export default function Button(theme: Theme) {
 						borderRadius: theme.shape.borderRadiusLg,
 						// p: `1rem`,
 						// m: `1rem`,
+					},
+				},
+				{
+					props: { variant: 'grey' },
+					style: {
+						height: '44px',
+						fontSize: '1rem',
+						background: '#333333',
+						border: 0,
+						boxShadow: theme.customShadows.primary,
+						borderRadius: theme.shape.borderRadiusSm,
+					},
+				},
+				{
+					props: { variant: 'lemon' },
+					style: {
+						height: '44px',
+						fontSize: '1rem',
+						background: '#f3cb14',
+						color: '#111111',
+						'&:hover': { color: '#ffffff' },
+						border: 0,
+						// boxShadow: theme.customShadows.primary,
+						borderRadius: theme.shape.borderRadiusSm,
+					},
+				},
+				{
+					props: { variant: 'pink' },
+					style: {
+						height: '48px',
+						fontSize: '1rem',
+						background: '#ee4693ff',
+						color: '#ffffff',
+						'&:hover': { color: '#ffffff' },
+						border: 0,
+						// boxShadow: theme.customShadows.primary,
+						// borderRadius: theme.shape.borderRadiusSm,
 					},
 				},
 			],
