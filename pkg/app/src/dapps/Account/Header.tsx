@@ -26,7 +26,7 @@ import {
 	Logout,
 	MoreVert,
 	ExtensionOutlined as NotificationsNone, //or CategoryOultined
-	Fingerprint as Identity,
+	Fingerprint as IdentityIcon,
 	SettingsOutlined as Settings,
 	SportsEsportsOutlined as Topic,
 } from '@mui/icons-material'
@@ -43,12 +43,12 @@ export function Header() {
 	const { loading, data, error } = useIdentityByAddressSubscription({
 		variables: { address: address },
 	})
-	const [identity, setIdentity] = useState<Identity>(data?.identity_by_pk)
+	const [identity, setIdentity] = useState(data?.identity_by_pk)
 
 	useEffect(() => {
 		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
 		setIdentity(data?.identity_by_pk)
-	}, [data?.identity_by_pk])
+	}, [data?.identity_by_pk, identity])
 
 	const avatarHash = useMemo(() => md5(address), [address])
 
@@ -72,7 +72,7 @@ export function Header() {
 				<Box>
 					<Typography variant="h6">
 						{identity?.display_name || getNameFromAccountState(accountState)}&nbsp;
-						{identity?.display_name && <Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" />}
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'middle' }} fontSize="small" />}
 					</Typography>
 					<Box sx={{ display: 'flex', alignItems: 'center' }}>
 						{shortAccountAddress(accountState?.account)}

@@ -88,17 +88,17 @@ export function IdentityView() {
 	// 	}
 	// }
 
-	// const submit = useCallback(
-	// 	(data, type: 'set' | 'clear') => {
-	// 		setValues(data)
-	// 		if (type === 'set') {
-	// 			setModalState((prevState) => ({ ...prevState, set: true }))
-	// 		} else {
-	// 			setModalState((prevState) => ({ ...prevState, clear: true }))
-	// 		}
-	// 	},
-	// 	[values],
-	// )
+	const submit = useCallback(
+		(data, type: 'set' | 'clear') => {
+			setValues(data)
+			if (type === 'set') {
+				setModalState((prevState) => ({ ...prevState, set: true }))
+			} else {
+				setModalState((prevState) => ({ ...prevState, clear: true }))
+			}
+		},
+		[values],
+	)
 
 	return (
 		<FormProvider {...formHandler}>

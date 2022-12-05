@@ -73,7 +73,7 @@ export function Selector({ onClick, open }: ComponentProps) {
 					<Typography variant="subtitle2">
 						{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
 						{identity?.display_name && (
-							<Verified sx={{ verticalAlign: 'middle' }} fontSize="10px" color="disabled" />
+							<Verified sx={{ verticalAlign: 'middle' }} type="small" color="disabled" />
 						)}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>

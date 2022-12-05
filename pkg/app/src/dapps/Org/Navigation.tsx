@@ -6,7 +6,7 @@ import { Box, Tab, Tabs } from '@mui/material'
 import { AccountTabs } from 'constants/account'
 
 interface Props {
-	param: AccountTabs
+	param?: AccountTabs
 }
 
 interface ITabs {
@@ -50,7 +50,7 @@ export function Navigation({ param }: Props) {
 
 	const handleTabsChange = useCallback(
 		(event: ChangeEvent<{}>, value: AccountTabs): void => {
-			push(`/account/${value}`)
+			push(`/org/${value}`)
 		},
 		[push],
 	)

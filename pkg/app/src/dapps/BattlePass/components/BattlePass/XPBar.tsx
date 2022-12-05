@@ -22,18 +22,19 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	},
 }))
 
+// eslint-disable-next-line @next/next/no-img-element
 const Shield = () => <img src="/bp/shield-default.svg" height="45px" alt="GameDAO" />
 
 export type TArgs = {
-	id: string
-	isBattlePass?: string
+	id?: string
+	isBattlePass?: boolean
 }
 
 type TProps = {
 	args?: TArgs
 }
 
-export const XPBar = ({ args }): TProps => {
+export const XPBar = ({ args }: TProps) => {
 	const { id } = args
 	const theme = useTheme()
 	const joinBattlePassTX = useJoinBattlePassTX(id)
@@ -61,7 +62,7 @@ export const XPBar = ({ args }): TProps => {
 					</Typography>
 				</Button>
 				<Stack direction="column" alignItems="bottom">
-					<Typography variant="body" color="white">
+					<Typography variant="body1" color="white">
 						Your current Score
 					</Typography>
 					<Typography variant="h5" color="white">

@@ -174,7 +174,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 								href={item.path}
 								target={item.path.includes('http') ? '_blank' : null}
 							>
-								<Button type="xs">
+								<Button>
 									{item.icon && item.icon}
 									{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
 								</Button>

@@ -227,7 +227,7 @@ export const Overview = ({ id }: TProps) => {
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('label:members')}</Typography>
-						<Button color="secondary" onClick={() => handleChangeRoute('members')}>
+						<Button color="secondary" onClick={() => push('members')}>
 							{t('button:ui:go_to_members')} <ChevronRight />
 						</Button>
 					</Stack>
@@ -243,7 +243,7 @@ export const Overview = ({ id }: TProps) => {
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('label:treasury')}</Typography>
-						<Button color="secondary" onClick={() => handleChangeRoute('treasury')}>
+						<Button color="secondary" onClick={() => push('treasury')}>
 							{t('button:ui:go_to_treasury')} <ChevronRight />
 						</Button>
 					</Stack>
@@ -266,7 +266,7 @@ export const Overview = ({ id }: TProps) => {
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('label:campaigns')}</Typography>
-						<Button color="secondary" onClick={() => handleChangeRoute('campaigns')}>
+						<Button color="secondary" onClick={() => push('campaigns')}>
 							{t('button:ui:view_all')} <ChevronRight />
 						</Button>
 					</Stack>
@@ -296,7 +296,7 @@ export const Overview = ({ id }: TProps) => {
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
 						<Typography variant="h5">{t('page:organisations:votings')}</Typography>
-						<Button color="secondary" onClick={() => handleChangeRoute('proposals')}>
+						<Button color="secondary" onClick={() => push('proposals')}>
 							{t('button:ui:view_all')} <ChevronRight />
 						</Button>
 					</Stack>

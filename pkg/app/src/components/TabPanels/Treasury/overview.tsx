@@ -2,6 +2,7 @@
 import { Grid, Stack, Typography } from '@mui/material'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 // Subscriptions
 import {
@@ -16,11 +17,8 @@ import { Charts } from './modules/charts'
 import { Assets } from './modules/assets'
 import { Transactions } from './modules/transactions'
 
-interface ComponentProps {
-	address: string
-}
-
-export function TreasuryOverview({ address }: ComponentProps) {
+export function TreasuryOverview() {
+	const address = useCurrentAccountAddress()
 	const { t } = useTranslation()
 
 	const [incomeTransactionsData, setIncomeTransactionsData] = useState<HistoricIncome[]>([])

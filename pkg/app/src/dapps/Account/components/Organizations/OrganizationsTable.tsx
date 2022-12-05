@@ -117,7 +117,7 @@ export const MyOrganizationsTable: FC<MyOrganizationsTableProps> = ({ title }) =
 														{getInitials(organization?.organization_metadata?.logo)}
 													</Avatar>
 													<Box sx={{ ml: 1 }}>
-														{organisation?.organization_metadata?.name}
+														{organization?.organization_metadata?.name}
 													</Box>
 												</Box>
 											</TableCell>

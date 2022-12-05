@@ -11,7 +11,7 @@ interface Data {
 
 interface ComponentProps {
 	status: string
-	variant: 'CampaignState' | 'campaignState'
+	variant: 'campaignStatus' | 'campaignState'
 }
 
 export function StatusChip({ status, variant }: ComponentProps) {

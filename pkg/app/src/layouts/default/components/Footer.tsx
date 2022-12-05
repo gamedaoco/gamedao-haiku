@@ -12,7 +12,7 @@ const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" alt="G
 
 const Link = ({ href, children }) => (
 	<Box>
-		<NextLink variant="inherit" href={href} target="_blank" underline="none" rel="noreferrer" color="inherit">
+		<NextLink href={href} target="_blank">
 			{children}
 		</NextLink>
 	</Box>

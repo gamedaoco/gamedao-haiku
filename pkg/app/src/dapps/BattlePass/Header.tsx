@@ -9,7 +9,7 @@ import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 // import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-// import { createWarningNotification } from 'src/utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import Navigation from './Navigation'
 

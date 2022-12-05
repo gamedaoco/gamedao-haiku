@@ -10,7 +10,7 @@ import { MemberLimit } from './modules/memberLimit'
 import { MemberType } from './modules/memberType'
 
 interface ComponentProps {
-	organizationState: Organization
+	organizationState?: Organization
 }
 
 export function SettingsOverview({ organizationState }: ComponentProps) {

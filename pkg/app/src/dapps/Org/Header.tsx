@@ -3,14 +3,14 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import { useConfig } from 'hooks/useConfig'
-// import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-// import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
+import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-// import { createWarningNotification } from 'src/utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
-import Navigation from './Navigation'
+// import { Navigation } from './Navigation'
 
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
@@ -58,12 +58,12 @@ export const Header = () => {
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
 
-	// const handleOpenTxModal = useCallback(() => {
-	// 	setShowTxModalType(true)
-	// }, [setShowTxModalType])
-	// const handleCloseTxModal = useCallback(() => {
-	// 	setShowTxModalType(false)
-	// }, [setShowTxModalType])
+	const handleOpenTxModal = useCallback(() => {
+		setShowTxModalType(true)
+	}, [setShowTxModalType])
+	const handleCloseTxModal = useCallback(() => {
+		setShowTxModalType(false)
+	}, [setShowTxModalType])
 
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -86,15 +86,15 @@ export const Header = () => {
 	// 	},
 	// 	[organizationIdState, push],
 	// )
-	// const handleUploadImage = useCallback(async (event, setter) => {
-	// 	const files = event.target.files
-	// 	if (!files || files.length === 0) {
-	// 		return createWarningNotification('No file selected')
-	// 	}
+	const handleUploadImage = useCallback(async (event, setter) => {
+		const files = event.target.files
+		if (!files || files.length === 0) {
+			return createWarningNotification('No file selected')
+		}
 
-	// 	const cid = await uploadFileToIpfs(files[0])
-	// 	setter(cid.toString())
-	// }, [])
+		const cid = await uploadFileToIpfs(files[0])
+		setter(cid.toString())
+	}, [])
 
 	// Query and route mapping
 	// useEffect(() => {

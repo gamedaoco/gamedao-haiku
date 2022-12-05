@@ -13,7 +13,7 @@ export function Organizations() {
 	const { push } = useRouter()
 	const address = useCurrentAccountAddress()
 
-	const createOrganization = () => router.push('/organizations/create')
+	const createOrganization = () => push('/guilds/create')
 
 	const { data, loading } = useAccountOrganizationsSubscription({
 		variables: { address },
@@ -38,7 +38,7 @@ export function Organizations() {
 			<Card variant={'glass'}>
 				<CardContent>
 					{organizations ? (
-						<OrganizationsTable organizations={organizations as Organization[]} loading={loading} />
+						<OrganizationsTable />
 					) : (
 						<Box>
 							<Typography variant="subtitle1">You are not a member of any organization.</Typography>

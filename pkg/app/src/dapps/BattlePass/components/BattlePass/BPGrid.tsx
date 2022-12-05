@@ -6,7 +6,7 @@ import { CardContent, CardActions } from '@mui/material'
 
 const IconGroup = () => {
 	return (
-		<AvatarGroup max={3} total={24} spacing="small" pb={0}>
+		<AvatarGroup max={3} total={24} spacing="small">
 			<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
 			<Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
 			<Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
@@ -15,7 +15,11 @@ const IconGroup = () => {
 	)
 }
 
-export const BPGridItem = ({ index }) => {
+type TGridItemProps = {
+	index?: number
+}
+
+export const BPGridItem = ({ index }: TGridItemProps) => {
 	return (
 		<Fragment>
 			<Box sx={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1000 }}>
@@ -54,7 +58,7 @@ export const BPGridItem = ({ index }) => {
 					<Typography pt={2} m={0} variant="h5">
 						WAVE OG Banner
 					</Typography>
-					<Typography variant="body" sx={{ opacity: 0.5 }}>
+					<Typography variant="body1" sx={{ opacity: 0.5 }}>
 						Get a limited edition WAVE banner for your socials
 					</Typography>
 					<Box py={1} sx={{ opacity: 0.2 }}>
@@ -70,9 +74,15 @@ export const BPGridItem = ({ index }) => {
 	)
 }
 
-export const BPGrid = () => {
-	const theme = useTheme()
+type TGridProps = {
+	id?: string
+}
+type TArgs = {
+	args?: TGridProps
+}
 
+export const BPGrid = ({ args }: TArgs) => {
+	const theme = useTheme()
 	const items = 100
 	const arr1: number[] = new Array(16).fill(0)
 

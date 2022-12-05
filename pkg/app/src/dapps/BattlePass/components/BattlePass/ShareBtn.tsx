@@ -9,7 +9,7 @@ export function ShareBtn({}: TProps) {
 
 	return (
 		<a href="https://twitter.com/intent/tweet?text=Hello%20world" target="_blank" rel="noreferrer">
-			<Button sx={{ mr: [0, 2] }} variant="plain" endIcon={<ShareIcon />}>
+			<Button sx={{ mr: [0, 2] }} variant="text" endIcon={<ShareIcon />}>
 				Share with a friend
 			</Button>
 		</a>

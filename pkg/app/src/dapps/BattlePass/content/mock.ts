@@ -27,7 +27,7 @@ type Threshold = {
 	}
 }
 
-const achievement_defaults = {
+export const achievement_defaults = {
 	name: 'achievement',
 	slug: 'achievement',
 
@@ -41,7 +41,7 @@ const achievement_defaults = {
 	burnable: true,
 }
 
-const battlepass = {
+export const battlepass = {
 	uuid: '0x0123456789abcdef',
 
 	name: 'battlepass 1',

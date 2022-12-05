@@ -9,7 +9,7 @@ export default function Tabs(theme: Theme) {
 					fontWeight: theme.typography.fontWeightMedium,
 					borderTopLeftRadius: 0,
 					borderTopRightRadius: 0,
-					height: '90px',
+					// height: '90px',
 					// borderRadius: 0, //theme.shape.borderRadiusLg,
 
 					// boxShadow: '0px 15px 30px #0ff',

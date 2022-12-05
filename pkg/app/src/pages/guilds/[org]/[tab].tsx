@@ -86,7 +86,7 @@ export function OrganisationById() {
 	const [organization, setOrganization] = useState<Organization>(null)
 	const [orgName, setOrgName] = useState('')
 
-	const addMemberTx = org && useAddMemberTransaction(org || null)
+	const addMemberTx = useAddMemberTransaction(org || null)
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState() || null
 
@@ -98,7 +98,7 @@ export function OrganisationById() {
 			setIsMember(isMember)
 			console.log('isMember', isMember)
 		}
-	}, [organization?.organization_members, address])
+	}, [organization?.organization_members, address, organization])
 
 	// ui
 
@@ -128,7 +128,7 @@ export function OrganisationById() {
 			// Reset proposal id when click on tab
 			setProposalId(null)
 		},
-		[org, push],
+		[org],
 	)
 
 	// useEffect(() => {
@@ -153,9 +153,11 @@ export function OrganisationById() {
 	// 	}
 	// },[org])
 
-	const { loading, data, error } = org.startsWith('0x')
-		? useOrganizationByIdSubscription({ variables: { orgId: org } })
-		: useOrganizationByNameSubscription({ variables: { name: org } })
+	// TODO: resolve based on id or slug
+	const { loading, data, error } = useOrganizationByIdSubscription({ variables: { orgId: org } })
+	// const { loading, data, error } = org.startsWith('0x')
+	// 	? useOrganizationByIdSubscription({ variables: { orgId: org } })
+	// 	: useOrganizationByNameSubscription({ variables: { name: org } })
 
 	// content
 

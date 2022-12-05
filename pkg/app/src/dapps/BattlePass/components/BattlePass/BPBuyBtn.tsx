@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { useConfig } from 'hooks/useConfig'
@@ -12,14 +12,14 @@ import { Button } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 export type TArgs = {
-	id: string
+	id?: string
 }
 
 type TProps = {
-	args: TArgs
+	args?: TArgs
 }
 
-export const BPBuyBtn = ({ args }): TProps => {
+export const BPBuyBtn = ({ args }: TProps) => {
 	const { id } = args
 	const theme = useTheme()
 
@@ -38,25 +38,26 @@ export const BPBuyBtn = ({ args }): TProps => {
 		setShowTxModalType(false)
 	}, [setShowTxModalType])
 
-	return !isBattlePass ? (
-		<>
-			<Button
-				// TODO: add state pending
-				disabled={isBattlePass}
-				onClick={handleOpenTxModal}
-				variant="lemon"
-				// fullWidth
-			>
-				Join BattlePass
-			</Button>
-			<TransactionDialog
-				open={showTxModalType}
-				onClose={handleCloseTxModal}
-				txData={joinBattlePassTX}
-				txCallback={handleCloseTxModal}
-			/>
-		</>
-	) : null
+	if (!isBattlePass) return null
+
+	return
+	;<Fragment>
+		<Button
+			// TODO: add state pending
+			disabled={isBattlePass}
+			onClick={handleOpenTxModal}
+			variant="lemon"
+			// fullWidth
+		>
+			Join BattlePass
+		</Button>
+		<TransactionDialog
+			open={showTxModalType}
+			onClose={handleCloseTxModal}
+			txData={joinBattlePassTX}
+			txCallback={handleCloseTxModal}
+		/>
+	</Fragment>
 }
 
 export default BPBuyBtn

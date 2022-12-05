@@ -26,14 +26,10 @@ export function BattlePass({ id }: TProps) {
 				<Grid item sm={12} md={6}>
 					<XPBar args={{ id }} />
 				</Grid>
-				<Grid item sm={12} md={6} alignItems="center" align="right">
+				<Grid item sm={12} md={6} display="flex" alignItems="center" justifyContent="end">
 					<ShareBtn />
 					<BPBuyBtn args={{ id }} />
 				</Grid>
-				{/*			<Grid item sm={12}>
-				<Typography pt={2} variant="h3">Rewards</Typography>
-			</Grid>
-*/}{' '}
 				<Grid item sm={12}>
 					<BPGrid args={{ id }} />
 				</Grid>

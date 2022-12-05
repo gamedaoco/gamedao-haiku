@@ -26,8 +26,8 @@ export function CampaignCard({ campaign }: ComponentProps) {
 	)
 
 	const handleClick = useCallback(() => {
-		if (campaign?.state === CampaignStatus.Draft) {
-			return push(`/organisations/${campaign?.organization?.id}/campaigns?draft=${campaign?.id}`)
+		if (campaign?.state === CampaignState.Draft) {
+			return push(`/org/${campaign?.organization?.id}/campaigns?draft=${campaign?.id}`)
 		}
 		return push(`/campaigns/${campaign?.id}`)
 	}, [push, campaign])

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
@@ -20,6 +20,7 @@ interface Props {
 interface ITabs {
 	label: string
 	value: ContentTabs
+	disabled?: boolean
 }
 
 export function Navigation({ id, path }: Props) {
@@ -79,7 +80,7 @@ export function Navigation({ id, path }: Props) {
 					  }
 					: null,
 			].filter((item) => item !== null),
-		[t],
+		[isBattlePass, isMember, isPrime],
 	)
 
 	const handleTabChange = useCallback(

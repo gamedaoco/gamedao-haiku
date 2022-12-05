@@ -22,8 +22,9 @@ import { BattlePass } from './components/BattlePass/'
 import { Settings } from './components/Settings'
 
 interface Props {
-	id: string
-	path: ContentTabs
+	id?: string
+	name?: string
+	path?: ContentTabs
 }
 
 export const Org = ({ id, name, path }: Props) => {
@@ -33,23 +34,22 @@ export const Org = ({ id, name, path }: Props) => {
 	const theme = useTheme()
 	const { t } = useTranslation()
 
-	const Content = useCallback(() => {
-		switch (path) {
-			case ContentTabs.BATTLEPASS:
-				return <BattlePass />
-			case ContentTabs.SETTINGS:
-				return <Settings />
-			default:
-				return <Overview />
-		}
-	}, [path])
+	// const Content = useCallback(() => {
+	// 	switch (path) {
+	// 		case ContentTabs.BATTLEPASS:
+	// 			return <BattlePass />
+	// 		case ContentTabs.SETTINGS:
+	// 			return <Settings />
+	// 		default:
+	// 			return <Overview />
+	// 	}
+	// }, [path])
 
 	return (
 		<Stack spacing={4}>
 			<Paper
 				variant={'glass'}
 				sx={{
-					// position: 'relative',
 					background: '#111111ee',
 					backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), #000000aa)`,
 				}}

@@ -1,36 +1,27 @@
+import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import { OrganizationTabs } from 'constants/organisation'
+import { OrganizationTabs } from 'constants/organization'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Grid, Typography } from '@mui/material'
 
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
-import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
-import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
-import { Overview } from 'components/TabPanels/Organization/overview'
-import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
-import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
-import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
-import { SettingsOverview } from 'components/TabPanels/Settings/overview'
 
-export function Campaigns() {
+type TProps = {
+	id?: string
+	isAdmin?: boolean
+}
+type TArgs = {
+	args?: TProps
+}
+
+export function Campaigns({ args }: TArgs) {
+	const { id, isAdmin } = args
+
 	const theme = useTheme()
 	const { t } = useTranslation()
 
-	return (
-		<TabPanel value={OrganizationTabs.MEMBERS}>
-			{proposalIdState && organizationState ? (
-				<ProposalDetail
-					organization={organizationState}
-					proposalId={proposalIdState}
-					isMember={isMemberState}
-					goBack={() => handleTabSelect('proposals')}
-				/>
-			) : (
-				<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
-			)}
-		</TabPanel>
-	)
+	return <CampaignOverview organizationId={id} isAdmin={isAdmin} />
 }
 
 export default Campaigns

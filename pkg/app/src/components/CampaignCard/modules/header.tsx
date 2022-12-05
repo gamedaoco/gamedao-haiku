@@ -50,7 +50,7 @@ export function Header({ organizationImage, headerImage, status, id, orgId }: Co
 						zIndex: 1,
 					}}
 				>
-					{status === CampaignStatus.Draft && (
+					{status === CampaignState.Draft && (
 						<Chip variant="campaignCard" onClick={handleDelete} label={<DeleteOutlined />} />
 					)}
 				</Box>
