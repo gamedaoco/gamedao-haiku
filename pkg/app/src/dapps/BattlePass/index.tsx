@@ -19,6 +19,7 @@ import { Header } from './Header'
 import { Navigation } from './Navigation'
 import { Overview } from './components/Overview'
 import { BattlePass } from './components/BattlePass/'
+import { Governance } from './components/Governance'
 import { Settings } from './components/Settings'
 
 interface Props {
@@ -63,6 +64,9 @@ export const Org = ({ id, name, path }: Props) => {
 				</TabPanel>
 				<TabPanel value="battlepass">
 					<BattlePass id={id as string} />
+				</TabPanel>
+				<TabPanel value="governance">
+					<Governance />
 				</TabPanel>
 				<TabPanel value="settings">
 					<Settings />

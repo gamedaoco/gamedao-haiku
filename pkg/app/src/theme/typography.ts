@@ -6,6 +6,9 @@ declare module '@mui/material/styles' {
 		btn: React.CSSProperties
 		shield: React.CSSProperties
 		poster: React.CSSProperties
+		cardHeader: React.CSSProperties
+		cardBody: React.CSSProperties
+		cardMicro: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
@@ -14,6 +17,9 @@ declare module '@mui/material/styles' {
 		btn?: React.CSSProperties
 		shield?: React.CSSProperties
 		poster?: React.CSSProperties
+		cardHeader?: React.CSSProperties
+		cardBody?: React.CSSProperties
+		cardMicro?: React.CSSProperties
 	}
 }
 
@@ -24,6 +30,9 @@ declare module '@mui/material/Typography' {
 		btn: true
 		shield: true
 		poster: true
+		cardHeader: true
+		cardBody: true
+		cardMicro: true
 	}
 }
 
@@ -51,7 +60,6 @@ const FONT_HEADER = 'fatfrank, Helvetica Neue, Helvetica, sans-serif'
 const FONT_PRIMARY = 'Inter, Helvetica Neue, Helvetica, sans-serif'
 const FONT_UI = 'Inter, sans-serif'
 const FONT_SECONDARY = 'Times New Roman, serif'
-// const FONT_SECONDARY = 'Times New Roman, serif'; // Local Font
 
 const FONT_LIGHT = 200
 const FONT_REGULAR = 400
@@ -79,14 +87,14 @@ const typography = {
 		...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
 	},
 	h3: {
-		fontFamily: FONT_HEADER,
+		fontFamily: FONT_PRIMARY,
 		fontWeight: FONT_BOLD,
 		lineHeight: 1.5,
 		fontSize: pxToRem(24),
 		...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
 	},
 	h4: {
-		fontFamily: FONT_HEADER,
+		fontFamily: FONT_PRIMARY,
 		fontWeight: FONT_BOLD,
 		lineHeight: 1.5,
 		fontSize: pxToRem(20),
@@ -168,6 +176,26 @@ const typography = {
 		fontSize: 250,
 		letterSpacing: -2,
 		// ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
+	},
+	cardHeader: {
+		fontFamily: FONT_PRIMARY,
+		fontWeight: FONT_BOLD,
+		fontSize: pxToRem(16),
+		lineHeight: 1.5,
+		display: 'block',
+	},
+	cardBody: {
+		fontFamily: FONT_PRIMARY,
+		fontWeight: FONT_REGULAR,
+		lineHeight: 1.8,
+		fontSize: pxToRem(12),
+	},
+	cardMicro: {
+		fontFamily: FONT_PRIMARY,
+		fontWeight: FONT_REGULAR,
+		lineHeight: 1,
+		fontSize: pxToRem(12),
+		display: 'block',
 	},
 } as const
 

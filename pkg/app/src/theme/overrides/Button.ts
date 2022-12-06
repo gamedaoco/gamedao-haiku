@@ -35,7 +35,7 @@ export default function Button(theme: Theme) {
 						fontSize: '1rem',
 						background: '#333333',
 						border: 0,
-						boxShadow: theme.customShadows.primary,
+						// boxShadow: theme.customShadows.primary,
 						borderRadius: theme.shape.borderRadiusSm,
 					},
 				},

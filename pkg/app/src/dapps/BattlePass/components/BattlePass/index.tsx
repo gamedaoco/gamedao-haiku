@@ -7,9 +7,10 @@ import ShareIcon from '@mui/icons-material/Share'
 import { Loader } from 'components/Loader'
 
 import { XPBar } from './XPBar'
-import { BPBuyBtn } from './BPBuyBtn'
-import { BPGrid } from './BPGrid'
 import { ShareBtn } from './ShareBtn'
+import { BPBuyBtn } from './BPBuyBtn'
+import { BPQuests } from './BPQuests'
+import { BPRewards } from './BPRewards'
 
 type TProps = {
 	id: string
@@ -31,7 +32,10 @@ export function BattlePass({ id }: TProps) {
 					<BPBuyBtn args={{ id }} />
 				</Grid>
 				<Grid item sm={12}>
-					<BPGrid args={{ id }} />
+					<BPQuests args={{ id }} />
+				</Grid>
+				<Grid item sm={12}>
+					<BPRewards args={{ id }} />
 				</Grid>
 			</Grid>
 		</Box>

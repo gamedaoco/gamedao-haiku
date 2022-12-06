@@ -15,10 +15,12 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	[`&.${linearProgressClasses.colorPrimary}`]: {
 		borderRadius: 1,
 		backgroundColor: theme.palette.grey[700],
+		boxShadow: '0 0 10px #ffff0033',
 	},
 	[`& .${linearProgressClasses.bar}`]: {
 		borderRadius: 1,
-		backgroundColor: 'yellow',
+		background: 'linear-gradient( to right, #f3cb14, #ffee66 80%, #ffffff 90% )',
+		boxShadow: '0 0 10px #ffff00',
 	},
 }))
 
@@ -41,8 +43,8 @@ export const XPBar = ({ args }: TProps) => {
 	const address = useCurrentAccountAddress()
 
 	const level = 7
-	const points = 1337
-	const progress = 50
+	const max = 10000
+	const points = Math.round(Math.random() * max)
 
 	return (
 		<Stack sx={{ width: '100%' }} spacing={1}>
@@ -66,11 +68,11 @@ export const XPBar = ({ args }: TProps) => {
 						Your current Score
 					</Typography>
 					<Typography variant="h5" color="white">
-						{points} / 10000 BP
+						{points} / {max} BP
 					</Typography>
 				</Stack>
 			</Stack>
-			<BorderLinearProgress variant="determinate" value={progress} />
+			<BorderLinearProgress variant="determinate" value={points / 100} />
 		</Stack>
 	)
 }

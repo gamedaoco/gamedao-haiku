@@ -19,7 +19,7 @@ type TGridItemProps = {
 	index?: number
 }
 
-export const BPGridItem = ({ index }: TGridItemProps) => {
+export const BPRewardItem = ({ index }: TGridItemProps) => {
 	return (
 		<Fragment>
 			<Box sx={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1000 }}>
@@ -37,10 +37,11 @@ export const BPGridItem = ({ index }: TGridItemProps) => {
 							sx={{
 								borderRadius: '2px',
 								background: `linear-gradient(
-							to top,
-							#ee4693ff,
-							#ee469300 75%
-						)`,
+												to top,
+												#ee4693ff,
+												#ee469300 75%
+											)`,
+								boxShadow: `0px 20px 30px #00000033`,
 							}}
 						>
 							<Box
@@ -81,7 +82,7 @@ type TArgs = {
 	args?: TGridProps
 }
 
-export const BPGrid = ({ args }: TArgs) => {
+export const BPRewards = ({ args }: TArgs) => {
 	const theme = useTheme()
 	const items = 100
 	const arr1: number[] = new Array(16).fill(0)
@@ -90,15 +91,19 @@ export const BPGrid = ({ args }: TArgs) => {
 		<Grid
 			container
 			// columns={{ xs: 1, md: 2 }}
-			spacing={{ xs: 2, md: 4, lg: 6 }}
+			rowSpacing={2}
+			columnSpacing={{ xs: 2, md: 4, lg: 6 }}
 			justifyContent={{ xs: 'center', md: 'left' }}
-			pt={4}
 		>
+			<Grid item xs={12}>
+				<Typography variant="h4">Rewards</Typography>
+			</Grid>
+
 			{arr1.map((item, index) => {
 				return (
 					<Grid item key={index}>
 						<Card sx={{ width: '348px', height: '560px', border: 0, backgroundColor: '#11111122' }}>
-							<BPGridItem index={index + 1} />
+							<BPRewardItem index={index + 1} />
 						</Card>
 					</Grid>
 				)
@@ -107,4 +112,4 @@ export const BPGrid = ({ args }: TArgs) => {
 	)
 }
 
-export default BPGrid
+export default BPRewards

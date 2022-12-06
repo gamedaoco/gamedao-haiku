@@ -72,6 +72,13 @@ export function Navigation({ id, path }: Props) {
 							disabled: !isBattlePass,
 					  }
 					: null,
+				isMember
+					? {
+							label: 'Governance',
+							value: ContentTabs.GOVERNANCE,
+							disabled: !isMember,
+					  }
+					: null,
 				isPrime
 					? {
 							label: 'Settings',
@@ -80,7 +87,7 @@ export function Navigation({ id, path }: Props) {
 					  }
 					: null,
 			].filter((item) => item !== null),
-		[isBattlePass, isPrime],
+		[isBattlePass, isMember, isPrime],
 	)
 
 	const handleTabChange = useCallback(
