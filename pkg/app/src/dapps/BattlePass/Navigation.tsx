@@ -76,7 +76,7 @@ export function Navigation({ id, path }: Props) {
 					? {
 							label: 'Governance',
 							value: ContentTabs.GOVERNANCE,
-							disabled: !isMember,
+							// disabled: !isMember,
 					  }
 					: null,
 				isPrime
