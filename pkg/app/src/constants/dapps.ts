@@ -1,5 +1,6 @@
-export enum DApps {
+export enum ContentTabs {
 	DASHBOARD = 'dashboard',
+	OVERVIEW = 'overview',
 	BATTLEPASS = 'battlepass',
 	GOVERNANCE = 'governance',
 	CAMPAIGNS = 'campaigns',

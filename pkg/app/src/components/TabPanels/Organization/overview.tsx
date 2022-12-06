@@ -53,7 +53,7 @@ export const Overview = ({ id }: TProps) => {
 			setIsMember(organization.organization_members.some((member) => member.address === address))
 			setIsPrime(organization.prime === address)
 		}
-	}, [])
+	}, [address, organization])
 
 	// content
 

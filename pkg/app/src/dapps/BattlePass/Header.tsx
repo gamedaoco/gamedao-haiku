@@ -11,7 +11,7 @@ import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
-import Navigation from './Navigation'
+// import Navigation from './Navigation'
 
 import { Add } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
@@ -36,7 +36,7 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { Image } from 'components/Image/image'
 
 type TProps = {
-	id: string
+	id: string | string[]
 }
 
 export const Header = ({ id }: TProps) => {
@@ -52,11 +52,10 @@ export const Header = ({ id }: TProps) => {
 	const [isMember, setIsMember] = useState<boolean>(false)
 
 	const { loading, data, error } = useOrganizationByIdSubscription({
-		variables: { orgId: id },
+		variables: { orgId: id as string },
 	})
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
-
 	// add member
 
 	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
@@ -101,10 +100,10 @@ export const Header = ({ id }: TProps) => {
 	// }, [cache, cache.name, cache.description, cache.logoCID, cache.headerCID])
 
 	useEffect(() => {
-		if (data) {
-			!data.organization?.[0] ? push('/guilds') : setOrganization(data.organization?.[0] as Organization)
-		}
-	}, [data])
+		if (!data?.organization[0]) return
+		console.log('org', data?.organization[0])
+		setOrganization(data.organization?.[0] as Organization)
+	}, [data?.organization])
 
 	useEffect(() => {
 		if (address && organization) {
@@ -194,19 +193,6 @@ export const Header = ({ id }: TProps) => {
 								n: organization?.organization_members?.length ?? 1,
 							})}
 						</Typography>
-					</Stack>
-					<Stack>
-						{/*						{organization && isMember && address !== organization?.creator && (
-							<Button
-								// variant="micro"
-								disabled={!addMemberTx}
-								onClick={handleOpenTxModal}
-							>
-								{
-									'join' //t('button:ui:join_organization')
-								}
-							</Button>
-						)}*/}
 					</Stack>
 				</Stack>
 			</Stack>

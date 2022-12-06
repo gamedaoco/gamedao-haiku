@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ContentTabs } from 'src/constants/battlepass'
+import { ContentTabs } from 'constants/battlepass'
 
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
@@ -22,14 +22,14 @@ import { BattlePass } from './components/BattlePass/'
 import { Settings } from './components/Settings'
 
 interface Props {
-	id?: string
+	id: string | string[]
+	path: ContentTabs
 	name?: string
-	path?: ContentTabs
 }
 
 export const Org = ({ id, name, path }: Props) => {
 	const { query, push } = useRouter()
-
+	// console.log(query?.id,path)
 	const config = useConfig()
 	const theme = useTheme()
 	const { t } = useTranslation()
@@ -58,11 +58,11 @@ export const Org = ({ id, name, path }: Props) => {
 				<Navigation id={id} path={path} />
 			</Paper>
 			<TabContext value={path}>
-				<TabPanel value="overview">
-					<Overview id={id} />
+				<TabPanel value={'overview'}>
+					<Overview id={id as string} />
 				</TabPanel>
 				<TabPanel value="battlepass">
-					<BattlePass id={id} />
+					<BattlePass id={id as string} />
 				</TabPanel>
 				<TabPanel value="settings">
 					<Settings />

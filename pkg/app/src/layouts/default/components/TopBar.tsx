@@ -64,8 +64,8 @@ const lerp = (start, end) => Math.round(Math.max(start, end) - Math.min(start, e
 
 const left = [
 	{
-		name: 'Guilds', // 'button:navigation:organisations',
-		path: '/organisations',
+		name: 'Organizations', // 'button:navigation:organisations',
+		path: '/org',
 		icon: <RiShieldLine />,
 	},
 	{

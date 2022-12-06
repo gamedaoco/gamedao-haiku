@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ContentTabs } from 'constants/battlepass'
+import { ContentTabs } from 'constants/dapps'
 
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'

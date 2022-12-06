@@ -13,13 +13,13 @@ import { Loader } from 'components/Loader'
 import { Join } from './components/JoinBtn'
 
 interface Props {
-	id: string
+	id: string | string[]
 	path: ContentTabs
 }
 
 interface ITabs {
 	label: string
-	value: ContentTabs
+	value?: ContentTabs
 	disabled?: boolean
 }
 
@@ -33,7 +33,7 @@ export function Navigation({ id, path }: Props) {
 
 	const [organization, setOrganization] = useState<Organization>(null)
 	const { loading, data, error } = useOrganizationByIdSubscription({
-		variables: { orgId: id },
+		variables: { orgId: id as string },
 	})
 	useEffect(() => {
 		if (!data?.organization) return
@@ -58,11 +58,11 @@ export function Navigation({ id, path }: Props) {
 	const tabs = useMemo<ITabs[]>(
 		() =>
 			[
-				isMember
+				true
 					? {
 							label: 'Overview',
 							value: ContentTabs.OVERVIEW,
-							disabled: !isMember,
+							// disabled: !isMember,
 					  }
 					: null,
 				isBattlePass
@@ -80,7 +80,7 @@ export function Navigation({ id, path }: Props) {
 					  }
 					: null,
 			].filter((item) => item !== null),
-		[isBattlePass, isMember, isPrime],
+		[isBattlePass, isPrime],
 	)
 
 	const handleTabChange = useCallback(
@@ -115,7 +115,7 @@ export function Navigation({ id, path }: Props) {
 						<Tab key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />
 					))}
 				</Tabs>
-				<Join args={{ id: id, isMember: isMember, isOpen: isOpen, isPrime: isPrime }} />
+				<Join args={{ id: id as string, isMember: isMember, isOpen: isOpen, isPrime: isPrime }} />
 			</Stack>
 		</Box>
 	)
