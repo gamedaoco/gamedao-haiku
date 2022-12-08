@@ -58,7 +58,7 @@ export function Campaigns() {
 					{
 						_or: [
 							{
-								campaign_metadata: {
+								campaign: {
 									_or: [
 										{
 											name: {
@@ -75,10 +75,8 @@ export function Campaigns() {
 							},
 							{
 								organization: {
-									organization_metadata: {
-										name: {
-											_ilike: `%${filters.query ?? ''}%`,
-										},
+									name: {
+										_ilike: `%${filters.query ?? ''}%`,
 									},
 								},
 							},

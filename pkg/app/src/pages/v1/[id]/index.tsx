@@ -22,7 +22,7 @@ export function Page() {
 	useEffect(() => {
 		if (!data?.organization) return
 		if (data?.organization[0]) {
-			// const name = data?.organization[0].organization_metadata.name
+			// const name = data?.organization[0].name
 			// console.log(name)
 			const p = `/v1/${id}/${ContentTabs.BATTLEPASS}`
 			// console.log(p)

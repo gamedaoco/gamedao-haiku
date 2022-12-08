@@ -124,11 +124,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	}, [setShowMore])
 
 	const buttonContent = useMemo(
-		() =>
-			showMore
-				? proposal?.proposal_metadata?.description ?? ''
-				: `${proposal?.proposal_metadata?.description?.slice(0, 700)}` ?? '',
-		[proposal?.proposal_metadata?.description, showMore],
+		() => (showMore ? proposal?.description ?? '' : `${proposal?.description?.slice(0, 700)}` ?? ''),
+		[proposal?.description, showMore],
 	)
 
 	useEffect(() => {
@@ -180,10 +177,10 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	}, [displayValues, proposal])
 
 	useEffect(() => {
-		if (proposal?.proposal_metadata?.description?.length > 350) {
+		if (proposal?.description?.length > 350) {
 			setShowButton(true)
 		}
-	}, [proposal?.proposal_metadata?.description?.length])
+	}, [proposal?.description?.length])
 
 	return !loading && proposal ? (
 		<Stack direction="row" flexWrap="wrap" gap={3}>
@@ -193,7 +190,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 					<IconButton onClick={goBack}>
 						<ArrowBack />
 					</IconButton>
-					<Typography variant="h6">Proposal {proposal.proposal_metadata?.name ?? proposalId}</Typography>
+					<Typography variant="h6">Proposal {proposal?.name ?? proposalId}</Typography>
 				</Stack>
 
 				<Stack paddingTop={2} paddingLeft={4} paddingRight={4} spacing={2} gap={2}>

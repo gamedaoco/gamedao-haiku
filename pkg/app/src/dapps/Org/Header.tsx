@@ -201,11 +201,8 @@ export const Header = () => {
 							cursor: 'pointer',
 						})}
 						srcSet={
-							organizationState?.organization_metadata?.logo || cache.logoCID?.length
-								? parseIpfsHash(
-										organizationState?.organization_metadata?.logo || cache.logoCID,
-										config.IPFS_GATEWAY,
-								  )
+							organizationState?.logo || cache.logoCID?.length
+								? parseIpfsHash(organizationState?.logo || cache.logoCID, config.IPFS_GATEWAY)
 								: null
 						}
 					>
@@ -227,7 +224,7 @@ export const Header = () => {
 				>
 					<Stack spacing={0} sx={{ flex: 0.9 }}>
 						<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
-							{organizationState?.organization_metadata?.name ?? cache.name ?? ''}
+							{organizationState?.name ?? cache.name ?? ''}
 						</Typography>
 						<Typography
 							// variant='small'
@@ -292,16 +289,13 @@ export const Header = () => {
 						disabled={!!organizationIdState}
 						onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
 					/>
-					{!organizationState?.organization_metadata?.header && !cache.headerCID?.length ? (
+					{!organizationState?.header && !cache.headerCID?.length ? (
 						<Box display="grid" justifyContent="center" alignItems="center">
 							<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
 						</Box>
 					) : (
 						<Image
-							src={parseIpfsHash(
-								organizationState?.organization_metadata?.header ?? cache.headerCID,
-								config.IPFS_GATEWAY,
-							)}
+							src={parseIpfsHash(organizationState?.header ?? cache.headerCID, config.IPFS_GATEWAY)}
 							alt="logo"
 							sx={{
 								position: 'absolute',

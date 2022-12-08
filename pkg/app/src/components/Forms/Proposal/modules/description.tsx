@@ -280,7 +280,7 @@ export function Description({
 							{data?.campaign?.map((campaign) => {
 								return (
 									<MenuItem key={campaign.id} value={campaign.id}>
-										{campaign?.campaign_metadata?.name}
+										{campaign?.name}
 									</MenuItem>
 								)
 							})}
@@ -346,7 +346,7 @@ export function Description({
 									startAdornment: (
 										<Stack direction={'row'} flexShrink={0} alignItems={'center'} gap={1}>
 											<Inbox />
-											{`${organization?.organization_metadata?.name} Treasury`}
+											{`${organization?.name} Treasury`}
 										</Stack>
 									),
 									endAdornment: <>{organization?.treasury}</>,
