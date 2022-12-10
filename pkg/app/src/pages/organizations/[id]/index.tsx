@@ -7,7 +7,7 @@ export function Page() {
 	const { query, push } = useRouter()
 
 	useEffect(() => {
-		push(`/org/${query.id}/${OrganizationTabs.OVERVIEW}`)
+		push(`/organizations/${query.id}/${OrganizationTabs.OVERVIEW}`)
 	}, [push, query])
 }
 

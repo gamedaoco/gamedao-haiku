@@ -13,7 +13,7 @@ export function CreateOrganisationPage() {
 			<Box sx={{ mb: 4 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">{t('page:organisations:create')}</Typography>
+						<Typography variant="h3">Create Organization{!t('page:organisations:create')}</Typography>
 					</Grid>
 					<Grid item></Grid>
 				</Grid>

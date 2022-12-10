@@ -79,7 +79,7 @@ export function OrganisationPage() {
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" alignItems="center" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">{t('page:organisations:title')}</Typography>
+						<Typography variant="h3">Organizations{!t('page:organisations:title')}</Typography>
 					</Grid>
 					<Grid item>
 						<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleClickCreate}>
@@ -145,7 +145,7 @@ export function OrganisationPage() {
 					</Box>
 				</>
 			) : (
-				<>No Organisations yet — why not create one?</>
+				<>No Organizations yet — create one!</>
 			)}
 		</Layout>
 	)

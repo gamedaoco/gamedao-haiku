@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { Layout } from 'layouts/default'
-import Organization from 'dapps/Org'
+import Organization from 'dapps/Organization'
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 
 export function Page() {
