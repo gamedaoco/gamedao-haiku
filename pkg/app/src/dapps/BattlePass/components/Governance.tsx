@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ContentTabs } from 'constants/dapps'
 
@@ -11,6 +11,7 @@ import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 type TProps = {
 	id?: string
 	pid?: string
+	org?: string
 }
 
 type TArgs = {
@@ -18,23 +19,25 @@ type TArgs = {
 }
 
 export function Governance({ args }: TArgs) {
-	const { id, pid } = args
+	const { id, pid, org } = args
+
+	const [selectedProposal, selectProposal] = useState(null)
 
 	const theme = useTheme()
 	const { t } = useTranslation()
 
+	// if (!organisation) return <Loader/>
+	if (selectedProposal) return
+
 	return (
 		<Fragment>
-			{/*			{proposalIdState && organizationState ? (
-				<ProposalDetail
-					organization={org}
-					proposalId={pid}
-					isMember={isMember}
-					// goBack={() => handleTabSelect('proposals')}
-				/>
-			) : (
-				<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
-			)}*/}
+			<ProposalDetail
+				organization={org}
+				proposalId={pid}
+				isMember={true}
+				// goBack={() => handleTabSelect('proposals')}
+			/>
+			{/*<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />*/}
 		</Fragment>
 	)
 }

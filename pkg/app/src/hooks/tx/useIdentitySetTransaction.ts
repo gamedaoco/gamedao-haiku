@@ -96,7 +96,7 @@ export function useIdentitySetTransaction(identity): TransactionData {
 				}
 			}
 		}
-	}, [selectedApiProvider, identity])
+	}, [selectedApiProvider, identity, t, logger, txState])
 
 	return txState
 }

@@ -55,7 +55,7 @@ export function useAddMemberTransaction(organizationId: string): TransactionData
 				}
 			}
 		}
-	}, [selectedApiProvider, address, organizationId, logger, t, setTxState])
+	}, [selectedApiProvider, address, organizationId, logger, t, setTxState, txState])
 
 	return txState
 }

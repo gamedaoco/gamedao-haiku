@@ -245,6 +245,7 @@ export const Header = ({ id }: TProps) => {
 								config.IPFS_GATEWAY,
 							)}
 							alt="logo"
+							layout="fill"
 							sx={{
 								position: 'absolute',
 								top: 0,

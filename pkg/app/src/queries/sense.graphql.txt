@@ -1,0 +1,12 @@
+subscription sense( $address: String! $id: String!) {
+	sense(
+		where: {
+			organization_members: {address: {_eq: $address}}
+
+		}
+	) {
+		id
+		logo
+		name
+	}
+}

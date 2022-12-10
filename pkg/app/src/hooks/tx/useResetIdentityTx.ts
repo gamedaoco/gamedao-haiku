@@ -5,16 +5,17 @@ import { useLogger } from 'hooks/useLogger'
 import { useNetworkContext } from 'providers/network/modules/context'
 import { TransactionData } from 'src/@types/transactionData'
 
-export function useClearIdentityTransaction(): TransactionData {
+export function useResetIdentityTx(): TransactionData {
 	const [txState, setTxState] = useState<TransactionData>(null)
 	const { selectedApiProvider } = useNetworkContext()
 	const { t } = useTranslation()
+
 	const logger = useLogger('useIdentitySetTransaction')
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider) {
 			try {
-				const tx = selectedApiProvider.apiProvider.tx.identity.clearIdentity()
+				const tx = selectedApiProvider?.apiProvider?.tx?.identity?.clearIdentity()
 
 				setTxState({
 					tx,
@@ -26,13 +27,13 @@ export function useClearIdentityTransaction(): TransactionData {
 					},
 				})
 			} catch (e) {
-				logger.trace(e)
+				logger.error(e)
 				if (txState) {
 					setTxState(null)
 				}
 			}
 		}
-	}, [selectedApiProvider, logger, t, txState, setTxState])
+	}, [logger, selectedApiProvider?.apiProvider, t, txState])
 
 	return txState
 }

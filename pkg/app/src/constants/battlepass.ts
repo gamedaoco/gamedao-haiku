@@ -1,6 +1,8 @@
 export enum ContentTabs {
 	OVERVIEW = 'overview',
 	BATTLEPASS = 'battlepass',
-	SETTINGS = 'settings',
 	GOVERNANCE = 'governance',
+	TREASURY = 'treasury',
+	MEMBERS = 'members',
+	SETTINGS = 'settings',
 }

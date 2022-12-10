@@ -10,6 +10,7 @@ import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useTheme } from '@mui/material/styles'
 import { Box, Button } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+import ShareIcon from '@mui/icons-material/Share'
 
 export type TArgs = {
 	id: string
@@ -24,44 +25,51 @@ type TProps = {
 
 export const Join = ({ args }: TProps) => {
 	const { id, isMember, isPrime, isOpen } = args
-	// TODO: add state pending
 	const isPending = false
-
 	const theme = useTheme()
-
 	const addMemberTx = useAddMemberTransaction(id)
 	const address = useCurrentAccountAddress()
 
 	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
-
 	const handleOpenTxModal = useCallback(() => {
 		setShowTxModalType(true)
 	}, [setShowTxModalType])
-
 	const handleCloseTxModal = useCallback(() => {
 		setShowTxModalType(false)
 	}, [setShowTxModalType])
 
 	const [txt, setTxt] = useState('')
-
 	useEffect(() => {
-		// TODO: add state pending
 		let t = isOpen ? 'Join' : 'Apply'
 		if (isMember) t = 'Invite'
+		if (isPending) t = 'Pending'
 		setTxt(t)
-	}, [id, isMember, isOpen, isPrime])
+	}, [id, isMember, isOpen, isPending, isPrime])
 
-	return isMember ? (
+	const str = encodeURI(
+		`Join our DAO on GameDAO: https://dev.gamedao.co/v1/0x466c497d831c304febed74fe412439ca61dd25e0a39c617d4a8d2b7709015914`,
+	)
+
+	return (
 		<Fragment>
 			<Box pb={2} pr={1}>
-				<Button
-					// TODO: add state pending
-					disabled={!isOpen}
-					onClick={handleOpenTxModal}
-					variant="lemon"
-				>
-					{txt}
-				</Button>
+				{isMember && (
+					<a href={`https://twitter.com/intent/tweet?text=${str}`} target="_blank" rel="noreferrer">
+						<Button sx={{ mr: [0, 2] }} variant="text" color="secondary" endIcon={<ShareIcon />}>
+							share
+						</Button>
+					</a>
+				)}
+				{!isMember && (
+					<Button
+						// TODO: add state pending
+						disabled={!isOpen}
+						onClick={isMember ? openInviteModal : handleOpenTxModal}
+						variant={isMember ? `pink` : `lemon`}
+					>
+						{txt}
+					</Button>
+				)}
 			</Box>
 			<TransactionDialog
 				open={showTxModalType}
@@ -70,7 +78,7 @@ export const Join = ({ args }: TProps) => {
 				txCallback={handleCloseTxModal}
 			/>
 		</Fragment>
-	) : null
+	)
 }
 
 export default Join
