@@ -1,20 +1,36 @@
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Grid } from '@mui/material'
 
-import OrganizationsTable from '../Organizations/OrganizationsTable'
-import { Achievements } from './Achievements'
-import { Balances } from './Balances'
-// import Collectables from '../Collectables'
+import Achievements from './Achievements'
+import Balances from './Balances'
+import Organizations from '../Organizations/OrganizationsTable'
+import Collectables from '../Collectables'
+
+import AddIcon from '@mui/icons-material/Add'
 
 export function Overview() {
 	const theme = useTheme()
-	const address = useCurrentAccountAddress()
 	const { t } = useTranslation()
+
+	const { push } = useRouter()
+	const address = useCurrentAccountAddress()
+
+	const { data, loading } = useAccountOrganizationsSubscription({
+		variables: { address },
+	})
+
+	const [organizations, setOrganizations] = useState(null)
+
+	useEffect(() => {
+		setOrganizations(data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice())
+	}, [data?.identity_by_pk?.organization_members])
 
 	return (
 		<Box>
@@ -27,21 +43,17 @@ export function Overview() {
 					<Balances />
 				</Grid>
 
-				{/*
 				<Grid item xs={12}>
-					<OrganizationsTable
+					<Organizations
 						organizations={organizations as Organization[]}
 						title={t('page:account:organisations:title')}
 						loading={loading}
 					/>
 				</Grid>
-*/}
 
-				{/*
 				<Grid item xs={12}>
 					<Collectables />
 				</Grid>
-*/}
 			</Grid>
 		</Box>
 	)

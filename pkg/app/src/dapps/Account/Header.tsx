@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
 
 import { AccountTabs } from 'constants/account'
+import { avatarImageURL } from 'utils/avatars'
 
 import type { Identity } from 'src/queries'
 import { useIdentityByAddressSubscription } from 'src/queries'
@@ -50,8 +51,6 @@ export function Header() {
 		setIdentity(data?.identity_by_pk)
 	}, [data?.identity_by_pk, identity])
 
-	const avatarHash = useMemo(() => md5(address), [address])
-
 	const accountState = useCurrentAccountState()
 
 	const handleCopyAddress = useCallback(() => {
@@ -62,17 +61,13 @@ export function Header() {
 		<Grid container justifyContent="space-between" spacing={[2, 4]}>
 			<Grid item sx={{ alignItems: { sm: 'top', md: 'center' }, display: 'flex', overflow: 'hidden' }}>
 				<Avatar
-					sx={{ height: { md: 48, sx: 24 }, mr: 2, width: { md: 48, sx: 24 } }}
-					src={
-						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
-					}
+					sx={{ height: { md: 48, sx: 24 }, mx: 2, width: { md: 48, sx: 24 } }}
+					src={avatarImageURL(address)}
 				/>
 				<Box>
 					<Typography variant="h6">
 						{identity?.display_name || getNameFromAccountState(accountState)}&nbsp;
-						{identity?.display_name && <Verified sx={{ verticalAlign: 'middle' }} fontSize="small" />}
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize="small" />}
 					</Typography>
 					<Box sx={{ display: 'flex', alignItems: 'center' }}>
 						{shortAccountAddress(accountState?.account)}

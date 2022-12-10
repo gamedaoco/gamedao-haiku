@@ -24,22 +24,23 @@ export function Navigation({ param }: Props) {
 				label: t('button:navigation:overview'),
 				value: AccountTabs.OVERVIEW,
 			},
-			// {
-			// 	label: t('button:navigation:my_organisations'),
-			// 	value: AccountTabs.ORGANIZATIONS,
-			// },
-			// {
-			// 	label: t('button:navigation:my_campaigns'),
-			// 	value: AccountTabs.CAMPAIGNS,
-			// },
-			// {
-			// 	label: t('button:navigation:my_collectables'),
-			// 	value: AccountTabs.COLLECTABLES,
-			// },
+			{
+				label: t('button:navigation:my_organisations'),
+				value: AccountTabs.ORGANIZATIONS,
+			},
+			{
+				label: t('button:navigation:my_campaigns'),
+				value: AccountTabs.CAMPAIGNS,
+			},
+			{
+				label: t('button:navigation:my_collectables'),
+				value: AccountTabs.COLLECTABLES,
+			},
 			{
 				label: t('button:navigation:identity'),
 				value: AccountTabs.IDENTITY,
 			},
+			// preferences
 			// {
 			// 	label: t('button:navigation:settings'),
 			// 	value: AccountTabs.SETTINGS,

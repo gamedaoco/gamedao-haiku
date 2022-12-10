@@ -6,9 +6,9 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 
 import type { Identity } from 'src/queries'
 import { useIdentityByAddressSubscription } from 'src/queries'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
-import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useResetIdentityTx } from 'hooks/tx/useResetIdentityTx'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 
@@ -22,7 +22,7 @@ import IconButton from '@mui/material/IconButton'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-const initialState = (identity?: Identity) => ({
+const initialState = (identity: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
 	email: identity?.email || '',
@@ -36,21 +36,21 @@ const initialState = (identity?: Identity) => ({
 export function IdentityView() {
 	const { t } = useTranslation()
 
-	const address = useCurrentAccountAddress()
+	const [modalState, setModalState] = useState({ set: false, reset: false })
 
-	// subscribe to identity
+	const address = useCurrentAccountAddress()
 	const { loading, data, error } = useIdentityByAddressSubscription({
 		variables: { address: address },
 	})
-	const [identity, setIdentity] = useState(null)
 
+	// hydrate
+	const [identity, setIdentity] = useState(null)
 	useEffect(() => {
 		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
 		setIdentity(data.identity_by_pk)
-	}, [data.identity_by_pk, identity])
+	}, [data?.identity_by_pk, identity])
 
-	// ui and actions
-
+	// set
 	const [values, setValues] = useState(null)
 	const resolver = useYupValidationResolver(validation)
 	const formHandler = useForm<Identity | any>({
@@ -59,57 +59,38 @@ export function IdentityView() {
 	})
 	const setIdentityTx = useIdentitySetTransaction(values)
 
-	const [modalState, setModalState] = useState({
-		set: false,
-		clear: false,
-	})
+	// reset
+	const [canReset, setCanReset] = useState(false)
+	// const resetIdentityTX = useResetIdentityTx()
 
-	// clear identity
-
-	const [isClearDisabled, setIsClearDisabled] = useState(false)
-	// const clearIdentityTx = useClearIdentityTransaction()
 	// useEffect(() => {
 	// 	if (!identity?.display_name) {
-	// 		setIsClearDisabled(true)
+	// 		setCanReset(true)
 	// 	} else {
-	// 		setIsClearDisabled(false)
+	// 		setCanReset(false)
 	// 	}
 	// }, [identity?.display_name])
 
-	useEffect(() => {
-		if (identity) {
-			formHandler.reset(initialState(identity))
-		}
-	}, [identity?.display_name])
-
 	// useEffect(() => {
-	// 	if (values) console.log('values', values)
-	// }, [values])
+	// 	if (identity) {
+	// 		formHandler.reset(initialState(identity))
+	// 	}
+	// }, [formHandler, identity, identity?.display_name])
+
+	useEffect(() => {
+		if (values) console.log('values', values)
+	}, [values])
 
 	const handleModalClose = useCallback((type: 'set' | 'clear') => {
-		if (type === 'set') {
-			setModalState((prevState) => ({ ...prevState, set: false }))
-		} else {
-			setModalState((prevState) => ({ ...prevState, clear: false }))
-		}
+		type === 'set'
+			? setModalState((prevState) => ({ ...prevState, set: false }))
+			: setModalState((prevState) => ({ ...prevState, reset: false }))
 	}, [])
 
-	// const submit = (data,type) => {
-	// 	setValues(data)
-	// 	if (type === 'set') {
-	// 		setModalState({ ...modalState, set: true })
-	// 	} else {
-	// 		setModalState({ ...modalState, clear: true })
-	// 	}
-	// }
-
-	const submit = useCallback((data, type: 'set' | 'clear') => {
-		setValues(data)
-		if (type === 'set') {
-			setModalState((prevState) => ({ ...prevState, set: true }))
-		} else {
-			setModalState((prevState) => ({ ...prevState, clear: true }))
-		}
+	const submit = useCallback((data, type: 'set' | 'reset') => {
+		setValues(data)(type === 'set')
+			? setModalState((prevState) => ({ ...prevState, set: true }))
+			: setModalState((prevState) => ({ ...prevState, reset: true }))
 	}, [])
 
 	return (
@@ -340,14 +321,14 @@ export function IdentityView() {
 										gap: 2,
 									}}
 								>
-									{!isClearDisabled && (
+									{canReset && (
 										<Button
 											onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
 											type="button"
 											sx={{ m: 1 }}
 											variant="outlined"
 											color="secondary"
-											disabled={isClearDisabled}
+											disabled={!canReset}
 										>
 											{t('button:form:identity:clear')}
 										</Button>
@@ -357,11 +338,9 @@ export function IdentityView() {
 										type="button"
 										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
 										color="primary"
-										variant={!isClearDisabled ? 'outlined' : 'contained'}
+										variant={canReset ? 'outlined' : 'contained'}
 									>
-										{!isClearDisabled
-											? t('button:form:identity:update')
-											: t('button:form:identity:submit')}
+										{canReset ? t('button:form:identity:update') : t('button:form:identity:submit')}
 									</Button>
 								</Box>
 							</Grid>
