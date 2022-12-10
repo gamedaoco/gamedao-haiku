@@ -1,9 +1,7 @@
 import { memo, useCallback } from 'react'
 import Image from 'next/image'
-
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
 import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
 
@@ -21,9 +19,6 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 	const { push } = useRouter()
 	const config = useConfig()
 	const url = `/v1/${id}`
-	// const navigateCall = useCallback(() => {
-	// 	push(`/organizations/${id}`)
-	// }, [id, push])
 
 	return (
 		<Tooltip title={name}>
@@ -88,7 +83,12 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 						alt={name}
 						src={parseIpfsHash(logo ?? '', config.IPFS_GATEWAY)}
 					>
-						<Image src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} alt={name} />
+						<Image
+							src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')}
+							width={48}
+							height={48}
+							alt={name}
+						/>
 					</Avatar>
 				</Link>
 			</Box>

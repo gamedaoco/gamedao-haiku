@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 import { useTranslation } from 'react-i18next'
 
@@ -43,9 +44,9 @@ import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
 /* eslint-disable @next/next/no-img-element */
-const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" alt="GameDAO" />
+const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height={16} alt="GameDAO" />
 /* eslint-disable @next/next/no-img-element */
-const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height="16px" alt="GameDAO" />
+const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height={16} alt="GameDAO" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
@@ -73,24 +74,24 @@ const leftNav = [
 	// 	path: '/achievements',
 	// 	icon: <Achievements/>
 	// },
-	// {
-	// 	name: 'Store',
-	// 	path: '/store',
-	// 	icon: <Store />,
-	// },
+	{
+		name: 'Buy',
+		path: '/buy',
+		icon: <Store />,
+	},
 ]
 
 const rightNav = [
-	{
-		name: 'Loot', //'button:navigation:faucet',
-		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
-		icon: <RiDropLine />,
-	},
-	{
-		name: 'Docs', //'button:navigation:documentation',
-		path: 'https://docs.gamedao.co/',
-		icon: <RiBookOpenLine />,
-	},
+	// {
+	// 	name: 'Loot', //'button:navigation:faucet',
+	// 	path: 'https://discord.com/channels/273529551483699200/772045307021885452',
+	// 	icon: <RiDropLine />,
+	// },
+	// {
+	// 	name: 'Docs', //'button:navigation:documentation',
+	// 	path: 'https://docs.gamedao.co/',
+	// 	icon: <RiBookOpenLine />,
+	// },
 ]
 
 export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
@@ -144,9 +145,9 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
 					<Box>
 						<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
-							<Link href="/">
-								<Typography sx={{ ml: 1, minWidth: 32 }}>{isLg ? <Logo /> : <LogoSM />}</Typography>
-							</Link>
+							<Box width={isLg ? 96 : 48}>
+								<Link href="/">{isLg ? <Logo /> : <LogoSM />}</Link>
+							</Box>
 						</MenuItem>
 					</Box>
 
@@ -206,9 +207,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						/>
 					)}
 
-					<MenuItem>
-						<AccountSelector />
-					</MenuItem>
+					<AccountSelector flip />
 
 					<Box sx={{ display: { xs: 'block', md: 'none' } }} marginLeft={4}>
 						<Button

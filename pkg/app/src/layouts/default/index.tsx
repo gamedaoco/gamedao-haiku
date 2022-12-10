@@ -46,7 +46,7 @@ export function Layout({
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
 
-	const showTopBar = true
+	const showTopBar = false
 	const spacing = showHeader ? `calc( 100vh - 90px )` : `100vh`
 
 	return (

@@ -12,6 +12,7 @@ import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { OrganizationButtonMemoized } from './OrganizationButton'
+import AccountSelector from 'components/AccountSelector/accountSelector'
 
 interface ComponentProps {
 	showHeader?: boolean
@@ -132,6 +133,8 @@ export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 			</Stack>
 
 			<Stack>
+				<AccountSelector />
+
 				{/*
 					helper icons
 					- feedback
