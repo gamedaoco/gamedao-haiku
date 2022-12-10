@@ -11,7 +11,7 @@ export function Account() {
 		<>
 			<Header />
 			<Navigation />
-			{/*<Content/>*/}
+			<Content />
 		</>
 	)
 }
