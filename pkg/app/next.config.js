@@ -38,10 +38,17 @@ module.exports = withMDX({
 		VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
 		VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
 		VERCEL_ENV: process.env.VERCEL_ENV || '',
+		APP_URI: process.env === 'development' ? '//localhost:3000' : '//gamedao.co',
 	},
 	poweredByHeader: false,
 	experiments: {
 		topLevelAwait: true,
+	},
+	images: {
+		domains: ['ipfs.infura.io', 'gateway.ipfs.io', 'gamedao.infura-ipfs.io'],
+		// remotePatterns: [
+		// 	{ protocol: 'https', hostname: 'gateway.ipfs.io', port: '', pathname: '/ipfs/**', },
+		// ],
 	},
 	// eslint: {
 	// 	// Warning: This allows production builds to successfully complete even if

@@ -74,10 +74,10 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 	return new ApolloClient({
 		link: splitLink,
 		cache,
-		defaultOptions: {
-			watchQuery: {
-				fetchPolicy: 'cache-and-network',
-			},
-		},
+		// defaultOptions: {
+		// 	watchQuery: {
+		// 		fetchPolicy: 'cache-and-network',
+		// 	},
+		// },
 	})
 }
