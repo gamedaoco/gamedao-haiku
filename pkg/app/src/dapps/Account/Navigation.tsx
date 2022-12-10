@@ -66,6 +66,35 @@ export function Navigation({ param }: Props) {
 				sx={{ px: 3 }}
 				textColor="primary"
 				value={param || AccountTabs.OVERVIEW}
+				TabIndicatorProps={{
+					sx: {
+						height: '0px',
+						borderRadius: '2px',
+						'&::after': {
+							content: '""',
+							position: 'absolute',
+							width: '40%',
+							borderColor: '#ff00ff',
+							borderRadius: '2px 0px 0px 2px',
+							boxShadow: '0 0px 15px 2px #00ffcc',
+							borderTop: '5px solid white',
+							left: '30%',
+							right: '30%',
+							top: '0',
+						},
+						'&::before': {
+							content: '""',
+							position: 'absolute',
+							bottom: 0,
+							left: '40%',
+							right: '40%',
+							width: '20%',
+							borderRadius: '2px',
+							borderTop: '4px solid #00ffcc',
+							zIndex: '5',
+						},
+					},
+				}}
 			>
 				{tabs.map((tab, i) => (
 					<Tab key={i} label={tab.label} value={tab.value} />

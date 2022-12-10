@@ -6,9 +6,9 @@ import { useNetworkContext } from 'providers/network/modules/context'
 import { TransactionData } from 'src/@types/transactionData'
 
 export function useResetIdentityTx(): TransactionData {
-	const [txState, setTxState] = useState<TransactionData>(null)
-	const { selectedApiProvider } = useNetworkContext()
 	const { t } = useTranslation()
+	const { selectedApiProvider } = useNetworkContext()
+	const [txState, setTxState] = useState<TransactionData>(null)
 
 	const logger = useLogger('useIdentitySetTransaction')
 
@@ -33,7 +33,8 @@ export function useResetIdentityTx(): TransactionData {
 				}
 			}
 		}
-	}, [logger, selectedApiProvider?.apiProvider, t, txState])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [logger, selectedApiProvider?.apiProvider, t])
 
 	return txState
 }

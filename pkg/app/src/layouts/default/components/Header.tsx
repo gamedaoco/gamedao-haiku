@@ -183,21 +183,22 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						)
 					})}
 
-					{featureFeedback && (
+					{/*					{featureFeedback && (
 						<Button ref={anchorRef} onClick={openFeedback}>
 							<RiChat1Line />
 							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
 					)}
 					{showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />}
-
-					{featureAccount && (
+*/}
+					{/*					{featureAccount && (
 						<Button ref={accountAnchorRef} onClick={openAccount}>
 							<Dashboard fontSize={'inherit'} />
 							{/*isLg && <Typography sx={{ pl: 2, mr: 2 }}></Typography>*/}
-						</Button>
-					)}
-					{showAccount && (
+					{/*</Button>*/}
+					{/*)}*/}
+
+					{/*					{showAccount && (
 						<Flyout
 							anchorEl={accountAnchorRef?.current}
 							open={showAccount}
@@ -205,7 +206,7 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 							openAccountSelect={() => {}}
 							openNetworkSelect={() => {}}
 						/>
-					)}
+					)}*/}
 
 					<AccountSelector flip />
 

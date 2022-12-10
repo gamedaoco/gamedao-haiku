@@ -22,7 +22,7 @@ export function Page() {
 
 	return (
 		<Layout showHeader showSidebar showFooter title={t('page:account:title')}>
-			<Box sx={{ mb: 2 }}>
+			{/*			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
 						<Typography variant="h3">
@@ -31,7 +31,7 @@ export function Page() {
 					</Grid>
 					<Grid item></Grid>
 				</Grid>
-			</Box>
+			</Box>*/}
 
 			<Account param={path as AccountTabs} />
 		</Layout>

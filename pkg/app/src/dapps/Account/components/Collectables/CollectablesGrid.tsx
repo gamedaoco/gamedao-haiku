@@ -13,7 +13,6 @@ interface CollectablesListProps {
 
 const CollectablesGrid: FC<CollectablesListProps> = ({ loading, items }) => {
 	if (loading) return <Loader />
-
 	if (items?.rmrkNfts.length === 0) return <Typography>Your collection is empty.</Typography>
 
 	// 			: (

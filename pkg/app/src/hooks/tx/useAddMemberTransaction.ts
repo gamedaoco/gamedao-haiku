@@ -55,7 +55,8 @@ export function useAddMemberTransaction(organizationId: string): TransactionData
 				}
 			}
 		}
-	}, [selectedApiProvider, address, organizationId, logger, t, setTxState, txState])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedApiProvider, address, organizationId, logger, t])
 
 	return txState
 }

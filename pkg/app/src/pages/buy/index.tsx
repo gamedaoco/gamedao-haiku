@@ -53,7 +53,7 @@ export function Page() {
 			</Box>
 
 			{clientSecret && (
-				<Box p={[0, 4, 6]} m={0}>
+				<Box p={[0, 4, 6]}>
 					<Paper variant="glass">
 						<Box p={[2, 4, 6]}>
 							<Typography variant="h4" pb={[2, 4]}>

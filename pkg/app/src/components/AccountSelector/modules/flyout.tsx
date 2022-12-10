@@ -40,11 +40,13 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			onClose={handleClose}
 			onClick={handleClose}
 			PaperProps={{
-				elevation: 0,
+				elevation: 10,
 				sx: {
 					overflow: 'visible',
 					filter: 'drop-shadow(0px 15px 35px rgba(0,0,0,0.32))',
-					mt: { xs: '1.25rem', sm: '0.5rem' },
+					position: 'absolute',
+					// top:-10, right: 10,
+					mt: { xs: '1.25rem', sm: '1rem' },
 					borderRadius: theme.shape.borderRadiusLg,
 					borderTopLeftRadius: 0,
 					borderTopRightRadius: 0,
@@ -118,14 +120,14 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 							<Typography variant="body2">Identity</Typography>
 						</MenuItem>
 					</Link>
-					<Link href={'/account/settings'}>
+					{/*					<Link href={'/account/settings'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Settings fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Settings</Typography>
 						</MenuItem>
-					</Link>
+					</Link>*/}
 					<MenuItem onClick={disconnectWallet as any} sx={{ p: 0 }}>
 						<ListItemIcon>
 							<Logout fontSize="small" />

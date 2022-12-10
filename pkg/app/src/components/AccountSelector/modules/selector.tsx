@@ -28,7 +28,7 @@ export function Selector({ onClick, open, flip }: ComponentProps) {
 		return (
 			<Avatar
 				onClick={onClick}
-				sx={{ width: '32px', height: '32px', border: '1px solid white' }}
+				sx={{ width: '32px', height: '32px' }}
 				src={avatarImageURL(selectedAccount?.account?.address)}
 			/>
 		)
@@ -45,7 +45,13 @@ export function Selector({ onClick, open, flip }: ComponentProps) {
 				borderRadius: '0.5rem',
 				borderBottomLeftRadius: '2rem',
 				borderTopLeftRadius: '2rem',
-				'& > *': {},
+				opacity: 1,
+				transitionDuration: '150ms',
+				transitionProperty: 'opacity',
+				'&:hover': {
+					cursor: 'pointer',
+					opacity: 1,
+				},
 			}}
 		>
 			<Stack
@@ -57,37 +63,18 @@ export function Selector({ onClick, open, flip }: ComponentProps) {
 					borderTopRightRadius: '0.5rem',
 				}}
 			>
-				<Avatar
-					sx={{
-						width: '44px',
-						height: '44px',
-						opacity: 0.8,
-						transitionDuration: '150ms',
-						transitionProperty: 'opacity',
-						'&:hover': {
-							cursor: 'pointer',
-							opacity: 1,
-						},
-					}}
-					src={avatarImageURL(selectedAccount?.account?.address)}
-				/>
-				{/*				<Stack>
-					<Typography variant="subtitle2">
+				<Avatar sx={{ width: 32, height: 32 }} src={avatarImageURL(selectedAccount?.account?.address)} />
+				<Stack>
+					<Typography variant="micro">
 						{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
-						{identity?.display_name && (
-							<Verified sx={{ verticalAlign: 'middle' }} type="small" color="disabled" />
-						)}
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize={'10px'} />}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>
-						<Typography sx={{ color: theme.palette.grey[700] }} variant="body2">
-							{shortAccountAddress(selectedAccount?.account)}
-						</Typography>
+						<Typography variant="micro">{shortAccountAddress(selectedAccount?.account)}</Typography>
 					</Stack>
-				</Stack>*/}
+				</Stack>
 			</Stack>
-			{/*			<Box display="grid">{open ? <ExpandLess /> : <ExpandMore />}</Box>
-			<Box />
-*/}{' '}
+			{/*<Box display="grid">{open ? <ExpandLess /> : <ExpandMore />}</Box>*/}
 		</Stack>
 	)
 }

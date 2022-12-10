@@ -22,7 +22,7 @@ import IconButton from '@mui/material/IconButton'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
-const initialState = (identity: Identity) => ({
+const initialState = (identity?: Identity) => ({
 	display: identity?.display_name || '',
 	legal: identity?.legal_name || '',
 	email: identity?.email || '',
@@ -35,9 +35,7 @@ const initialState = (identity: Identity) => ({
 
 export function IdentityView() {
 	const { t } = useTranslation()
-
 	const [modalState, setModalState] = useState({ set: false, reset: false })
-
 	const address = useCurrentAccountAddress()
 	const { loading, data, error } = useIdentityByAddressSubscription({
 		variables: { address: address },
@@ -71,11 +69,11 @@ export function IdentityView() {
 	// 	}
 	// }, [identity?.display_name])
 
-	// useEffect(() => {
-	// 	if (identity) {
-	// 		formHandler.reset(initialState(identity))
-	// 	}
-	// }, [formHandler, identity, identity?.display_name])
+	useEffect(() => {
+		if (identity) {
+			formHandler.reset(initialState(identity))
+		}
+	}, [identity])
 
 	useEffect(() => {
 		if (values) console.log('values', values)

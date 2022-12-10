@@ -44,7 +44,7 @@ export default function CheckoutForm() {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		console.log('send')
+		console.log('buy')
 
 		if (!stripe || !elements) {
 			// Stripe.js has not yet loaded.

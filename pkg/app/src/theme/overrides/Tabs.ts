@@ -11,7 +11,6 @@ export default function Tabs(theme: Theme) {
 					borderTopRightRadius: 0,
 					// height: '90px',
 					// borderRadius: 0, //theme.shape.borderRadiusLg,
-
 					// boxShadow: '0px 15px 30px #0ff',
 					// width: '90px',
 					// position: 'relative',
@@ -43,9 +42,7 @@ export default function Tabs(theme: Theme) {
 
 					'&.MuiTabs-indicator': {
 						// display: "none",
-						// backgroundColor: "orange"
 					},
-
 					'&.Mui-selected': {
 						// color: 'green' //theme.palette.secondary.main,
 					},
