@@ -45,33 +45,16 @@ import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/overview'
 
-//NextRouter['param']
-export function useParam() {
-	const { query } = useRouter()
-	const routerRef = useRef(query)
-	routerRef.current = query
-
-	console.log('MEMO QUERY', query)
-
-	const [queryParam] = useState(() => {
-		const param = routerRef.current.param
-		return param
-	})
-	return queryParam
-}
-
 export function OrganisationById() {
 	const router = useRouter()
 	const { query, push } = useRouter()
-	const org = query.org[0]
-	const tab = query.tab[0]
+	const org = query.org
+	const tab = query.tab
 
-	// resolve path hash to slug url
-
-	const hashToSlug = (hash: string) => {
-		const slug = (organization && organization?.organization_metadata?.name.replace(' ', '').toLowerCase()) || null
-		console.log('slug', slug)
-	}
+	// const hashToSlug = (hash: string) => {
+	// 	const slug = (organization && organization?.organization_metadata?.name.replace(' ', '').toLowerCase()) || null
+	// 	console.log('slug', slug)
+	// }
 
 	//
 
@@ -119,40 +102,10 @@ export function OrganisationById() {
 
 	const handleTabSelect = useCallback(
 		(newPath) => {
-			console.log('handle', newPath)
-			// if (organizationId) {
-			// 	push()
-			// } else {
-			// 	push()
-			// }
-			setRoute(org ? `${org}/${newPath}` : newPath)
-			// Reset proposal id when click on tab
-			setProposalId(null)
+			push(`/guilds/${org}/${newPath}`)
 		},
-		[org],
+		[org, push],
 	)
-
-	// useEffect(() => {
-	// 	if ( tab !== route ) {
-	// 		console.log('change route to', tab )
-	// 		setRoute(tab)
-	// 		// setActiveTab(param[1])
-	// 	}
-	// }, [ tab, route ])
-
-	// useEffect(() => {
-	// 	// if ( organizationId === org ) return
-	// 	// setOrganizationId(org)
-	// 	console.log('change organizationId', org)
-	// }, [ organization?.org ])
-
-	// TODO: make router redirect to slug
-
-	// useEffect(()=>{
-	// 	if (org) {
-
-	// 	}
-	// },[org])
 
 	// TODO: resolve based on id or slug
 	const { loading, data, error } = useOrganizationByIdSubscription({ variables: { orgId: org } })
@@ -172,33 +125,31 @@ export function OrganisationById() {
 		setter(cid.toString())
 	}, [])
 
-	// cached content
-
 	// Update and upload metadata
-	// useEffect(() => {
-	// 	if (cache.name && cache.description && cache.logoCID && cache.headerCID) {
-	// 		const metaData = {
-	// 			name: cache.name,
-	// 			description: cache.description,
-	// 			logo: cache.logoCID,
-	// 			header: cache.headerCID,
-	// 		}
-	// 		;(async (): Promise<string> => {
-	// 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
-	// 				type: 'text/plain',
-	// 			})
+	useEffect(() => {
+		if (cache.name && cache.description && cache.logoCID && cache.headerCID) {
+			const metaData = {
+				name: cache.name,
+				description: cache.description,
+				logo: cache.logoCID,
+				header: cache.headerCID,
+			}
+			;(async (): Promise<string> => {
+				const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
+					type: 'text/plain',
+				})
 
-	// 			const cid = await uploadFileToIpfs(file)
-	// 			return cid.toString()
-	// 		})().then((cid) => cache.setMetaDataCID(cid))
-	// 	}
-	// }, [cache.name, cache.description, cache.logoCID, cache.headerCID])
+				const cid = await uploadFileToIpfs(file)
+				return cid.toString()
+			})().then((cid) => cache.setMetaDataCID(cid))
+		}
+	}, [cache.name, cache.description, cache.logoCID, cache.headerCID, cache])
 
 	useEffect(() => {
 		if (data) {
-			!data.organization?.[0] ? push('/organizations') : setOrganization(data.organization?.[0] as Organization)
+			!data.organization?.[0] ? push('/guilds') : setOrganization(data.organization?.[0] as Organization)
 		}
-	}, [data, data.organization, push])
+	}, [data, data?.organization, push])
 
 	useEffect(() => {
 		if (organization?.organization_metadata?.name || cache.name) {
@@ -207,9 +158,6 @@ export function OrganisationById() {
 			setOrgName(t('page:organisations:title'))
 		}
 	}, [organization?.organization_metadata?.name, cache.name, t])
-
-	console.log('================================')
-	// console.log('org',organization)
 
 	return (
 		<Layout showHeader showFooter showSidebar title={orgName}>
@@ -389,7 +337,7 @@ export function OrganisationById() {
 								></Box>
 							</Grid>
 
-							<Box px={4} sx={{ borderRadius: 0 }}>
+							<Box px={4} sx={{}}>
 								<Tabs
 									// variant="contentheader"
 									// scrollButtons="auto"
@@ -445,14 +393,10 @@ export function OrganisationById() {
 								<TmpOverview />
 							)}
 						</TabPanel>
-						{/*
 
 						<TabPanel value={OrganizationTabs.CAMPAIGNS}>
 							{org ? (
-								<CampaignOverview
-									organizationId={org}
-									isAdmin={address === organization?.creator}
-								/>
+								<CampaignOverview organizationId={org} isAdmin={address === organization?.creator} />
 							) : (
 								<TmpOverview />
 							)}
@@ -483,7 +427,6 @@ export function OrganisationById() {
 							<OrganizationMembersTable organization={organization} />
 						</TabPanel>
 
-						*/}
 						<TabPanel value={OrganizationTabs.SETTINGS}>
 							<SettingsOverview />
 						</TabPanel>

@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { Session } from 'next-auth'
+import { SessionProvider } from 'next-auth/react'
+
 import * as Fathom from 'fathom-client'
 
 import { Providers } from 'src/providers'
@@ -20,6 +23,7 @@ interface MyAppProps extends AppProps {
 	Component: any
 	emotionCache: EmotionCache
 	pageProps: object
+	session?: Session
 }
 
 const log = Logger('HAIKU')
@@ -58,7 +62,7 @@ function HeadAndMetaTags() {
 	)
 }
 
-export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
+export function MyApp({ Component, emotionCache = clientSideEmotionCache, session, pageProps }: MyAppProps) {
 	const router = useRouter()
 
 	useEffect(() => {
@@ -81,12 +85,14 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 	}, [router.events])
 
 	return (
-		<CacheProvider value={emotionCache}>
-			<Providers>
-				<HeadAndMetaTags />
-				<Component {...pageProps} />
-			</Providers>
-		</CacheProvider>
+		<SessionProvider session={session}>
+			<CacheProvider value={emotionCache}>
+				<Providers>
+					<HeadAndMetaTags />
+					<Component {...pageProps} />
+				</Providers>
+			</CacheProvider>
+		</SessionProvider>
 	)
 }
 

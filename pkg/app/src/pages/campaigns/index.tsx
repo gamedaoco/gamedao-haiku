@@ -113,7 +113,7 @@ export function Campaigns() {
 					<Grid item>
 						<Typography variant="h3">{t('label:campaigns')}</Typography>
 					</Grid>
-					<Grid item></Grid>
+					<Grid item>{/* how to create a campaign */}</Grid>
 				</Grid>
 			</Box>
 
