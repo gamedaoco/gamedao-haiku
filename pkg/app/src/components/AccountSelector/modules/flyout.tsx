@@ -78,14 +78,14 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 				<Divider />
 
 				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
-					{/*					<Link href={'/account'}>
+					<Link href={'/account'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Dashboard fontSize="small" />
 							</ListItemIcon>
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
-					</Link>*/}
+					</Link>
 					<Link href={'/account/organizations'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>

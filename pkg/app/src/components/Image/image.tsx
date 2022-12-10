@@ -1,6 +1,7 @@
 import { Box, BoxProps, SxProps } from '@mui/material'
 import { Theme } from '@mui/material/styles'
-import { LazyLoadImage, LazyLoadImageProps } from 'react-lazy-load-image-component'
+// import { LazyLoadImage, LazyLoadImageProps } from 'react-lazy-load-image-component'
+import NextImage from 'next/image'
 
 import placeHolder from './modules/img_placeholder.svg'
 
@@ -53,7 +54,7 @@ export const Image = ({ ratio, disabledEffect = false, effect = 'blur', sx, ...r
 				}}
 			>
 				<Box
-					component={LazyLoadImage}
+					component={NextImage}
 					wrapperClassName="wrapper"
 					effect={disabledEffect ? undefined : effect}
 					placeholderSrc={placeHolder.src}
@@ -76,7 +77,7 @@ export const Image = ({ ratio, disabledEffect = false, effect = 'blur', sx, ...r
 			}}
 		>
 			<Box
-				component={LazyLoadImage}
+				component={NextImage}
 				wrapperClassName="wrapper"
 				effect={disabledEffect ? undefined : effect}
 				placeholderSrc={placeHolder.src}

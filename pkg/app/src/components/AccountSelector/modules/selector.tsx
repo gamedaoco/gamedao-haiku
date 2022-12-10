@@ -2,21 +2,20 @@ import { ExpandMore, ExpandLess, Verified } from '@mui/icons-material'
 import { Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
-import md5 from 'md5'
+import { avatarImageURL } from 'src/utils/avatars'
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
 
 interface ComponentProps {
 	onClick: () => void
 	open?: boolean
+	flip: boolean
 }
 
-export function Selector({ onClick, open }: ComponentProps) {
+export function Selector({ onClick, open, flip }: ComponentProps) {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
-	const avatarHash = md5(selectedAccount?.account?.address)
-
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
@@ -29,12 +28,8 @@ export function Selector({ onClick, open }: ComponentProps) {
 		return (
 			<Avatar
 				onClick={onClick}
-				sx={{ width: '48px', height: '48px' }}
-				src={
-					identity?.email
-						? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
-						: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
-				}
+				sx={{ width: '32px', height: '32px', border: '1px solid white' }}
+				src={avatarImageURL(selectedAccount?.account?.address)}
 			/>
 		)
 	}
@@ -50,6 +45,7 @@ export function Selector({ onClick, open }: ComponentProps) {
 				borderRadius: '0.5rem',
 				borderBottomLeftRadius: '2rem',
 				borderTopLeftRadius: '2rem',
+				'& > *': {},
 			}}
 		>
 			<Stack
@@ -62,14 +58,20 @@ export function Selector({ onClick, open }: ComponentProps) {
 				}}
 			>
 				<Avatar
-					sx={{ width: '48px', height: '48px' }}
-					src={
-						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
-					}
+					sx={{
+						width: '44px',
+						height: '44px',
+						opacity: 0.8,
+						transitionDuration: '150ms',
+						transitionProperty: 'opacity',
+						'&:hover': {
+							cursor: 'pointer',
+							opacity: 1,
+						},
+					}}
+					src={avatarImageURL(selectedAccount?.account?.address)}
 				/>
-				<Stack>
+				{/*				<Stack>
 					<Typography variant="subtitle2">
 						{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
 						{identity?.display_name && (
@@ -81,10 +83,11 @@ export function Selector({ onClick, open }: ComponentProps) {
 							{shortAccountAddress(selectedAccount?.account)}
 						</Typography>
 					</Stack>
-				</Stack>
+				</Stack>*/}
 			</Stack>
-			<Box display="grid">{open ? <ExpandLess /> : <ExpandMore />}</Box>
+			{/*			<Box display="grid">{open ? <ExpandLess /> : <ExpandMore />}</Box>
 			<Box />
+*/}{' '}
 		</Stack>
 	)
 }
