@@ -1,6 +1,6 @@
 {
   "startBlock": -1,
   "networkAddressPrefix": 25,
-  "chainRPC": "ws://dev.node.sub.zero.io:9944",
+  "chainRPC": "ws://graph.dev.sub.zero.io/v1/graphql",
   "archiveGQL": "http://localhost:4010/v1/graphql"
 }
