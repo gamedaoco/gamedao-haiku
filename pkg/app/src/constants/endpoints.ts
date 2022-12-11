@@ -22,19 +22,19 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'Development via test',
-		url: 'https://test.graph.dev.sub.zero.io/v1/graphql',
-		healthCheck: 'https://test.graph.dev.sub.zero.io/health',
-		chain: 'wss://node.dev.sub.zero.io',
-		default: ENVIRONMENT === Environment.Development ? true : false,
-	},
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
 		name: 'Development',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		chain: 'wss://node.dev.sub.zero.io',
 		default: ENVIRONMENT === Environment.Development ? true : false,
+	},
+	{
+		image: '/svg/z-ctrl-45-wht.svg',
+		name: 'Development via firesquid',
+		url: 'https://test.graph.dev.sub.zero.io/v1/graphql',
+		healthCheck: 'https://test.graph.dev.sub.zero.io/health',
+		chain: 'wss://node.dev.sub.zero.io',
+		// default: ENVIRONMENT === Environment.Development ? true : false,
 	},
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
