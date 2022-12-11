@@ -38,7 +38,7 @@ export function Organizations() {
 			<Card variant={'glass'}>
 				<CardContent>
 					{organizations ? (
-						<OrganizationsTable />
+						<OrganizationsTable organizations={organizations} />
 					) : (
 						<Box>
 							<Typography variant="subtitle1">You are not a member of any organization.</Typography>

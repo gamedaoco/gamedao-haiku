@@ -3,15 +3,15 @@ import { Header } from './Header'
 import { Navigation } from './Navigation'
 import { Content } from './Content'
 
-interface Props {
-	param: ContentTabs
+type TProps = {
+	param?: ContentTabs
 }
-export function Account() {
+export function Account({ param }: TProps) {
 	return (
 		<>
 			<Header />
 			<Navigation />
-			<Content />
+			<Content param={param} />
 		</>
 	)
 }

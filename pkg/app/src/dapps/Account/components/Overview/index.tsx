@@ -44,11 +44,7 @@ export function Overview() {
 				</Grid>
 
 				<Grid item xs={12}>
-					<Organizations
-						organizations={organizations as Organization[]}
-						title={t('page:account:organisations:title')}
-						loading={loading}
-					/>
+					<Organizations organizations={organizations} title={t('page:account:organisations:title')} />
 				</Grid>
 
 				<Grid item xs={12}>

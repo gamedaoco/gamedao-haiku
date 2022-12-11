@@ -49,7 +49,7 @@ export function IdentityView() {
 	}, [data?.identity_by_pk, identity])
 
 	// set
-	const [values, setValues] = useState(null)
+	const [values, setValues] = useState({})
 	const resolver = useYupValidationResolver(validation)
 	const formHandler = useForm<Identity | any>({
 		defaultValues: initialState(identity),
@@ -79,17 +79,20 @@ export function IdentityView() {
 		if (values) console.log('values', values)
 	}, [values])
 
-	const handleModalClose = useCallback((type: 'set' | 'clear') => {
+	const handleModalClose = useCallback((type: 'set' | 'reset') => {
 		type === 'set'
 			? setModalState((prevState) => ({ ...prevState, set: false }))
 			: setModalState((prevState) => ({ ...prevState, reset: false }))
 	}, [])
 
-	const submit = useCallback((data, type: 'set' | 'reset') => {
-		setValues(data)(type === 'set')
-			? setModalState((prevState) => ({ ...prevState, set: true }))
-			: setModalState((prevState) => ({ ...prevState, reset: true }))
-	}, [])
+	const submit = useCallback(
+		(data, type: 'set' | 'reset') => {
+			setValues(data)
+			if (type === 'set') setModalState((prevState) => ({ ...prevState, set: true }))
+			else setModalState((prevState) => ({ ...prevState, reset: true }))
+		},
+		[setValues],
+	)
 
 	return (
 		<FormProvider {...formHandler}>
@@ -321,7 +324,7 @@ export function IdentityView() {
 								>
 									{canReset && (
 										<Button
-											onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
+											onClick={formHandler.handleSubmit((data) => submit(data, 'reset'))}
 											type="button"
 											sx={{ m: 1 }}
 											variant="outlined"

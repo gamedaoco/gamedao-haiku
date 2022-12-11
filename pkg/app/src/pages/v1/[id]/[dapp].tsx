@@ -12,8 +12,8 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material'
 export function Page() {
 	const { t } = useTranslation()
 	const { query } = useRouter()
-	const id = query?.id
-	const dapp = query?.dapp
+	const id = query?.id as string
+	const dapp = query?.dapp as string
 	const walletGate = false
 	const accountState = useCurrentAccountState()
 

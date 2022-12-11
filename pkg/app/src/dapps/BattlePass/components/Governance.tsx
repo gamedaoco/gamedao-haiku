@@ -7,11 +7,12 @@ import { Box, Grid, Typography } from '@mui/material'
 
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
+import { Organization } from 'src/queries'
 
 type TProps = {
 	id?: string
 	pid?: string
-	org?: string
+	organization?: Organization
 }
 
 type TArgs = {
@@ -19,7 +20,7 @@ type TArgs = {
 }
 
 export function Governance({ args }: TArgs) {
-	const { id, pid, org } = args
+	const { id, pid, organization } = args
 
 	const [selectedProposal, selectProposal] = useState(null)
 
@@ -32,7 +33,7 @@ export function Governance({ args }: TArgs) {
 	return (
 		<Fragment>
 			<ProposalDetail
-				organization={org}
+				organization={organization}
 				proposalId={pid}
 				isMember={true}
 				// goBack={() => handleTabSelect('proposals')}

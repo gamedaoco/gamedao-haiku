@@ -5,7 +5,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 import type { Identity } from 'src/queries'
 
-import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
+import { useResetIdentityTx } from 'hooks/tx/useResetIdentityTx'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
@@ -33,7 +33,7 @@ export function IdentityView() {
 	const { t } = useTranslation()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	// const clearIdentityTx = useClearIdentityTransaction()
+	// const clearIdentityTx = useResetIdentityTx()
 
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
 

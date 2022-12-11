@@ -9,7 +9,7 @@ import Campaigns from './components/Campaigns'
 // import Settings from './components/Settings'
 
 interface Props {
-	param: ContentTabs
+	param?: ContentTabs
 }
 
 export function Content({ param }: Props) {

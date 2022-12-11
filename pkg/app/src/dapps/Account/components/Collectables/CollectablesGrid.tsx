@@ -24,7 +24,7 @@ const CollectablesGrid: FC<CollectablesListProps> = ({ loading, items }) => {
 		<Grid container sx={{ pt: 3 }} spacing={{ xs: 2 }} columns={{ xs: 2, sm: 8, md: 12 }}>
 			{loading ? (
 				// [1, 2, 3].map((x) => (
-				<Grid item xs={12 / 5} key={x}>
+				<Grid item xs={12 / 5} key={1}>
 					<Loader />
 				</Grid>
 			) : (

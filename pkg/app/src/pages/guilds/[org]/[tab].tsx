@@ -48,8 +48,8 @@ import { SettingsOverview } from 'components/TabPanels/Settings/overview'
 export function OrganisationById() {
 	const router = useRouter()
 	const { query, push } = useRouter()
-	const org = query.org
-	const tab = query.tab
+	const org = query.org as string
+	const tab = query.tab as string
 
 	// const hashToSlug = (hash: string) => {
 	// 	const slug = (organization && organization?.organization_metadata?.name.replace(' ', '').toLowerCase()) || null
@@ -424,7 +424,7 @@ export function OrganisationById() {
 						</TabPanel>
 
 						<TabPanel value={'members'}>
-							<OrganizationMembersTable organization={organization} />
+							<OrganizationMembersTable organizationState={organization} />
 						</TabPanel>
 
 						<TabPanel value={OrganizationTabs.SETTINGS}>

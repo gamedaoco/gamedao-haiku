@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import { ContentTabs } from 'constants/battlepass'
-// import { Organization, useOrganizationByIdSubscription } from 'src/queries'
+import { Organization } from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
@@ -13,7 +13,7 @@ import { Loader } from 'components/Loader'
 import { Join } from './components/JoinBtn'
 
 type TProps = {
-	id: string | string[]
+	id: string
 	path: ContentTabs
 	organization?: Organization
 }
@@ -65,18 +65,18 @@ export function Navigation({ id, path, organization }: TProps) {
 	const tabs = useMemo<ITabs[]>(
 		() =>
 			[
-				true
-					? {
-							label: 'Overview',
-							value: ContentTabs.OVERVIEW,
-							// disabled: !isMember,
-					  }
-					: null,
 				isBattlePass
 					? {
 							label: 'Battlepass',
 							value: ContentTabs.BATTLEPASS,
 							disabled: !isBattlePass,
+					  }
+					: null,
+				true
+					? {
+							label: 'Overview',
+							value: ContentTabs.OVERVIEW,
+							// disabled: !isMember,
 					  }
 					: null,
 				isMember

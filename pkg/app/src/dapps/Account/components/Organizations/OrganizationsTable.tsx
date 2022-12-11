@@ -32,8 +32,7 @@ import Loader from './Loader'
 import { Organization, useAccountOrganizationsSubscription } from 'src/queries'
 
 interface MyOrganizationsTableProps {
-	// loading: boolean
-	// organizations: Organization[]
+	organizations: Organization[]
 	title?: string
 }
 

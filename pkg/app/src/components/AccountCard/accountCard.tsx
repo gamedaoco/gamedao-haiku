@@ -3,6 +3,7 @@ import { useCallback, useMemo } from 'react'
 import Check from '@mui/icons-material/CheckOutlined'
 import Verified from '@mui/icons-material/Verified'
 import { Avatar, Button, Card, Skeleton, Stack, Typography } from '@mui/material'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 import { useExtensionContext } from 'providers/extension/modules/context'
@@ -19,15 +20,14 @@ interface ComponentProps {
 
 export function AccountCard({ accountState, active, selectable, callback }: ComponentProps) {
 	const { accounts, selectAccount, selectedAccount } = useExtensionContext()
-	const { identity, loading } = useIdentityByAddress(accountState?.account?.address)
+	const address = useCurrentAccountAddress()
+	const { identity, loading } = useIdentityByAddress(address)
 	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
 
 	const handleCopyAddress = useCallback(() => {
 		// TODO: Add i18n
-		navigator.clipboard
-			.writeText(getAddressFromAccountState(selectedAccount))
-			.then(() => createInfoNotification('Address Copied to Clipboard'))
-	}, [selectedAccount])
+		navigator.clipboard.writeText(address).then(() => createInfoNotification('Address Copied to Clipboard'))
+	}, [address])
 
 	const handleButtonClick = useCallback(
 		(event) => {

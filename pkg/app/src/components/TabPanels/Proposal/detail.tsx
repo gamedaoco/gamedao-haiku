@@ -36,10 +36,10 @@ import { TransactionDialog } from 'components/TransactionDialog/transactionDialo
 import { useApiProvider } from 'hooks/useApiProvider'
 
 interface ComponentProps {
-	organization: Organization
+	organization?: Organization
 	proposalId: string
 	isMember: boolean
-	goBack: () => void
+	goBack?: () => void
 }
 
 const defaultGridColDef = {

@@ -26,7 +26,7 @@ import { Members } from './components/Members'
 import { Settings } from './components/Settings'
 
 interface Props {
-	id: string | string[]
+	id: string
 	path: ContentTabs
 	name?: string
 }
@@ -39,7 +39,7 @@ export const Org = ({ id, name, path }: Props) => {
 
 	const [org, setOrg] = useState<Organization>(null)
 	const { loading, data, error } = useOrganizationByIdSubscription({
-		variables: { orgId: id as string },
+		variables: { orgId: id },
 	})
 	useEffect(() => {
 		if (!data?.organization) return
@@ -56,7 +56,7 @@ export const Org = ({ id, name, path }: Props) => {
 				}}
 			>
 				<Header id={id} />
-				<Navigation id={id} path={path} org={org} />
+				<Navigation id={id} path={path} organization={org} />
 			</Paper>
 			<TabContext value={path}>
 				<TabPanel value="overview">

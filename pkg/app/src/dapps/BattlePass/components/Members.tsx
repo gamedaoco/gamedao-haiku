@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { ContentTabs } from 'constants/dapps'
 
+import { Organization } from 'src/queries'
 import { useTheme } from '@mui/material/styles'
 import { Box, Grid, Typography } from '@mui/material'
 

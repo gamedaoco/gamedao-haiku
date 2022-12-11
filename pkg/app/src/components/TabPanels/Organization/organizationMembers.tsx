@@ -110,16 +110,12 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 				role: t(`label:${member?.address === prime ? 'prime' : 'member'}`),
 				email: member?.identity?.email,
 				address: shortAccountAddress(member),
-				xp: member?.identity?.xp || '0', // 5000 + 20 * index,
-				rep: member?.identity?.rep || '0', //2000 + 23 * index,
-				trust:
-					member?.identity?.trust || member
-						? prime === member.address
-							? 3
-							: member?.identity?.email
-							? 2
-							: 1
-						: 0,
+				//member?.identity?.xp? ||
+				xp: '0', // 5000 + 20 * index,
+				//member?.identity?.rep? ||
+				rep: '0', //2000 + 23 * index,
+				//member?.identity?.trust ||
+				trust: member ? (prime === member.address ? 3 : member?.identity?.email ? 2 : 1) : 0,
 			})),
 		)
 	}, [members, prime, t])
@@ -136,7 +132,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 					columns={columns}
 					autoHeight //pageSize={pageSize}
 					rowsPerPageOptions={pageSizeOptions}
-					pagination={rows > pageSize ? true : false}
+					// pagination={rows > pageSize ? true : false}
 					isCellEditable={() => false}
 					hideFooterSelectedRowCount={true}
 					getRowHeight={() => {

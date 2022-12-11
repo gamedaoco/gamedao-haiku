@@ -67,7 +67,7 @@ export function Selector({ onClick, open, flip }: ComponentProps) {
 				<Stack>
 					<Typography variant="micro">
 						{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
-						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize={'10px'} />}
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize={'inherit'} />}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>
 						<Typography variant="micro">{shortAccountAddress(selectedAccount?.account)}</Typography>

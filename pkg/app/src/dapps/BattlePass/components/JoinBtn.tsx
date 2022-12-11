@@ -50,6 +50,8 @@ export const Join = ({ args }: TProps) => {
 		`Join our DAO on GameDAO: https://dev.gamedao.co/v1/0x466c497d831c304febed74fe412439ca61dd25e0a39c617d4a8d2b7709015914`,
 	)
 
+	const openInviteModal = () => {}
+
 	return (
 		<Fragment>
 			<Box pb={2} pr={1}>

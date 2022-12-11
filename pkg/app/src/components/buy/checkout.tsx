@@ -58,7 +58,7 @@ export default function CheckoutForm() {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: 'http://localhost:3000/buy/complete',
+				return_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
 				receipt_email: email,
 			},
 		})
@@ -77,9 +77,9 @@ export default function CheckoutForm() {
 		setIsLoading(false)
 	}
 
-	const paymentElementOptions = {
-		layout: 'tabs',
-	}
+	// const paymentElementOptions = {
+	// 	layout: 'tabs',
+	// }
 
 	return (
 		<form id="payment-form" onSubmit={handleSubmit}>
@@ -91,7 +91,11 @@ export default function CheckoutForm() {
 				placeholder="Enter email address"
 			/>
 			<br />
-			<PaymentElement id="payment-element" options={paymentElementOptions} />
+			<br />
+			<PaymentElement
+				id="payment-element"
+				// options={paymentElementOptions}
+			/>
 			<Stack py={3} direction="row" alignItems="center" height="100%" width="100%" justifyContent="space-between">
 				<>By clicking PAY NOW you agree to the Battlepass terms and conditions.</>
 				<Button variant="lemon" disabled={isLoading || !stripe || !elements} id="submit">

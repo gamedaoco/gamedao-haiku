@@ -9,6 +9,7 @@ declare module '@mui/material/styles' {
 		cardHeader: React.CSSProperties
 		cardBody: React.CSSProperties
 		cardMicro: React.CSSProperties
+		micro: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
@@ -20,6 +21,7 @@ declare module '@mui/material/styles' {
 		cardHeader?: React.CSSProperties
 		cardBody?: React.CSSProperties
 		cardMicro?: React.CSSProperties
+		micro?: React.CSSProperties
 	}
 }
 
@@ -33,6 +35,7 @@ declare module '@mui/material/Typography' {
 		cardHeader: true
 		cardBody: true
 		cardMicro: true
+		micro: true
 	}
 }
 

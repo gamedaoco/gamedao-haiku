@@ -23,17 +23,23 @@ type TGridItemProps = {
 }
 
 export const BPQuestItem = ({ index }: TGridItemProps) => {
-	const icons = ['follow', 'follow', 'twitter', 'wallet']
+	const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
 	const key = icons[index] // icons[ Math.round( Math.random() * 4 ) ]
 	const url = `/bp/icons/${key}-gold.svg`
+	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={url} height="45px" alt={key} />
 
 	const ButtonOrBar = Math.random() > 0.5
 
-	const p = Math.round(Math.random() * 5) * 250
+	const p = Math.round(Math.random() * 5) * 250 + 250
 	const t = 100
 	const v = Math.round(Math.random() * t)
-
+	const action = () => {
+		switch (key) {
+			default:
+				return ''
+		}
+	}
 	return (
 		<Stack p={2} sx={{ width: 348, height: 148 }} direction="column" justifyContent="space-between">
 			<Stack direction="row">
@@ -44,7 +50,7 @@ export const BPQuestItem = ({ index }: TGridItemProps) => {
 					</Typography>
 				</Box>
 				<Box pl={2}>
-					<Typography variant="cardHeader">Follow</Typography>
+					<Typography variant="cardHeader">{key}</Typography>
 					<Typography variant="cardBody" sx={{ opacity: 0.5 }}>
 						Get a limited edition WAVE banner for your socials
 					</Typography>
@@ -53,7 +59,7 @@ export const BPQuestItem = ({ index }: TGridItemProps) => {
 
 			{ButtonOrBar ? (
 				<Button fullWidth variant="grey" sx={{ height: 36 }}>
-					Connect Wallet
+					{`Connect ${action}`}
 				</Button>
 			) : (
 				<>

@@ -38,7 +38,7 @@ export function Page() {
 	}
 	const options = {
 		clientSecret,
-		appearance,
+		// appearance,
 	}
 
 	return (
