@@ -6,10 +6,8 @@ subscription ProposalsByOrganizationId($orgId: String!) {
         start
         created_at_block
         expiry
-        proposal_metadata {
-            name
-            description
-        }
+        name
+        description
     }
 }
 
@@ -26,10 +24,8 @@ subscription ProposalById($proposalId: String!) {
             id
             display_name
         }
-        proposal_metadata {
-            name
-            description
-        }
+        name
+        description
         voting {
             proposal_voters {
                 identity {

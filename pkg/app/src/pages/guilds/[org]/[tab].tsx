@@ -51,8 +51,10 @@ export function OrganisationById() {
 	const org = query.org as string
 	const tab = query.tab as string
 
+	// resolve path hash to slug url
+
 	// const hashToSlug = (hash: string) => {
-	// 	const slug = (organization && organization?.organization_metadata?.name.replace(' ', '').toLowerCase()) || null
+	// 	const slug = (organization && organization?.name.replace(' ', '').toLowerCase()) || null
 	// 	console.log('slug', slug)
 	// }
 
@@ -152,12 +154,12 @@ export function OrganisationById() {
 	}, [data, data?.organization, push])
 
 	useEffect(() => {
-		if (organization?.organization_metadata?.name || cache.name) {
-			setOrgName(organization?.organization_metadata?.name || cache.name)
+		if (organization?.name || cache.name) {
+			setOrgName(organization?.name || cache.name)
 		} else {
 			setOrgName(t('page:organisations:title'))
 		}
-	}, [organization?.organization_metadata?.name, cache.name, t])
+	}, [organization?.name, cache.name, t])
 
 	return (
 		<Layout showHeader showFooter showSidebar title={orgName}>
@@ -215,9 +217,9 @@ export function OrganisationById() {
 											cursor: 'pointer',
 										})}
 										srcSet={
-											organization?.organization_metadata?.logo || cache.logoCID?.length
+											organization?.logo || cache.logoCID?.length
 												? parseIpfsHash(
-														organization?.organization_metadata?.logo || cache.logoCID,
+														organization?.logo || cache.logoCID,
 														config.IPFS_GATEWAY,
 												  )
 												: null
@@ -241,7 +243,7 @@ export function OrganisationById() {
 								>
 									<Stack spacing={0} sx={{ flex: 0.9 }}>
 										<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
-											{organization?.organization_metadata?.name ?? cache.name ?? ''}
+											{organization?.name ?? cache.name ?? ''}
 										</Typography>
 										<Typography
 											// variant='small'
@@ -301,14 +303,14 @@ export function OrganisationById() {
 										disabled={!!org}
 										onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
 									/>
-									{!organization?.organization_metadata?.header && !cache.headerCID?.length ? (
+									{!organization?.header && !cache.headerCID?.length ? (
 										<Box display="grid" justifyContent="center" alignItems="center">
 											<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
 										</Box>
 									) : (
 										<Image
 											src={parseIpfsHash(
-												organization?.organization_metadata?.header ?? cache.headerCID,
+												organization?.header ?? cache.headerCID,
 												config.IPFS_GATEWAY,
 											)}
 											alt="logo"

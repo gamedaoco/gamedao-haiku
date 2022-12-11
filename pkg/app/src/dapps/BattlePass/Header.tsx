@@ -155,11 +155,8 @@ export const Header = ({ id }: TProps) => {
 							cursor: 'pointer',
 						})}
 						srcSet={
-							organization?.organization_metadata?.logo || cache.logoCID?.length
-								? parseIpfsHash(
-										organization?.organization_metadata?.logo || cache.logoCID,
-										config.IPFS_GATEWAY,
-								  )
+							organization?.logo || cache.logoCID?.length
+								? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
 								: null
 						}
 					>
@@ -181,7 +178,7 @@ export const Header = ({ id }: TProps) => {
 				>
 					<Stack spacing={0} sx={{ pb: '100px', pl: '30px', flex: 0.9 }}>
 						<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
-							{organization?.organization_metadata?.name ?? cache.name ?? ''}
+							{organization?.name ?? cache.name ?? ''}
 						</Typography>
 						<Typography
 							// variant='small'
@@ -234,16 +231,13 @@ export const Header = ({ id }: TProps) => {
 						disabled={!!id}
 						onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
 					/>
-					{!organization?.organization_metadata?.header && !cache.headerCID?.length ? (
+					{!organization?.header && !cache.headerCID?.length ? (
 						<Box display="grid" justifyContent="center" alignItems="center">
 							<Add sx={{ height: '40px', width: '40px', cursor: 'pointer' }} />
 						</Box>
 					) : (
 						<Image
-							src={parseIpfsHash(
-								organization?.organization_metadata?.header ?? cache.headerCID,
-								config.IPFS_GATEWAY,
-							)}
+							src={parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)}
 							alt="logo"
 							layout="fill"
 							sx={{

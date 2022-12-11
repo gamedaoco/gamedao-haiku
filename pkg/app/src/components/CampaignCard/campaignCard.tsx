@@ -38,19 +38,16 @@ export function CampaignCard({ campaign }: ComponentProps) {
 	return (
 		<Card onClick={handleClick} sx={{ cursor: 'pointer' }}>
 			<Header
-				organizationImage={parseIpfsHash(
-					campaign?.organization?.organization_metadata?.logo,
-					config.IPFS_GATEWAY,
-				)}
-				headerImage={parseIpfsHash(campaign?.campaign_metadata?.header, config.IPFS_GATEWAY)}
+				organizationImage={parseIpfsHash(campaign?.organization?.logo, config.IPFS_GATEWAY)}
+				headerImage={parseIpfsHash(campaign?.header, config.IPFS_GATEWAY)}
 				status={campaign?.state}
 				id={campaign?.id}
 				orgId={campaign?.organization?.id}
 			/>
 
 			<Content
-				title={campaign.campaign_metadata?.name}
-				organisationName={campaign.organization?.organization_metadata?.name}
+				title={campaign?.name}
+				organisationName={campaign.organization?.name}
 				backers={campaign?.campaign_contributors_aggregate?.aggregate?.count ?? 0}
 				contributed={campaign?.campaign_contributors_aggregate?.aggregate?.sum?.contributed ?? '0'}
 				target={campaign?.target ?? '0'}

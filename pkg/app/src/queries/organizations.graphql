@@ -1,14 +1,12 @@
 subscription OrgNames($searchQuery: String="%") {
   organization {
     id
-    organization_metadata {
-      name
-    }
+    name
   }
 }
 
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
-    organization_aggregate(where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
+    organization_aggregate(where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
         aggregate {
             count
         }
@@ -16,13 +14,11 @@ subscription OrganizationsPaginationCount($searchQuery: String="%") {
 }
 
 subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
-    organization(limit: $first, order_by: $orderBy, where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
+    organization(limit: $first, order_by: $orderBy, where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
         id
-        organization_metadata {
-            name
-            description
-            logo
-        }
+        name
+        description
+        logo
         access_model
         creator
         organization_members{
@@ -32,17 +28,15 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
 }
 
 # subscription OrganizationByName($name: String!) {
-#     organization(where: {organization_metadata: {name: {_eq: $name}}}) {
-#         organization_metadata {
+#     organization(where: {name: {_eq: $name}}}) {
 #             name
 #             # TODO: add slug for resolver
 #             # slug
-#         }
 #     }
 # }
 
 subscription OrganizationByName($name: String!) {
-    organization(where: {organization_metadata: {name: {_eq: $name}}}) {
+    organization(where: {name: {_eq: $name}}) {
         access_model
         creator
         created_at_block
@@ -62,21 +56,18 @@ subscription OrganizationByName($name: String!) {
                 email
                 display_name
             }
-            # TODO:
-            # state
+            state
         }
-        organization_metadata {
-            description
-            email
-            # TODO: cid
-            id
-            logo
-            header
-            name
-            repo
-            website
-            # todo: add slug
-        }
+        description
+        email
+        # TODO: cid
+        id
+        logo
+        header
+        name
+        repo
+        website
+        slug
         organization_members_aggregate {
             aggregate {
                 count
@@ -124,18 +115,16 @@ subscription OrganizationById($orgId: String!) {
                 email
                 display_name
             }
-            # state
+            state
         }
-        organization_metadata {
-            description
-            email
-            id
-            logo
-            header
-            name
-            repo
-            website
-        }
+        description
+        email
+        id
+        logo
+        header
+        name
+        repo
+        website
         organization_members_aggregate {
             aggregate {
                 count
@@ -168,10 +157,8 @@ subscription AccountOrganizations($address: String!) {
             id
             organization {
                 id
-                organization_metadata {
-                    name
-                    logo
-                }
+                name
+                logo
                 access_model
                 creator
                 organization_members {

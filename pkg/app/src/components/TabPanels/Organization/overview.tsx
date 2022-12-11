@@ -62,11 +62,8 @@ export const Overview = ({ id }: TProps) => {
 		setIsReadMore((prev) => !prev)
 	}, [setIsReadMore])
 	const description = useMemo(
-		() =>
-			isReadMore
-				? organization?.organization_metadata?.description?.slice(0, 150)
-				: organization?.organization_metadata?.description,
-		[isReadMore, organization?.organization_metadata?.description],
+		() => (isReadMore ? organization?.description?.slice(0, 150) : organization?.description),
+		[isReadMore, organization?.description],
 	)
 
 	const [showButton, setShowButton] = useState<boolean>(false)
@@ -136,8 +133,8 @@ export const Overview = ({ id }: TProps) => {
 	)
 
 	useEffect(() => {
-		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
-	}, [organization?.organization_metadata?.description?.length])
+		organization?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
+	}, [organization?.description?.length])
 
 	return (
 		<>
@@ -171,9 +168,7 @@ export const Overview = ({ id }: TProps) => {
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
-								<Typography variant="body2">
-									{organization?.organization_metadata?.website || 'gamedao.co'}
-								</Typography>
+								<Typography variant="body2">{organization?.website || 'gamedao.co'}</Typography>
 							</Stack>
 						</Stack>
 					</Stack>
