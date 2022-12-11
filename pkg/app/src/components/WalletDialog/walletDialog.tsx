@@ -65,8 +65,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 		return null
 	}
 
-	const redirect_url = process.env
-		.NEXT_PUBLIC_VERCEL_URL`https://discord.com/api/oauth2/authorize?client_id=1049953821536833536&redirect_uri=${encodeURI(
+	const redirect_url = `https://discord.com/api/oauth2/authorize?client_id=1049953821536833536&redirect_uri=${encodeURI(
 		process.env.NEXT_PUBLIC_VERCEL_URL,
 	)}%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=identify%20email`
 
