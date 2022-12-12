@@ -9,10 +9,11 @@ import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
 interface ComponentProps {
 	onClick: () => void
 	open?: boolean
-	flip: boolean
+	flip?: boolean
+	iconOnly?: boolean
 }
 
-export function Selector({ onClick, open, flip }: ComponentProps) {
+export function Selector({ onClick, open, flip, iconOnly }: ComponentProps) {
 	const { selectedAccount } = useExtensionContext()
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
@@ -64,15 +65,17 @@ export function Selector({ onClick, open, flip }: ComponentProps) {
 				}}
 			>
 				<Avatar sx={{ width: 32, height: 32 }} src={avatarImageURL(selectedAccount?.account?.address)} />
-				<Stack>
-					<Typography variant="micro">
-						{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
-						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize={'inherit'} />}
-					</Typography>
-					<Stack direction="row" alignItems="center" spacing={1} pr={2}>
-						<Typography variant="micro">{shortAccountAddress(selectedAccount?.account)}</Typography>
+				{!iconOnly && (
+					<Stack>
+						<Typography variant="micro">
+							{identity?.display_name || getAccountName(selectedAccount?.account)}&nbsp;
+							{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize={'inherit'} />}
+						</Typography>
+						<Stack direction="row" alignItems="center" spacing={1} pr={2}>
+							<Typography variant="micro">{shortAccountAddress(selectedAccount?.account)}</Typography>
+						</Stack>
 					</Stack>
-				</Stack>
+				)}
 			</Stack>
 			{/*<Box display="grid">{open ? <ExpandLess /> : <ExpandMore />}</Box>*/}
 		</Stack>

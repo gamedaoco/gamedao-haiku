@@ -43,9 +43,10 @@ import { Selector } from './modules/selector'
 
 type TProps = {
 	flip?: boolean
+	iconOnly?: boolean
 }
 
-export function AccountSelector({ flip }: TProps) {
+export function AccountSelector({ flip, iconOnly }: TProps) {
 	const { t } = useTranslation()
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -118,6 +119,7 @@ export function AccountSelector({ flip }: TProps) {
 						// onClick={ () => push(`/account`) }
 						open={flyoutOpenState}
 						flip={flip ? true : false}
+						iconOnly={iconOnly ? true : false}
 					/>
 				</Box>
 				<Flyout

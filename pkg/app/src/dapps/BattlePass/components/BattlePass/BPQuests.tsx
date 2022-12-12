@@ -34,12 +34,24 @@ export const BPQuestItem = ({ index }: TGridItemProps) => {
 	const p = Math.round(Math.random() * 5) * 250 + 250
 	const t = 100
 	const v = Math.round(Math.random() * t)
+
 	const action = () => {
 		switch (key) {
+			case 'Wallet':
+				return 'Talisman Wallet'
+				break
+			case 'Follow':
+				return 'Twitch'
+				break
+			case 'Twitter':
+				return 'Twitter'
+				break
 			default:
-				return ''
+				return 'Discord'
+				break
 		}
 	}
+
 	return (
 		<Stack p={2} sx={{ width: 348, height: 148 }} direction="column" justifyContent="space-between">
 			<Stack direction="row">
@@ -59,7 +71,7 @@ export const BPQuestItem = ({ index }: TGridItemProps) => {
 
 			{ButtonOrBar ? (
 				<Button fullWidth variant="grey" sx={{ height: 36 }}>
-					{`Connect ${action}`}
+					{`Connect ${action()}`}
 				</Button>
 			) : (
 				<>

@@ -133,7 +133,7 @@ export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 			</Stack>
 
 			<Stack>
-				<AccountSelector />
+				<AccountSelector iconOnly />
 
 				{/*
 					helper icons
