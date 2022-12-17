@@ -24,7 +24,6 @@ export function IdentitySection() {
 			account: { address },
 		},
 	} = useExtensionContext()
-	console.log('address', address)
 	const accountState = useCurrentAccountState()
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)

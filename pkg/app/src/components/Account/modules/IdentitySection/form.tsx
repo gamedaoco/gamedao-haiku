@@ -1,16 +1,20 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
+import type { Identity } from 'src/queries'
+import { useIdentityByAddressSubscription } from 'src/queries'
+
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
 import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
-import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
+
+// import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+// import { useIdentityByAddressSubscription } from 'hooks/useIdentityByAddress'
+// import { getAddressFromAccountState } from 'src/utils/accountUtils'
+
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
-import type { Identity } from 'src/queries'
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
-
+import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
 const initialState = (identity: Identity) => ({
@@ -24,21 +28,36 @@ const initialState = (identity: Identity) => ({
 	web3name: identity?.web3name || '',
 })
 export function IdentityForm() {
-	const accountState = useCurrentAccountState()
-	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const resolver = useYupValidationResolver(validation)
 	const { t } = useTranslation()
-	const [isClearDisabled, setIsClearDisabled] = useState(false)
+	const address = useCurrentAccountAddress()
+	const { loading, data, error } = useIdentityByAddressSubscription({
+		variables: { address: address },
+	})
+
+	// const accountState = useCurrentAccountState()
+	// const { identity } = useIdentityByAddressSubscription(getAddressFromAccountState(accountState))
+
+	// hydrate
+	const [identity, setIdentity] = useState(null)
+	useEffect(() => {
+		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
+		setIdentity(data.identity_by_pk)
+	}, [data?.identity_by_pk, identity])
+
+	//
+
+	const [values, setValues] = useState(null)
+	const resolver = useYupValidationResolver(validation)
 	const formHandler = useForm<Identity | any>({
 		defaultValues: initialState(identity),
 		resolver,
 	})
+
 	useEffect(() => {
 		if (identity) {
 			formHandler.reset(initialState(identity))
 		}
-	}, [identity, formHandler])
-	const [values, setValues] = useState(null)
+	}, [formHandler, identity])
 
 	const submit = useCallback((data, type: 'set' | 'clear') => {
 		setValues(data)
@@ -48,8 +67,12 @@ export function IdentityForm() {
 			setModalState((prevState) => ({ ...prevState, clear: true }))
 		}
 	}, [])
+
+	//
+
 	const setIdentityTx = useIdentitySetTransaction(values)
 	const clearIdentityTx = useClearIdentityTransaction()
+	const [isClearDisabled, setIsClearDisabled] = useState(false)
 	const [modalState, setModalState] = useState({
 		set: false,
 		clear: false,
@@ -64,6 +87,9 @@ export function IdentityForm() {
 		},
 		[setModalState],
 	)
+
+	//
+
 	useEffect(() => {
 		if (!identity?.display_name) {
 			setIsClearDisabled(true)
@@ -71,6 +97,8 @@ export function IdentityForm() {
 			setIsClearDisabled(false)
 		}
 	}, [identity])
+
+	//
 
 	return (
 		<FormProvider {...formHandler}>
@@ -100,7 +128,7 @@ export function IdentityForm() {
 										<TextField
 											fullWidth
 											label={t('label:display_name')}
-											placeholder="JupiterMoon"
+											placeholder="Nickname"
 											sx={{
 												'& fieldset': {
 													borderRadius: '16px',
@@ -121,7 +149,7 @@ export function IdentityForm() {
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
-											placeholder="Jupiter Moon"
+											placeholder="Real Name"
 											error={!!errors?.legal}
 											helperText={errors?.legal?.message?.toString()}
 											sx={{
@@ -306,11 +334,12 @@ export function IdentityForm() {
 											onClick={formHandler.handleSubmit((data) => submit(data, 'clear'))}
 											type="button"
 											sx={{ m: 1 }}
-											variant="outlined"
+											// variant="outlined"
 											color="secondary"
 											disabled={isClearDisabled}
 										>
-											{t('button:form:identity:clear')}
+											{/*{t('button:form:identity:clear')}*/}
+											{`Reset Identity`}
 										</Button>
 									)}
 									<Box />
@@ -320,9 +349,8 @@ export function IdentityForm() {
 										color="primary"
 										variant={!isClearDisabled ? 'outlined' : 'contained'}
 									>
-										{!isClearDisabled
-											? t('button:form:identity:update')
-											: t('button:form:identity:submit')}
+										{/*{!isClearDisabled ? t('button:form:identity:update') : t('button:form:identity:submit')}*/}
+										{!isClearDisabled ? `Update Identity` : `Set Identity`}
 									</Button>
 								</Box>
 							</Grid>
