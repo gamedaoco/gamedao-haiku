@@ -169,7 +169,7 @@ export function Overview({
 							{description}
 							{showButton && (
 								<span style={{ cursor: 'pointer' }} onClick={toggleReadMore} className="read-or-hide">
-									{isReadMore ? '...Read More' : ' Show Less'}
+									{isReadMore ? ' More...' : ' Less...'}
 								</span>
 							)}
 						</Typography>
@@ -181,7 +181,7 @@ export function Overview({
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<FmdGood />
-								<Typography variant="body2">USA</Typography>
+								<Typography variant="body2">unknown</Typography>
 							</Stack>
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<VpnKey />
@@ -190,7 +190,7 @@ export function Overview({
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
 								<Typography variant="body2">
-									{organization?.organization_metadata?.website || 'gamedao.co'}
+									{organization?.organization_metadata?.website || null}
 								</Typography>
 							</Stack>
 						</Stack>
@@ -205,7 +205,7 @@ export function Overview({
 								<>
 									<Button
 										variant="outlined"
-										size="large"
+										size="small"
 										disabled={!addMemberTx}
 										onClick={handleOpenTxModal}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
@@ -219,11 +219,11 @@ export function Overview({
 								</>
 							)}
 
-							{(isMember || isAdmin) && (
+							{/*							{(isMember || isAdmin) && (
 								<>
 									<Button
 										variant="outlined"
-										size="large"
+										size="small"
 										disabled={!removeMemberTx}
 										onClick={() => handleChangeRoute('settings')}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
@@ -231,7 +231,7 @@ export function Overview({
 										{t('button:ui:change_settings')}
 									</Button>
 								</>
-							)}
+							)}*/}
 						</Stack>
 					</Stack>
 				</Paper>
@@ -243,9 +243,9 @@ export function Overview({
 						<Stack direction="column" spacing={3} pt="1rem">
 							{organization?.fee_model && (
 								<Stack direction="row" spacing={1}>
-									<Verified sx={{ width: 33, height: 31.5, color: theme.palette.success.main }} />
+									<Verified sx={{ width: '16px', color: theme.palette.success.main }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{feeModel.title}</Typography>
+										<Typography variant="body2">{feeModel.title}</Typography>
 										<Typography variant="body2">{feeModel.text}</Typography>
 									</Stack>
 								</Stack>
@@ -253,9 +253,9 @@ export function Overview({
 
 							{organization?.access_model && (
 								<Stack direction="row" spacing={1}>
-									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
+									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{access_model.title}</Typography>
+										<Typography variant="body2">{access_model.title}</Typography>
 										<Typography variant="body2">{access_model.text}</Typography>
 									</Stack>
 								</Stack>
@@ -263,9 +263,9 @@ export function Overview({
 
 							{(organization?.member_limit || organization?.member_limit === 0) && (
 								<Stack direction="row" spacing={1}>
-									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
+									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{memberLimit.title}</Typography>
+										<Typography variant="body2">{memberLimit.title}</Typography>
 										<Typography variant="body2">{memberLimit.text}</Typography>
 									</Stack>
 								</Stack>
