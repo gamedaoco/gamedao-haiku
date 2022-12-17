@@ -17,9 +17,9 @@ interface ComponentProps {
 export function OrganizationButton({ id, logo, name, active, notification }: ComponentProps) {
 	const { push } = useRouter()
 	const config = useConfig()
-	const url = `/organisations/${id}/dashboard`
+	const url = `/organizations/${id}/dashboard`
 	const navigateCall = useCallback(() => {
-		push(`/organisations/${id}/dashboard`)
+		push(`/organizations/${id}/dashboard`)
 	}, [id, push])
 
 	return (
@@ -31,7 +31,7 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 						error: { main },
 					},
 				}) => ({
-					width: '100%',
+					width: '90px',
 					position: 'relative',
 					'&::after': {
 						content: '""',
@@ -39,9 +39,10 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 						width: '4px',
 						backgroundColor: active ? primary : 'transparent',
 						borderRadius: '2px 0px 0px 2px',
-						top: '25%',
-						bottom: '25%',
-						right: '0',
+						boxShadow: `0 0 15px 1px ${active ? primary : 'transparent'}`,
+						top: '40%',
+						bottom: '40%',
+						right: '0px',
 					},
 					'&': {
 						'&::before': {
@@ -70,20 +71,21 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 							width: '48px',
 							height: '48px',
 							cursor: 'pointer',
-							transition: 'border-radius .5s',
+							transition: 'border-radius .1s',
 							'&:hover': {
-								border: `2px solid ${primary}`,
+								outline: `2px solid ${primary}`,
 								borderRadius: '30%',
 							},
 							'&': {
-								border: `2px solid ${active ? primary : 'transparent'}`,
+								outline: `2px solid ${active ? primary : 'transparent'}`,
 								borderRadius: '50%',
 							},
 						})}
 						alt={name}
 						src={parseIpfsHash(logo ?? '', config.IPFS_GATEWAY)}
 					>
-						<img src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} />
+						{/* eslint-disable-next-line @next/next/no-img-element */}
+						<img alt={name} src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} />
 					</Avatar>
 				</Link>
 			</Box>
