@@ -19,7 +19,6 @@ export function Selector({ onClick }: ComponentProps) {
 			account: { address },
 		},
 	} = useExtensionContext()
-	console.log('address', address)
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
 
