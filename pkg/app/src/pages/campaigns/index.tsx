@@ -15,6 +15,8 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
+import { Link } from 'components/Link'
+
 import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { CampaignFiltersTab } from 'components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
@@ -114,6 +116,17 @@ export function Campaigns() {
 						<Typography variant="h3">{t('label:campaigns')}</Typography>
 					</Grid>
 					<Grid item></Grid>
+				</Grid>
+				<Grid item>
+					<Typography pb={1} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
+						Fundraising campaigns collect funds through the GameDAO community and treasury and are community
+						governed by default to increase transparency, verifiability and therefore accountability.
+					</Typography>
+					<Typography variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
+						Support existing campaigns to take part in product development and governance. To create a
+						campaign for your own ideas, start by creating your own organization or join an existing
+						organization to take part in their governance to initiate a campaign.
+					</Typography>
 				</Grid>
 			</Box>
 

@@ -77,13 +77,19 @@ export function OrganisationPage() {
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">{t('page:organisations:title')}</Typography>
+						<Typography variant="h3">{'Organizations'}</Typography>
 					</Grid>
 					<Grid item>
 						<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleClickCreate}>
 							{t('button:ui:create')}
 						</Button>
 					</Grid>
+				</Grid>
+				<Grid item>
+					<Typography variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
+						Join existing organizations to take part in their governance. Create an organization and operate
+						it any way you want — as an individual or collective, with your company, team or community.
+					</Typography>
 				</Grid>
 			</Box>
 
@@ -96,7 +102,7 @@ export function OrganisationPage() {
 						showFilters={enabledFeature?.ORGANIZATION_PAGE_SHOW_FILTERS}
 						showSearch={enabledFeature?.ORGANIZATION_PAGE_SHOW_SEARCH}
 						showSort={enabledFeature?.ORGANIZATION_PAGE_SHOW_SORT}
-						searchPlaceHolder={t('page:organisations:search_place_holder')}
+						searchPlaceHolder={'Find Organizations'}
 						ListTab={OrganizationFiltersListTab}
 					/>
 
