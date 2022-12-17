@@ -65,6 +65,10 @@ export function Footer() {
 								<Link href="https://t.me/gamedaoco">telegram</Link>
 								<Link href="https://twitter.com/gamedaoco">twitter</Link>
 								<Link href="https://www.linkedin.com/company/gamedaoco">linkedin</Link>
+								<br />
+								<NextLink href="/service/account">select account</NextLink>
+								<br />
+								<NextLink href="/service/network">select network</NextLink>
 							</Typography>
 						</Grid>
 						<Grid item xs={6} md={2} mb={4}>
