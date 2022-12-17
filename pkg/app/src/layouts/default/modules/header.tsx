@@ -39,7 +39,7 @@ interface ComponentProps {
 const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
-		path: '/organisations',
+		path: '/organizations',
 		icon: <RiShieldLine />,
 	},
 	// {

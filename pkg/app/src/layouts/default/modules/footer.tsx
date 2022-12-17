@@ -10,6 +10,7 @@ import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { FontIcons } from 'components/Icons/icons'
 
+// eslint-disable-next-line @next/next/no-img-element
 const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" />
 
 const Link = ({ href, children }) => (
