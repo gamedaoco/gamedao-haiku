@@ -15,7 +15,7 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
-import { Link } from 'components/Link'
+import Link from 'components/Link'
 
 import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { CampaignFiltersTab } from 'components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
