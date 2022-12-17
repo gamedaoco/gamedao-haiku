@@ -354,11 +354,14 @@ export function OrganisationById() {
 									onChange={(_, value) => handleTabSelect(value)}
 								>
 									<Tab label={t('button:navigation:overview')} value={'dashboard'} />
+
+									{/*
 									<Tab
 										label={t('button:navigation:campaigns')}
 										value={'campaigns'}
 										disabled={!organizationIdState}
 									/>
+*/}
 									<Tab
 										label={t('button:navigation:proposals')}
 										value={'proposals'}
@@ -375,11 +378,15 @@ export function OrganisationById() {
 										value={'treasury'}
 										disabled={!organizationIdState}
 									/>
+
+									{/*
+
 									<Tab
 										label={t('button:navigation:settings')}
 										value={'settings'}
 										disabled={!organizationIdState}
 									/>
+*/}
 								</Tabs>
 							</Box>
 						</Paper>

@@ -26,7 +26,7 @@ export function SectionsLayout({ param }: ComponentProps) {
 			default:
 				return <OverviewTab />
 		}
-	}, [accountState, param])
+	}, [param])
 
 	return <>{reroute()}</>
 }

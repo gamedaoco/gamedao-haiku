@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
+import { useExtensionContext } from 'src/providers/extension/modules/context'
 
 import Link from 'components/Link'
 import { AccountSelector } from 'components/AccountSelector/accountSelector'
@@ -15,7 +16,6 @@ import {
 	RiVipDiamondLine,
 	RiBookOpenLine,
 	RiDropLine,
-	RiExchangeFundsLine,
 	RiAwardLine,
 	RiChat1Line,
 } from 'react-icons/ri'
@@ -26,7 +26,9 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
+// eslint-disable-next-line @next/next/no-img-element
 const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+// eslint-disable-next-line @next/next/no-img-element
 const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
 
 interface ComponentProps {
@@ -40,11 +42,11 @@ const leftNav = [
 		path: '/organisations',
 		icon: <RiShieldLine />,
 	},
-	{
-		name: 'Quests', //'button:navigation:quests',
-		path: '/quests',
-		icon: <RiTreasureMapLine />,
-	},
+	// {
+	// 	name: 'Quests', //'button:navigation:quests',
+	// 	path: '/quests',
+	// 	icon: <RiTreasureMapLine />,
+	// },
 	// {
 	// 	name: 'Achievements', //'button:navigation:quests',
 	// 	path: '/achievements',
@@ -53,7 +55,7 @@ const leftNav = [
 	{
 		name: 'Campaigns', // button:navigation:campaigns',
 		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
+		icon: <RiVipDiamondLine />,
 	},
 ]
 
@@ -71,6 +73,8 @@ const rightNav = [
 ]
 
 export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
+	const { w3Enabled } = useExtensionContext()
+
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const router = useRouter()
@@ -134,27 +138,28 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
-					{rightNav.map((item) => {
-						return (
-							<Link
-								key={item.name}
-								href={item.path}
-								target={item.path.includes('http') ? '_blank' : null}
-							>
-								<Button>
-									{item.icon && item.icon}
-									{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
-								</Button>
-							</Link>
-						)
-					})}
+					{w3Enabled &&
+						rightNav.map((item) => {
+							return (
+								<Link
+									key={item.name}
+									href={item.path}
+									target={item.path.includes('http') ? '_blank' : null}
+								>
+									<Button>
+										{item.icon && item.icon}
+										{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
+									</Button>
+								</Link>
+							)
+						})}
 
-					<Button ref={anchorRef} onClick={openFeedback}>
+					{/*					<Button ref={anchorRef} onClick={openFeedback}>
 						<RiChat1Line />
 						{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 					</Button>
 					{showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />}
-
+*/}
 					<MenuItem>
 						<AccountSelector />
 					</MenuItem>
