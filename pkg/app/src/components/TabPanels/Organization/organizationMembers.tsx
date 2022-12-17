@@ -7,6 +7,7 @@ import md5 from 'md5'
 import { useTranslation } from 'react-i18next'
 import { Organization } from 'src/queries'
 import { shortAccountAddress } from 'src/utils/accountUtils'
+import { avatarImageURL } from 'utils/avatars'
 
 interface ComponentProps {
 	organizationState: Organization
@@ -39,19 +40,14 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 								display: 'flex',
 							}}
 						>
-							<Avatar
-								sx={{ height: 48, width: 48 }}
-								src={`https://avatars.dicebear.com/api/pixel-art/${md5(
-									params?.row?.email || params?.row?.address,
-								)}.svg`}
-							/>
+							<Avatar sx={{ height: 48, width: 48 }} src={avatarImageURL(params?.row?.id)} />
 
 							<Stack sx={{ ml: 1 }}>
 								<Typography variant="h6">
 									{params.row.name}
 									&nbsp;
 									{params.row.email && (
-										<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
+										<Verified sx={{ verticalAlign: 'top' }} fontSize="small" color="disabled" />
 									)}
 								</Typography>
 								<Stack direction="row" alignItems="center" spacing={0.5} pr={2}>

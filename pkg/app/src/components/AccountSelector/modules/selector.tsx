@@ -6,15 +6,22 @@ import md5 from 'md5'
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
 
+import { avatarImageURL } from 'utils/avatars'
+
 interface ComponentProps {
 	onClick: () => void
 }
 
 export function Selector({ onClick }: ComponentProps) {
 	const { selectedAccount } = useExtensionContext()
+	const {
+		selectedAccount: {
+			account: { address },
+		},
+	} = useExtensionContext()
+	console.log('address', address)
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
-	const avatarHash = md5(selectedAccount?.account?.address)
 
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -25,17 +32,7 @@ export function Selector({ onClick }: ComponentProps) {
 	}
 
 	if (!isMd) {
-		return (
-			<Avatar
-				onClick={onClick}
-				sx={{ width: '48px', height: '48px' }}
-				src={
-					identity?.email
-						? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
-						: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
-				}
-			/>
-		)
+		return <Avatar onClick={onClick} sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
 	}
 
 	return (
@@ -60,14 +57,7 @@ export function Selector({ onClick }: ComponentProps) {
 					borderTopRightRadius: '0.5rem',
 				}}
 			>
-				<Avatar
-					sx={{ width: '48px', height: '48px' }}
-					src={
-						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
-					}
-				/>
+				<Avatar sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
 				<Stack>
 					<Typography variant="subtitle2">
 						{getAccountName(selectedAccount?.account)}

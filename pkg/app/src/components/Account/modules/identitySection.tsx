@@ -13,15 +13,23 @@ import { AccountTabs } from 'src/@types/account'
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
+import { useExtensionContext } from 'providers/extension/modules/context'
+import { avatarImageURL } from 'utils/avatars'
+
 export function IdentitySection() {
 	const { push } = useRouter()
 	const { t } = useTranslation()
+	const {
+		selectedAccount: {
+			account: { address },
+		},
+	} = useExtensionContext()
+	console.log('address', address)
 	const accountState = useCurrentAccountState()
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)
 	}, [push])
 	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
-	const avatarHash = useMemo(() => md5(getAddressFromAccountState(accountState)), [accountState])
 
 	const handleCopyAddress = useCallback(() => {
 		navigator.clipboard
@@ -53,11 +61,7 @@ export function IdentitySection() {
 							sx: 24,
 						},
 					}}
-					src={
-						identity?.email
-							? `https://avatars.dicebear.com/api/pixel-art/${md5(identity?.email)}.svg`
-							: `https://avatars.dicebear.com/api/pixel-art/${avatarHash}.svg`
-					}
+					src={avatarImageURL(address)}
 				/>
 				<div>
 					<Typography variant="h6">
