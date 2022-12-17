@@ -22,7 +22,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 	const { t } = useTranslation()
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0) {
-			push('/organisations')
+			push('/organizations')
 		}
 	}, [currentStep])
 
@@ -39,7 +39,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 
 		if (currentStep == 2) {
 			createInfoNotification('Organisation was saved')
-			push('/organisations/dashboard')
+			push('/organizations/dashboard')
 		}
 	}, [currentStep, setStep, push])
 

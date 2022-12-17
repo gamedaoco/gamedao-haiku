@@ -114,6 +114,7 @@ export function Settings({
 				value={1}
 				selectedValue={selectedMode}
 				onChange={setSelectedMode}
+				disabled
 			/>
 
 			{selectedMode === 1 && (
