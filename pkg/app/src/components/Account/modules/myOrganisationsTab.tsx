@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -12,6 +12,9 @@ import { getAddressFromAccountState } from 'src/utils/accountUtils'
 import MyOrganisationsTable from './MyOrganisations/myOrganisations'
 
 export function MyOrganisationsTab() {
+	const { t } = useTranslation()
+	const router = useRouter()
+
 	const accountState = useCurrentAccountState()
 	const address = getAddressFromAccountState(accountState)
 	const { data, loading } = useAccountOrganizationsSubscription({
@@ -19,13 +22,21 @@ export function MyOrganisationsTab() {
 			address: address,
 		},
 	})
-	const { t } = useTranslation()
-	const router = useRouter()
+
 	const createOrganization = useCallback(() => {
-		router.push('/organisations/create')
+		router.push('/organizations/create')
 	}, [router])
 
-	const organisations = data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice()
+	const [organizations, setOrganizations] = useState(null)
+
+	useEffect(() => {
+		if (!data?.identity_by_pk?.organization_members) return
+		const _ = data?.identity_by_pk?.organization_members?.map(({ organization }) => organization)?.slice()
+		setOrganizations(_)
+	}, [data?.identity_by_pk?.organization_members])
+
+	// console.log(organizations)
+
 	return (
 		<Box display="flex" flexDirection="column">
 			<Button
@@ -36,7 +47,7 @@ export function MyOrganisationsTab() {
 			>
 				{t('button:ui:create')}
 			</Button>
-			<MyOrganisationsTable organisations={organisations as Organization[]} loading={loading} />
+			<MyOrganisationsTable organisations={organizations as Organization[]} loading={loading} />
 		</Box>
 	)
 }

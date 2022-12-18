@@ -41,7 +41,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 	const selectedAddress = useCurrentAccountAddress()
 	const editOrganization = useCallback(
 		(id: string) => {
-			router?.push(`/organisations/${id}/settings`)
+			router?.push(`/organizations/${id}/settings`)
 		},
 		[router],
 	)
