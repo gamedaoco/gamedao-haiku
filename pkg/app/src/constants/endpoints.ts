@@ -6,17 +6,17 @@ const developmentEndpoints: Endpoints = [
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
 		name: 'Local Testnet',
-		url: 'http://localhost:9080/v1/graphql',
-		healthCheck: 'http://localhost:9080/healthz',
-		chain: 'wss://localhost:9080',
+		url: 'http://localhost:9999/v1/graphql',
+		healthCheck: 'http://localhost:9999/healthz',
+		chain: 'wss://localhost:9944',
 	},
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'Rococo Parachain Testnet',
-		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.rococo.sub.zero.io/health',
-		chain: 'wss://node.rococo.sub.zero.io',
-	},
+	// {
+	// 	image: '/svg/z-ctrl-45-wht.svg',
+	// 	name: 'Rococo Parachain Testnet',
+	// 	url: 'https://graph.rococo.sub.zero.io/v1/graphql',
+	// 	healthCheck: 'https://graph.rococo.sub.zero.io/health',
+	// 	chain: 'wss://node.rococo.sub.zero.io',
+	// },
 ]
 
 const productionEndpoints: Endpoints = [
@@ -27,6 +27,14 @@ const productionEndpoints: Endpoints = [
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		chain: 'wss://node.dev.sub.zero.io',
 		default: ( ENVIRONMENT === Environment.Development ) ? true : false,
+	},
+	{
+		image: '/svg/z-ctrl-45-wht.svg',
+		name: 'Firesquid',
+		url: 'https://test.graph.dev.sub.zero.io/v1/graphql',
+		healthCheck: 'https://test.graph.dev.sub.zero.io/health',
+		chain: 'wss://node.dev.sub.zero.io',
+		// default: ( ENVIRONMENT === Environment.Staging ) ? true : false,
 	},
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
