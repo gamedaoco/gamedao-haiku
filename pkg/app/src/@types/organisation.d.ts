@@ -12,6 +12,9 @@ export interface TMPOrganisation {
 	description: string
 	metaDataCID: string
 	deposit: number
+	location: string
+	url: string
+	tags: string[]
 }
 
 export interface TMPOrganisationState extends TMPOrganisation {
@@ -29,4 +32,7 @@ export interface TMPOrganisationState extends TMPOrganisation {
 	setMetaDataCID: (string) => void
 	setDeposit: (number) => void
 	clearAll: () => void
+	setLocation: (string) => void
+	setUrl: (string) => void
+	setTags: ([]) => void
 }
