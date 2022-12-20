@@ -23,7 +23,9 @@ export const defaultValuesTmpOrganisation: TMPOrganisation = {
 	description: '',
 	metaDataCID: '',
 	deposit: 5,
-	url:'', location:'', tags:JSON.stringify([]),
+	url:'',
+	location:'',
+	tags:[],
 }
 
 export const defaultValuesTMPProposal: TMPProposal = {

@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
+import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 
-import { ChevronRight, Verified } from '@mui/icons-material'
-import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
-import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { Organization } from 'src/queries'
 import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
 import { getProposalTypesCount } from 'src/utils/proposalUtils'
+import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
+
+import { useTheme } from '@mui/material/styles'
+import { ChevronRight, Verified } from '@mui/icons-material'
+import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
+import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -157,6 +157,22 @@ export function Overview({
 		organization?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
 	}, [organization?.description?.length])
 
+	const [orgData, setOrgData] = useState({
+		location: '',
+		url: '',
+		tags: [],
+	})
+	// useEffect(() => {
+	// 	if (!organization?.organization_metadata) return
+	// 	setOrgData({
+	// 		...orgData,
+	// 		location: organization?.organization_metadata?.location,
+	// 		url: organization?.organization_metadata?.url,
+	// 		tags: organization?.organization_metadata?.tags,
+	// 	})
+	// }, [organization?.organization_metadata])
+	console.log('orgData', orgData)
+
 	return (
 		<>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
@@ -174,25 +190,32 @@ export function Overview({
 							)}
 						</Typography>
 
-						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1rem">
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<Label />
-								<Typography variant="body2">Game, RPG, Desktop</Typography>
-							</Stack>
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<FmdGood />
-								<Typography variant="body2">unknown</Typography>
-							</Stack>
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<VpnKey />
-								<Typography variant="body2">{access_model.status} </Typography>
-							</Stack>
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<InsertLink />
-								<Typography variant="body2">
-									{organization?.website || null}
-								</Typography>
-							</Stack>
+						<Stack
+							direction={{ xs: 'column', sm: 'row' }}
+							spacing={3}
+							pt="1rem"
+							justifyContent="space-between"
+						>
+							{orgData.tags && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<Label /> <Typography variant="body2">{orgData.tags}</Typography>
+								</Stack>
+							)}
+							{orgData.location && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<FmdGood /> <Typography variant="body2">{orgData.location}</Typography>
+								</Stack>
+							)}
+							{access_model.status && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<VpnKey /> <Typography variant="body2">{access_model.status} </Typography>
+								</Stack>
+							)}
+							{orgData.url && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<InsertLink /> <Typography variant="body2"> {orgData.url} </Typography>
+								</Stack>
+							)}
 						</Stack>
 
 						<Stack

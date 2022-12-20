@@ -62,6 +62,8 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		return null
 	}
 
+	console.log(tmpOrgState)
+
 	return (
 		<>
 			{currentStep === 0 && (
@@ -70,6 +72,13 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 					setName={tmpOrgState.setName}
 					description={tmpOrgState.description}
 					setDescription={tmpOrgState.setDescription}
+					// ridiculous, but needs to stay like this till refactor
+					url={tmpOrgState.url}
+					setUrl={tmpOrgState.setUrl}
+					location={tmpOrgState.location}
+					setLocation={tmpOrgState.setLocation}
+					tags={tmpOrgState.tags}
+					setTags={tmpOrgState.setTags}
 				/>
 			)}
 			{currentStep === 1 && <Controller selected={tmpOrgState.type} setSelected={tmpOrgState.setType} />}
