@@ -6,9 +6,9 @@ const developmentEndpoints: Endpoints = [
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
 		name: 'Local Testnet',
-		url: 'http://localhost:9999/v1/graphql',
-		healthCheck: 'http://localhost:9999/healthz',
-		chain: 'wss://localhost:9944',
+		url: 'http://localhost:9080/v1/graphql',
+		healthCheck: 'http://localhost:9080/healthz',
+		chain: 'wss://node.dev.sub.zero.io',
 	},
 	// {
 	// 	image: '/svg/z-ctrl-45-wht.svg',

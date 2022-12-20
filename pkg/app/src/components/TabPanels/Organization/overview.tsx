@@ -83,9 +83,9 @@ export function Overview({
 	const description = useMemo(
 		() =>
 			isReadMore
-				? organization?.organization_metadata?.description?.slice(0, 150)
-				: organization?.organization_metadata?.description,
-		[isReadMore, organization?.organization_metadata?.description],
+				? organization?.description?.slice(0, 150)
+				: organization?.description,
+		[isReadMore, organization?.description],
 	)
 
 	const access_model = useMemo(
@@ -154,8 +154,8 @@ export function Overview({
 	)
 
 	useEffect(() => {
-		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
-	}, [organization?.organization_metadata?.description?.length])
+		organization?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
+	}, [organization?.description?.length])
 
 	return (
 		<>
@@ -190,7 +190,7 @@ export function Overview({
 							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 								<InsertLink />
 								<Typography variant="body2">
-									{organization?.organization_metadata?.website || null}
+									{organization?.website || null}
 								</Typography>
 							</Stack>
 						</Stack>

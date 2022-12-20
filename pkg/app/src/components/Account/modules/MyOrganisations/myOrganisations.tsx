@@ -89,7 +89,7 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 												>
 													<Avatar
 														src={parseIpfsHash(
-															organisation?.organization_metadata?.logo,
+															organisation?.logo,
 															config.IPFS_GATEWAY,
 														)}
 														sx={{
@@ -97,10 +97,10 @@ export const MyOrganisationsTable: FC<MyOrganisationsTableProps> = ({ organisati
 															width: 42,
 														}}
 													>
-														{getInitials(organisation?.organization_metadata?.logo)}
+														{getInitials(organisation?.logo)}
 													</Avatar>
 													<Box sx={{ ml: 1 }}>
-														{organisation?.organization_metadata?.name}
+														{organisation?.name}
 													</Box>
 												</Box>
 											</TableCell>

@@ -117,8 +117,8 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 
 				return {
 					id: proposal.id,
-					name: proposal.proposal_metadata?.name ?? '',
-					description: proposal.proposal_metadata?.description ?? '',
+					name: proposal?.name ?? '',
+					description: proposal?.description ?? '',
 					status: proposal.state,
 					timeLeft,
 					hasStarted,

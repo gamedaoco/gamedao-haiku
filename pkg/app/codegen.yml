@@ -1,4 +1,4 @@
-schema: https://graph.dev.sub.zero.io/v1/graphql
+schema: https://test.graph.dev.sub.zero.io/v1/graphql
 overwrite: true
 
 generates:

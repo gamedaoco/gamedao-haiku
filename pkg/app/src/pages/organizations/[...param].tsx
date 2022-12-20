@@ -170,7 +170,7 @@ export function OrganisationById() {
 			showHeader
 			showFooter
 			showSidebar
-			title={organizationState?.organization_metadata?.name ?? cache.name ?? t('page:organisations:title')}
+			title={organizationState?.name ?? cache.name ?? t('page:organisations:title')}
 		>
 			<TabContext value={activeStep}>
 				{(!loading && data) || !organizationIdState ? (
@@ -223,9 +223,9 @@ export function OrganisationById() {
 											cursor: 'pointer',
 										})}
 										srcSet={
-											organizationState?.organization_metadata?.logo || cache.logoCID?.length
+											organizationState?.logo || cache.logoCID?.length
 												? parseIpfsHash(
-														organizationState?.organization_metadata?.logo || cache.logoCID,
+														organizationState?.logo || cache.logoCID,
 														config.IPFS_GATEWAY,
 												  )
 												: null
@@ -249,7 +249,7 @@ export function OrganisationById() {
 								>
 									<Stack spacing={0} sx={{ flex: 0.9 }}>
 										<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
-											{organizationState?.organization_metadata?.name ?? cache.name ?? ''}
+											{organizationState?.name ?? cache.name ?? ''}
 										</Typography>
 										<Typography
 											// variant='small'
@@ -306,14 +306,14 @@ export function OrganisationById() {
 										disabled={!!organizationIdState}
 										onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
 									/>
-									{!organizationState?.organization_metadata?.header && !cache.headerCID?.length ? (
+									{!organizationState?.header && !cache.headerCID?.length ? (
 										<Box display="grid" justifyContent="center" alignItems="center">
 											<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
 										</Box>
 									) : (
 										<Image
 											src={parseIpfsHash(
-												organizationState?.organization_metadata?.header ?? cache.headerCID,
+												organizationState?.header ?? cache.headerCID,
 												config.IPFS_GATEWAY,
 											)}
 											alt="logo"

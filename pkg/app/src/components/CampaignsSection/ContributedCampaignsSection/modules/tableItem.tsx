@@ -77,16 +77,16 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 								borderRadius: Number(theme.shape.borderRadius) * 8,
 							}}
 							src={parseIpfsHash(
-								campaignContributor?.campaign?.campaign_metadata?.header,
+								campaignContributor?.campaign?.header,
 								config.IPFS_GATEWAY,
 							)}
 							alt="campaign_logo"
 						/>
 					</Box>
 					<Box display="flex" flexDirection="column">
-						<Typography>{campaignContributor?.campaign?.campaign_metadata?.name}</Typography>
+						<Typography>{campaignContributor?.campaign?.name}</Typography>
 						<Typography variant="body2">
-							{campaignContributor?.campaign?.organization?.organization_metadata?.name}
+							{campaignContributor?.campaign?.organization?.name}
 						</Typography>
 					</Box>
 				</Box>

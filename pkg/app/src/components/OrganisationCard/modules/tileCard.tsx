@@ -92,15 +92,15 @@ export const TileCard = ({ item }: ComponentPros) => {
 				<CardHeader
 					avatar={
 						<Avatar
-							src={parseIpfsHash(item?.organization_metadata?.logo, config.IPFS_GATEWAY)}
+							src={parseIpfsHash(item?.logo, config.IPFS_GATEWAY)}
 							sx={{ width: 64, height: 64 }}
 						>
-							{item?.organization_metadata?.name?.slice(0, 1)}
+							{item?.name?.slice(0, 1)}
 						</Avatar>
 					}
 					title={
 						<Typography variant={'body2'} fontWeight={'700'} noWrap>
-							{item?.organization_metadata?.name}
+							{item?.name}
 						</Typography>
 					}
 					subheader={SubHeader}
@@ -118,7 +118,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 								WebkitBoxOrient: 'vertical',
 							}}
 						>
-							{item?.organization_metadata?.description}
+							{item?.description}
 						</Typography>
 					</div>
 				</CardContent>

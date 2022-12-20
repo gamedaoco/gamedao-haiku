@@ -3,9 +3,7 @@
 query OrganizationVanityUrl($searchQuery: String="%") {
     organization {
         id
-        organization_metadata {
-            name
-        }
+        name
     }
 }
 
@@ -26,7 +24,7 @@ subscription OrganizationMembersByState(
 }
 
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
-    organization_aggregate(where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
+    organization_aggregate(where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
         aggregate {
             count
         }
@@ -34,13 +32,11 @@ subscription OrganizationsPaginationCount($searchQuery: String="%") {
 }
 
 subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
-    organization(limit: $first, order_by: $orderBy, where: {organization_metadata: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}}) {
+    organization(limit: $first, order_by: $orderBy, where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
         id
-        organization_metadata {
-            name
-            description
-            logo
-        }
+        name
+        description
+        logo
         access_model
         creator
         organization_members{
@@ -71,16 +67,14 @@ subscription OrganizationById($orgId: String!) {
                 display_name
             }
         }
-        organization_metadata {
-            description
-            email
-            id
-            logo
-            header
-            name
-            repo
-            website
-        }
+        description
+        email
+        id
+        logo
+        header
+        name
+        repo
+        website
         organization_members_aggregate {
             aggregate {
                 count
@@ -113,10 +107,8 @@ subscription AccountOrganizations($address: String!) {
             id
             organization {
                 id
-                organization_metadata {
-                    name
-                    logo
-                }
+                name
+                logo
                 access_model
                 creator
                 organization_members {
