@@ -11,14 +11,13 @@ query OrganizationVanityUrl($searchQuery: String="%") {
 #   e.g. `pending` to provide a list for prime to approve
 subscription OrganizationMembersByState(
     $id: String!
-    # $state: String!
+    $state: String!
 ) {
     organization(where: { id: {_eq: $id}}) {
         id
-        # organization_members(where: { state: {_eq: $state}}) {
-        organization_members {
+        organization_members(where: { state: {_eq: $state}}) {
             address
-            # state
+            state
         }
     }
 }
@@ -39,7 +38,7 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
         logo
         access_model
         creator
-        organization_members{
+        organization_members {
             address
         }
     }
