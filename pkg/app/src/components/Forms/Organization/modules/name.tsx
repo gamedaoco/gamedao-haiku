@@ -13,7 +13,7 @@ interface ComponentProps {
 	setUrl: (url) => void
 	location: string
 	setLocation: (location) => void
-	tags: string | string[]
+	tags: string[]
 	setTags: (tags) => void
 }
 
@@ -125,17 +125,16 @@ export function Name({
 	}
 
 	const handleChange = (e) => {
-		console.log(e)
-		const content = tagRef.current.value
+		const content = e.target.value || ''
 
 		if (content.startsWith(' ')) {
-			tagRef.current.value = content.slice(1, -1)
+			e.target.current.value = content.slice(1, -1)
 		}
 		if (content.endsWith(',') || content.endsWith(' ')) {
 			const tag = content.slice(0, -1)
 			const arr = new Array().concat(_tags).concat([tag])
 			setTags(arr)
-			tagRef.current.value = ''
+			e.target.current.value = ''
 		}
 	}
 
@@ -187,7 +186,7 @@ export function Name({
 				name="location"
 				onChange={handleUpdate}
 				fullWidth
-				value={formState.url.location}
+				value={formState.location.value}
 				label="Location"
 				placeholder=""
 				variant="outlined"
