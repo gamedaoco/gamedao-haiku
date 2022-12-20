@@ -21,6 +21,10 @@ export function useTmpOrganisation(): TMPOrganisation {
 	const [metaDataCID] = useLocalStorage<string>(`TmpOrg-${address}-metaDataCID`, defaultValues.metaDataCID)
 	const [deposit] = useLocalStorage<number>(`TmpOrg-${address}-deposit`, defaultValues.deposit)
 
+	const [url] = useLocalStorage<string>(`TmpOrg-${address}-url`, defaultValues.url)
+	const [location] = useLocalStorage<string>(`TmpOrg-${address}-location`, defaultValues.location)
+	const [tags] = useLocalStorage<string>(`TmpOrg-${address}-tags`, defaultValues.tags)
+
 	const [state, setState] = useState<TMPOrganisation>({
 		type: selectedType,
 		name: nameState,
@@ -35,6 +39,9 @@ export function useTmpOrganisation(): TMPOrganisation {
 		description: description,
 		metaDataCID: metaDataCID,
 		deposit: deposit,
+		url: url,
+		location: location,
+		tags: tags,
 	})
 
 	useEffect(() => {
@@ -52,6 +59,9 @@ export function useTmpOrganisation(): TMPOrganisation {
 			description: description,
 			metaDataCID: metaDataCID,
 			deposit: deposit,
+			url: url,
+			location: location,
+			tags: tags,
 		})
 	}, [
 		selectedType,
@@ -67,6 +77,9 @@ export function useTmpOrganisation(): TMPOrganisation {
 		description,
 		metaDataCID,
 		deposit,
+		url,
+		location,
+		tags,
 	])
 
 	return state

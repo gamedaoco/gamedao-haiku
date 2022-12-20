@@ -185,11 +185,17 @@ export function TmpOverview() {
 					</Paper>
 				</Stack>
 				<Paper sx={{ width: '100%' }}>
-					<Stack padding={{ xs: 2, md: 4 }} direction={{ xs: 'column', md: 'row' }}>
+					<Stack
+						padding={{ xs: 2, md: 4 }}
+						direction={{ xs: 'column', md: 'row' }}
+						justifyContent="space-between"
+					>
 						<Stack direction="row" alignItems="center" spacing={2}>
 							<Info />
 							<Typography>
-								{t('label:deploy_organization_min_deposit', { value: 5 })}
+								{/*{t('label:deploy_organization_min_deposit', { value: 5 })}*/}
+								To deploy the organization a minimum collateral of 100 GAME is required. Higher deposits
+								lead in higher trust levels.{' '}
 								<Link
 									textAlign="center"
 									href="https://discord.com/channels/273529551483699200/772045307021885452"
@@ -207,13 +213,22 @@ export function TmpOverview() {
 							padding={{ xs: 2 }}
 							spacing={2}
 							alignItems="center"
+							justifyContent="end"
 						>
 							<TextField
 								variant="outlined"
-								label="Treasury Deposit"
+								label="Collateral"
 								type="number"
 								InputProps={{
-									endAdornment: <InputAdornment position="start">GAME</InputAdornment>,
+									endAdornment: (
+										<InputAdornment
+											sx={{ borderRadius: '2px', p: '.75rem', m: 0 }}
+											position="start"
+											variant="outlined"
+										>
+											GAME
+										</InputAdornment>
+									),
 								}}
 								value={tmpOrgState.deposit}
 								onChange={handleDepositChange}
@@ -225,7 +240,8 @@ export function TmpOverview() {
 								disabled={!tx}
 								onClick={handleModalOpen}
 							>
-								{t('label:deploy_organization')}
+								Launch
+								{/*{t('label:deploy_organization')}*/}
 							</Button>
 						</Stack>
 					</Stack>

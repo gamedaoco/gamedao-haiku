@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'src/theme/css/toastify.css'
 import 'src/theme/css/modelViewer.css'
 
+import { ENVIRONMENT } from 'src/constants/index'
+
 const clientSideEmotionCache = createEmotionCache()
 
 interface MyAppProps extends AppProps {
@@ -69,6 +71,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 	}, [])
 
 	useEffect(() => {
+		if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
 		Fathom.load('XLUUAYWU', {
 			url: 'https://brilliant-truthful.gamedao.co/script.js',
 			includedDomains: ['gamedao.co'],

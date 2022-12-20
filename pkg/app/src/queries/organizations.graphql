@@ -80,6 +80,9 @@ subscription OrganizationById($orgId: String!) {
             name
             repo
             website
+            url
+            location
+            tags
         }
         organization_members_aggregate {
             aggregate {

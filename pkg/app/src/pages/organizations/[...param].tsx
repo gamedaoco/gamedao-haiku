@@ -103,6 +103,7 @@ export function OrganisationById() {
 	}, [])
 
 	// Query and route mapping
+
 	useEffect(() => {
 		const param = query?.param
 		if (param && Array.isArray(param)) {
@@ -132,6 +133,7 @@ export function OrganisationById() {
 	}, [routeState])
 
 	// Update and upload metadata
+
 	useEffect(() => {
 		if (cache.name && cache.description && cache.logoCID && cache.headerCID) {
 			const metaData = {
@@ -139,12 +141,17 @@ export function OrganisationById() {
 				description: cache.description,
 				logo: cache.logoCID,
 				header: cache.headerCID,
+				url: cache.url,
+				location: cache.location,
+				tags: cache.tags,
 			}
+			console.log('================================')
+			console.log('organization metadata', metaData)
+			console.log('================================')
 			;(async (): Promise<string> => {
 				const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 					type: 'text/plain',
 				})
-
 				const cid = await uploadFileToIpfs(file)
 				return cid.toString()
 			})().then((cid) => cache.setMetaDataCID(cid))
@@ -355,13 +362,13 @@ export function OrganisationById() {
 								>
 									<Tab label={t('button:navigation:overview')} value={'dashboard'} />
 
-									{/*
 									<Tab
 										label={t('button:navigation:campaigns')}
 										value={'campaigns'}
 										disabled={!organizationIdState}
 									/>
-*/}
+									{/*
+									 */}
 									<Tab
 										label={t('button:navigation:proposals')}
 										value={'proposals'}
@@ -380,7 +387,6 @@ export function OrganisationById() {
 									/>
 
 									{/*
-
 									<Tab
 										label={t('button:navigation:settings')}
 										value={'settings'}
