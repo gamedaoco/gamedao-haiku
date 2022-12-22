@@ -6,6 +6,7 @@ import Verified from '@mui/icons-material/Verified'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 import { useTranslation } from 'react-i18next'
@@ -19,22 +20,20 @@ import { avatarImageURL } from 'utils/avatars'
 export function IdentitySection() {
 	const { push } = useRouter()
 	const { t } = useTranslation()
-	const {
-		selectedAccount: {
-			account: { address },
-		},
-	} = useExtensionContext()
+
+	const address = useCurrentAccountAddress()
+	const { identity } = useIdentityByAddress(address)
 	const accountState = useCurrentAccountState()
+
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)
 	}, [push])
-	const { identity } = useIdentityByAddress(getAddressFromAccountState(accountState))
 
 	const handleCopyAddress = useCallback(() => {
-		navigator.clipboard
-			.writeText(getAddressFromAccountState(accountState))
-			.then(() => createInfoNotification(t('notification:info:address_copied')))
-	}, [accountState, t])
+		navigator.clipboard.writeText(address).then(() => createInfoNotification(t('notification:info:address_copied')))
+	}, [address, t])
+
+	console.log(identity)
 	return (
 		<Grid container justifyContent="space-between" spacing={3}>
 			<Grid
@@ -64,8 +63,8 @@ export function IdentitySection() {
 				/>
 				<div>
 					<Typography variant="h6">
-						{getNameFromAccountState(accountState)}&nbsp;
-						{identity?.email && <Verified sx={{ verticalAlign: 'middle' }} fontSize="inherit" />}
+						{identity?.display_name || getNameFromAccountState(accountState)}&nbsp;
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" />}
 					</Typography>
 					<Box
 						sx={{

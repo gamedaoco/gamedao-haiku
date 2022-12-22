@@ -71,8 +71,9 @@ export function Name({
 	tags,
 	setTags,
 }: ComponentProps) {
-	const [errorState, setErrorState] = useState<string>()
 	const [_tags, _setTags] = useState(tags)
+
+	const [errorState, setErrorState] = useState<string>()
 
 	const [formState, setFormState] = useState({
 		name: { value: name, validation: Yup.string().required('A name is required') },
@@ -128,13 +129,13 @@ export function Name({
 		const content = e.target.value || ''
 
 		if (content.startsWith(' ')) {
-			e.target.current.value = content.slice(1, -1)
+			e.target.value = content.slice(1, -1)
 		}
 		if (content.endsWith(',') || content.endsWith(' ')) {
 			const tag = content.slice(0, -1)
 			const arr = new Array().concat(_tags).concat([tag])
 			setTags(arr)
-			e.target.current.value = ''
+			e.target.value = ''
 		}
 	}
 

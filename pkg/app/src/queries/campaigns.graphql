@@ -153,10 +153,6 @@ subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!], $o
     }
 }
 
-
-
-
-
 subscription CampaignsPaginationCount($filters: [campaign_bool_exp!]) {
     campaign_aggregate (where: {_or: $filters}) {
         aggregate {

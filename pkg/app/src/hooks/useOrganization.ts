@@ -25,7 +25,7 @@ export type TOrg = {
 // 				data.organization.map( (item,i) => {
 // 					return {
 // 						id: item.id,
-// 						name: item.organization_metadata.name,
+// 						name: item.name,
 // 					} as TOrg
 // 				}),
 // 			)

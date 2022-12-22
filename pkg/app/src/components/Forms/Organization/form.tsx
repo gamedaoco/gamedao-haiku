@@ -38,7 +38,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		}
 
 		if (currentStep == 2) {
-			createInfoNotification('Organisation was saved')
+			createInfoNotification('Organization was saved')
 			push('/organizations/dashboard')
 		}
 	}, [currentStep, setStep, push])

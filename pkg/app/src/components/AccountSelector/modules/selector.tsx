@@ -4,7 +4,8 @@ import { useTheme } from '@mui/material/styles'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import md5 from 'md5'
 import { useExtensionContext } from 'providers/extension/modules/context'
-import { getAccountName, shortAccountAddress } from 'src/utils/accountUtils'
+import { getAccountName, shortAccountAddress, getNameFromAccountState } from 'src/utils/accountUtils'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 
 import { avatarImageURL } from 'utils/avatars'
 
@@ -21,6 +22,7 @@ export function Selector({ onClick }: ComponentProps) {
 	} = useExtensionContext()
 	const theme = useTheme()
 	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
+	const accountState = useCurrentAccountState()
 
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -59,10 +61,10 @@ export function Selector({ onClick }: ComponentProps) {
 				<Avatar sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
 				<Stack>
 					<Typography variant="subtitle2">
-						{getAccountName(selectedAccount?.account)}
+						{identity?.display_name || getNameFromAccountState(accountState)}
 						&nbsp;
-						{identity?.email && (
-							<Verified sx={{ verticalAlign: 'middle' }} fontSize="small" color="disabled" />
+						{identity?.display_name && (
+							<Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" color="disabled" />
 						)}
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>

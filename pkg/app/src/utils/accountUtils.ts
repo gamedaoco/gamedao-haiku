@@ -9,7 +9,7 @@ export function shortAccountAddress(account: InjectedAccount): string {
 }
 
 export function getAccountName(account: InjectedAccount): string {
-	return account?.name ?? ''
+	return account?.display_name ?? ''
 }
 
 export function getAddressFromAccountState(accountState: AccountState) {

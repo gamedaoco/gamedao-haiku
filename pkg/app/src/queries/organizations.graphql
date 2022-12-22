@@ -46,6 +46,7 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
         creator
         organization_members {
             address
+            state
         }
     }
 }
@@ -66,6 +67,7 @@ subscription OrganizationById($orgId: String!) {
         type
         organization_members {
             address
+            state
             identity {
                 id
                 email
@@ -113,6 +115,7 @@ subscription AccountOrganizations($address: String!) {
         id
         organization_members {
             id
+            state
             organization {
                 id
                 name

@@ -11,7 +11,7 @@ import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTheme } from '@mui/material/styles'
 import { ChevronRight, Verified } from '@mui/icons-material'
 import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
+import { Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -81,11 +81,8 @@ export function Overview({
 	}, [setIsReadMore])
 
 	const description = useMemo(
-		() =>
-			isReadMore
-				? organization?.organization_metadata?.description?.slice(0, 150)
-				: organization?.organization_metadata?.description,
-		[isReadMore, organization?.organization_metadata?.description],
+		() => (isReadMore ? organization?.description?.slice(0, 150) : organization?.description),
+		[isReadMore, organization?.description],
 	)
 
 	const access_model = useMemo(
@@ -154,8 +151,8 @@ export function Overview({
 	)
 
 	useEffect(() => {
-		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
-	}, [organization?.organization_metadata?.description?.length])
+		organization?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
+	}, [organization?.description?.length])
 
 	const [orgData, setOrgData] = useState({
 		location: '',
@@ -163,15 +160,14 @@ export function Overview({
 		tags: [],
 	})
 	useEffect(() => {
-		if (!organization?.organization_metadata) return
+		if (!organization) return
 		setOrgData({
 			...orgData,
-			location: organization?.organization_metadata?.location,
-			url: organization?.organization_metadata?.url,
-			tags: organization?.organization_metadata?.tags,
+			location: organization?.location,
+			url: organization?.url,
+			tags: organization?.tags,
 		})
-	}, [organization?.organization_metadata])
-	console.log('orgData', orgData)
+	}, [organization])
 
 	return (
 		<>
@@ -194,11 +190,17 @@ export function Overview({
 							direction={{ xs: 'column', sm: 'row' }}
 							spacing={3}
 							pt="1rem"
-							justifyContent="space-between"
+							justifyContent="start"
+							alignItems="top"
 						>
-							{orgData.tags && (
+							{orgData.tags.length > 0 && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-									<Label /> <Typography variant="body2">{orgData.tags}</Typography>
+									<Label />{' '}
+									<Typography>
+										{orgData.tags.map((item, index) => {
+											return <Chip size="small" sx={{ mr: 1, mb: 1 }} key={index} label={item} />
+										})}
+									</Typography>
 								</Stack>
 							)}
 							{orgData.location && (
