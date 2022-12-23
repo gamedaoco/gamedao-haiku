@@ -30,8 +30,7 @@ export function Page() {
 	// 		</Box>
 	// 	</Layout>
 
-	return
-	// 	? <Loader />
+	return // 	? <Loader />
 	;<Layout>
 		<Box>{id}</Box>
 	</Layout>

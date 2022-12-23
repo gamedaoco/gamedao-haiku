@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import md5 from 'md5'
 
 import { useTranslation } from 'react-i18next'
@@ -34,31 +34,68 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 	const [pageSize, setPageSize] = useState<number>(10)
 
 	const orgId = useMemo(() => organizationState?.id?.slice(), [organizationState])
-	const address = useCurrentAccountAddress()
 	const prime = organizationState?.prime || organizationState?.creator
-	const isPrime = prime === address
+	const address = useCurrentAccountAddress()
+	const [isPrime, setIsPrime] = useState(false)
+
+	useEffect(() => {
+		if (!organizationState) return
+		console.og
+		setIsPrime(prime === address)
+	}, [prime, address, setIsPrime])
+
+	// const isPrime = ( prime === address ) ? true : false
 
 	const members = useMemo(() => organizationState?.organization_members?.slice(), [organizationState])
 	const [rows, setRows] = useState<any[]>([])
 
 	const [approveUserAddress, setApproveUserAddress] = useState(null)
-	const approveMemberTx = useApproveMemberTx({ organizationId: orgId, accountId: approveUserAddress })
+
+	console.log('approveUserAddress', approveUserAddress, '\nprime', prime, '\nisPrime', isPrime, '\naddress', address)
+
+	const approveMemberTx = useApproveMemberTx({
+		organizationId: orgId,
+		accountId: approveUserAddress,
+	})
 
 	const [showTxModal, setShowTxModal] = useState(false)
-	const dismissTxModal = () => {
-		console.log('dismiss')
+
+	const handleOpenTxModal = useCallback(() => {
+		setShowTxModal(true)
+	}, [setShowTxModal])
+
+	const handleCloseTxModal = useCallback(() => {
 		setApproveUserAddress(null)
 		setShowTxModal(false)
-	}
+	}, [setShowTxModal, setApproveUserAddress])
 
 	useEffect(() => {
-		if (!approveUserAddress) return
+		if (approveUserAddress === null) {
+			setShowTxModal(false)
+			return
+		}
 		console.log('approve tx for\n org', orgId, '\n by ', prime, '\n account', approveUserAddress)
 		setShowTxModal(true)
 	}, [approveUserAddress])
 
-	const memberList = useMemo<GridColDef[]>(
-		() => [
+	const MemberState = useCallback(
+		({ state, id }) => {
+			if (!isPrime) return <Chip size="small" label={state} />
+			// TODO: add disable tx
+			if (state === 'Active') return <Chip size="small" label={state} />
+			return (
+				<Button onClick={() => setApproveUserAddress(id)} size="small" color="primary" variant="outlined">
+					Approve
+				</Button>
+			)
+		},
+		[isPrime],
+	)
+
+	const [memberList, setMemberList] = useState([])
+
+	useEffect(() => {
+		setMemberList([
 			{
 				...defaultGridColDef,
 				field: 'name',
@@ -129,33 +166,18 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 				field: 'state',
 				sortable: true,
 				headerName: 'State',
-				renderCell: (params) => {
-					return params.row.state === 'Active' ? (
-						<Chip size="small" label={params.row.state} />
-					) : // : <Button onClick={()=>{}} size="small" color="primary" variant="outline">Approve</Button>
-					isPrime ? (
-						<Button
-							onClick={setApproveUserAddress(params.row.id)}
-							size="small"
-							color="primary"
-							variant="outlined"
-						>
-							Approve
-						</Button>
-					) : (
-						<Chip size="small" label={params.row.state} />
-					)
-				},
+				renderCell: (params) => <MemberState state={params.row.state} id={params.row.id} />,
 			},
-		],
-		[t],
-	)
+		])
+	}, [MemberState, t])
+
+	//		[t],
+	//	)
 
 	useEffect(() => {
 		if (!members) return
 		setRows(
 			members?.map((member, index) => {
-				console.log(prime, member?.address, address)
 				return {
 					id: member?.address,
 					name: member?.identity?.display_name,
@@ -199,10 +221,10 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 					onPageSizeChange={(pageSize) => setPageSize(pageSize)}
 				/>
 				<TransactionDialog
-					open={showTxModal}
+					open={handleOpenTxModal}
 					txData={approveMemberTx}
-					onClose={() => dismissTxModal()}
-					txCallback={() => dismissTxModal()}
+					onClose={handleCloseTxModal}
+					txCallback={handleCloseTxModal}
 				/>
 			</Stack>
 		</Stack>

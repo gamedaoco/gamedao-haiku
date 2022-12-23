@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useTranslation } from 'react-i18next'
 import { useLogger } from 'hooks/useLogger'
 import { useNetworkContext } from 'providers/network/modules/context'
-import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 
@@ -20,25 +18,23 @@ export function useApproveMemberTx({
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const [ txState, setTxState ] = useState<TransactionData>(null)
-
-	// const address = useCurrentAccountAddress()
 	const logger = useLogger('Approve Member')
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && accountId && organizationId) {
-			try {
-				// Data mapping
-				const mappedData = {
-					organizationId: organizationId,
-					accountId: accountId,
-				}
 
-				// Data validation
-				validation.validateSync(mappedData)
+			console.log(accountId,organizationId)
+			try {
+
+				const payload = {
+					organizationId,
+					accountId,
+				}
+				validation.validateSync(payload)
 
 				const tx = selectedApiProvider.apiProvider.tx.control.updateMemberState(
-					mappedData.organizationId,
-					mappedData.accountId,
+					payload.organizationId,
+					payload.accountId,
 					'Active'
 				)
 
