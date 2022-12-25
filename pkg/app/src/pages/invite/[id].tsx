@@ -1,26 +1,26 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { useOrganizationByNameSubscription } from 'src/queries'
+import { useGetOrganizationByIdQuery } from 'src/queries'
+import { useGetOrganizationByNameQuery } from 'src/queries'
 
 import { Layout } from 'layouts/default/layout'
-// import { Loader } from 'components/Loader'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 export function Page() {
-	const {
-		query: { id },
-	} = useRouter()
-	const { loading, data, error } = useOrganizationByNameSubscription({
-		variables: { name: id },
+	const { query } = useRouter()
+	const id = query.id as string
+
+	const { loading, data, error } = useGetOrganizationByIdQuery({
+		variables: { id: id },
 	})
 
 	useEffect(() => {
-		if (!query.org.startsWith('0x')) {
-			console.log('query for:', query.org)
+		if (id.startsWith('0x')) {
+			console.log('query for:', id)
 			console.log('resolver:', data?.organization, error)
 		}
-	}, [query.org, data, push, error])
+	}, [data, error])
 
 	// return loading
 	// 	? <Loader />
@@ -30,10 +30,11 @@ export function Page() {
 	// 		</Box>
 	// 	</Layout>
 
-	return // 	? <Loader />
-	;<Layout>
-		<Box>{id}</Box>
-	</Layout>
+	return (
+		<Layout>
+			<Box>{id}</Box>
+		</Layout>
+	)
 }
 
 export default Page

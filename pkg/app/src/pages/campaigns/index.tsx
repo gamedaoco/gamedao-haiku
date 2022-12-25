@@ -48,6 +48,7 @@ export function Campaigns() {
 			}))
 		}
 	}, [filtersOptions, setFilters])
+
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
@@ -60,27 +61,23 @@ export function Campaigns() {
 					{
 						_or: [
 							{
-								campaign_metadata: {
-									_or: [
-										{
-											name: {
-												_ilike: `%${filters.query ?? ''}%`,
-											},
-										},
-										{
-											title: {
-												_ilike: `%${filters.query ?? ''}%`,
-											},
-										},
-									],
-								},
-							},
-							{
-								organization: {
-									organization_metadata: {
+								_or: [
+									{
 										name: {
 											_ilike: `%${filters.query ?? ''}%`,
 										},
+									},
+									{
+										title: {
+											_ilike: `%${filters.query ?? ''}%`,
+										},
+									},
+								],
+							},
+							{
+								organization: {
+									name: {
+										_ilike: `%${filters.query ?? ''}%`,
 									},
 								},
 							},
