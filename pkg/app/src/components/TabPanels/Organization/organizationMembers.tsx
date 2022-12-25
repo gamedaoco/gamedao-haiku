@@ -40,9 +40,8 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 
 	useEffect(() => {
 		if (!organizationState) return
-		console.og
 		setIsPrime(prime === address)
-	}, [prime, address, setIsPrime])
+	}, [prime, address, setIsPrime, organizationState])
 
 	// const isPrime = ( prime === address ) ? true : false
 
@@ -221,7 +220,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 					onPageSizeChange={(pageSize) => setPageSize(pageSize)}
 				/>
 				<TransactionDialog
-					open={handleOpenTxModal}
+					open={showTxModal}
 					txData={approveMemberTx}
 					onClose={handleCloseTxModal}
 					txCallback={handleCloseTxModal}

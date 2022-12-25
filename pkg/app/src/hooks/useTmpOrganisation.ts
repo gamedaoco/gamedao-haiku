@@ -23,7 +23,7 @@ export function useTmpOrganisation(): TMPOrganisation {
 
 	const [url] = useLocalStorage<string>(`TmpOrg-${address}-url`, defaultValues.url)
 	const [location] = useLocalStorage<string>(`TmpOrg-${address}-location`, defaultValues.location)
-	const [tags] = useLocalStorage<string>(`TmpOrg-${address}-tags`, defaultValues.tags)
+	const [tags] = useLocalStorage<string[]>(`TmpOrg-${address}-tags`, defaultValues.tags)
 
 	const [state, setState] = useState<TMPOrganisation>({
 		type: selectedType,

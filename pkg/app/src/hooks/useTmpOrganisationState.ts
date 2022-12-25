@@ -55,7 +55,7 @@ export function useTmpOrganisationState(): TMPOrganisationState {
 		defaultValues.location,
 	)
 	// TODO: type array
-	const [tags, setTags] = useLocalStorage(
+	const [tags, setTags] = useLocalStorage<any>(
 		`TmpOrg-${address}-tags`,
 		defaultValues.tags,
 	)

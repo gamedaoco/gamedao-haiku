@@ -51,6 +51,22 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
     }
 }
 
+query GetOrganizationByName($name: String!) {
+    organization(where: { name: {_eq: $name}}) {
+        id
+        name
+        slug
+    }
+}
+
+query GetOrganizationById($id: String!) {
+    organization(where: { id: {_eq: $id}}) {
+        id
+        name
+        slug
+    }
+}
+
 subscription OrganizationById($orgId: String!) {
     organization(where: { id: {_eq: $orgId}}) {
         access_model
