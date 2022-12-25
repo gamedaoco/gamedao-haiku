@@ -124,10 +124,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	}, [setShowMore])
 
 	const buttonContent = useMemo(
-		() =>
-			showMore
-				? proposal?.description ?? ''
-				: `${proposal?.description?.slice(0, 700)}` ?? '',
+		() => (showMore ? proposal?.description ?? '' : `${proposal?.description?.slice(0, 700)}` ?? ''),
 		[proposal?.description, showMore],
 	)
 
@@ -193,7 +190,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 					<IconButton onClick={goBack}>
 						<ArrowBack />
 					</IconButton>
-					<Typography variant="h6">Proposal {proposal?.name ?? proposalId}</Typography>
+					<Typography variant="h6">Proposal {proposal.name ?? proposalId}</Typography>
 				</Stack>
 
 				<Stack paddingTop={2} paddingLeft={4} paddingRight={4} spacing={2} gap={2}>

@@ -117,8 +117,8 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 
 				return {
 					id: proposal.id,
-					name: proposal?.name ?? '',
-					description: proposal?.description ?? '',
+					name: proposal.name ?? '',
+					description: proposal.description ?? '',
 					status: proposal.state,
 					timeLeft,
 					hasStarted,
@@ -165,7 +165,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 						setPageSize(pageSize)
 					}}
 					onRowClick={({ row: { id } }) => {
-						push(`/organisations/${organizationId}/proposals/${id}`)
+						push(`/organizations/${organizationId}/proposals/${id}`)
 					}}
 				/>
 			</Box>

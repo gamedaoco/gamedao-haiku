@@ -91,10 +91,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 			>
 				<CardHeader
 					avatar={
-						<Avatar
-							src={parseIpfsHash(item?.logo, config.IPFS_GATEWAY)}
-							sx={{ width: 64, height: 64 }}
-						>
+						<Avatar src={parseIpfsHash(item?.logo, config.IPFS_GATEWAY)} sx={{ width: 64, height: 64 }}>
 							{item?.name?.slice(0, 1)}
 						</Avatar>
 					}

@@ -11,7 +11,7 @@ import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTheme } from '@mui/material/styles'
 import { ChevronRight, Verified } from '@mui/icons-material'
 import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
+import { Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -81,10 +81,7 @@ export function Overview({
 	}, [setIsReadMore])
 
 	const description = useMemo(
-		() =>
-			isReadMore
-				? organization?.description?.slice(0, 150)
-				: organization?.description,
+		() => (isReadMore ? organization?.description?.slice(0, 150) : organization?.description),
 		[isReadMore, organization?.description],
 	)
 
@@ -162,16 +159,15 @@ export function Overview({
 		url: '',
 		tags: [],
 	})
-	// useEffect(() => {
-	// 	if (!organization?.organization_metadata) return
-	// 	setOrgData({
-	// 		...orgData,
-	// 		location: organization?.organization_metadata?.location,
-	// 		url: organization?.organization_metadata?.url,
-	// 		tags: organization?.organization_metadata?.tags,
-	// 	})
-	// }, [organization?.organization_metadata])
-	console.log('orgData', orgData)
+	useEffect(() => {
+		if (!organization) return
+		setOrgData({
+			...orgData,
+			location: organization?.location,
+			url: organization?.url,
+			tags: organization?.tags,
+		})
+	}, [organization])
 
 	return (
 		<>
@@ -194,11 +190,17 @@ export function Overview({
 							direction={{ xs: 'column', sm: 'row' }}
 							spacing={3}
 							pt="1rem"
-							justifyContent="space-between"
+							justifyContent="start"
+							alignItems="top"
 						>
-							{orgData.tags && (
+							{orgData.tags.length > 0 && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-									<Label /> <Typography variant="body2">{orgData.tags}</Typography>
+									<Label />{' '}
+									<Typography>
+										{orgData.tags.map((item, index) => {
+											return <Chip size="small" sx={{ mr: 1, mb: 1 }} key={index} label={item} />
+										})}
+									</Typography>
 								</Stack>
 							)}
 							{orgData.location && (

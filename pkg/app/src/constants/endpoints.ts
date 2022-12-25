@@ -34,7 +34,7 @@ const productionEndpoints: Endpoints = [
 		url: 'https://test.graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://test.graph.dev.sub.zero.io/health',
 		chain: 'wss://node.dev.sub.zero.io',
-		default: ( ENVIRONMENT === Environment.Staging ) ? true : false,
+		default: ( ENVIRONMENT === Environment.Development ) ? true : false,
 	},
 	{
 		image: '/svg/z-ctrl-45-wht.svg',

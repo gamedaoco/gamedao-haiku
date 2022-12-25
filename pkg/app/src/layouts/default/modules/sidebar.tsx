@@ -92,7 +92,7 @@ export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 
 						{selectedAccount &&
 							(data?.organization?.slice() as any)
-								?.sort((a, b) => a?.name?.localeCompare(b?.name))
+								?.sort((a, b) => a.name?.localeCompare(b.name))
 								?.map((organization) => {
 									return (
 										<Fragment key={organization?.id}>
