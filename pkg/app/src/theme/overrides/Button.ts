@@ -4,6 +4,7 @@ import { Theme } from '@mui/material/styles'
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
+		secondary: true
 		micro: true
 		grey: true
 		lemon: true
