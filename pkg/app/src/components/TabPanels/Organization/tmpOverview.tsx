@@ -60,7 +60,7 @@ export function TmpOverview() {
 
 	useEffect(() => {
 		if (orgId && organizationByIdData && !loading) {
-			push(`/organisations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+			push(`/organizations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
 		}
 	}, [orgId, organizationByIdData])
 

@@ -1,10 +1,11 @@
 import { memo, useCallback } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
-import { Avatar, Box, Tooltip } from '@mui/material'
+import { useRouter } from 'next/router'
 import { useConfig } from 'hooks/useConfig'
 import { parseIpfsHash } from 'src/utils/ipfs'
+import { Avatar, Box, Tooltip } from '@mui/material'
+import Unknown from '@mui/icons-material/QuestionMarkOutlined'
 
 interface ComponentProps {
 	id: string
@@ -15,12 +16,11 @@ interface ComponentProps {
 }
 
 export function OrganizationButton({ id, logo, name, active, notification }: ComponentProps) {
-	const { push } = useRouter()
+
 	const config = useConfig()
+	const { push } = useRouter()
 	const url = `/organizations/${id}/dashboard`
-	const navigateCall = useCallback(() => {
-		push(`/organizations/${id}/dashboard`)
-	}, [id, push])
+	const navigateCall = useCallback(() => push(url), [push,url])
 
 	return (
 		<Tooltip title={name}>
@@ -67,6 +67,7 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 								text: { primary },
 							},
 						}) => ({
+							backgroundColor: '#00000033',
 							margin: 'auto',
 							width: '48px',
 							height: '48px',
@@ -81,11 +82,10 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 								borderRadius: '50%',
 							},
 						})}
-						alt={name}
-						src={parseIpfsHash(logo ?? '', config.IPFS_GATEWAY)}
+						alt={'name'}
+						src={parseIpfsHash( logo ?? '', config.IPFS_GATEWAY )}
 					>
-						{/* eslint-disable-next-line @next/next/no-img-element */}
-						<img alt={name} src={parseIpfsHash('QmSbag4j9xwaSWzxAMLRvzT9MDmWkAnwy7Fu3pYTKRTXYM')} />
+						{ <Unknown/> }
 					</Avatar>
 				</Link>
 			</Box>
