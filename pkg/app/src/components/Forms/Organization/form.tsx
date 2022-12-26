@@ -17,9 +17,11 @@ interface ComponentProps {
 }
 
 export function Form({ currentStep, setStep }: ComponentProps) {
-	const tmpOrgState = useTmpOrganisationState()
 	const { push } = useRouter()
 	const { t } = useTranslation()
+
+	const tmpOrgState = useTmpOrganisationState()
+
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0) {
 			push('/organizations')
@@ -62,7 +64,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		return null
 	}
 
-	console.log(tmpOrgState)
+	// console.log('xxxxxxxxxxxxxxxxxxxxxxxx\n\n','tmpOrgState',tmpOrgState)
 
 	return (
 		<>

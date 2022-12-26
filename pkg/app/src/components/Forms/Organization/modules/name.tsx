@@ -76,10 +76,14 @@ export function Name({
 	const [errorState, setErrorState] = useState<string>()
 
 	const [formState, setFormState] = useState({
-		name: { value: name, validation: Yup.string().required('A name is required') },
-		description: { value: name, validation: Yup.string().required('A description is required') },
-		url: { value: url, validation: Yup.string().matches(urlRegex, 'The url is not valid.') },
-		location: { value: location, validation: null },
+		name: { value: name, validation: Yup.string().required('A name is required'), set: setName },
+		description: {
+			value: name,
+			validation: Yup.string().required('A description is required'),
+			set: setDescription,
+		},
+		url: { value: url, validation: Yup.string().matches(urlRegex, 'The url is not valid.'), set: setUrl },
+		location: { value: location, validation: null, set: setLocation },
 		tags: { value: tags, validation: null },
 	})
 
@@ -89,31 +93,48 @@ export function Name({
 	}, [tags])
 
 	const handleNameChange = useCallback(
-		(event) => {
+		(e) => {
 			if (setName) {
 				try {
-					validationNameSchema.validateSync(event.target.value)
+					validationNameSchema.validateSync(e.target.value)
 					setErrorState(null)
 				} catch (err) {
 					setErrorState(err.message)
 				}
-				setName(event.target.value)
+				setName(e.target.value)
 			}
+			const content = formState[e.target.name]
+			setFormState({
+				...formState,
+				[e.target.name]: {
+					...content,
+					value: e.target.value,
+				},
+			})
 		},
 		[setName, setErrorState],
 	)
 
 	const handleDescriptionChange = useCallback(
-		(event) => {
+		(e) => {
 			if (setDescription) {
 				try {
-					validationDescriptionSchema.validateSync(event.target.value)
+					validationDescriptionSchema.validateSync(e.target.value)
 					setErrorState(null)
 				} catch (err) {
 					setErrorState(err.message)
 				}
-				setDescription(event.target.value)
+				setDescription(e.target.value)
 			}
+
+			const content = formState[e.target.name]
+			setFormState({
+				...formState,
+				[e.target.name]: {
+					...content,
+					value: e.target.value,
+				},
+			})
 		},
 		[setDescription, setErrorState],
 	)
@@ -140,20 +161,24 @@ export function Name({
 	}
 
 	const handleUpdate = (e) => {
-		console.log(e.target.name, e.target.value)
-
-		// try  { formState[e.target.name].validation( e.target.value) }
+		// console.log('formState[e.target.name]',formState[e.target.name])
+		// try  { formState[e.target.name].validation( formState[e.target.name].value ) }
 		// catch (err) { console.log( 'validation failed' ) }
-
+		const content = formState[e.target.name]
 		setFormState({
 			...formState,
-			[e.target.name]: { value: e.target.value },
+			[e.target.name]: {
+				...content,
+				value: e.target.value,
+			},
 		})
+		content.set(e.target.value)
 	}
 
 	return (
-		<BaseForm title={'Organization Basics'} error={errorState}>
+		<BaseForm title={'Organization'} error={errorState}>
 			<TextField
+				name="name"
 				fullWidth
 				onChange={handleNameChange}
 				value={name}
@@ -163,6 +188,7 @@ export function Name({
 				error={!!errorState}
 			/>
 			<TextField
+				name="description"
 				fullWidth
 				multiline
 				minRows={4}
@@ -178,7 +204,7 @@ export function Name({
 				name="url"
 				onChange={handleUpdate}
 				fullWidth
-				value={formState.url.value}
+				value={url}
 				label="Website"
 				placeholder="https://coolsite.xyz"
 				variant="outlined"
@@ -187,7 +213,7 @@ export function Name({
 				name="location"
 				onChange={handleUpdate}
 				fullWidth
-				value={formState.location.value}
+				value={location}
 				label="Location"
 				placeholder=""
 				variant="outlined"

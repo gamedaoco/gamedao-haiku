@@ -16,11 +16,10 @@ interface ComponentProps {
 }
 
 export function OrganizationButton({ id, logo, name, active, notification }: ComponentProps) {
-
 	const config = useConfig()
 	const { push } = useRouter()
 	const url = `/organizations/${id}/dashboard`
-	const navigateCall = useCallback(() => push(url), [push,url])
+	const navigateCall = useCallback(() => push(url), [push, url])
 
 	return (
 		<Tooltip title={name}>
@@ -83,9 +82,9 @@ export function OrganizationButton({ id, logo, name, active, notification }: Com
 							},
 						})}
 						alt={'name'}
-						src={parseIpfsHash( logo ?? '', config.IPFS_GATEWAY )}
+						src={parseIpfsHash(logo ?? '', config.IPFS_GATEWAY)}
 					>
-						{ <Unknown/> }
+						{<Unknown />}
 					</Avatar>
 				</Link>
 			</Box>
