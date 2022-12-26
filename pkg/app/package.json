@@ -89,6 +89,7 @@
     "@graphql-codegen/typescript-operations": "^2.4.2",
     "@graphql-codegen/typescript-react-apollo": "^3.2.16",
     "@graphql-codegen/typescript-resolvers": "^2.6.6",
+    "@next/bundle-analyzer": "^13.1.1",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",

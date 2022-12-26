@@ -17,6 +17,10 @@ sitemap({
 	},
 })
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -27,21 +31,22 @@ const withMDX = require('@next/mdx')({
   },
 })
 
-module.exports = withMDX({
-	pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-	reactStrictMode: true,
-	env: {
-		BUILD_TIME: dateStr.toString(),
-		BUILD_TIMESTAMP: +date,
-		APP_NAME: pkg.name,
-		APP_VERSION: pkg.version,
-		VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
-		VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
-		VERCEL_ENV: process.env.VERCEL_ENV || ''
-	},
-	poweredByHeader: false,
-	experiments: {
-		topLevelAwait: true,
-	},
-})
-
+module.exports = withBundleAnalyzer(
+	withMDX({
+		pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+		reactStrictMode: true,
+		env: {
+			BUILD_TIME: dateStr.toString(),
+			BUILD_TIMESTAMP: +date,
+			APP_NAME: pkg.name,
+			APP_VERSION: pkg.version,
+			VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
+			VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
+			VERCEL_ENV: process.env.VERCEL_ENV || ''
+		},
+		poweredByHeader: false,
+		experiments: {
+			topLevelAwait: true,
+		},
+	})
+)

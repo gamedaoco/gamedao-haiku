@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { alpha, useTheme } from '@mui/material/styles'
 import { ApexOptions } from 'apexcharts'
 
-import { Chart } from 'components/Charts/chart'
+import { Chart } from './chart'
 
 interface ComponentProps {
 	categories: any
