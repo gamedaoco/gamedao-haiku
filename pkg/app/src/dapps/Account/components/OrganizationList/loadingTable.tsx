@@ -6,15 +6,10 @@ import Skeleton from '@mui/material/Skeleton'
 const LoadingTable: FC = () => {
 	return (
 		<TableBody>
-			{[1, 2, 3, 4, 5]?.map((index) => (
+			{new Array(3).map((index) => (
 				<TableRow hover key={index}>
 					<TableCell>
-						<Box
-							sx={{
-								alignItems: 'center',
-								display: 'flex',
-							}}
-						>
+						<Box sx={{ alignItems: 'center', display: 'flex' }}>
 							<Skeleton variant="circular" width={40} height={40} />
 							<Box sx={{ ml: 1, width: 300 }}>
 								<Skeleton animation="wave" />
@@ -22,16 +17,20 @@ const LoadingTable: FC = () => {
 						</Box>
 					</TableCell>
 					<TableCell>
-						<Skeleton />
+						{' '}
+						<Skeleton />{' '}
 					</TableCell>
 					<TableCell>
-						<Skeleton width={300} />
+						{' '}
+						<Skeleton width={300} />{' '}
 					</TableCell>
 					<TableCell>
+						{' '}
 						<Skeleton />
 					</TableCell>
 					<TableCell align="right">
-						<Skeleton width={20} />
+						{' '}
+						<Skeleton width={20} />{' '}
 					</TableCell>
 				</TableRow>
 			))}

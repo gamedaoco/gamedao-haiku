@@ -27,7 +27,7 @@ const initialState = (identity: Identity) => ({
 	discord: identity?.discord || '',
 	web3name: identity?.web3name || '',
 })
-export function IdentityForm() {
+export function MyIdentity() {
 	const { t } = useTranslation()
 	const address = useCurrentAccountAddress()
 	const { loading, data, error } = useIdentityByAddressSubscription({
@@ -115,7 +115,7 @@ export function IdentityForm() {
 				txCallback={() => handleModalClose('clear')}
 			/>
 			<form>
-				<Card sx={{ borderRadius: '16px' }} variant={'glass'}>
+				<Card variant={'glass'}>
 					<CardContent>
 						<Typography variant="h5">{t('button:navigation:set_on_chain_identity')}</Typography>
 

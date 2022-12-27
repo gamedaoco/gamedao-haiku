@@ -29,8 +29,14 @@
       "config/*": [
         "src/config/*"
       ],
+      "constants/*": [
+        "src/constants/*"
+      ],
       "components/*": [
         "src/components/*"
+      ],
+      "dapps/*": [
+        "src/dapps/*"
       ],
       "data/*": [
         "src/data/*"
