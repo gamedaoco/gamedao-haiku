@@ -42,7 +42,6 @@ import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
 export function OrganisationById() {
-
 	const { query, push } = useRouter()
 	const config = useConfig()
 	const theme = useTheme()
@@ -147,7 +146,6 @@ export function OrganisationById() {
 		console.log('================================')
 		console.log('organization metadata', metaData)
 		console.log('================================')
-
 		;(async (): Promise<string> => {
 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 				type: 'text/plain',
@@ -155,11 +153,9 @@ export function OrganisationById() {
 			const cid = await uploadFileToIpfs(file)
 			return cid.toString()
 		})().then((cid) => {
-			console.log(cid,cache)
+			console.log(cid, cache)
 			cache.setMetaDataCID(cid)
 		})
-
-
 	}, [cache])
 
 	useEffect(() => {

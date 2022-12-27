@@ -172,11 +172,11 @@ export function Name({
 				value: e.target.value,
 			},
 		})
-		console.log (JSON.stringify(content))
+		console.log(JSON.stringify(content))
 		content.set(e.target.value)
 	}
 
-	console.log( url, setUrl )
+	console.log(url, setUrl)
 
 	return (
 		<BaseForm title={'Organization'} error={errorState}>

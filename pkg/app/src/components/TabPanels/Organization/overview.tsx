@@ -39,7 +39,6 @@ export function Overview({
 	showTxModalType,
 	addMemberTx,
 }: ComponentProps) {
-
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const { push } = useRouter()
@@ -170,9 +169,8 @@ export function Overview({
 			url: organization?.url,
 			tags: organization?.tags,
 		})
-		console.log('orgData',orgData)
+		console.log('orgData', orgData)
 	}, [organization])
-
 
 	return (
 		<>
