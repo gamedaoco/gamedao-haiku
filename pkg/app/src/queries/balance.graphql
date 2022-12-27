@@ -10,7 +10,7 @@ subscription BalanceByAddress($address: String!) {
 
 subscription HistoricalBalance(
   $address: String!,
-  $symbol: String!
+  $symbol: String
 ) {
   historical_balance(
     where: {
@@ -22,6 +22,7 @@ subscription HistoricalBalance(
     free
     reserved
     total
+    currency_id
   }
 }
 

@@ -56,7 +56,6 @@ export function OrganisationById() {
 	const [proposalIdState, setProposalIdState] = useState<string>(null)
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const [isMemberState, setIsMemberState] = useState<boolean>(false)
-	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 
 	const { loading, data, error } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
@@ -65,6 +64,7 @@ export function OrganisationById() {
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
 
+	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 	const handleOpenTxModal = useCallback(() => {
 		setShowTxModalType(true)
 	}, [setShowTxModalType])

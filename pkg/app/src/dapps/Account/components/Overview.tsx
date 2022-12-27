@@ -13,16 +13,16 @@ export function Overview() {
 
 	return (
 		<Grid container spacing={theme.spacing(2)}>
-			<Grid item xs={12} md={12}>
-				<MyBalancesChart />
-			</Grid>
-
-			<Grid item xs={12} md={9}>
+			<Grid item xs={12} md={6}>
 				<MyBalances />
 			</Grid>
 
-			<Grid item xs={12} md={3}>
+			<Grid item xs={12} md={6}>
 				<MyAchievements />
+			</Grid>
+
+			<Grid item xs={12} md={12}>
+				<MyBalancesChart symbol="ZERO" />
 			</Grid>
 
 			<Grid item xs={12}>

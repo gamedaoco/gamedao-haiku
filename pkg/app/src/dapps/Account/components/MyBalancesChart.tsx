@@ -28,11 +28,14 @@ import { StackedAreaChart } from 'components/Charts/StackedAreaChart'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 
-export function MyBalancesChart() {
+interface IBalancesChart {
+	symbol: string
+}
+export function MyBalancesChart({ symbol = 'ZERO' }: IBalancesChart) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 
-	const symbol = 'ZERO'
+	// const symbol = 'ZERO'
 
 	const systemProperties = useSystemProperties()
 	const tokenDecimals = systemProperties.tokenDecimals?.[systemProperties.networkCurrency]
@@ -42,7 +45,7 @@ export function MyBalancesChart() {
 		variables: { address: address, symbol: symbol },
 	})
 	const [series, setSeries] = useState([])
-	const [categories, setCategories] = useState()
+	const [categories, setCategories] = useState([])
 
 	// series: [{
 	// 	name: 'ZERO',
@@ -54,19 +57,17 @@ export function MyBalancesChart() {
 		if (!data) return
 
 		const _symbol = symbol
-		const _total = data.historical_balance.map((balance) => toUnit(balance.total, tokenDecimals))
+		// const _total = data.historical_balance.map((balance) => toUnit(balance.total, tokenDecimals))
 		const _free = data.historical_balance.map((balance) => toUnit(balance.free, tokenDecimals))
 		const _reserved = data.historical_balance.map((balance) => toUnit(balance.reserved, tokenDecimals))
-		const _blocked = data.historical_balance.map((balance) => toUnit(balance.block, tokenDecimals))
 		const _categories = data.historical_balance.map((balance) => balance.block)
 
-		// console.log( 'data', _symbol,_series,_categories)
+		console.log('data', _symbol, _categories)
 
 		setSeries([
-			{ name: 'Total', data: _total },
+			// { name: 'Total', data: _total },
 			{ name: 'Free', data: _free },
 			{ name: 'Reserved', data: _reserved },
-			{ name: 'Locked', data: _blocked },
 		])
 		setCategories(_categories)
 	}, [data, tokenDecimals])
@@ -78,10 +79,7 @@ export function MyBalancesChart() {
 			<CardContent>
 				<Typography variant="h5">Balance History</Typography>
 
-				<StackedAreaChart
-					// categories={categories}
-					series={series}
-				/>
+				{series && <StackedAreaChart categories={categories} series={series} height={200} />}
 
 				{/*				{ balances &&
 					<RadialChart

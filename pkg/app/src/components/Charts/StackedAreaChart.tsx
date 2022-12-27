@@ -8,7 +8,7 @@ import { Chart } from './chart'
 interface ComponentProps {
 	categories?: any
 	series: any
-	height: number
+	height?: number
 	width?: number
 	options?: any
 }
@@ -21,7 +21,7 @@ export function StackedAreaChart({ categories, series, height, options = null }:
 	const chartOptions: ApexOptions = {
 		chart: {
 			background: 'transparent',
-			stacked: false,
+			stacked: true,
 			toolbar: { show: false },
 		},
 		// colors: [
@@ -41,15 +41,17 @@ export function StackedAreaChart({ categories, series, height, options = null }:
 		stroke: { width: 1, curve: 'smooth' },
 		theme: { mode: theme.palette.mode },
 		xaxis: {
-			type: 'number',
+			type: 'numeric',
 			axisBorder: { show: false },
 			axisTicks: { show: true },
 			categories: categories,
 			labels: { show: false },
 		},
 		tooltip: { x: { format: 'dd/MM/yy' } },
-		yaxis: [{ show: false }],
+		yaxis: [{ show: true }],
 	}
 
-	return <Chart options={chartOptions} series={series} type="area" height={250} />
+	if (!categories || !series) return null
+
+	return <Chart options={chartOptions} series={series} type="area" height={height || 250} />
 }

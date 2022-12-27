@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react'
+import { FC, useCallback, useState, Fragment } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
@@ -17,9 +17,38 @@ import Edit from '@mui/icons-material/TuneSharp'
 import ExitToAppSharpIcon from '@mui/icons-material/ExitToAppSharp'
 
 import { Avatar, Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 import { Scrollbar } from 'components/scrollbar'
-
 import LoadingTable from './loadingTable'
+
+interface IExitProps {
+	id: string
+}
+
+const ExitOrganizationButton = ({ id }: IExitProps) => {
+	const address = useCurrentAccountAddress()
+
+	const removeMemberTx = useRemoveMemberTransaction(id || null)
+
+	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
+	const handleOpenTxModal = useCallback(() => setShowTxModalType(true), [setShowTxModalType])
+	const handleCloseTxModal = useCallback(() => setShowTxModalType(false), [setShowTxModalType])
+
+	return (
+		<Fragment>
+			<IconButton onClick={handleOpenTxModal}>
+				{' '}
+				<ExitToAppSharpIcon />{' '}
+			</IconButton>
+			<TransactionDialog
+				open={showTxModalType}
+				onClose={() => handleCloseTxModal()}
+				txData={removeMemberTx}
+				txCallback={() => handleCloseTxModal()}
+			/>
+		</Fragment>
+	)
+}
 
 interface IProps {
 	organizations: Organization[]
@@ -29,8 +58,6 @@ export const OrganizationList = ({ organizations }: IProps) => {
 	const config = useConfig()
 	const { push } = useRouter()
 	const { t } = useTranslation()
-
-	const removeMemberTx = useRemoveMemberTransaction(id)
 
 	// admin === organization.prime
 	const address = useCurrentAccountAddress()
@@ -42,10 +69,6 @@ export const OrganizationList = ({ organizations }: IProps) => {
 		[push],
 	)
 	const linkOrganization = (id: string) => `/organizations/${id}/dashboard`
-	const leaveOrganization = useCallback((id: string) => {
-		console.log('leave')
-		removeMemberTx(id)
-	}, [])
 
 	return (
 		<Scrollbar>
@@ -101,15 +124,7 @@ export const OrganizationList = ({ organizations }: IProps) => {
 											<Edit />{' '}
 										</IconButton>
 									)}
-									{!isAdmin(organization.prime) && (
-										<IconButton
-											aria-label="edit"
-											onClick={() => leaveOrganization(organization.id)}
-										>
-											{' '}
-											<ExitToAppSharpIcon />{' '}
-										</IconButton>
-									)}
+									{!isAdmin(organization.prime) && <ExitOrganizationButton id={organization.id} />}
 								</TableCell>
 							</TableRow>
 						))}
