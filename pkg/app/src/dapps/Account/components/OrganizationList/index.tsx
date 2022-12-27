@@ -3,9 +3,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
-import { useConfig } from 'hooks/useConfig'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { Organization } from 'src/queries'
+import { useConfig } from 'hooks/useConfig'
+import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+
 import { getInitials } from 'src/utils/accountUtils'
 import { reformatNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
@@ -28,6 +30,8 @@ export const OrganizationList = ({ organizations }: IProps) => {
 	const { push } = useRouter()
 	const { t } = useTranslation()
 
+	const removeMemberTx = useRemoveMemberTransaction(id)
+
 	// admin === organization.prime
 	const address = useCurrentAccountAddress()
 	const isAdmin = useCallback((admin: string) => admin === address, [address])
@@ -40,6 +44,7 @@ export const OrganizationList = ({ organizations }: IProps) => {
 	const linkOrganization = (id: string) => `/organizations/${id}/dashboard`
 	const leaveOrganization = useCallback((id: string) => {
 		console.log('leave')
+		removeMemberTx(id)
 	}, [])
 
 	return (

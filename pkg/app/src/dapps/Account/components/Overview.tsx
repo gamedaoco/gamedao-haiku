@@ -5,6 +5,7 @@ import { Grid } from '@mui/material'
 import { MyOrganizations } from './MyOrganizations'
 import { MyAchievements } from './MyAchievements'
 import { MyBalances } from './MyBalances'
+import { MyBalancesChart } from './MyBalancesChart'
 import { MyCollectables } from './MyCollectables'
 
 export function Overview() {
@@ -12,11 +13,15 @@ export function Overview() {
 
 	return (
 		<Grid container spacing={theme.spacing(2)}>
-			<Grid item xs={12} md={8}>
+			<Grid item xs={12} md={12}>
+				<MyBalancesChart />
+			</Grid>
+
+			<Grid item xs={12} md={9}>
 				<MyBalances />
 			</Grid>
 
-			<Grid item xs={12} md={4}>
+			<Grid item xs={12} md={3}>
 				<MyAchievements />
 			</Grid>
 

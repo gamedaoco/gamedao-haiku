@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { Organization, useOrganizationsByAccountSubscription } from 'src/queries'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import AddIcon from '@mui/icons-material/Add'
 import { Card, CardContent, Typography, Box, Button, Stack } from '@mui/material'
