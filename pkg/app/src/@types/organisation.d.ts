@@ -31,8 +31,8 @@ export interface TMPOrganisationState extends TMPOrganisation {
 	setDescription: (string) => void
 	setMetaDataCID: (string) => void
 	setDeposit: (number) => void
-	clearAll: () => void
 	setLocation: (string) => void
 	setUrl: (string) => void
 	setTags: ([]) => void
+	clearAll: () => void
 }

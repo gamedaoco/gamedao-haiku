@@ -42,25 +42,26 @@ import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
 export function OrganisationById() {
+
 	const { query, push } = useRouter()
 	const config = useConfig()
 	const theme = useTheme()
 	const { t } = useTranslation()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
 
 	const [routeState, setRouteState] = useState<string>(null)
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
-
 	const [organizationIdState, setOrganizationIdState] = useState<string>(null)
 	const [proposalIdState, setProposalIdState] = useState<string>(null)
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const [isMemberState, setIsMemberState] = useState<boolean>(false)
+	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 
 	const { loading, data, error } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
 	})
-
-	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
-
 	const addMemberTx = useAddMemberTransaction(organizationIdState)
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
@@ -71,10 +72,6 @@ export function OrganisationById() {
 	const handleCloseTxModal = useCallback(() => {
 		setShowTxModalType(false)
 	}, [setShowTxModalType])
-
-	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-		defaultMatches: true,
-	})
 
 	const handleInvalidUrl = useCallback(() => {
 		push('/')
@@ -98,7 +95,6 @@ export function OrganisationById() {
 		if (!files || files.length === 0) {
 			return createWarningNotification('No file selected')
 		}
-
 		const cid = await uploadFileToIpfs(files[0])
 		setter(cid.toString())
 	}, [])
@@ -136,28 +132,35 @@ export function OrganisationById() {
 	// Update and upload metadata
 
 	useEffect(() => {
-		if (cache.name && cache.description && cache.logoCID && cache.headerCID) {
-			const metaData = {
-				name: cache.name,
-				description: cache.description,
-				logo: cache.logoCID,
-				header: cache.headerCID,
-				url: cache.url,
-				location: cache.location,
-				tags: cache.tags,
-			}
-			console.log('================================')
-			console.log('organization metadata', metaData)
-			console.log('================================')
-			;(async (): Promise<string> => {
-				const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
-					type: 'text/plain',
-				})
-				const cid = await uploadFileToIpfs(file)
-				return cid.toString()
-			})().then((cid) => cache.setMetaDataCID(cid))
+		if (!cache) return
+
+		const metaData = {
+			name: cache.name,
+			description: cache.description,
+			logo: cache.logoCID,
+			header: cache.headerCID,
+			url: cache.url,
+			location: cache.location,
+			tags: cache.tags,
 		}
-	}, [cache.name, cache.description, cache.logoCID, cache.headerCID])
+
+		console.log('================================')
+		console.log('organization metadata', metaData)
+		console.log('================================')
+
+		;(async (): Promise<string> => {
+			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
+				type: 'text/plain',
+			})
+			const cid = await uploadFileToIpfs(file)
+			return cid.toString()
+		})().then((cid) => {
+			console.log(cid,cache)
+			cache.setMetaDataCID(cid)
+		})
+
+
+	}, [cache])
 
 	useEffect(() => {
 		if (data) {

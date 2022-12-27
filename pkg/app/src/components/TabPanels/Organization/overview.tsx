@@ -39,10 +39,13 @@ export function Overview({
 	showTxModalType,
 	addMemberTx,
 }: ComponentProps) {
+
 	const theme = useTheme()
-	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
 	const { push } = useRouter()
+
+	const removeMemberTx = useRemoveMemberTransaction(organizationId)
+
 	const series1 = [
 		{
 			name: 'Members',
@@ -167,7 +170,9 @@ export function Overview({
 			url: organization?.url,
 			tags: organization?.tags,
 		})
+		console.log('orgData',orgData)
 	}, [organization])
+
 
 	return (
 		<>
@@ -203,7 +208,7 @@ export function Overview({
 									</Typography>
 								</Stack>
 							)}
-							{orgData.location && (
+							{organization?.location && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 									<FmdGood /> <Typography variant="body2">{orgData.location}</Typography>
 								</Stack>
@@ -213,7 +218,7 @@ export function Overview({
 									<VpnKey /> <Typography variant="body2">{access_model.status} </Typography>
 								</Stack>
 							)}
-							{orgData.url && (
+							{organization?.url && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 									<InsertLink /> <Typography variant="body2"> {orgData.url} </Typography>
 								</Stack>

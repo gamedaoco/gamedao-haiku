@@ -121,13 +121,13 @@ export function Settings({
 				<Box sx={{ width: '100%' }}>
 					<FormControlLabel
 						sx={{ display: 'block' }}
-						control={<Checkbox checked={hasWhitelist} onChange={handleWhitelistChange} />}
-						label="Whitelist (Members can be added later)"
+						control={<Checkbox checked={hasApplication} onChange={handleApplicationChange} />}
+						label="Apply + Approve"
 					/>
 					<FormControlLabel
 						sx={{ display: 'block' }}
-						control={<Checkbox checked={hasApplication} onChange={handleApplicationChange} />}
-						label="Application"
+						control={<Checkbox checked={hasWhitelist} onChange={handleWhitelistChange} />}
+						label="Whitelist (Members can be added later)"
 					/>
 				</Box>
 			)}

@@ -78,12 +78,12 @@ export function Name({
 	const [formState, setFormState] = useState({
 		name: { value: name, validation: Yup.string().required('A name is required'), set: setName },
 		description: {
-			value: name,
+			value: description,
 			validation: Yup.string().required('A description is required'),
 			set: setDescription,
 		},
-		url: { value: url, validation: Yup.string().matches(urlRegex, 'The url is not valid.'), set: setUrl },
-		location: { value: location, validation: null, set: setLocation },
+		url: { value: url, validation: Yup.string().matches(urlRegex, 'The url is not valid.'), set: (u) => setUrl(u) },
+		location: { value: location, validation: null, set: (l) => setLocation(l) },
 		tags: { value: tags, validation: null },
 	})
 
@@ -172,8 +172,11 @@ export function Name({
 				value: e.target.value,
 			},
 		})
+		console.log (JSON.stringify(content))
 		content.set(e.target.value)
 	}
+
+	console.log( url, setUrl )
 
 	return (
 		<BaseForm title={'Organization'} error={errorState}>

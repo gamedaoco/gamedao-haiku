@@ -224,7 +224,6 @@ export function TmpOverview() {
 										<InputAdornment
 											sx={{ borderRadius: '2px', p: '.75rem', m: 0 }}
 											position="start"
-											variant="outlined"
 										>
 											GAME
 										</InputAdornment>
