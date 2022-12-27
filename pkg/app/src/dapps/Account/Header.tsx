@@ -1,23 +1,24 @@
 import React, { useCallback, useMemo } from 'react'
-
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
+import md5 from 'md5'
 
-import Verified from '@mui/icons-material/Verified'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
-import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
+import { AccountTabs } from 'constants/account'
+
+import { useExtensionContext } from 'providers/extension/modules/context'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
-import md5 from 'md5'
-import { useTranslation } from 'react-i18next'
-import { AccountTabs } from 'src/@types/account'
-import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
-import { createInfoNotification } from 'src/utils/notificationUtils'
 
-import { useExtensionContext } from 'providers/extension/modules/context'
+import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'utils/accountUtils'
+import { createInfoNotification } from 'utils/notificationUtils'
 import { avatarImageURL } from 'utils/avatars'
 
-export function IdentitySection() {
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import Verified from '@mui/icons-material/Verified'
+import { Avatar, Box, Button, Chip, Grid, IconButton, Typography } from '@mui/material'
+
+export function Header() {
 	const { push } = useRouter()
 	const { t } = useTranslation()
 
@@ -33,7 +34,6 @@ export function IdentitySection() {
 		navigator.clipboard.writeText(address).then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [address, t])
 
-	console.log(identity)
 	return (
 		<Grid container justifyContent="space-between" spacing={3}>
 			<Grid

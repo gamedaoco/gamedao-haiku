@@ -126,27 +126,49 @@ subscription OrganizationById($orgId: String!) {
         }
     }
 }
-subscription AccountOrganizations($address: String!) {
-    identity_by_pk(id: $address){
-        id
-        organization_members {
-            id
-            state
-            organization {
-                id
-                name
-                logo
-                access_model
-                creator
-                organization_members {
-                    address
-                    identity {
-                        display_name
-                        image
-                        email
-                    }
-                }
-            }
-        }
+subscription OrganizationsByAccount($address: String!) {
+  organization(where: {organization_members: {address: {_eq: $address}}}) {
+    id
+    name
+    description
+    creator
+    prime
+    member_limit
+    membership_fee
+    access_model
+    deposit
+    slug
+    logo
+    organization_members_aggregate {
+      aggregate {
+        count
+      }
     }
+    organization_members (where: {address: {_eq: $address}}){
+      address
+      state
+    }
+  }
+    # identity_by_pk(id: $address){
+    #     id
+    #     organization_members {
+    #         id
+    #         state
+    #         organization {
+    #             id
+    #             name
+    #             logo
+    #             access_model
+    #             creator
+    #             organization_members {
+    #                 address
+    #                 identity {
+    #                     display_name
+    #                     image
+    #                     email
+    #                 }
+    #             }
+    #         }
+    #     }
+    # }
 }

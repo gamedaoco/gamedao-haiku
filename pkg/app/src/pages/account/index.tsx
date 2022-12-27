@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { AccountTabs } from 'src/@types/account'
+import { AccountTabs } from 'constants/account'
 
-export function AccountPage() {
+export function Page() {
 	const { push } = useRouter()
 
 	useEffect(() => {
@@ -10,4 +10,4 @@ export function AccountPage() {
 	}, [push])
 }
 
-export default AccountPage
+export default Page

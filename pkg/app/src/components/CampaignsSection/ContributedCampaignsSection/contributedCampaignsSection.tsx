@@ -21,44 +21,39 @@ export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 
 	return (
 		<Box>
-			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold} sx={{ pb: 4 }}>
+			{/*			<Typography variant="body2" fontWeight={theme.typography.fontWeightBold} sx={{ pb: 4 }}>
 				{t('page:account:campaigns:contributed_campaigns')}
-			</Typography>
-			<Card>
-				<CardContent>
-					<Typography variant="h6" sx={{ mb: 2 }}>
-						{t('page:account:campaigns:campaign_contributions')}
-					</Typography>
+			</Typography>*/}
 
-					<Scrollbar>
-						<Table>
-							<TableHead>
-								<TableRow>
-									<TableCell>{t('page:account:campaigns:name')}</TableCell>
-									<TableCell>{t('page:account:campaigns:contributors')}</TableCell>
-									<TableCell>{t('page:account:campaigns:investment')}</TableCell>
-									<TableCell>{t('page:account:campaigns:raised_goal')}</TableCell>
-									<TableCell>{t('page:account:campaigns:time_left')}</TableCell>
-									<TableCell>{t('page:account:campaigns:status')}</TableCell>
-								</TableRow>
-							</TableHead>
-							{loading ? (
-								<LoadingCampaignTable />
-							) : (
-								<TableBody>
-									{data?.campaign_contributor?.map((campaignContributor) => (
-										<Fragment key={campaignContributor?.id}>
-											<TableItem
-												campaignContributor={campaignContributor as Campaign_Contributor}
-											/>
-										</Fragment>
-									))}
-								</TableBody>
-							)}
-						</Table>
-					</Scrollbar>
-				</CardContent>
-			</Card>
+			<Typography variant="h6" sx={{ mb: 2 }}>
+				{t('page:account:campaigns:campaign_contributions')}
+			</Typography>
+
+			<Scrollbar>
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableCell>{t('page:account:campaigns:name')}</TableCell>
+							<TableCell>{t('page:account:campaigns:contributors')}</TableCell>
+							<TableCell>{t('page:account:campaigns:investment')}</TableCell>
+							<TableCell>{t('page:account:campaigns:raised_goal')}</TableCell>
+							<TableCell>{t('page:account:campaigns:time_left')}</TableCell>
+							<TableCell>{t('page:account:campaigns:status')}</TableCell>
+						</TableRow>
+					</TableHead>
+					{loading ? (
+						<LoadingCampaignTable />
+					) : (
+						<TableBody>
+							{data?.campaign_contributor?.map((campaignContributor) => (
+								<Fragment key={campaignContributor?.id}>
+									<TableItem campaignContributor={campaignContributor as Campaign_Contributor} />
+								</Fragment>
+							))}
+						</TableBody>
+					)}
+				</Table>
+			</Scrollbar>
 		</Box>
 	)
 }
