@@ -12,7 +12,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { ContentTabs } from 'constants/battlepass'
+import { DApps } from 'constants/dapps'
 
 import { useOrganizationByIdSubscription } from 'src/queries'
 import { Loader } from 'components/Loader'
@@ -21,7 +21,7 @@ export function Page() {
 	const { query, push } = useRouter()
 	const id = query?.id as string
 
-	// console.log(id, ContentTabs)
+	// console.log(id, DApps)
 	// const resolve = id.startsWith('0x')
 	const { loading, data, error } = useOrganizationByIdSubscription({ variables: { orgId: id } })
 
@@ -32,10 +32,10 @@ export function Page() {
 	useEffect(() => {
 		if (!data?.organization) return
 		if (data?.organization[0]) {
-			// const name = data?.organization[0].name
-			// console.log(name)
-			const p = `/v1/${id}/${ContentTabs.BATTLEPASS}`
-			// console.log(p)
+			const name = data?.organization[0].name
+			console.log(name)
+			const p = `/v1/${id}/${DApps.BATTLEPASS}`
+			console.log(p)
 			push(p)
 		}
 	}, [id, data?.organization, push])

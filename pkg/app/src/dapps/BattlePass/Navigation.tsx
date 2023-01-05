@@ -93,7 +93,7 @@ export function Navigation({ id, path, organization }: TProps) {
 				pr={isMd ? '1rem' : 0}
 			>
 				<Tabs
-					centered={isMd}
+					centered={true}
 					scrollButtons
 					allowScrollButtonsMobile
 					textColor="primary"
