@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
-import { DApps } from 'constants/dapps'
+import { ContentTabs } from 'constants/battlepass'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { Layout } from 'layouts/v1'
 
@@ -11,6 +11,8 @@ import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnecte
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 export function Page() {
+	// TODO: decompose dapp/module routing
+
 	const { t } = useTranslation()
 	const { query } = useRouter()
 

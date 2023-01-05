@@ -72,34 +72,6 @@ export function Navigation({ id, path, organization }: TProps) {
 							disabled: !isBattlePass,
 					  }
 					: null,
-				true
-					? {
-							label: 'Overview',
-							value: ContentTabs.OVERVIEW,
-							// disabled: !isMember,
-					  }
-					: null,
-				isMember
-					? {
-							label: 'Governance',
-							value: ContentTabs.GOVERNANCE,
-							// disabled: !isMember,
-					  }
-					: null,
-				true
-					? {
-							label: 'Members',
-							value: ContentTabs.MEMBERS,
-							// disabled: !isPrime,
-					  }
-					: null,
-				isPrime
-					? {
-							label: 'Settings',
-							value: ContentTabs.SETTINGS,
-							disabled: !isPrime,
-					  }
-					: null,
 			].filter((item) => item !== null),
 		[isBattlePass, isMember, isPrime],
 	)
@@ -128,7 +100,7 @@ export function Navigation({ id, path, organization }: TProps) {
 					indicatorColor="primary"
 					sx={{ pl: isMd ? '200px' : 0, height: 60 }}
 					onChange={handleTabChange}
-					value={path || ContentTabs.OVERVIEW}
+					value={path || ContentTabs.BATTLEPASS}
 				>
 					{tabs.map((tab, i) => (
 						<Tab key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />

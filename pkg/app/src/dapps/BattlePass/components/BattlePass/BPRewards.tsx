@@ -28,7 +28,7 @@ const IconGroup = () => {
 
 type TGridItemProps = {
 	index?: number
-	content?: object
+	content?: any // TODO: type content
 }
 
 export const BPRewardItem = ({ index, content }: TGridItemProps) => {
@@ -85,7 +85,7 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 
 					<IconGroup />
 				</CardContent>
-				<Button fullWidth variant="pink" size="xs">
+				<Button fullWidth variant="pink">
 					Claim
 				</Button>
 			</Box>

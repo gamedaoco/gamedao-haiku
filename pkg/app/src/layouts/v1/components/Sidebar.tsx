@@ -12,7 +12,7 @@ import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { OrganizationButtonMemoized } from './OrganizationButton'
-import AccountSelector from 'components/AccountSelector/accountSelector'
+import { AccountSelector } from 'components/AccountSelector/accountSelector'
 
 interface ComponentProps {
 	showHeader?: boolean

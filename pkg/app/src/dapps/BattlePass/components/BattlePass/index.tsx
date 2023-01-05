@@ -1,4 +1,4 @@
-import { ContentTabs } from 'constants/dapps'
+import { ContentTabs } from 'constants/battlepass'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Typography, Grid, Button } from '@mui/material'
