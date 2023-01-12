@@ -8,44 +8,44 @@ import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
-	organizationId: Yup.string().required(),
+	battlepassId: Yup.string().required(),
 	accountId: Yup.string().required(),
 })
 
-export function useJoinBattlePassTX(organizationId: string): TransactionData {
+export function useJoinBattlePassTX(battlepassId: string): TransactionData {
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const [txState, setTxState] = useState<TransactionData>(null)
 
 	const address = useCurrentAccountAddress()
-	const logger = useLogger('useAddMemberTransaction')
+	const logger = useLogger('useJoinBattlePassTX')
 
 	useEffect(() => {
-		if (selectedApiProvider?.apiProvider && address && organizationId) {
+		if (selectedApiProvider?.apiProvider && address && battlepassId) {
 			try {
 				// Data mapping
 				const mappedData = {
-					organizationId: organizationId,
+					battlepassId: battlepassId,
 					accountId: address,
 				}
 
 				// Data validation
 				validation.validateSync(mappedData)
 
-				const tx = selectedApiProvider.apiProvider.tx.control.addMember(
-					mappedData.organizationId,
+				const tx = selectedApiProvider.apiProvider.tx.battlepass.claimBattlepass(
+					mappedData.battlepassId,
 					mappedData.accountId,
 				)
 
 				setTxState({
 					tx,
-					title: 'Join BattlePass',
+					title: 'Join Battlepass',
 					description: t('transactions:addMember:description'),
 					actionSubTitle: t('transactions:addMember:action_subtitle'),
 					txMsg: {
-						pending: t('notification:transactions:addMember:pending'),
-						success: t('notification:transactions:addMember:success'),
-						error: t('notification:transactions:addMember:error'),
+						pending: 'joining battlepass...',
+						success: 'joined battlepass!',
+						error: 'tx failed!',
 					},
 				})
 			} catch (e) {
@@ -55,7 +55,7 @@ export function useJoinBattlePassTX(organizationId: string): TransactionData {
 				}
 			}
 		}
-	}, [selectedApiProvider, address, organizationId, logger, t, setTxState])
+	}, [selectedApiProvider, address, battlepassId, logger, t, setTxState])
 
 	return txState
 }
