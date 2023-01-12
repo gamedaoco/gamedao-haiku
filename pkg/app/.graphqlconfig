@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "https://graph.dev.sub.zero.io/v1/graphql",
+        "url": "https://test.graph.dev.sub.zero.io/v1/graphql",
         "headers": {
         },
         "introspect": true

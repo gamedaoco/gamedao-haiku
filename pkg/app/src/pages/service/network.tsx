@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Container, Typography } from '@mui/material'
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/v2'
 import { SelectNetworkDialog } from 'components/SelectNetworkDialog/selectNetworkDialog'
 
 export function Page() {

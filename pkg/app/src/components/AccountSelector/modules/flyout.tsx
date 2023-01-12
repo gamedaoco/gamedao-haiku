@@ -68,10 +68,9 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
 				{/*
 				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
-*/}
 				<BalanceCard />
-
 				<Divider />
+*/}
 
 				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
 					<Link href={'/account'}>
@@ -82,7 +81,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
 					</Link>
-					<Link href={'/organisations'}>
+					{/*					<Link href={'/organisations'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Folder fontSize="small" />
@@ -105,7 +104,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 							</ListItemIcon>
 							<Typography variant="body2">Collectables</Typography>
 						</MenuItem>
-					</Link>
+					</Link>*/}
 					<Link href={'/account/identity'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>

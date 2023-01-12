@@ -12,9 +12,11 @@ import {
 	useOrganizationsPaginationSubscription,
 } from 'src/queries'
 
+import { Layout } from 'layouts/v2'
+
 import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { Layout } from 'layouts/default/layout'
+
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
 import { ItemList } from 'components/OrganisationCard/itemList'
 import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'

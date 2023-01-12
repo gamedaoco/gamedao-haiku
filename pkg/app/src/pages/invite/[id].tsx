@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useGetOrganizationByIdQuery } from 'src/queries'
 import { useGetOrganizationByNameQuery } from 'src/queries'
 
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/v2'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 export function Page() {

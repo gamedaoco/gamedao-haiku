@@ -26,23 +26,23 @@ const productionEndpoints: Endpoints = [
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		chain: 'wss://node.dev.sub.zero.io',
-		// default: ( ENVIRONMENT === Environment.Development ) ? true : false,
+		default: ENVIRONMENT === Environment.Development ? true : false,
 	},
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'Firesquid',
-		url: 'https://test.graph.dev.sub.zero.io/v1/graphql',
-		healthCheck: 'https://test.graph.dev.sub.zero.io/health',
-		chain: 'wss://node.dev.sub.zero.io',
-		default: ( ENVIRONMENT === Environment.Development ) ? true : false,
-	},
+	// {
+	// 	image: '/svg/z-ctrl-45-wht.svg',
+	// 	name: 'Firesquid',
+	// 	url: 'https://test.graph.dev.sub.zero.io/v1/graphql',
+	// 	healthCheck: 'https://test.graph.dev.sub.zero.io/health',
+	// 	chain: 'wss://node.dev.sub.zero.io',
+	// 	default: ( ENVIRONMENT === Environment.Development ) ? true : false,
+	// },
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
 		name: 'Staging',
 		url: 'https://graph.stage.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.stage.sub.zero.io/health',
 		chain: 'wss://node.stage.sub.zero.io',
-		default: ( ENVIRONMENT === Environment.Staging ) ? true : false,
+		default: ENVIRONMENT === Environment.Staging ? true : false,
 	},
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
@@ -50,14 +50,11 @@ const productionEndpoints: Endpoints = [
 		url: 'https://graph.prod.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.prod.sub.zero.io/health',
 		chain: 'wss://node.prod.sub.zero.io',
-		default: ( ENVIRONMENT === Environment.Production ) ? true : false,
+		default: ENVIRONMENT === Environment.Production ? true : false,
 	},
 ]
 
 export const ENDPOINTS: Endpoints =
-
-	ENVIRONMENT === Environment.Development
-	? [...developmentEndpoints, ...productionEndpoints]
-	: productionEndpoints
+	ENVIRONMENT === Environment.Development ? [...developmentEndpoints, ...productionEndpoints] : productionEndpoints
 
 export const getConnectedEndpoint = () => ENDPOINTS.find((e) => e.default)
