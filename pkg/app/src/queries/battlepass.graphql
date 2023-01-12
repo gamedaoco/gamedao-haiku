@@ -1,0 +1,14 @@
+subscription ActiveBattlepass {
+  battlepass(where: {state: {_eq: "ACTIVE"}}) {
+    id
+    name
+    organization {
+      id
+      name
+    }
+    price
+    season
+    state
+    cid
+  }
+}

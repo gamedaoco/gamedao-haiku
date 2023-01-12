@@ -20,10 +20,10 @@ subscription ProposalById($proposalId: String!) {
         created_at_block
         start
         expiry
-        identity {
-            id
-            display_name
-        }
+        # identity {
+        #     id
+        #     display_name
+        # }
         name
         description
         voting {
