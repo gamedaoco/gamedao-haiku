@@ -19,7 +19,7 @@ import { Paper, Stack } from '@mui/material'
 
 import { Header } from './Header'
 import { Navigation } from './Navigation'
-import { Battlepass } from './components/Battlepass/'
+import { Battlepass } from './components/battlepass/'
 
 interface Props {
 	id: string
@@ -27,7 +27,7 @@ interface Props {
 	name?: string
 }
 
-export const Org = ({ id, name, path }: Props) => {
+export const BattlepassView = ({ id, name, path }: Props) => {
 	const { query, push } = useRouter()
 	const config = useConfig()
 	const theme = useTheme()
@@ -63,4 +63,4 @@ export const Org = ({ id, name, path }: Props) => {
 	)
 }
 
-export default Org
+export default BattlepassView

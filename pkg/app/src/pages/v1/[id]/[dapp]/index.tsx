@@ -9,7 +9,7 @@ import { Layout } from 'layouts/v2'
 import { useActiveBattlepassByIdQuery } from 'src/queries'
 import { Loader } from 'components/Loader'
 
-import BattlePass from 'dapps/BattlePass'
+import Battlepass from 'dapps/battlepass'
 
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
@@ -36,7 +36,7 @@ export function Page() {
 
 	return (
 		<Layout showHeader showFooter>
-			<BattlePass id={id} path={dapp as ContentTabs} />
+			<Battlepass id={id} path={dapp as ContentTabs} />
 		</Layout>
 	)
 }

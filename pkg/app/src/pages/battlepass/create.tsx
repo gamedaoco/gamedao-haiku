@@ -1,6 +1,5 @@
 import { Layout } from 'layouts/v2'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { BPGrid } from 'components/BattlepassGrid'
 
 export function Page() {
 	return (
