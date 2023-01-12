@@ -30,7 +30,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/v2'
 import { Image } from 'components/Image/image'
 import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
 import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
@@ -143,9 +143,9 @@ export function OrganisationById() {
 			tags: cache.tags,
 		}
 
-		console.log('================================')
-		console.log('organization metadata', metaData)
-		console.log('================================')
+		// console.log('================================')
+		// console.log('organization metadata', metaData)
+		// console.log('================================')
 		;(async (): Promise<string> => {
 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 				type: 'text/plain',
@@ -153,7 +153,7 @@ export function OrganisationById() {
 			const cid = await uploadFileToIpfs(file)
 			return cid.toString()
 		})().then((cid) => {
-			console.log(cid, cache)
+			// console.log(cid, cache)
 			cache.setMetaDataCID(cid)
 		})
 	}, [cache])
@@ -367,8 +367,6 @@ export function OrganisationById() {
 										value={'campaigns'}
 										disabled={!organizationIdState}
 									/>
-									{/*
-									 */}
 									<Tab
 										label={t('button:navigation:proposals')}
 										value={'proposals'}
@@ -386,15 +384,15 @@ export function OrganisationById() {
 										disabled={!organizationIdState}
 									/>
 
-									{/*
 									<Tab
 										label={t('button:navigation:settings')}
 										value={'settings'}
 										disabled={!organizationIdState}
 									/>
-*/}
 								</Tabs>
 							</Box>
+							{/*
+							 */}
 						</Paper>
 
 						<TabPanel value={'dashboard'}>
