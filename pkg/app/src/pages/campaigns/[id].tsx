@@ -8,7 +8,7 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useCampaignByIdSubscription } from 'src/queries'
 
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/v2'
 import { NavLink } from 'src/components'
 
 import { ArrowBack } from '@mui/icons-material'

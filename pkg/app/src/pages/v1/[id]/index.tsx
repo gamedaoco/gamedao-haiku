@@ -33,9 +33,9 @@ export function Page() {
 		if (!data?.organization) return
 		if (data?.organization[0]) {
 			const name = data?.organization[0].name
-			console.log(name)
+			// console.log(name)
 			const p = `/v1/${id}/${DApps.BATTLEPASS}`
-			console.log(p)
+			// console.log(p)
 			push(p)
 		}
 	}, [id, data?.organization, push])

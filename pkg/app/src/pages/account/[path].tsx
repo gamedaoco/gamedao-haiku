@@ -4,11 +4,11 @@ import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useTranslation } from 'react-i18next'
 import { AccountTabs } from 'constants/account'
 
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/v2'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
-import { Account } from 'dapps/Account'
+import { Account } from 'dapps/account'
 
 export function Page() {
 	const { t } = useTranslation()

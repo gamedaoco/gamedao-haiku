@@ -6,7 +6,7 @@ import { ContentTabs } from 'constants/battlepass'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { Layout } from 'layouts/v2'
 
-import { useOrganizationByIdSubscription } from 'src/queries'
+import { useActiveBattlepassByIdQuery } from 'src/queries'
 import { Loader } from 'components/Loader'
 
 import BattlePass from 'dapps/BattlePass'
@@ -21,12 +21,12 @@ export function Page() {
 	const id = query?.id as string
 	const dapp = query?.dapp as string
 
-	const { loading, data, error } = useOrganizationByIdSubscription({ variables: { orgId: id } })
+	const { loading, data, error } = useActiveBattlepassByIdQuery({ variables: { id: id } })
 
 	useEffect(() => {
 		if (loading === true) return
-		if (data.organization.length === 0) push('/battlepass')
-	}, [loading, data?.organization, push])
+		if (data.battlepass.length === 0) push('/battlepass')
+	}, [loading, data?.battlepass, push])
 
 	const walletGate = false
 	const accountState = useCurrentAccountState()
