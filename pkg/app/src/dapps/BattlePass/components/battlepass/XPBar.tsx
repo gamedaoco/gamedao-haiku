@@ -76,5 +76,3 @@ export const XPBar = ({ args }: TProps) => {
 		</Stack>
 	)
 }
-
-export default XPBar

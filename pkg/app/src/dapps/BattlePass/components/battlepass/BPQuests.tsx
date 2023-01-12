@@ -121,5 +121,3 @@ export const BPQuests = ({ args }: TArgs) => {
 		</Grid>
 	)
 }
-
-export default BPQuests

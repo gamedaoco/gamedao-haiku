@@ -132,5 +132,3 @@ export const BPRewards = ({ args }: TArgs) => {
 		</Grid>
 	)
 }
-
-export default BPRewards

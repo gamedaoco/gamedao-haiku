@@ -19,7 +19,7 @@ import { Paper, Stack } from '@mui/material'
 
 import { Header } from './Header'
 import { Navigation } from './Navigation'
-import { BattlePass } from './components/BattlePass/'
+import { Battlepass } from './components/Battlepass/'
 
 interface Props {
 	id: string
@@ -56,7 +56,7 @@ export const Org = ({ id, name, path }: Props) => {
 			</Paper>
 			<TabContext value={path}>
 				<TabPanel value="battlepass">
-					<BattlePass id={id} />
+					<Battlepass id={id} />
 				</TabPanel>
 			</TabContext>
 		</Stack>

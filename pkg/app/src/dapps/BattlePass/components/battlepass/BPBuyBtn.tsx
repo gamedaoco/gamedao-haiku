@@ -60,5 +60,3 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		</Fragment>
 	)
 }
-
-export default BPBuyBtn

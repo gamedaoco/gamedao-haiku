@@ -16,7 +16,7 @@ type TProps = {
 	id: string
 }
 
-export function BattlePass({ id }: TProps) {
+export function Battlepass({ id }: TProps) {
 	const theme = useTheme()
 
 	if (!id) return <Loader />
@@ -41,5 +41,3 @@ export function BattlePass({ id }: TProps) {
 		</Box>
 	)
 }
-
-export default BattlePass

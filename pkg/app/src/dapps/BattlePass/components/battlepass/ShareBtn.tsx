@@ -15,5 +15,3 @@ export function ShareBtn({}: TProps) {
 		</a>
 	)
 }
-
-export default ShareBtn
