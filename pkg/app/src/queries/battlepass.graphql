@@ -12,3 +12,13 @@ subscription ActiveBattlepass {
     cid
   }
 }
+
+
+query ActiveBattlepassById($id: String!) {
+  battlepass(where: {organization: {id: {_eq: $id}}}) {
+    id
+    organization {
+      id
+    }
+  }
+}

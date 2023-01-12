@@ -210,7 +210,7 @@ export const Header = ({ id }: TProps) => {
 				overflow="hidden"
 				position="relative"
 				sx={{
-					backgroundColor: '#111111ee',
+					backgroundColor: '#010101ee',
 					borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
 					height: '40vh',
 					[theme.breakpoints.up('sm')]: {
@@ -257,7 +257,7 @@ export const Header = ({ id }: TProps) => {
 						left: 0,
 						right: 0,
 						bottom: 0,
-						background: 'linear-gradient(182deg, #11111100 -1.23%, #111111ff 85%)',
+						background: 'linear-gradient(182deg, #02020200 -1.23%, #020202ff 85%)',
 						backgroundBlendMode: 'multiply',
 						pointerEvents: 'none',
 					}}

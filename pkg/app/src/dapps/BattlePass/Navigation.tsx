@@ -84,7 +84,7 @@ export function Navigation({ id, path, organization }: TProps) {
 	)
 
 	return (
-		<Box sx={{ backgroundColor: '#111111ee' }}>
+		<Box sx={{ backgroundColor: '#020202ee' }}>
 			<Stack
 				direction={isMd ? 'row' : 'column'}
 				spacing={2}
@@ -92,7 +92,8 @@ export function Navigation({ id, path, organization }: TProps) {
 				justifyContent={isMd ? 'space-between' : 'center'}
 				pr={isMd ? '1rem' : 0}
 			>
-				<Tabs
+				<Box>
+					{/*				<Tabs
 					centered={true}
 					scrollButtons
 					allowScrollButtonsMobile
@@ -105,7 +106,8 @@ export function Navigation({ id, path, organization }: TProps) {
 					{tabs.map((tab, i) => (
 						<Tab key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />
 					))}
-				</Tabs>
+				</Tabs>*/}
+				</Box>
 				<Join args={{ id: id, isMember: isMember, isOpen: isOpen, isPrime: isPrime }} />
 			</Stack>
 		</Box>

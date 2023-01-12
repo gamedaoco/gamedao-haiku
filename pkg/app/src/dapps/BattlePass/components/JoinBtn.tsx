@@ -48,9 +48,7 @@ export const Join = ({ args }: TProps) => {
 		setTxt(t)
 	}, [id, isMember, isOpen, isPending, isPrime])
 
-	const str = encodeURI(
-		`Join our DAO on GameDAO: https://dev.gamedao.co/v1/0x466c497d831c304febed74fe412439ca61dd25e0a39c617d4a8d2b7709015914`,
-	)
+	const str = encodeURI(`Join our DAO on GameDAO: https://dev.gamedao.co/v1/${id}`)
 
 	const openInviteModal = () => {}
 
@@ -67,7 +65,7 @@ export const Join = ({ args }: TProps) => {
 				{!isMember && (
 					<Button
 						// TODO: add state pending
-						disabled={!isOpen}
+						// disabled={!isOpen}
 						onClick={isMember ? openInviteModal : handleOpenTxModal}
 						variant={isMember ? `pink` : `lemon`}
 					>

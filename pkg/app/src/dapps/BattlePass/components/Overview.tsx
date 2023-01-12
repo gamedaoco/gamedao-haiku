@@ -19,8 +19,8 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 		console.log('join', id)
 	}
 	return (
-		<Link href={`/v1/${content.organization.id}`}>
-			<CardContent>
+		<CardContent>
+			<Link href={`/v1/${content.organization.id}`}>
 				<Box
 					p={'24px'}
 					sx={{
@@ -52,24 +52,24 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 						}}
 					></Box>
 				</Box>
-				<Box py={2}>
-					<Typography variant="h6">{content.organization.name}</Typography>
-					<Typography pt={2} m={0} variant="h5">
-						{content.name}
-					</Typography>
-					<Typography variant="h6">Season {content.season}</Typography>
-					{/*<Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography>*/}
-					{/*<Typography>{(content.price===0)?`free`:`\$ ${content.price}`}</Typography>*/}
-				</Box>
-				<Button fullWidth variant="pink" onClick={() => handleJoin(content.organization.id)}>
-					Join
-				</Button>
-			</CardContent>
-		</Link>
+			</Link>
+			<Box py={2}>
+				<Typography variant="h6">{content.organization.name}</Typography>
+				<Typography pt={2} m={0} variant="h5">
+					{content.name}
+				</Typography>
+				<Typography variant="h6">Season {content.season}</Typography>
+				{/*<Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography>*/}
+				{/*<Typography>{(content.price===0)?`free`:`\$ ${content.price}`}</Typography>*/}
+			</Box>
+			<Button fullWidth variant="pink" onClick={() => handleJoin(content.organization.id)}>
+				Join
+			</Button>
+		</CardContent>
 	)
 }
 
-export const BPGrid = () => {
+export const Overview = () => {
 	const theme = useTheme()
 
 	// get content
