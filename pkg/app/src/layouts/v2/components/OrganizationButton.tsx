@@ -18,7 +18,8 @@ interface ComponentProps {
 export function OrganizationButton({ id, logo, name, active, notification }: ComponentProps) {
 	const { push } = useRouter()
 	const config = useConfig()
-	const url = `/v1/${id}`
+	// const url = `/v1/${id}`
+	const url = `/organizations/${id}/dashboard`
 
 	return (
 		<Tooltip title={name}>
