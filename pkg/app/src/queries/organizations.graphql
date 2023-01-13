@@ -42,6 +42,7 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
         name
         description
         logo
+        header
         access_model
         creator
         organization_members {
