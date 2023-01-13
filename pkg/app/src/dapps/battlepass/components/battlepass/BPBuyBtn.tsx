@@ -5,6 +5,7 @@ import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
+import { useActiveBattlepassByIdQuery } from 'src/queries'
 
 // import { createWarningNotification } from 'src/utils/notificationUtils'
 import { useTheme } from '@mui/material/styles'
@@ -22,8 +23,20 @@ type TProps = {
 export const BPBuyBtn = ({ args }: TProps) => {
 	const { id } = args
 	const theme = useTheme()
+	const { push } = useRouter()
 
-	const joinBattlePassTX = useJoinBattlePassTX(id)
+	const [battlepassId, setBattlepassId] = useState(null)
+
+	const { loading, data, error } = useActiveBattlepassByIdQuery({ variables: { id: id } })
+
+	useEffect(() => {
+		if (loading === true) return
+		if (data.battlepass.length === 0) push('/battlepass')
+		console.log(data.battlepass[0].id)
+		setBattlepassId(data.battlepass[0].id)
+	}, [loading, data?.battlepass])
+
+	const joinBattlePassTX = useJoinBattlePassTX(battlepassId)
 	const address = useCurrentAccountAddress()
 
 	const [isBattlePass, setIsBattlePass] = useState<boolean>(false)
@@ -38,7 +51,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		setShowTxModalType(false)
 	}, [setShowTxModalType])
 
-	// if (!isBattlePass) return null
+	if (!battlepassId) return null
 
 	return (
 		<Fragment>
