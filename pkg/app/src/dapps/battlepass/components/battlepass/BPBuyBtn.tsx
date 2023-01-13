@@ -23,6 +23,7 @@ type TProps = {
 export const BPBuyBtn = ({ args }: TProps) => {
 	const { id } = args
 	const theme = useTheme()
+	const { push } = useRouter()
 
 	const [battlepassId, setBattlepassId] = useState(null)
 
@@ -33,7 +34,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		if (data.battlepass.length === 0) push('/battlepass')
 		console.log(data.battlepass[0].id)
 		setBattlepassId(data.battlepass[0].id)
-	}, [loading, data?.battlepass?.id])
+	}, [loading, data?.battlepass])
 
 	const joinBattlePassTX = useJoinBattlePassTX(battlepassId)
 	const address = useCurrentAccountAddress()
