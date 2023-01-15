@@ -6,11 +6,12 @@
   "engines": {
     "node": ">=16"
   },
+  "packageManager": "yarn@1.19.0",
   "workspaces": [
     "pkg/*"
   ],
   "scripts": {
-    "setup": "yarn policies set-version 1.19.0 && yarn && wsrun -s -c install",
+    "setup": "yarn && wsrun -s -c install",
     "dev": "wsrun -p @gamedao/app -c dev",
     "build": "wsrun -e -c -s -x -m build",
     "test": "wsrun -e -c -s --exclude-missing test",
