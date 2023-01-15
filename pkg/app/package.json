@@ -1,5 +1,5 @@
 {
-  "name": "@gamedao-haiku/app",
+  "name": "@gamedao/app",
   "version": "1.0.0-rc.1",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "generate": "graphql-codegen",
-    "storybook": "start-storybook -p 3333",
-    "build:storybook": "build-storybook",
+    "sb": "start-storybook -p 3333",
+    "build:sb": "build-storybook",
     "chromatic": "npx chromatic --project-token=015a4a235bee"
   },
   "dependencies": {
@@ -19,7 +19,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
-    "@gamedao-haiku/translations": "*",
+    "@gamedao/translations": "*",
     "@google/model-viewer": "^1.12.0",
     "@graphql-tools/graphql-file-loader": "^7.3.14",
     "@graphql-tools/load": "^7.5.13",

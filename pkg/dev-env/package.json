@@ -1,5 +1,5 @@
 {
-  "name": "@gamedao-haiku/dev-env",
+  "name": "@gamedao/dev-env",
   "version": "0.0.1",
   "private": true,
   "scripts": {
