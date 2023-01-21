@@ -1,6 +1,7 @@
-import React from 'react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { Layout } from 'layouts/v2'
+import { LoginBtn } from 'components/LoginBtn'
 
 export function Page() {
 	return (
@@ -13,6 +14,7 @@ export function Page() {
 					<Grid item></Grid>
 				</Grid>
 				<Grid item>
+					<LoginBtn />
 					{/*					<Typography pb={2} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
 						Community driven ownership and creation will be a vital part of
 						how we see video games in the near future. The transition to token driven
