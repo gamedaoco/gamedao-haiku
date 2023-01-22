@@ -25,6 +25,7 @@ import {
 	Tabs,
 	useMediaQuery,
 } from '@mui/material'
+
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 
@@ -40,6 +41,8 @@ import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
 import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
 import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 import { SettingsOverview } from 'components/TabPanels/Settings/settings'
+
+import { Loader } from 'components/Loader'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
@@ -170,8 +173,6 @@ export function OrganisationById() {
 		}
 	}, [organizationState, address])
 
-	// if (error) console.log('==== Error ====>\n', error)
-
 	return (
 		<Layout
 			showHeader
@@ -179,8 +180,8 @@ export function OrganisationById() {
 			showSidebar
 			title={organizationState?.name ?? cache.name ?? t('page:organisations:title')}
 		>
-			<TabContext value={activeStep}>
-				{(!loading && data) || !organizationIdState ? (
+			{(!loading && data) || !organizationIdState ? (
+				<TabContext value={activeStep}>
 					<Stack spacing={4}>
 						<Paper
 							variant={'glass'}
@@ -198,6 +199,7 @@ export function OrganisationById() {
 								sx={{
 									top: '5%',
 									left: 0,
+
 									right: 0,
 									zIndex: 99,
 									position: 'absolute',
@@ -270,18 +272,18 @@ export function OrganisationById() {
 										</Typography>
 									</Stack>
 									{/*											<Stack>
-												{organizationState &&
-													!isMemberState &&
-													address !== organizationState?.creator && (
-														<Button
-															variant="contained"
-															disabled={!addMemberTx}
-															onClick={handleOpenTxModal}
-														>
-															{t('button:ui:join_organization')}
-														</Button>
-													)}
-											</Stack>
+											{organizationState &&
+												!isMemberState &&
+												address !== organizationState?.creator && (
+													<Button
+														variant="contained"
+														disabled={!addMemberTx}
+														onClick={handleOpenTxModal}
+													>
+														{t('button:ui:join_organization')}
+													</Button>
+												)}
+										</Stack>
 */}
 								</Stack>
 							</Stack>
@@ -344,7 +346,8 @@ export function OrganisationById() {
 										left: 0,
 										right: 0,
 										bottom: 0,
-										background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) -1.23%, #000000 80%)',
+										background: `linear-gradient(transparent 75%, #020202 100%)`,
+										mixBlendMode: 'multiply',
 										pointerEvents: 'none',
 									}}
 								></Box>
@@ -391,10 +394,7 @@ export function OrganisationById() {
 									/>
 								</Tabs>
 							</Box>
-							{/*
-							 */}
 						</Paper>
-
 						<TabPanel value={'dashboard'}>
 							{organizationIdState ? (
 								<Overview
@@ -411,54 +411,49 @@ export function OrganisationById() {
 								<TmpOverview />
 							)}
 						</TabPanel>
+						{/*
 
-						<TabPanel value={'campaigns'}>
-							{organizationIdState ? (
-								<CampaignOverview
-									organizationId={organizationIdState}
-									isAdmin={address === organizationState?.creator}
-								/>
-							) : (
-								<TmpOverview />
-							)}
-						</TabPanel>
+					<TabPanel value={'campaigns'}>
+						{organizationIdState ? (
+							<CampaignOverview
+								organizationId={organizationIdState}
+								isAdmin={address === organizationState?.creator}
+							/>
+						) : (
+							<TmpOverview />
+						)}
+					</TabPanel>
 
-						<TabPanel value={'treasury'}>
-							{organizationState && <TreasuryOverview address={organizationState.treasury} />}
-						</TabPanel>
+					<TabPanel value={'treasury'}>
+						{organizationState && <TreasuryOverview address={organizationState.treasury} />}
+					</TabPanel>
 
-						<TabPanel value={'proposals'}>
-							{proposalIdState && organizationState ? (
-								<ProposalDetail
-									organization={organizationState}
-									proposalId={proposalIdState}
-									isMember={isMemberState}
-									goBack={() => handleTabSelect('proposals')}
-								/>
-							) : (
-								<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
-							)}
-						</TabPanel>
+					<TabPanel value={'proposals'}>
+						{proposalIdState && organizationState ? (
+							<ProposalDetail
+								organization={organizationState}
+								proposalId={proposalIdState}
+								isMember={isMemberState}
+								goBack={() => handleTabSelect('proposals')}
+							/>
+						) : (
+							<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
+						)}
+					</TabPanel>
 
-						<TabPanel value={'members'}>
-							<OrganizationMembersTable organizationState={organizationState} />
-						</TabPanel>
+					<TabPanel value={'members'}>
+						<OrganizationMembersTable organizationState={organizationState} />
+					</TabPanel>
 
-						<TabPanel value={'settings'}>
-							<SettingsOverview organizationState={organizationState} />
-						</TabPanel>
+					<TabPanel value={'settings'}>
+						<SettingsOverview organizationState={organizationState} />
+					</TabPanel>
+				*/}
 					</Stack>
-				) : (
-					<CircularProgress
-						sx={{
-							position: 'absolute',
-							top: '50%',
-							left: '50%',
-							transform: 'translate(-50%, -50%)',
-						}}
-					/>
-				)}
-			</TabContext>
+				</TabContext>
+			) : (
+				<Loader />
+			)}
 		</Layout>
 	)
 }

@@ -109,11 +109,11 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 			>
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
 					<Box>
-						<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
-							<Link href="/">
+						<Link href="/">
+							<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
 								<Typography sx={{ ml: 1, minWidth: 32 }}>{isLg ? <Logo /> : <LogoSM />}</Typography>
-							</Link>
-						</MenuItem>
+							</MenuItem>
+						</Link>
 					</Box>
 
 					{leftNav.map((item) => {

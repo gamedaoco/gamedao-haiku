@@ -12,6 +12,8 @@ import { HeaderMobile } from './components/HeaderMobile'
 import { Footer } from './components/Footer'
 import { Sidebar } from './components/Sidebar'
 
+import { motion } from 'framer-motion'
+
 interface ComponentProps {
 	showHeader?: boolean
 	showFooter?: boolean
@@ -24,6 +26,22 @@ interface ComponentProps {
 
 // TODO: Should not be here/ configs and co
 const SITE_NAME = 'GameDAO'
+
+const Wrapper = ({ children }) => (
+	<motion.div
+		initial={{ opacity: 0, rotateY: -10 }}
+		animate={{ opacity: 1, rotateY: 0 }}
+		exit={{ opacity: 0, rotateY: -10 }}
+		transition={{
+			duration: 0.2,
+			type: 'tween',
+			// stiffness: 260,
+			// damping: 200,
+		}}
+	>
+		{children}
+	</motion.div>
+)
 
 export function Layout({
 	showHeader,
@@ -65,27 +83,29 @@ export function Layout({
 						<HeaderMobile onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
 					))}
 
-				<Box>
-					<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
-						{showSidebar && (isMd || sidebarOpen) && connected && (
-							<Box sx={{ minWidth: 90, minHeight: spacing }}>
-								<Sidebar />
-							</Box>
-						)}
-
-						{noContainer ? (
-							children
-						) : (
-							<Box p={noBorder ? 0 : [2, 4]} style={{ width: '100%', minHeight: spacing }}>
-								<Box component="main" sx={{ flexGrow: 1 }}>
-									<Container disableGutters maxWidth="xl" sx={{ border: 0 }}>
-										{children}
-									</Container>
+				<Wrapper>
+					<Box>
+						<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
+							{showSidebar && (isMd || sidebarOpen) && connected && (
+								<Box sx={{ minWidth: 90, minHeight: spacing }}>
+									<Sidebar />
 								</Box>
-							</Box>
-						)}
-					</Stack>
-				</Box>
+							)}
+
+							{noContainer ? (
+								children
+							) : (
+								<Box p={noBorder ? 0 : [2, 4]} style={{ width: '100%', minHeight: spacing }}>
+									<Box component="main" sx={{ flexGrow: 1 }}>
+										<Container disableGutters maxWidth="xl" sx={{ border: 0 }}>
+											{children}
+										</Container>
+									</Box>
+								</Box>
+							)}
+						</Stack>
+					</Box>
+				</Wrapper>
 			</Box>
 
 			{showFooter && <Footer />}
