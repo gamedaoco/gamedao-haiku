@@ -52,7 +52,7 @@ export const BattlepassView = ({ id, name, path }: Props) => {
 				}}
 			>
 				<Header id={id} />
-				<Navigation id={id} path={path} organization={org} />
+				{/*<Navigation id={id} path={path} organization={org} />*/}
 			</Paper>
 			<TabContext value={path}>
 				<TabPanel value="battlepass">

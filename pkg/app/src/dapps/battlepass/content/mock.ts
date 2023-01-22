@@ -1,5 +1,5 @@
 type Achievement = {
-	uuid: string
+	id: string
 	name: string
 	slug: string
 

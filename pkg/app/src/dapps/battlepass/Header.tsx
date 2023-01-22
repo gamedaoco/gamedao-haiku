@@ -119,73 +119,57 @@ export const Header = ({ id }: TProps) => {
 				alignItems="center"
 				justifyContent={isMd ? 'flex-start' : 'center'}
 				sx={{
-					top: '15%',
-					left: 0,
-					right: 0,
-					zIndex: 99,
+					border: '1px solid yellow',
 					position: 'absolute',
-					marginTop: theme.spacing(5),
+					bottom: 0,
+					left: 0,
+					zIndex: 99,
+					// marginTop: theme.spacing(5),
 					[theme.breakpoints.up('md')]: {
 						top: 'unset',
-						right: 'auto',
 						display: 'flex',
+						right: 'auto',
 						alignItems: 'center',
 						left: theme.spacing(3),
 						bottom: theme.spacing(3),
 					},
 				}}
 			>
-				<label htmlFor="logo-file-upload">
-					<input
-						style={{ display: 'none' }}
-						accept="image/*"
-						id="logo-file-upload"
-						type="file"
-						disabled={!!id}
-						onChange={(event) => handleUploadImage(event, cache.setLogoCID)}
-					/>
-					<Avatar
-						sx={(theme) => ({
-							ml: '1rem',
-							mb: '3rem',
-							width: '7rem',
-							height: '7rem',
-							backgroundColor: theme.palette.background.default,
-							outline: `10px solid #111111aa`,
-							cursor: 'pointer',
-						})}
-						srcSet={
-							organization?.logo || cache.logoCID?.length
-								? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
-								: null
-						}
-					>
-						<Stack spacing={1} alignItems="center">
-							<Add sx={{ height: '20px', width: '20px' }} />
-							{/*<Typography>{t('label:update_photo')}</Typography>*/}
-						</Stack>
-					</Avatar>
-				</label>
+				<Avatar
+					sx={(theme) => ({
+						border: '1px solid yellow',
+
+						ml: '2rem',
+						mb: '2rem',
+						width: '5rem',
+						height: '5rem',
+						backgroundColor: theme.palette.background.default,
+						outline: `5px solid #111111aa`,
+						// cursor: 'pointer',
+					})}
+					srcSet={
+						organization?.logo || cache.logoCID?.length
+							? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
+							: null
+					}
+				/>
 
 				<Stack
-				// spacing={2}
-				// px={isMd ? 0 : 2}
-				// sx={{
-				// width: '100%',
-				// justifyContent: { xs: 'space-between', sm: 'flex-start' },
-				// }}
-				// direction="row"
+					// spacing={2}
+					// px={isMd ? 0 : 2}
+					sx={{
+						border: '1px solid yellow',
+
+						width: '100%',
+						justifyContent: { xs: 'space-between', sm: 'flex-start' },
+					}}
+					// direction="row"
 				>
 					<Stack spacing={0} sx={{ pb: '100px', pl: '30px', flex: 0.9 }}>
-						<Typography variant="h4" sx={{ whiteSpace: 'nowrap' }}>
+						<Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>
 							{organization?.name ?? cache.name ?? ''}
 						</Typography>
-						<Typography
-							// variant='small'
-							sx={{
-								whiteSpace: 'nowrap',
-							}}
-						>
+						<Typography sx={{ whiteSpace: 'nowrap' }}>
 							{t('label:n_members', {
 								n: organization?.organization_members?.length ?? 1,
 							})}
@@ -210,6 +194,7 @@ export const Header = ({ id }: TProps) => {
 				overflow="hidden"
 				position="relative"
 				sx={{
+					border: '1px solid yellow',
 					backgroundColor: '#010101ee',
 					borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
 					height: '40vh',
@@ -222,35 +207,27 @@ export const Header = ({ id }: TProps) => {
 					},
 				}}
 			>
-				<label htmlFor="header-file-upload">
-					<input
-						style={{ display: 'none' }}
-						accept="image/*"
-						id="header-file-upload"
-						type="file"
-						disabled={!!id}
-						onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
+				{/* header image */}
+				{!organization?.header && !cache.headerCID?.length ? (
+					<Box display="grid" justifyContent="center" alignItems="center">
+						<Add sx={{ height: '40px', width: '40px', cursor: 'pointer' }} />
+					</Box>
+				) : (
+					<Image
+						src={parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)}
+						alt="logo"
+						layout="fill"
+						sx={{
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							right: 0,
+							bottom: 0,
+						}}
 					/>
-					{!organization?.header && !cache.headerCID?.length ? (
-						<Box display="grid" justifyContent="center" alignItems="center">
-							<Add sx={{ height: '40px', width: '40px', cursor: 'pointer' }} />
-						</Box>
-					) : (
-						<Image
-							src={parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)}
-							alt="logo"
-							layout="fill"
-							sx={{
-								position: 'absolute',
-								top: 0,
-								left: 0,
-								right: 0,
-								bottom: 0,
-							}}
-						/>
-					)}
-				</label>
-				<Box
+				)}
+				{/* gradient */}
+				{/*				<Box
 					sx={{
 						position: 'absolute',
 						top: 0,
@@ -261,7 +238,7 @@ export const Header = ({ id }: TProps) => {
 						backgroundBlendMode: 'multiply',
 						pointerEvents: 'none',
 					}}
-				></Box>
+				></Box>*/}
 			</Grid>
 		</>
 	)
