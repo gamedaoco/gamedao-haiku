@@ -50,7 +50,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 
 	const [approveUserAddress, setApproveUserAddress] = useState(null)
 
-	console.log('approveUserAddress', approveUserAddress, '\nprime', prime, '\nisPrime', isPrime, '\naddress', address)
+	// console.log('approveUserAddress', approveUserAddress, '\nprime', prime, '\nisPrime', isPrime, '\naddress', address)
 
 	const approveMemberTx = useApproveMemberTx({
 		organizationId: orgId,
@@ -68,14 +68,11 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 		setShowTxModal(false)
 	}, [setShowTxModal, setApproveUserAddress])
 
-	useEffect(() => {
-		if (approveUserAddress === null) {
-			setShowTxModal(false)
-			return
-		}
-		console.log('approve tx for\n org', orgId, '\n by ', prime, '\n account', approveUserAddress)
+	const handleApprove = (id) => {
+		// 	console.log('approve tx for\n org', orgId, '\n by ', prime, '\n account', approveUserAddress)
+		setApproveUserAddress(id)
 		setShowTxModal(true)
-	}, [approveUserAddress])
+	}
 
 	const MemberState = useCallback(
 		({ state, id }) => {
@@ -83,7 +80,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 			// TODO: add disable tx
 			if (state === 'Active') return <Chip size="small" label={state} />
 			return (
-				<Button onClick={() => setApproveUserAddress(id)} size="small" color="primary" variant="outlined">
+				<Button onClick={() => handleApprove(id)} size="small" color="primary" variant="outlined">
 					Approve
 				</Button>
 			)

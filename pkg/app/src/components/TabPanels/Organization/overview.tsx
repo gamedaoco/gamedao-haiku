@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 
@@ -11,7 +11,7 @@ import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useTheme } from '@mui/material/styles'
 import { ChevronRight, Verified } from '@mui/icons-material'
 import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
+import { Box, Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
@@ -169,17 +169,17 @@ export function Overview({
 			url: organization?.url,
 			tags: organization?.tags,
 		})
-		console.log('orgData', orgData)
 	}, [organization])
 
 	return (
-		<>
+		<Fragment>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
 				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }} variant={'glass'}>
 					<Stack minHeight={307} spacing={1} padding={3}>
 						<Typography variant="h6" pb="1rem">
 							{t('page:organisations:about')}
 						</Typography>
+
 						<Typography variant="body2">
 							{description}
 							{showButton && (
@@ -199,13 +199,14 @@ export function Overview({
 							{orgData.tags.length > 0 && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 									<Label />{' '}
-									<Typography>
+									<Box>
 										{orgData.tags.map((item, index) => {
 											return <Chip size="small" sx={{ mr: 1, mb: 1 }} key={index} label={item} />
 										})}
-									</Typography>
+									</Box>
 								</Stack>
 							)}
+
 							{organization?.location && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
 									<FmdGood /> <Typography variant="body2">{orgData.location}</Typography>
@@ -246,20 +247,6 @@ export function Overview({
 									</Button>
 								</>
 							)}
-
-							{/*							{(isMember || isAdmin) && (
-								<>
-									<Button
-										variant="outlined"
-										size="small"
-										disabled={!removeMemberTx}
-										onClick={() => handleChangeRoute('settings')}
-										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
-									>
-										{t('button:ui:change_settings')}
-									</Button>
-								</>
-							)}*/}
 						</Stack>
 					</Stack>
 				</Paper>
@@ -399,6 +386,6 @@ export function Overview({
 				txData={isMember ? removeMemberTx : addMemberTx}
 				txCallback={handleCloseTxModal}
 			/>
-		</>
+		</Fragment>
 	)
 }

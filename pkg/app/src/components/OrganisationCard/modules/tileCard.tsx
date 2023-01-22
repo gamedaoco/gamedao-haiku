@@ -75,51 +75,79 @@ export const TileCard = ({ item }: ComponentPros) => {
 		)
 	}, [item, address])
 
+	const avatarImgUrl = item?.logo ? parseIpfsHash(item?.logo, config.IPFS_GATEWAY) : null
+	const bgImgUrl = item?.header ? parseIpfsHash(item?.header, config.IPFS_GATEWAY) : null
+
 	return (
 		<NavLink href={`/organizations/${item.id}/dashboard`}>
-			<Card
+			<Box
 				sx={{
-					border: '1px solid transparent',
-					'&:hover': {
-						border: `1px solid ${theme.palette.grey[500_32]}`,
-					},
-					cursor: 'pointer',
 					width: '100%',
 					height: '100%',
+					backgroundImage: `url(${bgImgUrl})`,
+					backgroundPosition: 'center',
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: 'cover',
+					// backdropFilter: 'blur(32px)',
+					// webkitBackdropFilter: 'blur(32px)',
+					transformStyle: 'preserve-3d',
+					willChange: 'transform',
+					'&:hover': {
+						transform: 'translateZ(12px)',
+					},
 				}}
-				variant={'glass'}
 			>
-				<CardHeader
-					avatar={
-						<Avatar src={parseIpfsHash(item?.logo, config.IPFS_GATEWAY)} sx={{ width: 64, height: 64 }}>
-							{item?.name?.slice(0, 1)}
-						</Avatar>
-					}
-					title={
-						<Typography variant={'body2'} fontWeight={'700'} noWrap>
-							{item?.name}
-						</Typography>
-					}
-					subheader={SubHeader}
-				/>
-				<CardContent>
-					<div>
-						<Typography
-							variant={'caption'}
-							fontWeight={'400'}
-							sx={{
-								overflow: 'hidden',
-								textOverflow: 'ellipsis',
-								display: '-webkit-box',
-								WebkitLineClamp: '2',
-								WebkitBoxOrient: 'vertical',
-							}}
-						>
-							{item?.description}
-						</Typography>
-					</div>
-				</CardContent>
-			</Card>
+				<Card
+					sx={{
+						position: 'relative',
+						zIndex: 1,
+						transition: 'transform 0.3s ease',
+
+						backgroundColor: `#11111133`,
+						border: '1px solid transparent',
+						borderRadius: theme.shape.borderRadiusLg,
+						'&:hover': {
+							border: `1px solid ${theme.palette.primary}`,
+							boxShadow: theme.customShadows.primary,
+						},
+						cursor: 'pointer',
+						width: '100%',
+						height: '100%',
+					}}
+					variant={'glass'}
+				>
+					<CardHeader
+						avatar={
+							<Avatar src={avatarImgUrl} sx={{ width: 64, height: 64 }}>
+								{item?.name?.slice(0, 1)}
+							</Avatar>
+						}
+						title={
+							<Typography variant={'body2'} fontWeight={'700'} noWrap>
+								{item?.name}
+							</Typography>
+						}
+						subheader={SubHeader}
+					/>
+					<CardContent>
+						<div>
+							<Typography
+								variant={'caption'}
+								fontWeight={'400'}
+								sx={{
+									overflow: 'hidden',
+									textOverflow: 'ellipsis',
+									display: '-webkit-box',
+									WebkitLineClamp: '2',
+									WebkitBoxOrient: 'vertical',
+								}}
+							>
+								{item?.description}
+							</Typography>
+						</div>
+					</CardContent>
+				</Card>
+			</Box>
 		</NavLink>
 	)
 }

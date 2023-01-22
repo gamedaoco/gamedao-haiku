@@ -56,7 +56,7 @@ export function Name({ name, setName, description, setDescription }: ComponentPr
 	)
 
 	return (
-		<BaseForm title={'What’s the name of your campaign?'} error={errorState}>
+		<BaseForm title={'Campaign Description'} error={errorState}>
 			<TextField
 				fullWidth
 				onChange={handleNameChange}

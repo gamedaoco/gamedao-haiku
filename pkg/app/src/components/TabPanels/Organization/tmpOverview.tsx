@@ -38,7 +38,7 @@ export function TmpOverview() {
 	const handleDepositChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			tmpOrgState?.setDeposit(value < 5 ? 5 : value)
+			tmpOrgState?.setDeposit(value < 0 ? 0 : value)
 		},
 		[tmpOrgState?.setDeposit],
 	)

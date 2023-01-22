@@ -23,7 +23,10 @@ export function Type({ selected, setSelected }: ComponentProps) {
 					quantity: PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.General],
 					coin: 'GAME',
 				})}
-				description={t('page:proposals:settings:create_general_proposal.description')}
+				description={
+					'General topics to decide with all organization members.' ||
+					t('page:proposals:settings:create_general_proposal.description')
+				}
 				value={0}
 				selectedValue={selected}
 				onChange={setSelected}
@@ -35,7 +38,10 @@ export function Type({ selected, setSelected }: ComponentProps) {
 					quantity: PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.Withdrawal],
 					coin: 'GAME',
 				})}
-				description={t('page:proposals:settings:create_withdraw_proposal.description')}
+				description={
+					'Request to unlock funds from a campaign treasury, decided by campaign contributors.' ||
+					t('page:proposals:settings:create_withdraw_proposal.description')
+				}
 				value={1}
 				selectedValue={selected}
 				onChange={setSelected}
@@ -47,7 +53,10 @@ export function Type({ selected, setSelected }: ComponentProps) {
 					quantity: PROPOSAL_CREATE_DEPOSIT[PROPOSAL_KEYS.Spending],
 					coin: 'GAME',
 				})}
-				description={t('page:proposals:settings:create_spending_proposal.description')}
+				description={
+					'Request to spend funds out of your organization treasury, decided by organization members.' ||
+					t('page:proposals:settings:create_spending_proposal.description')
+				}
 				value={2}
 				selectedValue={selected}
 				onChange={setSelected}

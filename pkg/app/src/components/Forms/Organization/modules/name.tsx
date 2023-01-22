@@ -172,7 +172,7 @@ export function Name({
 				value: e.target.value,
 			},
 		})
-		console.log(JSON.stringify(content))
+		// console.log(JSON.stringify(content))
 		content.set(e.target.value)
 	}
 

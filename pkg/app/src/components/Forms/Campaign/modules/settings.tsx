@@ -1,10 +1,27 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import moment from 'moment'
+import * as Yup from 'yup'
+import { useConfig } from 'hooks/useConfig'
+import { useDisplayValues } from 'hooks/useDisplayValues'
+import { useNetworkContext } from 'providers/network/modules/context'
+
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import enLocale from 'date-fns/locale/en-US'
 
 import { InfoRounded } from '@mui/icons-material'
+
 import {
+	Box,
 	Checkbox,
 	FormControl,
+	FormLabel,
 	FormControlLabel,
+	RadioGroup,
+	Radio,
 	InputLabel,
 	MenuItem,
 	Paper,
@@ -12,19 +29,14 @@ import {
 	Stack,
 	TextField,
 	Typography,
+	Alert,
 } from '@mui/material'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import enLocale from 'date-fns/locale/en-US'
-import { useConfig } from 'hooks/useConfig'
-import { useDisplayValues } from 'hooks/useDisplayValues'
-import moment from 'moment'
-import { useNetworkContext } from 'providers/network/modules/context'
-import { useTranslation } from 'react-i18next'
-import * as Yup from 'yup'
 
 import { RadioItem } from 'components/Forms/modules/radioItem'
+
+import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'components/content'
+
+//
 
 const validationTargetSchema = Yup.number()
 	.required()
@@ -227,73 +239,70 @@ export function Settings({
 		)
 	}, [selectedApiProvider])
 
+	//
 	return (
-		<Stack component={Paper} p={{ xs: 3, sm: 6 }} spacing={{ xs: 2, sm: 4 }} gap={2} width="100%" height="100%">
-			<Typography variant={'h6'}>Additional Information</Typography>
+		<ContentPanel>
+			<ContentTitle>Campaign Settings</ContentTitle>
 
-			<Stack gap={4}>
-				<Typography variant={'subtitle2'}>Protocol</Typography>
+			<Section
+				direction={{ xs: 'column', md: 'row' }}
+				title="Use of funds"
+				description="Select a category how you want to spend the funds raised."
+			>
+				<FormControl sx={{ flex: 1 }}>
+					<InputLabel id="usage-of-funds">Usage of funds*</InputLabel>
+					<Select
+						value={usageOfFunds}
+						onChange={handleUsageOfFundsChanged}
+						labelId="usage-of-funds"
+						label="Use of funds*"
+					>
+						{displayValues?.campaignFundingCategories?.map((x) => (
+							<MenuItem value={x.value} key={x.key}>
+								{t(x.text)}
+							</MenuItem>
+						))}
+					</Select>
+				</FormControl>
+			</Section>
+
+			<Section title="Protocol" direction={{ xs: 'column', md: 'row' }}>
 				<RadioItem
-					title={'Grant'}
-					description={'Choose when contributors donate only without being rewarded'}
+					title={'Donation'}
+					description={'Contributors donate to support your work without any obligations.'}
 					value={0}
 					selectedValue={flowProtocol}
 					onChange={setFlowProtocol}
 				/>
 				<RadioItem
-					title={'Prepaid'}
-					description={'Choose when contributors can select from rewards options'}
+					title={'Presale'}
+					description={'Contributors get rewards for contributing to the campaign.'}
 					value={1}
 					selectedValue={flowProtocol}
 					onChange={setFlowProtocol}
 				/>
-			</Stack>
+			</Section>
 
-			<Stack gap={4}>
-				<Typography variant={'subtitle2'}>Funds & Deposit</Typography>
-				<Stack display={'flex'} direction={'row'} gap={2}>
-					<TextField
-						fullWidth
-						type="number"
-						onChange={handleTargetAmountChange}
-						value={targetAmount ?? ''}
-						label="Funding target*"
-						variant="outlined"
-						sx={{ flex: 1 }}
-					/>
-					<FormControl sx={{ flex: 1 }}>
-						<InputLabel id="currency">Currency*</InputLabel>
-						<Select
-							value={currencyId}
-							onChange={handleCurrencyChanged}
-							labelId="currency"
-							label="Currency*"
-						>
-							{currencies.map((x) => (
-								<MenuItem value={x.value} key={x.key}>
-									{t(x.text)}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</Stack>
-				<Stack display={'flex'} direction={'row'} gap={2}>
-					<FormControl sx={{ flex: 1 }}>
-						<InputLabel id="usage-of-funds">Usage of funds*</InputLabel>
-						<Select
-							value={usageOfFunds}
-							onChange={handleUsageOfFundsChanged}
-							labelId="usage-of-funds"
-							label="Usage of funds*"
-						>
-							{displayValues?.campaignFundingCategories?.map((x) => (
-								<MenuItem value={x.value} key={x.key}>
-									{t(x.text)}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</Stack>
+			<Section title="Funds & Deposit" direction={{ xs: 'column', md: 'row' }}>
+				<TextField
+					fullWidth
+					type="number"
+					onChange={handleTargetAmountChange}
+					value={targetAmount ?? ''}
+					label="Funding target*"
+					variant="outlined"
+					sx={{ flex: 1 }}
+				/>
+				<FormControl sx={{ flex: 1 }}>
+					<InputLabel id="currency">Currency*</InputLabel>
+					<Select value={currencyId} onChange={handleCurrencyChanged} labelId="currency" label="Currency*">
+						{currencies.map((x) => (
+							<MenuItem value={x.value} key={x.key}>
+								{t(x.text)}
+							</MenuItem>
+						))}
+					</Select>
+				</FormControl>
 				<TextField
 					fullWidth
 					type="number"
@@ -306,52 +315,78 @@ export function Settings({
 					variant="outlined"
 					sx={{ flex: 1 }}
 				/>
+			</Section>
 
+			{/* COMMUNITY GOVERNANCE */}
+			{/*
 				<FormControlLabel
 					sx={{ display: 'block' }}
 					control={<Checkbox checked={!!governance} onChange={handleGovernanceChecked} />}
-					label="Handle collected funds by governance voting"
+					label="The community votes on spending proposals."
 				/>
+*/}
 
-				<Stack display={'flex'} direction={'row'} alignItems={'center'} gap={1}>
-					<InfoRounded />
-					<Typography variant={'caption'}>
-						We return the deposit to the treasury in case the campaign is not successful
-					</Typography>
-				</Stack>
-			</Stack>
+			{/*			<Section
+				title="Treasury Governance"
+				description={`
+					Deposited token will be locked by the protocol at least for the full duration of the campaign.
+					If a campaign is not successful, the deposit will be automatically returned in full to the organizations treasury.
+					If the campaign is successful, the deposit will be returned in full to the organizations treasury upon all funds of the campaign have been spent.
+				`}
+				>
+				<RadioGroup
+					aria-labelledby="governance-radio"
+					name="governance-radio-group"
+					value={governance} onChange={handleGovernanceChecked}
+					>
+					<FormControlLabel value={true} control={<Radio />} label="Yes, I want the community to decide over our proposals to use our funds." />
+					<FormControlLabel value={false} control={<Radio />} label="No, I do not want the community to decide over our spendings." />
+				</RadioGroup>
+			</Section>*/}
 
-			<Stack gap={4}>
-				<Typography variant={'subtitle2'}>Date</Typography>
-
+			<Section
+				title="Campagin Duration"
+				description={`
+					Choose from one of the default campaign durations or set a custom duration.
+					Campaigns will start immediately or around 1200 UCT of the selected date, depending on blocktime.
+				`}
+			>
 				<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
 					<Stack direction="row" spacing={1} justifyContent="space-between" width="100%">
-						<DateTimePicker
+						<MobileDatePicker
 							label="Start date"
 							minDate={minStartDate}
 							value={startDate ?? minStartDate}
 							onChange={setStartDate}
 							renderInput={(params) => <TextField {...params} />}
-							ampm={false}
+							// ampm={false}
 						/>
-						<DateTimePicker
+						<MobileDatePicker
 							label="End date"
 							minDate={minEndDate}
 							maxDate={maxEndDate}
 							value={endDate ?? minEndDate}
 							onChange={setEndDate}
 							renderInput={(params) => <TextField {...params} />}
-							ampm={false}
+							// ampm={false}
 						/>
 					</Stack>
 				</LocalizationProvider>
+			</Section>
 
+			<Section
+				title="Terms and Conditions"
+				description={`
+					GameDAO is a decentralized protocol, but usage of this website and interacting with the community is
+					bound to the GameDAO Terms and Conditions maintaining a positive vibe for all.
+				`}
+			>
 				<FormControlLabel
 					sx={{ display: 'block' }}
 					control={<Checkbox checked={termsConditionAccepted} onChange={handleTermsAndConditionChecked} />}
 					label="I Accept the terms & conditions of GameDAO"
 				/>
-			</Stack>
-		</Stack>
+			</Section>
+		</ContentPanel>
 	)
 }
