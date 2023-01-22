@@ -1,0 +1,46 @@
+subscription ActiveBattlepass {
+  battlepass(where: {state: {_eq: "ACTIVE"}}) {
+    id
+    name
+    organization {
+      id
+      name
+    }
+    price
+    season
+    state
+    cid
+  }
+}
+
+query ActiveBattlepassById($id: String!) {
+  battlepass(where: {organization: {id: {_eq: $id}}}) {
+    id
+    organization {
+      id
+    }
+  }
+}
+
+# query BattlepassPoints( $id: String! ) {
+  # BattlepassPoints(where: {battlepassChainId: $id}) {
+  #   battlepassId
+  #   identityId
+  #   points
+  # }
+#   points( battlepass: $id ) {
+#     quests
+#     points
+#     address
+#     discord
+#   }
+  # quests( where: { battlepass: { _eq: $id } } ) {
+  #   channelId
+  #   daily
+  #   maxDaily
+  #   points
+  #   quantity
+  #   source
+  #   type
+  # }
+# }

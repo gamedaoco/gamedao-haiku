@@ -18,17 +18,17 @@ sitemap({
 })
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+	enabled: process.env.ANALYZE === 'true',
 })
 
 const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    // If you use `MDXProvider`, uncomment the following line.
-    // providerImportSource: "@mdx-js/react",
-  },
+	extension: /\.mdx?$/,
+	options: {
+		remarkPlugins: [],
+		rehypePlugins: [],
+		// If you use `MDXProvider`, uncomment the following line.
+		// providerImportSource: "@mdx-js/react",
+	},
 })
 
 module.exports = withBundleAnalyzer(
@@ -42,11 +42,17 @@ module.exports = withBundleAnalyzer(
 			APP_VERSION: pkg.version,
 			VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
 			VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF || '',
-			VERCEL_ENV: process.env.VERCEL_ENV || ''
+			VERCEL_ENV: process.env.VERCEL_ENV || '',
 		},
 		poweredByHeader: false,
 		experiments: {
 			topLevelAwait: true,
 		},
-	})
+		images: {
+			domains: ['ipfs.infura.io', 'gateway.ipfs.io', 'gamedao.infura-ipfs.io'],
+			// remotePatterns: [
+			// 	{ protocol: 'https', hostname: 'gateway.ipfs.io', port: '', pathname: '/ipfs/**', },
+			// ],
+		},
+	}),
 )
