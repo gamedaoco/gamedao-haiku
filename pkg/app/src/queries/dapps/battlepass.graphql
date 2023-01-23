@@ -22,25 +22,30 @@ query ActiveBattlepassById($id: String!) {
   }
 }
 
+query Battlepasses {
+  Bot {
+    Battlepasses {
+      bot_id
+      bot_chainId
+    }
+  }
+}
+
 # query BattlepassPoints( $id: String! ) {
-  # BattlepassPoints(where: {battlepassChainId: $id}) {
-  #   battlepassId
-  #   identityId
-  #   points
-  # }
-#   points( battlepass: $id ) {
-#     quests
-#     points
-#     address
-#     discord
+#   Bot {
+#     BattlepassPoints(where: {battlepassChainId: $id}) {
+#       battlepassId
+#       identityId
+#       points
+#     }
+#     BattlePassQuests( where: { battlepass: { _eq: $id } } ) {
+#       channelId
+#       daily
+#       maxDaily
+#       points
+#       quantity
+#       source
+#       type
+#     }
 #   }
-  # quests( where: { battlepass: { _eq: $id } } ) {
-  #   channelId
-  #   daily
-  #   maxDaily
-  #   points
-  #   quantity
-  #   source
-  #   type
-  # }
 # }

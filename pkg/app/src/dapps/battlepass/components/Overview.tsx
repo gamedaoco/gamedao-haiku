@@ -1,11 +1,13 @@
-import Link from 'next/link'
 import { Fragment, useState, useEffect } from 'react'
-import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { CardContent, CardActions } from '@mui/material'
+import Link from 'next/link'
 
 import { useActiveBattlepassSubscription } from 'src/queries'
 import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
+
+import { useTheme } from '@mui/material/styles'
+import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
+import { CardContent, CardActions } from '@mui/material'
+import { BPCard } from './BPCard'
 
 type TGridItemProps = {
 	index?: number
@@ -96,9 +98,59 @@ export const Overview = () => {
 				content.map((item, index) => {
 					return (
 						<Grid item key={index}>
-							<Card sx={{ width: '348px', height: '560px', border: 0, backgroundColor: '#11111122' }}>
-								<BPGridItem index={index} content={item} />
-							</Card>
+							<BPCard>
+								<Card
+									sx={{
+										width: '348px',
+										height: '560px',
+										border: 0,
+										backgroundColor: '#11111122',
+										cursor: 'pointer',
+									}}
+								>
+									<BPGridItem index={index} content={item} />
+								</Card>
+							</BPCard>
+						</Grid>
+					)
+				})}
+			{content &&
+				content.map((item, index) => {
+					return (
+						<Grid item key={index}>
+							<BPCard>
+								<Card
+									sx={{
+										width: '348px',
+										height: '560px',
+										border: 0,
+										backgroundColor: '#11111122',
+										cursor: 'pointer',
+									}}
+								>
+									<BPGridItem index={index} content={item} />
+								</Card>
+							</BPCard>
+						</Grid>
+					)
+				})}
+			{content &&
+				content.map((item, index) => {
+					return (
+						<Grid item key={index}>
+							<BPCard>
+								<Card
+									sx={{
+										width: '348px',
+										height: '560px',
+										border: 0,
+										backgroundColor: '#11111122',
+										cursor: 'pointer',
+									}}
+								>
+									<BPGridItem index={index} content={item} />
+								</Card>
+							</BPCard>
 						</Grid>
 					)
 				})}

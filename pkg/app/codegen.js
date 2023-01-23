@@ -4,8 +4,7 @@ module.exports = {
 		'./src/queries/index.ts': {
 			schema: [
 				{
-					'https://test.graph.dev.sub.zero.io/v1/graphql': {
-						// "https://sunny-cub-59.hasura.app/v1/graphql": {
+					'https://graph.dev.sub.zero.io/v1/graphql': {
 						headers: {
 							// "x-hasura-role": "admin",
 							// "x-hasura-admin-secret": "IfRf0ERh7iK4YoZXIr1enMOmVnC2I3fcerldPGck5Q93qwdl7LmP1zCzUyAjKnRy"
@@ -17,6 +16,10 @@ module.exports = {
 			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
 			config: {
 				preResolveTypes: true,
+				noSchemaStitching: false,
+				immutableTypes: true,
+				useIndexSignature: true,
+
 				skipTypename: false,
 				withHooks: true,
 				withHOC: false,
@@ -24,9 +27,6 @@ module.exports = {
 				enumsAsTypes: true,
 				constEnums: true,
 				reactApolloVersion: 3,
-				noSchemaStitching: false,
-				immutableTypes: true,
-				useIndexSignature: true,
 			},
 		},
 	},

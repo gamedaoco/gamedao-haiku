@@ -3,7 +3,7 @@ import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
-
+import { BPCard } from '../BPCard'
 import content from '../../content/rewards.json'
 
 const IconGroupVisible = false
@@ -69,7 +69,7 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 									borderRadius: '2px',
 									// background: 'url(https://pbs.twimg.com/media/EcBPYBRWsAAH6v8.jpg:large)',
 									// fallback icon:
-									background: `url(${content.item_url})`,
+									background: `url(${content.banner_url})`,
 									backgroundSize: 'cover',
 									backgroundPosition: 'center center',
 								}}
@@ -123,9 +123,19 @@ export const BPRewards = ({ args }: TArgs) => {
 			{content.map((item, index) => {
 				return (
 					<Grid item key={index}>
-						<Card sx={{ width: '348px', height: '560px', border: 0, backgroundColor: '#11111122' }}>
-							<BPRewardItem index={index + 1} content={item} />
-						</Card>
+						<BPCard>
+							<Card
+								sx={{
+									width: '348px',
+									height: '560px',
+									border: 0,
+									backgroundColor: '#11111122',
+									cursor: 'pointer',
+								}}
+							>
+								<BPRewardItem index={index + 1} content={item} />
+							</Card>
+						</BPCard>
 					</Grid>
 				)
 			})}
