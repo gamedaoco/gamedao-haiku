@@ -16,12 +16,15 @@ type TGridItemProps = {
 }
 
 export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
-	console.log(content)
-
 	const joinTX = useJoinBattlePassTX(content.organization.id)
 	const handleJoin = (id) => {
 		console.log('join', id)
 	}
+
+	// TODO: add join bp extrinsic
+
+	// TODO: load battlepass image
+
 	return (
 		<CardContent>
 			<Link href={`/v1/${content.organization.id}`}>
@@ -93,7 +96,9 @@ export const Overview = () => {
 			justifyContent={{ xs: 'center', md: 'left' }}
 		>
 			<Grid item xs={12}>
-				<Typography variant="h4">Open Battlepasses</Typography>
+				<Typography variant="h4" pb={2}>
+					Open Battlepasses
+				</Typography>
 			</Grid>
 
 			{content &&

@@ -45,16 +45,16 @@ export const BPCard = ({ children }) => {
 	}, [])
 
 	const update = (x, y) => {
-		set({ xys: calc(x, y, w.w, w.h) })
+		set.start({ xys: calc(x, y, w.w, w.h) })
 	}
 
 	return (
 		<animated.div
 			ref={ref}
 			onMouseMove={({ clientX: x, clientY: y }) => update(x, y)}
-			onMouseLeave={() => set({ xys: [0, 0, 1] })}
+			onMouseLeave={() => set.start({ xys: [0, 0, 1] })}
 			style={{
-				transform: props?.xys.interpolate(trans),
+				transform: props?.xys.to(trans),
 				// dropShadow: `(${-w.w}px ${-w.h}px 15px #000000)`
 			}}
 		>

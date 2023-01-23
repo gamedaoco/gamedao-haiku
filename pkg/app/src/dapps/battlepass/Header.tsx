@@ -101,7 +101,7 @@ export const Header = ({ id }: TProps) => {
 
 	useEffect(() => {
 		if (!data?.organization[0]) return
-		console.log('org', data?.organization[0])
+		// console.log('org', data?.organization[0])
 		setOrganization(data.organization?.[0] as Organization)
 	}, [data?.organization])
 
@@ -111,6 +111,16 @@ export const Header = ({ id }: TProps) => {
 		}
 	}, [organization, address])
 
+	const avatarImageUrl =
+		organization?.logo || cache.logoCID
+			? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
+			: null
+
+	const headerImageUrl =
+		organization?.header || cache.headerCID
+			? parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)
+			: null
+
 	return (
 		<>
 			<Stack
@@ -119,25 +129,25 @@ export const Header = ({ id }: TProps) => {
 				alignItems="center"
 				justifyContent={isMd ? 'flex-start' : 'center'}
 				sx={{
-					border: '1px solid yellow',
+					// border: '1px solid yellow',
 					position: 'absolute',
 					bottom: 0,
 					left: 0,
 					zIndex: 99,
 					// marginTop: theme.spacing(5),
 					[theme.breakpoints.up('md')]: {
-						top: 'unset',
-						display: 'flex',
-						right: 'auto',
-						alignItems: 'center',
-						left: theme.spacing(3),
-						bottom: theme.spacing(3),
+						// top: 'unset',
+						// display: 'flex',
+						// right: 'auto',
+						// alignItems: 'center',
+						// left: theme.spacing(3),
+						// bottom: theme.spacing(3),
 					},
 				}}
 			>
 				<Avatar
 					sx={(theme) => ({
-						border: '1px solid yellow',
+						// border: '1px solid yellow',
 
 						ml: '2rem',
 						mb: '2rem',
@@ -147,11 +157,7 @@ export const Header = ({ id }: TProps) => {
 						outline: `5px solid #111111aa`,
 						// cursor: 'pointer',
 					})}
-					srcSet={
-						organization?.logo || cache.logoCID?.length
-							? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
-							: null
-					}
+					srcSet={avatarImageUrl}
 				/>
 
 				<Stack
@@ -214,7 +220,7 @@ export const Header = ({ id }: TProps) => {
 					</Box>
 				) : (
 					<Image
-						src={parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)}
+						src={headerImageUrl}
 						alt="logo"
 						layout="fill"
 						sx={{
