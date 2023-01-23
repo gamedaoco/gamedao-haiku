@@ -20,7 +20,7 @@ interface ComponentProps {
 	open?: boolean
 }
 
-// const log = Logger('HAIKU')
+const log = Logger('HAIKU')
 
 export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 	const theme = useTheme()
