@@ -93,7 +93,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 			<Providers>
 				<HeadAndMetaTags />
 				<AnimatePresence mode="wait" initial={false}>
-					<Component {...pageProps} key={router.pathname} />
+					<Component {...pageProps} key={router.asPath} />
 				</AnimatePresence>
 			</Providers>
 		</CacheProvider>

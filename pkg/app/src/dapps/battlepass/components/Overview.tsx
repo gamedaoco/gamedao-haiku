@@ -16,6 +16,8 @@ type TGridItemProps = {
 }
 
 export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
+	console.log(content)
+
 	const joinTX = useJoinBattlePassTX(content.organization.id)
 	const handleJoin = (id) => {
 		console.log('join', id)
@@ -48,7 +50,7 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 							borderRadius: '2px',
 							// background: 'url(https://pbs.twimg.com/media/EcBPYBRWsAAH6v8.jpg:large)',
 							// fallback icon:
-							background: `url(${content.item_url})`,
+							background: `url(${content.banner_url})`,
 							backgroundSize: 'cover',
 							backgroundPosition: 'center center',
 						}}

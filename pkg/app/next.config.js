@@ -5,7 +5,7 @@ const dateStr = date.toISOString()
 
 sitemap({
 	ignoredPaths: ['api'],
-	baseUrl: 'https://app.gamedao.co',
+	baseUrl: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
 	pagesDirectory: __dirname + '/src/pages',
 	targetDirectory: 'public/',
 	ignoreIndexFiles: true,
