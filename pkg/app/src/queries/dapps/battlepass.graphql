@@ -23,10 +23,10 @@ query ActiveBattlepassById($id: String!) {
 }
 
 query Battlepasses {
-  Bot {
+  BattlepassBot {
     Battlepasses {
-      bot_id
-      bot_chainId
+      id
+      chainId
     }
   }
 }
