@@ -122,35 +122,37 @@ export const Header = ({ id }: TProps) => {
 			: null
 
 	return (
-		<>
+		<Box>
 			<Stack
-				direction={isMd ? 'row' : 'column'}
+				// direction={isMd ? 'row' : 'column'}
 				spacing={2}
 				alignItems="center"
-				justifyContent={isMd ? 'flex-start' : 'center'}
+				justifyContent={isMd ? 'center' : 'center'}
 				sx={{
-					// border: '1px solid yellow',
+					border: '1px solid yellow',
 					position: 'absolute',
+					top: 0,
 					bottom: 0,
 					left: 0,
+					right: 0,
+					width: 'auto',
 					zIndex: 99,
-					// marginTop: theme.spacing(5),
+					// margin: [2,4],
 					[theme.breakpoints.up('md')]: {
-						// top: 'unset',
-						// display: 'flex',
-						// right: 'auto',
-						// alignItems: 'center',
-						// left: theme.spacing(3),
-						// bottom: theme.spacing(3),
+						top: 'unset',
+						display: 'flex',
+						right: 'auto',
+						alignItems: 'center',
+						left: theme.spacing(3),
+						bottom: theme.spacing(3),
 					},
 				}}
 			>
 				<Avatar
 					sx={(theme) => ({
 						// border: '1px solid yellow',
-
-						ml: '2rem',
-						mb: '2rem',
+						// ml: '2rem',
+						// mb: '2rem',
 						width: '5rem',
 						height: '5rem',
 						backgroundColor: theme.palette.background.default,
@@ -200,7 +202,7 @@ export const Header = ({ id }: TProps) => {
 				overflow="hidden"
 				position="relative"
 				sx={{
-					border: '1px solid yellow',
+					border: '1px solid blue',
 					backgroundColor: '#010101ee',
 					borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
 					height: '40vh',
@@ -233,20 +235,22 @@ export const Header = ({ id }: TProps) => {
 					/>
 				)}
 				{/* gradient */}
-				{/*				<Box
+				<Box
 					sx={{
 						position: 'absolute',
 						top: 0,
 						left: 0,
 						right: 0,
 						bottom: 0,
-						background: 'linear-gradient(182deg, #02020200 -1.23%, #020202ff 85%)',
+						background: 'linear-gradient(182deg, #02020200 20%, #020202ff 90%)',
 						backgroundBlendMode: 'multiply',
 						pointerEvents: 'none',
 					}}
-				></Box>*/}
+				></Box>
+				{/*
+				 */}
 			</Grid>
-		</>
+		</Box>
 	)
 }
 

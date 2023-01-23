@@ -53,7 +53,7 @@ export const BPQuestItem = ({ index }: TGridItemProps) => {
 	}
 
 	return (
-		<Stack p={2} sx={{ width: 348, height: 148 }} direction="column" justifyContent="space-between">
+		<Stack p={2} sx={{ width: ['100%'], height: 150 }} direction="column" justifyContent="space-between">
 			<Stack direction="row">
 				<Box sx={{ width: '56px' }}>
 					<Icon />
@@ -94,16 +94,20 @@ type TArgs = {
 
 export const BPQuests = ({ args }: TArgs) => {
 	const theme = useTheme()
-	const items = 4
+
+	const items = 8
 	const arr1: number[] = new Array(items).fill(0)
 
 	return (
 		<Grid
 			container
+			// p={0}
+			// m={0}
 			// columns={{ xs: 1, md: 2 }}
-			rowSpacing={2}
-			columnSpacing={{ xs: 2, md: 4, lg: 6 }}
-			justifyContent={{ xs: 'center', md: 'left' }}
+			// rowSpacing={2}
+			// columnSpacing={{ xs: 2, md: 4, lg: 6 }}
+			spacing={{ xs: 2, md: 4, lg: 6 }}
+			justifyContent={{ xs: 'center', md: 'center' }}
 		>
 			<Grid item xs={12}>
 				<Typography variant="h4">Quests</Typography>
@@ -111,7 +115,7 @@ export const BPQuests = ({ args }: TArgs) => {
 
 			{arr1.map((item, index) => {
 				return (
-					<Grid item key={index}>
+					<Grid item key={index} xs={12} md={6} lg={3}>
 						<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
 							<BPQuestItem index={index} />
 						</Card>

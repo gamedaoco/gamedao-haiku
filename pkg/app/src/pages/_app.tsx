@@ -9,8 +9,6 @@ import { Providers } from 'src/providers'
 import { useConfig } from 'hooks/useConfig'
 import { Logger } from 'lib/logger'
 
-import { AnimatePresence } from 'framer-motion'
-
 import createEmotionCache from 'src/theme/createEmotionCache'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import 'react-toastify/dist/ReactToastify.css'
@@ -90,9 +88,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 		<CacheProvider value={emotionCache}>
 			<Providers>
 				<HeadAndMetaTags />
-				{/*				<AnimatePresence mode="wait" initial={false}>*/}
 				<Component {...pageProps} key={router.asPath} />
-				{/*</AnimatePresence>*/}
 			</Providers>
 		</CacheProvider>
 	)
