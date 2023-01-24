@@ -53,6 +53,7 @@ export function TmpOverview() {
 						setOrgId(data?.[1]?.toHex())
 					}
 				})
+				push('/organizations/')
 			}
 		},
 		[tmpOrgState.clearAll],

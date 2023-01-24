@@ -22,11 +22,83 @@ query ActiveBattlepassById($id: String!) {
   }
 }
 
-query Battlepasses {
+query AllBattlepasses {
   BattlepassBot {
     Battlepasses {
       id
       chainId
+    }
+  }
+}
+
+# if user has connected their wallet
+# we can query a battlepass id by wallet address
+query BattlepassById($address: String, $battlepass: String) {
+  BattlepassBot {
+    # Battlepasses {
+    #   id
+    #   chainId
+    # }
+    BattlepassIdentities(where: {address: $address}) {
+      address
+      discord
+      id
+      twitter
+    }
+    # identity type?
+    # BattlepassPoints(where: {identityId: $identity, battlepassChainId: $battlepass}) {
+    # BattlepassPoints(where: {battlepassChainId: $battlepass}) {
+    #   battlepassId
+    #   identityId
+    #   points
+    # }
+    BattlepassQuests(where: { battlepassChainId: $battlepass }) {
+      battlepassId
+      channelId
+      id
+      maxDaily
+      points
+      quantity
+      repeat
+      source
+      type
+    }
+    # identity type?
+    # BattlepassProgresses(where: {battlepassChainId: $battlepass, identityId: $identity}) {
+    # BattlepassProgresses(where: {battlepassChainId: $battlepass}) {
+    #   questId
+    #   progress
+    # }
+  }
+}
+
+# if user has connected their wallet
+# we can query a battlepass id by wallet address
+query BattlepassIdByAddress($address: String)
+{
+  BattlepassBot {
+    BattlepassIdentities(where: {address: $address}) {
+      address
+      discord
+      id
+      twitter
+    }
+  }
+}
+
+# query the quests for a specific battlepass
+query BattlepassQuests($id: String) {
+  BattlepassBot {
+    BattlepassQuests(where: { battlepassChainId: $id }) {
+      battlepassId
+      channelId
+      id
+      maxDaily
+      points
+      quantity
+      repeat
+      source
+      type
     }
   }
 }

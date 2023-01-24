@@ -411,44 +411,44 @@ export function OrganisationById() {
 								<TmpOverview />
 							)}
 						</TabPanel>
+
+						<TabPanel value={'campaigns'}>
+							{organizationIdState ? (
+								<CampaignOverview
+									organizationId={organizationIdState}
+									isAdmin={address === organizationState?.creator}
+								/>
+							) : (
+								<TmpOverview />
+							)}
+						</TabPanel>
+
+						<TabPanel value={'treasury'}>
+							{organizationState && <TreasuryOverview address={organizationState.treasury} />}
+						</TabPanel>
+
+						<TabPanel value={'proposals'}>
+							{proposalIdState && organizationState ? (
+								<ProposalDetail
+									organization={organizationState}
+									proposalId={proposalIdState}
+									isMember={isMemberState}
+									goBack={() => handleTabSelect('proposals')}
+								/>
+							) : (
+								<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
+							)}
+						</TabPanel>
+
+						<TabPanel value={'members'}>
+							<OrganizationMembersTable organizationState={organizationState} />
+						</TabPanel>
+
+						<TabPanel value={'settings'}>
+							<SettingsOverview organizationState={organizationState} />
+						</TabPanel>
 						{/*
-
-					<TabPanel value={'campaigns'}>
-						{organizationIdState ? (
-							<CampaignOverview
-								organizationId={organizationIdState}
-								isAdmin={address === organizationState?.creator}
-							/>
-						) : (
-							<TmpOverview />
-						)}
-					</TabPanel>
-
-					<TabPanel value={'treasury'}>
-						{organizationState && <TreasuryOverview address={organizationState.treasury} />}
-					</TabPanel>
-
-					<TabPanel value={'proposals'}>
-						{proposalIdState && organizationState ? (
-							<ProposalDetail
-								organization={organizationState}
-								proposalId={proposalIdState}
-								isMember={isMemberState}
-								goBack={() => handleTabSelect('proposals')}
-							/>
-						) : (
-							<ProposalOverview organizationId={organizationIdState} isMember={isMemberState} />
-						)}
-					</TabPanel>
-
-					<TabPanel value={'members'}>
-						<OrganizationMembersTable organizationState={organizationState} />
-					</TabPanel>
-
-					<TabPanel value={'settings'}>
-						<SettingsOverview organizationState={organizationState} />
-					</TabPanel>
-				*/}
+						 */}
 					</Stack>
 				</TabContext>
 			) : (

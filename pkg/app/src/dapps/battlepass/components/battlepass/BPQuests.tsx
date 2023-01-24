@@ -1,4 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
+
+import { useBattlepassByIdQuery } from 'src/queries'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
@@ -93,9 +97,18 @@ type TArgs = {
 }
 
 export const BPQuests = ({ args }: TArgs) => {
+	const { id } = args
+	const address = useCurrentAccountAddress()
+	const variables = { address, battlepass: id, identity: null }
+	const { loading, data, error } = useBattlepassByIdQuery({ variables })
+
+	useEffect(() => {
+		console.log('loading content:', loading, data)
+	}, [loading, data])
+
 	const theme = useTheme()
 
-	const items = 8
+	const items = 4
 	const arr1: number[] = new Array(items).fill(0)
 
 	return (

@@ -68,8 +68,8 @@ export function Settings({
 		(event) => {
 			const value = event.target.value
 			try {
-				// if (setFeeAmount) setFeeAmount(value < 0 ? 0 : value)
-				if (!value) return setFeeAmountChangeError(t('label:required'))
+				if (setFeeAmount) setFeeAmount(value < 0 ? 0 : value)
+				if (!value || value < 1) return setFeeAmountChangeError(t('label:required'))
 				validationFeeSchema?.validateSync(value)
 				setFeeAmountChangeError(null)
 			} catch (e) {
