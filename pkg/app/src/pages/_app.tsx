@@ -88,7 +88,7 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 		<CacheProvider value={emotionCache}>
 			<Providers>
 				<HeadAndMetaTags />
-				<Component {...pageProps} key={router.asPath} />
+				<Component {...pageProps} />
 			</Providers>
 		</CacheProvider>
 	)
