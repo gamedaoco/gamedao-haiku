@@ -2,7 +2,7 @@
 
 root = true
 
-[*.{js,jsx,ts,tsx,sol}]
+[*.{js,jsx,ts,tsx,sol,gql,graphql}]
 indent_style = tab
 indent_size = 4
 trim_trailing_whitespace = true
