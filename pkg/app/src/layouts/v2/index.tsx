@@ -1,17 +1,14 @@
 import { useCallback, useState } from 'react'
-
 import Head from 'next/head'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
-
-import { TopBar } from './components/TopBar'
+// import { TopBar } from './components/TopBar'
 import { Header } from './components/Header'
 import { HeaderMobile } from './components/HeaderMobile'
 import { Footer } from './components/Footer'
 import { Sidebar } from './components/Sidebar'
-
 // import { AnimatePresence, motion } from 'framer-motion'
 
 interface ComponentProps {
@@ -25,7 +22,7 @@ interface ComponentProps {
 }
 
 // TODO: Should not be here/ configs and co
-const SITE_NAME = 'GameDAO'
+// const SITE_NAME = 'GameDAO'
 
 // const Transition = ({ children }) => (
 // 	<motion.div
@@ -64,7 +61,7 @@ export function Layout({
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
 
-	const showTopBar = false
+	// const showTopBar = false
 	const spacing = showHeader ? `calc( 100vh - 90px )` : `100vh`
 
 	return (

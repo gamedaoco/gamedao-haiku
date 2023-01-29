@@ -1,3 +1,54 @@
+query GetBattlepassForUser ($uuid: String!) {
+  BattlepassBot {
+    BattlepassIdentities(where: {uuid: $uuid}) {
+      members {
+        battlepass {
+          chainId
+        }
+      }
+    }
+  }
+}
+
+query GetScore ( $battlepass: String, $uuid: String ) {
+  BattlepassBot {
+    BattlepassPoints(where: { battlepassChainId: $battlepass, identityUuid: $uuid }) {
+      points
+      quests
+    }
+
+  }
+}
+
+query GetIdentityByDiscord ($discord: String) {
+  BattlepassBot {
+    BattlepassIdentities(where: { discord: $discord }) {
+      uuid
+      address
+      discord
+      twitter
+    }
+  }
+}
+
+mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String ) {
+  BattlepassBot {
+    identity( uuid: $uuid, address: $address, discord: $discord) {
+      uuid
+      address
+      discord
+    }
+  }
+}
+
+mutation JoinBattlepass ( $battlepass: String!, $uuid: String!){
+  BattlepassBot {
+    join( battlepass: $battlepass, identityUuid: $uuid) {
+      uuid
+    }
+  }
+}
+
 subscription ActiveBattlepass {
   battlepass(where: {state: {_eq: "ACTIVE"}}) {
     id
@@ -5,6 +56,8 @@ subscription ActiveBattlepass {
     organization {
       id
       name
+      header
+      logo
     }
     price
     season
@@ -14,12 +67,19 @@ subscription ActiveBattlepass {
 }
 
 query ActiveBattlepassById($id: String!) {
-  battlepass(where: {organization: {id: {_eq: $id}}}) {
-    id
-    organization {
+  BattlepassBot {
+    Battlepasses(where: {chainId: $id}) {
       id
+      orgId
+      chainId
     }
   }
+  # battlepass(where: {organization: {id: {_eq: $id}}}) {
+  #   id
+  #   organization {
+  #     id
+  #   }
+  # }
 }
 
 query AllBattlepasses {
@@ -63,6 +123,17 @@ query BattlepassById($address: String, $battlepass: String) {
       source
       type
     }
+    # BattlepassRewards(where: { battlepassChainId: $battlepass }) {
+    #   battlepassId
+    #   channelId
+    #   id
+    #   maxDaily
+    #   points
+    #   quantity
+    #   repeat
+    #   source
+    #   type
+    # }
     # identity type?
     # BattlepassProgresses(where: {battlepassChainId: $battlepass, identityId: $identity}) {
     # BattlepassProgresses(where: {battlepassChainId: $battlepass}) {

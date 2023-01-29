@@ -5,4 +5,5 @@ export interface AppState {
 	config: Config
 	features: Features
 	apiProviderConfig: ApiProviderConfig
+	uuid?: string
 }

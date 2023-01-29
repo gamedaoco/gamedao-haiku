@@ -1,10 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { AppContext } from 'providers/app/modules/context'
 import { ENVIRONMENT } from 'src/constants'
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 
+import { useSession } from 'next-auth/react'
+import { useGetIdentityByDiscordQuery } from 'src/queries'
+
 export function AppProvider({ children }) {
+	// resolve uuid and persist in app state
+	const { data: session } = useSession()
+	const { data } = useGetIdentityByDiscordQuery({ variables: { discord: session?.user?.discord } })
+	const [uuid, setUuid] = useState(null)
+	useEffect(() => {
+		if (!data) return
+		const id = data.BattlepassBot.BattlepassIdentities[0].uuid
+		setUuid(id)
+	}, [data?.BattlepassBot])
+
 	const configQueryResult = useConfigQuery({
 		variables: { env: ENVIRONMENT },
 	})
@@ -32,6 +45,7 @@ export function AppProvider({ children }) {
 				config: configQueryResult.data?.config ?? null,
 				features: featureQueryResult.data?.features ?? null,
 				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
+				uuid: uuid,
 			}}
 		>
 			{children}
