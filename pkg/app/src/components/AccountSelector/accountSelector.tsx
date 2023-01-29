@@ -1,5 +1,12 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState, useEffect } from 'react'
 
+// session management
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useGetIdentityByDiscordQuery } from 'src/queries'
+import { useConnectIdentityMutation } from 'src/queries'
+
+//
 import { Box, Button, useMediaQuery, useTheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useExtensionContext } from 'src/providers/extension/modules/context'
@@ -10,11 +17,48 @@ import { SelectAccountDialog } from 'components/SelectAccountDialog/selectAccoun
 import { SelectNetworkDialog } from 'components/SelectNetworkDialog/selectNetworkDialog'
 
 export function AccountSelector() {
+	const { w3Enabled, selectedAccount, connectWallet, supportedWallets } = useExtensionContext()
+
+	// session + user handling
+
+	const [connected, setConnected] = useState(false)
+
+	const currentAddress = useCurrentAccountAddress()
+	const { data: session } = useSession()
+	const [uuid, setUuid] = useState(null)
+	const [address, setAddress] = useState(null)
+	const [discord, setDiscord] = useState(null)
+
+	const [user, setUser] = useState({ uuid: uuid, address: address, discord: discord })
+	const [connectIdentityMutation, { data }] = useConnectIdentityMutation({ variables: { discord } })
+
+	// get discord id
+	useEffect(() => {
+		if (!session) return
+		if (!session.user.discord) return
+		setDiscord(session.user.discord)
+		setConnected(true)
+		// console.log('connecting', session.user.discord, '...')
+		const connect = async () => {
+			const response = await connectIdentityMutation().then((res) => {
+				console.log('connection', res)
+			})
+		}
+		connect().catch(console.error)
+	}, [session])
+
+	// 	console.log(`================================================================`)
+	// 	console.log(uuid, discord, address)
+	// 	console.log(`================================================================`)
+
+	useEffect(() => {
+		if (connected) console.log(`connected`, connected)
+	}, [connected])
+
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
-	const { w3Enabled, selectedAccount, connectWallet, supportedWallets } = useExtensionContext()
 	const { t } = useTranslation()
 	const [flyoutOpenState, setFlyoutOpenState] = useState<boolean>(false)
 	const [accountSelectOpenState, setAccountSelectOpenState] = useState<boolean>(false)
@@ -54,12 +98,12 @@ export function AccountSelector() {
 	if (w3Enabled === false || selectedAccount === null) {
 		return isMd ? (
 			<Button variant="outlined" size="medium" onClick={connectWallet as any}>
-				Connect
+				Sign in
 			</Button>
 		) : (
 			<Box width="100%">
 				<Button variant="outlined" size="medium" fullWidth={true} onClick={connectWallet as any}>
-					Connect
+					Sign in
 				</Button>
 			</Box>
 		)
