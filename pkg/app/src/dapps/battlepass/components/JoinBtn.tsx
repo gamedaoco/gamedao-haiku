@@ -1,5 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
@@ -27,6 +28,8 @@ type TProps = {
 
 export const Join = ({ args }: TProps) => {
 	const { id, isMember, isPrime, isOpen } = args
+	const { data: session } = useSession()
+
 	const isPending = false
 	const theme = useTheme()
 	const addMemberTx = useAddMemberTransaction(id)

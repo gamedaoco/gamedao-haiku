@@ -103,7 +103,7 @@ export const BPQuests = ({ args }: TArgs) => {
 	const { loading, data, error } = useBattlepassByIdQuery({ variables })
 
 	useEffect(() => {
-		console.log('loading content:', loading, data)
+		console.log('loading content:', id, loading, data)
 	}, [loading, data])
 
 	const theme = useTheme()

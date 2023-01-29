@@ -1,13 +1,17 @@
 import { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
 
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { useConfig } from 'hooks/useConfig'
+
 import { useActiveBattlepassSubscription } from 'src/queries'
 import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { CardContent, CardActions } from '@mui/material'
-import { BPCard } from './BPCard'
+
+import { BPCard } from './components/BPCard'
 
 type TGridItemProps = {
 	index?: number
@@ -16,10 +20,14 @@ type TGridItemProps = {
 }
 
 export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
-	const joinTX = useJoinBattlePassTX(content.organization.id)
+	const config = useConfig()
+	const joinTX = useJoinBattlePassTX(content.id)
+
 	const handleJoin = (id) => {
 		console.log('join', id)
 	}
+
+	// TODO: check if already member, show/hide join/view
 
 	// TODO: add join bp extrinsic
 
@@ -27,17 +35,15 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 
 	return (
 		<CardContent>
-			<Link href={`/v1/${content.organization.id}`}>
+			<Link href={`/battlepass/${content.id}`}>
 				<Box
-					p={'24px'}
 					sx={{
+						height: '470px',
 						borderRadius: '2px',
-						background: `linear-gradient(
-										to top,
-										#ee4693ff,
-										#ee469300 75%
-									)`,
 						boxShadow: `0px 20px 30px #00000033`,
+						background: `url(${parseIpfsHash(content.organization.header, config.IPFS_GATEWAY)})`,
+						backgroundSize: 'cover',
+						backgroundPosition: 'center center',
 					}}
 				>
 					{/*
@@ -47,29 +53,31 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 				*/}
 
 					<Box
+						p={'24px'}
 						sx={{
-							width: 250,
-							height: 250,
+							backdropFilter: 'blur(32px)',
+							webkitBackdropFilter: 'blur(32px)',
+							background: `linear-gradient(to top, #111111ff, #11111122 75% )`,
+							height: '512px',
 							borderRadius: '2px',
-							// background: 'url(https://pbs.twimg.com/media/EcBPYBRWsAAH6v8.jpg:large)',
-							// fallback icon:
-							background: `url(${content.banner_url})`,
-							backgroundSize: 'cover',
-							backgroundPosition: 'center center',
+							// background: `url(${parseIpfsHash(content.organization.logo,config.IPFS_GATEWAY)})`,
+							// backgroundSize: 'cover',
+							// backgroundPosition: 'center center',
 						}}
-					></Box>
+					>
+						<Box justifyContent="center">
+							<Typography variant="h6">{content.organization.name}</Typography>
+							<Typography pt={2} m={0} variant="h5">
+								{content.name}
+							</Typography>
+							<Typography variant="h6">Season {content.season}</Typography>
+							{/*<Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography>*/}
+							{/*<Typography>{(content.price===0)?`free`:`\$ ${content.price}`}</Typography>*/}
+						</Box>
+					</Box>
 				</Box>
 			</Link>
-			<Box py={2}>
-				<Typography variant="h6">{content.organization.name}</Typography>
-				<Typography pt={2} m={0} variant="h5">
-					{content.name}
-				</Typography>
-				<Typography variant="h6">Season {content.season}</Typography>
-				{/*<Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography>*/}
-				{/*<Typography>{(content.price===0)?`free`:`\$ ${content.price}`}</Typography>*/}
-			</Box>
-			<Button fullWidth variant="pink" onClick={() => handleJoin(content.organization.id)}>
+			<Button fullWidth variant="pink" onClick={() => handleJoin(content.id)}>
 				Join
 			</Button>
 		</CardContent>
@@ -111,47 +119,7 @@ export const Overview = () => {
 										width: '348px',
 										height: '560px',
 										border: 0,
-										backgroundColor: '#11111122',
-										cursor: 'pointer',
-									}}
-								>
-									<BPGridItem index={index} content={item} />
-								</Card>
-							</BPCard>
-						</Grid>
-					)
-				})}
-			{content &&
-				content.map((item, index) => {
-					return (
-						<Grid item key={index}>
-							<BPCard>
-								<Card
-									sx={{
-										width: '348px',
-										height: '560px',
-										border: 0,
-										backgroundColor: '#11111122',
-										cursor: 'pointer',
-									}}
-								>
-									<BPGridItem index={index} content={item} />
-								</Card>
-							</BPCard>
-						</Grid>
-					)
-				})}
-			{content &&
-				content.map((item, index) => {
-					return (
-						<Grid item key={index}>
-							<BPCard>
-								<Card
-									sx={{
-										width: '348px',
-										height: '560px',
-										border: 0,
-										backgroundColor: '#11111122',
+										backgroundColor: '#11111144',
 										cursor: 'pointer',
 									}}
 								>

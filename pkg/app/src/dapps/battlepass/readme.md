@@ -21,6 +21,8 @@
 
 	- Level (L) -> achieved by collecting points
 
+	- Reward (R) -> unique token representing the reward or a redeemable voucher to get the reward
+
 ## Overview
 
 BattlePass is a subscription based engagement protocol for gaming guilds. It enables claiming and dropping rewards based on completing quests. These achievements are based on verifiable activity and contribute to xp, rep, trust in SENSE.

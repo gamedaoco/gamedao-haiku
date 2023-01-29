@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
 import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
+
+import { useGetScoreQuery } from 'src/queries'
 
 import { styled, useTheme } from '@mui/material/styles'
 import { Box, Button, Stack, Typography } from '@mui/material'
@@ -37,14 +40,20 @@ type TProps = {
 }
 
 export const XPBar = ({ args }: TProps) => {
-	const { id } = args
 	const theme = useTheme()
-	const joinBattlePassTX = useJoinBattlePassTX(id)
-	const address = useCurrentAccountAddress()
 
-	const level = 7
-	const max = 10000
-	const points = Math.round(Math.random() * max)
+	const { id } = args
+	const { data: session } = useSession()
+
+	const [level, setLevel] = useState(7)
+	const [max, setMax] = useState(10000)
+	const [points, setPoints] = useState(Math.round(Math.random() * max))
+
+	const where = { battlepass: id, uuid: session.user.uuid }
+	const { loading, data } = useGetScoreQuery({ where })
+
+	// const joinBattlePassTX = useJoinBattlePassTX(id)
+	// const address = useCurrentAccountAddress()
 
 	return (
 		<Stack sx={{ width: '100%' }} spacing={1}>

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
-import { ContentTabs } from 'constants/battlepass'
+import { BattlepassViews } from 'constants/battlepass'
 import { Organization } from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
@@ -10,17 +10,18 @@ import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useTheme } from '@mui/material/styles'
 import { Box, Tab, Tabs, Button, Stack, useMediaQuery } from '@mui/material'
 import { Loader } from 'components/Loader'
-import { Join } from './components/JoinBtn'
+
+import { Join } from './JoinBtn'
 
 type TProps = {
 	id: string
-	path: ContentTabs
+	view: BattlepassViews
 	organization?: Organization
 }
 
 interface ITabs {
 	label: string
-	value?: ContentTabs
+	value?: BattlepassViews
 	disabled?: boolean
 }
 
@@ -31,7 +32,7 @@ const initialRole = {
 	battlepass: false,
 }
 
-export function Navigation({ id, path, organization }: TProps) {
+export function Navigation({ id, view, organization }: TProps) {
 	const { t } = useTranslation()
 	const { push } = useRouter()
 	const theme = useTheme()
@@ -67,9 +68,16 @@ export function Navigation({ id, path, organization }: TProps) {
 			[
 				isBattlePass
 					? {
-							label: 'Battlepass',
-							value: ContentTabs.BATTLEPASS,
+							label: 'Dashboard',
+							value: BattlepassViews.DASHBOARD,
 							disabled: !isBattlePass,
+					  }
+					: null,
+				setIsPrime
+					? {
+							label: 'Admin',
+							value: BattlepassViews.ADMIN,
+							disabled: !setIsPrime,
 					  }
 					: null,
 			].filter((item) => item !== null),
@@ -77,8 +85,8 @@ export function Navigation({ id, path, organization }: TProps) {
 	)
 
 	const handleTabChange = useCallback(
-		(event: ChangeEvent<{}>, path: ContentTabs): void => {
-			push(`/v1/${id}/${path}`)
+		(event: ChangeEvent<{}>, view: BattlepassViews): void => {
+			push(`/battlepass/${id}/${view}`)
 		},
 		[id, push],
 	)
@@ -93,20 +101,20 @@ export function Navigation({ id, path, organization }: TProps) {
 				pr={isMd ? '1rem' : 0}
 			>
 				<Box>
-					{/*				<Tabs
-					centered={true}
-					scrollButtons
-					allowScrollButtonsMobile
-					textColor="primary"
-					indicatorColor="primary"
-					sx={{ pl: isMd ? '200px' : 0, height: 60 }}
-					onChange={handleTabChange}
-					value={path || ContentTabs.BATTLEPASS}
-				>
-					{tabs.map((tab, i) => (
-						<Tab key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />
-					))}
-				</Tabs>*/}
+					<Tabs
+						centered={true}
+						scrollButtons
+						allowScrollButtonsMobile
+						textColor="primary"
+						indicatorColor="primary"
+						sx={{ pl: isMd ? '200px' : 0, height: 60 }}
+						onChange={handleTabChange}
+						value={view || BattlepassViews.DASHBOARD}
+					>
+						{tabs.map((tab, i) => (
+							<Tab key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />
+						))}
+					</Tabs>
 				</Box>
 				<Join args={{ id: id, isMember: isMember, isOpen: isOpen, isPrime: isPrime }} />
 			</Stack>

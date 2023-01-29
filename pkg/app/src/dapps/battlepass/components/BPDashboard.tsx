@@ -1,4 +1,4 @@
-import { ContentTabs } from 'constants/battlepass'
+import { BattlepassViews } from 'constants/battlepass'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Typography, Grid, Button } from '@mui/material'
@@ -16,7 +16,7 @@ type TProps = {
 	id: string
 }
 
-export function Battlepass({ id }: TProps) {
+export function BPDashboard({ id }: TProps) {
 	const theme = useTheme()
 
 	if (!id) return <Loader />
@@ -37,6 +37,8 @@ export function Battlepass({ id }: TProps) {
 				<Grid item sm={12}>
 					<BPRewards args={{ id }} />
 				</Grid>
+				{/*
+				 */}
 			</Grid>
 		</Box>
 	)

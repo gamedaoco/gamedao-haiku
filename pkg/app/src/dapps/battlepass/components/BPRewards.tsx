@@ -3,8 +3,8 @@ import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
-import { BPCard } from '../BPCard'
-import content from '../../content/rewards.json'
+import { BPCard } from './BPCard'
+import content from '../content/rewards.json'
 
 const IconGroupVisible = false
 
