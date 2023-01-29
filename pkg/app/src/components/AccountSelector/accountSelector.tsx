@@ -3,7 +3,6 @@ import { useCallback, useRef, useState, useEffect } from 'react'
 // session management
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useGetIdentityByDiscordQuery } from 'src/queries'
 import { useConnectIdentityMutation } from 'src/queries'
 
 //
@@ -41,7 +40,11 @@ export function AccountSelector() {
 		// console.log('connecting', session.user.discord, '...')
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
-				console.log('connection', res)
+				const data = res.data?.BattlepassBot?.identity
+				console.log('connection', data)
+				setUuid(data.uuid)
+				setAddress(data.address)
+				setDiscord(data.discord)
 			})
 		}
 		connect().catch(console.error)

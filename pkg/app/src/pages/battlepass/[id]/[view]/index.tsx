@@ -31,8 +31,6 @@ export function Page() {
 	const walletGate = false
 	const accountState = useCurrentAccountState()
 
-	console.log(data?.BattlepassBot?.Battlepasses[0])
-
 	if (loading) return <Loader />
 	if (walletGate && !accountState) return <NoWalletConnected />
 
