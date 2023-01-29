@@ -10,7 +10,7 @@ import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
 import { useGetScoreQuery } from 'src/queries'
 
 import { styled, useTheme } from '@mui/material/styles'
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography, useMediaQuery } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -41,7 +41,9 @@ type TProps = {
 
 export const XPBar = ({ args }: TProps) => {
 	const theme = useTheme()
-
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
 	const { id } = args
 	const { data: session } = useSession()
 
@@ -51,6 +53,7 @@ export const XPBar = ({ args }: TProps) => {
 
 	const where = { battlepass: id, uuid: session.user.uuid }
 	const { loading, data } = useGetScoreQuery({ variables: where })
+	console.log('score', data?.BattlepassBot.BattlepassPoints)
 
 	// const joinBattlePassTX = useJoinBattlePassTX(id)
 	// const address = useCurrentAccountAddress()

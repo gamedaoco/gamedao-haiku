@@ -51,7 +51,7 @@ export const Join = ({ args }: TProps) => {
 		setTxt(t)
 	}, [id, isMember, isOpen, isPending, isPrime])
 
-	const str = encodeURI(`Join our DAO on GameDAO: https://dev.gamedao.co/v1/${id}`)
+	const str = encodeURI(`Join our Battlepass on GameDAO: https://dev.gamedao.co/battlepass/${id}`)
 
 	const openInviteModal = () => {}
 

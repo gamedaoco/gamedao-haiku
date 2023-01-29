@@ -1,7 +1,7 @@
 import { BattlepassViews } from 'constants/battlepass'
 
 import { useTheme } from '@mui/material/styles'
-import { Box, Typography, Grid, Button } from '@mui/material'
+import { Box, Typography, Grid, Button, useMediaQuery } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share'
 
 import { Loader } from 'components/Loader'
@@ -16,25 +16,28 @@ type TProps = {
 	id: string
 }
 
-export function BPDashboard({ id }: TProps) {
+export function DashboardView({ id }: TProps) {
 	const theme = useTheme()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
 
 	if (!id) return <Loader />
 
 	return (
 		<Box>
 			<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)}>
-				<Grid item sm={12} md={6}>
+				<Grid item xs={12} md={6} pb={[2, 0]}>
 					<XPBar args={{ id }} />
 				</Grid>
-				<Grid item sm={12} md={6} display="flex" alignItems="center" justifyContent="end">
+				<Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
 					<ShareBtn />
 					<BPBuyBtn args={{ id }} />
 				</Grid>
-				<Grid item sm={12}>
+				<Grid item xs={12}>
 					<BPQuests args={{ id }} />
 				</Grid>
-				<Grid item sm={12}>
+				<Grid item xs={12}>
 					<BPRewards args={{ id }} />
 				</Grid>
 				{/*

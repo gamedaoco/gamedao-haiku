@@ -123,68 +123,54 @@ export const Header = ({ id }: TProps) => {
 
 	return (
 		<Box>
-			<Stack
-				// direction={isMd ? 'row' : 'column'}
-				spacing={2}
-				alignItems="center"
-				justifyContent={isMd ? 'center' : 'center'}
-				sx={{
-					border: '1px solid yellow',
-					position: 'absolute',
-					top: 0,
-					bottom: 0,
-					left: 0,
-					right: 0,
-					width: 'auto',
-					zIndex: 99,
-					// margin: [2,4],
-					[theme.breakpoints.up('md')]: {
-						top: 'unset',
-						display: 'flex',
-						right: 'auto',
-						alignItems: 'center',
-						left: theme.spacing(3),
-						bottom: theme.spacing(3),
-					},
-				}}
-			>
-				<Avatar
-					sx={(theme) => ({
-						// border: '1px solid yellow',
-						// ml: '2rem',
-						// mb: '2rem',
-						width: '5rem',
-						height: '5rem',
-						backgroundColor: theme.palette.background.default,
-						outline: `5px solid #111111aa`,
-						// cursor: 'pointer',
-					})}
-					srcSet={avatarImageUrl}
-				/>
-
+			<Box sx={{}}>
 				<Stack
-					// spacing={2}
-					// px={isMd ? 0 : 2}
+					direction={isMd ? 'row' : 'column'}
+					spacing={2}
+					alignItems={isMd ? 'end' : 'center'}
+					justifyContent={isMd ? 'start' : 'center'}
+					pb={isMd ? 4 : 0}
+					pl={isMd ? 4 : 0}
 					sx={{
-						border: '1px solid yellow',
-
-						width: '100%',
-						justifyContent: { xs: 'space-between', sm: 'flex-start' },
+						position: 'absolute',
+						top: 0,
+						bottom: 0,
+						left: 0,
+						right: 0,
+						width: 'auto',
+						zIndex: 99, //, border: '1px solid pink'
 					}}
-					// direction="row"
 				>
-					<Stack spacing={0} sx={{ pb: '100px', pl: '30px', flex: 0.9 }}>
+					<Stack alignItems="center" justifyContent={isMd ? 'left' : 'center'}>
+						<Avatar
+							sx={(theme) => ({
+								width: '5rem',
+								height: '5rem',
+								backgroundColor: theme.palette.background.default,
+								outline: `5px solid #111111aa`,
+							})}
+							srcSet={avatarImageUrl}
+						/>
+					</Stack>
+
+					<Stack
+						alignItems={isMd ? 'space-between' : 'center'}
+						justifyContent={isMd ? 'left' : 'center'}
+						direction={isMd ? 'column' : 'column'}
+						pl={isMd ? 2 : 0}
+					>
 						<Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>
 							{organization?.name ?? cache.name ?? ''}
 						</Typography>
-						<Typography sx={{ whiteSpace: 'nowrap' }}>
+						<Typography variant="caption" sx={{ whiteSpace: 'nowrap' }}>
 							{t('label:n_members', {
 								n: organization?.organization_members?.length ?? 1,
 							})}
 						</Typography>
 					</Stack>
 				</Stack>
-			</Stack>
+			</Box>
+
 			{/*
 			 */}
 
@@ -195,24 +181,19 @@ export const Header = ({ id }: TProps) => {
 			 */}
 
 			<Grid
-				height={isMd ? '20vh' : '40vh'}
+				height={isMd ? '20vh' : '20vh'}
 				width="100%"
 				display="grid"
 				alignItems="center"
 				overflow="hidden"
 				position="relative"
 				sx={{
-					border: '1px solid blue',
+					// border: '1px solid blue',
 					backgroundColor: '#010101ee',
 					borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
-					height: '40vh',
-					[theme.breakpoints.up('sm')]: {
-						height: '25vh',
-					},
-
-					[theme.breakpoints.up('md')]: {
-						height: '20vh',
-					},
+					height: '20vh',
+					[theme.breakpoints.up('xs')]: { height: '20vh' },
+					[theme.breakpoints.up('md')]: { height: '20vh' },
 				}}
 			>
 				{/* header image */}

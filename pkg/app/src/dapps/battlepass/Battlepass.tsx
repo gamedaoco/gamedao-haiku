@@ -21,7 +21,7 @@ import { Paper, Stack } from '@mui/material'
 import { Header } from './components/Header'
 import { Navigation } from './components/Navigation'
 
-import { BPDashboard } from './components/BPDashboard'
+import { DashboardView } from './components/DashboardView'
 
 type TArgs = {
 	id: string
@@ -51,7 +51,7 @@ export const Battlepass = ({ args }: TProps) => {
 			</Paper>
 			<TabContext value={view}>
 				<TabPanel value="dashboard">
-					<BPDashboard id={id} />
+					<DashboardView id={id} />
 				</TabPanel>
 			</TabContext>
 		</Stack>

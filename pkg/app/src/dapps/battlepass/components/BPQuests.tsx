@@ -28,7 +28,7 @@ type TGridItemProps = {
 
 export const BPQuestItem = ({ index }: TGridItemProps) => {
 	const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
-	const key = icons[index] // icons[ Math.round( Math.random() * 4 ) ]
+	const key = icons[index].toLowerCase() // icons[ Math.round( Math.random() * 4 ) ]
 	const url = `/bp/icons/${key}-gold.svg`
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={url} height="45px" alt={key} />

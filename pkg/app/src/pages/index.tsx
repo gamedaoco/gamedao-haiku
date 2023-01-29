@@ -29,7 +29,7 @@ export function Page() {
 							>
 								Connect your Discord
 							</Button>
-							<Button
+							{/* <Button
 								sx={{ mr: 2, mb: 2 }}
 								variant="outlined"
 								size="medium"
@@ -44,7 +44,7 @@ export function Page() {
 								onClick={() => signIn('email')}
 							>
 								Sign in with email
-							</Button>
+							</Button> */}
 						</Box>
 					)}
 					{session && (

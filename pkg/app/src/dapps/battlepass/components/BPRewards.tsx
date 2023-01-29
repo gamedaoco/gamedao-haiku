@@ -4,7 +4,7 @@ import { Avatar, AvatarGroup } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
 import { BPCard } from './BPCard'
-import content from '../content/rewards.json'
+import { content } from '../content/rewards'
 
 const IconGroupVisible = false
 

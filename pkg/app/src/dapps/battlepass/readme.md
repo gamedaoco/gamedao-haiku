@@ -1,5 +1,6 @@
-# BattlePass Beta
+# GameDAO Battlepass
 
+A reward and engagement protocol for video games, content creators, esports and beyond. Battlepass is based on the GameDAO Protocol and operates on ZERO Network.
 ## Definitions + Dictionary
 
 	- Guild -> A group of people gaming together.
@@ -127,4 +128,7 @@ Battlepass provides the following functions:
 
 ### Control
 
-###
+### License Agreement
+
+The General License Terms of GameDAO Protocol apply to the entire codebase unless otherwise specified.
+© 2023 GAME3 Foundation, GameDAO AG, ZERO REALITY AG

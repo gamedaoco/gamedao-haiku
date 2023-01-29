@@ -41,10 +41,12 @@ export function AccountSelector() {
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
 				const data = res.data?.BattlepassBot?.identity
-				console.log('connection', data)
-				setUuid(data.uuid)
-				setAddress(data.address)
-				setDiscord(data.discord)
+				if (data) {
+					console.log('connection', data)
+					setUuid(data.uuid)
+					setAddress(data.address)
+					setDiscord(data.discord)
+				}
 			})
 		}
 		connect().catch(console.error)
