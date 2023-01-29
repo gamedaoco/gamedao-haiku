@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 import clientPromise from 'lib/mongodb'
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 
@@ -9,7 +9,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 
 const scope = ['identify'].join(' ')
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
 	adapter: MongoDBAdapter(clientPromise),
 
 	providers: [

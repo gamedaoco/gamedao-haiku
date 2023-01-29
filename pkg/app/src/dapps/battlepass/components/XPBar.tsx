@@ -50,7 +50,7 @@ export const XPBar = ({ args }: TProps) => {
 	const [points, setPoints] = useState(Math.round(Math.random() * max))
 
 	const where = { battlepass: id, uuid: session.user.uuid }
-	const { loading, data } = useGetScoreQuery({ where })
+	const { loading, data } = useGetScoreQuery({ variables: where })
 
 	// const joinBattlePassTX = useJoinBattlePassTX(id)
 	// const address = useCurrentAccountAddress()
