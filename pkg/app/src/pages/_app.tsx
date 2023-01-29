@@ -1,13 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import * as Fathom from 'fathom-client'
+import { Logger } from 'lib/logger'
+
+import { SessionProvider } from 'next-auth/react'
 
 import { Providers } from 'src/providers'
 import { useConfig } from 'hooks/useConfig'
-import { Logger } from 'lib/logger'
 
 import createEmotionCache from 'src/theme/createEmotionCache'
 import { CacheProvider, EmotionCache } from '@emotion/react'
@@ -23,9 +25,10 @@ interface MyAppProps extends AppProps {
 	Component: any
 	emotionCache: EmotionCache
 	pageProps: object
+	session: any
 }
 
-const log = Logger('HAIKU')
+const log = Logger()
 
 function HeadAndMetaTags() {
 	const config = useConfig()
@@ -61,8 +64,9 @@ function HeadAndMetaTags() {
 	)
 }
 
-export function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
+export function MyApp({ Component, emotionCache = clientSideEmotionCache, session, pageProps }: MyAppProps) {
 	const router = useRouter()
+
 	useEffect(() => {
 		log.info(`❤️  Welcome to GameDAO`)
 		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
@@ -85,12 +89,14 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, pagePr
 	}, [router.events])
 
 	return (
-		<CacheProvider value={emotionCache}>
-			<Providers>
-				<HeadAndMetaTags />
-				<Component {...pageProps} />
-			</Providers>
-		</CacheProvider>
+		<SessionProvider session={session}>
+			<CacheProvider value={emotionCache}>
+				<Providers>
+					<HeadAndMetaTags />
+					<Component {...pageProps} />
+				</Providers>
+			</CacheProvider>
+		</SessionProvider>
 	)
 }
 

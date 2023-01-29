@@ -12,7 +12,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { DApps } from 'constants/dapps'
+import { ContentView } from 'constants/organization'
 
 import { useOrganizationByIdSubscription } from 'src/queries'
 import { Loader } from 'components/Loader'
@@ -34,7 +34,7 @@ export function Page() {
 		if (data?.organization[0]) {
 			const name = data?.organization[0].name
 			// console.log(name)
-			const p = `/v1/${id}/${DApps.BATTLEPASS}`
+			const p = `/v1/${id}/${ContentView.DASHBOARD}`
 			// console.log(p)
 			push(p)
 		}

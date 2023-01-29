@@ -2,7 +2,13 @@ import React from 'react'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { Layout } from 'layouts/v2'
 
+import { useSession, signIn, signOut } from 'next-auth/react'
+
 export function Page() {
+	const { data: session } = useSession()
+
+	// console.log('session',session||null)
+
 	return (
 		<Layout showHeader showFooter showSidebar>
 			<Box sx={{ mb: 2 }}>
@@ -13,25 +19,43 @@ export function Page() {
 					<Grid item></Grid>
 				</Grid>
 				<Grid item>
-					{/*					<Typography pb={2} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
-						Community driven ownership and creation will be a vital part of
-						how we see video games in the near future. The transition to token driven
-						economies is already in progress but is still in its early stages, only
-						treating the symptoms of a broken, financial incentive driven sales machine.
-					</Typography>
-					<Typography pb={2} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
-						Tokenisation and community ownership need fair and transparent protocols to
-						create safe environments for all participants working and creating together.
-						Proper game theory needs to disincentivize bad actors and reward the good vibes
-						of the community.
-					</Typography>
-					<Typography pb={2} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
-						From forging the initial idea over collaboration to fundraising and finally
-						creating and operating game economies, we provide open protocols enabling
-						coordination, ownership, fundraising and much more to sustainably improve
-						economics of videogames, content creation and esports.
-					</Typography>
-*/}{' '}
+					{!session && (
+						<Box>
+							<Button
+								sx={{ mr: 2, mb: 2 }}
+								variant="outlined"
+								size="medium"
+								onClick={() => signIn('discord')}
+							>
+								Connect your Discord
+							</Button>
+							<Button
+								sx={{ mr: 2, mb: 2 }}
+								variant="outlined"
+								size="medium"
+								onClick={() => signIn('twitter')}
+							>
+								Connect your Twitter
+							</Button>
+							<Button
+								sx={{ mr: 2, mb: 2 }}
+								variant="outlined"
+								size="medium"
+								onClick={() => signIn('email')}
+							>
+								Sign in with email
+							</Button>
+						</Box>
+					)}
+					{session && (
+						<Box>
+							Hello {session.user.name}
+							<br />
+							<Button variant="outlined" size="medium" onClick={() => signOut()}>
+								Sign out
+							</Button>
+						</Box>
+					)}
 				</Grid>
 			</Box>
 		</Layout>

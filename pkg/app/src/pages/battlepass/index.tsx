@@ -1,6 +1,6 @@
 import { Layout } from 'layouts/v2'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { Overview } from 'dapps/battlepass/components/Overview'
+import { Overview } from 'dapps/battlepass'
 
 export function Page() {
 	return (
