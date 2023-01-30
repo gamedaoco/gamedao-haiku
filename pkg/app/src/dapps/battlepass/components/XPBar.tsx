@@ -66,13 +66,13 @@ export const XPBar = ({ args }: TProps) => {
 		if (!data) return
 
 		const _points = data.BattlepassBot.BattlepassPoints[0].points
-		console.log('xp', 'updatePoints', _points)
+		// console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
 		setDisplayLevel(Math.round(_points / 100))
 
 		const updateProgress = Math.round((_points / max) * 100)
 		setProgress(updateProgress)
-		console.log('xp', 'updateProgress', updateProgress)
+		// console.log('xp', 'updateProgress', updateProgress)
 	}, [data?.BattlepassBot?.BattlepassPoints])
 
 	useEffect(() => {
@@ -100,7 +100,7 @@ export const XPBar = ({ args }: TProps) => {
 					points,
 				)
 			]
-		console.log('xp', 'updateRank', updateRank)
+		// console.log('xp', 'updateRank', updateRank)
 		setRank(updateRank.name)
 		setLevel(updateRank.level)
 	}, [levels])

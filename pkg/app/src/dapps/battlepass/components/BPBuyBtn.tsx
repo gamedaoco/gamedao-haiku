@@ -16,7 +16,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		console.log(data)
+		// console.log('buy',data.BattlepassBot.BattlepassIdentities)
 		const pass = data.BattlepassBot.BattlepassIdentities[0].members
 			.map((i) => i.battlepass.chainId)
 			.filter((e) => e === id)[0]
@@ -28,11 +28,10 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	})
 
 	const handleJoin = () => {
-		console.log('buy battlepass:', id, uuid)
+		// console.log('buy battlepass:', id, uuid)
 		const res = joinBattlepassMutation()
 	}
 
-	// if (!id || !uuid ) return null
 	if (!enableBuy) return null
 
 	return (
@@ -42,7 +41,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				variant="lemon"
 				// fullWidth
 			>
-				Join BattlePass
+				Join Battlepass
 			</Button>
 		</Fragment>
 	)
