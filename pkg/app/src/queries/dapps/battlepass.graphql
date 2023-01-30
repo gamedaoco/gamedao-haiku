@@ -1,3 +1,26 @@
+query GetBattlepassName($id:String) {
+    battlepass(where: {id: {_eq: $id}}) {
+    name
+    cid
+  }
+}
+
+query GetBattlepassQuests($id: String) {
+  BattlepassBot {
+    BattlepassQuests(where: { battlepassChainId: $id }) {
+      battlepassId
+      channelId
+      id
+      maxDaily
+      points
+      quantity
+      repeat
+      source
+      type
+    }
+  }
+}
+
 query GetBattlepassForUser ($uuid: String!) {
   BattlepassBot {
     BattlepassIdentities(where: {uuid: $uuid}) {
@@ -10,17 +33,33 @@ query GetBattlepassForUser ($uuid: String!) {
   }
 }
 
-query GetScore ( $battlepass: String, $uuid: String ) {
+query GetScore ( $id: String, $uuid: String ) {
   BattlepassBot {
-    BattlepassPoints(where: { battlepassChainId: $battlepass, identityUuid: $uuid }) {
+    BattlepassPoints(where: { battlepassChainId: $id, identityUuid: $uuid }) {
       points
       quests
     }
-
+    BattlepassLevels(where: { battlepassChainId: $id }) {
+      level
+      name
+      points
+      totalPoints
+    }
   }
 }
 
-query GetIdentityByDiscord ($discord: String) {
+query GetLevels ( $id: String ) {
+  BattlepassBot {
+    BattlepassLevels(where: { battlepassChainId: $id }) {
+      level
+      name
+      points
+      totalPoints
+    }
+  }
+}
+
+query GetIdentityByDiscord ( $discord: String ) {
   BattlepassBot {
     BattlepassIdentities(where: { discord: $discord }) {
       uuid
@@ -66,6 +105,7 @@ subscription ActiveBattlepass {
   }
 }
 
+
 query ActiveBattlepassById($id: String!) {
   BattlepassBot {
     Battlepasses(where: {chainId: $id}) {
@@ -86,6 +126,7 @@ query AllBattlepasses {
   BattlepassBot {
     Battlepasses {
       id
+      orgId
       chainId
     }
   }
@@ -157,22 +198,7 @@ query BattlepassIdByAddress($address: String)
   }
 }
 
-# query the quests for a specific battlepass
-query BattlepassQuests($id: String) {
-  BattlepassBot {
-    BattlepassQuests(where: { battlepassChainId: $id }) {
-      battlepassId
-      channelId
-      id
-      maxDaily
-      points
-      quantity
-      repeat
-      source
-      type
-    }
-  }
-}
+
 
 # query BattlepassPoints( $id: String! ) {
 #   Bot {

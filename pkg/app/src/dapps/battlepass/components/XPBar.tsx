@@ -1,12 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
-
-import { useConfig } from 'hooks/useConfig'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
-
+import { useAppContext } from 'providers/app/modules/context'
 import { useGetScoreQuery } from 'src/queries'
 
 import { styled, useTheme } from '@mui/material/styles'
@@ -30,6 +23,15 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 // eslint-disable-next-line @next/next/no-img-element
 const Shield = () => <img src="/bp/shield-default.svg" height="45px" alt="GameDAO" />
 
+const closest = (counts: Array<number>, goal: number) =>
+	counts.reduce((prev, curr) => (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev))
+const nFormat = (num, limit = 1000, unit = 'k') =>
+	Math.abs(num) > limit - 1
+		? Math.sign(num) * Number((Math.abs(num) / limit).toFixed(1)) + unit
+		: Math.sign(num) * Math.abs(num)
+
+const below = (arr: Array<number>, num: number) => arr.findIndex((e) => e > num)
+
 export type TArgs = {
 	id?: string
 	isBattlePass?: boolean
@@ -44,19 +46,71 @@ export const XPBar = ({ args }: TProps) => {
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
+
 	const { id } = args
-	const { data: session } = useSession()
+	const { uuid } = useAppContext()
 
-	const [level, setLevel] = useState(7)
-	const [max, setMax] = useState(10000)
-	const [points, setPoints] = useState(Math.round(Math.random() * max))
+	const [levels, setLevels] = useState(null)
+	const [level, setLevel] = useState(0)
+	const [displayLevel, setDisplayLevel] = useState(0)
+	const [points, setPoints] = useState(0) // Math.round(Math.random() * max)
+	const [displayPoints, setDisplayPoints] = useState(0)
+	const [max, setMax] = useState(1000000)
+	const [progress, setProgress] = useState(0)
+	const [rank, setRank] = useState(null)
 
-	const where = { battlepass: id, uuid: session.user.uuid }
-	const { loading, data } = useGetScoreQuery({ variables: where })
-	console.log('score', data?.BattlepassBot.BattlepassPoints)
+	const where = { battlepass: id, uuid: uuid }
+	const { data } = useGetScoreQuery({ variables: where })
 
-	// const joinBattlePassTX = useJoinBattlePassTX(id)
-	// const address = useCurrentAccountAddress()
+	useEffect(() => {
+		if (!data) return
+
+		const _points = data.BattlepassBot.BattlepassPoints[0].points
+		console.log('xp', 'updatePoints', _points)
+		setPoints(_points)
+		setDisplayLevel(Math.round(_points / 100))
+
+		const updateProgress = Math.round((_points / max) * 100)
+		setProgress(updateProgress)
+		console.log('xp', 'updateProgress', updateProgress)
+	}, [data?.BattlepassBot?.BattlepassPoints])
+
+	useEffect(() => {
+		if (!data) return
+		// get ranks and points from levels
+		const _levels = data.BattlepassBot.BattlepassLevels.map((l) => {
+			return { level: l.level, points: l.points, name: l.name }
+		})
+		setLevels(_levels)
+	}, [data?.BattlepassBot?.BattlepassLevels])
+
+	useEffect(() => {
+		if (points != displayPoints) {
+			const updatePoints = Math.round((displayPoints + points) / 2)
+			setDisplayPoints(updatePoints)
+		}
+	}, [points, displayPoints])
+
+	useEffect(() => {
+		if (!levels) return
+		const updateRank =
+			levels[
+				below(
+					levels.map((l) => l.points),
+					points,
+				)
+			]
+		console.log('xp', 'updateRank', updateRank)
+		setRank(updateRank.name)
+		setLevel(updateRank.level)
+	}, [levels])
+
+	useEffect(() => {
+		if (level != displayLevel) {
+			const updateLevel = Math.floor((displayLevel + level) / 2)
+			setDisplayLevel(updateLevel)
+		}
+	}, [level, displayLevel])
 
 	return (
 		<Stack sx={{ width: '100%' }} spacing={1}>
@@ -72,19 +126,17 @@ export const XPBar = ({ args }: TProps) => {
 					}}
 				>
 					<Typography variant="shield" color="white">
-						{level}
+						{displayLevel}
 					</Typography>
 				</Button>
 				<Stack direction="column" alignItems="bottom">
+					<Typography color="white">{`${displayPoints}${max > 0 ? ` / ${nFormat(max)}` : ``} BP`}</Typography>
 					<Typography variant="body1" color="white">
-						Your current Score
-					</Typography>
-					<Typography variant="h5" color="white">
-						{points} / {max} BP
+						{rank}
 					</Typography>
 				</Stack>
 			</Stack>
-			<BorderLinearProgress variant="determinate" value={points / 100} />
+			<BorderLinearProgress variant="determinate" value={progress} />
 		</Stack>
 	)
 }
