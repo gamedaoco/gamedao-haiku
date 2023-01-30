@@ -6,6 +6,7 @@ import { createClient } from 'graphql-ws'
 import { Endpoint } from 'src/@types/graphql'
 
 const cache = new InMemoryCache({
+	addTypename: false,
 	typePolicies: {
 		Balance: {
 			keyFields: ['address', 'balanceId'],
