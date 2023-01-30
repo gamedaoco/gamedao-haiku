@@ -6,41 +6,31 @@ import { useTranslation } from 'react-i18next'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
-// import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
+import { useGetBattlepassNameQuery } from 'src/queries'
+
 // import Navigation from './Navigation'
 
 import { Add } from '@mui/icons-material'
-import { TabContext, TabPanel } from '@mui/lab'
-import {
-	Container,
-	Avatar,
-	Box,
-	Button,
-	CircularProgress,
-	Grid,
-	Paper,
-	Stack,
-	Tab,
-	Tabs,
-	useMediaQuery,
-} from '@mui/material'
-import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
+import { Typography, Avatar, Box, Grid, Stack, useMediaQuery } from '@mui/material'
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { Image } from 'components/Image/image'
+import { useAppContext } from 'providers/app/modules/context'
 
 type TProps = {
-	id: string | string[]
+	orgId: string
+	id: string
 }
 
-export const Header = ({ id }: TProps) => {
+export const Header = ({ orgId, id }: TProps) => {
 	const { query, push } = useRouter()
+	const { uuid } = useAppContext()
 	const config = useConfig()
 	const theme = useTheme()
 	const { t } = useTranslation()
@@ -48,11 +38,18 @@ export const Header = ({ id }: TProps) => {
 		defaultMatches: true,
 	})
 
+	const [name, setName] = useState('')
+	const { data: names } = useGetBattlepassNameQuery({ variables: { id: id } })
+	useEffect(() => {
+		if (!names) return
+		setName(names.battlepass[0].name)
+	}, [names?.battlepass])
+
 	const [organization, setOrganization] = useState<Organization>()
 	const [isMember, setIsMember] = useState<boolean>(false)
 
 	const { loading, data, error } = useOrganizationByIdSubscription({
-		variables: { orgId: id as string },
+		variables: { orgId: orgId as string },
 	})
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
@@ -139,6 +136,9 @@ export const Header = ({ id }: TProps) => {
 						right: 0,
 						width: 'auto',
 						zIndex: 99, //, border: '1px solid pink'
+						WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+						filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+						backgroundBlendMode: 'multiply',
 					}}
 				>
 					<Stack alignItems="center" justifyContent={isMd ? 'left' : 'center'}>
@@ -147,7 +147,7 @@ export const Header = ({ id }: TProps) => {
 								width: '5rem',
 								height: '5rem',
 								backgroundColor: theme.palette.background.default,
-								outline: `5px solid #111111aa`,
+								outline: `3px solid #111111aa`,
 							})}
 							srcSet={avatarImageUrl}
 						/>
@@ -159,10 +159,16 @@ export const Header = ({ id }: TProps) => {
 						direction={isMd ? 'column' : 'column'}
 						pl={isMd ? 2 : 0}
 					>
-						<Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>
-							{organization?.name ?? cache.name ?? ''}
+						<Typography
+							variant="header1"
+							sx={{
+								whiteSpace: 'nowrap',
+							}}
+						>
+							{name.toUpperCase()}
 						</Typography>
-						<Typography variant="caption" sx={{ whiteSpace: 'nowrap' }}>
+						<Typography variant="header2" sx={{ whiteSpace: 'nowrap' }}>
+							{organization?.name ?? cache.name ?? ''} ·{' '}
 							{t('label:n_members', {
 								n: organization?.organization_members?.length ?? 1,
 							})}
@@ -223,8 +229,8 @@ export const Header = ({ id }: TProps) => {
 						left: 0,
 						right: 0,
 						bottom: 0,
-						background: 'linear-gradient(182deg, #02020200 20%, #020202ff 90%)',
-						backgroundBlendMode: 'multiply',
+						// background: 'linear-gradient(200deg, #03002000 60%, #030020ee 80%)',
+						backgroundBlendMode: 'darken',
 						pointerEvents: 'none',
 					}}
 				></Box>

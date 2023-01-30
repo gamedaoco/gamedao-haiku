@@ -10,6 +10,8 @@ declare module '@mui/material/styles' {
 		cardBody: React.CSSProperties
 		cardMicro: React.CSSProperties
 		micro: React.CSSProperties
+		header1: React.CSSProperties
+		header2: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
@@ -22,6 +24,8 @@ declare module '@mui/material/styles' {
 		cardBody?: React.CSSProperties
 		cardMicro?: React.CSSProperties
 		micro?: React.CSSProperties
+		header1?: React.CSSProperties
+		header2?: React.CSSProperties
 	}
 }
 
@@ -36,6 +40,8 @@ declare module '@mui/material/Typography' {
 		cardBody: true
 		cardMicro: true
 		micro: true
+		header1: true
+		header2: true
 	}
 }
 
@@ -199,6 +205,20 @@ const typography = {
 		lineHeight: 1,
 		fontSize: pxToRem(12),
 		display: 'block',
+	},
+	header1: {
+		fontFamily: FONT_HEADER,
+		fontWeight: FONT_BOLD,
+		lineHeight: 64 / 48,
+		fontSize: pxToRem(20),
+		...responsiveFontSizes({ sm: 16, md: 20, lg: 24 }),
+	},
+	header2: {
+		fontFamily: FONT_PRIMARY,
+		fontWeight: FONT_MEDIUM,
+		lineHeight: 64 / 48,
+		fontSize: pxToRem(16),
+		...responsiveFontSizes({ sm: 10, md: 14, lg: 18 }),
 	},
 } as const
 
