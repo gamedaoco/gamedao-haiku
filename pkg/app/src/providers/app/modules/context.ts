@@ -9,6 +9,7 @@ export const AppContext = createContext<AppState>({
 	features: null,
 	apiProviderConfig: null,
 	uuid: null,
+	user: null,
 })
 
 export function useAppContext(): AppState {

@@ -14,51 +14,11 @@ import { Flyout } from 'components/AccountSelector/modules/flyout'
 import { Selector } from 'components/AccountSelector/modules/selector'
 import { SelectAccountDialog } from 'components/SelectAccountDialog/selectAccountDialog'
 import { SelectNetworkDialog } from 'components/SelectNetworkDialog/selectNetworkDialog'
+import { useAppContext } from 'providers/app/modules/context'
 
 export function AccountSelector() {
 	const { w3Enabled, selectedAccount, connectWallet, supportedWallets } = useExtensionContext()
-
-	// session + user handling
-
-	const [connected, setConnected] = useState(false)
-
 	const currentAddress = useCurrentAccountAddress()
-	const { data: session } = useSession()
-	const [uuid, setUuid] = useState(null)
-	const [address, setAddress] = useState(null)
-	const [discord, setDiscord] = useState(null)
-
-	const [user, setUser] = useState({ uuid: uuid, address: address, discord: discord })
-	const [connectIdentityMutation, { data }] = useConnectIdentityMutation({ variables: { discord } })
-
-	// get discord id
-	useEffect(() => {
-		if (!session) return
-		if (!session.user.discord) return
-		setDiscord(session.user.discord)
-		setConnected(true)
-		// console.log('connecting', session.user.discord, '...')
-		const connect = async () => {
-			const response = await connectIdentityMutation().then((res) => {
-				const data = res.data?.BattlepassBot?.identity
-				if (data) {
-					console.log('connection', data)
-					setUuid(data.uuid)
-					setAddress(data.address)
-					setDiscord(data.discord)
-				}
-			})
-		}
-		connect().catch(console.error)
-	}, [session])
-
-	// 	console.log(`================================================================`)
-	// 	console.log(uuid, discord, address)
-	// 	console.log(`================================================================`)
-
-	useEffect(() => {
-		if (connected) console.log(`connected`, connected)
-	}, [connected])
 
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {

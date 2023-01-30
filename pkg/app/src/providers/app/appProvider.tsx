@@ -5,19 +5,78 @@ import { ENVIRONMENT } from 'src/constants'
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 
 import { useSession } from 'next-auth/react'
-import { useGetIdentityByDiscordQuery } from 'src/queries'
+import { useGetIdentityByDiscordQuery, useConnectIdentityMutation } from 'src/queries'
+
+const initialUserState = { uuid: null, address: null, discord: null }
 
 export function AppProvider({ children }) {
+	// session + user handling
 	// resolve uuid and persist in app state
-	const { data: session } = useSession()
-	const { data } = useGetIdentityByDiscordQuery({ variables: { discord: session?.user?.discord } })
-	const [uuid, setUuid] = useState(null)
-	useEffect(() => {
-		if (!data) return
-		const id = data.BattlepassBot.BattlepassIdentities[0].uuid
-		setUuid(id)
-	}, [data?.BattlepassBot])
 
+	const { data: session } = useSession()
+	const [connected, setConnected] = useState(false)
+
+	const [uuid, setUuid] = useState(null)
+	const [address, setAddress] = useState(null)
+	const [discord, setDiscord] = useState(null)
+	const [user, setUser] = useState({ uuid: uuid, address: address, discord: discord })
+
+	const [connectIdentityMutation] = useConnectIdentityMutation({ variables: { discord } })
+
+	// get discord id
+	useEffect(() => {
+		if (!session) return
+		if (!session.user.discord) return
+		console.log('app', 'set discord', session.user.discord)
+
+		setDiscord(session?.user?.discord)
+	}, [session])
+
+	// get uuid
+	useEffect(() => {
+		if (!discord) return
+		console.log('app', 'connecting', discord, '...')
+
+		const connect = async () => {
+			const response = await connectIdentityMutation().then((res) => {
+				try {
+					const _uuid = res.data.BattlepassBot.identity.uuid
+					console.log('app', 'uuid ->', _uuid)
+
+					const _user = {
+						discord: discord,
+						address: address,
+						uuid: _uuid,
+					}
+					console.log('app', 'user ->', _user)
+					setUser(_user)
+					setUuid(_uuid)
+				} catch (e) {
+					console.log(e)
+				}
+			})
+		}
+		connect()
+		setConnected(true)
+	}, [session, discord])
+
+	// rm uuid when session is null
+	useEffect(() => {
+		if (session) {
+			console.log('app', 'found a session', session, uuid)
+		} else {
+			console.log('app', 'no session, rm uuid')
+			setUuid(null)
+			setUser(initialUserState)
+		}
+	}, [session])
+
+	// ping back when connected
+	useEffect(() => {
+		if (connected) console.log('app', `connected`, connected)
+	}, [connected])
+
+	//
 	const configQueryResult = useConfigQuery({
 		variables: { env: ENVIRONMENT },
 	})
@@ -46,6 +105,7 @@ export function AppProvider({ children }) {
 				features: featureQueryResult.data?.features ?? null,
 				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
 				uuid: uuid,
+				user: user,
 			}}
 		>
 			{children}
