@@ -31,14 +31,14 @@ export function DashboardView({ id }: TProps) {
 					<XPBar args={{ id }} />
 				</Grid>
 				<Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
-					<ShareBtn />
+					<ShareBtn args={{ id }} />
 					<BPBuyBtn args={{ id }} />
 				</Grid>
 				<Grid item xs={12}>
-					<BPQuests args={{ id }} />
+					{/* <BPQuests args={{ id }} /> */}
 				</Grid>
 				<Grid item xs={12}>
-					<BPRewards args={{ id }} />
+					{/* <BPRewards args={{ id }} /> */}
 				</Grid>
 				{/*
 				 */}

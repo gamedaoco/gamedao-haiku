@@ -64,7 +64,15 @@ export const XPBar = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
+		// get ranks and points from levels
+		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
+			return { level: l.level, points: l.points, name: l.name }
+		})
+		setLevels(_levels)
+	}, [data?.BattlepassBot?.BattlepassLevels])
 
+	useEffect(() => {
+		if (!data) return
 		const _points = data.BattlepassBot.BattlepassPoints[0].points
 		// console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
@@ -74,15 +82,6 @@ export const XPBar = ({ args }: TProps) => {
 		setProgress(updateProgress)
 		// console.log('xp', 'updateProgress', updateProgress)
 	}, [data?.BattlepassBot?.BattlepassPoints])
-
-	useEffect(() => {
-		if (!data) return
-		// get ranks and points from levels
-		const _levels = data.BattlepassBot.BattlepassLevels.map((l) => {
-			return { level: l.level, points: l.points, name: l.name }
-		})
-		setLevels(_levels)
-	}, [data?.BattlepassBot?.BattlepassLevels])
 
 	useEffect(() => {
 		if (points != displayPoints) {

@@ -21,6 +21,16 @@ query GetBattlepassQuests($id: String) {
   }
 }
 
+# query GetBattlepassStateForUser ($uuid: String!, $id: String!) {
+#   BattlepassBot {
+#     BattlepassState(where: {uuid: $uuid, battlepassChainId: $id}) {
+#       uuid
+#       state
+#       member
+#       premium
+#     }
+#   }  
+# }
 query GetBattlepassForUser ($uuid: String!) {
   BattlepassBot {
     BattlepassIdentities(where: {uuid: $uuid}) {
@@ -29,6 +39,7 @@ query GetBattlepassForUser ($uuid: String!) {
           chainId
         }
       }
+      uuid
     }
   }
 }
