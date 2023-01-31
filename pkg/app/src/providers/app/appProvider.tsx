@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
-
-import { AppContext } from 'providers/app/modules/context'
-import { ENVIRONMENT } from 'src/constants'
-import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
-
 import { useSession } from 'next-auth/react'
+import { ENVIRONMENT } from 'src/constants'
+import { AppContext } from 'providers/app/modules/context'
+
+import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 import { useGetIdentityByDiscordQuery, useConnectIdentityMutation } from 'src/queries'
 
 const initialUserState = { uuid: null, address: null, discord: null }
+const initialContext = { dapp: null, id: null }
 
 export function AppProvider({ children }) {
 	// session + user handling
 	// resolve uuid and persist in app state
+	const context = initialContext
 
 	const { data: session } = useSession()
 	const [connected, setConnected] = useState(false)
@@ -28,7 +29,6 @@ export function AppProvider({ children }) {
 		if (!session) return
 		if (!session.user.discord) return
 		// console.log('app', 'set discord', session.user.discord)
-
 		setDiscord(session?.user?.discord)
 	}, [session])
 
@@ -41,7 +41,7 @@ export function AppProvider({ children }) {
 			const response = await connectIdentityMutation().then((res) => {
 				try {
 					const _uuid = res.data.BattlepassBot.identity.uuid
-					// console.log('app', 'uuid ->', _uuid)
+					console.log('app', 'uuid ->', _uuid)
 
 					const _user = {
 						discord: discord,
@@ -80,9 +80,11 @@ export function AppProvider({ children }) {
 	const configQueryResult = useConfigQuery({
 		variables: { env: ENVIRONMENT },
 	})
+
 	const featureQueryResult = useFeaturesQuery({
 		variables: { env: ENVIRONMENT },
 	})
+
 	const apiProviderConfigQueryResult = useApiProviderConfigQuery()
 
 	useEffect(() => {
@@ -106,6 +108,7 @@ export function AppProvider({ children }) {
 				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
 				uuid: uuid,
 				user: user,
+				context: context,
 			}}
 		>
 			{children}

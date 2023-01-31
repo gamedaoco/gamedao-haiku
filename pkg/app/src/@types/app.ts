@@ -7,4 +7,5 @@ export interface AppState {
 	apiProviderConfig: ApiProviderConfig
 	uuid: string
 	user: object
+	context: object
 }
