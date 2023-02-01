@@ -21,7 +21,7 @@ export function Page() {
 	const id = query?.id as string
 	const view = query?.view as BattlepassViews
 
-	const { loading, data, error } = useActiveBattlepassByIdQuery({ variables: { id: id } })
+	const { loading, data } = useActiveBattlepassByIdQuery({ variables: { id: id } })
 
 	useEffect(() => {
 		if (loading === true) return

@@ -26,6 +26,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const [isPremium, setIsPremium] = useState(false)
 
 	useEffect(() => {
+		if (!uuid) return
 		if (!data) return
 		console.log('buy', data.BattlepassBot.BattlepassIdentities)
 		const pass =
@@ -34,7 +35,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		console.log('pass', pass)
 		setEnable(!pass)
 		setIsMember(pass)
-	}, [data?.BattlepassBot?.BattlepassIdentities])
+	}, [uuid, data?.BattlepassBot?.BattlepassIdentities])
 
 	const [joinBattlepassMutation] = useJoinBattlepassMutation({
 		variables: { battlepass: id, uuid: uuid },
