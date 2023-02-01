@@ -44,7 +44,7 @@ export const Battlepass = ({ args }: TProps) => {
 					backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), #000000aa)`,
 				}}
 			>
-				<Header id={id} orgId={orgId} />
+				{/* <Header id={id} orgId={orgId} /> */}
 				{/*
 				<Navigation id={id} view={view} organization={orgId} />
 				*/}
