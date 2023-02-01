@@ -81,7 +81,7 @@ query GetIdentityByDiscord ( $discord: String ) {
   }
 }
 
-mutation ConnectIdentity ( $uuid: String!, $address: String, $discord: String ) {
+mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String ) {
   BattlepassBot {
     identity( uuid: $uuid, address: $address, discord: $discord) {
       uuid
