@@ -45,9 +45,7 @@ export const Battlepass = ({ args }: TProps) => {
 				}}
 			>
 				{/* <Header id={id} orgId={orgId} /> */}
-				{/*
-				<Navigation id={id} view={view} organization={orgId} />
-				*/}
+				{/* <Navigation id={id} view={view} organization={orgId} /> */}
 			</Paper>
 			<TabContext value={view}>
 				<TabPanel value="dashboard">
