@@ -42,7 +42,7 @@ export const Header = ({ orgId, id }: TProps) => {
 	const { data: names } = useGetBattlepassNameQuery({ variables: { id: id } })
 	useEffect(() => {
 		if (!names) return
-		setName(names.battlepass[0].name)
+		setName(names?.battlepass[0]?.name)
 	}, [names?.battlepass])
 
 	const [organization, setOrganization] = useState<Organization>()

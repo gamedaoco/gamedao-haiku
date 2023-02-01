@@ -25,6 +25,7 @@ const Shield = () => <img src="/bp/shield-default.svg" height="45px" alt="GameDA
 
 const closest = (counts: Array<number>, goal: number) =>
 	counts.reduce((prev, curr) => (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev))
+
 const nFormat = (num, limit = 1000, unit = 'k') =>
 	Math.abs(num) > limit - 1
 		? Math.sign(num) * Number((Math.abs(num) / limit).toFixed(1)) + unit
@@ -112,7 +113,7 @@ export const XPBar = ({ args }: TProps) => {
 	}, [level, displayLevel])
 
 	return (
-		<Stack sx={{ width: '100%' }} spacing={1}>
+		<Stack sx={{ width: '100%' }} spacing={2}>
 			<Stack direction="row" spacing={theme.spacing(2)} alignItems="center">
 				<Button
 					sx={{
@@ -135,7 +136,7 @@ export const XPBar = ({ args }: TProps) => {
 					</Typography>
 				</Stack>
 			</Stack>
-			<BorderLinearProgress variant="determinate" value={progress} />
+			<BorderLinearProgress variant="determinate" value={progress} pt={1} />
 		</Stack>
 	)
 }
