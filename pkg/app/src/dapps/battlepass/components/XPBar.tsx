@@ -136,7 +136,7 @@ export const XPBar = ({ args }: TProps) => {
 					</Typography>
 				</Stack>
 			</Stack>
-			<BorderLinearProgress variant="determinate" value={progress} pt={1} />
+			<BorderLinearProgress variant="determinate" value={progress} />
 		</Stack>
 	)
 }
