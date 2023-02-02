@@ -31,7 +31,7 @@ export function DashboardView({ id }: TProps) {
 					{/* <XPBar args={{ id }} /> */}
 				</Grid>
 				<Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
-					{/* <ShareBtn args={{ id }} /> */}
+					<ShareBtn args={{ id }} />
 					<BPBuyBtn args={{ id }} />
 				</Grid>
 				<Grid item xs={12}>
