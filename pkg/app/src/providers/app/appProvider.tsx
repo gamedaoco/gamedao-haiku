@@ -28,19 +28,19 @@ export function AppProvider({ children }) {
 	useEffect(() => {
 		if (!session) return
 		if (!session.user.discord) return
-		// console.log('app', 'set discord', session.user.discord)
+		console.log('app', 'set discord', session.user.discord)
 		setDiscord(session?.user?.discord)
 	}, [session])
 
 	// get uuid
 	useEffect(() => {
 		if (!discord) return
-		// console.log('app', 'connecting', discord, '...')
+		console.log('app', 'connecting', discord, '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
 				try {
-					const _uuid = res.data.BattlepassBot.identity.uuid
+					const _uuid = res?.data?.BattlepassBot?.identity?.uuid
 					console.log('app', 'uuid ->', _uuid)
 
 					const _user = {
@@ -48,7 +48,7 @@ export function AppProvider({ children }) {
 						address: address,
 						uuid: _uuid,
 					}
-					// console.log('app', 'user ->', _user)
+					console.log('app', 'user ->', _user)
 					setUser(_user)
 					setUuid(_uuid)
 				} catch (e) {
@@ -63,9 +63,9 @@ export function AppProvider({ children }) {
 	// rm uuid when session is null
 	useEffect(() => {
 		if (session) {
-			// console.log('app', 'found a session', session, uuid)
+			console.log('app', 'found a session', session, uuid)
 		} else {
-			// console.log('app', 'no session, rm uuid')
+			console.log('app', 'no session, rm uuid')
 			setUuid(null)
 			setUser(initialUserState)
 		}
@@ -73,7 +73,7 @@ export function AppProvider({ children }) {
 
 	// ping back when connected
 	useEffect(() => {
-		// if (connected) console.log('app', `connected`, connected)
+		if (connected) console.log('app', `connected`, connected)
 	}, [connected])
 
 	//

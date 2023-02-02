@@ -27,7 +27,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		console.log('buy', data.BattlepassBot.BattlepassIdentities)
+		console.log('buy', data?.BattlepassBot?.BattlepassIdentities)
+
 		const pass =
 			data.BattlepassBot.BattlepassIdentities[0].members.filter((i) => i.battlepass.chainId === id)[0].battlepass
 				.chainId === id
