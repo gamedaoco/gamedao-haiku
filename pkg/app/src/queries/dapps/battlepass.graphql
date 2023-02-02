@@ -1,3 +1,15 @@
+query GetBattlepassUsers ($id:String) {
+  BattlepassBot {
+    Battlepasses(where: {chainId: $id}) {
+      members {
+        identity {
+          uuid
+        }
+      }
+    }
+  }
+}
+
 query GetBattlepassName($id:String) {
     battlepass(where: {id: {_eq: $id}}) {
       name
@@ -29,7 +41,7 @@ query GetBattlepassQuests($id: String) {
 #       member
 #       premium
 #     }
-#   }  
+#   }
 # }
 query GetBattlepassForUser ($uuid: String!) {
   BattlepassBot {

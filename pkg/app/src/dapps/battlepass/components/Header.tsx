@@ -23,6 +23,8 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { Image } from 'components/Image/image'
 import { useAppContext } from 'providers/app/modules/context'
 
+import { useGetBattlepassUsersQuery } from 'src/queries'
+
 type TProps = {
 	orgId: string
 	id: string
@@ -45,6 +47,19 @@ export const Header = ({ orgId, id }: TProps) => {
 		setName(names?.battlepass[0]?.name)
 	}, [names?.battlepass])
 
+	console.log('header', id)
+
+	const [memberCount, setMemberCount] = useState('No members yet.')
+	const where = { chainId: id }
+	const { data: members } = useGetBattlepassUsersQuery({ variables: { id: id } })
+	useEffect(() => {
+		if (!members) return
+		const _memberCount = members?.BattlepassBot?.Battlepasses[0]?.members.length || 0
+		if (_memberCount === 0) return
+		setMemberCount(`${_memberCount} member${_memberCount > 1 ? 's' : ''}`)
+		console.log('members', members?.BattlepassBot?.Battlepasses[0]?.members.length)
+	}, [members])
+
 	const [organization, setOrganization] = useState<Organization>()
 	const [isMember, setIsMember] = useState<boolean>(false)
 
@@ -66,15 +81,15 @@ export const Header = ({ orgId, id }: TProps) => {
 
 	// content
 
-	const handleUploadImage = useCallback(async (event, setter) => {
-		const files = event.target.files
-		if (!files || files.length === 0) {
-			return createWarningNotification('No file selected')
-		}
+	// const handleUploadImage = useCallback(async (event, setter) => {
+	// 	const files = event.target.files
+	// 	if (!files || files.length === 0) {
+	// 		return createWarningNotification('No file selected')
+	// 	}
 
-		const cid = await uploadFileToIpfs(files[0])
-		setter(cid.toString())
-	}, [])
+	// 	const cid = await uploadFileToIpfs(files[0])
+	// 	setter(cid.toString())
+	// }, [])
 
 	// Update and upload metadata
 	// useEffect(() => {
@@ -169,9 +184,10 @@ export const Header = ({ orgId, id }: TProps) => {
 						</Typography>
 						<Typography variant="header2" sx={{ whiteSpace: 'nowrap' }}>
 							{organization?.name ?? cache.name ?? ''} ·{' '}
-							{t('label:n_members', {
+							{/* {t('label:n_members', {
 								n: organization?.organization_members?.length ?? 1,
-							})}
+							})} */}
+							{memberCount}
 						</Typography>
 					</Stack>
 				</Stack>
