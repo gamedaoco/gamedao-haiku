@@ -121,9 +121,8 @@ export const BPQuests = ({ args }: TArgs) => {
 	const { id } = args
 	const { uuid } = useAppContext()
 	const where = { id: id }
-	const { loading, data } = useGetBattlepassQuestsQuery({ variables: where })
-
 	const [items, setItems] = useState([])
+	const { data } = useGetBattlepassQuestsQuery({ variables: where })
 
 	useEffect(() => {
 		if (!data) return
@@ -131,9 +130,6 @@ export const BPQuests = ({ args }: TArgs) => {
 		console.log('q', _quests)
 		setItems(_quests)
 	}, [data])
-
-	// const items = 4
-	// const arr1: number[] = new Array(items).fill(0)
 
 	return (
 		<Grid
@@ -150,15 +146,19 @@ export const BPQuests = ({ args }: TArgs) => {
 				<Typography variant="h4">Quests</Typography>
 			</Grid>
 
-			{items.map((item, index) => {
-				return (
+			{items.length > 0 ? (
+				items.map((item, index) => (
 					<Grid item key={index} xs={12} md={6} lg={3}>
 						<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
 							<BPQuestItem item={item} index={index} />
 						</Card>
 					</Grid>
-				)
-			})}
+				))
+			) : (
+				<Box>
+					<Typography variant="body1">No Quests yet, message the organization!</Typography>
+				</Box>
+			)}
 		</Grid>
 	)
 }

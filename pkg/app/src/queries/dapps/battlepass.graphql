@@ -1,3 +1,19 @@
+query GetBattlepassRewards ($id: String) {
+  BattlepassBot {
+    BattlepassRewards(where: {battlepassChainId: $id}) {
+      available
+      cid
+      description
+      id
+      level
+      name
+      points
+      total
+      battlepassId
+    }
+  }
+}
+
 query GetBattlepassUsers ($id:String) {
   BattlepassBot {
     Battlepasses(where: {chainId: $id}) {

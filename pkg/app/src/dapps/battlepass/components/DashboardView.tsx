@@ -28,17 +28,17 @@ export function DashboardView({ id }: TProps) {
 		<Box>
 			<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)}>
 				<Grid item xs={12} md={6} pb={[2, 0]}>
-					{/* <XPBar args={{ id }} /> */}
+					<XPBar args={{ id }} />
 				</Grid>
 				<Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
 					<ShareBtn args={{ id }} />
 					<BPBuyBtn args={{ id }} />
 				</Grid>
-				<Grid item xs={12}>
-					{/* <BPQuests args={{ id }} /> */}
+				<Grid item xs={12} mt={[2, 4]}>
+					<BPQuests args={{ id }} />
 				</Grid>
-				<Grid item xs={12}>
-					{/* <BPRewards args={{ id }} /> */}
+				<Grid item xs={12} mt={[2, 4]}>
+					<BPRewards args={{ id }} />
 				</Grid>
 				{/*
 				 */}

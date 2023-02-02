@@ -50,7 +50,6 @@ export const XPBar = ({ args }: TProps) => {
 
 	const { id } = args
 	const { uuid } = useAppContext()
-	console.log('xpbar', 'context', id, uuid)
 
 	const [levels, setLevels] = useState(null)
 	const [level, setLevel] = useState(0)
@@ -64,6 +63,17 @@ export const XPBar = ({ args }: TProps) => {
 	const where = { battlepass: id, uuid: uuid }
 	const { data } = useGetScoreQuery({ variables: where })
 
+	console.log(id, uuid)
+	console.log(data || null)
+	// console.log('xpbar', 'context', id, uuid)
+	// console.log('xp', 'query', where)
+
+	useEffect(() => {
+		if (!data) return
+		console.log('xp', 'data', data)
+		setPoints(0)
+	}, [data])
+
 	useEffect(() => {
 		if (!data) return
 		if (!data?.BattlepassBot?.BattlepassLevels) return
@@ -71,19 +81,22 @@ export const XPBar = ({ args }: TProps) => {
 		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
 			return { level: l.level, points: l.points, name: l.name }
 		})
+		console.log('levels', _levels)
 		setLevels(_levels)
 	}, [data?.BattlepassBot?.BattlepassLevels])
 
 	useEffect(() => {
 		if (!data) return
+		if (!data.BattlepassBot.BattlepassPoints) return
+		console.log(data.BattlepassBot.BattlepassPoints)
 		const _points = data.BattlepassBot.BattlepassPoints[0].points
-		// console.log('xp', 'updatePoints', _points)
+		console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
 		setDisplayLevel(Math.round(_points / 100))
 
 		const updateProgress = Math.round((_points / max) * 100)
 		setProgress(updateProgress)
-		// console.log('xp', 'updateProgress', updateProgress)
+		console.log('xp', 'updateProgress', updateProgress)
 	}, [data?.BattlepassBot?.BattlepassPoints])
 
 	useEffect(() => {
