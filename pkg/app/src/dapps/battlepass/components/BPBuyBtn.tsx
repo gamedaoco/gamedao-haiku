@@ -44,8 +44,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	const handleJoinBattlepass = () => {
 		console.log('join battlepass:', id, uuid)
-		const res = joinBattlepassMutation()
-
 		const connect = async () => {
 			const response = await joinBattlepassMutation().then((res) => {
 				try {
@@ -61,7 +59,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 	const handleBuyBattlepass = () => {
 		console.log('buy battlepass:', id, uuid)
-		// const res = joinBattlepassMutation()
 	}
 
 	if (!uuid)
