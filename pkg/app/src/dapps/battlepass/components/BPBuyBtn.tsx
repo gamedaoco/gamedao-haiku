@@ -27,13 +27,22 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		console.log('buy', data?.BattlepassBot?.BattlepassIdentities)
+		console.log(data)
 
-		const pass =
-			data.BattlepassBot.BattlepassIdentities[0].members.filter((i) => i.battlepass.chainId === id)[0].battlepass
-				.chainId === id
+		const memberships = data?.BattlepassBot?.BattlepassIdentities[0].members
+
+		if (!memberships.length) {
+			setIsMember(false)
+			return
+		}
+
+		console.log('buy', memberships.length, 'entries', memberships)
+
+		const pass = memberships.filter((i) => i.battlepass.chainId === id)[0].battlepass.chainId === id
+
 		console.log('pass', pass)
-		setEnable(!pass)
+
+		// setEnable(!pass)
 		setIsMember(pass)
 	}, [data?.BattlepassBot?.BattlepassIdentities])
 
