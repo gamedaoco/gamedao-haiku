@@ -77,9 +77,9 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 					</Box>
 				</Box>
 			</Link>
-			<Button fullWidth variant="pink" onClick={() => handleJoin(content.id)}>
+			{/* <Button fullWidth variant="pink" onClick={() => handleJoin(content.id)}>
 				Join
-			</Button>
+			</Button> */}
 		</CardContent>
 	)
 }
