@@ -50,6 +50,7 @@ export const XPBar = ({ args }: TProps) => {
 
 	const { id } = args
 	const { uuid } = useAppContext()
+	console.log('xpbar', 'context', id, uuid)
 
 	const [levels, setLevels] = useState(null)
 	const [level, setLevel] = useState(0)
@@ -65,6 +66,7 @@ export const XPBar = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
+		if (!data?.BattlepassBot?.BattlepassLevels) return
 		// get ranks and points from levels
 		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
 			return { level: l.level, points: l.points, name: l.name }
