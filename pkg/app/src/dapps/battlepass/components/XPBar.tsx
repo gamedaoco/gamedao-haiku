@@ -63,8 +63,8 @@ export const XPBar = ({ args }: TProps) => {
 	const where = { battlepass: id, uuid: uuid }
 	const { data } = useGetScoreQuery({ variables: where })
 
-	console.log(id, uuid)
-	console.log(data || null)
+	// console.log(id, uuid)
+	// console.log(data || null)
 	// console.log('xpbar', 'context', id, uuid)
 	// console.log('xp', 'query', where)
 

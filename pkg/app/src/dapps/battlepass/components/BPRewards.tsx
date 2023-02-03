@@ -1,10 +1,12 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
 import { BPCard } from './BPCard'
 import { content } from '../content/rewards'
+import { useAppContext } from 'providers/app/modules/context'
+import { useGetBattlepassRewardsQuery } from 'queries/index'
 
 const IconGroupVisible = false
 
@@ -100,12 +102,48 @@ type TArgs = {
 	args?: TGridProps
 }
 
-export const BPRewards = ({ args }: TArgs) => {
-	const theme = useTheme()
+export type TRewardItem = {
+	id: number
+	name: string
+	description: string
+	cid: string
+	available: boolean
+	level: number
+	points: number
+	total: number
+	battlepassId: string
+	__typename?: string
+}
 
+// id: 1
+// battlepassId: 1
+// name: "Free Epic NFT"
+// description: null
+// cid: null
+// available: 100
+// level: 10
+// points: null
+// total: 100
+
+export const BPRewards = ({ args }: TArgs) => {
 	// TODO: get content for battlepass from graph
 
-	const items = content.length
+	const { id } = args
+	const { uuid } = useAppContext()
+	const where = { id: id }
+	const { data: rewards } = useGetBattlepassRewardsQuery({ variables: where })
+	const [items, setItems] = useState([])
+	const [demoMode, setDemoMode] = useState(true)
+
+	useEffect(() => {
+		if (!rewards) return
+		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
+		console.log('r', res)
+		setDemoMode(res.length === 0)
+		setItems(res.length === 0 ? content : res)
+	}, [rewards])
+
+	// const items = content.length
 	// const arr1: number[] = new Array(items).fill(0)
 
 	return (
@@ -117,10 +155,10 @@ export const BPRewards = ({ args }: TArgs) => {
 			justifyContent={{ xs: 'center', md: 'left' }}
 		>
 			<Grid item xs={12}>
-				<Typography variant="h4">Rewards</Typography>
+				<Typography variant="h4"> {demoMode && `Demo `}Rewards</Typography>
 			</Grid>
 
-			{content.map((item, index) => {
+			{items.map((item, index) => {
 				return (
 					<Grid item key={index}>
 						<BPCard>

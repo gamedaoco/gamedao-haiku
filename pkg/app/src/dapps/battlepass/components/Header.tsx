@@ -47,7 +47,7 @@ export const Header = ({ orgId, id }: TProps) => {
 		setName(names?.battlepass[0]?.name)
 	}, [names?.battlepass])
 
-	console.log('header', id)
+	// console.log('header', id)
 
 	const [memberCount, setMemberCount] = useState('No members yet.')
 	const where = { chainId: id }

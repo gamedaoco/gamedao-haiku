@@ -26,7 +26,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
-type TQuestItem = {
+export type TQuestItem = {
 	battlepassId: number
 	channelId: string
 	id: number

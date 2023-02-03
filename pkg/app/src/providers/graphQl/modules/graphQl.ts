@@ -7,41 +7,41 @@ import { Endpoint } from 'src/@types/graphql'
 
 const cache = new InMemoryCache({
 	addTypename: false,
-	typePolicies: {
-		Balance: {
-			keyFields: ['address', 'balanceId'],
-		},
-		campaign: {
-			keyFields: ['id'],
-		},
-		campaign_contributor: {
-			keyFields: ['id'],
-		},
-		organization: {
-			keyFields: ['id'],
-		},
-		rmrkNfts: {
-			keyFields: ['id'],
-		},
-		config: {
-			keyFields: [],
-		},
-		apiProvider: {
-			keyFields: ['wsProviderUrl'],
-		},
-		displayValues: {
-			keyFields: [],
-		},
-		features: {
-			keyFields: [],
-		},
-		identity: {
-			keyFields: ['id'],
-		},
-		proposal: {
-			keyFields: ['id'],
-		},
-	},
+	// typePolicies: {
+	// Balance: {
+	// 	keyFields: ['address', 'balanceId'],
+	// },
+	// campaign: {
+	// 	keyFields: ['id'],
+	// },
+	// campaign_contributor: {
+	// 	keyFields: ['id'],
+	// },
+	// organization: {
+	// 	keyFields: ['id'],
+	// },
+	// rmrkNfts: {
+	// 	keyFields: ['id'],
+	// },
+	// config: {
+	// 	keyFields: [],
+	// },
+	// apiProvider: {
+	// 	keyFields: ['wsProviderUrl'],
+	// },
+	// displayValues: {
+	// 	keyFields: [],
+	// },
+	// features: {
+	// 	keyFields: [],
+	// },
+	// identity: {
+	// 	keyFields: ['id'],
+	// },
+	// proposal: {
+	// 	keyFields: ['id'],
+	// },
+	// },
 })
 
 export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClient<any>> {
