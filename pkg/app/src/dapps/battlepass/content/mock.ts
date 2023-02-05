@@ -1,6 +1,6 @@
 // score map version 1
 
-const ScoreToLevelMap = [
+export const scoreToLevelMap = [
 	{ level: 0, score: 0, name: 'dust', id: '0123456789' },
 	{ level: 1, score: 100, name: 'beginner', id: '0123456789' },
 	{ level: 2, score: 200, name: 'beginner', id: '0123456789' },

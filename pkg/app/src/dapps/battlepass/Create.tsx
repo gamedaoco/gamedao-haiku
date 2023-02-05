@@ -50,6 +50,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'components/content'
 import { Image } from 'components/Image/image'
+import { LevelEditor } from './components/CreateLevels'
 
 export type TInitialState = {
 	name: string
@@ -393,6 +394,41 @@ export const Create = () => {
 				</Box>
 			</Section>
 
+			<hr />
+
+			<Section
+				direction={{ xs: 'column', md: 'column' }}
+				title="3. Levels, Quests, rewards"
+				description={`Create and configure all the details for your Battlepass`}
+			>
+				<SectionTitle>A. Levels</SectionTitle>
+				<LevelEditor />
+				<SectionTitle>B. Quests</SectionTitle>
+				<SectionTitle>C. Rewards</SectionTitle>
+
+				<Stack direction={{ sm: 'column', md: 'column' }} spacing={2} justifyContent="space-evenly">
+					<TextField
+						name={'name'}
+						inputProps={{ maxLength: 64 }}
+						fullWidth
+						onChange={handleChange}
+						value={formState.name}
+						label="Name"
+						variant="outlined"
+					/>
+					<TextField
+						name={'description'}
+						inputProps={{ maxLength: 512 }}
+						fullWidth
+						onChange={handleChange}
+						value={formState.description}
+						label="Description"
+						variant="outlined"
+						multiline
+						rows={4}
+					/>
+				</Stack>
+			</Section>
 			<hr />
 
 			<Section direction={'column'} title="4. Duration + Access Control">
