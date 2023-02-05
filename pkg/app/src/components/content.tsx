@@ -30,7 +30,7 @@ export const SectionTitle = ({ children }) => (
 )
 
 export const SectionDescription = ({ children }) => (
-	<Typography variant="body2" sx={{ m: 0, p: 0, pb: 4 }}>
+	<Typography variant="body2" sx={{ maxWidth: { sm: '100%', md: '75%' }, m: 0, p: 0, py: 2 }}>
 		{children}
 	</Typography>
 )

@@ -39,6 +39,9 @@ export const Header = ({ orgId, id }: TProps) => {
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
+	const isXs = useMediaQuery(theme.breakpoints.up('xs'), {
+		defaultMatches: true,
+	})
 
 	const [name, setName] = useState('')
 	const { data: names } = useGetBattlepassNameQuery({ variables: { id: id } })
@@ -203,7 +206,7 @@ export const Header = ({ orgId, id }: TProps) => {
 			 */}
 
 			<Grid
-				height={isMd ? '20vh' : '20vh'}
+				height={isXs ? '20vh' : '40vh'}
 				width="100%"
 				display="grid"
 				alignItems="center"
