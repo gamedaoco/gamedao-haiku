@@ -403,6 +403,7 @@ export const Create = () => {
 			>
 				<SectionTitle>A. Levels</SectionTitle>
 				<LevelEditor />
+
 				<SectionTitle>B. Quests</SectionTitle>
 				<SectionTitle>C. Rewards</SectionTitle>
 

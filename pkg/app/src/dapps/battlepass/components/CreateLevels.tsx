@@ -1,50 +1,171 @@
-import * as React from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-
 import { scoreToLevelMap } from '../content/mock'
-function createData(id: number, name: string, level: number, score: number) {
+import Delete from '@mui/icons-material/DeleteForeverOutlined'
+import Edit from '@mui/icons-material/EditOutlined'
+import Save from '@mui/icons-material/SaveOutlined'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Stack, Button } from '@mui/material'
+import { TextField } from '@mui/material'
+import { Fragment, useState, useEffect } from 'react'
+
+const createData = (id: number, name: string, level: number, score: number) => {
 	return { id, name, level, score }
 }
 const rows = scoreToLevelMap.map((item, index) => createData(index, item.name, item.level, item.score))
+const initialRowState = { id: 0, name: '', level: 0, score: 0 }
 
 export function LevelEditor() {
-	return (
-		<TableContainer component={Paper}>
-			<Table sx={{ minWidth: 650 }} aria-label="score-to-level" size="small">
-				<TableHead>
-					<TableRow>
-						<TableCell align="right">Id</TableCell>
-						<TableCell align="right">Name</TableCell>
-						<TableCell align="right">Level</TableCell>
-						<TableCell align="right">Score</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{rows.map((row) => (
-						<TableRow
-							key={row.id}
-							sx={{
-								'td,th': { borderBottom: '1px dotted #ffffff33' },
-								'&:last-child td, &:last-child th': { border: 0 },
-							}}
-						>
-							<TableCell align="left" component="th" scope="row">
-								{' '}
-								{row.id}{' '}
-							</TableCell>
-							<TableCell align="right">{row.name}</TableCell>
-							<TableCell align="right">{row.level}</TableCell>
-							<TableCell align="right">{row.score}</TableCell>
+	const [data, setData] = useState(rows)
+	const [editMode, setEditMode] = useState(false)
+	const [editRow, setEditRow] = useState(null)
+	const [rowState, setRowState] = useState(initialRowState)
+
+	const handleChange = (e) => {
+		const update = { ...rowState, [e.target.name]: e.target.value }
+		setRowState(update)
+	}
+	const handleEditRow = (row) => {
+		setEditRow(row)
+		setEditMode(true)
+		setRowState(data[row])
+		console.log('edit row', row, data[row])
+	}
+	const handleSaveRow = (row) => {
+		const update = { ...data[row], ...rowState }
+		const merge = data.map((item, index) => (index !== row ? item : update))
+		setData((prevState) => merge)
+		setEditRow(null)
+		setRowState(initialRowState)
+		setEditMode(false)
+	}
+	const handleDeleteRow = (row) => {
+		const update = data
+			.filter((i) => i.id !== row)
+			.map((item, index) => {
+				item.id = index
+				return item
+			})
+		setData((prevState) => update)
+	}
+	const handleReset = () => {
+		setRowState(null)
+		setEditRow(null)
+		setEditMode(false)
+		setData(null)
+	}
+
+	useEffect(() => {
+		if (!data)
+			setData(
+				rows.map((row, index) => {
+					row.id = index
+					return row
+				}),
+			)
+	}, [data])
+
+	return !data ? null : (
+		<Fragment>
+			<TableContainer component={Paper}>
+				<Table sx={{ minWidth: 650 }} aria-label="score-to-level" size="small">
+					<TableHead>
+						<TableRow>
+							<TableCell align="right">Id</TableCell>
+							<TableCell align="right">Name</TableCell>
+							<TableCell align="right">Level</TableCell>
+							<TableCell align="right">Score</TableCell>
+							<TableCell align="right">fn</TableCell>
 						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</TableContainer>
+					</TableHead>
+					<TableBody>
+						{data.map((row) => (
+							<TableRow
+								key={row.id}
+								sx={{
+									'td,th': { borderBottom: '1px dotted #ffffff33' },
+									'&:last-child td, &:last-child th': { border: 0 },
+								}}
+							>
+								<TableCell align="left" component="th" scope="row">
+									{' '}
+									{row.id}{' '}
+								</TableCell>
+								<TableCell align="right">
+									{row.id === editRow ? (
+										<TextField
+											name={'name'}
+											size="small"
+											fullWidth
+											label="Name"
+											variant="outlined"
+											onChange={handleChange}
+											value={rowState.name}
+										/>
+									) : (
+										row.name
+									)}
+								</TableCell>
+								<TableCell align="right">
+									{row.id === editRow ? (
+										<TextField
+											name={'level'}
+											size="small"
+											fullWidth
+											label="Level"
+											variant="outlined"
+											onChange={handleChange}
+											value={rowState.level}
+										/>
+									) : (
+										row.level
+									)}
+								</TableCell>
+								<TableCell align="right">
+									{row.id === editRow ? (
+										<TextField
+											name={'score'}
+											size="small"
+											fullWidth
+											label="Score"
+											variant="outlined"
+											onChange={handleChange}
+											value={rowState.score}
+										/>
+									) : (
+										row.score
+									)}
+								</TableCell>
+								<TableCell align="right">
+									{row.id === editRow ? (
+										<Button onClick={() => handleSaveRow(row.id)}>
+											<Save />
+										</Button>
+									) : (
+										!editMode && (
+											<Button onClick={() => handleEditRow(row.id)}>
+												<Edit />
+											</Button>
+										)
+									)}
+									<Button onClick={() => handleDeleteRow(row.id)}>
+										<Delete />
+									</Button>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
+			{rows !== data && (
+				<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+					<Button color="warning" variant="outlined" onClick={handleReset}>
+						Reset
+					</Button>
+					<Stack direction="row" spacing={2}>
+						<Button color="success" variant="contained">
+							Save
+						</Button>
+					</Stack>
+				</Stack>
+			)}
+		</Fragment>
 	)
 }
