@@ -39,6 +39,7 @@ import {
 	TextField,
 	Typography,
 	Alert,
+	Divider,
 } from '@mui/material'
 import { RadioItem } from 'components/Forms/modules/radioItem'
 
@@ -218,7 +219,7 @@ export const Create = () => {
 				</Stack>
 			</Section>
 
-			<hr />
+			<Divider />
 
 			<Section
 				direction={{ xs: 'column', md: 'column' }}
@@ -394,7 +395,7 @@ export const Create = () => {
 				</Box>
 			</Section>
 
-			<hr />
+			<Divider />
 
 			<Section
 				direction={{ xs: 'column', md: 'column' }}
@@ -403,10 +404,11 @@ export const Create = () => {
 			>
 				<SectionTitle>A. Levels</SectionTitle>
 				<LevelEditor />
-
+				<Divider />
 				<SectionTitle>B. Quests</SectionTitle>
+				<Divider />
 				<SectionTitle>C. Rewards</SectionTitle>
-
+				<Divider />
 				<Stack direction={{ sm: 'column', md: 'column' }} spacing={2} justifyContent="space-evenly">
 					<TextField
 						name={'name'}
@@ -430,7 +432,7 @@ export const Create = () => {
 					/>
 				</Stack>
 			</Section>
-			<hr />
+			<Divider />
 
 			<Section direction={'column'} title="4. Duration + Access Control">
 				<SectionDescription> Choose a battlepass duration. </SectionDescription>
@@ -461,7 +463,7 @@ export const Create = () => {
 					</Stack>
 				</RadioGroup>
 			</Section>
-			<hr />
+			<Divider />
 			<Section
 				title="5. Accept Terms + Activate Battlepass"
 				description={`

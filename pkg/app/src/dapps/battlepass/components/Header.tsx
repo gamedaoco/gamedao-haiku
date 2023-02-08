@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { BattlepassViews } from 'constants/battlepass'
 
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
@@ -22,15 +23,19 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { Image } from 'components/Image/image'
 import { useAppContext } from 'providers/app/modules/context'
+import { Navigation } from './Navigation'
 
 import { useGetBattlepassUsersQuery } from 'src/queries'
+
+import { Join } from './JoinBtn'
 
 type TProps = {
 	orgId: string
 	id: string
+	view: BattlepassViews
 }
 
-export const Header = ({ orgId, id }: TProps) => {
+export const Header = ({ orgId, id, view }: TProps) => {
 	const { query, push } = useRouter()
 	const { uuid } = useAppContext()
 	const config = useConfig()
@@ -43,6 +48,7 @@ export const Header = ({ orgId, id }: TProps) => {
 		defaultMatches: true,
 	})
 
+	// name
 	const [name, setName] = useState('')
 	const { data: names } = useGetBattlepassNameQuery({ variables: { id: id } })
 	useEffect(() => {
@@ -50,8 +56,7 @@ export const Header = ({ orgId, id }: TProps) => {
 		setName(names?.battlepass[0]?.name)
 	}, [names?.battlepass])
 
-	// console.log('header', id)
-
+	// member count
 	const [memberCount, setMemberCount] = useState('No members yet.')
 	const where = { chainId: id }
 	const { data: members } = useGetBattlepassUsersQuery({ variables: { id: id } })
@@ -63,16 +68,17 @@ export const Header = ({ orgId, id }: TProps) => {
 		console.log('members', members?.BattlepassBot?.Battlepasses[0]?.members.length)
 	}, [members])
 
-	const [organization, setOrganization] = useState<Organization>()
+	// organization + membership
+	const [organization, setOrganization] = useState<Organization>(null)
 	const [isMember, setIsMember] = useState<boolean>(false)
-
 	const { loading, data, error } = useOrganizationByIdSubscription({
 		variables: { orgId: orgId as string },
 	})
+
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
-	// add member
 
+	// join tx
 	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 	// const addMemberTx = useAddMemberTransaction(organizationIdState)
 	// const handleOpenTxModal = useCallback(() => {
@@ -144,7 +150,7 @@ export const Header = ({ orgId, id }: TProps) => {
 					spacing={2}
 					alignItems={isMd ? 'end' : 'center'}
 					justifyContent={isMd ? 'start' : 'center'}
-					pb={isMd ? 4 : 0}
+					pb={isMd ? 12 : 0}
 					pl={isMd ? 4 : 0}
 					sx={{
 						position: 'absolute',
@@ -176,6 +182,7 @@ export const Header = ({ orgId, id }: TProps) => {
 						justifyContent={isMd ? 'left' : 'center'}
 						direction={isMd ? 'column' : 'column'}
 						pl={isMd ? 2 : 0}
+						pb={isMd ? 2 : 0}
 					>
 						<Typography
 							variant="header1"
@@ -240,6 +247,34 @@ export const Header = ({ orgId, id }: TProps) => {
 						}}
 					/>
 				)}
+				<Box
+					sx={{
+						zIndex: 100,
+						position: 'absolute',
+						// top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						// background: 'linear-gradient(200deg, #03002000 60%, #030020ee 80%)',
+						// backgroundBlendMode: 'darken',
+					}}
+				>
+					<Navigation id={id} view={view} org={orgId} />
+				</Box>
+				<Box
+					sx={{
+						zIndex: 100,
+						position: 'absolute',
+						// top: 0,
+						// left: 0,
+						right: 0,
+						bottom: 0,
+						// background: 'linear-gradient(200deg, #03002000 60%, #030020ee 80%)',
+						// backgroundBlendMode: 'darken',
+					}}
+				>
+					<Join args={{ id: id }} />
+				</Box>
 				{/* gradient */}
 				<Box
 					sx={{
@@ -248,7 +283,7 @@ export const Header = ({ orgId, id }: TProps) => {
 						left: 0,
 						right: 0,
 						bottom: 0,
-						// background: 'linear-gradient(200deg, #03002000 60%, #030020ee 80%)',
+						background: 'linear-gradient(180deg, #03002000 50%, #030020ee 100%)',
 						backgroundBlendMode: 'darken',
 						pointerEvents: 'none',
 					}}

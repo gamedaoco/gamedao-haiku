@@ -1,9 +1,13 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useAppContext } from 'providers/app/modules/context'
 import { useJoinBattlepassMutation } from 'src/queries'
 import { useGetBattlepassForUserQuery } from 'src/queries'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { signIn } from 'next-auth/react'
+
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
+import { Checkout } from 'components/Checkout'
 
 export enum MemberState {
 	VIEWER,
@@ -16,9 +20,15 @@ type TArgs = { id: string }
 type TProps = { args: TArgs }
 
 export const BPBuyBtn = ({ args }: TProps) => {
+	const { push } = useRouter()
 	const { id } = args
 	const { uuid } = useAppContext()
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
+
+	const [open, setOpen] = useState(false)
+	const onClose = () => {
+		setOpen(false)
+	}
 
 	const [memberState, setMemberState] = useState(MemberState.VIEWER)
 	const [enableBuy, setEnable] = useState(false)
@@ -57,8 +67,10 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		}
 		connect()
 	}
+
 	const handleBuyBattlepass = () => {
 		console.log('buy battlepass:', id, uuid)
+		push('/buy')
 	}
 
 	if (!uuid)
@@ -76,7 +88,26 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		)
 	return (
 		<Button onClick={() => handleBuyBattlepass()} variant="pink">
-			Go Premium
+			{' '}
+			Go Premium{' '}
 		</Button>
+		// <Fragment>
+		// 	<BaseDialog title="Go Premium" open={open} onClose={onClose}>
+		// 		{/* <Typography
+		// 			variant="h3"
+		// 			sx={{
+		// 				background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+		// 				WebkitBackgroundClip: 'text',
+		// 				WebkitTextFillColor: 'transparent',
+		// 				fontWeight: 800,
+		// 			}}
+		// 		>
+		// 			Buy a Battlepass now and get premium!
+		// 		</Typography> */}
+
+		// 		<Checkout/>
+
+		// 	</BaseDialog>
+		// </Fragment>
 	)
 }

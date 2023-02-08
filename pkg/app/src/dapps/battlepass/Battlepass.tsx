@@ -19,9 +19,9 @@ import { Paper, Stack } from '@mui/material'
 
 // TODO: move component level up
 import { Header } from './components/Header'
-import { Navigation } from './components/Navigation'
 
 import { DashboardView } from './components/DashboardView'
+import { LeaderboardView } from './components/LeaderboardView'
 
 type TArgs = {
 	id: string
@@ -44,12 +44,14 @@ export const Battlepass = ({ args }: TProps) => {
 					backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), #000000aa)`,
 				}}
 			>
-				<Header id={id} orgId={orgId} />
-				{/* <Navigation id={id} view={view} organization={orgId} /> */}
+				<Header id={id} orgId={orgId} view={view} />
 			</Paper>
 			<TabContext value={view}>
 				<TabPanel value="dashboard">
 					<DashboardView id={id} />
+				</TabPanel>
+				<TabPanel value="leaderboard">
+					<LeaderboardView id={id} />
 				</TabPanel>
 			</TabContext>
 		</Stack>

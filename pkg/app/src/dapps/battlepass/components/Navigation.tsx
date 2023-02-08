@@ -11,12 +11,12 @@ import { useTheme } from '@mui/material/styles'
 import { Box, Tab, Tabs, Button, Stack, useMediaQuery } from '@mui/material'
 import { Loader } from 'components/Loader'
 
-import { Join } from './JoinBtn'
+// import { Join } from './JoinBtn'
 
 type TProps = {
 	id: string
 	view: BattlepassViews
-	organization?: Organization
+	org?: string
 }
 
 interface ITabs {
@@ -32,7 +32,7 @@ const initialRole = {
 	battlepass: false,
 }
 
-export function Navigation({ id, view, organization }: TProps) {
+export function Navigation({ id, view, org }: TProps) {
 	const { t } = useTranslation()
 	const { push } = useRouter()
 	const theme = useTheme()
@@ -56,12 +56,12 @@ export function Navigation({ id, view, organization }: TProps) {
 	const [isPrime, setIsPrime] = useState<boolean>(false)
 	const [isBattlePass, setIsBattlePass] = useState<boolean>(true)
 
-	useEffect(() => {
-		if (!address || !organization) return
-		setIsMember(organization.organization_members.some((member) => member.address === address))
-		setIsPrime(organization.prime === address)
-		setIsOpen(organization.access_model === 'Open' ? true : false)
-	}, [address, organization])
+	// useEffect(() => {
+	// 	if (!address || !organization) return
+	// 	setIsMember(organization.organization_members.some((member) => member.address === address))
+	// 	setIsPrime(organization.prime === address)
+	// 	setIsOpen(organization.access_model === 'Open' ? true : false)
+	// }, [address, organization])
 
 	const tabs = useMemo<ITabs[]>(
 		() =>
@@ -73,11 +73,18 @@ export function Navigation({ id, view, organization }: TProps) {
 							disabled: !isBattlePass,
 					  }
 					: null,
-				setIsPrime
+				isBattlePass
+					? {
+							label: 'Leaderboard',
+							value: BattlepassViews.LEADERBOARD,
+							disabled: !isBattlePass,
+					  }
+					: null,
+				isPrime
 					? {
 							label: 'Admin',
 							value: BattlepassViews.ADMIN,
-							disabled: !setIsPrime,
+							disabled: !isPrime,
 					  }
 					: null,
 			].filter((item) => item !== null),
@@ -92,13 +99,15 @@ export function Navigation({ id, view, organization }: TProps) {
 	)
 
 	return (
-		<Box sx={{ backgroundColor: '#020202ee' }}>
+		<Box
+		// sx={{ backgroundColor: '#02020299', backgroundBlendMode: 'multiply' }}
+		>
 			<Stack
 				direction={isMd ? 'row' : 'column'}
 				spacing={2}
 				alignItems="center"
 				justifyContent={isMd ? 'space-between' : 'center'}
-				pr={isMd ? '1rem' : 0}
+				// p={isMd ? '1rem' : 0}
 			>
 				<Box>
 					<Tabs
@@ -107,16 +116,45 @@ export function Navigation({ id, view, organization }: TProps) {
 						allowScrollButtonsMobile
 						textColor="primary"
 						indicatorColor="primary"
-						sx={{ pl: isMd ? '200px' : 0, height: 60 }}
+						sx={{ pl: isMd ? '130px' : 0, height: '72px', pt: '12px' }}
 						onChange={handleTabChange}
 						value={view || BattlepassViews.DASHBOARD}
+						TabIndicatorProps={{
+							sx: {
+								height: '0px',
+								borderRadius: '1px',
+								'&::after': {
+									content: '""',
+									position: 'absolute',
+									width: '80%',
+									borderColor: '#ff00ff',
+									borderRadius: '2px 0px 0px 2px',
+									boxShadow: '0 0px 20px 2px #00ffcc',
+									borderTop: '5px solid white',
+									left: '10%',
+									right: '10%',
+									top: '0',
+								},
+								'&::before': {
+									content: '""',
+									position: 'absolute',
+									bottom: 0,
+									left: '10%',
+									right: '10%',
+									width: '80%',
+									borderRadius: '2px',
+									borderTop: '2px solid #00ffcc11',
+									zIndex: '100',
+								},
+							},
+						}}
 					>
 						{tabs.map((tab, i) => (
-							<Tab key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />
+							<Tab sx={{ p: 2 }} key={i} label={tab.label} value={tab.value} disabled={tab.disabled} />
 						))}
 					</Tabs>
 				</Box>
-				<Join args={{ id: id, isMember: isMember, isOpen: isOpen, isPrime: isPrime }} />
+				{/* <Join args={{ id: id, isMember: isMember, isOpen: isOpen, isPrime: isPrime }} /> */}
 			</Stack>
 		</Box>
 	)

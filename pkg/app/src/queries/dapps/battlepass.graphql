@@ -72,6 +72,20 @@ query GetBattlepassForUser ($uuid: String!) {
   }
 }
 
+query GetLeaderboard ( $id: String ) {
+  BattlepassBot {
+    BattlepassPoints(where: { battlepassChainId: $id }) {
+      points
+      quests
+      identityUuid
+      identity {
+        twitter
+        discord
+      }
+    }
+  }
+}
+
 query GetScore ( $id: String, $uuid: String ) {
   BattlepassBot {
     BattlepassPoints(where: { battlepassChainId: $id, identityUuid: $uuid }) {

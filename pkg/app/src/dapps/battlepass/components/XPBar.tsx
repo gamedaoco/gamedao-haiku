@@ -54,19 +54,16 @@ export const XPBar = ({ args }: TProps) => {
 	const [levels, setLevels] = useState(null)
 	const [level, setLevel] = useState(0)
 	const [displayLevel, setDisplayLevel] = useState(0)
-	const [points, setPoints] = useState(0) // Math.round(Math.random() * max)
+
+	const [points, setPoints] = useState(0)
 	const [displayPoints, setDisplayPoints] = useState(0)
-	const [max, setMax] = useState(1000000)
+	const [maxPoints, setMaxPoints] = useState(1000000)
+
 	const [progress, setProgress] = useState(0)
 	const [rank, setRank] = useState(null)
 
-	const where = { battlepass: id, uuid: uuid }
+	const where = { id: id, uuid: uuid }
 	const { data } = useGetScoreQuery({ variables: where })
-
-	// console.log(id, uuid)
-	// console.log(data || null)
-	// console.log('xpbar', 'context', id, uuid)
-	// console.log('xp', 'query', where)
 
 	useEffect(() => {
 		if (!data) return
@@ -74,58 +71,58 @@ export const XPBar = ({ args }: TProps) => {
 		setPoints(0)
 	}, [data])
 
-	useEffect(() => {
-		if (!data) return
-		if (!data?.BattlepassBot?.BattlepassLevels) return
-		// get ranks and points from levels
-		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
-			return { level: l.level, points: l.points, name: l.name }
-		})
-		console.log('levels', _levels)
-		setLevels(_levels)
-	}, [data?.BattlepassBot?.BattlepassLevels])
+	// useEffect(() => {
+	// 	if (!data) return
+	// 	if (!data?.BattlepassBot?.BattlepassLevels) return
+	// 	// get ranks and points from levels
+	// 	const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
+	// 		return { level: l.level, points: l.points, name: l.name }
+	// 	})
+	// 	console.log('levels', _levels)
+	// 	setLevels(_levels)
+	// }, [data?.BattlepassBot?.BattlepassLevels])
 
-	useEffect(() => {
-		if (!data) return
-		if (!data.BattlepassBot.BattlepassPoints) return
-		console.log(data.BattlepassBot.BattlepassPoints)
-		const _points = data.BattlepassBot.BattlepassPoints[0].points
-		console.log('xp', 'updatePoints', _points)
-		setPoints(_points)
-		setDisplayLevel(Math.round(_points / 100))
+	// useEffect(() => {
+	// 	if (!data) return
+	// 	if (!data?.BattlepassBot?.BattlepassPoints) return
+	// 	console.log(data.BattlepassBot.BattlepassPoints)
+	// 	const _points = data.BattlepassBot.BattlepassPoints[0].points
+	// 	console.log('xp', 'updatePoints', _points)
+	// 	setPoints(_points)
+	// 	setDisplayLevel(Math.round(_points / 100))
 
-		const updateProgress = Math.round((_points / max) * 100)
-		setProgress(updateProgress)
-		console.log('xp', 'updateProgress', updateProgress)
-	}, [data?.BattlepassBot?.BattlepassPoints])
+	// 	const updateProgress = Math.round((_points / maxPoints) * 100)
+	// 	setProgress(updateProgress)
+	// 	console.log('xp', 'updateProgress', updateProgress)
+	// }, [data?.BattlepassBot?.BattlepassPoints])
 
-	useEffect(() => {
-		if (points != displayPoints) {
-			const updatePoints = Math.round((displayPoints + points) / 2)
-			setDisplayPoints(updatePoints)
-		}
-	}, [points, displayPoints])
+	// useEffect(() => {
+	// 	if (points != displayPoints) {
+	// 		const updatePoints = Math.round((displayPoints + points) / 2)
+	// 		setDisplayPoints(updatePoints)
+	// 	}
+	// }, [points, displayPoints])
 
-	useEffect(() => {
-		if (!levels) return
-		const updateRank =
-			levels[
-				below(
-					levels.map((l) => l.points),
-					points,
-				)
-			]
-		// console.log('xp', 'updateRank', updateRank)
-		setRank(updateRank.name)
-		setLevel(updateRank.level)
-	}, [levels])
+	// useEffect(() => {
+	// 	if (!levels || levels.length < 1) return
+	// 	const updateRank =
+	// 		levels[
+	// 			below(
+	// 				levels.map((l) => l.points),
+	// 				points,
+	// 			)
+	// 		]
+	// 	// console.log('xp', 'updateRank', updateRank)
+	// 	setRank(updateRank.name)
+	// 	setLevel(updateRank.level)
+	// }, [levels])
 
-	useEffect(() => {
-		if (level != displayLevel) {
-			const updateLevel = Math.floor((displayLevel + level) / 2)
-			setDisplayLevel(updateLevel)
-		}
-	}, [level, displayLevel])
+	// useEffect(() => {
+	// 	if (level != displayLevel) {
+	// 		const updateLevel = Math.floor((displayLevel + level) / 2)
+	// 		setDisplayLevel(updateLevel)
+	// 	}
+	// }, [level, displayLevel])
 
 	return (
 		<Stack sx={{ width: '100%' }} spacing={2}>
@@ -145,7 +142,9 @@ export const XPBar = ({ args }: TProps) => {
 					</Typography>
 				</Button>
 				<Stack direction="column" alignItems="bottom">
-					<Typography color="white">{`${displayPoints}${max > 0 ? ` / ${nFormat(max)}` : ``} BP`}</Typography>
+					<Typography color="white">{`${displayPoints}${
+						maxPoints > 0 ? ` / ${nFormat(maxPoints)}` : ``
+					} BP`}</Typography>
 					<Typography variant="body1" color="white">
 						{rank}
 					</Typography>
