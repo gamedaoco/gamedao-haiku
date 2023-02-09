@@ -150,7 +150,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 					spacing={2}
 					alignItems={isMd ? 'end' : 'center'}
 					justifyContent={isMd ? 'start' : 'center'}
-					pb={isMd ? 12 : 0}
+					pb={isMd ? 6 : 4}
 					pl={isMd ? 4 : 0}
 					sx={{
 						position: 'absolute',
@@ -261,7 +261,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 				>
 					<Navigation id={id} view={view} org={orgId} />
 				</Box>
-				<Box
+				{/* <Box
 					sx={{
 						zIndex: 100,
 						position: 'absolute',
@@ -274,7 +274,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 					}}
 				>
 					<Join args={{ id: id }} />
-				</Box>
+				</Box> */}
 				{/* gradient */}
 				<Box
 					sx={{

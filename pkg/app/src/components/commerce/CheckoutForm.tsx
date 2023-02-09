@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useImperativeHandle } from 'react'
 
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import { Button, Stack, Typography, Input, TextField } from '@mui/material'
+import { Box, Button, Stack, Typography, Input, TextField } from '@mui/material'
 import { Loader } from 'components/Loader'
 
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
@@ -77,6 +77,18 @@ export const CheckoutForm = () => {
 	return (
 		<Fragment>
 			{isLoading && <Loader text="Purchasing Battlepass" />}
+
+			<Typography variant="h4" pb={[2, 4]}>
+				Collect points and convert them to real rewards with Battlepass. Join the beta now and get your
+				Battlepass at an introductory price now:
+			</Typography>
+
+			{message && (
+				<Typography variant="h5" pb={[2, 4]}>
+					{message}
+				</Typography>
+			)}
+
 			<form id="payment-form">
 				<TextField
 					id="email"
@@ -152,26 +164,30 @@ export const CheckoutForm = () => {
 				/>
 				<Stack
 					py={3}
-					direction="row"
+					spacing={2}
+					// direction={isMd?"row":"column"}
 					alignItems="center"
 					height="100%"
 					width="100%"
 					justifyContent="space-between"
 				>
-					<>By clicking PAY NOW you agree to the Battlepass terms and conditions.</>
-					<Button
-						variant="lemon"
-						disabled={isLoading || !stripe || !elements}
-						id="submit"
-						onClick={handleSubmit}
-					>
-						<span id="button-text">
-							{isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
-						</span>
-					</Button>
+					<Box>By clicking PAY NOW you agree to the Battlepass terms and conditions.</Box>
+					{stripe && elements && (
+						<Button
+							variant="lemon"
+							disabled={isLoading || !stripe || !elements}
+							id="submit"
+							onClick={handleSubmit}
+							fullWidth
+							size="large"
+						>
+							Pay now
+							{/* <span id="button-text">
+								{isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
+							</span> */}
+						</Button>
+					)}
 				</Stack>
-
-				{message && <div id="payment-message">{message}</div>}
 			</form>
 		</Fragment>
 	)

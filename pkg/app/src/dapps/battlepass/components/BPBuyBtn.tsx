@@ -7,7 +7,7 @@ import { Button, Typography } from '@mui/material'
 import { signIn } from 'next-auth/react'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
-// import { Checkout } from 'components/checkout'
+import { Checkout } from 'components/commerce'
 
 export enum MemberState {
 	VIEWER,
@@ -70,7 +70,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	const handleBuyBattlepass = () => {
 		console.log('buy battlepass:', id, uuid)
-		push('/buy')
+		setOpen(true)
+		// push('/buy')
 	}
 
 	if (!uuid)
@@ -87,27 +88,26 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Button>
 		)
 	return (
-		<Button onClick={() => handleBuyBattlepass()} variant="pink">
-			{' '}
-			Go Premium{' '}
-		</Button>
-		// <Fragment>
-		// 	<BaseDialog title="Go Premium" open={open} onClose={onClose}>
-		// 		{/* <Typography
-		// 			variant="h3"
-		// 			sx={{
-		// 				background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
-		// 				WebkitBackgroundClip: 'text',
-		// 				WebkitTextFillColor: 'transparent',
-		// 				fontWeight: 800,
-		// 			}}
-		// 		>
-		// 			Buy a Battlepass now and get premium!
-		// 		</Typography> */}
+		<Fragment>
+			<Button onClick={() => handleBuyBattlepass()} variant="pink">
+				{' '}
+				Go Premium{' '}
+			</Button>
+			<BaseDialog title="Go Premium" open={open} onClose={onClose}>
+				{/* <Typography
+					variant="h3"
+					sx={{
+						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+						WebkitBackgroundClip: 'text',
+						WebkitTextFillColor: 'transparent',
+						fontWeight: 800,
+					}}
+				>
+					Buy a Battlepass now and get premium!
+				</Typography> */}
 
-		// 		<Checkout/>
-
-		// 	</BaseDialog>
-		// </Fragment>
+				<Checkout />
+			</BaseDialog>
+		</Fragment>
 	)
 }

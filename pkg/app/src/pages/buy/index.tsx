@@ -25,10 +25,6 @@ export function Page() {
 			<Box p={[0, 4, 6]}>
 				<Paper variant="glass">
 					<Box p={[2, 4, 6]}>
-						<Typography variant="h4" pb={[2, 4]}>
-							Collect points and convert them to real rewards with Battlepass. Join the beta now and get
-							your Battlepass at an introductory price now:
-						</Typography>
 						<Checkout />
 					</Box>
 				</Paper>
