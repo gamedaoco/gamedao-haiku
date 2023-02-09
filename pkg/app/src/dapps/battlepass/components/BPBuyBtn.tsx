@@ -7,7 +7,7 @@ import { Button, Typography } from '@mui/material'
 import { signIn } from 'next-auth/react'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
-import { Checkout } from 'components/Checkout'
+// import { Checkout } from 'components/checkout'
 
 export enum MemberState {
 	VIEWER,
