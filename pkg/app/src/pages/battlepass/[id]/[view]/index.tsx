@@ -24,8 +24,8 @@ export function Page() {
 	const { loading, data, error } = useActiveBattlepassByIdQuery({ variables: { id: id } })
 
 	useEffect(() => {
-		if (loading === true) return
-		if (data.BattlepassBot.Battlepasses.length === 0) push('/battlepass') // 404
+		if (loading || !data) return
+		if (data?.BattlepassBot?.Battlepasses?.length === 0) push('/battlepass') // 404
 	}, [loading, data?.BattlepassBot?.Battlepasses, push])
 
 	const walletGate = false
