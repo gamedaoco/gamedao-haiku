@@ -28,6 +28,7 @@ query GetBattlepassUsers ($id:String) {
 
 query GetBattlepassName($id:String) {
     battlepass(where: {id: {_eq: $id}}) {
+	  chainId
       name
       cid
   }

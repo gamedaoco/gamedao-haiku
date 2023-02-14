@@ -71,16 +71,16 @@ export const XPBar = ({ args }: TProps) => {
 		setPoints(0)
 	}, [data])
 
-	// useEffect(() => {
-	// 	if (!data) return
-	// 	if (!data?.BattlepassBot?.BattlepassLevels) return
-	// 	// get ranks and points from levels
-	// 	const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
-	// 		return { level: l.level, points: l.points, name: l.name }
-	// 	})
-	// 	console.log('levels', _levels)
-	// 	setLevels(_levels)
-	// }, [data?.BattlepassBot?.BattlepassLevels])
+	useEffect(() => {
+		if (!data) return
+		if (!data?.BattlepassBot?.BattlepassLevels) return
+		// get ranks and points from levels
+		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
+			return { level: l.level, points: l.points, name: l.name }
+		})
+		console.log('levels', _levels)
+		setLevels(_levels)
+	}, [data?.BattlepassBot?.BattlepassLevels])
 
 	// useEffect(() => {
 	// 	if (!data) return

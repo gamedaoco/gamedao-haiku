@@ -91,8 +91,9 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 							'https://repository-images.githubusercontent.com/486722660/7ef9a610-b65a-48b7-ba4a-f4da081b90ad'
 						}
 						name={'Discord'}
-						url={`https://discord.com/api/oauth2/authorize?client_id=1049953821536833536&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=identify%20email`}
+						// url={`https://discord.com/api/oauth2/authorize?client_id=1049953821536833536&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=identify%20email`}
 						connectable={true}
+						callback={() => signIn('discord')}
 					/>
 				</Fragment>
 				<Fragment key={'twitter'}>

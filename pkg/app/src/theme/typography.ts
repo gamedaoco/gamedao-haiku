@@ -12,6 +12,10 @@ declare module '@mui/material/styles' {
 		micro: React.CSSProperties
 		header1: React.CSSProperties
 		header2: React.CSSProperties
+		hero1: React.CSSProperties
+		hero2: React.CSSProperties
+		time: React.CSSProperties
+		button: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
@@ -26,6 +30,10 @@ declare module '@mui/material/styles' {
 		micro?: React.CSSProperties
 		header1?: React.CSSProperties
 		header2?: React.CSSProperties
+		hero1?: React.CSSProperties
+		hero2?: React.CSSProperties
+		time: React.CSSProperties
+		button: React.CSSProperties
 	}
 }
 
@@ -42,6 +50,9 @@ declare module '@mui/material/Typography' {
 		micro: true
 		header1: true
 		header2: true
+		hero1: true
+		hero2: true
+		button: true
 	}
 }
 
@@ -73,7 +84,7 @@ const FONT_SECONDARY = 'Times New Roman, serif'
 const FONT_LIGHT = 200
 const FONT_REGULAR = 400
 const FONT_MEDIUM = 600
-const FONT_BOLD = 800
+const FONT_BOLD = 900
 
 const typography = {
 	fontFamily: FONT_PRIMARY,
@@ -219,6 +230,38 @@ const typography = {
 		lineHeight: 64 / 48,
 		fontSize: pxToRem(16),
 		...responsiveFontSizes({ sm: 10, md: 14, lg: 18 }),
+	},
+	button: {
+		fontFamily: FONT_UI,
+		fontWeight: 400,
+		lineHeight: 24 / 14,
+		fontSize: pxToRem(14),
+		textTransform: 'uppercase',
+	},
+	time: {
+		fontFamily: FONT_HEADER,
+	},
+	hero1: {
+		fontFamily: FONT_HEADER,
+		fontWeight: 900,
+		lineHeight: 80 / 64,
+		fontSize: pxToRem(32),
+		...responsiveFontSizes({ sm: 32, md: 36, lg: 40 }),
+		float: 'left',
+		textShadow: 'rgba(0,0,0,1) 0 5px 20px',
+		// WebkitTextStrokeWidth: '1px',
+		// WebkitTextStrokeColor: 'rgba(0,0,0,0.2)',
+	},
+	hero2: {
+		fontFamily: FONT_PRIMARY,
+		fontWeight: 400,
+		lineHeight: 80 / 64,
+		fontSize: pxToRem(24),
+		...responsiveFontSizes({ sm: 24, md: 28, lg: 32 }),
+		float: 'left',
+		textShadow: 'rgba(0,0,0,1) 0 5px 20px',
+		// WebkitTextStrokeWidth: '1px',
+		// WebkitTextStrokeColor: 'rgba(0,0,0,0.2)',
 	},
 } as const
 

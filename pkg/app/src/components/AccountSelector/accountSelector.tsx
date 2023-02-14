@@ -19,6 +19,7 @@ import { useAppContext } from 'providers/app/modules/context'
 export function AccountSelector() {
 	const { w3Enabled, selectedAccount, connectWallet, supportedWallets } = useExtensionContext()
 	const currentAddress = useCurrentAccountAddress()
+	const { data: session } = useSession()
 
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -59,22 +60,34 @@ export function AccountSelector() {
 		setNetworkSelectOpenState(false)
 	}, [setNetworkSelectOpenState])
 
+	if (session) {
+		return (
+			<Box>
+				{/* Hello {session.user.name}<br /> */}
+				<Button variant="outlined" size="medium" onClick={() => signOut()}>
+					Disconnect
+				</Button>
+			</Box>
+		)
+	}
+
 	// Show connect button
-	if (w3Enabled === false || selectedAccount === null) {
+	if ((!session && w3Enabled === false) || selectedAccount === null) {
 		return isMd ? (
 			<Button variant="outlined" size="medium" onClick={connectWallet as any}>
-				Sign in
+				Connect
 			</Button>
 		) : (
 			<Box width="100%">
 				<Button variant="outlined" size="medium" fullWidth={true} onClick={connectWallet as any}>
-					Sign in
+					Connect
 				</Button>
 			</Box>
 		)
 	}
 
 	// Show account selector
+
 	if (selectedAccount) {
 		return (
 			<>
