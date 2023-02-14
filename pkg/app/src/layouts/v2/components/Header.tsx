@@ -6,6 +6,7 @@ import { useExtensionContext } from 'src/providers/extension/modules/context'
 import Link from 'components/Link'
 import { AccountSelector } from 'components/AccountSelector/accountSelector'
 import Feedback from 'components/Feedback'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -27,13 +28,16 @@ import Stack from '@mui/material/Stack'
 import Toolbar from '@mui/material/Toolbar'
 
 // eslint-disable-next-line @next/next/no-img-element
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+// const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
 // eslint-disable-next-line @next/next/no-img-element
-const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
+// const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
+const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height="32px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
 	sidebarOpen: boolean
+	noContainer?: boolean
 }
 
 const leftNav = [
@@ -46,6 +50,11 @@ const leftNav = [
 		name: 'Battlepass',
 		path: '/battlepass',
 		icon: <RiSwordLine />,
+	},
+	{
+		name: 'Buy', // button:navigation:campaigns',
+		path: '/buy',
+		icon: <RiVipDiamondLine />,
 	},
 	// {
 	// 	name: 'Campaigns', // button:navigation:campaigns',
@@ -67,7 +76,7 @@ const rightNav = [
 	},
 ]
 
-export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
+export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentProps) {
 	const { w3Enabled } = useExtensionContext()
 
 	const theme = useTheme()
@@ -79,6 +88,8 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 	const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
 		defaultMatches: true,
 	})
+
+	const connected = useCurrentAccountAddress()
 
 	const [showFeedback, setFeedback] = useState(false)
 	const anchorRef = useRef(null)
@@ -93,7 +104,6 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				background: 'transparent',
 				boxShadow: 'none',
 				borderRadius: 0,
-				// zIndex: (theme) => theme.zIndex.drawer + 1,
 			}}
 		>
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
@@ -101,10 +111,11 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				sx={{
 					// backgroundColor: `rgba(0,0,0,0.5)`,
 					// backgroundColor: theme.palette.primary,
-					borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
+					borderBottom: noContainer ? 0 : `1px solid ${theme.palette.grey[500_32]}`,
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					height: '90px',
+					zIndex: 9000,
 				}}
 			>
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
@@ -133,7 +144,8 @@ export function Header({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
-					{w3Enabled &&
+					{connected &&
+						w3Enabled &&
 						rightNav.map((item) => {
 							return (
 								<Link

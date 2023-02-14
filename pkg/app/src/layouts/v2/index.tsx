@@ -62,7 +62,8 @@ export function Layout({
 	}, [setOpenSidebar, sidebarOpen])
 
 	// const showTopBar = false
-	const spacing = showHeader ? `calc( 100vh - 90px )` : `100vh`
+	const baseSpacing = 90
+	const spacing = showHeader ? `calc( 100vh - ${baseSpacing}px )` : `100vh`
 
 	return (
 		<>
@@ -72,26 +73,25 @@ export function Layout({
 
 			<Box>
 				{/*{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}*/}
-
 				{showHeader &&
 					(isMd ? (
-						<Header onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
+						<Header onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} noContainer={noContainer} />
 					) : (
 						<HeaderMobile onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
 					))}
-
 				{/*<AnimatePresence mode="wait" initial={false}>*/}
 				{/*<Transition>*/}
 				<Box>
 					<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
 						{showSidebar && (isMd || sidebarOpen) && connected && (
-							<Box sx={{ minWidth: 90, minHeight: spacing }}>
+							<Box sx={{ minWidth: baseSpacing, minHeight: spacing }}>
 								<Sidebar />
 							</Box>
 						)}
-
 						{noContainer ? (
-							children
+							<Box mt={`-${baseSpacing}px`} width="100%">
+								{children}
+							</Box>
 						) : (
 							<Box p={noBorder ? 0 : [2, 4]} style={{ width: '100%', minHeight: spacing }}>
 								<Box component="main" sx={{ flexGrow: 1 }}>

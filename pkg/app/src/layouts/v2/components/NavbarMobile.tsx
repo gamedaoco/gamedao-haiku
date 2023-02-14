@@ -2,6 +2,7 @@ import React, { Fragment, useCallback } from 'react'
 
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import {
 	RiShieldLine,
@@ -50,11 +51,11 @@ const leftNav = [
 		path: '/organizations',
 		icon: <RiShieldLine />,
 	},
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiExchangeFundsLine />,
+	// },
 	{
 		name: 'Battlepass', //'button:navigation:quests',
 		path: '/battlepass',
@@ -92,6 +93,8 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const { push } = useRouter()
+
+	const connected = useCurrentAccountAddress()
 
 	const handleClick = useCallback(
 		(url, external) => {
@@ -180,18 +183,19 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 					})}
 					<br />
 					<br />
-					{rightNav.map((item) => {
-						return (
-							<Fragment key={item.name}>
-								<ListItemButton>
-									{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-									<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
-										<Typography>{t(item.name)}</Typography>
-									</Link>
-								</ListItemButton>
-							</Fragment>
-						)
-					})}
+					{connected &&
+						rightNav.map((item) => {
+							return (
+								<Fragment key={item.name}>
+									<ListItemButton>
+										{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+										<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+											<Typography>{t(item.name)}</Typography>
+										</Link>
+									</ListItemButton>
+								</Fragment>
+							)
+						})}
 				</Stack>
 
 				<Stack alignItems="center" spacing={4}>
