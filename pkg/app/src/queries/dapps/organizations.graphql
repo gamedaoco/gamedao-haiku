@@ -7,6 +7,14 @@ query OrganizationVanityUrl($searchQuery: String="%") {
     }
 }
 
+subscription GetOrganizationsForPrime ( $id: String! ) {
+  organization(where: {prime: {_eq: $id}}) {
+    id
+    name
+  }
+}
+
+
 #   get organization member by state
 #   e.g. `pending` to provide a list for prime to approve
 subscription OrganizationMembersByState(
