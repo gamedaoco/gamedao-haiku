@@ -14,7 +14,7 @@ export const ContentTitle = ({ children }) => (
 )
 
 export const Section = (props) => (
-	<Box>
+	<Box pb={4}>
 		{props.title && <SectionTitle>{props.title}</SectionTitle>}
 		{props.description && <SectionDescription>{props.description}</SectionDescription>}
 		<Stack spacing={{ xs: 1, sm: 2 }} direction={props.direction || undefined}>
@@ -24,7 +24,7 @@ export const Section = (props) => (
 )
 
 export const SectionTitle = ({ children }) => (
-	<Typography variant="h4" sx={{ m: 0, p: 0, pb: 2 }}>
+	<Typography variant="h4" sx={{ m: 0, p: 0, pt: 0, pb: 0 }}>
 		{children}
 	</Typography>
 )

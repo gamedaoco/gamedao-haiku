@@ -1,3 +1,27 @@
+query GetBattlepassesForOrganization ($id: String) {
+  BattlepassBot {
+    Battlepasses(where: {orgChainId: $id}) {
+      active
+      chainId
+      cid
+      name
+      orgId
+    }
+  }
+}
+
+# filtering does not seem to work atm, so lets get all for now
+# subscription GetBattlepassesForOrganization ($id: String) {
+subscription GetAllBattlepasses {
+#   Battlepasses(where: {orgId: {_eq: $id}}) {
+  Battlepasses {
+    chainId
+    name
+    active
+	orgId
+  }
+}
+
 query GetBattlepassRewards ($id: String) {
   BattlepassBot {
     BattlepassRewards(where: {battlepassChainId: $id}) {

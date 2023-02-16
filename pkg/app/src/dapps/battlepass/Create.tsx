@@ -7,12 +7,20 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { useActiveBattlepassSubscription } from 'src/queries'
 import { useCreateBattlepassTX } from 'hooks/tx/useCreateBattlepassTX'
+import { useActivateBattlepassTX } from 'hooks/tx/useActivateBattlepassTX'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { InfoRounded } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
-import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
 
+// accordion
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
+// uploads
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
 import { Avatar, Card, Button, Grid, CardContent, CardActions } from '@mui/material'
 import {
 	Box,
@@ -40,12 +48,17 @@ import { Image } from 'components/Image/image'
 import { LevelEditor } from './components/LevelEditor'
 import { QuestEditor } from './components/QuestEditor'
 
-import { useGetOrganizationsForPrimeSubscription } from 'src/queries'
+import {
+	useGetOrganizationsForPrimeSubscription,
+	useGetBattlepassesForOrganizationQuery,
+	useGetAllBattlepassesSubscription,
+} from 'src/queries'
 
 export type TInitialState = {
 	organizationId: string
 	organizationAddress: string
 	creatorAddress: string
+	battlepassId: string
 	//
 	name: string
 	description: string
@@ -76,6 +89,7 @@ export type TInitialState = {
 const initialState: TInitialState = {
 	organizationId: '',
 	organizationAddress: '',
+	battlepassId: '',
 	creatorAddress: '',
 	// styling
 	primaryColor: '',
@@ -112,7 +126,9 @@ export const Create = () => {
 	const [formState, setFormState] = useState(initialState)
 	const [id, setId] = useState('')
 	const [cid, setCid] = useState(null)
+	const [stakeToEur, setStakeToEur] = useState(null)
 	const createBattlepassTX = useCreateBattlepassTX(formState.organizationId, formState.name, cid, formState.price)
+	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
 
 	const [organizations, setOrganizations] = useState<any>()
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
@@ -121,12 +137,31 @@ export const Create = () => {
 	useEffect(() => {
 		if (loading) return
 		if (!primeOrganizations.organization.length) return
-		const organizations = primeOrganizations.organization.map((o, i) => {
+		const organizations = primeOrganizations?.organization?.map((o, i) => {
 			return { label: o.name, value: o.id }
 		})
 		setOrganizations(organizations)
 		console.log(organizations)
 	}, [primeOrganizations, loading])
+
+	const [battlepasses, setBattlepasses] = useState<any>()
+	const { loading: loadingPasses, data: organizationBattlepasses } = useGetAllBattlepassesSubscription({
+		// TODO: check why filter is not working
+		// variables: { id: formState.organizationId },
+	})
+	useEffect(() => {
+		if (loadingPasses) return
+		if (!formState.organizationId) return
+		if (!organizationBattlepasses?.Battlepasses?.length) return
+		console.log('passes1', organizationBattlepasses.Battlepasses)
+		console.log('find for org', formState.organizationId)
+		const passes = organizationBattlepasses?.Battlepasses?.map((p, i) => {
+			return { name: p.name, id: p.chainId, active: p.active, org: p.orgId }
+		}).filter((i) => i.org === formState.organizationId)
+		setBattlepasses(passes)
+		console.log('passes2', passes)
+	}, [organizations, loadingPasses, organizationBattlepasses, formState.organizationId])
+	//
 
 	useEffect(() => {
 		if (!localStorage.getItem('battlepass')) return
@@ -138,12 +173,14 @@ export const Create = () => {
 	useEffect(() => {
 		if (formState.price === 0) return
 		if (formState.subscribers === 0) return
-		const fxGAME = 50 // cents per GAME
+		const fxGAME = 0.5 // cents per GAME
+		const fxGAMEtoEUR = 0.5
 		const price = formState.price
 		const mul = formState.subscribers
 		const deposit = (price * mul * fxGAME) / 100
 		console.log('deposit', deposit)
 		setFormState({ ...formState, stake: deposit })
+		setStakeToEur(deposit * fxGAMEtoEUR)
 	}, [formState.subscribers, formState.price])
 
 	const handleChange = (e) => {
@@ -167,18 +204,31 @@ export const Create = () => {
 
 	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
 
-	const [showTxModal, setShowTxModal] = useState<boolean>(false)
-	const openTxModal = () => setShowTxModal(true)
-	const closeTxModal = () => setShowTxModal(false)
-
-	const handleOpenTxModal = () => {
+	const [showCreateModal, setShowCreateModal] = useState<boolean>(false)
+	const openCreateModal = () => setShowCreateModal(true)
+	const closeCreateModal = () => setShowCreateModal(false)
+	const handleOpenCreateModal = () => {
 		console.log('handleOpenTxModal')
-		setShowTxModal(true)
+		openCreateModal()
 	}
 	const handleCreateComplete = (e) => {
 		console.log('handleCreateComplete', e)
+		setShowCreateModal(false)
+	}
+
+	const [showActivateModal, setShowActivateModal] = useState<boolean>(false)
+	const openActivateModal = () => setShowActivateModal(true)
+	const closeActivateModal = () => setShowActivateModal(false)
+	const handleOpenActivateModal = () => {
+		console.log('handleOpenActivateModal')
+		openActivateModal()
 	}
 	// const handleCloseTxModal = useCallback(() => { setShowTxModal(false) }, [setShowTxModal])
+	const handleActivateComplete = (e) => {
+		console.log('handleCreateComplete', e)
+		setShowActivateModal(false)
+	}
+	// txData={activateBattlepassTX}
 
 	return (
 		<Fragment>
@@ -186,198 +236,225 @@ export const Create = () => {
 				Staking not implemented yet. Enter data to get a feeling for staking requirements.
 			</Alert> */}
 
-			<Section
-				direction={{ xs: 'column', md: 'column' }}
-				title="1. Deposit + Activate"
-				description={`
-				GameDAO protocols can be enabled for your organization by staking GAME token.
-				The amount should be in relation to the number of passes issued and their respective sales price.
-				Keeping a healthy ratio between the number of passes and the stake also contributes to
-				the reputation of your organization.
-				`}
-			>
-				{/* <TextField
-						name={'organizationId'}
-						onChange={handleChange}
-						value={formState.organizationId}
-						label="Organization Id"
-						variant="outlined"
-						fullWidth
-						/> */}
-				{organizations && organizations.length > 0 && (
-					<FormControl sx={{ flex: 1 }}>
-						<InputLabel id="organization">Select Organization</InputLabel>
-						<Select
-							name={'organizationId'}
-							value={formState.organizationId}
-							onChange={handleChange}
-							labelId="organization"
-							label="Select Organization"
-							variant="outlined"
-						>
-							{organizations.map((item, index) => (
-								<MenuItem value={item.value} key={index}>
-									{item.label}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				)}
-
-				<SectionDescription>
-					Estimate the number of subscribers and their subscription price to get a suggestion for a reasonable
-					amount of GAME token. Deposit will trigger a transaction to sign with the prime account of the
-					organization and automaticallt enable the Battlepass Protocol for the organization.
-				</SectionDescription>
-
-				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<TextField
-						name={'subscribers'}
-						onChange={handleChange}
-						value={formState.subscribers}
-						label="Estimated Susbcribers"
-						variant="outlined"
-						fullWidth
-						// disabled
-					/>
-					<TextField
-						name={'price'}
-						onChange={handleChange}
-						value={formState.price}
-						label="Subscription Price"
-						InputProps={{
-							endAdornment: (
-								<Typography mr={1} variant="body2">
-									cents
-								</Typography>
-							),
-						}}
-						variant="outlined"
-						fullWidth
-						// disabled
-					/>
-					<TextField
-						name={'stake'}
-						onChange={handleChange}
-						value={formState.stake}
-						label="Recommended Stake"
-						InputProps={{
-							endAdornment: (
-								<Typography mr={1} variant="body2">
-									GAME
-								</Typography>
-							),
-						}}
-						variant="outlined"
-						fullWidth
-						disabled
-					/>
-				</Stack>
-				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<Button disabled size="large" variant="outlined" fullWidth>
-						Deposit
-					</Button>
-				</Stack>
-			</Section>
-
-			{/* <Divider /> */}
-
-			<Section
-				direction={{ xs: 'column', md: 'column' }}
-				title="2. General Settings"
-				description={`Set the basic settings for your Battlepass`}
-			>
-				{/*	input price <br /> input currency
- upload icon <br /> upload image <br /> </Typography> */}
-
-				<Stack direction={{ sm: 'column', md: 'column' }} spacing={2} justifyContent="space-evenly">
-					<TextField
-						name={'name'}
-						inputProps={{ maxLength: 64 }}
-						fullWidth
-						onChange={handleChange}
-						value={formState.name}
-						label="Name"
-						variant="outlined"
-					/>
-					<TextField
-						name={'description'}
-						inputProps={{ maxLength: 512 }}
-						fullWidth
-						onChange={handleChange}
-						value={formState.description}
-						label="Description"
-						variant="outlined"
-						multiline
-						rows={4}
-					/>
-				</Stack>
-				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<Button size="large" variant="outlined" fullWidth onClick={openTxModal}>
-						Create Battlepass
-					</Button>
-				</Stack>
-			</Section>
-
-			{false && (
-				<ContentPanel>
+			<Accordion>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+					<Typography>1. Deposit + Create Battlepass</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
-						title="3. Styling"
-						description={`Add images and colors to create that unique look`}
+						title="Deposit"
+						description={`
+					GameDAO protocols can be enabled for your organization by staking GAME token.
+					The amount should be in relation to the number of passes issued and their respective sales price.
+					Keeping a healthy ratio between the number of passes and the stake also contributes to
+					the reputation of your organization.
+					`}
 					>
+						{/* <TextField
+							name={'organizationId'}
+							onChange={handleChange}
+							value={formState.organizationId}
+							label="Organization Id"
+							variant="outlined"
+							fullWidth
+							/> */}
+						{organizations && organizations.length > 0 ? (
+							<FormControl sx={{ flex: 1 }}>
+								<InputLabel id="organization">Select Organization</InputLabel>
+								<Select
+									name={'organizationId'}
+									value={formState.organizationId}
+									onChange={handleChange}
+									labelId="organization"
+									label="Select Organization"
+									variant="outlined"
+								>
+									{organizations.map((item, index) => (
+										<MenuItem value={item.value} key={index}>
+											{item.label}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						) : (
+							`Searching for an organization...`
+						)}
+
+						<SectionDescription>
+							Estimate the number of subscribers and their subscription price to get a suggestion for a
+							reasonable amount of GAME token. Deposit will trigger a transaction to sign with the prime
+							account of the organization and automaticallt enable the Battlepass Protocol for the
+							organization.
+						</SectionDescription>
+
 						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
 							<TextField
-								name={'primaryColor'}
-								inputProps={{ maxLength: 8 }}
-								fullWidth
+								name={'subscribers'}
 								onChange={handleChange}
-								value={formState.primaryColor}
-								label="Primary Color"
+								value={formState.subscribers}
+								label="Estimated Susbcribers"
 								variant="outlined"
-								InputProps={{
-									startAdornment: (
-										<Typography mr={1} variant="body2">
-											#
-										</Typography>
-									),
-								}}
+								fullWidth
+								// disabled
 							/>
 							<TextField
-								name={'secondaryColor'}
-								inputProps={{ maxLength: 8 }}
-								fullWidth
+								name={'price'}
 								onChange={handleChange}
-								value={formState.secondaryColor}
-								label="Secondary Color"
-								variant="outlined"
+								value={formState.price}
+								label="Subscription Price"
 								InputProps={{
-									startAdornment: (
+									endAdornment: (
 										<Typography mr={1} variant="body2">
-											#
+											cents
 										</Typography>
 									),
 								}}
+								variant="outlined"
+								fullWidth
+								// disabled
 							/>
 							<TextField
-								name={'backgroundColor'}
-								inputProps={{ maxLength: 8 }}
-								fullWidth
+								name={'stake'}
 								onChange={handleChange}
-								value={formState.backgroundColor}
-								label="Background Color"
-								variant="outlined"
+								value={formState.stake}
+								label="Recommended Stake"
 								InputProps={{
-									startAdornment: (
+									endAdornment: (
 										<Typography mr={1} variant="body2">
-											#
+											GAME
 										</Typography>
 									),
 								}}
+								variant="outlined"
+								fullWidth
+								disabled
+							/>
+							<TextField
+								name={'stakeToEur'}
+								// onChange={handleChange}
+								value={stakeToEur}
+								// label="Stake in EUR"
+								InputProps={{
+									endAdornment: (
+										<Typography mr={1} variant="body2">
+											EUR
+										</Typography>
+									),
+								}}
+								variant="outlined"
+								fullWidth
+								disabled
 							/>
 						</Stack>
+						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+							<Button disabled size="large" variant="outlined" fullWidth>
+								Deposit
+							</Button>
+						</Stack>
+					</Section>
 
-						<Box sx={{ border: '1px solid yellow' }}>
+					{/* <Divider /> */}
+
+					<Section
+						direction={{ xs: 'column', md: 'column' }}
+						title="Create"
+						description={`
+						Add basic information to create your Battlepass.
+						Based on existing passes the season will automatically increase.
+					`}
+					>
+						<Stack direction={{ sm: 'column', md: 'column' }} spacing={2} justifyContent="space-evenly">
+							<TextField
+								name={'name'}
+								inputProps={{ maxLength: 64 }}
+								fullWidth
+								onChange={handleChange}
+								value={formState.name}
+								label="Name"
+								variant="outlined"
+							/>
+							<TextField
+								name={'description'}
+								inputProps={{ maxLength: 512 }}
+								fullWidth
+								onChange={handleChange}
+								value={formState.description}
+								label="Description"
+								variant="outlined"
+								multiline
+								rows={4}
+							/>
+						</Stack>
+						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+							<Button size="large" variant="outlined" fullWidth onClick={openCreateModal}>
+								Create Battlepass
+							</Button>
+						</Stack>
+					</Section>
+
+					{organizations?.length > 0 && battlepasses?.length > 0 && (
+						<Section
+							direction={{ xs: 'column', md: 'column' }}
+							title="Activate"
+							description={`Select and activate a battlepass.`}
+						>
+							<FormControl sx={{ flex: 1 }}>
+								<InputLabel id="organization">Select Organization</InputLabel>
+								<Select
+									name={'organizationId'}
+									value={formState.organizationId}
+									onChange={handleChange}
+									labelId="organization"
+									label="Select Organization"
+									variant="outlined"
+								>
+									{organizations.map((item, index) => (
+										<MenuItem value={item.value} key={index}>
+											{item.label}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+
+							<FormControl sx={{ flex: 1 }}>
+								<InputLabel id="battlepass">Select Battlepass</InputLabel>
+								<Select
+									name={'battlepassId'}
+									value={formState.battlepassId}
+									onChange={handleChange}
+									labelId="battlepass"
+									label="Select Battlepass"
+									variant="outlined"
+								>
+									{battlepasses.map((item, index) => (
+										<MenuItem value={item.id} key={index}>
+											{item.name}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+							<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+								<Button size="large" variant="outlined" fullWidth onClick={openActivateModal}>
+									Activate Battlepass
+								</Button>
+							</Stack>
+						</Section>
+					)}
+				</AccordionDetails>
+			</Accordion>
+
+			<Accordion>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+					<Typography>2. Styling</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Section
+						direction={{ xs: 'column', md: 'column' }}
+						title="Styling"
+						description={`Add images and colors to create that unique look`}
+					>
+						<Box sx={{ border: 'grey' }}>
 							<label htmlFor="logo-file-upload">
 								<input
 									style={{ display: 'none' }}
@@ -465,8 +542,63 @@ export const Create = () => {
 								)}
 							</label>
 						</Box>
-					</Section>
 
+						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+							<TextField
+								name={'primaryColor'}
+								inputProps={{ maxLength: 8 }}
+								fullWidth
+								onChange={handleChange}
+								value={formState.primaryColor}
+								label="Primary Color"
+								variant="outlined"
+								InputProps={{
+									startAdornment: (
+										<Typography mr={1} variant="body2">
+											#
+										</Typography>
+									),
+								}}
+							/>
+							<TextField
+								name={'secondaryColor'}
+								inputProps={{ maxLength: 8 }}
+								fullWidth
+								onChange={handleChange}
+								value={formState.secondaryColor}
+								label="Secondary Color"
+								variant="outlined"
+								InputProps={{
+									startAdornment: (
+										<Typography mr={1} variant="body2">
+											#
+										</Typography>
+									),
+								}}
+							/>
+							<TextField
+								name={'backgroundColor'}
+								inputProps={{ maxLength: 8 }}
+								fullWidth
+								onChange={handleChange}
+								value={formState.backgroundColor}
+								label="Background Color"
+								variant="outlined"
+								InputProps={{
+									startAdornment: (
+										<Typography mr={1} variant="body2">
+											#
+										</Typography>
+									),
+								}}
+							/>
+						</Stack>
+					</Section>
+				</AccordionDetails>
+			</Accordion>
+
+			{false && (
+				<ContentPanel>
 					<Divider />
 
 					<Section
@@ -579,12 +711,20 @@ export const Create = () => {
 				</ContentPanel>
 			)}
 
-			{showTxModal && (
+			{showCreateModal && (
 				<TransactionDialog
-					open={showTxModal}
-					onClose={closeTxModal}
+					open={showCreateModal}
+					onClose={closeCreateModal}
 					txData={createBattlepassTX}
 					txCallback={handleCreateComplete}
+				/>
+			)}
+			{showActivateModal && (
+				<TransactionDialog
+					open={showActivateModal}
+					onClose={closeActivateModal}
+					txData={activateBattlepassTX}
+					txCallback={handleActivateComplete}
 				/>
 			)}
 		</Fragment>
