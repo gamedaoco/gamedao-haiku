@@ -216,7 +216,7 @@ export const Create = () => {
 							variant="outlined"
 						>
 							{organizations.map((item, index) => (
-								<MenuItem value={index} key={index}>
+								<MenuItem value={item.value} key={index}>
 									{item.label}
 								</MenuItem>
 							))}
