@@ -16,8 +16,11 @@ import {
 	Paper,
 	Stack,
 	TextField,
+	Typography,
 } from '@mui/material'
 import { useGetBattlepassQuestsQuery } from 'src/queries'
+
+import { TInitialState } from '../Create'
 
 // quest(
 // battlepass: String!
@@ -36,7 +39,7 @@ import { useGetBattlepassQuestsQuery } from 'src/queries'
 // ): BattlepassQuest
 
 type TData = {
-	index: number
+	index?: number
 	battlepass: string
 	channelId?: string
 	cid?: string
@@ -57,20 +60,96 @@ const createData = (data) => {
 const rows = scoreToLevelMap.map((item, index) => createData(item))
 
 type TProps = {
-	id: string
+	formState: TInitialState
+	setFormState: (object) => void
 }
-export function QuestEditor({ id }: TProps) {
+
+export function QuestEditor({ formState, setFormState }: TProps) {
+	// get battlepass id
+	const { battlepassId: id } = formState
 	const { data } = useGetBattlepassQuestsQuery({ variables: { id } })
 
-	const enableEdit = false
-	const enableDelete = false
+	const handleChange = (e) => {
+		// console.log('input', e.target.name, e.target.value, formState)
+		const update = { ...formState, [e.target.name]: e.target.value }
+		setFormState(update)
+		localStorage.setItem('quests', JSON.stringify(update))
+	}
 
-	// set battlepass id
 	// get current quests
-	// create new quest
 	// delete quest
 	// edit quest
 	// save quest
+
+	// create new quest
+	const CreateQuest = (props) => {
+		// cid: String
+
+		// name: String
+		// description: String
+
+		// daily: Boolean!
+		// maxDaily: Int
+		// points: Int!
+		// quantity: Int!
+
+		// source: Source!
+		//	discord | twitter
+		// type: ActivityType!
+		//	post | react | retweet | comment | follow | unfollow
+
+		// discord
+		//		channelId: String
+		// twitter
+		//		twitterId: String
+		//		hashtag: String
+
+		return (
+			<Fragment>
+				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+					<TextField
+						name={'name'}
+						onChange={handleChange}
+						value={formState.subscribers}
+						label="Quest Name"
+						variant="outlined"
+						fullWidth
+					/>
+					<TextField
+						name={'description'}
+						onChange={handleChange}
+						value={formState.price}
+						label="Short Description"
+						variant="outlined"
+						fullWidth
+					/>
+				</Stack>
+				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+					<TextField
+						name={'name'}
+						onChange={handleChange}
+						value={formState.subscribers}
+						label="Quest Name"
+						variant="outlined"
+						fullWidth
+					/>
+					<TextField
+						name={'description'}
+						onChange={handleChange}
+						value={formState.price}
+						label="Short Description"
+						variant="outlined"
+						fullWidth
+					/>
+				</Stack>
+				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+					<Button size="large" variant="outlined" fullWidth>
+						Create Quest
+					</Button>
+				</Stack>
+			</Fragment>
+		)
+	}
 
 	// const [editMode, setEditMode] = useState(false)
 	// const [editRow, setEditRow] = useState(null)
@@ -121,5 +200,9 @@ export function QuestEditor({ id }: TProps) {
 	// 		)
 	// }, [data])
 
-	return !id || !data ? null : <Fragment></Fragment>
+	return !id || !data ? null : (
+		<Fragment>
+			<CreateQuest />
+		</Fragment>
+	)
 }

@@ -230,6 +230,13 @@ export const Create = () => {
 	}
 	// txData={activateBattlepassTX}
 
+	const checkActive = (id) => {
+		const pass = battlepasses.find((p) => p.id === id)
+		const active = pass?.active
+		console.log('active', active)
+		return active
+	}
+
 	return (
 		<Fragment>
 			{/* <Alert severity="info" sx={{ mb: 2 }}>
@@ -435,16 +442,20 @@ export const Create = () => {
 								</Select>
 							</FormControl>
 							<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-								<Button size="large" variant="outlined" fullWidth onClick={openActivateModal}>
-									Activate Battlepass
-								</Button>
+								{checkActive(formState.battlepassId) ? (
+									`Already activated`
+								) : (
+									<Button size="large" variant="outlined" fullWidth onClick={openActivateModal}>
+										Activate Battlepass
+									</Button>
+								)}
 							</Stack>
 						</Section>
 					)}
 				</AccordionDetails>
 			</Accordion>
 
-			<Accordion>
+			<Accordion disabled>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
 					<Typography>2. Styling</Typography>
 				</AccordionSummary>
@@ -597,55 +608,55 @@ export const Create = () => {
 				</AccordionDetails>
 			</Accordion>
 
+			<Accordion disabled={formState.battlepassId ? false : true}>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+					<Typography>3. Levels</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Section
+						direction={{ xs: 'column', md: 'column' }}
+						// title="Levels"
+						description={`Configure levels and ranks`}
+					>
+						<LevelEditor id={formState.battlepassId} />
+					</Section>
+				</AccordionDetails>
+			</Accordion>
+
+			<Accordion disabled={formState.battlepassId ? false : true}>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+					<Typography>4. Quests</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Section direction={{ xs: 'column', md: 'column' }} description={`Configure Quests`}>
+						<QuestEditor formState={formState} setFormState={setFormState} />
+					</Section>
+				</AccordionDetails>
+			</Accordion>
+
+			<Accordion disabled>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+					<Typography>5. Rewards</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Section direction={{ xs: 'column', md: 'column' }} description={`Create rewards`}>
+						{/* <RewardsEditor id={id} /> */}
+					</Section>
+				</AccordionDetails>
+			</Accordion>
+
 			{false && (
 				<ContentPanel>
 					<Divider />
-
-					<Section
-						direction={{ xs: 'column', md: 'column' }}
-						title="3. Levels, Quests, rewards"
-						description={`Create and configure all the details for your Battlepass`}
-					>
-						<SectionTitle>A. Levels</SectionTitle>
-						<LevelEditor />
-						<Divider />
-						<SectionTitle>B. Quests</SectionTitle>
-						<QuestEditor id={id} />
-						<Divider />
-						<SectionTitle>C. Rewards</SectionTitle>
-						<Divider />
-						<Stack direction={{ sm: 'column', md: 'column' }} spacing={2} justifyContent="space-evenly">
-							<TextField
-								name={'name'}
-								inputProps={{ maxLength: 64 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.name}
-								label="Name"
-								variant="outlined"
-							/>
-							<TextField
-								name={'description'}
-								inputProps={{ maxLength: 512 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.description}
-								label="Description"
-								variant="outlined"
-								multiline
-								rows={4}
-							/>
-						</Stack>
-					</Section>
 					<Divider />
 
 					{/* <Section direction={'column'} title="4. Duration + Access Control">
 				<SectionDescription> Choose a battlepass duration. </SectionDescription>
 				<RadioGroup
-					aria-labelledby="duration-radio"
-					name="duration-radio-group"
-					value={formState.duration}
-					onChange={handleChange}
+				aria-labelledby="duration-radio"
+				name="duration-radio-group"
+				value={formState.duration}
+				onChange={handleChange}
 				>
 					<Stack direction={'row'}>
 						<FormControlLabel disabled value={1} control={<Radio />} label="1 day" />

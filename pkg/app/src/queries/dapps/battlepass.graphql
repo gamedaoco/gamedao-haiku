@@ -1,3 +1,11 @@
+mutation CreateBattlepassLevels ( $id: String!, $levels: [Level!]! ){
+  BattlepassBot {
+    levels( battlepass: $id, levels: $levels ) {
+		battlepassId
+	}
+  }
+}
+
 query GetBattlepassesForOrganization ($id: String) {
   BattlepassBot {
     Battlepasses(where: {orgChainId: $id}) {

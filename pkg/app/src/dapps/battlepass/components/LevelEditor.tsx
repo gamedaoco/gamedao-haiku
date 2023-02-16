@@ -1,10 +1,14 @@
+import { Fragment, useState, useEffect, useCallback } from 'react'
 import { scoreToLevelMap } from '../content/mock'
+import { useCreateBattlepassLevelsMutation, Level } from 'src/queries'
+
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
 import Edit from '@mui/icons-material/EditOutlined'
 import Save from '@mui/icons-material/SaveOutlined'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Stack, Button } from '@mui/material'
 import { TextField } from '@mui/material'
-import { Fragment, useState, useEffect } from 'react'
+
+import { gql, useMutation } from '@apollo/client'
 
 const createData = (id: number, name: string, level: number, score: number) => {
 	return { id, name, level, score }
@@ -12,9 +16,11 @@ const createData = (id: number, name: string, level: number, score: number) => {
 const rows = scoreToLevelMap.map((item, index) => createData(index, item.name, item.level, item.score))
 const initialRowState = { id: 0, name: '', level: 0, score: 0 }
 
-export function LevelEditor() {
+export function LevelEditor(id) {
 	const enableEdit = false
 	const enableDelete = false
+
+	const [enableSend, setEnableSend] = useState(true)
 
 	const [data, setData] = useState(rows)
 	const [editMode, setEditMode] = useState(false)
@@ -56,11 +62,56 @@ export function LevelEditor() {
 		setData(null)
 	}
 
-	// TODO send mutation:
-	// levels(battlepass: String!levels: [Level]!): [BattlepassLevel]
-	const handleSend = () => {
-		console.log('handleSend')
-	}
+	const [battlepassId, setBattlepassID] = useState(id.id as string)
+	const [levels, setLevels] = useState(null)
+
+	console.log('battlepass id', battlepassId)
+
+	useEffect(() => {
+		if (!data) return
+		const levels = data?.map((i) => ({ level: i.level, name: i.name, points: i.score }))
+		setLevels(levels)
+	}, [data])
+
+	const [payload, setPayload] = useState<any>({ id: battlepassId, levels: levels })
+
+	useEffect(() => {
+		if (!levels) return
+		const payload = { id: id.id, levels: levels }
+		setPayload(payload)
+	}, [id, levels])
+
+	const [createBattlepassLevelsMutation] = useCreateBattlepassLevelsMutation({
+		variables: payload,
+	})
+
+	const [createLevels, { loading, error }] = useMutation(gql`
+		mutation CreateLevels($id: String!, $levels: [Level!]!) {
+			BattlepassBot {
+				levels(battlepass: $id, levels: $levels) {
+					battlepassId
+				}
+			}
+		}
+	`)
+
+	console.log('createBattlepassLevelsMutation', createBattlepassLevelsMutation)
+	const handleSend = useCallback(() => {
+		console.log('create', payload)
+
+		const create = async () => {
+			const response = await createBattlepassLevelsMutation().then((res) => {
+				try {
+					// const _id = res?.data?.BattlepassBot?.levels
+					console.log('create', 'id ->', res)
+					setEnableSend(false)
+				} catch (e) {
+					console.log(e)
+				}
+			})
+		}
+		create()
+	}, [levels, payload])
 
 	useEffect(() => {
 		if (!data)
@@ -167,18 +218,18 @@ export function LevelEditor() {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			{rows !== data && (
-				<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-					<Button color="warning" variant="outlined" onClick={handleReset}>
-						Reset
+			{/* {rows !== data && ( */}
+			<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+				<Button color="warning" variant="outlined" onClick={handleReset}>
+					Reset
+				</Button>
+				<Stack direction="row" spacing={2}>
+					<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
+						Save
 					</Button>
-					<Stack direction="row" spacing={2}>
-						<Button color="success" variant="contained" onClick={handleSend}>
-							Save
-						</Button>
-					</Stack>
 				</Stack>
-			)}
+			</Stack>
+			{/* )} */}
 		</Fragment>
 	)
 }
