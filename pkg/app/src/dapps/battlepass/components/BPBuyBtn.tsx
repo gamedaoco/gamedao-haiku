@@ -7,7 +7,7 @@ import { Button, Typography } from '@mui/material'
 import { signIn } from 'next-auth/react'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
-import { Checkout } from 'components/commerce'
+// import { Checkout } from 'components/commerce'
 
 export enum MemberState {
 	VIEWER,
@@ -94,7 +94,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				Go Premium{' '}
 			</Button>
 			<BaseDialog title="Go Premium" open={open} onClose={onClose}>
-				{/* <Typography
+				<Typography
 					variant="h3"
 					sx={{
 						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
@@ -104,9 +104,9 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					}}
 				>
 					Buy a Battlepass now and get premium!
-				</Typography> */}
+				</Typography>
 
-				<Checkout />
+				{/* <Checkout /> */}
 			</BaseDialog>
 		</Fragment>
 	)

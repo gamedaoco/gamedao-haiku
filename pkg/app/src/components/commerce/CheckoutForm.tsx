@@ -1,74 +1,74 @@
 import React, { Fragment, useEffect, useRef, useImperativeHandle } from 'react'
 
-import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
+// import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { Box, Button, Stack, Typography, Input, TextField } from '@mui/material'
 import { Loader } from 'components/Loader'
 
-import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
+// import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
-const clientSecret = process.env.STRIPE_SECRET_KEY
+// const clientSecret = process.env.STRIPE_SECRET_KEY
 
-export const StripeInput = ({ component: Component, inputRef, ...props }) => {
-	const elementRef = useRef(null)
-	useImperativeHandle(inputRef, () => ({
-		focus: () => elementRef.current.focus,
-	}))
-	return <Component onReady={(element) => (elementRef.current = element)} {...props} />
-}
+// export const StripeInput = ({ component: Component, inputRef, ...props }) => {
+// 	const elementRef = useRef(null)
+// 	useImperativeHandle(inputRef, () => ({
+// 		focus: () => elementRef.current.focus,
+// 	}))
+// 	return <Component onReady={(element) => (elementRef.current = element)} {...props} />
+// }
 
 export const CheckoutForm = () => {
-	const stripe = useStripe()
-	const elements = useElements()
+	// const stripe = useStripe()
+	// const elements = useElements()
 
 	const [email, setEmail] = React.useState('')
 	const [message, setMessage] = React.useState(null)
 	const [isLoading, setIsLoading] = React.useState(false)
 
-	useEffect(() => {
-		if (!stripe) return
-		if (!clientSecret) return
+	// useEffect(() => {
+	// 	if (!stripe) return
+	// 	if (!clientSecret) return
 
-		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-			switch (paymentIntent.status) {
-				case 'succeeded':
-					setMessage('Payment succeeded!')
-					break
-				case 'processing':
-					setMessage('Your payment is processing.')
-					break
-				case 'requires_payment_method':
-					setMessage('Your payment was not successful, please try again.')
-					break
-				default:
-					setMessage('Something went wrong.')
-					break
-			}
-		})
-	}, [stripe, clientSecret])
+	// 	stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+	// 		switch (paymentIntent.status) {
+	// 			case 'succeeded':
+	// 				setMessage('Payment succeeded!')
+	// 				break
+	// 			case 'processing':
+	// 				setMessage('Your payment is processing.')
+	// 				break
+	// 			case 'requires_payment_method':
+	// 				setMessage('Your payment was not successful, please try again.')
+	// 				break
+	// 			default:
+	// 				setMessage('Something went wrong.')
+	// 				break
+	// 		}
+	// 	})
+	// }, [stripe, clientSecret])
 
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		console.log('buy')
-		if (!stripe || !elements) return
-		setIsLoading(true)
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault()
+	// 	console.log('buy')
+	// 	if (!stripe || !elements) return
+	// 	setIsLoading(true)
 
-		const { error } = await stripe.confirmPayment({
-			elements,
-			// redirect: 'if_required',
-			confirmParams: {
-				return_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
-				receipt_email: email,
-			},
-		})
+	// 	const { error } = await stripe.confirmPayment({
+	// 		elements,
+	// 		// redirect: 'if_required',
+	// 		confirmParams: {
+	// 			return_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
+	// 			receipt_email: email,
+	// 		},
+	// 	})
 
-		if (error.type === 'card_error' || error.type === 'validation_error') {
-			setMessage(error.message)
-		} else {
-			setMessage('An unexpected error occurred.')
-		}
+	// 	if (error.type === 'card_error' || error.type === 'validation_error') {
+	// 		setMessage(error.message)
+	// 	} else {
+	// 		setMessage('An unexpected error occurred.')
+	// 	}
 
-		setIsLoading(false)
-	}
+	// 	setIsLoading(false)
+	// }
 
 	const paymentElementOptions = {
 		layout: 'tabs',
@@ -158,7 +158,7 @@ export const CheckoutForm = () => {
 
 				<br />
 				<br />
-				<PaymentElement
+				{/* <PaymentElement
 					id="payment-element"
 					// options={paymentElementOptions}
 				/>
@@ -182,12 +182,12 @@ export const CheckoutForm = () => {
 							size="large"
 						>
 							Pay now
-							{/* <span id="button-text">
-								{isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
-							</span> */}
+						// <span id="button-text">
+						//		{isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
+						//	</span>
 						</Button>
 					)}
-				</Stack>
+				</Stack> */}
 			</form>
 		</Fragment>
 	)
