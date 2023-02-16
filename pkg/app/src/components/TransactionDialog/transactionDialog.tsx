@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { Box, Button, Card, Divider, Link, Stack, Typography } from '@mui/material'
+import { TransactionData } from 'src/@types/transactionData'
+import { formatBalanceString } from 'src/utils/balance'
+
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import type { ISubmittableResult } from '@polkadot/types/types'
 import { Balance } from 'hooks/useBalanceByAddress'
@@ -8,10 +11,8 @@ import { useBalanceByAddressAndBalanceId } from 'hooks/useBalanceByAddressAndBal
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useTransaction } from 'hooks/useTransaction'
-import { useTranslation } from 'react-i18next'
-import { TransactionData } from 'src/@types/transactionData'
-import { formatBalanceString } from 'src/utils/balance'
 
+import { Box, Button, Card, Divider, Link, Stack, Typography } from '@mui/material'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 
 interface ComponentProps {
@@ -24,6 +25,7 @@ interface ComponentProps {
 
 export function TransactionDialog({ open, onClose, txData, txCallback, children }: ComponentProps) {
 	const { t } = useTranslation()
+
 	const [showDescription, setShowDescription] = useState<boolean>(false)
 	const [paymentInfo, setPaymentInfo] = useState<RuntimeDispatchInfo>(null)
 	const signAndSend = useTransaction()
@@ -32,10 +34,14 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 	const networkBalance: Balance = useBalanceByAddressAndBalanceId(address, systemProperties?.networkCurrency)
 	const depositBalance: Balance = useBalanceByAddressAndBalanceId(address, txData?.currencyId)
 
+	const [lock, setLock] = useState<boolean>(false)
+
 	const handleProceed = useCallback(() => {
+		setLock(true)
 		signAndSend(txData?.tx, txData?.txMsg, txCallback, t)
 		onClose()
-	}, [signAndSend, onClose, txData, txCallback])
+		setLock(false)
+	}, [lock, setLock, signAndSend, onClose, txData, txCallback])
 
 	useEffect(() => {
 		if (txData && address) {
@@ -49,7 +55,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 
 	return (
 		<BaseDialog title={txData.title} open={open} onClose={onClose}>
-			<Stack spacing={{ xs: 3, sm: 5 }} width={{ xs: 'auto', lg: '400px' }}>
+			<Stack spacing={{ xs: 2, sm: 4 }} width={{ xs: 'auto', lg: '400px' }}>
 				{children}
 
 				<Stack spacing={{ xs: 1, sm: 2 }} width="100%">
@@ -111,8 +117,8 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 					</Stack>
 				)}
 
-				<Button variant="contained" onClick={handleProceed}>
-					{t('button:ui:submit')}
+				<Button variant="contained" onClick={handleProceed} disabled={lock}>
+					{lock ? `sending...` : t('button:ui:submit')}
 				</Button>
 
 				<Link

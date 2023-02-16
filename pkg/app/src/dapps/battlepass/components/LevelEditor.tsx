@@ -13,6 +13,9 @@ const rows = scoreToLevelMap.map((item, index) => createData(index, item.name, i
 const initialRowState = { id: 0, name: '', level: 0, score: 0 }
 
 export function LevelEditor() {
+	const enableEdit = false
+	const enableDelete = false
+
 	const [data, setData] = useState(rows)
 	const [editMode, setEditMode] = useState(false)
 	const [editRow, setEditRow] = useState(null)
@@ -28,6 +31,7 @@ export function LevelEditor() {
 		setRowState(data[row])
 		console.log('edit row', row, data[row])
 	}
+
 	const handleSaveRow = (row) => {
 		const update = { ...data[row], ...rowState }
 		const merge = data.map((item, index) => (index !== row ? item : update))
@@ -50,6 +54,12 @@ export function LevelEditor() {
 		setEditRow(null)
 		setEditMode(false)
 		setData(null)
+	}
+
+	// TODO send mutation:
+	// levels(battlepass: String!levels: [Level]!): [BattlepassLevel]
+	const handleSend = () => {
+		console.log('handleSend')
 	}
 
 	useEffect(() => {
@@ -139,15 +149,18 @@ export function LevelEditor() {
 											<Save />
 										</Button>
 									) : (
-										!editMode && (
+										!editMode &&
+										enableEdit && (
 											<Button onClick={() => handleEditRow(row.id)}>
 												<Edit />
 											</Button>
 										)
 									)}
-									<Button onClick={() => handleDeleteRow(row.id)}>
-										<Delete />
-									</Button>
+									{enableDelete && (
+										<Button onClick={() => handleDeleteRow(row.id)}>
+											<Delete />
+										</Button>
+									)}
 								</TableCell>
 							</TableRow>
 						))}
@@ -160,7 +173,7 @@ export function LevelEditor() {
 						Reset
 					</Button>
 					<Stack direction="row" spacing={2}>
-						<Button color="success" variant="contained">
+						<Button color="success" variant="contained" onClick={handleSend}>
 							Save
 						</Button>
 					</Stack>
