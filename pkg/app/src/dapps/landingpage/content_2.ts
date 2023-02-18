@@ -201,46 +201,33 @@ export const teaser1 = {
 }
 
 export const transform = {
-	title: `Next Level Fan Engagement`,
+	title: `We are transforming the Games Industry`,
 	content: [
 		{
-			title: `🪙 Community Integration`,
-			content: [`Reward community contribution`, `Gives fan a voice`, `Unite your community`],
-		},
-		{
-			title: `👑 Social Media Impact`,
+			title: `🪙 Enable Contribution`,
 			content: [
-				`Get your audience outgoing through social media quests`,
-				`Boost engagement through gamified incentives`,
-				`Integrate player progress from popular games`,
+				`Creators can fund their projects`,
+				`Gamers can support teams they love`,
+				`Offering investors a new industry`,
+				`Traditional fundraising + borrowing of funds`,
 			],
 		},
 		{
-			title: `☔ Data Analytics`,
-			content: [`Simple data visualization`, `Identify your biggest fans`, `Gain data-driven insight`],
-		},
-		{
-			title: `🪙 Fan Experience`,
+			title: `👑 Enable Coordination`,
 			content: [
-				`Create new Experience for your fanbase`,
-				`Strengthen loyalty`,
-				`Distribute rewards including digital assets or access to IRL services,`,
+				`Democratic governance + ownership for teams`,
+				`Integrating gamers as active stakeholders`,
+				`Creating more sustainable business models`,
+				`Enable early market proof for projects`,
 			],
 		},
 		{
-			title: `👑 Market Outreach`,
+			title: `☔ Provide Trust`,
 			content: [
-				`New opportunities for partnerships and sponsors`,
-				`Increase your outreach to new groups`,
-				`Exposure for existing partners`,
-			],
-		},
-		{
-			title: `☔ Sustainable Revenue`,
-			content: [
-				`Monetize fan engagement`,
-				`Use a new, innovative revenue stream`,
-				`Increase sustainability through Web3 revenue share`,
+				`Providing ecosystem-wide decentralised identities`,
+				`Common treasury powering community initiatives`,
+				`A utility $GAME token for access and governance`,
+				`Transparent Due Diligence and Compliance tools`,
 			],
 		},
 	],

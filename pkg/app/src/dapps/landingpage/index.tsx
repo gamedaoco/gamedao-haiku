@@ -37,12 +37,12 @@ export function Landingpage() {
 		<Box>
 			{hero && <Hero />}
 
-			<Newsletter />
+			{/* <Newsletter /> */}
 
 			<Container maxWidth="xl" disableGutters>
-				{intro && <Intro />}
+				{/* {intro && <Intro />} */}
 
-				{teaser1 && (
+				{/* {teaser1 && (
 					<Teaser
 						variant="h2"
 						fontSize={['2rem', '4rem']}
@@ -55,11 +55,11 @@ export function Landingpage() {
 						<br />
 						together.
 					</Teaser>
-				)}
+				)} */}
 
-				{/*{ transform && <Transform/> }*/}
+				{transform && <Transform />}
 
-				{roadmap && <Roadmap />}
+				{/* {roadmap && <Roadmap />} */}
 
 				{team && <Team />}
 				{partners && <Partners />}
