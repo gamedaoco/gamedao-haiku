@@ -20,6 +20,7 @@ export function AppProvider({ children }) {
 	const [uuid, setUuid] = useState(null)
 	const [address, setAddress] = useState(null)
 	const [discord, setDiscord] = useState(null)
+	const [twitter, setTwitter] = useState(null)
 	const [user, setUser] = useState({ uuid: uuid, address: address, discord: discord })
 
 	const [connectIdentityMutation] = useConnectIdentityMutation({ variables: { discord } })
@@ -35,7 +36,7 @@ export function AppProvider({ children }) {
 	// get uuid
 	useEffect(() => {
 		if (!discord) return
-		console.log('app', 'connecting', discord, '...')
+		console.log('app', 'connecting', discord, twitter, '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
@@ -45,6 +46,7 @@ export function AppProvider({ children }) {
 
 					const _user = {
 						discord: discord,
+						twitter: twitter,
 						address: address,
 						uuid: _uuid,
 					}
