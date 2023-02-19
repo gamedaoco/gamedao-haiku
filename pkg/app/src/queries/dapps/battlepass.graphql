@@ -69,6 +69,8 @@ query GetBattlepassName($id:String) {
 query GetBattlepassQuests($id: String) {
   BattlepassBot {
     BattlepassQuests(where: { battlepassChainId: $id }) {
+	name
+	description
       battlepassId
       channelId
       id
@@ -78,6 +80,15 @@ query GetBattlepassQuests($id: String) {
       repeat
       source
       type
+    }
+  }
+}
+
+query GetBattlepassAchievements($id: String, $uuid: String) {
+  BattlepassBot {
+    BattlepassProgresses(where: {battlepassChainId: $id, identityUuid: $uuid}) {
+      progress
+      questId
     }
   }
 }
