@@ -26,7 +26,7 @@ const Shield = () => <img src="/bp/shield-default.svg" height="45px" alt="GameDA
 const closest = (counts: Array<number>, goal: number) =>
 	counts.reduce((prev, curr) => (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev))
 
-const nFormat = (num, limit = 1000, unit = 'k') =>
+const nFormat = (num, limit = 10000, unit = 'k') =>
 	Math.abs(num) > limit - 1
 		? Math.sign(num) * Number((Math.abs(num) / limit).toFixed(1)) + unit
 		: Math.sign(num) * Math.abs(num)
@@ -57,7 +57,7 @@ export const XPBar = ({ args }: TProps) => {
 
 	const [points, setPoints] = useState(0)
 	const [displayPoints, setDisplayPoints] = useState(0)
-	const [maxPoints, setMaxPoints] = useState(1000000)
+	const [maxPoints, setMaxPoints] = useState(0) // points until next level
 
 	const [progress, setProgress] = useState(0)
 	const [rank, setRank] = useState(null)
@@ -76,53 +76,56 @@ export const XPBar = ({ args }: TProps) => {
 		if (!data?.BattlepassBot?.BattlepassLevels) return
 		// get ranks and points from levels
 		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
-			return { level: l.level, points: l.points, name: l.name }
+			return { level: l.level || 0, points: l.points || 0, name: l.name }
 		})
 		console.log('levels', _levels)
 		setLevels(_levels)
 	}, [data?.BattlepassBot?.BattlepassLevels])
 
-	// useEffect(() => {
-	// 	if (!data) return
-	// 	if (!data?.BattlepassBot?.BattlepassPoints) return
-	// 	console.log(data.BattlepassBot.BattlepassPoints)
-	// 	const _points = data.BattlepassBot.BattlepassPoints[0].points
-	// 	console.log('xp', 'updatePoints', _points)
-	// 	setPoints(_points)
-	// 	setDisplayLevel(Math.round(_points / 100))
+	useEffect(() => {
+		if (!data) return
+		if (!data?.BattlepassBot?.BattlepassPoints) return
+		console.log(data.BattlepassBot.BattlepassPoints)
+		const _points = data.BattlepassBot.BattlepassPoints[0].points
+		console.log('xp', 'updatePoints', _points)
+		setPoints(_points)
+		setDisplayLevel(Math.round(_points / 100))
 
-	// 	const updateProgress = Math.round((_points / maxPoints) * 100)
-	// 	setProgress(updateProgress)
-	// 	console.log('xp', 'updateProgress', updateProgress)
-	// }, [data?.BattlepassBot?.BattlepassPoints])
+		const updateProgress = Math.round((_points / maxPoints) * 100)
+		setProgress(updateProgress)
+		console.log('xp', 'updateProgress', updateProgress)
+	}, [data?.BattlepassBot?.BattlepassPoints])
 
-	// useEffect(() => {
-	// 	if (points != displayPoints) {
-	// 		const updatePoints = Math.round((displayPoints + points) / 2)
-	// 		setDisplayPoints(updatePoints)
-	// 	}
-	// }, [points, displayPoints])
+	useEffect(() => {
+		if (!points) return
+		if (points != displayPoints) {
+			const updatePoints = Math.round((displayPoints + points) / 2)
+			setDisplayPoints(updatePoints)
+		}
+	}, [points, displayPoints])
 
-	// useEffect(() => {
-	// 	if (!levels || levels.length < 1) return
-	// 	const updateRank =
-	// 		levels[
-	// 			below(
-	// 				levels.map((l) => l.points),
-	// 				points,
-	// 			)
-	// 		]
-	// 	// console.log('xp', 'updateRank', updateRank)
-	// 	setRank(updateRank.name)
-	// 	setLevel(updateRank.level)
-	// }, [levels])
+	useEffect(() => {
+		if (!levels || levels.length < 1) return
+		const updateRank =
+			levels[
+				below(
+					levels.map((l) => l.points),
+					points,
+				)
+			]
+		// console.log('xp', 'updateRank', updateRank)
+		// console.log('xp','next rank',updateRank.points, levels[updateRank])
+		setMaxPoints(updateRank.points)
+		setRank(updateRank.name)
+		setLevel(updateRank.level)
+	}, [levels])
 
-	// useEffect(() => {
-	// 	if (level != displayLevel) {
-	// 		const updateLevel = Math.floor((displayLevel + level) / 2)
-	// 		setDisplayLevel(updateLevel)
-	// 	}
-	// }, [level, displayLevel])
+	useEffect(() => {
+		if (level != displayLevel) {
+			const updateLevel = Math.floor((displayLevel + level) / 2)
+			setDisplayLevel(updateLevel)
+		}
+	}, [level, displayLevel])
 
 	return (
 		<Stack sx={{ width: '100%' }} spacing={2}>

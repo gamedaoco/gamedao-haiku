@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 
-import { useGetBattlepassQuestsQuery } from 'src/queries'
+import { useGetBattlepassQuestsQuery, useGetBattlepassAchievementsQuery } from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
@@ -10,6 +10,7 @@ import { CardContent, CardActions } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 import { useAppContext } from 'providers/app/modules/context'
 import { use } from 'i18next'
+import { String } from 'lodash'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -29,6 +30,8 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 export type TQuestItem = {
 	battlepassId: number
 	channelId: string
+	name: string
+	description: string
 	id: number
 	maxDaily: number
 	points: number
@@ -42,9 +45,10 @@ export type TQuestItem = {
 type TGridItemProps = {
 	index: number
 	item: TQuestItem
+	achievement: any
 }
 
-export const BPQuestItem = ({ index, item }: TGridItemProps) => {
+export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
 	const key = icons[index % 4] // icons[ Math.round( Math.random() * 4 ) ]
 	const url = `/bp/icons/${key.toLowerCase()}-gold.svg`
@@ -54,9 +58,12 @@ export const BPQuestItem = ({ index, item }: TGridItemProps) => {
 	const ButtonOrBar = !item.progress ? false : true //Math.random() > 0.5
 
 	const p = item.points // Math.round(Math.random() * 5) * 250 + 250
-	const t = item.quantity
-	const v = Math.round(Math.random() * t) // progress
+	const v = achievement?.progress || 0
+	const t = item.maxDaily || 1
 	const completed = Math.round((v / t) * 100)
+
+	console.log(v, t, completed)
+	console.log(item.id, item.maxDaily, 'achievement', achievement)
 
 	const action = () => {
 		switch (key) {
@@ -86,10 +93,11 @@ export const BPQuestItem = ({ index, item }: TGridItemProps) => {
 				</Box>
 				<Box pl={2}>
 					<Typography variant="cardHeader">
-						{capitalize(item.source)} {capitalize(item.type)}
+						{item.name}
+						{/*  {capitalize(item.source)} {capitalize(item.type)} */}
 					</Typography>
 					<Typography variant="cardBody" sx={{ opacity: 0.5 }}>
-						Get a limited edition WAVE banner for your socials
+						{item.description}
 					</Typography>
 				</Box>
 			</Stack>
@@ -122,14 +130,30 @@ export const BPQuests = ({ args }: TArgs) => {
 	const { uuid } = useAppContext()
 	const where = { id: id }
 	const [items, setItems] = useState([])
-	const { data } = useGetBattlepassQuestsQuery({ variables: where })
+	const { data: quests } = useGetBattlepassQuestsQuery({ variables: where })
+	const [userAchievements, setUserAchievements] = useState([])
+	const { data: achievements } = useGetBattlepassAchievementsQuery({ variables: where })
 
 	useEffect(() => {
-		if (!data) return
-		const _quests = data.BattlepassBot.BattlepassQuests as TQuestItem[]
+		if (!quests) return
+		const _quests = quests.BattlepassBot.BattlepassQuests as TQuestItem[]
 		console.log('q', _quests)
 		setItems(_quests)
-	}, [data])
+	}, [quests])
+
+	useEffect(() => {
+		if (!achievements) return
+		const a = achievements.BattlepassBot.BattlepassProgresses
+		if (!a) return
+		// console.log('a', a)
+		setUserAchievements(a as any[])
+	}, [achievements])
+
+	const getAchievementForQuest = (id) => {
+		const x = userAchievements.find((q) => q.questId === id)
+		// console.log(userAchievements, x, id)
+		return x
+	}
 
 	return (
 		<Grid
@@ -150,7 +174,7 @@ export const BPQuests = ({ args }: TArgs) => {
 				items.map((item, index) => (
 					<Grid item key={index} xs={12} md={6} lg={3}>
 						<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
-							<BPQuestItem item={item} index={index} />
+							<BPQuestItem item={item} index={index} achievement={getAchievementForQuest(item.id)} />
 						</Card>
 					</Grid>
 				))
