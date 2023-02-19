@@ -111,7 +111,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 					<Typography variant="cardMicro" align="right" sx={{ color: '#f3cb14' }}>
 						{v}/{t}
 					</Typography>
-					<BorderLinearProgress variant="determinate" value={completed} />
+					<BorderLinearProgress variant="determinate" value={completed < 100 ? completed : 100} />
 				</>
 			)}
 		</Stack>
