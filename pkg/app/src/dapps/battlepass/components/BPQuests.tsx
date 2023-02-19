@@ -1,5 +1,9 @@
 import { Fragment, useEffect, useState } from 'react'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { use } from 'i18next'
+import { String } from 'lodash'
 
+import { useAppContext } from 'providers/app/modules/context'
 import { useGetBattlepassQuestsQuery, useGetBattlepassAchievementsQuery } from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
@@ -8,9 +12,6 @@ import { Avatar, AvatarGroup } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
-import { useAppContext } from 'providers/app/modules/context'
-import { use } from 'i18next'
-import { String } from 'lodash'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -49,21 +50,36 @@ type TGridItemProps = {
 }
 
 export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
+	const { uuid } = useAppContext()
+	const { data: session } = useSession()
+
+	// find an icon for the quest
 	const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
 	const key = icons[index % 4] // icons[ Math.round( Math.random() * 4 ) ]
 	const url = `/bp/icons/${key.toLowerCase()}-gold.svg`
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={url} height="45px" alt={key} />
 
-	const ButtonOrBar = !item.progress ? false : true //Math.random() > 0.5
-
 	const p = item.points // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
 	const t = item.maxDaily || 1
 	const completed = Math.round((v / t) * 100)
 
-	console.log(v, t, completed)
-	console.log(item.id, item.maxDaily, 'achievement', achievement)
+	const ButtonOrBar = () => {
+		if (item.source === 'twitter' && !session.user.twitter) {
+			console.log('Twitter not logged in')
+			return true
+		}
+		if (item.source === 'discord' && !session.user.discord) {
+			console.log('Discord not logged in')
+			return true
+		}
+		return false
+	}
+
+	// console.log(item)
+	// console.log(v, t, completed)
+	// console.log(item.id, item.maxDaily, 'achievement', achievement)
 
 	const action = () => {
 		switch (key) {
@@ -102,9 +118,9 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 				</Box>
 			</Stack>
 
-			{ButtonOrBar ? (
-				<Button fullWidth variant="grey" sx={{ height: 36 }}>
-					{`Connect ${action()}`}
+			{ButtonOrBar() ? (
+				<Button fullWidth variant="outlined" sx={{ height: 36 }} onClick={() => signIn(item.source)}>
+					{`Connect ${item.source}`}
 				</Button>
 			) : (
 				<>
