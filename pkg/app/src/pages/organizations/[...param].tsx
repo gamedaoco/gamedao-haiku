@@ -382,17 +382,17 @@ export function OrganisationById() {
 										value={'members'}
 										disabled={!organizationIdState}
 									/>
-									<Tab
+									{/* <Tab
 										label={t('button:navigation:treasury')}
 										value={'treasury'}
 										disabled={!organizationIdState}
-									/>
+									/> */}
 
-									<Tab
+									{/* <Tab
 										label={t('button:navigation:settings')}
 										value={'settings'}
 										disabled={!organizationIdState}
-									/>
+									/> */}
 								</Tabs>
 							</Box>
 						</Paper>
