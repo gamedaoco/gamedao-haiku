@@ -34,8 +34,9 @@ export const authOptions: NextAuthOptions = {
 		// }),
 
 		TwitterProvider({
-			clientId: process.env.TWITTER_CLIENT_ID,
-			clientSecret: process.env.TWITTER_CLIENT_SECRET,
+			clientId: process.env.TWITTER_CLIENT_ID_V2,
+			clientSecret: process.env.TWITTER_CLIENT_SECRET_V2,
+			version: '2.0',
 		}),
 
 		EmailProvider({
@@ -90,6 +91,7 @@ export const authOptions: NextAuthOptions = {
 			if (account) {
 				token.accessToken = account.access_token
 			}
+
 			if (profile) {
 				token.discord = profile.id
 				token.username = profile.username
@@ -107,6 +109,7 @@ export const authOptions: NextAuthOptions = {
 				avatar: token.avatar,
 				// id: token?.profile?.id || null,
 				discord: token.discord,
+				twitter: token.twitter,
 				address: token.address,
 				uuid: null,
 				// email: token?.email || null,
