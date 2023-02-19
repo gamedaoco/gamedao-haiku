@@ -137,6 +137,7 @@ export const BPRewards = ({ args }: TArgs) => {
 
 	useEffect(() => {
 		if (!rewards) return
+		if (rewards?.BattlepassBot?.BattlepassRewards.length) return
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		console.log('r', res)
 		setDemoMode(res.length === 0)
@@ -158,7 +159,7 @@ export const BPRewards = ({ args }: TArgs) => {
 				<Typography variant="h4"> {demoMode && `Demo `}Rewards</Typography>
 			</Grid>
 
-			{items.map((item, index) => {
+			{items?.map((item, index) => {
 				return (
 					<Grid item key={index}>
 						<BPCard>
