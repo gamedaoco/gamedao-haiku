@@ -94,7 +94,7 @@ export const XPBar = ({ args }: TProps) => {
 		const updateProgress = Math.round((_points / maxPoints) * 100)
 		setProgress(updateProgress)
 		console.log('xp', 'updateProgress', updateProgress)
-	}, [data?.BattlepassBot?.BattlepassPoints])
+	}, [data?.BattlepassBot?.BattlepassPoints, maxPoints])
 
 	useEffect(() => {
 		if (!points) return
