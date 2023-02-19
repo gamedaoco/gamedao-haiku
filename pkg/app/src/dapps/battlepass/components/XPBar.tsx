@@ -84,9 +84,10 @@ export const XPBar = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		if (!data?.BattlepassBot?.BattlepassPoints) return
-		console.log(data.BattlepassBot.BattlepassPoints)
-		const _points = data.BattlepassBot.BattlepassPoints[0].points
+		if (!data?.BattlepassBot?.BattlepassPoints.length) return
+		console.log('xp p', data.BattlepassBot.BattlepassPoints)
+		const _points = data?.BattlepassBot?.BattlepassPoints[0].points
+
 		console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
 		setDisplayLevel(Math.round(_points / 100))
