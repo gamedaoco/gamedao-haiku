@@ -137,16 +137,13 @@ export const BPRewards = ({ args }: TArgs) => {
 
 	useEffect(() => {
 		if (!rewards) return
-		if (rewards?.BattlepassBot?.BattlepassRewards.length) return
+		if (!rewards?.BattlepassBot?.BattlepassRewards.length) return
 
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
 		console.log('r', res)
 	}, [rewards])
-
-	// const items = content.length
-	// const arr1: number[] = new Array(items).fill(0)
 
 	return (
 		<Grid
