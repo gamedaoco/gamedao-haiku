@@ -3,6 +3,9 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { use } from 'i18next'
 import { String } from 'lodash'
 
+import { useAnimation, motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+
 import { useAppContext } from 'providers/app/modules/context'
 import { useGetBattlepassQuestsQuery, useGetBattlepassAchievementsQuery } from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
@@ -134,6 +137,24 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	)
 }
 
+const container = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			delayChildren: 0.5,
+			staggerChildren: 1,
+			type: 'tween',
+			ease: 'easeInOut',
+		},
+	},
+}
+
+const containerItem = {
+	hidden: { opacity: 0 },
+	visible: { opacity: 1 },
+}
+
 type TGridProps = {
 	id?: string
 }
@@ -171,6 +192,32 @@ export const BPQuests = ({ args }: TArgs) => {
 		return x
 	}
 
+	const { ref, inView } = useInView({
+		threshold: 0.8,
+	})
+
+	function FadeInWhenVisible({ children }) {
+		return (
+			<motion.div
+				initial="hidden"
+				whileInView="visible"
+				// whileHover={{ scale: 1 }}
+				// whileTap={{ opacity: 0.8 }}
+				viewport={{ once: true }}
+				transition={{
+					delay: 0.1,
+					duration: 0.1,
+				}}
+				variants={{
+					visible: { opacity: 1, scale: 1 },
+					hidden: { opacity: 0, scale: 0.9 },
+				}}
+			>
+				{children}
+			</motion.div>
+		)
+	}
+
 	return (
 		<Grid
 			container
@@ -189,9 +236,11 @@ export const BPQuests = ({ args }: TArgs) => {
 			{items.length > 0 ? (
 				items.map((item, index) => (
 					<Grid item key={index} xs={12} md={6} lg={3}>
-						<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
-							<BPQuestItem item={item} index={index} achievement={getAchievementForQuest(item.id)} />
-						</Card>
+						<FadeInWhenVisible>
+							<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
+								<BPQuestItem item={item} index={index} achievement={getAchievementForQuest(item.id)} />
+							</Card>
+						</FadeInWhenVisible>
 					</Grid>
 				))
 			) : (
