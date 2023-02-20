@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { useOrganizationFeatures } from 'hooks/featureToggle/useOrganizationFeatures'
@@ -32,6 +33,8 @@ interface FiltersInterface {
 
 export function OrganisationPage() {
 	const { t } = useTranslation()
+
+	const address = useCurrentAccountAddress()
 
 	const [filters, setFilters] = useState<FiltersInterface>({
 		query: '',
@@ -82,9 +85,11 @@ export function OrganisationPage() {
 						<Typography variant="h3">{'Organizations'}</Typography>
 					</Grid>
 					<Grid item>
-						<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleClickCreate}>
-							{t('button:ui:create')}
-						</Button>
+						{address && (
+							<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleClickCreate}>
+								{t('button:ui:create')}
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 				<Grid item>
