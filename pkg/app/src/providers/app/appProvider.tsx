@@ -9,6 +9,15 @@ import { useGetIdentityByDiscordQuery, useConnectIdentityMutation } from 'src/qu
 const initialUserState = { uuid: null, address: null, discord: null }
 const initialContext = { dapp: null, id: null }
 
+export type TAppUser = {
+	uuid?: string
+	address?: string
+	discord?: string
+	twitter?: string
+	email?: string
+	name?: string
+}
+
 export function AppProvider({ children }) {
 	// session + user handling
 	// resolve uuid and persist in app state
@@ -21,6 +30,9 @@ export function AppProvider({ children }) {
 	const [address, setAddress] = useState(null)
 	const [discord, setDiscord] = useState(null)
 	const [twitter, setTwitter] = useState(null)
+	const [email, setEmail] = useState(null)
+	const [name, setName] = useState(null)
+
 	const [user, setUser] = useState({ uuid: uuid, address: address, discord: discord })
 
 	const [connectIdentityMutation] = useConnectIdentityMutation({ variables: { discord } })
@@ -35,7 +47,7 @@ export function AppProvider({ children }) {
 
 	// get uuid
 	useEffect(() => {
-		if (!discord) return
+		if (!discord && !twitter) return
 		console.log('app', 'connecting', discord, twitter, '...')
 
 		const connect = async () => {
@@ -45,10 +57,12 @@ export function AppProvider({ children }) {
 					console.log('app', 'uuid ->', _uuid)
 
 					const _user = {
+						uuid: _uuid,
+						address: address,
 						discord: discord,
 						twitter: twitter,
-						address: address,
-						uuid: _uuid,
+						email: email,
+						name: name,
 					}
 					console.log('app', 'user ->', _user)
 					setUser(_user)
