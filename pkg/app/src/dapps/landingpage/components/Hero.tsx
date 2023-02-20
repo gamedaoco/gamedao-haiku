@@ -1,8 +1,9 @@
-import { Container, Box, Grid, Card, Paper, Typography, Button, Stack } from '@mui/material'
+import { useMediaQuery, Container, Stack, Box, Typography, Button } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { styled } from '@mui/system'
 import Carousel from 'react-material-ui-carousel'
 import Link from 'components/Link'
+import { useTheme } from '@mui/material/styles'
 
 import Icon from '@mui/material/Icon'
 
@@ -59,16 +60,17 @@ const Item = (props) => {
 				sx={{
 					zIndex: 20,
 					width: '100%',
-					height: '100vh',
+					height: 'calc( 100vh - 90px )',
 					position: 'absolute',
-					top: 0,
+					top: -90,
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'end',
 					padding: [1, 4, '5rem'],
+					// border: '5px solid yellow'
 				}}
 			>
-				<Container>
+				<Stack>
 					{props.item.img && (
 						<Box
 							px={[2, 4, 6]}
@@ -104,7 +106,7 @@ const Item = (props) => {
 							))}
 						</Typography>
 					)}
-				</Container>
+				</Stack>
 			</Box>
 		</>
 	)
@@ -124,15 +126,22 @@ const Content = () => (
 	</Carousel>
 )
 
-export const Hero = () => (
-	<Box
-		sx={{
-			height: '100vh',
-			m: 0,
-			p: 0,
-			mb: 0,
-		}}
-	>
-		<Content />
-	</Box>
-)
+export const Hero = () => {
+	const theme = useTheme()
+	const isSm = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
+	const h = !isSm ? `calc( 100vh - 80px )` : `100vh`
+
+	return (
+		<Box
+			sx={{
+				height: '100vh',
+				m: 0,
+				p: 0,
+			}}
+		>
+			<Content />
+		</Box>
+	)
+}

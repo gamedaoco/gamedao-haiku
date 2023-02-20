@@ -65,10 +65,10 @@ export const hero = [
 	// 	bg: '#111',
 
 	{
-		title: `WAVE ESPORTS`,
-		description: `Join the leading Esports team in Europe
-			and enjoy kick ass treats for playing with us:
-			BattlePass awaits!`,
+		sub: `Join the leading Esports team in Europe`,
+		description: `
+		You are in for some  kick ass treats for playing with us:
+		BattlePass Beta awaits!`,
 		image: '/teaser.jpg',
 		links: [
 			{
