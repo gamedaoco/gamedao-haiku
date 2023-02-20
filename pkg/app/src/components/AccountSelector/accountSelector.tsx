@@ -102,7 +102,7 @@ export function AccountSelector() {
 				handleClose={handleCloseFlyout}
 				openAccountSelect={handleOpenAccountSelect}
 				openNetworkSelect={handleOpenNetworkSelect}
-				connectWallet={connectWallet}
+				connectWallet={connectWallet as any}
 			/>
 		</Box>
 	)
