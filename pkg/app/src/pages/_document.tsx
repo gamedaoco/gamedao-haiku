@@ -63,6 +63,7 @@ export default class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css?family=Inter:400,600,800&display=swap"
 					/>
 					{/*<link rel="stylesheet" href="/iconfont.css" />*/}
+					<link rel="stylesheet" href="https://use.typekit.net/glg5whl.css" />
 				</Head>
 				<body
 					style={{
