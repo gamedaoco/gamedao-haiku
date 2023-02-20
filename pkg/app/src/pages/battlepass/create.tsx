@@ -1,8 +1,11 @@
 import { Layout } from 'layouts/v2'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { Create } from 'dapps/battlepass'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 export function Page() {
+	const address = useCurrentAccountAddress()
+
 	return (
 		<Layout showHeader showFooter>
 			<Box sx={{ mb: 2 }}>
@@ -17,9 +20,7 @@ export function Page() {
 						Engage with your favourite games, guilds and creators.
 					</Typography>
 				</Grid>
-				<Grid item>
-					<Create />
-				</Grid>
+				<Grid item>{address && <Create />}</Grid>
 			</Box>
 		</Layout>
 	)
