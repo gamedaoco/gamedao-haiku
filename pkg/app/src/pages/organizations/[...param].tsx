@@ -60,10 +60,12 @@ export function OrganisationById() {
 	const [organizationState, setOrganizationState] = useState<Organization>()
 	const [isMemberState, setIsMemberState] = useState<boolean>(false)
 	const [isPrime, setIsPrime] = useState<boolean>(false)
+	const [treasury, setTreasury] = useState(null)
 
 	const { loading, data, error } = useOrganizationByIdSubscription({
 		variables: { orgId: organizationIdState },
 	})
+
 	const addMemberTx = useAddMemberTransaction(organizationIdState)
 	const address = useCurrentAccountAddress()
 	const cache = useTmpOrganisationState()
@@ -87,7 +89,6 @@ export function OrganisationById() {
 			} else {
 				push(newPath)
 			}
-
 			// Reset proposal id when click on tab
 			setProposalIdState(null)
 		},
@@ -169,9 +170,11 @@ export function OrganisationById() {
 	}, [data])
 
 	useEffect(() => {
-		if (address && organizationState) {
-			setIsMemberState(organizationState.organization_members.some((member) => member.address === address))
-		}
+		if (!address || !organizationState) return
+		setIsMemberState(organizationState?.organization_members?.some((member) => member.address === address))
+		setIsPrime(organizationState?.prime === address)
+		setTreasury(organizationState?.treasury)
+		// console.log(organizationState?.treasury)
 	}, [organizationState, address])
 
 	return (
@@ -407,6 +410,7 @@ export function OrganisationById() {
 									handleOpenTxModal={handleOpenTxModal}
 									showTxModalType={showTxModalType}
 									addMemberTx={addMemberTx}
+									treasury={treasury}
 								/>
 							) : (
 								<TmpOverview />
