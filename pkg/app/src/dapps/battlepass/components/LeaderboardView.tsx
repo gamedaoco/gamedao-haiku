@@ -48,7 +48,7 @@ export function LeaderboardView({ id }: TProps) {
 		<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)}>
 			<Grid item xs={12} pb={[2, 0]}>
 				<TableContainer component={Paper} variant="glass">
-					<Table sx={{ minWidth: 650 }} aria-label="score-to-level">
+					<Table sx={{ minWidth: '100%' }} aria-label="score-to-level">
 						<TableHead>
 							<TableRow>
 								<TableCell align="left">Rank</TableCell>

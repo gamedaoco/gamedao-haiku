@@ -140,9 +140,9 @@ export const BPRewards = ({ args }: TArgs) => {
 		if (rewards?.BattlepassBot?.BattlepassRewards.length) return
 
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
-		console.log('r', res)
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
+		console.log('r', res)
 	}, [rewards])
 
 	// const items = content.length

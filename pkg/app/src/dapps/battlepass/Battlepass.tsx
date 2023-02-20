@@ -15,7 +15,7 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { useTheme } from '@mui/material/styles'
 import { TabContext, TabPanel } from '@mui/lab'
-import { Paper, Stack } from '@mui/material'
+import { Container, Paper, Stack, Box } from '@mui/material'
 
 // TODO: move component level up
 import { Header } from './components/Header'
@@ -46,14 +46,20 @@ export const Battlepass = ({ args }: TProps) => {
 			>
 				<Header id={id} orgId={orgId} view={view} />
 			</Paper>
-			<TabContext value={view}>
-				<TabPanel value="dashboard">
-					<DashboardView id={id} />
-				</TabPanel>
-				<TabPanel value="leaderboard">
-					<LeaderboardView id={id} />
-				</TabPanel>
-			</TabContext>
+			<Box p={[2, 4]} style={{ width: '100%', minHeight: '100vh' }}>
+				<Box component="main" sx={{ flexGrow: 1 }}>
+					<Container disableGutters maxWidth="xl" sx={{ border: 0 }}>
+						<TabContext value={view}>
+							<TabPanel value="dashboard">
+								<DashboardView id={id} />
+							</TabPanel>
+							<TabPanel value="leaderboard">
+								<LeaderboardView id={id} />
+							</TabPanel>
+						</TabContext>
+					</Container>
+				</Box>
+			</Box>
 		</Stack>
 	)
 }

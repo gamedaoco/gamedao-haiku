@@ -146,11 +146,11 @@ export const Header = ({ orgId, id, view }: TProps) => {
 		<Box>
 			<Box sx={{}}>
 				<Stack
-					direction={isMd ? 'row' : 'column'}
 					spacing={2}
+					direction={isMd ? 'row' : 'column'}
 					alignItems={isMd ? 'end' : 'center'}
-					justifyContent={isMd ? 'start' : 'center'}
-					pb={isMd ? 6 : 4}
+					justifyContent={isMd ? 'start' : 'end'}
+					pb={isMd ? 6 : 12}
 					pl={isMd ? 4 : 0}
 					sx={{
 						position: 'absolute',
@@ -213,7 +213,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 			 */}
 
 			<Grid
-				height={isXs ? '20vh' : '40vh'}
+				height={isXs ? '60vh' : '40vh'}
 				width="100%"
 				display="grid"
 				alignItems="center"
@@ -224,8 +224,8 @@ export const Header = ({ orgId, id, view }: TProps) => {
 					backgroundColor: '#010101ee',
 					borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
 					height: '20vh',
-					[theme.breakpoints.up('xs')]: { height: '20vh' },
-					[theme.breakpoints.up('md')]: { height: '20vh' },
+					[theme.breakpoints.up('xs')]: { height: '60vh' },
+					[theme.breakpoints.up('md')]: { height: '30vh' },
 				}}
 			>
 				{/* header image */}

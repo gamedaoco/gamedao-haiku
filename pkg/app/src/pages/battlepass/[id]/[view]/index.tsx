@@ -35,7 +35,7 @@ export function Page() {
 	if (walletGate && !accountState) return <NoWalletConnected />
 
 	return (
-		<Layout showHeader showFooter>
+		<Layout showHeader showFooter noContainer>
 			<Battlepass
 				args={{
 					orgId: data?.BattlepassBot?.Battlepasses[0]?.orgId,
