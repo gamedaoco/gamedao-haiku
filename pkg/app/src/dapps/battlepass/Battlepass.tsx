@@ -37,7 +37,7 @@ export const Battlepass = ({ args }: TProps) => {
 
 	return (
 		<Stack spacing={4}>
-			{/* <Paper
+			<Paper
 				variant={'glass'}
 				sx={{
 					background: '#111111ee',
@@ -45,7 +45,7 @@ export const Battlepass = ({ args }: TProps) => {
 				}}
 			>
 				<Header id={id} orgId={orgId} view={view} />
-			</Paper> */}
+			</Paper>
 			<TabContext value={view}>
 				<TabPanel value="dashboard">
 					<DashboardView id={id} />
