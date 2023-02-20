@@ -28,9 +28,17 @@ interface ComponentProps {
 	handleClose: () => void
 	openAccountSelect: () => void
 	openNetworkSelect: (event) => void
+	connectWallet: () => void
 }
 
-export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNetworkSelect }: ComponentProps) {
+export function Flyout({
+	anchorEl,
+	open,
+	handleClose,
+	openAccountSelect,
+	openNetworkSelect,
+	connectWallet,
+}: ComponentProps) {
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
 	const { endpoints, selectedEndpoint } = useGraphQlContext()
 	const { data: session } = useSession()
@@ -140,7 +148,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 					)}
 
 					{!user.twitter && (
-						<MenuItem sx={{ p: 0 }} onClick={() => {}}>
+						<MenuItem sx={{ p: 0 }} onClick={() => signIn('twitter')}>
 							<ListItemIcon>
 								<RxTwitterLogo fontSize="inherit" />
 							</ListItemIcon>
@@ -149,7 +157,7 @@ export function Flyout({ anchorEl, open, handleClose, openAccountSelect, openNet
 					)}
 
 					{!selectedAccount && (
-						<MenuItem sx={{ p: 0 }} onClick={() => {}}>
+						<MenuItem sx={{ p: 0 }} onClick={connectWallet}>
 							<ListItemIcon>
 								<MdOutlineAccountBalanceWallet fontSize="inherit" />
 							</ListItemIcon>

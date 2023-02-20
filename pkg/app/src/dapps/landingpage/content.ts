@@ -63,40 +63,7 @@ export const hero = [
 	// 	link_text: 'GO',
 	// 	link_url: '#',
 	// 	bg: '#111',
-	{
-		title: `GAMEDAO`,
-		// Empowering creators to
-		// build better games through
-		// democratization and community ownership.
-		sub: `Enhance your gaming experience with GameDAO`,
-		description: `
-		The ultimate platform for community-driven
-		fan engagement, governance, fundraising, and collectibles.
-		Connect with other gamers, creators, and investors
-		to build better games together.
-		`,
-		image: '/art/IP39-DeepMarket.jpg',
-		links: [
-			{
-				text: 'PINKY PAPER',
-				url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca',
-				icon: 'Book',
-			},
-			{
-				text: 'ONE PAGER',
-				url: 'https://docsend.com/view/gesqag6cbemye63f',
-				icon: 'Book',
-			},
-			{
-				text: 'JOIN WAITLIST',
-				url: 'https://discord.gg/kr8Q9Jam2N',
-				icon: 'Discord',
-			},
-		],
-		bg: '#111',
-		img: '/v3/svg/GameDAO-color-h-wht-m.svg',
-		img_height: '48px',
-	},
+
 	{
 		title: `WAVE ESPORTS`,
 		description: `Join the leading Esports team in Europe
@@ -149,6 +116,41 @@ export const hero = [
 		// 	image: '/generic/pexels-photo-9069000.jpg',
 		// 	link_url: '',
 		// 	bg: '#ffff00',
+	},
+
+	{
+		title: `GAMEDAO`,
+		// Empowering creators to
+		// build better games through
+		// democratization and community ownership.
+		sub: `Enhance your gaming experience with GameDAO`,
+		description: `
+		The ultimate platform for community-driven
+		fan engagement, governance, fundraising, and collectibles.
+		Connect with other gamers, creators, and investors
+		to build better games together.
+		`,
+		image: '/art/IP39-DeepMarket.jpg',
+		links: [
+			{
+				text: 'PINKY PAPER',
+				url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca',
+				icon: 'Book',
+			},
+			{
+				text: 'ONE PAGER',
+				url: 'https://docsend.com/view/gesqag6cbemye63f',
+				icon: 'Book',
+			},
+			{
+				text: 'JOIN WAITLIST',
+				url: 'https://discord.gg/kr8Q9Jam2N',
+				icon: 'Discord',
+			},
+		],
+		bg: '#111',
+		img: '/v3/svg/GameDAO-color-h-wht-m.svg',
+		img_height: '48px',
 	},
 ]
 
