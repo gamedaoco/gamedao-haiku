@@ -1,43 +1,67 @@
-import { useCallback } from 'react'
-import md5 from 'md5'
+import { useCallback, useEffect, useState } from 'react'
+
+import { getAccountName, shortAccountAddress, shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { useAppContext } from 'providers/app/modules/context'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { useExtensionContext } from 'providers/extension/modules/context'
-import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-import { getAccountName, shortAccountAddress, getNameFromAccountState } from 'src/utils/accountUtils'
+import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 
-import { ExpandMore, Verified } from '@mui/icons-material'
-import { Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
+import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
+import { ExpandMore, Verified } from '@mui/icons-material'
 import { avatarImageURL } from 'utils/avatars'
+import Logout from '@mui/icons-material/Logout'
+import { MdOutlineLogout } from 'react-icons/md'
 
-interface ComponentProps {
+interface IComponentProps {
 	onClick: () => void
 }
 
-export function Selector({ onClick }: ComponentProps) {
-	const { selectedAccount } = useExtensionContext()
-	const {
-		selectedAccount: {
-			account: { address },
-		},
-	} = useExtensionContext()
+export function Selector({ onClick }: IComponentProps) {
 	const theme = useTheme()
-	const { identity } = useIdentityByAddress(selectedAccount?.account?.address)
-	const accountState = useCurrentAccountState()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
 
-	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-		defaultMatches: true,
-	})
+	const { data: session } = useSession()
+	const { user } = useAppContext()
+	const address = useCurrentAccountAddress()
+
+	const accountState = useCurrentAccountState()
+	const { identity } = useIdentityByAddress(address)
+
+	const [imageUrl, setImageUrl] = useState(null)
+	const [displayName, setDisplayName] = useState(null)
+	const [addressShort, setAddressShort] = useState(null)
+
+	useEffect(() => {
+		if (!user && !address) return
+		if (address) setAddressShort(shortHash(address))
+		const userName = identity?.display_name || user.name || getNameFromAccountState(accountState) || 'anonymous'
+		setDisplayName(userName)
+		if (user.uuid || address) {
+			setImageUrl(avatarImageURL(user.uuid || address))
+		}
+	}, [identity?.display_name, user?.name, accountState, address])
+
+	const VerifiedBadge = () =>
+		identity?.display_name ? <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" color="inherit" /> : null
+
+	// const { selectedAccount } = useExtensionContext()
+	// const {
+	// 	selectedAccount: {
+	// 		account: { address },
+	// 	},
+	// } = useExtensionContext()
 
 	const handleCopyAddress = useCallback(() => {
-		navigator.clipboard.writeText(address).then(() => console.log('address copied!')) //createInfoNotification(t('notification:info:address_copied')))
+		navigator.clipboard.writeText(address) // .then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [address])
 
-	if (!selectedAccount) {
-		return null
-	}
+	// if (!address) {
+	// 	return null
+	// }
 
 	if (!isMd) {
 		return (
@@ -52,41 +76,31 @@ export function Selector({ onClick }: ComponentProps) {
 			spacing={2}
 			sx={{
 				overflow: 'hidden',
-				borderRadius: '0.5rem',
-				borderBottomLeftRadius: '2rem',
-				borderTopLeftRadius: '2rem',
 			}}
 		>
-			<Avatar sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} onClick={handleCopyAddress} />
-			<Stack
-				direction="row"
-				alignItems="center"
-				spacing={2}
-				onClick={onClick}
-				sx={{
-					borderBottomRightRadius: '0.5rem',
-					borderTopRightRadius: '0.5rem',
-				}}
-			>
+			<Avatar sx={{ width: '48px', height: '48px' }} src={imageUrl} onClick={handleCopyAddress} />
+			<Stack direction="row" alignItems="center" spacing={2} onClick={onClick}>
 				<Stack>
-					<Typography variant="subtitle2">
-						{identity?.display_name || getNameFromAccountState(accountState)}
+					<Typography variant="subtitle2" color="white">
+						{displayName}
 						&nbsp;
-						{identity?.display_name && (
-							<Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" color="disabled" />
-						)}
+						<VerifiedBadge />
 					</Typography>
 					<Stack direction="row" alignItems="center" spacing={1} pr={2}>
-						<Typography sx={{ color: theme.palette.grey[700] }} variant="body2">
-							{shortAccountAddress(selectedAccount?.account)}
+						<Typography sx={{ color: theme.palette.grey[500] }} variant="body2" onClick={handleCopyAddress}>
+							{addressShort}
 						</Typography>
 					</Stack>
 				</Stack>
+				<Box display="grid">
+					<ExpandMore />
+				</Box>
 			</Stack>
-			<Box display="grid">
-				<ExpandMore />
-			</Box>
-			<Box />
+			{/* {(session || address) && (
+				<Button onClick={() => signOut()}>
+					<MdOutlineLogout/>
+				</Button>
+			)} */}
 		</Stack>
 	)
 }

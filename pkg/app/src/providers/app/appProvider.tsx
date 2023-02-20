@@ -43,6 +43,7 @@ export function AppProvider({ children }) {
 		if (!session.user.discord) return
 		console.log('app', 'set discord', session.user.discord)
 		setDiscord(session?.user?.discord)
+		setName(session?.user?.name)
 	}, [session])
 
 	// get uuid
