@@ -18,6 +18,7 @@ import { AreaChartContainer } from 'components/TabPanels/Organization/modules/ar
 import { RadialChartContainer } from 'components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
+import { TreasuryChart } from 'dapps/organization/components/TreasuryChart'
 interface ComponentProps {
 	organization: Organization
 	organizationId: string
@@ -161,6 +162,7 @@ export function Overview({
 		url: '',
 		tags: [],
 	})
+
 	useEffect(() => {
 		if (!organization) return
 		setOrgData({
@@ -328,6 +330,17 @@ export function Overview({
 					/>
 				</Stack>
 			</Stack> */}
+
+			<Stack
+				direction={{ xs: 'column', sm: 'row' }}
+				alignItems={{ xs: 'center', sm: 'flex-start' }}
+				spacing={2.5}
+				pt="2.5rem"
+			>
+				<TreasuryChart address={organization?.treasury} symbol="ZERO" />
+				<TreasuryChart address={organization?.treasury} symbol="GAME" />
+				<TreasuryChart address={organization?.treasury} symbol="PLAY" />
+			</Stack>
 
 			<Stack
 				direction={{ xs: 'column', sm: 'row' }}
