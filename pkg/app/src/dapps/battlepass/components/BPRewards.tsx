@@ -138,6 +138,7 @@ export const BPRewards = ({ args }: TArgs) => {
 	useEffect(() => {
 		if (!rewards) return
 		if (rewards?.BattlepassBot?.BattlepassRewards.length) return
+
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		console.log('r', res)
 		setDemoMode(res.length === 0)

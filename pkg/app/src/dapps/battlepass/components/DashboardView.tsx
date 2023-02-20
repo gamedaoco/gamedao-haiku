@@ -38,10 +38,8 @@ export function DashboardView({ id }: TProps) {
 					<BPQuests args={{ id }} />
 				</Grid>
 				<Grid item xs={12} mt={[2, 4]}>
-					{/* <BPRewards args={{ id }} /> */}
+					<BPRewards args={{ id }} />
 				</Grid>
-				{/*
-				 */}
 			</Grid>
 		</Box>
 	)

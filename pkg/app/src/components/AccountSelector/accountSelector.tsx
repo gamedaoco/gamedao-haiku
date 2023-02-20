@@ -21,8 +21,6 @@ export function AccountSelector() {
 	const { data: session } = useSession()
 	const { user } = useAppContext()
 
-	console.log(currentAddress, selectedAccount)
-
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,

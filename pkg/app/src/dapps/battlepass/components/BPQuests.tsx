@@ -69,11 +69,11 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	const completed = Math.round((v / t) * 100)
 
 	const ButtonOrBar = () => {
-		if (item.source === 'twitter' && !session.user.twitter) {
+		if (item.source === 'twitter' && !session?.user?.twitter) {
 			console.log('Twitter not logged in')
 			return true
 		}
-		if (item.source === 'discord' && !session.user.discord) {
+		if (item.source === 'discord' && !session?.user?.discord) {
 			console.log('Discord not logged in')
 			return true
 		}

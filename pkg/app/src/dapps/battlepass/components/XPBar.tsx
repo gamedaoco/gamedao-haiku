@@ -66,20 +66,20 @@ export const XPBar = ({ args }: TProps) => {
 	const { data } = useGetScoreQuery({ variables: where })
 
 	useEffect(() => {
-		if (!data) return
+		if (!data || !uuid) return
 		console.log('xp', 'data', data)
 		setPoints(0)
-	}, [data])
+	}, [data, uuid])
 
 	useEffect(() => {
-		if (!data || !data?.BattlepassBot?.BattlepassLevels.length) return
+		if (!uuid || !data || !data?.BattlepassBot?.BattlepassLevels.length) return
 		// get ranks and points from levels
 		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
 			return { level: l.level || 0, points: l.points || 0, name: l.name }
 		})
 		console.log('levels', _levels)
 		setLevels(_levels)
-	}, [data?.BattlepassBot?.BattlepassLevels])
+	}, [data?.BattlepassBot?.BattlepassLevels, uuid])
 
 	useEffect(() => {
 		if (!data || !data?.BattlepassBot?.BattlepassPoints.length) return
