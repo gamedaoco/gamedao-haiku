@@ -66,7 +66,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	}
 
 	return (
-		<BaseDialog title="Connect" open={open} onClose={onClose}>
+		<BaseDialog title="Connect GameDAO" open={open} onClose={onClose}>
 			<Typography
 				variant="h4"
 				sx={{
@@ -76,14 +76,14 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 					fontWeight: 800,
 				}}
 			>
-				Get started and connect with email or your socials
+				Get started and connect with your socials
 			</Typography>
 			<Grid
 				display={'grid'}
-				gridTemplateColumns="repeat(auto-fit, minmax(300px, 500px))"
+				gridTemplateColumns={{ xs: '100%', lg: 'repeat(auto-fit, minmax(300px, 500px))' }}
 				justifyContent="space-around"
 				gap={'1rem'}
-				maxWidth={{ xs: 'auto', md: '50vw', lg: theme.breakpoints.values.lg }}
+				maxWidth={{ xs: 'auto', lg: theme.breakpoints.values.lg }}
 			>
 				<Fragment key={'discord'}>
 					<WalletCard
@@ -117,10 +117,10 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 			</Typography>
 			<Grid
 				display={'grid'}
-				gridTemplateColumns="repeat(auto-fit, minmax(300px, 500px))"
+				gridTemplateColumns={{ xs: '100%', lg: 'repeat(auto-fit, minmax(300px, 500px))' }}
 				justifyContent="space-around"
 				gap={'1rem'}
-				maxWidth={{ xs: 'auto', md: '50vw', lg: theme.breakpoints.values.lg }}
+				maxWidth={{ xs: 'auto', lg: theme.breakpoints.values.lg }}
 			>
 				{allSupportedWallets.map((wallet) => {
 					return (

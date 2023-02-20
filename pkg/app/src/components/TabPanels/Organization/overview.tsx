@@ -290,7 +290,7 @@ export function Overview({
 				</Paper>
 			</Stack>
 
-			<Stack
+			{/* <Stack
 				direction={{ xs: 'column', sm: 'row' }}
 				alignItems={{ xs: 'center', sm: 'flex-start' }}
 				spacing={2.5}
@@ -327,7 +327,7 @@ export function Overview({
 						categories={categories}
 					/>
 				</Stack>
-			</Stack>
+			</Stack> */}
 
 			<Stack
 				direction={{ xs: 'column', sm: 'row' }}
