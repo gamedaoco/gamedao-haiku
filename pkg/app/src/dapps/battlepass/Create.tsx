@@ -198,6 +198,7 @@ export const Create = () => {
 			const update = { ...formState, [key]: cid.toString() }
 			setFormState(update)
 			localStorage.setItem('battlepass', JSON.stringify(update))
+			console.log('IPFS', 'cid', cid)
 		},
 		[formState],
 	)
@@ -455,7 +456,7 @@ export const Create = () => {
 				</AccordionDetails>
 			</Accordion>
 
-			<Accordion disabled>
+			<Accordion>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
 					<Typography>2. Styling</Typography>
 				</AccordionSummary>

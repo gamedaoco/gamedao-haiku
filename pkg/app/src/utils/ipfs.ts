@@ -29,12 +29,14 @@ export async function fetchIpfsBlob(ipfsHash: string, gateway: string = 'https:/
 }
 
 export async function uploadFileToIpfs(file: File): Promise<CID> {
+	console.log(process.env.NEXT_PUBLIC_IPFS_HOST)
+
 	try {
 		const auth =
 			'Basic ' +
-			Buffer.from('1v04L2wj5JmI0JgKF5KztV0oN8o' + ':' + '85547c6003abb67a6335469d1aa6a3a3').toString('base64')
+			Buffer.from(process.env.NEXT_PUBLIC_IPFS_KEY + ':' + process.env.NEXT_PUBLIC_IPFS_SECRET).toString('base64')
 		const client = await create({
-			url: 'https://ipfs.infura.io:5001/api/v0',
+			url: process.env.NEXT_PUBLIC_IPFS_HOST,
 			headers: {
 				authorization: auth,
 			},
