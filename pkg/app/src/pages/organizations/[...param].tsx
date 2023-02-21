@@ -410,7 +410,6 @@ export function OrganisationById() {
 									handleOpenTxModal={handleOpenTxModal}
 									showTxModalType={showTxModalType}
 									addMemberTx={addMemberTx}
-									treasury={treasury}
 								/>
 							) : (
 								<TmpOverview />
