@@ -7,5 +7,6 @@ export interface AppState {
 	apiProviderConfig: ApiProviderConfig
 	uuid: string
 	user: TAppUser
+	linkAddress: Function
 	context: object
 }
