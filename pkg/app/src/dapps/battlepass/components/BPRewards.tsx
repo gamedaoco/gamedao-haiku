@@ -28,7 +28,7 @@ const IconGroup = () => {
 	)
 }
 
-const cidToURL = (cid) => `${process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY}ipfs/${cid}`
+const cidToURL = (cid) => `url(${process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY}ipfs/${cid})`
 
 type TGridItemProps = {
 	index?: number
@@ -73,10 +73,8 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 									width: 250,
 									height: 350,
 									borderRadius: '2px',
-									// background: 'url(https://pbs.twimg.com/media/EcBPYBRWsAAH6v8.jpg:large)',
-									// background: `url(${content.banner_url})`,
-									background: `url(${cidToURL(content.cid)})`,
-									// fallback icon:
+									background: content.cid ? cidToURL(content.cid) : null,
+									backgroundRepeat: 'no-repeat',
 									backgroundSize: 'cover',
 									backgroundPosition: 'center center',
 								}}
