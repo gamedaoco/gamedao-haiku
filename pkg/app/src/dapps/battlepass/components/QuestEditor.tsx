@@ -18,6 +18,7 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material'
+
 import { useGetBattlepassQuestsQuery } from 'src/queries'
 
 import { TInitialState } from '../Create'
@@ -57,7 +58,7 @@ type TData = {
 const createData = (data) => {
 	return { ...data }
 }
-const rows = scoreToLevelMap.map((item, index) => createData(item))
+// const rows = quests.map((item, index) => createData(item))
 
 type TProps = {
 	formState: TInitialState

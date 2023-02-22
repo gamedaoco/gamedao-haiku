@@ -60,17 +60,18 @@ const Item = (props) => {
 				sx={{
 					zIndex: 20,
 					width: '100%',
-					height: 'calc( 100vh - 90px )',
+					// minHeight: 'calc( 100vh )',
+					height: '100vh',
 					position: 'absolute',
 					top: -90,
 					display: 'flex',
 					flexDirection: 'column',
-					justifyContent: 'end',
-					padding: [1, 4, '5rem'],
+					justifyContent: 'flex-end',
+					padding: [1, 2, 4, '5rem'],
 					// border: '5px solid yellow'
 				}}
 			>
-				<Stack>
+				<Stack direction="column" justifyContent="flex-end" alignItems="flex-start" spacing={2}>
 					{props.item.img && (
 						<Box
 							px={[2, 4, 6]}
@@ -92,7 +93,12 @@ const Item = (props) => {
 							{props.item.sub}
 						</Typography>
 					)}
-					<Typography variant={'hero2'} px={[2, 4, 6]} pt={2}>
+					<Typography
+						variant={'hero2'}
+						px={[2, 4, 6]}
+						pt={2}
+						sx={{ maxWidth: { xs: '100%', md: '75%', lg: '50%' } }}
+					>
 						{props.item.description}
 					</Typography>
 					{props.item.links && (

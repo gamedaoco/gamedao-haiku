@@ -73,6 +73,8 @@ query GetBattlepassQuests($id: String) {
 	description
       battlepassId
       channelId
+	  guildId
+	  twitterId
       id
       maxDaily
       points
@@ -167,12 +169,13 @@ query GetIdentityByDiscord ( $discord: String ) {
   }
 }
 
-mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String ) {
+mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $twitter: String ) {
   BattlepassBot {
-    identity( uuid: $uuid, address: $address, discord: $discord) {
+    identity( uuid: $uuid, address: $address, discord: $discord, twitter: $twitter ) {
       uuid
       address
       discord
+	  twitter
     }
   }
 }

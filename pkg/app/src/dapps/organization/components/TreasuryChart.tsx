@@ -31,12 +31,6 @@ export function TreasuryChart({ address, symbol = 'ZERO' }: IBalancesChart) {
 	const [series, setSeries] = useState([])
 	const [categories, setCategories] = useState([])
 
-	// series: [{
-	// 	name: 'ZERO',
-	// 	data: [31, 40, 28, 51, 42, 109, 100]
-	// }],
-	// }
-
 	useEffect(() => {
 		if (loading) return
 		if (!data || !address) return
