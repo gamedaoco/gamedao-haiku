@@ -28,12 +28,16 @@ const IconGroup = () => {
 	)
 }
 
+const cidToURL = (cid) => `${process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY}ipfs/${cid}`
+
 type TGridItemProps = {
 	index?: number
 	content?: any // TODO: type content
 }
 
 export const BPRewardItem = ({ index, content }: TGridItemProps) => {
+	// console.log( 'content', cidToURL(content.cid) )
+
 	return (
 		<Fragment>
 			<Box sx={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1000 }}>
@@ -70,8 +74,9 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 									height: 350,
 									borderRadius: '2px',
 									// background: 'url(https://pbs.twimg.com/media/EcBPYBRWsAAH6v8.jpg:large)',
+									// background: `url(${content.banner_url})`,
+									background: `url(${cidToURL(content.cid)})`,
 									// fallback icon:
-									background: `url(${content.banner_url})`,
 									backgroundSize: 'cover',
 									backgroundPosition: 'center center',
 								}}
@@ -141,7 +146,7 @@ export const BPRewards = ({ args }: TArgs) => {
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
-		console.log('r', res)
+		// console.log('r', res)
 	}, [rewards])
 
 	return (

@@ -44,7 +44,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			?.map((b) => b.battlepass.chainId)
 			.filter((i) => i === id)[0]
 		const member = memberships === id
-		console.log('memberships', memberships, member)
+		// console.log('memberships', memberships, member)
 		setIsMember(member)
 	}, [data?.BattlepassBot?.BattlepassIdentities])
 
@@ -69,7 +69,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 
 	const handleBuyBattlepass = () => {
-		console.log('buy battlepass:', id, uuid)
+		// console.log('buy battlepass:', id, uuid)
 		setOpen(true)
 		// push('/buy')
 	}

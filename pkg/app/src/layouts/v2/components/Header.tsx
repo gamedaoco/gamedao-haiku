@@ -103,12 +103,13 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 			style={{
 				boxShadow: 'none',
 				borderRadius: 0,
+				background: 'transparent',
 			}}
 		>
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
 			<Toolbar
 				sx={{
-					// background: '#00000033', //'transparent',
+					background: 'transparent',
 					// backgroundColor: `rgba(0,0,0,0.5)`,
 					// backgroundColor: theme.palette.primary,
 					borderBottom: noContainer ? 0 : `1px solid ${theme.palette.grey[500_32]}`,
