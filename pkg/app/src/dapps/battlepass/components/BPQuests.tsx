@@ -33,7 +33,9 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
 export type TQuestItem = {
 	battlepassId: number
-	channelId: string
+	channelId?: string
+	guildId?: string
+	twitterId?: string
 	name: string
 	description: string
 	id: number
@@ -52,54 +54,101 @@ type TGridItemProps = {
 	achievement: any
 }
 
-export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
-	const { uuid } = useAppContext()
-	const { data: session } = useSession()
-
+const getIconUrl = (props) => {
 	// find an icon for the quest
-	const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
-	const key = icons[index % 4] // icons[ Math.round( Math.random() * 4 ) ]
-	const url = `/bp/icons/${key.toLowerCase()}-gold.svg`
+	// const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
+	// const key = icons[index % 4] // icons[ Math.round( Math.random() * 4 ) ]
+
+	const name = 'twitter'
+	const url = `/bp/icons/${name.toLowerCase()}-gold.svg`
+
+	return url
+}
+
+export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
+	const { uuid, linkAddress } = useAppContext()
+	const { data: session } = useSession()
+	const address = useCurrentAccountAddress()
+
 	// eslint-disable-next-line @next/next/no-img-element
-	const Icon = () => <img src={url} height="45px" alt={key} />
+	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
 	const p = item.points // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
 	const t = item.maxDaily || 1
 	const completed = Math.round((v / t) * 100)
 
-	const ButtonOrBar = () => {
-		if (item.source === 'twitter' && !session?.user?.twitter) {
-			console.log('Twitter not logged in')
-			return true
-		}
-		if (item.source === 'discord' && !session?.user?.discord) {
-			console.log('Discord not logged in')
-			return true
-		}
-		return false
+	enum Source {
+		Wallet,
+		Twitter,
+		Discord,
+		Instagram,
+		Facebook,
+		TikTok,
+		SnapChat,
+		Twitch,
+		Game,
 	}
 
-	// console.log(item)
+	enum Actions {
+		DEFAULT = '',
+		CONNECT = 'connect your',
+		DISCONNECT = 'disconnect',
+		JOIN = 'join',
+		FOLLOW = 'follow us on',
+		POST = 'post',
+		LIKE = 'like',
+		SHARE = 'share',
+		LINK = 'link wallet',
+	}
+
+	let actionString = ''
+	let showAction = false
+	let action
+
+	if (item.source === 'twitter' && !session?.user?.twitter) {
+		actionString = `${Actions.CONNECT} ${item.source}`
+		action = () => signIn(item.source)
+		showAction = true
+	}
+
+	if (item.source === 'twitter' && item.type === 'follow') {
+		actionString = `${Actions.FOLLOW} ${item.source}`
+		const str = `https://twitter.com/intent/follow?screen_name=${item.twitterId}`
+		action = () => {
+			console.log('follow', str)
+			window.open(str, '_blank')
+		}
+		showAction = true
+	}
+
+	if (item.source === 'discord' && !session?.user?.discord) {
+		// console.log('Discord not logged in', session?.user?.discord)
+		actionString = `${Actions.CONNECT} ${item.source}`
+		action = () => signIn(item.source)
+		showAction = true
+	}
+
+	if (item.source === 'discord' && item.type === 'join' && v === 0) {
+		// console.log('not joined yet')
+		actionString = `${Actions.JOIN} ${item.source}`
+		showAction = true
+	}
+
+	if (item.source === 'gamedao' && item.type === 'connect' && v === 0) {
+		// console.log('not connected yet', item)
+		actionString = `${Actions.LINK}`
+		// TODO: nextauth needs auth flow with message signing signIn('polkadot')
+		action = () => {
+			// console.log('connect', address, session.user.uuid )
+			linkAddress(address)
+		} // send address to api
+		showAction = true
+	}
+
+	// console.log(item, achievement)
 	// console.log(v, t, completed)
 	// console.log(item.id, item.maxDaily, 'achievement', achievement)
-
-	const action = () => {
-		switch (key) {
-			case 'Wallet':
-				return 'Talisman Wallet'
-				break
-			case 'Follow':
-				return 'Twitch'
-				break
-			case 'Twitter':
-				return 'Twitter'
-				break
-			default:
-				return 'Discord'
-				break
-		}
-	}
 
 	return (
 		<Stack p={2} sx={{ width: ['100%'], height: 150 }} direction="column" justifyContent="space-between">
@@ -121,9 +170,9 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 				</Box>
 			</Stack>
 
-			{ButtonOrBar() ? (
-				<Button fullWidth variant="outlined" sx={{ height: 36 }} onClick={() => signIn(item.source)}>
-					{`Connect ${item.source}`}
+			{showAction ? (
+				<Button fullWidth variant="outlined" sx={{ height: 36 }} onClick={action}>
+					{`${actionString}`}
 				</Button>
 			) : (
 				<>
@@ -174,7 +223,7 @@ export const BPQuests = ({ args }: TArgs) => {
 	useEffect(() => {
 		if (!quests) return
 		const _quests = quests.BattlepassBot.BattlepassQuests as TQuestItem[]
-		console.log('q', _quests)
+		// console.log('q', _quests)
 		setItems(_quests)
 	}, [quests])
 
@@ -234,15 +283,22 @@ export const BPQuests = ({ args }: TArgs) => {
 			</Grid>
 
 			{items.length > 0 ? (
-				items.map((item, index) => (
-					<Grid item key={index} xs={12} md={6} lg={3}>
-						<FadeInWhenVisible>
-							<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
-								<BPQuestItem item={item} index={index} achievement={getAchievementForQuest(item.id)} />
-							</Card>
-						</FadeInWhenVisible>
-					</Grid>
-				))
+				items.map((item, index) => {
+					if (item.source === 'twitter') return null
+					return (
+						<Grid item key={index} xs={12} md={6} lg={3}>
+							<FadeInWhenVisible>
+								<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
+									<BPQuestItem
+										item={item}
+										index={index}
+										achievement={getAchievementForQuest(item.id)}
+									/>
+								</Card>
+							</FadeInWhenVisible>
+						</Grid>
+					)
+				})
 			) : (
 				<Box>
 					<Typography variant="body1">No Quests yet, message the organization!</Typography>
