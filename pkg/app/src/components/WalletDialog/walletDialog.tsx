@@ -6,6 +6,7 @@ import { useExtensionContext } from 'providers/extension/modules/context'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { WalletCard } from 'components/WalletDialog/modules/walletCard'
+import Device from 'components/Device'
 
 import { Button, Paper, Stack, Typography } from '@mui/material'
 
@@ -124,15 +125,26 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 			>
 				{allSupportedWallets.map((wallet) => {
 					return (
-						<Fragment key={wallet.extensionName}>
-							<WalletCard
-								imageSrc={wallet.logo?.src}
-								name={wallet.title || wallet.extensionName}
-								url={wallet.installUrl}
-								callback={() => callback(wallet.extensionName)}
-								connectable={wallet.installed}
-							/>
-						</Fragment>
+						<Device key={wallet.extensionName}>
+							{({ isMobile }) => {
+								console.log(wallet.title, isMobile)
+								if (
+									(isMobile && wallet.title === 'Polkawallet') ||
+									(!isMobile && wallet.title !== 'Polkawallet')
+								)
+									return (
+										<Fragment>
+											<WalletCard
+												imageSrc={wallet.logo?.src}
+												name={wallet.title || wallet.extensionName}
+												url={wallet.installUrl}
+												callback={() => callback(wallet.extensionName)}
+												connectable={wallet.installed}
+											/>
+										</Fragment>
+									)
+							}}
+						</Device>
 					)
 				})}
 			</Grid>
