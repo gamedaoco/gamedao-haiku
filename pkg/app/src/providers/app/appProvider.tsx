@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { ENVIRONMENT } from 'src/constants'
 import { AppContext } from 'providers/app/modules/context'
 
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 import { useGetIdentityByDiscordQuery, useConnectIdentityMutation } from 'src/queries'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 
-const initialUserState = { uuid: null, address: null, discord: null }
+const initialUserState = { uuid: null, address: null, discord: null, twitter: null }
 const initialContext = { dapp: null, id: null }
 
 export type TAppUser = {
@@ -19,8 +21,6 @@ export type TAppUser = {
 }
 
 export function AppProvider({ children }) {
-	// session + user handling
-	// resolve uuid and persist in app state
 	const context = initialContext
 
 	const { data: session } = useSession()
@@ -30,26 +30,57 @@ export function AppProvider({ children }) {
 	const [address, setAddress] = useState(null)
 	const [discord, setDiscord] = useState(null)
 	const [twitter, setTwitter] = useState(null)
+
 	const [email, setEmail] = useState(null)
 	const [name, setName] = useState(null)
 
-	const [user, setUser] = useState({ uuid: uuid, address: address, discord: discord })
+	const [user, setUser] = useState<TAppUser>({
+		uuid: uuid,
+		address: address,
+		discord: discord,
+		twitter: twitter,
+		email: email,
+		name: name,
+	})
+	const [connectIdentityMutation] = useConnectIdentityMutation({
+		variables: {
+			uuid: uuid,
+			address: address,
+			discord: discord,
+			twitter: twitter,
+		},
+	})
 
-	const [connectIdentityMutation] = useConnectIdentityMutation({ variables: { discord } })
+	// useEffect(() => {
+	// 	if (!connectedAddress) return
+	// 	console.log('app', 'account ->', connectedAddress, user.address)
+	// 	if(!address) {
+	// 		setAddress(connectedAddress)
+	// 		setUser({ ...user, address: connectedAddress })
+	// 	}
+	// }, [connectedAddress, session])
 
-	// get discord id
 	useEffect(() => {
 		if (!session) return
 		if (!session.user.discord) return
-		console.log('app', 'set discord', session.user.discord)
+		console.log('app', 'discord ->', session.user.discord)
 		setDiscord(session?.user?.discord)
 		setName(session?.user?.name)
+		setUser({ ...user, discord: session?.user?.discord })
 	}, [session])
 
-	// get uuid
 	useEffect(() => {
+		if (!session) return
+		if (!session.user.twitter) return
+		console.log('app', 'twitter ->', session.user.twitter)
+		setTwitter(session?.user?.twitter)
+		setUser({ ...user, twitter: session?.user?.twitter })
+	}, [session])
+
+	useEffect(() => {
+		if (!session) return
 		if (!discord && !twitter) return
-		console.log('app', 'connecting', discord, twitter, '...')
+		console.log('app', 'connecting', '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
@@ -62,11 +93,10 @@ export function AppProvider({ children }) {
 						address: address,
 						discord: discord,
 						twitter: twitter,
-						email: email,
-						name: name,
 					}
 					console.log('app', 'user ->', _user)
-					setUser(_user)
+
+					setUser({ ..._user })
 					setUuid(_uuid)
 				} catch (e) {
 					console.log(e)
@@ -75,23 +105,77 @@ export function AppProvider({ children }) {
 		}
 		connect()
 		setConnected(true)
-	}, [session, discord])
+	}, [session, discord, twitter])
 
-	// rm uuid when session is null
+	//
+
 	useEffect(() => {
 		if (session) {
-			console.log('app', 'found a session', session, uuid)
+			console.log('app', 'found a session', session, user)
 		} else {
 			console.log('app', 'no session, rm uuid')
 			setUuid(null)
 			setUser(initialUserState)
+			setConnected(false)
 		}
 	}, [session])
 
-	// ping back when connected
 	useEffect(() => {
 		if (connected) console.log('app', `connected`, connected)
 	}, [connected])
+
+	useEffect(() => {
+		if (!address) return
+		const update = async () => {
+			// console.log( 'app', 'writing address...', address )
+			const res = await connectIdentityMutation().then((res) => {
+				try {
+					const _uuid = res?.data?.BattlepassBot?.identity?.address
+					console.log('app', 'linked address', address)
+				} catch (e) {
+					console.log(e)
+				}
+			})
+		}
+		update()
+	}, [address])
+
+	const linkAddress = useCallback(
+		(adr) => {
+			if (user.address) return
+
+			if (!user.address) {
+				console.log('app', 'linking address...', adr)
+				setAddress(adr)
+				setUser({ ...user, address: adr })
+			} else {
+				console.log('app', 'linking address rejected.')
+			}
+		},
+		[address],
+	)
+
+	useEffect(() => {
+		console.log(
+			'app',
+			'\nuuid',
+			uuid,
+			'\naddress',
+			address,
+			'\ndiscord',
+			discord,
+			'\ntwitter',
+			twitter,
+			'\nname',
+			name,
+		)
+	}, [uuid, address, discord, twitter, name])
+
+	//
+	//
+	//
+	//
+	//
 
 	//
 	const configQueryResult = useConfigQuery({
@@ -125,6 +209,7 @@ export function AppProvider({ children }) {
 				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
 				uuid: uuid,
 				user: user,
+				linkAddress: linkAddress,
 				context: context,
 			}}
 		>
