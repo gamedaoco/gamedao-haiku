@@ -3,9 +3,9 @@ import { GraphQlProvider } from 'providers/graphQl/graphQlProvider'
 import { LanguageProvider } from 'providers/language/languageProvider'
 import { ReadyProvider } from 'providers/ready/readyProvider'
 import { ThemeProvider } from 'providers/theme/themeProvider'
-import { ExtensionProvider } from './extension/extensionProvider'
-import { NetworkProvider } from './network/networkProvider'
-import { SettingsProvider } from './settings/settingsProvider'
+import { ExtensionProvider } from 'providers/extension/extensionProvider'
+import { NetworkProvider } from 'providers/network/networkProvider'
+import { SettingsProvider } from 'providers/settings/settingsProvider'
 
 export function Providers({ children }) {
 	return (

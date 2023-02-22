@@ -67,7 +67,7 @@ export const XPBar = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data || !uuid) return
-		console.log('xp', 'data', data)
+		// console.log('xp', 'data', data)
 		setPoints(0)
 	}, [data, uuid])
 
@@ -77,22 +77,22 @@ export const XPBar = ({ args }: TProps) => {
 		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
 			return { level: l.level || 0, points: l.points || 0, name: l.name }
 		})
-		console.log('levels', _levels)
+		// console.log('levels', _levels)
 		setLevels(_levels)
 	}, [data?.BattlepassBot?.BattlepassLevels, uuid])
 
 	useEffect(() => {
 		if (!data || !data?.BattlepassBot?.BattlepassPoints.length) return
-		console.log('xp p', data.BattlepassBot.BattlepassPoints)
+		// console.log('xp p', data.BattlepassBot.BattlepassPoints)
 		const _points = data?.BattlepassBot?.BattlepassPoints[0].points
 
-		console.log('xp', 'updatePoints', _points)
+		// console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
 		setDisplayLevel(Math.round(_points / 100))
 
 		const updateProgress = Math.round((_points / maxPoints) * 100)
 		setProgress(updateProgress)
-		console.log('xp', 'updateProgress', updateProgress)
+		// console.log('xp', 'updateProgress', updateProgress)
 	}, [data?.BattlepassBot?.BattlepassPoints, maxPoints])
 
 	useEffect(() => {

@@ -68,10 +68,11 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, sessio
 	const router = useRouter()
 
 	useEffect(() => {
+		if (ENVIRONMENT === 'DEVELOPMENT') return
 		log.info(`❤️  Welcome to GameDAO`)
 		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
 		log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
-	}, [])
+	}, [ENVIRONMENT])
 
 	useEffect(() => {
 		if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return

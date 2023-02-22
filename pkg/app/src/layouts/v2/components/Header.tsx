@@ -101,7 +101,6 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 			position="static"
 			elevation={0}
 			style={{
-				background: 'transparent',
 				boxShadow: 'none',
 				borderRadius: 0,
 			}}
@@ -109,6 +108,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
 			<Toolbar
 				sx={{
+					// background: '#00000033', //'transparent',
 					// backgroundColor: `rgba(0,0,0,0.5)`,
 					// backgroundColor: theme.palette.primary,
 					borderBottom: noContainer ? 0 : `1px solid ${theme.palette.grey[500_32]}`,
@@ -116,6 +116,9 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 					alignItems: 'center',
 					height: '90px',
 					zIndex: 9000,
+					// WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+					// filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+					// backgroundBlendMode: 'multiply',
 				}}
 			>
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
