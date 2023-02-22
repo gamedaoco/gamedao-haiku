@@ -81,7 +81,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 			<Grid
 				display={'grid'}
 				gridTemplateColumns={{ xs: '100%', lg: 'repeat(auto-fit, minmax(300px, 500px))' }}
-				justifyContent="space-around"
+				justifyContent="start"
 				gap={'1rem'}
 				maxWidth={{ xs: 'auto', lg: theme.breakpoints.values.lg }}
 			>
@@ -95,14 +95,14 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						callback={() => signIn('discord')}
 					/>
 				</Fragment>
-				<Fragment key={'twitter'}>
+				{/* <Fragment key={'twitter'}>
 					<WalletCard
 						imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
 						name={'Twitter'}
 						connectable={true}
 						callback={() => signIn('twitter')}
 					/>
-				</Fragment>
+				</Fragment> */}
 			</Grid>
 			<Typography
 				variant="h4"
