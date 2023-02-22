@@ -31,7 +31,7 @@ export async function fetchIpfsBlob(ipfsHash: string, gateway: string = ipfsGate
 }
 
 export async function uploadFileToIpfs(file: File): Promise<CID> {
-	console.log(process.env.NEXT_PUBLIC_IPFS_HOST)
+	// console.log(process.env.NEXT_PUBLIC_IPFS_HOST)
 
 	try {
 		const auth =

@@ -26,7 +26,7 @@ export function TreasuryChart({ address, symbol = 'ZERO' }: IBalancesChart) {
 		variables: { address: address, symbol: symbol },
 	})
 
-	console.log('treasury', address, symbol)
+	// console.log('treasury', address, symbol)
 
 	const [series, setSeries] = useState([])
 	const [categories, setCategories] = useState([])
@@ -41,7 +41,7 @@ export function TreasuryChart({ address, symbol = 'ZERO' }: IBalancesChart) {
 		const _reserved = data.historical_balance.map((balance) => toUnit(balance.reserved, tokenDecimals))
 		const _categories = data.historical_balance.map((balance) => balance.block)
 
-		console.log('data', _symbol, _categories)
+		// console.log('data', _symbol, _categories)
 
 		setSeries([
 			// { name: 'Total', data: _total },
