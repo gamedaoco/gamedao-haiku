@@ -165,14 +165,12 @@ export function Flyout({
 						</MenuItem>
 					)}
 
-					{!user.address && (
-						<MenuItem onClick={handleDisconnect} sx={{ p: 0 }}>
-							<ListItemIcon>
-								<RxExit fontSize="inherit" />
-							</ListItemIcon>
-							<Typography variant="body2">Disconnect</Typography>
-						</MenuItem>
-					)}
+					<MenuItem onClick={handleDisconnect} sx={{ p: 0 }}>
+						<ListItemIcon>
+							<RxExit fontSize="inherit" />
+						</ListItemIcon>
+						<Typography variant="body2">Disconnect</Typography>
+					</MenuItem>
 				</Stack>
 
 				{/*

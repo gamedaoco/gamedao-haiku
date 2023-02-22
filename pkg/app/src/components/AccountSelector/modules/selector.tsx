@@ -40,8 +40,8 @@ export function Selector({ onClick }: IComponentProps) {
 		if (address) setAddressShort(shortHash(address))
 		const userName = identity?.display_name || user.name || getNameFromAccountState(accountState) || 'anonymous'
 		setDisplayName(userName)
-		if (user.uuid || address) {
-			setImageUrl(avatarImageURL(user.uuid || address))
+		if (address || user.uuid) {
+			setImageUrl(avatarImageURL(address || user.uuid))
 		}
 	}, [identity?.display_name, user?.name, accountState, address])
 
@@ -76,6 +76,9 @@ export function Selector({ onClick }: IComponentProps) {
 			spacing={2}
 			sx={{
 				overflow: 'hidden',
+				WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+				filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+				backgroundBlendMode: 'multiply',
 			}}
 		>
 			<Avatar sx={{ width: '48px', height: '48px' }} src={imageUrl} onClick={handleCopyAddress} />
