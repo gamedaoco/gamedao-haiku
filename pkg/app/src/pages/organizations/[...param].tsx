@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { lazy, useCallback, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
@@ -33,16 +34,37 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { Layout } from 'layouts/v2'
 import { Image } from 'components/Image/image'
-import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
-import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
-import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
-import { Overview } from 'components/TabPanels/Organization/overview'
-import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
-import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
-import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
-import { SettingsOverview } from 'components/TabPanels/Settings/settings'
-
 import { Loader } from 'components/Loader'
+
+const CampaignOverview = dynamic(() =>
+	import('components/TabPanels/Campaign/overview').then((mod) => mod.CampaignOverview),
+)
+const TreasuryOverview = dynamic(() =>
+	import('components/TabPanels/Treasury/overview').then((mod) => mod.TreasuryOverview),
+)
+const OrganizationMembersTable = dynamic(() =>
+	import('components/TabPanels/Organization/organizationMembers').then((mod) => mod.OrganizationMembersTable),
+)
+const Overview = dynamic(() => import('components/TabPanels/Organization/overview').then((mod) => mod.Overview))
+const TmpOverview = dynamic(() =>
+	import('components/TabPanels/Organization/tmpOverview').then((mod) => mod.TmpOverview),
+)
+const ProposalDetail = dynamic(() => import('components/TabPanels/Proposal/detail').then((mod) => mod.ProposalDetail))
+const ProposalOverview = dynamic(() =>
+	import('components/TabPanels/Proposal/overview').then((mod) => mod.ProposalOverview),
+)
+const SettingsOverview = dynamic(() =>
+	import('components/TabPanels/Settings/settings').then((mod) => mod.SettingsOverview),
+)
+
+// import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
+// import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
+// import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
+// import { Overview } from 'components/TabPanels/Organization/overview'
+// import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
+// import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
+// import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
+// import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
 export function OrganisationById() {
 	const { query, push } = useRouter()
