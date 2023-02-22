@@ -37,19 +37,25 @@ export const authOptions: NextAuthOptions = {
 			clientId: process.env.TWITTER_CLIENT_ID_V2,
 			clientSecret: process.env.TWITTER_CLIENT_SECRET_V2,
 			version: '2.0',
+			// profile(profile) {
+			// 	return {
+			// 		context: 'twitter',
+			// 		...profile,
+			// 	}
+			// }
 		}),
 
-		EmailProvider({
-			server: {
-				host: process.env.EMAIL_SERVER_HOST,
-				port: process.env.EMAIL_SERVER_PORT,
-				auth: {
-					user: process.env.EMAIL_SERVER_USER,
-					pass: process.env.EMAIL_SERVER_PASSWORD,
-				},
-			},
-			from: process.env.EMAIL_FROM,
-		}),
+		// EmailProvider({
+		// 	server: {
+		// 		host: process.env.EMAIL_SERVER_HOST,
+		// 		port: process.env.EMAIL_SERVER_PORT,
+		// 		auth: {
+		// 			user: process.env.EMAIL_SERVER_USER,
+		// 			pass: process.env.EMAIL_SERVER_PASSWORD,
+		// 		},
+		// 	},
+		// 	from: process.env.EMAIL_FROM,
+		// }),
 
 		DiscordProvider({
 			clientId: process.env.DISCORD_KEY,
@@ -58,6 +64,7 @@ export const authOptions: NextAuthOptions = {
 			profile(profile) {
 				// console.log(profile)
 				return {
+					context: 'discord',
 					...profile,
 					// accent_color: profile.accent_color,
 					// avatar: profile.avatar,
@@ -87,16 +94,40 @@ export const authOptions: NextAuthOptions = {
 	},
 
 	callbacks: {
-		async jwt({ token, account, profile }) {
-			if (account) {
-				token.accessToken = account.access_token
-			}
+		async jwt({ token, user, account = {}, profile, isNewUser }) {
+			// if ( account.provider && !token[account.provider] ) {
+			// 	token[account.provider] = { access_token: null, refresh_token: null }
+			// }
 
-			if (profile) {
+			// if ( account.access_token ) {
+			// 	token[account.provider] = { ...token, [account.provider]:  { access_token: account.access_token } }
+			// }
+
+			// if ( account.refresh_token ) {
+			// 	token[account.provider] = { ...token, [account.provider] : { refresh_token: account.refresh_token } }
+			// }
+
+			// if (account) {
+			// 	token.accessToken = account.access_token
+			// }
+
+			// discord signin has priority
+			if (account?.provider === 'discord' && profile) {
+				console.log('discord', account.providerAccountId)
 				token.discord = profile.id
 				token.username = profile.username
 				token.avatar = profile.avatar
 			}
+			// only take twitter id and username
+			if (account?.provider === 'twitter') {
+				console.log('twitter', account.providerAccountId)
+				token.twitter = profile.id
+				token.twitter_username = profile.username
+			}
+
+			console.log('user', user)
+			console.log('account', account)
+			// console.log('profile', profile)
 			console.log('token', token)
 			return token
 		},
@@ -109,13 +140,15 @@ export const authOptions: NextAuthOptions = {
 				avatar: token.avatar,
 				// id: token?.profile?.id || null,
 				discord: token.discord,
-				twitter: token.twitter,
-				address: token.address,
+				twitter_id: token.twitter_id,
+				twitter_username: token.twitter_username,
+				// address: token.address,
 				uuid: null,
 				// email: token?.email || null,
 				// profile: token?.profile || null,
 			}
 			console.log('session', session)
+			console.log(token.twitter)
 			return session
 		},
 		// async signIn({ user, account, profile, email, credentials }) {
