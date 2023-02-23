@@ -49,14 +49,17 @@ export const CheckoutForm = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		console.log('buy')
+
 		if (!stripe || !elements) return
 		setIsLoading(true)
+
+		console.log('NEXT_PUBLIC_VERCEL_URL', process.env.NEXT_PUBLIC_VERCEL_URL)
 
 		const { error } = await stripe.confirmPayment({
 			elements,
 			// redirect: 'if_required',
 			confirmParams: {
-				return_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
+				return_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
 				receipt_email: email,
 			},
 		})
