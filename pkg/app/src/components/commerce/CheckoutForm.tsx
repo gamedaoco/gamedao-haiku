@@ -4,6 +4,8 @@ import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { Box, Button, Stack, Typography, Input, TextField } from '@mui/material'
 import { Loader } from 'components/Loader'
 
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
+
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
 const clientSecret = process.env.STRIPE_SECRET_KEY
@@ -15,6 +17,8 @@ export const StripeInput = ({ component: Component, inputRef, ...props }) => {
 	}))
 	return <Component onReady={(element) => (elementRef.current = element)} {...props} />
 }
+
+const protocol = process.env.NODE_ENV === 'development' ? '' : 'https'
 
 export const CheckoutForm = () => {
 	const stripe = useStripe()
@@ -48,23 +52,20 @@ export const CheckoutForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		console.log('buy')
-
 		if (!stripe || !elements) return
 		setIsLoading(true)
-
-		console.log('NEXT_PUBLIC_VERCEL_URL', process.env.NEXT_PUBLIC_VERCEL_URL)
 
 		const { error } = await stripe.confirmPayment({
 			elements,
 			// redirect: 'if_required',
 			confirmParams: {
-				return_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
+				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
 				receipt_email: email,
 			},
 		})
 
-		if (error.type === 'card_error' || error.type === 'validation_error') {
+		// console.log(error)
+		if (error?.type === 'card_error' || error?.type === 'validation_error') {
 			setMessage(error.message)
 		} else {
 			setMessage('An unexpected error occurred.')

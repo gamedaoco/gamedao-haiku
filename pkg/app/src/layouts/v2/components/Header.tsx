@@ -117,9 +117,9 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 					alignItems: 'center',
 					height: '90px',
 					zIndex: 9000,
-					// WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
-					// filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
-					// backgroundBlendMode: 'multiply',
+					WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+					filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+					backgroundBlendMode: 'multiply',
 				}}
 			>
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
