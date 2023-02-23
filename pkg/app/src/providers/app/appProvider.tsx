@@ -65,8 +65,21 @@ export function AppProvider({ children }) {
 		if (!session.user.discord) return
 		console.log('app', 'discord ->', session.user.discord)
 		setDiscord(session?.user?.discord)
+		setEmail(session?.user?.email)
 		setName(session?.user?.name)
-		setUser({ ...user, discord: session?.user?.discord })
+		const updateUser = { ...user, discord: session?.user?.discord }
+		setUser(updateUser)
+	}, [session])
+
+	useEffect(() => {
+		if (!session) return
+		if (!session.user.discord) return
+		console.log('app', 'discord ->', session.user.discord)
+		setDiscord(session?.user?.discord)
+		setEmail(session?.user?.email)
+		setName(session?.user?.name)
+		const updateUser = { ...user, discord: session?.user?.discord }
+		setUser(updateUser)
 	}, [session])
 
 	useEffect(() => {
@@ -74,30 +87,39 @@ export function AppProvider({ children }) {
 		if (!session.user.twitter) return
 		console.log('app', 'twitter ->', session.user.twitter)
 		setTwitter(session?.user?.twitter)
-		setUser({ ...user, twitter: session?.user?.twitter })
+		const updateUser = { ...user, discord: session?.user?.twitter_id }
+		setUser(updateUser)
 	}, [session])
 
 	useEffect(() => {
 		if (!session) return
-		if (!discord && !twitter) return
+		if (!discord && !address && !uuid) return
 		console.log('app', 'connecting', '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
 				try {
-					const _uuid = res?.data?.BattlepassBot?.identity?.uuid
-					console.log('app', 'uuid ->', _uuid)
+					const identity = res?.data?.BattlepassBot?.identity
+					console.log('app', 'identity', identity)
+					console.log('app', 'uuid ->', identity.uuid)
 
-					const _user = {
-						uuid: _uuid,
-						address: address,
-						discord: discord,
-						twitter: twitter,
+					setUuid(identity.uuid)
+					setAddress(identity.address)
+					setDiscord(identity.discord)
+					setTwitter(identity.twitter)
+					setEmail(identity.email)
+					setName(identity.name)
+
+					const updateUser = {
+						...user,
+						uuid: identity.uuid,
+						address: identity.address,
+						discord: identity.discord,
+						twitter: identity.twitter,
+						name: identity.name,
 					}
-					console.log('app', 'user ->', _user)
-
-					setUser({ ..._user })
-					setUuid(_uuid)
+					console.log('app', 'user ->', updateUser)
+					setUser(updateUser)
 				} catch (e) {
 					console.log(e)
 				}
@@ -105,7 +127,7 @@ export function AppProvider({ children }) {
 		}
 		connect()
 		setConnected(true)
-	}, [session, discord, twitter])
+	}, [session, discord, uuid, address])
 
 	//
 
