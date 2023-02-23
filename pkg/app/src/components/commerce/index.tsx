@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react'
 
-// import { Stripe, loadStripe, StripeElementsOptions, Appearance } from '@stripe/stripe-js'
+import { Stripe, loadStripe, StripeElementsOptions, Appearance } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import { CheckoutForm } from './CheckoutForm'
 import { Loader } from '../Loader'
 
-// let stripePromise: Promise<Stripe | null>
+let stripePromise: Promise<Stripe | null>
 
-// export const getStripe = () => {
-// 	if (!stripePromise) {
-// 		stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
-// 	}
-// 	return stripePromise
-// }
+export const getStripe = () => {
+	if (!stripePromise) {
+		stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+	}
+	return stripePromise
+}
 
 export const Checkout = () => {
 	const [clientSecret, setClientSecret] = useState('')
-	// const stripe = getStripe()
+	const stripe = getStripe()
 
 	useEffect(() => {
 		// Create PaymentIntent as soon as the page loads
@@ -31,21 +31,20 @@ export const Checkout = () => {
 			})
 	}, [])
 
-	// const appearance: Appearance = {
-	// 	theme: 'none',
-	// }
+	const appearance: Appearance = {
+		theme: 'none',
+	}
 
-	// const options: StripeElementsOptions = {
-	// 	clientSecret,
-	// 	appearance,
-	// }
+	const options: StripeElementsOptions = {
+		clientSecret,
+		appearance,
+	}
 
-	// return stripe && clientSecret ? (
-	// 	<Elements options={options} stripe={stripe}>
-	// 		<CheckoutForm />
-	// 	</Elements>
-	// ) : (
-	return
-	;<Loader />
-	// )
+	return stripe && clientSecret ? (
+		<Elements options={options} stripe={stripe}>
+			<CheckoutForm />
+		</Elements>
+	) : (
+		<Loader />
+	)
 }

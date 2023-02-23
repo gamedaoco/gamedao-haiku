@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Layout } from 'layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'
 
-// import { Checkout } from 'components/commerce'
+import { Checkout } from 'components/commerce'
 
 export function Page() {
 	return (
@@ -20,7 +20,9 @@ export function Page() {
 
 			<Box p={[0, 4, 6]}>
 				<Paper variant="glass">
-					<Box p={[2, 4, 6]}>{/* <Checkout /> */}</Box>
+					<Box p={[2, 4, 6]}>
+						<Checkout />
+					</Box>
 				</Paper>
 			</Box>
 		</Layout>
