@@ -38,6 +38,21 @@ type TGridItemProps = {
 export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 	// console.log( 'content', cidToURL(content.cid) )
 
+	const ClaimButton = (props) => {
+		const walletConnected = Math.round(Math.random() * 100) > 50
+		const handleClaim = () => {}
+		const handleConnect = () => {}
+		return walletConnected ? (
+			<Button size="small" fullWidth variant="pink">
+				Claim
+			</Button>
+		) : (
+			<Button fullWidth size="large" variant="outlined">
+				Connect Wallet
+			</Button>
+		)
+	}
+
 	return (
 		<Fragment>
 			<Box sx={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1000 }}>
@@ -47,8 +62,23 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 					</Typography>
 				)}
 			</Box>
-			<Box sx={{ position: 'absolute', top: 0, left: 0, zIndex: 1010 }}>
-				<CardContent>
+
+			<Stack
+				sx={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					zIndex: 1010,
+					// border: '1px solid',
+					width: '100%',
+					height: '100%',
+					p: '24px',
+				}}
+				direction="column"
+				justifyItems="space-between"
+				spacing={2}
+			>
+				<Box>
 					<Box sx={{ border: '0px solid red' }}>
 						<Box
 							p={'24px'}
@@ -70,8 +100,8 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 
 							<Box
 								sx={{
-									width: 250,
-									height: 350,
+									width: 252,
+									height: 252,
 									borderRadius: '2px',
 									background: content.cid ? cidToURL(content.cid) : null,
 									backgroundRepeat: 'no-repeat',
@@ -81,6 +111,7 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 							></Box>
 						</Box>
 					</Box>
+
 					<Typography pt={2} m={0} variant="h5">
 						{content.name}
 					</Typography>
@@ -89,11 +120,9 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 					</Typography>
 
 					<IconGroup />
-				</CardContent>
-				<Button fullWidth variant="pink">
-					Claim
-				</Button>
-			</Box>
+				</Box>
+				<ClaimButton />
+			</Stack>
 		</Fragment>
 	)
 }
@@ -166,7 +195,7 @@ export const BPRewards = ({ args }: TArgs) => {
 							<Card
 								sx={{
 									width: '348px',
-									height: '560px',
+									height: '480px',
 									border: 0,
 									backgroundColor: '#11111122',
 									cursor: 'pointer',
