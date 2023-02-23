@@ -127,6 +127,7 @@ query GetLeaderboard ( $id: String ) {
       identity {
         twitter
         discord
+		name
       }
     }
   }
@@ -176,6 +177,8 @@ mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $t
       address
       discord
 	  twitter
+	  name
+	  email
     }
   }
 }
