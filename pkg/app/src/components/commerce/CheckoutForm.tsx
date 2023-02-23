@@ -18,7 +18,7 @@ export const StripeInput = ({ component: Component, inputRef, ...props }) => {
 	return <Component onReady={(element) => (elementRef.current = element)} {...props} />
 }
 
-const protocol = process.env.NODE_ENV === 'development' ? '' : 'https'
+const protocol = process.env.NEXT_PUBLIC_ENVIRONMENT === 'Development' ? '' : 'https://'
 
 export const CheckoutForm = () => {
 	const stripe = useStripe()
