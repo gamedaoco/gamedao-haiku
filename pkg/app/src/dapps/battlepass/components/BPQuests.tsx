@@ -7,7 +7,11 @@ import { useAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 import { useAppContext } from 'providers/app/modules/context'
-import { useGetBattlepassQuestsQuery, useGetBattlepassAchievementsQuery } from 'src/queries'
+import {
+	useGetBattlepassQuestsQuery,
+	useGetBattlepassAchievementsQuery,
+	useGetAchievementsSubscription,
+} from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
@@ -15,6 +19,8 @@ import { Avatar, AvatarGroup } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
+
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -66,7 +72,7 @@ const getIconUrl = (props) => {
 }
 
 export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
-	const { uuid, linkAddress } = useAppContext()
+	const { uuid, user, linkAddress } = useAppContext()
 	const { data: session } = useSession()
 	const address = useCurrentAccountAddress()
 
@@ -122,6 +128,8 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		showAction = true
 	}
 
+	//  connect discord to gamedao
+
 	if (item.source === 'discord' && !session?.user?.discord) {
 		// console.log('Discord not logged in', session?.user?.discord)
 		actionString = `${Actions.CONNECT} ${item.source}`
@@ -129,14 +137,20 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		showAction = true
 	}
 
-	if (item.source === 'discord' && item.type === 'join' && v === 0) {
-		// console.log('not joined yet')
-		actionString = `${Actions.JOIN} ${item.source}`
-		showAction = true
+	// join a discord server
+
+	if (item.source === 'discord' && item.type === 'join') {
+		console.log('join server', item.guildId)
+		if (v === 0) {
+			actionString = `${Actions.JOIN} ${item.source} SERVER`
+			showAction = true
+		}
 	}
 
-	if (item.source === 'gamedao' && item.type === 'connect' && v === 0) {
-		// console.log('not connected yet', item)
+	// wallet connection
+
+	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address) {
+		console.log('not connected yet', item, achievement, user.address)
 		actionString = `${Actions.LINK}`
 		// TODO: nextauth needs auth flow with message signing signIn('polkadot')
 		action = () => {
@@ -218,7 +232,8 @@ export const BPQuests = ({ args }: TArgs) => {
 	const [items, setItems] = useState([])
 	const { data: quests } = useGetBattlepassQuestsQuery({ variables: where })
 	const [userAchievements, setUserAchievements] = useState([])
-	const { data: achievements } = useGetBattlepassAchievementsQuery({ variables: where })
+	// const { data: achievements } = useGetBattlepassAchievementsQuery({ variables: where })
+	const { data: achievements } = useGetAchievementsSubscription({ variables: { id: id, uuid: uuid } })
 
 	useEffect(() => {
 		if (!quests) return
@@ -229,9 +244,10 @@ export const BPQuests = ({ args }: TArgs) => {
 
 	useEffect(() => {
 		if (!achievements) return
-		const a = achievements.BattlepassBot.BattlepassProgresses
+		// const a = achievements.BattlepassBot.BattlepassProgresses
+		const a = achievements.QuestProgresses
 		if (!a) return
-		// console.log('a', a)
+		console.log('a', a)
 		setUserAchievements(a as any[])
 	}, [achievements])
 
@@ -267,43 +283,52 @@ export const BPQuests = ({ args }: TArgs) => {
 		)
 	}
 
-	return (
-		<Grid
-			container
-			// p={0}
-			// m={0}
-			// columns={{ xs: 1, md: 2 }}
-			// rowSpacing={2}
-			// columnSpacing={{ xs: 2, md: 4, lg: 6 }}
-			spacing={{ xs: 2, md: 4, lg: 6 }}
-			justifyContent={{ xs: 'center', md: 'center' }}
-		>
-			<Grid item xs={12}>
-				<Typography variant="h4">Quests</Typography>
-			</Grid>
+	const [showDialog, setShowDialog] = useState(false)
+	const handleClose = () => setShowDialog(false)
+	const handleShow = () => setShowDialog(true)
 
-			{items.length > 0 ? (
-				items.map((item, index) => {
-					if (item.source === 'twitter') return null
-					return (
-						<Grid item key={index} xs={12} md={6} lg={3}>
-							<FadeInWhenVisible>
-								<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
-									<BPQuestItem
-										item={item}
-										index={index}
-										achievement={getAchievementForQuest(item.id)}
-									/>
-								</Card>
-							</FadeInWhenVisible>
-						</Grid>
-					)
-				})
-			) : (
-				<Box>
-					<Typography variant="body1">No Quests yet, message the organization!</Typography>
-				</Box>
-			)}
-		</Grid>
+	return (
+		<Fragment>
+			<BaseDialog title="Hello" open={showDialog} onClose={handleClose}>
+				Hello
+			</BaseDialog>
+			<Grid
+				container
+				// p={0}
+				// m={0}
+				// columns={{ xs: 1, md: 2 }}
+				// rowSpacing={2}
+				// columnSpacing={{ xs: 2, md: 4, lg: 6 }}
+				spacing={{ xs: 2, md: 4, lg: 6 }}
+				justifyContent={{ xs: 'center', md: 'center' }}
+			>
+				<Grid item xs={12}>
+					<Typography variant="h4">Quests</Typography>
+				</Grid>
+
+				{items.length > 0 ? (
+					items.map((item, index) => {
+						if (item.source === 'twitter') return null
+						return (
+							<Grid item key={index} xs={12} md={6} lg={4}>
+								<FadeInWhenVisible>
+									<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
+										<BPQuestItem
+											item={item}
+											index={index}
+											achievement={getAchievementForQuest(item.id)}
+										/>
+									</Card>
+								</FadeInWhenVisible>
+							</Grid>
+						)
+					})
+				) : (
+					<Box>
+						<Typography variant="body1">No Quests yet, message the organization!</Typography>
+					</Box>
+				)}
+			</Grid>
+		</Fragment>
 	)
 }

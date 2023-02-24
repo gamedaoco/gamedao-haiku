@@ -86,6 +86,18 @@ query GetBattlepassQuests($id: String) {
   }
 }
 
+subscription GetAchievements($uuid: uuid, $id: bpchar) {
+  QuestProgresses(where: {Identity: {uuid: {_eq: $uuid}}, Quest: {Battlepass: {chainId: {_eq: $id}}}}) {
+    progress
+    questId
+    identityId
+    Quest {
+      name
+      points
+    }
+  }
+}
+
 query GetBattlepassAchievements($id: String, $uuid: String) {
   BattlepassBot {
     BattlepassProgresses(where: {battlepassChainId: $id, identityUuid: $uuid}) {
