@@ -25,8 +25,8 @@ import { Drawer, Fade } from '@mui/material'
 
 const pages = [
 	// ['Cases',''],
+	['Join Discord', '//discord.gg/rhwtr7p'],
 	['Blog', '//blog.gamedao.co'],
-	['Community', '//discord.gg/rhwtr7p'],
 	// ['Contact','mailto:hey@gamedao.co'],
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Disconnect']
