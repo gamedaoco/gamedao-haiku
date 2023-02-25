@@ -52,6 +52,7 @@ export type TQuestItem = {
 	source: string
 	type: string
 	progress?: number
+	link?: string
 }
 
 type TGridItemProps = {
@@ -140,9 +141,13 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// join a discord server
 
 	if (item.source === 'discord' && item.type === 'join') {
-		console.log('join server', item.guildId)
+		console.log('join discord', item.guildId, item.link)
 		if (v === 0) {
 			actionString = `${Actions.JOIN} ${item.source} SERVER`
+			const str = `${item.link}`
+			action = () => {
+				window.open(str, '_blank')
+			}
 			showAction = true
 		}
 	}
@@ -167,7 +172,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	return (
 		<Stack p={2} sx={{ width: ['100%'], height: 150 }} direction="column" justifyContent="space-between">
 			<Stack direction="row">
-				<Box sx={{ width: '56px' }}>
+				<Box sx={{ minWidth: '64px' }}>
 					<Icon />
 					<Typography pt={1} variant="cardMicro" sx={{ color: '#f3cb14' }}>
 						{p} BP

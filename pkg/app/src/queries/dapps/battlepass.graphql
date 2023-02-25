@@ -132,6 +132,7 @@ query GetBattlepassQuests($id: String) {
 			repeat
 			source
 			type
+			link
 		}
 	}
 }
