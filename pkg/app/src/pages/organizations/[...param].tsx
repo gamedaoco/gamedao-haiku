@@ -392,13 +392,14 @@ export function OrganisationById() {
 									<Tab label={t('button:navigation:overview')} value={'dashboard'} />
 
 									<Tab
-										label={t('button:navigation:campaigns')}
-										value={'campaigns'}
-										disabled={!organizationIdState}
-									/>
-									<Tab
 										label={t('button:navigation:proposals')}
 										value={'proposals'}
+										disabled={!organizationIdState}
+									/>
+
+									<Tab
+										label={t('button:navigation:campaigns')}
+										value={'campaigns'}
 										disabled={!organizationIdState}
 									/>
 
@@ -407,6 +408,7 @@ export function OrganisationById() {
 										value={'members'}
 										disabled={!organizationIdState}
 									/>
+
 									{/* <Tab
 										label={t('button:navigation:treasury')}
 										value={'treasury'}
