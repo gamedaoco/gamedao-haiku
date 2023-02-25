@@ -19,7 +19,7 @@ type TArgs = {
 	price?: number
 }
 
-export function useCreateBattlepassTX(orgId: string, name: string, cid: string, price: number): TransactionData {
+export function useCreateBattlepassTX(orgId: string, name: string, cid: string = '', price: number): TransactionData {
 	const { selectedApiProvider } = useNetworkContext()
 	const [txState, setTxState] = useState<TransactionData>(null)
 	const address = useCurrentAccountAddress()
@@ -31,7 +31,7 @@ export function useCreateBattlepassTX(orgId: string, name: string, cid: string, 
 		logger.log('tx', orgId, name, cid, price)
 
 		try {
-			const payload = { orgId: orgId, name: name, cid: cid || '', price: price }
+			const payload = { orgId: orgId, name: name, cid: cid, price: price }
 			logger.log('payload', payload)
 			validation.validateSync(payload)
 

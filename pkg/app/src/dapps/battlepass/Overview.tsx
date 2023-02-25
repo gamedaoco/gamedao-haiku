@@ -28,10 +28,19 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 	}
 
 	// TODO: check if already member, show/hide join/view
-
 	// TODO: add join bp extrinsic
-
 	// TODO: load battlepass image
+
+	const [cardImage, setCardImage] = useState(null)
+	useEffect(() => {
+		if (!content) return
+		const cid = content?.cid.length ? content?.cid : content?.organization.header
+		console.log('cid', cid)
+		const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
+		setCardImage(`url(${url})`)
+	}, [content?.cid])
+
+	// console.log('content', content)
 
 	return (
 		<CardContent>
@@ -41,7 +50,7 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 						height: '470px',
 						borderRadius: '2px',
 						boxShadow: `0px 20px 30px #00000033`,
-						background: `url(${parseIpfsHash(content.organization.header, config.IPFS_GATEWAY)})`,
+						background: cardImage,
 						backgroundSize: 'cover',
 						backgroundPosition: 'center center',
 					}}
@@ -55,8 +64,13 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 					<Box
 						p={'24px'}
 						sx={{
-							backdropFilter: 'blur(32px)',
-							webkitBackdropFilter: 'blur(32px)',
+							transitionDuration: '0.5s',
+							backdropFilter: `blur(${content.cid ? 2 : 16}px)`,
+							webkitBackdropFilter: `blur(${content.cid ? 2 : 16}px)`,
+							'&:hover': {
+								backdropFilter: `blur(${content.cid ? 0 : 8}px)`,
+								webkitBackdropFilter: `blur(${content.cid ? 0 : 8}px)`,
+							},
 							background: `linear-gradient(to top, #111111ff, #11111122 75% )`,
 							height: '512px',
 							borderRadius: '2px',

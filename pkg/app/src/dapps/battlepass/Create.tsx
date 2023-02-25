@@ -78,6 +78,7 @@ export type TInitialState = {
 	subscribers: number
 	price: number
 	stake: number
+	freePasses: number
 	//
 	duration: number
 	claim: number
@@ -110,6 +111,7 @@ const initialState: TInitialState = {
 	subscribers: 0,
 	price: 1500, // in cents
 	stake: 15000,
+	freePasses: 0,
 	// duration and access
 	duration: 100,
 	claim: 0,
@@ -127,8 +129,15 @@ export const Create = () => {
 	const [id, setId] = useState('')
 	const [cid, setCid] = useState(null)
 	const [stakeToEur, setStakeToEur] = useState(null)
-	const createBattlepassTX = useCreateBattlepassTX(formState.organizationId, formState.name, cid, formState.price)
+	const createBattlepassTX = useCreateBattlepassTX(
+		formState.organizationId,
+		formState.name,
+		formState.cardImg,
+		formState.price,
+	)
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
+
+	console.log('cardImg', formState.cardImg)
 
 	const [organizations, setOrganizations] = useState<any>()
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
@@ -372,27 +381,63 @@ export const Create = () => {
 						Based on existing passes the season will automatically increase.
 					`}
 					>
-						<Stack direction={{ sm: 'column', md: 'column' }} spacing={2} justifyContent="space-evenly">
-							<TextField
-								name={'name'}
-								inputProps={{ maxLength: 64 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.name}
-								label="Name"
-								variant="outlined"
-							/>
-							<TextField
-								name={'description'}
-								inputProps={{ maxLength: 512 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.description}
-								label="Description"
-								variant="outlined"
-								multiline
-								rows={4}
-							/>
+						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2}>
+							<Box>
+								<label htmlFor="card-image-upload">
+									<input
+										style={{ display: 'none' }}
+										accept="image/*"
+										id="card-image-upload"
+										type="file"
+										onChange={(e) => handleUploadImage(e, 'cardImg')}
+									/>
+									{!formState.bannerImg ? (
+										<Stack spacing={1} alignItems="center">
+											<AddPhotoAlternateOutlinedIcon
+												sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
+											/>
+											<Typography>Add Battlepass Card Image</Typography>
+										</Stack>
+									) : (
+										<Image
+											src={getImageURL(formState.cardImg)}
+											alt="card"
+											sx={{
+												borderRadius: Number(theme.shape.borderRadius),
+												height: '400px',
+												width: '300px',
+											}}
+										/>
+									)}
+								</label>
+							</Box>
+							<Stack
+								sx={{ width: '100%' }}
+								direction={{ sm: 'column', md: 'column' }}
+								spacing={2}
+								justifyContent="top"
+							>
+								<TextField
+									name={'name'}
+									inputProps={{ maxLength: 64 }}
+									fullWidth
+									onChange={handleChange}
+									value={formState.name}
+									label="Name"
+									variant="outlined"
+								/>
+								<TextField
+									name={'description'}
+									inputProps={{ maxLength: 512, height: '100%' }}
+									fullWidth
+									onChange={handleChange}
+									value={formState.description}
+									label="Description"
+									variant="outlined"
+									multiline
+									rows={4}
+								/>
+							</Stack>
 						</Stack>
 						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
 							<Button size="large" variant="outlined" fullWidth onClick={openCreateModal}>
@@ -496,11 +541,11 @@ export const Create = () => {
 						</Box>
 
 						<Box sx={{ border: '1px solid yellow' }}>
-							<label htmlFor="header-file-upload">
+							<label htmlFor="banner-file-upload">
 								<input
 									style={{ display: 'none' }}
 									accept="image/*"
-									id="header-file-upload"
+									id="banner-file-upload"
 									type="file"
 									onChange={(e) => handleUploadImage(e, 'bannerImg')}
 								/>
@@ -515,36 +560,6 @@ export const Create = () => {
 									<Image
 										src={getImageURL(formState.bannerImg)}
 										alt="banner"
-										sx={{
-											borderRadius: Number(theme.shape.borderRadius) * 20,
-											height: '250px',
-											width: 'auto',
-										}}
-									/>
-								)}
-							</label>
-						</Box>
-
-						<Box sx={{ border: '1px solid yellow' }}>
-							<label htmlFor="card-file-upload">
-								<input
-									style={{ display: 'none' }}
-									accept="image/*"
-									id="card-file-upload"
-									type="file"
-									onChange={(e) => handleUploadImage(e, 'cardImg')}
-								/>
-								{!formState.bannerImg ? (
-									<Stack spacing={1} alignItems="center">
-										<AddPhotoAlternateOutlinedIcon
-											sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
-										/>
-										<Typography>Add Card Image</Typography>
-									</Stack>
-								) : (
-									<Image
-										src={getImageURL(formState.cardImg)}
-										alt="card"
 										sx={{
 											borderRadius: Number(theme.shape.borderRadius) * 20,
 											height: '250px',
