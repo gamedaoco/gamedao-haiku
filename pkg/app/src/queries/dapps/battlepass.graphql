@@ -230,6 +230,14 @@ query GetLeaderboard ( $id: String ) {
 #   }
 # }
 
+subscription Score ( $id: bpchar, $uuid: uuid) {
+  BattlepassParticipants(where: {Battlepass: {chainId: {_eq: $id}}, Identity: {uuid: {_eq: $uuid}}}) {
+    premium
+    points
+    passChainId
+  }
+}
+
 query GetScore ( $id: String, $uuid: String ) {
 	BattlepassBot {
 		BattlepassPoints(where: { battlepassChainId: $id, identityUuid: $uuid }) {

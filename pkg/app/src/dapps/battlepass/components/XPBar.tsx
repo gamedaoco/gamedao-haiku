@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useAppContext } from 'providers/app/modules/context'
-import { useGetLevelsQuery, useGetScoreQuery } from 'src/queries'
+import { useGetLevelsQuery, useGetScoreQuery, useScoreSubscription } from 'src/queries'
 
 import { styled, useTheme } from '@mui/material/styles'
 import { Box, Button, Stack, Typography, useMediaQuery } from '@mui/material'
@@ -65,7 +65,8 @@ export const XPBar = ({ args }: TProps) => {
 	const { data: levelsData } = useGetLevelsQuery({ variables: { id: id } })
 	// TODO: replace with subscription
 	const where = { id: id, uuid: uuid }
-	const { data } = useGetScoreQuery({ variables: where })
+	// const { data } = useGetScoreQuery({ variables: where })
+	const { data } = useScoreSubscription({ variables: where })
 
 	useEffect(() => {
 		if (!data || !uuid) return
@@ -84,10 +85,11 @@ export const XPBar = ({ args }: TProps) => {
 	}, [levelsData?.BattlepassBot?.BattlepassLevels, uuid])
 
 	useEffect(() => {
-		if (!data || !data?.BattlepassBot?.BattlepassPoints.length) return
+		// if (!data || !data?.BattlepassBot?.BattlepassPoints.length) return
+		if (!data || !data?.BattlepassParticipants) return
 		// console.log('xp p', data.BattlepassBot.BattlepassPoints)
-		const _points = data?.BattlepassBot?.BattlepassPoints[0].points
-
+		// const _points = data?.BattlepassBot?.BattlepassPoints[0].points
+		const _points = data?.BattlepassParticipants?.[0].points
 		// console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
 		setDisplayLevel(Math.round(_points / 100))
@@ -95,7 +97,7 @@ export const XPBar = ({ args }: TProps) => {
 		const updateProgress = Math.round((_points / maxPoints) * 100)
 		setProgress(updateProgress)
 		// console.log('xp', 'updateProgress', updateProgress)
-	}, [data?.BattlepassBot?.BattlepassPoints, maxPoints])
+	}, [data?.BattlepassParticipants, maxPoints])
 
 	useEffect(() => {
 		if (!points) return
