@@ -79,15 +79,29 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 							// backgroundPosition: 'center center',
 						}}
 					>
-						<Box justifyContent="center">
+						<Stack
+							direction="column"
+							justifyContent="space-between"
+							sx={{
+								height: '100%',
+								WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+								filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+								backgroundBlendMode: 'multiply',
+							}}
+						>
 							<Typography variant="h6">{content.organization.name}</Typography>
-							<Typography pt={2} m={0} variant="h5">
-								{content.name}
-							</Typography>
-							<Typography variant="h6">Season {content.season}</Typography>
-							{/*<Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography>*/}
-							{/*<Typography>{(content.price===0)?`free`:`\$ ${content.price}`}</Typography>*/}
-						</Box>
+							<Stack direction="column" alignItems="center" justifyContent="end" sx={{ height: '100%' }}>
+								<Typography align="center" variant="pass1">
+									{' '}
+									{content.name}{' '}
+								</Typography>
+								<Typography variant="caption">Season {content.season}</Typography>
+								{/* <Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography> */}
+								<Typography variant="caption">
+									{content.price === 0 ? `free` : `EUR ${content.price / 100} / SEASON`}
+								</Typography>
+							</Stack>
+						</Stack>
 					</Box>
 				</Box>
 			</Link>
