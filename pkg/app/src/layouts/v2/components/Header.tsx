@@ -21,6 +21,8 @@ import {
 	RiChat1Line,
 } from 'react-icons/ri'
 
+import { RxDiscordLogo } from 'react-icons/rx'
+
 import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -122,7 +124,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 					backgroundBlendMode: 'multiply',
 				}}
 			>
-				<Stack direction="row" alignItems="center" spacing={2} minWidth="60%">
+				<Stack direction="row" alignItems="center" spacing={2} minWidth="50%">
 					<Box>
 						<Link href="/">
 							<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
@@ -148,6 +150,12 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
+					<Link href="https://discord.gg/gamedao">
+						<Button>
+							<RxDiscordLogo />
+							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}
+						</Button>
+					</Link>
 					{connected &&
 						w3Enabled &&
 						rightNav.map((item) => {
@@ -165,12 +173,10 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 							)
 						})}
 
-					{/*					<Button ref={anchorRef} onClick={openFeedback}>
-						<RiChat1Line />
-						{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
-					</Button>
-					{showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />}
-*/}
+					{/*
+					 */}
+					{/* {showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />} */}
+
 					<MenuItem>
 						<AccountSelector />
 					</MenuItem>

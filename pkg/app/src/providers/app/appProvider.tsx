@@ -73,8 +73,8 @@ export function AppProvider({ children }) {
 	useEffect(() => {
 		if (!session || connected) return
 		if (!session.user.discord) return
-		console.log('================================')
-		console.log('app', 'connect', 'discord ->', session.user.discord)
+		// console.log('================================')
+		// console.log('app', 'connect', 'discord ->', session.user.discord)
 		setDiscord(session?.user?.discord)
 		const updateUser = { ...user, discord: session?.user?.discord }
 		setUser(updateUser)
@@ -83,8 +83,8 @@ export function AppProvider({ children }) {
 	useEffect(() => {
 		if (!session || connected) return
 		if (!session.user.twitter) return
-		console.log('================================')
-		console.log('app', 'connect', 'twitter ->', session.user.twitter)
+		// console.log('================================')
+		// console.log('app', 'connect', 'twitter ->', session.user.twitter)
 		setTwitter(session?.user?.twitter)
 		const updateUser = { ...user, discord: session?.user?.twitter_id }
 		setUser(updateUser)
@@ -94,17 +94,17 @@ export function AppProvider({ children }) {
 		if (!session || connected) return
 		if (!discord && !address && !uuid) return
 
-		console.log('================================')
-		console.log('app', 'connecting', '...')
+		// console.log('================================')
+		// console.log('app', 'connecting', '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity
 
-					console.log('app', 'session', session)
-					console.log('app', 'identity', identity)
-					console.log('app', 'uuid ->', identity.uuid)
+					// console.log('app', 'session', session)
+					// console.log('app', 'identity', identity)
+					// console.log('app', 'uuid ->', identity.uuid)
 
 					setUuid(identity.uuid)
 					setAddress(identity.address)
@@ -122,7 +122,7 @@ export function AppProvider({ children }) {
 						name: identity.name,
 					}
 
-					console.log('app', 'user ->', updateUser)
+					// console.log('app', 'user ->', updateUser)
 
 					setUser(updateUser)
 				} catch (e) {
@@ -186,23 +186,23 @@ export function AppProvider({ children }) {
 		[address],
 	)
 
-	useEffect(() => {
-		if (!uuid && !discord) return
-		console.log('\n================================')
-		console.log(
-			'app',
-			'\nuuid',
-			uuid,
-			'\naddress',
-			address,
-			'\ndiscord',
-			discord,
-			'\ntwitter',
-			twitter,
-			'\nname',
-			name,
-		)
-	}, [uuid, address, discord, twitter, name])
+	// useEffect(() => {
+	// 	if (!uuid && !discord) return
+	// 	console.log('\n================================')
+	// 	console.log(
+	// 		'app',
+	// 		'\nuuid',
+	// 		uuid,
+	// 		'\naddress',
+	// 		address,
+	// 		'\ndiscord',
+	// 		discord,
+	// 		'\ntwitter',
+	// 		twitter,
+	// 		'\nname',
+	// 		name,
+	// 	)
+	// }, [uuid, address, discord, twitter, name])
 
 	//
 	//

@@ -24,10 +24,9 @@ export function Selector({ onClick }: IComponentProps) {
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
 
-	const { data: session } = useSession()
 	const { user } = useAppContext()
+	const { data: session } = useSession()
 	const address = useCurrentAccountAddress()
-
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(address)
 
@@ -38,30 +37,19 @@ export function Selector({ onClick }: IComponentProps) {
 	useEffect(() => {
 		if (!user && !address) return
 		if (address) setAddressShort(shortHash(address))
-		const userName = identity?.display_name || user.name || getNameFromAccountState(accountState) || 'anonymous'
+		const userName = identity?.display_name || session.user.name || getNameFromAccountState(accountState)
 		setDisplayName(userName)
 		if (address || user.uuid) {
 			setImageUrl(avatarImageURL(address || user.uuid))
 		}
-	}, [identity?.display_name, user?.name, accountState, address])
+	}, [identity, user, accountState, address])
 
 	const VerifiedBadge = () =>
 		identity?.display_name ? <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" color="inherit" /> : null
 
-	// const { selectedAccount } = useExtensionContext()
-	// const {
-	// 	selectedAccount: {
-	// 		account: { address },
-	// 	},
-	// } = useExtensionContext()
-
 	const handleCopyAddress = useCallback(() => {
 		navigator.clipboard.writeText(address) // .then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [address])
-
-	// if (!address) {
-	// 	return null
-	// }
 
 	if (!isMd) {
 		return (
@@ -76,9 +64,9 @@ export function Selector({ onClick }: IComponentProps) {
 			spacing={2}
 			sx={{
 				overflow: 'hidden',
-				WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
-				filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
-				backgroundBlendMode: 'multiply',
+				// WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+				// filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
+				// backgroundBlendMode: 'multiply',
 			}}
 		>
 			<Avatar sx={{ width: '48px', height: '48px' }} src={imageUrl} onClick={handleCopyAddress} />

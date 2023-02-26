@@ -15,6 +15,7 @@ import {
 	RiAwardLine,
 } from 'react-icons/ri'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+import { RxDiscordLogo } from 'react-icons/rx'
 
 import { useTheme } from '@mui/material/styles'
 import { Close } from '@mui/icons-material'
@@ -69,6 +70,11 @@ const leftNav = [
 ]
 
 const rightNav = [
+	{
+		name: 'Discord', //'button:navigation:faucet',
+		path: 'https://discord.gg/gamedao',
+		icon: <RxDiscordLogo />,
+	},
 	{
 		name: 'Loot', //'button:navigation:faucet',
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',

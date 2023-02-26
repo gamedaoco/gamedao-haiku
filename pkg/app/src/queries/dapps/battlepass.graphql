@@ -253,6 +253,14 @@ query GetScore ( $id: String, $uuid: String ) {
 	}
 }
 
+subscription Levels ( $id: bpchar ) {
+	BattlepassLevels(where: {Battlepass: {chainId: {_eq: $id}}}) {
+		level
+		name
+		points
+		totalPoints
+	}
+}
 query GetLevels ( $id: String ) {
 	BattlepassBot {
 		BattlepassLevels(where: { battlepassChainId: $id }) {

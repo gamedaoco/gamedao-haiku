@@ -141,7 +141,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// join a discord server
 
 	if (item.source === 'discord' && item.type === 'join') {
-		console.log('join discord', item.guildId, item.link)
+		// console.log('join discord', item.guildId, item.link)
 		if (v === 0) {
 			actionString = `${Actions.JOIN} ${item.source} SERVER`
 			const str = item.link.startsWith('http') ? `${item.link}` : `https://discord.gg/${item.link}`
@@ -155,7 +155,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// wallet connection
 
 	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address) {
-		console.log('not connected yet', item, achievement, user.address)
+		// console.log('not connected yet', item, achievement, user.address)
 		actionString = `${Actions.LINK}`
 		// TODO: nextauth needs auth flow with message signing signIn('polkadot')
 		action = () => {
