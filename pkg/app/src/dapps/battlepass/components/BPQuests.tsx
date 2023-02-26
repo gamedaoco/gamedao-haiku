@@ -61,14 +61,29 @@ type TGridItemProps = {
 	achievement: any
 }
 
-const getIconUrl = (props) => {
-	// find an icon for the quest
-	// const icons = ['Join', 'Follow', 'Twitter', 'Wallet']
-	// const key = icons[index % 4] // icons[ Math.round( Math.random() * 4 ) ]
+// const iconMap = {
+// 	['twitter-follow']: '/bp/icons/twitter-gold.svg',
+// 	['twitter-like']: '/bp/icons/twitter-gold.svg',
+// 	['twitter-retweet']: '/bp/icons/twitter-gold.svg',
+// 	['twitter-comment']: '/bp/icons/twitter-gold.svg',
 
-	const name = 'twitter'
-	const url = `/bp/icons/${name.toLowerCase()}-gold.svg`
+// 	['discord-join']: '/bp/icons/discord-gold.svg',
+// 	['discord-post']: '/bp/icons/discord-gold.svg',
+// 	['discord-emoji']: '/bp/icons/discord-gold.svg',
+// 	['discord-comment']: '/bp/icons/discord-gold.svg',
 
+// 	['gamedao-connect']: '/bp/icons/wallet-gold.svg',
+// 	['gamedao-identity']: '/bp/icons/identity-gold.svg',
+
+// 	['gamedao-create-org']: '/bp/icons/identity-gold.svg',
+// 	['gamedao-create-campaign']: '/bp/icons/identity-gold.svg',
+// 	['gamedao-create-proposal']: '/bp/icons/identity-gold.svg',
+// }
+
+const getIconUrl = (item) => {
+	const name = `${item.source}-${item.type}`.toLowerCase()
+	const url = `/bp/icons/${name}.svg`
+	console.log('icon', url)
 	return url
 }
 
