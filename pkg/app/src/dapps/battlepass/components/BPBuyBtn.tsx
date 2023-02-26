@@ -1,13 +1,19 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useAppContext } from 'providers/app/modules/context'
-import { useJoinBattlepassMutation } from 'src/queries'
-import { useGetBattlepassForUserQuery } from 'src/queries'
-import { Button, Typography } from '@mui/material'
 import { signIn } from 'next-auth/react'
 
+import { useAppContext } from 'providers/app/modules/context'
+import {
+	useJoinBattlepassMutation,
+	useGetBattlepassForUserQuery,
+	useBattlepassSubscription,
+	useClaimBattlepassPremiumMutation,
+	useClaimBattlepassFreemiumMutation,
+} from 'src/queries'
+
+import { Button, Typography } from '@mui/material'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
-// import { Checkout } from 'components/commerce'
+import { Checkout } from 'components/commerce'
 
 export enum MemberState {
 	VIEWER,
@@ -24,11 +30,25 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const { id } = args
 	const { uuid } = useAppContext()
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
+	const { data: freePasses } = useBattlepassSubscription({ variables: { id: id } })
 
-	const [open, setOpen] = useState(false)
-	const onClose = () => {
-		setOpen(false)
-	}
+	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
+
+	useEffect(() => {
+		if (!freePasses || !freePasses?.Battlepasses.length) return
+		const pass = freePasses?.Battlepasses[0]
+		console.log(
+			'total/available/claimed',
+			pass.freePasses,
+			pass.freePasses - pass.passesClaimed,
+			pass.passesClaimed,
+		)
+		setPasses({
+			total: pass.freePasses,
+			claimed: pass.passesClaimed,
+			free: pass.freePasses - pass.passesClaimed,
+		})
+	}, [freePasses])
 
 	const [memberState, setMemberState] = useState(MemberState.VIEWER)
 	const [enableBuy, setEnable] = useState(false)
@@ -52,6 +72,11 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		variables: { battlepass: id, uuid: uuid },
 	})
 
+	const [open, setOpen] = useState(false)
+	const onClose = () => {
+		setOpen(false)
+	}
+
 	const handleJoinBattlepass = () => {
 		console.log('join battlepass:', id, uuid)
 		const connect = async () => {
@@ -68,10 +93,30 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		connect()
 	}
 
+	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
+		variables: { battlepass: id, uuid: uuid },
+	})
+
 	const handleBuyBattlepass = () => {
-		// console.log('buy battlepass:', id, uuid)
-		setOpen(true)
-		// push('/buy')
+		// buy
+		if (passes.free === 0) {
+			setOpen(true)
+		}
+		// claim
+		else {
+			const connect = async () => {
+				const response = await claimBattlepassFreemiumMutation().then((res) => {
+					try {
+						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
+						console.log('claim', 'uuid ->', _uuid)
+						setIsPremium(true)
+					} catch (e) {
+						console.log(e)
+					}
+				})
+			}
+			connect()
+		}
 	}
 
 	if (!uuid)
@@ -81,17 +126,18 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				Connect with Discord{' '}
 			</Button>
 		)
+
 	if (!isMember)
 		return (
 			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
 				Join Battlepass
 			</Button>
 		)
-	return (
+
+	return isPremium ? null : (
 		<Fragment>
 			<Button onClick={() => handleBuyBattlepass()} variant="pink">
-				{' '}
-				Go Premium{' '}
+				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
 			</Button>
 			<BaseDialog title="Go Premium" open={open} onClose={onClose}>
 				<Typography
@@ -106,7 +152,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					Buy a Battlepass now and get premium!
 				</Typography>
 
-				{/* <Checkout /> */}
+				<Checkout />
 			</BaseDialog>
 		</Fragment>
 	)

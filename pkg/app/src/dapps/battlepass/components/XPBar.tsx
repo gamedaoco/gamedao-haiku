@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useAppContext } from 'providers/app/modules/context'
-import { useGetScoreQuery } from 'src/queries'
+import { useGetLevelsQuery, useGetScoreQuery } from 'src/queries'
 
 import { styled, useTheme } from '@mui/material/styles'
 import { Box, Button, Stack, Typography, useMediaQuery } from '@mui/material'
@@ -62,6 +62,8 @@ export const XPBar = ({ args }: TProps) => {
 	const [progress, setProgress] = useState(0)
 	const [rank, setRank] = useState(null)
 
+	const { data: levelsData } = useGetLevelsQuery({ variables: { id: id } })
+	// TODO: replace with subscription
 	const where = { id: id, uuid: uuid }
 	const { data } = useGetScoreQuery({ variables: where })
 
@@ -72,14 +74,14 @@ export const XPBar = ({ args }: TProps) => {
 	}, [data, uuid])
 
 	useEffect(() => {
-		if (!uuid || !data || !data?.BattlepassBot?.BattlepassLevels.length) return
+		if (!uuid || !data || !levelsData?.BattlepassBot?.BattlepassLevels.length) return
 		// get ranks and points from levels
-		const _levels = data?.BattlepassBot?.BattlepassLevels?.map((l) => {
+		const _levels = levelsData?.BattlepassBot?.BattlepassLevels?.map((l) => {
 			return { level: l.level || 0, points: l.points || 0, name: l.name }
 		})
 		// console.log('levels', _levels)
 		setLevels(_levels)
-	}, [data?.BattlepassBot?.BattlepassLevels, uuid])
+	}, [levelsData?.BattlepassBot?.BattlepassLevels, uuid])
 
 	useEffect(() => {
 		if (!data || !data?.BattlepassBot?.BattlepassPoints.length) return

@@ -13,8 +13,30 @@ subscription Battlepass ( $id: bpchar! ) {
 	}
 }
 
-#	get payment completed
-
+mutation ClaimBattlepassPremium (
+	$bid: String!,
+	$uid: String!,
+	$pid: String!,
+	$sid: String!,
+) {
+	BattlepassBot {
+		processPayment(
+			battlepass: $bid,
+			identityUuid: $uid,
+			paymentToken: $pid,
+			securityToken: $sid
+		) {
+			identityUuid
+		}
+	}
+}
+mutation ClaimBattlepassFreemium ( $battlepass: String!, $uuid: String!){
+	BattlepassBot {
+		joinPremium( battlepass: $battlepass, identityUuid: $uuid) {
+			uuid
+		}
+	}
+}
 
 mutation JoinBattlepass ( $battlepass: String!, $uuid: String!){
 	BattlepassBot {
@@ -175,8 +197,8 @@ query GetBattlepassForUser ($uuid: String!) {
 			members {
 				battlepass {
 					chainId
-					# premium
 				}
+				premium
 			}
 			uuid
 		}
@@ -197,11 +219,16 @@ query GetLeaderboard ( $id: String ) {
 		}
 	}
 }
+
 # subscribe to progresses so we can compute points and enable rewards...
-# subscription GetProgress ( $id: bpchar, $uuid: uuid) {
-
+# subscription GetScore ( $id: bpchar, $uuid: uuid) {
+#   Quests(where: {Battlepass: {chainId: {_eq: $id}} }) {
+#     points
+#     QuestProgresses(where: {Identity: {uuid: {_eq: $uuid}}}) {
+#       progress
+#     }
+#   }
 # }
-
 
 query GetScore ( $id: String, $uuid: String ) {
 	BattlepassBot {
@@ -209,12 +236,12 @@ query GetScore ( $id: String, $uuid: String ) {
 			points
 			quests
 		}
-		BattlepassLevels(where: { battlepassChainId: $id }) {
-			level
-			name
-			points
-			totalPoints
-		}
+		# BattlepassLevels(where: { battlepassChainId: $id }) {
+		# 	level
+		# 	name
+		# 	points
+		# 	totalPoints
+		# }
 	}
 }
 
