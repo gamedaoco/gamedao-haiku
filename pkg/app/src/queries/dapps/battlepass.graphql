@@ -1,3 +1,16 @@
+# claim reward
+
+mutation ClaimReward( $uuid: String!, $id: String!) {
+	BattlepassBot {
+		claimReward(
+			identityUuid: $uuid,
+			reward: $id
+		){
+			id
+		}
+	}
+}
+
 #
 #	purchase processing
 #	get free items
