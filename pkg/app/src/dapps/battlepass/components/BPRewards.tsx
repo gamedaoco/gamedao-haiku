@@ -1,12 +1,15 @@
 import { Fragment, useEffect, useState } from 'react'
+
+import { useGetBattlepassRewardsQuery, useGetScoreQuery, useScoreSubscription } from 'queries/index'
+import { useAppContext } from 'providers/app/modules/context'
+
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
+
 import { useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
 import { BPCard } from './BPCard'
 import { content } from '../content/rewards'
-import { useAppContext } from 'providers/app/modules/context'
-import { useGetBattlepassRewardsQuery } from 'queries/index'
 
 const IconGroupVisible = false
 
@@ -33,29 +36,44 @@ const cidToURL = (cid) => `url(${process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY}ipf
 type TGridItemProps = {
 	index?: number
 	content?: any // TODO: type content
+	score?: any
 }
 
-export const BPRewardItem = ({ index, content }: TGridItemProps) => {
-	// console.log( 'content', cidToURL(content.cid) )
+export const BPRewardItem = ({ index, content, score }: TGridItemProps) => {
+	const {
+		user: { address },
+	} = useAppContext()
 
 	const ClaimButton = (props) => {
-		const walletConnected = Math.round(Math.random() * 100) > 50
-		const handleClaim = () => {}
+		const walletConnected = address !== null || !score.premium
+		const requiredPoints = score.score >= content.points
+		const handleClaim = () => {
+			console.log('claiming reward')
+		}
+
 		const handleConnect = () => {}
-		return walletConnected ? (
-			<Button size="small" fullWidth variant="pink">
+
+		return requiredPoints && walletConnected ? (
+			<Button size="large" fullWidth variant="pink" onClick={handleClaim}>
 				Claim
 			</Button>
 		) : (
-			<Button fullWidth size="large" variant="outlined">
-				Connect Wallet
+			<Button fullWidth size="large" disabled>
+				Go Premium to Claim
 			</Button>
 		)
 	}
 
 	return (
 		<Fragment>
-			<Box sx={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1000 }}>
+			<Box
+				sx={{
+					position: 'absolute',
+					bottom: 0,
+					left: 0,
+					zIndex: 1000,
+				}}
+			>
 				{index && (
 					<Typography variant="poster" sx={{ opacity: 0.1 }}>
 						{index}
@@ -69,17 +87,17 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 					top: 0,
 					left: 0,
 					zIndex: 1010,
-					// border: '1px solid',
 					width: '100%',
 					height: '100%',
 					p: '24px',
+					// border: `1px solid blue`,
 				}}
 				direction="column"
 				justifyItems="space-between"
 				spacing={2}
 			>
 				<Box>
-					<Box sx={{ border: '0px solid red' }}>
+					<Box>
 						<Box
 							p={'24px'}
 							sx={{
@@ -92,35 +110,33 @@ export const BPRewardItem = ({ index, content }: TGridItemProps) => {
 								boxShadow: `0px 20px 30px #00000033`,
 							}}
 						>
-							{/*
-							TODO:
-							- load gltf pack
-							- map background image
-						*/}
-
 							<Box
 								sx={{
-									width: 252,
-									height: 252,
+									width: '260px',
+									height: '340px',
 									borderRadius: '2px',
 									background: content.cid ? cidToURL(content.cid) : null,
 									backgroundRepeat: 'no-repeat',
 									backgroundSize: 'cover',
 									backgroundPosition: 'center center',
+									// border: `1px solid yellow`,
 								}}
 							></Box>
 						</Box>
 					</Box>
 
-					<Typography pt={2} m={0} variant="h5">
-						{content.name}
-					</Typography>
-					<Typography variant="body1" sx={{ opacity: 0.5 }}>
-						{content.description}
-					</Typography>
+					<Stack>
+						<Typography p={1} m={0} variant="h5">
+							{content.name}
+						</Typography>
+						{/* <Typography variant="caption" sx={{ opacity: 0.5 }}>
+							{content.description}
+						</Typography> */}
+					</Stack>
 
 					<IconGroup />
 				</Box>
+
 				<ClaimButton />
 			</Stack>
 		</Fragment>
@@ -158,22 +174,33 @@ export type TRewardItem = {
 // total: 100
 
 export const BPRewards = ({ args }: TArgs) => {
-	// TODO: get content for battlepass from graph
-
 	const { id } = args
 	const { uuid } = useAppContext()
-	const where = { id: id }
-	const { data: rewards } = useGetBattlepassRewardsQuery({ variables: where })
+
+	const [score, setScore] = useState({ score: 0, premium: false })
+	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
+	useEffect(() => {
+		if (!scoreData?.BattlepassParticipants.length) return
+		console.log('scoreData', scoreData?.BattlepassParticipants[0])
+		if (scoreData.BattlepassParticipants) {
+			setScore({
+				...score,
+				score: scoreData?.BattlepassParticipants[0].points,
+				premium: scoreData?.BattlepassParticipants[0].premium,
+			})
+		}
+	}, [scoreData?.BattlepassParticipants])
+
 	const [items, setItems] = useState([])
 	const [demoMode, setDemoMode] = useState(true)
-
+	const { data: rewards } = useGetBattlepassRewardsQuery({ variables: { id: id } })
 	useEffect(() => {
 		if (!rewards) return
 		if (!rewards?.BattlepassBot?.BattlepassRewards) return
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
-		// console.log('r', res)
+		console.log('r', res)
 	}, [rewards])
 
 	return (
@@ -194,14 +221,14 @@ export const BPRewards = ({ args }: TArgs) => {
 						<BPCard>
 							<Card
 								sx={{
-									width: '348px',
-									height: '480px',
+									width: '360px',
+									height: '512px',
 									border: 0,
 									backgroundColor: '#11111122',
 									cursor: 'pointer',
 								}}
 							>
-								<BPRewardItem index={index + 1} content={item} />
+								<BPRewardItem index={index + 1} content={item} score={score} />
 							</Card>
 						</BPCard>
 					</Grid>

@@ -24,7 +24,7 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 	const joinTX = useJoinBattlePassTX(content.id)
 
 	const handleJoin = (id) => {
-		console.log('join', id)
+		// console.log('join', id)
 	}
 
 	// TODO: check if already member, show/hide join/view
@@ -35,7 +35,7 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 	useEffect(() => {
 		if (!content) return
 		const cid = content?.cid.length ? content?.cid : content?.organization.header
-		console.log('cid', cid)
+		// console.log('cid', cid)
 		const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
 		setCardImage(`url(${url})`)
 	}, [content?.cid])
