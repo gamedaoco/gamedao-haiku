@@ -30,7 +30,6 @@ export function AppProvider({ children }) {
 	const [address, setAddress] = useState(null)
 	const [discord, setDiscord] = useState(null)
 	const [twitter, setTwitter] = useState(null)
-
 	const [email, setEmail] = useState(null)
 	const [name, setName] = useState(null)
 
@@ -60,46 +59,50 @@ export function AppProvider({ children }) {
 	// 	}
 	// }, [connectedAddress, session])
 
+	// useEffect(() => {
+	// 	if (!session) return
+	// 	if (!session.user.discord) return
+	// 	console.log('app', 'discord ->', session.user.discord, session)
+	// 	setDiscord(session?.user?.discord)
+	// 	setEmail(session?.user?.email)
+	// 	setName(session?.user?.name)
+	// 	const updateUser = { ...user, discord: session?.user?.discord }
+	// 	setUser(updateUser)
+	// }, [session])
+
 	useEffect(() => {
-		if (!session) return
+		if (!session || connected) return
 		if (!session.user.discord) return
-		console.log('app', 'discord ->', session.user.discord)
+		console.log('================================')
+		console.log('app', 'connect', 'discord ->', session.user.discord)
 		setDiscord(session?.user?.discord)
-		setEmail(session?.user?.email)
-		setName(session?.user?.name)
 		const updateUser = { ...user, discord: session?.user?.discord }
 		setUser(updateUser)
 	}, [session])
 
 	useEffect(() => {
-		if (!session) return
-		if (!session.user.discord) return
-		console.log('app', 'discord ->', session.user.discord)
-		setDiscord(session?.user?.discord)
-		setEmail(session?.user?.email)
-		setName(session?.user?.name)
-		const updateUser = { ...user, discord: session?.user?.discord }
-		setUser(updateUser)
-	}, [session])
-
-	useEffect(() => {
-		if (!session) return
+		if (!session || connected) return
 		if (!session.user.twitter) return
-		console.log('app', 'twitter ->', session.user.twitter)
+		console.log('================================')
+		console.log('app', 'connect', 'twitter ->', session.user.twitter)
 		setTwitter(session?.user?.twitter)
 		const updateUser = { ...user, discord: session?.user?.twitter_id }
 		setUser(updateUser)
 	}, [session])
 
 	useEffect(() => {
-		if (!session) return
+		if (!session || connected) return
 		if (!discord && !address && !uuid) return
+
+		console.log('================================')
 		console.log('app', 'connecting', '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity
+
+					console.log('app', 'session', session)
 					console.log('app', 'identity', identity)
 					console.log('app', 'uuid ->', identity.uuid)
 
@@ -107,8 +110,8 @@ export function AppProvider({ children }) {
 					setAddress(identity.address)
 					setDiscord(identity.discord)
 					setTwitter(identity.twitter)
-					setEmail(identity.email)
-					setName(identity.name)
+					setEmail(session.user.email)
+					setName(session.user.name)
 
 					const updateUser = {
 						...user,
@@ -118,7 +121,9 @@ export function AppProvider({ children }) {
 						twitter: identity.twitter,
 						name: identity.name,
 					}
+
 					console.log('app', 'user ->', updateUser)
+
 					setUser(updateUser)
 				} catch (e) {
 					console.log(e)
@@ -133,17 +138,21 @@ export function AppProvider({ children }) {
 
 	useEffect(() => {
 		if (session) {
-			console.log('app', 'found a session', session, user)
+			// console.log('================================')
+			// console.log('app', 'found a session', session, user)
 		} else {
-			console.log('app', 'no session, rm uuid')
-			setUuid(null)
-			setUser(initialUserState)
-			setConnected(false)
+			if (connected) {
+				// console.log('================================')
+				// console.log('app', 'no session, rm uuid')
+				setUuid(null)
+				setUser(initialUserState)
+				setConnected(false)
+			}
 		}
 	}, [session])
 
 	useEffect(() => {
-		if (connected) console.log('app', `connected`, connected)
+		if (connected) console.log('\napp', `connected`, connected)
 	}, [connected])
 
 	useEffect(() => {
@@ -178,6 +187,8 @@ export function AppProvider({ children }) {
 	)
 
 	useEffect(() => {
+		if (!uuid && !discord) return
+		console.log('\n================================')
 		console.log(
 			'app',
 			'\nuuid',
