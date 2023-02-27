@@ -1,10 +1,11 @@
 # claim reward
 
-mutation ClaimReward( $uuid: String!, $id: String!) {
+mutation ClaimReward( $battlepass: String!, $uuid: String!, $reward: String!) {
 	BattlepassBot {
 		claimReward(
+			battlepass: $battlepass
 			identityUuid: $uuid,
-			reward: $id
+			reward: $reward
 		){
 			id
 		}

@@ -9,6 +9,7 @@ import {
 	useBattlepassSubscription,
 	useClaimBattlepassPremiumMutation,
 	useClaimBattlepassFreemiumMutation,
+	useScoreSubscription,
 } from 'src/queries'
 
 import { Button, Typography } from '@mui/material'
@@ -30,14 +31,25 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const { id } = args
 	const { uuid } = useAppContext()
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
-	const { data: freePasses } = useBattlepassSubscription({ variables: { id: id } })
 
 	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
+	const { data: freePasses } = useBattlepassSubscription({ variables: { id: id } })
+
+	const [isPremium, setPremium] = useState(false)
+	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
+
+	useEffect(() => {
+		if (!scoreData?.BattlepassParticipants.length) return
+		if (scoreData.BattlepassParticipants) {
+			setPremium(scoreData?.BattlepassParticipants[0].premium === true)
+		}
+	}, [scoreData?.BattlepassParticipants])
 
 	useEffect(() => {
 		if (!freePasses || !freePasses?.Battlepasses.length) return
 		const pass = freePasses?.Battlepasses[0]
 		console.log(
+			pass,
 			'total/available/claimed',
 			pass.freePasses,
 			pass.freePasses - pass.passesClaimed,
@@ -53,7 +65,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const [memberState, setMemberState] = useState(MemberState.VIEWER)
 	const [enableBuy, setEnable] = useState(false)
 	const [isMember, setIsMember] = useState(false)
-	const [isPremium, setIsPremium] = useState(false)
 
 	useEffect(() => {
 		if (!data) return
@@ -109,7 +120,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					try {
 						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
 						console.log('claim', 'uuid ->', _uuid)
-						setIsPremium(true)
 					} catch (e) {
 						console.log(e)
 					}
@@ -122,8 +132,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	if (!uuid)
 		return (
 			<Button onClick={() => signIn('discord')} variant="outlined">
-				{' '}
-				Connect with Discord{' '}
+				Connect with Discord
 			</Button>
 		)
 
@@ -134,7 +143,21 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Button>
 		)
 
-	return isPremium ? null : (
+	return isPremium ? (
+		<Fragment>
+			<Typography
+				variant="h3"
+				sx={{
+					background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+					WebkitBackgroundClip: 'text',
+					WebkitTextFillColor: 'transparent',
+					fontWeight: 800,
+				}}
+			>
+				PREMIUM
+			</Typography>
+		</Fragment>
+	) : (
 		<Fragment>
 			<Button onClick={() => handleBuyBattlepass()} variant="pink">
 				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
