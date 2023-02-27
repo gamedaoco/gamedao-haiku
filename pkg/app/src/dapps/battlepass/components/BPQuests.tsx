@@ -139,7 +139,12 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		// console.log('join discord', item.guildId, item.link)
 		if (v === 0) {
 			actionString = `${Actions.JOIN} ${item.source} SERVER`
-			const str = item.link.startsWith('http') ? `${item.link}` : `https://discord.gg/${item.link}`
+			const str = item.link
+				? item.link.startsWith('http')
+					? `${item.link}`
+					: `https://discord.gg/${item.link}`
+				: null
+
 			action = () => {
 				window.open(str, '_blank')
 			}
