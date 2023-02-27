@@ -21,8 +21,8 @@ export function NoWalletConnected() {
 					}}
 				>
 					{/* {t('label:connect_wallet')} */}
-					Connect your wallet to use GameDAO's native web3 functionality. This will allow you to take true
-					control over your personal data and collectable items.
+					Connect your wallet to use GameDAO&apos;s native web3 functionality. This will allow you to take
+					true control over your personal data and collectable items.
 				</Typography>
 				<Stack direction="row" justifyContent="space-between" spacing={4}>
 					<Button size="large" color="secondary" onClick={() => openUrl('https://docs.gamedao.co/')}>
