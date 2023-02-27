@@ -5,7 +5,7 @@ import { Button, Paper, Stack, Typography } from '@mui/material'
 
 export function NoWalletConnected() {
 	const openUrl = useCallback((url: string) => {
-		window.open(url, '_blank', 'noopener').focus()
+		window.open(url, '_blank', 'noreferrer,noopener').focus()
 	}, [])
 	const { t } = useTranslation()
 	return (
@@ -20,30 +20,30 @@ export function NoWalletConnected() {
 						fontWeight: 800,
 					}}
 				>
-					{t('label:connect_wallet')}
+					{/* {t('label:connect_wallet')} */}
+					Connect your wallet to use GameDAO's native web3 functionality. This will allow you to take true
+					control over your personal data and collectable items.
 				</Typography>
-				<Stack direction="row" justifyContent="end" spacing={4}>
-					<Button size="small" onClick={() => openUrl('https://docs.gamedao.co/')}>
+				<Stack direction="row" justifyContent="space-between" spacing={4}>
+					<Button size="large" color="secondary" onClick={() => openUrl('https://docs.gamedao.co/')}>
 						{t('button:ui:learn_more')}
 					</Button>
-					<Button
-						size="small"
-						variant="outlined"
-						onClick={() => openUrl('https://polkadot.js.org/extension/')}
-					>
-						{t('button:ui:download_extension', {
-							extension: 'Polkadot',
-						})}
-					</Button>
-					<Button
-						size="small"
-						variant="outlined"
-						onClick={() => openUrl('https://polkadot.js.org/extension/')}
-					>
-						{t('button:ui:download_extension', {
-							extension: 'Talisman',
-						})}
-					</Button>
+					<Stack direction="row" justifyContent="end" spacing={4}>
+						<Button
+							size="large"
+							variant="outlined"
+							color="secondary"
+							onClick={() => openUrl('https://polkadot.js.org/extension/')}
+						>
+							Download Polkadot Wallet
+						</Button>
+						<Button size="large" variant="pink" onClick={() => openUrl('https://www.talisman.xyz/')}>
+							Download Talisman Wallet
+							{/* {t('button:ui:download_extension', {
+								extension: 'Talisman',
+							})}*/}
+						</Button>
+					</Stack>
 				</Stack>
 			</Stack>
 		</Layout>

@@ -120,6 +120,7 @@ query GetBattlepassRewards ($id: String) {
 		BattlepassRewards(where: {battlepassChainId: $id}) {
 			available
 			cid
+			chainId
 			description
 			id
 			level
