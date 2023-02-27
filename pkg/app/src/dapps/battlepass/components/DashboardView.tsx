@@ -1,9 +1,7 @@
 import { BattlepassViews } from 'constants/battlepass'
 
 import { useTheme } from '@mui/material/styles'
-import { Box, Typography, Grid, Button, useMediaQuery } from '@mui/material'
-import ShareIcon from '@mui/icons-material/Share'
-
+import { Box, Grid, Stack, useMediaQuery } from '@mui/material'
 import { Loader } from 'components/Loader'
 
 import { XPBar } from './XPBar'
@@ -31,8 +29,14 @@ export function DashboardView({ id }: TProps) {
 					<XPBar args={{ id }} />
 				</Grid>
 				<Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
-					<ShareBtn args={{ id }} />
-					<BPBuyBtn args={{ id }} />
+					<Stack
+						direction={isMd ? 'row' : 'column'}
+						alignItems="center"
+						justifyContent={isMd ? 'end' : 'center'}
+					>
+						<ShareBtn args={{ id }} />
+						<BPBuyBtn args={{ id }} />
+					</Stack>
 				</Grid>
 				<Grid item xs={12} mt={[2, 4]}>
 					<BPQuests args={{ id }} />

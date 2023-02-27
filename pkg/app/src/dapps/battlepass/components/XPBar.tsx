@@ -9,12 +9,12 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 10,
 	[`&.${linearProgressClasses.colorPrimary}`]: {
-		borderRadius: 1,
-		backgroundColor: theme.palette.grey[700],
+		borderRadius: 3,
+		backgroundColor: '#66006622',
 		boxShadow: '0 0 10px #ee469399',
 	},
 	[`& .${linearProgressClasses.bar}`]: {
-		borderRadius: 1,
+		borderRadius: 3,
 		background: 'linear-gradient( to right, #ee4693, #ee4693 90%, #ffffff 100% )',
 		boxShadow: '0 0 10px #ee4693',
 	},
@@ -148,7 +148,19 @@ export const XPBar = ({ args }: TProps) => {
 					</Typography>
 				</Stack>
 			</Stack>
-			<BorderLinearProgress variant="determinate" value={progress} />
+			<BorderLinearProgress
+				sx={{
+					transitionDuration: '0.5s',
+					WebkitFilter: 'drop-shadow( 0 5px 10px rgba(255,0,255,0.2) )',
+					filter: 'drop-shadow( 0 1px 10px rgba(255,0,255,0.2) )',
+					'&:hover': {
+						WebkitFilter: 'drop-shadow( 0 5px 10px rgba(255,0,255,.5) )',
+						filter: 'drop-shadow( 0 1px 10px rgba(255,0,255,.5) )',
+					},
+				}}
+				variant="determinate"
+				value={progress}
+			/>
 		</Stack>
 	)
 }

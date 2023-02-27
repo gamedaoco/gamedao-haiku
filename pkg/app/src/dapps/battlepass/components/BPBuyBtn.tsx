@@ -68,7 +68,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		console.log('buy', data)
+		// console.log('buy', data)
 		if (!data?.BattlepassBot?.BattlepassIdentities) return
 
 		const memberships = data?.BattlepassBot?.BattlepassIdentities[0]?.members
@@ -148,12 +148,19 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	return isPremium ? (
 		<Fragment>
 			<Typography
-				variant="h3"
+				variant="header1"
 				sx={{
 					background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
 					WebkitBackgroundClip: 'text',
 					WebkitTextFillColor: 'transparent',
 					fontWeight: 800,
+					transitionDuration: '1s',
+					WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
+					filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
+					'&:hover': {
+						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
+						filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
+					},
 				}}
 			>
 				PREMIUM

@@ -271,7 +271,7 @@ export const BPRewards = ({ args }: TArgs) => {
 							<BPCard>
 								<Card
 									sx={{
-										width: '360px',
+										width: '348px',
 										height: '512px',
 										border: 0,
 										backgroundColor: '#11111122',
