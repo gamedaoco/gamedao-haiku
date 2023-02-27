@@ -17,8 +17,8 @@ const rows = scoreToLevelMap.map((item, index) => createData(index, item.name, i
 const initialRowState = { id: 0, name: '', level: 0, score: 0 }
 
 export function LevelEditor(id) {
-	const enableEdit = false
-	const enableDelete = false
+	const enableEdit = true
+	const enableDelete = true
 
 	const [enableSend, setEnableSend] = useState(true)
 
@@ -218,18 +218,18 @@ export function LevelEditor(id) {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			{/* {rows !== data && ( */}
-			<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-				<Button color="warning" variant="outlined" onClick={handleReset}>
-					Reset
-				</Button>
-				<Stack direction="row" spacing={2}>
-					<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
-						Save
+			{rows !== data && (
+				<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+					<Button color="warning" variant="outlined" onClick={handleReset}>
+						Reset
 					</Button>
+					<Stack direction="row" spacing={2}>
+						<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
+							Save
+						</Button>
+					</Stack>
 				</Stack>
-			</Stack>
-			{/* )} */}
+			)}
 		</Fragment>
 	)
 }
