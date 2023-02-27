@@ -109,14 +109,16 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	})
 
 	const handleBuyBattlepass = () => {
+		console.log(passes.free, id, uuid)
+
 		// buy
 		if (passes.free === 0) {
 			setOpen(true)
-		}
-		// claim
-		else {
+		} else {
 			const connect = async () => {
-				const response = await claimBattlepassFreemiumMutation().then((res) => {
+				const response = await claimBattlepassFreemiumMutation({
+					variables: { battlepass: id, uuid: uuid },
+				}).then((res) => {
 					try {
 						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
 						console.log('claim', 'uuid ->', _uuid)
@@ -172,7 +174,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 						fontWeight: 800,
 					}}
 				>
-					Buy a Battlepass now and get premium!
+					Buy a Battlepass now and go premium!
 				</Typography>
 
 				<Checkout />

@@ -47,9 +47,41 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		user: { address },
 	} = useAppContext()
 
-	const walletConnected = address !== null || !score.premium
+	const isPremium = score.premium ? true : false
+	const isConnected = address !== null
 	const requiredPoints = score.score >= content.points
-	const click = () => handleClaim(content.chainId)
+
+	const goPremium = () => {
+		console.log('goPremium')
+	}
+	const claimReward = () => handleClaim(content.chainId)
+
+	const ClaimSection = () => {
+		if (!isPremium)
+			return (
+				<Button fullWidth size="large" variant="lemon" onClick={() => goPremium()}>
+					Go Premium to Claim
+				</Button>
+			)
+		if (!isConnected)
+			return (
+				<Typography p={1} m={0} variant="h5">
+					Connect your Wallet to claim rewards!
+				</Typography>
+			)
+		if (requiredPoints)
+			return (
+				<Button size="large" fullWidth variant="pink" onClick={() => claimReward()}>
+					Claim Now!
+				</Button>
+			)
+		return (
+			<Typography p={1} m={0} variant="caption">
+				Keep grinding, player!
+			</Typography>
+		)
+	}
+
 	return (
 		<Fragment>
 			<Box
@@ -122,16 +154,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 
 					<IconGroup />
 				</Box>
-
-				{!requiredPoints && walletConnected ? (
-					<Button size="large" fullWidth variant="pink" onClick={() => handleClaim(content.chainId)}>
-						Claim
-					</Button>
-				) : (
-					<Button fullWidth size="large" disabled>
-						Go Premium to Claim
-					</Button>
-				)}
+				<ClaimSection />
 			</Stack>
 		</Fragment>
 	)
@@ -175,7 +198,7 @@ export const BPRewards = ({ args }: TArgs) => {
 	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
 	useEffect(() => {
 		if (!scoreData?.BattlepassParticipants.length) return
-		console.log('scoreData', scoreData?.BattlepassParticipants[0])
+		// console.log('scoreData', scoreData?.BattlepassParticipants[0])
 		if (scoreData.BattlepassParticipants) {
 			setScore({
 				...score,
@@ -194,27 +217,28 @@ export const BPRewards = ({ args }: TArgs) => {
 		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
-		console.log('r', res)
+		// console.log('r', res)
 	}, [rewards])
 
 	const [chainId, setChainId] = useState(null)
 	const [claimRewardMutation] = useClaimRewardMutation({
-		variables: { id: chainId, uuid: uuid },
+		variables: { battlepass: id, uuid: uuid, reward: chainId },
 	})
 
 	const [open, setOpen] = useState(false)
 	const handleClaim = useCallback(
-		(id) => {
-			if (!id) return
+		(itemId: string) => {
+			if (!itemId) return
 			setOpen(true)
+			console.log('claiming reward', itemId, 'for', uuid)
+			setChainId(itemId)
+			console.log('claim', itemId)
 
-			console.log('claiming reward', chainId, 'for', uuid)
-			setChainId(id)
-			console.log(id)
-
-			const connect = async () => {
+			const connect = async (itemId: string) => {
 				console.log('connecting')
-				const response = await claimRewardMutation().then((res) => {
+				const response = await claimRewardMutation({
+					variables: { battlepass: id, uuid: uuid, reward: itemId },
+				}).then((res) => {
 					try {
 						console.log('res', res)
 						setOpen(false)
@@ -223,9 +247,9 @@ export const BPRewards = ({ args }: TArgs) => {
 					}
 				})
 			}
-			if (chainId) connect()
+			if (id) connect(id)
 		},
-		[setChainId, chainId, uuid, claimRewardMutation],
+		[setChainId, chainId, uuid, id, claimRewardMutation],
 	)
 
 	return (
@@ -258,7 +282,7 @@ export const BPRewards = ({ args }: TArgs) => {
 										index={index + 1}
 										content={item}
 										score={score}
-										handleClaim={handleClaim}
+										handleClaim={() => handleClaim(item.chainId)}
 									/>
 								</Card>
 							</BPCard>
