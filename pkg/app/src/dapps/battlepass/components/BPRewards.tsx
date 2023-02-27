@@ -1,21 +1,22 @@
-import { Fragment, useEffect, useState } from 'react'
-
-import { useGetBattlepassRewardsQuery, useGetScoreQuery, useScoreSubscription } from 'queries/index'
+import { Fragment, useEffect, useState, useCallback } from 'react'
+import {
+	useGetBattlepassRewardsQuery,
+	useGetScoreQuery,
+	useScoreSubscription,
+	useClaimRewardMutation,
+} from 'queries/index'
 import { useAppContext } from 'providers/app/modules/context'
-
+import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
-
-import { useTheme } from '@mui/material/styles'
-import { CardContent, CardActions } from '@mui/material'
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { BPCard } from './BPCard'
 import { content } from '../content/rewards'
+import { CircularProgress } from '@mui/material'
 
 const IconGroupVisible = false
-
 const IconGroup = () => {
 	if (!IconGroupVisible) return null
-
 	return (
 		<Fragment>
 			<Box py={1} sx={{ opacity: 0.2 }}>
@@ -37,32 +38,17 @@ type TGridItemProps = {
 	index?: number
 	content?: any // TODO: type content
 	score?: any
+	handleClaim: Function
 }
 
-export const BPRewardItem = ({ index, content, score }: TGridItemProps) => {
+export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemProps) => {
+	const { uuid } = useAppContext()
 	const {
 		user: { address },
 	} = useAppContext()
 
-	const ClaimButton = (props) => {
-		const walletConnected = address !== null || !score.premium
-		const requiredPoints = score.score >= content.points
-		const handleClaim = () => {
-			console.log('claiming reward')
-		}
-
-		const handleConnect = () => {}
-
-		return requiredPoints && walletConnected ? (
-			<Button size="large" fullWidth variant="pink" onClick={handleClaim}>
-				Claim
-			</Button>
-		) : (
-			<Button fullWidth size="large" disabled>
-				Go Premium to Claim
-			</Button>
-		)
-	}
+	const walletConnected = address !== null || !score.premium
+	const requiredPoints = score.score >= content.points
 
 	return (
 		<Fragment>
@@ -137,7 +123,15 @@ export const BPRewardItem = ({ index, content, score }: TGridItemProps) => {
 					<IconGroup />
 				</Box>
 
-				<ClaimButton />
+				{requiredPoints && walletConnected ? (
+					<Button size="large" fullWidth variant="pink" onClick={handleClaim}>
+						Claim
+					</Button>
+				) : (
+					<Button fullWidth size="large" disabled>
+						Go Premium to Claim
+					</Button>
+				)}
 			</Stack>
 		</Fragment>
 	)
@@ -203,37 +197,92 @@ export const BPRewards = ({ args }: TArgs) => {
 		console.log('r', res)
 	}, [rewards])
 
-	return (
-		<Grid
-			container
-			// columns={{ xs: 1, md: 2 }}
-			rowSpacing={2}
-			columnSpacing={{ xs: 2, md: 4, lg: 6 }}
-			justifyContent={{ xs: 'center', md: 'left' }}
-		>
-			<Grid item xs={12}>
-				<Typography variant="h4"> {demoMode && `Demo `}Rewards</Typography>
-			</Grid>
+	const [chainId, setChainId] = useState(null)
+	const [claimRewardMutation] = useClaimRewardMutation({
+		variables: { id: chainId, uuid: uuid },
+	})
 
-			{items?.map((item, index) => {
-				return (
-					<Grid item key={index}>
-						<BPCard>
-							<Card
-								sx={{
-									width: '360px',
-									height: '512px',
-									border: 0,
-									backgroundColor: '#11111122',
-									cursor: 'pointer',
-								}}
-							>
-								<BPRewardItem index={index + 1} content={item} score={score} />
-							</Card>
-						</BPCard>
-					</Grid>
-				)
-			})}
-		</Grid>
+	const [open, setOpen] = useState(false)
+	const handleClaim = useCallback(
+		(id) => {
+			if (!id) return
+			setOpen(true)
+
+			console.log('claiming reward', chainId, 'for', uuid)
+			setChainId(id)
+			console.log(id)
+
+			const connect = async () => {
+				console.log('connecting')
+				const response = await claimRewardMutation().then((res) => {
+					try {
+						console.log('res', res)
+						setOpen(false)
+					} catch (e) {
+						console.log(e)
+					}
+				})
+			}
+			if (chainId) connect()
+		},
+		[setChainId, chainId, uuid, claimRewardMutation],
+	)
+
+	return (
+		<Fragment>
+			<Grid
+				container
+				// columns={{ xs: 1, md: 2 }}
+				rowSpacing={2}
+				columnSpacing={{ xs: 2, md: 4, lg: 6 }}
+				justifyContent={{ xs: 'center', md: 'left' }}
+			>
+				<Grid item xs={12}>
+					<Typography variant="h4"> {demoMode && `Demo `}Rewards</Typography>
+				</Grid>
+
+				{items?.map((item, index) => {
+					return (
+						<Grid item key={index}>
+							<BPCard>
+								<Card
+									sx={{
+										width: '360px',
+										height: '512px',
+										border: 0,
+										backgroundColor: '#11111122',
+										cursor: 'pointer',
+									}}
+								>
+									<BPRewardItem
+										index={index + 1}
+										content={item}
+										score={score}
+										handleClaim={() => handleClaim(item.chainId)}
+									/>
+								</Card>
+							</BPCard>
+						</Grid>
+					)
+				})}
+			</Grid>
+			<BaseDialog open={open} onClose={() => setOpen(false)}>
+				<Stack alignItems="center">
+					<CircularProgress color="inherit" />
+					<Typography
+						variant="h3"
+						p={4}
+						sx={{
+							background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+							WebkitBackgroundClip: 'text',
+							WebkitTextFillColor: 'transparent',
+							fontWeight: 800,
+						}}
+					>
+						Claiming the reward for you!
+					</Typography>
+				</Stack>
+			</BaseDialog>
+		</Fragment>
 	)
 }
