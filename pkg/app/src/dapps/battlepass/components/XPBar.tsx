@@ -82,10 +82,10 @@ export const XPBar = ({ args }: TProps) => {
 
 	useEffect(() => {
 		// if (!data || !data?.BattlepassBot?.BattlepassPoints.length) return
-		if (!data || !data?.BattlepassParticipants) return
+		if (!data || !data?.BattlepassParticipants.length) return
 		// console.log('xp p', data.BattlepassBot.BattlepassPoints)
 		// const _points = data?.BattlepassBot?.BattlepassPoints[0].points
-		const _points = data?.BattlepassParticipants?.[0].points
+		const _points = data?.BattlepassParticipants[0].points
 		// console.log('xp', 'updatePoints', _points)
 		setPoints(_points)
 		setDisplayLevel(Math.round(_points / 100))
