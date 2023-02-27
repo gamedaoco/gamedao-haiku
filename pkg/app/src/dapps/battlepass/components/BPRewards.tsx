@@ -49,7 +49,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 
 	const walletConnected = address !== null || !score.premium
 	const requiredPoints = score.score >= content.points
-
+	const click = () => handleClaim(content.chainId)
 	return (
 		<Fragment>
 			<Box
@@ -123,8 +123,8 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 					<IconGroup />
 				</Box>
 
-				{requiredPoints && walletConnected ? (
-					<Button size="large" fullWidth variant="pink" onClick={handleClaim}>
+				{!requiredPoints && walletConnected ? (
+					<Button size="large" fullWidth variant="pink" onClick={() => handleClaim(content.chainId)}>
 						Claim
 					</Button>
 				) : (
@@ -258,7 +258,7 @@ export const BPRewards = ({ args }: TArgs) => {
 										index={index + 1}
 										content={item}
 										score={score}
-										handleClaim={() => handleClaim(item.chainId)}
+										handleClaim={handleClaim}
 									/>
 								</Card>
 							</BPCard>
