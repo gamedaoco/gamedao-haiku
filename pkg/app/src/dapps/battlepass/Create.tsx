@@ -7,6 +7,7 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { useActiveBattlepassSubscription } from 'src/queries'
 import { useCreateBattlepassTX } from 'hooks/tx/useCreateBattlepassTX'
+import { useLinkBotTX } from 'hooks/tx/useLinkBotTX'
 import { useActivateBattlepassTX } from 'hooks/tx/useActivateBattlepassTX'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
@@ -85,6 +86,7 @@ export type TInitialState = {
 	join: number
 	//
 	acceptTerms: boolean
+	botAccount: string
 }
 
 const initialState: TInitialState = {
@@ -118,6 +120,7 @@ const initialState: TInitialState = {
 	join: 1,
 	// create
 	acceptTerms: false,
+	botAccount: null,
 }
 
 export const Create = () => {
@@ -129,6 +132,7 @@ export const Create = () => {
 	const [id, setId] = useState('')
 	const [cid, setCid] = useState(null)
 	const [stakeToEur, setStakeToEur] = useState(null)
+
 	const createBattlepassTX = useCreateBattlepassTX(
 		formState.organizationId,
 		formState.name,
@@ -136,6 +140,7 @@ export const Create = () => {
 		formState.price,
 	)
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
+	const linkBotTX = useLinkBotTX(formState.battlepassId, formState.botAccount)
 
 	console.log('cardImg', formState.cardImg)
 
@@ -245,6 +250,18 @@ export const Create = () => {
 		const active = pass?.active
 		console.log('active', active)
 		return active
+	}
+
+	const [showLinkModal, setShowLinkModal] = useState<boolean>(false)
+	const openLinkModal = () => setShowLinkModal(true)
+	const closeLinkModal = () => setShowLinkModal(false)
+	const handleOpenLinkModal = () => {
+		console.log('handleOpenLinkModal')
+		openLinkModal()
+	}
+	const handleLinkComplete = (e) => {
+		console.log('handlLinkComplete', e)
+		setShowLinkModal(false)
 	}
 
 	return (
@@ -445,6 +462,66 @@ export const Create = () => {
 							</Button>
 						</Stack>
 					</Section>
+
+					{organizations?.length > 0 && battlepasses?.length > 0 && (
+						<Section
+							direction={{ xs: 'column', md: 'column' }}
+							title="Link Bot Account"
+							description={`
+								Select Organization and Battlepass and add the PUBLIC KEY of your bot account.
+							`}
+						>
+							<FormControl sx={{ flex: 1 }}>
+								<InputLabel id="organization">Select Organization</InputLabel>
+								<Select
+									name={'organizationId'}
+									value={formState.organizationId}
+									onChange={handleChange}
+									labelId="organization"
+									label="Select Organization"
+									variant="outlined"
+								>
+									{organizations.map((item, index) => (
+										<MenuItem value={item.value} key={index}>
+											{item.label}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+
+							<FormControl sx={{ flex: 1 }}>
+								<InputLabel id="battlepass">Select Battlepass</InputLabel>
+								<Select
+									name={'battlepassId'}
+									value={formState.battlepassId}
+									onChange={handleChange}
+									labelId="battlepass"
+									label="Select Battlepass"
+									variant="outlined"
+								>
+									{battlepasses.map((item, index) => (
+										<MenuItem value={item.id} key={index}>
+											{item.name}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+							<TextField
+								name={'botAccount'}
+								inputProps={{ maxLength: 512, height: '100%' }}
+								fullWidth
+								onChange={handleChange}
+								value={formState.botAccount}
+								label="Bot Account"
+								variant="outlined"
+							/>
+							<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+								<Button size="large" variant="outlined" fullWidth onClick={openLinkModal}>
+									Link Bot Account
+								</Button>
+							</Stack>
+						</Section>
+					)}
 
 					{organizations?.length > 0 && battlepasses?.length > 0 && (
 						<Section
@@ -752,6 +829,14 @@ export const Create = () => {
 					onClose={closeActivateModal}
 					txData={activateBattlepassTX}
 					txCallback={handleActivateComplete}
+				/>
+			)}
+			{showLinkModal && (
+				<TransactionDialog
+					open={showLinkModal}
+					onClose={closeLinkModal}
+					txData={linkBotTX}
+					txCallback={handleLinkComplete}
 				/>
 			)}
 		</Fragment>
