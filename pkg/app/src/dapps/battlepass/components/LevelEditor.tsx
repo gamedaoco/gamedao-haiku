@@ -10,11 +10,17 @@ import { TextField } from '@mui/material'
 
 import { gql, useMutation } from '@apollo/client'
 
-const createData = (id: number, name: string, level: number, score: number) => {
+type TRowData = {
+	id: number
+	name: string
+	score: number
+	level: number
+}
+const createData = (id: number, name: string, level: number, score: number): TRowData => {
 	return { id, name, level, score }
 }
 const rows = scoreToLevelMap.map((item, index) => createData(index, item.name, item.level, item.score))
-const initialRowState = { id: 0, name: '', level: 0, score: 0 }
+const initialRowState: TRowData = { id: 0, name: '', level: 0, score: 0 }
 
 export function LevelEditor(id) {
 	const enableEdit = true
@@ -69,7 +75,7 @@ export function LevelEditor(id) {
 
 	useEffect(() => {
 		if (!data) return
-		const levels = data?.map((i) => ({ level: i.level, name: i.name, points: i.score }))
+		const levels = data?.map((i) => ({ level: i.level as number, name: i.name, points: i.score as number }))
 		setLevels(levels)
 	}, [data])
 
@@ -139,7 +145,7 @@ export function LevelEditor(id) {
 					<TableBody>
 						{data.map((row) => (
 							<TableRow
-								key={row.id}
+								key={`${row.id}${Math.random() * 1000}`}
 								sx={{
 									'td,th': { borderBottom: '1px dotted #ffffff33' },
 									'&:last-child td, &:last-child th': { border: 0 },
@@ -174,6 +180,7 @@ export function LevelEditor(id) {
 											variant="outlined"
 											onChange={handleChange}
 											value={rowState.level}
+											type="number"
 										/>
 									) : (
 										row.level
@@ -189,6 +196,7 @@ export function LevelEditor(id) {
 											variant="outlined"
 											onChange={handleChange}
 											value={rowState.score}
+											type="number"
 										/>
 									) : (
 										row.score
