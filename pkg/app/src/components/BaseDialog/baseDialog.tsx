@@ -15,7 +15,7 @@ export function BaseDialog({ children, title, open, fullWidth, onClose }: Compon
 	return (
 		<Dialog open={open} maxWidth="lg" fullWidth={fullWidth} onClose={onClose}>
 			<Stack component={Paper} p={4} spacing={4} elevation={5} variant="glass">
-				<Stack direction="row" justifyContent="space-between" alignItems="center">
+				<Stack direction="row" justifyContent={title ? 'space-between' : 'end'} alignItems="center">
 					{title && <Typography variant="h4">{title}</Typography>}
 					{onClose && (
 						<Button onClick={onClose}>
