@@ -54,7 +54,7 @@ export function TreasuryChart({ address, symbol = 'ZERO' }: IBalancesChart) {
 	// console.log(categories)
 
 	return !address ? null : (
-		<Card sx={{ minHeight: '100%' }} variant={'glass'}>
+		<Card sx={{ minHeight: '100%', width: '100%' }} variant={'glass'}>
 			<CardContent>
 				<Typography variant="h5">Balance History</Typography>
 
