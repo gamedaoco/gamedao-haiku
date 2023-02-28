@@ -151,6 +151,9 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 			</Stack>
 			<Box sx={{ height: 550 }}>
 				<DataGrid
+					localeText={{
+						noRowsLabel: 'Sadness. No proposals yet.',
+					}}
 					loading={loading || !data}
 					rows={rows}
 					columns={columns}
