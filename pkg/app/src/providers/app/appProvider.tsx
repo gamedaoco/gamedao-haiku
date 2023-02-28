@@ -73,8 +73,8 @@ export function AppProvider({ children }) {
 	useEffect(() => {
 		if (!session || connected) return
 		if (!session.user.discord) return
-		// console.log('================================')
-		// console.log('app', 'connect', 'discord ->', session.user.discord)
+		console.log('================================')
+		console.log('app', 'connect', 'discord ->', session.user.discord)
 		setDiscord(session?.user?.discord)
 		const updateUser = { ...user, discord: session?.user?.discord }
 		setUser(updateUser)
@@ -83,8 +83,8 @@ export function AppProvider({ children }) {
 	useEffect(() => {
 		if (!session || connected) return
 		if (!session.user.twitter) return
-		// console.log('================================')
-		// console.log('app', 'connect', 'twitter ->', session.user.twitter)
+		console.log('================================')
+		console.log('app', 'connect', 'twitter ->', session.user.twitter)
 		setTwitter(session?.user?.twitter)
 		const updateUser = { ...user, discord: session?.user?.twitter_id }
 		setUser(updateUser)
@@ -92,26 +92,26 @@ export function AppProvider({ children }) {
 
 	useEffect(() => {
 		if (!session || connected) return
-		if (!discord && !address && !uuid) return
+		if (!discord && !address) return
 
-		// console.log('================================')
-		// console.log('app', 'connecting', '...')
+		console.log('================================')
+		console.log('app', 'connecting', '...')
 
 		const connect = async () => {
 			const response = await connectIdentityMutation().then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity
 
-					// console.log('app', 'session', session)
-					// console.log('app', 'identity', identity)
-					// console.log('app', 'uuid ->', identity.uuid)
+					console.log('app', 'session', session)
+					console.log('app', 'identity', identity)
+					console.log('app', 'uuid ->', identity?.uuid)
 
-					setUuid(identity.uuid)
-					setAddress(identity.address)
-					setDiscord(identity.discord)
-					setTwitter(identity.twitter)
-					setEmail(session.user.email)
-					setName(session.user.name)
+					if (identity.uuid) setUuid(identity.uuid)
+					if (identity.address) setAddress(identity.address)
+					if (identity.discord) setDiscord(identity.discord)
+					if (identity.twitter) setTwitter(identity.twitter)
+					if (session.user.email) setEmail(session.user.email)
+					if (session.user.name) setName(session.user.name)
 
 					const updateUser = {
 						...user,
@@ -122,7 +122,7 @@ export function AppProvider({ children }) {
 						name: identity.name,
 					}
 
-					// console.log('app', 'user ->', updateUser)
+					console.log('app', 'user ->', updateUser)
 
 					setUser(updateUser)
 				} catch (e) {
@@ -138,12 +138,12 @@ export function AppProvider({ children }) {
 
 	useEffect(() => {
 		if (session) {
-			// console.log('================================')
-			// console.log('app', 'found a session', session, user)
+			console.log('================================')
+			console.log('app', 'found a session', session, user)
 		} else {
 			if (connected) {
-				// console.log('================================')
-				// console.log('app', 'no session, rm uuid')
+				console.log('================================')
+				console.log('app', 'no session, rm uuid')
 				setUuid(null)
 				setUser(initialUserState)
 				setConnected(false)

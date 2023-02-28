@@ -68,7 +68,7 @@
     "loglevel": "^1.8.0",
     "loglevel-plugin-prefix": "^0.8.4",
     "md5": "^2.3.0",
-    "micro": "^9.4.0",
+    "micro": "^10.0.1",
     "micro-cors": "^0.1.1",
     "moment": "^2.29.4",
     "mongodb": "^4.13.0",
