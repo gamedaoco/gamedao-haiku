@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from 'react'
+import { useAppContext } from 'providers/app/modules/context'
 
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -53,6 +54,7 @@ interface ComponentProps {
 export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
 	const theme = useTheme()
+	const { user } = useAppContext()
 
 	useEffect(() => {
 		if (open && supportedWallets?.length === 1) {
@@ -93,6 +95,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						}
 						name={'Discord'}
 						connectable={true}
+						connected={user.discord ? true : false}
 						callback={() => signIn('discord')}
 					/>
 				</Fragment>
