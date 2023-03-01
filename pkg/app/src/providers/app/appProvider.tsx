@@ -35,12 +35,6 @@ export function AppProvider({ children }) {
 	const context = initialContextState
 
 	const { data: session } = useSession()
-	// const [uuid, setUuid] = useState(null)
-	// const [address, setAddress] = useState(null)
-	// const [discord, setDiscord] = useState(null)
-	// const [twitter, setTwitter] = useState(null)
-	// const [email, setEmail] = useState(null)
-	// const [name, setName] = useState(null)
 	const [user, setUser] = useState<TAppUser>(initialUserState)
 	const [connected, setConnected] = useState(false)
 
@@ -50,21 +44,8 @@ export function AppProvider({ children }) {
 			address: user.address,
 			discord: user.discord,
 			twitter: user.twitter,
-			// uuid: uuid,
-			// address: address,
-			// discord: discord,
-			// twitter: twitter,
 		},
 	})
-
-	// useEffect(() => {
-	// 	if (!connectedAddress) return
-	// 	console.log('app', 'account ->', connectedAddress, user.address)
-	// 	if(!address) {
-	// 		setAddress(connectedAddress)
-	// 		setUser({ ...user, address: connectedAddress })
-	// 	}
-	// }, [connectedAddress, session])
 
 	useEffect(() => {
 		if (!session || connected) return
@@ -102,25 +83,14 @@ export function AppProvider({ children }) {
 
 		const connect = async () => {
 			console.log('================================================================')
-			console.log('app', 'connecting', '...')
+			console.log('app', 'fetching id', '...')
 
 			const response = await connectIdentityMutation({
 				variables: { discord: user.discord, name: user.name, email: user.email || null },
 			}).then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity
-
-					// console.log('app', 'session', session)
-					console.log('app', 'identity', identity)
-					// console.log('app', 'uuid ->', identity?.uuid)
-
-					// if (identity.uuid) setUuid(identity.uuid)
-					// if (identity.address) setAddress(identity.address)
-					// if (identity.discord) setDiscord(identity.discord)
-					// if (identity.twitter) setTwitter(identity.twitter)
-					// if (session.user.email) setEmail(session.user.email)
-					// if (session.user.name) setName(session.user.name)
-
+					console.log('app', 'identity', '->', identity)
 					const updateUser = {
 						...user,
 						uuid: identity.uuid,
@@ -128,10 +98,9 @@ export function AppProvider({ children }) {
 						discord: identity.discord,
 						twitter: identity.twitter,
 						name: identity.name,
+						email: identity.email,
 					}
-
 					console.log('app', 'user ->', updateUser)
-
 					setUser(updateUser)
 				} catch (e) {
 					console.log(e)
@@ -143,25 +112,18 @@ export function AppProvider({ children }) {
 	}, [session, user])
 	// }, [session, discord, uuid, address])
 
-	//
-
-	useEffect(() => {
-		console.log('================================================================')
-		if (session) {
-			// console.log('app', 'found a session', session, user)
-		} else {
-			if (connected) {
-				console.log('app', 'disconnected, rm uuid')
-				// setUuid(null)
-				setUser(initialUserState)
-				setConnected(false)
-			}
-		}
-	}, [session, connected])
-
 	useEffect(() => {
 		if (connected) console.log('\napp', `connected`, connected)
 	}, [connected])
+
+	useEffect(() => {
+		if (connected && !session) {
+			console.log('================================================================')
+			console.log('app', 'disconnected, rm uuid')
+			setUser(initialUserState)
+			setConnected(false)
+		}
+	}, [session, connected])
 
 	useEffect(() => {
 		if (!user.address) return
@@ -211,6 +173,8 @@ export function AppProvider({ children }) {
 			user.twitter,
 			'\nname',
 			user.name,
+			'\nemail',
+			user.email,
 		)
 	}, [user])
 
