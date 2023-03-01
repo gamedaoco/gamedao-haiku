@@ -30,6 +30,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const { push } = useRouter()
 	const { id } = args
 	const { uuid, user } = useAppContext()
+
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
 
 	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
@@ -70,16 +71,14 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		// console.log('buy', data)
 		if (!data?.BattlepassBot?.BattlepassIdentities) return
-
 		const memberships = data?.BattlepassBot?.BattlepassIdentities[0]?.members
 			?.map((b) => b.battlepass.chainId)
 			.filter((i) => i === id)[0]
 		const member = memberships === id
-		// console.log('memberships', memberships, member)
+		console.log('memberships', memberships, member)
 		setIsMember(member)
-	}, [data?.BattlepassBot?.BattlepassIdentities])
+	}, [data, data?.BattlepassBot])
 
 	const [joinBattlepassMutation] = useJoinBattlepassMutation({
 		variables: { battlepass: id, uuid: uuid },
@@ -110,6 +109,29 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		variables: { battlepass: id, uuid: uuid },
 	})
 
+	const handleClaimBattlepass = () => {
+		console.log(passes.free, id, uuid)
+
+		// buy
+		if (passes.free === 0) {
+			setOpen(true)
+		} else {
+			const connect = async () => {
+				const response = await claimBattlepassFreemiumMutation({
+					variables: { battlepass: id, uuid: uuid },
+				}).then((res) => {
+					try {
+						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
+						console.log('buy', 'claim', 'uuid ->', _uuid)
+					} catch (e) {
+						console.log(e)
+					}
+				})
+			}
+			connect()
+		}
+	}
+
 	const handleBuyBattlepass = () => {
 		console.log(passes.free, id, uuid)
 
@@ -133,21 +155,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		}
 	}
 
-	if (!uuid)
-		return (
-			<Button onClick={() => signIn('discord')} variant="outlined">
-				Connect with Discord
-			</Button>
-		)
-
-	if (!isMember)
-		return (
-			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
-				Join Battlepass
-			</Button>
-		)
-
-	if (isPremium)
+	if (uuid && isPremium)
 		return (
 			<Fragment>
 				<Typography
@@ -171,32 +179,51 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (!isPremium && user.address && passes.free > 0)
-		<Fragment>
-			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={passes.free < 1}>
-				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
-			</Button>
-		</Fragment>
+	if (uuid && !isPremium && passes.free > 0)
+		return (
+			<Fragment>
+				<Button onClick={() => handleClaimBattlepass()} variant="pink" disabled={passes.free < 1}>
+					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
+				</Button>
+			</Fragment>
+		)
 
-	return (
-		<Fragment>
-			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={claiming}>
-				Buy Now
+	if (uuid && isMember && !isPremium)
+		return (
+			<Fragment>
+				<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={claiming}>
+					Buy Now
+				</Button>
+				<BaseDialog title="Go Premium" open={open} onClose={onClose}>
+					<Typography
+						variant="h3"
+						sx={{
+							background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+							WebkitBackgroundClip: 'text',
+							WebkitTextFillColor: 'transparent',
+							fontWeight: 800,
+						}}
+					>
+						Buy a Battlepass now and go premium!
+					</Typography>
+					<Checkout />
+				</BaseDialog>
+			</Fragment>
+		)
+
+	if (!isMember)
+		return (
+			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
+				Join Battlepass
 			</Button>
-			<BaseDialog title="Go Premium" open={open} onClose={onClose}>
-				<Typography
-					variant="h3"
-					sx={{
-						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
-						WebkitBackgroundClip: 'text',
-						WebkitTextFillColor: 'transparent',
-						fontWeight: 800,
-					}}
-				>
-					Buy a Battlepass now and go premium!
-				</Typography>
-				<Checkout />
-			</BaseDialog>
-		</Fragment>
-	)
+		)
+
+	if (!uuid)
+		return (
+			<Button onClick={() => signIn('discord')} variant="outlined">
+				Connect with Discord
+			</Button>
+		)
+
+	return null
 }

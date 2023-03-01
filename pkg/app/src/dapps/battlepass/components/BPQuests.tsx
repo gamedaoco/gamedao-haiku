@@ -313,7 +313,9 @@ export const BPQuests = ({ args }: TArgs) => {
 
 				{items.length > 0 ? (
 					items.map((item, index) => {
+						// TODO: rm when twitter is fixed
 						if (item.source === 'twitter') return null
+
 						return (
 							<Grid item key={index} xs={12} md={6} lg={4}>
 								<FadeInWhenVisible>
@@ -329,9 +331,11 @@ export const BPQuests = ({ args }: TArgs) => {
 						)
 					})
 				) : (
-					<Box>
-						<Typography variant="body1">No Quests yet, message the organization!</Typography>
-					</Box>
+					<Grid item xs={12}>
+						<Typography align="center" variant="body1">
+							No Quests yet, message the organization!
+						</Typography>
+					</Grid>
 				)}
 			</Grid>
 		</Fragment>

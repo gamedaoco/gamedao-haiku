@@ -34,8 +34,8 @@ export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 	const [cardImage, setCardImage] = useState(null)
 	useEffect(() => {
 		if (!content) return
-		const cid = content?.cid.length ? content?.cid : content?.organization.header
-		console.log('cid', cid)
+		const cid = content?.cid ? content?.cid : content?.organization.header
+		// console.log('cid', content)
 		const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
 		setCardImage(`url(${url})`)
 	}, [content?.cid])
