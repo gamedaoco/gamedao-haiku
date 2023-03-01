@@ -7,7 +7,7 @@ mutation ClaimReward( $battlepass: String!, $uuid: String!, $reward: String!) {
 			identityUuid: $uuid,
 			reward: $reward
 		){
-			id
+			rewardId
 		}
 	}
 }
@@ -298,15 +298,15 @@ query GetIdentityByDiscord ( $discord: String ) {
 	}
 }
 
-mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $twitter: String ) {
+mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $twitter: String, $name: String, $email: String) {
 	BattlepassBot {
-		identity( uuid: $uuid, address: $address, discord: $discord, twitter: $twitter ) {
+		identity( uuid: $uuid, address: $address, discord: $discord, twitter: $twitter, name: $name, email: $email ) {
 			uuid
 			address
 			discord
-		twitter
-		name
-		email
+			twitter
+			name
+			email
 		}
 	}
 }

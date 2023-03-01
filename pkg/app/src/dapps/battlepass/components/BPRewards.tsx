@@ -55,7 +55,6 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		console.log('goPremium')
 	}
 	const claimReward = () => handleClaim(content.chainId)
-
 	const ClaimSection = () => {
 		if (!isPremium)
 			return (
@@ -145,7 +144,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 
 					<Stack>
 						<Typography p={1} m={0} variant="h5">
-							{content.name}
+							{content.name} {content.points}
 						</Typography>
 						{/* <Typography variant="caption" sx={{ opacity: 0.5 }}>
 							{content.description}
@@ -232,22 +231,21 @@ export const BPRewards = ({ args }: TArgs) => {
 			setOpen(true)
 			console.log('claiming reward', itemId, 'for', uuid)
 			setChainId(itemId)
-			console.log('claim', itemId)
-
-			const connect = async (itemId: string) => {
-				console.log('connecting')
+			// console.log('claim', itemId)
+			const connect = async () => {
+				// console.log('connecting', itemId, id, uuid)
 				const response = await claimRewardMutation({
 					variables: { battlepass: id, uuid: uuid, reward: itemId },
 				}).then((res) => {
 					try {
 						console.log('res', res)
 						setOpen(false)
-					} catch (e) {
-						console.log(e)
+					} catch (err) {
+						console.log(err)
 					}
 				})
 			}
-			if (id) connect(id)
+			connect()
 		},
 		[setChainId, chainId, uuid, id, claimRewardMutation],
 	)
@@ -264,31 +262,32 @@ export const BPRewards = ({ args }: TArgs) => {
 				<Grid item xs={12}>
 					<Typography variant="h4"> {demoMode && `Demo `}Rewards</Typography>
 				</Grid>
-
-				{items?.map((item, index) => {
-					return (
-						<Grid item key={index}>
-							<BPCard>
-								<Card
-									sx={{
-										width: '348px',
-										height: '512px',
-										border: 0,
-										backgroundColor: '#11111122',
-										cursor: 'pointer',
-									}}
-								>
-									<BPRewardItem
-										index={index + 1}
-										content={item}
-										score={score}
-										handleClaim={() => handleClaim(item.chainId)}
-									/>
-								</Card>
-							</BPCard>
-						</Grid>
-					)
-				})}
+				{items
+					?.sort((a, b) => (a.points < b.points ? -1 : a.points > b.points ? 1 : 0))
+					.map((item, index) => {
+						return (
+							<Grid item key={index}>
+								<BPCard>
+									<Card
+										sx={{
+											width: '348px',
+											height: '512px',
+											border: 0,
+											backgroundColor: '#11111122',
+											cursor: 'pointer',
+										}}
+									>
+										<BPRewardItem
+											index={index + 1}
+											content={item}
+											score={score}
+											handleClaim={() => handleClaim(item.chainId)}
+										/>
+									</Card>
+								</BPCard>
+							</Grid>
+						)
+					})}
 			</Grid>
 			<BaseDialog open={open} onClose={() => setOpen(false)}>
 				<Stack alignItems="center">

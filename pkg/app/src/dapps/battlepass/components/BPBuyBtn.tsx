@@ -38,6 +38,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const [isPremium, setPremium] = useState(false)
 	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
 
+	const [claiming, setClaiming] = useState(false)
+
 	useEffect(() => {
 		if (!scoreData?.BattlepassParticipants.length) return
 		if (scoreData.BattlepassParticipants) {
@@ -48,13 +50,13 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	useEffect(() => {
 		if (!freePasses || !freePasses?.Battlepasses.length) return
 		const pass = freePasses?.Battlepasses[0]
-		console.log(
-			pass,
-			'total/available/claimed',
-			pass.freePasses,
-			pass.freePasses - pass.passesClaimed,
-			pass.passesClaimed,
-		)
+		// console.log('buy',
+		// 	pass,
+		// 	'total/available/claimed',
+		// 	pass.freePasses,
+		// 	pass.freePasses - pass.passesClaimed,
+		// 	pass.passesClaimed,
+		// )
 		setPasses({
 			total: pass.freePasses,
 			claimed: pass.passesClaimed,
@@ -89,12 +91,12 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 
 	const handleJoinBattlepass = () => {
-		console.log('join battlepass:', id, uuid)
+		console.log('buy', 'join battlepass:', id, uuid)
 		const connect = async () => {
 			const response = await joinBattlepassMutation().then((res) => {
 				try {
 					const _uuid = res?.data?.BattlepassBot?.join?.uuid
-					console.log('join', 'uuid ->', _uuid)
+					console.log('buy', 'join', 'uuid ->', _uuid)
 					setIsMember(true)
 				} catch (e) {
 					console.log(e)
@@ -121,7 +123,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				}).then((res) => {
 					try {
 						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
-						console.log('claim', 'uuid ->', _uuid)
+						console.log('buy', 'claim', 'uuid ->', _uuid)
 					} catch (e) {
 						console.log(e)
 					}
@@ -168,7 +170,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		</Fragment>
 	) : (
 		<Fragment>
-			<Button onClick={() => handleBuyBattlepass()} variant="pink">
+			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={claiming}>
 				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
 			</Button>
 			<BaseDialog title="Go Premium" open={open} onClose={onClose}>

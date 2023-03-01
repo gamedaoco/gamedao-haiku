@@ -305,7 +305,7 @@ export const BPQuests = ({ args }: TArgs) => {
 				// rowSpacing={2}
 				// columnSpacing={{ xs: 2, md: 4, lg: 6 }}
 				spacing={{ xs: 2, md: 4, lg: 6 }}
-				justifyContent={{ xs: 'center', md: 'center' }}
+				justifyContent={{ xs: 'center', md: 'start' }}
 			>
 				<Grid item xs={12}>
 					<Typography variant="h4">Quests</Typography>

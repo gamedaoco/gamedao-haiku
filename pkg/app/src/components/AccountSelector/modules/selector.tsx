@@ -37,7 +37,10 @@ export function Selector({ onClick }: IComponentProps) {
 	useEffect(() => {
 		if (!user && !address) return
 		if (address) setAddressShort(shortHash(address))
-		const userName = identity?.display_name || session?.user?.name || getNameFromAccountState(accountState)
+
+		const userName =
+			identity?.display_name || user?.name /*session?.user?.name*/ || getNameFromAccountState(accountState)
+
 		setDisplayName(userName)
 		if (address || user?.uuid) {
 			setImageUrl(avatarImageURL(address || user?.uuid))
