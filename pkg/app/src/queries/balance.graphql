@@ -7,3 +7,22 @@ subscription BalanceByAddress($address: String!) {
         reserved
     }
 }
+
+subscription HistoricalBalance(
+  $address: String!,
+  $symbol: String
+) {
+  historical_balance(
+    where: {
+      address: {_eq: $address},
+      currency_id: {_eq: $symbol}
+    }
+  ) {
+    block
+    free
+    reserved
+    total
+    currency_id
+  }
+}
+

@@ -1,23 +1,75 @@
 {
-  "button": {
-    "navigation": {
-      "governance": "Governance",
-      "campaigns": "Campaigns",
-      "organisations": "Organisations",
-      "dashboard": "Dashboard",
-      "wallet": "Wallet",
-      "documentation": "Documentation",
-      "faucet": "Faucet",
-      "overview": "Overview",
-      "my_organisations": "My Organisations",
-      "my_campaigns": "My Campaigns",
-      "my_collectables": "My Collectables",
-      "identity": "Identity",
-      "set_on_chain_identity": "Set On-Chain Identity",
-      "proposals": "Proposals",
-      "members": "Members",
-      "treasury": "Treasury",
-      "settings": "Settings"
+    "button": {
+        "navigation": {
+            "governance": "Governance",
+            "campaigns": "Campaigns",
+            "organisations": "Organisations",
+            "dashboard": "Dashboard",
+            "wallet": "Wallet",
+            "documentation": "Documentation",
+            "faucet": "Faucet",
+            "overview": "Overview",
+            "my_organisations": "Organisations",
+            "my_campaigns": "Campaigns",
+            "my_collectables": "Collectables",
+            "identity": "Identity",
+            "set_on_chain_identity": "Set On-Chain Identity",
+            "proposals": "Proposals",
+            "members": "Members",
+            "treasury": "Treasury",
+            "settings": "Settings"
+        },
+        "ui": {
+            "no_continue": "No, continue",
+            "yes_cancel_now": "Yes, cancel now",
+            "yes_delete_now": "Yes, delete now",
+            "learn_more": "Learn More",
+            "download_extension": "Download {{extension}} Extension.",
+            "connect_wallet": "Connect wallet",
+            "submit": "Submit",
+            "select": "Select",
+            "create": "Create",
+            "load_more": "Load More",
+            "clear": "Clear",
+            "back_to_all_campaigns": "back to all campaigns",
+            "transaction": {
+                "get_token_a_b": "Get {{tokenA}} / {{tokenB}} here",
+                "get_token": "Get {{token}} here",
+                "transaction_fee": "Transaction Fee",
+                "your_balance": "Your current balance",
+                "description_toggle": "What is this used for?"
+            },
+            "create_campaign": "Create your first Campaign",
+            "explore_campaigns": "Explore Campaigns",
+            "contribute_now": "Contribute now",
+            "contribute_again": "Contribute again",
+            "join_organization": "Join Organisation",
+            "leave_organization": "Leave Organisation",
+            "create_proposal": "Create Proposal",
+            "show_more": "Show More",
+            "show_less": "Show Less",
+            "vote": "Vote",
+            "save_draft": "Save Draft",
+            "delete_draft": "Delete Draft",
+            "go_to_members": "Go to Members",
+            "go_to_treasury": "Go to Treasury",
+            "view_all": "View All",
+            "change_settings": "Change Settings"
+        },
+        "form": {
+            "publish_now": "Publish Now",
+            "next_step": "Next step",
+            "save_organization": "Save Organisation",
+            "back": "Back",
+            "cancel": "Cancel",
+            "proposal": {
+                "create": "Create Proposal"
+            },
+            "identity": {
+                "clear": "Clear Identity",
+                "submit": "Sign and Submit"
+            }
+        }
     },
     "ui": {
       "no_continue": "No, continue",
@@ -56,21 +108,6 @@
       "view_all": "View All",
       "change_settings": "Change Settings"
     },
-    "form": {
-      "publish_now": "Publish Now",
-      "next_step": "Next step",
-      "save_organization": "Save Organisation",
-      "back": "Back",
-      "cancel": "Cancel",
-      "proposal": {
-        "create": "Create Proposal"
-      },
-      "identity": {
-        "clear": "Clear Identity",
-        "submit": "Sign and Submit"
-      }
-    }
-  },
   "label": {
     "are_you_sure": "Are you sure?",
     "progress_will_be_lost": "All your progress will be lost. Maybe save it as a draft and continue later",
@@ -84,6 +121,7 @@
     "backers": "Backers:",
     "funded": "Funded:",
     "amount": "Amount",
+    "required": "This field is required",
     "campaign_status": {
       "created": "Created",
       "active": "Active",
@@ -101,6 +139,8 @@
     "total_deposit": "Total Deposit",
     "website": "Website",
     "campaigns": "Campaigns",
+    "campaign": "Campaign",
+    "campaign_name": "Campaign name",
     "treasury": "Treasury",
     "search_campaigns": "Search Campaigns",
     "update_photo": "Update photo",
@@ -141,7 +181,10 @@
     "currency": "Currency",
     "source": "Source",
     "type": "Type",
-    "hash": "Hash"
+    "hash": "Hash",
+    "proposal_description": "Proposal Description",
+    "proposal_name": "Proposal Name",
+    "send_to_address": "Send to address"
   },
   "transactions": {
     "createOrganization": {
@@ -166,7 +209,7 @@
       "title": "Submit Vote"
     },
     "addMember": {
-      "title": "Join Organisation",
+      "title": "Join",
       "action_subtitle": "Free",
       "description": "This organisation does not require any fee."
     },
@@ -174,11 +217,11 @@
       "title": "Leave Organisation"
     },
     "setIdentity": {
-      "title": "Set ZERO chain identity",
+      "title": "Claim Identity",
       "action_subtitle": "Deposit",
       "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an on-chain identity."
-    },
+      "description": "You need to deposit a small collateral to claim your on-chain identity."
+  },
     "clearIdentity": {
       "title": "Clear ZERO chain identity"
     },
@@ -190,18 +233,18 @@
   },
   "page": {
     "account": {
-      "title": "My Account",
+      "title": "Account",
       "achievements": {
-        "title": "My Achievements",
-        "description": "Level up by using our protocols and collaborating with the community."
+          "title": "Achievements",
+          "description": "Level up by using our protocols and collaborating with the community."
       },
       "balances": {
-        "title": "My Balances",
-        "token": "Token",
-        "transferable": "Transferable",
-        "locked": "Locked",
-        "reserved": "Reserved",
-        "total": "Total"
+          "title": "Balances",
+          "token": "Token",
+          "transferable": "Transferable",
+          "locked": "Locked",
+          "reserved": "Reserved",
+          "total": "Total"
       },
       "organisations": {
         "title": "Organisations",
@@ -302,8 +345,12 @@
             "title": "No Fee",
             "description": "Members can join the organization without a fee"
           },
-          "radio_button_fee": {
-            "title": "Fee",
+          "radio_button_reserve_fee": {
+            "title": "Reserve fee ",
+            "description": "The fee will be locked when a member joins this organisation and unlocked when leaving"
+          },
+          "radio_button_transfer_fee": {
+            "title": "Transfer fee",
             "description": "When members join the organization they pay a fee"
           },
           "fee_amount": "Fee amount",
@@ -407,6 +454,46 @@
       "overview": "OVERVIEW",
       "reasons_to_invest": "REASON TO INVEST",
       "contribute_to_campaign_help_text": "Your funds will be reserved until the campaign is funded or expired."
+    },
+    "proposals": {
+      "settings": {
+        "voting_type": "What type of voting do you need?",
+        "simple_majority": {
+          "title": "Simple majority",
+          "description": "The option with more votes than all other options together wins"
+        },
+        "relative_majority": {
+          "title": "Relative majority",
+          "description": "The option with the most single votes wins"
+        },
+        "absolute_majority": {
+          "title": "Absolute majority",
+          "description": "The option with votes of more than 50% of eligible member votes wins"
+        },
+        "min_deposit": "A min deposit of {{quantity}} {{coin}} is needed",
+        "proposal_type": "What type of proposal do you need?",
+        "create_general_proposal": {
+          "title": "General Proposal  ( Deposit {{quantity}} {{coin}} )",
+          "description": "'Select for all types of proposals except withdrawal'"
+        },
+        "create_withdraw_proposal": {
+          "title": "Withdrawal Proposal  ( Deposit {{quantity}} {{coin}} )",
+          "description": "'Select to withdrawal from a campaign'"
+        },
+        "create_spending_proposal": {
+          "title": "Spending Proposal  ( Deposit {{quantity}} {{coin}} )",
+          "description": "'Select for all types of proposals except withdrawal'"
+        },
+        "create_title": "What’s the title of your proposal?",
+        "create_description": "Add a description to your proposal",
+        "no_campaign": "No campaign available"
+      },
+      "forms": {
+        "validations": {
+          "proposal_name": "Proposal name is required",
+          "proposal_description": "Proposal description is required"
+        }
+      }
     }
   },
   "notification": {

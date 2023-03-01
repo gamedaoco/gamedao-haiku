@@ -60,10 +60,11 @@ export function useSaveCampaignDraft(orgId: string): CampaignDraft {
 				token_symbol: currencySymbol,
 				organization: data?.organization?.[0] ?? {},
 				state: 'Draft',
-				campaign_metadata: {
-					name: tmpData?.name,
-					header: tmpData?.bannerCid,
-				},
+				// TODO: metadata has moved?
+				// campaign_metadata: {
+				// 	name: tmpData?.name,
+				// 	header: tmpData?.bannerCid,
+				// },
 				target: fromUnit(tmpData.target, systemProperties?.tokenDecimals?.[tmpData.currencyId] ?? 18),
 				expiry: endBlock,
 			} as Campaign

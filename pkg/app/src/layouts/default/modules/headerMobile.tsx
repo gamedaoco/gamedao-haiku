@@ -15,6 +15,7 @@ import { NavbarMobile } from 'layouts/default/modules/navbarMobile'
 import { AccountSelector, FontIcons } from 'src/components'
 import { NavLink } from 'components/NavLink/navLink'
 
+// eslint-disable-next-line @next/next/no-img-element
 const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
 
 interface ComponentProps {

@@ -1,7 +1,8 @@
 import { TMPCampaign } from 'src/@types/campaign'
 import type { TMPOrganisation } from 'src/@types/organisation'
 import { TMPProposal } from 'src/@types/proposal'
-import { Environment } from 'src/queries'
+
+import type { Environment } from 'src/queries'
 
 export const ENVIRONMENT: Environment = (
 	process.env.NEXT_PUBLIC_ENVIRONMENT || 'Development'
@@ -23,6 +24,9 @@ export const defaultValuesTmpOrganisation: TMPOrganisation = {
 	description: '',
 	metaDataCID: '',
 	deposit: 5,
+	url: '',
+	location: '',
+	tags: [],
 }
 
 export const defaultValuesTMPProposal: TMPProposal = {

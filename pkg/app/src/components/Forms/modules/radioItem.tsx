@@ -41,7 +41,7 @@ export function RadioItem({ icon, title, description, value, selectedValue, onCh
 			<Radio checked={selectedValue === value} value={value} disabled={disabled} />
 			{icon}
 			<Stack spacing={1} width="100%">
-				<Typography variant="subtitle2">{title}</Typography>
+				<Typography variant="body1">{title}</Typography>
 				{description && <Typography variant="body2">{description}</Typography>}
 			</Stack>
 		</Stack>

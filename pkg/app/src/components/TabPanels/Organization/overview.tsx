@@ -1,23 +1,24 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 
-import { ChevronRight, Verified } from '@mui/icons-material'
-import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
-import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
-import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
 import { Organization } from 'src/queries'
 import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
 import { getProposalTypesCount } from 'src/utils/proposalUtils'
+import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
+
+import { useTheme } from '@mui/material/styles'
+import { ChevronRight, Verified } from '@mui/icons-material'
+import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
+import { Box, Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { DonutChart } from 'components/Charts/donutChart'
 import { AreaChartContainer } from 'components/TabPanels/Organization/modules/areaChartContainer'
 import { RadialChartContainer } from 'components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
 
+import { TreasuryChart } from 'dapps/organization/components/TreasuryChart'
 interface ComponentProps {
 	organization: Organization
 	organizationId: string
@@ -40,9 +41,11 @@ export function Overview({
 	addMemberTx,
 }: ComponentProps) {
 	const theme = useTheme()
-	const removeMemberTx = useRemoveMemberTransaction(organizationId)
 	const { t } = useTranslation()
 	const { push } = useRouter()
+
+	const removeMemberTx = useRemoveMemberTransaction(organizationId)
+
 	const series1 = [
 		{
 			name: 'Members',
@@ -81,11 +84,8 @@ export function Overview({
 	}, [setIsReadMore])
 
 	const description = useMemo(
-		() =>
-			isReadMore
-				? organization?.organization_metadata?.description?.slice(0, 150)
-				: organization?.organization_metadata?.description,
-		[isReadMore, organization?.organization_metadata?.description],
+		() => (isReadMore ? organization?.description?.slice(0, 150) : organization?.description),
+		[isReadMore, organization?.description],
 	)
 
 	const access_model = useMemo(
@@ -115,7 +115,7 @@ export function Overview({
 				title: t('page:organisations:organisation_rules:reserved_fee:title'),
 				text: t('page:organisations:organisation_rules:reserved_fee:text'),
 			}
-		} else if (organization?.fee_model === 'Transferred') {
+		} else if (organization?.fee_model === 'Transfer') {
 			return {
 				title: t('page:organisations:organisation_rules:transferred_fee:title'),
 				text: t('page:organisations:organisation_rules:transferred_fee:text'),
@@ -154,45 +154,76 @@ export function Overview({
 	)
 
 	useEffect(() => {
-		organization?.organization_metadata?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
-	}, [organization?.organization_metadata?.description?.length])
+		organization?.description?.length > 250 ? setShowButton(true) : setShowButton(false)
+	}, [organization?.description?.length])
+
+	const [orgData, setOrgData] = useState({
+		location: '',
+		url: '',
+		tags: [],
+	})
+
+	useEffect(() => {
+		if (!organization) return
+		setOrgData({
+			...orgData,
+			location: organization?.location,
+			url: organization?.url,
+			tags: organization?.tags,
+		})
+	}, [organization])
 
 	return (
-		<>
+		<Fragment>
 			<Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2, md: 4 }}>
 				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }} variant={'glass'}>
 					<Stack minHeight={307} spacing={1} padding={3}>
 						<Typography variant="h6" pb="1rem">
 							{t('page:organisations:about')}
 						</Typography>
+
 						<Typography variant="body2">
 							{description}
 							{showButton && (
 								<span style={{ cursor: 'pointer' }} onClick={toggleReadMore} className="read-or-hide">
-									{isReadMore ? '...Read More' : ' Show Less'}
+									{isReadMore ? ' More...' : ' Less...'}
 								</span>
 							)}
 						</Typography>
 
-						<Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} pt="1rem">
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<Label />
-								<Typography variant="body2">Game, RPG, Desktop</Typography>
-							</Stack>
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<FmdGood />
-								<Typography variant="body2">USA</Typography>
-							</Stack>
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<VpnKey />
-								<Typography variant="body2">{access_model.status} </Typography>
-							</Stack>
-							<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-								<InsertLink />
-								<Typography variant="body2">
-									{organization?.organization_metadata?.website || 'gamedao.co'}
-								</Typography>
-							</Stack>
+						<Stack
+							direction={{ xs: 'column', sm: 'row' }}
+							spacing={3}
+							pt="1rem"
+							justifyContent="start"
+							alignItems="top"
+						>
+							{orgData.tags.length > 0 && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<Label />{' '}
+									<Box>
+										{orgData.tags.map((item, index) => {
+											return <Chip size="small" sx={{ mr: 1, mb: 1 }} key={index} label={item} />
+										})}
+									</Box>
+								</Stack>
+							)}
+
+							{organization?.location && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<FmdGood /> <Typography variant="body2">{orgData.location}</Typography>
+								</Stack>
+							)}
+							{access_model.status && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<VpnKey /> <Typography variant="body2">{access_model.status} </Typography>
+								</Stack>
+							)}
+							{organization?.url && (
+								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+									<InsertLink /> <Typography variant="body2"> {orgData.url} </Typography>
+								</Stack>
+							)}
 						</Stack>
 
 						<Stack
@@ -205,26 +236,16 @@ export function Overview({
 								<>
 									<Button
 										variant="outlined"
-										size="large"
+										size="small"
 										disabled={!addMemberTx}
 										onClick={handleOpenTxModal}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
-										{t('button:ui:join_organization')}
-									</Button>
-								</>
-							)}
-
-							{(isMember || isAdmin) && (
-								<>
-									<Button
-										variant="outlined"
-										size="large"
-										disabled={!removeMemberTx}
-										onClick={() => handleChangeRoute('settings')}
-										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
-									>
-										{t('button:ui:change_settings')}
+										{organization?.access_model === 'Open' ? (
+											t('button:ui:join_organization')
+										) : (
+											<>Apply</>
+										)}
 									</Button>
 								</>
 							)}
@@ -239,9 +260,9 @@ export function Overview({
 						<Stack direction="column" spacing={3} pt="1rem">
 							{organization?.fee_model && (
 								<Stack direction="row" spacing={1}>
-									<Verified sx={{ width: 33, height: 31.5, color: theme.palette.success.main }} />
+									<Verified sx={{ width: '16px', color: theme.palette.success.main }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{feeModel.title}</Typography>
+										<Typography variant="body2">{feeModel.title}</Typography>
 										<Typography variant="body2">{feeModel.text}</Typography>
 									</Stack>
 								</Stack>
@@ -249,9 +270,9 @@ export function Overview({
 
 							{organization?.access_model && (
 								<Stack direction="row" spacing={1}>
-									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
+									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{access_model.title}</Typography>
+										<Typography variant="body2">{access_model.title}</Typography>
 										<Typography variant="body2">{access_model.text}</Typography>
 									</Stack>
 								</Stack>
@@ -259,9 +280,9 @@ export function Overview({
 
 							{(organization?.member_limit || organization?.member_limit === 0) && (
 								<Stack direction="row" spacing={1}>
-									<Verified sx={{ width: '33px', height: '31.5px', color: '#A4D808' }} />
+									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="subtitle1">{memberLimit.title}</Typography>
+										<Typography variant="body2">{memberLimit.title}</Typography>
 										<Typography variant="body2">{memberLimit.text}</Typography>
 									</Stack>
 								</Stack>
@@ -271,7 +292,7 @@ export function Overview({
 				</Paper>
 			</Stack>
 
-			<Stack
+			{/* <Stack
 				direction={{ xs: 'column', sm: 'row' }}
 				alignItems={{ xs: 'center', sm: 'flex-start' }}
 				spacing={2.5}
@@ -308,6 +329,17 @@ export function Overview({
 						categories={categories}
 					/>
 				</Stack>
+			</Stack> */}
+
+			<Stack
+				direction={{ xs: 'column', sm: 'row' }}
+				alignItems={{ xs: 'center', sm: 'flex-start' }}
+				spacing={2.5}
+				pt="2.5rem"
+			>
+				<TreasuryChart address={organization?.treasury} symbol="ZERO" />
+				<TreasuryChart address={organization?.treasury} symbol="GAME" />
+				<TreasuryChart address={organization?.treasury} symbol="PLAY" />
 			</Stack>
 
 			<Stack
@@ -367,6 +399,6 @@ export function Overview({
 				txData={isMember ? removeMemberTx : addMemberTx}
 				txCallback={handleCloseTxModal}
 			/>
-		</>
+		</Fragment>
 	)
 }

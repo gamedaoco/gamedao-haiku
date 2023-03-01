@@ -66,7 +66,9 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 						) : (
 							<Box p={[2, 4]} style={{ width: '100%', minHeight: `calc( 100vh - 90px )` }}>
 								<Box component="main" sx={{ flexGrow: 1 }}>
-									<Container maxWidth="xl">{children}</Container>
+									<Container disableGutters maxWidth="xl">
+										{children}
+									</Container>
 								</Box>
 							</Box>
 						)}

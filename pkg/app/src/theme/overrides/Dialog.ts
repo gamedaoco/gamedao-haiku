@@ -1,6 +1,10 @@
 import { Theme } from '@mui/material/styles'
 
-// ----------------------------------------------------------------------
+declare module '@mui/material/Dialog' {
+	interface DialogPropsVariantOverrides {
+		glass: true
+	}
+}
 
 export default function Dialog(theme: Theme) {
 	return {
@@ -30,6 +34,17 @@ export default function Dialog(theme: Theme) {
 					width: '100%',
 				},
 			},
+			variants: [
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+						border: `1px solid #ffffff11`,
+					},
+				},
+			],
 		},
 		MuiDialogTitle: {
 			styleOverrides: {

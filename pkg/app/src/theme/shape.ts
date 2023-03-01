@@ -5,14 +5,16 @@ declare module '@mui/system' {
 		borderRadiusSm: number | string
 		borderRadiusMd: number | string
 		borderRadiusLg: number | string
+		borderRadiusXl: number | string
 	}
 }
 
 const shape = {
-	borderRadius: 1,
-	borderRadiusSm: '0.5rem',
-	borderRadiusMd: '1rem',
-	borderRadiusLg: '2rem',
+	borderRadius: 0,
+	borderRadiusSm: '1px',
+	borderRadiusMd: '1px',
+	borderRadiusLg: '1px',
+	borderRadiusXl: '1rem',
 }
 
 export default shape

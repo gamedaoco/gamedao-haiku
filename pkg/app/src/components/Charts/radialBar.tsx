@@ -33,7 +33,7 @@ export function RadialChart({ colors, series, labels, height = 160, plotOptions 
 			radialBar: {
 				dataLabels: {
 					name: {
-						show: false,
+						show: true,
 					},
 					value: {
 						offsetY: 5,

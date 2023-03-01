@@ -3,6 +3,8 @@ import { hexToU8a, isHex } from '@polkadot/util'
 import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 import type { AccountState } from 'src/@types/extension'
 
+export const shortHash = (str: string): string => (str.length < 11 ? str : `${str.slice(0, 4)}...${str.slice(-4)}`)
+
 export function shortAccountAddress(account: InjectedAccount): string {
 	const address = account?.address ?? ''
 	return `${address.slice(0, 4)}...${address.slice(-4)}`

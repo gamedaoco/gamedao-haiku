@@ -1,7 +1,6 @@
-import { ReactNode } from 'react'
-
-import { CircularProgress, Stack, Typography } from '@mui/material'
+import { ReactNode, Fragment } from 'react'
 import { useAppContext } from 'providers/app/modules/context'
+import { Loader } from 'components/Loader'
 
 interface ComponentProps {
 	children: ReactNode
@@ -9,15 +8,5 @@ interface ComponentProps {
 
 export function ReadyProvider({ children }: ComponentProps) {
 	const appContext = useAppContext()
-
-	if (!appContext.ready) {
-		return (
-			<Stack width="100vw" height="100vh" justifyContent="center" alignItems="center" spacing={6}>
-				<Typography variant={'h5'}>Loading...</Typography>
-				<CircularProgress />
-			</Stack>
-		)
-	}
-
-	return <>{children}</>
+	return !appContext.ready ? <Loader /> : <Fragment>{children}</Fragment>
 }

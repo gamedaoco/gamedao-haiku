@@ -32,7 +32,7 @@ export async function SignAndNotify(
 		}
 
 		const [error] = await to(
-			tx.signAndSend(accountState.account.address, { signer: accountState.signer }, (result) => {
+			tx.signAndSend(accountState.account.address, { nonce: -1, signer: accountState.signer }, (result) => {
 				if (result.status.isFinalized) {
 					let hasError = false
 					result.events
@@ -82,7 +82,7 @@ export async function SignAndNotify(
 		)
 
 		if (error) {
-			console.log('Transaction failing with', error)
+			console.log('Transaction failed:', error)
 			createErrorNotification(error.message)
 			if (callback) callback(false, null)
 			return reject()

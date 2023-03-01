@@ -7,9 +7,10 @@ import { createWarningNotification } from 'src/utils/notificationUtils'
 interface ComponentProps {
 	imageSrc: string
 	name: string
-	url: string
+	url?: string
 	connectable: boolean
 	callback?: () => void
+	mobile?: boolean
 }
 
 export function WalletCard({ imageSrc, name, url, connectable, callback }: ComponentProps) {
@@ -19,7 +20,7 @@ export function WalletCard({ imageSrc, name, url, connectable, callback }: Compo
 		}
 
 		if (url) {
-			return window.open(url, '_blank', 'noopener')?.focus()
+			return window.open(url, '_self', 'noopener')?.focus()
 		}
 
 		return createWarningNotification('No logic is implemented for this function')

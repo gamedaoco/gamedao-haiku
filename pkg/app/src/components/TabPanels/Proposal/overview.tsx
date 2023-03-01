@@ -117,8 +117,8 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 
 				return {
 					id: proposal.id,
-					name: proposal.proposal_metadata?.name ?? '',
-					description: proposal.proposal_metadata?.description ?? '',
+					name: proposal.name ?? '',
+					description: proposal.description ?? '',
 					status: proposal.state,
 					timeLeft,
 					hasStarted,
@@ -151,6 +151,9 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 			</Stack>
 			<Box sx={{ height: 550 }}>
 				<DataGrid
+					localeText={{
+						noRowsLabel: 'Sadness. No proposals yet.',
+					}}
 					loading={loading || !data}
 					rows={rows}
 					columns={columns}
@@ -165,7 +168,7 @@ export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
 						setPageSize(pageSize)
 					}}
 					onRowClick={({ row: { id } }) => {
-						push(`/organisations/${organizationId}/proposals/${id}`)
+						push(`/organizations/${organizationId}/proposals/${id}`)
 					}}
 				/>
 			</Box>

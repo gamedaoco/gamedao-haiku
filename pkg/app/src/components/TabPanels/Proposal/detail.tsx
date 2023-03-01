@@ -1,6 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
 import { useRouter } from 'next/router'
+import moment from 'moment'
+
+import { useTranslation } from 'react-i18next'
+import { useVoteTransaction } from 'hooks/tx/useVoteTransaction'
+import { useBlockNumber } from 'hooks/useBlockNumber'
+import { useDisplayValues } from 'hooks/useDisplayValues'
+import { useSystemProperties } from 'hooks/useSystemProperties'
+import { Organization, useProposalByIdSubscription } from 'src/queries'
+import { formatAddressShort } from 'src/utils/address'
+import { isProposalActive } from 'src/utils/proposalUtils'
+import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { ArrowBack, HowToVote, Launch } from '@mui/icons-material'
 import {
@@ -17,21 +27,12 @@ import {
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
-import { useVoteTransaction } from 'hooks/tx/useVoteTransaction'
-import { useBlockNumber } from 'hooks/useBlockNumber'
-import { useDisplayValues } from 'hooks/useDisplayValues'
-import { useSystemProperties } from 'hooks/useSystemProperties'
-import moment from 'moment'
-import { useTranslation } from 'react-i18next'
-import { NavLink } from 'src/components'
-import { Organization, useProposalByIdSubscription } from 'src/queries'
-import { formatAddressShort } from 'src/utils/address'
-import { isProposalActive } from 'src/utils/proposalUtils'
-import { getConnectedEndpoint } from 'src/constants/endpoints'
 
+import { NavLink } from 'src/components'
 import { RadioItem } from 'components/Forms/modules/radioItem'
 import { ProposalStatusChip } from 'components/ProposalStatusChip/ProposalStatusChip'
 import { TransactionDialog } from 'components/TransactionDialog/transactionDialog'
+import { Loader } from 'components/Loader'
 
 import { useApiProvider } from 'hooks/useApiProvider'
 
@@ -124,11 +125,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	}, [setShowMore])
 
 	const buttonContent = useMemo(
-		() =>
-			showMore
-				? proposal?.proposal_metadata?.description ?? ''
-				: `${proposal?.proposal_metadata?.description?.slice(0, 700)}` ?? '',
-		[proposal?.proposal_metadata?.description, showMore],
+		() => (showMore ? proposal?.description ?? '' : `${proposal?.description?.slice(0, 700)}` ?? ''),
+		[proposal?.description, showMore],
 	)
 
 	useEffect(() => {
@@ -180,12 +178,14 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 	}, [displayValues, proposal])
 
 	useEffect(() => {
-		if (proposal?.proposal_metadata?.description?.length > 350) {
+		if (proposal?.description?.length > 350) {
 			setShowButton(true)
 		}
-	}, [proposal?.proposal_metadata?.description?.length])
+	}, [proposal?.description?.length])
 
-	return !loading && proposal ? (
+	if (loading || !proposal) return <Loader />
+
+	return (
 		<Stack direction="row" flexWrap="wrap" gap={3}>
 			{/* Metadata */}
 			<Stack component={Paper} flexBasis={{ xs: '100%', lg: '70%' }} padding={4} spacing={2}>
@@ -193,7 +193,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 					<IconButton onClick={goBack}>
 						<ArrowBack />
 					</IconButton>
-					<Typography variant="h6">Proposal {proposal.proposal_metadata?.name ?? proposalId}</Typography>
+					<Typography variant="h6">Proposal {proposal.name ?? proposalId}</Typography>
 				</Stack>
 
 				<Stack paddingTop={2} paddingLeft={4} paddingRight={4} spacing={2} gap={2}>
@@ -205,7 +205,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 								<Typography sx={{ wordBreak: 'break-all' }} variant="body1">
 									{t('label:proposal_by', {
 										creator:
-											proposal.identity.display_name ?? formatAddressShort(proposal.identity.id),
+											proposal.creator_identity.display_name ??
+											formatAddressShort(proposal.creator_identity.id),
 									})}
 								</Typography>
 							</Stack>
@@ -239,7 +240,8 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						</Box>
 						<Box>
 							<Typography variant="body2">
-								{proposal.identity.display_name ?? formatAddressShort(proposal.identity.id, 6)}
+								{proposal.creator_identity.display_name ??
+									formatAddressShort(proposal.creator_identity.id, 6)}
 							</Typography>
 						</Box>
 
@@ -375,14 +377,5 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 				txCallback={handleCloseTxModal}
 			/>
 		</Stack>
-	) : (
-		<CircularProgress
-			sx={{
-				position: 'absolute',
-				top: '50%',
-				left: '50%',
-				transform: 'translate(-50%, -50%)',
-			}}
-		/>
 	)
 }

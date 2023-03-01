@@ -47,14 +47,14 @@ interface ComponentProps {
 const leftNav = [
 	{
 		name: 'Guilds', // 'button:navigation:organisations',
-		path: '/organisations',
+		path: '/organizations',
 		icon: <RiShieldLine />,
 	},
-	{
-		name: 'Quests', //'button:navigation:quests',
-		path: '/quests',
-		icon: <RiTreasureMapLine />,
-	},
+	// {
+	// 	name: 'Quests', //'button:navigation:quests',
+	// 	path: '/quests',
+	// 	icon: <RiTreasureMapLine />,
+	// },
 	// {
 	// 	name: 'Achievements', //'button:navigation:quests',
 	// 	path: '/achievements',

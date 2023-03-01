@@ -28,6 +28,7 @@ export async function initializeApis(configs: ApiProviderConfig[]): Promise<ApiP
 				provider: new WsProvider(config.wsProviderUrl),
 				types: JSON.parse(config.types),
 				throwOnConnect: true,
+				noInitWarn: true,
 			})
 			await apiProvider.isReady
 

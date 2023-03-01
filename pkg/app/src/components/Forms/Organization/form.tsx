@@ -17,12 +17,14 @@ interface ComponentProps {
 }
 
 export function Form({ currentStep, setStep }: ComponentProps) {
-	const tmpOrgState = useTmpOrganisationState()
 	const { push } = useRouter()
 	const { t } = useTranslation()
+
+	const tmpOrgState = useTmpOrganisationState()
+
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0) {
-			push('/organisations')
+			push('/organizations')
 		}
 	}, [currentStep])
 
@@ -38,8 +40,8 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		}
 
 		if (currentStep == 2) {
-			createInfoNotification('Organisation was saved')
-			push('/organisations/dashboard')
+			createInfoNotification('Organization was saved')
+			push('/organizations/dashboard')
 		}
 	}, [currentStep, setStep, push])
 
@@ -62,6 +64,8 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		return null
 	}
 
+	// console.log('xxxxxxxxxxxxxxxxxxxxxxxx\n\n','tmpOrgState',tmpOrgState)
+
 	return (
 		<>
 			{currentStep === 0 && (
@@ -70,6 +74,13 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 					setName={tmpOrgState.setName}
 					description={tmpOrgState.description}
 					setDescription={tmpOrgState.setDescription}
+					// ridiculous, but needs to stay like this till refactor
+					url={tmpOrgState.url}
+					setUrl={tmpOrgState.setUrl}
+					location={tmpOrgState.location}
+					setLocation={tmpOrgState.setLocation}
+					tags={tmpOrgState.tags}
+					setTags={tmpOrgState.setTags}
 				/>
 			)}
 			{currentStep === 1 && <Controller selected={tmpOrgState.type} setSelected={tmpOrgState.setType} />}

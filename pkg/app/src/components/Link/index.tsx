@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Component = ({ href, target, children }: Props) => {
-	return target ? (
+	return target || href.startsWith('http') ? (
 		<a target="_blank" rel="noreferrer" href={href}>
 			{children}
 		</a>

@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import { CssBaseline } from '@mui/material'
 import { ThemeProvider as MuiThemeProvider, Theme, ThemeOptions, createTheme } from '@mui/material/styles'
 import 'react-quill/dist/quill.snow.css'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, Zoom } from 'react-toastify'
 import { ThemePrimaryColor } from 'src/components'
 import { useSettings } from 'src/hooks/useSettings'
 import breakpoints from 'src/theme/breakpoints'
@@ -52,7 +52,7 @@ export function ThemeProvider({ children }: ComponentProps) {
 
 	return (
 		<MuiThemeProvider theme={themeState}>
-			<ToastContainer theme={themeMode} />
+			<ToastContainer position="bottom-right" autoClose={1000} theme={themeMode} transition={Zoom} />
 			<CssBaseline />
 			<ThemePrimaryColor>{children}</ThemePrimaryColor>
 			<GlobalStyles />

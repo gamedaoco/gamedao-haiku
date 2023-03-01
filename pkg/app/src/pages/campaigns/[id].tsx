@@ -8,7 +8,7 @@ import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'hooks/useSystemProperties'
 import { useCampaignByIdSubscription } from 'src/queries'
 
-import { Layout } from 'layouts/default/layout'
+import { Layout } from 'layouts/v2'
 import { NavLink } from 'src/components'
 
 import { ArrowBack } from '@mui/icons-material'
@@ -66,9 +66,9 @@ export function CampaignById() {
 			<Box sx={{ p: '2rem' }}>
 				<CampaignDetailsContent
 					id={campaignId}
-					title={data?.campaign?.[0]?.campaign_metadata?.name}
-					header={data?.campaign[0]?.campaign_metadata?.header}
-					description={data?.campaign?.[0]?.campaign_metadata?.description}
+					title={data?.campaign?.[0]?.name}
+					header={data?.campaign[0]?.header}
+					description={data?.campaign?.[0]?.description}
 					backers={data?.campaign?.[0]?.campaign_contributors_aggregate?.aggregate?.count ?? 0}
 					target={data?.campaign?.[0]?.target}
 					contributed={
@@ -108,7 +108,7 @@ export function CampaignById() {
 									variant="body1"
 									mt="1rem"
 									dangerouslySetInnerHTML={{
-										__html: filterXSS(data?.campaign?.[0]?.campaign_metadata?.markdown ?? ''),
+										__html: filterXSS(data?.campaign?.[0]?.markdown ?? ''),
 									}}
 								></Typography>
 							</Box>

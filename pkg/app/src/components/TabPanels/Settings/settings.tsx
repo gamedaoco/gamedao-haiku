@@ -19,9 +19,9 @@ export function SettingsOverview({ organizationState }: ComponentProps) {
 			<Grid item xs={12}>
 				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<About
-						description={organizationState?.organization_metadata?.description}
-						header={organizationState?.organization_metadata?.header}
-						logo={organizationState?.organization_metadata?.logo}
+						description={organizationState?.description}
+						header={organizationState?.header}
+						logo={organizationState?.logo}
 					/>
 				</Stack>
 			</Grid>
