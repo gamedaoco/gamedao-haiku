@@ -29,7 +29,7 @@ type TProps = { args: TArgs }
 export const BPBuyBtn = ({ args }: TProps) => {
 	const { push } = useRouter()
 	const { id } = args
-	const { uuid } = useAppContext()
+	const { uuid, user } = useAppContext()
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
 
 	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
@@ -147,31 +147,41 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Button>
 		)
 
-	return isPremium ? (
+	if (isPremium)
+		return (
+			<Fragment>
+				<Typography
+					variant="header1"
+					sx={{
+						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+						WebkitBackgroundClip: 'text',
+						WebkitTextFillColor: 'transparent',
+						fontWeight: 800,
+						transitionDuration: '1s',
+						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
+						filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
+						'&:hover': {
+							WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
+							filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
+						},
+					}}
+				>
+					PREMIUM
+				</Typography>
+			</Fragment>
+		)
+
+	if (!isPremium && user.address && passes.free > 0)
 		<Fragment>
-			<Typography
-				variant="header1"
-				sx={{
-					background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
-					WebkitBackgroundClip: 'text',
-					WebkitTextFillColor: 'transparent',
-					fontWeight: 800,
-					transitionDuration: '1s',
-					WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
-					filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
-					'&:hover': {
-						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
-						filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
-					},
-				}}
-			>
-				PREMIUM
-			</Typography>
+			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={passes.free < 1}>
+				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
+			</Button>
 		</Fragment>
-	) : (
+
+	return (
 		<Fragment>
 			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={claiming}>
-				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
+				Buy Now
 			</Button>
 			<BaseDialog title="Go Premium" open={open} onClose={onClose}>
 				<Typography
@@ -185,7 +195,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				>
 					Buy a Battlepass now and go premium!
 				</Typography>
-
 				<Checkout />
 			</BaseDialog>
 		</Fragment>
