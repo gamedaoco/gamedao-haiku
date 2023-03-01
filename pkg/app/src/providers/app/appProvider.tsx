@@ -72,7 +72,12 @@ export function AppProvider({ children }) {
 		console.log('================================================================')
 		console.log('app', 'connect', 'discord ->', session.user.discord)
 		// setDiscord(session?.user?.discord)
-		const updateUser = { ...user, discord: session?.user?.discord, name: session?.user?.name }
+		const updateUser = {
+			...user,
+			discord: session?.user?.discord,
+			name: session?.user?.name,
+			email: session?.user?.email,
+		}
 		setUser(updateUser)
 	}, [session])
 
@@ -82,7 +87,12 @@ export function AppProvider({ children }) {
 		console.log('================================================================')
 		console.log('app', 'connect', 'twitter ->', session.user.twitter)
 		// setTwitter(session?.user?.twitter)
-		const updateUser = { ...user, discord: session?.user?.twitter_id, name: session?.user?.name }
+		const updateUser = {
+			...user,
+			discord: session?.user?.twitter_id,
+			name: session?.user?.name,
+			email: session?.user?.email,
+		}
 		setUser(updateUser)
 	}, [session])
 
@@ -90,12 +100,12 @@ export function AppProvider({ children }) {
 		if (!session || connected) return
 		if (!user.discord && !user.address) return
 
-		console.log('================================================================')
-		console.log('app', 'connecting', '...')
-
 		const connect = async () => {
+			console.log('================================================================')
+			console.log('app', 'connecting', '...')
+
 			const response = await connectIdentityMutation({
-				variables: { discord: user.discord, name: user.name },
+				variables: { discord: user.discord, name: user.name, email: user.email || null },
 			}).then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity
