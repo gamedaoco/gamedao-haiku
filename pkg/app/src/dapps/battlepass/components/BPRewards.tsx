@@ -63,7 +63,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		if (isClaimed)
 			return (
 				<Typography p={1} m={0} variant="body1">
-					You have claimed this reward!
+					You have claimed this reward
 				</Typography>
 			)
 		if (!isPremium)
@@ -75,13 +75,13 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		if (!isConnected)
 			return (
 				<Typography p={1} m={0} variant="h5">
-					Connect your Wallet to claim rewards!
+					Connect your Wallet to claim rewards
 				</Typography>
 			)
 		if (requiredPoints)
 			return (
 				<Button size="large" fullWidth variant="pink" onClick={() => claimReward()}>
-					Claim Now!
+					Claim Now
 				</Button>
 			)
 		return (
@@ -139,7 +139,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 						>
 							<Box
 								sx={{
-									width: '260px',
+									width: '256px',
 									height: '340px',
 									borderRadius: '2px',
 									background: content.cid ? cidToURL(content.cid) : null,
@@ -283,7 +283,7 @@ export const BPRewards = ({ args }: TArgs) => {
 								<BPCard>
 									<Card
 										sx={{
-											width: '348px',
+											width: '352px',
 											height: '512px',
 											border: 0,
 											backgroundColor: '#11111122',

@@ -115,6 +115,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 					WebkitBackgroundClip: 'text',
 					WebkitTextFillColor: 'transparent',
 					fontWeight: 800,
+					opacity: `${user.uuid ? 1 : 0.5}`,
 				}}
 			>
 				Full control: Connect with your web3 wallet
@@ -125,6 +126,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 				justifyContent="space-around"
 				gap={'1rem'}
 				maxWidth={{ xs: 'auto', lg: theme.breakpoints.values.lg }}
+				sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}
 			>
 				{allSupportedWallets.map((wallet) => {
 					return (

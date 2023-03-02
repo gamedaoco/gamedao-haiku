@@ -152,11 +152,11 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		}
 	}
 
-	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address) {
+	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address && user.uuid) {
 		// console.log('link wallet', address, user.address)
 		actionString = `${Actions.LINK}`
 		action = () => {
-			console.log('link address', '->', address, user.uuid)
+			// console.log('link address', '->', address, user.uuid)
 			linkAddress(address)
 		}
 		showAction = true
@@ -249,7 +249,7 @@ export const BPQuests = ({ args }: TArgs) => {
 		// const a = achievements.BattlepassBot.BattlepassProgresses
 		const a = achievements.QuestProgresses
 		if (!a) return
-		console.log('a', a)
+		// console.log('a', a)
 		setUserAchievements(a as any[])
 	}, [achievements])
 
