@@ -211,7 +211,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (!isMember)
+	if (uuid && !isMember)
 		return (
 			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
 				Join Battlepass
