@@ -159,10 +159,12 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		actionString = `${Actions.LINK}`
 		// TODO: nextauth needs auth flow with message signing signIn('polkadot')
 		action = () => {
-			// console.log('connect', address, session.user.uuid )
-			linkAddress(address)
+			if (address) {
+				console.log('link address', '->', address, session.user.uuid)
+				linkAddress(address)
+			}
 		} // send address to api
-		showAction = true
+		showAction = address ? true : false
 	}
 
 	// console.log(item, achievement)

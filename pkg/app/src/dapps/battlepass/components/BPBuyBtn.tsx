@@ -31,6 +31,11 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const { id } = args
 	const { uuid, user } = useAppContext()
 
+	const [open, setOpen] = useState(false)
+	const onClose = () => {
+		setOpen(false)
+	}
+
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
 
 	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
@@ -51,13 +56,14 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	useEffect(() => {
 		if (!freePasses || !freePasses?.Battlepasses.length) return
 		const pass = freePasses?.Battlepasses[0]
-		// console.log('buy',
-		// 	pass,
-		// 	'total/available/claimed',
-		// 	pass.freePasses,
-		// 	pass.freePasses - pass.passesClaimed,
-		// 	pass.passesClaimed,
-		// )
+		console.log(
+			'buy',
+			pass,
+			'total/available/claimed',
+			pass.freePasses,
+			pass.freePasses - pass.passesClaimed,
+			pass.passesClaimed,
+		)
 		setPasses({
 			total: pass.freePasses,
 			claimed: pass.passesClaimed,
@@ -83,12 +89,9 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const [joinBattlepassMutation] = useJoinBattlepassMutation({
 		variables: { battlepass: id, uuid: uuid },
 	})
-
-	const [open, setOpen] = useState(false)
-	const onClose = () => {
-		setOpen(false)
-	}
-
+	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
+		variables: { battlepass: id, uuid: uuid },
+	})
 	const handleJoinBattlepass = () => {
 		console.log('buy', 'join battlepass:', id, uuid)
 		const connect = async () => {
@@ -105,14 +108,9 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		connect()
 	}
 
-	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
-		variables: { battlepass: id, uuid: uuid },
-	})
-
 	const handleClaimBattlepass = () => {
-		console.log(passes.free, id, uuid)
+		console.log('claim battlepass', passes.free, id, user.uuid, user.address)
 
-		// buy
 		if (passes.free === 0) {
 			setOpen(true)
 		} else {
@@ -133,26 +131,20 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 
 	const handleBuyBattlepass = () => {
-		console.log(passes.free, id, uuid)
-
-		// buy
-		if (passes.free === 0) {
-			setOpen(true)
-		} else {
-			const connect = async () => {
-				const response = await claimBattlepassFreemiumMutation({
-					variables: { battlepass: id, uuid: uuid },
-				}).then((res) => {
-					try {
-						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
-						console.log('buy', 'claim', 'uuid ->', _uuid)
-					} catch (e) {
-						console.log(e)
-					}
-				})
-			}
-			connect()
+		console.log('buy battlepass', passes.free, id, uuid)
+		const connect = async () => {
+			const response = await claimBattlepassFreemiumMutation({
+				variables: { battlepass: id, uuid: uuid },
+			}).then((res) => {
+				try {
+					const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
+					console.log('buy', 'claim', 'uuid ->', _uuid)
+				} catch (e) {
+					console.log(e)
+				}
+			})
 		}
+		connect()
 	}
 
 	//
