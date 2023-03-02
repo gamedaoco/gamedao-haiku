@@ -118,7 +118,7 @@ subscription GetAllBattlepasses {
 }
 
 subscription Rewards ($id: bpchar, $uuid: uuid) {
-  BattlepassRewards(where: {Battlepass: {chainId: {_eq: $id}}, RewardClaims: {BattlepassParticipant: {Identity: {uuid: {_eq: $uuid}}}}}, order_by: {id: asc}) {
+  BattlepassRewards(where: {Battlepass: {chainId: {_eq: $id}}}, order_by: {points: asc}) {
     available
     total
     syncStatus
@@ -129,8 +129,10 @@ subscription Rewards ($id: bpchar, $uuid: uuid) {
     createdAt
     cid
     chainId
-    RewardClaims {
+    RewardClaims(where: {BattlepassParticipant: {Identity: {uuid: {_eq: $uuid}}}}) {
       syncStatus
+	  rewardId
+	  nftId
     }
   }
 }

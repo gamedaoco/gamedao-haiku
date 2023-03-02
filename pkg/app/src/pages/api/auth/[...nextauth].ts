@@ -125,10 +125,10 @@ export const authOptions: NextAuthOptions = {
 				token.twitter_username = profile.username
 			}
 
-			console.log('user', user)
-			console.log('account', account)
+			// console.log('user', user)
+			// console.log('account', account)
 			// console.log('profile', profile)
-			console.log('token', token)
+			// console.log('token', token)
 			return token
 		},
 		async session({ session, token }) {
@@ -144,11 +144,11 @@ export const authOptions: NextAuthOptions = {
 				twitter_username: token.twitter_username,
 				// address: token.address,
 				uuid: null,
-				// email: token?.email || null,
+				email: token?.email || null,
 				// profile: token?.profile || null,
 			}
-			console.log('session', session)
-			console.log(token.twitter)
+			// console.log('session', session)
+			// console.log(token.twitter)
 			return session
 		},
 		// async signIn({ user, account, profile, email, credentials }) {

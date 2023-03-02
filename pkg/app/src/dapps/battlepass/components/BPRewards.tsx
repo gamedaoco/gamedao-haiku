@@ -57,9 +57,15 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 	}
 	const claimReward = () => handleClaim(content.chainId)
 
-	console.log(content)
+	const isClaimed = content.RewardClaims.filter((i) => i.syncStatus === 'synced').length > 0 ? true : false
 
 	const ClaimSection = () => {
+		if (isClaimed)
+			return (
+				<Typography p={1} m={0} variant="body1">
+					You have claimed this reward!
+				</Typography>
+			)
 		if (!isPremium)
 			return (
 				<Button fullWidth size="large" variant="lemon" onClick={() => goPremium()}>
@@ -147,10 +153,12 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 					</Box>
 
 					<Stack>
-						<Typography p={1} m={0} variant="h5">
-							{content.name} {content.points}
+						<Typography pt={1} px={1} m={0} variant="caption">
+							{content.name}
+							<br />
+							LEVEL {content.level} · {content.points}BP
 						</Typography>
-						{/* <Typography variant="caption" sx={{ opacity: 0.5 }}>
+						{/* <Typography px={1} m={0} variant="caption" sx={{ opacity: 0.5 }}>
 							{content.description}
 						</Typography> */}
 					</Stack>
@@ -215,12 +223,12 @@ export const BPRewards = ({ args }: TArgs) => {
 	const [demoMode, setDemoMode] = useState(true)
 
 	const { data: rewards } = useRewardsSubscription({ variables: { id: id, uuid: uuid } })
-	// const { data: rewards } = useGetBattlepassRewardsQuery({ variables: { id: id } })
 
 	useEffect(() => {
 		if (!rewards) return
-		// if (!rewards?.BattlepassBot?.BattlepassRewards) return
 		if (!rewards?.BattlepassRewards.length) return
+		console.log('rewards', id, uuid)
+		console.log('rewards', rewards)
 		const res = rewards?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
@@ -228,10 +236,7 @@ export const BPRewards = ({ args }: TArgs) => {
 	}, [rewards])
 
 	const [chainId, setChainId] = useState(null)
-	const [claimRewardMutation] = useClaimRewardMutation({
-		variables: { battlepass: id, uuid: uuid, reward: chainId },
-	})
-
+	const [claimRewardMutation] = useClaimRewardMutation()
 	const [open, setOpen] = useState(false)
 	const handleClaim = useCallback(
 		(itemId: string) => {
