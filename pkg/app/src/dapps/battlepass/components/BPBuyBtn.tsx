@@ -162,7 +162,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Button>
 		)
 
-	if (uuid && isMember && !isPremium && user.address)
+	if (uuid && isMember && !isPremium && !user.address)
 		return (
 			<Fragment>
 				<Typography
@@ -186,7 +186,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (uuid && isMember && !isPremium && !user.address)
+	if (uuid && isMember && !isPremium && user.address)
 		return passes.free > 0 ? (
 			<Fragment>
 				<Button onClick={() => handleClaimBattlepass()} variant="pink" disabled={passes.free < 1}>
