@@ -126,18 +126,11 @@ export function AppProvider({ children }) {
 	}, [session, connected])
 
 	useEffect(() => {
-		if (!user.address) return
-
+		if (!user.address || !user.uuid) return
 		console.log('user', user)
-
 		const update = async () => {
-			console.log('app', 'writing address...', user.address)
-			const res = await connectIdentityMutation({
-				variables: {
-					uuid: user.uuid,
-					address: user.address,
-				},
-			}).then((res) => {
+			console.log('app', 'writing address...', user.address, 'for', user.uuid)
+			const res = await connectIdentityMutation().then((res) => {
 				try {
 					const _uuid = res?.data?.BattlepassBot?.identity?.address
 					console.log('app', 'linked address', user.address)
@@ -152,13 +145,11 @@ export function AppProvider({ children }) {
 	const linkAddress = useCallback(
 		(adr) => {
 			console.log('link address', user, adr)
-
 			if (user.address) {
 				console.log('app', 'already linked')
 				return
 			}
-
-			if (!user.address) {
+			if (!user.address && user.uuid) {
 				console.log('app', 'linking address...', adr)
 				// setAddress(adr)
 				setUser({ ...user, address: adr })
