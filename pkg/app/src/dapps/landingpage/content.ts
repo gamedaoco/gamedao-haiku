@@ -206,11 +206,11 @@ export const transform = {
 	title: `Next Level Fan Engagement`,
 	content: [
 		{
-			title: `🪙 Community Integration`,
+			title: `🤲 Community Integration`,
 			content: [`Reward community contribution`, `Gives fan a voice`, `Unite your community`],
 		},
 		{
-			title: `👑 Social Media Impact`,
+			title: `👀 Social Media Impact`,
 			content: [
 				`Get your audience outgoing through social media quests`,
 				`Boost engagement through gamified incentives`,
@@ -218,11 +218,11 @@ export const transform = {
 			],
 		},
 		{
-			title: `☔ Data Analytics`,
+			title: `📈 Data Analytics`,
 			content: [`Simple data visualization`, `Identify your biggest fans`, `Gain data-driven insight`],
 		},
 		{
-			title: `🪙 Fan Experience`,
+			title: `🎉 Fan Experience`,
 			content: [
 				`Create new Experience for your fanbase`,
 				`Strengthen loyalty`,
@@ -230,7 +230,7 @@ export const transform = {
 			],
 		},
 		{
-			title: `👑 Market Outreach`,
+			title: `🍕 Market Outreach`,
 			content: [
 				`New opportunities for partnerships and sponsors`,
 				`Increase your outreach to new groups`,
@@ -238,7 +238,7 @@ export const transform = {
 			],
 		},
 		{
-			title: `☔ Sustainable Revenue`,
+			title: `💸 Sustainable Revenue`,
 			content: [
 				`Monetize fan engagement`,
 				`Use a new, innovative revenue stream`,
