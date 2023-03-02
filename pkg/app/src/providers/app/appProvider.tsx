@@ -157,6 +157,7 @@ export function AppProvider({ children }) {
 				console.log('app', 'already linked')
 				return
 			}
+
 			if (!user.address) {
 				console.log('app', 'linking address...', adr)
 				// setAddress(adr)

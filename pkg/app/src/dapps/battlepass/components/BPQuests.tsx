@@ -152,19 +152,14 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		}
 	}
 
-	// wallet connection
-
 	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address) {
-		// console.log('not connected yet', item, achievement, user.address)
+		console.log('link wallet', address, user.address)
 		actionString = `${Actions.LINK}`
-		// TODO: nextauth needs auth flow with message signing signIn('polkadot')
 		action = () => {
-			if (address) {
-				console.log('link address', '->', address, session.user.uuid)
-				linkAddress(address)
-			}
-		} // send address to api
-		showAction = address ? true : false
+			console.log('link address', '->', address, user.uuid)
+			linkAddress(address)
+		}
+		showAction = true
 	}
 
 	// console.log(item, achievement)
