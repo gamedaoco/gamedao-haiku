@@ -117,6 +117,24 @@ subscription GetAllBattlepasses {
 	}
 }
 
+subscription Rewards ($id: bpchar, $uuid: uuid) {
+  BattlepassRewards(where: {Battlepass: {chainId: {_eq: $id}}, RewardClaims: {BattlepassParticipant: {Identity: {uuid: {_eq: $uuid}}}}}, order_by: {id: asc}) {
+    available
+    total
+    syncStatus
+    points
+    name
+    level
+    description
+    createdAt
+    cid
+    chainId
+    RewardClaims {
+      syncStatus
+    }
+  }
+}
+
 query GetBattlepassRewards ($id: String) {
 	BattlepassBot {
 		BattlepassRewards(where: {battlepassChainId: $id}) {

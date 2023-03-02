@@ -4,6 +4,7 @@ import {
 	useGetScoreQuery,
 	useScoreSubscription,
 	useClaimRewardMutation,
+	useRewardsSubscription,
 } from 'queries/index'
 import { useAppContext } from 'providers/app/modules/context'
 import { useTheme } from '@mui/material/styles'
@@ -55,6 +56,9 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		console.log('goPremium')
 	}
 	const claimReward = () => handleClaim(content.chainId)
+
+	console.log(content)
+
 	const ClaimSection = () => {
 		if (!isPremium)
 			return (
@@ -209,11 +213,15 @@ export const BPRewards = ({ args }: TArgs) => {
 
 	const [items, setItems] = useState([])
 	const [demoMode, setDemoMode] = useState(true)
-	const { data: rewards } = useGetBattlepassRewardsQuery({ variables: { id: id } })
+
+	const { data: rewards } = useRewardsSubscription({ variables: { id: id, uuid: uuid } })
+	// const { data: rewards } = useGetBattlepassRewardsQuery({ variables: { id: id } })
+
 	useEffect(() => {
 		if (!rewards) return
-		if (!rewards?.BattlepassBot?.BattlepassRewards) return
-		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
+		// if (!rewards?.BattlepassBot?.BattlepassRewards) return
+		if (!rewards?.BattlepassRewards.length) return
+		const res = rewards?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
 		// console.log('r', res)

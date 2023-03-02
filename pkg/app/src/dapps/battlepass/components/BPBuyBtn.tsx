@@ -1,7 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
-
 import { useAppContext } from 'providers/app/modules/context'
 import {
 	useJoinBattlepassMutation,
@@ -110,7 +109,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	const handleClaimBattlepass = () => {
 		console.log('claim battlepass', passes.free, id, user.uuid, user.address)
-
 		if (passes.free === 0) {
 			setOpen(true)
 		} else {
@@ -132,19 +130,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	const handleBuyBattlepass = () => {
 		console.log('buy battlepass', passes.free, id, uuid)
-		const connect = async () => {
-			const response = await claimBattlepassFreemiumMutation({
-				variables: { battlepass: id, uuid: uuid },
-			}).then((res) => {
-				try {
-					const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
-					console.log('buy', 'claim', 'uuid ->', _uuid)
-				} catch (e) {
-					console.log(e)
-				}
-			})
-		}
-		connect()
+		setOpen(true)
 	}
 
 	//

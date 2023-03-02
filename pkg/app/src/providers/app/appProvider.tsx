@@ -33,7 +33,6 @@ const initialUserState: TAppUser = {
 
 export function AppProvider({ children }) {
 	const context = initialContextState
-
 	const { data: session } = useSession()
 	const [user, setUser] = useState<TAppUser>(initialUserState)
 	const [connected, setConnected] = useState(false)
@@ -70,7 +69,7 @@ export function AppProvider({ children }) {
 		// setTwitter(session?.user?.twitter)
 		const updateUser = {
 			...user,
-			discord: session?.user?.twitter_id,
+			twitter: session?.user?.twitter_id,
 			name: session?.user?.name,
 			email: session?.user?.email,
 		}
@@ -157,7 +156,7 @@ export function AppProvider({ children }) {
 				console.log('app', 'linking address rejected.')
 			}
 		},
-		[user.address],
+		[user],
 	)
 
 	useEffect(() => {
