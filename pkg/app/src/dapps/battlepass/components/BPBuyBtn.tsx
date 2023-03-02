@@ -155,41 +155,28 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		}
 	}
 
-	if (uuid && isPremium)
-		return (
-			<Fragment>
-				<Typography
-					variant="header1"
-					sx={{
-						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
-						WebkitBackgroundClip: 'text',
-						WebkitTextFillColor: 'transparent',
-						fontWeight: 800,
-						transitionDuration: '1s',
-						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
-						filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
-						'&:hover': {
-							WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
-							filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
-						},
-					}}
-				>
-					PREMIUM
-				</Typography>
-			</Fragment>
-		)
+	//
 
-	if (uuid && !isPremium && passes.free > 0)
+	if (!uuid)
 		return (
+			<Button onClick={() => signIn('discord')} variant="outlined">
+				Connect with Discord
+			</Button>
+		)
+	if (uuid && !isMember)
+		return (
+			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
+				Join Battlepass
+			</Button>
+		)
+	if (uuid && isMember && !isPremium)
+		return passes.free > 0 ? (
 			<Fragment>
 				<Button onClick={() => handleClaimBattlepass()} variant="pink" disabled={passes.free < 1}>
 					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
 				</Button>
 			</Fragment>
-		)
-
-	if (uuid && isMember && !isPremium)
-		return (
+		) : (
 			<Fragment>
 				<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={claiming}>
 					Buy Now
@@ -211,18 +198,28 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (uuid && !isMember)
+	if (uuid && isMember && isPremium)
 		return (
-			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
-				Join Battlepass
-			</Button>
-		)
-
-	if (!uuid)
-		return (
-			<Button onClick={() => signIn('discord')} variant="outlined">
-				Connect with Discord
-			</Button>
+			<Fragment>
+				<Typography
+					variant="header1"
+					sx={{
+						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+						WebkitBackgroundClip: 'text',
+						WebkitTextFillColor: 'transparent',
+						fontWeight: 800,
+						transitionDuration: '1s',
+						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
+						filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,0.2) )',
+						'&:hover': {
+							WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
+							filter: 'drop-shadow( 0 2px 10px rgba(255,255,0,1) )',
+						},
+					}}
+				>
+					PREMIUM
+				</Typography>
+			</Fragment>
 		)
 
 	return null
