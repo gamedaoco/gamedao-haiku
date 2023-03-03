@@ -1,27 +1,21 @@
 import { Fragment, useEffect } from 'react'
-import { useAppContext } from 'providers/app/modules/context'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
-import { Grid } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { useAppContext } from 'providers/app/modules/context'
 import { useExtensionContext } from 'providers/extension/modules/context'
+
+import { Grid, Button, Paper, Stack, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { WalletCard } from 'components/WalletDialog/modules/walletCard'
 import Device from 'components/Device'
 
-import { Button, Paper, Stack, Typography } from '@mui/material'
-
-import { useSession, signIn, signOut } from 'next-auth/react'
-
 export const Web2Connect = () => {
 	const { data: session } = useSession()
 	const { selectedAccount } = useExtensionContext()
 
-	//
-
 	const url = `https://discord.com/api/oauth2/authorize?client_id=1049953821536833536&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=identify%20email`
-
-	if (session) console.log(session.user.email)
 
 	if (session && !selectedAccount)
 		return (
@@ -42,7 +36,6 @@ export const Web2Connect = () => {
 			</a>
 		</Stack>
 	)
-	//
 }
 
 interface ComponentProps {
@@ -53,8 +46,8 @@ interface ComponentProps {
 
 export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
-	const theme = useTheme()
 	const { user } = useAppContext()
+	const theme = useTheme()
 
 	useEffect(() => {
 		if (open && supportedWallets?.length === 1) {
@@ -63,10 +56,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 		}
 	}, [supportedWallets, open, callback])
 
-	// No There is no wallet available
-	if (!allSupportedWallets?.length) {
-		return null
-	}
+	if (!allSupportedWallets?.length) return null
 
 	return (
 		<BaseDialog title="Connect GameDAO" open={open} onClose={onClose}>
