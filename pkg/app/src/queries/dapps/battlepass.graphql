@@ -7,7 +7,8 @@ mutation ClaimReward( $battlepass: String!, $uuid: String!, $reward: String!) {
 			identityUuid: $uuid,
 			reward: $reward
 		){
-			rewardId
+			id
+			syncStatus
 		}
 	}
 }
@@ -114,6 +115,26 @@ subscription GetAllBattlepasses {
 		active
 	orgId
 	}
+}
+
+subscription Rewards ($id: bpchar, $uuid: uuid) {
+  BattlepassRewards(where: {Battlepass: {chainId: {_eq: $id}}}, order_by: {points: asc}) {
+    available
+    total
+    syncStatus
+    points
+    name
+    level
+    description
+    createdAt
+    cid
+    chainId
+    RewardClaims(where: {BattlepassParticipant: {Identity: {uuid: {_eq: $uuid}}}}) {
+      syncStatus
+	  rewardId
+	  nftId
+    }
+  }
 }
 
 query GetBattlepassRewards ($id: String) {
@@ -311,8 +332,6 @@ mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $t
 	}
 }
 
-
-
 subscription ActiveBattlepass {
 	battlepass(where: {state: {_eq: "ACTIVE"}}) {
 		id
@@ -329,7 +348,6 @@ subscription ActiveBattlepass {
 		cid
 	}
 }
-
 
 query ActiveBattlepassById($id: String!) {
 	BattlepassBot {

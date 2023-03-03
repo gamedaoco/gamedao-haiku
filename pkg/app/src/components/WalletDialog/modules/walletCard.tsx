@@ -11,9 +11,10 @@ interface ComponentProps {
 	connectable: boolean
 	callback?: () => void
 	mobile?: boolean
+	connected?: boolean
 }
 
-export function WalletCard({ imageSrc, name, url, connectable, callback }: ComponentProps) {
+export function WalletCard({ imageSrc, name, url, connectable, callback, connected }: ComponentProps) {
 	const handleButtonClick = useCallback(() => {
 		if (connectable && callback) {
 			return callback()
@@ -31,13 +32,20 @@ export function WalletCard({ imageSrc, name, url, connectable, callback }: Compo
 			<Stack p={{ xs: 2, md: 4 }} direction="row" alignItems="center" spacing={{ xs: 2, md: 4 }}>
 				<Avatar sx={{ width: { md: 64 }, height: { md: 64 } }} src={imageSrc} />
 				<Typography variant="h6">{name}</Typography>
-				<Button
-					onClick={handleButtonClick}
-					variant={connectable ? 'outlined' : 'text'}
-					sx={{ marginLeft: 'auto !important' }}
-				>
-					{connectable ? <Typography>Connect</Typography> : <Download />}
-				</Button>
+				{connected && (
+					<Typography sx={{ marginLeft: 'auto !important' }} variant="body1">
+						Connected
+					</Typography>
+				)}
+				{!connected && (
+					<Button
+						onClick={handleButtonClick}
+						variant={connectable ? 'outlined' : 'text'}
+						sx={{ marginLeft: 'auto !important' }}
+					>
+						{connectable ? <Typography>Connect</Typography> : <Download />}
+					</Button>
+				)}
 			</Stack>
 		</Card>
 	)

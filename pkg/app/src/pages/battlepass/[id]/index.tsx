@@ -22,8 +22,8 @@ export function Page() {
 
 	const { loading, data, error } = useActiveBattlepassByIdQuery({ variables: { id: id } })
 
-	console.log(loading, query)
-	console.log(data)
+	// console.log(loading, query)
+	// console.log(data)
 
 	useEffect(() => {
 		if (loading || !data) return

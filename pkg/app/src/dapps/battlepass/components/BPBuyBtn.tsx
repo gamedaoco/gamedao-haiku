@@ -1,7 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
-
 import { useAppContext } from 'providers/app/modules/context'
 import {
 	useJoinBattlepassMutation,
@@ -30,6 +29,14 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const { push } = useRouter()
 	const { id } = args
 	const { uuid, user } = useAppContext()
+
+	const [purchaseInProgess, setPurchaseInProgess] = useState(false)
+
+	const [open, setOpen] = useState(false)
+	const onClose = () => {
+		setOpen(false)
+	}
+
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
 
 	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
@@ -37,8 +44,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	const [isPremium, setPremium] = useState(false)
 	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
-
-	const [claiming, setClaiming] = useState(false)
 
 	useEffect(() => {
 		if (!scoreData?.BattlepassParticipants.length) return
@@ -50,13 +55,14 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	useEffect(() => {
 		if (!freePasses || !freePasses?.Battlepasses.length) return
 		const pass = freePasses?.Battlepasses[0]
-		// console.log('buy',
-		// 	pass,
-		// 	'total/available/claimed',
-		// 	pass.freePasses,
-		// 	pass.freePasses - pass.passesClaimed,
-		// 	pass.passesClaimed,
-		// )
+		console.log(
+			'buy',
+			pass,
+			'total/available/claimed',
+			pass.freePasses,
+			pass.freePasses - pass.passesClaimed,
+			pass.passesClaimed,
+		)
 		setPasses({
 			total: pass.freePasses,
 			claimed: pass.passesClaimed,
@@ -70,26 +76,21 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	useEffect(() => {
 		if (!data) return
-		// console.log('buy', data)
 		if (!data?.BattlepassBot?.BattlepassIdentities) return
-
 		const memberships = data?.BattlepassBot?.BattlepassIdentities[0]?.members
 			?.map((b) => b.battlepass.chainId)
 			.filter((i) => i === id)[0]
 		const member = memberships === id
-		// console.log('memberships', memberships, member)
+		console.log('memberships', memberships, member)
 		setIsMember(member)
-	}, [data?.BattlepassBot?.BattlepassIdentities])
+	}, [data, data?.BattlepassBot])
 
 	const [joinBattlepassMutation] = useJoinBattlepassMutation({
 		variables: { battlepass: id, uuid: uuid },
 	})
-
-	const [open, setOpen] = useState(false)
-	const onClose = () => {
-		setOpen(false)
-	}
-
+	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
+		variables: { battlepass: id, uuid: uuid },
+	})
 	const handleJoinBattlepass = () => {
 		console.log('buy', 'join battlepass:', id, uuid)
 		const connect = async () => {
@@ -106,15 +107,10 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		connect()
 	}
 
-	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
-		variables: { battlepass: id, uuid: uuid },
-	})
-
-	const handleBuyBattlepass = () => {
-		console.log(passes.free, id, uuid)
-
-		// buy
+	const handleClaimBattlepass = () => {
+		console.log('claim battlepass', passes.free, id, user.uuid, user.address)
 		if (passes.free === 0) {
+			setPurchaseInProgess(true)
 			setOpen(true)
 		} else {
 			const connect = async () => {
@@ -124,6 +120,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					try {
 						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
 						console.log('buy', 'claim', 'uuid ->', _uuid)
+						// setPurchaseInProgess(false)
+						setOpen(false)
 					} catch (e) {
 						console.log(e)
 					}
@@ -133,21 +131,90 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		}
 	}
 
+	const handleBuyBattlepass = () => {
+		setPurchaseInProgess(true)
+		console.log('buy battlepass', passes.free, id, uuid)
+		// setPurchaseInProgess(false)
+		setOpen(true)
+	}
+
+	//
+
 	if (!uuid)
 		return (
 			<Button onClick={() => signIn('discord')} variant="outlined">
 				Connect with Discord
 			</Button>
 		)
-
-	if (!isMember)
+	if (uuid && !isMember)
 		return (
-			<Button onClick={() => handleJoinBattlepass()} variant="lemon">
+			<Button disabled={purchaseInProgess ? true : false} onClick={() => handleJoinBattlepass()} variant="lemon">
 				Join Battlepass
 			</Button>
 		)
 
-	if (isPremium)
+	if (uuid && isMember && !isPremium && !user.address)
+		return (
+			<Fragment>
+				<Typography
+					variant="header1"
+					sx={{
+						background: '-webkit-linear-gradient(45deg, #ff00cc 30%, #ff99ff 90%)',
+						WebkitBackgroundClip: 'text',
+						WebkitTextFillColor: 'transparent',
+						fontWeight: 800,
+						transitionDuration: '1s',
+						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,0,255,0.2) )',
+						filter: 'drop-shadow( 0 2px 10px rgba(255,0,255,0.2) )',
+						'&:hover': {
+							WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,0,255,1) )',
+							filter: 'drop-shadow( 0 2px 10px rgba(255,0,255,1) )',
+						},
+					}}
+				>
+					MEMBER
+				</Typography>
+			</Fragment>
+		)
+
+	if (uuid && isMember && !isPremium && user.address)
+		return passes.free > 0 ? (
+			<Fragment>
+				<Button
+					disabled={purchaseInProgess ? true : false}
+					onClick={() => handleClaimBattlepass()}
+					variant="pink"
+				>
+					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
+				</Button>
+			</Fragment>
+		) : (
+			<Fragment>
+				<Button
+					disabled={purchaseInProgess ? true : false}
+					onClick={() => handleBuyBattlepass()}
+					variant="pink"
+				>
+					Buy Now
+				</Button>
+				<BaseDialog title="Go Premium" open={open} onClose={onClose}>
+					<Typography
+						variant="h3"
+						sx={{
+							background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
+							WebkitBackgroundClip: 'text',
+							WebkitTextFillColor: 'transparent',
+							fontWeight: 800,
+						}}
+					>
+						Buy a Battlepass now and go premium!
+					</Typography>
+					<Checkout />
+				</BaseDialog>
+			</Fragment>
+		)
+
+	if (uuid && isMember && isPremium)
 		return (
 			<Fragment>
 				<Typography
@@ -171,32 +238,5 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (!isPremium && user.address && passes.free > 0)
-		<Fragment>
-			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={passes.free < 1}>
-				{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
-			</Button>
-		</Fragment>
-
-	return (
-		<Fragment>
-			<Button onClick={() => handleBuyBattlepass()} variant="pink" disabled={claiming}>
-				Buy Now
-			</Button>
-			<BaseDialog title="Go Premium" open={open} onClose={onClose}>
-				<Typography
-					variant="h3"
-					sx={{
-						background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
-						WebkitBackgroundClip: 'text',
-						WebkitTextFillColor: 'transparent',
-						fontWeight: 800,
-					}}
-				>
-					Buy a Battlepass now and go premium!
-				</Typography>
-				<Checkout />
-			</BaseDialog>
-		</Fragment>
-	)
+	return null
 }

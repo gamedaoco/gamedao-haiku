@@ -152,16 +152,13 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		}
 	}
 
-	// wallet connection
-
-	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address) {
-		// console.log('not connected yet', item, achievement, user.address)
+	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address && user.uuid) {
+		// console.log('link wallet', address, user.address)
 		actionString = `${Actions.LINK}`
-		// TODO: nextauth needs auth flow with message signing signIn('polkadot')
 		action = () => {
-			// console.log('connect', address, session.user.uuid )
+			// console.log('link address', '->', address, user.uuid)
 			linkAddress(address)
-		} // send address to api
+		}
 		showAction = true
 	}
 
@@ -313,7 +310,9 @@ export const BPQuests = ({ args }: TArgs) => {
 
 				{items.length > 0 ? (
 					items.map((item, index) => {
+						// TODO: rm when twitter is fixed
 						if (item.source === 'twitter') return null
+
 						return (
 							<Grid item key={index} xs={12} md={6} lg={4}>
 								<FadeInWhenVisible>
@@ -329,9 +328,11 @@ export const BPQuests = ({ args }: TArgs) => {
 						)
 					})
 				) : (
-					<Box>
-						<Typography variant="body1">No Quests yet, message the organization!</Typography>
-					</Box>
+					<Grid item xs={12}>
+						<Typography align="center" variant="body1">
+							No Quests yet, message the organization!
+						</Typography>
+					</Grid>
 				)}
 			</Grid>
 		</Fragment>

@@ -25,7 +25,6 @@ const initialRowState: TRowData = { id: 0, name: '', level: 0, score: 0 }
 export function LevelEditor(id) {
 	const enableEdit = true
 	const enableDelete = true
-
 	const [enableSend, setEnableSend] = useState(true)
 
 	const [data, setData] = useState(rows)
@@ -37,6 +36,7 @@ export function LevelEditor(id) {
 		const update = { ...rowState, [e.target.name]: e.target.value }
 		setRowState(update)
 	}
+
 	const handleEditRow = (row) => {
 		setEditRow(row)
 		setEditMode(true)
@@ -52,6 +52,7 @@ export function LevelEditor(id) {
 		setRowState(initialRowState)
 		setEditMode(false)
 	}
+
 	const handleDeleteRow = (row) => {
 		const update = data
 			.filter((i) => i.id !== row)
@@ -61,6 +62,7 @@ export function LevelEditor(id) {
 			})
 		setData((prevState) => update)
 	}
+
 	const handleReset = () => {
 		setRowState(null)
 		setEditRow(null)
@@ -71,11 +73,14 @@ export function LevelEditor(id) {
 	const [battlepassId, setBattlepassID] = useState(id.id as string)
 	const [levels, setLevels] = useState(null)
 
-	console.log('battlepass id', battlepassId)
+	useEffect(() => {
+		if (!battlepassId) return
+		console.log('battlepass id', battlepassId)
+	}, [battlepassId])
 
 	useEffect(() => {
 		if (!data) return
-		const levels = data?.map((i) => ({ level: i.level as number, name: i.name, points: i.score as number }))
+		const levels = data?.map((i): Level => ({ level: Number(i.level), name: i.name, points: Number(i.score) }))
 		setLevels(levels)
 	}, [data])
 
@@ -91,22 +96,21 @@ export function LevelEditor(id) {
 		variables: payload,
 	})
 
-	const [createLevels, { loading, error }] = useMutation(gql`
-		mutation CreateLevels($id: String!, $levels: [Level!]!) {
-			BattlepassBot {
-				levels(battlepass: $id, levels: $levels) {
-					battlepassId
-				}
-			}
-		}
-	`)
+	// const [createLevels, { loading, error }] = useMutation(gql`
+	// 	mutation CreateLevels($id: String!, $levels: [Level!]!) {
+	// 		BattlepassBot {
+	// 			levels(battlepass: $id, levels: $levels) {
+	// 				battlepassId
+	// 			}
+	// 		}
+	// 	}
+	// `)
+	// console.log('createBattlepassLevelsMutation', createBattlepassLevelsMutation)
 
-	console.log('createBattlepassLevelsMutation', createBattlepassLevelsMutation)
 	const handleSend = useCallback(() => {
 		console.log('create', payload)
-
 		const create = async () => {
-			const response = await createBattlepassLevelsMutation().then((res) => {
+			const response = await createBattlepassLevelsMutation({ variables: payload }).then((res) => {
 				try {
 					// const _id = res?.data?.BattlepassBot?.levels
 					console.log('create', 'id ->', res)

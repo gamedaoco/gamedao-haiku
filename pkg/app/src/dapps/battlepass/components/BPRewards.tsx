@@ -4,6 +4,7 @@ import {
 	useGetScoreQuery,
 	useScoreSubscription,
 	useClaimRewardMutation,
+	useRewardsSubscription,
 } from 'queries/index'
 import { useAppContext } from 'providers/app/modules/context'
 import { useTheme } from '@mui/material/styles'
@@ -55,7 +56,16 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		console.log('goPremium')
 	}
 	const claimReward = () => handleClaim(content.chainId)
+
+	const isClaimed = content.RewardClaims.filter((i) => i.syncStatus === 'synced').length > 0 ? true : false
+
 	const ClaimSection = () => {
+		if (isClaimed)
+			return (
+				<Typography p={1} m={0} variant="body1">
+					You have claimed this reward
+				</Typography>
+			)
 		if (!isPremium)
 			return (
 				<Button fullWidth size="large" variant="lemon" onClick={() => goPremium()}>
@@ -65,13 +75,13 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		if (!isConnected)
 			return (
 				<Typography p={1} m={0} variant="h5">
-					Connect your Wallet to claim rewards!
+					Connect your Wallet to claim rewards
 				</Typography>
 			)
 		if (requiredPoints)
 			return (
 				<Button size="large" fullWidth variant="pink" onClick={() => claimReward()}>
-					Claim Now!
+					Claim Now
 				</Button>
 			)
 		return (
@@ -129,7 +139,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 						>
 							<Box
 								sx={{
-									width: '260px',
+									width: '256px',
 									height: '340px',
 									borderRadius: '2px',
 									background: content.cid ? cidToURL(content.cid) : null,
@@ -143,10 +153,12 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 					</Box>
 
 					<Stack>
-						<Typography p={1} m={0} variant="h5">
-							{content.name} {content.points}
+						<Typography pt={1} px={1} m={0} variant="caption">
+							{content.name}
+							<br />
+							LEVEL {content.level} · {content.points}BP
 						</Typography>
-						{/* <Typography variant="caption" sx={{ opacity: 0.5 }}>
+						{/* <Typography px={1} m={0} variant="caption" sx={{ opacity: 0.5 }}>
 							{content.description}
 						</Typography> */}
 					</Stack>
@@ -209,21 +221,22 @@ export const BPRewards = ({ args }: TArgs) => {
 
 	const [items, setItems] = useState([])
 	const [demoMode, setDemoMode] = useState(true)
-	const { data: rewards } = useGetBattlepassRewardsQuery({ variables: { id: id } })
+
+	const { data: rewards } = useRewardsSubscription({ variables: { id: id, uuid: uuid } })
+
 	useEffect(() => {
 		if (!rewards) return
-		if (!rewards?.BattlepassBot?.BattlepassRewards) return
-		const res = rewards?.BattlepassBot?.BattlepassRewards.map((i) => i) // as TRewardItem[]
+		if (!rewards?.BattlepassRewards.length) return
+		console.log('rewards', id, uuid)
+		console.log('rewards', rewards)
+		const res = rewards?.BattlepassRewards.map((i) => i) // as TRewardItem[]
 		setDemoMode(res.length === 0)
 		setItems(res.length === 0 ? content : res)
 		// console.log('r', res)
 	}, [rewards])
 
 	const [chainId, setChainId] = useState(null)
-	const [claimRewardMutation] = useClaimRewardMutation({
-		variables: { battlepass: id, uuid: uuid, reward: chainId },
-	})
-
+	const [claimRewardMutation] = useClaimRewardMutation()
 	const [open, setOpen] = useState(false)
 	const handleClaim = useCallback(
 		(itemId: string) => {
@@ -270,7 +283,7 @@ export const BPRewards = ({ args }: TArgs) => {
 								<BPCard>
 									<Card
 										sx={{
-											width: '348px',
+											width: '352px',
 											height: '512px',
 											border: 0,
 											backgroundColor: '#11111122',
