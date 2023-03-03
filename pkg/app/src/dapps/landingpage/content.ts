@@ -71,16 +71,16 @@ export const hero = [
 		BattlePass Beta awaits!`,
 		image: '/teaser.jpg',
 		links: [
-			{
-				text: 'LEARN MORE',
-				url: '/cases/esports',
-				icon: 'Joystick',
-			},
-			{
-				text: 'JOIN BATTLEPASS',
-				url: '/battlepass/0x612bbe0650317b75891c4e7e8316f97d3bd246220ae906a169cd22b124127c09',
-				icon: 'Battle',
-			},
+			// {
+			// 	text: 'LEARN MORE',
+			// 	url: '/cases/esports',
+			// 	icon: 'Joystick',
+			// },
+			// {
+			// 	text: 'JOIN BATTLEPASS',
+			// 	url: '/battlepass/0x612bbe0650317b75891c4e7e8316f97d3bd246220ae906a169cd22b124127c09',
+			// 	icon: 'Battle',
+			// },
 		],
 		bg: '#111',
 		img: '/partners/wave-esports-white.png',
