@@ -12,6 +12,11 @@ export function Page() {
 	const { push } = useRouter()
 	const address = useCurrentAccountAddress()
 
+	const dev = process.env.NEXT_PUBLIC_ENV === 'development'
+	console.log(dev)
+	console.log(dev)
+	console.log(dev)
+
 	const handleCreate = (e) => {
 		if (!address) return
 		push('/battlepass/create')
@@ -25,11 +30,11 @@ export function Page() {
 						<Typography variant="h3">Battlepass</Typography>
 					</Grid>
 					<Grid item>
-						{address && (
+						{/* {address && (
 							<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleCreate}>
 								{t('button:ui:create')}
 							</Button>
-						)}
+						)} */}
 					</Grid>
 				</Grid>
 				<Grid item>
