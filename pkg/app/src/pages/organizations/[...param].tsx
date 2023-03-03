@@ -397,11 +397,11 @@ export function OrganisationById() {
 										disabled={!organizationIdState}
 									/>
 
-									<Tab
+									{/* 									<Tab
 										label={t('button:navigation:campaigns')}
 										value={'campaigns'}
 										disabled={!organizationIdState}
-									/>
+									/> */}
 
 									<Tab
 										label={t('button:navigation:members')}
