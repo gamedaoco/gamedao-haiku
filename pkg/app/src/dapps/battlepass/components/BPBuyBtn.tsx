@@ -45,8 +45,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	const [isPremium, setPremium] = useState(false)
 	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
 
-	const [claiming, setClaiming] = useState(false)
-
 	useEffect(() => {
 		if (!scoreData?.BattlepassParticipants.length) return
 		if (scoreData.BattlepassParticipants) {
@@ -186,7 +184,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					disabled={purchaseInProgess ? true : false}
 					onClick={() => handleClaimBattlepass()}
 					variant="pink"
-					disabled={passes.free < 1}
 				>
 					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
 				</Button>
@@ -197,7 +194,6 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					disabled={purchaseInProgess ? true : false}
 					onClick={() => handleBuyBattlepass()}
 					variant="pink"
-					disabled={claiming}
 				>
 					Buy Now
 				</Button>
