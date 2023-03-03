@@ -171,7 +171,8 @@ export const Header = ({ orgId, id, view }: TProps) => {
 								width: '5rem',
 								height: '5rem',
 								backgroundColor: theme.palette.background.default,
-								outline: `3px solid #111111aa`,
+								border: `3px solid #111111aa`,
+								// outline: `3px solid #111111aa`,
 							})}
 							srcSet={avatarImageUrl}
 						/>
