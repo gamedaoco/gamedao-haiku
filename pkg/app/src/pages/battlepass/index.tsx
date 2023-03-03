@@ -12,11 +12,6 @@ export function Page() {
 	const { push } = useRouter()
 	const address = useCurrentAccountAddress()
 
-	const dev = process.env.NEXT_PUBLIC_ENV === 'development'
-	console.log(dev)
-	console.log(dev)
-	console.log(dev)
-
 	const handleCreate = (e) => {
 		if (!address) return
 		push('/battlepass/create')
