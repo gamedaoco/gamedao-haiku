@@ -80,6 +80,7 @@ export type TInitialState = {
 	price: number
 	stake: number
 	freePasses: number
+	totalPasses: number
 	//
 	duration: number
 	claim: number
@@ -111,16 +112,17 @@ const initialState: TInitialState = {
 	// commercials
 	currency: 'EUR',
 	subscribers: 0,
-	price: 1500, // in cents
+	price: 1500, // in eurocents
 	stake: 15000,
 	freePasses: 0,
+	totalPasses: 0, // unlimited
 	// duration and access
 	duration: 100,
 	claim: 0,
 	join: 1,
 	// create
 	acceptTerms: false,
-	botAccount: null,
+	botAccount: '',
 }
 
 export const Create = () => {
@@ -130,8 +132,8 @@ export const Create = () => {
 
 	const [formState, setFormState] = useState(initialState)
 	const [id, setId] = useState('')
-	const [cid, setCid] = useState(null)
-	const [stakeToEur, setStakeToEur] = useState(null)
+	const [cid, setCid] = useState('')
+	const [stakeToEur, setStakeToEur] = useState(0)
 
 	const createBattlepassTX = useCreateBattlepassTX(
 		formState.organizationId,
@@ -142,7 +144,7 @@ export const Create = () => {
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
 	const linkBotTX = useLinkBotTX(formState.battlepassId, formState.botAccount)
 
-	console.log('cardImg', formState.cardImg)
+	// console.log('cardImg', formState.cardImg)
 
 	const [organizations, setOrganizations] = useState<any>()
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
@@ -167,20 +169,20 @@ export const Create = () => {
 		if (loadingPasses) return
 		if (!formState.organizationId) return
 		if (!organizationBattlepasses?.Battlepasses?.length) return
-		console.log('passes1', organizationBattlepasses.Battlepasses)
-		console.log('find for org', formState.organizationId)
+		console.log('hydrate', 'passes in', organizationBattlepasses.Battlepasses)
+		console.log('hydrate', 'filter by org', formState.organizationId)
 		const passes = organizationBattlepasses?.Battlepasses?.map((p, i) => {
 			return { name: p.name, id: p.chainId, active: p.active, org: p.orgId }
 		}).filter((i) => i.org === formState.organizationId)
 		setBattlepasses(passes)
-		console.log('passes2', passes)
+		console.log('hydrate', 'passes out', passes)
 	}, [organizations, loadingPasses, organizationBattlepasses, formState.organizationId])
 	//
 
 	useEffect(() => {
 		if (!localStorage.getItem('battlepass')) return
 		const cache = JSON.parse(localStorage.getItem('battlepass'))
-		console.log('restoring from cache', cache)
+		console.log('hydrate', 'restoring from cache', cache)
 		setFormState({ ...cache })
 	}, [])
 
@@ -219,17 +221,29 @@ export const Create = () => {
 
 	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
 
+	// refresh the payload for a metadata blob on ipfs
+	// available keys:
+	// bp_metadata - operator side - battlepass metadata - configures mutable metadata of the battlepass from operator perspective
+	// bp_collection_metadata
+	// bp_user_metadata - user side battlepass nft metadata
+	// bp_reward_content drop item nft metadata
+
+	const refreshMetadata = (key, payload) => {}
+	// create
+
 	const [showCreateModal, setShowCreateModal] = useState<boolean>(false)
 	const openCreateModal = () => setShowCreateModal(true)
 	const closeCreateModal = () => setShowCreateModal(false)
 	const handleOpenCreateModal = () => {
-		console.log('handleOpenTxModal')
+		console.log('handleOpenTxModal', formState)
 		openCreateModal()
 	}
 	const handleCreateComplete = (e) => {
 		console.log('handleCreateComplete', e)
 		setShowCreateModal(false)
 	}
+
+	// activate
 
 	const [showActivateModal, setShowActivateModal] = useState<boolean>(false)
 	const openActivateModal = () => setShowActivateModal(true)
@@ -238,12 +252,10 @@ export const Create = () => {
 		console.log('handleOpenActivateModal')
 		openActivateModal()
 	}
-	// const handleCloseTxModal = useCallback(() => { setShowTxModal(false) }, [setShowTxModal])
 	const handleActivateComplete = (e) => {
 		console.log('handleCreateComplete', e)
 		setShowActivateModal(false)
 	}
-	// txData={activateBattlepassTX}
 
 	const checkActive = (id) => {
 		const pass = battlepasses.find((p) => p.id === id)
@@ -251,6 +263,8 @@ export const Create = () => {
 		console.log('active', active)
 		return active
 	}
+
+	// link bot
 
 	const [showLinkModal, setShowLinkModal] = useState<boolean>(false)
 	const openLinkModal = () => setShowLinkModal(true)
@@ -263,6 +277,8 @@ export const Create = () => {
 		console.log('handlLinkComplete', e)
 		setShowLinkModal(false)
 	}
+
+	//
 
 	return (
 		<Fragment>
