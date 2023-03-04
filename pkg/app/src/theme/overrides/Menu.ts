@@ -8,9 +8,11 @@ export default function Menu(theme: Theme) {
 			styleOverrides: {
 				root: {
 					'&.Mui-selected': {
-						backgroundColor: theme.palette.action.selected,
+						background: 'transparent', //theme.palette.action.selected,
+						borderBottom: `2px solid ${theme.palette.primary.main}`,
 						'&:hover': {
-							backgroundColor: theme.palette.action.hover,
+							backgroundColor: 'transparent',
+							borderBottom: `2px solid ${theme.palette.primary.darker}`,
 						},
 					},
 				},

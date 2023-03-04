@@ -15,10 +15,12 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
+import Link from 'components/Link'
+
 import { CampaignsList } from 'components/CampaignsList/campaignsList'
 import { CampaignFiltersTab } from 'components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/v2'
 
 export function Campaigns() {
 	const { data: displayValuesData } = useDisplayValuesQuery()
@@ -46,6 +48,7 @@ export function Campaigns() {
 			}))
 		}
 	}, [filtersOptions, setFilters])
+
 	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
@@ -58,27 +61,23 @@ export function Campaigns() {
 					{
 						_or: [
 							{
-								campaign_metadata: {
-									_or: [
-										{
-											name: {
-												_ilike: `%${filters.query ?? ''}%`,
-											},
-										},
-										{
-											title: {
-												_ilike: `%${filters.query ?? ''}%`,
-											},
-										},
-									],
-								},
-							},
-							{
-								organization: {
-									organization_metadata: {
+								_or: [
+									{
 										name: {
 											_ilike: `%${filters.query ?? ''}%`,
 										},
+									},
+									{
+										title: {
+											_ilike: `%${filters.query ?? ''}%`,
+										},
+									},
+								],
+							},
+							{
+								organization: {
+									name: {
+										_ilike: `%${filters.query ?? ''}%`,
 									},
 								},
 							},
@@ -105,23 +104,31 @@ export function Campaigns() {
 		() => paginatedData?.length < campaignsCount?.data?.campaign_aggregate?.aggregate?.count,
 		[paginatedData?.length, campaignsCount?.data],
 	)
+
 	return (
 		<Layout showHeader showFooter showSidebar title={t('labels:campaigns')}>
-			<Box
-				component="main"
-				sx={{
-					flexGrow: 1,
-					py: 8,
-				}}
-			>
-				<Container maxWidth="xl">
-					<Box sx={{ mb: 4 }}>
-						<Grid container justifyContent="space-between" spacing={3}>
-							<Grid item>
-								<Typography variant="h3">{t('label:campaigns')}</Typography>
-							</Grid>
-						</Grid>
-					</Box>
+			<Box sx={{ mb: 2 }}>
+				<Grid container justifyContent="space-between" spacing={3}>
+					<Grid item>
+						<Typography variant="h3">{t('label:campaigns')}</Typography>
+					</Grid>
+					<Grid item></Grid>
+				</Grid>
+				<Grid item>
+					<Typography pb={1} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
+						Fundraising campaigns collect funds through the GameDAO community and treasury and are community
+						governed by default to increase transparency, verifiability and therefore accountability.
+					</Typography>
+					<Typography variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
+						Support existing campaigns to take part in product development and governance. To create a
+						campaign for your own ideas, start by creating your own organization or join an existing
+						organization to take part in their governance to initiate a campaign.
+					</Typography>
+				</Grid>
+			</Box>
+
+			{campaignsCount?.data?.campaign_aggregate?.aggregate.count > 0 ? (
+				<>
 					<FiltersSection
 						setFilters={setFilters}
 						filters={filters}
@@ -131,6 +138,7 @@ export function Campaigns() {
 						filtersOptions={filtersOptions}
 						defaultOption={'time_left_desc'}
 					/>
+
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mt: 2, mb: 4 }}>
 							<Typography fontWeight={700}>{t('page:campaigns:no_campaigns')}</Typography>
@@ -139,40 +147,44 @@ export function Campaigns() {
 							)}
 						</Box>
 					)}
+
 					<Box sx={{ mt: 2, mb: 4 }}>
 						<CampaignsList loading={loading} campaigns={paginatedData} />
 					</Box>
-				</Container>
-				<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								alignItems: 'center',
-								justifyContent: 'center',
-								gap: 1.5,
-							}}
-						>
-							{buttonVisibility && (
-								<Button
-									endIcon={<ArrowDownward />}
-									onClick={() => setLimit((p) => p + 30)}
-									variant="outlined"
-								>
-									{t('button:ui:load_more')}
-								</Button>
-							)}
-							<Typography>
-								{t('page:campaigns:showing_results', {
-									count1: paginatedData?.length,
-									count2: campaignsCount?.data?.campaign_aggregate?.aggregate.count,
-								})}
-							</Typography>
+
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+						<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 3 }}>
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'center',
+									justifyContent: 'center',
+									gap: 1.5,
+								}}
+							>
+								{buttonVisibility && (
+									<Button
+										endIcon={<ArrowDownward />}
+										onClick={() => setLimit((p) => p + 30)}
+										variant="outlined"
+									>
+										{t('button:ui:load_more')}
+									</Button>
+								)}
+								<Typography>
+									{t('page:campaigns:showing_results', {
+										count1: paginatedData?.length,
+										count2: campaignsCount?.data?.campaign_aggregate?.aggregate.count,
+									})}
+								</Typography>
+							</Box>
 						</Box>
 					</Box>
-				</Box>
-			</Box>
+				</>
+			) : (
+				<>No Campaigns yet — why not create one!</>
+			)}
 		</Layout>
 	)
 }

@@ -20,14 +20,23 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@types/*": [
+        "src/@types/*"
+      ],
       "graphql/*": [
         "src/graphql/*"
       ],
       "config/*": [
         "src/config/*"
       ],
+      "constants/*": [
+        "src/constants/*"
+      ],
       "components/*": [
         "src/components/*"
+      ],
+      "dapps/*": [
+        "src/dapps/*"
       ],
       "data/*": [
         "src/data/*"
@@ -41,8 +50,8 @@
       "lib/*": [
         "src/lib/*"
       ],
-      "provider/*": [
-        "src/provider/*"
+      "providers/*": [
+        "src/providers/*"
       ],
       "public/*": [
         "public/*"
@@ -55,6 +64,9 @@
       ],
       "themes/*": [
         "src/themes/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
       ]
     }
   },

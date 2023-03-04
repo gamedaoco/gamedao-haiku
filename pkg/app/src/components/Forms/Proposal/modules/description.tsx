@@ -1,18 +1,39 @@
-import { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { InputAdornment, MenuItem, Stack, TextField, Typography } from '@mui/material'
+import { Inbox } from '@mui/icons-material'
+import {
+	Box,
+	Button,
+	FormControl,
+	InputAdornment,
+	InputLabel,
+	MenuItem,
+	Select,
+	Stack,
+	TextField,
+	Typography,
+} from '@mui/material'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
 import { useConfig } from 'hooks/useConfig'
 import moment from 'moment'
-import { useSuccessfulCampaignByOrganisationIdSubscription } from 'src/queries'
+import { useNetworkContext } from 'providers/network/modules/context'
+import { useTranslation } from 'react-i18next'
+import { CREATE_PROPOSAL_TYPE_TITLES, PROPOSAL_KEYS } from 'src/constants/proposal'
+import {
+	Organization,
+	useOrganizationByIdSubscription,
+	useSuccessfulCampaignByOrganisationIdSubscription,
+} from 'src/queries'
+import { getCurrenciesForSelect } from 'src/utils/forms/currencyUtils'
 import * as Yup from 'yup'
 
 import { BaseForm } from 'components/Forms/baseForm'
 
 interface ComponentProps {
+	type: number
 	name: string
 	setName: (name) => void
 	description: string
@@ -26,26 +47,34 @@ interface ComponentProps {
 	campaignId: string
 	setCampaignId: (campaignId) => void
 	organizationId: string
-	isWithdrawal?: boolean
+	currencyId: number
+	setCurrencyId: (currencyId) => void
+	beneficiaryAddress: string
+	setBeneficiaryAddress: (beneficiaryAddress) => void
 }
 
 const validationNameSchema = Yup.string().required('* Proposal name is required')
 const validationDescriptionSchema = Yup.string().required('* Proposal description is required')
+const validationCurrencyIdSchema = Yup.number().required().min(0)
+const validationBeneficiaryAddressSchema = Yup.string().required()
+
+const validationEndDateSchema = (minExpiry: number | string) =>
+	Yup.date()
+		.required()
+		.when('startDate', (startDate, schema) => {
+			return schema.min(
+				moment(startDate ?? new Date())
+					.add(minExpiry ?? 0, 'seconds')
+					.toDate(),
+			)
+		})
 
 export function getValidationSchema(minExpiry: number | string) {
 	return Yup.object().shape({
 		name: Yup.string().required(),
 		description: Yup.string().required(),
 		startDate: Yup.date().required(),
-		endDate: Yup.date()
-			.required()
-			.when('startDate', (startDate, schema) => {
-				return schema.min(
-					moment(startDate ?? new Date())
-						.add(minExpiry ?? 0, 'seconds')
-						.toDate(),
-				)
-			}),
+		endDate: validationEndDateSchema(minExpiry),
 	})
 }
 
@@ -54,21 +83,25 @@ export function getValidationSchemaWithdrawal(minExpiry: number | string) {
 		name: Yup.string().required(),
 		description: Yup.string().required(),
 		startDate: Yup.date().required(),
-		endDate: Yup.date()
-			.required()
-			.when('startDate', (startDate, schema) => {
-				return schema.min(
-					moment(startDate ?? new Date())
-						.add(minExpiry ?? 0, 'seconds')
-						.toDate(),
-				)
-			}),
+		endDate: validationEndDateSchema(minExpiry),
 		campaignId: Yup.string().required(),
 		amount: Yup.number().required(),
 	})
 }
 
+export function getDescriptionValidationSchemaSpending(minExpiry: number | string) {
+	return Yup.object().shape({
+		name: Yup.string().required(),
+		description: Yup.string().required(),
+		startDate: Yup.date().required(),
+		endDate: validationEndDateSchema(minExpiry),
+		amount: Yup.number().required(),
+		beneficiaryAddress: Yup.string().required(),
+	})
+}
+
 export function Description({
+	type,
 	name,
 	setName,
 	description,
@@ -82,11 +115,21 @@ export function Description({
 	campaignId,
 	setCampaignId,
 	organizationId,
-	isWithdrawal,
+	currencyId,
+	setCurrencyId,
+	beneficiaryAddress,
+	setBeneficiaryAddress,
 }: ComponentProps) {
+	const { selectedApiProvider } = useNetworkContext()
 	const [errorState, setErrorState] = useState<string>()
 	const { data } = useSuccessfulCampaignByOrganisationIdSubscription({ variables: { orgId: organizationId } })
+	const { data: organizationData } = useOrganizationByIdSubscription({ variables: { orgId: organizationId } })
+	const [organization, setOrganization] = useState<Organization>(null)
+	const isWithdrawal = useMemo(() => type === PROPOSAL_KEYS.Withdrawal, [type])
+	const isSpending = useMemo(() => type === PROPOSAL_KEYS.Spending, [type])
 	const config = useConfig()
+	const [currencies, setCurrencies] = useState([])
+	const { t } = useTranslation()
 
 	const handleNameChange = useCallback(
 		(event) => {
@@ -128,6 +171,48 @@ export function Description({
 		[setAmount],
 	)
 
+	const handleBeneficiaryAddressChanged = useCallback(
+		(event) => {
+			if (setBeneficiaryAddress) {
+				try {
+					validationBeneficiaryAddressSchema.validateSync(event.target.value)
+					setErrorState(null)
+				} catch (err) {
+					setErrorState(err.message)
+				}
+
+				setBeneficiaryAddress(event.target.value)
+			}
+		},
+		[setBeneficiaryAddress, setErrorState],
+	)
+
+	const handleStartDateChanged = useCallback(
+		(event) => {
+			if (isNaN(event)) {
+				return
+			}
+
+			if (setStartDate) {
+				setStartDate(event)
+			}
+		},
+		[setStartDate, setErrorState],
+	)
+
+	const handleEndDateChanged = useCallback(
+		(event) => {
+			if (isNaN(event)) {
+				return
+			}
+
+			if (setEndDate) {
+				setEndDate(event)
+			}
+		},
+		[setEndDate, setErrorState],
+	)
+
 	const handleCampaignChange = useCallback(
 		(event) => {
 			const value = event.target.value
@@ -135,6 +220,20 @@ export function Description({
 		},
 		[setCampaignId],
 	)
+
+	const handleCurrencyChanged = useCallback(
+		(event) => {
+			const value = event.target.value
+			try {
+				validationCurrencyIdSchema?.validateSync(value)
+				if (setCurrencyId) {
+					setCurrencyId(value)
+				}
+			} catch (e) {}
+		},
+		[setCurrencyId, validationCurrencyIdSchema],
+	)
+
 	useEffect(() => {
 		setStartDate(new Date())
 		setEndDate(moment(new Date()).add(1, 'day').toDate())
@@ -146,28 +245,44 @@ export function Description({
 		}
 	}, [startDate])
 
+	useEffect(() => {
+		setCurrencies(getCurrenciesForSelect(selectedApiProvider))
+	}, [selectedApiProvider])
+
+	useEffect(() => {
+		if (
+			!organizationData ||
+			!(organizationData.organization instanceof Array) ||
+			organizationData.organization.length === 0
+		)
+			return
+
+		// setOrganization(organizationData.organization[0])
+	}, [organizationData])
+
+	// console.log( 'organizationData.organization[0]', organizationData?.organization[0] )
+
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enLocale}>
-			<BaseForm
-				title={isWithdrawal ? 'Withdrawal Proposal' : 'What’s the name of your proposal?'}
-				error={errorState}
-			>
+			<BaseForm title={CREATE_PROPOSAL_TYPE_TITLES[type]} error={errorState}>
 				{isWithdrawal && (
 					<>
 						<TextField
 							fullWidth
 							variant="outlined"
-							label="Campaign"
-							placeholder="Campaign name"
+							label={t('label:campaign')}
+							placeholder={t('label:campaign_name')}
 							select
 							value={campaignId}
 							onChange={handleCampaignChange}
 						>
-							{data?.campaign?.length === 0 && <MenuItem>No campaign available</MenuItem>}
+							{data?.campaign?.length === 0 && (
+								<MenuItem>{t('page:proposals:settings:no_campaign')}</MenuItem>
+							)}
 							{data?.campaign?.map((campaign) => {
 								return (
 									<MenuItem key={campaign.id} value={campaign.id}>
-										{campaign?.campaign_metadata?.name}
+										{campaign?.name}
 									</MenuItem>
 								)
 							})}
@@ -175,7 +290,7 @@ export function Description({
 						<TextField
 							fullWidth
 							variant="outlined"
-							label="Amount"
+							label={t('label:amount')}
 							type="number"
 							InputProps={{
 								endAdornment: <InputAdornment position="start">GAME</InputAdornment>,
@@ -184,16 +299,78 @@ export function Description({
 							onChange={handleAmountChange}
 						/>
 						<Typography variant="h5" textAlign="center">
-							What’s the name of your proposal?
+							{t('page:proposals:settings:create_title')}
 						</Typography>
 					</>
+				)}
+
+				{isSpending && (
+					<Stack width={'100%'} gap={4}>
+						<Stack display={'flex'} direction={'row'} gap={2}>
+							<FormControl sx={{ flex: 1 }}>
+								<TextField
+									fullWidth
+									variant="outlined"
+									label={`${t('label:amount')}*`}
+									type="number"
+									value={amount}
+									// ToDo: We need treasury balance for the Max button
+									// InputProps={{
+									// 	endAdornment: (
+									// 		<Button variant={'outlined'} color={'secondary'}>
+									// 			Max
+									// 		</Button>
+									// 	),
+									// }}
+									onChange={handleAmountChange}
+								/>
+							</FormControl>
+							<FormControl sx={{ flex: 1 }}>
+								<InputLabel id="currency">{t('label:currency')}*</InputLabel>
+								<Select
+									value={currencyId}
+									onChange={handleCurrencyChanged}
+									labelId="currency"
+									label={`${t('label:currency')}*`}
+								>
+									{currencies.map((x) => (
+										<MenuItem value={x.value} key={x.key}>
+											{t(x.text)}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Stack>
+						{organization && (
+							<TextField
+								disabled={true}
+								InputProps={{
+									startAdornment: (
+										<Stack direction={'row'} flexShrink={0} alignItems={'center'} gap={1}>
+											<Inbox />
+											{`${organization?.name} Treasury`}
+										</Stack>
+									),
+									endAdornment: <>{organization?.treasury}</>,
+								}}
+							/>
+						)}
+						<TextField
+							fullWidth
+							variant="outlined"
+							label={t('label:send_to_address')}
+							value={beneficiaryAddress}
+							onChange={handleBeneficiaryAddressChanged}
+						/>
+						<Typography variant={'subtitle2'}>{t('page:proposals:settings:create_description')}</Typography>
+					</Stack>
 				)}
 
 				<TextField
 					fullWidth
 					onChange={handleNameChange}
 					value={name}
-					label="Proposal Name"
+					label={t('label:proposal_name')}
 					variant="outlined"
 					error={!!errorState}
 				/>
@@ -203,26 +380,26 @@ export function Description({
 					minRows={4}
 					onChange={handleDescriptionChange}
 					value={description}
-					label="Proposal Description"
+					label={t('label:proposal_description')}
 					variant="outlined"
 					error={!!errorState}
 				/>
 				<Stack direction="row" spacing={1} justifyContent="space-between" width="100%">
 					<DateTimePicker
-						label="Start date"
+						label={t('label:start_date')}
 						minDate={new Date()}
 						value={startDate}
-						onChange={setStartDate}
+						onChange={handleStartDateChanged}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}
 					/>
 					<DateTimePicker
-						label="End date"
+						label={t('label:end_date')}
 						minDate={moment(startDate ?? new Date())
 							.add(config?.PROPOSAL_MIN_EXPIRY_IN_SECONDS ?? 0, 'seconds')
 							.toDate()}
 						value={endDate}
-						onChange={setEndDate}
+						onChange={handleEndDateChanged}
 						renderInput={(params) => <TextField {...params} />}
 						ampm={false}
 					/>

@@ -21,11 +21,16 @@ const StyledDropzone = styled('div')(({ theme }) => ({
 }))
 
 export function Dropzone({ children, options, onFilesSelected }: ComponentProps) {
-	const { getRootProps, acceptedFiles } = useDropzone(options ?? {})
+	const { getRootProps, getInputProps, acceptedFiles, open } = useDropzone(options ?? {})
 
 	useEffect(() => {
 		onFilesSelected(acceptedFiles)
 	}, [acceptedFiles])
 
-	return <StyledDropzone {...getRootProps()}>{children}</StyledDropzone>
+	return (
+		<StyledDropzone {...getRootProps()}>
+			<input {...getInputProps()} />
+			{children}
+		</StyledDropzone>
+	)
 }

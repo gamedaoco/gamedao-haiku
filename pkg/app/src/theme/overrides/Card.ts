@@ -2,6 +2,12 @@ import { Theme } from '@mui/material/styles'
 
 // ----------------------------------------------------------------------
 
+declare module '@mui/material/Card' {
+	interface CardPropsVariantOverrides {
+		glass: true
+	}
+}
+
 export default function Card(theme: Theme) {
 	return {
 		MuiCard: {
@@ -9,8 +15,8 @@ export default function Card(theme: Theme) {
 				root: {
 					position: 'relative',
 					boxShadow: theme.customShadows.card,
-					borderRadius: Number(theme.shape.borderRadius) * 20,
-					borderColor: theme.palette.grey[500],
+					borderRadius: theme.shape.borderRadiusLg,
+					border: `1px solid #ffffff22`,
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
@@ -21,7 +27,6 @@ export default function Card(theme: Theme) {
 						width: '6rem',
 						height: '6rem',
 						boxShadow: 'none',
-						borderRadius: Number(theme.shape.borderRadius) * 50,
 						border: 'none',
 						zIndex: 0,
 					},
@@ -33,6 +38,15 @@ export default function Card(theme: Theme) {
 						border: 1,
 						borderStyle: 'dashed',
 						':hover': { opacity: 0.8 },
+					},
+				},
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+						border: `1px solid #ffffff11`,
 					},
 				},
 			],
@@ -52,7 +66,7 @@ export default function Card(theme: Theme) {
 			styleOverrides: {
 				root: {
 					position: 'relative',
-					borderRadius: Number(theme.shape.borderRadius) * 20,
+					borderRadius: theme.shape.borderRadiusMd,
 				},
 			},
 		},

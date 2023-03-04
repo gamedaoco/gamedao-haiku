@@ -2,16 +2,20 @@ import { useRouter } from 'next/router'
 
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useTranslation } from 'react-i18next'
-import { AccountTabs } from 'src/@types/account'
+import { AccountTabs } from 'constants/account'
 
-import { AccountPageGeneralLayout } from 'components/Account/generalLayout'
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/v2'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
+
 import { NoWalletConnected } from 'components/NoWalletConnected/noWalletConnected'
+import { Account } from 'dapps/account'
 
-export function AccountByTab() {
+export function Page() {
 	const { t } = useTranslation()
 	const { query } = useRouter()
+
 	const param = query?.path
+
 	const accountState = useCurrentAccountState()
 	if (!accountState) {
 		return <NoWalletConnected />
@@ -19,9 +23,18 @@ export function AccountByTab() {
 
 	return (
 		<Layout showHeader showSidebar title={t('page:account:title')}>
-			<AccountPageGeneralLayout param={param as AccountTabs} />
+			<Box sx={{ mb: 2 }}>
+				<Grid container justifyContent="space-between" spacing={3}>
+					<Grid item>
+						<Typography variant="h3">Dashboard</Typography>
+					</Grid>
+					<Grid item></Grid>
+				</Grid>
+			</Box>
+
+			<Account param={param as AccountTabs} />
 		</Layout>
 	)
 }
 
-export default AccountByTab
+export default Page

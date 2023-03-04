@@ -8,12 +8,12 @@ import { getCampaign, getCampaignContributor } from '../../../database/getters';
 async function handleCampaignContributedEvent(context: EventHandlerContext) {
 	let eventName = 'Flow.Contributed';
 	let raw_event = new FlowContributedEvent(context);
-	if (!raw_event.isV61) {
+	if (!raw_event.isV62) {
 		console.error(`Unknown version: ${eventName}`);
 		return;
 	}
 	let store = context.store;
-	let event = raw_event.asV61;
+	let event = raw_event.asV62;
 
 	let contributor = addressCodec.encode(event.sender);
 	let campaignId = hashToHexString(event.campaignId);

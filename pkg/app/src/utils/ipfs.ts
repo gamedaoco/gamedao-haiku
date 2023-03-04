@@ -1,12 +1,14 @@
 import { CID, create } from 'ipfs-http-client'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
-export function parseIpfsHash(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
+const ipfsGateway = process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY || ''
+
+export function parseIpfsHash(ipfsHash: string, gateway: string = ipfsGateway) {
 	let hashPart = ipfsHash?.split('/')
 	return gateway + 'ipfs/' + hashPart?.[hashPart?.length - 1]
 }
 
-export async function fetchIpfsJson(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
+export async function fetchIpfsJson(ipfsHash: string, gateway: string = process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY) {
 	try {
 		const response = await fetch(parseIpfsHash(ipfsHash, gateway), { method: 'GET' })
 		return await response.json()
@@ -17,7 +19,7 @@ export async function fetchIpfsJson(ipfsHash: string, gateway: string = 'https:/
 	return null
 }
 
-export async function fetchIpfsBlob(ipfsHash: string, gateway: string = 'https://gateway.ipfs.io/') {
+export async function fetchIpfsBlob(ipfsHash: string, gateway: string = ipfsGateway) {
 	try {
 		const response = await fetch(parseIpfsHash(ipfsHash, gateway), { method: 'GET' })
 		return await response.blob()
@@ -29,12 +31,14 @@ export async function fetchIpfsBlob(ipfsHash: string, gateway: string = 'https:/
 }
 
 export async function uploadFileToIpfs(file: File): Promise<CID> {
+	// console.log(process.env.NEXT_PUBLIC_IPFS_HOST)
+
 	try {
 		const auth =
 			'Basic ' +
-			Buffer.from('1v04L2wj5JmI0JgKF5KztV0oN8o' + ':' + '85547c6003abb67a6335469d1aa6a3a3').toString('base64')
+			Buffer.from(process.env.NEXT_PUBLIC_IPFS_KEY + ':' + process.env.NEXT_PUBLIC_IPFS_SECRET).toString('base64')
 		const client = await create({
-			url: 'https://ipfs.infura.io:5001/api/v0',
+			url: process.env.NEXT_PUBLIC_IPFS_HOST,
 			headers: {
 				authorization: auth,
 			},

@@ -1,3 +1,5 @@
+// whoever came up with this implementation idea shall...
+
 import { useCallback } from 'react'
 
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
@@ -41,6 +43,25 @@ export function useTmpOrganisationState(): TMPOrganisationState {
 		`TmpOrg-${address}-description`,
 		defaultValues.description,
 	)
+
+	// adding this temporarily, this whole storage and caching needs a refactor...
+
+	const [url, setUrl] = useLocalStorage<string>(
+		`TmpOrg-${address}-url`,
+		defaultValues.url,
+	)
+	const [location, setLocation] = useLocalStorage<string>(
+		`TmpOrg-${address}-location`,
+		defaultValues.location,
+	)
+	// TODO: type array
+	const [tags, setTags] = useLocalStorage<any>(
+		`TmpOrg-${address}-tags`,
+		defaultValues.tags,
+	)
+
+	//
+
 	const [metaDataCID, setMetaDataCID] = useLocalStorage<string>(
 		`TmpOrg-${address}-metaDataCID`,
 		defaultValues.metaDataCID,
@@ -62,6 +83,9 @@ export function useTmpOrganisationState(): TMPOrganisationState {
 		setDescription(defaultValues.description)
 		setMetaDataCID(defaultValues.metaDataCID)
 		setDeposit(defaultValues.deposit)
+		setUrl(defaultValues.url)
+		setLocation(defaultValues.location)
+		setTags(defaultValues.tags)
 	}, [
 		setSelectedType,
 		setNameState,
@@ -76,6 +100,9 @@ export function useTmpOrganisationState(): TMPOrganisationState {
 		setDescription,
 		setMetaDataCID,
 		setDeposit,
+		setUrl,
+		setLocation,
+		setTags,
 	])
 
 	return {
@@ -106,5 +133,11 @@ export function useTmpOrganisationState(): TMPOrganisationState {
 		setMetaDataCID: setMetaDataCID,
 		setDeposit: setDeposit,
 		clearAll: clearAll,
+		url: url,
+		setUrl: setUrl,
+		location: location,
+		setLocation: setLocation,
+		tags: tags,
+		setTags: setTags,
 	}
 }

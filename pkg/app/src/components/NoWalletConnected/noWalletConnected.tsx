@@ -1,13 +1,15 @@
 import { useCallback } from 'react'
-
-import { Button, Paper, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-
-import { Layout } from 'components/Layouts/default/layout'
+import { Layout } from 'layouts/default/layout'
+import { Button, Paper, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 
 export function NoWalletConnected() {
+	const theme = useTheme()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
 	const openUrl = useCallback((url: string) => {
-		window.open(url, '_blank', 'noopener').focus()
+		window.open(url, '_blank', 'noreferrer,noopener').focus()
 	}, [])
 	const { t } = useTranslation()
 	return (
@@ -22,30 +24,41 @@ export function NoWalletConnected() {
 						fontWeight: 800,
 					}}
 				>
-					{t('label:connect_wallet')}
+					{/* {t('label:connect_wallet')} */}
+					Connect your wallet to use GameDAO&apos;s native web3 functionality. This will allow you to take
+					true control over your personal data and collectable items.
 				</Typography>
-				<Stack direction="row" justifyContent="end" spacing={4}>
-					<Button size="small" onClick={() => openUrl('https://docs.gamedao.co/')}>
+				<Stack direction={isMd ? 'row' : 'column-reverse'} justifyContent="space-between" spacing={[2, 4]}>
+					<Button
+						fullWidth={isMd ? false : true}
+						size="large"
+						color="secondary"
+						onClick={() => openUrl('https://docs.gamedao.co/')}
+					>
 						{t('button:ui:learn_more')}
 					</Button>
-					<Button
-						size="small"
-						variant="outlined"
-						onClick={() => openUrl('https://polkadot.js.org/extension/')}
-					>
-						{t('button:ui:download_extension', {
-							extension: 'Polkadot',
-						})}
-					</Button>
-					<Button
-						size="small"
-						variant="outlined"
-						onClick={() => openUrl('https://polkadot.js.org/extension/')}
-					>
-						{t('button:ui:download_extension', {
-							extension: 'Talisman',
-						})}
-					</Button>
+					<Stack direction={isMd ? 'row' : 'column-reverse'} justifyContent="end" spacing={[2, 4]}>
+						<Button
+							fullWidth={isMd ? false : true}
+							size="large"
+							variant="outlined"
+							color="secondary"
+							onClick={() => openUrl('https://polkadot.js.org/extension/')}
+						>
+							Get Polkadot Wallet
+						</Button>
+						<Button
+							fullWidth={isMd ? false : true}
+							size="large"
+							variant="pink"
+							onClick={() => openUrl('https://www.talisman.xyz/')}
+						>
+							Get Talisman Wallet
+							{/* {t('button:ui:download_extension', {
+								extension: 'Talisman',
+							})}*/}
+						</Button>
+					</Stack>
 				</Stack>
 			</Stack>
 		</Layout>

@@ -62,7 +62,8 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Inter:400,600,800&display=swap"
 					/>
-					<link rel="stylesheet" href="/iconfont.css" />
+					{/*<link rel="stylesheet" href="/iconfont.css" />*/}
+					<link rel="stylesheet" href="https://use.typekit.net/glg5whl.css" />
 				</Head>
 				<body
 					style={{
@@ -73,14 +74,14 @@ export default class MyDocument extends Document {
 				>
 					<Main />
 					<NextScript />
-					<style jsx global>{`
+					{/*					<style jsx global>{`
 						#__next {
 							height: 100%;
 						}
 						* {
 							color: red !important;
 						}
-					`}</style>
+					`}</style>*/}
 				</body>
 			</Html>
 		)

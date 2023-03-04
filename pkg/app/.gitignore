@@ -29,12 +29,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env.development.local
-.env.test.local
-.env.production.local
-
 # vercel
 .vercel
 
 **/sitemap.xml
+
+# local env files
+.env
+**/*.local
+*.production

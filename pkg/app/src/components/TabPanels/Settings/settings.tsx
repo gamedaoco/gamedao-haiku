@@ -17,31 +17,31 @@ export function SettingsOverview({ organizationState }: ComponentProps) {
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
-				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw">
+				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<About
-						description={organizationState?.organization_metadata?.description}
-						header={organizationState?.organization_metadata?.header}
-						logo={organizationState?.organization_metadata?.logo}
+						description={organizationState?.description}
+						header={organizationState?.header}
+						logo={organizationState?.logo}
 					/>
 				</Stack>
 			</Grid>
 			<Grid item xs={12}>
-				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw">
+				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<AccessType mode={organizationState?.access_model} />
 				</Stack>
 			</Grid>
 			<Grid item xs={12}>
-				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw">
+				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<MemberType feeType={organizationState?.fee_model} feeAmount={+organizationState?.fee_model} />
 				</Stack>
 			</Grid>
 			<Grid item xs={12}>
-				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw">
+				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<MemberLimit memberLimit={organizationState?.member_limit} />
 				</Stack>
 			</Grid>
 			<Grid item xs={12}>
-				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw">
+				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<Control organizationType={organizationState?.type} />
 				</Stack>
 			</Grid>

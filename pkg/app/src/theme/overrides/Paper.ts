@@ -7,6 +7,7 @@ declare module '@mui/material/Paper' {
 		mask: true
 		primary: true
 		secondary: true
+		glass: true
 	}
 }
 
@@ -14,7 +15,7 @@ export default function Paper(theme: Theme) {
 	return {
 		MuiPaper: {
 			defaultProps: {
-				elevation: 0,
+				elevation: 10,
 			},
 
 			variants: [
@@ -34,6 +35,16 @@ export default function Paper(theme: Theme) {
 						borderBottomLeftRadius: 0,
 					},
 				},
+				{
+					props: { variant: 'glass' },
+					style: {
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+						border: `1px solid #ffffff11`,
+						borderRadius: theme.shape.borderRadiusLg,
+					},
+				},
 			],
 
 			styleOverrides: {
@@ -41,7 +52,7 @@ export default function Paper(theme: Theme) {
 					backgroundImage: 'none',
 					position: 'relative',
 					boxShadow: theme.customShadows.card,
-					borderRadius: Number(theme.shape.borderRadius) * 20,
+					borderRadius: theme.shape.borderRadiusLg,
 					backgroundColor: theme.palette.background.paper,
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},

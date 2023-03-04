@@ -7,7 +7,7 @@ export function useDisplayValues(): DisplayValues {
 
 	useEffect(() => {
 		if (error) {
-			console.error('There is an error when querying the display values')
+			console.error('There was an error when querying the display values')
 		}
 	}, [error])
 

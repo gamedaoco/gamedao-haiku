@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Person } from '@mui/icons-material'
 import { Box, Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
@@ -12,8 +12,9 @@ import { RadioItem } from 'components/Forms/modules/radioItem'
 const validationFeeSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
+	.required()
 
-const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit')
+const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit').required()
 
 interface ComponentProps {
 	selectedMode: number
@@ -45,37 +46,34 @@ export function Settings({
 	setFeeAmount,
 }: ComponentProps) {
 	const { t } = useTranslation()
+
+	const [memberLimitChangeError, setMemberLimitChangeError] = useState(null)
 	const handleMemberLimitChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
+				if (setMemberLimit) setMemberLimit(value < 0 ? 0 : value)
+				if (!value) return setMemberLimitChangeError(t('label:required'))
 				validationMemberLimitSchema?.validateSync(value)
-				if (setMemberLimit) {
-					setMemberLimit(value < 0 ? 0 : value)
-				}
+				setMemberLimitChangeError(null)
 			} catch (e) {
-				createWarningNotification(t(e.message))
+				setMemberLimitChangeError(t(e.message))
 			}
 		},
 		[setMemberLimit, validationMemberLimitSchema, t],
 	)
 
+	const [feeAmountChangeError, setFeeAmountChangeError] = useState(null)
 	const handleFeeAmountChange = useCallback(
 		(event) => {
 			const value = event.target.value
-			if (!value) {
-				return
-			}
 			try {
+				if (setFeeAmount) setFeeAmount(value < 0 ? 0 : value)
+				if (!value || value < 1) return setFeeAmountChangeError(t('label:required'))
 				validationFeeSchema?.validateSync(value)
-				if (setFeeAmount) {
-					setFeeAmount(value < 0 ? 0 : value)
-				}
+				setFeeAmountChangeError(null)
 			} catch (e) {
-				createWarningNotification(t(e.message))
+				setFeeAmountChangeError(t(e.message))
 			}
 		},
 		[setFeeAmount, validationFeeSchema, t],
@@ -116,45 +114,54 @@ export function Settings({
 				value={1}
 				selectedValue={selectedMode}
 				onChange={setSelectedMode}
+				// disabled
 			/>
 
 			{selectedMode === 1 && (
 				<Box sx={{ width: '100%' }}>
 					<FormControlLabel
 						sx={{ display: 'block' }}
-						control={<Checkbox checked={hasWhitelist} onChange={handleWhitelistChange} />}
-						label="Whitelist (Members can be added later)"
+						control={<Checkbox checked={hasApplication} onChange={handleApplicationChange} />}
+						label="Apply + Approve"
 					/>
 					<FormControlLabel
 						sx={{ display: 'block' }}
-						control={<Checkbox checked={hasApplication} onChange={handleApplicationChange} />}
-						label="Application"
+						control={<Checkbox checked={hasWhitelist} onChange={handleWhitelistChange} />}
+						label="Whitelist (Members can be added later)"
 					/>
 				</Box>
 			)}
 
 			<Divider variant="fullWidth" sx={{ display: 'block', width: '100%', borderStyle: 'dashed' }} />
 			<Typography variant="h5" textAlign="center">
-				{'Will your organization collect a fee for members to join?'}
+				{t('page:organisations:settings:member_type:sub_title')}
 			</Typography>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={'No Fee'}
-				description={'Members can join the organization without a fee'}
+				title={t('page:organisations:settings:member_type:radio_button_no_fee:title')}
+				description={t('page:organisations:settings:member_type:radio_button_no_fee:description')}
 				value={0}
 				selectedValue={selectedFee}
 				onChange={setSelectedFee}
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={'Fee'}
-				description={'When members join the organization they pay a fee'}
+				title={t('page:organisations:settings:member_type:radio_button_reserve_fee:title')}
+				description={t('page:organisations:settings:member_type:radio_button_reserve_fee:description')}
 				value={1}
 				selectedValue={selectedFee}
 				onChange={setSelectedFee}
 			/>
+			<RadioItem
+				icon={<Person sx={{ width: '40px', height: '40px' }} />}
+				title={t('page:organisations:settings:member_type:radio_button_transfer_fee:title')}
+				description={t('page:organisations:settings:member_type:radio_button_transfer_fee:description')}
+				value={2}
+				selectedValue={selectedFee}
+				onChange={setSelectedFee}
+			/>
 
-			{selectedFee === 1 && (
+			{selectedFee > 0 && (
 				<TextField
 					fullWidth
 					type="number"
@@ -165,6 +172,8 @@ export function Settings({
 						endAdornment: <Typography variant="body2">GAME</Typography>,
 					}}
 					variant="outlined"
+					error={!!feeAmountChangeError}
+					helperText={feeAmountChangeError}
 				/>
 			)}
 
@@ -186,6 +195,8 @@ export function Settings({
 				value={memberLimit}
 				label="Member limit"
 				variant="outlined"
+				error={!!memberLimitChangeError}
+				helperText={memberLimitChangeError}
 			/>
 		</BaseForm>
 	)
