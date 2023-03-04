@@ -58,9 +58,6 @@ export default class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
-					<meta name="apple-mobile-web-app-capable" content="yes" />
-					<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
 					<link
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Inter:400,600,800&display=swap"

@@ -84,7 +84,7 @@ export const hero = [
 		],
 		bg: '#111',
 		img: '/partners/wave-esports-white.png',
-		img_height: '64px',
+		img_height: '64',
 		// title: `COMMUNITY DISCOVERY`,
 		// description: `Take the leap and
 		// leverage the power of community
@@ -150,7 +150,7 @@ export const hero = [
 		],
 		bg: '#111',
 		img: '/v3/svg/GameDAO-color-h-wht-m.svg',
-		img_height: '48px',
+		img_height: '48',
 	},
 ]
 

@@ -3,6 +3,7 @@ import React, { Fragment, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
+import { AccountSelector } from 'src/components'
 
 import {
 	RiShieldLine,
@@ -175,6 +176,8 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
+					<AccountSelector />
+
 					{leftNav.map((item) => {
 						return (
 							<Fragment key={item.name}>
