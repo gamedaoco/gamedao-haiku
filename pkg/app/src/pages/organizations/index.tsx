@@ -25,6 +25,16 @@ import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
 
+const filterMap = [
+	'0xe589c0c1b78555556a090342a09e55e87650118518c6094b988e6659e91c2629',
+	'0x8a6cac07805460ea2a507102da9ad0983ee9e8f44dd5cc1203da0f4da2551259',
+	'0x30aa3ebae427d327fef0c9e5e83b6961249013b04467a6fb10222ce529e56ee0',
+	'0xc674bedeb399d1b2f1cb6800fb6f3ab6324131687f0d2166a6b4fd953874d9b2',
+]
+
+const applyFilter = (data: Organization[], filter: string[]): Organization[] =>
+	data?.filter((item) => !filter.includes(item.id))
+
 interface FiltersInterface {
 	query: string
 	sortOption: Organization_Order_By
@@ -60,7 +70,14 @@ export function OrganisationPage() {
 		}
 	}, [organizationsCount?.error])
 
-	const paginatedData = applyPagination(organizationsData?.data?.organization?.slice() as Organization[], bodyCount)
+	const organizations = applyFilter(organizationsData?.data?.organization?.slice() as Organization[], filterMap)
+
+	const paginatedData = applyPagination(
+		organizations,
+		// organizationsData?.data?.organization?.slice() as Organization[]
+		bodyCount,
+	)
+
 	const { push } = useRouter()
 	const { w3Enabled, connectWallet, selectedAccount } = useExtensionContext()
 
