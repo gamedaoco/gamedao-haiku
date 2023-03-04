@@ -53,7 +53,7 @@ export function HeaderMobile({ onSidebarOpen, sidebarOpen, noContainer }: Compon
 						alignItems: 'center',
 						position: 'relative',
 						height: '90px',
-						zIndex: 9000,
+						zIndex: 1000,
 						// mb: '90px',
 					}}
 				>
