@@ -12,6 +12,13 @@ const developmentEndpoints: Endpoints = [
 		healthCheck: 'http://localhost:9999/healthz',
 		chain: 'wss://localhost:9944',
 	},
+	{
+		image: '/svg/z-ctrl-45-wht.svg',
+		name: 'Rococo Parachain Testnet',
+		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
+		healthCheck: 'https://graph.rococo.sub.zero.io/health',
+		chain: 'wss://node.rococo.sub.zero.io',
+	},
 ]
 
 const productionEndpoints: Endpoints = [
@@ -42,6 +49,9 @@ const productionEndpoints: Endpoints = [
 ]
 
 export const ENDPOINTS: Endpoints =
-	ENVIRONMENT === Environment.Development ? [...developmentEndpoints, ...productionEndpoints] : productionEndpoints
+
+	ENVIRONMENT === Environment.Development
+	? [...developmentEndpoints, ...productionEndpoints]
+	: productionEndpoints
 
 export const getConnectedEndpoint = () => ENDPOINTS.find((e) => e.default)
