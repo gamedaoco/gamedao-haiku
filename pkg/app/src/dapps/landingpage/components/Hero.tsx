@@ -49,7 +49,6 @@ const Item = (props) => {
 		defaultMatches: true,
 	})
 	const imageHeight = isSm ? props.item.img_height : props.item.img_height / 2
-	console.log(props.item.img_height, imageHeight)
 
 	return (
 		<>
