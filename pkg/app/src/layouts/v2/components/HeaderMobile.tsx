@@ -9,14 +9,16 @@ import { AccountSelector, FontIcons } from 'src/components'
 import { NavbarMobile } from './NavbarMobile'
 
 /* eslint-disable @next/next/no-img-element */
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
+// const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
+const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
 	sidebarOpen: boolean
+	noContainer?: boolean
 }
 
-export function HeaderMobile({ onSidebarOpen, sidebarOpen }: ComponentProps) {
+export function HeaderMobile({ onSidebarOpen, sidebarOpen, noContainer }: ComponentProps) {
 	const theme = useTheme()
 	const [openMenu, setOpenMenu] = useState<boolean>(false)
 
@@ -35,18 +37,24 @@ export function HeaderMobile({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 				elevation={0}
 				sx={{
 					borderRadius: 0,
+					border: 0,
 					zIndex: (theme) => theme.zIndex.drawer + 1,
+					boxShadow: 'none',
+					background: 'transparent',
 				}}
 			>
 				<Toolbar
 					sx={{
-						backgroundColor: `#00000099`,
+						backgroundColor: 'transparent', //`#00000099`,
 						// backgroundColor: theme.palette.background.default,
-						borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
+						// borderBottom: `1px solid ${theme.palette.grey[500_32]}`,
+						borderBottom: noContainer ? 0 : `1px solid ${theme.palette.grey[500_32]}`,
 						justifyContent: 'space-between',
 						alignItems: 'center',
 						position: 'relative',
 						height: '90px',
+						zIndex: 9000,
+						// mb: '90px',
 					}}
 				>
 					<Button
@@ -91,7 +99,7 @@ export function HeaderMobile({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 						<Menu />
 					</Button>
 				</Toolbar>
-				<Box
+				{/* <Box
 					sx={{
 						display: 'flex',
 						backgroundColor: theme.palette.background.default,
@@ -102,7 +110,7 @@ export function HeaderMobile({ onSidebarOpen, sidebarOpen }: ComponentProps) {
 					}}
 				>
 					<AccountSelector />
-				</Box>
+				</Box> */}
 			</AppBar>
 			<NavbarMobile onClose={handleMenuClose} open={openMenu} />
 		</>

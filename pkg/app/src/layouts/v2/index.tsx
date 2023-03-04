@@ -77,7 +77,11 @@ export function Layout({
 					(isMd ? (
 						<Header onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} noContainer={noContainer} />
 					) : (
-						<HeaderMobile onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />
+						<HeaderMobile
+							onSidebarOpen={toggleSidebar}
+							sidebarOpen={sidebarOpen}
+							noContainer={noContainer}
+						/>
 					))}
 				{/*<AnimatePresence mode="wait" initial={false}>*/}
 				{/*<Transition>*/}

@@ -44,6 +44,12 @@ const Backdrop = ({ src }) => {
 }
 
 const Item = (props) => {
+	const theme = useTheme()
+	const isSm = useMediaQuery(theme.breakpoints.up('md'), {
+		defaultMatches: true,
+	})
+	const imageHeight = isSm ? props.item.img_height : props.item.img_height / 2
+
 	return (
 		<>
 			<Box
@@ -63,7 +69,7 @@ const Item = (props) => {
 					// minHeight: 'calc( 100vh )',
 					height: '100vh',
 					position: 'absolute',
-					top: -90,
+					top: 0,
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'flex-end',
@@ -71,7 +77,7 @@ const Item = (props) => {
 					// border: '5px solid yellow'
 				}}
 			>
-				<Stack direction="column" justifyContent="flex-end" alignItems="flex-start" spacing={2}>
+				<Stack direction="column" justifyContent="flex-end" alignItems="flex-start" spacing={[1, 1, 2]}>
 					{props.item.img && (
 						<Box
 							px={[2, 4, 6]}
@@ -80,7 +86,7 @@ const Item = (props) => {
 								filter: 'drop-shadow( 0 15px 20px rgba(0,0,0,1) )',
 							}}
 						>
-							<img src={props.item.img} height={props.item.img_height} width="auto" />
+							<img src={props.item.img} height={imageHeight} width="auto" />
 						</Box>
 					)}
 					{!props.item.img && (
@@ -102,7 +108,7 @@ const Item = (props) => {
 						{props.item.description}
 					</Typography>
 					{props.item.links && (
-						<Typography variant={'hero2'} px={[2, 4, 6]} pt={4} sx={{ lineHeight: '95%' }}>
+						<Typography variant={'hero2'} px={[2, 4, 6]} pt={[2, 4]} sx={{ lineHeight: '95%' }}>
 							{props.item.links.map((e, i) => (
 								<Link href={e.url} key={i}>
 									<Button size="small" variant="outlined" sx={{ mr: 2, mb: 2 }}>

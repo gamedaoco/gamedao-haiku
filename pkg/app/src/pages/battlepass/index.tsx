@@ -25,11 +25,11 @@ export function Page() {
 						<Typography variant="h3">Battlepass</Typography>
 					</Grid>
 					<Grid item>
-						{address && (
+						{/* {address && (
 							<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleCreate}>
 								{t('button:ui:create')}
 							</Button>
-						)}
+						)} */}
 					</Grid>
 				</Grid>
 				<Grid item>
