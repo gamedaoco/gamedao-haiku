@@ -37,7 +37,7 @@ export function Landingpage() {
 		<Box>
 			{hero && <Hero />}
 
-			{/* <Newsletter /> */}
+			<Newsletter />
 
 			<Container maxWidth="xl" disableGutters>
 				{/* {intro && <Intro />} */}

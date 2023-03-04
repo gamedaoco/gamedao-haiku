@@ -203,7 +203,7 @@ export const teaser1 = {
 }
 
 export const transform = {
-	title: `Next Level Fan Engagement`,
+	title: `GameDAO Battlepass: Next Level Fan Engagement`,
 	content: [
 		{
 			title: `🤲 Community Integration`,

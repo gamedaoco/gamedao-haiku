@@ -6,7 +6,7 @@ import { List, ListItem, ListItemIcon } from '@mui/material'
 import { Hero, Team, Partners, Supporters } from './'
 
 export const Transform = () => (
-	<Paper sx={{ p: [2, 4], my: 4, height: '100%' }} elevation={0} variant="glass">
+	<Paper sx={{ p: [2, 4], height: '100%' }} elevation={0} variant="glass">
 		<Grid container spacing={[2, 4]}>
 			<Grid key={'title'} container item xs={12} direction="row">
 				<Typography variant={'hero1'}>{transform.title} </Typography>
