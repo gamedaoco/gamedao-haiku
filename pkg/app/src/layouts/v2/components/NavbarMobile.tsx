@@ -39,7 +39,8 @@ import { FontIcons } from 'src/components'
 import Link from 'components/Link'
 
 /* eslint-disable @next/next/no-img-element */
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
+// const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
+const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
 
 interface ComponentProps {
 	onClose: () => void
@@ -140,6 +141,7 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 					alignItems: 'center',
 					position: 'relative',
 					height: '90px',
+					pt: 1,
 				}}
 			>
 				<Box></Box>
