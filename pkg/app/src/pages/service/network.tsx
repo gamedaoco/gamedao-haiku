@@ -12,7 +12,7 @@ export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar>
 			<Typography variant={'h3'}>Network Selector</Typography>
-			<SelectNetworkDialog open={open} onClose={onClose} />
+			<SelectNetworkDialog open={open} onClose={() => onClose} />
 		</Layout>
 	)
 }
