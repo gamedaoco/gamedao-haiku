@@ -12,7 +12,7 @@ export function Page() {
 	return (
 		<Layout showHeader showFooter showSidebar>
 			<Typography variant={'h3'}>Account Selector</Typography>
-			<SelectAccountDialog open={open} onClose={() => onClose} />
+			<SelectAccountDialog open={open} onClose={onClose} />
 		</Layout>
 	)
 }
