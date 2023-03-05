@@ -20,16 +20,18 @@ export const config = { api: { bodyParser: false } }
 // 	}
 //   }
 
-const query = `mutation Payment($securityToken: String!, $battlepass: String!, $identityUuid: String!, $paymentToken: String!) {
-	processPayment(
-		securityToken: $securityToken,
-		battlepass: $battlepass,
-		identityUuid: $identityUuid,
-		paymentToken: $paymentToken
-) {
-		battlepass
-		identityUuid
-		paymentToken
+const query = `mutation Payment($token: String!, $bpid: String!, $uuid: String!, $txid: String!) {
+	BattlepassBot {
+		processPayment(
+			securityToken: $token,
+			battlepass: $bpid,
+			identityUuid: $uuid,
+			paymentToken: $txid
+		) {
+			battlepass
+			identityUuid
+			paymentToken
+		}
 	}
 }`
 
@@ -37,12 +39,15 @@ const battlepass_discord_hook = process.env.DISCORD_BATTLEPASS_LOG_WEBHOOK
 const battlepass_payment_key = process.env.BATTLEPASS_PAYMENT_KEY
 const battlepass_url = getConnectedEndpoint().url
 
-const processPayment = async (
-	securityToken, // api key
-	battlepass, // clear
-	identityUuid, // clear
-	paymentToken, // the payment token
-) => {
+const handlePaymentIntentSucceeded = async (paymentIntent) => {
+	console.log('sending receipt', paymentIntent)
+
+	const bpid = ''
+	const uuid = ''
+	const txid = paymentIntent.id
+
+	console.log(bpid, uuid, txid)
+
 	fetch(battlepass_url, {
 		method: 'POST',
 		headers: {
@@ -51,11 +56,16 @@ const processPayment = async (
 		},
 		body: JSON.stringify({
 			query,
-			variables: { securityToken, battlepass, identityUuid, paymentToken },
+			variables: {
+				token: battlepass_payment_key,
+				bpid: bpid,
+				uuid: uuid,
+				txid: txid,
+			},
 		}),
 	})
 		.then((r) => r.json())
-		.then((data) => console.log('data returned:', data))
+		.then((data) => console.log('res:', data))
 }
 
 const stripe_secret_key = process.env.STRIPE_SECRET_KEY
@@ -69,12 +79,10 @@ const handler = async (req, res) => {
 
 		// verify signature
 		try {
-			console.log('verifying stripe signature')
 			const buf = await buffer(req)
 			const sig = req.headers['stripe-signature']
-
+			// console.log(buf.toString())
 			event = stripe.webhooks.constructEvent(buf.toString(), sig, stripe_webhooks_secret)
-			console.log(event)
 		} catch (err) {
 			return res.status(400).send(`⚠️  Webhook signature verification failed: ${err.message}`)
 		}
@@ -87,18 +95,18 @@ const handler = async (req, res) => {
 			case 'payment_intent.succeeded':
 				const paymentIntent = event.data.object
 				console.log(`💰 Payment received!`)
-				// Then define and call a method to handle the successful payment intent.
-				// handlePaymentIntentSucceeded(paymentIntent);
+				handlePaymentIntentSucceeded(paymentIntent)
 				break
-			case 'payment_method.attached':
-				const paymentMethod = event.data.object
-				// Then define and call a method to handle the successful attachment of a PaymentMethod.
-				// handlePaymentMethodAttached(paymentMethod);
-				break
+
+			// case 'payment_method.attached':
+			// const paymentMethod = event.data.object
+			// Then define and call a method to handle the successful attachment of a PaymentMethod.
+			// handlePaymentMethodAttached(paymentMethod);
+			// break
 			default:
 				console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
 		}
-		res.json({ received: true })
+		res.status(200).json({ received: true })
 	} else {
 		res.setHeader('Allow', 'POST')
 		res.status(405).end('Method Not Allowed')

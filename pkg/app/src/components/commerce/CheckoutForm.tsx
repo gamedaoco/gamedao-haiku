@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useRef, useImperativeHandle } from 'react'
+import { useAppContext } from 'providers/app/modules/context'
 
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { Box, Button, Stack, Typography, Input, TextField } from '@mui/material'
 import { Loader } from 'components/Loader'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
-
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
 const clientSecret = process.env.STRIPE_SECRET_KEY
@@ -23,6 +23,7 @@ const protocol = process.env.NEXT_PUBLIC_ENVIRONMENT === 'Development' ? '' : 'h
 export const CheckoutForm = () => {
 	const stripe = useStripe()
 	const elements = useElements()
+	const { user } = useAppContext()
 
 	const [email, setEmail] = React.useState('')
 	const [message, setMessage] = React.useState(null)
@@ -60,7 +61,13 @@ export const CheckoutForm = () => {
 			// redirect: 'if_required',
 			confirmParams: {
 				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
-				receipt_email: email,
+				// receipt_email: email,
+				payment_method_data: {
+					billing_details: {
+						name: user.name || user.uuid,
+						email: user.email,
+					},
+				},
 			},
 		})
 

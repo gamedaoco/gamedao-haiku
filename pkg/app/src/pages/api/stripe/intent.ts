@@ -8,7 +8,7 @@ const calculateOrderAmount = (items) => {
 }
 
 export default async function handler(req, res) {
-	const { items } = req.body
+	const { items, uuid, bpid } = req.body
 
 	console.log('payment intent', items)
 
