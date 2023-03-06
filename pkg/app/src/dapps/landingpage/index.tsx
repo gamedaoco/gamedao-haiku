@@ -17,7 +17,8 @@ import {
 	Supporters,
 	Roadmap,
 	Disclaimer,
-	Questions,
+	// QuestionsGameDAO,
+	QuestionsBattlepass,
 } from './components'
 
 const Wrapper = styled(Box)(({ theme }) => ({
@@ -67,7 +68,7 @@ export function Landingpage() {
 
 				{wallet && <Wallet />}
 
-				{questions && <Questions />}
+				{questions && <QuestionsBattlepass />}
 				{disclaimer && <Disclaimer />}
 			</Container>
 		</Box>
