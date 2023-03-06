@@ -1,8 +1,8 @@
+export const config = { api: { bodyParser: false } }
+
 import Stripe from 'stripe'
 import { buffer } from 'micro'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
-
-export const config = { api: { bodyParser: false } }
 
 // async function buffer(readable) {
 // 	const chunks = [];
@@ -73,44 +73,44 @@ const stripe_webhooks_secret = process.env.STRIPE_WEBHOOKS_SECRET
 const stripe = new Stripe(stripe_secret_key, { apiVersion: '2022-11-15' })
 
 const handler = async (req, res) => {
-	if (req.method === 'POST') {
-		console.log('============================================================')
-		let event
+	// if (req.method === 'POST') {
+	// 	console.log('============================================================')
+	let event
 
-		// verify signature
-		try {
-			const buf = await buffer(req)
-			const sig = req.headers['stripe-signature']
-			// console.log(buf.toString())
-			event = stripe.webhooks.constructEvent(buf.toString(), sig, stripe_webhooks_secret)
-		} catch (err) {
-			return res.status(400).send(`⚠️  Webhook signature verification failed: ${err.message}`)
-		}
-
-		console.log('✅ Success:', event.id)
-
-		// handle event
-
-		switch (event.type) {
-			case 'payment_intent.succeeded':
-				const paymentIntent = event.data.object
-				console.log(`💰 Payment received!`)
-				handlePaymentIntentSucceeded(paymentIntent)
-				break
-
-			// case 'payment_method.attached':
-			// const paymentMethod = event.data.object
-			// Then define and call a method to handle the successful attachment of a PaymentMethod.
-			// handlePaymentMethodAttached(paymentMethod);
-			// break
-			default:
-				console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
-		}
-		res.status(200).json({ received: true })
-	} else {
-		res.setHeader('Allow', 'POST')
-		res.status(405).end('Method Not Allowed')
+	// verify signature
+	try {
+		const buf = await buffer(req)
+		const sig = req.headers['stripe-signature']
+		// console.log(buf.toString())
+		event = stripe.webhooks.constructEvent(buf.toString(), sig, stripe_webhooks_secret)
+	} catch (err) {
+		return res.status(400).send(`⚠️  Webhook signature verification failed: ${err.message}`)
 	}
+
+	console.log('✅ Success:', event.id)
+
+	// handle event
+
+	switch (event.type) {
+		case 'payment_intent.succeeded':
+			const paymentIntent = event.data.object
+			console.log(`💰 Payment received!`)
+			handlePaymentIntentSucceeded(paymentIntent)
+			break
+
+		// case 'payment_method.attached':
+		// const paymentMethod = event.data.object
+		// Then define and call a method to handle the successful attachment of a PaymentMethod.
+		// handlePaymentMethodAttached(paymentMethod);
+		// break
+		default:
+			console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
+	}
+	res.status(200).json({ received: true })
+	// } else {
+	// 	res.setHeader('Allow', 'POST')
+	// 	res.status(405).end('Method Not Allowed')
+	// }
 }
 
 export default handler

@@ -25,7 +25,7 @@ export const CheckoutForm = () => {
 	const elements = useElements()
 	const { user } = useAppContext()
 
-	const [email, setEmail] = React.useState('')
+	const [email, setEmail] = React.useState(user.email || '')
 	const [message, setMessage] = React.useState(null)
 	const [isLoading, setIsLoading] = React.useState(false)
 
@@ -53,7 +53,7 @@ export const CheckoutForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		if (!stripe || !elements) return
+		if (!stripe || !elements || !email) return
 		setIsLoading(true)
 
 		const { error } = await stripe.confirmPayment({
@@ -61,7 +61,7 @@ export const CheckoutForm = () => {
 			// redirect: 'if_required',
 			confirmParams: {
 				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
-				// receipt_email: email,
+				receipt_email: email,
 				payment_method_data: {
 					billing_details: {
 						name: user.name || user.uuid,
