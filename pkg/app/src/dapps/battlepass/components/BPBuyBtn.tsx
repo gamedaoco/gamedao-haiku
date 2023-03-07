@@ -28,7 +28,11 @@ type TProps = { args: TArgs }
 export const BPBuyBtn = ({ args }: TProps) => {
 	const { push } = useRouter()
 	const { id } = args
-	const { uuid, user } = useAppContext()
+	const { uuid, user, linkBpid } = useAppContext()
+
+	useEffect(() => {
+		linkBpid(id)
+	}, [id])
 
 	const [purchaseInProgess, setPurchaseInProgess] = useState(false)
 
