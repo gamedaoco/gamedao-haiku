@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useRef, useImperativeHandle } from 'react'
+import { useAppContext } from 'providers/app/modules/context'
 
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { Box, Button, Stack, Typography, Input, TextField } from '@mui/material'
 import { Loader } from 'components/Loader'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
-
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
 const clientSecret = process.env.STRIPE_SECRET_KEY
@@ -23,8 +23,9 @@ const protocol = process.env.NEXT_PUBLIC_ENVIRONMENT === 'Development' ? '' : 'h
 export const CheckoutForm = () => {
 	const stripe = useStripe()
 	const elements = useElements()
+	const { user, bpid } = useAppContext()
 
-	const [email, setEmail] = React.useState('')
+	const [email, setEmail] = React.useState(user.email || '')
 	const [message, setMessage] = React.useState(null)
 	const [isLoading, setIsLoading] = React.useState(false)
 
@@ -52,15 +53,21 @@ export const CheckoutForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		if (!stripe || !elements) return
+		if (!stripe || !elements || !email) return
 		setIsLoading(true)
 
 		const { error } = await stripe.confirmPayment({
 			elements,
 			// redirect: 'if_required',
 			confirmParams: {
-				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
+				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/battlepass/${bpid}/dashboard`,
 				receipt_email: email,
+				payment_method_data: {
+					billing_details: {
+						name: `${user.name}#${user.uuid}`,
+						email: user.email,
+					},
+				},
 			},
 		})
 
@@ -78,7 +85,7 @@ export const CheckoutForm = () => {
 		layout: 'tabs',
 	}
 
-	return (
+	return user.uuid && bpid ? (
 		<Fragment>
 			{isLoading && <Loader text="Purchasing Battlepass" />}
 
@@ -194,5 +201,5 @@ export const CheckoutForm = () => {
 				</Stack>
 			</form>
 		</Fragment>
-	)
+	) : null
 }

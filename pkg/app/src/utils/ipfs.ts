@@ -43,9 +43,8 @@ export async function uploadFileToIpfs(file: File): Promise<CID> {
 				authorization: auth,
 			},
 		})
-
-		const ipfsResult = await client.add(file, { pin: true })
-		return ipfsResult.cid
+		const { cid } = await client.add(file, { pin: true })
+		return cid
 	} catch (err) {
 		console.error(err)
 		createErrorNotification('Ipfs upload failed')

@@ -12,5 +12,6 @@ export * from './Roadmap'
 export * from './Wallet'
 export * from './Disclaimer'
 
-export * from './Questions'
+export * from './QuestionsGameDAO'
+export * from './QuestionsBattlepass'
 export * from './Transform'

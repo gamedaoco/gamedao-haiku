@@ -28,7 +28,11 @@ type TProps = { args: TArgs }
 export const BPBuyBtn = ({ args }: TProps) => {
 	const { push } = useRouter()
 	const { id } = args
-	const { uuid, user } = useAppContext()
+	const { uuid, user, linkBpid, processing, setProcessing } = useAppContext()
+
+	useEffect(() => {
+		linkBpid(id)
+	}, [id])
 
 	const [purchaseInProgess, setPurchaseInProgess] = useState(false)
 
@@ -81,7 +85,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			?.map((b) => b.battlepass.chainId)
 			.filter((i) => i === id)[0]
 		const member = memberships === id
-		console.log('memberships', memberships, member)
+		// console.log('memberships', memberships, member)
 		setIsMember(member)
 	}, [data, data?.BattlepassBot])
 
@@ -108,8 +112,11 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 
 	const handleClaimBattlepass = () => {
+		if (processing) return
+
 		console.log('claim battlepass', passes.free, id, user.uuid, user.address)
 		if (passes.free === 0) {
+			setProcessing(true)
 			setPurchaseInProgess(true)
 			setOpen(true)
 		} else {
@@ -132,6 +139,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 
 	const handleBuyBattlepass = () => {
+		if (processing) return
+		setProcessing(true)
 		setPurchaseInProgess(true)
 		console.log('buy battlepass', passes.free, id, uuid)
 		// setPurchaseInProgess(false)
@@ -139,6 +148,13 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}
 
 	//
+
+	// if (processing)
+	// 	return (
+	// 		<Button variant="pink" size="large" sx={{ opacity: 0.75 }}>
+	// 			Processing...
+	// 		</Button>
+	// 	)
 
 	if (!uuid)
 		return (
@@ -180,21 +196,13 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	if (uuid && isMember && !isPremium && user.address)
 		return passes.free > 0 ? (
 			<Fragment>
-				<Button
-					disabled={purchaseInProgess ? true : false}
-					onClick={() => handleClaimBattlepass()}
-					variant="pink"
-				>
+				<Button onClick={() => handleClaimBattlepass()} variant="pink">
 					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
 				</Button>
 			</Fragment>
 		) : (
 			<Fragment>
-				<Button
-					disabled={purchaseInProgess ? true : false}
-					onClick={() => handleBuyBattlepass()}
-					variant="pink"
-				>
+				<Button onClick={() => handleBuyBattlepass()} variant="pink">
 					Buy Now
 				</Button>
 				<BaseDialog title="Go Premium" open={open} onClose={onClose}>

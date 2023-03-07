@@ -1,3 +1,18 @@
+mutation Payment($token: String!, $bpid: String!, $uuid: String!, $txid: String!) {
+	BattlepassBot {
+		processPayment(
+			securityToken: $token,
+			battlepass: $bpid,
+			identityUuid: $uuid,
+			paymentToken: $txid
+		) {
+			battlepass
+			identityUuid
+			paymentToken
+		}
+	}
+}
+
 # claim reward
 
 mutation ClaimReward( $battlepass: String!, $uuid: String!, $reward: String!) {
