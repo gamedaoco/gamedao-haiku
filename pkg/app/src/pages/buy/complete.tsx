@@ -8,6 +8,8 @@ export function Page() {
 	const { t } = useTranslation()
 	const { query } = useRouter()
 
+	console.log(query)
+
 	return (
 		<Layout showHeader showSidebar showFooter title={t('page:account:title')}>
 			<Box sx={{ mb: 2 }}>

@@ -17,10 +17,13 @@ export const getStripe = () => {
 export const Checkout = () => {
 	const [clientSecret, setClientSecret] = useState('')
 	const stripe = getStripe()
-	const { user } = useAppContext()
+	const { user, bpid } = useAppContext()
 
 	useEffect(() => {
+		if (!user.uuid) return
+
 		// Create PaymentIntent as soon as the page loads
+
 		fetch('/api/stripe/intent', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -39,7 +42,7 @@ export const Checkout = () => {
 						label: { type: 'custom', custom: 'bpid' },
 						optional: false,
 						type: 'text',
-						text: { value: 'bpid' },
+						text: { value: bpid },
 					},
 				],
 			}),
@@ -48,7 +51,7 @@ export const Checkout = () => {
 			.then((data) => {
 				setClientSecret(data.clientSecret)
 			})
-	}, [])
+	}, [user])
 
 	const appearance: Appearance = {
 		theme: 'none',
@@ -59,7 +62,7 @@ export const Checkout = () => {
 		appearance,
 	}
 
-	return stripe && clientSecret ? (
+	return user.uuid && stripe && clientSecret ? (
 		<Elements options={options} stripe={stripe}>
 			<CheckoutForm />
 		</Elements>

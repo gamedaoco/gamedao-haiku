@@ -23,7 +23,7 @@ const protocol = process.env.NEXT_PUBLIC_ENVIRONMENT === 'Development' ? '' : 'h
 export const CheckoutForm = () => {
 	const stripe = useStripe()
 	const elements = useElements()
-	const { user } = useAppContext()
+	const { user, bpid } = useAppContext()
 
 	const [email, setEmail] = React.useState(user.email || '')
 	const [message, setMessage] = React.useState(null)
@@ -60,11 +60,11 @@ export const CheckoutForm = () => {
 			elements,
 			// redirect: 'if_required',
 			confirmParams: {
-				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/buy/complete`,
+				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/battlepass/${bpid}`,
 				receipt_email: email,
 				payment_method_data: {
 					billing_details: {
-						name: user.name || user.uuid,
+						name: `${user.name}#${user.uuid}`,
 						email: user.email,
 					},
 				},
@@ -85,7 +85,7 @@ export const CheckoutForm = () => {
 		layout: 'tabs',
 	}
 
-	return (
+	return user.uuid && bpid ? (
 		<Fragment>
 			{isLoading && <Loader text="Purchasing Battlepass" />}
 
@@ -201,5 +201,5 @@ export const CheckoutForm = () => {
 				</Stack>
 			</form>
 		</Fragment>
-	)
+	) : null
 }
