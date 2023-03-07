@@ -144,7 +144,7 @@ export const Create = () => {
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
 	const linkBotTX = useLinkBotTX(formState.battlepassId, formState.botAccount)
 
-	// console.log('cardImg', formState.cardImg)
+	console.log('cardImg', formState.cardImg)
 
 	const [organizations, setOrganizations] = useState<any>()
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
@@ -725,7 +725,7 @@ export const Create = () => {
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
 						// title="Levels"
-						description={`Configure levels and ranks`}
+						description={`Configure levels and ranks. Careful, this can only be set once!`}
 					>
 						<LevelEditor id={formState.battlepassId} />
 					</Section>
