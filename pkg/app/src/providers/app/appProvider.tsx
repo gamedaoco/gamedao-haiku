@@ -35,6 +35,7 @@ export function AppProvider({ children }) {
 	const context = initialContextState
 	const { data: session } = useSession()
 	const [user, setUser] = useState<TAppUser>(initialUserState)
+	const [bpid, setBpid] = useState<string>(null)
 	const [connected, setConnected] = useState(false)
 
 	const [connectIdentityMutation] = useConnectIdentityMutation({
@@ -159,6 +160,14 @@ export function AppProvider({ children }) {
 		[user],
 	)
 
+	const linkBpid = useCallback(
+		(id) => {
+			console.log('set bpid', bpid, id)
+			setBpid(id)
+		},
+		[bpid],
+	)
+
 	useEffect(() => {
 		if (!user.uuid && !user.discord) return
 		console.log('================================================================')
@@ -219,6 +228,8 @@ export function AppProvider({ children }) {
 				user: user,
 				linkAddress: linkAddress,
 				context: context,
+				linkBpid: linkBpid,
+				bpid: bpid,
 			}}
 		>
 			{children}

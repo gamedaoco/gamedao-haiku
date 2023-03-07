@@ -12,6 +12,8 @@ export const AppContext = createContext<AppState>({
 	user: null,
 	linkAddress: () => {},
 	context: null,
+	linkBpid: () => {},
+	bpid: null,
 })
 
 export function useAppContext(): AppState {
