@@ -36,6 +36,7 @@ export function AppProvider({ children }) {
 	const { data: session } = useSession()
 	const [user, setUser] = useState<TAppUser>(initialUserState)
 	const [bpid, setBpid] = useState<string>(null)
+	const [processing, setProcessing] = useState<boolean>(false)
 	const [connected, setConnected] = useState(false)
 
 	const [connectIdentityMutation] = useConnectIdentityMutation({
@@ -230,6 +231,8 @@ export function AppProvider({ children }) {
 				context: context,
 				linkBpid: linkBpid,
 				bpid: bpid,
+				processing: processing,
+				setProcessing: setProcessing,
 			}}
 		>
 			{children}

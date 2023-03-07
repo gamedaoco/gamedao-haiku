@@ -14,6 +14,8 @@ export const AppContext = createContext<AppState>({
 	context: null,
 	linkBpid: () => {},
 	bpid: null,
+	processing: false,
+	setProcessing: () => {},
 })
 
 export function useAppContext(): AppState {

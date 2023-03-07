@@ -1,6 +1,6 @@
 import type { ApiProvider as ApiProviderConfig, Config, Features } from 'src/queries'
 import type { TAppUser } from 'providers/app/appProvider'
-import { Function } from 'lodash'
+
 export interface AppState {
 	ready: boolean
 	config: Config
@@ -12,4 +12,6 @@ export interface AppState {
 	context: object
 	linkBpid: Function
 	bpid: string
+	processing: boolean
+	setProcessing: Function
 }

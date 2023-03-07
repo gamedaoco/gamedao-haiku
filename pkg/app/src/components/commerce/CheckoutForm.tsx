@@ -60,7 +60,7 @@ export const CheckoutForm = () => {
 			elements,
 			// redirect: 'if_required',
 			confirmParams: {
-				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/battlepass/${bpid}`,
+				return_url: `${protocol}${process.env.NEXT_PUBLIC_VERCEL_URL}/battlepass/${bpid}/dashboard`,
 				receipt_email: email,
 				payment_method_data: {
 					billing_details: {
