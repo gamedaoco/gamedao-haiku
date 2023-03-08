@@ -207,9 +207,9 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				<Button onClick={() => handleBuyBattlepass()} variant="pink">
 					Buy Now
 				</Button>
-				<BaseDialog title="Go Premium" open={open} onClose={onClose}>
+				<BaseDialog title="GameDAO Battlepass" open={open} onClose={onClose}>
 					<Typography
-						variant="h3"
+						variant="h2"
 						sx={{
 							background: '-webkit-linear-gradient(45deg, #ffcc00 30%, #ffff99 90%)',
 							WebkitBackgroundClip: 'text',
@@ -217,7 +217,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 							fontWeight: 800,
 						}}
 					>
-						Buy a Battlepass now and go premium!
+						Get early access and go premium!
 					</Typography>
 					<Checkout args={{ price: passes.price }} />
 				</BaseDialog>

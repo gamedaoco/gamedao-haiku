@@ -215,10 +215,12 @@ export const CheckoutForm = ({ args }: TProps) => {
 				<br />
 				<br />
 
-				<PaymentElement
-					id="payment-element"
-					// options={paymentElementOptions}
-				/>
+				<Box sx={{ '.StripeElement': { border: 'white' } }}>
+					<PaymentElement
+						id="payment-element"
+						// options={paymentElementOptions}
+					/>
+				</Box>
 				<Stack
 					py={3}
 					spacing={2}
@@ -228,7 +230,7 @@ export const CheckoutForm = ({ args }: TProps) => {
 					width="100%"
 					justifyContent="space-between"
 				>
-					<Box>By clicking PAY NOW you agree to the Battlepass terms and conditions.</Box>
+					<Box>By clicking BUY NOW you agree to the Battlepass terms and conditions.</Box>
 					{stripe && elements && (
 						<Button
 							variant="lemon"

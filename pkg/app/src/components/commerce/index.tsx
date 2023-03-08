@@ -57,7 +57,16 @@ export const Checkout = ({ args }: TProps) => {
 	}, [user])
 
 	const appearance: Appearance = {
-		theme: 'none',
+		theme: 'flat',
+		variables: {
+			colorPrimary: '#eeeeee',
+			colorBackground: '#000000',
+			colorText: '#eeeeee',
+			colorDanger: '#ff0000',
+			fontFamily: 'Inter, system-ui, sans-serif',
+			// spacingUnit: '2px',
+			borderRadius: '0',
+		},
 	}
 
 	const options: StripeElementsOptions = {
