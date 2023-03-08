@@ -43,7 +43,7 @@ export const CheckoutForm = ({ args }: TProps) => {
 	const [email, setEmail] = useState(user.email || '')
 	const [message, setMessage] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
-	const [finalPrice, setFinalPrice] = useState<float>(0)
+	const [finalPrice, setFinalPrice] = useState(0)
 
 	useEffect(() => {
 		if (!args.price) return
