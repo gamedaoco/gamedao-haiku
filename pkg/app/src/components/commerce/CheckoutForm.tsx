@@ -40,10 +40,10 @@ export const CheckoutForm = ({ args }: TProps) => {
 	const { user, bpid } = useAppContext()
 	const { price } = args
 
-	const [email, setEmail] = useState(user.email || '')
-	const [message, setMessage] = useState(null)
-	const [isLoading, setIsLoading] = useState(false)
-	const [finalPrice, setFinalPrice] = useState(0)
+	const [email, setEmail] = useState<string>(user.email || '')
+	const [message, setMessage] = useState<string>(null)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+	const [finalPrice, setFinalPrice] = useState<string>(null)
 
 	useEffect(() => {
 		if (!args.price) return
