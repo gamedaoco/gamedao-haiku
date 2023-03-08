@@ -26,7 +26,7 @@ type TArgs = {
 	total?: number
 	remaining?: number
 }
-type TProps = { args: TArgs }
+type TProps = { args?: TArgs }
 
 export const CheckoutForm = ({ args }: TProps) => {
 	const theme = useTheme()
@@ -106,7 +106,7 @@ export const CheckoutForm = ({ args }: TProps) => {
 		layout: 'tabs',
 	}
 
-	return user.uuid && bpid ? (
+	return user.uuid && bpid && args.price ? (
 		<Fragment>
 			{isLoading && <Loader text="Purchasing Battlepass" />}
 

@@ -15,7 +15,7 @@ export const getStripe = () => {
 }
 
 type TArgs = { price: number }
-type TProps = { args: TArgs }
+type TProps = { args?: TArgs }
 
 export const Checkout = ({ args }: TProps) => {
 	const [clientSecret, setClientSecret] = useState('')
