@@ -43,8 +43,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
 
-	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0 })
-	const { data: freePasses } = useBattlepassSubscription({ variables: { id: id } })
+	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0, price: 0 })
+	const { data: battlepass } = useBattlepassSubscription({ variables: { id: id } })
 
 	const [isPremium, setPremium] = useState(false)
 	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
@@ -57,8 +57,9 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	}, [scoreData?.BattlepassParticipants])
 
 	useEffect(() => {
-		if (!freePasses || !freePasses?.Battlepasses.length) return
-		const pass = freePasses?.Battlepasses[0]
+		if (!battlepass || !battlepass?.Battlepasses.length) return
+		const pass = battlepass?.Battlepasses[0]
+		console.log('price', pass.price)
 		console.log(
 			'buy',
 			pass,
@@ -71,8 +72,9 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			total: pass.freePasses,
 			claimed: pass.passesClaimed,
 			free: pass.freePasses - pass.passesClaimed,
+			price: pass.price,
 		})
-	}, [freePasses])
+	}, [battlepass])
 
 	const [memberState, setMemberState] = useState(MemberState.VIEWER)
 	const [enableBuy, setEnable] = useState(false)
@@ -96,12 +98,12 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		variables: { battlepass: id, uuid: uuid },
 	})
 	const handleJoinBattlepass = () => {
-		console.log('buy', 'join battlepass:', id, uuid)
+		console.log('join', 'battlepass', id, uuid)
 		const connect = async () => {
 			const response = await joinBattlepassMutation().then((res) => {
 				try {
 					const _uuid = res?.data?.BattlepassBot?.join?.uuid
-					console.log('buy', 'join', 'uuid ->', _uuid)
+					console.log('join', 'uuid ->', _uuid)
 					setIsMember(true)
 				} catch (e) {
 					console.log(e)
@@ -217,7 +219,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					>
 						Buy a Battlepass now and go premium!
 					</Typography>
-					<Checkout />
+					<Checkout args={{ price: passes.price }} />
 				</BaseDialog>
 			</Fragment>
 		)

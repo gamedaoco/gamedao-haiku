@@ -14,7 +14,10 @@ export const getStripe = () => {
 	return stripePromise
 }
 
-export const Checkout = () => {
+type TArgs = { price: number }
+type TProps = { args: TArgs }
+
+export const Checkout = ({ args }: TProps) => {
 	const [clientSecret, setClientSecret] = useState('')
 	const stripe = getStripe()
 	const { user, bpid } = useAppContext()
@@ -64,7 +67,7 @@ export const Checkout = () => {
 
 	return user.uuid && stripe && clientSecret ? (
 		<Elements options={options} stripe={stripe}>
-			<CheckoutForm />
+			<CheckoutForm args={args} />
 		</Elements>
 	) : (
 		<Loader />
