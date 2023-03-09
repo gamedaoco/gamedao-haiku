@@ -20,17 +20,17 @@ export const CollectablesList: FC<Props> = ({ loading = false, items }) => {
 	return (
 		<Fragment>
 			<Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
-			<Grid container sx={{ pt: 3 }} spacing={{ xs: 2 }} columns={{ xs: 2, sm: 8, md: 12 }}>
+			<Grid container sx={{ pt: 3 }} spacing={{ xs: 2 }} columns={{ xs: 2, sm: 6, md: 12 }}>
 				{loading ? (
 					[1, 2, 3].map((x) => (
-						<Grid item xs={12 / 5} key={x}>
+						<Grid container item xs={12} sm={6} md={4} lg={12 / 5} key={x}>
 							<LoadingCollectableCard />
 						</Grid>
 					))
 				) : (
 					<>
 						{items?.rmrkNfts.map((item: TCollectable) => (
-							<Grid item xs={12 / 5} key={item.id}>
+							<Grid container item xs={12} sm={6} md={4} lg={12 / 5} key={item.id}>
 								<Collectable item={item} />
 							</Grid>
 						))}
