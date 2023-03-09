@@ -34,15 +34,19 @@ export function MyCollectables() {
 					<Fragment>
 						<Typography variant="h6" py={2}>
 							{' '}
-							ZERO{' '}
+							ZERO Ecosystem{' '}
 						</Typography>
-						{zeroNFT?.rmrkNfts?.length === 0 ? (
+						<Typography variant="body1">
+							No collectables have been indexed on this network yet. Please try again later.
+						</Typography>
+
+						{/* {zeroNFT?.rmrkNfts?.length === 0 ? (
 							<Typography variant="body1">
 								You do not own any collectables on this network yet.
 							</Typography>
 						) : (
 							<CollectablesList loading={loading} items={zeroNFT as CollectablesForUserQuery} />
-						)}
+						)} */}
 					</Fragment>
 				)}
 
