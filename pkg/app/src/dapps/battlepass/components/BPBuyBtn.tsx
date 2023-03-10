@@ -117,8 +117,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		const connect = async () => {
 			const response = await joinBattlepassMutation().then((res) => {
 				try {
-					const _uuid = res?.data?.BattlepassBot?.join?.uuid
-					console.log('join', 'uuid ->', _uuid)
+					const _uuid = res?.data?.BattlepassBot?.join?.id
+					console.log('join', 'id ->', id)
 					setIsMember(true)
 				} catch (e) {
 					console.log(e)
