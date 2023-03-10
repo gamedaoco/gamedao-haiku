@@ -25,7 +25,7 @@ export function SettingsOverview({ organizationState }: ComponentProps) {
 					/>
 				</Stack>
 			</Grid>
-			<Grid item xs={12}>
+			{/* <Grid item xs={12}>
 				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<AccessType mode={organizationState?.access_model} />
 				</Stack>
@@ -44,7 +44,7 @@ export function SettingsOverview({ organizationState }: ComponentProps) {
 				<Stack component={Paper} padding={4} spacing={6} minWidth="40vw" variant={'glass'}>
 					<Control organizationType={organizationState?.type} />
 				</Stack>
-			</Grid>
+			</Grid> */}
 		</Grid>
 	)
 }
