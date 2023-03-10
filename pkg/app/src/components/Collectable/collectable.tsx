@@ -29,7 +29,6 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 
 	useEffect(() => {
 		if (item) {
-			console.log('item', item)
 			fetchIpfsJson(item.metadata, IPFS_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
 		}
 	}, [item])
