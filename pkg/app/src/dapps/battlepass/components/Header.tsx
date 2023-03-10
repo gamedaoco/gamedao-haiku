@@ -191,7 +191,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 								whiteSpace: 'nowrap',
 							}}
 						>
-							{name.toUpperCase()}
+							{name?.toUpperCase()}
 						</Typography>
 						<Typography variant="header2" sx={{ whiteSpace: 'nowrap' }}>
 							{organization?.name ?? cache.name ?? ''} ·{' '}

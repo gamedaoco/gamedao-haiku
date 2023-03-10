@@ -34,40 +34,54 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		linkBpid(id)
 	}, [id])
 
-	const [purchaseInProgess, setPurchaseInProgess] = useState(false)
-
 	const [open, setOpen] = useState(false)
-	const onClose = () => {
-		setOpen(false)
-	}
+	const onClose = () => setOpen(false)
 
-	const { data } = useGetBattlepassForUserQuery({ variables: { uuid: uuid } })
+	const { loading: loadingBattlepassData, data: battlepassData } = useGetBattlepassForUserQuery({
+		variables: { uuid: uuid ? uuid : null },
+	})
+
+	// BATTLEPASS STATE FOR USER
+	// free = member
+	// pendingpayment =
+
+	const [txState, setTxState] = useState(null)
+	const [isPremium, setPremium] = useState(false)
+	const { loading: loadingMembership, data: membershipData } = useScoreSubscription({
+		variables: { id: id, uuid: uuid },
+	})
+	// console.log(loadingMembership,membershipData)
+	useEffect(() => {
+		if (loadingMembership) return
+		if (membershipData?.BattlepassParticipants?.length === 0) {
+			console.log('-->', 'not a member')
+			setTxState('unknown')
+			setPremium(false)
+		}
+		if (membershipData?.BattlepassParticipants?.length > 0) {
+			const membership = membershipData?.BattlepassParticipants[0]
+			console.log('---->', 'membership', membership)
+			setTxState(membership.status)
+			setPremium(membership.premium === true)
+		}
+	}, [id, uuid, loadingMembership, membershipData])
+
+	// BATTLEPASS COMMERCIALS
 
 	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0, price: 0 })
 	const { data: battlepass } = useBattlepassSubscription({ variables: { id: id } })
-
-	const [isPremium, setPremium] = useState(false)
-	const { data: scoreData } = useScoreSubscription({ variables: { id: id, uuid: uuid } })
-
-	useEffect(() => {
-		if (!scoreData?.BattlepassParticipants.length) return
-		if (scoreData.BattlepassParticipants) {
-			setPremium(scoreData?.BattlepassParticipants[0].premium === true)
-		}
-	}, [scoreData?.BattlepassParticipants])
-
 	useEffect(() => {
 		if (!battlepass || !battlepass?.Battlepasses.length) return
 		const pass = battlepass?.Battlepasses[0]
-		console.log('price', pass.price)
-		console.log(
-			'buy',
-			pass,
-			'total/available/claimed',
-			pass.freePasses,
-			pass.freePasses - pass.passesClaimed,
-			pass.passesClaimed,
-		)
+		// console.log('price', pass.price)
+		// console.log(
+		// 	'buy',
+		// 	pass,
+		// 	'total/available/claimed',
+		// 	pass.freePasses,
+		// 	pass.freePasses - pass.passesClaimed,
+		// 	pass.passesClaimed,
+		// )
 		setPasses({
 			total: pass.freePasses,
 			claimed: pass.passesClaimed,
@@ -76,25 +90,26 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		})
 	}, [battlepass])
 
+	// MEMBERSHIP
+
 	const [memberState, setMemberState] = useState(MemberState.VIEWER)
-	const [enableBuy, setEnable] = useState(false)
 	const [isMember, setIsMember] = useState(false)
 
 	useEffect(() => {
-		if (!data) return
-		if (!data?.BattlepassBot?.BattlepassIdentities) return
-		const memberships = data?.BattlepassBot?.BattlepassIdentities[0]?.members
+		if (loadingBattlepassData) return
+		if (!battlepassData) return
+		if (!battlepassData?.BattlepassBot?.BattlepassIdentities) return
+		const memberships = battlepassData?.BattlepassBot?.BattlepassIdentities[0]?.members
 			?.map((b) => b.battlepass.chainId)
 			.filter((i) => i === id)[0]
 		const member = memberships === id
 		// console.log('memberships', memberships, member)
 		setIsMember(member)
-	}, [data, data?.BattlepassBot])
+	}, [uuid, loadingBattlepassData, battlepassData?.BattlepassBot])
+
+	// JOIN TO PARTICIPATE
 
 	const [joinBattlepassMutation] = useJoinBattlepassMutation({
-		variables: { battlepass: id, uuid: uuid },
-	})
-	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
 		variables: { battlepass: id, uuid: uuid },
 	})
 	const handleJoinBattlepass = () => {
@@ -113,65 +128,71 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		connect()
 	}
 
+	// CLAIM + BUY
+
+	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
+		variables: { battlepass: id, uuid: uuid },
+	})
 	const handleClaimBattlepass = () => {
-		if (processing) return
-
-		console.log('claim battlepass', passes.free, id, user.uuid, user.address)
-		if (passes.free === 0) {
-			setProcessing(true)
-			setPurchaseInProgess(true)
-			setOpen(true)
-		} else {
-			const connect = async () => {
-				const response = await claimBattlepassFreemiumMutation({
-					variables: { battlepass: id, uuid: uuid },
-				}).then((res) => {
-					try {
-						const _uuid = res?.data?.BattlepassBot?.joinPremium?.uuid
-						console.log('buy', 'claim', 'uuid ->', _uuid)
-						// setPurchaseInProgess(false)
-						setOpen(false)
-					} catch (e) {
-						console.log(e)
-					}
-				})
-			}
-			connect()
+		const connect = async () => {
+			const response = await claimBattlepassFreemiumMutation({
+				variables: { battlepass: id, uuid: uuid },
+			}).then((res) => {
+				try {
+					const txs = res?.data?.BattlepassBot?.joinPremium?.status
+					console.log('-->', 'tx status', txs)
+					setTxState(txs)
+					if (txs === 'pendingPayment') setOpen(true)
+					if (txs === 'pending') console.log('success! waiting for confirmation.')
+				} catch (e) {
+					console.log(e)
+				}
+			})
 		}
-	}
-
-	const handleBuyBattlepass = () => {
-		if (processing) return
-		setProcessing(true)
-		setPurchaseInProgess(true)
-		console.log('buy battlepass', passes.free, id, uuid)
-		// setPurchaseInProgess(false)
-		setOpen(true)
+		connect()
 	}
 
 	//
+	//
+	//
 
-	// if (processing)
-	// 	return (
-	// 		<Button variant="pink" size="large" sx={{ opacity: 0.75 }}>
-	// 			Processing...
-	// 		</Button>
-	// 	)
-
+	// no discord connection
 	if (!uuid)
 		return (
 			<Button onClick={() => signIn('discord')} variant="outlined">
 				Connect with Discord
 			</Button>
 		)
-	if (uuid && !isMember)
+
+	// not a member or awaiting payment
+	if (txState === 'unknown')
 		return (
-			<Button disabled={purchaseInProgess ? true : false} onClick={() => handleJoinBattlepass()} variant="lemon">
-				Join Battlepass
+			<Fragment>
+				<Button onClick={() => handleJoinBattlepass()} variant="lemon">
+					Join Battlepass
+				</Button>
+			</Fragment>
+		)
+
+	// waiting for stripe payment
+	// if (txState==='pendingPayment')
+	// 	return (<Fragment>
+	// 		<Button variant="pink" size="large" sx={{ opacity: 0.75 }}>
+	// 			Awaiting Payment
+	// 		</Button>
+
+	// 		</Fragment>)
+
+	// waiting for on chain tx confirmation
+	if (txState === 'pending')
+		return (
+			<Button variant="pink" size="large" sx={{ opacity: 0.75 }}>
+				Confirming Transaction
 			</Button>
 		)
 
-	if (uuid && isMember && !isPremium && !user.address)
+	// a member but no connected wallet address
+	if (!user.address && txState === 'free')
 		return (
 			<Fragment>
 				<Typography
@@ -195,17 +216,15 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (uuid && isMember && !isPremium && user.address)
-		return passes.free > 0 ? (
+	// a member with a connected wallet
+	if (user.address && (txState === 'free' || txState === 'pendingPayment'))
+		return (
 			<Fragment>
-				<Button onClick={() => handleClaimBattlepass()} variant="pink">
-					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Ended`}
-				</Button>
-			</Fragment>
-		) : (
-			<Fragment>
-				<Button onClick={() => handleBuyBattlepass()} variant="pink">
-					Buy Now
+				<Button
+					onClick={() => (txState === 'pendingPayment' ? setOpen(true) : handleClaimBattlepass())}
+					variant="pink"
+				>
+					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
 				</Button>
 				<BaseDialog title="GameDAO Battlepass" open={open} onClose={onClose}>
 					<Typography
@@ -224,7 +243,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	if (uuid && isMember && isPremium)
+	// a premium member
+	if (txState === 'synced')
 		return (
 			<Fragment>
 				<Typography
@@ -248,5 +268,5 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
-	return null
+	return <Fragment></Fragment>
 }

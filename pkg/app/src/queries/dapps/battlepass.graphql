@@ -64,7 +64,7 @@ mutation ClaimBattlepassPremium (
 mutation ClaimBattlepassFreemium ( $battlepass: String!, $uuid: String!){
 	BattlepassBot {
 		joinPremium( battlepass: $battlepass, identityUuid: $uuid) {
-			uuid
+			status
 		}
 	}
 }
@@ -72,7 +72,7 @@ mutation ClaimBattlepassFreemium ( $battlepass: String!, $uuid: String!){
 mutation JoinBattlepass ( $battlepass: String!, $uuid: String!){
 	BattlepassBot {
 		join( battlepass: $battlepass, identityUuid: $uuid) {
-			uuid
+			id
 		}
 	}
 }
@@ -266,7 +266,7 @@ query GetLeaderboard ( $id: String ) {
 			identity {
 				twitter
 				discord
-		name
+				name
 			}
 		}
 	}
@@ -287,6 +287,7 @@ subscription Score ( $id: bpchar, $uuid: uuid) {
     premium
     points
     passChainId
+	status
   }
 }
 
