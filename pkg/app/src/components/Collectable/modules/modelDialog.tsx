@@ -12,7 +12,7 @@ interface ComponentProps {
 }
 
 // TODO extract to app config
-const RMRK_GATEWAY = 'https://rmrk.mypinata.cloud/'
+const IPFS_GATEWAY = 'https://dweb.link/'
 
 async function blobToBase64(blob) {
 	const reader = new FileReader()
@@ -32,7 +32,7 @@ export function ModelDialog({ open, mediaUrl, handleClose, alt, poster }: Compon
 
 	useEffect(() => {
 		if (open && mediaUrl) {
-			fetchIpfsBlob(mediaUrl, RMRK_GATEWAY).then((data: Blob) => {
+			fetchIpfsBlob(mediaUrl, IPFS_GATEWAY).then((data: Blob) => {
 				if (data.type.indexOf('model') != -1) {
 					setIs3DModel(true)
 				} else if (data.type.indexOf('image') != -1) {

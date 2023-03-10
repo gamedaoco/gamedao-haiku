@@ -230,18 +230,18 @@ export function LevelEditor(id) {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			{rows !== data && (
-				<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-					<Button color="warning" variant="outlined" onClick={handleReset}>
-						Reset
+			{/* {rows !== data && ( */}
+			<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+				<Button color="warning" variant="outlined" onClick={handleReset}>
+					Reset
+				</Button>
+				<Stack direction="row" spacing={2}>
+					<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
+						Save
 					</Button>
-					<Stack direction="row" spacing={2}>
-						<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
-							Save
-						</Button>
-					</Stack>
 				</Stack>
-			)}
+			</Stack>
+			{/* )} */}
 		</Fragment>
 	)
 }

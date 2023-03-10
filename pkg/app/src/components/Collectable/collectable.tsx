@@ -20,7 +20,7 @@ interface ComponentProps {
 }
 
 // TODO extract to app config
-const RMRK_GATEWAY = 'https://rmrk.mypinata.cloud/'
+const IPFS_GATEWAY = 'https://dweb.link/'
 
 const Collectable: FC<ComponentProps> = ({ item }) => {
 	const [ipfsMetadata, setIpfsMetadata] = useState<IpfsMetadata>(null)
@@ -29,7 +29,7 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 
 	useEffect(() => {
 		if (item) {
-			fetchIpfsJson(item.metadata, RMRK_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
+			fetchIpfsJson(item.metadata, IPFS_GATEWAY).then((json) => setIpfsMetadata(json as IpfsMetadata))
 		}
 	}, [item])
 
@@ -49,7 +49,7 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 					<CardMedia
 						component="img"
 						sx={{ padding: 0.75 }}
-						image={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
+						image={parseIpfsHash(ipfsMetadata.thumbnailUri, IPFS_GATEWAY)}
 						alt="collectable_image"
 						onClick={() => setOpenModel(true)}
 					/>
@@ -68,7 +68,7 @@ const Collectable: FC<ComponentProps> = ({ item }) => {
 							open={openModel}
 							mediaUrl={ipfsMetadata.mediaUri}
 							handleClose={() => setOpenModel(false)}
-							poster={parseIpfsHash(ipfsMetadata.thumbnailUri, RMRK_GATEWAY)}
+							poster={parseIpfsHash(ipfsMetadata.thumbnailUri, IPFS_GATEWAY)}
 							alt={ipfsMetadata.description}
 						/>
 					</Box>

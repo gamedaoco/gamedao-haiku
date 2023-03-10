@@ -14,7 +14,10 @@ export const getStripe = () => {
 	return stripePromise
 }
 
-export const Checkout = () => {
+type TArgs = { price: number }
+type TProps = { args?: TArgs }
+
+export const Checkout = ({ args }: TProps) => {
 	const [clientSecret, setClientSecret] = useState('')
 	const stripe = getStripe()
 	const { user, bpid } = useAppContext()
@@ -54,7 +57,16 @@ export const Checkout = () => {
 	}, [user])
 
 	const appearance: Appearance = {
-		theme: 'none',
+		theme: 'flat',
+		variables: {
+			colorPrimary: '#eeeeee',
+			colorBackground: '#000000',
+			colorText: '#eeeeee',
+			colorDanger: '#ff0000',
+			fontFamily: 'Inter, system-ui, sans-serif',
+			// spacingUnit: '2px',
+			borderRadius: '0',
+		},
 	}
 
 	const options: StripeElementsOptions = {
@@ -64,7 +76,7 @@ export const Checkout = () => {
 
 	return user.uuid && stripe && clientSecret ? (
 		<Elements options={options} stripe={stripe}>
-			<CheckoutForm />
+			<CheckoutForm args={args} />
 		</Elements>
 	) : (
 		<Loader />
