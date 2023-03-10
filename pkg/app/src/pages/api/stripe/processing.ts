@@ -42,9 +42,23 @@ const battlepass_url = getConnectedEndpoint().url
 const handlePaymentIntentSucceeded = async (paymentIntent) => {
 	console.log('-->', 'sending receipt', paymentIntent)
 
+	console.log('battlepass_url', battlepass_url)
+
 	const { id: txid, receipt_email, metadata } = paymentIntent
 	const { uuid, bpid } = paymentIntent.metadata
-	console.log('-->', bpid, uuid, txid, receipt_email)
+	console.log(
+		'-->',
+		'\token',
+		battlepass_payment_key,
+		'\nbpid',
+		bpid,
+		'\nuuid',
+		uuid,
+		'\ntxid',
+		txid,
+		'\nreceipt_email',
+		receipt_email,
+	)
 
 	fetch(battlepass_url, {
 		method: 'POST',
