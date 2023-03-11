@@ -45,8 +45,11 @@ export function Flyout({
 	const { user } = useAppContext()
 
 	const handleDisconnect = () => {
-		signOut()
-		disconnectWallet()
+		const disconnect = async () => {
+			await disconnectWallet()
+			await signOut()
+		}
+		disconnect()
 	}
 
 	return (
@@ -147,14 +150,14 @@ export function Flyout({
 						</MenuItem>
 					)}
 
-					{!user.twitter && (
+					{/* {!user.twitter && (
 						<MenuItem sx={{ p: 0 }} onClick={() => signIn('twitter')}>
 							<ListItemIcon>
 								<RxTwitterLogo fontSize="inherit" />
 							</ListItemIcon>
 							<Typography variant="body2">Connect Twitter</Typography>
 						</MenuItem>
-					)}
+					)} */}
 
 					{!selectedAccount && (
 						<MenuItem sx={{ p: 0 }} onClick={connectWallet}>

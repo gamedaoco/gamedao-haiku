@@ -140,7 +140,45 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 								href={item.path}
 								target={item.path.includes('http') ? '_blank' : null}
 							>
-								<MenuItem selected={router.pathname.includes(item.path)}>
+								<MenuItem
+									selected={router.pathname.includes(item.path)}
+									sx={{
+										py: '32px',
+										overflow: 'hidden',
+										'* >, &::after, &::before': { transitionDuration: '1s' },
+										'&:hover': {
+											'&::after': {
+												content: '""',
+												position: 'absolute',
+												width: '90%',
+												borderRadius: '2px 0px 0px 2px',
+												boxShadow: '0 0px 20px 2px #00ffcc99',
+												borderBottom: '2px solid #ffffff66',
+												left: '5%',
+												right: '5%',
+												bottom: '-1px',
+											},
+										},
+										'&.Mui-selected': {
+											'&:hover': {
+												border: 0,
+												borderBottom: '4px transparent',
+											},
+											'&::after': {
+												content: '""',
+												position: 'absolute',
+												width: '90%',
+												borderColor: '#ff00ff',
+												borderRadius: '2px 0px 0px 2px',
+												boxShadow: '0 0px 20px 2px #00ffcc',
+												borderBottom: '2px solid white',
+												left: '5%',
+												right: '5%',
+												bottom: '-1px',
+											},
+										},
+									}}
+								>
 									{item.icon && <ListItemIcon sx={{ mx: 0 }}> {item.icon} </ListItemIcon>}
 									{<ListItemText>{t(item.name)}</ListItemText>}
 								</MenuItem>
