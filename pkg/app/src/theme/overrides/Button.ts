@@ -9,6 +9,7 @@ declare module '@mui/material/Button' {
 		grey: true
 		lemon: true
 		pink: true
+		glass: true
 	}
 }
 
@@ -27,6 +28,18 @@ export default function Button(theme: Theme) {
 						borderRadius: theme.shape.borderRadiusLg,
 						// p: `1rem`,
 						// m: `1rem`,
+					},
+				},
+				{
+					props: { variant: 'glass' },
+					style: {
+						height: '44px',
+						fontSize: '1rem',
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+						border: `1px solid #ffffff11`,
+						borderRadius: theme.shape.borderRadiusLg,
 					},
 				},
 				{
@@ -72,17 +85,15 @@ export default function Button(theme: Theme) {
 				root: {
 					borderRadius: theme.shape.borderRadiusLg,
 					'&:hover': {
-						boxShadow: 'none',
+						// boxShadow: 'none',
 					},
 				},
-
 				sizeLarge: {
 					height: 48,
 				},
 				sizeXs: {
 					height: '15px',
 				},
-
 				containedInherit: {
 					boxShadow: theme.customShadows.z8,
 					'&:hover': {
@@ -114,13 +125,12 @@ export default function Button(theme: Theme) {
 					color: theme.palette.grey[800],
 				},
 
-				// 	// outlined
-				// 	outlinedInherit: {
-				// 		border: `1px solid ${theme.palette.grey[500_32]}`,
-				// 		'&:hover': {
-				// 			backgroundColor: theme.palette.action.hover,
-				// 		},
-				// 	},
+				// outlined
+				outlinedInherit: {
+					height: '48px',
+					fontSize: '1rem',
+					'&:hover': {},
+				},
 				// 	textInherit: {
 				// 		'&:hover': {
 				// 			backgroundColor: theme.palette.action.hover,
