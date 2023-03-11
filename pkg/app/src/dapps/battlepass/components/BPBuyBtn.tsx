@@ -186,7 +186,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	// waiting for on chain tx confirmation
 	if (txState === 'pending')
 		return (
-			<Button variant="pink" size="large" sx={{ opacity: 0.75 }}>
+			<Button variant="glass" size="large" sx={{ opacity: 0.75 }}>
 				Confirming Transaction
 			</Button>
 		)
@@ -224,7 +224,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					onClick={() => (txState === 'pendingPayment' ? setOpen(true) : handleClaimBattlepass())}
 					variant="pink"
 				>
-					{passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
+					{txState === 'pendingPayment' ? `Pay Now` : passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
 				</Button>
 				<BaseDialog title="GameDAO Battlepass" open={open} onClose={onClose}>
 					<Typography

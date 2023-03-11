@@ -53,7 +53,8 @@ export default function Paper(theme: Theme) {
 					position: 'relative',
 					boxShadow: theme.customShadows.card,
 					borderRadius: theme.shape.borderRadiusLg,
-					backgroundColor: theme.palette.background.paper,
+					// backgroundColor: theme.palette.background.paper,
+					backgroundColor: '#00000066',
 					zIndex: 0, // Fix Safari overflow: hidden with border radius
 				},
 			},
