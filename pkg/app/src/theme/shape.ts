@@ -11,9 +11,9 @@ declare module '@mui/system' {
 
 const shape = {
 	borderRadius: 0,
-	borderRadiusSm: '1px',
-	borderRadiusMd: '1px',
-	borderRadiusLg: '1px',
+	borderRadiusSm: '2px',
+	borderRadiusMd: '3px',
+	borderRadiusLg: '4px',
 	borderRadiusXl: '1rem',
 }
 

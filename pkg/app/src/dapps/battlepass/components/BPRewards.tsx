@@ -12,7 +12,10 @@ import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { BPCard } from './BPCard'
-import { content } from '../content/rewards'
+
+import demoContent from '../content/rewards'
+import mockCIDJSON from '../content/mock-cid.json'
+
 import { CircularProgress } from '@mui/material'
 
 const IconGroupVisible = false
@@ -48,6 +51,13 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 		user: { address },
 	} = useAppContext()
 
+	const metadata = mockCIDJSON
+	// TODO: load metadata from CID, instead of image
+	// TODO: parse metadata to get card content
+	useEffect(() => {
+		if (!metadata) return
+	}, [metadata])
+
 	const isPremium = score.premium ? true : false
 	const isConnected = address !== null
 	const requiredPoints = score.score >= content.points
@@ -57,7 +67,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 	}
 	const claimReward = () => handleClaim(content.chainId)
 
-	const isClaimed = content.RewardClaims.filter((i) => i.syncStatus === 'synced').length > 0 ? true : false
+	const isClaimed = content?.RewardClaims?.filter((i) => i.syncStatus === 'synced').length > 0 ? true : false
 
 	const ClaimSection = () => {
 		if (isClaimed)
@@ -222,18 +232,14 @@ export const BPRewards = ({ args }: TArgs) => {
 	const [items, setItems] = useState([])
 	const [demoMode, setDemoMode] = useState(true)
 
-	const { data: rewards } = useRewardsSubscription({ variables: { id: id, uuid: uuid } })
+	const { loading: loadingRewards, data: rewards } = useRewardsSubscription({ variables: { id: id, uuid: uuid } })
 
 	useEffect(() => {
-		if (!rewards) return
-		if (!rewards?.BattlepassRewards.length) return
-		console.log('rewards', id, uuid)
-		console.log('rewards', rewards)
-		const res = rewards?.BattlepassRewards.map((i) => i) // as TRewardItem[]
-		setDemoMode(res.length === 0)
-		setItems(res.length === 0 ? content : res)
-		// console.log('r', res)
-	}, [rewards])
+		if (loadingRewards) return
+		const hasRewards = rewards?.BattlepassRewards?.length > 0
+		setDemoMode(!hasRewards)
+		setItems(hasRewards ? rewards?.BattlepassRewards?.map((i) => i) : demoContent)
+	}, [loadingRewards, rewards?.BattlepassRewards])
 
 	const [chainId, setChainId] = useState(null)
 	const [claimRewardMutation] = useClaimRewardMutation()
@@ -268,9 +274,9 @@ export const BPRewards = ({ args }: TArgs) => {
 			<Grid
 				container
 				// columns={{ xs: 1, md: 2 }}
-				rowSpacing={2}
-				columnSpacing={{ xs: 2, md: 4, lg: 6 }}
-				justifyContent={{ xs: 'center', md: 'left' }}
+				rowSpacing={{ xs: 2, md: 3, lg: 4 }}
+				columnSpacing={{ xs: 2, md: 3, lg: 4 }}
+				justifyContent={{ xs: 'center', md: 'center' }}
 			>
 				<Grid item xs={12}>
 					<Typography variant="h4"> {demoMode && `Demo `}Rewards</Typography>
