@@ -34,8 +34,12 @@ mutation ClaimReward( $battlepass: String!, $uuid: String!, $reward: String!) {
 subscription Battlepass ( $id: bpchar! ) {
 	Battlepasses(where: {chainId: {_eq: $id}}) {
 		cid
-		passesClaimed
+		joinable
+		totalJoined
+		premiumPasses
+		premiumClaimed
 		freePasses
+		freeClaimed
 		name
 		active
 		season
