@@ -68,7 +68,22 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	// BATTLEPASS COMMERCIALS
 
-	const [passes, setPasses] = useState({ total: 0, claimed: 0, free: 0, price: 0 })
+	const [pass, setPass] = useState({
+		price: 0,
+		joinable: false,
+		claimable: false,
+		totalJoined: null,
+		freePasses: null,
+		freeClaimed: null,
+		premiumPasses: null,
+		premiumClaimed: null,
+		totalClaimed: null,
+
+		// total: 0,
+		// claimed: 0,
+		// free: 0,
+	})
+
 	const { data: battlepass } = useBattlepassSubscription({ variables: { id: id } })
 	useEffect(() => {
 		if (!battlepass || !battlepass?.Battlepasses.length) return
@@ -78,16 +93,22 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		// 	'buy',
 		// 	pass,
 		// 	'total/available/claimed',
-		// 	pass.freePasses,
-		// 	pass.freePasses - pass.passesClaimed,
-		// 	pass.passesClaimed,
+		// 	pass.freepass,
+		// 	pass.freepass - pass.passClaimed,
+		// 	pass.passClaimed,
 		// )
-		setPasses({
-			total: pass.freePasses,
-			claimed: pass.passesClaimed,
-			free: pass.freePasses - pass.passesClaimed,
+		setPass({
 			price: pass.price,
+			joinable: pass.joinable,
+			totalJoined: pass.totalJoined,
+			claimable: pass.freePasses + pass.premiumPasses > 0,
+			freePasses: pass.freePasses,
+			freeClaimed: pass.freeClaimed,
+			premiumPasses: pass.premiumPasses,
+			premiumClaimed: pass.premiumClaimed,
+			totalClaimed: pass.freeClaimed + pass.premiumClaimed,
 		})
+		console.log('pass', pass)
 	}, [battlepass])
 
 	// MEMBERSHIP
@@ -165,7 +186,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		)
 
 	// not a member or awaiting payment
-	if (txState === 'unknown')
+	if (txState === 'unknown' && pass.joinable === true)
 		return (
 			<Fragment>
 				<Button onClick={() => handleJoinBattlepass()} variant="lemon">
@@ -217,14 +238,24 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		)
 
 	// a member with a connected wallet
-	if (user.address && (txState === 'free' || txState === 'pendingPayment'))
+	const buttonContent = () => {
+		if (txState === 'pendingPayment') return `Pay Now`
+		// if ( pass.freePasses === null ) return `Claim Now`
+		if (pass.freePasses > 0) return `Claim 1 of ${pass.freePasses}`
+		if (pass.premiumPasses === null) return `Buy Now`
+		if (pass.premiumPasses > 0) return `Buy 1 of ${pass.premiumPasses}`
+		if (pass.premiumPasses === 0) return `All gone!`
+		return null
+	}
+	if (user.address && (txState === 'free' || txState === 'pendingPayment') && buttonContent() !== null)
 		return (
 			<Fragment>
 				<Button
+					disabled={pass.freePasses === 0 && pass.premiumPasses === 0}
 					onClick={() => (txState === 'pendingPayment' ? setOpen(true) : handleClaimBattlepass())}
-					variant="pink"
+					variant={pass.freePasses === 0 && pass.premiumPasses === 0 ? 'glass' : 'pink'}
 				>
-					{txState === 'pendingPayment' ? `Pay Now` : passes.free > 0 ? `Get 1 of ${passes.free}` : `Buy Now`}
+					{buttonContent()}
 				</Button>
 				<BaseDialog title="GameDAO Battlepass" open={open} onClose={onClose}>
 					<Typography
@@ -238,7 +269,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 					>
 						Get early access and go premium!
 					</Typography>
-					<Checkout args={{ price: passes.price }} />
+					<Checkout args={{ price: pass.price }} />
 				</BaseDialog>
 			</Fragment>
 		)
