@@ -43,8 +43,11 @@ const handlePaymentIntentSucceeded = async (paymentIntent) => {
 	console.log('-->', 'sending receipt', paymentIntent)
 	console.log('battlepass_url', battlepass_url)
 
+	console.log('battlepass_url', battlepass_url)
+
 	const { id: txid, receipt_email, metadata } = paymentIntent
 	const { uuid, bpid } = paymentIntent.metadata
+
 	console.log('-->', '\nk', battlepass_payment_key, '\nb', bpid, '\nu', uuid, '\nx', txid, '\ne', receipt_email)
 
 	fetch(battlepass_url, {
