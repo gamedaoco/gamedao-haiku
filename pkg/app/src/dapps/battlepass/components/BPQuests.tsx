@@ -152,8 +152,9 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		}
 	}
 
-	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && !user.address && user.uuid) {
-		// console.log('link wallet', address, user.address)
+	console.log(item)
+	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && user.uuid) {
+		console.log('link wallet', item, address, user.address)
 		actionString = `${Actions.LINK}`
 		action = () => {
 			// console.log('link address', '->', address, user.uuid)
@@ -311,7 +312,7 @@ export const BPQuests = ({ args }: TArgs) => {
 				{items.length > 0 ? (
 					items.map((item, index) => {
 						// TODO: rm when twitter is fixed
-						if (item.source === 'twitter') return null
+						// if (item.source === 'twitter') return null
 
 						return (
 							<Grid item key={index} xs={12} md={6} lg={4}>

@@ -143,35 +143,39 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 								<MenuItem
 									selected={router.pathname.includes(item.path)}
 									sx={{
+										transitionDuration: '250ms',
 										py: '32px',
 										overflow: 'hidden',
-										'* >, &::after, &::before': { transitionDuration: '1s' },
+										'* >, &::after, &::before': { transitionDuration: '250ms' },
+										'&::after': {
+											transitionDuration: '250ms',
+											content: '""',
+											position: 'absolute',
+											borderRadius: '2px 0px 0px 2px',
+											boxShadow: '0 0px 20px 2px #00ffcc99',
+											// borderBottom: '2px solid #ffffff33',
+											width: '0%',
+											left: '50%',
+											right: '50%',
+											bottom: '-1px',
+										},
 										'&:hover': {
 											'&::after': {
-												content: '""',
-												position: 'absolute',
 												width: '90%',
-												borderRadius: '2px 0px 0px 2px',
-												boxShadow: '0 0px 20px 2px #00ffcc99',
-												borderBottom: '2px solid #ffffff66',
 												left: '5%',
 												right: '5%',
-												bottom: '-1px',
 											},
 										},
 										'&.Mui-selected': {
-											'&:hover': {
-												border: 0,
-												borderBottom: '4px transparent',
-											},
 											'&::after': {
+												transitionDuration: '250ms',
 												content: '""',
 												position: 'absolute',
-												width: '90%',
-												borderColor: '#ff00ff',
+												// borderColor: '#ff00ff',
 												borderRadius: '2px 0px 0px 2px',
 												boxShadow: '0 0px 20px 2px #00ffcc',
-												borderBottom: '2px solid white',
+												// borderBottom: '2px solid #ffffff66',
+												width: '90%',
 												left: '5%',
 												right: '5%',
 												bottom: '-1px',

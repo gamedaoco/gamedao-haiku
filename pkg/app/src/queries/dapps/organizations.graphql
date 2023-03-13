@@ -88,6 +88,7 @@ subscription OrganizationById($orgId: String!) {
         id
         member_limit
         pay_currency
+		prime
         treasury
         type
         organization_members {

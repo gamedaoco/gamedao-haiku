@@ -6,11 +6,12 @@ import {
 	useJoinBattlepassMutation,
 	useGetBattlepassForUserQuery,
 	useBattlepassSubscription,
-	useClaimBattlepassPremiumMutation,
-	useClaimBattlepassFreemiumMutation,
+	// useClaimBattlepassPremiumMutation,
+	usePayBattlepassMutation,
 	useScoreSubscription,
 } from 'src/queries'
 
+import CircularProgress from '@mui/material/CircularProgress'
 import { Button, Typography } from '@mui/material'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { Checkout } from 'components/commerce'
@@ -151,12 +152,13 @@ export const BPBuyBtn = ({ args }: TProps) => {
 
 	// CLAIM + BUY
 
-	const [claimBattlepassFreemiumMutation] = useClaimBattlepassFreemiumMutation({
+	const [payBattlepassMutation] = usePayBattlepassMutation({
 		variables: { battlepass: id, uuid: uuid },
 	})
 	const handleClaimBattlepass = () => {
+		console.log('buy', 'battlepass', id, uuid)
 		const connect = async () => {
-			const response = await claimBattlepassFreemiumMutation({
+			const response = await payBattlepassMutation({
 				variables: { battlepass: id, uuid: uuid },
 			}).then((res) => {
 				try {
@@ -207,7 +209,12 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	// waiting for on chain tx confirmation
 	if (txState === 'pending')
 		return (
-			<Button variant="glass" size="large" sx={{ opacity: 0.75 }}>
+			<Button
+				startIcon={<CircularProgress color={'inherit'} size={14} />}
+				variant="glass"
+				size="large"
+				sx={{ opacity: 0.75 }}
+			>
 				Confirming Transaction
 			</Button>
 		)
@@ -237,12 +244,13 @@ export const BPBuyBtn = ({ args }: TProps) => {
 			</Fragment>
 		)
 
+	console.log('pass.premiumPasses', pass)
 	// a member with a connected wallet
 	const buttonContent = () => {
 		if (txState === 'pendingPayment') return `Pay Now`
 		// if ( pass.freePasses === null ) return `Claim Now`
 		if (pass.freePasses > 0) return `Claim 1 of ${pass.freePasses}`
-		if (pass.premiumPasses === null) return `Buy Now`
+		if (!pass.premiumPasses) return `Buy Now`
 		if (pass.premiumPasses > 0) return `Buy 1 of ${pass.premiumPasses}`
 		if (pass.premiumPasses === 0) return `All gone!`
 		return null
