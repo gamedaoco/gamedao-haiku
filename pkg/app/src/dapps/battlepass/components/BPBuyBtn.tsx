@@ -250,7 +250,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		if (txState === 'pendingPayment') return `Pay Now`
 		// if ( pass.freePasses === null ) return `Claim Now`
 		if (pass.freePasses > 0) return `Claim 1 of ${pass.freePasses}`
-		if (!pass.premiumPasses) return `Buy Now`
+		if (pass.premiumPasses === null) return `Buy Now`
 		if (pass.premiumPasses > 0) return `Buy 1 of ${pass.premiumPasses}`
 		if (pass.premiumPasses === 0) return `All gone!`
 		return null
