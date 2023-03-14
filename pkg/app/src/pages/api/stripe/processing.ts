@@ -1,16 +1,17 @@
 export const config = { api: { bodyParser: false } }
 
+import Discord from 'discord.js'
 import Stripe from 'stripe'
 import { buffer } from 'micro'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
 
-// async function buffer(readable) {
-// 	const chunks = [];
-// 	for await (const chunk of readable) {
-// 		chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-// 	}
-// 	return Buffer.concat(chunks);
-// }
+// curl -X POST localhost:3000/api/feedback -H "Content-Type:application/json;charset=utf-8" -d '{"msg":"hello"}'
+// send a message: discord.send({ content: msg })
+
+import { Logger } from 'lib/logger'
+const log = Logger('payment')
+
+const discord = new Discord.WebhookClient({ id: process.env.DISCORD_HOOK_ID, token: process.env.DISCORD_HOOK_TOKEN })
 
 // mutation Payment($securityToken: String!, $battlepass: String!, $identityUuid: String!, $paymentToken: String!) {
 // 	processPayment(securityToken: $securityToken, battlepass: $battlepass, identityUuid: $identityUuid, paymentToken: $paymentToken) {
@@ -40,15 +41,15 @@ const battlepass_payment_key = process.env.BATTLEPASS_PAYMENT_KEY
 const battlepass_url = getConnectedEndpoint().url
 
 const handlePaymentIntentSucceeded = async (paymentIntent) => {
-	console.log('-->', 'sending receipt', paymentIntent)
-	console.log('battlepass_url', battlepass_url)
+	log.info('-->', 'sending receipt', paymentIntent)
+	log.info('battlepass_url', battlepass_url)
 
-	console.log('battlepass_url', battlepass_url)
+	log.info('battlepass_url', battlepass_url)
 
 	const { id: txid, receipt_email, metadata } = paymentIntent
 	const { uuid, bpid } = paymentIntent.metadata
 
-	console.log('-->', '\nk', battlepass_payment_key, '\nb', bpid, '\nu', uuid, '\nx', txid, '\ne', receipt_email)
+	log.info('-->', '\nk', battlepass_payment_key, '\nb', bpid, '\nu', uuid, '\nx', txid, '\ne', receipt_email)
 
 	fetch(battlepass_url, {
 		method: 'POST',
@@ -67,7 +68,10 @@ const handlePaymentIntentSucceeded = async (paymentIntent) => {
 		}),
 	})
 		.then((r) => r.json())
-		.then((data) => console.log('res:', data))
+		.then((data) => {
+			discord.send({ content: `🎉 payment completed for bp ${bpid} by user ${uuid}` })
+			log.info('🎉 payment completed:', data)
+		})
 }
 
 const stripe_secret_key = process.env.STRIPE_SECRET_KEY
@@ -76,27 +80,28 @@ const stripe = new Stripe(stripe_secret_key, { apiVersion: '2022-11-15' })
 
 const handler = async (req, res) => {
 	// if (req.method === 'POST') {
-	// 	console.log('============================================================')
+	// 	log.info('============================================================')
 	let event
 
 	// verify signature
 	try {
 		const buf = await buffer(req)
 		const sig = req.headers['stripe-signature']
-		// console.log(buf.toString())
+		// log.info(buf.toString())
 		event = stripe.webhooks.constructEvent(buf.toString(), sig, stripe_webhooks_secret)
 	} catch (err) {
 		return res.status(400).send(`⚠️  Webhook signature verification failed: ${err.message}`)
 	}
 
-	console.log('✅ Success:', event.id)
+	log.info('✅ Success:', event.id)
 
 	// handle event
 
 	switch (event.type) {
 		case 'payment_intent.succeeded':
 			const paymentIntent = event.data.object
-			console.log(`💰 Payment received!`)
+			discord.send(`💰 Payment received!`)
+			log.info(`💰 Payment received!`)
 			handlePaymentIntentSucceeded(paymentIntent)
 			break
 
@@ -106,7 +111,8 @@ const handler = async (req, res) => {
 		// handlePaymentMethodAttached(paymentMethod);
 		// break
 		default:
-			console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
+			discord.send({ content: `🤷‍♀️ Unhandled event type: ${event.type}` })
+			log.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
 	}
 	res.status(200).json({ received: true })
 	// } else {
