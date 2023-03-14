@@ -3,13 +3,13 @@
         "navigation": {
             "governance": "Governance",
             "campaigns": "Campaigns",
-            "organisations": "Organisations",
+            "organizations": "Organizations",
             "dashboard": "Dashboard",
             "wallet": "Wallet",
             "documentation": "Documentation",
             "faucet": "Faucet",
             "overview": "Overview",
-            "my_organisations": "Organisations",
+            "my_organizations": "Organizations",
             "my_campaigns": "Campaigns",
             "my_collectables": "Collectables",
             "identity": "Identity",
@@ -43,8 +43,8 @@
             "explore_campaigns": "Explore Campaigns",
             "contribute_now": "Contribute now",
             "contribute_again": "Contribute again",
-            "join_organization": "Join Organisation",
-            "leave_organization": "Leave Organisation",
+            "join_organization": "Join Organization",
+            "leave_organization": "Leave Organization",
             "create_proposal": "Create Proposal",
             "show_more": "Show More",
             "show_less": "Show Less",
@@ -59,7 +59,7 @@
         "form": {
             "publish_now": "Publish Now",
             "next_step": "Next step",
-            "save_organization": "Save Organisation",
+            "save_organization": "Save Organization",
             "back": "Back",
             "cancel": "Cancel",
             "proposal": {
@@ -95,8 +95,8 @@
       "explore_campaigns": "Explore Campaigns",
       "contribute_now": "Contribute now",
       "contribute_again": "Contribute again",
-      "join_organization": "Join Organisation",
-      "leave_organization": "Leave Organisation",
+      "join_organization": "Join Organization",
+      "leave_organization": "Leave Organization",
       "create_proposal": "Create Proposal",
       "show_more": "Show More",
       "show_less": "Show Less",
@@ -188,10 +188,10 @@
   },
   "transactions": {
     "createOrganization": {
-      "title": "Create Organisation",
-      "action_subtitle": "Organisation deposit",
+      "title": "Create Organization",
+      "action_subtitle": "Organization deposit",
       "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an organisation. You will receive your deposit back when you close the organisation."
+      "description": "You need to deposit the amount so you can create an organization. You will receive your deposit back when you close the organization."
     },
     "createCampaign": {
       "title": "Create Campaign",
@@ -211,10 +211,10 @@
     "addMember": {
       "title": "Join",
       "action_subtitle": "Free",
-      "description": "This organisation does not require any fee."
+      "description": "This organization does not require any fee."
     },
     "removeMember": {
-      "title": "Leave Organisation"
+      "title": "Leave Organization"
     },
     "setIdentity": {
       "title": "Claim Identity",
@@ -246,8 +246,8 @@
           "reserved": "Reserved",
           "total": "Total"
       },
-      "organisations": {
-        "title": "Organisations",
+      "organizations": {
+        "title": "Organizations",
         "name": "Name",
         "members": "Members",
         "value_locked": "Value Locked",
@@ -267,21 +267,21 @@
         "status": "Status"
       }
     },
-    "organisations": {
-      "title": "Organisations",
+    "organizations": {
+      "title": "Organizations",
       "no_campaigns": "No Campaigns Yet",
-      "no_organisations": "No organisation found",
+      "no_organizations": "No organization found",
       "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
       "search_place_holder": "Search Organizations",
-      "load_more": "Load More Organisations",
-      "showing_results": "Showing {{count1}} of {{count2}} organisations",
+      "load_more": "Load More Organizations",
+      "showing_results": "Showing {{count1}} of {{count2}} organizations",
       "votings": "Votings",
-      "organisations_rules": "Organisation Rules",
+      "organizations_rules": "Organization Rules",
       "about": "About",
       "general_proposal": "General Proposal",
       "withdrawal_proposal": "Withdrawal Proposal",
       "spending_proposal": "Spending Proposal",
-      "organisation_rules": {
+      "organization_rules": {
         "open": {
           "title": "Open Access",
           "text": "Anyone can join this organization.",
@@ -289,7 +289,7 @@
         },
         "private": {
           "title": "Private Access",
-          "text": "Approved applicants can join the organisation.",
+          "text": "Approved applicants can join the organization.",
           "status": "Private"
         },
         "no_fee": {
@@ -302,15 +302,15 @@
         },
         "transferred_fee": {
           "title": "Transferred Membership Fee",
-          "text": "Members pay a fee to join this organisation."
+          "text": "Members pay a fee to join this organization."
         },
         "no_member_limit": {
           "title": "No Member Limit",
-          "text": " Unlimited Members can join this organisation."
+          "text": " Unlimited Members can join this organization."
         },
         "member_limit": {
           "title": "Member Limit",
-          "text": "members can join this organisation",
+          "text": "members can join this organization",
           "only": "Only"
         }
       },
@@ -347,7 +347,7 @@
           },
           "radio_button_reserve_fee": {
             "title": "Reserve fee ",
-            "description": "The fee will be locked when a member joins this organisation and unlocked when leaving"
+            "description": "The fee will be locked when a member joins this organization and unlocked when leaving"
           },
           "radio_button_transfer_fee": {
             "title": "Transfer fee",
@@ -418,7 +418,7 @@
         "treasury_by_year": "Treasury by Year",
         "than_last_year": "than last year"
       }
-    
+
     },
     "campaigns": {
       "created_campaigns": "Created Campaigns",
@@ -519,14 +519,14 @@
         "error": "Voting failed"
       },
       "addMember": {
-        "pending": "Join organisations in progress…",
-        "success": "Join organisations successfully",
-        "error": "Join organisations failed"
+        "pending": "Join organizations in progress…",
+        "success": "Join organizations successfully",
+        "error": "Join organizations failed"
       },
       "removeMember": {
-        "pending": "Leave organisations in progress…",
-        "success": "Leave organisations successfully",
-        "error": "Leave organisations failed"
+        "pending": "Leave organizations in progress…",
+        "success": "Leave organizations successfully",
+        "error": "Leave organizations failed"
       },
       "setIdentity": {
         "pending": "Setting your identity in progress…",
