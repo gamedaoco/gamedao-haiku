@@ -44,10 +44,12 @@ export function Flyout({
 	const { data: session } = useSession()
 	const { user } = useAppContext()
 
-	const handleDisconnect = () => {
+	async function handleDisconnect() {
 		const disconnect = async () => {
+			console.log('disconnect wallet')
 			await disconnectWallet()
-			await signOut()
+			console.log('kill session')
+			await signOut({ callbackUrl: '/' })
 		}
 		disconnect()
 	}

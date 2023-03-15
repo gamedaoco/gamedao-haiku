@@ -37,6 +37,7 @@ export function Selector({ onClick }: IComponentProps) {
 	useEffect(() => {
 		if (!user && !address) return
 		if (address) setAddressShort(shortHash(address))
+		console.log('account selector update')
 
 		const userName =
 			identity?.display_name || user?.name /*session?.user?.name*/ || getNameFromAccountState(accountState)
@@ -45,7 +46,7 @@ export function Selector({ onClick }: IComponentProps) {
 		if (address || user?.uuid) {
 			setImageUrl(avatarImageURL(address || user?.uuid))
 		}
-	}, [identity, user, accountState, address])
+	}, [session, identity, user, accountState, address])
 
 	const VerifiedBadge = () =>
 		identity?.display_name ? <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" color="inherit" /> : null
