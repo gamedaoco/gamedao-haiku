@@ -42,12 +42,12 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 	return (
 		<>
 			<Stack>
-				<Typography variant="h5">{t('page:organisations:settings:member_limit:title')}</Typography>
+				<Typography variant="h5">{t('page:organizations:settings:member_limit:title')}</Typography>
 				<Typography variant="h5" mt={3}>
-					{t('page:organisations:settings:member_limit:sub_title')}
+					{t('page:organizations:settings:member_limit:sub_title')}
 				</Typography>
 				<Typography variant="body2" fontStyle="italic">
-					{t('page:organisations:settings:member_limit:description')}
+					{t('page:organizations:settings:member_limit:description')}
 				</Typography>
 			</Stack>
 
@@ -57,7 +57,7 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 				onChange={handleMemberLimitChange}
 				InputLabelProps={{ shrink: Number.isInteger(+memberLimitValue) }}
 				value={memberLimitValue}
-				label={t('page:organisations:settings:member_limit:title')}
+				label={t('page:organizations:settings:member_limit:title')}
 				variant="outlined"
 				error={!!memberLimitError}
 				helperText={memberLimitError}
@@ -70,7 +70,7 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 					sx={{ display: 'block', flexGrow: { xs: 1, sm: 0 } }}
 					disabled
 				>
-					{t('page:organisations:settings:member_limit:cta_button')}
+					{t('page:organizations:settings:member_limit:cta_button')}
 				</Button>
 			</Stack>
 		</>

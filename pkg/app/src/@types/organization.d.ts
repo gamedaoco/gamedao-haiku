@@ -1,4 +1,4 @@
-export interface TMPOrganisation {
+export interface TMPOrganization {
 	type: number
 	name: string
 	mode: number
@@ -17,7 +17,7 @@ export interface TMPOrganisation {
 	tags: string[]
 }
 
-export interface TMPOrganisationState extends TMPOrganisation {
+export interface TMPOrganizationState extends TMPOrganization {
 	setType: (number) => void
 	setName: (name) => void
 	setMode: (number) => void

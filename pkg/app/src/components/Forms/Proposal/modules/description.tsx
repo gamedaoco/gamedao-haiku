@@ -25,7 +25,7 @@ import { CREATE_PROPOSAL_TYPE_TITLES, PROPOSAL_KEYS } from 'src/constants/propos
 import {
 	Organization,
 	useOrganizationByIdSubscription,
-	useSuccessfulCampaignByOrganisationIdSubscription,
+	useSuccessfulCampaignByOrganizationIdSubscription,
 } from 'src/queries'
 import { getCurrenciesForSelect } from 'src/utils/forms/currencyUtils'
 import * as Yup from 'yup'
@@ -122,7 +122,7 @@ export function Description({
 }: ComponentProps) {
 	const { selectedApiProvider } = useNetworkContext()
 	const [errorState, setErrorState] = useState<string>()
-	const { data } = useSuccessfulCampaignByOrganisationIdSubscription({ variables: { orgId: organizationId } })
+	const { data } = useSuccessfulCampaignByOrganizationIdSubscription({ variables: { orgId: organizationId } })
 	const { data: organizationData } = useOrganizationByIdSubscription({ variables: { orgId: organizationId } })
 	const [organization, setOrganization] = useState<Organization>(null)
 	const isWithdrawal = useMemo(() => type === PROPOSAL_KEYS.Withdrawal, [type])

@@ -134,28 +134,28 @@ export function Settings({
 
 			<Divider variant="fullWidth" sx={{ display: 'block', width: '100%', borderStyle: 'dashed' }} />
 			<Typography variant="h5" textAlign="center">
-				{t('page:organisations:settings:member_type:sub_title')}
+				{t('page:organizations:settings:member_type:sub_title')}
 			</Typography>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_no_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_no_fee:description')}
+				title={t('page:organizations:settings:member_type:radio_button_no_fee:title')}
+				description={t('page:organizations:settings:member_type:radio_button_no_fee:description')}
 				value={0}
 				selectedValue={selectedFee}
 				onChange={setSelectedFee}
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_reserve_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_reserve_fee:description')}
+				title={t('page:organizations:settings:member_type:radio_button_reserve_fee:title')}
+				description={t('page:organizations:settings:member_type:radio_button_reserve_fee:description')}
 				value={1}
 				selectedValue={selectedFee}
 				onChange={setSelectedFee}
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_transfer_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_transfer_fee:description')}
+				title={t('page:organizations:settings:member_type:radio_button_transfer_fee:title')}
+				description={t('page:organizations:settings:member_type:radio_button_transfer_fee:description')}
 				value={2}
 				selectedValue={selectedFee}
 				onChange={setSelectedFee}

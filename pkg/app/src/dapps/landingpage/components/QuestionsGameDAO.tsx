@@ -76,7 +76,7 @@ Once you’ve connected your wallet to the ZERO network, you’ll be able to add
 		answer: ``,
 	},
 	{
-		question: `How can I create an Organisation?`,
+		question: `How can I create an Organization?`,
 		answer: ``,
 	},
 	{
@@ -92,7 +92,7 @@ Once you’ve connected your wallet to the ZERO network, you’ll be able to add
 		answer: ``,
 	},
 	{
-		question: `What is the security model of GameDAO, an Organisation or a Campaign?`,
+		question: `What is the security model of GameDAO, an Organization or a Campaign?`,
 		answer: ``,
 	},
 ]

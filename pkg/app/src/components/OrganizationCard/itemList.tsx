@@ -3,8 +3,8 @@ import React, { Fragment } from 'react'
 import { Grid } from '@mui/material'
 import { Organization } from 'src/queries'
 
-import { LoadingTileCard } from 'components/OrganisationCard/modules/loadingTileCard'
-import { TileCard } from 'components/OrganisationCard/modules/tileCard'
+import { LoadingTileCard } from 'components/OrganizationCard/modules/loadingTileCard'
+import { TileCard } from 'components/OrganizationCard/modules/tileCard'
 
 interface ComponentProps {
 	items: Organization[]

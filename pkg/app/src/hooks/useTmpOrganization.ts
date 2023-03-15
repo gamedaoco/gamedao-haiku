@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
-import type { TMPOrganisation } from 'src/@types/organisation'
-import { defaultValuesTmpOrganisation as defaultValues } from 'src/constants'
+import type { TMPOrganization } from 'src/@types/organization'
+import { defaultValuesTmpOrganization as defaultValues } from 'src/constants'
 
-export function useTmpOrganisation(): TMPOrganisation {
+export function useTmpOrganization(): TMPOrganization {
 	const address = useCurrentAccountAddress()
 	const [selectedType] = useLocalStorage<number>(`TmpOrg-${address}-selectedType`, defaultValues.type)
 	const [nameState] = useLocalStorage<string>(`TmpOrg-${address}-nameState`, defaultValues.name)
@@ -25,7 +25,7 @@ export function useTmpOrganisation(): TMPOrganisation {
 	const [location] = useLocalStorage<string>(`TmpOrg-${address}-location`, defaultValues.location)
 	const [tags] = useLocalStorage<string[]>(`TmpOrg-${address}-tags`, defaultValues.tags)
 
-	const [state, setState] = useState<TMPOrganisation>({
+	const [state, setState] = useState<TMPOrganization>({
 		type: selectedType,
 		name: nameState,
 		mode: selectedMode,

@@ -26,7 +26,7 @@ export function Assets({ address }: ComponentProps) {
 	return (
 		<>
 			<Box py={3}>
-				<Typography variant="h5">{t('page:organisations:treasury:assets')}</Typography>
+				<Typography variant="h5">{t('page:organizations:treasury:assets')}</Typography>
 			</Box>
 			<Grid container spacing={3}>
 				{assetsData.map(({ name, quantity, image }) => (
