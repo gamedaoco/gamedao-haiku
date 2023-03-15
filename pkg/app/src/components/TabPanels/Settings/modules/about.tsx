@@ -18,7 +18,7 @@ interface ComponentProps {
 	logo: string
 }
 
-const validationDescriptionSchema = Yup.string().required('page:organisations:settings:about:description_error')
+const validationDescriptionSchema = Yup.string().required('page:organizations:settings:about:description_error')
 
 export const validationSchema = Yup.object().shape({
 	name: Yup.string().required(),
@@ -110,7 +110,7 @@ export function About({ description, header, logo }: ComponentProps) {
 
 	return (
 		<Fragment>
-			<Typography variant="h5">{t('page:organisations:settings:about:title')}</Typography>
+			<Typography variant="h5">{t('page:organizations:settings:about:title')}</Typography>
 			<TextField
 				fullWidth
 				multiline
@@ -123,7 +123,7 @@ export function About({ description, header, logo }: ComponentProps) {
 				InputLabelProps={{ shrink: !!descriptionValue }}
 				value={descriptionValue}
 				minRows={4}
-				label={t('page:organisations:settings:about:description')}
+				label={t('page:organizations:settings:about:description')}
 				variant="outlined"
 				error={!!errorState}
 			/>
@@ -189,7 +189,7 @@ export function About({ description, header, logo }: ComponentProps) {
 
 			<TextField
 				fullWidth
-				label={t('page:organisations:settings:about:website')}
+				label={t('page:organizations:settings:about:website')}
 				InputProps={{
 					startAdornment: <Web sx={{ width: '20px', height: '20px', mr: '8px' }} />,
 				}}
@@ -207,7 +207,7 @@ export function About({ description, header, logo }: ComponentProps) {
 				getOptionLabel={(option: DisplayValueEntryNumber) => t(option.text)}
 				value={countrySelected}
 				renderInput={(params) => (
-					<TextField {...params} label={t('page:organisations:settings:about:country')} />
+					<TextField {...params} label={t('page:organizations:settings:about:country')} />
 				)}
 			/>
 
@@ -225,7 +225,7 @@ export function About({ description, header, logo }: ComponentProps) {
 				onChange={handleTagsChange}
 				getOptionLabel={(option: DisplayValueEntryNumber) => t(option.text)}
 				value={selectedTags}
-				renderInput={(params) => <TextField {...params} label={t('page:organisations:settings:about:tags')} />}
+				renderInput={(params) => <TextField {...params} label={t('page:organizations:settings:about:tags')} />}
 			/>
 			<Stack spacing={2} sx={{ justifyContent: { xs: 'space-between', sm: 'flex-end' } }} direction="row">
 				<Button
@@ -235,7 +235,7 @@ export function About({ description, header, logo }: ComponentProps) {
 					sx={{ display: 'block', flexGrow: { xs: 1, sm: 0 } }}
 					// disabled
 				>
-					{t('page:organisations:settings:about:cta_button')}
+					{t('page:organizations:settings:about:cta_button')}
 				</Button>
 			</Stack>
 		</Fragment>

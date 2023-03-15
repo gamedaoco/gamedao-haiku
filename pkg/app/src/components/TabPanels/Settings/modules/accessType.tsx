@@ -42,19 +42,19 @@ export function AccessType({ mode }: ComponentProps) {
 
 	return (
 		<>
-			<Typography variant="h5">{t('page:organisations:settings:access_type:title')}</Typography>
+			<Typography variant="h5">{t('page:organizations:settings:access_type:title')}</Typography>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:access_type:radio_button_open.title')}
-				description={t('page:organisations:settings:access_type:radio_button_open.description')}
+				title={t('page:organizations:settings:access_type:radio_button_open.title')}
+				description={t('page:organizations:settings:access_type:radio_button_open.description')}
 				value={'0'}
 				selectedValue={selectedMode || accessType[mode]}
 				onChange={setSelectedMode}
 			/>
 			<RadioItem
 				icon={<People sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:access_type:radio_button_private.title')}
-				description={t('page:organisations:settings:access_type:radio_button_private.description')}
+				title={t('page:organizations:settings:access_type:radio_button_private.title')}
+				description={t('page:organizations:settings:access_type:radio_button_private.description')}
 				value={'1'}
 				selectedValue={selectedMode || accessType[mode]}
 				onChange={setSelectedMode}
@@ -65,12 +65,12 @@ export function AccessType({ mode }: ComponentProps) {
 					<FormControlLabel
 						sx={{ display: 'block' }}
 						control={<Checkbox checked={hasWhitelist} onChange={handleWhitelistChange} />}
-						label={t('page:organisations:settings:access_type:whitelist')}
+						label={t('page:organizations:settings:access_type:whitelist')}
 					/>
 					<FormControlLabel
 						sx={{ display: 'block' }}
 						control={<Checkbox checked={hasApplication} onChange={handleApplicationChange} />}
-						label={t('page:organisations:settings:access_type:application')}
+						label={t('page:organizations:settings:access_type:application')}
 					/>
 				</Box>
 			)}
@@ -82,7 +82,7 @@ export function AccessType({ mode }: ComponentProps) {
 					sx={{ display: 'block', flexGrow: { xs: 1, sm: 0 } }}
 					disabled
 				>
-					{t('page:organisations:settings:access_type:cta_button')}
+					{t('page:organizations:settings:access_type:cta_button')}
 				</Button>
 			</Stack>
 		</>

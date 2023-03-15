@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 
 import { Button, Stack } from '@mui/material'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganizationState } from 'hooks/useTmpOrganizationState'
 import { useTranslation } from 'react-i18next'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 
@@ -20,7 +20,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 	const { push } = useRouter()
 	const { t } = useTranslation()
 
-	const tmpOrgState = useTmpOrganisationState()
+	const tmpOrgState = useTmpOrganizationState()
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0) {

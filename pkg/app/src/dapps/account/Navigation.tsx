@@ -24,7 +24,7 @@ export function Navigation({ param }: ComponentProps) {
 				value: AccountTabs.OVERVIEW,
 			},
 			{
-				label: `Organizations`, //t('button:navigation:my_organisations'),
+				label: `Organizations`, //t('button:navigation:my_organizations'),
 				value: AccountTabs.ORGANIZATIONS,
 			},
 			{

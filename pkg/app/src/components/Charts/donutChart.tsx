@@ -30,9 +30,9 @@ export function DonutChart({ series }: ComponentProps) {
 		},
 
 		labels: [
-			t('page:organisations:general_proposal'),
-			t('page:organisations:withdrawal_proposal'),
-			t('page:organisations:spending_proposal'),
+			t('page:organizations:general_proposal'),
+			t('page:organizations:withdrawal_proposal'),
+			t('page:organizations:spending_proposal'),
 		],
 		legend: {
 			labels: {

@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react'
 
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganizationState } from 'hooks/useTmpOrganizationState'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 // import { createWarningNotification } from 'src/utils/notificationUtils'

@@ -33,7 +33,7 @@ export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
 
 	const onHandleCancelClicked = useCallback(() => {
 		if (query?.draft) {
-			push(`/organisations/${organizationId}/campaigns`)
+			push(`/organizations/${organizationId}/campaigns`)
 		}
 		setShowCreatePage(false)
 	}, [setShowCreatePage, query?.draft, organizationId])

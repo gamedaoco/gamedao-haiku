@@ -63,31 +63,31 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 	return (
 		<>
 			<Stack>
-				<Typography variant="h5">{t('page:organisations:settings:member_type:title')}</Typography>
+				<Typography variant="h5">{t('page:organizations:settings:member_type:title')}</Typography>
 				<Typography variant="h5" mt={3} textAlign="center">
-					{t('page:organisations:settings:member_type:sub_title')}
+					{t('page:organizations:settings:member_type:sub_title')}
 				</Typography>
 			</Stack>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_no_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_no_fee:description')}
+				title={t('page:organizations:settings:member_type:radio_button_no_fee:title')}
+				description={t('page:organizations:settings:member_type:radio_button_no_fee:description')}
 				value={'0'}
 				selectedValue={selectedFee || feeTypes[feeType]}
 				onChange={setSelectedFee}
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_reserve_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_reserve_fee:description')}
+				title={t('page:organizations:settings:member_type:radio_button_reserve_fee:title')}
+				description={t('page:organizations:settings:member_type:radio_button_reserve_fee:description')}
 				value={'1'}
 				selectedValue={selectedFee || feeTypes[feeType]}
 				onChange={setSelectedFee}
 			/>
 			<RadioItem
 				icon={<People sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:member_type:radio_button_transfer_fee:title')}
-				description={t('page:organisations:settings:member_type:radio_button_transfer_fee:description')}
+				title={t('page:organizations:settings:member_type:radio_button_transfer_fee:title')}
+				description={t('page:organizations:settings:member_type:radio_button_transfer_fee:description')}
 				value={'2'}
 				selectedValue={selectedFee || feeTypes[feeType]}
 				onChange={setSelectedFee}
@@ -99,7 +99,7 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 					type="number"
 					onChange={handleFeeAmountChange}
 					value={feeAmountValue}
-					label={t('page:organisations:settings:member_type:fee_amount')}
+					label={t('page:organizations:settings:member_type:fee_amount')}
 					InputLabelProps={{ shrink: Number.isInteger(+feeAmountValue) }}
 					InputProps={{
 						endAdornment: <Typography variant="body2">GAME</Typography>,
@@ -117,7 +117,7 @@ export function MemberType({ feeType, feeAmount }: ComponentProps) {
 					sx={{ display: 'block', flexGrow: { xs: 1, sm: 0 } }}
 					disabled
 				>
-					{t('page:organisations:settings:member_type:cta_button')}
+					{t('page:organizations:settings:member_type:cta_button')}
 				</Button>
 			</Stack>
 		</>

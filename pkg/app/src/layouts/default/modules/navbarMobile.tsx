@@ -46,7 +46,7 @@ interface ComponentProps {
 // TODO: Extract to features / graphql
 const leftNav = [
 	{
-		name: 'Guilds', // 'button:navigation:organisations',
+		name: 'Guilds', // 'button:navigation:organizations',
 		path: '/organizations',
 		icon: <RiShieldLine />,
 	},

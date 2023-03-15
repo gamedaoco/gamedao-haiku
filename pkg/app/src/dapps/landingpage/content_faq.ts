@@ -5,7 +5,7 @@ export const content = [
 		They reward users for playing a certain game and completing quests—like in Fortnite.
 		Gamers can get rewarded with in-game goodies like skins, dances, or sprays.
 		Usually, battle passes are tiered, with free and premium versions.
-		We apply this model to esports organisations and content creators in a customisable way.
+		We apply this model to esports organizations and content creators in a customisable way.
 		This allows creators to incentivise fan engagement, reward their community, and monetise these interactions.
 		Rewards vary from digital collectibles to store discounts and more, as decided by the creator.
 		This results in an alternative revenue stream, and an expanded, more sustainable business model overall.`,
@@ -24,7 +24,7 @@ export const content = [
 		If you are interested to read more, check out our Gitbook.`,
 	],
 	[
-		`How can I register my organisation?`,
+		`How can I register my organization?`,
 		`For our early testing, we have partnered with esports teams ÆX-1 and WAVE to bring the Battlepass to their fans.
 		Later, we will onboard more esports and creator teams to bring our fan engagement platform to their communities.
 		Currently, Battlepass creation is done manually on our end — if you would like to be one of the first to join the likes of AEX-1 and WAVE,

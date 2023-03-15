@@ -8,7 +8,7 @@ import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem
 import { Button, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import type { ISubmittableResult } from '@polkadot/types/types'
 import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganizationState } from 'hooks/useTmpOrganizationState'
 import { useTranslation } from 'react-i18next'
 import { useOrganizationByIdSubscription } from 'src/queries'
 
@@ -20,7 +20,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 export function TmpOverview() {
 	const [modalState, setModalState] = useState<boolean>(false)
-	const tmpOrgState = useTmpOrganisationState()
+	const tmpOrgState = useTmpOrganizationState()
 	const { t } = useTranslation()
 	const tx = useCreateOrgTransaction()
 	const { push } = useRouter()

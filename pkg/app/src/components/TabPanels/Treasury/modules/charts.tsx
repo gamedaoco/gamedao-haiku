@@ -132,15 +132,15 @@ export function Charts({ address }: ComponentProps) {
 		<Grid container spacing={3}>
 			<Grid item xs={4}>
 				<Stack component={Paper} padding={4} spacing={6} sx={{ boxShadow: 'none' }}>
-					<Typography variant="h6">{t('page:organisations:treasury:treasury_balance')}</Typography>
+					<Typography variant="h6">{t('page:organizations:treasury:treasury_balance')}</Typography>
 					{currentData.incomePercentage && (
 						<RadialChart
 							height={320}
 							colors={[theme.palette.success.main, theme.palette.warning.main]}
 							series={[currentData.incomePercentage, currentData.outgoingPercentage]}
 							labels={[
-								t('page:organisations:treasury:income'),
-								t('page:organisations:treasury:outgoing'),
+								t('page:organizations:treasury:income'),
+								t('page:organizations:treasury:outgoing'),
 							]}
 							stroke={{ lineCap: 'round' }}
 							plotOptions={{
@@ -175,13 +175,13 @@ export function Charts({ address }: ComponentProps) {
 					<Grid container spacing={3} style={{ marginTop: 0 }}>
 						<Grid item xs={6}>
 							<ChartLabel
-								name={t('page:organisations:treasury:income')}
+								name={t('page:organizations:treasury:income')}
 								color={theme.palette.success.main}
 							></ChartLabel>
 						</Grid>
 						<Grid item xs={6}>
 							<ChartLabel
-								name={t('page:organisations:treasury:outgoing')}
+								name={t('page:organizations:treasury:outgoing')}
 								color={theme.palette.warning.main}
 							></ChartLabel>
 						</Grid>
@@ -190,24 +190,24 @@ export function Charts({ address }: ComponentProps) {
 			</Grid>
 			<Grid item xs={8}>
 				<Stack component={Paper} padding={4} spacing={6} sx={{ boxShadow: 'none' }}>
-					<Typography variant="h6">{t('page:organisations:treasury:treasury_by_year')}</Typography>
+					<Typography variant="h6">{t('page:organizations:treasury:treasury_by_year')}</Typography>
 					<Typography variant="body2" style={{ marginTop: 0 }}>
-						(+43%) {t('page:organisations:treasury:than_last_year')}
+						(+43%) {t('page:organizations:treasury:than_last_year')}
 					</Typography>
 					<Grid container spacing={3} style={{ marginTop: 0 }}>
 						<Grid item xs={6} />
 						<Grid item xs={3}>
 							<ChartLabel
-								name={`${t('page:organisations:treasury:total')} ${t(
-									'page:organisations:treasury:income',
+								name={`${t('page:organizations:treasury:total')} ${t(
+									'page:organizations:treasury:income',
 								)}`}
 								color={theme.palette.success.main}
 							></ChartLabel>
 						</Grid>
 						<Grid item xs={3}>
 							<ChartLabel
-								name={`${t('page:organisations:treasury:total')} ${t(
-									'page:organisations:treasury:outgoing',
+								name={`${t('page:organizations:treasury:total')} ${t(
+									'page:organizations:treasury:outgoing',
 								)}`}
 								color={theme.palette.warning.main}
 							></ChartLabel>

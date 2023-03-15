@@ -252,8 +252,8 @@ export function Transactions({ type, data }: ComponentProps) {
 			<Box py={3}>
 				<Typography variant="h5">
 					{type == 'in'
-						? t('page:organisations:treasury:transactions_income')
-						: t('page:organisations:treasury:transactions_outgoing')}
+						? t('page:organizations:treasury:transactions_income')
+						: t('page:organizations:treasury:transactions_outgoing')}
 				</Typography>
 			</Box>
 			<Stack component={Paper} padding={4} spacing={6} sx={{ boxShadow: 'none', padding: 0 }}>

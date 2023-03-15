@@ -107,7 +107,7 @@ export function Flyout({
 							<Typography variant="body2">Dashboard</Typography>
 						</MenuItem>
 					</Link>
-					{/*					<Link href={'/organisations'}>
+					{/*					<Link href={'/organizations'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>
 								<Folder fontSize="small" />

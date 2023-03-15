@@ -25,7 +25,6 @@ export function ThemeProvider({ children }: ComponentProps) {
 	const [themeState, setThemeState] = useState<Theme>(null)
 
 	useEffect(() => {
-		console.log('update theme')
 		if (!themeMode || !themeDirection) {
 			return
 		}

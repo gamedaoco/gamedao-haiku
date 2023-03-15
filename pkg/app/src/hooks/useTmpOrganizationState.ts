@@ -4,12 +4,12 @@ import { useCallback } from 'react'
 
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLocalStorage } from 'hooks/useLocalStorage'
-import type { TMPOrganisationState } from 'src/@types/organisation'
-import { defaultValuesTmpOrganisation as defaultValues } from 'src/constants'
+import type { TMPOrganizationState } from 'src/@types/organization'
+import { defaultValuesTmpOrganization as defaultValues } from 'src/constants'
 
 // TODO: Replace store logic with db for cross device storage
 
-export function useTmpOrganisationState(): TMPOrganisationState {
+export function useTmpOrganizationState(): TMPOrganizationState {
 	const address = useCurrentAccountAddress()
 	const [selectedType, setSelectedType] = useLocalStorage<number>(
 		`TmpOrg-${address}-selectedType`,
@@ -46,19 +46,10 @@ export function useTmpOrganisationState(): TMPOrganisationState {
 
 	// adding this temporarily, this whole storage and caching needs a refactor...
 
-	const [url, setUrl] = useLocalStorage<string>(
-		`TmpOrg-${address}-url`,
-		defaultValues.url,
-	)
-	const [location, setLocation] = useLocalStorage<string>(
-		`TmpOrg-${address}-location`,
-		defaultValues.location,
-	)
+	const [url, setUrl] = useLocalStorage<string>(`TmpOrg-${address}-url`, defaultValues.url)
+	const [location, setLocation] = useLocalStorage<string>(`TmpOrg-${address}-location`, defaultValues.location)
 	// TODO: type array
-	const [tags, setTags] = useLocalStorage<any>(
-		`TmpOrg-${address}-tags`,
-		defaultValues.tags,
-	)
+	const [tags, setTags] = useLocalStorage<any>(`TmpOrg-${address}-tags`, defaultValues.tags)
 
 	//
 

@@ -1,5 +1,5 @@
 import { TMPCampaign } from 'src/@types/campaign'
-import type { TMPOrganisation } from 'src/@types/organisation'
+import type { TMPOrganization } from 'src/@types/organization'
 import { TMPProposal } from 'src/@types/proposal'
 
 import type { Environment } from 'src/queries'
@@ -10,7 +10,7 @@ export const ENVIRONMENT: Environment = (
 
 export const sessionUpdateInterval: number = 5 * 60 * 1000
 
-export const defaultValuesTmpOrganisation: TMPOrganisation = {
+export const defaultValuesTmpOrganization: TMPOrganization = {
 	type: 0,
 	name: '',
 	mode: 0,

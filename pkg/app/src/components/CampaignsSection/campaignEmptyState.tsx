@@ -29,7 +29,7 @@ export function CampaignEmptyState({ isAdmin, setShowCreatePage }: ComponentProp
 					alignItems: 'center',
 				}}
 			>
-				<Typography variant="subtitle1">{t('page:organisations:no_campaigns')}</Typography>
+				<Typography variant="subtitle1">{t('page:organizations:no_campaigns')}</Typography>
 				<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'space-evenly', mt: 2 }}>
 					{isAdmin && (
 						<Button variant="contained" onClick={onCreateCallback}>

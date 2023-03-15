@@ -15,6 +15,7 @@ import Message from '@mui/icons-material/ChatBubbleOutline'
 import Tooltip from '@mui/material/Tooltip'
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import Typography from '@mui/material/Typography'
+import { Loader } from 'components/Loader'
 
 // interface FlyoutProps {
 // 	anchorEl: Element
@@ -29,7 +30,7 @@ const Flyout = ({ anchorEl, handleClose, handleSend }) => {
 			anchorEl={anchorEl}
 			id="feedback-menu"
 			open={true}
-			onClose={handleClose()}
+			onClose={handleClose}
 			PaperProps={{
 				elevation: 0,
 				sx: {
@@ -57,7 +58,7 @@ const Flyout = ({ anchorEl, handleClose, handleSend }) => {
 		>
 			<Card p={[2]}>
 				<Stack spacing={2}>
-					<Typography>Send us some Feedback!</Typography>
+					{/* <Typography></Typography> */}
 					<TextareaAutosize
 						minRows={8}
 						maxRows={8}
@@ -80,18 +81,34 @@ const Flyout = ({ anchorEl, handleClose, handleSend }) => {
 // 	close: () => void
 // }
 
-export const FeedbackButton = ({ close, anchorRef }) => {
+export const FeedbackButton = ({ handleClose, anchorRef }) => {
 	const [messageEnabled, setMessageEnabled] = useState(true)
 	const [sending, setSending] = useState(false)
-	const handleSend = () => close()
+	const handleSend = () => {
+		setSending(true)
+		handleClose()
+	}
 
-	return (
-		<>
-			<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true} onClick={close}>
-				{sending && <CircularProgress color="inherit" />}
-			</Backdrop>
-			<Flyout anchorEl={anchorRef} handleClose={close()} handleSend={handleSend()} />
-		</>
+	return sending ? (
+		<Loader />
+	) : (
+		// <Flyout anchorEl={anchorRef} handleClose={handleClose} handleSend={handleSend} />
+		<Card p={[2]}>
+			<Stack spacing={2}>
+				{/* <Typography></Typography> */}
+				<TextareaAutosize
+					minRows={8}
+					maxRows={8}
+					aria-label="maximum height"
+					placeholder="Maximum 4 rows"
+					defaultValue=""
+					style={{ width: '100%' }}
+				/>
+				<Button onClick={() => handleSend()} disabled={false}>
+					Send
+				</Button>
+			</Stack>
+		</Card>
 	)
 }
 

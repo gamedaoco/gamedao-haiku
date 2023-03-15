@@ -50,7 +50,7 @@ interface ComponentProps {
 // TODO: Extract to features / graphql
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organisations',
+		name: 'Organizations', // 'button:navigation:organizations',
 		path: '/organizations',
 		icon: <RiShieldLine />,
 	},
