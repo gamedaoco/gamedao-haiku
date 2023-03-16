@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import { getAccountName, shortAccountAddress, shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useAppContext } from 'providers/app/modules/context'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
-import { useExtensionContext } from 'providers/extension/modules/context'
+import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 
@@ -13,8 +12,6 @@ import { useTheme } from '@mui/material/styles'
 import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { ExpandMore, Verified } from '@mui/icons-material'
 import { avatarImageURL } from 'utils/avatars'
-import Logout from '@mui/icons-material/Logout'
-import { MdOutlineLogout } from 'react-icons/md'
 
 interface IComponentProps {
 	onClick: () => void
@@ -26,6 +23,7 @@ export function Selector({ onClick }: IComponentProps) {
 
 	const { user } = useAppContext()
 	const { data: session } = useSession()
+
 	const address = useCurrentAccountAddress()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(address)
@@ -37,7 +35,6 @@ export function Selector({ onClick }: IComponentProps) {
 	useEffect(() => {
 		if (!user && !address) return
 		if (address) setAddressShort(shortHash(address))
-		console.log('account selector update')
 
 		const userName =
 			identity?.display_name || user?.name /*session?.user?.name*/ || getNameFromAccountState(accountState)
@@ -91,11 +88,6 @@ export function Selector({ onClick }: IComponentProps) {
 					<ExpandMore />
 				</Box>
 			</Stack>
-			{/* {(session || address) && (
-				<Button onClick={() => signOut()}>
-					<MdOutlineLogout/>
-				</Button>
-			)} */}
 		</Stack>
 	)
 }

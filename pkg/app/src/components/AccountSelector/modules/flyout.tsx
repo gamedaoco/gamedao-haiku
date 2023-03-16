@@ -1,33 +1,20 @@
 import { useAppContext } from 'providers/app/modules/context'
 import { useSession, signIn, signOut } from 'next-auth/react'
-
-import {
-	PanoramaFishEyeOutlined as Dashboard, // or DashboardOutlined
-	CastleOutlined as Folder, // or AccountBalanceOutlined
-	Logout,
-	MoreVert,
-	ExtensionOutlined as NotificationsNone, //or CategoryOultined
-	Fingerprint as Settings,
-	SportsEsportsOutlined as Topic,
-} from '@mui/icons-material'
-
 import { RxDiscordLogo, RxTwitterLogo, RxExit, RxCircle } from 'react-icons/rx'
 import { MdFingerprint, MdOutlineAccountBalanceWallet } from 'react-icons/md'
 
-import { Box, Button, Divider, ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
+import { ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { useGraphQlContext } from 'providers/graphQl/modules/context'
 
-import { AccountCard } from 'components/AccountCard/accountCard'
-import { BalanceCard } from 'components/BalanceCard/balanceCard'
 import Link from 'components/Link'
 
 interface ComponentProps {
 	anchorEl: Element
 	open: boolean
 	handleClose: () => void
-	openAccountSelect: () => void
-	openNetworkSelect: (event) => void
+	openAccountSelect?: () => void
+	openNetworkSelect?: (event) => void
 	connectWallet: () => void
 }
 
@@ -94,12 +81,6 @@ export function Flyout({
 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
-				{/*
-				<AccountCard accountState={selectedAccount} callback={openAccountSelect} />
-				<BalanceCard />
-				<Divider />
-*/}
-
 				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
 					<Link href={'/account'}>
 						<MenuItem sx={{ p: 0 }}>
@@ -152,14 +133,16 @@ export function Flyout({
 						</MenuItem>
 					)}
 
-					{/* {!user.twitter && (
+					{!user.twitter && (
 						<MenuItem sx={{ p: 0 }} onClick={() => signIn('twitter')}>
 							<ListItemIcon>
 								<RxTwitterLogo fontSize="inherit" />
 							</ListItemIcon>
 							<Typography variant="body2">Connect Twitter</Typography>
 						</MenuItem>
-					)} */}
+					)}
+					{/*
+					 */}
 
 					{!selectedAccount && (
 						<MenuItem sx={{ p: 0 }} onClick={connectWallet}>
@@ -177,20 +160,6 @@ export function Flyout({
 						<Typography variant="body2">Disconnect</Typography>
 					</MenuItem>
 				</Stack>
-
-				{/*
-				<Divider />
-				<Box display="flex" justifyContent="center" alignItems="center" gap={1}>
-					<Typography variant="body2" fontWeight="bold">
-						{selectedEndpoint?.name ?? ''}
-						{endpoints?.length > 1 && (
-							<Button onClick={openNetworkSelect}>
-								<MoreVert fontSize="small" />
-							</Button>
-						)}
-					</Typography>
-				</Box>
-*/}
 			</Stack>
 		</Menu>
 	)
