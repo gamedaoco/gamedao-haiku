@@ -11,7 +11,7 @@
 import { generateHash } from './randomHash'
 
 const client = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID_V2
-const callback = process.env.NEXT_PUBLIC_VERCEL_URL + '/callback/twitter'
+const callback = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/callback/twitter`
 
 console.log(process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID_V2)
 
