@@ -4,7 +4,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { useAppContext } from 'providers/app/modules/context'
 import { useExtensionContext } from 'providers/extension/modules/context'
 
-import { Grid, Button, Paper, Stack, Typography } from '@mui/material'
+import { Grid, Button, Box, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
@@ -12,6 +12,7 @@ import { WalletCard } from 'components/WalletDialog/modules/walletCard'
 import Device from 'components/Device'
 
 import { getTwitterAuthorizationURL } from 'lib/getTwitterAuthorizationURL'
+console.log(process.env.NEXT_PUBLIC_ENVIRONMENT)
 
 export const Web2Connect = () => {
 	const { data: session } = useSession()
@@ -99,16 +100,16 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						callback={() => signIn('discord')}
 					/>
 				</Fragment>
-				{user.uuid && (
-					<Fragment key={'twitter'}>
+				<Fragment key={'twitter'}>
+					<Box sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}>
 						<WalletCard
 							imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
 							name={'Twitter'}
 							connectable={true}
 							callback={() => openTwitterAuthorization()}
 						/>
-					</Fragment>
-				)}
+					</Box>
+				</Fragment>
 			</Grid>
 			<Typography
 				variant="h4"

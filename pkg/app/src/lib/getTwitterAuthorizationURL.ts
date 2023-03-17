@@ -11,9 +11,7 @@
 import { generateHash } from './randomHash'
 
 const client = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID_V2
-const callback = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/callback/twitter`
-
-console.log(process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID_V2)
+const callback = `${process.env.NEXT_PUBLIC_VERCEL_URL}/callback/twitter`
 
 async function sha256(source) {
 	const sourceBytes = new TextEncoder().encode(source)
@@ -33,7 +31,7 @@ export async function getTwitterAuthorizationURL(uuid = '') {
 			client,
 			'&redirect_uri=',
 			callback,
-			'&scope=tweet.read users.read like.read follows.read',
+			'&scope=tweet.read users.read like.read follows.read offline.access',
 			'&state=',
 			state,
 			'&response_type=code&code_challenge_method=plain',
