@@ -29,7 +29,7 @@ export function Page() {
 	}, [user.uuid, query.code])
 
 	return (
-		<Layout showHeader showSidebar showFooter title={t('page:account:title')}>
+		<Layout showHeader showSidebar showFooter title={'Twitter Authorization'}>
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>

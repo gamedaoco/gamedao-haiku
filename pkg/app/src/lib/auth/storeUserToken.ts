@@ -1,4 +1,4 @@
-import Discord from 'discord.js'
+// import Discord from 'discord.js'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
@@ -8,7 +8,7 @@ import { Logger } from 'lib/logger'
 const log = Logger('lib/token')
 
 const battlepass_url = getConnectedEndpoint().url
-const discord = new Discord.WebhookClient({ id: process.env.DISCORD_HOOK_ID, token: process.env.DISCORD_HOOK_TOKEN })
+// const discord = new Discord.WebhookClient({ id: process.env.DISCORD_HOOK_ID, token: process.env.DISCORD_HOOK_TOKEN })
 
 const query = `mutation StoreUserToken($uuid: String!, $source: String!, $token: String!) {
 	BattlepassBot {
