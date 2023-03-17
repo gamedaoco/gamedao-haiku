@@ -4,6 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { Layout } from 'layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'
 
+// example
+// http://localhost:3000/callback/twitter?
+// state=11d62afdf08d1f386880c6525f4ea625ad3d4ec201527e4b9a1247d434838b65 <-- hashed uuid
+// &code=SXRudGlaVUxCT0pIRWlnU1otZHFnYk8yWExwcmR2emhrUXNDcjhIa1VIUzJCOjE2NzkwNTc5MDE3NTA6MToxOmFjOjE <-- token
+
 export function Page() {
 	const { t } = useTranslation()
 	const { query } = useRouter()
@@ -23,7 +28,7 @@ export function Page() {
 
 			<Paper variant="glass">
 				<Box p={2}>
-					<Typography variant="h4">{JSON.parse(JSON.stringify(query))}</Typography>
+					<Typography variant="h4">{JSON.stringify(query)}</Typography>
 				</Box>
 			</Paper>
 		</Layout>
