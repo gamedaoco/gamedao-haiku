@@ -133,12 +133,12 @@ export function Flyout({
 						</MenuItem>
 					)}
 
-					{!user.twitter && (
-						<MenuItem sx={{ p: 0 }} onClick={() => signIn('twitter')}>
+					{user.uuid && (
+						<MenuItem sx={{ p: 0 }} onClick={connectWallet}>
 							<ListItemIcon>
 								<RxTwitterLogo fontSize="inherit" />
 							</ListItemIcon>
-							<Typography variant="body2">Connect Twitter</Typography>
+							<Typography variant="body2">Authorize Twitter</Typography>
 						</MenuItem>
 					)}
 					{/*

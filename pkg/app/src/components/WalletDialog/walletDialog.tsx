@@ -11,6 +11,8 @@ import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { WalletCard } from 'components/WalletDialog/modules/walletCard'
 import Device from 'components/Device'
 
+import { getTwitterAuthorizationURL } from 'lib/getTwitterAuthorizationURL'
+
 export const Web2Connect = () => {
 	const { data: session } = useSession()
 	const { selectedAccount } = useExtensionContext()
@@ -47,6 +49,8 @@ interface ComponentProps {
 export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
 	const { user } = useAppContext()
+	const { data: session } = useSession()
+
 	const theme = useTheme()
 
 	useEffect(() => {
@@ -57,6 +61,12 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	}, [supportedWallets, open, callback])
 
 	if (!allSupportedWallets?.length) return null
+
+	async function openTwitterAuthorization() {
+		if (!session && !user.uuid) return
+		const url = await getTwitterAuthorizationURL(user.uuid)
+		window.open(url, '_blank')
+	}
 
 	return (
 		<BaseDialog title="Connect GameDAO" open={open} onClose={onClose}>
@@ -89,14 +99,16 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						callback={() => signIn('discord')}
 					/>
 				</Fragment>
-				{/* <Fragment key={'twitter'}>
-					<WalletCard
-						imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
-						name={'Twitter'}
-						connectable={true}
-						callback={() => signIn('twitter')}
-					/>
-				</Fragment> */}
+				{user.uuid && (
+					<Fragment key={'twitter'}>
+						<WalletCard
+							imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
+							name={'Twitter'}
+							connectable={true}
+							callback={() => openTwitterAuthorization()}
+						/>
+					</Fragment>
+				)}
 			</Grid>
 			<Typography
 				variant="h4"
