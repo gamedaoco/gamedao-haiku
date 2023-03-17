@@ -28,8 +28,8 @@ const query = `mutation StoreUserToken($uuid: String!, $source: String!, $token:
 // - source (twitter, discord etc, only twitter acceptable now)
 // - token - access token string
 
-export async function setUserToken(provider, token, refresh) {
-	log.info('token received', provider, token, refresh)
+export async function setUserToken(uuid, source, token) {
+	log.info('token received', uuid, source, token)
 
 	fetch(battlepass_url, {
 		method: 'POST',
@@ -40,16 +40,15 @@ export async function setUserToken(provider, token, refresh) {
 		body: JSON.stringify({
 			query,
 			variables: {
-				// token: battlepass_payment_key,
-				// bpid: bpid,
-				// uuid: uuid,
-				// txid: txid,
+				uuid: uuid,
+				source: source,
+				token: token,
 			},
 		}),
 	})
 		.then((r) => r.json())
 		.then((data) => {
 			// discord.send({ content: `🎉 payment completed for bp ${bpid} by user ${uuid}` })
-			log.info('🎉 payment completed:', data)
+			log.info('🎉 token sent', data)
 		})
 }

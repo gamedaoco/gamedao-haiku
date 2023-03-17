@@ -1,8 +1,12 @@
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
+import { useAppContext } from 'providers/app/modules/context'
 
 import { Layout } from 'layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'
+import { setUserToken } from 'lib/auth/storeUserToken'
 
 // example
 // http://localhost:3000/callback/twitter?
@@ -10,10 +14,19 @@ import { Paper, Box, Grid, Typography } from '@mui/material'
 // &code=SXRudGlaVUxCT0pIRWlnU1otZHFnYk8yWExwcmR2emhrUXNDcjhIa1VIUzJCOjE2NzkwNTc5MDE3NTA6MToxOmFjOjE <-- token
 
 export function Page() {
-	const { t } = useTranslation()
 	const { query } = useRouter()
+	const { user } = useAppContext()
+	const { data: session } = useSession()
 
-	console.log(query)
+	console.log(query.code)
+
+	useEffect(() => {
+		if (!user.uuid || !query.code) return
+		async function sendToken() {
+			await setUserToken(user.uuid, 'twitter', query.code)
+		}
+		sendToken()
+	}, [user.uuid, query.code])
 
 	return (
 		<Layout showHeader showSidebar showFooter title={t('page:account:title')}>
