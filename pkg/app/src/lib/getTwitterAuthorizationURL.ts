@@ -33,7 +33,7 @@ export async function getTwitterAuthorizationURL(uuid = '') {
 			client,
 			'&redirect_uri=',
 			callback,
-			'&scope=tweet.read users.read follows.read follows.write',
+			'&scope=tweet.read users.read like.read follows.read',
 			'&state=',
 			state,
 			'&response_type=code&code_challenge_method=plain',
