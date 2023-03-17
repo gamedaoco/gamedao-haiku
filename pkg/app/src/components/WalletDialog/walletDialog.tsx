@@ -66,7 +66,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	async function openTwitterAuthorization() {
 		if (!session && !user.uuid) return
 		const url = await getTwitterAuthorizationURL(user.uuid)
-		window.open(url, '_blank')
+		window.open(url, '_self', 'noopener')?.focus()
 	}
 
 	return (
@@ -107,6 +107,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 							name={'Twitter'}
 							connectable={true}
 							callback={() => openTwitterAuthorization()}
+							buttonText={'Authorize'}
 						/>
 					</Box>
 				</Fragment>

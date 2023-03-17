@@ -10,7 +10,7 @@ const log = Logger('lib/token')
 const battlepass_url = getConnectedEndpoint().url
 // const discord = new Discord.WebhookClient({ id: process.env.DISCORD_HOOK_ID, token: process.env.DISCORD_HOOK_TOKEN })
 
-const query = `mutation StoreUserToken($uuid: String!, $source: String!, $token: String!) {
+const query = `mutation StoreUserToken($uuid: String!, $source: Source!, $token: String!) {
 	BattlepassBot {
 		provideUserToken(
 			identityUuid: $uuid,
