@@ -49,7 +49,7 @@ interface ComponentProps {
 
 export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
-	const { user } = useAppContext()
+	const { user, twa } = useAppContext()
 	const { data: session } = useSession()
 
 	const theme = useTheme()
@@ -106,6 +106,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 							imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
 							name={'Twitter'}
 							connectable={true}
+							connected={twa ? true : false}
 							callback={() => openTwitterAuthorization()}
 							buttonText={'Authorize'}
 						/>

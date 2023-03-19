@@ -14,4 +14,6 @@ export interface AppState {
 	bpid: string
 	processing: boolean
 	setProcessing: Function
+	twa: boolean
+	setTwitterAuthorized: Function
 }

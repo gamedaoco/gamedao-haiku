@@ -15,8 +15,8 @@ import { setUserToken } from 'lib/auth/storeUserToken'
 
 export function Page() {
 	const { query } = useRouter()
-	const { user } = useAppContext()
-	const { data: session } = useSession()
+	const { user, setTwitterAuthorized } = useAppContext()
+	// const { data: session } = useSession()
 
 	console.log(query.code)
 
@@ -24,6 +24,7 @@ export function Page() {
 		if (!user.uuid || !query.code) return
 		async function sendToken() {
 			await setUserToken(user.uuid, 'twitter', query.code)
+			setTwitterAuthorized(true)
 		}
 		sendToken()
 	}, [user.uuid, query.code])
@@ -39,11 +40,11 @@ export function Page() {
 				</Grid>
 			</Box>
 
-			<Paper variant="glass">
+			{/* <Paper variant="glass">
 				<Box p={2}>
 					<Typography variant="h4">{JSON.stringify(query)}</Typography>
 				</Box>
-			</Paper>
+			</Paper> */}
 		</Layout>
 	)
 }
