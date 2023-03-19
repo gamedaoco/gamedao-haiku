@@ -193,12 +193,12 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
-					{/* <Link href="#">
-						<Button onClick={()=>openFeedback()}>
+					<Link href="#">
+						<Button onClick={() => openFeedback()}>
 							<RiChat1Line />
 							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
-					</Link> */}
+					</Link>
 					<Link href="https://discord.gg/gamedao">
 						<Button>
 							<RxDiscordLogo />

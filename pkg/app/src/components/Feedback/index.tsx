@@ -1,28 +1,10 @@
-// Feedback Component
-// Button opening a Flyout
-// featuring a multiline text input
-// on send, the discord webhook sends a message
-import { useState, useRef } from 'react'
-
-import CircularProgress from '@mui/material/CircularProgress'
-import Backdrop from '@mui/material/Backdrop'
-import Card from '@mui/material/Stack'
-import Stack from '@mui/material/Stack'
-import Menu from '@mui/material/Menu'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Message from '@mui/icons-material/ChatBubbleOutline'
-import Tooltip from '@mui/material/Tooltip'
-import TextareaAutosize from '@mui/material/TextareaAutosize'
-import Typography from '@mui/material/Typography'
+import { useState, useEffect } from 'react'
+import { Card, Stack, Menu, Button, TextareaAutosize, TextField, Typography } from '@mui/material'
 import { Loader } from 'components/Loader'
+import { useAppContext } from 'providers/app/modules/context'
 
-// interface FlyoutProps {
-// 	anchorEl: Element
-// 	open: boolean
-// 	handleClose: () => void
-// 	handleSend: () => void
-// }
+import { Logger } from 'lib/logger'
+const log = Logger('feedback')
 
 const Flyout = ({ anchorEl, handleClose, handleSend }) => {
 	return (
@@ -81,34 +63,67 @@ const Flyout = ({ anchorEl, handleClose, handleSend }) => {
 // 	close: () => void
 // }
 
+async function sendMessage(u = '', b = '', m = '', cb = () => {}) {
+	try {
+		const res = await fetch('/api/bot/feedback', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				uuid: u,
+				bpid: b,
+				msg: m,
+			}),
+		}).then((res) => {
+			log.info('RES', res)
+			cb()
+		})
+	} catch (err) {
+		log.error(err)
+	}
+}
+
 export const FeedbackButton = ({ handleClose, anchorRef }) => {
-	const [messageEnabled, setMessageEnabled] = useState(true)
+	const { uuid, bpid } = useAppContext()
+
 	const [sending, setSending] = useState(false)
 	const handleSend = () => {
 		setSending(true)
-		handleClose()
+		sendMessage(uuid, bpid, message, handleClose)
 	}
+
+	const [message, setMessage] = useState('')
+	const handleChange = (event) => {
+		setMessage(event.target.value)
+	}
+
+	const [sendEnabled, setSendEnabled] = useState(false)
+	useEffect(() => {
+		if (message.length > 100 && sendEnabled === false) setSendEnabled(true)
+		if (message.length < 100 && sendEnabled === true) setSendEnabled(true)
+	}, [message])
 
 	return sending ? (
 		<Loader />
 	) : (
 		// <Flyout anchorEl={anchorRef} handleClose={handleClose} handleSend={handleSend} />
-		<Card p={[2]}>
-			<Stack spacing={2}>
-				{/* <Typography></Typography> */}
-				<TextareaAutosize
-					minRows={8}
-					maxRows={8}
-					aria-label="maximum height"
-					placeholder="Maximum 4 rows"
-					defaultValue=""
-					style={{ width: '100%' }}
-				/>
-				<Button onClick={() => handleSend()} disabled={false}>
-					Send
-				</Button>
-			</Stack>
-		</Card>
+		// <Card p={[2]}>
+		<Stack spacing={2}>
+			<Typography>Thank you for taking the time. Send us your feedback, min 100 chars.</Typography>
+			<TextField
+				name={'feedback'}
+				onChange={handleChange}
+				value={message}
+				label="Feedback"
+				variant="outlined"
+				fullWidth
+				multiline
+				rows={4}
+			/>
+			<Button onClick={() => handleSend()} variant={sendEnabled ? `lemon` : `glass`} disabled={!sendEnabled}>
+				{sendEnabled ? `Send` : `Please give your feedback`}
+			</Button>
+		</Stack>
+		// </Card>
 	)
 }
 

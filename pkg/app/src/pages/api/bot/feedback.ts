@@ -10,9 +10,18 @@ const log = Logger('feedback')
 const discord = new Discord.WebhookClient({ id: process.env.DISCORD_HOOK_ID, token: process.env.DISCORD_HOOK_TOKEN })
 
 const Feedback = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { method, msg } = req.body
-	if (method === 'POST' && msg !== null) {
-		discord.send({ content: msg })
+	const { uuid, bpid, msg } = req.body
+	log.info('feedback', { req, uuid, bpid, msg })
+
+	if (req.method === 'POST') {
+		discord.send({
+			content: `
+			Feedback Message\n
+			From ${uuid || 'anonymous'}:\n
+			Battlepass: ${bpid || 'unknown'}\n
+			${msg}.
+		`,
+		})
 		log.info(`message sent`)
 		res.status(200).send('ok')
 	} else {
