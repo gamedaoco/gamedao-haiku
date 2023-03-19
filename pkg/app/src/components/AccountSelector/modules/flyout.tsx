@@ -2,8 +2,9 @@ import { useAppContext } from 'providers/app/modules/context'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { RxDiscordLogo, RxTwitterLogo, RxExit, RxCircle } from 'react-icons/rx'
 import { MdFingerprint, MdOutlineAccountBalanceWallet } from 'react-icons/md'
+import { useTheme } from '@mui/material/styles'
 
-import { ListItemIcon, Menu, MenuItem, Stack, Typography } from '@mui/material'
+import { ListItemIcon, Menu, MenuItem, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useExtensionContext } from 'providers/extension/modules/context'
 import { useGraphQlContext } from 'providers/graphQl/modules/context'
 
@@ -31,6 +32,9 @@ export function Flyout({
 	const { data: session } = useSession()
 	const { user } = useAppContext()
 
+	const theme = useTheme()
+	const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
+
 	async function handleDisconnect() {
 		const disconnect = async () => {
 			console.log('disconnect wallet')
@@ -52,6 +56,8 @@ export function Flyout({
 				variant: 'glass',
 				elevation: 0,
 				sx: {
+					width: !isMd ? '100%' : '320px',
+					px: 3,
 					zIndex: 2000,
 					overflow: 'visible',
 					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
@@ -63,25 +69,25 @@ export function Flyout({
 						mr: 1,
 					},
 
-					'&:before': {
-						content: '""',
-						display: 'block',
-						position: 'absolute',
-						top: 0,
-						right: 60,
-						width: 10,
-						height: 10,
-						bgcolor: 'background.paper',
-						transform: 'translateY(-50%) rotate(45deg)',
-						zIndex: 0,
-					},
+					// '&:before': isMd ? {
+					// 	content: '""',
+					// 	display: 'block',
+					// 	position: 'absolute',
+					// 	top: 0,
+					// 	right: 60,
+					// 	width: 10,
+					// 	height: 10,
+					// 	bgcolor: 'background.paper',
+					// 	transform: 'translateY(-50%) rotate(45deg)',
+					// 	zIndex: 0,
+					// } : {},
 				},
 			}}
 			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 		>
 			<Stack p={{ xs: 1, sm: 3 }} spacing={{ xs: 1, sm: 3 }}>
-				<Stack width={240} sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
+				<Stack sx={{ '&': { p: 0, m: 0 } }} spacing={2}>
 					<Link href={'/account'}>
 						<MenuItem sx={{ p: 0 }}>
 							<ListItemIcon>

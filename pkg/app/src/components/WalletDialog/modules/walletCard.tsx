@@ -30,7 +30,7 @@ export function WalletCard({ imageSrc, name, url, connectable, callback, connect
 
 	return (
 		<Card>
-			<Stack p={{ xs: 2, md: 4 }} direction="row" alignItems="center" spacing={{ xs: 2, md: 4 }}>
+			<Stack p={{ xs: 2, md: 4 }} alignItems="center" spacing={{ xs: 2, md: 4 }}>
 				<Avatar sx={{ width: { md: 64 }, height: { md: 64 } }} src={imageSrc} />
 				<Typography variant="h6">{name}</Typography>
 				{connected && (

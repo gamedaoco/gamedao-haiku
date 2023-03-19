@@ -137,8 +137,12 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						<Device key={wallet.extensionName}>
 							{({ isMobile }) => {
 								if (
-									(isMobile && wallet.title === 'Polkawallet') ||
-									(!isMobile && wallet.title !== 'Polkawallet')
+									(isMobile &&
+										(wallet.extensionName === 'polkawallet' ||
+											wallet.extensionName === 'novawallet')) ||
+									(!isMobile &&
+										wallet.extensionName !== 'polkawallet' &&
+										wallet.extensionName !== 'novawallet')
 								)
 									return (
 										<Fragment>

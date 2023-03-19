@@ -52,11 +52,11 @@ export function Selector({ onClick }: IComponentProps) {
 		navigator.clipboard.writeText(address) // .then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [address])
 
-	if (!isMd) {
-		return (
-			<Avatar onClick={handleCopyAddress} sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
-		)
-	}
+	// if (!isMd) {
+	// 	return (
+	// 		<Avatar onClick={handleCopyAddress} sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
+	// 	)
+	// }
 
 	return (
 		<Stack
@@ -65,13 +65,21 @@ export function Selector({ onClick }: IComponentProps) {
 			spacing={2}
 			sx={{
 				overflow: 'hidden',
+				width: !isMd ? '100%' : 'auto',
 				// WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
 				// filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
 				// backgroundBlendMode: 'multiply',
 			}}
 		>
 			<Avatar sx={{ width: '48px', height: '48px' }} src={imageUrl} onClick={handleCopyAddress} />
-			<Stack direction="row" alignItems="center" spacing={2} onClick={onClick}>
+			<Stack
+				direction="row"
+				alignItems="center"
+				justifyContent="space-between"
+				spacing={2}
+				onClick={onClick}
+				sx={{ width: !isMd ? '100%' : 'auto' }}
+			>
 				<Stack>
 					<Typography variant="subtitle2" color="white">
 						{displayName}
