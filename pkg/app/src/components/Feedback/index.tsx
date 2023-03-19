@@ -6,57 +6,57 @@ import { useAppContext } from 'providers/app/modules/context'
 import { Logger } from 'lib/logger'
 const log = Logger('feedback')
 
-const Flyout = ({ anchorEl, handleClose, handleSend }) => {
-	return (
-		<Menu
-			anchorEl={anchorEl}
-			id="feedback-menu"
-			open={true}
-			onClose={handleClose}
-			PaperProps={{
-				elevation: 0,
-				sx: {
-					width: 'auto',
-					height: 'auto',
-					// overflow: 'hidden',
-					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-					borderRadius: '1rem',
-					'&:before': {
-						content: '""',
-						display: 'block',
-						position: 'absolute',
-						top: 0,
-						right: 60,
-						width: 10,
-						height: 10,
-						bgcolor: 'background.paper',
-						transform: 'translateY(-50%) rotate(45deg)',
-						zIndex: 0,
-					},
-				},
-			}}
-			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
-			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
-		>
-			<Card p={[2]}>
-				<Stack spacing={2}>
-					{/* <Typography></Typography> */}
-					<TextareaAutosize
-						minRows={8}
-						maxRows={8}
-						aria-label="maximum height"
-						placeholder="Maximum 4 rows"
-						defaultValue=""
-						style={{ width: '100%' }}
-					/>
-					<Button onClick={handleSend()} disabled={false}>
-						Send
-					</Button>
-				</Stack>
-			</Card>
-		</Menu>
-	)
-}
+// const Flyout = ({ anchorEl, handleClose, handleSend }) => {
+// 	return (
+// 		<Menu
+// 			anchorEl={anchorEl}
+// 			id="feedback-menu"
+// 			open={true}
+// 			onClose={handleClose}
+// 			PaperProps={{
+// 				elevation: 0,
+// 				sx: {
+// 					width: 'auto',
+// 					height: 'auto',
+// 					// overflow: 'hidden',
+// 					filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+// 					borderRadius: '1rem',
+// 					'&:before': {
+// 						content: '""',
+// 						display: 'block',
+// 						position: 'absolute',
+// 						top: 0,
+// 						right: 60,
+// 						width: 10,
+// 						height: 10,
+// 						bgcolor: 'background.paper',
+// 						transform: 'translateY(-50%) rotate(45deg)',
+// 						zIndex: 0,
+// 					},
+// 				},
+// 			}}
+// 			transformOrigin={{ horizontal: 'center', vertical: 'top' }}
+// 			anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+// 		>
+// 			<Card p={[2]}>
+// 				<Stack spacing={2}>
+// 					{/* <Typography></Typography> */}
+// 					<TextareaAutosize
+// 						minRows={8}
+// 						maxRows={8}
+// 						aria-label="maximum height"
+// 						placeholder="Maximum 4 rows"
+// 						defaultValue=""
+// 						style={{ width: '100%' }}
+// 					/>
+// 					<Button onClick={handleSend()} disabled={false}>
+// 						Send
+// 					</Button>
+// 				</Stack>
+// 			</Card>
+// 		</Menu>
+// 	)
+// }
 
 // interface FeedbackProps {
 // 	anchorRef: Element
