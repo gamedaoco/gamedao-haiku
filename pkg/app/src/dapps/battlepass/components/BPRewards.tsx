@@ -12,6 +12,7 @@ import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { BPCard } from './BPCard'
+import { FadeInWhenVisible } from './FadeInWhenVisible'
 
 import demoContent from '../content/rewards'
 import mockCIDJSON from '../content/mock-cid.json'
@@ -78,7 +79,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 			)
 		if (!isPremium)
 			return (
-				<Button fullWidth size="large" variant="lemon" onClick={() => goPremium()}>
+				<Button fullWidth size="large" variant="pink" onClick={() => goPremium()}>
 					Go Premium to Claim
 				</Button>
 			)
@@ -90,7 +91,7 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 			)
 		if (requiredPoints)
 			return (
-				<Button size="large" fullWidth variant="pink" onClick={() => claimReward()}>
+				<Button size="large" fullWidth variant="glass" onClick={() => claimReward()}>
 					Claim Now
 				</Button>
 			)
@@ -238,6 +239,7 @@ export const BPRewards = ({ args }: TArgs) => {
 		if (loadingRewards) return
 		const hasRewards = rewards?.BattlepassRewards?.length > 0
 		setDemoMode(!hasRewards)
+		console.log(rewards)
 		setItems(hasRewards ? rewards?.BattlepassRewards?.map((i) => i) : demoContent)
 	}, [loadingRewards, rewards?.BattlepassRewards])
 
@@ -286,24 +288,26 @@ export const BPRewards = ({ args }: TArgs) => {
 					.map((item, index) => {
 						return (
 							<Grid item key={index}>
-								<BPCard>
-									<Card
-										sx={{
-											width: '352px',
-											height: '512px',
-											border: 0,
-											backgroundColor: '#11111122',
-											cursor: 'pointer',
-										}}
-									>
-										<BPRewardItem
-											index={index + 1}
-											content={item}
-											score={score}
-											handleClaim={() => handleClaim(item.chainId)}
-										/>
-									</Card>
-								</BPCard>
+								<FadeInWhenVisible d={index}>
+									<BPCard>
+										<Card
+											sx={{
+												width: '352px',
+												height: '512px',
+												border: 0,
+												backgroundColor: '#11111122',
+												cursor: 'pointer',
+											}}
+										>
+											<BPRewardItem
+												index={index + 1}
+												content={item}
+												score={score}
+												handleClaim={() => handleClaim(item.chainId)}
+											/>
+										</Card>
+									</BPCard>
+								</FadeInWhenVisible>
 							</Grid>
 						)
 					})}

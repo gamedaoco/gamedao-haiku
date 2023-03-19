@@ -3,7 +3,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { use } from 'i18next'
 import { String } from 'lodash'
 
-import { useAnimation, motion } from 'framer-motion'
+// import { useAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 import { useAppContext } from 'providers/app/modules/context'
@@ -21,6 +21,7 @@ import { CardContent, CardActions } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
+import { FadeInWhenVisible } from './FadeInWhenVisible'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -264,27 +265,27 @@ export const BPQuests = ({ args }: TArgs) => {
 		threshold: 0.8,
 	})
 
-	function FadeInWhenVisible({ children }) {
-		return (
-			<motion.div
-				initial="hidden"
-				whileInView="visible"
-				// whileHover={{ scale: 1 }}
-				// whileTap={{ opacity: 0.8 }}
-				viewport={{ once: true }}
-				transition={{
-					delay: 0.1,
-					duration: 0.1,
-				}}
-				variants={{
-					visible: { opacity: 1, scale: 1 },
-					hidden: { opacity: 0, scale: 0.9 },
-				}}
-			>
-				{children}
-			</motion.div>
-		)
-	}
+	// function FadeInWhenVisible({ d, children }) {
+	// 	return (
+	// 		<motion.div
+	// 			initial="hidden"
+	// 			whileInView="visible"
+	// 			// whileHover={{ scale: 1 }}
+	// 			// whileTap={{ opacity: 0.8 }}
+	// 			viewport={{ once: true }}
+	// 			transition={{
+	// 				delay: ( 0.1 + d / 10 ),
+	// 				duration: 0.1,
+	// 			}}
+	// 			variants={{
+	// 				visible: { opacity: 1, scale: 1 },
+	// 				hidden: { opacity: 0, scale: 0.9 },
+	// 			}}
+	// 		>
+	// 			{children}
+	// 		</motion.div>
+	// 	)
+	// }
 
 	const [showDialog, setShowDialog] = useState(false)
 	const handleClose = () => setShowDialog(false)
@@ -316,7 +317,7 @@ export const BPQuests = ({ args }: TArgs) => {
 
 						return (
 							<Grid item key={index} xs={12} md={6} lg={4}>
-								<FadeInWhenVisible>
+								<FadeInWhenVisible d={index}>
 									<Card sx={{ border: 0, backgroundColor: '#11111122' }}>
 										<BPQuestItem
 											item={item}
