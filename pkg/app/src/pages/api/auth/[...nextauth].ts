@@ -7,80 +7,37 @@ import DiscordProvider from 'next-auth/providers/discord'
 import TwitterProvider from 'next-auth/providers/twitter'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
+import { getUuid } from 'lib/auth/getUuid'
+import { setUserToken } from 'lib/auth/storeUserToken'
+
+import { Logger } from 'lib/logger'
+const log = Logger('auth')
+
 const scope = ['identify'].join(' ')
 
 export const authOptions: NextAuthOptions = {
 	adapter: MongoDBAdapter(clientPromise),
 
 	providers: [
-		// Web3 Signin
-		// CredentialsProvider({
-		// 	name: 'Credentials',
-		// 	credentials: {
-		// 		address: {
-		// 			label: 'Address',
-		// 			type: 'text',
-		// 			placeholder: '0x0',
-		// 		},
-		// 	},
-		// 	async authorize(credentials) {
-		// 		if (Boolean(currentAddress())) {
-		// 			return null
-		// 		}
-		// 		return {
-		// 			id: currentAddress(),
-		// 		}
-		// 	},
+		// TwitterProvider({
+		// 	clientId: process.env.TWITTER_CLIENT_ID_V2,
+		// 	clientSecret: process.env.TWITTER_CLIENT_SECRET_V2,
+		// 	version: '2.0',
+		// 	// profile(profile) {
+		// 	// 	return {
+		// 	// 		context: 'twitter',
+		// 	// 		...profile,
+		// 	// 	}
+		// 	// }
 		// }),
-
-		TwitterProvider({
-			clientId: process.env.TWITTER_CLIENT_ID_V2,
-			clientSecret: process.env.TWITTER_CLIENT_SECRET_V2,
-			version: '2.0',
-			// profile(profile) {
-			// 	return {
-			// 		context: 'twitter',
-			// 		...profile,
-			// 	}
-			// }
-		}),
-
-		// EmailProvider({
-		// 	server: {
-		// 		host: process.env.EMAIL_SERVER_HOST,
-		// 		port: process.env.EMAIL_SERVER_PORT,
-		// 		auth: {
-		// 			user: process.env.EMAIL_SERVER_USER,
-		// 			pass: process.env.EMAIL_SERVER_PASSWORD,
-		// 		},
-		// 	},
-		// 	from: process.env.EMAIL_FROM,
-		// }),
-
 		DiscordProvider({
 			clientId: process.env.DISCORD_KEY,
 			clientSecret: process.env.DISCORD_SECRET,
 			authorization: { params: { scope: scope } },
 			profile(profile) {
-				// console.log(profile)
 				return {
 					context: 'discord',
 					...profile,
-					// accent_color: profile.accent_color,
-					// avatar: profile.avatar,
-					// banner: profile.banner,
-					// banner_color: profile.banner_color,
-					// discriminator: profile.discriminator,
-					// email: profile.email,
-					// flags: profile.flags,
-					// id: profile.id,
-					// image_url: profile.image_url,
-					// locale: profile.locale,
-					// mfa_enabled: profile.mfa_enabled,
-					// premium_type: profile.premium_type,
-					// public_flags: profile.public_flags,
-					// username: profile.username,
-					// verified: profile.verified,
 				}
 			},
 		}),
@@ -94,65 +51,75 @@ export const authOptions: NextAuthOptions = {
 	},
 
 	callbacks: {
-		async jwt({ token, user, account = {}, profile, isNewUser }) {
-			// if ( account.provider && !token[account.provider] ) {
-			// 	token[account.provider] = { access_token: null, refresh_token: null }
-			// }
+		async jwt({ token, user, account, profile, isNewUser }) {
+			log.info('AUTH', '-->', 'provider', account?.provider)
+			if (account?.provider && !token[account?.provider]) {
+				token.providers = {
+					...token,
+					providers: { [account.provider]: { access_token: null, refresh_token: null } },
+				}
+			}
+			if (account?.access_token) {
+				token.providers = {
+					...token,
+					providers: { [account.provider]: { access_token: account.access_token } },
+				}
+			}
+			if (account?.refresh_token) {
+				token.providers = {
+					...token,
+					providers: { [account.provider]: { refresh_token: account.refresh_token } },
+				}
+			}
 
-			// if ( account.access_token ) {
-			// 	token[account.provider] = { ...token, [account.provider]:  { access_token: account.access_token } }
-			// }
+			// const identity = getUuid({ provider: 'discord', id: profile.id })
 
-			// if ( account.refresh_token ) {
-			// 	token[account.provider] = { ...token, [account.provider] : { refresh_token: account.refresh_token } }
-			// }
-
-			// if (account) {
-			// 	token.accessToken = account.access_token
-			// }
-
-			// discord signin has priority
-			if (account?.provider === 'discord' && profile) {
-				console.log('discord', account.providerAccountId)
+			if (account?.provider === 'discord') {
+				// log.info('AUTH', '-->', 'discord', profile.id)
 				token.discord = profile.id
 				token.username = profile.username
 				token.avatar = profile.avatar
-			}
-			// only take twitter id and username
-			if (account?.provider === 'twitter') {
-				console.log('twitter', account.providerAccountId)
-				token.twitter = profile.id
-				token.twitter_username = profile.username
+				token.email = profile.email
+				token.uuid = await getUuid({ provider: 'discord', id: profile.id })
+				// token.address = identity.address
+				// token.twitter = twitter
 			}
 
-			// console.log('user', user)
-			// console.log('account', account)
-			// console.log('profile', profile)
-			// console.log('token', token)
+			// if (account?.provider === 'twitter') {
+			// 	log.info('AUTH', '-->', 'twitter', account.providerAccountId)
+			// 	token.twitter = profile?.id
+			// 	token.twitter_username = profile.username
+			// 	// send token to bot api
+			// 	// log.info('AUTH', '-->', 'sending', account.access_token, account.refresh_token)
+			// 	// await setUserToken( account?.provider, account?.access_token, account?.refresh_token )
+			// 	// log.info('AUTH', '-->', 'sent')
+			// }
+
+			log.info('AUTH', '-->', 'token', token)
+			// log.info('AUTH', '-->', 'token providers', token.providers)
+
 			return token
 		},
+
 		async session({ session, token }) {
-			// Send properties to the client, like an access_token from a provider.
-			// session.accessToken = token.accessToken
-			session.address = token.sub
+			session.address = token?.sub
+
 			session.user = {
-				name: token.username,
-				avatar: token.avatar,
-				// id: token?.profile?.id || null,
-				discord: token.discord,
-				twitter_id: token.twitter_id,
-				twitter_username: token.twitter_username,
-				// address: token.address,
-				uuid: null,
-				email: token?.email || null,
-				// profile: token?.profile || null,
+				uuid: token?.uuid,
+				name: token?.username,
+				avatar: token?.avatar,
+				email: token?.email,
+				address: token?.address,
+				discord: token?.discord,
+				twitter: token?.twitter,
+				twitter_username: token?.twitter_username,
 			}
-			// console.log('session', session)
-			// console.log(token.twitter)
+
+			log.info('AUTH', '-->', 'session', token, session)
 			return session
 		},
 		// async signIn({ user, account, profile, email, credentials }) {
-		// 	console.log('signIn', user, account, profile, email, credentials)
+		// 	log.info('signIn', user, account, profile, email, credentials)
 		// 	return true
 		// },
 	},
