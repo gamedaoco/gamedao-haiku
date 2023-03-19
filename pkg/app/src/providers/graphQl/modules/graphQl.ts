@@ -74,6 +74,7 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 
 	return new ApolloClient({
 		link: splitLink,
+		ssrMode: typeof window === 'undefined',
 		cache,
 		defaultOptions: {
 			watchQuery: {
