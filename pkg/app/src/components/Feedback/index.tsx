@@ -74,7 +74,7 @@ async function sendMessage(u = '', b = '', m = '', cb = () => {}) {
 				msg: m,
 			}),
 		}).then((res) => {
-			log.info('RES', res)
+			// log.info('RES', res)
 			cb()
 		})
 	} catch (err) {
@@ -88,7 +88,11 @@ export const FeedbackButton = ({ handleClose, anchorRef }) => {
 	const [sending, setSending] = useState(false)
 	const handleSend = () => {
 		setSending(true)
-		sendMessage(uuid, bpid, message, handleClose)
+		const send = async () => {
+			await sendMessage(uuid, bpid, message, handleClose)
+			setMessage('')
+		}
+		send()
 	}
 
 	const [message, setMessage] = useState('')
