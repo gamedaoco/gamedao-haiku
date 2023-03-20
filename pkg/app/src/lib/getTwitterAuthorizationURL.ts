@@ -21,8 +21,7 @@ async function sha256(source) {
 }
 
 export async function getTwitterAuthorizationURL(uuid = '') {
-	const challenge = sha256(uuid)
-	const state = await sha256(uuid)
+	const challenge = await sha256(uuid)
 
 	const url = encodeURI(
 		[
@@ -33,7 +32,7 @@ export async function getTwitterAuthorizationURL(uuid = '') {
 			callback,
 			'&scope=tweet.read users.read like.read follows.read offline.access',
 			'&state=',
-			state,
+			challenge,
 			'&response_type=code&code_challenge_method=plain',
 			'&code_challenge=',
 			challenge,
