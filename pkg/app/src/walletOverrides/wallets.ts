@@ -1,8 +1,8 @@
 import { Wallet, getWallets as getTalismanWallets } from '@talisman-connect/wallets'
-import { PolkawalletWallet } from 'src/walletOverrides/polkawallet-wallet'
-
+import { Polkawallet } from './polkawallet'
+import { NovaWallet } from './novawallet'
 // Add new wallets here
-const supportedWallets = [...getTalismanWallets(), new PolkawalletWallet()]
+const supportedWallets = [...getTalismanWallets(), new Polkawallet(), new NovaWallet()]
 
 export function getWallets() {
 	return supportedWallets

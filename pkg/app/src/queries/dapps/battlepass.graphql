@@ -65,10 +65,11 @@ mutation ClaimBattlepassPremium (
 		}
 	}
 }
-mutation ClaimBattlepassFreemium ( $battlepass: String!, $uuid: String!){
+mutation PayBattlepass ( $battlepass: String!, $uuid: String!){
 	BattlepassBot {
 		joinPremium( battlepass: $battlepass, identityUuid: $uuid) {
 			status
+			premium
 		}
 	}
 }

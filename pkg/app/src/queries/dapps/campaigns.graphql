@@ -1,4 +1,4 @@
-subscription SuccessfulCampaignByOrganisationId($orgId: String!) {
+subscription SuccessfulCampaignByOrganizationId($orgId: String!) {
     campaign(where: {organization_id: {_eq: $orgId}, state: {_eq: "Success"}}) {
         id
         name

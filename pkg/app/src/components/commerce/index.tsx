@@ -14,7 +14,7 @@ export const getStripe = () => {
 	return stripePromise
 }
 
-type TArgs = { price: number }
+type TArgs = { price?: number }
 type TProps = { args?: TArgs }
 
 export const Checkout = ({ args }: TProps) => {
@@ -23,7 +23,7 @@ export const Checkout = ({ args }: TProps) => {
 	const { user, bpid } = useAppContext()
 
 	useEffect(() => {
-		if (!user.uuid) return
+		if (!user.uuid || !bpid) return
 
 		// Create PaymentIntent as soon as the page loads
 

@@ -19,8 +19,8 @@ import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 import { FiltersSection } from 'components/FiltersSections/filtersSection'
-import { ItemList } from 'components/OrganisationCard/itemList'
-import { OrganizationFiltersListTab } from 'components/OrganisationCard/modules/listTab'
+import { ItemList } from 'components/OrganizationCard/itemList'
+import { OrganizationFiltersListTab } from 'components/OrganizationCard/modules/listTab'
 
 const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
 	data?.filter((x, index) => index < rowsPerPage)
@@ -41,7 +41,7 @@ interface FiltersInterface {
 	filters: any
 }
 
-export function OrganisationPage() {
+export function OrganizationPage() {
 	const { t } = useTranslation()
 
 	const address = useCurrentAccountAddress()
@@ -95,7 +95,7 @@ export function OrganisationPage() {
 	}, [w3Enabled, connectWallet, selectedAccount, push])
 
 	return (
-		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
+		<Layout showHeader showFooter showSidebar title={t('page:organizations:title')}>
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
@@ -132,8 +132,8 @@ export function OrganisationPage() {
 
 					{paginatedData?.length === 0 && !loading && (
 						<Box sx={{ mb: 4 }}>
-							<Typography fontWeight={700}>{t('page:organisations:no_organisations')}</Typography>
-							<Typography>{t('page:organisations:no_result', { query: filters?.query })}</Typography>
+							<Typography fontWeight={700}>{t('page:organizations:no_organizations')}</Typography>
+							<Typography>{t('page:organizations:no_result', { query: filters?.query })}</Typography>
 						</Box>
 					)}
 
@@ -158,11 +158,11 @@ export function OrganisationPage() {
 										onClick={() => setBodyCount((p) => p + 30)}
 										variant="outlined"
 									>
-										{t('page:organisations:load_more')}
+										{t('page:organizations:load_more')}
 									</Button>
 								)}
 								<Typography>
-									{t('page:organisations:showing_results', {
+									{t('page:organizations:showing_results', {
 										count1: paginatedData?.length,
 										count2: organizationsCount?.data?.organization_aggregate?.aggregate.count,
 									})}
@@ -172,10 +172,10 @@ export function OrganisationPage() {
 					</Box>
 				</>
 			) : (
-				<>No Organisations yet — why not create one?</>
+				<>No Organizations yet — why not create one?</>
 			)}
 		</Layout>
 	)
 }
 
-export default OrganisationPage
+export default OrganizationPage

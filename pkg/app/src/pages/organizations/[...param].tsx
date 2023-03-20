@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganizationState } from 'hooks/useTmpOrganizationState'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
@@ -66,7 +66,7 @@ const SettingsOverview = dynamic(() =>
 // import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
 // import { SettingsOverview } from 'components/TabPanels/Settings/settings'
 
-export function OrganisationById() {
+export function OrganizationById() {
 	const { query, push } = useRouter()
 	const config = useConfig()
 	const theme = useTheme()
@@ -90,7 +90,7 @@ export function OrganisationById() {
 
 	const addMemberTx = useAddMemberTransaction(organizationIdState)
 	const address = useCurrentAccountAddress()
-	const cache = useTmpOrganisationState()
+	const cache = useTmpOrganizationState()
 
 	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)
 	const handleOpenTxModal = useCallback(() => {
@@ -204,7 +204,7 @@ export function OrganisationById() {
 			showHeader
 			showFooter
 			showSidebar
-			title={organizationState?.name ?? cache.name ?? t('page:organisations:title')}
+			title={organizationState?.name ?? cache.name ?? t('page:organizations:title')}
 		>
 			{(!loading && data) || !organizationIdState ? (
 				<TabContext value={activeStep}>
@@ -486,4 +486,4 @@ export function OrganisationById() {
 	)
 }
 
-export default OrganisationById
+export default OrganizationById

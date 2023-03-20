@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useConfig } from 'hooks/useConfig'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useTmpOrganisationState } from 'hooks/useTmpOrganisationState'
+import { useTmpOrganizationState } from 'hooks/useTmpOrganizationState'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
@@ -76,7 +76,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 	})
 
 	const address = useCurrentAccountAddress()
-	const cache = useTmpOrganisationState()
+	const cache = useTmpOrganizationState()
 
 	// join tx
 	const [showTxModalType, setShowTxModalType] = useState<boolean>(false)

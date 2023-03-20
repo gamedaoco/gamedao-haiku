@@ -4,12 +4,15 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { useAppContext } from 'providers/app/modules/context'
 import { useExtensionContext } from 'providers/extension/modules/context'
 
-import { Grid, Button, Paper, Stack, Typography } from '@mui/material'
+import { Grid, Button, Box, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { WalletCard } from 'components/WalletDialog/modules/walletCard'
 import Device from 'components/Device'
+
+import { getTwitterAuthorizationURL } from 'lib/getTwitterAuthorizationURL'
+console.log(process.env.NEXT_PUBLIC_ENVIRONMENT)
 
 export const Web2Connect = () => {
 	const { data: session } = useSession()
@@ -46,7 +49,9 @@ interface ComponentProps {
 
 export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
-	const { user } = useAppContext()
+	const { user, twa } = useAppContext()
+	const { data: session } = useSession()
+
 	const theme = useTheme()
 
 	useEffect(() => {
@@ -57,6 +62,12 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 	}, [supportedWallets, open, callback])
 
 	if (!allSupportedWallets?.length) return null
+
+	async function openTwitterAuthorization() {
+		if (!session && !user.uuid) return
+		const url = await getTwitterAuthorizationURL(user.uuid)
+		window.open(url, '_self', 'noopener')?.focus()
+	}
 
 	return (
 		<BaseDialog title="Connect GameDAO" open={open} onClose={onClose}>
@@ -89,14 +100,18 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						callback={() => signIn('discord')}
 					/>
 				</Fragment>
-				{/* <Fragment key={'twitter'}>
-					<WalletCard
-						imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
-						name={'Twitter'}
-						connectable={true}
-						callback={() => signIn('twitter')}
-					/>
-				</Fragment> */}
+				<Fragment key={'twitter'}>
+					<Box sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}>
+						<WalletCard
+							imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
+							name={'Twitter'}
+							connectable={true}
+							connected={twa ? true : false}
+							callback={() => openTwitterAuthorization()}
+							buttonText={'Authorize'}
+						/>
+					</Box>
+				</Fragment>
 			</Grid>
 			<Typography
 				variant="h4"
@@ -123,8 +138,12 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 						<Device key={wallet.extensionName}>
 							{({ isMobile }) => {
 								if (
-									(isMobile && wallet.title === 'Polkawallet') ||
-									(!isMobile && wallet.title !== 'Polkawallet')
+									(isMobile &&
+										(wallet.extensionName === 'polkawallet' ||
+											wallet.extensionName === 'novawallet')) ||
+									(!isMobile &&
+										wallet.extensionName !== 'polkawallet' &&
+										wallet.extensionName !== 'novawallet')
 								)
 									return (
 										<Fragment>

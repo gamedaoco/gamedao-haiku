@@ -22,7 +22,7 @@ export const StripeInput = ({ component: Component, inputRef, ...props }) => {
 const protocol = process.env.NEXT_PUBLIC_ENVIRONMENT === 'Development' ? '' : 'https://'
 
 type TArgs = {
-	price: number
+	price?: number
 	total?: number
 	remaining?: number
 }
@@ -38,7 +38,6 @@ export const CheckoutForm = ({ args }: TProps) => {
 	const elements = useElements()
 
 	const { user, bpid } = useAppContext()
-	const { price } = args
 
 	const [email, setEmail] = useState<string>(user.email || '')
 	const [message, setMessage] = useState<string>(null)

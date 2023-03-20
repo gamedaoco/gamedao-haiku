@@ -5,15 +5,15 @@ import { Layout } from 'layouts/v2'
 import { Container, Box, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import { Form } from 'components/Forms/Organization/form'
 
-export function CreateOrganisationPage() {
+export function CreateOrganizationPage() {
 	const [activeStep, setActiveStep] = useState<number>(0)
 	const { t } = useTranslation()
 	return (
-		<Layout showHeader showFooter showSidebar title={t('page:organisations:title')}>
+		<Layout showHeader showFooter showSidebar title={t('page:organizations:title')}>
 			<Box sx={{ mb: 4 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">{t('page:organisations:create')}</Typography>
+						<Typography variant="h3">{t('page:organizations:create')}</Typography>
 					</Grid>
 					<Grid item></Grid>
 				</Grid>
@@ -36,4 +36,4 @@ export function CreateOrganisationPage() {
 	)
 }
 
-export default CreateOrganisationPage
+export default CreateOrganizationPage

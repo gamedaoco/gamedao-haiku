@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import { getAccountName, shortAccountAddress, shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useAppContext } from 'providers/app/modules/context'
-import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
-import { useExtensionContext } from 'providers/extension/modules/context'
+import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'hooks/useIdentityByAddress'
 
@@ -13,8 +12,6 @@ import { useTheme } from '@mui/material/styles'
 import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
 import { ExpandMore, Verified } from '@mui/icons-material'
 import { avatarImageURL } from 'utils/avatars'
-import Logout from '@mui/icons-material/Logout'
-import { MdOutlineLogout } from 'react-icons/md'
 
 interface IComponentProps {
 	onClick: () => void
@@ -26,6 +23,7 @@ export function Selector({ onClick }: IComponentProps) {
 
 	const { user } = useAppContext()
 	const { data: session } = useSession()
+
 	const address = useCurrentAccountAddress()
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(address)
@@ -45,7 +43,7 @@ export function Selector({ onClick }: IComponentProps) {
 		if (address || user?.uuid) {
 			setImageUrl(avatarImageURL(address || user?.uuid))
 		}
-	}, [identity, user, accountState, address])
+	}, [session, identity, user, accountState, address])
 
 	const VerifiedBadge = () =>
 		identity?.display_name ? <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" color="inherit" /> : null
@@ -54,11 +52,11 @@ export function Selector({ onClick }: IComponentProps) {
 		navigator.clipboard.writeText(address) // .then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [address])
 
-	if (!isMd) {
-		return (
-			<Avatar onClick={handleCopyAddress} sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
-		)
-	}
+	// if (!isMd) {
+	// 	return (
+	// 		<Avatar onClick={handleCopyAddress} sx={{ width: '48px', height: '48px' }} src={avatarImageURL(address)} />
+	// 	)
+	// }
 
 	return (
 		<Stack
@@ -67,13 +65,21 @@ export function Selector({ onClick }: IComponentProps) {
 			spacing={2}
 			sx={{
 				overflow: 'hidden',
+				width: !isMd ? '100%' : 'auto',
 				// WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
 				// filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
 				// backgroundBlendMode: 'multiply',
 			}}
 		>
 			<Avatar sx={{ width: '48px', height: '48px' }} src={imageUrl} onClick={handleCopyAddress} />
-			<Stack direction="row" alignItems="center" spacing={2} onClick={onClick}>
+			<Stack
+				direction="row"
+				alignItems="center"
+				justifyContent="space-between"
+				spacing={2}
+				onClick={onClick}
+				sx={{ width: !isMd ? '100%' : 'auto' }}
+			>
 				<Stack>
 					<Typography variant="subtitle2" color="white">
 						{displayName}
@@ -90,11 +96,6 @@ export function Selector({ onClick }: IComponentProps) {
 					<ExpandMore />
 				</Box>
 			</Stack>
-			{/* {(session || address) && (
-				<Button onClick={() => signOut()}>
-					<MdOutlineLogout/>
-				</Button>
-			)} */}
 		</Stack>
 	)
 }

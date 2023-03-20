@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import { BattlepassViews } from 'constants/battlepass'
-import { Organization } from 'src/queries'
+import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
@@ -40,14 +40,15 @@ export function Navigation({ id, view, org }: TProps) {
 		defaultMatches: true,
 	})
 
-	// const [organization, setOrganization] = useState<Organization>(null)
-	// const { loading, data, error } = useOrganizationByIdSubscription({
-	// 	variables: { orgId: id as string },
-	// })
-	// useEffect(() => {
-	// 	if (!data?.organization) return
-	// 	setOrganization(data.organization?.[0] as Organization)
-	// }, [data])
+	const [organization, setOrganization] = useState(null)
+	const { loading: loadingOrg, data: orgData } = useOrganizationByIdSubscription({
+		variables: { orgId: org },
+	})
+	useEffect(() => {
+		if (loadingOrg) return
+		if (!orgData?.organization.length) return
+		setOrganization(orgData.organization?.[0])
+	}, [orgData])
 
 	const address = useCurrentAccountAddress()
 
@@ -56,12 +57,12 @@ export function Navigation({ id, view, org }: TProps) {
 	const [isPrime, setIsPrime] = useState<boolean>(false)
 	const [isBattlePass, setIsBattlePass] = useState<boolean>(true)
 
-	// useEffect(() => {
-	// 	if (!address || !organization) return
-	// 	setIsMember(organization.organization_members.some((member) => member.address === address))
-	// 	setIsPrime(organization.prime === address)
-	// 	setIsOpen(organization.access_model === 'Open' ? true : false)
-	// }, [address, organization])
+	useEffect(() => {
+		if (!address || !organization) return
+		setIsMember(organization.organization_members.some((member) => member.address === address))
+		setIsPrime(organization.prime === address)
+		setIsOpen(organization.access_model === 'Open' ? true : false)
+	}, [address, organization])
 
 	const tabs = useMemo<ITabs[]>(
 		() =>

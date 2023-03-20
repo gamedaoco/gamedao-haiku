@@ -7,6 +7,8 @@ import { Paper, Box, Grid, Typography } from '@mui/material'
 import { Checkout } from 'components/commerce'
 
 export function Page() {
+	// const { query } = useRouter()
+	// query.bpid
 	return (
 		<Layout showHeader showSidebar showFooter title={`Buy`}>
 			<Box sx={{ mb: 2 }}>

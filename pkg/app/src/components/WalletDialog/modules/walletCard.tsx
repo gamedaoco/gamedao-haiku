@@ -12,9 +12,10 @@ interface ComponentProps {
 	callback?: () => void
 	mobile?: boolean
 	connected?: boolean
+	buttonText?: string
 }
 
-export function WalletCard({ imageSrc, name, url, connectable, callback, connected }: ComponentProps) {
+export function WalletCard({ imageSrc, name, url, connectable, callback, connected, buttonText }: ComponentProps) {
 	const handleButtonClick = useCallback(() => {
 		if (connectable && callback) {
 			return callback()
@@ -43,7 +44,7 @@ export function WalletCard({ imageSrc, name, url, connectable, callback, connect
 						variant={connectable ? 'outlined' : 'text'}
 						sx={{ marginLeft: 'auto !important' }}
 					>
-						{connectable ? <Typography>Connect</Typography> : <Download />}
+						{connectable ? <Typography>{buttonText ? buttonText : `Connect`}</Typography> : <Download />}
 					</Button>
 				)}
 			</Stack>

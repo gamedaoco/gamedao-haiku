@@ -1,10 +1,22 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const calculateOrderAmount = (items) => {
-	// Replace this constant with a calculation of the order's amount
-	// Calculate the order total on the server to prevent
-	// people from directly manipulating the amount on the client
-	return 1500
+	const { id } = items
+	if (!id) return 1000
+
+	// TODO: get price for bpid and insert here
+	// for beta version presale price is generally restricted to 10 EUR === 1000 eurocents
+
+	switch (id) {
+		// beta fixed price
+		case 'battlepass-beta':
+			return 1000
+			break
+
+		default:
+			return 5
+			break
+	}
 }
 
 export default async function handler(req, res) {

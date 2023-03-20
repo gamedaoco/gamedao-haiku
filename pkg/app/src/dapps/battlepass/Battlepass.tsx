@@ -22,6 +22,7 @@ import { Header } from './components/Header'
 
 import { DashboardView } from './components/DashboardView'
 import { LeaderboardView } from './components/LeaderboardView'
+import { AdminView } from './components/AdminView'
 
 type TArgs = {
 	id: string
@@ -55,6 +56,9 @@ export const Battlepass = ({ args }: TProps) => {
 							</TabPanel>
 							<TabPanel value="leaderboard">
 								<LeaderboardView id={id} />
+							</TabPanel>
+							<TabPanel value="admin">
+								<AdminView id={id} />
 							</TabPanel>
 						</TabContext>
 					</Container>

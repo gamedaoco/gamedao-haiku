@@ -92,14 +92,14 @@ export function Overview({
 		() =>
 			organization?.access_model === 'Open'
 				? {
-						title: t('page:organisations:organisation_rules:open:title'),
-						text: t('page:organisations:organisation_rules:open:text'),
-						status: t('page:organisations:organisation_rules:open:status'),
+						title: t('page:organizations:organization_rules:open:title'),
+						text: t('page:organizations:organization_rules:open:text'),
+						status: t('page:organizations:organization_rules:open:status'),
 				  }
 				: {
-						title: t('page:organisations:organisation_rules:private:title'),
-						text: t('page:organisations:organisation_rules:private:text'),
-						status: t('page:organisations:organisation_rules:private:status'),
+						title: t('page:organizations:organization_rules:private:title'),
+						text: t('page:organizations:organization_rules:private:text'),
+						status: t('page:organizations:organization_rules:private:status'),
 				  },
 		[organization?.access_model],
 	)
@@ -107,18 +107,18 @@ export function Overview({
 	const feeModel = useMemo(() => {
 		if (organization?.fee_model === 'NoFees') {
 			return {
-				title: t('page:organisations:organisation_rules:no_fee:title'),
-				text: t('page:organisations:organisation_rules:no_fee:text'),
+				title: t('page:organizations:organization_rules:no_fee:title'),
+				text: t('page:organizations:organization_rules:no_fee:text'),
 			}
 		} else if (organization?.fee_model === 'Reserve') {
 			return {
-				title: t('page:organisations:organisation_rules:reserved_fee:title'),
-				text: t('page:organisations:organisation_rules:reserved_fee:text'),
+				title: t('page:organizations:organization_rules:reserved_fee:title'),
+				text: t('page:organizations:organization_rules:reserved_fee:text'),
 			}
 		} else if (organization?.fee_model === 'Transfer') {
 			return {
-				title: t('page:organisations:organisation_rules:transferred_fee:title'),
-				text: t('page:organisations:organisation_rules:transferred_fee:text'),
+				title: t('page:organizations:organization_rules:transferred_fee:title'),
+				text: t('page:organizations:organization_rules:transferred_fee:text'),
 			}
 		}
 	}, [organization?.fee_model])
@@ -127,14 +127,14 @@ export function Overview({
 		() =>
 			organization?.member_limit === 0
 				? {
-						title: t('page:organisations:organisation_rules:no_member_limit:title'),
-						text: t('page:organisations:organisation_rules:no_member_limit:text'),
+						title: t('page:organizations:organization_rules:no_member_limit:title'),
+						text: t('page:organizations:organization_rules:no_member_limit:text'),
 				  }
 				: {
-						title: t('page:organisations:organisation_rules:member_limit:title'),
-						text: ` ${t('page:organisations:organisation_rules:member_limit:only')} ${
+						title: t('page:organizations:organization_rules:member_limit:title'),
+						text: ` ${t('page:organizations:organization_rules:member_limit:only')} ${
 							organization?.member_limit
-						}  ${t('page:organisations:organisation_rules:member_limit:text')}`,
+						}  ${t('page:organizations:organization_rules:member_limit:text')}`,
 				  },
 		[organization?.member_limit],
 	)
@@ -179,7 +179,7 @@ export function Overview({
 				<Paper sx={{ width: { xs: '100%', md: '65%' }, height: '100%' }} variant={'glass'}>
 					<Stack minHeight={307} spacing={1} padding={3}>
 						<Typography variant="h6" pb="1rem">
-							{t('page:organisations:about')}
+							{t('page:organizations:about')}
 						</Typography>
 
 						<Typography variant="body2">
@@ -255,7 +255,7 @@ export function Overview({
 
 				<Paper sx={{ width: { xs: '100%', md: '35%' }, minHeight: 284 }} variant={'glass'}>
 					<Stack height="100%" spacing={1} padding={3}>
-						<Typography variant="h6">{t('page:organisations:organisations_rules')}</Typography>
+						<Typography variant="h6">{t('page:organizations:organizations_rules')}</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
 							{organization?.fee_model && (
@@ -380,7 +380,7 @@ export function Overview({
 
 				<Stack width={{ xs: '100%', sm: '50%' }}>
 					<Stack direction="row" justifyContent="space-between" pb="1rem">
-						<Typography variant="h5">{t('page:organisations:votings')}</Typography>
+						<Typography variant="h5">{t('page:organizations:votings')}</Typography>
 						<Button color="secondary" onClick={() => handleChangeRoute('proposals')}>
 							{t('button:ui:view_all')} <ChevronRight />
 						</Button>

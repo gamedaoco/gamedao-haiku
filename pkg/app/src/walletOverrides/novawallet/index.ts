@@ -2,13 +2,13 @@ import { BaseDotsamaWallet } from '@talisman-connect/wallets'
 
 import logo from './logo.png'
 
-export class PolkawalletWallet extends BaseDotsamaWallet {
-	extensionName = 'polkawallet'
-	title = 'Polkawallet'
+export class NovaWallet extends BaseDotsamaWallet {
+	extensionName = 'novawallet'
+	title = 'Nova Wallet'
 	// noExtensionMessage = 'You can use any Polkadot compatible wallet but we recommend using Talisman'
-	installUrl = 'https://polkawallet.io/'
+	installUrl = 'https://novawallet.io/'
 	logo = {
 		src: logo.src,
-		alt: 'Polkawallet Logo',
+		alt: 'Nova Wallet',
 	}
 }

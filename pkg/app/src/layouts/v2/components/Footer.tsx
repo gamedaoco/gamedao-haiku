@@ -51,7 +51,7 @@ export function Footer() {
 									pinky paper
 								</Link>
 								<Link href="https://blog.gamedao.co">blog</Link>
-								<Link href="https://gamedao.co">gamedao.co</Link>
+								<Link href="https://docs.gamedao.co">documentation</Link>
 								<br />
 								<Link href="https://discord.gg/rhwtr7p">discord</Link>
 								<Link href="https://t.me/gamedaoco">telegram</Link>

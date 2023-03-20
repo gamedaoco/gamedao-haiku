@@ -13,6 +13,7 @@ declare module '@mui/material/Button' {
 	}
 }
 
+const large = '48px'
 export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
@@ -33,7 +34,7 @@ export default function Button(theme: Theme) {
 				{
 					props: { variant: 'glass' },
 					style: {
-						height: '44px',
+						// height: large,
 						fontSize: '1rem',
 						backgroundColor: `#00000011`, //theme.palette.background.neutral,
 						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
@@ -45,7 +46,7 @@ export default function Button(theme: Theme) {
 				{
 					props: { variant: 'grey' },
 					style: {
-						height: '44px',
+						// height: large,
 						fontSize: '1rem',
 						background: '#333333',
 						border: 0,
@@ -56,7 +57,7 @@ export default function Button(theme: Theme) {
 				{
 					props: { variant: 'lemon' },
 					style: {
-						height: '44px',
+						// height: large,
 						fontSize: '1rem',
 						background: '#f3cb14',
 						color: '#111111',
@@ -69,7 +70,7 @@ export default function Button(theme: Theme) {
 				{
 					props: { variant: 'pink' },
 					style: {
-						height: '48px',
+						// height: large,
 						fontSize: '1rem',
 						background: '#ee4693ff',
 						color: '#ffffff',
@@ -79,17 +80,31 @@ export default function Button(theme: Theme) {
 						// borderRadius: theme.shape.borderRadiusSm,
 					},
 				},
+				{
+					props: { variant: 'outlined' },
+					style: {
+						// height: large,
+						// fontSize: '1rem',
+						// background: '#ee4693ff',
+						// color: '#ffffff',
+						// '&:hover': { color: '#ffffff' },
+						// border: 0,
+						// boxShadow: theme.customShadows.primary,
+						// borderRadius: theme.shape.borderRadiusSm,
+					},
+				},
 			],
 
 			styleOverrides: {
 				root: {
-					borderRadius: theme.shape.borderRadiusLg,
+					borderRadius: theme.shape.borderRadiusSm,
+					'* >': { transformDuration: '1000ms' },
 					'&:hover': {
 						// boxShadow: 'none',
 					},
 				},
 				sizeLarge: {
-					height: 48,
+					height: large,
 				},
 				sizeXs: {
 					height: '15px',
@@ -127,15 +142,15 @@ export default function Button(theme: Theme) {
 
 				// outlined
 				outlinedInherit: {
-					height: '48px',
+					height: large,
 					fontSize: '1rem',
 					'&:hover': {},
 				},
-				// 	textInherit: {
-				// 		'&:hover': {
-				// 			backgroundColor: theme.palette.action.hover,
-				// 		},
+				// textInherit: {
+				// 	'&:hover': {
+				// 		backgroundColor: theme.palette.action.hover,
 				// 	},
+				// },
 			},
 		},
 	}

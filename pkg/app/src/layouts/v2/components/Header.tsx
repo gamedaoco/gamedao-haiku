@@ -5,7 +5,7 @@ import { useExtensionContext } from 'src/providers/extension/modules/context'
 
 import Link from 'components/Link'
 import { AccountSelector } from 'components/AccountSelector/accountSelector'
-import Feedback from 'components/Feedback'
+import FeedbackButton from 'components/Feedback'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 
 import { useTheme } from '@mui/material/styles'
@@ -23,6 +23,7 @@ import {
 
 import { RxDiscordLogo } from 'react-icons/rx'
 
+import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -44,7 +45,7 @@ interface ComponentProps {
 
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organisations',
+		name: 'Organizations', // 'button:navigation:organizations',
 		path: '/organizations',
 		icon: <RiShieldLine />,
 	},
@@ -71,11 +72,11 @@ const rightNav = [
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
 		icon: <RiDropLine />,
 	},
-	{
-		name: 'Docs', //'button:navigation:documentation',
-		path: 'https://docs.gamedao.co/',
-		icon: <RiBookOpenLine />,
-	},
+	// {
+	// 	name: 'Docs', //'button:navigation:documentation',
+	// 	path: 'https://docs.gamedao.co/',
+	// 	icon: <RiBookOpenLine />,
+	// },
 ]
 
 export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentProps) {
@@ -143,35 +144,39 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 								<MenuItem
 									selected={router.pathname.includes(item.path)}
 									sx={{
+										transitionDuration: '250ms',
 										py: '32px',
 										overflow: 'hidden',
-										'* >, &::after, &::before': { transitionDuration: '1s' },
+										'* >, &::after, &::before': { transitionDuration: '250ms' },
+										'&::after': {
+											transitionDuration: '250ms',
+											content: '""',
+											position: 'absolute',
+											borderRadius: '2px 0px 0px 2px',
+											boxShadow: '0 0px 20px 2px #00ffcc99',
+											// borderBottom: '2px solid #ffffff33',
+											width: '0%',
+											left: '50%',
+											right: '50%',
+											bottom: '-1px',
+										},
 										'&:hover': {
 											'&::after': {
-												content: '""',
-												position: 'absolute',
 												width: '90%',
-												borderRadius: '2px 0px 0px 2px',
-												boxShadow: '0 0px 20px 2px #00ffcc99',
-												borderBottom: '2px solid #ffffff66',
 												left: '5%',
 												right: '5%',
-												bottom: '-1px',
 											},
 										},
 										'&.Mui-selected': {
-											'&:hover': {
-												border: 0,
-												borderBottom: '4px transparent',
-											},
 											'&::after': {
+												transitionDuration: '250ms',
 												content: '""',
 												position: 'absolute',
-												width: '90%',
-												borderColor: '#ff00ff',
+												// borderColor: '#ff00ff',
 												borderRadius: '2px 0px 0px 2px',
 												boxShadow: '0 0px 20px 2px #00ffcc',
-												borderBottom: '2px solid white',
+												// borderBottom: '2px solid #ffffff66',
+												width: '90%',
 												left: '5%',
 												right: '5%',
 												bottom: '-1px',
@@ -188,6 +193,12 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
+					<Link href="#">
+						<Button onClick={() => openFeedback()}>
+							<RiChat1Line />
+							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
+						</Button>
+					</Link>
 					<Link href="https://discord.gg/gamedao">
 						<Button>
 							<RxDiscordLogo />
@@ -211,9 +222,13 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 							)
 						})}
 
-					{/*
-					 */}
-					{/* {showFeedback && <Feedback anchorRef={anchorRef?.current} close={closeFeedback} />} */}
+					{showFeedback && (
+						<BaseDialog open={true} onClose={closeFeedback} title="Send us some Feedback!">
+							<Box ref={anchorRef}>
+								<FeedbackButton anchorRef={anchorRef?.current} handleClose={closeFeedback} />
+							</Box>
+						</BaseDialog>
+					)}
 
 					<MenuItem>
 						<AccountSelector />

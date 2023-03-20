@@ -10,7 +10,7 @@ import { toUnit } from 'src/utils/token'
 
 interface ComponentProps {
 	title: string
-	organisationName: string
+	organizationName: string
 	backers: number
 	target: string
 	contributed: string
@@ -18,7 +18,7 @@ interface ComponentProps {
 	expiry: number
 }
 
-export function Content({ title, organisationName, backers, target, contributed, currencyId, expiry }: ComponentProps) {
+export function Content({ title, organizationName, backers, target, contributed, currencyId, expiry }: ComponentProps) {
 	const { t } = useTranslation()
 	const systemProperties = useSystemProperties()
 	const blockNumber = useBlockNumber()
@@ -38,7 +38,7 @@ export function Content({ title, organisationName, backers, target, contributed,
 				<Stack>
 					<Typography variant="subtitle1">{title}</Typography>
 					<Typography variant="body2">
-						{t('label:by_organization', { organizationName: organisationName })}
+						{t('label:by_organization', { organizationName: organizationName })}
 					</Typography>
 				</Stack>
 				{duration && (

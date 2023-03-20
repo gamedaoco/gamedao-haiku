@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useLogger } from 'hooks/useLogger'
-import { useTmpOrganisation } from 'hooks/useTmpOrganisation'
+import { useTmpOrganization } from 'hooks/useTmpOrganization'
 import { useNetworkContext } from 'providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
@@ -30,7 +30,7 @@ export function useCreateOrgTransaction(): TransactionData {
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
-	const data = useTmpOrganisation()
+	const data = useTmpOrganization()
 	const logger = useLogger('useCreateOrgTransaction')
 
 	useEffect(() => {

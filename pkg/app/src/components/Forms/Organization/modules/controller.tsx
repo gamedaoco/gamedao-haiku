@@ -22,16 +22,16 @@ export function Controller({ selected, setSelected }: ComponentProps) {
 		<BaseForm title={'Who will control the organization?'}>
 			<RadioItem
 				icon={<Group sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:control:radio_button_community:title')}
-				description={t('page:organisations:settings:control:radio_button_community:description')}
+				title={t('page:organizations:settings:control:radio_button_community:title')}
+				description={t('page:organizations:settings:control:radio_button_community:description')}
 				value={2}
 				selectedValue={selected}
 				onChange={setSelected}
 			/>
 			<RadioItem
 				icon={<Person sx={{ width: '40px', height: '40px' }} />}
-				title={t('page:organisations:settings:control:radio_button_entity:title')}
-				description={t('page:organisations:settings:control:radio_button_entity:description')}
+				title={t('page:organizations:settings:control:radio_button_entity:title')}
+				description={t('page:organizations:settings:control:radio_button_entity:description')}
 				value={0}
 				selectedValue={selected}
 				onChange={setSelected}

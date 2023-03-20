@@ -50,7 +50,7 @@ export function AppProvider({ children }) {
 
 	useEffect(() => {
 		if (!session || connected) return
-		if (!session.user.discord) return
+		if (!session.user.discord || user.discord === session?.user?.discord) return
 		console.log('================================================================')
 		console.log('app', 'connect', 'discord ->', session.user.discord)
 		// setDiscord(session?.user?.discord)
@@ -63,20 +63,20 @@ export function AppProvider({ children }) {
 		setUser(updateUser)
 	}, [session])
 
-	useEffect(() => {
-		if (!session || connected) return
-		if (!session.user.twitter) return
-		console.log('================================================================')
-		console.log('app', 'connect', 'twitter ->', session.user.twitter)
-		// setTwitter(session?.user?.twitter)
-		const updateUser = {
-			...user,
-			twitter: session?.user?.twitter_id,
-			name: session?.user?.name,
-			email: session?.user?.email,
-		}
-		setUser(updateUser)
-	}, [session])
+	// useEffect(() => {
+	// 	if (!session || connected) return
+	// 	if (!session.user.twitter || user.twitter === session?.user?.twitter) return
+	// 	console.log('================================================================')
+	// 	console.log('app', 'connect', 'twitter ->', session.user.twitter, session)
+	// 	// setTwitter(session?.user?.twitter)
+	// 	const updateUser = {
+	// 		...user,
+	// 		twitter: session?.user?.twitter_id,
+	// 		name: session?.user?.name,
+	// 		email: session?.user?.email,
+	// 	}
+	// 	setUser(updateUser)
+	// }, [session])
 
 	useEffect(() => {
 		if (!session || connected) return
@@ -169,6 +169,12 @@ export function AppProvider({ children }) {
 		[bpid],
 	)
 
+	const [twa, setTwa] = useState<boolean>(false)
+	const setTwitterAuthorized = useCallback((authorized) => {
+		console.log('set twitter authorized', authorized)
+		setTwa(authorized)
+	}, [])
+
 	useEffect(() => {
 		if (!user.uuid && !user.discord) return
 		console.log('================================================================')
@@ -233,6 +239,8 @@ export function AppProvider({ children }) {
 				bpid: bpid,
 				processing: processing,
 				setProcessing: setProcessing,
+				twa: twa,
+				setTwitterAuthorized: setTwitterAuthorized,
 			}}
 		>
 			{children}
