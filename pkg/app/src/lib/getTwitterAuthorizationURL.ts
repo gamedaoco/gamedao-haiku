@@ -2,7 +2,7 @@
 // reference: https://developer.twitter.com/en/docs/authentication/oauth-2-0/user-access-token
 
 // https://twitter.com/i/oauth2/authorize?response_type=code
-// &client_id=M1M5R3BMVy13QmpScXkzTUt5OE46MTpjaQ
+// &client_id=xxxxxxxx
 // &redirect_uri=https://www.example.com
 // &scope=tweet.read%20users.read%20follows.read%20follows.write
 // &state=state
@@ -21,7 +21,7 @@ async function sha256(source) {
 }
 
 export async function getTwitterAuthorizationURL(uuid = '') {
-	const rnd = generateHash(8)
+	const challenge = sha256(uuid)
 	const state = await sha256(uuid)
 
 	const url = encodeURI(
@@ -36,7 +36,7 @@ export async function getTwitterAuthorizationURL(uuid = '') {
 			state,
 			'&response_type=code&code_challenge_method=plain',
 			'&code_challenge=',
-			rnd,
+			challenge,
 		].join(''),
 	)
 	return url
