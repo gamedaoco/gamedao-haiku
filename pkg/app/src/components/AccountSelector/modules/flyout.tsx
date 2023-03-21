@@ -139,6 +139,7 @@ export function Flyout({
 						</MenuItem>
 					)}
 
+					{/*
 					{user.uuid && (
 						<MenuItem sx={{ p: 0 }} onClick={connectWallet}>
 							<ListItemIcon>
@@ -147,7 +148,6 @@ export function Flyout({
 							<Typography variant="body2">Authorize Twitter</Typography>
 						</MenuItem>
 					)}
-					{/*
 					 */}
 
 					{!selectedAccount && (
