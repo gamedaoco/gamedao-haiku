@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { use } from 'i18next'
 import { String } from 'lodash'
+import { useRouter } from 'next/router'
 
 // import { useAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
@@ -22,6 +23,8 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
+
+import { getTwitterAuthorizationURL } from 'lib/getTwitterAuthorizationURL'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -68,10 +71,17 @@ const getIconUrl = (item) => {
 	return url
 }
 
+async function authorizeTwitter(uuid, path) {
+	console.log('authorizeTwitter')
+	const url = await getTwitterAuthorizationURL(uuid, path)
+	return window.open(url, '_self')
+}
+
 export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	const { uuid, user, linkAddress } = useAppContext()
 	const { data: session } = useSession()
 	const address = useCurrentAccountAddress()
+	const router = useRouter()
 
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
@@ -109,9 +119,13 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	let showAction = false
 	let action
 
-	if (item.source === 'twitter' && !session?.user?.twitter) {
+	console.log(item.source, item.type)
+
+	// TODO: check for existing twitter token
+	// if (item.source === 'twitter' && !session?.user?.twitter) {
+	if (item.source === 'twitter' && item.type === 'connect') {
 		actionString = `${Actions.CONNECT} ${item.source}`
-		action = () => signIn(item.source)
+		action = () => authorizeTwitter(uuid, router.asPath)
 		showAction = true
 	}
 
@@ -147,13 +161,12 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 				: null
 
 			action = () => {
-				window.open(str, '_blank')
+				window.open(str, '_self')
 			}
 			showAction = true
 		}
 	}
 
-	console.log(item)
 	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && user.uuid) {
 		console.log('link wallet', item, address, user.address)
 		actionString = `${Actions.LINK}`

@@ -14,10 +14,10 @@ import { setUserToken } from 'lib/auth/storeUserToken'
 // &code=SXRudGlaVUxCT0pIRWlnU1otZHFnYk8yWExwcmR2emhrUXNDcjhIa1VIUzJCOjE2NzkwNTc5MDE3NTA6MToxOmFjOjE <-- token
 
 export function Page() {
-	const { query } = useRouter()
+	const { query, push } = useRouter()
 	const { user, setTwitterAuthorized } = useAppContext()
-	// const { data: session } = useSession()
 
+	console.log(query.state)
 	console.log(query.code)
 
 	useEffect(() => {
@@ -25,9 +25,10 @@ export function Page() {
 		async function sendToken() {
 			await setUserToken(user.uuid, 'twitter', query.code)
 			setTwitterAuthorized(true)
+			push(query?.state as string)
 		}
 		sendToken()
-	}, [user.uuid, query.code])
+	}, [user.uuid, query.code, query.state])
 
 	return (
 		<Layout showHeader showSidebar showFooter title={'Twitter Authorization'}>

@@ -20,8 +20,9 @@ async function sha256(source) {
 	return resultBytes.map((x) => x.toString(16).padStart(2, '0')).join('')
 }
 
-export async function getTwitterAuthorizationURL(uuid = '') {
+export async function getTwitterAuthorizationURL(uuid = '', callerURL = '') {
 	const challenge = await sha256(uuid)
+	const state = encodeURI(callerURL)
 
 	const url = encodeURI(
 		[
@@ -32,7 +33,7 @@ export async function getTwitterAuthorizationURL(uuid = '') {
 			callback,
 			'&scope=tweet.read users.read like.read follows.read offline.access',
 			'&state=',
-			challenge,
+			state,
 			'&response_type=code&code_challenge_method=plain',
 			'&code_challenge=',
 			challenge,
