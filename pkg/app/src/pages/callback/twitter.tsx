@@ -30,7 +30,7 @@ export function Page() {
 		async function sendToken() {
 			await setUserToken(user.uuid, 'twitter', query.code + '::::' + callbackURL)
 			setTwitterAuthorized(true)
-			if (state[0] !== 'noredirect') push(query?.state as string)
+			if (callerURL !== 'noredirect') push(callerURL)
 		}
 		sendToken()
 	}, [user.uuid, query.code, query.state])
