@@ -57,7 +57,7 @@ export function AppProvider({ children }) {
 		const updateUser = {
 			...user,
 			discord: session?.user?.discord,
-			twitter: session?.user?.discord,
+			twitter: session?.user?.twitter,
 			name: session?.user?.name,
 			email: session?.user?.email,
 		}
