@@ -57,6 +57,7 @@ export function AppProvider({ children }) {
 		const updateUser = {
 			...user,
 			discord: session?.user?.discord,
+			twitter: session?.user?.discord,
 			name: session?.user?.name,
 			email: session?.user?.email,
 		}
@@ -87,7 +88,7 @@ export function AppProvider({ children }) {
 			console.log('app', 'fetching id', '...')
 
 			const response = await connectIdentityMutation({
-				variables: { discord: user.discord, name: user.name, email: user.email || null },
+				variables: { discord: user.discord, name: user.name, email: user.email, twitter: user.twitter },
 			}).then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity

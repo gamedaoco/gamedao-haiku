@@ -7,6 +7,7 @@ import { useAppContext } from 'providers/app/modules/context'
 import { Layout } from 'layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'
 import { setUserToken } from 'lib/auth/storeUserToken'
+import { decode } from 'lib/getTwitterAuthorizationURL'
 
 // example
 // http://localhost:3000/callback/twitter?
@@ -17,15 +18,19 @@ export function Page() {
 	const { query, push } = useRouter()
 	const { user, setTwitterAuthorized } = useAppContext()
 
-	console.log(query.state)
+	const state = decode(query?.state as string).split('::::')
+	const callerURL = state[0]
+	const callbackURL = state[1]
+
+	console.log(query.state, state)
 	console.log(query.code)
 
 	useEffect(() => {
 		if (!user.uuid || !query.code) return
 		async function sendToken() {
-			await setUserToken(user.uuid, 'twitter', query.code)
+			await setUserToken(user.uuid, 'twitter', query.code + '::::' + callbackURL)
 			setTwitterAuthorized(true)
-			push(query?.state as string)
+			if (state[0] !== 'noredirect') push(query?.state as string)
 		}
 		sendToken()
 	}, [user.uuid, query.code, query.state])
