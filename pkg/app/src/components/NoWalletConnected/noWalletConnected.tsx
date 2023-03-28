@@ -9,7 +9,7 @@ export function NoWalletConnected() {
 		defaultMatches: true,
 	})
 	const openUrl = useCallback((url: string) => {
-		window.open(url, '_blank', 'noreferrer,noopener').focus()
+		window.open(url, '_blank').focus()
 	}, [])
 	const { t } = useTranslation()
 	return (

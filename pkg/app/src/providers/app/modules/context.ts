@@ -1,7 +1,5 @@
 import { createContext, useContext } from 'react'
-
 import { AppState } from 'src/@types/app'
-import { string } from 'yup/lib/locale'
 
 export const AppContext = createContext<AppState>({
 	ready: false,

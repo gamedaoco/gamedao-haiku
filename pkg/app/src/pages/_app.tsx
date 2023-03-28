@@ -53,8 +53,8 @@ function HeadAndMetaTags() {
 			<meta property="og:description" content={config?.SITE_DESCRIPTION} />
 			<meta property="og:image" content={config?.SITE_IMAGE} />
 
-			<meta property="twitter:domain" content="app.gamedao.co" />
-			<meta property="twitter:url" content="https://app.gamedao.co/" />
+			<meta property="twitter:domain" content="gamedao.co" />
+			<meta property="twitter:url" content="https://gamedao.co/" />
 			<meta property="twitter:image" content={config?.SITE_IMAGE} />
 
 			<meta name="twitter:card" content="summary_large_image" />
@@ -70,9 +70,9 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, sessio
 	const router = useRouter()
 
 	useEffect(() => {
-		if (ENVIRONMENT === 'DEVELOPMENT') return
-		log.info(`❤️  Welcome to GameDAO`)
-		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
+		// if (ENVIRONMENT === 'DEVELOPMENT') return
+		// log.info(`❤️  Welcome to GameDAO`)
+		// log.info(`💬  Join our discord: https://discord.gg/gamedao`)
 		log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
 	}, [ENVIRONMENT])
 

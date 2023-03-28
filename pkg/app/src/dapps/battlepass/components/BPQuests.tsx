@@ -86,10 +86,13 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
+	console.log('item', item, achievement)
 	const p = item.points // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
-	const t = item.maxDaily || 1
-	const completed = Math.round((v / t) * 100)
+	// const t = item.maxDaily || 1
+	// const completed = Math.round( Math.random() * item.quantity )
+	const completed = achievement.progress ? item.quantity / achievement.progress : 0
+	const completedBar = (completed / (item.maxDaily || item.quantity)) * 100
 
 	enum Source {
 		Wallet,
@@ -123,13 +126,13 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 
 	// TODO: check for existing twitter token
 	// if (item.source === 'twitter' && !session?.user?.twitter) {
-	if (item.source === 'twitter' && item.type === 'connect') {
+	if (item.source === 'twitter' && item.type === 'connect' && v === 0) {
 		actionString = `${Actions.CONNECT} ${item.source}`
 		action = () => authorizeTwitter(uuid, router.asPath)
 		showAction = true
 	}
 
-	if (item.source === 'twitter' && item.type === 'follow') {
+	if (item.source === 'twitter' && item.type === 'follow' && v === 0) {
 		actionString = `${Actions.FOLLOW} ${item.source}`
 		const str = `https://twitter.com/intent/follow?screen_name=${item.twitterId}`
 		action = () => {
@@ -208,9 +211,9 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 			) : (
 				<>
 					<Typography variant="cardMicro" align="right" sx={{ color: '#f3cb14' }}>
-						{v}/{t}
+						{completed}/{item.quantity}
 					</Typography>
-					<BorderLinearProgress variant="determinate" value={completed < 100 ? completed : 100} />
+					<BorderLinearProgress variant="determinate" value={completedBar < 100 ? completedBar : 100} />
 				</>
 			)}
 		</Stack>
