@@ -87,12 +87,12 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
 	console.log('item', item, achievement)
-	const p = item.points // Math.round(Math.random() * 5) * 250 + 250
+	const p = item?.points || 0 // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
 	// const t = item.maxDaily || 1
 	// const completed = Math.round( Math.random() * item.quantity )
-	const completed = achievement.progress ? item.quantity / achievement.progress : 0
-	const completedBar = (completed / (item.maxDaily || item.quantity)) * 100
+	const completed = achievement?.progress ? item?.quantity / achievement?.progress : 0
+	const completedBar = (completed / (item?.maxDaily || item?.quantity)) * 100
 
 	enum Source {
 		Wallet,
