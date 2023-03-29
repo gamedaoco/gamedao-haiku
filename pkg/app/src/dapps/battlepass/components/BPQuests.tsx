@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { use } from 'i18next'
 import { String } from 'lodash'
+import { useRouter } from 'next/router'
 
 // import { useAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
@@ -22,6 +23,8 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 
 import { BaseDialog } from 'components/BaseDialog/baseDialog'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
+
+import { getTwitterAuthorizationURL } from 'lib/getTwitterAuthorizationURL'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -68,18 +71,36 @@ const getIconUrl = (item) => {
 	return url
 }
 
+async function authorizeTwitter(uuid, path) {
+	console.log('authorizeTwitter')
+	const url = await getTwitterAuthorizationURL(uuid, path)
+	return window.open(url, '_self')
+}
+
 export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	const { uuid, user, linkAddress } = useAppContext()
 	const { data: session } = useSession()
 	const address = useCurrentAccountAddress()
+	const router = useRouter()
 
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
-	const p = item.points // Math.round(Math.random() * 5) * 250 + 250
+	// console.log('item', item, achievement)
+
+	const p = item?.points || 0 // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
 	const t = item.maxDaily || 1
-	const completed = Math.round((v / t) * 100)
+
+	const completed = achievement?.progress ? achievement?.progress / item?.quantity : 0
+
+	// console.log(completed, t)
+	const completedBar = (completed / t) * 100
+
+	// console.log(completedBar)
+
+	const progressText =
+		t === 1 ? (achievement?.progress === 1 ? `completed` : `pending`) : `${achievement?.progress} of ${t}`
 
 	enum Source {
 		Wallet,
@@ -109,13 +130,17 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	let showAction = false
 	let action
 
-	if (item.source === 'twitter' && !session?.user?.twitter) {
+	console.log(item.source, item.type)
+
+	// TODO: check for existing twitter token
+	// if (item.source === 'twitter' && !session?.user?.twitter) {
+	if (item.source === 'twitter' && item.type === 'connect' && v === 0) {
 		actionString = `${Actions.CONNECT} ${item.source}`
-		action = () => signIn(item.source)
+		action = () => authorizeTwitter(uuid, router.asPath)
 		showAction = true
 	}
 
-	if (item.source === 'twitter' && item.type === 'follow') {
+	if (item.source === 'twitter' && item.type === 'follow' && v === 0) {
 		actionString = `${Actions.FOLLOW} ${item.source}`
 		const str = `https://twitter.com/intent/follow?screen_name=${item.twitterId}`
 		action = () => {
@@ -147,13 +172,12 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 				: null
 
 			action = () => {
-				window.open(str, '_blank')
+				window.open(str, '_self')
 			}
 			showAction = true
 		}
 	}
 
-	console.log(item)
 	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && user.uuid) {
 		console.log('link wallet', item, address, user.address)
 		actionString = `${Actions.LINK}`
@@ -169,8 +193,14 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// console.log(item.id, item.maxDaily, 'achievement', achievement)
 
 	return (
-		<Stack p={2} sx={{ width: ['100%'], height: 150 }} direction="column" justifyContent="space-between">
-			<Stack direction="row">
+		<Stack
+			p={2}
+			spacing={2}
+			sx={{ width: ['100%'], height: 192 }}
+			direction="column"
+			justifyContent="space-between"
+		>
+			<Stack direction="row" height={'100%'}>
 				<Box sx={{ minWidth: '64px' }}>
 					<Icon />
 					<Typography pt={1} variant="cardMicro" sx={{ color: '#f3cb14' }}>
@@ -195,9 +225,9 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 			) : (
 				<>
 					<Typography variant="cardMicro" align="right" sx={{ color: '#f3cb14' }}>
-						{v}/{t}
+						{progressText}
 					</Typography>
-					<BorderLinearProgress variant="determinate" value={completed < 100 ? completed : 100} />
+					<BorderLinearProgress variant="determinate" value={completedBar < 100 ? completedBar : 100} />
 				</>
 			)}
 		</Stack>

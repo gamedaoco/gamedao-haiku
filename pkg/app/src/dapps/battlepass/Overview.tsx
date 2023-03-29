@@ -5,7 +5,7 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { useConfig } from 'hooks/useConfig'
 
 import { useActiveBattlepassSubscription } from 'src/queries'
-import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
+// import { useJoinBattlePassTX } from 'hooks/tx/useJoinBattlePassTX'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
@@ -21,7 +21,7 @@ type TGridItemProps = {
 
 export const BPGridItem = ({ index, content, handler }: TGridItemProps) => {
 	const config = useConfig()
-	const joinTX = useJoinBattlePassTX(content.id)
+	// const joinTX = useJoinBattlePassTX(content.id)
 
 	const handleJoin = (id) => {
 		// console.log('join', id)

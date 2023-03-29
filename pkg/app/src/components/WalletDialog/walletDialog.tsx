@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 import { useAppContext } from 'providers/app/modules/context'
@@ -48,11 +49,11 @@ interface ComponentProps {
 }
 
 export function WalletDialog({ open, callback, onClose }: ComponentProps) {
+	const theme = useTheme()
 	const { supportedWallets, allSupportedWallets } = useExtensionContext()
 	const { user, twa } = useAppContext()
 	const { data: session } = useSession()
-
-	const theme = useTheme()
+	const { asPath } = useRouter()
 
 	useEffect(() => {
 		if (open && supportedWallets?.length === 1) {
@@ -65,7 +66,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 
 	async function openTwitterAuthorization() {
 		if (!session && !user.uuid) return
-		const url = await getTwitterAuthorizationURL(user.uuid)
+		const url = await getTwitterAuthorizationURL(user.uuid, asPath)
 		window.open(url, '_self', 'noopener')?.focus()
 	}
 

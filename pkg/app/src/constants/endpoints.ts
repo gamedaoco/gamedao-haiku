@@ -27,7 +27,7 @@ const productionEndpoints: Endpoints = [
 		name: 'development ( breaks often )',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
-		chain: 'wss://node.dev.sub.zero.io',
+		chain: 'wss://rpc.dev.sub.zero.io',
 		default: ENVIRONMENT === Environment.Development ? true : false,
 	},
 	{
@@ -35,7 +35,7 @@ const productionEndpoints: Endpoints = [
 		name: 'subzero testnet ( stable, fiat on )',
 		url: 'https://graph.stage.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.stage.sub.zero.io/health',
-		chain: 'wss://node.stage.sub.zero.io',
+		chain: 'wss://rpc.stage.sub.zero.io',
 		default: ENVIRONMENT === Environment.Staging ? true : false,
 	},
 	// {
@@ -49,9 +49,6 @@ const productionEndpoints: Endpoints = [
 ]
 
 export const ENDPOINTS: Endpoints =
-
-	ENVIRONMENT === Environment.Development
-	? [...developmentEndpoints, ...productionEndpoints]
-	: productionEndpoints
+	ENVIRONMENT === Environment.Development ? [...developmentEndpoints, ...productionEndpoints] : productionEndpoints
 
 export const getConnectedEndpoint = () => ENDPOINTS.find((e) => e.default)

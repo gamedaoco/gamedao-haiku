@@ -30,7 +30,7 @@ export function Flyout({
 	const { disconnectWallet, selectedAccount } = useExtensionContext()
 	const { endpoints, selectedEndpoint } = useGraphQlContext()
 	const { data: session } = useSession()
-	const { user } = useAppContext()
+	const { user, flush } = useAppContext()
 
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
@@ -39,8 +39,8 @@ export function Flyout({
 		const disconnect = async () => {
 			console.log('disconnect wallet')
 			await disconnectWallet()
-			console.log('kill session')
-			await signOut({ callbackUrl: '/' })
+			console.log('flush')
+			await flush()
 		}
 		disconnect()
 	}
@@ -139,6 +139,7 @@ export function Flyout({
 						</MenuItem>
 					)}
 
+					{/*
 					{user.uuid && (
 						<MenuItem sx={{ p: 0 }} onClick={connectWallet}>
 							<ListItemIcon>
@@ -147,7 +148,6 @@ export function Flyout({
 							<Typography variant="body2">Authorize Twitter</Typography>
 						</MenuItem>
 					)}
-					{/*
 					 */}
 
 					{!selectedAccount && (

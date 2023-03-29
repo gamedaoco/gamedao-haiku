@@ -16,4 +16,5 @@ export interface AppState {
 	setProcessing: Function
 	twa: boolean
 	setTwitterAuthorized: Function
+	flush: Function
 }

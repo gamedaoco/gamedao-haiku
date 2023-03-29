@@ -20,8 +20,12 @@ async function sha256(source) {
 	return resultBytes.map((x) => x.toString(16).padStart(2, '0')).join('')
 }
 
-export async function getTwitterAuthorizationURL(uuid = '') {
+export const encode = (str: string): string => Buffer.from(str, 'binary').toString('base64')
+export const decode = (str: string): string => Buffer.from(str, 'base64').toString('binary')
+
+export async function getTwitterAuthorizationURL(uuid = '', callerURL = 'noredirect') {
 	const challenge = await sha256(uuid)
+	const state = encode(callerURL + '::::' + callback)
 
 	const url = encodeURI(
 		[
