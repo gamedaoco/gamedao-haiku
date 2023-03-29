@@ -112,17 +112,28 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 			{/*<AppBar position="fixed" elevation={0} sx={{ borderRadius: 0 }}>*/}
 			<Toolbar
 				sx={{
-					background: 'transparent',
-					// backgroundColor: `rgba(0,0,0,0.5)`,
+					// background: 'transparent',
+					// backgroundColor: `rgba(0,0,0,0.01)`,
 					// backgroundColor: theme.palette.primary,
-					borderBottom: noContainer ? 0 : `1px solid ${theme.palette.grey[500_32]}`,
+					// backgroundColor: `#00000001`, //theme.palette.background.neutral,
+					// backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))`,
+					// backdropFilter: `blur(5px)`,
+					// WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,0.5) )',
+					// filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,0.5) )',
+					// backgroundBlendMode: 'multiply',
+					'::after': {
+						content: '""',
+						position: 'absolute',
+						inset: 0,
+						zIndex: -1,
+						mask: 'linear-gradient(to top, transparent, black 50%)',
+						backdropFilter: 'blur(10px)',
+					},
+					borderBottom: 0, // noContainer ? 0 : `1px solid ${theme.palette.grey[500_32]}`,
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					height: '90px',
 					zIndex: 9000,
-					WebkitFilter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
-					filter: 'drop-shadow( 0 5px 10px rgba(0,0,0,1) )',
-					backgroundBlendMode: 'multiply',
 				}}
 			>
 				<Stack direction="row" alignItems="center" spacing={2} minWidth="50%">
