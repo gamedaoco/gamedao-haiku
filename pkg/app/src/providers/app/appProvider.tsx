@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { ENVIRONMENT } from 'src/constants'
 import { AppContext } from 'providers/app/modules/context'
 
@@ -63,21 +63,6 @@ export function AppProvider({ children }) {
 		}
 		setUser(updateUser)
 	}, [session])
-
-	// useEffect(() => {
-	// 	if (!session || connected) return
-	// 	if (!session.user.twitter || user.twitter === session?.user?.twitter) return
-	// 	console.log('================================================================')
-	// 	console.log('app', 'connect', 'twitter ->', session.user.twitter, session)
-	// 	// setTwitter(session?.user?.twitter)
-	// 	const updateUser = {
-	// 		...user,
-	// 		twitter: session?.user?.twitter_id,
-	// 		name: session?.user?.name,
-	// 		email: session?.user?.email,
-	// 	}
-	// 	setUser(updateUser)
-	// }, [session])
 
 	useEffect(() => {
 		if (!session || connected) return
@@ -225,6 +210,14 @@ export function AppProvider({ children }) {
 		}
 	}, [featureQueryResult.error])
 
+	const flush = async () => {
+		console.log('kill session')
+		await signOut({ callbackUrl: '/' })
+		setUser(initialUserState)
+		setConnected(false)
+		console.log('reset complete')
+	}
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -242,6 +235,7 @@ export function AppProvider({ children }) {
 				setProcessing: setProcessing,
 				twa: twa,
 				setTwitterAuthorized: setTwitterAuthorized,
+				flush: flush,
 			}}
 		>
 			{children}

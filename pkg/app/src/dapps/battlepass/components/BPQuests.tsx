@@ -87,12 +87,20 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
 	console.log('item', item, achievement)
+
 	const p = item?.points || 0 // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
-	// const t = item.maxDaily || 1
-	// const completed = Math.round( Math.random() * item.quantity )
-	const completed = achievement?.progress ? item?.quantity / achievement?.progress : 0
-	const completedBar = (completed / (item?.maxDaily || item?.quantity)) * 100
+	const t = item.maxDaily || 1
+
+	const completed = achievement?.progress ? achievement?.progress / item?.quantity : 0
+
+	console.log(completed, t)
+	const completedBar = (completed / t) * 100
+
+	console.log(completedBar)
+
+	const progressText =
+		t === 1 ? (achievement?.progress === 1 ? `completed` : `pending`) : `${achievement?.progress} of ${t}`
 
 	enum Source {
 		Wallet,
@@ -185,8 +193,14 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// console.log(item.id, item.maxDaily, 'achievement', achievement)
 
 	return (
-		<Stack p={2} sx={{ width: ['100%'], height: 150 }} direction="column" justifyContent="space-between">
-			<Stack direction="row">
+		<Stack
+			p={2}
+			spacing={2}
+			sx={{ width: ['100%'], height: 192 }}
+			direction="column"
+			justifyContent="space-between"
+		>
+			<Stack direction="row" height={'100%'}>
 				<Box sx={{ minWidth: '64px' }}>
 					<Icon />
 					<Typography pt={1} variant="cardMicro" sx={{ color: '#f3cb14' }}>
@@ -211,7 +225,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 			) : (
 				<>
 					<Typography variant="cardMicro" align="right" sx={{ color: '#f3cb14' }}>
-						{completed}/{item.quantity}
+						{progressText}
 					</Typography>
 					<BorderLinearProgress variant="determinate" value={completedBar < 100 ? completedBar : 100} />
 				</>
