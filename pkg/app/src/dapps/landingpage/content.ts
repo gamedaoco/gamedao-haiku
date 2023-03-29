@@ -34,17 +34,14 @@ export const partners = [
 ]
 
 export const supporters = [
+	['Outlier Ventures', '', '/img/maxstealth.png', 'https://'],
 	['Scytale Ventures', '', '/img/scytale.png', 'https://'],
 	['Valhalla Capital', '', '/img/valhalla.png', 'https://'],
+	['Primal', '', '/img/primal.png', 'https://'],
 	['Automata Network', '', '/img/automata.png', 'https://'],
-	['MaxStealth', '', '/img/maxstealth.png', 'https://'],
-
-	['YaoQi', '', '/img/yaoqi.png', 'https://'],
 	['1PAR Research', '', '/img/1par.png', 'https://'],
-	['NXGEN', '', '/img/maxstealth.png', 'https://'],
+	['YaoQi', '', '/img/yaoqi.png', 'https://'],
 	['Tek Forest', '', '/img/tekforest.png', 'https://'],
-
-	['Outlier Ventures', '', '/img/maxstealth.png', 'https://'],
 ]
 
 //

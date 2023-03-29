@@ -21,22 +21,19 @@ export const Supporters = (openUrl) => (
 			Next generation funding and acceleration to grow our community.
 		</Typography>
 
-		<Grid container>
-			{supporters.map((person, index) => (
-				<Grid item xs={6} sm={4} md={3} lg={2} pt={2} key={index}>
-					<Box
-						sx={{
-							display: 'grid',
-							gridTemplateColumns: { xl: '1fr 1fr' },
-						}}
-					>
-						<Item>
-							{' '}
-							{person[0]} <br /> {person[1]}{' '}
-						</Item>
-					</Box>
-				</Grid>
-			))}
-		</Grid>
+		<Box display="flex" justifyContent="center" alignItems="center">
+			<Grid container>
+				{supporters.map((person, index) => (
+					<Grid item xs={6} sm={4} md={3} lg={3} pt={3} key={index}>
+						<Box>
+							<Item>
+								{' '}
+								{person[0]} <br /> {person[1]}{' '}
+							</Item>
+						</Box>
+					</Grid>
+				))}
+			</Grid>
+		</Box>
 	</Stack>
 )

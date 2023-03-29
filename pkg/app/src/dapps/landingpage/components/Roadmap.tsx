@@ -104,33 +104,34 @@ export function Roadmap() {
 				<RoadmapItem title="Q2 22">
 					Substrate Builders Program
 					<br />
-					Launched Beta One with 200 OG Keys
+					Beta One with 200 OG Keys
 					<br />
-					Joined Outlier Ventures Ascent
 				</RoadmapItem>
 				<RoadmapItem title="Q3 22">
-					Rococo Slot Acquired for ZERO
+					Outlier Ventures Ascent Program
 					<br />
+					Rococo Slot Acquired for ZERO
+					{/* <br />
 					Talisman Wallet +<br />
-					PolkaWallet Integration
+				PolkaWallet Integration */}
 					<br />
 					WAVE & SPARXX Partnership
 				</RoadmapItem>
 				<RoadmapItem title="Q4 22">
 					Guild Beta with WAVE Esports
 					<br />
-					Private Sale
-					<br />
+					{/* Private Sale
+					<br /> */}
 					ZERO Parachain
 				</RoadmapItem>
-				<RoadmapItem title="Q1 23">
-					$GAME Public Sale + TGE
+				<RoadmapItem title="Q2 23">
+					$GAME TGE
 					<br />
 					Protocol Launch
 					<br />
 					Scale Up Guild Case
 				</RoadmapItem>
-				<RoadmapItem title="Q2 23" last>
+				<RoadmapItem title="Q3 23" last>
 					Seed Fund Creator Teams
 					<br />
 					Investor Syndicates

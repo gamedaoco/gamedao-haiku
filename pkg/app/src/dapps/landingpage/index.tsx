@@ -60,15 +60,15 @@ export function Landingpage() {
 
 				{transform && <Transform />}
 
-				{/* {roadmap && <Roadmap />} */}
-
 				{team && <Team />}
 				{partners && <Partners />}
-				{supporters && <Supporters />}
 
 				{wallet && <Wallet />}
 
 				{questions && <QuestionsBattlepass />}
+
+				{roadmap && <Roadmap />}
+				{supporters && <Supporters />}
 				{disclaimer && <Disclaimer />}
 			</Container>
 		</Box>

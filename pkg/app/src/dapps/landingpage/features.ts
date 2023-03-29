@@ -13,7 +13,7 @@ export const features = {
 	wallet: false,
 
 	questions: true,
-	disclaimer: false,
+	disclaimer: true,
 
 	// nav
 	cases: false,
