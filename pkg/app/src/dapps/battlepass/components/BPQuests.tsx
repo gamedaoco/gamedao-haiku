@@ -86,7 +86,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
-	console.log('item', item, achievement)
+	// console.log('item', item, achievement)
 
 	const p = item?.points || 0 // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
@@ -94,10 +94,10 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 
 	const completed = achievement?.progress ? achievement?.progress / item?.quantity : 0
 
-	console.log(completed, t)
+	// console.log(completed, t)
 	const completedBar = (completed / t) * 100
 
-	console.log(completedBar)
+	// console.log(completedBar)
 
 	const progressText =
 		t === 1 ? (achievement?.progress === 1 ? `completed` : `pending`) : `${achievement?.progress} of ${t}`

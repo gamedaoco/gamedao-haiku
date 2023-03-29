@@ -7,7 +7,7 @@ type TProps = { args: TArgs }
 export const ShareBtn = ({ args }: TProps) => {
 	const { id } = args
 	const str = encodeURI(
-		`Join our Battlepass on GameDAO: ${process.env.NEXT_PUBLIC_VERCEL_URL}/battlepass/${id}/dashboard`,
+		`⚔️ Join our Battlepass on GameDAO: ${process.env.NEXT_PUBLIC_VERCEL_URL}/battlepass/${id}/dashboard`,
 	)
 
 	return (
