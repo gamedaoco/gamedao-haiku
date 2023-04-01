@@ -1,0 +1,9 @@
+{
+  "name": "@gamedao/translations",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
+}

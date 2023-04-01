@@ -1,0 +1,7 @@
+{
+  "name": "@gamedao/admin",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "author": "2075@zero.io",
+  "license": "MIT"
+}
