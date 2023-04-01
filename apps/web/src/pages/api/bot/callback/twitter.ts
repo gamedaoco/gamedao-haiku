@@ -1,6 +1,6 @@
 // curl -X POST localhost:3000/api/feedback -H "Content-Type:application/json;charset=utf-8" -d '{"msg":"hello"}'
 // send a message: discord.send({ content: msg })
-export const config = { runtime: 'edge' }
+// export const config = { runtime: 'edge' }
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Discord from 'discord.js'

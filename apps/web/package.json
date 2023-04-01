@@ -93,6 +93,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-quill": "^2.0.0",
     "react-toastify": "^9.0.7",
+    "sharp": "^0.32.0",
     "stripe": "^11.9.1",
     "utf8": "^3.0.0",
     "uuid": "^9.0.0",
