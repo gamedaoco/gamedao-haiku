@@ -48,4 +48,4 @@ yarn-error.log*
 **/sitemap.xml
 .vscode/settings.json
 
-# .yarnrc
+.yarnrc
