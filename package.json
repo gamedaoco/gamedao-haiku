@@ -3,10 +3,6 @@
   "description": "a monorepo for gamedao dapps",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": ">14",
-    "yarn": "1.19.0"
-  },
   "workspaces": [
     "apps/*",
     "packages/*"
