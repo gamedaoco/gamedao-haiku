@@ -16,8 +16,8 @@ export function ItemList({ items, loading }: ComponentProps) {
 		<Grid
 			sx={{
 				display: 'grid',
-				gap: '1rem',
-				gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+				gap: ['1rem', '2rem'],
+				gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
 			}}
 		>
 			{items?.map((item) => (

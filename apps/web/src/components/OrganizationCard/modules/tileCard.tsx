@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import { Check, Key, Person } from '@mui/icons-material'
-import { Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { Stack, Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
@@ -19,7 +19,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 	const config = useConfig()
 	const address = useCurrentAccountAddress()
 	const { t } = useTranslation()
-	const SubHeader = useMemo(() => {
+	const subheader = useMemo(() => {
 		return (
 			<Box
 				sx={{
@@ -37,7 +37,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 						gap: '.25rem',
 					}}
 				>
-					<Person fontSize={'small'} />
+					<Person fontSize={'inherit'} />
 					<span>{`${item?.organization_members?.length} ${t(
 						`label:${item?.organization_members?.length > 1 ? 'members' : 'member'}`,
 					)} `}</span>
@@ -60,12 +60,12 @@ export const TileCard = ({ item }: ComponentPros) => {
 					>
 						{item?.organization_members?.find((member) => member.address === address) ? (
 							<>
-								<Check fontSize={'small'} />
+								<Check fontSize={'inherit'} />
 								<span>{t('label:joined')}</span>
 							</>
 						) : (
 							<>
-								<Key fontSize={'small'} />
+								<Key fontSize={'inherit'} />
 								<span>{t(`label:${item?.access_model === 'Open' ? 'open' : 'invitation'}`)}</span>
 							</>
 						)}
@@ -83,7 +83,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 			<Box
 				sx={{
 					width: '100%',
-					height: '100%',
+					height: '480px',
 					backgroundImage: `url(${bgImgUrl})`,
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',
@@ -113,24 +113,38 @@ export const TileCard = ({ item }: ComponentPros) => {
 						cursor: 'pointer',
 						width: '100%',
 						height: '100%',
+						p: '2rem',
 					}}
 					variant={'glass'}
 				>
-					<CardHeader
-						avatar={
+					<Stack
+						direction="column"
+						spacing={2}
+						alignItems="center"
+						justifyContent="end"
+						sx={{
+							height: '100%',
+							WebkitFilter: 'drop-shadow( 0 5px 15px rgba(0,0,0,1) )',
+							filter: 'drop-shadow( 0 5px 15px rgba(0,0,0,1) )',
+							// backgroundBlendMode: 'multiply',
+						}}
+					>
+						<Stack direction="column" alignItems="center" justifyContent="end" sx={{ height: '100%' }}>
 							<Avatar src={avatarImgUrl} sx={{ width: 64, height: 64 }}>
 								{item?.name?.slice(0, 1)}
 							</Avatar>
-						}
-						title={
-							<Typography variant={'body2'} fontWeight={'700'} noWrap>
+							<Typography variant={'body1'} fontWeight={'700'} pt={2}>
 								{item?.name}
 							</Typography>
-						}
-						subheader={SubHeader}
-					/>
-					<CardContent>
-						<div>
+							{subheader}
+						</Stack>
+						<Stack
+							p={[2, 4]}
+							direction="column"
+							alignItems="center"
+							justifyContent="center"
+							sx={{ height: '100%' }}
+						>
 							<Typography
 								variant={'caption'}
 								fontWeight={'400'}
@@ -138,14 +152,14 @@ export const TileCard = ({ item }: ComponentPros) => {
 									overflow: 'hidden',
 									textOverflow: 'ellipsis',
 									display: '-webkit-box',
-									WebkitLineClamp: '2',
+									WebkitLineClamp: '5',
 									WebkitBoxOrient: 'vertical',
 								}}
 							>
 								{item?.description}
 							</Typography>
-						</div>
-					</CardContent>
+						</Stack>
+					</Stack>
 				</Card>
 			</Box>
 		</NavLink>

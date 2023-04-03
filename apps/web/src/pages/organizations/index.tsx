@@ -26,6 +26,7 @@ const applyPagination = (data: Organization[], rowsPerPage: number): Organizatio
 	data?.filter((x, index) => index < rowsPerPage)
 
 const filterMap = [
+	'0x49a9f455df77578802e0c8b5b482110793e09a40561ab4b75fc4ca5f31331152',
 	'0xe589c0c1b78555556a090342a09e55e87650118518c6094b988e6659e91c2629',
 	'0x8a6cac07805460ea2a507102da9ad0983ee9e8f44dd5cc1203da0f4da2551259',
 	'0x30aa3ebae427d327fef0c9e5e83b6961249013b04467a6fb10222ce529e56ee0',
