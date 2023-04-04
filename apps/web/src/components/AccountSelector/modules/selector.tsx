@@ -86,14 +86,14 @@ export function Selector({ onClick }: IComponentProps) {
 				// fiat balance
 				const balance =
 					Math.round(
-						balances[0].free * fx.zero + balances[2].free * fx.game + balances[1].free * fx.play * 100,
+						balances[0]?.free * fx.zero + balances[2]?.free * fx.game + balances[1]?.free * fx.play * 100,
 					) / 100
 				return `${balance} EUR`
 				break
 			case 1: // network balances
-				return `${Math.round(balances[0].free * 100) / 100} ${balances[0].tokenSymbol} · ${balances[2].free} ${
-					balances[2].tokenSymbol
-				}`
+				return `${Math.round(balances[0]?.free * 100) / 100} ${balances[0]?.tokenSymbol} · ${
+					balances[2]?.free
+				} ${balances[2]?.tokenSymbol}`
 				break
 			case 2: // wallet address
 				return addressShort
