@@ -78,8 +78,6 @@ export const TileCard = ({ item }: ComponentPros) => {
 	const avatarImgUrl = item?.logo ? parseIpfsHash(item?.logo, config.IPFS_GATEWAY) : null
 	const bgImgUrl = item?.header ? parseIpfsHash(item?.header, config.IPFS_GATEWAY) : null
 
-	console.log(item)
-
 	return (
 		<NavLink href={`/organizations/${item.id}/dashboard`}>
 			<Box

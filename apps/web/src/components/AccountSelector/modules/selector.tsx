@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
 import { useAppContext } from 'src/providers/app/modules/context'
+
 import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
 
 import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
@@ -14,8 +15,6 @@ import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/mate
 import { ExpandMore, Verified } from '@mui/icons-material'
 import { avatarImageURL } from 'src/utils/avatars'
 
-import { Currency } from 'components/Currency'
-
 interface IComponentProps {
 	onClick: () => void
 }
@@ -26,8 +25,10 @@ export function Selector({ onClick }: IComponentProps) {
 
 	const { user } = useAppContext()
 	const { data: session } = useSession()
+
 	const address = useCurrentAccountAddress()
 	const balances = useBalanceByAddress(address)
+
 	const accountState = useCurrentAccountState()
 	const { identity } = useIdentityByAddress(address)
 
