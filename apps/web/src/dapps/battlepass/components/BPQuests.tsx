@@ -134,7 +134,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 
 	// TODO: check for existing twitter token
 	// if (item.source === 'twitter' && !session?.user?.twitter) {
-	if (item.source === 'twitter' && item.type === 'connect' && v === 0) {
+	if (item.source === 'twitter' && item.type === 'connect' && !user.twitter && v === 0) {
 		actionString = `${Actions.CONNECT} ${item.source}`
 		action = () => authorizeTwitter(uuid, router.asPath)
 		showAction = true

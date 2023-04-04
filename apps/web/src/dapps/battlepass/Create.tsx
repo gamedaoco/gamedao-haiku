@@ -1,5 +1,5 @@
 import { useCallback, useEffect, Fragment, useState } from 'react'
-import * as Yup from 'yup'
+import { useRouter } from 'next/router'
 
 import { useConfig } from 'src/hooks/useConfig'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
@@ -11,18 +11,11 @@ import { useLinkBotTX } from 'src/hooks/tx/useLinkBotTX'
 import { useActivateBattlepassTX } from 'src/hooks/tx/useActivateBattlepassTX'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
-import { InfoRounded } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
-
-// accordion
-import Accordion from '@mui/material/Accordion'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 // uploads
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
-import { Avatar, Card, Button, Grid, CardContent, CardActions } from '@mui/material'
+import { Avatar, Button, Grid } from '@mui/material'
 import {
 	Box,
 	Checkbox,
@@ -34,7 +27,6 @@ import {
 	Stack,
 	TextField,
 	Typography,
-	Alert,
 	Divider,
 	Radio,
 	RadioGroup,
@@ -48,6 +40,9 @@ import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription }
 import { Image } from 'src/components/Image/image'
 import { LevelEditor } from './components/create/LevelEditor'
 import { QuestEditor } from './components/create/QuestEditor'
+
+import { TabContext, TabPanel } from '@mui/lab'
+import TabBar from './components/create/TabBar'
 
 import {
 	useGetOrganizationsForPrimeSubscription,
@@ -130,6 +125,9 @@ export const Create = () => {
 	const theme = useTheme()
 	const address: string = useCurrentAccountAddress()
 
+	const { query, push } = useRouter()
+	const view = query?.view as string
+
 	const [formState, setFormState] = useState(initialState)
 	const [id, setId] = useState('')
 	const [cid, setCid] = useState('')
@@ -144,7 +142,7 @@ export const Create = () => {
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
 	const linkBotTX = useLinkBotTX(formState.battlepassId, formState.botAccount)
 
-	console.log('cardImg', formState.cardImg)
+	// console.log('cardImg', formState.cardImg)
 
 	const [organizations, setOrganizations] = useState<any>()
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
@@ -278,19 +276,30 @@ export const Create = () => {
 		setShowLinkModal(false)
 	}
 
+	const reset = () => {
+		setFormState(initialState)
+	}
+
 	//
 
 	return (
 		<Fragment>
-			{/* <Alert severity="info" sx={{ mb: 2 }}>
-				Staking not implemented yet. Enter data to get a feeling for staking requirements.
-			</Alert> */}
+			<Stack pb={2} direction="row" alignItems="middle" justifyContent="space-between">
+				<Typography>Flush Cache</Typography>
+				<Button variant={'pink'} onClick={reset}>
+					Flush Cache
+				</Button>
+			</Stack>
+			<hr />
+			<TabBar />
 
-			<Accordion>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+			<TabContext value={view}>
+				<TabPanel value="dashboard">
+					<Typography>Dashboard</Typography>
+				</TabPanel>
+
+				<TabPanel value="general">
 					<Typography>1. Deposit + Create Battlepass</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
 						title="Deposit"
@@ -591,14 +600,9 @@ export const Create = () => {
 							</Stack>
 						</Section>
 					)}
-				</AccordionDetails>
-			</Accordion>
-
-			<Accordion>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+				</TabPanel>
+				<TabPanel value="styling">
 					<Typography>2. Styling</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
 						title="Styling"
@@ -714,14 +718,12 @@ export const Create = () => {
 							/>
 						</Stack>
 					</Section>
-				</AccordionDetails>
-			</Accordion>
+				</TabPanel>
+				<TabPanel value="levels">
+					{/* <Accordion disabled={formState.battlepassId ? false : true}> */}
 
-			<Accordion disabled={formState.battlepassId ? false : true}>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
 					<Typography>3. Levels</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
+
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
 						// title="Levels"
@@ -729,30 +731,21 @@ export const Create = () => {
 					>
 						<LevelEditor id={formState.battlepassId} />
 					</Section>
-				</AccordionDetails>
-			</Accordion>
-
-			<Accordion disabled={formState.battlepassId ? false : true}>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+				</TabPanel>
+				<TabPanel value="quests">
+					{/* disabled === formState.battlepassId ? false : true */}
 					<Typography>4. Quests</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
 					<Section direction={{ xs: 'column', md: 'column' }} description={`Configure Quests`}>
 						<QuestEditor formState={formState} setFormState={setFormState} />
 					</Section>
-				</AccordionDetails>
-			</Accordion>
-
-			<Accordion disabled>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="section1" id="panel1a-header">
+				</TabPanel>
+				<TabPanel value="rewards">
 					<Typography>5. Rewards</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
 					<Section direction={{ xs: 'column', md: 'column' }} description={`Create rewards`}>
 						{/* <RewardsEditor id={id} /> */}
 					</Section>
-				</AccordionDetails>
-			</Accordion>
+				</TabPanel>
+			</TabContext>
 
 			{false && (
 				<ContentPanel>
