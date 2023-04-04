@@ -133,15 +133,11 @@ export function Selector({ onClick }: IComponentProps) {
 				sx={{ width: !isMd ? '100%' : 'auto' }}
 			>
 				<Stack>
-					<Typography variant="subtitle2" color="white" sx={{ whiteSpace: 'nowrap' }}>
+					<Typography variant="subtitle2" color="white" sx={{ whiteSpace: 'nowrap', userSelect: 'none' }}>
 						{displayName}
 						<VerifiedBadge />
 					</Typography>
-					<Typography
-						sx={{ color: theme.palette.grey[500], mb: 0 }}
-						variant="caption"
-						onClick={handleCopyAddress}
-					>
+					<Typography sx={{ color: theme.palette.grey[500], mb: 0 }} variant="caption">
 						<Box
 							onClick={handleClickLine}
 							sx={{
