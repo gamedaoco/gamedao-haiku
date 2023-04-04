@@ -85,10 +85,14 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const router = useRouter()
+
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
 	const isLg = useMediaQuery(theme.breakpoints.up('lg'), {
+		defaultMatches: true,
+	})
+	const isXl = useMediaQuery(theme.breakpoints.up('xl'), {
 		defaultMatches: true,
 	})
 
@@ -207,13 +211,13 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 					<Link href="#">
 						<Button onClick={() => openFeedback()}>
 							<RiChat1Line />
-							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
+							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
 					</Link>
 					<Link href="https://discord.gg/gamedao">
 						<Button>
 							<RxDiscordLogo />
-							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}
+							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}
 						</Button>
 					</Link>
 					{connected &&
@@ -227,7 +231,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 								>
 									<Button>
 										{item.icon && item.icon}
-										{isLg && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
+										{isXl && <Typography sx={{ pl: 2, mr: 2 }}>{t(item.name)}</Typography>}
 									</Button>
 								</Link>
 							)

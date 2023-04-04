@@ -45,8 +45,8 @@ export function Selector({ onClick }: IComponentProps) {
 		const userName =
 			identity?.display_name || // on chain display name
 			user?.name /*session?.user?.name*/ || // user name derived from discord
-			getNameFromAccountState(accountState) // wallet account name
-
+			getNameFromAccountState(accountState) || // wallet account name
+			'anonymous'
 		setDisplayName(userName)
 
 		// TODO: sort out uuid flow, so we don't need to do this goofy selection
@@ -133,15 +133,11 @@ export function Selector({ onClick }: IComponentProps) {
 				sx={{ width: !isMd ? '100%' : 'auto' }}
 			>
 				<Stack>
-					<Typography variant="subtitle2" color="white" sx={{ whiteSpace: 'nowrap' }}>
+					<Typography variant="subtitle2" color="white" sx={{ whiteSpace: 'nowrap', userSelect: 'none' }}>
 						{displayName}
 						<VerifiedBadge />
 					</Typography>
-					<Typography
-						sx={{ color: theme.palette.grey[500], mb: 0 }}
-						variant="caption"
-						onClick={handleCopyAddress}
-					>
+					<Typography sx={{ color: theme.palette.grey[500], mb: 0 }} variant="caption">
 						<Box
 							onClick={handleClickLine}
 							sx={{

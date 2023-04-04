@@ -28,7 +28,6 @@ export function Header() {
 	const accountState = useCurrentAccountState()
 	const { user } = useAppContext()
 
-
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)
 	}, [push])
