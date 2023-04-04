@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
+import { useAppContext } from 'src/providers/app/modules/context'
 
 import { AccountTabs } from 'src/constants/account'
 
@@ -25,6 +26,8 @@ export function Header() {
 	const address = useCurrentAccountAddress()
 	const { identity } = useIdentityByAddress(address)
 	const accountState = useCurrentAccountState()
+	const { user } = useAppContext()
+
 
 	const handleButtonClick = useCallback(() => {
 		push(`/account/${AccountTabs.IDENTITY}`)
@@ -59,7 +62,7 @@ export function Header() {
 							sx: 24,
 						},
 					}}
-					src={avatarImageURL(address)}
+					src={avatarImageURL(user?.uuid || user?.address || address)}
 				/>
 				<div>
 					<Typography variant="h6">
