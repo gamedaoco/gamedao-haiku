@@ -241,9 +241,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 						</BaseDialog>
 					)}
 
-					<MenuItem>
-						<AccountSelector />
-					</MenuItem>
+					<AccountSelector />
 
 					<Box sx={{ display: { xs: 'block', md: 'none' } }} marginLeft={4}>
 						<Button
