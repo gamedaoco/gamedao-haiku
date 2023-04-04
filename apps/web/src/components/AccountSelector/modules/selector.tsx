@@ -45,7 +45,8 @@ export function Selector({ onClick }: IComponentProps) {
 		const userName =
 			identity?.display_name || // on chain display name
 			user?.name /*session?.user?.name*/ || // user name derived from discord
-			getNameFromAccountState(accountState) // wallet account name
+			getNameFromAccountState(accountState) || // wallet account name
+			'anonymous'
 
 		setDisplayName(userName)
 
