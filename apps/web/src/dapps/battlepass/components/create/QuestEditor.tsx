@@ -161,6 +161,7 @@ const initialQuestState = {
 	daily: false,
 	max: 0,
 	maxDaily: 0,
+	//
 	total_points: 0,
 	total_quantity: 0,
 	param: null,
