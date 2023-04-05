@@ -220,6 +220,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}
 						</Button>
 					</Link>
+
 					{connected &&
 						w3Enabled &&
 						rightNav.map((item) => {

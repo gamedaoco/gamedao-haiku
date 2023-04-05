@@ -12,13 +12,16 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { getUuid } from 'src/lib/auth/getUuid'
 import { setUserToken } from 'src/lib/auth/storeUserToken'
 
+const options = { databaseName: process.env.MONGO_DATABASE }
+console.log('db', process.env.MONGO_DATABASE)
+
 import { Logger } from 'src/lib/logger'
 const log = Logger('auth')
 
 const scope = ['identify'].join(' ')
 
 export const authOptions: NextAuthOptions = {
-	adapter: MongoDBAdapter(clientPromise),
+	adapter: MongoDBAdapter(clientPromise, options),
 
 	providers: [
 		// TwitterProvider({
