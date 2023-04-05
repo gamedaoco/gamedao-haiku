@@ -35,9 +35,9 @@ export function useBalanceByAddress(address: string): Balance[] {
 					.map((balance) => {
 						const tokenDecimals = systemProperties.tokenDecimals?.[balance.balanceId] ?? 18
 						return {
-							frozen: formatBalanceString(balance.frozen, tokenDecimals),
-							free: formatBalanceString(balance.free, tokenDecimals),
-							reserved: formatBalanceString(balance.reserved, tokenDecimals),
+							frozen: formatBalanceString(balance.frozen, tokenDecimals) ?? 0,
+							free: formatBalanceString(balance.free, tokenDecimals) ?? 0,
+							reserved: formatBalanceString(balance.reserved, tokenDecimals) ?? 0,
 							balanceId: +balance.balanceId,
 							tokenSymbol: systemProperties.tokenSymbol?.[balance.balanceId] ?? '',
 							tokenDecimals: tokenDecimals,
