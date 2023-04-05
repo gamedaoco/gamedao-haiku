@@ -4,27 +4,27 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "app/*",
-    "pkg/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
-    "dev": "wsrun -p @gamedao-haiku/app -c dev",
+    "dev": "wsrun -p @gamedao/app -c dev",
     "build": "wsrun -e -c -s -x -m build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "release": "yarn build && yarn changeset publish",
-    "format": "prettier --parser babel-ts --write --check pkg/**/*.{ts,tsx}",
-    "format:verify": "prettier --parser babel-ts --check pkg/**/*.{ts,tsx}",
-    "format:staged": "pretty-quick --staged --pattern 'pkg/**/*.{ts,tsx}'",
+    "format": "prettier --parser babel-ts --write --check '{apps,packages}/**/*.{ts,tsx}'",
+    "format:verify": "prettier --parser babel-ts --check '{apps,packages}/**/*.{ts,tsx}'",
+    "format:staged": "pretty-quick --staged --pattern '{apps,packages}/**/*.{ts,tsx}'",
     "lint": "yarn lint:app",
-    "lint:app": "yarn eslint 'pkg/app/src'",
-    "build:graphql": "yarn workspace @gamedao-haiku/app generate",
-    "build:frontend": "yarn workspace @gamedao-haiku/app build",
+    "lint:app": "yarn eslint 'apps/**/src'",
+    "build:graphql": "yarn workspace @gamedao/app generate",
+    "build:frontend": "yarn workspace @gamedao/app build",
     "prod:frontend": "yarn npm-run-all -s build:graphql build:frontend",
     "commit": "git-cz",
-    "analyze": "ANALYZE=true wsrun -p @gamedao-haiku/app -c build",
-    "sb": "wsrun -p @gamedao-haiku/app -c storybook",
-    "reset": "rm -rf node_modules && rm -rf **/node_modules"
+    "analyze": "ANALYZE=true wsrun -p @gamedao/app -c build",
+    "sb": "wsrun -p @gamedao/app -c storybook",
+    "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules"
   },
   "publishConfig": {
     "access": "public"
