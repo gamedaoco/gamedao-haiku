@@ -13,7 +13,6 @@ import { WalletCard } from 'src/components/WalletDialog/modules/walletCard'
 import Device from 'src/components/Device'
 
 import { getTwitterAuthorizationURL } from 'src/lib/getTwitterAuthorizationURL'
-console.log(process.env.NEXT_PUBLIC_ENVIRONMENT)
 
 export const Web2Connect = () => {
 	const { data: session } = useSession()

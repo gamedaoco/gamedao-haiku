@@ -70,29 +70,29 @@ export function MyApp({
 	emotionCache = clientSideEmotionCache,
 	pageProps: { session, ...pageProps },
 }: MyAppProps) {
-	// const router = useRouter()
+	const router = useRouter()
 
-	// useEffect(() => {
-	// 	if (ENVIRONMENT === 'DEVELOPMENT') return
-	// 	log.info(`❤️  Welcome to GameDAO`)
-	// 	log.info(`💬  Join our discord: https://discord.gg/gamedao`)
-	// 	log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
-	// }, [ENVIRONMENT])
+	useEffect(() => {
+		if (ENVIRONMENT === 'DEVELOPMENT') return
+		log.info(`❤️  Welcome to GameDAO`)
+		log.info(`💬  Join our discord: https://discord.gg/gamedao`)
+		log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
+	}, [ENVIRONMENT])
 
-	// useEffect(() => {
-	// 	if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
-	// 	Fathom.load('XLUUAYWU', {
-	// 		url: 'https://brilliant-truthful.gamedao.co/script.js',
-	// 		includedDomains: ['gamedao.co'],
-	// 	})
-	// 	function onRouteChangeComplete() {
-	// 		Fathom.trackPageview()
-	// 	}
-	// 	router.events.on('routeChangeComplete', onRouteChangeComplete)
-	// 	return () => {
-	// 		router.events.off('routeChangeComplete', onRouteChangeComplete)
-	// 	}
-	// }, [router.events])
+	useEffect(() => {
+		if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
+		Fathom.load('XLUUAYWU', {
+			url: 'https://brilliant-truthful.gamedao.co/script.js',
+			includedDomains: ['gamedao.co'],
+		})
+		function onRouteChangeComplete() {
+			Fathom.trackPageview()
+		}
+		router.events.on('routeChangeComplete', onRouteChangeComplete)
+		return () => {
+			router.events.off('routeChangeComplete', onRouteChangeComplete)
+		}
+	}, [router.events])
 
 	return (
 		<SessionProvider session={session} refetchInterval={5 * 60}>
