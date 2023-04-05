@@ -236,6 +236,7 @@ export type BattlepassBotMutation = {
 	readonly joinPremium?: Maybe<BattlepassMember>
 	readonly levels?: Maybe<ReadonlyArray<Maybe<BattlepassLevel>>>
 	readonly processPayment?: Maybe<Payment>
+	readonly provideUserToken?: Maybe<BattlepassIdentity>
 	readonly quest?: Maybe<BattlepassQuest>
 	readonly reward?: Maybe<BattlepassReward>
 	readonly setFreePasses?: Maybe<BattlepassType>
@@ -278,6 +279,12 @@ export type BattlepassBotMutationProcessPaymentArgs = {
 	identityUuid: Scalars['String']
 	paymentToken: Scalars['String']
 	securityToken: Scalars['String']
+}
+
+export type BattlepassBotMutationProvideUserTokenArgs = {
+	identityUuid: Scalars['String']
+	source: Source
+	token: Scalars['String']
 }
 
 export type BattlepassBotMutationQuestArgs = {

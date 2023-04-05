@@ -1,11 +1,11 @@
 import React from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
-import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { Layout } from 'src/layouts/v2'
+// import { useSession, signIn, signOut } from 'next-auth/react'
+// import { Box, Button, Container, Grid, Typography } from '@mui/material'
+import { Layout } from 'layouts/v2'
 import { Landingpage } from 'src/dapps/landingpage'
 
 export function Page() {
-	const { data: session } = useSession()
+	// const { data: session } = useSession()
 
 	// console.log('session',session||null)
 

@@ -7,7 +7,6 @@ import * as Fathom from 'fathom-client'
 import { Logger } from 'src/lib/logger'
 
 import { SessionProvider } from 'next-auth/react'
-
 import { Providers } from 'src/providers'
 import { useConfig } from 'src/hooks/useConfig'
 
@@ -24,8 +23,8 @@ const clientSideEmotionCache = createEmotionCache()
 interface MyAppProps extends AppProps {
 	Component: any
 	emotionCache: EmotionCache
-	pageProps: object
-	session: any
+	// pageProps: object
+	// session?: any
 }
 
 const log = Logger()
@@ -66,33 +65,37 @@ function HeadAndMetaTags() {
 	)
 }
 
-export function MyApp({ Component, emotionCache = clientSideEmotionCache, session, pageProps }: MyAppProps) {
-	const router = useRouter()
+export function MyApp({
+	Component,
+	emotionCache = clientSideEmotionCache,
+	pageProps: { session, ...pageProps },
+}: MyAppProps) {
+	// const router = useRouter()
 
-	useEffect(() => {
-		// if (ENVIRONMENT === 'DEVELOPMENT') return
-		// log.info(`❤️  Welcome to GameDAO`)
-		// log.info(`💬  Join our discord: https://discord.gg/gamedao`)
-		log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
-	}, [ENVIRONMENT])
+	// useEffect(() => {
+	// 	if (ENVIRONMENT === 'DEVELOPMENT') return
+	// 	log.info(`❤️  Welcome to GameDAO`)
+	// 	log.info(`💬  Join our discord: https://discord.gg/gamedao`)
+	// 	log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
+	// }, [ENVIRONMENT])
 
-	useEffect(() => {
-		if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
-		Fathom.load('XLUUAYWU', {
-			url: 'https://brilliant-truthful.gamedao.co/script.js',
-			includedDomains: ['gamedao.co'],
-		})
-		function onRouteChangeComplete() {
-			Fathom.trackPageview()
-		}
-		router.events.on('routeChangeComplete', onRouteChangeComplete)
-		return () => {
-			router.events.off('routeChangeComplete', onRouteChangeComplete)
-		}
-	}, [router.events])
+	// useEffect(() => {
+	// 	if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
+	// 	Fathom.load('XLUUAYWU', {
+	// 		url: 'https://brilliant-truthful.gamedao.co/script.js',
+	// 		includedDomains: ['gamedao.co'],
+	// 	})
+	// 	function onRouteChangeComplete() {
+	// 		Fathom.trackPageview()
+	// 	}
+	// 	router.events.on('routeChangeComplete', onRouteChangeComplete)
+	// 	return () => {
+	// 		router.events.off('routeChangeComplete', onRouteChangeComplete)
+	// 	}
+	// }, [router.events])
 
 	return (
-		<SessionProvider session={session}>
+		<SessionProvider session={session} refetchInterval={5 * 60}>
 			<CacheProvider value={emotionCache}>
 				<Providers>
 					<HeadAndMetaTags />
@@ -102,9 +105,5 @@ export function MyApp({ Component, emotionCache = clientSideEmotionCache, sessio
 		</SessionProvider>
 	)
 }
-
-// export function reportWebVitals(metric: NextWebVitalsMetric) {
-// 	log.trace(metric)
-// }
 
 export default MyApp

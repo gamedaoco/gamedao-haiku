@@ -47,7 +47,6 @@ export function Selector({ onClick }: IComponentProps) {
 			user?.name /*session?.user?.name*/ || // user name derived from discord
 			getNameFromAccountState(accountState) || // wallet account name
 			'anonymous'
-
 		setDisplayName(userName)
 
 		// TODO: sort out uuid flow, so we don't need to do this goofy selection
