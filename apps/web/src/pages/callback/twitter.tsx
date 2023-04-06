@@ -17,8 +17,8 @@ export function Page() {
 	const callerURL = state[0]
 	const callbackURL = state[1]
 
-	console.log(query.state, state)
-	console.log(query.code)
+	console.log(query?.state, state)
+	console.log(query?.code)
 
 	useEffect(() => {
 		if (!user.uuid || !query.code) return
