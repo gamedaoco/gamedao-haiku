@@ -20,12 +20,12 @@ import { ENVIRONMENT } from 'src/constants/index'
 
 const clientSideEmotionCache = createEmotionCache()
 
-interface MyAppProps extends AppProps {
-	Component: any
-	emotionCache: EmotionCache
-	// pageProps: object
-	// session?: any
-}
+// interface MyAppProps extends AppProps {
+// 	Component: any
+// 	emotionCache: EmotionCache
+// 	// pageProps: object
+// 	// session?: any
+// }
 
 const log = Logger()
 
@@ -69,9 +69,8 @@ export function MyApp({
 	Component,
 	emotionCache = clientSideEmotionCache,
 	pageProps: { session, ...pageProps },
-}: MyAppProps) {
+}: AppProps) {
 	const router = useRouter()
-
 	useEffect(() => {
 		if (ENVIRONMENT === 'DEVELOPMENT') return
 		log.info(`❤️  Welcome to GameDAO`)
@@ -99,7 +98,7 @@ export function MyApp({
 			<CacheProvider value={emotionCache}>
 				<Providers>
 					<HeadAndMetaTags />
-					<Component {...pageProps} />
+					<Component {...pageProps} session={session} />
 				</Providers>
 			</CacheProvider>
 		</SessionProvider>
