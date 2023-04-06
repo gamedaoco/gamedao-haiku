@@ -25,7 +25,7 @@ export const decode = (str: string): string => Buffer.from(str, 'base64').toStri
 
 export async function getTwitterAuthorizationURL(uuid = '', callerURL = 'noredirect') {
 	const challenge = await sha256(uuid)
-	const state = encode(callerURL + '::::' + callback)
+	const state = encodeURI(encode(callerURL + '::::' + callback))
 
 	const url = encodeURI(
 		[
@@ -42,5 +42,8 @@ export async function getTwitterAuthorizationURL(uuid = '', callerURL = 'noredir
 			challenge,
 		].join(''),
 	)
+
+	console.log('url', url)
+
 	return url
 }
