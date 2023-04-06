@@ -24,6 +24,7 @@ declare module 'next-auth' {
 		notifications?: boolean
 	}
 	interface Session extends DefaultSession {
+		address?: string
 		user?: User
 	}
 
