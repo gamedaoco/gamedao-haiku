@@ -81,11 +81,11 @@ export const authOptions: NextAuthOptions = {
 
 			if (account?.provider === 'discord') {
 				// log.info('AUTH', '-->', 'discord', profile.id)
-				token.discord = profile.id
-				token.username = profile.username
-				token.avatar = profile.avatar
-				token.email = profile.email
-				token.uuid = await getUuid({ provider: 'discord', id: profile.id })
+				token.discord = profile?.id
+				token.username = profile?.username
+				token.avatar = profile?.avatar
+				token.email = profile?.email
+				token.uuid = await getUuid({ provider: 'discord', id: profile?.id })
 				// token.address = identity.address
 				// token.twitter = twitter
 			}
@@ -110,14 +110,15 @@ export const authOptions: NextAuthOptions = {
 			session.address = token?.sub
 
 			session.user = {
-				uuid: token?.uuid,
-				name: token?.username,
-				avatar: token?.avatar,
-				email: token?.email,
-				address: token?.address,
-				discord: token?.discord,
-				twitter: token?.twitter,
-				twitter_username: token?.twitter_username,
+				id: token?.id as string,
+				uuid: token.uuid as string,
+				name: token?.username as string,
+				avatar: token.avatar as string,
+				email: token.email as string,
+				address: token.address,
+				discord: token.discord as string,
+				twitter: token.twitter,
+				twitter_username: token.twitter_username,
 			}
 
 			log.info('AUTH', '-->', 'session', token, session)

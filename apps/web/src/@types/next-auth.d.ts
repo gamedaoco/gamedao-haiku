@@ -1,4 +1,4 @@
-import NextAuth, { DefaultSession } from 'next-auth'
+import NextAuth, { DefaultSession, DefaultUser } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 
 declare module 'next-auth/jwt' {
@@ -16,16 +16,18 @@ declare module 'next-auth/jwt' {
 declare module 'next-auth' {
 	interface User {
 		uuid?: string
-		discord?: string
-		address?: string
-		twitter?: string
-		username?: string
+		name?: string
 		avatar?: string
-		notifications?: boolean
+		email?: string
+		address?: string
+		discord?: string
+		twitter?: string
+		twitter_username?: string
 	}
+
 	interface Session extends DefaultSession {
 		address?: string
-		user?: User
+		user?: User & DefaultSession['user']
 	}
 
 	interface Profile {

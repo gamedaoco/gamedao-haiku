@@ -23,7 +23,7 @@ export const Web2Connect = () => {
 	if (session && !selectedAccount)
 		return (
 			<Stack>
-				<Typography>Signed in as {session.user.email}</Typography>
+				<Typography>{`Signed in as ${session.user.email}`}</Typography>
 				<Button variant="outlined" size="small" onClick={() => signOut()}>
 					Sign out
 				</Button>
