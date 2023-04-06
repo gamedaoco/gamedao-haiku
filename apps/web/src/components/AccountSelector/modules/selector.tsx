@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useAppContext } from 'src/providers/app/modules/context'
 
 import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
+import { formatBalanceString } from 'src/utils/balance'
 
 import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
@@ -91,27 +92,29 @@ export function Selector({ onClick }: IComponentProps) {
 	// },[balances])
 
 	const [line, setLine] = useState(0)
-	const handleClickLine = () => setLine(line < 3 ? line + 1 : 0)
+	const handleClickLine = () => setLine(line < 4 ? line + 1 : 0)
 	const InfoLine = () => {
 		if (!balances || !address) return null
 
 		switch (line) {
 			case 0:
 				// fiat balance
-				const balance =
-					Math.round(
-						(balances[0]?.free || 0) * fx.zero +
-							(balances[1]?.free || 0) * fx.play +
-							(balances[2]?.free || 0) * fx.game * 100,
-					) / 100
+				const balance = Math.round(
+					(balances[0]?.free || 0) * fx.zero +
+						(balances[1]?.free || 0) * fx.play +
+						(balances[2]?.free || 0) * fx.game,
+				).toFixed(2)
 				return `${balance} EUR`
 				break
 			case 1: // network balances
-				return `${Math.round(balances[0]?.free || 0 * 100) / 100} ${balances[0]?.tokenSymbol || 'ZERO'} · ${
+				return `${(balances[0]?.free || 0).toFixed(2)} ${balances[0]?.tokenSymbol || 'ZERO'} · ${(
 					balances[2]?.free || 0
-				} ${balances[2]?.tokenSymbol || 'GAME'}`
+				).toFixed(2)} ${balances[2]?.tokenSymbol || 'GAME'}`
 				break
-			case 2: // wallet address
+			case 2: // stable balances
+				return `${(balances[1]?.free || 0).toFixed(2)} ${balances[1]?.tokenSymbol || 'PLAY'}`
+				break
+			case 3: // wallet address
 				return (
 					<>
 						{sense.xp}
@@ -128,7 +131,7 @@ export function Selector({ onClick }: IComponentProps) {
 					</>
 				)
 				break
-			case 3: // XP REP TRUST
+			case 4: // XP REP TRUST
 				return addressShort
 				break
 		}
@@ -175,7 +178,7 @@ export function Selector({ onClick }: IComponentProps) {
 						<Box
 							onClick={handleClickLine}
 							sx={{
-								minWidth: '160px',
+								minWidth: '176px',
 								userSelect: 'none',
 								transition: '250ms ease-in-out',
 								color: '#ffffff66',

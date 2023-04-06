@@ -9,16 +9,11 @@ import { Paper, Box, Grid, Typography } from '@mui/material'
 import { setUserToken } from 'src/lib/auth/storeUserToken'
 import { decode } from 'src/lib/getTwitterAuthorizationURL'
 
-// example
-// http://localhost:3000/callback/twitter?
-// state=11d62afdf08d1f386880c6525f4ea625ad3d4ec201527e4b9a1247d434838b65 <-- hashed uuid
-// &code=SXRudGlaVUxCT0pIRWlnU1otZHFnYk8yWExwcmR2emhrUXNDcjhIa1VIUzJCOjE2NzkwNTc5MDE3NTA6MToxOmFjOjE <-- token
-
 export function Page() {
 	const { query, push } = useRouter()
 	const { user, setTwitterAuthorized } = useAppContext()
 
-	const state = decode(query?.state as string).split('::::')
+	const state = decode(decodeURI(query?.state as string)).split('::::')
 	const callerURL = state[0]
 	const callbackURL = state[1]
 
