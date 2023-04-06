@@ -6,16 +6,15 @@ import { Flyout } from 'src/components/AccountSelector/modules/flyout'
 import { Selector } from 'src/components/AccountSelector/modules/selector'
 
 export function AccountSelector() {
-	const { selectedAccount, connectWallet } = useExtensionContext()
-	const { data: session } = useSession()
-
 	const theme = useTheme()
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
 
-	const anchorRef = useRef(null)
+	const { data: session } = useSession()
+	const { selectedAccount, connectWallet } = useExtensionContext()
 
+	const anchorRef = useRef(null)
 	const [flyoutOpenState, setFlyoutOpenState] = useState<boolean>(false)
 	const handleToggleFlyout = useCallback(() => {
 		setFlyoutOpenState(!flyoutOpenState)
