@@ -12,13 +12,9 @@ import { decode } from 'src/lib/getTwitterAuthorizationURL'
 export function Page() {
 	const { query, push } = useRouter()
 	const { user, setTwitterAuthorized } = useAppContext()
-
 	const state = decode(decodeURI(query?.state as string)).split('::::')
 	const callerURL = state[0]
 	const callbackURL = state[1]
-
-	console.log(query?.state, state)
-	console.log(query?.code)
 
 	useEffect(() => {
 		if (!user.uuid || !query.code) return

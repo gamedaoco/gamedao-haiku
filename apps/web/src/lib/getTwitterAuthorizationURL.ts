@@ -36,7 +36,7 @@ export async function getTwitterAuthorizationURL(uuid = '', callerURL = 'noredir
 			callback,
 			'&scope=tweet.read users.read like.read follows.read offline.access',
 			'&state=',
-			challenge,
+			state,
 			'&response_type=code&code_challenge_method=plain',
 			'&code_challenge=',
 			challenge,
