@@ -101,7 +101,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 					/>
 				</Fragment>
 				<Fragment key={'twitter'}>
-					<Box sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}>
+					{/* <Box sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}>
 						<WalletCard
 							imageSrc={'https://avatars.githubusercontent.com/u/50278?s=200&v=4'}
 							name={'Twitter'}
@@ -110,7 +110,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 							callback={() => openTwitterAuthorization()}
 							buttonText={'Authorize'}
 						/>
-					</Box>
+					</Box> */}
 				</Fragment>
 			</Grid>
 			<Typography
