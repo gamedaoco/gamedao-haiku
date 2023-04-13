@@ -1,4 +1,5 @@
 # GameDAO
+
 (!(Commitizen friendly]<https://img.shields.io/badge/commitizen-friendly-brightgreen.svg]]<http://commitizen.github.io/cz-cli/]
 
 GameDAO is a community owned and governed DAO providing community centric protocols:
@@ -11,7 +12,7 @@ GameDAO is a community owned and governed DAO providing community centric protoc
 
 These enable crowdfunding and governance protocols and aim at videogame creators and players, creators and eSports communities.
 
-GameDAO as a dApp is running on [ZERO.IO]<https://zero.io], a substrate based multichain network for the Metaverse featuring unique, decentralised protocols for the videogames industry.
+GameDAO as a dApp is running on [ZERO.IO]<https://zero.io], a substrate based multichain network featuring decentralised protocols for the videogames industry.
 
 ## 1. development
 
