@@ -64,7 +64,10 @@ export function useIdentitySetTransaction(identity): TransactionData {
 				validation.validateSync(mappedData)
 				const tx = selectedApiProvider.apiProvider.tx.identity.setIdentity(
 					selectedApiProvider?.apiProvider.createType('IdentityInfo', {
-						additional: [],
+						additional: [
+							[{ raw: 'web3name' }, mappedData.web3name ? { raw: mappedData.web3name } : { none: null }],
+							[{ raw: 'discord' }, mappedData.discord ? { raw: mappedData.discord } : { none: null }],
+						],
 						display: mappedData.display ? { raw: mappedData.display } : { none: null },
 						legal: mappedData.legal ? { raw: mappedData.legal } : { none: null },
 						web: mappedData.web ? { raw: mappedData.web } : { none: null },
@@ -72,8 +75,6 @@ export function useIdentitySetTransaction(identity): TransactionData {
 						email: mappedData.email ? { raw: mappedData.email } : { none: null },
 						image: { none: null },
 						twitter: mappedData.twitter ? { raw: mappedData.twitter } : { none: null },
-						web3name: mappedData.web3name ? { raw: mappedData.web3name } : { none: null },
-						discord: mappedData.discord ? { raw: mappedData.discord } : { none: null },
 					}),
 				)
 
