@@ -176,7 +176,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	}
 
 	if (item.source === 'gamedao' && item.type === 'connect' && v === 0 && user.uuid) {
-		console.log('link wallet', item, address, user.address)
+		// console.log('link wallet', item, address, user.address)
 		actionString = `${Actions.LINK}`
 		action = () => {
 			// console.log('link address', '->', address, user.uuid)

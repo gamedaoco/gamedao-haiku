@@ -12,7 +12,7 @@ import {
 } from 'src/queries'
 
 import CircularProgress from '@mui/material/CircularProgress'
-import { Button, Typography } from '@mui/material'
+import { Button, Typography, Stack } from '@mui/material'
 import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
 import { Checkout } from 'src/components/commerce'
 
@@ -223,24 +223,26 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	if (!user.address && txState === 'free')
 		return (
 			<Fragment>
-				<Typography
-					variant="header1"
-					sx={{
-						background: '-webkit-linear-gradient(45deg, #ff00cc 30%, #ff99ff 90%)',
-						WebkitBackgroundClip: 'text',
-						WebkitTextFillColor: 'transparent',
-						fontWeight: 800,
-						transitionDuration: '1s',
-						WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,0,255,0.2) )',
-						filter: 'drop-shadow( 0 2px 10px rgba(255,0,255,0.2) )',
-						'&:hover': {
-							WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,0,255,1) )',
-							filter: 'drop-shadow( 0 2px 10px rgba(255,0,255,1) )',
-						},
-					}}
-				>
-					MEMBER
-				</Typography>
+				<Stack>
+					<Typography
+						variant="header1"
+						sx={{
+							background: '-webkit-linear-gradient(45deg, #ff00cc 30%, #ff99ff 90%)',
+							WebkitBackgroundClip: 'text',
+							WebkitTextFillColor: 'transparent',
+							fontWeight: 800,
+							transitionDuration: '1s',
+							WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,0,255,0.2) )',
+							filter: 'drop-shadow( 0 2px 10px rgba(255,0,255,0.2) )',
+							'&:hover': {
+								WebkitFilter: 'drop-shadow( 0 2px 10px rgba(255,0,255,1) )',
+								filter: 'drop-shadow( 0 2px 10px rgba(255,0,255,1) )',
+							},
+						}}
+					>
+						MEMBER: CONNECT WALLET
+					</Typography>
+				</Stack>
 			</Fragment>
 		)
 
