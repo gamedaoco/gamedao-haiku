@@ -47,9 +47,6 @@
       "layouts/*": [
         "src/layouts/*"
       ],
-      "lib/*": [
-        "src/lib/*"
-      ],
       "providers/*": [
         "src/providers/*"
       ],

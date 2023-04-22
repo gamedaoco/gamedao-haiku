@@ -6,7 +6,7 @@ import { getConnectedEndpoint } from 'src/constants/endpoints'
 
 import { useConnectIdentityMutation } from 'src/queries'
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 const log = Logger('lib/uuid')
 
 const battlepass_url = getConnectedEndpoint().url

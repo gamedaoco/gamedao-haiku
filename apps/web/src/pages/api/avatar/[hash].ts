@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { createAvatar } from '@dicebear/core'
 import { bigSmile } from '@dicebear/collection'
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 const log = Logger('avatar')
 
 const Avatar = async (req: NextApiRequest, res: NextApiResponse) => {

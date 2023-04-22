@@ -4,7 +4,7 @@ import { useLogger } from 'src/hooks/useLogger'
 import { useNetworkContext } from 'src/providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
-import { fromUnit } from 'src/utils/token'
+import { fromUnit } from 'utils/token'
 import * as Yup from 'yup'
 
 const validation = Yup.object().shape({

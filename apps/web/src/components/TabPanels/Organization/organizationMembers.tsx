@@ -3,8 +3,8 @@ import md5 from 'md5'
 
 import { useTranslation } from 'react-i18next'
 import { Organization } from 'src/queries'
-import { shortAccountAddress } from 'src/utils/accountUtils'
-import { avatarImageURL } from 'src/utils/avatars'
+import { shortAccountAddress } from 'utils/accountUtils'
+import { avatarImageURL } from 'utils/avatars'
 
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useApproveMemberTx } from 'src/hooks/tx/useApproveMemberTx'

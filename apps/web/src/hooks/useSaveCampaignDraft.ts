@@ -7,8 +7,8 @@ import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { TMPCampaign } from 'src/@types/campaign'
 import { Campaign, useOrganizationByIdSubscription } from 'src/queries'
-import { createInfoNotification } from 'src/utils/notificationUtils'
-import { fromUnit } from 'src/utils/token'
+import { createInfoNotification } from 'utils/notificationUtils'
+import { fromUnit } from 'utils/token'
 
 export interface CampaignDraft {
 	drafts: any

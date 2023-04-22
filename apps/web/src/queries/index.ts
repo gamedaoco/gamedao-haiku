@@ -10934,6 +10934,28 @@ export type GetLeaderboardQuery = {
 	} | null
 }
 
+export type GetLeaderboardAchievementsQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+	uuid?: InputMaybe<Scalars['String']>
+}>
+
+export type GetLeaderboardAchievementsQuery = {
+	readonly __typename?: 'query_root'
+	readonly BattlepassBot?: {
+		readonly __typename?: 'BattlepassBotQuery'
+		readonly BattlepassRewardClaims?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassRewardClaim'
+			readonly reward: {
+				readonly __typename?: 'BattlepassReward'
+				readonly cid?: string | null
+				readonly description?: string | null
+				readonly name?: string | null
+				readonly chainId?: string | null
+			}
+		} | null> | null
+	} | null
+}
+
 export type ScoreSubscriptionVariables = Exact<{
 	id?: InputMaybe<Scalars['bpchar']>
 	uuid?: InputMaybe<Scalars['uuid']>
@@ -12849,6 +12871,65 @@ export function useGetLeaderboardLazyQuery(
 export type GetLeaderboardQueryHookResult = ReturnType<typeof useGetLeaderboardQuery>
 export type GetLeaderboardLazyQueryHookResult = ReturnType<typeof useGetLeaderboardLazyQuery>
 export type GetLeaderboardQueryResult = Apollo.QueryResult<GetLeaderboardQuery, GetLeaderboardQueryVariables>
+export const GetLeaderboardAchievementsDocument = gql`
+	query GetLeaderboardAchievements($id: String, $uuid: String) {
+		BattlepassBot {
+			BattlepassRewardClaims(where: { identityUuid: $uuid, battlepassChainId: $id }) {
+				reward {
+					cid
+					description
+					name
+					chainId
+				}
+			}
+		}
+	}
+`
+
+/**
+ * __useGetLeaderboardAchievementsQuery__
+ *
+ * To run a query within a React component, call `useGetLeaderboardAchievementsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLeaderboardAchievementsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLeaderboardAchievementsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useGetLeaderboardAchievementsQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetLeaderboardAchievementsQuery, GetLeaderboardAchievementsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetLeaderboardAchievementsQuery, GetLeaderboardAchievementsQueryVariables>(
+		GetLeaderboardAchievementsDocument,
+		options,
+	)
+}
+export function useGetLeaderboardAchievementsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<
+		GetLeaderboardAchievementsQuery,
+		GetLeaderboardAchievementsQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetLeaderboardAchievementsQuery, GetLeaderboardAchievementsQueryVariables>(
+		GetLeaderboardAchievementsDocument,
+		options,
+	)
+}
+export type GetLeaderboardAchievementsQueryHookResult = ReturnType<typeof useGetLeaderboardAchievementsQuery>
+export type GetLeaderboardAchievementsLazyQueryHookResult = ReturnType<typeof useGetLeaderboardAchievementsLazyQuery>
+export type GetLeaderboardAchievementsQueryResult = Apollo.QueryResult<
+	GetLeaderboardAchievementsQuery,
+	GetLeaderboardAchievementsQueryVariables
+>
 export const ScoreDocument = gql`
 	subscription Score($id: bpchar, $uuid: uuid) {
 		BattlepassParticipants(where: { Battlepass: { chainId: { _eq: $id } }, Identity: { uuid: { _eq: $uuid } } }) {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { toUnit } from 'src/utils/token'
+import { toUnit } from 'utils/token'
 import { useHistoricalBalanceSubscription } from 'src/queries'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useTheme } from '@mui/material/styles'

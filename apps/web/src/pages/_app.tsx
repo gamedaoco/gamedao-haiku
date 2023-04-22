@@ -4,7 +4,7 @@ import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import * as Fathom from 'fathom-client'
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 
 import { SessionProvider } from 'next-auth/react'
 import { Providers } from 'src/providers'

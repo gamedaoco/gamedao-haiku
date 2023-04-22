@@ -24,7 +24,8 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
 
-import { getTwitterAuthorizationURL } from 'src/lib/getTwitterAuthorizationURL'
+import { getTwitterAuthorizationURL } from 'src/utils/getTwitterAuthorizationURL'
+import { Loader } from 'components/Loader'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -86,21 +87,17 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	// eslint-disable-next-line @next/next/no-img-element
 	const Icon = () => <img src={getIconUrl(item)} height="45px" alt={item.description} />
 
-	// console.log('item', item, achievement)
-
 	const p = item?.points || 0 // Math.round(Math.random() * 5) * 250 + 250
 	const v = achievement?.progress || 0
-	const t = item.maxDaily || 1
+	const a = item?.quantity * v
+	const percent = v * 100
 
-	const completed = achievement?.progress ? achievement?.progress / item?.quantity : 0
-
-	// console.log(completed, t)
-	const completedBar = (completed / t) * 100
-
-	// console.log(completedBar)
-
-	const progressText =
-		t === 1 ? (achievement?.progress === 1 ? `completed` : `pending`) : `${achievement?.progress} of ${t}`
+	let progressText =
+		achievement?.progress === 1
+			? 'done'
+			: item?.maxDaily
+			? `${a} of ${item?.maxDaily}`
+			: `${a} of ${item?.quantity}`
 
 	enum Source {
 		Wallet,
@@ -130,7 +127,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	let showAction = false
 	let action
 
-	console.log(item.source, item.type)
+	// console.log(item.source, item.type)
 
 	// TODO: check for existing twitter token
 	// if (item.source === 'twitter' && !session?.user?.twitter) {
@@ -227,7 +224,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 					<Typography variant="cardMicro" align="right" sx={{ color: '#f3cb14' }}>
 						{progressText}
 					</Typography>
-					<BorderLinearProgress variant="determinate" value={completedBar < 100 ? completedBar : 100} />
+					<BorderLinearProgress variant="determinate" value={percent < 100 ? percent : 100} />
 				</>
 			)}
 		</Stack>
@@ -264,7 +261,7 @@ export const BPQuests = ({ args }: TArgs) => {
 	const { uuid } = useAppContext()
 	const where = { id: id }
 	const [items, setItems] = useState([])
-	const { data: quests } = useGetBattlepassQuestsQuery({ variables: where })
+	const { loading, data: quests } = useGetBattlepassQuestsQuery({ variables: where })
 	const [userAchievements, setUserAchievements] = useState([])
 	// const { data: achievements } = useGetBattlepassAchievementsQuery({ variables: where })
 	const { data: achievements } = useGetAchievementsSubscription({ variables: { id: id, uuid: uuid } })
@@ -272,6 +269,7 @@ export const BPQuests = ({ args }: TArgs) => {
 	useEffect(() => {
 		if (!quests) return
 		const _quests = quests.BattlepassBot.BattlepassQuests as TQuestItem[]
+		if (_quests === items) return
 		// console.log('q', _quests)
 		setItems(_quests)
 	}, [quests])
@@ -280,7 +278,7 @@ export const BPQuests = ({ args }: TArgs) => {
 		if (!achievements) return
 		// const a = achievements.BattlepassBot.BattlepassProgresses
 		const a = achievements.QuestProgresses
-		if (!a) return
+		if (!a || a === userAchievements) return
 		// console.log('a', a)
 		setUserAchievements(a as any[])
 	}, [achievements])
@@ -321,7 +319,9 @@ export const BPQuests = ({ args }: TArgs) => {
 	const handleClose = () => setShowDialog(false)
 	const handleShow = () => setShowDialog(true)
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<Fragment>
 			<BaseDialog title="Hello" open={showDialog} onClose={handleClose}>
 				Hello

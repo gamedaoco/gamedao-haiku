@@ -4,11 +4,7 @@ import type { ISubmittableResult } from '@polkadot/types/types'
 import { to } from 'await-to-js'
 import { AccountState } from 'src/@types/extension'
 import { PromiseMsg } from 'src/@types/promiseMsg'
-import {
-	createErrorNotification,
-	createPromiseNotification,
-	createSuccessNotification,
-} from 'src/utils/notificationUtils'
+import { createErrorNotification, createPromiseNotification, createSuccessNotification } from 'utils/notificationUtils'
 import { TFunction } from 'i18next'
 
 export async function SignAndNotify(

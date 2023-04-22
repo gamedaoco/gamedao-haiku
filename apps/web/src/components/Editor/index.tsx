@@ -3,11 +3,11 @@ import { ReactNode, useCallback, useMemo } from 'react'
 import dynamic from 'next/dynamic'
 
 import { Box, BoxProps, Typography } from '@mui/material'
-import { ImageDrop } from 'src/lib/quillImageDropModule'
-import { ImageResize } from 'src/lib/quillImageResizerModule/ImageResize'
+import { ImageDrop } from 'src/utils/quillImageDropModule'
+import { ImageResize } from 'src/utils/quillImageResizerModule/ImageResize'
 import { ReactQuillProps } from 'react-quill'
-import { uploadBase64File } from 'src/utils/file'
-import { parseIpfsHash } from 'src/utils/ipfs'
+import { uploadBase64File } from 'utils/file'
+import { parseIpfsHash } from 'utils/ipfs'
 
 import { EditorWrapper } from 'src/components/Editor/editorWrapper'
 

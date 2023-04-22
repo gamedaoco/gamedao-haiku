@@ -5,6 +5,7 @@ import { useGetLevelsQuery, useGetScoreQuery, useLevelsSubscription, useScoreSub
 import { styled, useTheme } from '@mui/material/styles'
 import { Box, Button, Stack, Typography, useMediaQuery } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
+import { Loader } from 'components/Loader'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 10,

@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
 
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
 import { useConfig } from 'src/hooks/useConfig'
 
 import { useActiveBattlepassSubscription } from 'src/queries'

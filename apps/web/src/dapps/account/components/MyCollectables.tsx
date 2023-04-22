@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
+import { getKusamaAddressFromAccountState } from 'utils/accountUtils'
 import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { useCollectablesForUserLazyQuery } from 'src/queries'
 import { CollectablesForUserQuery } from 'src/queries'

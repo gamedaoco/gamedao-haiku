@@ -6,7 +6,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Discord from 'discord.js'
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 
 const log = Logger('feedback')
 

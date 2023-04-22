@@ -1,7 +1,7 @@
 // export const config = { runtime: 'edge', }
 
 import NextAuth, { NextAuthOptions } from 'next-auth'
-import clientPromise from 'src/lib/mongodb'
+import clientPromise from 'src/utils/mongodb'
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 
 import EmailProvider from 'next-auth/providers/email'
@@ -9,13 +9,13 @@ import DiscordProvider from 'next-auth/providers/discord'
 import TwitterProvider from 'next-auth/providers/twitter'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-import { getUuid } from 'src/lib/auth/getUuid'
-import { setUserToken } from 'src/lib/auth/storeUserToken'
+import { getUuid } from 'src/utils/auth/getUuid'
+import { setUserToken } from 'src/utils/auth/storeUserToken'
 
 // const options = { databaseName: process.env.MONGO_DATABASE }
 // console.log('db', process.env.MONGO_DATABASE)
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 const log = Logger('auth')
 
 const scope = ['identify'].join(' ')

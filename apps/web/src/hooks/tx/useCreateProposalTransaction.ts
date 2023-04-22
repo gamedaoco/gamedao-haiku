@@ -13,7 +13,7 @@ import { ApiProvider } from 'src/@types/network'
 import { TMPProposal } from 'src/@types/proposal'
 import { TransactionData } from 'src/@types/transactionData'
 import { PROPOSAL_KEYS, PROPOSAL_MAJORITIES, PROPOSAL_TYPES, PROPOSAL_UNITS } from 'src/constants/proposal'
-import { createTokenType, fromUnit } from 'src/utils/token'
+import { createTokenType, fromUnit } from 'utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
 

@@ -8,9 +8,9 @@ import { useConfig } from 'src/hooks/useConfig'
 import { useRemoveMemberTransaction } from 'src/hooks/tx/useRemoveMemberTransaction'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
-import { getInitials } from 'src/utils/accountUtils'
-import { reformatNumber } from 'src/utils/globalUtils'
-import { parseIpfsHash } from 'src/utils/ipfs'
+import { getInitials } from 'utils/accountUtils'
+import { reformatNumber } from 'utils/globalUtils'
+import { parseIpfsHash } from 'utils/ipfs'
 
 import Unknown from '@mui/icons-material/QuestionMarkSharp'
 import Edit from '@mui/icons-material/TuneSharp'

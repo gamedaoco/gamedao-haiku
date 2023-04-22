@@ -7,7 +7,7 @@ import { createApolloClient } from 'src/providers/graphQl/modules/graphQl'
 import { useTranslation } from 'react-i18next'
 import { Endpoint } from 'src/@types/graphql'
 import { ENDPOINTS } from 'src/constants/endpoints'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'utils/notificationUtils'
 
 import { SelectNetworkDialog } from 'src/components/SelectNetworkDialog/selectNetworkDialog'
 

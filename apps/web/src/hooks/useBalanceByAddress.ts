@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useLogger } from 'src/hooks/useLogger'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useBalanceByAddressSubscription } from 'src/queries'
-import { formatBalanceString } from 'src/utils/balance'
+import { formatBalanceString } from 'utils/balance'
 
 export interface Balance {
 	frozen: number

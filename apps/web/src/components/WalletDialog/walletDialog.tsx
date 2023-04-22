@@ -12,7 +12,7 @@ import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
 import { WalletCard } from 'src/components/WalletDialog/modules/walletCard'
 import Device from 'src/components/Device'
 
-import { getTwitterAuthorizationURL } from 'src/lib/getTwitterAuthorizationURL'
+import { getTwitterAuthorizationURL } from 'src/utils/getTwitterAuthorizationURL'
 
 export const Web2Connect = () => {
 	const { data: session } = useSession()

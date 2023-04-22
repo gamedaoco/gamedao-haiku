@@ -4,9 +4,9 @@ import { Button, LinearProgress, Stack, Typography } from '@mui/material'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
-import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
-import { abbreviateNumber } from 'src/utils/globalUtils'
-import { toUnit } from 'src/utils/token'
+import { getCampaignProgress, getTimeFromBlock } from 'utils/campaignUtils'
+import { abbreviateNumber } from 'utils/globalUtils'
+import { toUnit } from 'utils/token'
 
 interface ComponentProps {
 	title: string

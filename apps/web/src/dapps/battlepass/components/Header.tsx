@@ -8,8 +8,8 @@ import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
 
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
+import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
+import { createWarningNotification } from 'utils/notificationUtils'
 
 import { useGetBattlepassNameQuery } from 'src/queries'
 

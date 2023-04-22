@@ -3,7 +3,7 @@ import { Card, Stack, Menu, Button, TextareaAutosize, TextField, Typography } fr
 import { Loader } from 'src/components/Loader'
 import { useAppContext } from 'src/providers/app/modules/context'
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 const log = Logger('feedback')
 
 // const Flyout = ({ anchorEl, handleClose, handleSend }) => {

@@ -8,8 +8,8 @@ import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
 
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
+import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
+import { createWarningNotification } from 'utils/notificationUtils'
 
 import { AddAPhoto } from '@mui/icons-material'
 import { TabContext, TabPanel } from '@mui/lab'
@@ -32,31 +32,29 @@ import { useTheme } from '@mui/material/styles'
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
-import { Layout } from 'src/layouts/v2'
-import { Image } from 'src/components/Image/image'
-import { Loader } from 'src/components/Loader'
+import { Layout } from 'layouts/v2'
+import { Image } from 'components/Image/image'
+import { Loader } from 'components/Loader'
 
 const CampaignOverview = dynamic(() =>
-	import('src/components/TabPanels/Campaign/overview').then((mod) => mod.CampaignOverview),
+	import('components/TabPanels/Campaign/overview').then((mod) => mod.CampaignOverview),
 )
 const TreasuryOverview = dynamic(() =>
-	import('src/components/TabPanels/Treasury/overview').then((mod) => mod.TreasuryOverview),
+	import('components/TabPanels/Treasury/overview').then((mod) => mod.TreasuryOverview),
 )
 const OrganizationMembersTable = dynamic(() =>
-	import('src/components/TabPanels/Organization/organizationMembers').then((mod) => mod.OrganizationMembersTable),
+	import('components/TabPanels/Organization/organizationMembers').then((mod) => mod.OrganizationMembersTable),
 )
 const Overview = dynamic(() => import('src/components/TabPanels/Organization/overview').then((mod) => mod.Overview))
 const TmpOverview = dynamic(() =>
-	import('src/components/TabPanels/Organization/tmpOverview').then((mod) => mod.TmpOverview),
+	import('components/TabPanels/Organization/tmpOverview').then((mod) => mod.TmpOverview),
 )
-const ProposalDetail = dynamic(() =>
-	import('src/components/TabPanels/Proposal/detail').then((mod) => mod.ProposalDetail),
-)
+const ProposalDetail = dynamic(() => import('components/TabPanels/Proposal/detail').then((mod) => mod.ProposalDetail))
 const ProposalOverview = dynamic(() =>
-	import('src/components/TabPanels/Proposal/overview').then((mod) => mod.ProposalOverview),
+	import('components/TabPanels/Proposal/overview').then((mod) => mod.ProposalOverview),
 )
 const SettingsOverview = dynamic(() =>
-	import('src/components/TabPanels/Settings/settings').then((mod) => mod.SettingsOverview),
+	import('components/TabPanels/Settings/settings').then((mod) => mod.SettingsOverview),
 )
 
 // import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
@@ -124,6 +122,7 @@ export function OrganizationById() {
 			return createWarningNotification('No file selected')
 		}
 		const cid = await uploadFileToIpfs(files[0])
+		console.log('cid created', cid)
 		setter(cid.toString())
 	}, [])
 
@@ -161,6 +160,7 @@ export function OrganizationById() {
 
 	useEffect(() => {
 		if (!cache) return
+		console.log(cache)
 
 		const metaData = {
 			name: cache.name,
@@ -172,9 +172,9 @@ export function OrganizationById() {
 			tags: cache.tags,
 		}
 
-		// console.log('================================')
-		// console.log('organization metadata', metaData)
-		// console.log('================================')
+		console.log('================================')
+		console.log('organization metadata', metaData)
+		console.log('================================')
 		;(async (): Promise<string> => {
 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 				type: 'text/plain',
@@ -248,7 +248,7 @@ export function OrganizationById() {
 										accept="image/*"
 										id="logo-file-upload"
 										type="file"
-										disabled={!!organizationIdState}
+										//disabled={!!organizationIdState}
 										onChange={(event) => handleUploadImage(event, cache.setLogoCID)}
 									/>
 									<Avatar
@@ -340,8 +340,9 @@ export function OrganizationById() {
 										accept="image/*"
 										id="header-file-upload"
 										type="file"
-										disabled={!!organizationIdState}
+										//disabled={!!organizationIdState}
 										onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
+										onClick={(event) => handleUploadImage(event, cache.setHeaderCID)}
 									/>
 									{!organizationState?.header && !cache.headerCID?.length ? (
 										<Box display="grid" justifyContent="center" alignItems="center">

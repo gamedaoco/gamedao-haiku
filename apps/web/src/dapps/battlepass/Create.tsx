@@ -1,15 +1,16 @@
 import { useCallback, useEffect, Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { useConfig } from 'src/hooks/useConfig'
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
+import slugify from 'slugify'
 
+import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
+import { createWarningNotification } from 'utils/notificationUtils'
+import { useConfig } from 'hooks/useConfig'
+import { useCreateBattlepassTX } from 'hooks/tx/useCreateBattlepassTX'
+import { useLinkBotTX } from 'hooks/tx/useLinkBotTX'
+import { useActivateBattlepassTX } from 'hooks/tx/useActivateBattlepassTX'
+import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
 import { useActiveBattlepassSubscription } from 'src/queries'
-import { useCreateBattlepassTX } from 'src/hooks/tx/useCreateBattlepassTX'
-import { useLinkBotTX } from 'src/hooks/tx/useLinkBotTX'
-import { useActivateBattlepassTX } from 'src/hooks/tx/useActivateBattlepassTX'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 import { useTheme } from '@mui/material/styles'
 
@@ -38,6 +39,7 @@ import { TransactionDialog } from 'src/components/TransactionDialog/transactionD
 
 import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
 import { Image } from 'src/components/Image/image'
+import { Loader } from 'src/components/Loader'
 import { LevelEditor } from './components/create/LevelEditor'
 import { QuestEditor } from './components/create/QuestEditor'
 
@@ -50,15 +52,41 @@ import {
 	useGetAllBattlepassesSubscription,
 } from 'src/queries'
 
+export type TMetadata = {
+	name: string
+	description: string
+	slug: string
+	tags: string[]
+	imageCid: string
+	price: number
+	cid: string
+}
+const initialMetadata: TMetadata = {
+	name: '',
+	description: '',
+	slug: '',
+	tags: [],
+	imageCid: '',
+	price: 0,
+	cid: '',
+}
+
 export type TInitialState = {
+	metadata?: TMetadata
+
 	organizationId: string
 	organizationAddress: string
 	creatorAddress: string
 	battlepassId: string
-	//
+
+	// battlepass metadata
 	name: string
 	description: string
 	slug: string
+	tags: string[]
+	coverImageCid: string
+	metadataCid: string
+
 	//
 	iconImg: string
 	bannerImg: string
@@ -85,25 +113,72 @@ export type TInitialState = {
 	botAccount: string
 }
 
+// const initialMetadataState = {
+// 	collection: {},
+// 	quests: [
+// 		{
+// 			index: 0,
+// 			name: 'GameDAO Battlepass Quest 1',
+// 			description: 'A fancy description of a quest',
+// 			payload: {
+// 				channel: 'twitter:gamedaoco',
+// 				action: 'follow',
+// 			},
+// 			points: 100,
+// 			metadataCID: '',
+// 		},
+// 	],
+// 	rewards: [
+// 		{
+// 			index: 0,
+
+// 			minPoints: 100,
+// 			minLevel: 1,
+// 			maxMint: 100,
+
+// 			name: 'GameDAO Battlepass Reward Level 1',
+// 			description: 'A fancy description of a reward',
+
+// 			payload: null, // e.g. { 'onClaim', 'mint', '<id>' }
+
+// 			thumbnailCID: '', // preview image
+// 			mediaCID: '', // content
+
+// 			metadataCID: '', // cid of this json excl this key
+// 		},
+// 	]
+// }
+
 const initialState: TInitialState = {
+	metadata: initialMetadata,
+
 	organizationId: '',
 	organizationAddress: '',
 	battlepassId: '',
 	creatorAddress: '',
+
 	// styling
 	primaryColor: '',
 	secondaryColor: '',
 	backgroundColor: '',
+
+	// images
 	iconImg: '',
-	bannerImg: '',
 	cardImg: '',
+	bannerImg: '',
+
 	// battlepass token
 	tokenCoverImg: '',
 	tokenContent: '',
+
 	// content
 	name: '',
 	description: '',
 	slug: '',
+	tags: [],
+	metadataCid: '',
+	coverImageCid: '',
+
 	// commercials
 	currency: 'EUR',
 	subscribers: 0,
@@ -123,41 +198,43 @@ const initialState: TInitialState = {
 export const Create = () => {
 	const config = useConfig()
 	const theme = useTheme()
-	const address: string = useCurrentAccountAddress()
-
 	const { query, push } = useRouter()
 	const view = query?.view as string
 
-	const [formState, setFormState] = useState(initialState)
-	const [id, setId] = useState('')
-	const [cid, setCid] = useState('')
+	const address: string = useCurrentAccountAddress()
 	const [stakeToEur, setStakeToEur] = useState(0)
+	const [formState, setFormState] = useState(initialState)
 
+	//  transactions
 	const createBattlepassTX = useCreateBattlepassTX(
 		formState.organizationId,
-		formState.name,
-		formState.cardImg,
-		formState.price,
+		formState.metadata.name,
+		formState.metadata.cid,
+		formState.metadata.price,
 	)
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
 	const linkBotTX = useLinkBotTX(formState.battlepassId, formState.botAccount)
 
-	// console.log('cardImg', formState.cardImg)
-
+	//
+	// get orgs for user
+	//
 	const [organizations, setOrganizations] = useState<any>()
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
 		variables: { id: address },
 	})
 	useEffect(() => {
 		if (loading) return
-		if (!primeOrganizations.organization.length) return
+		if (!primeOrganizations?.organization.length) return
 		const organizations = primeOrganizations?.organization?.map((o, i) => {
 			return { label: o.name, value: o.id }
 		})
 		setOrganizations(organizations)
-		console.log(organizations)
-	}, [primeOrganizations, loading])
+		// console.log(organizations)
+	}, [primeOrganizations?.organization, loading])
 
+	//
+	// get battlepasses for orgs
+	//
 	const [battlepasses, setBattlepasses] = useState<any>()
 	const { loading: loadingPasses, data: organizationBattlepasses } = useGetAllBattlepassesSubscription({
 		// TODO: check why filter is not working
@@ -167,16 +244,19 @@ export const Create = () => {
 		if (loadingPasses) return
 		if (!formState.organizationId) return
 		if (!organizationBattlepasses?.Battlepasses?.length) return
-		console.log('hydrate', 'passes in', organizationBattlepasses.Battlepasses)
-		console.log('hydrate', 'filter by org', formState.organizationId)
+		// console.log('hydrate', 'passes in', organizationBattlepasses.Battlepasses)
+		// console.log('hydrate', 'filter by org', formState.organizationId)
 		const passes = organizationBattlepasses?.Battlepasses?.map((p, i) => {
 			return { name: p.name, id: p.chainId, active: p.active, org: p.orgId }
 		}).filter((i) => i.org === formState.organizationId)
 		setBattlepasses(passes)
-		console.log('hydrate', 'passes out', passes)
+		// console.log('hydrate', 'passes out', passes)
 	}, [organizations, loadingPasses, organizationBattlepasses, formState.organizationId])
 	//
 
+	//
+	// hydrate
+	//
 	useEffect(() => {
 		if (!localStorage.getItem('battlepass')) return
 		const cache = JSON.parse(localStorage.getItem('battlepass'))
@@ -184,6 +264,9 @@ export const Create = () => {
 		setFormState({ ...cache })
 	}, [])
 
+	//
+	// calculate deposit
+	//
 	useEffect(() => {
 		if (formState.price === 0) return
 		if (formState.subscribers === 0) return
@@ -197,28 +280,68 @@ export const Create = () => {
 		setStakeToEur(deposit * fxGAMEtoEUR)
 	}, [formState.subscribers, formState.price])
 
-	const handleChange = (e) => {
-		// console.log('input', e.target.name, e.target.value, formState)
-		const update = { ...formState, [e.target.name]: e.target.value }
+	//
+	// handle input
+	//
+	const updateFormState = (k, v) => {
+		const update = { ...formState, k: v }
 		setFormState(update)
 		localStorage.setItem('battlepass', JSON.stringify(update))
 	}
+	const handleChange = (e) => {
+		updateFormState(e.target.name, e.target.value)
+	}
 
+	//
+	// handle image upload
+	//
 	const handleUploadImage = useCallback(
 		async (event, key) => {
 			const files = event.target.files
 			if (!files || files.length === 0) return createWarningNotification('No file selected')
 			const cid = await uploadFileToIpfs(files[0])
-			const update = { ...formState, [key]: cid.toString() }
-			setFormState(update)
-			localStorage.setItem('battlepass', JSON.stringify(update))
-			console.log('IPFS', 'cid', cid)
+			updateFormState([key], cid.toString())
+			console.log('IPFS', key, cid)
 		},
 		[formState],
 	)
-
 	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
 
+	//
+	// handle json upload
+	//
+	const uploadFile = async (filename, data) => {
+		const file = new File([JSON.stringify(data)], filename, { type: 'text/plain' })
+		const cid = await uploadFileToIpfs(file)
+		updateFormState('metadataCid', cid)
+	}
+
+	// TODO:
+	// 1 assemble metadata based on form state
+	useEffect(() => {
+		if (!formState.organizationId) return
+
+		const data = {
+			name: formState.name,
+			description: formState.description,
+			slug: slugify(formState.name),
+			tags: formState.tags,
+		}
+
+		updateFormState('metadata', data)
+
+		const filename = `${formState.slug}-metadata.json`
+
+		console.log('================================')
+		console.log('metadata', data)
+		console.log('filename', filename)
+		console.log('================================')
+	}, [formState])
+
+	// 2 upload metadata to ipfs
+	// 3 derive image urls from metadata cids
+
+	// example:
 	// refresh the payload for a metadata blob on ipfs
 	// available keys:
 	// bp_metadata - operator side - battlepass metadata - configures mutable metadata of the battlepass from operator perspective
@@ -258,7 +381,7 @@ export const Create = () => {
 	const checkActive = (id) => {
 		const pass = battlepasses.find((p) => p.id === id)
 		const active = pass?.active
-		console.log('active', active)
+		// console.log('active', active)
 		return active
 	}
 
@@ -276,33 +399,56 @@ export const Create = () => {
 		setShowLinkModal(false)
 	}
 
+	// admin utils
+
 	const reset = () => {
 		setFormState(initialState)
+		localStorage.setItem('battlepass', JSON.stringify(initialState))
 	}
 
+	const log = (item) => {
+		let res
+		switch (item) {
+			case 0:
+				res = formState.metadata
+				break
+			default:
+				res = formState
+				break
+		}
+		console.log(JSON.stringify(res || '', null, 4))
+	}
 	//
 
-	return (
+	return !organizations ? (
+		<Loader />
+	) : (
 		<Fragment>
-			<Stack pb={2} direction="row" alignItems="middle" justifyContent="space-between">
-				<Typography>Flush Cache</Typography>
-				<Button variant={'pink'} onClick={reset}>
-					Flush Cache
+			<Stack p={2} direction="row" alignItems="center" justifyContent="start" spacing={2}>
+				<Button variant={'nano'} onClick={reset}>
+					Flush Editor Cache
 				</Button>
+				<Button variant={'nano'} onClick={() => log(0)}>
+					Log Battlepass Metadata
+				</Button>
+				{/* <Button variant={'nano'} onClick={()=>log(1)}>
+					Log Quest Metadata
+				</Button>
+				<Button variant={'nano'} onClick={()=>log(2)}>
+					Log Reward Metadata
+				</Button> */}
 			</Stack>
-			<hr />
 			<TabBar />
 
 			<TabContext value={view}>
-				<TabPanel value="dashboard">
+				<TabPanel sx={{ py: 2 }} value="dashboard">
 					<Typography>Dashboard</Typography>
 				</TabPanel>
 
-				<TabPanel value="general">
-					<Typography>1. Deposit + Create Battlepass</Typography>
+				<TabPanel sx={{ py: 2 }} value="general">
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
-						title="Deposit"
+						title="Deposit + Create Battlepass Draft"
 						description={`
 					GameDAO protocols can be enabled for your organization by staking GAME token.
 					The amount should be in relation to the number of passes issued and their respective sales price.
@@ -431,18 +577,25 @@ export const Create = () => {
 										accept="image/*"
 										id="card-image-upload"
 										type="file"
-										onChange={(e) => handleUploadImage(e, 'cardImg')}
+										onChange={(e) => handleUploadImage(e, 'battlepassCoverImage')}
 									/>
-									{!formState.bannerImg ? (
-										<Stack spacing={1} alignItems="center">
+									{!formState.coverImageCid ? (
+										<Stack
+											spacing={1}
+											direction="column"
+											alignItems="center"
+											justifyContent="center"
+										>
 											<AddPhotoAlternateOutlinedIcon
 												sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
 											/>
-											<Typography>Add Battlepass Card Image</Typography>
+											<Typography variant="cardMicro" align="center">
+												Add Battlepass Cover Image
+											</Typography>
 										</Stack>
 									) : (
 										<Image
-											src={getImageURL(formState.cardImg)}
+											src={getImageURL(formState.coverImageCid)}
 											alt="card"
 											sx={{
 												borderRadius: Number(theme.shape.borderRadius),

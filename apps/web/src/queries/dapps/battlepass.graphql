@@ -276,6 +276,22 @@ query GetLeaderboard ( $id: String ) {
 		}
 	}
 }
+// get claimed rewards for a user / battlepass
+query GetLeaderboardAchievements ( $id: String, $uuid: String ) {
+	BattlepassBot {
+		BattlepassRewardClaims( where: {
+			identityUuid: $uuid,
+			battlepassChainId: $id,
+		}) {
+			reward {
+				cid
+				description
+				name
+				chainId
+			}
+		}
+	}
+}
 
 # subscribe to progresses so we can compute points and enable rewards...
 # subscription GetScore ( $id: bpchar, $uuid: uuid) {

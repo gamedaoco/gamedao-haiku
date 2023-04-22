@@ -9,7 +9,7 @@ import { useConfig } from 'src/hooks/useConfig'
 import { useTMPProposalState } from 'src/hooks/useTMPProposalState'
 import { useTranslation } from 'react-i18next'
 import { PROPOSAL_KEYS } from 'src/constants/proposal'
-import { uploadFileToIpfs } from 'src/utils/ipfs'
+import { uploadFileToIpfs } from 'utils/ipfs'
 
 import {
 	Description,

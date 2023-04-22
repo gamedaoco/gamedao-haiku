@@ -11,7 +11,7 @@ import { getConnectedEndpoint } from 'src/constants/endpoints'
 // curl -X POST localhost:3000/api/feedback -H "Content-Type:application/json;charset=utf-8" -d '{"msg":"hello"}'
 // send a message: discord.send({ content: msg })
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 const log = Logger('payment')
 
 const discord = new Discord.WebhookClient({ id: process.env.DISCORD_HOOK_ID, token: process.env.DISCORD_HOOK_TOKEN })

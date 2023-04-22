@@ -1,5 +1,5 @@
 import { CID, create } from 'ipfs-http-client'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'utils/notificationUtils'
 
 const ipfsGateway = process.env.NEXT_PUBLIC_IPFS_PUBLIC_GATEWAY || ''
 

@@ -6,8 +6,8 @@ import { useAppContext } from 'src/providers/app/modules/context'
 
 import { Layout } from 'src/layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'
-import { setUserToken } from 'src/lib/auth/storeUserToken'
-import { decode } from 'src/lib/getTwitterAuthorizationURL'
+import { setUserToken } from 'src/utils/auth/storeUserToken'
+import { decode } from 'src/utils/getTwitterAuthorizationURL'
 
 export function Page() {
 	const { query, push } = useRouter()

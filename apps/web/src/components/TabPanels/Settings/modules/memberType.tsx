@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
 import { useNetworkContext } from 'src/providers/network/modules/context'
-import { toUnit } from 'src/utils/token'
+import { toUnit } from 'utils/token'
 import { RadioItem } from 'src/components/Forms/modules/radioItem'
 
 const validationFeeSchema = Yup.number()

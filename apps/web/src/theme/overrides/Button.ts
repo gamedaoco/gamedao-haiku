@@ -10,6 +10,7 @@ declare module '@mui/material/Button' {
 		lemon: true
 		pink: true
 		glass: true
+		nano: true
 	}
 }
 
@@ -27,8 +28,19 @@ export default function Button(theme: Theme) {
 						boxShadow: theme.customShadows.primary,
 						border: `1px solid ${theme.palette.grey[500_32]}`,
 						borderRadius: theme.shape.borderRadiusLg,
-						// p: `1rem`,
+						p: `5px`,
 						// m: `1rem`,
+					},
+				},
+				{
+					props: { variant: 'nano' },
+					style: {
+						fontSize: '10px',
+						backgroundColor: `#00000011`, //theme.palette.background.neutral,
+						backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						backdropFilter: `blur(10px)`,
+						// border: `1px solid #ffffff11`,
+						borderRadius: theme.shape.borderRadiusLg,
 					},
 				},
 				{

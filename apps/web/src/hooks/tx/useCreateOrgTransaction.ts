@@ -7,7 +7,7 @@ import { useTmpOrganization } from 'src/hooks/useTmpOrganization'
 import { useNetworkContext } from 'src/providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
-import { createTokenType, fromUnit } from 'src/utils/token'
+import { createTokenType, fromUnit } from 'utils/token'
 import { encode as utf8Encode } from 'utf8'
 import * as Yup from 'yup'
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { getAddressFromAccountState } from 'src/utils/accountUtils'
+import { getAddressFromAccountState } from 'utils/accountUtils'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { Campaign, useCampaignContributorsSubscription, useCampaignSubscription } from 'src/queries'
 

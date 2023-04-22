@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useConfig } from 'src/hooks/useConfig'
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 import { Logger as LoggerType } from 'loglevel'
 
 export function useLogger(name: string = 'HAIKU'): LoggerType {

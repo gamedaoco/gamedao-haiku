@@ -1,4 +1,4 @@
-import { createInfoNotification } from 'src/utils/notificationUtils'
+import { createInfoNotification } from './notificationUtils'
 
 export const copytToClipboard = (content) => {
 	console.log('copied', content)

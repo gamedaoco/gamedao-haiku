@@ -7,7 +7,7 @@ import { Autocomplete, Box, Button, CardMedia, Stack, TextField, Typography } fr
 import { useConfig } from 'src/hooks/useConfig'
 import { useTranslation } from 'react-i18next'
 import { DisplayValueEntryNumber, useDisplayValuesQuery } from 'src/queries'
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
 import * as Yup from 'yup'
 
 import { Dropzone } from 'src/components/Dropzone/dropzone'

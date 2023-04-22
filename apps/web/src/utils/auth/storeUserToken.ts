@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
 
-import { Logger } from 'src/lib/logger'
+import { Logger } from 'src/utils/logger'
 const log = Logger('lib/token')
 
 const battlepass_url = getConnectedEndpoint().url

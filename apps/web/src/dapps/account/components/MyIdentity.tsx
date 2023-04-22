@@ -10,7 +10,7 @@ import { useIdentitySetTransaction, validation } from 'src/hooks/tx/useIdentityS
 
 // import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 // import { useIdentityByAddressSubscription } from 'hooks/useIdentityByAddress'
-// import { getAddressFromAccountState } from 'src/utils/accountUtils'
+// import { getAddressFromAccountState } from 'utils/accountUtils'
 
 import { useYupValidationResolver } from 'src/hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
