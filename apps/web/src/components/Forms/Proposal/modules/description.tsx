@@ -27,7 +27,7 @@ import {
 	useOrganizationByIdSubscription,
 	useSuccessfulCampaignByOrganizationIdSubscription,
 } from 'src/queries'
-import { getCurrenciesForSelect } from 'utils/forms/currencyUtils'
+import { getCurrenciesForSelect } from 'src/utils/forms/currencyUtils'
 import * as Yup from 'yup'
 
 import { BaseForm } from 'src/components/Forms/baseForm'

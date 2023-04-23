@@ -3,7 +3,7 @@ import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
 import { Wallet } from '@talisman-connect/wallets'
 import { AccountSettings, ExtensionState } from 'src/@types/extension'
 import { SystemProperties } from 'src/@types/network'
-import { getDecodedAddress } from 'utils/accountUtils'
+import { getDecodedAddress } from 'src/utils/accountUtils'
 import { getWalletBySource } from 'src/walletOverrides/wallets'
 
 export async function initializeAccounts(

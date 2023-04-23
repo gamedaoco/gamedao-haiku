@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
 import { useTranslation } from 'react-i18next'
-import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
-import { createWarningNotification } from 'utils/notificationUtils'
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { useConfig } from 'src/hooks/useConfig'
 import { useAddMemberTransaction } from 'src/hooks/tx/useAddMemberTransaction'
@@ -339,7 +339,7 @@ export function Header() {
 					// fullWidth={true}
 					// indicatorColor="#ff00ff"
 					centered
-					value={activeStep}
+					value={0}
 					onChange={(_, value) => handleTabSelect(value)}
 				>
 					<Tab label={t('button:navigation:overview')} value={'dashboard'} />

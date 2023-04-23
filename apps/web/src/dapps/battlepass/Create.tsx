@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 
 import slugify from 'slugify'
 
-import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
-import { createWarningNotification } from 'utils/notificationUtils'
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 import { useConfig } from 'hooks/useConfig'
 import { useCreateBattlepassTX } from 'hooks/tx/useCreateBattlepassTX'
 import { useLinkBotTX } from 'hooks/tx/useLinkBotTX'

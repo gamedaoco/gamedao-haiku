@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { uploadFileToIpfs } from 'utils/ipfs'
+import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import { useConfig } from 'src/hooks/useConfig'
 import { useCreateCampaignTransaction } from 'src/hooks/tx/useCreateCampaignTransaction'

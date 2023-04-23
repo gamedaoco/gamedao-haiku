@@ -11,9 +11,9 @@ import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
 
-import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'utils/accountUtils'
-import { createInfoNotification } from 'utils/notificationUtils'
-import { avatarImageURL } from 'utils/avatars'
+import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
+import { createInfoNotification } from 'src/utils/notificationUtils'
+import { avatarImageURL } from 'src/utils/avatars'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import Verified from '@mui/icons-material/Verified'

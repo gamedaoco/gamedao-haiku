@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { Box, Dialog } from '@mui/material'
-import { fetchIpfsBlob } from 'utils/ipfs'
+import { fetchIpfsBlob } from 'src/utils/ipfs'
 
 interface ComponentProps {
 	open: boolean

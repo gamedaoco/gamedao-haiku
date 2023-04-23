@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Collectable as CollectableInterface } from 'src/@types/collectable'
-import { fetchIpfsJson, parseIpfsHash } from 'utils/ipfs'
+import { fetchIpfsJson, parseIpfsHash } from 'src/utils/ipfs'
 
 import LoadingCollectableCard from 'src/dapps/account/components/CollectablesList/loadingCollectableCard'
 import { ModelDialog } from 'src/components/Collectable/modules/modelDialog'

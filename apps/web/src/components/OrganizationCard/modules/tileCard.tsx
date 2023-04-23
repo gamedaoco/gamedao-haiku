@@ -8,7 +8,7 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components/NavLink/navLink'
 import { Organization } from 'src/queries'
-import { parseIpfsHash } from 'utils/ipfs'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 interface ComponentPros {
 	item: Organization

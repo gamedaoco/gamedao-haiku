@@ -7,7 +7,7 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
 import { useAddMemberTransaction } from 'src/hooks/tx/useAddMemberTransaction'
 
-// import { createWarningNotification } from 'utils/notificationUtils'
+// import { createWarningNotification } from 'src/utils/notificationUtils'
 import { useTheme } from '@mui/material/styles'
 import { Box, Button, useMediaQuery } from '@mui/material'
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'

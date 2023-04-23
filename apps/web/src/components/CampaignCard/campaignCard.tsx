@@ -7,7 +7,7 @@ import { useConfig } from 'src/hooks/useConfig'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { CampaignStatus } from 'src/@types/campaignStatus'
 import type { Campaign } from 'src/queries'
-import { parseIpfsHash } from 'utils/ipfs'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { Content } from './modules/content'
 import { Header } from './modules/header'

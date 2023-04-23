@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react'
 import { Person } from '@mui/icons-material'
 import { Box, Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { createWarningNotification } from 'utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 import * as Yup from 'yup'
 
 import { BaseForm } from 'src/components/Forms/baseForm'

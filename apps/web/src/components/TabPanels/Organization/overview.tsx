@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 
 import { TransactionData } from 'src/@types/transactionData'
 import { Organization } from 'src/queries'
-import { getCampaignStatusPercentage } from 'utils/campaignUtils'
-import { getProposalTypesCount } from 'utils/proposalUtils'
+import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
+import { getProposalTypesCount } from 'src/utils/proposalUtils'
 import { useRemoveMemberTransaction } from 'src/hooks/tx/useRemoveMemberTransaction'
 
 import { useTheme } from '@mui/material/styles'

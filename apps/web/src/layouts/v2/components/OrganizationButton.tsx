@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useConfig } from 'src/hooks/useConfig'
-import { parseIpfsHash } from 'utils/ipfs'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 import { Avatar, Box, Tooltip } from '@mui/material'
 

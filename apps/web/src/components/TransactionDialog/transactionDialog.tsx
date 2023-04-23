@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { TransactionData } from 'src/@types/transactionData'
-import { formatBalanceString } from 'utils/balance'
+import { formatBalanceString } from 'src/utils/balance'
 
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import type { ISubmittableResult } from '@polkadot/types/types'

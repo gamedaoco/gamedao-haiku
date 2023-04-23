@@ -1,9 +1,9 @@
 import { Fragment, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { formatBalanceString } from 'utils/balance'
+import { formatBalanceString } from 'src/utils/balance'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { toUnit } from 'utils/token'
+import { toUnit } from 'src/utils/token'
 
 import { useHistoricalBalanceSubscription } from 'src/queries'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'

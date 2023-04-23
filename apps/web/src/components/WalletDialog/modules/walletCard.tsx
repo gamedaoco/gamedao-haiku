@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 
 import { Download } from '@mui/icons-material'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/material'
-import { createWarningNotification } from 'utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 interface ComponentProps {
 	imageSrc: string

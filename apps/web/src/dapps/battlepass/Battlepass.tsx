@@ -8,8 +8,8 @@ import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useAddMemberTransaction } from 'src/hooks/tx/useAddMemberTransaction'
 
-import { parseIpfsHash, uploadFileToIpfs } from 'utils/ipfs'
-import { createWarningNotification } from 'utils/notificationUtils'
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 

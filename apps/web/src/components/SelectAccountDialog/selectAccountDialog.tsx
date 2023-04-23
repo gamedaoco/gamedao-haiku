@@ -4,7 +4,7 @@ import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useExtensionContext } from 'src/providers/extension/modules/context'
 import { AccountState } from 'src/@types/extension'
-import { getAddressFromAccountState } from 'utils/accountUtils'
+import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import { AccountCard } from 'src/components/AccountCard/accountCard'
 import { BaseDialog } from 'src/components/BaseDialog/baseDialog'

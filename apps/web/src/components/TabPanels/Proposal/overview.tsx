@@ -11,7 +11,7 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useTranslation } from 'react-i18next'
 import { Proposal, useProposalsByOrganizationIdSubscription } from 'src/queries'
-import { getTimeFromBlock } from 'utils/campaignUtils'
+import { getTimeFromBlock } from 'src/utils/campaignUtils'
 
 import { ProposalStatusChip } from 'src/components/ProposalStatusChip/ProposalStatusChip'
 import { CreateProposal } from 'src/components/TabPanels/Organization/createProposal'

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Button, Stack } from '@mui/material'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
 import { useTranslation } from 'react-i18next'
-import { createInfoNotification } from 'utils/notificationUtils'
+import { createInfoNotification } from 'src/utils/notificationUtils'
 
 import { Controller } from './modules/controller'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
