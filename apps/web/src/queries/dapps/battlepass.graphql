@@ -276,7 +276,7 @@ query GetLeaderboard ( $id: String ) {
 		}
 	}
 }
-// get claimed rewards for a user / battlepass
+# get claimed rewards for a user, battlepass
 query GetLeaderboardAchievements ( $id: String, $uuid: String ) {
 	BattlepassBot {
 		BattlepassRewardClaims( where: {
