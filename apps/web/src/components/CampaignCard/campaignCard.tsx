@@ -36,7 +36,7 @@ export function CampaignCard({ campaign }: ComponentProps) {
 		return null
 	}
 	return (
-		<Card onClick={handleClick} sx={{ cursor: 'pointer' }}>
+		<Card onClick={handleClick} sx={{ cursor: 'pointer' }} variant="glass">
 			<Header
 				organizationImage={parseIpfsHash(campaign?.organization?.logo, config.IPFS_GATEWAY)}
 				headerImage={parseIpfsHash(campaign?.header, config.IPFS_GATEWAY)}

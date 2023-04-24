@@ -55,7 +55,7 @@ export function Header({ organizationImage, headerImage, status, id, orgId }: Co
 						<Chip variant="campaignCard" onClick={handleDelete} label={<DeleteOutlined />} />
 					)}
 				</Box>
-				<SvgIconStyle
+				{/* <SvgIconStyle
 					src={shapeAvatar.src}
 					sx={{
 						width: 144,
@@ -68,7 +68,7 @@ export function Header({ organizationImage, headerImage, status, id, orgId }: Co
 						position: 'absolute',
 						color: 'background.paper',
 					}}
-				/>
+				/> */}
 				<Avatar
 					alt={'Organization Image'}
 					src={organizationImage}

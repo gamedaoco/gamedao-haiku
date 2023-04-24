@@ -54,11 +54,11 @@ const leftNav = [
 		path: '/organizations',
 		icon: <RiShieldLine />,
 	},
-	// {
-	// 	name: 'Campaigns', // button:navigation:campaigns',
-	// 	path: '/campaigns',
-	// 	icon: <RiExchangeFundsLine />,
-	// },
+	{
+		name: 'Campaigns', // button:navigation:campaigns',
+		path: '/campaigns',
+		icon: <RiExchangeFundsLine />,
+	},
 	{
 		name: 'Battlepass', //'button:navigation:quests',
 		path: '/battlepass',

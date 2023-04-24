@@ -45,13 +45,13 @@ export function TopPlayers({ args }: TProps) {
 	return (
 		<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)} pb={[2, 2]}>
 			<Grid item xs={12}>
-				<Typography variant="h4">Top Players</Typography>
+				<Typography variant="micro">Top Players</Typography>
 			</Grid>
 
 			<Grid item xs={12}>
 				<Stack direction="row" spacing={1} justifyContent="space-between" alignItems="center">
 					{leaderboard.map((player, index) => (
-						<Paper key={index} sx={{ p: 1, width: '160px', background: 'none' }} variant="glass">
+						<Paper key={index} sx={{ p: 1, width: '160px' }} variant="glass">
 							<Stack direction="row" spacing={1} justifyContent="left" alignItems="center">
 								<Avatar></Avatar>
 								<Stack>
@@ -62,7 +62,6 @@ export function TopPlayers({ args }: TProps) {
 						</Paper>
 					))}
 				</Stack>
-				<hr />
 			</Grid>
 		</Grid>
 	)

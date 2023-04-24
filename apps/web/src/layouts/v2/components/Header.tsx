@@ -59,11 +59,11 @@ const leftNav = [
 	// 	path: '/buy',
 	// 	icon: <RiVipDiamondLine />,
 	// },
-	// {
-	// 	name: 'Campaigns', // button:navigation:campaigns',
-	// 	path: '/campaigns',
-	// 	icon: <RiVipDiamondLine />,
-	// },
+	{
+		name: 'Campaigns', // button:navigation:campaigns',
+		path: '/campaigns',
+		icon: <RiVipDiamondLine />,
+	},
 ]
 
 const rightNav = [

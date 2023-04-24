@@ -42,7 +42,7 @@ export function Content({ title, organizationName, backers, target, contributed,
 					</Typography>
 				</Stack>
 				{duration && (
-					<Button variant="outlined" size="small" color="inherit" disabled>
+					<Button variant="glass" size="small" color="inherit" disabled>
 						{duration}
 					</Button>
 				)}

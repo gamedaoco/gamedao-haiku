@@ -57,9 +57,9 @@ export function CampaignById() {
 	return (
 		<Layout showHeader showFooter showSidebar title="Campaigns">
 			<NavLink href="/campaigns">
-				<Button variant="secondary" sx={{ mt: '5rem', ml: '1rem' }} onClick={handleClick}>
+				<Button variant="secondary" onClick={handleClick}>
 					<ArrowBack sx={{ mr: '1rem' }} />
-					{t('button:ui:back_to_all_campaigns')}
+					{/* {t('button:ui:back_to_all_campaigns')} */}
 				</Button>
 			</NavLink>
 

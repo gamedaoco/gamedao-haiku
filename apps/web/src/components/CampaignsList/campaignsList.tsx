@@ -44,27 +44,6 @@ export function CampaignsList({ campaigns, showCreate, loading, draftCampaigns, 
 					gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))',
 				}}
 			>
-				{showCreate && (
-					<Card variant="dashed">
-						<Button sx={{ width: '100%', height: '100%', minHeight: 350 }} onClick={createCallback}>
-							<Box
-								sx={{
-									display: 'flex',
-									flexDirection: 'column',
-									justifyItems: 'center',
-									alignItems: 'center',
-								}}
-							>
-								<PlusIcon />
-								<Typography variant="subtitle1" sx={{ mt: 2 }}>
-									{t('page:campaigns:new_campaign')}
-								</Typography>
-								<Typography variant="body1">{t('page:campaigns:click')}</Typography>
-							</Box>
-						</Button>
-					</Card>
-				)}
-
 				{campaignsState?.map((campaign: Campaign) => (
 					<Fragment key={campaign?.id}>
 						<CampaignCard campaign={campaign} />
@@ -76,6 +55,28 @@ export function CampaignsList({ campaigns, showCreate, loading, draftCampaigns, 
 						<CampaignCard campaign={campaign} />
 					</Fragment>
 				))}
+
+				{showCreate && (
+					<Card variant="glass">
+						<Button sx={{ width: '100%', height: '100%', minHeight: 350 }} onClick={createCallback}>
+							<Box
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									justifyItems: 'center',
+									alignItems: 'center',
+								}}
+							>
+								{/* <PlusIcon /> */}
+								<Typography variant="subtitle1" sx={{ mt: 2 }}>
+									{/* {t('page:campaigns:new_campaign')} */}
+									Create New Campaign
+								</Typography>
+								{/* <Typography variant="body1">{t('page:campaigns:click')}</Typography> */}
+							</Box>
+						</Button>
+					</Card>
+				)}
 			</Grid>
 		</Box>
 	)
