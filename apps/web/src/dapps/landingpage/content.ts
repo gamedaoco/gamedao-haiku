@@ -62,6 +62,30 @@ export const hero = [
 	// 	bg: '#111',
 
 	{
+		sub: `Welcome to ÆX-1 — the future of gaming`,
+		description: `
+			Be part of the ÆX-1 community and declare war on the die-hards
+			and make a declaration of love for progress and gaming.`,
+		image: '/partners/Landingpage_V2.png',
+		links: [
+			// {
+			// 	text: 'LEARN MORE',
+			// 	url: '/cases/esports',
+			// 	icon: 'Joystick',
+			// },
+			{
+				text: 'JOIN',
+				url: '/organizations/0x5404d0a86c0c419f3bd2d9578aa4df81f9597d311b8309c52dc7fcb48adfc75c',
+				icon: 'Battle',
+			},
+		],
+		bg: '#111',
+		// txt: '#f74500',
+		img: '/partners/AEX-1_Logo_Landscape_White.png',
+		img_height: '64',
+	},
+
+	{
 		sub: `Join the leading Esports team in Europe`,
 		description: `
 		You are in for some  kick ass treats for playing with us:

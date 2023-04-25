@@ -92,12 +92,17 @@ const Item = (props) => {
 						</Box>
 					)}
 					{!props.item.img && (
-						<Teaser variant="h1" px={[2, 4, 6]}>
+						<Teaser variant="h1" px={[2, 4, 6]} sx={{ color: props.item.txt ? props.item.txt : null }}>
 							{props.item.title}
 						</Teaser>
 					)}
 					{props.item.sub && (
-						<Typography variant={'hero1'} px={[2, 4, 6]} pt={4} sx={{ lineHeight: '95%' }}>
+						<Typography
+							variant={'hero1'}
+							px={[2, 4, 6]}
+							pt={4}
+							sx={{ lineHeight: '95%', color: props.item.txt ? props.item.txt : null }}
+						>
 							{props.item.sub}
 						</Typography>
 					)}
@@ -105,7 +110,10 @@ const Item = (props) => {
 						variant={'hero2'}
 						px={[2, 4, 6]}
 						pt={2}
-						sx={{ maxWidth: { xs: '100%', md: '75%', lg: '50%' } }}
+						sx={{
+							maxWidth: { xs: '100%', md: '75%', lg: '50%' },
+							color: props.item.txt ? props.item.txt : null,
+						}}
 					>
 						{props.item.description}
 					</Typography>
