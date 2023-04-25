@@ -57,7 +57,7 @@ const Item = (props) => {
 					zIndex: 10,
 					width: '100%',
 					minHeight: { xs: '100vh', md: '400px' },
-					height: { xs: '100vh', md: '50vh' },
+					height: { xs: '100vh', md: '75vh' },
 				}}
 			>
 				<Backdrop src={props.item.image} />
@@ -69,7 +69,7 @@ const Item = (props) => {
 					width: '100%',
 					// minHeight: 'calc( 100vh )',
 					minHeight: { xs: '100vh', md: '400px' },
-					height: { xs: '100vh', md: '50vh' },
+					height: { xs: '100vh', md: '75vh' },
 					position: 'absolute',
 					top: 0,
 					display: 'flex',
@@ -159,7 +159,7 @@ export const Hero = () => {
 		<Box
 			sx={{
 				minHeight: { xs: '100vh', md: '400px' },
-				height: { xs: '100vh', md: '50vh' },
+				height: { xs: '100vh', md: '75vh' },
 				m: 0,
 				p: 0,
 			}}
