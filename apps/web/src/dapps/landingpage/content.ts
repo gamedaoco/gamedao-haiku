@@ -184,7 +184,7 @@ export const hero2 = [
 		// links: [
 		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
 		// ],
-		bg: '#11111199',
+		bg: '#000',
 		img: '/partners/wave-esports-white.png',
 		img_height: '32',
 	},
