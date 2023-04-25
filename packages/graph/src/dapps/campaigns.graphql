@@ -1,0 +1,162 @@
+subscription SuccessfulCampaignByOrganizationId($orgId: String!) {
+    campaign(where: {organization_id: {_eq: $orgId}, state: {_eq: "Success"}}) {
+        id
+        name
+    }
+}
+subscription CampaignContributors($address: String!) {
+    campaign_contributor(where: {identity: {address: {_eq: $address}}}) {
+        id
+        contributed
+        campaign {
+            name
+            title
+            header
+            campaign_contributors_aggregate {
+                aggregate {
+                    sum {
+                        contributed
+                    }
+                    count
+                }
+            }
+            organization {
+                name
+            }
+            expiry
+            created_at_block
+            token_symbol
+            state
+            target
+        }
+    }
+}
+
+
+subscription Campaign($address: String) {
+    campaign(where: {admin_identity_id: {_eq: $address}}) {
+        id
+        target
+        state
+        expiry
+        token_symbol
+        title
+        name
+        header
+        logo
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count(distinct: true)
+            }
+        }
+        organization {
+            id
+            name
+            logo
+            pay_currency
+        }
+    }
+}
+
+subscription CampaignByOrganizationId($orgId: String!) {
+    campaign(where: {organization_id: {_eq: $orgId}}, order_by: { expiry: asc}) {
+        id
+        target
+        state
+        expiry
+        token_symbol
+        title
+        name
+        header
+        logo
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count(distinct: true)
+            }
+        }
+        organization {
+            id
+            name
+            logo
+            pay_currency
+        }
+    }
+}
+
+
+subscription CampaignById($campaignId: String!, $address: String = "") {
+    campaign(where: {id: {_eq: $campaignId}}) {
+        id
+        expiry
+        target
+        deposit
+        state
+        protocol
+        token_symbol
+        description
+        header
+        name
+        markdown
+        campaign_contributors_aggregate {
+            aggregate {
+                count(distinct: true)
+                sum {
+                    contributed
+                }
+            }
+        }
+        userContributedCount: campaign_contributors_aggregate( where: {address: {_eq: $address}}) {
+            aggregate {
+                count
+            }
+        }
+        organization {
+            id
+            creator
+        }
+    }
+}
+
+
+
+subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!], $order_by: [campaign_order_by!]) {
+    campaign(limit: $limit, where: {_or: $filters}, order_by: $order_by) {
+        id
+        target
+        state
+        expiry
+        token_symbol
+        title
+        name
+        header
+        logo
+        campaign_contributors_aggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count(distinct: true)
+            }
+        }
+        organization {
+            id
+            name
+            logo
+            pay_currency
+        }
+    }
+}
+
+subscription CampaignsPaginationCount($filters: [campaign_bool_exp!]) {
+    campaign_aggregate (where: {_or: $filters}) {
+        aggregate {
+            count
+        }
+    }
+}
