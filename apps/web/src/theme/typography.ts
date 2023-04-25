@@ -17,6 +17,8 @@ declare module '@mui/material/styles' {
 		time: React.CSSProperties
 		button: React.CSSProperties
 		pass1: React.CSSProperties
+		teaserTitle: React.CSSProperties
+		teaserText: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
@@ -36,6 +38,8 @@ declare module '@mui/material/styles' {
 		time: React.CSSProperties
 		button: React.CSSProperties
 		pass1: React.CSSProperties
+		teaserTitle: React.CSSProperties
+		teaserText: React.CSSProperties
 	}
 }
 
@@ -56,6 +60,8 @@ declare module '@mui/material/Typography' {
 		hero2: true
 		button: true
 		pass1: true
+		teaserTitle: true
+		teaserText: true
 	}
 }
 
@@ -276,6 +282,24 @@ const typography = {
 		textShadow: 'rgba(0,0,0,1) 0 5px 20px',
 		// WebkitTextStrokeWidth: '1px',
 		// WebkitTextStrokeColor: 'rgba(0,0,0,0.2)',
+	},
+	teaserTitle: {
+		fontFamily: FONT_HEADER,
+		fontWeight: 900,
+		lineHeight: 80 / 64,
+		fontSize: pxToRem(18),
+		...responsiveFontSizes({ sm: 18, md: 20, lg: 22 }),
+		float: 'left',
+		// textShadow: 'rgba(0,0,0,1) 0 5px 20px',
+	},
+	teaserText: {
+		fontFamily: FONT_PRIMARY,
+		fontWeight: 400,
+		lineHeight: 80 / 64,
+		fontSize: pxToRem(14),
+		...responsiveFontSizes({ sm: 14, md: 16, lg: 18 }),
+		float: 'left',
+		// textShadow: 'rgba(0,0,0,1) 0 5px 20px',
 	},
 } as const
 

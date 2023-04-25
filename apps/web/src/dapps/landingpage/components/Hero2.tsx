@@ -9,7 +9,7 @@ import Icon from '@mui/material/Icon'
 
 import Prev from '@mui/icons-material/NavigateBefore'
 import Next from '@mui/icons-material/NavigateNext'
-import { hero as items } from '../content'
+import { hero2 as items } from '../content'
 import { GRADIENT } from '../styles'
 
 const Teaser = styled(Typography)(({ theme }) => ({
@@ -56,8 +56,9 @@ const Item = (props) => {
 				sx={{
 					zIndex: 10,
 					width: '100%',
-					minHeight: { xs: '100vh', md: '400px' },
-					height: { xs: '100vh', md: '50vh' },
+					minHeight: '240px',
+					height: '25vh',
+					backgroundColor: props.item.bg,
 				}}
 			>
 				<Backdrop src={props.item.image} />
@@ -68,8 +69,8 @@ const Item = (props) => {
 					zIndex: 20,
 					width: '100%',
 					// minHeight: 'calc( 100vh )',
-					minHeight: { xs: '100vh', md: '400px' },
-					height: { xs: '100vh', md: '50vh' },
+					minHeight: '240px',
+					height: '25vh',
 					position: 'absolute',
 					top: 0,
 					display: 'flex',
@@ -97,14 +98,14 @@ const Item = (props) => {
 						</Teaser>
 					)}
 					{props.item.sub && (
-						<Typography variant={'hero1'} px={[2, 4, 6]} pt={4} sx={{ lineHeight: '95%' }}>
+						<Typography variant={'hero1'} px={[2, 4, 6]} sx={{ lineHeight: '95%' }}>
 							{props.item.sub}
 						</Typography>
 					)}
 					<Typography
 						variant={'hero2'}
 						px={[2, 4, 6]}
-						pt={2}
+						// pt={2}
 						sx={{ maxWidth: { xs: '100%', md: '75%', lg: '50%' } }}
 					>
 						{props.item.description}
@@ -129,8 +130,8 @@ const Item = (props) => {
 const Content = () => (
 	<Carousel
 		sx={{ borderRadius: 0, height: '100%' }}
-		duration={250}
-		interval={5000}
+		duration={150}
+		interval={2500}
 		NextIcon={<Next />}
 		PrevIcon={<Prev />}
 	>
@@ -140,7 +141,7 @@ const Content = () => (
 	</Carousel>
 )
 
-export const Hero = () => {
+export const Hero2 = () => {
 	const theme = useTheme()
 	const isSm = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -150,10 +151,11 @@ export const Hero = () => {
 	return (
 		<Box
 			sx={{
-				minHeight: { xs: '100vh', md: '400px' },
-				height: { xs: '100vh', md: '50vh' },
+				minHeight: '240px',
+				height: '25vh',
 				m: 0,
 				p: 0,
+				// my: 4,
 			}}
 		>
 			<Content />

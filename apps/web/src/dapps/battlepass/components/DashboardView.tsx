@@ -11,6 +11,8 @@ import { BPBuyBtn } from './BPBuyBtn'
 import { BPQuests } from './BPQuests'
 import { BPRewards } from './BPRewards'
 
+import { Invitational } from './Invitational'
+
 type TProps = {
 	id: string
 }
@@ -26,7 +28,7 @@ export function DashboardView({ id }: TProps) {
 	return (
 		<Grid container alignItems="center" spacing={theme.spacing(2)}>
 			<Grid item xs={12}>
-				<TopPlayers args={{ id }} />
+				<Invitational args={{ id }} />
 			</Grid>
 			<Grid item xs={12} md={6} pb={[2, 0]}>
 				<XPBar args={{ id }} />

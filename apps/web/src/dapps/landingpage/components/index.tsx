@@ -4,6 +4,7 @@ export * from './Headline'
 export * from './Teaser'
 
 export * from './Hero'
+export * from './Hero2'
 export * from './Intro'
 export * from './Team'
 export * from './Partners'

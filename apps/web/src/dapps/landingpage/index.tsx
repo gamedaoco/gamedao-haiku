@@ -8,6 +8,7 @@ import { Newsletter } from './components/Newsletter'
 import { Box, Container } from '@mui/material'
 import {
 	Hero,
+	Hero2,
 	Intro,
 	Transform,
 	Teaser,
@@ -37,6 +38,7 @@ export function Landingpage() {
 	return (
 		<Box>
 			{hero && <Hero />}
+			{hero && <Hero2 />}
 
 			<Newsletter />
 

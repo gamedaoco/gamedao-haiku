@@ -73,11 +73,11 @@ export const hero = [
 			// 	url: '/cases/esports',
 			// 	icon: 'Joystick',
 			// },
-			// {
-			// 	text: 'JOIN BATTLEPASS',
-			// 	url: '/battlepass/0x612bbe0650317b75891c4e7e8316f97d3bd246220ae906a169cd22b124127c09',
-			// 	icon: 'Battle',
-			// },
+			{
+				text: 'JOIN BATTLEPASS',
+				url: '/battlepass/0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532',
+				icon: 'Battle',
+			},
 		],
 		bg: '#111',
 		img: '/partners/wave-esports-white.png',
@@ -148,6 +148,21 @@ export const hero = [
 		bg: '#111',
 		img: '/v3/svg/GameDAO-color-h-wht-m.svg',
 		img_height: '48',
+	},
+]
+
+export const hero2 = [
+	{
+		sub: `BATTLEPASS`,
+		description: `
+		GameDAO presents WAVEpass CASHCUP invitational`,
+		// image: '/teaser.jpg',
+		// links: [
+		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+		// ],
+		bg: '#11111199',
+		img: '/partners/wave-esports-white.png',
+		img_height: '32',
 	},
 ]
 
