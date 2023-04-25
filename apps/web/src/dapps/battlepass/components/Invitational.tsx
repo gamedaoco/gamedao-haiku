@@ -19,8 +19,11 @@ export function Invitational({ args }: TProps) {
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
+
+	const handleJoin = (e) => {}
 	// const { loading, data } = useGetLeaderboardQuery({ variables: { id } })
 	// if (loading) return <Loader />
+
 	return (
 		<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)} pb={[2, 2]}>
 			<Grid item xs={12}>
@@ -35,12 +38,7 @@ export function Invitational({ args }: TProps) {
 						</Typography>
 						<Stack direction="row" justifyContent="end">
 							{/* <Button color="secondary">Learn More</Button> */}
-							<Button
-								variant="lemon"
-								onClick={() =>
-									handleJoin('0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532')
-								}
-							>
+							<Button variant="lemon" onClick={handleJoin}>
 								Join
 							</Button>
 						</Stack>
