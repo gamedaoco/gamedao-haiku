@@ -1,4 +1,5 @@
 import { BattlepassViews } from 'src/constants/battlepass'
+import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Grid, Stack, useMediaQuery } from '@mui/material'
@@ -19,6 +20,9 @@ type TProps = {
 
 export function DashboardView({ id }: TProps) {
 	const theme = useTheme()
+
+	// const address = useCurrentAccountAddress()
+	// const
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
@@ -27,9 +31,9 @@ export function DashboardView({ id }: TProps) {
 
 	return (
 		<Grid container alignItems="center" spacing={theme.spacing(2)}>
-			<Grid item xs={12}>
+			{/* <Grid item xs={12}>
 				<Invitational args={{ id }} />
-			</Grid>
+			</Grid> */}
 			<Grid item xs={12} md={6} pb={[2, 0]}>
 				<XPBar args={{ id }} />
 			</Grid>
