@@ -181,8 +181,8 @@ export const Overview = () => {
 						</Typography>
 						<Stack direction="row" justifyContent="end">
 							{/* <Button color="secondary">Learn More</Button> */}
-							<Button variant="lemon" onClick={() => handleJoin('')}>
-								Join
+							<Button disabled variant="glass" onClick={() => handleJoin('')}>
+								Soon
 							</Button>
 						</Stack>
 					</Stack>
