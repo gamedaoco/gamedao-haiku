@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { ENVIRONMENT } from 'src/constants'
 import { AppContext } from 'src/providers/app/modules/context'
+import { useExtensionContext } from 'src/providers/extension/modules/context'
 
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 import { useGetIdentityByDiscordQuery, useConnectIdentityMutation } from 'src/queries'
@@ -210,8 +211,11 @@ export function AppProvider({ children }) {
 		}
 	}, [featureQueryResult.error])
 
+	const { disconnectWallet } = useExtensionContext()
+
 	const flush = async () => {
 		console.log('kill session')
+		if (disconnectWallet) disconnectWallet()
 		await signOut({ callbackUrl: '/' })
 		setUser(initialUserState)
 		setConnected(false)
