@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { Loader } from 'src/components/Loader'
 
 import { useExtensionContext } from 'src/providers/extension/modules/context'
 import { useOrganizationFeatures } from 'src/hooks/featureToggle/useOrganizationFeatures'
@@ -118,6 +119,7 @@ export function OrganizationPage() {
 				</Grid>
 			</Box>
 
+			{loading && <Loader />}
 			{organizationsCount?.data?.organization_aggregate?.aggregate.count > 0 ? (
 				<>
 					<FiltersSection
