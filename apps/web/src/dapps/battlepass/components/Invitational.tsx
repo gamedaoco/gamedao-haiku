@@ -127,6 +127,7 @@ export function Invitational({ args }: TProps) {
 						<Typography variant="teaserText" pb={2}>
 							Join top players from around the globe in this first invitational on Fortnite. To take part
 							make sure to join WAVEPASS Beta, which will close end of April and put you on the shortlist.
+							This invitational will only take place if we reach 1000 members. Join now!
 						</Typography>
 
 						{remainingTime && <Countdown targetDate={remainingTime} />}
