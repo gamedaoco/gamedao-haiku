@@ -38,6 +38,7 @@ export const Overview = () => {
 
 	const handleJoin = (id) => {
 		console.log('join', id)
+		push(`/battlepass/${id}`)
 	}
 	const handleBuy = async (id) => {
 		console.log('buy', id)

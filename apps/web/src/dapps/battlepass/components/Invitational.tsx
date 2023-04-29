@@ -99,8 +99,8 @@ export function Invitational({ args }: TProps) {
 
 	// member count
 	const [memberCount, setMemberCount] = useState(0)
-	const where = { chainId: id }
-	const { loading, data: members } = useGetBattlepassUsersQuery({ variables: { id: id } })
+	const bpid = '0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532'
+	const { loading, data: members } = useGetBattlepassUsersQuery({ variables: { id: bpid } })
 	useEffect(() => {
 		if (!members) return
 		const _memberCount = members?.BattlepassBot?.Battlepasses[0]?.members.length || 0
