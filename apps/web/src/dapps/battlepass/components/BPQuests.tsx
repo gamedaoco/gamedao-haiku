@@ -39,6 +39,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		boxShadow: '0 0 10px #ffff00',
 	},
 }))
+import { Invitational } from './Invitational'
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
@@ -338,6 +339,10 @@ export const BPQuests = ({ args }: TArgs) => {
 			>
 				<Grid item xs={12}>
 					<Typography variant="h4">Quests</Typography>
+				</Grid>
+
+				<Grid item xs={12}>
+					<Invitational args={{ id, items }} />
 				</Grid>
 
 				{items.length > 0 ? (

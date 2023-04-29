@@ -171,7 +171,7 @@ export const Overview = () => {
 			</Grid>
 			<Grid item xs={12} md={6}>
 				<Paper sx={{ p: 2, height: '100%' }} variant="glass">
-					<Stack direction="column">
+					<Stack direction="column" justifyContent="space-between">
 						<Typography variant="teaserTitle" pb={2}>
 							GAMEDAO Netrunner
 						</Typography>
@@ -181,9 +181,9 @@ export const Overview = () => {
 						</Typography>
 						<Stack direction="row" justifyContent="end">
 							{/* <Button color="secondary">Learn More</Button> */}
-							<Button disabled variant="glass" onClick={() => handleJoin('')}>
+							{/* <Button disabled variant="glass" onClick={() => handleJoin('')}>
 								Soon
-							</Button>
+							</Button> */}
 						</Stack>
 					</Stack>
 				</Paper>
