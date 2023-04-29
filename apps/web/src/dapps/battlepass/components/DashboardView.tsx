@@ -12,7 +12,7 @@ import { BPBuyBtn } from './BPBuyBtn'
 import { BPQuests } from './BPQuests'
 import { BPRewards } from './BPRewards'
 
-import { Invitational } from './Invitational'
+// import { Invitational } from './Invitational'
 
 type TProps = {
 	id: string
