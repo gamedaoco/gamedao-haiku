@@ -4,7 +4,7 @@ import { useConfig } from 'src/hooks/useConfig'
 import { Logger } from 'src/utils/logger'
 import { Logger as LoggerType } from 'loglevel'
 
-export function useLogger(name: string = 'HAIKU'): LoggerType {
+export function useLogger(name: string = '📜'): LoggerType {
 	const config = useConfig()
 	const [loggerState, setLoggerState] = useState<LoggerType>(Logger(name, config?.LOG_LEVEL))
 

@@ -11,6 +11,12 @@ declare module '@mui/material/Button' {
 		pink: true
 		glass: true
 		nano: true
+		xs: true
+	}
+	interface ButtonPropsColorOverrides {
+		white: true
+		lemon: true
+		pink: true
 	}
 }
 
@@ -19,6 +25,45 @@ export default function Button(theme: Theme) {
 	return {
 		MuiButton: {
 			variants: [
+				{
+					props: { variant: 'xs', color: 'lemon' },
+					style: {
+						height: '15px',
+						background: '#f3cb14',
+						color: 'black',
+						fontSize: '10px',
+						// boxShadow: theme.customShadows.primary,
+						border: `1px solid transparent`,
+						borderRadius: theme.shape.borderRadiusSm,
+						p: `5px`,
+					},
+				},
+				{
+					props: { variant: 'xs', color: 'pink' },
+					style: {
+						height: '15px',
+						background: '#ee4693ff',
+						color: 'black',
+						fontSize: '10px',
+						// boxShadow: theme.customShadows.primary,
+						border: `1px solid transparent`,
+						borderRadius: theme.shape.borderRadiusSm,
+						p: `5px`,
+					},
+				},
+				{
+					props: { variant: 'xs', color: 'white' },
+					style: {
+						height: '15px',
+						background: 'white',
+						color: 'black',
+						fontSize: '10px',
+						// boxShadow: theme.customShadows.primary,
+						border: `1px solid transparent`,
+						borderRadius: theme.shape.borderRadiusSm,
+						p: `5px`,
+					},
+				},
 				{
 					props: { variant: 'micro' },
 					style: {

@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 
 import { useCountdown } from 'hooks/useCountdown'
 import { useGetLeaderboardQuery } from 'src/queries'
+import { useGetBattlepassUsersQuery } from 'src/queries'
 
 import { useTheme } from '@mui/material/styles'
 import { Button, Grid, Typography, Paper, Stack, useMediaQuery } from '@mui/material'
@@ -94,6 +95,19 @@ export function Invitational({ args }: TProps) {
 		defaultMatches: true,
 	})
 
+	const requiredCount = 1000
+
+	// member count
+	const [memberCount, setMemberCount] = useState(0)
+	const where = { chainId: id }
+	const { loading, data: members } = useGetBattlepassUsersQuery({ variables: { id: id } })
+	useEffect(() => {
+		if (!members) return
+		const _memberCount = members?.BattlepassBot?.Battlepasses[0]?.members.length || 0
+		if (_memberCount === 0) return
+		setMemberCount(_memberCount)
+	}, [members])
+
 	const handleJoin = (e) => {}
 	// const { loading, data } = useGetLeaderboardQuery({ variables: { id } })
 	// if (loading) return <Loader />
@@ -106,9 +120,9 @@ export function Invitational({ args }: TProps) {
 		if (remainingTime) return
 		const t = new Date().getTime() + getDateDiff(new Date(), new Date('2023-05-01 00:00'))
 		setRemainingTime(t)
-		console.log('remainingTime', t)
 	}, [])
 
+	if (loading) return <Loader />
 	return (
 		<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)} pb={[2, 2]}>
 			<Grid item xs={12}>
@@ -127,10 +141,26 @@ export function Invitational({ args }: TProps) {
 						<Typography variant="teaserText" pb={2}>
 							Join top players from around the globe in this first invitational on Fortnite. To take part
 							make sure to join WAVEPASS Beta, which will close end of April and put you on the shortlist.
-							This invitational will only take place if we reach 1000 members. Join now!
+							This invitational will only take place if we reach {requiredCount} members. Join now!
 						</Typography>
 
-						{remainingTime && <Countdown targetDate={remainingTime} />}
+						{remainingTime && (
+							<Stack direction="column" spacing={0} alignItems="center" justifyContent="center">
+								<Typography variant="caption" sx={{ borderBottom: `1px solid white` }}>
+									{' '}
+									remaining slots{' '}
+								</Typography>
+								<Typography variant="hero1" sx={{}}>
+									{' '}
+									{requiredCount - memberCount}{' '}
+								</Typography>
+								<Typography variant="caption" pt={2} sx={{ borderBottom: `1px solid white` }}>
+									{' '}
+									remaining time{' '}
+								</Typography>
+								<Countdown targetDate={remainingTime} />
+							</Stack>
+						)}
 
 						<Stack direction="row" justifyContent="end">
 							{/* <Button color="secondary">Learn More</Button> */}
