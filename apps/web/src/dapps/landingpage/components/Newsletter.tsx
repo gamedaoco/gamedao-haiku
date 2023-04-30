@@ -94,7 +94,7 @@ const CustomForm: FC<FormProps> = ({ status, message, onValidated }) => {
 							onChange={handleOnChange}
 							fullWidth
 						/>
-						<Button onClick={handleOnSubmit} size="medium" variant="outlined" fullWidth>
+						<Button onClick={handleOnSubmit} variant="md" color="white" fullWidth>
 							Submit
 						</Button>
 					</Stack>

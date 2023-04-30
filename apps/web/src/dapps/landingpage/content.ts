@@ -74,8 +74,8 @@ export const hero = [
 			// 	icon: 'Joystick',
 			// },
 			{
-				text: 'JOIN',
-				url: '/organizations/0x5404d0a86c0c419f3bd2d9578aa4df81f9597d311b8309c52dc7fcb48adfc75c',
+				text: 'JOIN THE DAO',
+				url: '/organizations/0x5404d0a86c0c419f3bd2d9578aa4df81f9597d311b8309c52dc7fcb48adfc75c/overview',
 				icon: 'Battle',
 			},
 		],
@@ -179,7 +179,9 @@ export const hero2 = [
 	{
 		sub: `BATTLEPASS`,
 		description: `
-		GameDAO presents WAVEpass CASHCUP invitational`,
+			Unlock the WAVEpass CASHCUP invitational with us:
+			1000 slots available.
+		`,
 		// image: '/teaser.jpg',
 		// links: [
 		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },

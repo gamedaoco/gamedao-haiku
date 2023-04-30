@@ -79,7 +79,19 @@ const Item = (props) => {
 					// border: '5px solid yellow'
 				}}
 			>
-				<Stack direction="column" justifyContent="flex-end" alignItems="flex-start" spacing={[1, 1, 2]}>
+				<Stack
+					direction="column"
+					justifyContent="flex-end"
+					alignItems="flex-start"
+					spacing={[1, 1, 2]}
+					sx={{
+						backgroundColor: '#11111166',
+						// backdropFilter: `blur(5px)`,
+						borderRadius: theme.shape.borderRadiusLg,
+						// backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
+						py: 4,
+					}}
+				>
 					{props.item.img && (
 						<Box
 							px={[2, 4, 6]}
@@ -121,7 +133,7 @@ const Item = (props) => {
 						<Typography variant={'hero2'} px={[2, 4, 6]} pt={[2, 4]} sx={{ lineHeight: '95%' }}>
 							{props.item.links.map((e, i) => (
 								<Link href={e.url} key={i}>
-									<Button size="small" variant="outlined" sx={{ mr: 2, mb: 2 }}>
+									<Button variant="lemon" sx={{ mr: 2, mb: 2 }}>
 										{`${e.text || 'More'}`}
 									</Button>
 								</Link>
