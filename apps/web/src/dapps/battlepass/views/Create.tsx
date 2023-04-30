@@ -40,11 +40,11 @@ import { TransactionDialog } from 'src/components/TransactionDialog/transactionD
 import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
 import { Image } from 'src/components/Image/image'
 import { Loader } from 'src/components/Loader'
-import { LevelEditor } from './components/create/LevelEditor'
-import { QuestEditor } from './components/create/QuestEditor'
+import { LevelEditor } from '../create/LevelEditor'
+import { QuestEditor } from '../create/QuestEditor'
 
 import { TabContext, TabPanel } from '@mui/lab'
-import TabBar from './components/create/TabBar'
+import TabBar from '../create/TabBar'
 
 import {
 	useGetOrganizationsForPrimeSubscription,
@@ -52,148 +52,7 @@ import {
 	useGetAllBattlepassesSubscription,
 } from 'src/queries'
 
-export type TMetadata = {
-	name: string
-	description: string
-	slug: string
-	tags: string[]
-	imageCid: string
-	price: number
-	cid: string
-}
-const initialMetadata: TMetadata = {
-	name: '',
-	description: '',
-	slug: '',
-	tags: [],
-	imageCid: '',
-	price: 0,
-	cid: '',
-}
-
-export type TInitialState = {
-	metadata?: TMetadata
-
-	organizationId: string
-	organizationAddress: string
-	creatorAddress: string
-	battlepassId: string
-
-	// battlepass metadata
-	name: string
-	description: string
-	slug: string
-	tags: string[]
-	coverImageCid: string
-	metadataCid: string
-
-	//
-	iconImg: string
-	bannerImg: string
-	cardImg: string
-	primaryColor: string
-	secondaryColor: string
-	backgroundColor: string
-	//
-	tokenCoverImg: string
-	tokenContent: string
-	//
-	currency: string
-	subscribers: number
-	price: number
-	stake: number
-	freePasses: number
-	totalPasses: number
-	//
-	duration: number
-	claim: number
-	join: number
-	//
-	acceptTerms: boolean
-	botAccount: string
-}
-
-// const initialMetadataState = {
-// 	collection: {},
-// 	quests: [
-// 		{
-// 			index: 0,
-// 			name: 'GameDAO Battlepass Quest 1',
-// 			description: 'A fancy description of a quest',
-// 			payload: {
-// 				channel: 'twitter:gamedaoco',
-// 				action: 'follow',
-// 			},
-// 			points: 100,
-// 			metadataCID: '',
-// 		},
-// 	],
-// 	rewards: [
-// 		{
-// 			index: 0,
-
-// 			minPoints: 100,
-// 			minLevel: 1,
-// 			maxMint: 100,
-
-// 			name: 'GameDAO Battlepass Reward Level 1',
-// 			description: 'A fancy description of a reward',
-
-// 			payload: null, // e.g. { 'onClaim', 'mint', '<id>' }
-
-// 			thumbnailCID: '', // preview image
-// 			mediaCID: '', // content
-
-// 			metadataCID: '', // cid of this json excl this key
-// 		},
-// 	]
-// }
-
-const initialState: TInitialState = {
-	metadata: initialMetadata,
-
-	organizationId: '',
-	organizationAddress: '',
-	battlepassId: '',
-	creatorAddress: '',
-
-	// styling
-	primaryColor: '',
-	secondaryColor: '',
-	backgroundColor: '',
-
-	// images
-	iconImg: '',
-	cardImg: '',
-	bannerImg: '',
-
-	// battlepass token
-	tokenCoverImg: '',
-	tokenContent: '',
-
-	// content
-	name: '',
-	description: '',
-	slug: '',
-	tags: [],
-	metadataCid: '',
-	coverImageCid: '',
-
-	// commercials
-	currency: 'EUR',
-	subscribers: 0,
-	price: 1500, // in eurocents
-	stake: 15000,
-	freePasses: 0,
-	totalPasses: 0, // unlimited
-	// duration and access
-	duration: 100,
-	claim: 0,
-	join: 1,
-	// create
-	acceptTerms: false,
-	botAccount: '',
-}
+import { initialState } from '../create/const'
 
 export const Create = () => {
 	const config = useConfig()
@@ -201,16 +60,15 @@ export const Create = () => {
 	const { query, push } = useRouter()
 	const view = query?.view as string
 
-	const address: string = useCurrentAccountAddress()
+	const address = useCurrentAccountAddress()
 	const [stakeToEur, setStakeToEur] = useState(0)
 	const [formState, setFormState] = useState(initialState)
 
-	//  transactions
 	const createBattlepassTX = useCreateBattlepassTX(
 		formState.organizationId,
-		formState.metadata.name,
-		formState.metadata.cid,
-		formState.metadata.price,
+		formState.name,
+		formState.metadataCid,
+		formState.price,
 	)
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
 	const linkBotTX = useLinkBotTX(formState.battlepassId, formState.botAccount)
@@ -218,7 +76,7 @@ export const Create = () => {
 	//
 	// get orgs for user
 	//
-	const [organizations, setOrganizations] = useState<any>()
+	const [organizations, setOrganizations] = useState(null)
 	const { loading, data: primeOrganizations } = useGetOrganizationsForPrimeSubscription({
 		variables: { id: address },
 	})
@@ -285,6 +143,7 @@ export const Create = () => {
 	//
 	const updateFormState = (k, v) => {
 		const update = { ...formState, k: v }
+		console.log('update', update)
 		setFormState(update)
 		localStorage.setItem('battlepass', JSON.stringify(update))
 	}
@@ -336,7 +195,7 @@ export const Create = () => {
 		console.log('metadata', data)
 		console.log('filename', filename)
 		console.log('================================')
-	}, [formState])
+	}, [])
 
 	// 2 upload metadata to ipfs
 	// 3 derive image urls from metadata cids
@@ -464,22 +323,25 @@ export const Create = () => {
 							variant="outlined"
 							fullWidth
 							/> */}
-						{organizations && organizations.length > 0 ? (
+						{organizations?.length > 0 && formState.organizationId ? (
 							<FormControl sx={{ flex: 1 }}>
-								<InputLabel id="organization">Select Organization</InputLabel>
+								<InputLabel id="organizationId">Select Organization</InputLabel>
 								<Select
 									name={'organizationId'}
 									value={formState.organizationId}
 									onChange={handleChange}
-									labelId="organization"
+									labelId="organizationId"
 									label="Select Organization"
 									variant="outlined"
 								>
-									{organizations.map((item, index) => (
-										<MenuItem value={item.value} key={index}>
-											{item.label}
-										</MenuItem>
-									))}
+									{organizations?.map((item, index) => {
+										console.log(index, item)
+										return (
+											<MenuItem value={item.value} key={index}>
+												{item.label}
+											</MenuItem>
+										)
+									})}
 								</Select>
 							</FormControl>
 						) : (

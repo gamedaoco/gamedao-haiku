@@ -13,9 +13,9 @@ import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack, Paper } from '@mui/material'
 import { CardContent, CardActions } from '@mui/material'
 
-import { Invitational } from './components/Invitational'
-import { BPCard } from './components/BPCard'
-import { OverviewCard } from './components/OverviewCard'
+import { Invitational } from '../components/Invitational'
+import { BPCard } from '../components/Card'
+import { OverviewCard } from '../components/OverviewCard'
 
 export const Overview = () => {
 	const theme = useTheme()

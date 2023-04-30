@@ -18,11 +18,11 @@ import { TabContext, TabPanel } from '@mui/lab'
 import { Container, Paper, Stack, Box } from '@mui/material'
 
 // TODO: move component level up
-import { Header } from './components/Header'
+import { Header } from '../components/Header'
 
-import { DashboardView } from './components/DashboardView'
-import { LeaderboardView } from './components/LeaderboardView'
-import { AdminView } from './components/AdminView'
+import { DashboardView } from './Dashboard'
+import { LeaderboardView } from './Leaderboard'
+import { AdminView } from './Admin'
 
 type TArgs = {
 	id: string

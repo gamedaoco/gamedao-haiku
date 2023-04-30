@@ -1,3 +1,3 @@
-export * from './Overview'
-export * from './Battlepass'
-export * from './Create'
+export * from './views/Overview'
+export * from './views/Battlepass'
+export * from './views/Create'

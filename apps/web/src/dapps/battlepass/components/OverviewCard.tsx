@@ -12,7 +12,7 @@ import { Box, Card, Button, Typography, Grid, Stack, Paper } from '@mui/material
 import { CardContent, CardActions } from '@mui/material'
 
 import { Invitational } from './Invitational'
-import { BPCard } from './BPCard'
+import { BPCard } from './Card'
 
 type TOverviewCardProps = {
 	index?: number

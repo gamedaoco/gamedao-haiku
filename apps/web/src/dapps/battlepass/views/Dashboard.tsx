@@ -5,12 +5,12 @@ import { useTheme } from '@mui/material/styles'
 import { Box, Grid, Stack, useMediaQuery } from '@mui/material'
 import { Loader } from 'src/components/Loader'
 
-import { TopPlayers } from './TopPlayers'
-import { XPBar } from './XPBar'
-import { ShareBtn } from './ShareBtn'
-import { BPBuyBtn } from './BPBuyBtn'
-import { BPQuests } from './BPQuests'
-import { BPRewards } from './BPRewards'
+import { TopPlayers } from '../components/TopPlayers'
+import { XPBar } from '../components/XPBar'
+import { ShareBtn } from '../components/ShareBtn'
+import { BPBuyBtn } from '../components/BuyBtn'
+import { BPQuests } from '../components/Quests'
+import { BPRewards } from '../components/Rewards'
 
 // import { Invitational } from './Invitational'
 

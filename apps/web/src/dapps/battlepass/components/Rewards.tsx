@@ -11,7 +11,7 @@ import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
 import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
-import { BPCard } from './BPCard'
+import { BPCard } from './Card'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
 
 import demoContent from '../content/rewards'

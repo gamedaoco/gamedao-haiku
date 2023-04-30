@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react'
 import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
 
-import { scoreToLevelMap } from '../../content/mock'
+import { scoreToLevelMap } from '../content/mock'
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
 import Edit from '@mui/icons-material/EditOutlined'
 import Save from '@mui/icons-material/SaveOutlined'
@@ -29,7 +29,7 @@ import { RadioItem } from 'src/components/Forms/modules/radioItem'
 
 import { useGetBattlepassQuestsQuery } from 'src/queries'
 
-import { TInitialState } from '../../Create'
+import { TInitialState } from './const'
 
 // quest(
 // battlepass: String!

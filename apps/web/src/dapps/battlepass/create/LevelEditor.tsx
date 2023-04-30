@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect, useCallback } from 'react'
-import { scoreToLevelMap } from '../../content/mock'
+import { scoreToLevelMap } from '../content/mock'
 import { useCreateBattlepassLevelsMutation, Level } from 'src/queries'
 
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
