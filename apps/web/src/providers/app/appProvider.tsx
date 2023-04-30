@@ -23,7 +23,7 @@ export type TAppUser = {
 	email?: string
 	name?: string
 }
-const initialUserState: TAppUser = {
+export const initialUserState: TAppUser = {
 	uuid: null,
 	address: null,
 	discord: null,
@@ -74,7 +74,8 @@ export function AppProvider({ children }) {
 			console.log('app', 'fetching id', '...')
 
 			const response = await connectIdentityMutation({
-				variables: { discord: user.discord, name: user.name, email: user.email, twitter: user.twitter },
+				variables: { discord: user.discord },
+				// , name: user.name, email: user.email, twitter: user.twitter },
 			}).then((res) => {
 				try {
 					const identity = res?.data?.BattlepassBot?.identity
