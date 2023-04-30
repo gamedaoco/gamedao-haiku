@@ -20,6 +20,53 @@ const log = Logger('auth')
 
 const scope = ['identify'].join(' ')
 
+// provider:
+// 	url
+//  params
+//    [ key: value ]
+async function refreshAccessToken(token, provider) {
+	try {
+		const url =
+			provider.url +
+			new URLSearchParams(
+				provider.params.map((param) => {
+					return { [param.key]: param.value }
+				}),
+			)
+		// {
+		// 	client_id: process.env.GOOGLE_CLIENT_ID,
+		// 	client_secret: process.env.GOOGLE_CLIENT_SECRET,
+		// 	grant_type: 'refresh_token',
+		// 	refresh_token: token.refreshToken
+		//   })
+
+		const response = await fetch(url, {
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			method: 'POST',
+		})
+		const refreshedTokens = await response.json()
+
+		if (!response.ok) {
+			throw refreshedTokens
+		}
+
+		return {
+			...token,
+			accessToken: refreshedTokens.access_token,
+			accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+			refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+		}
+	} catch (error) {
+		console.log(error)
+		return {
+			...token,
+			error: 'RefreshAccessTokenError',
+		}
+	}
+}
+
 export const authOptions: NextAuthOptions = {
 	adapter: MongoDBAdapter(clientPromise),
 
@@ -118,7 +165,7 @@ export const authOptions: NextAuthOptions = {
 				address: token.address,
 				discord: token.discord as string,
 				twitter: token.twitter,
-				twitter_username: token.twitter_username,
+				// twitter_username: token.twitter_username,
 			}
 
 			log.info('AUTH', '-->', 'session', token, session)

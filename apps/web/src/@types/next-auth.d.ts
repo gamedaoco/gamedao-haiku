@@ -1,28 +1,18 @@
+import { ExecFileSyncOptionsWithBufferEncoding } from 'child_process'
 import NextAuth, { DefaultSession, DefaultUser } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 
-declare module 'next-auth/jwt' {
-	/**
-	 * Returned by the `jwt` callback and `getToken`, when using JWT sessions
-	 */
-	interface JWT {
-		uuid?: string
-		email?: string
-		address?: string
-		twitter?: string
-		twitter_username?: string
-	}
-}
 declare module 'next-auth' {
 	interface User {
 		uuid?: string
 		name?: string
 		avatar?: string
-		email?: string
 		address?: string
 		discord?: string
+		email?: string
+		epic?: string
 		twitter?: string
-		twitter_username?: string
+		notifications?: boolean
 	}
 
 	interface Session extends DefaultSession {
@@ -35,5 +25,20 @@ declare module 'next-auth' {
 		username?: string
 		avatar?: string
 		uuid?: string
+	}
+}
+
+declare module 'next-auth/jwt' {
+	interface JWT {
+		// primary key
+		uuid?: string
+		// signin keys
+		address?: string
+		discord?: string
+		email?: string
+		epic?: string
+		twitter?: string
+		// settings
+		notifications?: boolean
 	}
 }
