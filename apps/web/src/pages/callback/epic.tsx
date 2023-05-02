@@ -31,7 +31,7 @@ export function Page() {
 			<Box sx={{ mb: 2 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">Twitter Authorized</Typography>
+						<Typography variant="h3">Authorized</Typography>
 					</Grid>
 					<Grid item></Grid>
 				</Grid>
