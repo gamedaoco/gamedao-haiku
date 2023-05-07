@@ -1,14 +1,25 @@
-import { Fragment, useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { scoreToLevelMap } from '../content/mock'
 import { useCreateBattlepassLevelsMutation, Level } from 'src/queries'
 
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
 import Edit from '@mui/icons-material/EditOutlined'
 import Save from '@mui/icons-material/SaveOutlined'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Stack, Button } from '@mui/material'
-import { TextField } from '@mui/material'
-
-import { gql, useMutation } from '@apollo/client'
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	Paper,
+	Stack,
+	Button,
+	TextField,
+	Typography,
+} from '@mui/material'
+import { TabPanel } from '@mui/lab'
+import { Section } from 'src/components/content'
 
 type TRowData = {
 	id: number
@@ -134,114 +145,123 @@ export function LevelEditor(id) {
 	}, [data])
 
 	return !data ? null : (
-		<Fragment>
-			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 650 }} aria-label="score-to-level" size="small">
-					<TableHead>
-						<TableRow>
-							<TableCell align="right">Id</TableCell>
-							<TableCell align="right">Name</TableCell>
-							<TableCell align="right">Level</TableCell>
-							<TableCell align="right">Score</TableCell>
-							<TableCell align="right">fn</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{data.map((row) => (
-							<TableRow
-								key={`${row.id}${Math.random() * 1000}`}
-								sx={{
-									'td,th': { borderBottom: '1px dotted #ffffff33' },
-									'&:last-child td, &:last-child th': { border: 0 },
-								}}
-							>
-								<TableCell align="left" component="th" scope="row">
-									{' '}
-									{row.id}{' '}
-								</TableCell>
-								<TableCell align="right">
-									{row.id === editRow ? (
-										<TextField
-											name={'name'}
-											size="small"
-											fullWidth
-											label="Name"
-											variant="outlined"
-											onChange={handleChange}
-											value={rowState.name}
-										/>
-									) : (
-										row.name
-									)}
-								</TableCell>
-								<TableCell align="right">
-									{row.id === editRow ? (
-										<TextField
-											name={'level'}
-											size="small"
-											fullWidth
-											label="Level"
-											variant="outlined"
-											onChange={handleChange}
-											value={rowState.level}
-											type="number"
-										/>
-									) : (
-										row.level
-									)}
-								</TableCell>
-								<TableCell align="right">
-									{row.id === editRow ? (
-										<TextField
-											name={'score'}
-											size="small"
-											fullWidth
-											label="Score"
-											variant="outlined"
-											onChange={handleChange}
-											value={rowState.score}
-											type="number"
-										/>
-									) : (
-										row.score
-									)}
-								</TableCell>
-								<TableCell align="right">
-									{row.id === editRow ? (
-										<Button onClick={() => handleSaveRow(row.id)}>
-											<Save />
-										</Button>
-									) : (
-										!editMode &&
-										enableEdit && (
-											<Button onClick={() => handleEditRow(row.id)}>
-												<Edit />
-											</Button>
-										)
-									)}
-									{enableDelete && (
-										<Button onClick={() => handleDeleteRow(row.id)}>
-											<Delete />
-										</Button>
-									)}
-								</TableCell>
+		<TabPanel value="levels">
+			{/* <Accordion disabled={formState.battlepassId ? false : true}> */}
+			<Typography>3. Levels</Typography>
+			<Section
+				direction={{ xs: 'column', md: 'column' }}
+				// title="Levels"
+				description={`Configure levels and ranks. Careful, this can only be set once!`}
+			>
+				<TableContainer component={Paper}>
+					<Table sx={{ minWidth: 650 }} aria-label="score-to-level" size="small">
+						<TableHead>
+							<TableRow>
+								<TableCell align="right">Id</TableCell>
+								<TableCell align="right">Name</TableCell>
+								<TableCell align="right">Level</TableCell>
+								<TableCell align="right">Score</TableCell>
+								<TableCell align="right">fn</TableCell>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
-			{/* {rows !== data && ( */}
-			<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-				<Button color="warning" variant="outlined" onClick={handleReset}>
-					Reset
-				</Button>
-				<Stack direction="row" spacing={2}>
-					<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
-						Save
+						</TableHead>
+						<TableBody>
+							{data.map((row) => (
+								<TableRow
+									key={`${row.id}${Math.random() * 1000}`}
+									sx={{
+										'td,th': { borderBottom: '1px dotted #ffffff33' },
+										'&:last-child td, &:last-child th': { border: 0 },
+									}}
+								>
+									<TableCell align="left" component="th" scope="row">
+										{' '}
+										{row.id}{' '}
+									</TableCell>
+									<TableCell align="right">
+										{row.id === editRow ? (
+											<TextField
+												name={'name'}
+												size="small"
+												fullWidth
+												label="Name"
+												variant="outlined"
+												onChange={handleChange}
+												value={rowState.name}
+											/>
+										) : (
+											row.name
+										)}
+									</TableCell>
+									<TableCell align="right">
+										{row.id === editRow ? (
+											<TextField
+												name={'level'}
+												size="small"
+												fullWidth
+												label="Level"
+												variant="outlined"
+												onChange={handleChange}
+												value={rowState.level}
+												type="number"
+											/>
+										) : (
+											row.level
+										)}
+									</TableCell>
+									<TableCell align="right">
+										{row.id === editRow ? (
+											<TextField
+												name={'score'}
+												size="small"
+												fullWidth
+												label="Score"
+												variant="outlined"
+												onChange={handleChange}
+												value={rowState.score}
+												type="number"
+											/>
+										) : (
+											row.score
+										)}
+									</TableCell>
+									<TableCell align="right">
+										{row.id === editRow ? (
+											<Button onClick={() => handleSaveRow(row.id)}>
+												<Save />
+											</Button>
+										) : (
+											!editMode &&
+											enableEdit && (
+												<Button onClick={() => handleEditRow(row.id)}>
+													<Edit />
+												</Button>
+											)
+										)}
+										{enableDelete && (
+											<Button onClick={() => handleDeleteRow(row.id)}>
+												<Delete />
+											</Button>
+										)}
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+
+				{/* {rows !== data && ( */}
+				<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+					<Button color="warning" variant="outlined" onClick={handleReset}>
+						Reset
 					</Button>
+					<Stack direction="row" spacing={2}>
+						<Button color="success" variant="contained" onClick={handleSend} disabled={!enableSend}>
+							Save
+						</Button>
+					</Stack>
 				</Stack>
-			</Stack>
-			{/* )} */}
-		</Fragment>
+				{/* )} */}
+			</Section>
+		</TabPanel>
 	)
 }

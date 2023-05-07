@@ -1,21 +1,38 @@
 import { useCallback, useEffect, Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
-
 import slugify from 'slugify'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
+
+//
+
+import { DashboardTab } from '../create/DashboardTab'
+import { GeneralEditor } from '../create/GeneralEditor'
+import { StylingEditor } from '../create/StylingEditor'
+import { LevelEditor } from '../create/LevelEditor'
+import { QuestEditor } from '../create/QuestEditor'
+
+//
+
+import {
+	useActiveBattlepassSubscription,
+	useGetOrganizationsForPrimeSubscription,
+	useGetBattlepassesForOrganizationQuery,
+	useGetAllBattlepassesSubscription,
+} from 'src/queries'
+
 import { useConfig } from 'hooks/useConfig'
 import { useCreateBattlepassTX } from 'hooks/tx/useCreateBattlepassTX'
 import { useLinkBotTX } from 'hooks/tx/useLinkBotTX'
 import { useActivateBattlepassTX } from 'hooks/tx/useActivateBattlepassTX'
 import { useCurrentAccountAddress } from 'hooks/useCurrentAccountAddress'
-import { useActiveBattlepassSubscription } from 'src/queries'
+
+//
 
 import { useTheme } from '@mui/material/styles'
-
-// uploads
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
+import { TabContext, TabPanel } from '@mui/lab'
 import { Avatar, Button, Grid } from '@mui/material'
 import {
 	Box,
@@ -33,26 +50,26 @@ import {
 	RadioGroup,
 	MenuItem,
 } from '@mui/material'
-
 import { RadioItem } from 'src/components/Forms/modules/radioItem'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
 
+import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
 import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
 import { Image } from 'src/components/Image/image'
 import { Loader } from 'src/components/Loader'
-import { LevelEditor } from '../create/LevelEditor'
-import { QuestEditor } from '../create/QuestEditor'
 
-import { TabContext, TabPanel } from '@mui/lab'
 import TabBar from '../create/TabBar'
 
-import {
-	useGetOrganizationsForPrimeSubscription,
-	useGetBattlepassesForOrganizationQuery,
-	useGetAllBattlepassesSubscription,
-} from 'src/queries'
-
 import { initialState } from '../create/const'
+import { RecordWithTtl } from 'dns'
+
+enum CreateBattlepassViews {
+	dashboard,
+	general,
+	styling,
+	levels,
+	quests,
+	rewards,
+}
 
 export const Create = () => {
 	const config = useConfig()
@@ -142,8 +159,8 @@ export const Create = () => {
 	// handle input
 	//
 	const updateFormState = (k, v) => {
-		const update = { ...formState, k: v }
-		console.log('update', update)
+		const update = { ...formState, [k]: v }
+		// console.log('update', update)
 		setFormState(update)
 		localStorage.setItem('battlepass', JSON.stringify(update))
 	}
@@ -166,9 +183,9 @@ export const Create = () => {
 	)
 	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
 
-	//
-	// handle json upload
-	//
+	// //
+	// // handle json upload
+	// //
 	const uploadFile = async (filename, data) => {
 		const file = new File([JSON.stringify(data)], filename, { type: 'text/plain' })
 		const cid = await uploadFileToIpfs(file)
@@ -265,7 +282,7 @@ export const Create = () => {
 		localStorage.setItem('battlepass', JSON.stringify(initialState))
 	}
 
-	const log = (item) => {
+	const log = (item = null) => {
 		let res
 		switch (item) {
 			case 0:
@@ -287,7 +304,7 @@ export const Create = () => {
 				<Button variant={'nano'} onClick={reset}>
 					Flush Editor Cache
 				</Button>
-				<Button variant={'nano'} onClick={() => log(0)}>
+				<Button variant={'nano'} onClick={() => log()}>
 					Log Battlepass Metadata
 				</Button>
 				{/* <Button variant={'nano'} onClick={()=>log(1)}>
@@ -297,14 +314,23 @@ export const Create = () => {
 					Log Reward Metadata
 				</Button> */}
 			</Stack>
+
 			<TabBar />
 
 			<TabContext value={view}>
-				<TabPanel sx={{ py: 2 }} value="dashboard">
-					<Typography>Dashboard</Typography>
-				</TabPanel>
+				<DashboardTab />
+				<GeneralEditor args={{ formState, handleChange }} />
+				<LevelEditor id={formState.battlepassId} />
+				{/* <StylingEditor
+					handleUploadImage={handleUploadImage}
+					getImageURL={getImageURL}
+					formState={formState}
+					handleChange={handleChange}
+				/> */}
+				{/* <QuestsEditor/> */}
+				{/* <RewardsEditor/> */}
 
-				<TabPanel sx={{ py: 2 }} value="general">
+				<TabPanel sx={{ py: 2 }} value="general2">
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
 						title="Deposit + Create Battlepass Draft"
@@ -312,7 +338,7 @@ export const Create = () => {
 					GameDAO protocols can be enabled for your organization by staking GAME token.
 					The amount should be in relation to the number of passes issued and their respective sales price.
 					Keeping a healthy ratio between the number of passes and the stake also contributes to
-					the reputation of your organization.
+					the reputation of your organization. yy
 					`}
 					>
 						{/* <TextField
@@ -616,137 +642,7 @@ export const Create = () => {
 						</Section>
 					)}
 				</TabPanel>
-				<TabPanel value="styling">
-					<Typography>2. Styling</Typography>
-					<Section
-						direction={{ xs: 'column', md: 'column' }}
-						title="Styling"
-						description={`Add images and colors to create that unique look`}
-					>
-						<Box sx={{ border: 'grey' }}>
-							<label htmlFor="logo-file-upload">
-								<input
-									style={{ display: 'none' }}
-									accept="image/*"
-									id="logo-file-upload"
-									type="file"
-									onChange={(e) => handleUploadImage(e, 'iconImg')}
-								/>
-								<Avatar
-									sx={(theme) => ({
-										width: '7rem',
-										height: '7rem',
-										backgroundColor: theme.palette.background.default,
-										outline: `5px solid #000000aa`,
-										cursor: 'pointer',
-									})}
-									src={getImageURL(formState.iconImg)}
-								>
-									<Stack spacing={1} alignItems="center">
-										<AddPhotoAlternateOutlinedIcon
-											sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
-										/>
-										<Typography>Add Icon</Typography>
-									</Stack>
-								</Avatar>
-							</label>
-						</Box>
 
-						<Box sx={{ border: '1px solid yellow' }}>
-							<label htmlFor="banner-file-upload">
-								<input
-									style={{ display: 'none' }}
-									accept="image/*"
-									id="banner-file-upload"
-									type="file"
-									onChange={(e) => handleUploadImage(e, 'bannerImg')}
-								/>
-								{!formState.bannerImg ? (
-									<Stack spacing={1} alignItems="center">
-										<AddPhotoAlternateOutlinedIcon
-											sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
-										/>
-										<Typography>Add Banner Image</Typography>
-									</Stack>
-								) : (
-									<Image
-										src={getImageURL(formState.bannerImg)}
-										alt="banner"
-										sx={{
-											borderRadius: Number(theme.shape.borderRadius) * 20,
-											height: '250px',
-											width: 'auto',
-										}}
-									/>
-								)}
-							</label>
-						</Box>
-
-						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-							<TextField
-								name={'primaryColor'}
-								inputProps={{ maxLength: 8 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.primaryColor}
-								label="Primary Color"
-								variant="outlined"
-								InputProps={{
-									startAdornment: (
-										<Typography mr={1} variant="body2">
-											#
-										</Typography>
-									),
-								}}
-							/>
-							<TextField
-								name={'secondaryColor'}
-								inputProps={{ maxLength: 8 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.secondaryColor}
-								label="Secondary Color"
-								variant="outlined"
-								InputProps={{
-									startAdornment: (
-										<Typography mr={1} variant="body2">
-											#
-										</Typography>
-									),
-								}}
-							/>
-							<TextField
-								name={'backgroundColor'}
-								inputProps={{ maxLength: 8 }}
-								fullWidth
-								onChange={handleChange}
-								value={formState.backgroundColor}
-								label="Background Color"
-								variant="outlined"
-								InputProps={{
-									startAdornment: (
-										<Typography mr={1} variant="body2">
-											#
-										</Typography>
-									),
-								}}
-							/>
-						</Stack>
-					</Section>
-				</TabPanel>
-				<TabPanel value="levels">
-					{/* <Accordion disabled={formState.battlepassId ? false : true}> */}
-
-					<Typography>3. Levels</Typography>
-
-					<Section
-						direction={{ xs: 'column', md: 'column' }}
-						// title="Levels"
-						description={`Configure levels and ranks. Careful, this can only be set once!`}
-					>
-						<LevelEditor id={formState.battlepassId} />
-					</Section>
-				</TabPanel>
 				<TabPanel value="quests">
 					{/* disabled === formState.battlepassId ? false : true */}
 					<Typography>4. Quests</Typography>
