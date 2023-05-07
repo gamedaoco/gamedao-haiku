@@ -1,9 +1,6 @@
-import { Layout } from 'layouts/v2'
-import Box from '@mui/material/Box'
-
-# Terms and Conditions For GameDAO Website
+# Terms and Conditions for GameDAO
 _Last updated September 14, 2022_<br/>
-_Effective September 14, 2022_
+_Effective September 14, 2022_<br/>
 
 ## Disclaimer
 
@@ -34,10 +31,10 @@ Blockchain technology and crypto-assets carry significant risks, including the p
 1.5.1. You are not trying to access the Website or the GameDAO protocol from, nor are you a citizen or resident of any jurisdiction the laws of which prohibit or conflict with the holding, sale or trading of GAME tokens;
 1.5.2. You are not trying to access the Website or the GameDAO protocol from the Democratic People’s Republic of Korea, Cuba, Syria, Iran, People’s Republic of Crimea, and People’s Republic of China;
 1.5.3. You are not a “Prohibited Person”, meaning that you are not
-    1. a citizen or resident of a geographic area in which use of the GAME tokens is prohibited by applicable law, decree, regulation, treaty, or administrative act,
-    2. a citizen or resident of, or located in, a geographic area that is subject to U.S. or other applicable comprehensive country sanctions or embargoes
-    3. an individual, or an individual employed by or associated with an entity, identified on the U.S. Department of Commerce’s Denied Persons, Unverified, or Entity List, the U.S. Department of Treasury’s Specially Designated Nationals or Blocked Persons or Foreign Sanctions Evaders Lists, or the U.S. Department of State’s Debarred Parties List or the sanctions lists adopted by the United Nations and the European Union to such extent such sanctions are extended by the UK Government to its Overseas Territories, as such lists may be amended from time to time, or
-    4. a person who acts, directly or indirectly, for a senior foreign political figure, any member of a senior foreign political figure’s immediate family or any close associate of a senior foreign political figure. No person or entity that controls, is controlled by or under common control with, you is a Prohibited Person. No person having any direct or indirect beneficial interest in you is a Prohibited Person;
+	1. a citizen or resident of a geographic area in which use of the GAME tokens is prohibited by applicable law, decree, regulation, treaty, or administrative act,
+	2. a citizen or resident of, or located in, a geographic area that is subject to U.S. or other applicable comprehensive country sanctions or embargoes
+	3. an individual, or an individual employed by or associated with an entity, identified on the U.S. Department of Commerce’s Denied Persons, Unverified, or Entity List, the U.S. Department of Treasury’s Specially Designated Nationals or Blocked Persons or Foreign Sanctions Evaders Lists, or the U.S. Department of State’s Debarred Parties List or the sanctions lists adopted by the United Nations and the European Union to such extent such sanctions are extended by the UK Government to its Overseas Territories, as such lists may be amended from time to time, or
+	4. a person who acts, directly or indirectly, for a senior foreign political figure, any member of a senior foreign political figure’s immediate family or any close associate of a senior foreign political figure. No person or entity that controls, is controlled by or under common control with, you is a Prohibited Person. No person having any direct or indirect beneficial interest in you is a Prohibited Person;
 1.5.4. YOU WAIVE THE RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR A CLASS WIDE ARBITRATION AGAINST THE ECOSYSTEM OPERATOR, ANY PERSON OR ENTITY INVOLVED IN THE WEBSITE, AND/OR WITH THE CREATION AND DISTRIBUTION OF GAME TOKENS;
 1.5.5. No transfers, sales, or other dispositions of GAME tokens by you shall be in violation of applicable laws, regulatory requirements or rules;
 1.5.6. You bear the sole responsibility to determine what tax implications your use of the Website and the GameDAO protocol may have for you; and
@@ -202,10 +199,19 @@ THE WEBSITE AND CONTENT ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BA
 
 12.3 Except as expressly agreed by GameDAO and you, this Agreement constitutes the entire Agreement between you and the GameDAO with respect to the subject matter, and supercedes all previous or contemporaneous agreements, whether written or oral, between the parties with respect to the subject matter. The section headings are provided merely for convenience and shall not be given any legal import. This Agreement will inure to the benefit of our successors, assigns, licensees, and sublicensees.
 
+## 13. Contact
+In case of further questions regarding privacy, the use of our applications or protocols, please contact our team at support @ gamedao.co or through the information contained in the imprint.
+
+import { Layout } from 'layouts/v2'
+import Box from '@mui/material/Box'
 
 export default ({ children }) =>
 	<Layout showHeader showFooter>
-		<Box sx={{ pt: ['5rem', '5rem', '2rem'], pb: '1rem', minHeight: '100vh' }}>
+		<Box sx={{
+			// pt: ['5rem', '5rem', '2rem'],
+			// pb: '1rem', minHeight: '100vh',
+			h1: { my:2 }, h2: { my:2 }, h3: { my:2 },  '& > p': { my: 2 }
+		}}>
 			{ children }
 		</Box>
 	</Layout>
