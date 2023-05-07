@@ -150,6 +150,8 @@ export function AppProvider({ children }) {
 		[user],
 	)
 
+	//
+
 	const linkBpid = useCallback(
 		(id) => {
 			console.log('set bpid', bpid, id)
@@ -181,18 +183,13 @@ export function AppProvider({ children }) {
 			user.name,
 			'\nemail',
 			user.email,
-			'\nepic',
+			'\nepicGames',
 			user.epicGames,
 		)
 	}, [user])
 
-	//
-	//
-	//
-	//
-	//
+	// get application config and features
 
-	//
 	const configQueryResult = useConfigQuery({
 		variables: { env: ENVIRONMENT },
 	})
@@ -215,6 +212,8 @@ export function AppProvider({ children }) {
 		}
 	}, [featureQueryResult.error])
 
+	// disconnect
+
 	const { disconnectWallet } = useExtensionContext()
 
 	const flush = async () => {
@@ -225,6 +224,8 @@ export function AppProvider({ children }) {
 		setConnected(false)
 		console.log('reset complete')
 	}
+
+	//
 
 	return (
 		<AppContext.Provider
