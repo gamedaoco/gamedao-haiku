@@ -32,10 +32,10 @@ import Toolbar from '@mui/material/Toolbar'
 
 // eslint-disable-next-line @next/next/no-img-element
 // const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
-const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
+const Logo = () => <img src="/v3/svg/gamedao-mono-h-wht-scaled.svg" height="16px" />
 // eslint-disable-next-line @next/next/no-img-element
 // const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
-const LogoSM = () => <img src="/v3/svg/GameDAO-mono-wht.svg" height="32px" />
+const LogoSM = () => <img src="/v3/svg/gamedao-mono-wht.svg" height="32px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void

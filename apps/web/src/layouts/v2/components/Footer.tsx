@@ -8,7 +8,7 @@ import { FontIcons } from 'src/components/Icons/icons'
 import NextLink from 'src/components/Link'
 
 /* eslint-disable @next/next/no-img-element */
-const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" alt="GameDAO" />
+const Logo = () => <img src="/v3/svg/gamedao-color-v-blk.svg" height="48" alt="GameDAO" />
 
 const Link = ({ href, children }) => (
 	<Box>
