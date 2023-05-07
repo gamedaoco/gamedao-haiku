@@ -25,6 +25,7 @@ import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
 
 import { getTwitterAuthorizationURL } from 'src/utils/getTwitterAuthorizationURL'
+import { getEpicAuthorizationURL } from 'src/utils/getEpicAuthorizationURL'
 import { Loader } from 'components/Loader'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -39,7 +40,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 		boxShadow: '0 0 10px #ffff00',
 	},
 }))
-import { Invitational } from './Invitational'
+// import { Invitational } from './Invitational'
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
@@ -71,6 +72,12 @@ const getIconUrl = (item) => {
 	const name = `${item.source}-${item.type}`.toLowerCase()
 	const url = `/bp/icons/${name}.svg`
 	return url
+}
+
+async function authorizeEpic(uuid, path) {
+	console.log('authorizeEpic')
+	const url = await getEpicAuthorizationURL(uuid, path)
+	return window.open(url, '_self')
 }
 
 async function authorizeTwitter(uuid, path) {
@@ -110,6 +117,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 		SnapChat,
 		Twitch,
 		Game,
+		epicGames,
 	}
 
 	enum Actions {
@@ -128,7 +136,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 	let showAction = false
 	let action
 
-	// console.log(item.source, item.type)
+	console.log(item.source, item.type)
 
 	// TODO: check for existing twitter token
 	// if (item.source === 'twitter' && !session?.user?.twitter) {
@@ -145,6 +153,15 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 			// console.log('follow', str)
 			window.open(str, '_blank')
 		}
+		showAction = true
+	}
+
+	//  connect epic games to gamedao
+
+	if (item.source === 'epicGames' && !user.epicGames && v === 0) {
+		console.log('epic games not connected', !user.epicGames)
+		actionString = `Connect with Epic Games`
+		action = () => authorizeEpic(uuid, router.asPath)
 		showAction = true
 	}
 
@@ -341,9 +358,9 @@ export const BPQuests = ({ args }: TArgs) => {
 					<Typography variant="h4">Quests</Typography>
 				</Grid>
 
-				<Grid item xs={12}>
+				{/* <Grid item xs={12}>
 					<Invitational args={{ id, items }} />
-				</Grid>
+				</Grid> */}
 
 				{items.length > 0 ? (
 					items.map((item, index) => {

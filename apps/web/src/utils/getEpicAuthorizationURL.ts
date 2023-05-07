@@ -16,7 +16,7 @@ const callback = `${process.env.NEXT_PUBLIC_VERCEL_URL}/callback/epic`
 export const encode = (str: string): string => Buffer.from(str, 'binary').toString('base64')
 export const decode = (str: string): string => Buffer.from(str, 'base64').toString('binary')
 
-export async function getTwitterAuthorizationURL(uuid = '', callerURL = 'noredirect') {
+export async function getEpicAuthorizationURL(uuid = '', callerURL = 'noredirect') {
 	// const challenge = await sha256(uuid)
 	// const state = encodeURI(encode(callerURL + '::::' + callback))
 

@@ -22,11 +22,13 @@ export type Scalars = {
 	enum_BattlepassRewards_syncStatus: any
 	enum_ChainActivities_activityType: any
 	enum_DiscordActivities_activityType: any
+	enum_GenericActivities_source: any
 	enum_Quests_source: any
 	enum_Quests_type: any
 	enum_RewardClaims_syncStatus: any
 	enum_TwitterActivities_activityType: any
 	float8: any
+	json: any
 	numeric: any
 	timestamptz: any
 	uuid: any
@@ -383,6 +385,7 @@ export type BattlepassIdentity = {
 	readonly cid?: Maybe<Scalars['String']>
 	readonly discord?: Maybe<Scalars['String']>
 	readonly email?: Maybe<Scalars['String']>
+	readonly epicGames?: Maybe<Scalars['String']>
 	readonly id: Scalars['Int']
 	readonly members?: Maybe<ReadonlyArray<Maybe<BattlepassMember>>>
 	readonly name?: Maybe<Scalars['String']>
@@ -2011,6 +2014,85 @@ export type Features = {
 	readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
 }
 
+/** columns and relationships of "GenericActivities" */
+export type GenericActivities = {
+	readonly __typename?: 'GenericActivities'
+	readonly activityType: Scalars['String']
+	readonly authorId: Scalars['String']
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly extra?: Maybe<Scalars['json']>
+	readonly id: Scalars['Int']
+	readonly source: Scalars['enum_GenericActivities_source']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** columns and relationships of "GenericActivities" */
+export type GenericActivitiesExtraArgs = {
+	path?: InputMaybe<Scalars['String']>
+}
+
+/** Boolean expression to filter rows from the table "GenericActivities". All fields are combined with a logical 'AND'. */
+export type GenericActivities_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<GenericActivities_Bool_Exp>>
+	readonly _not?: InputMaybe<GenericActivities_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<GenericActivities_Bool_Exp>>
+	readonly activityType?: InputMaybe<String_Comparison_Exp>
+	readonly authorId?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly extra?: InputMaybe<Json_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly source?: InputMaybe<Enum_GenericActivities_Source_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** Ordering options when selecting data from "GenericActivities". */
+export type GenericActivities_Order_By = {
+	readonly activityType?: InputMaybe<Order_By>
+	readonly authorId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly extra?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** select columns of table "GenericActivities" */
+export enum GenericActivities_Select_Column {
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	AuthorId = 'authorId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Extra = 'extra',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** Streaming cursor of the table "GenericActivities" */
+export type GenericActivities_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: GenericActivities_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type GenericActivities_Stream_Cursor_Value_Input = {
+	readonly activityType?: InputMaybe<Scalars['String']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly extra?: InputMaybe<Scalars['json']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
 /** columns and relationships of "Identities" */
 export type Identities = {
 	readonly __typename?: 'Identities'
@@ -2025,6 +2107,7 @@ export type Identities = {
 	readonly createdAt: Scalars['timestamptz']
 	readonly discord?: Maybe<Scalars['String']>
 	readonly email?: Maybe<Scalars['String']>
+	readonly epicGames?: Maybe<Scalars['String']>
 	readonly id: Scalars['Int']
 	readonly name?: Maybe<Scalars['String']>
 	readonly twitter?: Maybe<Scalars['String']>
@@ -2072,6 +2155,7 @@ export type Identities_Bool_Exp = {
 	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
 	readonly discord?: InputMaybe<String_Comparison_Exp>
 	readonly email?: InputMaybe<String_Comparison_Exp>
+	readonly epicGames?: InputMaybe<String_Comparison_Exp>
 	readonly id?: InputMaybe<Int_Comparison_Exp>
 	readonly name?: InputMaybe<String_Comparison_Exp>
 	readonly twitter?: InputMaybe<String_Comparison_Exp>
@@ -2089,6 +2173,7 @@ export type Identities_Order_By = {
 	readonly createdAt?: InputMaybe<Order_By>
 	readonly discord?: InputMaybe<Order_By>
 	readonly email?: InputMaybe<Order_By>
+	readonly epicGames?: InputMaybe<Order_By>
 	readonly id?: InputMaybe<Order_By>
 	readonly name?: InputMaybe<Order_By>
 	readonly twitter?: InputMaybe<Order_By>
@@ -2108,6 +2193,8 @@ export enum Identities_Select_Column {
 	Discord = 'discord',
 	/** column name */
 	Email = 'email',
+	/** column name */
+	EpicGames = 'epicGames',
 	/** column name */
 	Id = 'id',
 	/** column name */
@@ -2135,6 +2222,7 @@ export type Identities_Stream_Cursor_Value_Input = {
 	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
 	readonly discord?: InputMaybe<Scalars['String']>
 	readonly email?: InputMaybe<Scalars['String']>
+	readonly epicGames?: InputMaybe<Scalars['String']>
 	readonly id?: InputMaybe<Scalars['Int']>
 	readonly name?: InputMaybe<Scalars['String']>
 	readonly twitter?: InputMaybe<Scalars['String']>
@@ -3083,6 +3171,7 @@ export type RewardsFilter = {
 
 export enum Source {
 	Discord = 'discord',
+	EpicGames = 'epicGames',
 	Gamedao = 'gamedao',
 	Twitter = 'twitter',
 }
@@ -5285,6 +5374,19 @@ export type Enum_DiscordActivities_ActivityType_Comparison_Exp = {
 	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_DiscordActivities_activityType']>>
 }
 
+/** Boolean expression to compare columns of type "enum_GenericActivities_source". All fields are combined with logical 'AND'. */
+export type Enum_GenericActivities_Source_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _gt?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _gte?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_GenericActivities_source']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _lte?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _neq?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_GenericActivities_source']>>
+}
+
 /** Boolean expression to compare columns of type "enum_Quests_source". All fields are combined with logical 'AND'. */
 export type Enum_Quests_Source_Comparison_Exp = {
 	readonly _eq?: InputMaybe<Scalars['enum_Quests_source']>
@@ -6049,6 +6151,19 @@ export type Identity_Stream_Cursor_Value_Input = {
 	readonly twitter?: InputMaybe<Scalars['String']>
 	readonly web?: InputMaybe<Scalars['String']>
 	readonly web3name?: InputMaybe<Scalars['String']>
+}
+
+/** Boolean expression to compare columns of type "json". All fields are combined with logical 'AND'. */
+export type Json_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['json']>
+	readonly _gt?: InputMaybe<Scalars['json']>
+	readonly _gte?: InputMaybe<Scalars['json']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['json']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['json']>
+	readonly _lte?: InputMaybe<Scalars['json']>
+	readonly _neq?: InputMaybe<Scalars['json']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['json']>>
 }
 
 /** columns and relationships of "migrations" */
@@ -8094,6 +8209,10 @@ export type Query_Root = {
 	readonly DiscordActivities: ReadonlyArray<DiscordActivities>
 	/** fetch data from the table: "DiscordActivities" using primary key columns */
 	readonly DiscordActivities_by_pk?: Maybe<DiscordActivities>
+	/** fetch data from the table: "GenericActivities" */
+	readonly GenericActivities: ReadonlyArray<GenericActivities>
+	/** fetch data from the table: "GenericActivities" using primary key columns */
+	readonly GenericActivities_by_pk?: Maybe<GenericActivities>
 	/** fetch data from the table: "Identities" */
 	readonly Identities: ReadonlyArray<Identities>
 	/** fetch data from the table: "Identities" using primary key columns */
@@ -8380,6 +8499,18 @@ export type Query_RootDiscordActivitiesArgs = {
 }
 
 export type Query_RootDiscordActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootGenericActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<GenericActivities_Order_By>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Query_RootGenericActivities_By_PkArgs = {
 	id: Scalars['Int']
 }
 
@@ -9251,6 +9382,12 @@ export type Subscription_Root = {
 	readonly DiscordActivities_by_pk?: Maybe<DiscordActivities>
 	/** fetch data from the table in a streaming manner : "DiscordActivities" */
 	readonly DiscordActivities_stream: ReadonlyArray<DiscordActivities>
+	/** fetch data from the table: "GenericActivities" */
+	readonly GenericActivities: ReadonlyArray<GenericActivities>
+	/** fetch data from the table: "GenericActivities" using primary key columns */
+	readonly GenericActivities_by_pk?: Maybe<GenericActivities>
+	/** fetch data from the table in a streaming manner : "GenericActivities" */
+	readonly GenericActivities_stream: ReadonlyArray<GenericActivities>
 	/** fetch data from the table: "Identities" */
 	readonly Identities: ReadonlyArray<Identities>
 	/** fetch data from the table: "Identities" using primary key columns */
@@ -9649,6 +9786,24 @@ export type Subscription_RootDiscordActivities_StreamArgs = {
 	batch_size: Scalars['Int']
 	cursor: ReadonlyArray<InputMaybe<DiscordActivities_Stream_Cursor_Input>>
 	where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+export type Subscription_RootGenericActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<GenericActivities_Order_By>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Subscription_RootGenericActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootGenericActivities_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<GenericActivities_Stream_Cursor_Input>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
 }
 
 export type Subscription_RootIdentitiesArgs = {
@@ -11044,7 +11199,6 @@ export type ConnectIdentityMutationVariables = Exact<{
 	uuid?: InputMaybe<Scalars['String']>
 	address?: InputMaybe<Scalars['String']>
 	discord?: InputMaybe<Scalars['String']>
-	twitter?: InputMaybe<Scalars['String']>
 	name?: InputMaybe<Scalars['String']>
 	email?: InputMaybe<Scalars['String']>
 }>
@@ -11061,6 +11215,7 @@ export type ConnectIdentityMutation = {
 			readonly twitter?: string | null
 			readonly name?: string | null
 			readonly email?: string | null
+			readonly epicGames?: string | null
 		} | null
 	} | null
 }
@@ -13136,22 +13291,16 @@ export type GetIdentityByDiscordQueryResult = Apollo.QueryResult<
 	GetIdentityByDiscordQueryVariables
 >
 export const ConnectIdentityDocument = gql`
-	mutation ConnectIdentity(
-		$uuid: String
-		$address: String
-		$discord: String
-		$twitter: String
-		$name: String
-		$email: String
-	) {
+	mutation ConnectIdentity($uuid: String, $address: String, $discord: String, $name: String, $email: String) {
 		BattlepassBot {
-			identity(uuid: $uuid, address: $address, discord: $discord, twitter: $twitter, name: $name, email: $email) {
+			identity(uuid: $uuid, address: $address, discord: $discord, name: $name, email: $email) {
 				uuid
 				address
 				discord
 				twitter
 				name
 				email
+				epicGames
 			}
 		}
 	}
@@ -13177,7 +13326,6 @@ export type ConnectIdentityMutationFn = Apollo.MutationFunction<
  *      uuid: // value for 'uuid'
  *      address: // value for 'address'
  *      discord: // value for 'discord'
- *      twitter: // value for 'twitter'
  *      name: // value for 'name'
  *      email: // value for 'email'
  *   },

@@ -165,7 +165,7 @@ export const authOptions: NextAuthOptions = {
 				address: token.address,
 				discord: token.discord as string,
 				twitter: token.twitter,
-				// twitter_username: token.twitter_username,
+				epicGames: token.epicGames,
 			}
 
 			log.info('AUTH', '-->', 'session', token, session)

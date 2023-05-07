@@ -22,6 +22,7 @@ export type TAppUser = {
 	twitter?: string
 	email?: string
 	name?: string
+	epicGames?: string
 }
 export const initialUserState: TAppUser = {
 	uuid: null,
@@ -30,6 +31,7 @@ export const initialUserState: TAppUser = {
 	twitter: null,
 	email: null,
 	name: null,
+	epicGames: null,
 }
 
 export function AppProvider({ children }) {
@@ -42,10 +44,8 @@ export function AppProvider({ children }) {
 
 	const [connectIdentityMutation] = useConnectIdentityMutation({
 		variables: {
-			uuid: user.uuid,
 			address: user.address,
 			discord: user.discord,
-			twitter: user.twitter,
 		},
 	})
 
@@ -88,6 +88,7 @@ export function AppProvider({ children }) {
 						twitter: identity.twitter,
 						name: identity.name,
 						email: identity.email,
+						epicGames: identity.epicGames,
 					}
 					console.log('app', 'user ->', updateUser)
 					setUser(updateUser)
@@ -180,6 +181,8 @@ export function AppProvider({ children }) {
 			user.name,
 			'\nemail',
 			user.email,
+			'\nepic',
+			user.epicGames,
 		)
 	}, [user])
 

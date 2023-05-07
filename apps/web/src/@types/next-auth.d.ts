@@ -10,7 +10,7 @@ declare module 'next-auth' {
 		address?: string
 		discord?: string
 		email?: string
-		epic?: string
+		epicGames?: string
 		twitter?: string
 		notifications?: boolean
 	}
@@ -36,7 +36,7 @@ declare module 'next-auth/jwt' {
 		address?: string
 		discord?: string
 		email?: string
-		epic?: string
+		epicGames?: string
 		twitter?: string
 		// settings
 		notifications?: boolean
