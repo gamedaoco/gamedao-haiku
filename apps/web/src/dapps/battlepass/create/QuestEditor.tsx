@@ -77,6 +77,7 @@ enum QuestSources {
 	gamedao,
 	twitter,
 	discord,
+	epicGames,
 	// twitch,
 	// wallet,
 	// fortnite,
@@ -151,13 +152,13 @@ function createQuest(args: TQuestArgs) {}
 
 const initialQuestState = {
 	index: 0,
-	battlepass: null,
-	cid: null,
+	battlepass: '',
+	cid: '',
 	name: 'New Quest',
 	description: 'A Quest for you',
-	//
-	points: null,
-	quantity: null,
+	// required
+	points: 0,
+	quantity: 1,
 	daily: false,
 	max: 0,
 	maxDaily: 0,
@@ -177,6 +178,8 @@ const initialQuestState = {
 	twitterId: null,
 }
 
+//
+
 type EnumType = { [key: string]: string | number }
 type EnumAsArrayType = {
 	key: string
@@ -187,22 +190,37 @@ const enumToArray = (data: EnumType): EnumAsArrayType =>
 		.filter((key) => Number.isNaN(+key))
 		.map((key: string) => ({ key, value: data[key] }))
 
+//
+
 export function QuestEditor({ formState, setFormState }: TProps) {
 	// get battlepass id
 	const { battlepassId: id } = formState
 	const { data } = useGetBattlepassQuestsQuery({ variables: { id } })
 
 	const [questCounter, setQuestCounter] = useState(0)
-	const [questList, updateQuestList] = useState([])
+	const [questList, updateQuestList] = useState([]) // on save store here
+	const [currentQuestState, setCurrentQuestState] = useState(initialQuestState) // current quest
 
-	const [currentQuestState, setCurrentQuestState] = useState({ ...initialQuestState, index: questCounter })
-
-	const handleChange = (e) => {
-		// console.log('input', e.target.name, e.target.value, formState)
-		const update = { ...currentQuestState, [e.target.name]: e.target.value }
+	const updateQuestState = (k, v) => {
+		const update = { ...currentQuestState, [k]: v }
+		console.log('update', k, v, update)
 		setCurrentQuestState(update)
 		localStorage.setItem('quests', JSON.stringify(update))
 	}
+	const handleChange = (e) => {
+		console.log(e.target.name, e.target.value)
+		updateQuestState(e.target.name, e.target.value)
+	}
+
+	const addQuest = () => {
+		// add quest to list
+		const updateQuests = questList.concat([currentQuestState])
+		updateQuestList(updateQuests)
+		setQuestCounter(questCounter + 1)
+		setCurrentQuestState(initialQuestState)
+	}
+
+	// upstream
 	const updateFormState = () => {
 		// const update = { ...formState, ...currentQuestState }
 		// setFormState(update)
@@ -240,7 +258,14 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 			<ContentPanel>
 				<ContentTitle>Quests</ContentTitle>
 
-				{questList}
+				{questList?.map((q, i) => {
+					return (
+						<>
+							<em>{q.index}</em>
+							<em>{q.name}</em>
+						</>
+					)
+				})}
 
 				<SectionTitle>Add quest {questCounter + 1}</SectionTitle>
 
@@ -310,8 +335,8 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 				<hr />
 
 				<RadioGroup
-					aria-labelledby="source-radio"
-					name="source-radio-group"
+					aria-labelledby="source"
+					name="source"
 					value={currentQuestState.source}
 					onChange={handleChange}
 				>
@@ -321,12 +346,7 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 						))}
 					</Stack>
 				</RadioGroup>
-				<RadioGroup
-					aria-labelledby="action-radio"
-					name="action-radio-group"
-					value={currentQuestState.type}
-					onChange={handleChange}
-				>
+				<RadioGroup aria-labelledby="type" name="type" value={currentQuestState.type} onChange={handleChange}>
 					<Stack direction={'row'}>
 						{enumToArray(QuestTypes).map(({ key, value }) => (
 							<FormControlLabel key={key} value={value} control={<Radio />} label={key} />
@@ -358,7 +378,7 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 				<hr />
 
 				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<Button size="large" variant="outlined" fullWidth>
+					<Button size="large" variant="outlined" fullWidth onClick={addQuest}>
 						Add Quest
 					</Button>
 				</Stack>

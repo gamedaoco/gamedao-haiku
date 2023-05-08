@@ -565,6 +565,30 @@ export const GeneralEditor = ({ args: TArgs }) => {
 					</Stack>
 				</Section>
 			)}
+			{showCreateModal && (
+				<TransactionDialog
+					open={showCreateModal}
+					onClose={closeCreateModal}
+					txData={createBattlepassTX}
+					txCallback={handleCreateComplete}
+				/>
+			)}
+			{showActivateModal && (
+				<TransactionDialog
+					open={showActivateModal}
+					onClose={closeActivateModal}
+					txData={activateBattlepassTX}
+					txCallback={handleActivateComplete}
+				/>
+			)}
+			{showLinkModal && (
+				<TransactionDialog
+					open={showLinkModal}
+					onClose={closeLinkModal}
+					txData={linkBotTX}
+					txCallback={handleLinkComplete}
+				/>
+			)}
 		</TabPanel>
 	)
 }

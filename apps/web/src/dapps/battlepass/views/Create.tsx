@@ -735,7 +735,7 @@ export const Create = () => {
 				</ContentPanel>
 			)}
 
-			{showCreateModal && (
+			{/* {showCreateModal && (
 				<TransactionDialog
 					open={showCreateModal}
 					onClose={closeCreateModal}
@@ -758,7 +758,7 @@ export const Create = () => {
 					txData={linkBotTX}
 					txCallback={handleLinkComplete}
 				/>
-			)}
+			)} */}
 		</Fragment>
 	)
 }
