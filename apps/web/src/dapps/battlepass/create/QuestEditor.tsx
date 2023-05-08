@@ -154,7 +154,7 @@ const initialQuestState = {
 	index: 0,
 	battlepass: '',
 	cid: '',
-	name: 'New Quest 0',
+	name: 'New Quest',
 	description: 'A Quest for you',
 	// required
 	points: 0,
@@ -203,16 +203,29 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 
 	const updateQuestState = (k, v) => {
 		const update = { ...currentQuestState, [k]: v }
-		console.log('update', k, v, update)
 		setCurrentQuestState(update)
 		localStorage.setItem('quests', JSON.stringify(update))
 	}
 	const handleChange = (e) => {
-		console.log(e.target.name, e.target.value)
-		updateQuestState(e.target.name, e.target.value)
+		updateQuestState(e.target.name, e.target.type === 'checkbox' ? e.target.checked : e.target.value)
 	}
 
 	const addQuest = () => {
+		const updateQuests = questList.concat([
+			{
+				...currentQuestState,
+				index: questCounter,
+			},
+		])
+		updateQuestList(updateQuests)
+		setCurrentQuestState({
+			...initialQuestState,
+			name: initialQuestState.name + ' ' + (questCounter + 2),
+		})
+		setQuestCounter(questCounter + 1)
+	}
+
+	const updateQuest = () => {
 		const updateQuests = questList.concat([
 			{
 				...currentQuestState,
@@ -239,215 +252,212 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 	// save quest
 
 	// create new quest
-	const CreateQuest = (props) => {
-		// cid: String
-		// name: String
-		// description: String
+	// const CreateQuest = (props) => {
+	// cid: String
+	// name: String
+	// description: String
 
-		// daily: Boolean!
-		// maxDaily: Int
-		// points: Int!
-		// quantity: Int!
+	// daily: Boolean!
+	// maxDaily: Int
+	// points: Int!
+	// quantity: Int!
 
-		// source: Source!
-		//	discord | twitter
-		// type: ActivityType!
-		//	post | react | retweet | comment | follow | unfollow
+	// source: Source!
+	//	discord | twitter
+	// type: ActivityType!
+	//	post | react | retweet | comment | follow | unfollow
 
-		// discord
-		//		guildId: string
-		//		channelId: String
-		// twitter
-		//		twitterId: String
-		//		hashtag: String
+	// discord
+	//		guildId: string
+	//		channelId: String
+	// twitter
+	//		twitterId: String
+	//		hashtag: String
 
-		return (
-			<ContentPanel>
-				<ContentTitle>Quests</ContentTitle>
+	return (
+		<ContentPanel>
+			<ContentTitle>Quests</ContentTitle>
 
-				<TableContainer component={Paper}>
-					<Table sx={{ minWidth: 650 }} aria-label="quest-list" size="small">
-						<TableHead>
-							<TableRow>
-								<TableCell align="left">#</TableCell>
-								<TableCell align="left">Name</TableCell>
-								<TableCell align="left">Source</TableCell>
-								<TableCell align="left">Type</TableCell>
-								<TableCell align="right">BP</TableCell>
-								<TableCell align="right">Max BP</TableCell>
-								<TableCell align="right">T</TableCell>
-								<TableCell align="right">Max T</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{questList?.map((row, i) => {
-								return (
-									<TableRow
-										key={`${row.id}${Math.random() * 1000}`}
-										sx={{
-											'td,th': { borderBottom: '1px dotted #ffffff33' },
-											'&:last-child td, &:last-child th': { border: 0 },
-										}}
-									>
-										<TableCell align="left" component="th" scope="row">
-											{row.index + 1}
-										</TableCell>
-										<TableCell align="left" component="th" scope="row">
-											{row.name}
-										</TableCell>
-										<TableCell align="left" component="th" scope="row">
-											{row.source}
-										</TableCell>
-										<TableCell align="left" component="th" scope="row">
-											{row.type}
-										</TableCell>
-									</TableRow>
-								)
-							})}
-						</TableBody>
-					</Table>
-				</TableContainer>
+			<TableContainer component={Paper}>
+				<Table sx={{ minWidth: 650 }} aria-label="quest-list" size="small">
+					<TableHead>
+						<TableRow>
+							<TableCell align="left">#</TableCell>
+							<TableCell align="left">Name</TableCell>
+							<TableCell align="left">Source</TableCell>
+							<TableCell align="left">Type</TableCell>
+							<TableCell align="right">BP</TableCell>
+							<TableCell align="right">Max BP</TableCell>
+							<TableCell align="right">T</TableCell>
+							<TableCell align="right">Max T</TableCell>
+							<TableCell align="right">R</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{questList?.map((row, i) => {
+							return (
+								<TableRow
+									key={`${row.id}${Math.random() * 1000}`}
+									sx={{
+										'td,th': { borderBottom: '1px dotted #ffffff33' },
+										'&:last-child td, &:last-child th': { border: 0 },
+									}}
+								>
+									<TableCell align="left" component="th" scope="row">
+										{row.index + 1}
+									</TableCell>
+									<TableCell align="left" component="th" scope="row">
+										{row.name}
+									</TableCell>
+									<TableCell align="left" component="th" scope="row">
+										{row.source}
+									</TableCell>
+									<TableCell align="left" component="th" scope="row">
+										{row.type}
+									</TableCell>
+									<TableCell align="right" component="th" scope="row">
+										{row.total_points}
+									</TableCell>
+									<TableCell align="right" component="th" scope="row">
+										{row.points}
+									</TableCell>
+									<TableCell align="right" component="th" scope="row">
+										{row.quantity}
+									</TableCell>
+									<TableCell align="right" component="th" scope="row">
+										{row.max}
+									</TableCell>
+									<TableCell align="right" component="th" scope="row">
+										{row.daily ? 'x' : '-'}
+									</TableCell>
+								</TableRow>
+							)
+						})}
+					</TableBody>
+				</Table>
+			</TableContainer>
 
-				<SectionTitle>Add quest {questCounter + 1}</SectionTitle>
+			<hr />
 
-				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<TextField
-						name={'name'}
-						onChange={handleChange}
-						value={currentQuestState.name}
-						label="Name"
-						variant="outlined"
-						fullWidth
-					/>
-					<TextField
-						name={'description'}
-						onChange={handleChange}
-						value={currentQuestState.description}
-						label="Description"
-						variant="outlined"
-						fullWidth
-					/>
-				</Stack>
+			<SectionTitle>Add quest {questCounter + 1}</SectionTitle>
 
-				{/* <SectionDescription>
-					A quest consists of one or multiple tasks and can repeatable every n days.
-				</SectionDescription> */}
-
-				<Stack direction={{ sm: 'row', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<TextField
-						name={'points'}
-						onChange={handleChange}
-						value={currentQuestState.points}
-						label="Points per task"
-						variant="outlined"
-						fullWidth
-					/>
-					<TextField
-						name={'quantity'}
-						onChange={handleChange}
-						value={currentQuestState.quantity}
-						label="Qty of tasks"
-						variant="outlined"
-						fullWidth
-					/>
-					<TextField
-						name={'total_points'}
-						onChange={handleChange}
-						value={currentQuestState.total_points}
-						label="Total points"
-						variant="outlined"
-						fullWidth
-					/>
-					<TextField
-						name={'maximum_qty'}
-						onChange={handleChange}
-						value={currentQuestState.total_quantity}
-						label="Max Total tasks"
-						variant="outlined"
-						fullWidth
-					/>
-				</Stack>
-
-				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<FormControlLabel control={<Checkbox defaultChecked />} label="Repeatable" />
-					{/* <FormControlLabel  control={<Checkbox />} label="Disabled" /> */}
-				</Stack>
-
-				<hr />
-
-				<RadioGroup
-					aria-labelledby="source"
-					name="source"
-					value={currentQuestState.source}
-					onChange={handleChange}
-				>
-					<Stack direction={'row'}>
-						{enumToArray(QuestSources).map(({ key, value }) => (
-							<FormControlLabel key={key} value={key} control={<Radio />} label={key} />
-						))}
-					</Stack>
-				</RadioGroup>
-				<RadioGroup aria-labelledby="type" name="type" value={currentQuestState.type} onChange={handleChange}>
-					<Stack direction={'row'}>
-						{enumToArray(QuestTypes).map(({ key, value }) => (
-							<FormControlLabel key={key} value={key} control={<Radio />} label={key} />
-						))}
-					</Stack>
-				</RadioGroup>
+			<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
 				<TextField
-					name={'param'}
+					name={'name'}
 					onChange={handleChange}
-					value={currentQuestState.param}
-					label="Parameter"
+					value={currentQuestState.name}
+					label="Name"
 					variant="outlined"
 					fullWidth
 				/>
-				{/* <SectionDescription>Who can claim Battlepass rewards?</SectionDescription>
-				<RadioGroup
-					aria-labelledby="claim-radio"
-					name="claim-radio-group"
-					value={currentQuestState.claim}
+				<TextField
+					name={'description'}
 					onChange={handleChange}
-				>
-					<Stack direction={'row'}>
-						<FormControlLabel value={0} control={<Radio />} label="daily" />
-						<FormControlLabel value={1} control={<Radio />} label="weekly" />
-						<FormControlLabel value={2} control={<Radio />} label="monthly" />
-					</Stack>
-				</RadioGroup> */}
+					value={currentQuestState.description}
+					label="Description"
+					variant="outlined"
+					fullWidth
+				/>
+			</Stack>
 
-				<hr />
+			{/* <SectionDescription>
+				A quest consists of one or multiple tasks and can repeatable every n days.
+			</SectionDescription> */}
 
-				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<Button
-						size="large"
-						variant="outlined"
-						fullWidth
-						onClick={addQuest}
-						disabled={!currentQuestState.source || !currentQuestState.type}
-					>
-						Add Quest
-					</Button>
+			<Stack direction={{ sm: 'row', md: 'row' }} spacing={2} justifyContent="space-evenly">
+				<TextField
+					name={'points'}
+					onChange={handleChange}
+					value={currentQuestState.points}
+					label="Points per task"
+					variant="outlined"
+					fullWidth
+				/>
+				<TextField
+					name={'quantity'}
+					onChange={handleChange}
+					value={currentQuestState.quantity}
+					label="Qty of tasks"
+					variant="outlined"
+					fullWidth
+				/>
+				<TextField
+					name={'total_points'}
+					onChange={handleChange}
+					value={currentQuestState.total_points}
+					label="Total points"
+					variant="outlined"
+					fullWidth
+				/>
+				<TextField
+					name={'total_quantity'}
+					onChange={handleChange}
+					value={currentQuestState.total_quantity}
+					label="Max Total tasks"
+					variant="outlined"
+					fullWidth
+				/>
+			</Stack>
+
+			<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+				<FormControlLabel
+					control={<Checkbox checked={currentQuestState.daily} onChange={handleChange} name={'daily'} />}
+					label="Repeatable"
+				/>
+				{/* <FormControlLabel  control={<Checkbox />} label="Disabled" /> */}
+			</Stack>
+
+			<hr />
+
+			<RadioGroup aria-labelledby="source" name="source" value={currentQuestState.source} onChange={handleChange}>
+				<Stack direction={'row'}>
+					{enumToArray(QuestSources).map(({ key, value }) => (
+						<FormControlLabel key={key} value={key} control={<Radio />} label={key} />
+					))}
 				</Stack>
-			</ContentPanel>
-		)
-	}
+			</RadioGroup>
+			<RadioGroup aria-labelledby="type" name="type" value={currentQuestState.type} onChange={handleChange}>
+				<Stack direction={'row'}>
+					{enumToArray(QuestTypes).map(({ key, value }) => (
+						<FormControlLabel key={key} value={key} control={<Radio />} label={key} />
+					))}
+				</Stack>
+			</RadioGroup>
+			<TextField
+				name={'param'}
+				onChange={handleChange}
+				value={currentQuestState.param}
+				label="Parameter"
+				variant="outlined"
+				fullWidth
+			/>
+			{/* <SectionDescription>Who can claim Battlepass rewards?</SectionDescription>
+			<RadioGroup
+				aria-labelledby="claim-radio"
+				name="claim-radio-group"
+				value={currentQuestState.claim}
+				onChange={handleChange}
+			>
+				<Stack direction={'row'}>
+					<FormControlLabel value={0} control={<Radio />} label="daily" />
+					<FormControlLabel value={1} control={<Radio />} label="weekly" />
+					<FormControlLabel value={2} control={<Radio />} label="monthly" />
+				</Stack>
+			</RadioGroup> */}
 
-	// TODO handle send mutation
+			<hr />
 
-	// useEffect(() => {
-	// 	if (!data)
-	// 		setData(
-	// 			rows.map((row, index) => {
-	// 				row.id = index
-	// 				return row
-	// 			}),
-	// 		)
-	// }, [data])
-
-	return !id || !data ? null : (
-		<Fragment>
-			<CreateQuest />
-		</Fragment>
+			<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+				<Button
+					size="large"
+					variant="outlined"
+					fullWidth
+					onClick={addQuest}
+					disabled={!currentQuestState.source || !currentQuestState.type}
+				>
+					Add Quest
+				</Button>
+			</Stack>
+		</ContentPanel>
 	)
 }
