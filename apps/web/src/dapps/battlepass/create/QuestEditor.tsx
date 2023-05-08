@@ -154,7 +154,7 @@ const initialQuestState = {
 	index: 0,
 	battlepass: '',
 	cid: '',
-	name: 'New Quest',
+	name: 'New Quest 0',
 	description: 'A Quest for you',
 	// required
 	points: 0,
@@ -213,11 +213,18 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 	}
 
 	const addQuest = () => {
-		// add quest to list
-		const updateQuests = questList.concat([currentQuestState])
+		const updateQuests = questList.concat([
+			{
+				...currentQuestState,
+				index: questCounter,
+			},
+		])
 		updateQuestList(updateQuests)
+		setCurrentQuestState({
+			...initialQuestState,
+			name: initialQuestState.name + ' ' + (questCounter + 2),
+		})
 		setQuestCounter(questCounter + 1)
-		setCurrentQuestState(initialQuestState)
 	}
 
 	// upstream
@@ -258,14 +265,48 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 			<ContentPanel>
 				<ContentTitle>Quests</ContentTitle>
 
-				{questList?.map((q, i) => {
-					return (
-						<>
-							<em>{q.index}</em>
-							<em>{q.name}</em>
-						</>
-					)
-				})}
+				<TableContainer component={Paper}>
+					<Table sx={{ minWidth: 650 }} aria-label="quest-list" size="small">
+						<TableHead>
+							<TableRow>
+								<TableCell align="left">#</TableCell>
+								<TableCell align="left">Name</TableCell>
+								<TableCell align="left">Source</TableCell>
+								<TableCell align="left">Type</TableCell>
+								<TableCell align="right">BP</TableCell>
+								<TableCell align="right">Max BP</TableCell>
+								<TableCell align="right">T</TableCell>
+								<TableCell align="right">Max T</TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{questList?.map((row, i) => {
+								return (
+									<TableRow
+										key={`${row.id}${Math.random() * 1000}`}
+										sx={{
+											'td,th': { borderBottom: '1px dotted #ffffff33' },
+											'&:last-child td, &:last-child th': { border: 0 },
+										}}
+									>
+										<TableCell align="left" component="th" scope="row">
+											{row.index + 1}
+										</TableCell>
+										<TableCell align="left" component="th" scope="row">
+											{row.name}
+										</TableCell>
+										<TableCell align="left" component="th" scope="row">
+											{row.source}
+										</TableCell>
+										<TableCell align="left" component="th" scope="row">
+											{row.type}
+										</TableCell>
+									</TableRow>
+								)
+							})}
+						</TableBody>
+					</Table>
+				</TableContainer>
 
 				<SectionTitle>Add quest {questCounter + 1}</SectionTitle>
 
@@ -342,14 +383,14 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 				>
 					<Stack direction={'row'}>
 						{enumToArray(QuestSources).map(({ key, value }) => (
-							<FormControlLabel key={key} value={value} control={<Radio />} label={key} />
+							<FormControlLabel key={key} value={key} control={<Radio />} label={key} />
 						))}
 					</Stack>
 				</RadioGroup>
 				<RadioGroup aria-labelledby="type" name="type" value={currentQuestState.type} onChange={handleChange}>
 					<Stack direction={'row'}>
 						{enumToArray(QuestTypes).map(({ key, value }) => (
-							<FormControlLabel key={key} value={value} control={<Radio />} label={key} />
+							<FormControlLabel key={key} value={key} control={<Radio />} label={key} />
 						))}
 					</Stack>
 				</RadioGroup>
@@ -378,50 +419,19 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 				<hr />
 
 				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<Button size="large" variant="outlined" fullWidth onClick={addQuest}>
+					<Button
+						size="large"
+						variant="outlined"
+						fullWidth
+						onClick={addQuest}
+						disabled={!currentQuestState.source || !currentQuestState.type}
+					>
 						Add Quest
 					</Button>
 				</Stack>
 			</ContentPanel>
 		)
 	}
-
-	// const [editMode, setEditMode] = useState(false)
-	// const [editRow, setEditRow] = useState(null)
-	// const [rowState, setRowState] = useState(initialRowState)
-	// const handleChange = (e) => {
-	// 	const update = { ...rowState, [e.target.name]: e.target.value }
-	// 	setRowState(update)
-	// }
-	// const handleEditRow = (row) => {
-	// 	setEditRow(row)
-	// 	setEditMode(true)
-	// 	setRowState(data[row])
-	// 	console.log('edit row', row, data[row])
-	// }
-	// const handleSaveRow = (row) => {
-	// 	const update = { ...data[row], ...rowState }
-	// 	const merge = data.map((item, index) => (index !== row ? item : update))
-	// 	setData((prevState) => merge)
-	// 	setEditRow(null)
-	// 	setRowState(initialRowState)
-	// 	setEditMode(false)
-	// }
-	// const handleDeleteRow = (row) => {
-	// 	const update = data
-	// 		.filter((i) => i.id !== row)
-	// 		.map((item, index) => {
-	// 			item.id = index
-	// 			return item
-	// 		})
-	// 	setData((prevState) => update)
-	// }
-	// const handleReset = () => {
-	// 	setRowState(null)
-	// 	setEditRow(null)
-	// 	setEditMode(false)
-	// 	setData(null)
-	// }
 
 	// TODO handle send mutation
 
