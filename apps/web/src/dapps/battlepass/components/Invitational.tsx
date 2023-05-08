@@ -35,13 +35,17 @@ const Counter = ({ days, hours, minutes, seconds }) => {
 }
 
 const Registration = () => {
-	return <Paper>Registration Form</Paper>
+	return (
+		<Stack direction="row">
+			<Typography variant="hero1">Registration Form</Typography>
+		</Stack>
+	)
 }
 
 const Countdown = ({ targetDate }) => {
 	const [days, hours, minutes, seconds] = useCountdown(targetDate)
 	return days + hours + minutes + seconds <= 0 ? (
-		<Registration />
+		<Typography variant="hero1">Expired</Typography>
 	) : (
 		<Counter days={days} hours={hours} minutes={minutes} seconds={seconds} />
 	)
@@ -95,11 +99,12 @@ export function Invitational({ args }: TProps) {
 		defaultMatches: true,
 	})
 
-	const requiredCount = 1000
-
-	// member count
-	const [memberCount, setMemberCount] = useState(0)
+	const deadline = new Date('2023-06-01 00:00')
+	const requiredCount = 1337
 	const bpid = '0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532'
+
+	const [memberCount, setMemberCount] = useState(0)
+
 	const { loading, data: members } = useGetBattlepassUsersQuery({ variables: { id: bpid } })
 	useEffect(() => {
 		if (!members) return
@@ -109,31 +114,21 @@ export function Invitational({ args }: TProps) {
 	}, [members])
 
 	const handleJoin = (e) => {}
-	// const { loading, data } = useGetLeaderboardQuery({ variables: { id } })
-	// if (loading) return <Loader />
 
-	// entry conditions:
-
-	// timer
 	const [remainingTime, setRemainingTime] = useState(null)
+
 	useEffect(() => {
 		if (remainingTime) return
-		const t = new Date().getTime() + getDateDiff(new Date(), new Date('2023-05-01 00:00'))
+		const t = new Date().getTime() + getDateDiff(new Date(), deadline)
 		setRemainingTime(t)
 	}, [])
 
 	if (loading) return <Loader />
+
 	return (
 		<Grid container alignItems="center" justifyContent="space-between" spacing={theme.spacing(2)} pb={[2, 2]}>
 			<Grid item xs={12}>
 				<Paper sx={{ p: 2, height: '100%' }} variant="glass">
-					{/* <Canvas>
-						<ambientLight />
-						<pointLight position={[10, 10, 10]} />
-						<Box position={[-1.2, 0, 0]} />
-						<Box position={[1.2, 0, 0]} />
-					</Canvas> */}
-
 					<Stack direction="column" justifyContent="space-between">
 						<Typography variant="teaserTitle" pb={2}>
 							WAVEPASS CASH CUP
@@ -147,16 +142,13 @@ export function Invitational({ args }: TProps) {
 						{remainingTime && (
 							<Stack direction="column" spacing={0} alignItems="center" justifyContent="center">
 								<Typography variant="caption" sx={{ borderBottom: `1px solid white` }}>
-									{' '}
-									remaining slots{' '}
+									remaining slots
 								</Typography>
 								<Typography variant="hero1" sx={{}}>
-									{' '}
-									{requiredCount - memberCount}{' '}
+									{requiredCount - memberCount} of {requiredCount}
 								</Typography>
 								<Typography variant="caption" pt={2} sx={{ borderBottom: `1px solid white` }}>
-									{' '}
-									remaining time{' '}
+									remaining time
 								</Typography>
 								<Countdown targetDate={remainingTime} />
 							</Stack>
@@ -164,9 +156,7 @@ export function Invitational({ args }: TProps) {
 
 						<Stack direction="row" justifyContent="end">
 							{/* <Button color="secondary">Learn More</Button> */}
-							{/* <Button variant="lemon" onClick={handleJoin}>
-								Join
-							</Button> */}
+							{/* <Button variant="lemon" onClick={handleJoin}> Join </Button> */}
 						</Stack>
 					</Stack>
 				</Paper>
