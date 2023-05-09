@@ -70,6 +70,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	// BATTLEPASS COMMERCIALS
 
 	const [pass, setPass] = useState({
+		active: false,
 		price: 0,
 		joinable: false,
 		claimable: false,
@@ -99,6 +100,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		// 	pass.passClaimed,
 		// )
 		setPass({
+			active: pass.active,
 			price: pass.price,
 			joinable: pass.joinable,
 			totalJoined: pass.totalJoined,
@@ -178,6 +180,8 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	//
 	//
 	//
+
+	if (!pass.active) return null
 
 	// no discord connection
 	if (!uuid)

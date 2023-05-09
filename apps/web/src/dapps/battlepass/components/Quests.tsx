@@ -12,6 +12,7 @@ import {
 	useGetBattlepassQuestsQuery,
 	useGetBattlepassAchievementsQuery,
 	useGetAchievementsSubscription,
+	useBattlepassSubscription,
 } from 'src/queries'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
@@ -86,7 +87,7 @@ async function authorizeTwitter(uuid, path) {
 	return window.open(url, '_self')
 }
 
-export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
+export const BPQuestItem = ({ index, item, achievement, active }: TGridItemProps) => {
 	const { uuid, user, linkAddress } = useAppContext()
 	const { data: session } = useSession()
 	const address = useCurrentAccountAddress()
@@ -233,7 +234,7 @@ export const BPQuestItem = ({ index, item, achievement }: TGridItemProps) => {
 				</Box>
 			</Stack>
 
-			{showAction ? (
+			{active && showAction ? (
 				<Button fullWidth variant="outlined" sx={{ height: 36 }} onClick={action}>
 					{`${actionString}`}
 				</Button>
@@ -279,6 +280,15 @@ export const BPQuests = ({ args }: TArgs) => {
 	const { uuid } = useAppContext()
 	const where = { id: id }
 	const [items, setItems] = useState([])
+
+	const [active, setActive] = useState(false)
+	const { data: battlepass } = useBattlepassSubscription({ variables: { id: id } })
+	useEffect(() => {
+		if (!battlepass || !battlepass?.Battlepasses.length) return
+		const pass = battlepass?.Battlepasses[0]
+		setActive(pass.active)
+	}, [battlepass])
+
 	const { loading, data: quests } = useGetBattlepassQuestsQuery({ variables: where })
 	const [userAchievements, setUserAchievements] = useState([])
 	// const { data: achievements } = useGetBattlepassAchievementsQuery({ variables: where })
@@ -375,6 +385,7 @@ export const BPQuests = ({ args }: TArgs) => {
 											item={item}
 											index={index}
 											achievement={getAchievementForQuest(item.id)}
+											active={active}
 										/>
 									</Card>
 								</FadeInWhenVisible>

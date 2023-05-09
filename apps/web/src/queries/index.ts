@@ -13348,7 +13348,7 @@ export type ConnectIdentityMutationOptions = Apollo.BaseMutationOptions<
 >
 export const ActiveBattlepassDocument = gql`
 	subscription ActiveBattlepass {
-		battlepass(where: { state: { _eq: "ACTIVE" } }) {
+		battlepass {
 			id
 			name
 			organization {

@@ -97,28 +97,32 @@ export const OverviewCard = ({ args }: TArgs) => {
 								</Typography>
 								<Typography variant="caption">Season {content.season}</Typography>
 								{/* <Typography variant="body1" sx={{ opacity: 0.5 }}>{content.description}</Typography> */}
-								<Typography variant="caption">
-									{content.price === 0 ? `free` : `EUR ${content.price / 100} / SEASON`}
-								</Typography>
+								{content.state === 'ACTIVE' && (
+									<Typography variant="caption">
+										{content.price === 0 ? `free` : `EUR ${content.price / 100} / SEASON`}
+									</Typography>
+								)}
 							</Stack>
 						</Stack>
 					</Box>
 				</Box>
 			</Link>
-			<Stack p={1} direction="row" alignContent="center" justifyContent="center" spacing={1}>
-				{join && (
-					<Button variant="xs" color="lemon" onClick={() => join()}>
-						{' '}
-						Join{' '}
-					</Button>
-				)}
-				{buy && (
-					<Button variant="xs" color="pink" onClick={() => buy()}>
-						{' '}
-						Buy{' '}
-					</Button>
-				)}
-			</Stack>
+			{content.state === 'ACTIVE' && (
+				<Stack p={1} direction="row" alignContent="center" justifyContent="center" spacing={1}>
+					{join && (
+						<Button variant="xs" color="lemon" onClick={() => join()}>
+							{' '}
+							Join{' '}
+						</Button>
+					)}
+					{buy && (
+						<Button variant="xs" color="pink" onClick={() => buy()}>
+							{' '}
+							Buy{' '}
+						</Button>
+					)}
+				</Stack>
+			)}
 		</CardContent>
 	)
 }

@@ -372,7 +372,8 @@ mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $n
 }
 
 subscription ActiveBattlepass {
-	battlepass(where: {state: {_eq: "ACTIVE"}}) {
+	# battlepass(where: {state: {_eq: "ACTIVE"}}) {
+	battlepass {
 		id
 		name
 		organization {

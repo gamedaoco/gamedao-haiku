@@ -5,7 +5,8 @@ import {
 	useScoreSubscription,
 	useClaimRewardMutation,
 	useRewardsSubscription,
-} from 'src/queries/index'
+	useBattlepassSubscription,
+} from 'src/queries'
 import { useAppContext } from 'src/providers/app/modules/context'
 import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
@@ -46,7 +47,7 @@ type TGridItemProps = {
 	handleClaim: Function
 }
 
-export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemProps) => {
+export const BPRewardItem = ({ index, content, score, handleClaim, active }: TGridItemProps) => {
 	const { uuid } = useAppContext()
 	const {
 		user: { address },
@@ -71,6 +72,13 @@ export const BPRewardItem = ({ index, content, score, handleClaim }: TGridItemPr
 	const isClaimed = content?.RewardClaims?.filter((i) => i.syncStatus === 'synced').length > 0 ? true : false
 
 	const ClaimSection = () => {
+		if (!active)
+			return (
+				<Button size="large" fullWidth variant="glass" disabled>
+					Season ended
+				</Button>
+			)
+
 		if (isClaimed)
 			return (
 				<Typography p={1} m={0} variant="body1">
@@ -233,6 +241,14 @@ export const BPRewards = ({ args }: TArgs) => {
 	const [items, setItems] = useState([])
 	const [demoMode, setDemoMode] = useState(true)
 
+	const [active, setActive] = useState(false)
+	const { data: battlepass } = useBattlepassSubscription({ variables: { id: id } })
+	useEffect(() => {
+		if (!battlepass || !battlepass?.Battlepasses.length) return
+		const pass = battlepass?.Battlepasses[0]
+		setActive(pass.active)
+	}, [battlepass])
+
 	const { loading: loadingRewards, data: rewards } = useRewardsSubscription({ variables: { id: id, uuid: uuid } })
 
 	useEffect(() => {
@@ -304,6 +320,7 @@ export const BPRewards = ({ args }: TArgs) => {
 												content={item}
 												score={score}
 												handleClaim={() => handleClaim(item.chainId)}
+												active={active}
 											/>
 										</Card>
 									</BPCard>
