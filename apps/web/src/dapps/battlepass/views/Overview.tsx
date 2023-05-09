@@ -52,24 +52,21 @@ export const Overview = () => {
 			columnSpacing={{ xs: 2, md: 4, lg: 6 }}
 			justifyContent={{ xs: 'center', md: 'left' }}
 		>
-			<Grid item xs={12} md={12}>
-				<Invitational
-					args={{
-						id: '0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532',
-						items: null,
-					}}
-				/>
-
+			{/* <Invitational
+				args={{
+					id: '0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532',
+					items: null,
+				}}
+			/> */}
+			<Grid item xs={12} md={6}>
 				{false && (
 					<Paper sx={{ p: 2, height: '100%' }} variant="glass">
 						<Stack direction="column" justifyContent="space-between">
 							<Typography variant="teaserTitle" pb={2}>
-								WAVEPASS CASH CUP
+								Coming up next: AEX-1 Season One
 							</Typography>
 							<Typography variant="teaserText" pb={2}>
-								Join top players from around the globe in this first invitational on Fortnite. To take
-								part make sure to join WAVEPASS Beta, which will close end of April and put you on the
-								shortlist.
+								Join top players from Europe in AEX-1 Season One, starting June 1st
 							</Typography>
 							<Stack direction="row" justifyContent="end">
 								{/* <Button color="secondary">Learn More</Button> */}
@@ -110,7 +107,7 @@ export const Overview = () => {
 
 			<Grid item xs={12}>
 				<Typography variant="h4" pb={2}>
-					Open Battlepasses
+					Overview
 				</Typography>
 			</Grid>
 
