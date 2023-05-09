@@ -45,6 +45,7 @@ type TGridItemProps = {
 	content?: any // TODO: type content
 	score?: any
 	handleClaim: Function
+	active: boolean
 }
 
 export const BPRewardItem = ({ index, content, score, handleClaim, active }: TGridItemProps) => {

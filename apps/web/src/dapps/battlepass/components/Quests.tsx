@@ -67,6 +67,7 @@ type TGridItemProps = {
 	index: number
 	item: TQuestItem
 	achievement: any
+	active: boolean
 }
 
 const getIconUrl = (item) => {
