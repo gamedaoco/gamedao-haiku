@@ -113,7 +113,7 @@ export const Overview = () => {
 
 			{content &&
 				content.map((item, index) => {
-					return (
+					return item.state === 'DRAFT' ? null : (
 						<Grid item key={index}>
 							<BPCard>
 								<Card
