@@ -48,13 +48,13 @@ import TabBar from './TabBar'
 
 import { initialState } from './const'
 
-export type TArgs = {
+type TArgs = {
 	organizationId?: string
 	battlepassId?: string
 	formState?: any
 	setFormState?: any
 }
-export type TProps = { args: TArgs }
+type TProps = { args: TArgs }
 
 export const GeneralEditor = ({ args }: TProps) => {
 	const { formState, setFormState } = args
