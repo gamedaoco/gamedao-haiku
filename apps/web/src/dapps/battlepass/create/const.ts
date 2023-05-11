@@ -30,13 +30,19 @@ export type TInitialState = {
 	description: string
 	slug: string
 	tags: string[]
-	coverImageCid: string
-	metadataCid: string
+	coverImageCid: string // the card image
+	bannerImageCid: string // the top banner of the battlepass page
+	tokenImageCid: string // the image of the generated token for the pass
+	iconImageCid: string // the icon image on top of the banner
+	metadataCid: string // the cid of the whole metadata
+	transferable: boolean
+	burnable: boolean
 
 	//
 	iconImg: string
 	bannerImg: string
 	cardImg: string
+
 	primaryColor: string
 	secondaryColor: string
 	backgroundColor: string
@@ -103,6 +109,15 @@ export const initialState: TInitialState = {
 	battlepassId: '',
 	creatorAddress: '',
 
+	// battlepass metadata
+	coverImageCid: '', // the card image
+	bannerImageCid: '', // the top banner of the battlepass page
+	tokenImageCid: '', // the image of the generated token for the pass
+	iconImageCid: '', // the icon image on top of the banner
+	metadataCid: '', // the cid of the whole metadata
+	transferable: true,
+	burnable: false,
+
 	// styling
 	primaryColor: '',
 	secondaryColor: '',
@@ -122,8 +137,6 @@ export const initialState: TInitialState = {
 	description: '',
 	slug: '',
 	tags: [],
-	metadataCid: '',
-	coverImageCid: '',
 
 	// commercials
 	currency: 'EUR',

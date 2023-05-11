@@ -29,16 +29,32 @@ export const OverviewCard = ({ args }: TArgs) => {
 	const config = useConfig()
 	const { content, join, buy } = args
 
+	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
+
+	const [metadata, setMetadata] = useState(null)
 	const [cardImage, setCardImage] = useState(null)
+
 	useEffect(() => {
 		if (!content) return
-		const cid = content?.cid ? content?.cid : content?.organization.header
-		// console.log('cid', content)
-		const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
-		setCardImage(`url(${url})`)
-	}, [content?.cid])
+		if (content?.cid.length < 16) {
+			setCardImage(`url(${content?.organization.header})`)
+		} else {
+			const cid = content?.cid.toString()
+			const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
+			const getContent = async () => {
+				const metadata = await fetch(url)
+					.then((res) => res.json())
+					.then((r) => {
+						console.log('metadata', r)
+						setMetadata(r)
+						setCardImage(getImageURL(r.coverImageCid))
+					})
+			}
+			getContent()
+		}
+	}, [content, setCardImage, setMetadata])
 
-	console.log('content', content)
+	console.log('cardImage', cardImage)
 
 	return (
 		<CardContent>
@@ -48,7 +64,7 @@ export const OverviewCard = ({ args }: TArgs) => {
 						height: '470px',
 						borderRadius: '2px',
 						boxShadow: `0px 20px 30px #00000033`,
-						background: cardImage,
+						background: `url(${cardImage})`,
 						backgroundSize: 'cover',
 						backgroundPosition: 'center center',
 						transitionDuration: '0.5s',

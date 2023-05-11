@@ -8,7 +8,7 @@ import { useLogger } from 'src/hooks/useLogger'
 const validation = Yup.object().shape({
 	orgId: Yup.string().required(),
 	name: Yup.string().required(),
-	cid: Yup.string(), //.required(),
+	cid: Yup.string().required(),
 	price: Yup.number().required(),
 })
 
@@ -27,7 +27,7 @@ export function useCreateBattlepassTX(orgId: string, name: string, cid: string =
 	const logger = useLogger('CreateBattlepass')
 
 	useEffect(() => {
-		if (!selectedApiProvider?.apiProvider || !address || !orgId || !name || !price) return
+		if (!selectedApiProvider?.apiProvider || !address || !orgId || !name || !price || !cid) return
 		logger.log('tx', orgId, name, cid, price)
 
 		try {

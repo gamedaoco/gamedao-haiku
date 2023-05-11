@@ -317,9 +317,16 @@ export const Create = () => {
 
 			<TabBar />
 
+			<Stack direction="row" spacing={2}>
+				<Typography>Organization</Typography>
+				<Typography></Typography>
+				<Typography>Battlepass</Typography>
+				<Typography></Typography>
+			</Stack>
+
 			<TabContext value={view}>
 				<DashboardTab />
-				<GeneralEditor args={{ formState, handleChange }} />
+				<GeneralEditor args={{ formState, setFormState }} />
 				<LevelEditor id={formState.battlepassId} />
 				{/* <StylingEditor
 					handleUploadImage={handleUploadImage}

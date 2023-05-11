@@ -49,12 +49,16 @@ import TabBar from './TabBar'
 import { initialState } from './const'
 
 export type TArgs = {
-	organizationId: string
-	battlepassId: string
+	organizationId?: string
+	battlepassId?: string
+	formState?: any
+	setFormState?: any
 }
 export type TProps = { args: TArgs }
 
-export const GeneralEditor = ({ args: TArgs }) => {
+export const GeneralEditor = ({ args }: TProps) => {
+	const { formState, setFormState } = args
+
 	const config = useConfig()
 	const theme = useTheme()
 	const { query, push } = useRouter()
@@ -62,12 +66,12 @@ export const GeneralEditor = ({ args: TArgs }) => {
 
 	const address = useCurrentAccountAddress()
 	const [stakeToEur, setStakeToEur] = useState(0)
-	const [formState, setFormState] = useState(initialState)
+	// const [formState, setFormState] = useState(initialState)
 
 	const createBattlepassTX = useCreateBattlepassTX(
 		formState.organizationId,
 		formState.name,
-		formState.metadataCid,
+		formState.metadataCid.toString(),
 		formState.price,
 	)
 	const activateBattlepassTX = useActivateBattlepassTX(formState.battlepassId)
@@ -133,7 +137,7 @@ export const GeneralEditor = ({ args: TArgs }) => {
 		const price = formState.price
 		const mul = formState.subscribers
 		const deposit = (price * mul * fxGAME) / 100
-		console.log('deposit', deposit)
+		// console.log('deposit', deposit)
 		setFormState({ ...formState, stake: deposit })
 		setStakeToEur(deposit * fxGAMEtoEUR)
 	}, [formState.subscribers, formState.price])
@@ -143,7 +147,6 @@ export const GeneralEditor = ({ args: TArgs }) => {
 	//
 	const updateFormState = (k, v) => {
 		const update = { ...formState, [k]: v }
-		// console.log('update', k, v, update)
 		setFormState(update)
 		localStorage.setItem('battlepass', JSON.stringify(update))
 	}
@@ -172,33 +175,39 @@ export const GeneralEditor = ({ args: TArgs }) => {
 	const uploadFile = async (filename, data) => {
 		const file = new File([JSON.stringify(data)], filename, { type: 'text/plain' })
 		const cid = await uploadFileToIpfs(file)
-		updateFormState('metadataCid', cid)
+		updateFormState('metadataCid', cid.toString())
+		return cid.toString()
 	}
 
-	// TODO:
-	// 1 assemble metadata based on form state
-	useEffect(() => {
+	//
+	// assemble and upload metadata
+	//
+	const updateMetadataCID = async () => {
 		if (!formState.organizationId) return
 
-		const data = {
+		const orgName = organizations?.find((o) => o.value === formState.organizationId)?.label
+		const filename = `${slugify(orgName)}-${slugify(formState.name)}-metadata.json`
+		const metadata = {
+			spec: 2,
 			name: formState.name,
 			description: formState.description,
-			slug: slugify(formState.name),
+			slug: `${slugify(orgName)}-${slugify(formState.name)}`,
 			tags: formState.tags,
+			coverImageCid: formState.coverImageCid,
+			bannerImageCid: formState.bannerImageCid,
+			tokenImageCid: formState.tokenImageCid,
+			iconImageCid: formState.iconImageCid,
+			transferable: formState.transferable || true,
+			burnable: formState.burnable || true,
 		}
-
-		updateFormState('metadata', data)
-
-		const filename = `${formState.slug}-metadata.json`
+		const cid = await uploadFile(filename, metadata)
 
 		console.log('================================')
-		console.log('metadata', data)
+		console.log('metadata', metadata)
 		console.log('filename', filename)
+		console.log('cid', cid)
 		console.log('================================')
-	}, [])
-
-	// 2 upload metadata to ipfs
-	// 3 derive image urls from metadata cids
+	}
 
 	// example:
 	// refresh the payload for a metadata blob on ipfs
@@ -208,20 +217,22 @@ export const GeneralEditor = ({ args: TArgs }) => {
 	// bp_user_metadata - user side battlepass nft metadata
 	// bp_reward_content drop item nft metadata
 
-	const refreshMetadata = (key, payload) => {}
 	// create
 
 	const [showCreateModal, setShowCreateModal] = useState<boolean>(false)
 	const openCreateModal = () => setShowCreateModal(true)
 	const closeCreateModal = () => setShowCreateModal(false)
-	const handleOpenCreateModal = () => {
-		console.log('handleOpenTxModal', formState)
+	const handleOpenCreateModal = async () => {
+		// console.log('handleOpenTxModal', formState)
+		await updateMetadataCID()
 		openCreateModal()
 	}
 	const handleCreateComplete = (e) => {
 		console.log('handleCreateComplete', e)
 		setShowCreateModal(false)
 	}
+
+	console.log('selected battlepassId', formState.battlepassId)
 
 	// activate
 
@@ -394,7 +405,7 @@ export const GeneralEditor = ({ args: TArgs }) => {
 								accept="image/*"
 								id="card-image-upload"
 								type="file"
-								onChange={(e) => handleUploadImage(e, 'battlepassCoverImage')}
+								onChange={(e) => handleUploadImage(e, 'coverImageCid')}
 							/>
 							{!formState.coverImageCid ? (
 								<Stack spacing={1} direction="column" alignItems="center" justifyContent="center">
@@ -418,6 +429,7 @@ export const GeneralEditor = ({ args: TArgs }) => {
 							)}
 						</label>
 					</Box>
+
 					<Stack
 						sx={{ width: '100%' }}
 						direction={{ sm: 'column', md: 'column' }}
@@ -444,10 +456,114 @@ export const GeneralEditor = ({ args: TArgs }) => {
 							multiline
 							rows={4}
 						/>
+
+						<Stack direction={{ sm: 'column', md: 'row' }} spacing={2}>
+							<Box sx={{ border: 'grey' }}>
+								<label htmlFor="icon-file-upload">
+									<input
+										style={{ display: 'none' }}
+										accept="image/*"
+										id="icon-file-upload"
+										type="file"
+										onChange={(e) => handleUploadImage(e, 'iconImageCid')}
+									/>
+									<Avatar
+										sx={(theme) => ({
+											width: '150px',
+											height: '150px',
+											backgroundColor: theme.palette.background.default,
+											outline: `5px solid #000000aa`,
+											cursor: 'pointer',
+										})}
+										src={getImageURL(formState.iconImageCid)}
+									>
+										<Stack spacing={1} alignItems="center">
+											<AddPhotoAlternateOutlinedIcon
+												sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
+											/>
+											<Typography>Add Icon</Typography>
+										</Stack>
+									</Avatar>
+								</label>
+							</Box>
+							<Box>
+								<label htmlFor="token-image-upload">
+									<input
+										style={{ display: 'none' }}
+										accept="image/*"
+										id="token-image-upload"
+										type="file"
+										onChange={(e) => handleUploadImage(e, 'tokenImageCid')}
+									/>
+									{!formState.coverImageCid ? (
+										<Stack
+											spacing={1}
+											direction="column"
+											alignItems="center"
+											justifyContent="center"
+										>
+											<AddPhotoAlternateOutlinedIcon
+												sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
+											/>
+											<Typography variant="cardMicro" align="center">
+												Add Battlepass Token Image
+											</Typography>
+										</Stack>
+									) : (
+										<Image
+											src={getImageURL(formState.tokenImageCid)}
+											alt="card"
+											sx={{
+												borderRadius: Number(theme.shape.borderRadius),
+												width: '100px',
+												height: '150px',
+											}}
+										/>
+									)}
+								</label>
+							</Box>
+							<Box>
+								<label htmlFor="banner-image-upload">
+									<input
+										style={{ display: 'none' }}
+										accept="image/*"
+										id="banner-image-upload"
+										type="file"
+										onChange={(e) => handleUploadImage(e, 'bannerImageCid')}
+									/>
+									{!formState.coverImageCid ? (
+										<Stack
+											spacing={1}
+											direction="column"
+											alignItems="center"
+											justifyContent="center"
+										>
+											<AddPhotoAlternateOutlinedIcon
+												sx={{ height: '20px', width: '20px', cursor: 'pointer' }}
+											/>
+											<Typography variant="cardMicro" align="center">
+												Add Battlepass Banner Image
+											</Typography>
+										</Stack>
+									) : (
+										<Image
+											src={getImageURL(formState.bannerImageCid)}
+											alt="card"
+											sx={{
+												borderRadius: Number(theme.shape.borderRadius),
+												width: '450px',
+												height: '150px',
+											}}
+										/>
+									)}
+								</label>
+							</Box>
+						</Stack>
 					</Stack>
 				</Stack>
+
 				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
-					<Button size="large" variant="outlined" fullWidth onClick={openCreateModal}>
+					<Button size="large" variant="outlined" fullWidth onClick={handleOpenCreateModal}>
 						Create Battlepass
 					</Button>
 				</Stack>
