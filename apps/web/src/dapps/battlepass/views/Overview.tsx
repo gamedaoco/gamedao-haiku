@@ -129,7 +129,6 @@ export const Overview = () => {
 										args={{
 											index,
 											content: item,
-											// canJoin,
 											join: () => handleJoin(item.id),
 											buy: () => handleBuy(item.id),
 										}}

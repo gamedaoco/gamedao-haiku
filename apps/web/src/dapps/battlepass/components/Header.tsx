@@ -25,7 +25,7 @@ import { Image } from 'src/components/Image/image'
 import { useAppContext } from 'src/providers/app/modules/context'
 import { Navigation } from './Navigation'
 
-import { useGetBattlepassUsersQuery } from 'src/queries'
+import { useGetBattlepassUsersQuery, useBattlepassSubscription } from 'src/queries'
 
 import { Join } from './JoinBtn'
 
@@ -47,6 +47,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 	const isXs = useMediaQuery(theme.breakpoints.up('xs'), {
 		defaultMatches: true,
 	})
+	const { loading: loadingBattlepass, data: battlepass } = useBattlepassSubscription({ variables: { id: id } })
 
 	// name
 	const [name, setName] = useState('')
@@ -132,15 +133,47 @@ export const Header = ({ orgId, id, view }: TProps) => {
 		}
 	}, [organization, address])
 
-	const avatarImageUrl =
-		organization?.logo || cache.logoCID
-			? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
-			: null
+	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
 
-	const headerImageUrl =
-		organization?.header || cache.headerCID
-			? parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)
-			: null
+	const [metadata, setMetadata] = useState(null)
+	const [avatarImageUrl, setAvatarImageUrl] = useState(null)
+	const [headerImageUrl, setHeaderImageUrl] = useState(null)
+
+	useEffect(() => {
+		if (!battlepass) return
+		const cid = battlepass?.Battlepasses[0]?.cid
+		if (cid?.length < 16) {
+			// invalid cid - show fallback
+			setAvatarImageUrl(parseIpfsHash(organization?.logo, config.IPFS_GATEWAY))
+			setHeaderImageUrl(parseIpfsHash(organization?.header, config.IPFS_GATEWAY))
+		} else {
+			// valid cid
+			const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
+			const getContent = async () => {
+				const metadata = await fetch(url)
+					.then((res) => res.json())
+					.then((r) => {
+						console.log('metadata', r)
+						setMetadata(r)
+						setAvatarImageUrl(parseIpfsHash(r.iconImageCid, config.IPFS_GATEWAY))
+						setHeaderImageUrl(parseIpfsHash(r.bannerImageCid, config.IPFS_GATEWAY))
+					})
+			}
+			getContent()
+		}
+	}, [battlepass])
+
+	// setCardImage(getImageURL(r.coverImageCid))
+
+	// const avatarImageUrl =
+	// 	organization?.logo || cache.logoCID
+	// 		? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
+	// 		: null
+
+	// const headerImageUrl =
+	// 	organization?.header || cache.headerCID
+	// 		? parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)
+	// 		: null
 
 	return (
 		<Box>
