@@ -29,9 +29,22 @@ const Teaser = styled(Typography)(({ theme }) => ({
 	textAlign: 'left',
 }))
 
-const Backdrop = ({ src, title, ...other }) => {
-	console.log('backdrop:', src)
-	return src ? <NextImage fill src={src ?? null} alt={title ?? 'image'} style={{ objectFit: 'cover' }} /> : null
+const Backdrop = ({ src, title, bg, lg, img, ...other }) => {
+	return src ? (
+		<Box
+			sx={{
+				position: 'relative',
+				zIndex: 10,
+				width: '100%',
+				minHeight: lg ? { xs: '100vh', md: '400px' } : '240px',
+				height: lg ? { xs: '100vh', md: '75vh' } : { xs: '50vh', md: '25vh' },
+				backgroundColor: bg,
+				borderTop: !lg && img !== '' ? '1px solid #000000' : 'none',
+			}}
+		>
+			<NextImage fill src={src ?? null} alt={title ?? 'image'} style={{ objectFit: 'cover' }} />
+		</Box>
+	) : null
 }
 
 const Item = (props) => {
@@ -44,20 +57,14 @@ const Item = (props) => {
 
 	return (
 		<Fragment>
-			<Box
-				sx={{
-					position: 'relative',
-					zIndex: 10,
-					width: '100%',
-					minHeight: props?.size === 'lg' ? { xs: '100vh', md: '400px' } : '240px',
-					height: props?.size === 'lg' ? { xs: '100vh', md: '75vh' } : { xs: '50vh', md: '25vh' },
-					backgroundColor: props.item.bg,
-					borderTop: !lg && props?.img !== '' ? '1px solid #000000' : 'none',
-				}}
-			>
-				<Backdrop src={props.item.image} title={props.item.title} priority={props.key === 0 ? true : false} />
-			</Box>
-
+			<Backdrop
+				img={props?.img}
+				bg={props.item.bg}
+				lg={lg}
+				src={props.item.image}
+				title={props.item.title}
+				priority={props.key === 0 ? true : false}
+			/>
 			<Box
 				px={[2, 4, 6]}
 				py={[2, 4]}

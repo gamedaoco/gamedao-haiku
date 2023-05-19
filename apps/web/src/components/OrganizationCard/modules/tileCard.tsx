@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import NextImage from 'next/image'
 
 import { Check, Key, Person } from '@mui/icons-material'
 import { Stack, Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
@@ -78,13 +79,30 @@ export const TileCard = ({ item }: ComponentPros) => {
 	const avatarImgUrl = item?.logo ? parseIpfsHash(item?.logo, config.IPFS_GATEWAY) : null
 	const bgImgUrl = item?.header ? parseIpfsHash(item?.header, config.IPFS_GATEWAY) : null
 
+	const Backdrop = ({ src, title = null, ...other }) => {
+		console.log('src', src)
+		return src ? (
+			<Box
+				sx={{
+					position: 'absolute',
+					width: '100%',
+					height: '100%',
+					borderRadius: theme.shape.borderRadiusLg,
+				}}
+			>
+				<NextImage fill src={src ?? null} alt={title ?? 'image'} style={{ objectFit: 'cover' }} />
+			</Box>
+		) : null
+	}
+
 	return (
 		<NavLink href={`/organizations/${item.id}/dashboard`}>
 			<Box
 				sx={{
 					width: '100%',
 					height: '480px',
-					backgroundImage: `url(${bgImgUrl})`,
+					// backgroundImage: `url(${bgImgUrl})`,
+					borderRadius: theme.shape.borderRadiusLg,
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',
 					backgroundSize: 'cover',
@@ -97,12 +115,13 @@ export const TileCard = ({ item }: ComponentPros) => {
 					},
 				}}
 			>
+				<Backdrop src={bgImgUrl} />
+
 				<Card
 					sx={{
 						position: 'relative',
 						zIndex: 1,
 						transition: 'transform 0.3s ease',
-
 						backgroundColor: `#11111133`,
 						border: '1px solid transparent',
 						borderRadius: theme.shape.borderRadiusLg,
