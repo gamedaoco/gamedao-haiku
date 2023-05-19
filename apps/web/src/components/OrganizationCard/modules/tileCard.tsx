@@ -80,7 +80,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 	const bgImgUrl = item?.header ? parseIpfsHash(item?.header, config.IPFS_GATEWAY) : null
 
 	const Backdrop = ({ src, title = null, ...other }) => {
-		console.log('src', src)
+		// console.log('src', src)
 		return src ? (
 			<Box
 				sx={{
