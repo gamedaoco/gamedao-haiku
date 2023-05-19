@@ -66,7 +66,7 @@ export const hero = [
 		description: `
 			Be part of the ÆX-1 community and declare war on the die-hards
 			and make a declaration of love for progress and gaming.`,
-		image: '/partners/Landingpage_V2.png',
+		image: '/partners/Landingpage_V2.jpg',
 		links: [
 			// {
 			// 	text: 'LEARN MORE',
@@ -98,8 +98,8 @@ export const hero = [
 			// 	icon: 'Joystick',
 			// },
 			{
-				text: 'JOIN BATTLEPASS',
-				url: '/battlepass/0x60134570092f28b3d3500152e7bfded8348521e46a83e24d664e2af0b63c6532',
+				text: 'JOIN WAVE DAO',
+				url: '/organizations/0xd438d915d9e9a4478acb485a02a511b43e69a51caf3e573b04a0c970883d213a/overview',
 				icon: 'Battle',
 			},
 		],
