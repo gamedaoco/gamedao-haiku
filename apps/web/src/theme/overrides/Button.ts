@@ -128,6 +128,21 @@ export default function Button(theme: Theme) {
 					},
 				},
 				{
+					props: { variant: 'md', color: 'lemon' },
+					style: {
+						fontSize: '.75rem',
+						padding: '.5rem',
+						background: 'none',
+						color: '#f3cb14',
+						border: '1px solid #f3cb14',
+						borderRadius: theme.shape.borderRadiusSm,
+						'&:hover': {
+							color: '#000000',
+							background: '#f3cb14',
+						},
+					},
+				},
+				{
 					props: { variant: 'lemon' },
 					style: {
 						// height: large,

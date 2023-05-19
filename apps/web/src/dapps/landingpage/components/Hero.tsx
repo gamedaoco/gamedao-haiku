@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import NextImage from 'next/image'
 
 import { useMediaQuery, Container, Stack, Box, Typography, Button } from '@mui/material'
@@ -11,7 +12,7 @@ import Icon from '@mui/material/Icon'
 
 import Prev from '@mui/icons-material/NavigateBefore'
 import Next from '@mui/icons-material/NavigateNext'
-import { hero as items } from '../content'
+// import { hero as items } from '../content'
 import { GRADIENT } from '../styles'
 
 const Teaser = styled(Typography)(({ theme }) => ({
@@ -28,123 +29,108 @@ const Teaser = styled(Typography)(({ theme }) => ({
 	textAlign: 'left',
 }))
 
-const Backdrop = ({ src, title }) => {
+const Backdrop = ({ src, title, ...other }) => {
 	console.log('backdrop:', src)
-	return src ? (
-		<Box sx={{ position: 'relative', height: '100%' }}>
-			<NextImage
-				fill
-				src={src ?? null}
-				alt={title ?? 'image'}
-				style={{ objectFit: 'cover' }}
-				// placeholder='blur'
-				loading="lazy"
-				// width={ window ? self.innerWidth || 1024 }
-				// height={'auto'}
-				// sx={{
-				// height: '100%',
-				// backgroundImage: `url(${src})`,
-				// backgroundSize: 'cover',
-				// backgroundPosition: 'center center',
-				// backgroundSize: '150% auto',
-				// backgroundRepeat: 'no-repeat',
-				// }}
-			/>
-		</Box>
-	) : null
+	return src ? <NextImage fill src={src ?? null} alt={title ?? 'image'} style={{ objectFit: 'cover' }} /> : null
 }
 
 const Item = (props) => {
 	const theme = useTheme()
-	const isSm = useMediaQuery(theme.breakpoints.up('md'), {
-		defaultMatches: true,
-	})
+	const isSm = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
+	const isXs = useMediaQuery(theme.breakpoints.up('xs'), { defaultMatches: true })
 	const imageHeight = isSm ? props.item.img_height : props.item.img_height / 2
+	const shadowStyle = 'drop-shadow( 0 15px 20px rgba(0,0,0,1) )'
+	const lg = props?.size === 'lg'
 
 	return (
-		<>
+		<Fragment>
 			<Box
 				sx={{
+					position: 'relative',
 					zIndex: 10,
 					width: '100%',
-					minHeight: { xs: '100vh', md: '400px' },
-					height: { xs: '100vh', md: '75vh' },
+					minHeight: props?.size === 'lg' ? { xs: '100vh', md: '400px' } : '240px',
+					height: props?.size === 'lg' ? { xs: '100vh', md: '75vh' } : { xs: '50vh', md: '25vh' },
+					backgroundColor: props.item.bg,
+					borderTop: !lg && props?.img !== '' ? '1px solid #000000' : 'none',
 				}}
 			>
-				<Backdrop src={props.item.image} />
+				<Backdrop src={props.item.image} title={props.item.title} priority={props.key === 0 ? true : false} />
 			</Box>
 
 			<Box
+				px={[2, 4, 6]}
+				py={[2, 4]}
 				sx={{
 					zIndex: 20,
 					width: '100%',
-					// minHeight: 'calc( 100vh )',
-					minHeight: { xs: '100vh', md: '400px' },
-					height: { xs: '100vh', md: '75vh' },
+					minHeight: props?.size === 'lg' ? { xs: '100vh', md: '400px' } : '240px',
+					height: props?.size === 'lg' ? { xs: '100vh', md: '75vh' } : { xs: '50vh', md: '25vh' },
 					position: 'absolute',
 					top: 0,
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'flex-end',
-					padding: [1, 2, 4, '5rem'],
-					// border: '5px solid yellow'
+					// padding: [1, 2, 4, '5rem'],
 				}}
 			>
 				<Stack
-					direction="column"
-					justifyContent="flex-end"
-					alignItems="flex-start"
-					spacing={[1, 1, 2]}
-					sx={{
-						backgroundColor: '#11111166',
-						// backdropFilter: `blur(5px)`,
-						borderRadius: theme.shape.borderRadiusLg,
-						// backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,.3))`,
-						py: 4,
-					}}
+					direction={lg ? 'column' : !isSm ? 'column' : 'row'}
+					justifyContent="space-between"
+					alignItems={lg ? 'flex-start' : isSm ? 'flex-end' : 'flex-start'}
 				>
-					{props.item.img && (
-						<Box
-							px={[2, 4, 6]}
-							sx={{
-								webkitFilter: 'drop-shadow( 0 15px 20px rgba(0,0,0,1) )',
-								filter: 'drop-shadow( 0 15px 20px rgba(0,0,0,1) )',
-							}}
-						>
-							<img src={props.item.img} height={imageHeight} width="auto" />
-						</Box>
-					)}
-					{!props.item.img && (
-						<Teaser variant="h1" px={[2, 4, 6]} sx={{ color: props.item.txt ? props.item.txt : null }}>
-							{props.item.title}
-						</Teaser>
-					)}
-					{props.item.sub && (
-						<Typography
-							variant={'hero1'}
-							px={[2, 4, 6]}
-							pt={4}
-							sx={{ lineHeight: '95%', color: props.item.txt ? props.item.txt : null }}
-						>
-							{props.item.sub}
-						</Typography>
-					)}
-					<Typography
-						variant={'hero2'}
-						px={[2, 4, 6]}
-						pt={2}
+					<Stack
+						direction="column"
+						// justifyContent={( lg ? "flex-end" : ( isXs ? "flex-start" : "flex-end" ) )}
+						alignItems="flex-start"
+						spacing={[1, 1, 2]}
 						sx={{
-							maxWidth: { xs: '100%', md: '75%', lg: '50%' },
-							color: props.item.txt ? props.item.txt : null,
+							// backgroundColor: '#11111166',
+							// borderRadius: theme.shape.borderRadiusLg,
+							py: lg ? 4 : 2,
 						}}
 					>
-						{props.item.description}
-					</Typography>
+						{props.item.img && (
+							<Box
+								sx={{
+									webkitFilter: shadowStyle,
+									filter: shadowStyle,
+								}}
+							>
+								<img src={props.item.img} height={imageHeight} width="auto" />
+							</Box>
+						)}
+						{!props.item.img && (
+							<Teaser variant={lg ? 'h1' : 'h2'} sx={{ color: props.item.txt ? props.item.txt : null }}>
+								{props.item.title}
+							</Teaser>
+						)}
+						{props.item.sub && (
+							<Typography
+								variant={props?.size === 'lg' ? 'hero1' : 'body1'}
+								pt={lg ? 4 : 0}
+								sx={{ lineHeight: '95%', color: props.item.txt ? props.item.txt : null }}
+							>
+								{props.item.sub}
+							</Typography>
+						)}
+						<Typography
+							// variant={'hero2'}
+							variant={lg ? 'hero2' : 'body2'}
+							pt={lg ? 2 : 0}
+							sx={{
+								maxWidth: { xs: '100%', md: '75%', lg: '50%' },
+								color: props.item.txt ? props.item.txt : null,
+							}}
+						>
+							{props.item.description}
+						</Typography>
+					</Stack>
 					{props.item.links && (
-						<Typography variant={'hero2'} px={[2, 4, 6]} pt={[2, 4]} sx={{ lineHeight: '95%' }}>
+						<Typography variant={'hero2'} pt={[2, 4]} sx={{ lineHeight: '95%' }}>
 							{props.item.links.map((e, i) => (
 								<Link href={e.url} key={i}>
-									<Button variant="lemon" sx={{ mr: 2, mb: 2 }}>
+									<Button variant={lg ? 'lemon' : 'md'} color="lemon" sx={{ mr: 2, mb: 2 }}>
 										{`${e.text || 'More'}`}
 									</Button>
 								</Link>
@@ -153,25 +139,18 @@ const Item = (props) => {
 					)}
 				</Stack>
 			</Box>
-		</>
+		</Fragment>
 	)
 }
 
-const Content = () => (
-	<Carousel
-		sx={{ borderRadius: 0, height: '100%' }}
-		duration={250}
-		interval={5000}
-		NextIcon={<Next />}
-		PrevIcon={<Prev />}
-	>
-		{items.map((item, i) => (
-			<Item key={i} item={item} />
-		))}
-	</Carousel>
-)
+type Size = 'lg' | 'sm'
 
-export const Hero = () => {
+interface HeroProps {
+	content?: Array<any>
+	size?: Size
+}
+
+export const Hero = ({ content, size = 'lg' }: HeroProps) => {
 	const theme = useTheme()
 	const isSm = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
@@ -181,13 +160,25 @@ export const Hero = () => {
 	return (
 		<Box
 			sx={{
-				minHeight: { xs: '100vh', md: '400px' },
-				height: { xs: '100vh', md: '75vh' },
+				minHeight: size === 'lg' ? { xs: '100vh', md: '400px' } : '240px',
+				height: size === 'lg' ? { xs: '100vh', md: '75vh' } : { xs: '50vh', md: '25vh' },
 				m: 0,
 				p: 0,
 			}}
 		>
-			<Content />
+			{content ? (
+				<Carousel
+					sx={{ borderRadius: 0, height: '100%' }}
+					duration={size === 'lg' ? 250 : 150}
+					interval={size === 'lg' ? 5000 : 2500}
+					NextIcon={<Next />}
+					PrevIcon={<Prev />}
+				>
+					{content.map((item, i) => (
+						<Item key={i} item={item} size={size} />
+					))}
+				</Carousel>
+			) : null}
 		</Box>
 	)
 }

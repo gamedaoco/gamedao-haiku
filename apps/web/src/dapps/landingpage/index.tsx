@@ -8,7 +8,6 @@ import { Newsletter } from './components/Newsletter'
 import { Box, Container } from '@mui/material'
 import {
 	Hero,
-	Hero2,
 	Intro,
 	Transform,
 	Teaser,
@@ -21,6 +20,8 @@ import {
 	// QuestionsGameDAO,
 	QuestionsBattlepass,
 } from './components'
+
+import { hero as heroContent, hero2 as hero2Content } from './content'
 
 const Wrapper = styled(Box)(({ theme }) => ({
 	// '& *': {
@@ -37,8 +38,8 @@ export function Landingpage() {
 
 	return (
 		<Box>
-			{hero && <Hero />}
-			{hero && <Hero2 />}
+			{hero && <Hero size="lg" content={heroContent} />}
+			{hero && <Hero size="sm" content={hero2Content} />}
 
 			<Newsletter />
 

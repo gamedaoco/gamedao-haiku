@@ -1,4 +1,10 @@
-export const team = [
+export const coreteam = [
+	['Marco', 'founder, architect', '/img/marco.png', 'https://linkedin.com/in/marcobahn'],
+	['Yonghan', 'esports, guilds, bd', '/img/yonghan.png', 'https://linkedin.com/in/yonghanlee'],
+	['Vasileya', 'bd, daos, legal + compliance', '/img/yonghan.png', 'https://linkedin.com/in/yonghanlee'],
+]
+
+export const alumni = [
 	['Marco', 'Founder', '/img/marco.png', 'https://linkedin.com/in/marcobahn'],
 	['Yonghan', 'Partnerships', '/img/yonghan.png', 'https://linkedin.com/in/yonghanlee'],
 	['Inan', 'Product', '/img/inan.png', 'https://linkedin.com/in/inangueder'],
@@ -25,23 +31,27 @@ export const team = [
 ]
 
 export const partners = [
+	['AEX-1', 'Esports', '/img/aex-1.png', 'https://aex-1.com'],
 	['Acala', 'Network', '/img/acala.png', 'https://acala.network'],
+	['DIA', 'Network', '/img/dia.png', 'https://dia.network'],
+	// ['Fractal', 'Identity', '/img/fractal.png', 'https://fractal.id'],
 	['Kilt', 'Identity', '/img/kilt.png', 'https://kilt.io'],
-	['Fractal', 'Identity', '/img/fractal.png', 'https://fractal.id'],
-
-	['XP Fantasy', 'Esports Oracles', '/img/xpfantasy.png', 'https://'],
-	['Wave Esports', 'Esports', '/img/wave.png', 'https://'],
+	['Wave Esports', 'Esports', '/img/wave.png', 'https://wave.gg'],
+	// ['XP Fantasy', 'Esports Oracles', '/img/xpfantasy.png', 'https://'],
 ]
 
-export const supporters = [
-	['Outlier Ventures', '', '/img/maxstealth.png', 'https://'],
-	['Scytale Ventures', '', '/img/scytale.png', 'https://'],
-	['Valhalla Capital', '', '/img/valhalla.png', 'https://'],
-	['Primal', '', '/img/primal.png', 'https://'],
-	['Automata Network', '', '/img/automata.png', 'https://'],
-	['1PAR Research', '', '/img/1par.png', 'https://'],
-	['YaoQi', '', '/img/yaoqi.png', 'https://'],
-	['Tek Forest', '', '/img/tekforest.png', 'https://'],
+export const backers1 = [['Scytale Digital', 'Horizon II', '/img/scytale.png', 'https://scytale.digital']]
+
+export const backers2 = [
+	['1PAR Research', '', '/img/1par.png', 'https://1par.com'],
+	['Automata Network', '', '/img/automata.png', 'https://ata.network'],
+	['Outlier Ventures', '', '/img/ov.png', 'https://outlierventures.io'],
+	['Primal', '', '/img/primal.png', 'https://primalcapital.io'],
+	// ['Scytale Ventures', 'Horizon II', '/img/scytale.png', 'https://scytale.digital'],
+	['Tek Forest', '', '/img/tekforest.png', 'https://tekforest.io'],
+	['Valhalla Capital', '', '/img/valhalla.png', 'https://valhalla.capital'],
+	['Vyoma Partners', '', '/img/vyoma.png', 'https://vyoma.ch'],
+	['Yaoqi Jia', '', '/img/yaoqi.png', 'https://jiayaoqi.com'],
 ]
 
 //
@@ -175,22 +185,48 @@ export const hero = [
 	},
 ]
 
+//
+//
+//
+
 export const hero2 = [
+	// {
+	// 	title: `Fundraising for Creators`,
+	// 	sub: `Fundraising and go to market for your game project on GameDAO`,
+	// 	description: `Raising funds and awareness has never been easy.
+	// 		GameDAO navigates you through the process of lifting off.`,
+	// 	links: [
+	// 		{ text: 'More', url: 'https://blog.gamedao.co/the-art-of-videogames-funding-a81ce6867d43', icon: 'Joystick', },
+	// 	],
+	// 	bg: '#069',
+	// },
+	// {
+	// 	title: 'Build your own DAO',
+	// 	sub: `What you need to know`,
+	// 	description: `What you need to know before starting your organization.`,
+	// 	links: [
+	// 		{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick', },
+	// 	],
+	// 	bg: '#609',
+	// },
 	{
-		sub: `BATTLEPASS`,
-		description: `
-			Unlock the WAVEpass CASHCUP invitational with us:
-			1000 slots available.
-		`,
+		title: `WAVE Esports`,
+		sub: `WAVEpass CASHCUP invitational`,
+		description: `500 slots not reached, let's try another time!`,
 		// image: '/teaser.jpg',
 		// links: [
+		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
 		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
 		// ],
 		bg: '#000',
 		img: '/partners/wave-esports-white.png',
-		img_height: '32',
+		img_height: '24',
 	},
 ]
+
+//
+//
+//
 
 export const intro = [
 	{

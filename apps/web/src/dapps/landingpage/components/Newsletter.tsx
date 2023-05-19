@@ -18,7 +18,7 @@ type FormProps = {
 const CustomForm: FC<FormProps> = ({ status, message, onValidated }) => {
 	const theme = useTheme()
 	const isSm = useMediaQuery(theme.breakpoints.up('sm'), { defaultMatches: true })
-
+	const isXs = useMediaQuery(theme.breakpoints.up('xs'), { defaultMatches: true })
 	const [inputs, setInputState] = useState({ uname: '', email: '' })
 
 	const handleOnChange = (e) => {
@@ -38,10 +38,10 @@ const CustomForm: FC<FormProps> = ({ status, message, onValidated }) => {
 	}
 
 	return (
-		<Box m={0} p={4} sx={{ backgroundColor: '#000' }}>
+		<Box m={0} p={[2, 4]} sx={{ backgroundColor: '#000', height: { xs: '25vh', sm: 'auto' } }}>
 			<Container maxWidth="xl" disableGutters>
-				<Stack justifyContent="center" alignItems="center">
-					<Typography pb={2} variant="h3">
+				<Stack justifyContent="center" alignItems="left">
+					<Typography pb={2} variant="hero1">
 						Know it first and subscribe to our newsletter
 					</Typography>
 
