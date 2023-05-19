@@ -38,7 +38,7 @@ const Backdrop = ({ src, title, bg, lg, img, ...other }) => {
 				width: '100%',
 				minHeight: lg ? { xs: '100vh', md: '400px' } : '240px',
 				height: lg ? { xs: '100vh', md: '75vh' } : { xs: '50vh', md: '25vh' },
-				backgroundColor: bg,
+				backgroundColor: bg ?? null,
 				borderTop: !lg && img !== '' ? '1px solid #000000' : 'none',
 			}}
 		>

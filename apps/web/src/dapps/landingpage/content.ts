@@ -192,25 +192,29 @@ export const hero = [
 //
 
 export const hero2 = [
-	// {
-	// 	title: `Fundraising for Creators`,
-	// 	sub: `Fundraising and go to market for your game project on GameDAO`,
-	// 	description: `Raising funds and awareness has never been easy.
-	// 		GameDAO navigates you through the process of lifting off.`,
-	// 	links: [
-	// 		{ text: 'More', url: 'https://blog.gamedao.co/the-art-of-videogames-funding-a81ce6867d43', icon: 'Joystick', },
-	// 	],
-	// 	bg: '#069',
-	// },
-	// {
-	// 	title: 'Build your own DAO',
-	// 	sub: `What you need to know`,
-	// 	description: `What you need to know before starting your organization.`,
-	// 	links: [
-	// 		{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick', },
-	// 	],
-	// 	bg: '#609',
-	// },
+	{
+		title: `Fundraising for Creators`,
+		sub: `Fundraising and go to market for your game project on GameDAO`,
+		description: `Raising funds and awareness has never been easy.
+			GameDAO navigates you through the process of lifting off.`,
+		links: [
+			{
+				text: 'More',
+				url: 'https://blog.gamedao.co/the-art-of-videogames-funding-a81ce6867d43',
+				icon: 'Joystick',
+			},
+		],
+		bg: '#069',
+	},
+	{
+		title: 'Build your own DAO',
+		sub: `What you need to know`,
+		description: `What you need to know before starting your organization.`,
+		links: [
+			{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' },
+		],
+		bg: '#609',
+	},
 	{
 		title: `WAVE Esports`,
 		sub: `WAVEpass CASHCUP invitational`,
