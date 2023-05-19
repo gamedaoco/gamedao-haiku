@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { Box, Grid, Card, Paper, Typography, Button, Stack } from '@mui/material'
 
 import { GRADIENT } from '../styles'
-import { supporters } from '../content'
+import { backers1, backers2 } from '../content'
 
 import { Item } from './Item'
 
@@ -23,7 +23,7 @@ export const Supporters = (openUrl) => (
 
 		<Box display="flex" justifyContent="center" alignItems="center">
 			<Grid container>
-				{supporters.map((person, index) => (
+				{backers1.map((person, index) => (
 					<Grid item xs={6} sm={4} md={3} lg={3} pt={3} key={index}>
 						<Box>
 							<Item>

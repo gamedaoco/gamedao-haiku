@@ -1,7 +1,9 @@
 export const coreteam = [
 	['Marco', 'founder, architect', '/img/marco.png', 'https://linkedin.com/in/marcobahn'],
 	['Yonghan', 'esports, guilds, bd', '/img/yonghan.png', 'https://linkedin.com/in/yonghanlee'],
-	['Vasileya', 'bd, daos, legal + compliance', '/img/yonghan.png', 'https://linkedin.com/in/yonghanlee'],
+	['Vasileya', 'bd, daos, legal + compliance', '/img/vasileya.png', ''],
+	['Zhenya', 'engineering', '/img/zhenya.png', ''],
+	['Yura', 'engineering', '/img/yura.png', ''],
 ]
 
 export const alumni = [

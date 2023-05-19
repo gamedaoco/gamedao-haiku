@@ -3,7 +3,7 @@ import { Box, Grid, Card, Paper, Typography, Button, Stack } from '@mui/material
 import { styled } from '@mui/system'
 
 import { GRADIENT } from '../styles'
-import { team } from '../content'
+import { coreteam } from '../content'
 
 import { Item, Title, Headline } from '.'
 
@@ -24,7 +24,7 @@ export const Team = (openUrl) => (
 		</Typography>
 
 		<Grid container>
-			{team.map((person, index) => (
+			{coreteam.map((person, index) => (
 				<Grid item xs={6} sm={4} md={3} lg={2} pt={2} key={index}>
 					<Box
 						sx={{

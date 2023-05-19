@@ -14,6 +14,9 @@ interface ComponentProps extends IProps {
 	ratio?: ImageRatio
 	effect?: ImageEffect
 	disabledEffect?: boolean
+	src?: string
+	alt?: string
+	layout?: string
 }
 
 function getRatio(ratio = '1/1') {
@@ -30,7 +33,7 @@ function getRatio(ratio = '1/1') {
 	}[ratio]
 }
 
-export function Image({ ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ComponentProps) {
+export function Image({ alt, ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ComponentProps) {
 	// if (ratio) {
 	// 	return (
 	// 		<Box
@@ -80,6 +83,7 @@ export function Image({ ratio, disabledEffect = false, effect = 'blur', sx, ...o
 			<Box
 				component={NextImage}
 				fill
+				alt={alt ?? 'image'}
 				style={{ objectFit: 'cover' }}
 				wrapperClassName="wrapper"
 				effect={disabledEffect ? undefined : effect}
