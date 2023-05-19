@@ -1,3 +1,5 @@
+import NextImage from 'next/image'
+
 import { useMediaQuery, Container, Stack, Box, Typography, Button } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { styled } from '@mui/system'
@@ -26,19 +28,28 @@ const Teaser = styled(Typography)(({ theme }) => ({
 	textAlign: 'left',
 }))
 
-const Backdrop = ({ src }) => {
+const Backdrop = ({ src, title }) => {
+	console.log('backdrop:', src)
 	return src ? (
-		<Box
-			sx={{
-				height: '100%',
-				backgroundImage: `url(${src})`,
-				backgroundSize: 'cover',
-				backgroundPosition: 'center center',
+		<Box sx={{ position: 'relative', height: '100%' }}>
+			<NextImage
+				fill
+				src={src ?? null}
+				alt={title ?? 'image'}
+				style={{ objectFit: 'cover' }}
+				// placeholder='blur'
+				loading="lazy"
+				// width={ window ? self.innerWidth || 1024 }
+				// height={'auto'}
+				// sx={{
+				// height: '100%',
+				// backgroundImage: `url(${src})`,
+				// backgroundSize: 'cover',
+				// backgroundPosition: 'center center',
 				// backgroundSize: '150% auto',
-				backgroundRepeat: 'no-repeat',
-			}}
-		>
-			{/*<img src={src} />*/}
+				// backgroundRepeat: 'no-repeat',
+				// }}
+			/>
 		</Box>
 	) : null
 }
