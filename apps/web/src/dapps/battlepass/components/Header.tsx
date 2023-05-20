@@ -38,22 +38,6 @@ type TProps = {
 	view: BattlepassViews
 }
 
-// const Backdrop = ({ src, title = null, ...other }) => {
-// 	return src ? (
-// 		<Box
-// 			sx={{
-// 				position: 'absolute',
-// 				width: '100%',
-// 				height: '100%',
-// 				// borderRadius: theme.shape.borderRadiusLg,
-// 			}}
-// 			{...other}
-// 		>
-// 			<NextImage fill src={src ?? null} alt={title ?? 'image'} style={{ objectFit: 'cover' }} />
-// 		</Box>
-// 	) : null
-// }
-
 export const Header = ({ orgId, id, view }: TProps) => {
 	const { query, push } = useRouter()
 	const { uuid } = useAppContext()
@@ -142,7 +126,6 @@ export const Header = ({ orgId, id, view }: TProps) => {
 
 	useEffect(() => {
 		if (!data?.organization[0]) return
-		// console.log('org', data?.organization[0])
 		setOrganization(data.organization?.[0] as Organization)
 	}, [data?.organization])
 
@@ -152,52 +135,38 @@ export const Header = ({ orgId, id, view }: TProps) => {
 		}
 	}, [organization, address])
 
-	const getImageURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
-
+	const getURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
 	const [metadata, setMetadata] = useState(null)
 	const [avatarImageUrl, setAvatarImageUrl] = useState(null)
 	const [headerImageUrl, setHeaderImageUrl] = useState(null)
-
-	console.log('avatarImageUrl', avatarImageUrl)
-	console.log('headerImageUrl', headerImageUrl)
 
 	useEffect(() => {
 		if (!battlepass) return
 		const cid = battlepass?.Battlepasses[0]?.cid
 		if (cid?.length < 16) {
-			// invalid cid - show fallback
-			console.log('invalid cid', cid)
-			setAvatarImageUrl(parseIpfsHash(organization?.logo, config.IPFS_GATEWAY))
-			setHeaderImageUrl(parseIpfsHash(organization?.header, config.IPFS_GATEWAY))
+			setAvatarImageUrl(getURL(organization?.logo))
+			setHeaderImageUrl(getURL(organization?.header))
 		} else {
-			// valid cid
-			console.log('valid cid', cid)
-			const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
+			const url = getURL(cid) //parseIpfsHash(cid, config.IPFS_GATEWAY)
 			const getContent = async () => {
-				const metadata = await fetch(url)
+				const _ = await fetch(url)
 					.then((res) => res.json())
-					.then((r) => {
-						console.log('metadata', r)
-						setMetadata(r)
-						setAvatarImageUrl(parseIpfsHash(r.iconImageCid, config.IPFS_GATEWAY))
-						setHeaderImageUrl(parseIpfsHash(r.bannerImageCid, config.IPFS_GATEWAY))
+					.then((data) => {
+						console.log('metadata', data)
+						setMetadata(data)
 					})
 			}
 			getContent()
 		}
 	}, [battlepass])
 
+	useEffect(() => {
+		if (!metadata) return
+		setAvatarImageUrl(getURL(metadata.iconImageCid))
+		setHeaderImageUrl(getURL(metadata.bannerImageCid))
+	}, [metadata])
+
 	// setCardImage(getImageURL(r.coverImageCid))
-
-	// const avatarImageUrl =
-	// 	organization?.logo || cache.logoCID
-	// 		? parseIpfsHash(organization?.logo || cache.logoCID, config.IPFS_GATEWAY)
-	// 		: null
-
-	// const headerImageUrl =
-	// 	organization?.header || cache.headerCID
-	// 		? parseIpfsHash(organization?.header ?? cache.headerCID, config.IPFS_GATEWAY)
-	// 		: null
 
 	return (
 		<Box>
@@ -222,18 +191,17 @@ export const Header = ({ orgId, id, view }: TProps) => {
 						backgroundBlendMode: 'multiply',
 					}}
 				>
-					<Stack alignItems="center" justifyContent={isMd ? 'left' : 'center'}>
-						<Avatar
-							sx={(theme) => ({
-								width: '5rem',
-								height: '5rem',
-								backgroundColor: theme.palette.background.default,
-								border: `3px solid #111111aa`,
-								// outline: `3px solid #111111aa`,
-							})}
-							srcSet={avatarImageUrl}
-						/>
-					</Stack>
+					<Avatar
+						sx={(theme) => ({
+							width: '5rem',
+							height: '5rem',
+							backgroundColor: theme.palette.background.default,
+							border: `3px solid #111111aa`,
+						})}
+						srcSet={avatarImageUrl}
+					/>
+					{/* <Stack alignItems="center" justifyContent={isMd ? 'left' : 'center'}>
+					</Stack> */}
 
 					<Stack
 						alignItems={isMd ? 'space-between' : 'center'}
