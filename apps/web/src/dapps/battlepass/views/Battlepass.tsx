@@ -1,25 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
 import { BattlepassViews } from 'src/constants/battlepass'
-
-import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
-
-import { useConfig } from 'src/hooks/useConfig'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useAddMemberTransaction } from 'src/hooks/tx/useAddMemberTransaction'
-
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
-
-import { Organization, useOrganizationByIdSubscription } from 'src/queries'
-
-import { useTheme } from '@mui/material/styles'
 import { TabContext, TabPanel } from '@mui/lab'
 import { Container, Paper, Stack, Box } from '@mui/material'
-
-// TODO: move component level up
 import { Header } from '../components/Header'
-
 import { DashboardView } from './Dashboard'
 import { LeaderboardView } from './Leaderboard'
 import { AdminView } from './Admin'

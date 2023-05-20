@@ -12,7 +12,7 @@ export const ShareBtn = ({ args }: TProps) => {
 
 	return (
 		<a href={`https://twitter.com/intent/tweet?text=${str}`} target="_blank" rel="noreferrer">
-			<Button sx={{ mr: [0, 2] }} variant="text" endIcon={<ShareIcon />}>
+			<Button variant="text" endIcon={<ShareIcon />}>
 				Share with a friend
 			</Button>
 		</a>

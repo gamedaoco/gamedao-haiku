@@ -48,8 +48,8 @@ export const Overview = () => {
 		<Grid
 			container
 			// columns={{ xs: 1, md: 2 }}
-			rowSpacing={2}
-			columnSpacing={{ xs: 2, md: 4, lg: 6 }}
+			// rowSpacing={2}
+			spacing={{ xs: 2, md: 4 }}
 			justifyContent={{ xs: 'center', md: 'left' }}
 		>
 			{/* <Invitational

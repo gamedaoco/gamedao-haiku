@@ -38,7 +38,12 @@ export function DashboardView({ id }: TProps) {
 				<XPBar args={{ id }} />
 			</Grid>
 			<Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
-				<Stack direction={isMd ? 'row' : 'column'} alignItems="center" justifyContent={isMd ? 'end' : 'center'}>
+				<Stack
+					direction={isMd ? 'row' : 'column-reverse'}
+					spacing={2}
+					alignItems="center"
+					justifyContent={isMd ? 'end' : 'center'}
+				>
 					<ShareBtn args={{ id }} />
 					<BPBuyBtn args={{ id }} />
 				</Stack>
