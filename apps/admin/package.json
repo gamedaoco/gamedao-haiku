@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "author": "2075@zero.io",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
 }

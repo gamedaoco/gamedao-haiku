@@ -33,7 +33,7 @@ function getRatio(ratio = '1/1') {
 	}[ratio]
 }
 
-export function Image({ alt, ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ComponentProps) {
+export function Image({ src, alt, ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ComponentProps) {
 	// if (ratio) {
 	// 	return (
 	// 		<Box
@@ -69,7 +69,7 @@ export function Image({ alt, ratio, disabledEffect = false, effect = 'blur', sx,
 	// 	)
 	// }
 
-	return (
+	return !src ? null : (
 		<Box
 			component="span"
 			sx={{
