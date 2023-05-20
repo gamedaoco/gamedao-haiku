@@ -22,18 +22,37 @@ import { Typography, Avatar, Box, Grid, Stack, useMediaQuery } from '@mui/materi
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { Image } from 'src/components/Image/image'
+import NextImage from 'next/image'
+
 import { useAppContext } from 'src/providers/app/modules/context'
 import { Navigation } from './Navigation'
 
 import { useGetBattlepassUsersQuery, useBattlepassSubscription } from 'src/queries'
 
 import { Join } from './JoinBtn'
+import { Backdrop } from 'components/Backdrop'
 
 type TProps = {
 	orgId: string
 	id: string
 	view: BattlepassViews
 }
+
+// const Backdrop = ({ src, title = null, ...other }) => {
+// 	return src ? (
+// 		<Box
+// 			sx={{
+// 				position: 'absolute',
+// 				width: '100%',
+// 				height: '100%',
+// 				// borderRadius: theme.shape.borderRadiusLg,
+// 			}}
+// 			{...other}
+// 		>
+// 			<NextImage fill src={src ?? null} alt={title ?? 'image'} style={{ objectFit: 'cover' }} />
+// 		</Box>
+// 	) : null
+// }
 
 export const Header = ({ orgId, id, view }: TProps) => {
 	const { query, push } = useRouter()
@@ -139,15 +158,20 @@ export const Header = ({ orgId, id, view }: TProps) => {
 	const [avatarImageUrl, setAvatarImageUrl] = useState(null)
 	const [headerImageUrl, setHeaderImageUrl] = useState(null)
 
+	console.log('avatarImageUrl', avatarImageUrl)
+	console.log('headerImageUrl', headerImageUrl)
+
 	useEffect(() => {
 		if (!battlepass) return
 		const cid = battlepass?.Battlepasses[0]?.cid
 		if (cid?.length < 16) {
 			// invalid cid - show fallback
+			console.log('invalid cid', cid)
 			setAvatarImageUrl(parseIpfsHash(organization?.logo, config.IPFS_GATEWAY))
 			setHeaderImageUrl(parseIpfsHash(organization?.header, config.IPFS_GATEWAY))
 		} else {
 			// valid cid
+			console.log('valid cid', cid)
 			const url = parseIpfsHash(cid, config.IPFS_GATEWAY)
 			const getContent = async () => {
 				const metadata = await fetch(url)
@@ -254,7 +278,6 @@ export const Header = ({ orgId, id, view }: TProps) => {
 				overflow="hidden"
 				position="relative"
 				sx={{
-					// border: '1px solid blue',
 					backgroundColor: '#010101ee',
 					borderRadius: `${theme.shape.borderRadiusLg} ${theme.shape.borderRadiusLg} 0 0`,
 					height: '20vh',
@@ -263,24 +286,38 @@ export const Header = ({ orgId, id, view }: TProps) => {
 				}}
 			>
 				{/* header image */}
-				{!organization?.header && !cache.headerCID?.length ? (
-					<Box display="grid" justifyContent="center" alignItems="center">
-						<Add sx={{ height: '40px', width: '40px', cursor: 'pointer' }} />
-					</Box>
+				{headerImageUrl && (
+					<Backdrop
+						sx={{
+							transitionDuration: '0.5s',
+							// opacity: 0.5, '&:hover': { opacity: 1 },
+							// filter: `blur(${content.cid ? 2 : 16}px)`,
+							// WebkitFilter: `blur(${content.cid ? 2 : 16}px)`,
+							// '&:hover': {
+							// 	filter: `blur(${content.cid ? 0 : 8}px)`,
+							// 	webkitFilter: `blur(${content.cid ? 0 : 8}px)`,
+							// },
+						}}
+						src={headerImageUrl}
+					/>
+				)}
+
+				{/* { !headerImageUrl ? (
+					 //!organization?.header && !cache.headerCID?.length ? (
 				) : (
 					<Image
 						src={headerImageUrl}
 						alt="logo"
-						layout="fill"
-						sx={{
-							position: 'absolute',
-							top: 0,
-							left: 0,
-							right: 0,
-							bottom: 0,
-						}}
+						// layout="fill"
+						// sx={{
+						// 	position: 'absolute',
+						// 	top: 0,
+						// 	left: 0,
+						// 	right: 0,
+						// 	bottom: 0,
+						// }}
 					/>
-				)}
+				 )} */}
 				<Box
 					sx={{
 						zIndex: 100,
