@@ -34,7 +34,9 @@ import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { Layout } from 'layouts/v2'
 import { Image } from 'components/Image/image'
+
 import { Loader } from 'components/Loader'
+import { Backdrop } from 'components/Backdrop'
 
 const CampaignOverview = dynamic(() =>
 	import('components/TabPanels/Campaign/overview').then((mod) => mod.CampaignOverview),
@@ -57,15 +59,6 @@ const SettingsOverview = dynamic(() =>
 	import('components/TabPanels/Settings/settings').then((mod) => mod.SettingsOverview),
 )
 
-// import { CampaignOverview } from 'components/TabPanels/Campaign/overview'
-// import { TreasuryOverview } from 'components/TabPanels/Treasury/overview'
-// import { OrganizationMembersTable } from 'components/TabPanels/Organization/organizationMembers'
-// import { Overview } from 'components/TabPanels/Organization/overview'
-// import { TmpOverview } from 'components/TabPanels/Organization/tmpOverview'
-// import { ProposalDetail } from 'components/TabPanels/Proposal/detail'
-// import { ProposalOverview } from 'components/TabPanels/Proposal/overview'
-// import { SettingsOverview } from 'components/TabPanels/Settings/settings'
-
 export function OrganizationById() {
 	const { query, push } = useRouter()
 	const config = useConfig()
@@ -74,6 +67,11 @@ export function OrganizationById() {
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
+
+	const getURL = (cid) => (cid ? parseIpfsHash(cid, config.IPFS_GATEWAY) : null)
+	const [metadata, setMetadata] = useState(null)
+	const [avatarImageUrl, setAvatarImageUrl] = useState(null)
+	const [headerImageUrl, setHeaderImageUrl] = useState(null)
 
 	const [routeState, setRouteState] = useState<string>(null)
 	const [activeStep, setActiveStep] = useState<string>('dashboard')
@@ -122,7 +120,7 @@ export function OrganizationById() {
 			return createWarningNotification('No file selected')
 		}
 		const cid = await uploadFileToIpfs(files[0])
-		console.log('cid created', cid)
+		// console.log('cid created', cid)
 		setter(cid.toString())
 	}, [])
 
@@ -160,8 +158,8 @@ export function OrganizationById() {
 
 	useEffect(() => {
 		if (!cache) return
-		console.log(cache)
 
+		// console.log( '==== cache ====\n', cache)
 		const metaData = {
 			name: cache.name,
 			description: cache.description,
@@ -172,9 +170,8 @@ export function OrganizationById() {
 			tags: cache.tags,
 		}
 
-		console.log('================================')
-		console.log('organization metadata', metaData)
-		console.log('================================')
+		// console.log( '==== metadata ====\n', metaData )
+
 		;(async (): Promise<string> => {
 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 				type: 'text/plain',
@@ -182,7 +179,6 @@ export function OrganizationById() {
 			const cid = await uploadFileToIpfs(file)
 			return cid.toString()
 		})().then((cid) => {
-			// console.log(cid, cache)
 			cache.setMetaDataCID(cid)
 		})
 	}, [cache])
@@ -198,8 +194,16 @@ export function OrganizationById() {
 		setIsMemberState(organizationState?.organization_members?.some((member) => member.address === address))
 		setIsPrime(organizationState?.prime === address)
 		setTreasury(organizationState?.treasury)
-		// console.log(organizationState?.treasury)
+		console.log('treasury', organizationState?.treasury)
 	}, [organizationState, address])
+
+	useEffect(() => {
+		const url =
+			!organizationState?.header && !cache.headerCID?.length
+				? null
+				: getURL(organizationState?.header ?? cache.headerCID)
+		setHeaderImageUrl(url)
+	}, [organizationState])
 
 	return (
 		<Layout
@@ -344,30 +348,15 @@ export function OrganizationById() {
 										onChange={(event) => handleUploadImage(event, cache.setHeaderCID)}
 										onClick={(event) => handleUploadImage(event, cache.setHeaderCID)}
 									/>
-									{!organizationState?.header && !cache.headerCID?.length ? (
+									{!headerImageUrl ? (
 										<Box display="grid" justifyContent="center" alignItems="center">
 											<AddAPhoto sx={{ height: '44px', width: '44px', cursor: 'pointer' }} />
 										</Box>
 									) : (
-										<Image
-											src={parseIpfsHash(
-												organizationState?.header ?? cache.headerCID,
-												config.IPFS_GATEWAY,
-											)}
-											alt="logo"
-											sx={{
-												borderRadius: Number(theme.shape.borderRadius) * 20,
-												position: 'absolute',
-												top: 0,
-												left: 0,
-												right: 0,
-												bottom: 0,
-											}}
-										/>
+										<Backdrop sx={{}} src={headerImageUrl} />
 									)}
-									{/*
-									 */}
 								</label>
+
 								<Box
 									sx={{
 										position: 'absolute',
