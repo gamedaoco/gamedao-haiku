@@ -37,6 +37,11 @@ export default function Button(theme: Theme) {
 						border: `1px solid transparent`,
 						borderRadius: theme.shape.borderRadiusSm,
 						p: `5px`,
+						'&:hover': {
+							color: '#f3cb14',
+							background: 'black',
+							border: `1px solid #f3cb14`,
+						},
 					},
 				},
 				{
@@ -50,6 +55,11 @@ export default function Button(theme: Theme) {
 						border: `1px solid transparent`,
 						borderRadius: theme.shape.borderRadiusSm,
 						p: `5px`,
+						'&:hover': {
+							color: '#ee4693ff',
+							background: 'black',
+							border: `1px solid #ee4693ff`,
+						},
 					},
 				},
 				{

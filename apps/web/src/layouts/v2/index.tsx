@@ -71,7 +71,12 @@ export function Layout({
 				<title>{title ? `${title} · ${config?.SITE_NAME}` : `${config?.SITE_NAME}`}</title>
 			</Head>
 
-			<Box>
+			<Box
+				sx={{
+					backgroundImage: `radial-gradient(circle at bottom center,#609, #303 60%)`,
+					backgroundSize: `100% 200%`,
+				}}
+			>
 				{/*{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}*/}
 				{showHeader &&
 					(isMd ? (
