@@ -12,13 +12,13 @@ const developmentEndpoints: Endpoints = [
 		healthCheck: 'http://localhost:9999/healthz',
 		chain: 'wss://localhost:9944',
 	},
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'Rococo Parachain Testnet',
-		url: 'https://graph.rococo.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.rococo.sub.zero.io/health',
-		chain: 'wss://node.rococo.sub.zero.io',
-	},
+	// {
+	// 	image: '/svg/z-ctrl-45-wht.svg',
+	// 	name: 'Rococo Parachain Testnet',
+	// 	url: 'https://graph.rococo.sub.zero.io/v1/graphql',
+	// 	healthCheck: 'https://graph.rococo.sub.zero.io/health',
+	// 	chain: 'wss://node.rococo.sub.zero.io',
+	// },
 ]
 
 const productionEndpoints: Endpoints = [
@@ -28,19 +28,19 @@ const productionEndpoints: Endpoints = [
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		chain: 'wss://rpc.dev.sub.zero.io',
-		default: ENVIRONMENT === Environment.Development ? true : false,
-	},
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'subzero testnet ( stable, fiat on )',
-		url: 'https://graph.stage.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.stage.sub.zero.io/health',
-		chain: 'wss://rpc.stage.sub.zero.io',
-		default: ENVIRONMENT === Environment.Staging ? true : false,
+		default: true, // ENVIRONMENT === Environment.Development ? true : false,
 	},
 	// {
 	// 	image: '/svg/z-ctrl-45-wht.svg',
-	// 	name: 'subzero kusama ( stable, fiat, token )',
+	// 	name: 'subzero testnet ( stable, fiat on )',
+	// 	url: 'https://graph.stage.sub.zero.io/v1/graphql',
+	// 	healthCheck: 'https://graph.stage.sub.zero.io/health',
+	// 	chain: 'wss://rpc.stage.sub.zero.io',
+	// 	default: ENVIRONMENT === Environment.Staging ? true : false,
+	// },
+	// {
+	// 	image: '/svg/z-ctrl-45-wht.svg',
+	// 	name: 'zero network',
 	// 	url: 'https://graph.prod.sub.zero.io/v1/graphql',
 	// 	healthCheck: 'https://graph.prod.sub.zero.io/health',
 	// 	chain: 'wss://node.prod.sub.zero.io',
