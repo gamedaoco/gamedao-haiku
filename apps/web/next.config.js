@@ -49,6 +49,7 @@ module.exports = withBundleAnalyzer(
 		// 	topLevelAwait: true,
 		// },
 		images: {
+			minimumCacheTTL: 3600,
 			domains: ['ipfs.infura.io', 'gateway.ipfs.io', 'gamedao.infura-ipfs.io'],
 			// remotePatterns: [
 			// 	{ protocol: 'https', hostname: 'gateway.ipfs.io', port: '', pathname: '/ipfs/**', },

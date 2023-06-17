@@ -102,31 +102,33 @@ export function Roadmap() {
 					Acala and Kilt Partnership
 				</RoadmapItem>
 				<RoadmapItem title="Q2 22">
+					{/* Scytale Digital joins the community
+					<br /> */}
 					Substrate Builders Program
 					<br />
 					Beta One with 200 OG Keys
 					<br />
 				</RoadmapItem>
 				<RoadmapItem title="Q3 22">
-					Outlier Ventures Ascent Program
-					<br />
+					{/* Outlier Ventures Ascent Program
+					<br /> */}
 					Rococo Slot Acquired for ZERO
 					{/* <br />
 					Talisman Wallet +<br />
 				PolkaWallet Integration */}
 					<br />
-					WAVE & SPARXX Partnership
+					WAVE Esports + SPARXX Partnership
 				</RoadmapItem>
 				<RoadmapItem title="Q4 22">
-					Guild Beta with WAVE Esports
+					Guild Beta with WAVE Esports + AEX-1
 					<br />
 					{/* Private Sale
 					<br /> */}
 					ZERO Parachain
 				</RoadmapItem>
 				<RoadmapItem title="Q2 23">
-					$GAME TGE
-					<br />
+					{/* $GAME TGE
+					<br /> */}
 					Protocol Launch
 					<br />
 					Scale Up Guild Case

@@ -13,6 +13,7 @@ import { Sidebar } from './components/Sidebar'
 
 interface ComponentProps {
 	showHeader?: boolean
+	hideDApps?: boolean
 	showFooter?: boolean
 	showSidebar?: boolean
 	noContainer?: boolean
@@ -48,6 +49,7 @@ export function Layout({
 	noContainer,
 	title,
 	noBorder,
+	hideDApps,
 }: ComponentProps) {
 	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 	const config = useConfig()
@@ -73,19 +75,25 @@ export function Layout({
 
 			<Box
 				sx={{
-					backgroundImage: `radial-gradient(circle at bottom center,#609, #303 60%)`,
+					backgroundImage: `radial-gradient(circle at top center, #306, #102, #000)`,
 					backgroundSize: `100% 200%`,
 				}}
 			>
 				{/*{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}*/}
 				{showHeader &&
 					(isMd ? (
-						<Header onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} noContainer={noContainer} />
+						<Header
+							onSidebarOpen={toggleSidebar}
+							hideDApps={hideDApps}
+							sidebarOpen={sidebarOpen}
+							noContainer={noContainer}
+						/>
 					) : (
 						<HeaderMobile
 							onSidebarOpen={toggleSidebar}
 							sidebarOpen={sidebarOpen}
 							noContainer={noContainer}
+							hideDApps={hideDApps}
 						/>
 					))}
 				{/*<AnimatePresence mode="wait" initial={false}>*/}

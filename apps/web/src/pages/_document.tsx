@@ -7,8 +7,6 @@ import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from 'src/theme/createEmotionCache'
 
 export default class MyDocument extends Document {
-	// `getInitialProps` belongs to `_document` (instead of `_app`),
-	// it's compatible with static-site generation (SSG).
 	static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
 		const originalRenderPage = ctx.renderPage
 		const cache = createEmotionCache()
@@ -24,8 +22,6 @@ export default class MyDocument extends Document {
 
 		const initialProps: DocumentInitialProps = await Document.getInitialProps(ctx)
 
-		// This is important. It prevents emotion to render invalid HTML.
-		// See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
 		const emotionStyles = extractCriticalToChunks(initialProps.html)
 		const emotionStyleTags = emotionStyles.styles.map((style) => (
 			<style
@@ -38,7 +34,6 @@ export default class MyDocument extends Document {
 
 		return {
 			...initialProps,
-			// Styles fragment is rendered after the app and page rendering finish.
 			styles: (
 				<>
 					{initialProps.styles}
@@ -62,7 +57,6 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Inter:400,600,800&display=swap"
 					/>
-					{/*<link rel="stylesheet" href="/iconfont.css" />*/}
 					<link rel="stylesheet" href="https://use.typekit.net/glg5whl.css" />
 				</Head>
 				<body
@@ -70,18 +64,11 @@ export default class MyDocument extends Document {
 						height: '100vh',
 						width: '100vw',
 						overflowX: 'hidden',
+						background: '#111111',
 					}}
 				>
 					<Main />
 					<NextScript />
-					{/*					<style jsx global>{`
-						#__next {
-							height: 100%;
-						}
-						* {
-							color: red !important;
-						}
-					`}</style>*/}
 				</body>
 			</Html>
 		)

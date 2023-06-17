@@ -7,21 +7,33 @@ import { ReadyProvider } from 'src/providers/ready/readyProvider'
 import { NetworkProvider } from 'src/providers/network/networkProvider'
 import { ExtensionProvider } from 'src/providers/extension/extensionProvider'
 
-export function Providers({ children }) {
+export function NetworkProviders({ children }) {
 	return (
 		<SettingsProvider>
 			<ThemeProvider>
 				<LanguageProvider>
-					<GraphQlProvider>
-						<AppProvider>
-							<ReadyProvider>
-								<NetworkProvider>
-									<ExtensionProvider>{children}</ExtensionProvider>
-								</NetworkProvider>
-							</ReadyProvider>
-						</AppProvider>
-					</GraphQlProvider>
+					{/* <GraphQlProvider> */}
+					<AppProvider>
+						{/* <ReadyProvider> */}
+						{/* <NetworkProvider> */}
+						{/* <ExtensionProvider> */}
+						{children}
+						{/* </ExtensionProvider> */}
+						{/* </NetworkProvider> */}
+						{/* </ReadyProvider> */}
+					</AppProvider>
+					{/* </GraphQlProvider> */}
 				</LanguageProvider>
+			</ThemeProvider>
+		</SettingsProvider>
+	)
+}
+
+export function Providers({ children }) {
+	return (
+		<SettingsProvider>
+			<ThemeProvider>
+				<LanguageProvider>{children}</LanguageProvider>
 			</ThemeProvider>
 		</SettingsProvider>
 	)

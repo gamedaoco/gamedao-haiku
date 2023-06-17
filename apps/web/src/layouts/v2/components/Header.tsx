@@ -41,6 +41,7 @@ interface ComponentProps {
 	onSidebarOpen: () => void
 	sidebarOpen: boolean
 	noContainer?: boolean
+	hideDApps?: boolean
 }
 
 const leftNav = [
@@ -79,7 +80,7 @@ const rightNav = [
 	// },
 ]
 
-export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentProps) {
+export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: ComponentProps) {
 	const { w3Enabled } = useExtensionContext()
 
 	const theme = useTheme()
@@ -144,67 +145,71 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 					<Box>
 						<Link href="/">
 							<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
-								<Typography sx={{ ml: 1, minWidth: 32 }}>{isLg ? <Logo /> : <LogoSM />}</Typography>
+								{/* <Typography sx={{ ml: 1, minWidth: 32 }}>{isLg ? <Logo /> : <LogoSM />}</Typography> */}
+								<Typography sx={{ ml: 1, minWidth: 32 }}>
+									<Logo />
+								</Typography>
 							</MenuItem>
 						</Link>
 					</Box>
 
-					{leftNav.map((item) => {
-						return (
-							<Link
-								key={item.name}
-								href={item.path}
-								target={item.path.includes('http') ? '_blank' : null}
-							>
-								<MenuItem
-									selected={router.pathname.includes(item.path)}
-									sx={{
-										transitionDuration: '250ms',
-										py: '32px',
-										overflow: 'hidden',
-										'* >, &::after, &::before': { transitionDuration: '250ms' },
-										'&::after': {
+					{!hideDApps &&
+						leftNav.map((item) => {
+							return (
+								<Link
+									key={item.name}
+									href={item.path}
+									target={item.path.includes('http') ? '_blank' : null}
+								>
+									<MenuItem
+										selected={router.pathname.includes(item.path)}
+										sx={{
 											transitionDuration: '250ms',
-											content: '""',
-											position: 'absolute',
-											borderRadius: '2px 0px 0px 2px',
-											boxShadow: '0 0px 20px 2px #00ffcc99',
-											// borderBottom: '2px solid #ffffff33',
-											width: '0%',
-											left: '50%',
-											right: '50%',
-											bottom: '-1px',
-										},
-										'&:hover': {
-											'&::after': {
-												width: '90%',
-												left: '5%',
-												right: '5%',
-											},
-										},
-										'&.Mui-selected': {
+											py: '32px',
+											overflow: 'hidden',
+											'* >, &::after, &::before': { transitionDuration: '250ms' },
 											'&::after': {
 												transitionDuration: '250ms',
 												content: '""',
 												position: 'absolute',
-												// borderColor: '#ff00ff',
 												borderRadius: '2px 0px 0px 2px',
-												boxShadow: '0 0px 20px 2px #00ffcc',
-												// borderBottom: '2px solid #ffffff66',
-												width: '90%',
-												left: '5%',
-												right: '5%',
+												boxShadow: '0 0px 20px 2px #00ffcc99',
+												// borderBottom: '2px solid #ffffff33',
+												width: '0%',
+												left: '50%',
+												right: '50%',
 												bottom: '-1px',
 											},
-										},
-									}}
-								>
-									{item.icon && <ListItemIcon sx={{ mx: 0 }}> {item.icon} </ListItemIcon>}
-									{<ListItemText>{t(item.name)}</ListItemText>}
-								</MenuItem>
-							</Link>
-						)
-					})}
+											'&:hover': {
+												'&::after': {
+													width: '90%',
+													left: '5%',
+													right: '5%',
+												},
+											},
+											'&.Mui-selected': {
+												'&::after': {
+													transitionDuration: '250ms',
+													content: '""',
+													position: 'absolute',
+													// borderColor: '#ff00ff',
+													borderRadius: '2px 0px 0px 2px',
+													boxShadow: '0 0px 20px 2px #00ffcc',
+													// borderBottom: '2px solid #ffffff66',
+													width: '90%',
+													left: '5%',
+													right: '5%',
+													bottom: '-1px',
+												},
+											},
+										}}
+									>
+										{item.icon && <ListItemIcon sx={{ mx: 0 }}> {item.icon} </ListItemIcon>}
+										{<ListItemText>{t(item.name)}</ListItemText>}
+									</MenuItem>
+								</Link>
+							)
+						})}
 				</Stack>
 
 				<Stack direction="row" justifyContent="end" alignItems="center">
@@ -221,7 +226,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 						</Button>
 					</Link>
 
-					{connected &&
+					{!connected &&
 						w3Enabled &&
 						rightNav.map((item) => {
 							return (
@@ -246,7 +251,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer }: ComponentPro
 						</BaseDialog>
 					)}
 
-					<AccountSelector />
+					{!hideDApps && <AccountSelector />}
 
 					<Box sx={{ display: { xs: 'block', md: 'none' } }} marginLeft={4}>
 						<Button

@@ -1,46 +1,67 @@
-import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-
-import { Layout } from 'src/layouts/v2'
-import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { Overview } from 'src/dapps/battlepass'
-import { Add, ArrowDownward } from '@mui/icons-material'
+import React from 'react'
+// import { useSession, signIn, signOut } from 'next-auth/react'
+// import { Box, Button, Container, Grid, Typography } from '@mui/material'
+import { Layout } from 'layouts/v2'
+import { Landingpage } from 'src/dapps/landingpage/battlepass'
 
 export function Page() {
-	const { t } = useTranslation()
-	const { push } = useRouter()
-	const address = useCurrentAccountAddress()
+	// const { data: session } = useSession()
 
-	const handleCreate = (e) => {
-		if (!address) return
-		push('/battlepass/create')
-	}
+	// console.log('session',session||null)
 
 	return (
-		<Layout showHeader showFooter>
-			<Box sx={{ mb: 2 }}>
-				<Grid container justifyContent="space-between" spacing={3}>
-					<Grid item>
-						<Typography variant="h3">Battlepass</Typography>
-					</Grid>
-					<Grid item>
-						{/* {address && (
-							<Button startIcon={<Add fontSize="small" />} variant="outlined" onClick={handleCreate}>
-								{t('button:ui:create')}
-							</Button>
-						)} */}
-					</Grid>
-				</Grid>
-				<Grid item>
-					<Typography pb={4} variant="body1" sx={{ maxWidth: { sx: '100%', md: '75%', lg: '50%' } }}>
-						Engage with your favourite games, guilds and creators.
-					</Typography>
-				</Grid>
-				<Grid item>
-					<Overview />
-				</Grid>
-			</Box>
+		<Layout showHeader showFooter noContainer hideDApps>
+			<Landingpage />
+
+			{
+				// <Box sx={{ mb: 2 }}>
+				// 	<Grid container justifyContent="space-between" spacing={3}>
+				// 		<Grid item>
+				// 			<Typography variant="h3">Welcome.</Typography>
+				// 		</Grid>
+				// 		<Grid item></Grid>
+				// 	</Grid>
+				// 	<Grid item>
+				// 		{!session && (
+				// 			<Box>
+				// 				<Button
+				// 					sx={{ mr: 2, mb: 2 }}
+				// 					variant="outlined"
+				// 					size="medium"
+				// 					onClick={() => signIn('discord')}
+				// 				>
+				// 					Connect your Discord
+				// 				</Button>
+				// 				{/* <Button
+				// 					sx={{ mr: 2, mb: 2 }}
+				// 					variant="outlined"
+				// 					size="medium"
+				// 					onClick={() => signIn('twitter')}
+				// 				>
+				// 					Connect your Twitter
+				// 				</Button>
+				// 				<Button
+				// 					sx={{ mr: 2, mb: 2 }}
+				// 					variant="outlined"
+				// 					size="medium"
+				// 					onClick={() => signIn('email')}
+				// 				>
+				// 					Sign in with email
+				// 				</Button> */}
+				// 			</Box>
+				// 		)}
+				// 		{session && (
+				// 			<Box>
+				// 				Hello {session.user.name}
+				// 				<br />
+				// 				<Button variant="outlined" size="medium" onClick={() => signOut()}>
+				// 					Sign out
+				// 				</Button>
+				// 			</Box>
+				// 		)}
+				// 	</Grid>
+				// </Box>
+			}
 		</Layout>
 	)
 }

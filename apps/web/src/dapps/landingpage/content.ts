@@ -73,83 +73,83 @@ export const hero = [
 	// 	link_url: '#',
 	// 	bg: '#111',
 
-	{
-		sub: `Welcome to ÆX-1 — the future of gaming`,
-		description: `
-			Be part of the ÆX-1 community and declare war on the die-hards
-			and make a declaration of love for progress and gaming.`,
-		image: '/partners/Landingpage_V2.jpg',
-		links: [
-			// {
-			// 	text: 'LEARN MORE',
-			// 	url: '/cases/esports',
-			// 	icon: 'Joystick',
-			// },
-			{
-				text: 'JOIN THE DAO',
-				url: '/organizations/0x5404d0a86c0c419f3bd2d9578aa4df81f9597d311b8309c52dc7fcb48adfc75c/overview',
-				icon: 'Battle',
-			},
-		],
-		bg: '#111',
-		// txt: '#f74500',
-		img: '/partners/AEX-1_Logo_Landscape_White.png',
-		img_height: '64',
-	},
+	// {
+	// 	sub: `Welcome to ÆX-1 — the future of gaming`,
+	// 	description: `
+	// 		Be part of the ÆX-1 community and declare war on the die-hards
+	// 		and make a declaration of love for progress and gaming.`,
+	// 	image: '/partners/Landingpage_V2.jpg',
+	// 	links: [
+	// 		// {
+	// 		// 	text: 'LEARN MORE',
+	// 		// 	url: '/cases/esports',
+	// 		// 	icon: 'Joystick',
+	// 		// },
+	// 		{
+	// 			text: 'JOIN THE DAO',
+	// 			url: '/organizations/0x5404d0a86c0c419f3bd2d9578aa4df81f9597d311b8309c52dc7fcb48adfc75c/overview',
+	// 			icon: 'Battle',
+	// 		},
+	// 	],
+	// 	bg: '#111',
+	// 	// txt: '#f74500',
+	// 	img: '/partners/AEX-1_Logo_Landscape_White.png',
+	// 	img_height: '64',
+	// },
 
-	{
-		sub: `Join the leading Esports team in Europe`,
-		description: `
-		You are in for some  kick ass treats for playing with us:
-		BattlePass Beta awaits!`,
-		image: '/teaser.jpg',
-		links: [
-			// {
-			// 	text: 'LEARN MORE',
-			// 	url: '/cases/esports',
-			// 	icon: 'Joystick',
-			// },
-			{
-				text: 'JOIN WAVE DAO',
-				url: '/organizations/0xd438d915d9e9a4478acb485a02a511b43e69a51caf3e573b04a0c970883d213a/overview',
-				icon: 'Battle',
-			},
-		],
-		bg: '#111',
-		img: '/partners/wave-esports-white.png',
-		img_height: '64',
-		// title: `COMMUNITY DISCOVERY`,
-		// description: `Take the leap and
-		// leverage the power of community
-		// to get early market proof and support.`,
-		// image: '/art/IP39-Overrun.jpg',
-		// links: [{
-		// 	text: 'JOIN WAITLIST',
-		// 	url: 'https://discord.gg/4A9CC6K8',
-		// 	icon: 'discord',
-		// }],
-		// bg: '#111',
-		// img: 'bettergames-outline.svg',
-		// img_height: '128px',
-		// },{
-		// 	title: 'Democratisation + Governance',
-		// 	description: 'Coordinate with your team and align with your community',
-		// 	image: '/generic/pexels-photo-7915357.jpg',
-		// 	link_url: '',
-		// 	bg: '#00ffff',
-		// },{
-		// 	title: 'Build > Launch > Scale',
-		// 	description: 'Get a fair chance and the support you need.',
-		// 	image: '/generic/pexels-photo-7915533-1.jpg',
-		// 	link_url: '',
-		// 	bg: '#ffff00',
-		// },{
-		// 	title: 'Battle test your ideas',
-		// 	description: 'Get market proof and raise funds.',
-		// 	image: '/generic/pexels-photo-9069000.jpg',
-		// 	link_url: '',
-		// 	bg: '#ffff00',
-	},
+	// {
+	// 	sub: `Join the leading Esports team in Europe`,
+	// 	description: `
+	// 	You are in for some  kick ass treats for playing with us:
+	// 	BattlePass Beta awaits!`,
+	// 	image: '/teaser.jpg',
+	// 	links: [
+	// 		// {
+	// 		// 	text: 'LEARN MORE',
+	// 		// 	url: '/cases/esports',
+	// 		// 	icon: 'Joystick',
+	// 		// },
+	// 		{
+	// 			text: 'JOIN WAVE DAO',
+	// 			url: '/organizations/0xd438d915d9e9a4478acb485a02a511b43e69a51caf3e573b04a0c970883d213a/overview',
+	// 			icon: 'Battle',
+	// 		},
+	// 	],
+	// 	bg: '#111',
+	// 	img: '/partners/wave-esports-white.png',
+	// 	img_height: '64',
+	// 	// title: `COMMUNITY DISCOVERY`,
+	// 	// description: `Take the leap and
+	// 	// leverage the power of community
+	// 	// to get early market proof and support.`,
+	// 	// image: '/art/IP39-Overrun.jpg',
+	// 	// links: [{
+	// 	// 	text: 'JOIN WAITLIST',
+	// 	// 	url: 'https://discord.gg/4A9CC6K8',
+	// 	// 	icon: 'discord',
+	// 	// }],
+	// 	// bg: '#111',
+	// 	// img: 'bettergames-outline.svg',
+	// 	// img_height: '128px',
+	// 	// },{
+	// 	// 	title: 'Democratisation + Governance',
+	// 	// 	description: 'Coordinate with your team and align with your community',
+	// 	// 	image: '/generic/pexels-photo-7915357.jpg',
+	// 	// 	link_url: '',
+	// 	// 	bg: '#00ffff',
+	// 	// },{
+	// 	// 	title: 'Build > Launch > Scale',
+	// 	// 	description: 'Get a fair chance and the support you need.',
+	// 	// 	image: '/generic/pexels-photo-7915533-1.jpg',
+	// 	// 	link_url: '',
+	// 	// 	bg: '#ffff00',
+	// 	// },{
+	// 	// 	title: 'Battle test your ideas',
+	// 	// 	description: 'Get market proof and raise funds.',
+	// 	// 	image: '/generic/pexels-photo-9069000.jpg',
+	// 	// 	link_url: '',
+	// 	// 	bg: '#ffff00',
+	// },
 
 	{
 		title: `GAMEDAO`,
@@ -170,11 +170,11 @@ export const hero = [
 				url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca',
 				icon: 'Book',
 			},
-			// {
-			// 	text: 'ONE PAGER',
-			// 	url: 'https://docsend.com/view/gesqag6cbemye63f',
-			// 	icon: 'Book',
-			// },
+			{
+				text: 'ONE PAGER',
+				url: 'https://docsend.com/view/gesqag6cbemye63f',
+				icon: 'Book',
+			},
 			// {
 			// 	text: 'JOIN WAITLIST',
 			// 	url: 'https://discord.gg/kr8Q9Jam2N',
@@ -195,8 +195,7 @@ export const hero2 = [
 	{
 		title: `Fundraising for Creators`,
 		sub: `Fundraising and go to market for your game project on GameDAO`,
-		description: `Raising funds and awareness has never been easy.
-			GameDAO navigates you through the process of lifting off.`,
+		description: `Raising funds and awareness has never been easy. GameDAO navigates you through the process of lifting off.`,
 		links: [
 			{
 				text: 'More',
@@ -215,19 +214,19 @@ export const hero2 = [
 		],
 		bg: '#609',
 	},
-	{
-		title: `WAVE Esports`,
-		sub: `WAVEpass CASHCUP invitational`,
-		description: `500 slots not reached, let's try another time!`,
-		// image: '/teaser.jpg',
-		// links: [
-		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
-		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
-		// ],
-		bg: '#000',
-		img: '/partners/wave-esports-white.png',
-		img_height: '24',
-	},
+	// {
+	// 	title: `WAVE Esports`,
+	// 	sub: `WAVEpass CASHCUP invitational`,
+	// 	description: `500 slots not reached, let's try another time!`,
+	// 	// image: '/teaser.jpg',
+	// 	// links: [
+	// 	// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+	// 	// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+	// 	// ],
+	// 	bg: '#000',
+	// 	img: '/partners/wave-esports-white.png',
+	// 	img_height: '24',
+	// },
 ]
 
 //

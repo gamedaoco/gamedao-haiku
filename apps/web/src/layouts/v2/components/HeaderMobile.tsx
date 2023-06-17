@@ -16,9 +16,10 @@ interface ComponentProps {
 	onSidebarOpen: () => void
 	sidebarOpen: boolean
 	noContainer?: boolean
+	hideDApps?: boolean
 }
 
-export function HeaderMobile({ onSidebarOpen, sidebarOpen, noContainer }: ComponentProps) {
+export function HeaderMobile({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: ComponentProps) {
 	const theme = useTheme()
 	const [openMenu, setOpenMenu] = useState<boolean>(false)
 
@@ -112,7 +113,7 @@ export function HeaderMobile({ onSidebarOpen, sidebarOpen, noContainer }: Compon
 					<AccountSelector />
 				</Box> */}
 			</AppBar>
-			<NavbarMobile onClose={handleMenuClose} open={openMenu} />
+			{!hideDApps && <NavbarMobile onClose={handleMenuClose} open={openMenu} />}
 		</>
 	)
 }
