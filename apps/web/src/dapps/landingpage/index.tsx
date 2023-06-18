@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, Fragment } from 'react'
 
 import { styled } from '@mui/system'
 import { GRADIENT } from './styles'
@@ -37,44 +37,46 @@ export function Landingpage() {
 		features
 
 	return (
-		<Box>
-			{hero && <Hero size="lg" content={heroContent} />}
-			{hero && <Hero size="sm" content={hero2Content} />}
+		<Fragment>
+			<Box>
+				{hero && <Hero size="lg" content={heroContent} />}
+				{hero && <Hero size="sm" content={hero2Content} />}
+				<Newsletter />
+			</Box>
+			<Box>
+				<Container maxWidth="xl" disableGutters>
+					{/* {intro && <Intro />} */}
 
-			<Newsletter />
+					{/* {teaser1 && (
+						<Teaser
+							variant="h2"
+							fontSize={['2rem', '4rem']}
+							padding={[4, 6]}
+							sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}
+						>
+							Building
+							<br />
+							better games
+							<br />
+							together.
+						</Teaser>
+					)} */}
 
-			<Container maxWidth="xl" disableGutters>
-				{/* {intro && <Intro />} */}
+					{transform && <Transform />}
 
-				{/* {teaser1 && (
-					<Teaser
-						variant="h2"
-						fontSize={['2rem', '4rem']}
-						padding={[4, 6]}
-						sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}
-					>
-						Building
-						<br />
-						better games
-						<br />
-						together.
-					</Teaser>
-				)} */}
+					{team && <Team />}
+					{partners && <Partners />}
 
-				{transform && <Transform />}
+					{wallet && <Wallet />}
 
-				{team && <Team />}
-				{partners && <Partners />}
+					{questions && <QuestionsBattlepass />}
 
-				{wallet && <Wallet />}
-
-				{questions && <QuestionsBattlepass />}
-
-				{roadmap && <Roadmap />}
-				{supporters && <Supporters />}
-				{disclaimer && <Disclaimer />}
-			</Container>
-		</Box>
+					{roadmap && <Roadmap />}
+					{supporters && <Supporters />}
+					{disclaimer && <Disclaimer />}
+				</Container>
+			</Box>
+		</Fragment>
 	)
 }
 
