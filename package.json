@@ -18,14 +18,14 @@
     "format:staged": "pretty-quick --staged --pattern '{apps,packages}/**/*.{ts,tsx}'",
     "lint": "yarn lint:app",
     "lint:app": "yarn eslint 'apps/**/src'",
-    "build:codegen": "yarn workspace @gamedao/app generate",
+    "build:codegen": "yarn workspace @gamedao/web generate",
     "build:web": "yarn workspace @gamedao/web build",
     "build:app": "yarn workspace @gamedao/app build",
     "build:admin": "yarn workspace @gamedao/admin build",
     "prod:frontend": "yarn npm-run-all -s build:codegen build:web",
     "commit": "git-cz",
-    "analyze": "ANALYZE=true wsrun -p @gamedao/app -c build",
-    "sb": "wsrun -p @gamedao/app -c storybook",
+    "analyze": "ANALYZE=true wsrun -p @gamedao/web -c build",
+    "sb": "wsrun -p @gamedao/web -c storybook",
     "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules"
   },
   "publishConfig": {
