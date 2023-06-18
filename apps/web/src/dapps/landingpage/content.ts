@@ -193,8 +193,17 @@ export const hero = [
 
 export const hero2 = [
 	{
+		title: 'Build your own DAO',
+		// sub: `What you need to know`,
+		description: `Get started with the powerful framework for the gaming space.`,
+		links: [
+			{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' },
+		],
+		bg: '#609',
+	},
+	{
 		title: `Fundraising for Creators`,
-		sub: `Fundraising and go to market for your game project on GameDAO`,
+		// sub: `Fundraising and go to market for your game project on GameDAO`,
 		description: `Raising funds and awareness has never been easy. GameDAO navigates you through the process of lifting off.`,
 		links: [
 			{
@@ -205,12 +214,17 @@ export const hero2 = [
 		],
 		bg: '#069',
 	},
+
 	{
-		title: 'Build your own DAO',
-		sub: `What you need to know`,
-		description: `What you need to know before starting your organization.`,
+		title: 'Battlepass',
+		// sub: `What you need to know`,
+		description: `What is a Battlepass and why would you need it to set up your gaming organization..`,
 		links: [
-			{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' },
+			{
+				text: 'More',
+				url: 'https://blog.gamedao.co/how-gamedaos-battlepass-boosts-growth-458b33a6be64',
+				icon: 'Joystick',
+			},
 		],
 		bg: '#609',
 	},

@@ -66,11 +66,14 @@ export function Layout({
 	// const showTopBar = false
 	const baseSpacing = 90
 	const spacing = showHeader ? `calc( 100vh - ${baseSpacing}px )` : `100vh`
+	const pageTitle = title
+		? `${title} · ${config?.SITE_NAME || 'GameDAO  — for better games'}`
+		: `${config?.SITE_NAME || 'GameDAO — for better games'}`
 
 	return (
 		<>
 			<Head>
-				<title>{title ? `${title} · ${config?.SITE_NAME}` : `${config?.SITE_NAME}`}</title>
+				<title>{pageTitle}</title>
 			</Head>
 
 			<Box
