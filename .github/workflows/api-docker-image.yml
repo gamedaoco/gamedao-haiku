@@ -15,5 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the API Docker image
-      run: cd packages/api && \
-        docker build . --file Dockerfile --tag gamedao/api:latest
+
+      run: docker build -t gamedao/api:latest -f packages/api/Dockerfile .
