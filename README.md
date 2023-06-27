@@ -1,6 +1,7 @@
 # GameDAO
 
 (!(Commitizen friendly]<https://img.shields.io/badge/commitizen-friendly-brightgreen.svg]]<http://commitizen.github.io/cz-cli/]
+[![API Docker Image CI](https://github.com/gamedaoco/gamedao-haiku/actions/workflows/api-docker-image.yml/badge.svg?branch=dev)](https://github.com/gamedaoco/gamedao-haiku/actions/workflows/api-docker-image.yml)
 
 GameDAO is a community owned and governed DAO providing community centric protocols:
 
