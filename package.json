@@ -22,7 +22,8 @@
     "build:web": "yarn workspace @gamedao/web build",
     "build:app": "yarn workspace @gamedao/app build",
     "build:admin": "yarn workspace @gamedao/admin build",
-    "build:prod": "yarn npm-run-all -s build:codegen build:web",
+    "build:prod:app": "yarn npm-run-all -s build:app",
+    "build:api": "yarn workspace @gamedao/graph-api docker:build",
     "prod:frontend": "yarn npm-run-all -s build:web",
     "commit": "git-cz",
     "analyze": "ANALYZE=true wsrun -p @gamedao/web -c build",
@@ -67,7 +68,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "yarn format"
+    "*.{js,jsx,ts,tsx}": "yarn format:staged"
   },
   "commitlint": {
     "extends": [
