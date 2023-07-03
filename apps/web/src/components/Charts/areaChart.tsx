@@ -1,9 +1,7 @@
-import { useMemo } from 'react'
-
+import { Chart } from './chart'
 import { alpha, useTheme } from '@mui/material/styles'
 import { ApexOptions } from 'apexcharts'
-
-import { Chart } from './chart'
+import { useMemo } from 'react'
 
 interface ComponentProps {
 	categories: any

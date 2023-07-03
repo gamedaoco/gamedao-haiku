@@ -1,8 +1,7 @@
+import { Chart } from './chart'
 import { useTheme } from '@mui/material/styles'
 import type { ApexOptions } from 'apexcharts'
 import { useTranslation } from 'react-i18next'
-
-import { Chart } from './chart'
 
 interface ComponentProps {
 	series: number[]

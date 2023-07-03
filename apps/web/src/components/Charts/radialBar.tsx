@@ -1,7 +1,6 @@
+import { Chart } from './chart'
 import { useTheme } from '@mui/material/styles'
 import type { ApexOptions } from 'apexcharts'
-
-import { Chart } from './chart'
 
 interface ComponentProps {
 	colors: string[]
