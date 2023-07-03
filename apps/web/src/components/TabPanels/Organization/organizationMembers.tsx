@@ -1,18 +1,21 @@
-import React, { useEffect, useMemo, useState, useCallback } from 'react'
+import { Verified } from '@mui/icons-material'
+import { Chip, Button, Avatar, Box, Paper, Rating, Stack, Typography } from '@mui/material'
 import md5 from 'md5'
-
+// import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import dynamic from 'next/dynamic'
+import React, { Suspense, useEffect, useMemo, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { useApproveMemberTx } from 'src/hooks/tx/useApproveMemberTx'
+import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { Organization } from 'src/queries'
 import { shortAccountAddress } from 'src/utils/accountUtils'
 import { avatarImageURL } from 'src/utils/avatars'
 
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useApproveMemberTx } from 'src/hooks/tx/useApproveMemberTx'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-
-import { Verified } from '@mui/icons-material'
-import { Chip, Button, Avatar, Box, Paper, Rating, Stack, Typography } from '@mui/material'
-import { DataGrid, GridColDef } from '@mui/x-data-grid'
+export const DataGrid = dynamic(() => import('@mui/x-data-grid').then((m) => m.DataGrid), {
+	ssr: false,
+	suspense: true,
+})
 
 interface ComponentProps {
 	organizationState: Organization
@@ -202,20 +205,22 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 		<Stack component={Paper} padding={4} spacing={2} variant={'glass'}>
 			<Stack direction="column" spacing={1} justifyContent="space-between">
 				<Typography variant="h6">{t('label:members')}</Typography>
-				<DataGrid
-					isRowSelectable={() => false}
-					disableSelectionOnClick
-					sx={{ minHeight: '560px' }}
-					loading={!organizationState}
-					rows={rows}
-					columns={memberList}
-					pageSize={pageSize}
-					rowsPerPageOptions={pageSizeOptions}
-					isCellEditable={() => false}
-					hideFooterSelectedRowCount={true}
-					getRowHeight={() => rowHeight}
-					onPageSizeChange={(pageSize) => setPageSize(pageSize)}
-				/>
+				<Suspense>
+					<DataGrid
+						isRowSelectable={() => false}
+						disableSelectionOnClick
+						sx={{ minHeight: '560px' }}
+						loading={!organizationState}
+						rows={rows}
+						columns={memberList}
+						pageSize={pageSize}
+						rowsPerPageOptions={pageSizeOptions}
+						isCellEditable={() => false}
+						hideFooterSelectedRowCount={true}
+						getRowHeight={() => rowHeight}
+						onPageSizeChange={(pageSize) => setPageSize(pageSize)}
+					/>
+				</Suspense>
 				<TransactionDialog
 					open={showTxModal}
 					txData={approveMemberTx}

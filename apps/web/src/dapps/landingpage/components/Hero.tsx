@@ -1,19 +1,16 @@
-import { Fragment } from 'react'
-import NextImage from 'next/image'
-
-import { useMediaQuery, Container, Stack, Box, Typography, Button } from '@mui/material'
-import { alpha } from '@mui/material/styles'
-import { styled } from '@mui/system'
-import Carousel from 'react-material-ui-carousel'
-import Link from 'src/components/Link'
-import { useTheme } from '@mui/material/styles'
-
-import Icon from '@mui/material/Icon'
-
-import Prev from '@mui/icons-material/NavigateBefore'
-import Next from '@mui/icons-material/NavigateNext'
 // import { hero as items } from '../content'
 import { GRADIENT } from '../styles'
+import Prev from '@mui/icons-material/NavigateBefore'
+import Next from '@mui/icons-material/NavigateNext'
+import { useMediaQuery, Container, Stack, Box, Typography, Button } from '@mui/material'
+import Icon from '@mui/material/Icon'
+import { alpha } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
+import { styled } from '@mui/system'
+import NextImage from 'next/image'
+import { Fragment } from 'react'
+import Carousel from 'react-material-ui-carousel'
+import Link from 'src/components/Link'
 
 const Teaser = styled(Typography)(({ theme }) => ({
 	background: GRADIENT.rainbow2,
@@ -63,7 +60,7 @@ const Item = (props) => {
 				lg={lg}
 				src={props.item.image}
 				title={props.item.title}
-				priority={props.key === 0 ? true : false}
+				priority={props?.index === 0}
 			/>
 			<Box
 				px={[2, 4, 6]}
@@ -182,7 +179,7 @@ export const Hero = ({ content, size = 'lg' }: HeroProps) => {
 					PrevIcon={<Prev />}
 				>
 					{content.map((item, i) => (
-						<Item key={i} item={item} size={size} />
+						<Item key={i} index={i} item={item} size={size} />
 					))}
 				</Carousel>
 			) : null}

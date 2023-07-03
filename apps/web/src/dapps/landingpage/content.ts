@@ -182,7 +182,7 @@ export const hero = [
 			// },
 		],
 		bg: '#111',
-		img: '/v3/svg/GameDAO-color-h-wht-m.svg',
+		img: '/v3/svg/gamedao-color-h-wht-m.svg',
 		img_height: '48',
 	},
 ]
