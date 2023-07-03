@@ -1,0 +1,15 @@
+name: API Docker Image CI
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the API Docker image
+      - run: docker build -t gamedao/api:latest -f packages/api/Dockerfile .
