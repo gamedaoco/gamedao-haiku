@@ -1,4 +1,4 @@
-import { OrganizationFeatures } from '@gamedao/service/src/@types/schema'
+import { OrganizationFeatures } from '@gamedao/graph-api/src/@types/schema'
 import { useFeatures } from 'src/hooks/useFeatures'
 
 export function useOrganizationFeatures(): OrganizationFeatures {
