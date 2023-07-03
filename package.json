@@ -19,7 +19,7 @@
     "lint": "yarn lint:app",
     "lint:app": "yarn eslint 'apps/**/src'",
     "build:codegen": "yarn workspace @gamedao/web generate",
-    "build:web": "wsrun -s -c install && yarn workspace @gamedao/web build",
+    "build:web": "wsrun -s -c install && yarn build:codegen && yarn workspace @gamedao/web build",
     "build:app": "yarn workspace @gamedao/app build",
     "build:admin": "yarn workspace @gamedao/admin build",
     "build:prod:app": "yarn npm-run-all -s build:app",
