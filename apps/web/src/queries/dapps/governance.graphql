@@ -20,7 +20,7 @@ subscription ProposalById($proposalId: String!) {
         created_at_block
         start
         expiry
-        creator_identity {
+        identity {
             id
             display_name
         }

@@ -5,10 +5,10 @@ module.exports = {
 			schema: [
 				{
 					'https://graph.dev.sub.zero.io/v1/graphql': {
-						// headers: {
-						// "x-hasura-role": "xxxxxxxx",
+						headers: {
+						// "x-hasura-role": "public",
 						// "x-hasura-admin-secret": "xxxxxxxx"
-						// },
+						},
 					},
 				},
 			],
@@ -19,7 +19,6 @@ module.exports = {
 				noSchemaStitching: false,
 				immutableTypes: true,
 				useIndexSignature: true,
-
 				// skipTypename: false,
 				// withHooks: true,
 				// withHOC: false,
