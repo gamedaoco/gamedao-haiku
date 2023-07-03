@@ -1,9 +1,12 @@
 {
-  "name": "@gamedao/service",
-  "version": "0.0.1",
+  "name": "@gamedao/graph-api",
+  "version": "0.75.0",
   "private": true,
   "type": "module",
   "scripts": {
+    "setup": "yarn install && yarn generate",
+    "docker:build": "docker build -t gamedao/graph-api:local .",
+    "docker:run": "docker run -p 4000:4000 gamedao/graph-api:local",
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM')\"",
     "generate": "graphql-codegen && yarn prisma generate",
     "dev": "nodemon"

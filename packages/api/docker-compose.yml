@@ -4,7 +4,27 @@ services:
   db:
     image: postgres:14
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: graph-api
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpass
     ports:
-      - "55322:5432"
+      - "${PG_PORT}:5432"
+
+  api:
+    build: .
+    # image: gamedao/graph-api:local
+    depends_on:
+      - db
+    ports:
+      - ${SERVER_PORT}
+    environment:
+      IPFS_API_URL: ${IPFS_API_URL}
+      IPFS_CLIENT_ID: ${IPFS_CLIENT_ID}
+      IPFS_CLIENT_SECRET: ${IPFS_CLIENT_SECRET}
+      SERVER_PORT: ${SERVER_PORT}
+      CHAIN_RPC_URL: ${CHAIN_RPC_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PG_PASS}
+      PG_HOST: ${PG_HOST}
+      PG_PORT: ${PG_PORT}
