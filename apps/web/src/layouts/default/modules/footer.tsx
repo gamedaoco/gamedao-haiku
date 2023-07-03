@@ -1,17 +1,14 @@
-import React from 'react'
-import NextLink from 'next/link'
-
-import { ENVIRONMENT } from 'src/constants'
-
 import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import NextLink from 'next/link'
+import React from 'react'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+import { FontIcons } from 'src/components/Icons/icons'
+import { ENVIRONMENT } from 'src/constants'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
 
-import { FontIcons } from 'src/components/Icons/icons'
-
 // eslint-disable-next-line @next/next/no-img-element
-const Logo = () => <img src="/v3/svg/GameDAO-color-v-blk.svg" height="48" />
+const Logo = () => <img src="/v3/svg/gamedao-color-v-blk.svg" height="48" />
 
 const Link = ({ href, children }) => (
 	<Box>

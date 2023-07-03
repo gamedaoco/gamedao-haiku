@@ -1,23 +1,4 @@
-import React, { Fragment, useCallback } from 'react'
-
-import {
-	RiShieldLine,
-	RiSwordLine,
-	RiTreasureMapLine,
-	RiVipDiamondLine,
-	RiBookOpenLine,
-	RiDropLine,
-	RiExchangeFundsLine,
-	RiAwardLine,
-} from 'react-icons/ri'
-
-import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
-import { useTheme } from '@mui/material/styles'
-
-import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { Close } from '@mui/icons-material'
-
 import {
 	Box,
 	Button,
@@ -31,12 +12,25 @@ import {
 	Toolbar,
 	MenuItem,
 } from '@mui/material'
-
+import { useTheme } from '@mui/material/styles'
+import { useRouter } from 'next/router'
+import React, { Fragment, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import {
+	RiShieldLine,
+	RiSwordLine,
+	RiTreasureMapLine,
+	RiVipDiamondLine,
+	RiBookOpenLine,
+	RiDropLine,
+	RiExchangeFundsLine,
+	RiAwardLine,
+} from 'react-icons/ri'
+import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { FontIcons } from 'src/components'
-
 import Link from 'src/components/Link'
 
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />
 
 interface ComponentProps {
 	onClose: () => void

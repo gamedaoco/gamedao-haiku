@@ -1,12 +1,5 @@
-import React, { useCallback } from 'react'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-
-import { features } from 'src/dapps/landingpage/features'
-import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
-import Link from 'src/components/Link'
-
+import MenuIcon from '@mui/icons-material/Menu'
 import {
 	AppBar,
 	Box,
@@ -20,8 +13,12 @@ import {
 	Tooltip,
 	MenuItem,
 } from '@mui/material'
-
 import { Drawer, Fade } from '@mui/material'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import React, { useCallback } from 'react'
+import Link from 'src/components/Link'
+import { features } from 'src/dapps/landingpage/features'
 
 const pages = [
 	// ['Cases',''],
@@ -31,7 +28,7 @@ const pages = [
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Disconnect']
 
-const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
+const Logo = () => <img src="/v3/svg/gamedao-mono-h-wht-scaled.svg" height="16px" />
 
 export const Header = () => {
 	const router = useRouter()

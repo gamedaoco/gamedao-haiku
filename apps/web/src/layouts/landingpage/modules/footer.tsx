@@ -1,10 +1,9 @@
-import React from 'react'
-import Link from 'src/components/Link'
-
 import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
-import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { useTheme } from '@mui/material/styles'
+import React from 'react'
+import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { FontIcons } from 'src/components/Icons/icons'
+import Link from 'src/components/Link'
 
 // const Link = ({ href, children }) => (
 // 	<Box>
@@ -70,7 +69,7 @@ export function Footer() {
 						 */}
 						<Grid item xs={12}>
 							<Link href="/">
-								<img src="/v3/svg/GameDAO-color.svg" width={'48'} height={'48'} />
+								<img src="/v3/svg/gamedao-color.svg" width={'48'} height={'48'} />
 							</Link>
 						</Grid>
 

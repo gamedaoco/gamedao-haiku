@@ -1,15 +1,13 @@
+import MenuIcon from '@mui/icons-material/Menu'
+import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
+import Toolbar from '@mui/material/Toolbar'
+import { useTheme } from '@mui/material/styles'
+import { useRouter } from 'next/router'
 import React, { Fragment, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useRouter } from 'next/router'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
-
-import Link from 'src/components/Link'
-import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
-import FeedbackButton from 'src/components/Feedback'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-
-import { useTheme } from '@mui/material/styles'
-import MenuIcon from '@mui/icons-material/Menu'
 import {
 	RiShieldLine,
 	RiSwordLine,
@@ -20,21 +18,19 @@ import {
 	RiAwardLine,
 	RiChat1Line,
 } from 'react-icons/ri'
-
 import { RxDiscordLogo } from 'react-icons/rx'
-
+import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
 import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
-import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
-import Toolbar from '@mui/material/Toolbar'
+import FeedbackButton from 'src/components/Feedback'
+import Link from 'src/components/Link'
+import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useExtensionContext } from 'src/providers/extension/modules/context'
 
 // eslint-disable-next-line @next/next/no-img-element
-// const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+// const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />
 const Logo = () => <img src="/v3/svg/gamedao-mono-h-wht-scaled.svg" height="16px" />
 // eslint-disable-next-line @next/next/no-img-element
-// const LogoSM = () => <img src="/v3/svg/GameDAO-color.svg" height="32px" />
+// const LogoSM = () => <img src="/v3/svg/gamedao-color.svg" height="32px" />
 const LogoSM = () => <img src="/v3/svg/gamedao-mono-wht.svg" height="32px" />
 
 interface ComponentProps {

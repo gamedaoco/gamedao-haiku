@@ -1,26 +1,4 @@
-import React, { Fragment, useCallback } from 'react'
-
-import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { AccountSelector } from 'src/components'
-
-import {
-	RiShieldLine,
-	RiSwordLine,
-	RiTreasureMapLine,
-	RiVipDiamondLine,
-	RiBookOpenLine,
-	RiDropLine,
-	RiExchangeFundsLine,
-	RiAwardLine,
-} from 'react-icons/ri'
-import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
-import { RxDiscordLogo } from 'react-icons/rx'
-
-import { useTheme } from '@mui/material/styles'
 import { Close } from '@mui/icons-material'
-
 import {
 	Box,
 	Button,
@@ -34,13 +12,30 @@ import {
 	Toolbar,
 	MenuItem,
 } from '@mui/material'
-
+import { useTheme } from '@mui/material/styles'
+import { useRouter } from 'next/router'
+import React, { Fragment, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import {
+	RiShieldLine,
+	RiSwordLine,
+	RiTreasureMapLine,
+	RiVipDiamondLine,
+	RiBookOpenLine,
+	RiDropLine,
+	RiExchangeFundsLine,
+	RiAwardLine,
+} from 'react-icons/ri'
+import { RxDiscordLogo } from 'react-icons/rx'
+import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+import { AccountSelector } from 'src/components'
 import { FontIcons } from 'src/components'
 import Link from 'src/components/Link'
+import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 /* eslint-disable @next/next/no-img-element */
-// const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" alt="GameDAO" />
-const Logo = () => <img src="/v3/svg/GameDAO-mono-h-wht-scaled.svg" height="16px" />
+// const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" alt="GameDAO" />
+const Logo = () => <img src="/v3/svg/gamedao-mono-h-wht-scaled.svg" height="16px" />
 
 interface ComponentProps {
 	onClose: () => void

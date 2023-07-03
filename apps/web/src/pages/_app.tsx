@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react'
-import Head from 'next/head'
-import { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-
-import * as Fathom from 'fathom-client'
-import { Logger } from 'src/utils/logger'
-
-import { SessionProvider } from 'next-auth/react'
-import { Providers } from 'src/providers'
-import { useConfig } from 'src/hooks/useConfig'
-
-import createEmotionCache from 'src/theme/createEmotionCache'
 import { CacheProvider, EmotionCache } from '@emotion/react'
+import * as Fathom from 'fathom-client'
+import { SessionProvider } from 'next-auth/react'
+import { AppProps } from 'next/app'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
-import 'src/theme/css/toastify.css'
-import 'src/theme/css/modelViewer.css'
-
 import { ENVIRONMENT } from 'src/constants/index'
+import { useConfig } from 'src/hooks/useConfig'
+import { Providers } from 'src/providers'
+import createEmotionCache from 'src/theme/createEmotionCache'
+import 'src/theme/css/modelViewer.css'
+import 'src/theme/css/toastify.css'
+import { Logger } from 'src/utils/logger'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -79,20 +75,20 @@ export function MyApp({
 	// 	log.info(`🕸  Connecting ${process.env.NEXT_PUBLIC_ENVIRONMENT}`)
 	// }, [ENVIRONMENT])
 
-	// useEffect(() => {
-	// 	if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
-	// 	Fathom.load('XLUUAYWU', {
-	// 		url: 'https://brilliant-truthful.gamedao.co/script.js',
-	// 		includedDomains: ['gamedao.co'],
-	// 	})
-	// 	function onRouteChangeComplete() {
-	// 		Fathom.trackPageview()
-	// 	}
-	// 	router.events.on('routeChangeComplete', onRouteChangeComplete)
-	// 	return () => {
-	// 		router.events.off('routeChangeComplete', onRouteChangeComplete)
-	// 	}
-	// }, [router.events])
+	useEffect(() => {
+		// if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
+		Fathom.load('XLUUAYWU', {
+			url: 'https://cdn.usefathom.com/script.js',
+			includedDomains: ['gamedao.co'],
+		})
+		function onRouteChangeComplete() {
+			Fathom.trackPageview()
+		}
+		router.events.on('routeChangeComplete', onRouteChangeComplete)
+		return () => {
+			router.events.off('routeChangeComplete', onRouteChangeComplete)
+		}
+	}, [router.events])
 
 	return (
 		<SessionProvider session={session} refetchInterval={5 * 60}>

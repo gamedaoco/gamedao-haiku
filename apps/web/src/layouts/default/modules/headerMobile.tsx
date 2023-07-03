@@ -1,22 +1,19 @@
-import React, { useCallback, useState } from 'react'
-import Link from 'src/components/Link'
-
+import { Menu, MoreVert } from '@mui/icons-material'
 import Open from '@mui/icons-material/Apps'
 import Close from '@mui/icons-material/Close'
-import { Menu, MoreVert } from '@mui/icons-material'
-
 import { Button, Stack, MenuItem, Typography } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/material/styles'
-
-import { NavbarMobile } from 'src/layouts/default/modules/navbarMobile'
+import React, { useCallback, useState } from 'react'
 import { AccountSelector, FontIcons } from 'src/components'
+import Link from 'src/components/Link'
 import { NavLink } from 'src/components/NavLink/navLink'
+import { NavbarMobile } from 'src/layouts/default/modules/navbarMobile'
 
 // eslint-disable-next-line @next/next/no-img-element
-const Logo = () => <img src="/v3/svg/GameDAO-color-h-wht.svg" height="32px" />
+const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />
 
 interface ComponentProps {
 	onSidebarOpen: () => void
