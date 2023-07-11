@@ -1,0 +1,25 @@
+# query account($address: String!) {
+#  account(where: { address: $address} ) {
+#    organizations {
+#      membersCount
+#      member {
+#        valueLocked
+#        canEdit
+#        role
+#      }
+#      access_model
+#      metadata {
+#        logo
+#        name
+#      }
+#    }
+#    balances {
+#      name
+#      symbol
+#      transferrable
+#      locked
+#      reserved
+#      total
+#    }
+#  }
+# }

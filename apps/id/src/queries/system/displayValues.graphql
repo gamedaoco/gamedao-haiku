@@ -1,0 +1,86 @@
+query DisplayValues {
+	gamedao {
+		displayValues {
+			collateralTypes {
+				key
+				value
+				text
+			}
+			proposalTypes {
+				key
+				value
+				text
+			}
+			votingTypes {
+				key
+				value
+				text
+			}
+			daoBodies {
+				key
+				value
+				text
+			}
+			daoMemberGovernance {
+				key
+				value
+				text
+			}
+			daoFeeModel {
+				key
+				value
+				text
+			}
+			projectTypes {
+				key
+				value
+				text
+			}
+			protocolTypes {
+				key
+				value
+				text
+			}
+			projectDurations {
+				key
+				value
+				text
+			}
+			memberships {
+				key
+				value
+				text
+			}
+			campaignFundingCategories {
+				key
+				value
+				text
+			}
+			countries {
+				key
+				value
+				text
+			}
+			organizationSortOptions {
+				key
+				value
+				text
+			}
+			campaignSortOptions {
+				key
+				value
+				text
+			}
+			campaignFilters {
+				key
+				text
+				value
+			}
+			tags {
+				key
+				text
+				value
+			}
+		}
+    }
+}

@@ -1,0 +1,36 @@
+query Config($env: Environment!) {
+	gamedao {
+		config(env: $env) {
+			SITE_NAME
+			SITE_TITLE
+			SITE_DESCRIPTION
+			SITE_IMAGE
+			TW_SITE_NAME
+			TW_SITE_CREATOR
+			CONTACT
+			IPFS_GATEWAY
+			LOG_LEVEL
+			PROPOSAL_MIN_EXPIRY_IN_SECONDS
+			CAMPAIGN_MIN_EXPIRY_IN_SECONDS
+		}
+	}
+}
+
+query ApiProviderConfig {
+	gamedao {
+		apiProvider {
+			name
+			types
+			wsProviderUrl
+			chainProperties {
+				governanceCurrency
+				networkCurrency
+				paymentCurrencies
+				ss58Format
+				tokenDecimals
+				tokenSymbol
+				blockTargetTime
+			}
+		}
+	}
+}
