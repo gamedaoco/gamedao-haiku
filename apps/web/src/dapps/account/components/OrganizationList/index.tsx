@@ -1,25 +1,21 @@
-import { FC, useCallback, useState, Fragment } from 'react'
+import LoadingTable from './loadingTable'
+import ExitToAppSharpIcon from '@mui/icons-material/ExitToAppSharp'
+import Unknown from '@mui/icons-material/QuestionMarkSharp'
+import Edit from '@mui/icons-material/TuneSharp'
+import { Avatar, Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { useRemoveMemberTransaction } from 'hooks/featureToggle/tx/useRemoveMemberTransaction'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { FC, useCallback, useState, Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { Organization } from 'src/queries'
+import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { Scrollbar } from 'src/components/scrollbar'
 import { useConfig } from 'src/hooks/useConfig'
-import { useRemoveMemberTransaction } from 'src/hooks/tx/useRemoveMemberTransaction'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-
+import { Organization } from 'src/queries'
 import { getInitials } from 'src/utils/accountUtils'
 import { reformatNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
-
-import Unknown from '@mui/icons-material/QuestionMarkSharp'
-import Edit from '@mui/icons-material/TuneSharp'
-import ExitToAppSharpIcon from '@mui/icons-material/ExitToAppSharp'
-
-import { Avatar, Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { Scrollbar } from 'src/components/scrollbar'
-import LoadingTable from './loadingTable'
 
 interface IExitProps {
 	id: string
@@ -78,7 +74,7 @@ export const OrganizationList = ({ organizations }: IProps) => {
 						<TableCell>{'Name' || t('page:account:organizations:name')}</TableCell>
 						<TableCell>{'Members' || t('page:account:organizations:members')}</TableCell>
 						<TableCell>{'Collateral' || t('page:account:organizations:value_locked')}</TableCell>
-						<TableCell>{'Access' || t('page:account:organizations:access_model')}</TableCell>
+						<TableCell>{'Access' || t('page:account:organizations:accessModel')}</TableCell>
 						<TableCell>{'Role' || t('page:account:organizations:role')}</TableCell>
 						<TableCell align="right">Actions</TableCell>
 					</TableRow>
@@ -111,10 +107,10 @@ export const OrganizationList = ({ organizations }: IProps) => {
 									</Box>
 								</TableCell>
 								<TableCell>
-									{reformatNumber(organization.organization_members_aggregate?.aggregate?.count, 2)}{' '}
+									{reformatNumber(organization.organizationMembersAggregate?.aggregate?.count, 2)}{' '}
 								</TableCell>
 								<TableCell>{reformatNumber(organization.deposit, 2)}</TableCell>
-								<TableCell>{organization.access_model}</TableCell>
+								<TableCell>{organization.accessModel}</TableCell>
 								<TableCell> {`${isAdmin(organization.prime) ? 'prime' : 'member'}`} </TableCell>
 
 								<TableCell align="right">

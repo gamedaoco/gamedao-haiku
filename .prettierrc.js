@@ -6,5 +6,5 @@ module.exports = {
 	tabWidth: 4,
 	useTabs: true,
 	parser: 'typescript',
-	semi: false,
+	semi: false
 }

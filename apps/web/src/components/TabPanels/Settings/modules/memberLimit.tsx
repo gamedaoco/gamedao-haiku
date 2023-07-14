@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
-
 import { Button, Stack, TextField, Typography } from '@mui/material'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
-const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit').required()
+const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_memberLimit').required()
 
 interface ComponentProps {
 	memberLimit: number
@@ -23,7 +22,7 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 				if (!value) return setMemberLimitError(t('label:required'))
 				validationMemberLimitSchema?.validateSync(value)
 				if (memberLimit !== 0 && value > memberLimit) {
-					setMemberLimitError(t('notification:warning:higher_current_member_limit'))
+					setMemberLimitError(t('notification:warning:higher_current_memberLimit'))
 				}
 				setMemberLimitError(null)
 			} catch (e) {
@@ -42,12 +41,12 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 	return (
 		<>
 			<Stack>
-				<Typography variant="h5">{t('page:organizations:settings:member_limit:title')}</Typography>
+				<Typography variant="h5">{t('page:organizations:settings:memberLimit:title')}</Typography>
 				<Typography variant="h5" mt={3}>
-					{t('page:organizations:settings:member_limit:sub_title')}
+					{t('page:organizations:settings:memberLimit:sub_title')}
 				</Typography>
 				<Typography variant="body2" fontStyle="italic">
-					{t('page:organizations:settings:member_limit:description')}
+					{t('page:organizations:settings:memberLimit:description')}
 				</Typography>
 			</Stack>
 
@@ -57,7 +56,7 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 				onChange={handleMemberLimitChange}
 				InputLabelProps={{ shrink: Number.isInteger(+memberLimitValue) }}
 				value={memberLimitValue}
-				label={t('page:organizations:settings:member_limit:title')}
+				label={t('page:organizations:settings:memberLimit:title')}
 				variant="outlined"
 				error={!!memberLimitError}
 				helperText={memberLimitError}
@@ -70,7 +69,7 @@ export function MemberLimit({ memberLimit }: ComponentProps) {
 					sx={{ display: 'block', flexGrow: { xs: 1, sm: 0 } }}
 					disabled
 				>
-					{t('page:organizations:settings:member_limit:cta_button')}
+					{t('page:organizations:settings:memberLimit:cta_button')}
 				</Button>
 			</Stack>
 		</>

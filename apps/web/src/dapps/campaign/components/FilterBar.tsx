@@ -1,19 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { CampaignFiltersInterface } from 'src/@types/campaign'
+import { CampaignFiltersTab } from 'src/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
+import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
 import {
 	Campaign,
-	Campaign_Bool_Exp,
-	Campaign_Order_By,
+	CampaignBoolExp,
+	CampaignOrderBy,
 	DisplayValueEntryString,
 	useCampaignsPaginationCountSubscription,
 	useCampaignsPaginationSubscription,
 	useDisplayValuesQuery,
 } from 'src/queries'
-
-import { CampaignFiltersTab } from 'src/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
-import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
 
 export function FilterBar() {
 	const { t } = useTranslation()
@@ -28,7 +26,7 @@ export function FilterBar() {
 
 	const filtersOptions = useMemo<DisplayValueEntryString[]>(
 		() =>
-			displayValuesData?.displayValues?.campaignFilters?.map((x) => ({
+			displayValuesData?.gamedao?.displayValues?.campaignFilters?.map((x) => ({
 				...x,
 				value: eval(`(${x?.value ?? 'null'})`),
 			})),
@@ -50,7 +48,7 @@ export function FilterBar() {
 		<FiltersSection
 			setFilters={setFilters}
 			filters={filters}
-			sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
+			sortOptions={displayValuesData?.gamedao?.displayValues?.campaignSortOptions?.concat([])}
 			searchPlaceHolder={t('label:search_campaigns')}
 			ListTab={CampaignFiltersTab}
 			filtersOptions={filtersOptions}

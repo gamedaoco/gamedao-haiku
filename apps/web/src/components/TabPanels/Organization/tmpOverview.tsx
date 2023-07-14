@@ -1,18 +1,15 @@
-import { useCallback, useEffect, useState } from 'react'
-
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
 import { Button, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from '@mui/material'
 import type { ISubmittableResult } from '@polkadot/types/types'
-import { useCreateOrgTransaction } from 'src/hooks/tx/useCreateOrgTransaction'
-import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
+import { useCreateOrgTransaction } from 'hooks/featureToggle/tx/useCreateOrgTransaction'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useOrganizationByIdSubscription } from 'src/queries'
-
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
+import { useOrganizationByIdSubscription } from 'src/queries'
 
 const Chart = dynamic(() => import('react-apexcharts'), {
 	ssr: false,

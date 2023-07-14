@@ -1,4 +1,4 @@
-import { Campaign_Bool_Exp, Campaign_Order_By } from 'src/queries'
+import { CampaignBoolExp, CampaignOrderBy } from 'src/queries'
 
 export interface TMPCampaign {
 	orgId: string
@@ -38,6 +38,6 @@ export interface TMPCampaignState extends TMPCampaign {
 
 export interface CampaignFiltersInterface {
 	query: string
-	sortOption: Campaign_Order_By | string
-	filters: Campaign_Bool_Exp[] | string[]
+	sortOption: CampaignOrderBy | string
+	filters: CampaignBoolExp[] | string[]
 }

@@ -1,0 +1,305 @@
+version: "3.9"
+
+x-db-variables: &db-variables
+  DB_HOST: db
+  DB_USER: ${POSTGRES_USER}
+  DB_PASS: ${POSTGRES_PASSWORD}
+  DB_PORT: 5432
+
+services:
+
+  #
+  # PROXY
+  #
+
+  nginx:
+    image: linuxserver/swag
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - SSLCerts:/config
+    configs:
+      - source: nginx-relay-9944
+        target: /config/nginx/proxy-confs/relay.subdomain.conf
+      - source: nginx-rpc-9944
+        target: /config/nginx/proxy-confs/rpc.subdomain.conf
+      - source: nginx-rpc-9944
+        target: /config/nginx/proxy-confs/node.subdomain.conf
+      - source: nginx-graph
+        target: /config/nginx/proxy-confs/graph.subdomain.conf
+    ports:
+      - 443:443
+      - 80:80
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Zurich
+      URL: dev.sub.zero.io
+      EMAIL: devops@zero.io
+      # SUBDOMAINS: wildcard
+      SUBDOMAINS: relay, rpc, node, graph, dashboard
+      VALIDATION: http
+      ONLY_SUBDOMAINS: "true"
+      # DOCKER_MODS: "linuxserver/mods:swag-dashboard"
+
+  #
+  # MONITORING
+  #
+
+  prometheus:
+    image: prom/prometheus:v2.37.0
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+
+  prometheus-node-metrics:
+    image: quay.io/prometheus/node-exporter:v1.0.1
+    ports:
+      - target: 9100
+        published: 9100
+        protocol: tcp
+        mode: host
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--web.listen-address=:9100"
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/rootfs"
+      - "--collector.filesystem.ignored-mount-points='^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)'"
+
+  docker-cadvisor-metrics:
+    image: google/cadvisor:latest
+    ports:
+      - target: 8080
+        published: 9101
+        mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    deploy:
+      labels:
+        prometheus-job: "cadvisor"
+
+  #
+  # DB
+  #
+
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_MULTIPLE_DATABASES="indexer","squid","graph","graph-gamedao"
+    configs:
+      - source: db
+        target: /docker-entrypoint-initdb.d/init-db.sh
+        mode: 0755
+    ports:
+      - 5432:5432
+    volumes:
+      - /db/postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - 6379:6379
+    command: redis-server --save 60 1 --loglevel warning
+
+  #
+  #
+  #
+
+  # indexer:
+  #   image: subsquid/hydra-indexer:5
+  #   environment:
+  #     <<: *db-variables
+  #     WORKERS_NUMBER: 2
+  #     DB_NAME: indexer
+  #     REDIS_URI: redis://redis:6379/0
+  #     FORCE_HEIGHT: "true"
+  #     BLOCK_HEIGHT: 0
+  #     WS_PROVIDER_ENDPOINT_URI: ws://rpc:9944
+  #   command: sh -c "yarn db:bootstrap && yarn start:prod"
+
+  # indexer-status-service:
+  #   image: subsquid/hydra-indexer-status-service:5
+  #   environment:
+  #     REDIS_URI: redis://redis:6379/0
+  #     PORT: 8090
+  #   ports:
+  #     - 8090
+
+  # indexer-gateway:
+  #   image: subsquid/hydra-indexer-gateway:5
+  #   ports:
+  #     - 8080
+  #   environment:
+  #     <<: *db-variables
+  #     DEV_MODE: "true"
+  #     DB_NAME: indexer
+  #     HYDRA_INDEXER_STATUS_SERVICE: http://indexer-status-service:8090/status
+
+  # indexer-ready-state:
+  #   image: ubuntu
+  #   command: bash -c "apt-get update && apt-get install -y curl && tail -f /dev/null"
+  #   healthcheck:
+  #     test: [ "CMD", "curl", "-f", "http://indexer-gateway:8080/console" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+  #
+  # APIs
+  #
+
+  # squid:
+  #   image: public.ecr.aws/zero.io/squid:v62
+  #   configs:
+  #     - source: squid
+  #       target: /squid/lib/config.json
+  #   environment:
+  #     <<: *db-variables
+  #     DB_NAME: squid
+  #     PROCESSOR_PROMETHEUS_PORT: 3000
+
+  # graph-gamedao:
+  #   image: public.ecr.aws/zero.io/graph-gamedao:v74
+  #   environment:
+  #     IPFS_API_URL: https://ipfs.infura.io:5001/api/v0
+  #     IPFS_CLIENT_ID: ${IPFS_CLIENT_ID}
+  #     IPFS_CLIENT_SECRET: ${IPFS_CLIENT_SECRET}
+  #     SERVER_PORT: 4000
+  #     CHAIN_RPC_URL: ws://rpc:9944/
+  #     CHAIN_RPC_URL_OVERRIDE: wss://node.dev.sub.zero.io/
+  #     DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/graph-gamedao?schema=public
+  #   ports:
+  #     - 4000
+
+  #
+  # GRAPH
+  #
+
+  graph:
+    image: hasura/graphql-engine:v2.12.0
+    ports:
+    #   - 8080:8080
+      - target: 8080
+        published: 8080
+        mode: host
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/graph
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "false"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      PG_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/squid
+      PG_SERVICE_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/graph-gamedao
+    # links:
+    #   - db
+
+
+  #
+  # NETWORK
+  #
+
+  validator-1: &default-relaychain-node
+    image: ${RELAY_IMAGE}
+    user: "0:0"
+    ports:
+      - 9945:9944
+    volumes:
+      - /db/chainspec:/db/chainspec
+      - /db/relay/alice:/db/relay/alice
+    configs:
+      - source: relaychain-git
+        target: /entrypoint/relaychain-node.sh
+        mode: 0100
+    entrypoint: /entrypoint/relaychain-node.sh
+    environment:
+      FLAGS: "--node-key=cf685bccc947651d0102610749e94c2e6dfb716f41342bc3df5167b0313f2684"
+      NODE_NAME: alice
+    ulimits: &a1
+      nofile:
+        soft: 65536
+        hard: 65536
+
+  validator-2:
+    <<: *default-relaychain-node
+    ports:
+      - 9946:9944
+    volumes:
+      - /db/chainspec:/db/chainspec
+      - /db/relay/bob:/db/relay/bob
+    environment:
+      NODE_NAME: bob
+
+
+  collator-1: &default-parachain-node
+    ports:
+      - 9947:9944
+    image: ${PARA_IMAGE}
+    user: "0:0"
+    volumes:
+      - /db/parachain/collator-1:/db/parachain/collator-1
+      - /db/chainspec:/db/chainspec
+    configs:
+      - source: parachain-git
+        target: /entrypoint/parachain-node.sh
+        mode: 0100
+    entrypoint: /entrypoint/parachain-node.sh
+    environment:
+      NODE_NAME: collator-1
+      FLAGS: "--collator --node-key=295928155e34eaae9b468e4e3c2f1ca1d2fbda866b024f3b344699f83a04a3c1"
+    ulimits: *a1
+
+  collator-2:
+    <<: *default-parachain-node
+    ports:
+      - 9948:9944
+    volumes:
+      - /db/parachain/collator-2:/db/parachain/collator-2
+      - /db/chainspec:/db/chainspec
+    environment:
+      NODE_NAME: collator-2
+      FLAGS: "--collator"
+
+  rpc:
+    <<: *default-parachain-node
+    ports:
+      - 9944:9944
+    volumes:
+      - /db/parachain/rpc:/db/parachain/rpc
+      - /db/chainspec:/db/chainspec
+    environment:
+      NODE_NAME: rpc
+      FLAGS: "--state-pruning=archive --ws-max-connections=1000 --ws-max-out-buffer-capacity=99999"
+
+volumes:
+  SSLCerts:
+
+configs:
+  nginx-relay-9944:
+    external: true
+  nginx-rpc-9944:
+    external: true
+  nginx-graph:
+    external: true
+  prometheus:
+    external: true
+  db:
+    external: true
+  squid:
+    external: true
+  relaychain-git:
+    external: true
+  parachain-git:
+    external: true

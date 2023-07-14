@@ -1,14 +1,13 @@
+import moment from 'moment/moment'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import moment from 'moment/moment'
-import { v4 as uuidv4 } from 'uuid'
-
+import { TMPCampaign } from 'src/@types/campaign'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { TMPCampaign } from 'src/@types/campaign'
 import { Campaign, useOrganizationByIdSubscription } from 'src/queries'
 import { createInfoNotification } from 'src/utils/notificationUtils'
 import { fromUnit } from 'src/utils/token'
+import { v4 as uuidv4 } from 'uuid'
 
 export interface CampaignDraft {
 	drafts: any
@@ -57,7 +56,7 @@ export function useSaveCampaignDraft(orgId: string): CampaignDraft {
 			const endBlock = currentBlockNumber + Math.ceil(endSecondsDiff / systemProperties?.blockTargetTime)
 			return {
 				id: draftId,
-				token_symbol: currencySymbol,
+				tokenSymbol: currencySymbol,
 				organization: data?.organization?.[0] ?? {},
 				state: 'Draft',
 				// TODO: metadata has moved?

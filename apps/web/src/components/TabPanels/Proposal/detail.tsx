@@ -1,17 +1,3 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useRouter } from 'next/router'
-import moment from 'moment'
-
-import { useTranslation } from 'react-i18next'
-import { useVoteTransaction } from 'src/hooks/tx/useVoteTransaction'
-import { useBlockNumber } from 'src/hooks/useBlockNumber'
-import { useDisplayValues } from 'src/hooks/useDisplayValues'
-import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { Organization, useProposalByIdSubscription } from 'src/queries'
-import { formatAddressShort } from 'src/utils/address'
-import { isProposalActive } from 'src/utils/proposalUtils'
-import { getConnectedEndpoint } from 'src/constants/endpoints'
-
 import { ArrowBack, HowToVote, Launch } from '@mui/icons-material'
 import {
 	Box,
@@ -27,14 +13,24 @@ import {
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
-
+import { useVoteTransaction } from 'hooks/featureToggle/tx/useVoteTransaction'
+import moment from 'moment'
+import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components'
 import { RadioItem } from 'src/components/Forms/modules/radioItem'
+import { Loader } from 'src/components/Loader'
 import { ProposalStatusChip } from 'src/components/ProposalStatusChip/ProposalStatusChip'
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { Loader } from 'src/components/Loader'
-
+import { getConnectedEndpoint } from 'src/constants/endpoints'
 import { useApiProvider } from 'src/hooks/useApiProvider'
+import { useBlockNumber } from 'src/hooks/useBlockNumber'
+import { useDisplayValues } from 'src/hooks/useDisplayValues'
+import { useSystemProperties } from 'src/hooks/useSystemProperties'
+import { Organization, useProposalByIdSubscription } from 'src/queries'
+import { formatAddressShort } from 'src/utils/address'
+import { isProposalActive } from 'src/utils/proposalUtils'
 
 interface ComponentProps {
 	organization: Organization
@@ -154,7 +150,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 		setVoterRows(
 			proposal.voting.proposal_voters.map((voter) => ({
 				id: voter.identity.id,
-				member: voter.identity.display_name,
+				member: voter.identity.displayName,
 				vote: voter.voted ? 'Yes' : 'No',
 			})),
 		)
@@ -205,7 +201,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 								<Typography sx={{ wordBreak: 'break-all' }} variant="body1">
 									{t('label:proposal_by', {
 										creator:
-											proposal.creator_identity.display_name ??
+											proposal.creator_identity.displayName ??
 											formatAddressShort(proposal.creator_identity.id),
 									})}
 								</Typography>
@@ -240,7 +236,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						</Box>
 						<Box>
 							<Typography variant="body2">
-								{proposal.creator_identity.display_name ??
+								{proposal.creator_identity.displayName ??
 									formatAddressShort(proposal.creator_identity.id, 6)}
 							</Typography>
 						</Box>
@@ -284,7 +280,7 @@ export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps)
 						<NavLink
 							href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
 								chain.toLowerCase(),
-							)}#/explorer/query/${proposal.created_at_block}`}
+							)}#/explorer/query/${proposal.createdAtBlock}`}
 							external={true}
 						>
 							<Stack direction="row" spacing={1}>

@@ -1,0 +1,30 @@
+.Toastify__progress-bar-theme--light, .Toastify__progress-bar-theme--dark {
+    background: linear-gradient(
+            90deg,
+            #00f2c4 0%,
+            #66f16d 13%,
+            #b5e653 25%,
+            #f6e900 38%,
+            #ffcc00 50%,
+            #ffb316 63%,
+            #ff747d 75%,
+            #ff4ea7 88%,
+            #ff00df 100%
+    );
+    border-radius: 1px;
+}
+.Toastify__toast-theme--dark {
+    background-color: #00000033;
+    background-cmage: linear-gradient(to bottom right, rgba(0,0,0,0.5), rgba(0,0,0,.8));
+    backdrop-filter: blur(10px);
+    border: 1px solid #ffffff11;
+}
+
+.Toastify__toast {
+    border-radius: 2px;
+}
+
+/*.Toastify__toast-container--bottom-right {
+    bottom: '0px';
+    right: '25px';
+}*/

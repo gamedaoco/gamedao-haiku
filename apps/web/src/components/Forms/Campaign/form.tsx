@@ -1,22 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { uploadFileToIpfs } from 'src/utils/ipfs'
-
-import { useConfig } from 'src/hooks/useConfig'
-import { useCreateCampaignTransaction } from 'src/hooks/tx/useCreateCampaignTransaction'
-import { useSaveCampaignDraft } from 'src/hooks/useSaveCampaignDraft'
-import { useTmpCampaign } from 'src/hooks/useTmpCampaign'
-import { useTmpCampaignState } from 'src/hooks/useTmpCampaignState'
-
-import { Box, Button, Stack } from '@mui/material'
-
-import { ConfirmationModal } from 'src/components/Modals/ConfirmationModal'
-import { ConfirmDeleteCampaignDraft } from 'src/components/Modals/confirmDeleteCampaignDraft'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-
 import { Content, validationSchema as contentValidationSchema } from './modules/content'
 import { Name, validationSchema as nameValidationSchema } from './modules/name'
 import { Settings, getValidationSchema as getSettingsValidationSchema } from './modules/settings'
+import { Box, Button, Stack } from '@mui/material'
+import { useCreateCampaignTransaction } from 'hooks/featureToggle/tx/useCreateCampaignTransaction'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ConfirmationModal } from 'src/components/Modals/ConfirmationModal'
+import { ConfirmDeleteCampaignDraft } from 'src/components/Modals/confirmDeleteCampaignDraft'
+import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { useConfig } from 'src/hooks/useConfig'
+import { useSaveCampaignDraft } from 'src/hooks/useSaveCampaignDraft'
+import { useTmpCampaign } from 'src/hooks/useTmpCampaign'
+import { useTmpCampaignState } from 'src/hooks/useTmpCampaignState'
+import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 interface ComponentProps {
 	organizationId: string

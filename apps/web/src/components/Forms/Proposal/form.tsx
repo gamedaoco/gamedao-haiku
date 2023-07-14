@@ -1,16 +1,9 @@
-import { useCallback, useState } from 'react'
-
-import { useRouter } from 'next/router'
-
 import { Button, Stack } from '@mui/material'
 import { ISubmittableResult } from '@polkadot/types/types'
-import { useCreateProposalTransaction } from 'src/hooks/tx/useCreateProposalTransaction'
-import { useConfig } from 'src/hooks/useConfig'
-import { useTMPProposalState } from 'src/hooks/useTMPProposalState'
+import { useCreateProposalTransaction } from 'hooks/featureToggle/tx/useCreateProposalTransaction'
+import { useRouter } from 'next/router'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PROPOSAL_KEYS } from 'src/constants/proposal'
-import { uploadFileToIpfs } from 'src/utils/ipfs'
-
 import {
 	Description,
 	getValidationSchema as getDescriptionValidationSchema,
@@ -20,6 +13,10 @@ import {
 import { Majority } from 'src/components/Forms/Proposal/modules/majority'
 import { Type } from 'src/components/Forms/Proposal/modules/type'
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { PROPOSAL_KEYS } from 'src/constants/proposal'
+import { useConfig } from 'src/hooks/useConfig'
+import { useTMPProposalState } from 'src/hooks/useTMPProposalState'
+import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 interface ComponentProps {
 	currentStep: number
