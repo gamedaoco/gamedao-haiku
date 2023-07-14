@@ -28,7 +28,7 @@ export function useBalanceByAddress(address: string): Balance[] {
 	useEffect(() => {
 		if (data && systemProperties) {
 			setBalanceState(
-				data.Balance
+				data.balance
 					// @ts-ignore
 					.sort((a, b) => (a.balanceId < b.balanceId ? -1 : a.balanceId > b.balanceId ? 1 : 0))
 					.map((balance) => {

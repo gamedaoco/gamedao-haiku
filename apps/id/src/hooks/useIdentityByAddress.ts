@@ -12,8 +12,8 @@ export function useIdentityByAddress(address: string): IdentityByAddress {
 	const { data, error, loading } = useIdentityByAddressSubscription({ variables: { address } })
 
 	useEffect(() => {
-		if (data?.identity_by_pk) {
-			setIdentityState({ ...data.identity_by_pk } as any)
+		if (data?.identityByPk) {
+			setIdentityState({ ...data.identityByPk } as any)
 		}
 	}, [data])
 

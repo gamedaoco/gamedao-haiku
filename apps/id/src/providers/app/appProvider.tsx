@@ -77,7 +77,7 @@ export function AppProvider({ children }) {
 				// , name: user.name, email: user.email, twitter: user.twitter },
 			}).then((res) => {
 				try {
-					const identity = res?.data?.BattlepassBot?.identity
+					const identity = res?.data?.battlepassBot?.identity
 					console.log('app', 'identity', '->', identity)
 					const updateUser = {
 						...user,
@@ -121,7 +121,7 @@ export function AppProvider({ children }) {
 			console.log('app', 'writing address...', user.address, 'for', user.uuid)
 			const res = await connectIdentityMutation().then((res) => {
 				try {
-					const _uuid = res?.data?.BattlepassBot?.identity?.address
+					const _uuid = res?.data?.battlepassBot?.identity?.address
 					console.log('app', 'linked address', user.address)
 				} catch (e) {
 					console.log(e)

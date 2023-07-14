@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLogger } from 'src/hooks/useLogger'
-import { useBattlepassSubscription } from 'src/queries'
+
+// import { useBattlepassSubscription } from 'src/queries'
 
 export type TProps = {
 	id?: string
@@ -26,7 +27,8 @@ export const useBattlepass = (id): TProps => {
 	const logger = useLogger('Battlepass')
 
 	const [battlepass, setBattlepass] = useState({})
-	const { loading, data, error } = useBattlepassSubscription({ variables: { id } })
+	// const { loading, data, error } = // useBattlepassSubscription({ variables: { id } })
+	let loading, data, error
 
 	useEffect(() => {
 		if (loading || !data) return

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import React from 'react'
-import { Layout } from 'src/layouts/default/layout'
+import { Layout } from 'src/layouts/default'
 import { Providers } from 'src/providers'
 
 export default {
