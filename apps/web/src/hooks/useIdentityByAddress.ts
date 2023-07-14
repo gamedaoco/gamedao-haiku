@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-
 import { Identity, useIdentityByAddressSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
@@ -13,8 +12,8 @@ export function useIdentityByAddress(address: string): IdentityByAddress {
 	const { data, error, loading } = useIdentityByAddressSubscription({ variables: { address } })
 
 	useEffect(() => {
-		if (data?.identity_by_pk) {
-			setIdentityState({ ...data.identity_by_pk } as any)
+		if (data?.identityByPk) {
+			setIdentityState({ ...data.identityByPk } as any)
 		}
 	}, [data])
 

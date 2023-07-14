@@ -1,20 +1,18 @@
-import React, { useCallback, useMemo, useState } from 'react'
-
 import { Box, Button, Card, CardContent, Divider, LinearProgress, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useContributeTransaction } from 'src/hooks/tx/useContributeTransaction'
+import { useContributeTransaction } from 'hooks/featureToggle/tx/useContributeTransaction'
+import React, { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Image } from 'src/components/Image/image'
+import { ContributeSection } from 'src/components/TransactionDialog/modules/contributeSection'
+import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { useConfig } from 'src/hooks/useConfig'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { useTranslation } from 'react-i18next'
 import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
 import { toUnit } from 'src/utils/token'
-
-import { Image } from 'src/components/Image/image'
-import { ContributeSection } from 'src/components/TransactionDialog/modules/contributeSection'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
 
 interface ComponentProps {
 	id: string

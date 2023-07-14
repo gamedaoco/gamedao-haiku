@@ -1,24 +1,19 @@
-import { useCallback, useEffect, useState } from 'react'
-
+import { ExpandMore, Verified } from '@mui/icons-material'
+import XPIcon from '@mui/icons-material/EmojiEventsOutlined'
+import REPIcon from '@mui/icons-material/FavoriteBorder'
+import TIcon from '@mui/icons-material/ShieldOutlined'
+import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { useSession } from 'next-auth/react'
-import { useAppContext } from 'src/providers/app/modules/context'
-
+import { useCallback, useEffect, useState } from 'react'
 import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
-import { formatBalanceString } from 'src/utils/balance'
-
-import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
-
-import { useTheme } from '@mui/material/styles'
-import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'
-import { ExpandMore, Verified } from '@mui/icons-material'
+import { useAppContext } from 'src/providers/app/modules/context'
+import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
 import { avatarImageURL } from 'src/utils/avatars'
-
-import REPIcon from '@mui/icons-material/FavoriteBorder'
-import XPIcon from '@mui/icons-material/EmojiEventsOutlined'
-import TIcon from '@mui/icons-material/ShieldOutlined'
+import { formatBalanceString } from 'src/utils/balance'
 
 interface IComponentProps {
 	onClick: () => void
@@ -47,7 +42,7 @@ export function Selector({ onClick }: IComponentProps) {
 		if (address) setAddressShort(shortHash(address))
 
 		const userName =
-			identity?.display_name || // on chain display name
+			identity?.displayName || // on chain display name
 			user?.name /*session?.user?.name*/ || // user name derived from discord
 			getNameFromAccountState(accountState) || // wallet account name
 			'anonymous'
@@ -59,7 +54,7 @@ export function Selector({ onClick }: IComponentProps) {
 	}, [session, identity, user, accountState, address])
 
 	const VerifiedBadge = () =>
-		identity?.display_name ? (
+		identity?.displayName ? (
 			<Verified sx={{ ml: '5px', verticalAlign: 'top' }} fontSize="inherit" color="inherit" />
 		) : null
 

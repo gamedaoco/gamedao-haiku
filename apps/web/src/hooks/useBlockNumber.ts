@@ -3,5 +3,5 @@ import { useBlockNumberSubscription } from 'src/queries'
 export function useBlockNumber(): number {
 	const { data } = useBlockNumberSubscription()
 
-	return data?.ChainInfo?.[0]?.blockNumber ?? 0
+	return data?.chainInfo?.[0]?.blockNumber ?? 0
 }

@@ -23,7 +23,7 @@ subscription OrganizationMembersByState(
 ) {
     organization(where: { id: {_eq: $id}}) {
         id
-        organization_members(where: { state: {_eq: $state}}) {
+        organizationMembers(where: { state: {_eq: $state}}) {
             address
             state
         }
@@ -31,9 +31,9 @@ subscription OrganizationMembersByState(
 }
 
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
-    organization_aggregate(
+    organizationAggregate(
         where: {
-            # organization_metadata: {
+            # organizationMetadata: {
                 _or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]
             # }
         }
@@ -44,16 +44,16 @@ subscription OrganizationsPaginationCount($searchQuery: String="%") {
     }
 }
 
-subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
-    organization(limit: $first, order_by: $orderBy, where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
+subscription OrganizationsPagination($orderBy: [OrganizationOrderBy!], $first: Int, , $searchQuery: String="%") {
+    organization(limit: $first, orderBy: $orderBy, where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
         id
         name
         description
         logo
         header
-        access_model
+        accessModel
         creator
-        organization_members {
+        organizationMembers {
             address
             state
         }
@@ -78,26 +78,25 @@ query GetOrganizationById($id: String!) {
 
 subscription OrganizationById($orgId: String!) {
     organization(where: { id: {_eq: $orgId}}) {
-        access_model
+        accessModel
         creator
-        created_at_block
+        createdAtBlock
         creator
-        fee_model
-        fee_model
-        gov_currency
+        feeModel
+        govCurrency
         id
-        member_limit
-        pay_currency
+        memberLimit
+        payCurrency
 		prime
         treasury
         type
-        organization_members {
+        organizationMembers {
             address
             state
             identity {
                 id
                 email
-                display_name
+                displayName
             }
         }
         description
@@ -111,12 +110,12 @@ subscription OrganizationById($orgId: String!) {
         url
         location
         tags
-        organization_members_aggregate {
+        organizationMembersAggregate {
             aggregate {
                 count
             }
         }
-        campaigns_aggregate {
+        campaignsAggregate {
             aggregate {
                 count
             }
@@ -125,7 +124,7 @@ subscription OrganizationById($orgId: String!) {
                 state
             }
         }
-        proposals_aggregate {
+        proposalsAggregate {
             nodes {
                 id
                 type
@@ -137,43 +136,43 @@ subscription OrganizationById($orgId: String!) {
     }
 }
 subscription OrganizationsByAccount($address: String!) {
-  organization(where: {organization_members: {address: {_eq: $address}}}) {
+  organization(where: {organizationMembers: {address: {_eq: $address}}}) {
     id
     name
     description
     creator
     prime
-    member_limit
-    membership_fee
-    access_model
+    memberLimit
+    membershipFee
+    accessModel
     deposit
     slug
     logo
-    organization_members_aggregate {
+    organizationMembersAggregate {
       aggregate {
         count
       }
     }
-    organization_members (where: {address: {_eq: $address}}){
+    organizationMembers (where: {address: {_eq: $address}}){
       address
       state
     }
   }
     # identity_by_pk(id: $address){
     #     id
-    #     organization_members {
+    #     organizationMembers {
     #         id
     #         state
     #         organization {
     #             id
     #             name
     #             logo
-    #             access_model
+    #             accessModel
     #             creator
-    #             organization_members {
+    #             organizationMembers {
     #                 address
     #                 identity {
-    #                     display_name
+    #                     displayName
     #                     image
     #                     email
     #                 }

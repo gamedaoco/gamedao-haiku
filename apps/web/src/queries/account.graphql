@@ -1,5 +1,5 @@
-#query account($address: String!) {
-#  account(address: $address) {
+# query account($address: String!) {
+#  account(where: { address: $address} ) {
 #    organizations {
 #      membersCount
 #      member {
@@ -22,4 +22,4 @@
 #      total
 #    }
 #  }
-#}
+# }

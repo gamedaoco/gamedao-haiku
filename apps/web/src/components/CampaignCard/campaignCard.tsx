@@ -1,16 +1,13 @@
-import { useCallback, useMemo } from 'react'
-
-import { useRouter } from 'next/router'
-
-import { Card } from '@mui/material'
-import { useConfig } from 'src/hooks/useConfig'
-import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { CampaignStatus } from 'src/@types/campaignStatus'
-import type { Campaign } from 'src/queries'
-import { parseIpfsHash } from 'src/utils/ipfs'
-
 import { Content } from './modules/content'
 import { Header } from './modules/header'
+import { Card } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useCallback, useMemo } from 'react'
+import { CampaignStatus } from 'src/@types/campaignStatus'
+import { useConfig } from 'src/hooks/useConfig'
+import { useSystemProperties } from 'src/hooks/useSystemProperties'
+import type { Campaign } from 'src/queries'
+import { parseIpfsHash } from 'src/utils/ipfs'
 
 interface ComponentProps {
 	campaign: Campaign
@@ -21,8 +18,8 @@ export function CampaignCard({ campaign }: ComponentProps) {
 	const { push } = useRouter()
 	const config = useConfig()
 	const currencyId = useMemo(
-		() => systemProperties?.tokenSymbol?.indexOf(campaign?.token_symbol) ?? 0,
-		[systemProperties, campaign?.token_symbol],
+		() => systemProperties?.tokenSymbol?.indexOf(campaign?.tokenSymbol) ?? 0,
+		[systemProperties, campaign?.tokenSymbol],
 	)
 
 	const handleClick = useCallback(() => {
@@ -48,8 +45,8 @@ export function CampaignCard({ campaign }: ComponentProps) {
 			<Content
 				title={campaign.name}
 				organizationName={campaign.organization?.name}
-				backers={campaign?.campaign_contributors_aggregate?.aggregate?.count ?? 0}
-				contributed={campaign?.campaign_contributors_aggregate?.aggregate?.sum?.contributed ?? '0'}
+				backers={campaign?.campaignContributorsAggregate?.aggregate?.count ?? 0}
+				contributed={campaign?.campaignContributorsAggregate?.aggregate?.sum?.contributed ?? '0'}
 				target={campaign?.target ?? '0'}
 				currencyId={currencyId < 0 ? 0 : currencyId}
 				expiry={campaign?.expiry ?? 0}

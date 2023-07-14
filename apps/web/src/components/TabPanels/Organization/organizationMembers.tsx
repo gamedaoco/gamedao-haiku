@@ -1,12 +1,12 @@
 import { Verified } from '@mui/icons-material'
 import { Chip, Button, Avatar, Box, Paper, Rating, Stack, Typography } from '@mui/material'
+import { useApproveMemberTx } from 'hooks/featureToggle/tx/useApproveMemberTx'
 import md5 from 'md5'
 // import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import dynamic from 'next/dynamic'
 import React, { Suspense, useEffect, useMemo, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { useApproveMemberTx } from 'src/hooks/tx/useApproveMemberTx'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { Organization } from 'src/queries'
 import { shortAccountAddress } from 'src/utils/accountUtils'
@@ -48,7 +48,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 
 	// const isPrime = ( prime === address ) ? true : false
 
-	const members = useMemo(() => organizationState?.organization_members?.slice(), [organizationState])
+	const members = useMemo(() => organizationState?.organizationMembers?.slice(), [organizationState])
 	const [rows, setRows] = useState<any[]>([])
 
 	const [approveUserAddress, setApproveUserAddress] = useState(null)
@@ -179,7 +179,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 			members?.map((member, index) => {
 				return {
 					id: member?.address,
-					name: member?.identity?.display_name,
+					name: member?.identity?.displayName,
 					role: t(`label:${member?.address === prime ? 'prime' : 'member'}`),
 					email: member?.identity?.email,
 					address: shortAccountAddress(member),
@@ -191,7 +191,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 					trust: member
 						? prime === member.address
 							? 3
-							: member?.identity?.email || member?.identity?.display_name
+							: member?.identity?.email || member?.identity?.displayName
 							? 2
 							: 1
 						: 0,

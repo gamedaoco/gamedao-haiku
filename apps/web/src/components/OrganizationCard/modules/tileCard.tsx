@@ -1,13 +1,12 @@
-import { useMemo } from 'react'
-import NextImage from 'next/image'
-
 import { Check, Key, Person } from '@mui/icons-material'
 import { Stack, Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useConfig } from 'src/hooks/useConfig'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import NextImage from 'next/image'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'src/components/NavLink/navLink'
+import { useConfig } from 'src/hooks/useConfig'
+import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { Organization } from 'src/queries'
 import { parseIpfsHash } from 'src/utils/ipfs'
 
@@ -39,8 +38,8 @@ export const TileCard = ({ item }: ComponentPros) => {
 					}}
 				>
 					<Person fontSize={'inherit'} />
-					<span>{`${item?.organization_members?.length} ${t(
-						`label:${item?.organization_members?.length > 1 ? 'members' : 'member'}`,
+					<span>{`${item?.organizationMembers?.length} ${t(
+						`label:${item?.organizationMembers?.length > 1 ? 'members' : 'member'}`,
 					)} `}</span>
 				</Box>
 				<Box
@@ -59,7 +58,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 							alignItems: 'center',
 						}}
 					>
-						{item?.organization_members?.find((member) => member.address === address) ? (
+						{item?.organizationMembers?.find((member) => member.address === address) ? (
 							<>
 								<Check fontSize={'inherit'} />
 								<span>{t('label:joined')}</span>
@@ -67,7 +66,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 						) : (
 							<>
 								<Key fontSize={'inherit'} />
-								<span>{t(`label:${item?.access_model === 'Open' ? 'open' : 'invitation'}`)}</span>
+								<span>{t(`label:${item?.accessModel === 'Open' ? 'open' : 'invitation'}`)}</span>
 							</>
 						)}
 					</Box>

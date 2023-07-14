@@ -1,20 +1,18 @@
-import { useCallback, useState } from 'react'
-
 import { Person } from '@mui/icons-material'
 import { Box, Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { createWarningNotification } from 'src/utils/notificationUtils'
-import * as Yup from 'yup'
-
 import { BaseForm } from 'src/components/Forms/baseForm'
 import { RadioItem } from 'src/components/Forms/modules/radioItem'
+import { createWarningNotification } from 'src/utils/notificationUtils'
+import * as Yup from 'yup'
 
 const validationFeeSchema = Yup.number()
 	.min(1, 'notification:warning:min_1_game_fee')
 	.max(1000000, 'notification:warning:max_1m_game_fee')
 	.required()
 
-const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_member_limit').required()
+const validationMemberLimitSchema = Yup.number().max(1000000, 'notification:warning:max_1m_memberLimit').required()
 
 interface ComponentProps {
 	selectedMode: number

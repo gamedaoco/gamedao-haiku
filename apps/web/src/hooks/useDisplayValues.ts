@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-
 import { DisplayValues, useDisplayValuesQuery } from 'src/queries'
 
 export function useDisplayValues(): DisplayValues {
@@ -11,5 +10,5 @@ export function useDisplayValues(): DisplayValues {
 		}
 	}, [error])
 
-	return (loading ? null : data?.displayValues ?? null) as DisplayValues
+	return (loading ? null : data?.gamedao.displayValues ?? null) as DisplayValues
 }

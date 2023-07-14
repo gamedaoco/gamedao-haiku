@@ -1,24 +1,46 @@
 import { useEffect, useState } from 'react'
 import { useLogger } from 'src/hooks/useLogger'
-import { useBattlepassByIdQuery } from 'src/queries'
 
-export type TBattlepass = {
+// import { useBattlepassSubscription } from 'src/queries'
+
+export type TProps = {
+	id?: string
+}
+
+type TBattlepass = {
 	id: string
-	org: string
 	name: string
 	description: string
 	slug: string
+	iconImageCid: string
+	bannerImageCid: string
+	type: string
+	price: number
+	rating: number
 }
 
-export const useBattlepass = (id = null): TBattlepass => {
-	const logger = useLogger('Battlepass')
-	const [battlepass, setBattlepass] = useState<TBattlepass | null>(null)
-	// const { loading, data, error } = useBattlepassByIdQuery({ query: { id } })
+type TBattlepasses = {
+	battlepass: TBattlepass[]
+}
 
-	// useEffect(() => {
-	// 	if (loading) return
-	// 	setBattlepass(null)
-	// }, [loading, data])
+export const useBattlepass = (id): TProps => {
+	const logger = useLogger('Battlepass')
+
+	const [battlepass, setBattlepass] = useState({})
+	// const { loading, data, error } = useBattlepassSubscription({ variables: { id } })
+	let loading, data, error
+
+	useEffect(() => {
+		if (loading || !data) return
+		setBattlepass({
+			...battlepass,
+			data,
+		})
+	}, [loading, data])
+
+	useEffect(() => {
+		if (error) logger.error(error)
+	}, [error])
 
 	return battlepass
 }

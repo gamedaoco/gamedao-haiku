@@ -1,24 +1,21 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useRouter } from 'next/router'
-
-import { TransactionData } from 'src/@types/transactionData'
-import { Organization } from 'src/queries'
-import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
-import { getProposalTypesCount } from 'src/utils/proposalUtils'
-import { useRemoveMemberTransaction } from 'src/hooks/tx/useRemoveMemberTransaction'
-
-import { useTheme } from '@mui/material/styles'
 import { ChevronRight, Verified } from '@mui/icons-material'
 import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
 import { Box, Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
-
+import { useTheme } from '@mui/material/styles'
+import { useRemoveMemberTransaction } from 'hooks/featureToggle/tx/useRemoveMemberTransaction'
+import { useRouter } from 'next/router'
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 import { DonutChart } from 'src/components/Charts/donutChart'
 import { AreaChartContainer } from 'src/components/TabPanels/Organization/modules/areaChartContainer'
 import { RadialChartContainer } from 'src/components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-
 import { TreasuryChart } from 'src/dapps/organization/components/TreasuryChart'
+import { Organization } from 'src/queries'
+import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
+import { getProposalTypesCount } from 'src/utils/proposalUtils'
+
 interface ComponentProps {
 	organization: Organization
 	organizationId: string
@@ -88,9 +85,9 @@ export function Overview({
 		[isReadMore, organization?.description],
 	)
 
-	const access_model = useMemo(
+	const accessModel = useMemo(
 		() =>
-			organization?.access_model === 'Open'
+			organization?.accessModel === 'Open'
 				? {
 						title: t('page:organizations:organization_rules:open:title'),
 						text: t('page:organizations:organization_rules:open:text'),
@@ -101,56 +98,56 @@ export function Overview({
 						text: t('page:organizations:organization_rules:private:text'),
 						status: t('page:organizations:organization_rules:private:status'),
 				  },
-		[organization?.access_model],
+		[organization?.accessModel],
 	)
 
 	const feeModel = useMemo(() => {
-		if (organization?.fee_model === 'NoFees') {
+		if (organization?.feeModel === 'NoFees') {
 			return {
 				title: t('page:organizations:organization_rules:no_fee:title'),
 				text: t('page:organizations:organization_rules:no_fee:text'),
 			}
-		} else if (organization?.fee_model === 'Reserve') {
+		} else if (organization?.feeModel === 'Reserve') {
 			return {
 				title: t('page:organizations:organization_rules:reserved_fee:title'),
 				text: t('page:organizations:organization_rules:reserved_fee:text'),
 			}
-		} else if (organization?.fee_model === 'Transfer') {
+		} else if (organization?.feeModel === 'Transfer') {
 			return {
 				title: t('page:organizations:organization_rules:transferred_fee:title'),
 				text: t('page:organizations:organization_rules:transferred_fee:text'),
 			}
 		}
-	}, [organization?.fee_model])
+	}, [organization?.feeModel])
 
 	const memberLimit = useMemo(
 		() =>
-			organization?.member_limit === 0
+			organization?.memberLimit === 0
 				? {
-						title: t('page:organizations:organization_rules:no_member_limit:title'),
-						text: t('page:organizations:organization_rules:no_member_limit:text'),
+						title: t('page:organizations:organization_rules:no_memberLimit:title'),
+						text: t('page:organizations:organization_rules:no_memberLimit:text'),
 				  }
 				: {
-						title: t('page:organizations:organization_rules:member_limit:title'),
-						text: ` ${t('page:organizations:organization_rules:member_limit:only')} ${
-							organization?.member_limit
-						}  ${t('page:organizations:organization_rules:member_limit:text')}`,
+						title: t('page:organizations:organization_rules:memberLimit:title'),
+						text: ` ${t('page:organizations:organization_rules:memberLimit:only')} ${
+							organization?.memberLimit
+						}  ${t('page:organizations:organization_rules:memberLimit:text')}`,
 				  },
-		[organization?.member_limit],
+		[organization?.memberLimit],
 	)
 
 	const statesPercentages = useMemo(
 		() =>
 			getCampaignStatusPercentage(
-				organization?.campaigns_aggregate?.aggregate?.count,
-				organization?.campaigns_aggregate?.nodes,
+				organization?.campaignsAggregate?.aggregate?.count,
+				organization?.campaignsAggregate?.nodes,
 			),
-		[organization?.campaigns_aggregate?.aggregate?.count, organization?.campaigns_aggregate?.nodes],
+		[organization?.campaignsAggregate?.aggregate?.count, organization?.campaignsAggregate?.nodes],
 	)
 
 	const proposalTypesCount = useMemo(
-		() => getProposalTypesCount(organization?.proposals_aggregate?.nodes),
-		[organization?.proposals_aggregate?.nodes],
+		() => getProposalTypesCount(organization?.proposalsAggregate?.nodes),
+		[organization?.proposalsAggregate?.nodes],
 	)
 
 	useEffect(() => {
@@ -214,9 +211,9 @@ export function Overview({
 									<FmdGood /> <Typography variant="body2">{orgData.location}</Typography>
 								</Stack>
 							)}
-							{access_model.status && (
+							{accessModel.status && (
 								<Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-									<VpnKey /> <Typography variant="body2">{access_model.status} </Typography>
+									<VpnKey /> <Typography variant="body2">{accessModel.status} </Typography>
 								</Stack>
 							)}
 							{organization?.url && (
@@ -241,7 +238,7 @@ export function Overview({
 										onClick={handleOpenTxModal}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
-										{organization?.access_model === 'Open' ? (
+										{organization?.accessModel === 'Open' ? (
 											t('button:ui:join_organization')
 										) : (
 											<>Apply</>
@@ -258,7 +255,7 @@ export function Overview({
 						<Typography variant="h6">{t('page:organizations:organizations_rules')}</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
-							{organization?.fee_model && (
+							{organization?.feeModel && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '16px', color: theme.palette.success.main }} />
 									<Stack direction="column">
@@ -268,17 +265,17 @@ export function Overview({
 								</Stack>
 							)}
 
-							{organization?.access_model && (
+							{organization?.accessModel && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
-										<Typography variant="body2">{access_model.title}</Typography>
-										<Typography variant="body2">{access_model.text}</Typography>
+										<Typography variant="body2">{accessModel.title}</Typography>
+										<Typography variant="body2">{accessModel.text}</Typography>
 									</Stack>
 								</Stack>
 							)}
 
-							{(organization?.member_limit || organization?.member_limit === 0) && (
+							{(organization?.memberLimit || organization?.memberLimit === 0) && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
@@ -307,7 +304,7 @@ export function Overview({
 					</Stack>
 					<AreaChartContainer
 						title="Total Members"
-						total={organization?.organization_members_aggregate?.aggregate?.count}
+						total={organization?.organizationMembersAggregate?.aggregate?.count}
 						increase={2.6}
 						series={series1}
 						categories={categories}

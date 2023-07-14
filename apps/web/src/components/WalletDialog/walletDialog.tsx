@@ -1,17 +1,13 @@
-import { Fragment, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { useSession, signIn, signOut } from 'next-auth/react'
-
-import { useAppContext } from 'src/providers/app/modules/context'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
-
 import { Grid, Button, Box, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { Fragment, useEffect } from 'react'
 import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
-import { WalletCard } from 'src/components/WalletDialog/modules/walletCard'
 import Device from 'src/components/Device'
-
+import { WalletCard } from 'src/components/WalletDialog/modules/walletCard'
+import { useAppContext } from 'src/providers/app/modules/context'
+import { useExtensionContext } from 'src/providers/extension/modules/context'
 import { getTwitterAuthorizationURL } from 'src/utils/getTwitterAuthorizationURL'
 
 export const Web2Connect = () => {
@@ -131,7 +127,7 @@ export function WalletDialog({ open, callback, onClose }: ComponentProps) {
 				justifyContent="space-around"
 				gap={'1rem'}
 				maxWidth={{ xs: 'auto', lg: theme.breakpoints.values.lg }}
-				sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}
+				// sx={{ pointerEvents: `${user.uuid ? 'auto' : 'none'}`, opacity: `${user.uuid ? 1 : 0.5}` }}
 			>
 				{allSupportedWallets.map((wallet) => {
 					return (

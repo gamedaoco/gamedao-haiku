@@ -23,7 +23,7 @@ export const dao_member_governance = [
 	{ key: '2', text: 'Proposal', value: 2 },
 ]
 
-export const dao_fee_model = [
+export const dao_feeModel = [
 	{ key: '0', text: 'no fees', value: 0 }, // fees are reserved in actor account
 	{ key: '1', text: 'reserve', value: 1 }, // fees are paid to treasury
 	{ key: '2', text: 'transfer', value: 2 }, // fees are staked and may result in item drops

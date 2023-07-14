@@ -1,14 +1,11 @@
-import React, { Fragment } from 'react'
-
+import { LoadingCampaignTable } from './modules/loadingCampaignTable'
 import { Box, Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CampaignContributorsSubscription, Campaign_Contributor } from 'src/queries'
-
 import { TableItem } from 'src/components/CampaignsSection/ContributedCampaignsSection/modules/tableItem'
 import { Scrollbar } from 'src/components/scrollbar'
-
-import { LoadingCampaignTable } from './modules/loadingCampaignTable'
+import { CampaignContributorsSubscription, CampaignContributor } from 'src/queries'
 
 interface ComponentProps {
 	data: CampaignContributorsSubscription
@@ -45,9 +42,9 @@ export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 						<LoadingCampaignTable />
 					) : (
 						<TableBody>
-							{data?.campaign_contributor?.map((campaignContributor) => (
+							{data?.campaignContributor?.map((campaignContributor) => (
 								<Fragment key={campaignContributor?.id}>
-									<TableItem campaignContributor={campaignContributor as Campaign_Contributor} />
+									<TableItem campaignContributor={campaignContributor as CampaignContributor} />
 								</Fragment>
 							))}
 						</TableBody>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import * as Yup from 'yup'
 import { TransactionData } from 'src/@types/transactionData'
-import { useNetworkContext } from 'src/providers/network/modules/context'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useLogger } from 'src/hooks/useLogger'
+import { useNetworkContext } from 'src/providers/network/modules/context'
+import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
 	battlepassId: Yup.string().required(),

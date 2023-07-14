@@ -25,7 +25,7 @@ export async function initializeApis(configs: ApiProviderConfig[]): Promise<ApiP
 	for (const config of configs) {
 		try {
 			const apiProvider = await ApiPromise.create({
-				provider: new WsProvider(config.wsProviderUrl),
+				provider: new WsProvider('wss://rpc.dev.sub.zero.io' || config.wsProviderUrl),
 				types: JSON.parse(config.types),
 				throwOnConnect: true,
 				noInitWarn: true,

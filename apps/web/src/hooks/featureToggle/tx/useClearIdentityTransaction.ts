@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-
-import { useLogger } from 'src/hooks/useLogger'
-import { useNetworkContext } from 'src/providers/network/modules/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from 'src/@types/transactionData'
+import { useLogger } from 'src/hooks/useLogger'
+import { useNetworkContext } from 'src/providers/network/modules/context'
 
 export function useClearIdentityTransaction(): TransactionData {
 	const [txState, setTxState] = useState<TransactionData>(null)

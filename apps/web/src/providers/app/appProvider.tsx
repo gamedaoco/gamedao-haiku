@@ -1,13 +1,9 @@
-import { useEffect, useState, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
+import { useEffect, useState, useCallback } from 'react'
 import { ENVIRONMENT } from 'src/constants'
 import { AppContext } from 'src/providers/app/modules/context'
 import { useExtensionContext } from 'src/providers/extension/modules/context'
-
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
-import { useGetIdentityByDiscordQuery, useConnectIdentityMutation } from 'src/queries'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 
 export type TAppContext = {
 	dapp?: string
@@ -42,12 +38,12 @@ export function AppProvider({ children }) {
 	const [processing, setProcessing] = useState<boolean>(false)
 	const [connected, setConnected] = useState(false)
 
-	const [connectIdentityMutation] = useConnectIdentityMutation({
-		variables: {
-			address: user.address,
-			discord: user.discord,
-		},
-	})
+	// const [connectIdentityMutation] = useConnectIdentityMutation({
+	// 	variables: {
+	// 		address: user.address,
+	// 		discord: user.discord,
+	// 	},
+	// })
 
 	useEffect(() => {
 		if (!session || connected) return
@@ -73,29 +69,29 @@ export function AppProvider({ children }) {
 			console.log('================================================================')
 			console.log('app', 'fetching id', '...')
 
-			const response = await connectIdentityMutation({
-				variables: { discord: user.discord },
-				// , name: user.name, email: user.email, twitter: user.twitter },
-			}).then((res) => {
-				try {
-					const identity = res?.data?.BattlepassBot?.identity
-					console.log('app', 'identity', '->', identity)
-					const updateUser = {
-						...user,
-						uuid: identity.uuid,
-						address: identity.address,
-						discord: identity.discord,
-						twitter: identity.twitter,
-						name: identity.name,
-						email: identity.email,
-						epicGames: identity.epicGames,
-					}
-					console.log('app', 'user ->', updateUser)
-					setUser(updateUser)
-				} catch (e) {
-					console.log(e)
-				}
-			})
+			// const response = await connectIdentityMutation({
+			// 	variables: { discord: user.discord },
+			// 	// , name: user.name, email: user.email, twitter: user.twitter },
+			// }).then((res) => {
+			// 	try {
+			// 		const identity = res?.data?.battlepassBot.identity
+			// 		console.log('app', 'identity', '->', identity)
+			// 		const updateUser = {
+			// 			...user,
+			// 			uuid: identity.uuid,
+			// 			address: identity.address,
+			// 			discord: identity.discord,
+			// 			twitter: identity.twitter,
+			// 			name: identity.name,
+			// 			email: identity.email,
+			// 			epicGames: identity.epicGames,
+			// 		}
+			// 		console.log('app', 'user ->', updateUser)
+			// 		setUser(updateUser)
+			// 	} catch (e) {
+			// 		console.log(e)
+			// 	}
+			// })
 		}
 		connect()
 		setConnected(true)
@@ -120,14 +116,14 @@ export function AppProvider({ children }) {
 		console.log('user', user)
 		const update = async () => {
 			console.log('app', 'writing address...', user.address, 'for', user.uuid)
-			const res = await connectIdentityMutation().then((res) => {
-				try {
-					const _uuid = res?.data?.BattlepassBot?.identity?.address
-					console.log('app', 'linked address', user.address)
-				} catch (e) {
-					console.log(e)
-				}
-			})
+			// const res = await connectIdentityMutation().then((res) => {
+			// 	try {
+			// 		const _uuid = res?.data?.battlepassBot.identity?.address
+			// 		console.log('app', 'linked address', user.address)
+			// 	} catch (e) {
+			// 		console.log(e)
+			// 	}
+			// })
 		}
 		update()
 	}, [user.address])
@@ -231,9 +227,9 @@ export function AppProvider({ children }) {
 		<AppContext.Provider
 			value={{
 				ready: !!configQueryResult.data && !!featureQueryResult.data && !!apiProviderConfigQueryResult.data,
-				config: configQueryResult.data?.config ?? null,
-				features: featureQueryResult.data?.features ?? null,
-				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
+				config: configQueryResult.data?.gamedao.config ?? null,
+				features: featureQueryResult.data?.gamedao.features ?? null,
+				apiProviderConfig: apiProviderConfigQueryResult.data?.gamedao.apiProvider ?? null,
 				uuid: user.uuid,
 				user: user,
 				linkAddress: linkAddress,

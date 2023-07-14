@@ -1,10 +1,10 @@
 subscription ProposalsByOrganizationId($orgId: String!) {
-    proposal(where: { organization_id: {_eq: $orgId}}) {
+    proposal(where: { organizationId: {_eq: $orgId}}) {
         id
         creator
         state
         start
-        created_at_block
+        createdAtBlock
         expiry
         name
         description
@@ -17,20 +17,20 @@ subscription ProposalById($proposalId: String!) {
         type
         type
         state
-        created_at_block
+        createdAtBlock
         start
         expiry
         identity {
             id
-            display_name
+            displayName
         }
         name
         description
         voting {
-            proposal_voters {
+            proposalVoters {
                 identity {
                     id
-                    display_name
+                    displayName
                 }
                 voted
             }

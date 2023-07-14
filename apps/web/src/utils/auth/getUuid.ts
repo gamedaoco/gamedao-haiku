@@ -1,12 +1,11 @@
 import Discord from 'discord.js'
-import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
+import { getServerSession } from 'next-auth/next'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
-
+import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import { useConnectIdentityMutation } from 'src/queries'
-
 import { Logger } from 'src/utils/logger'
+
 const log = Logger('lib/uuid')
 
 const battlepass_url = getConnectedEndpoint().url
@@ -59,7 +58,7 @@ export function getUuid(args: TArgs) {
 		})
 			.then((r) => r.json())
 			.then((res) => {
-				const data = res?.data?.BattlepassBot?.identity?.uuid
+				const data = res?.data?.identity?.uuid
 				// discord.send({ content: `🧬 uuid retrieved ${JSON.stringify(data)}` })
 				log.info('🧬 id retrieved', JSON.stringify(data))
 				return data

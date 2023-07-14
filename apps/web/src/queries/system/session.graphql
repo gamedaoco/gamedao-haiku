@@ -1,3 +1,5 @@
 mutation UpdateSession($address: String!){
-    updateSession(address: $address)
+	updateSession(where: {address: {_eq: $address}} ) {
+		returning { key }
+	}
 }

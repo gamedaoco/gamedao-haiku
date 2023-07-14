@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react'
-
 import { FilterList, Search } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
-import { useDebouncedState } from 'src/hooks/useDebouncedState'
+import React, { useCallback, useEffect, useState } from 'react'
 import { CampaignFiltersInterface } from 'src/@types/campaign'
-import { Campaign_Bool_Exp, DisplayValueEntryString, Organization_Order_By } from 'src/queries'
-
 import { SortOptionsTab } from 'src/components/FiltersSections/sortOptionsTab'
+import { useDebouncedState } from 'src/hooks/useDebouncedState'
+import { CampaignBoolExp, DisplayValueEntryString, OrganizationOrderBy } from 'src/queries'
 
 interface ComponentProps {
-	setFilters: (x: string | Organization_Order_By | any) => void
+	setFilters: (x: string | OrganizationOrderBy | any) => void
 	sortOptions: DisplayValueEntryString[]
 	filters?: CampaignFiltersInterface
 	searchPlaceHolder: string
@@ -17,7 +15,7 @@ interface ComponentProps {
 	showSort?: boolean
 	showFilters?: boolean
 	filtersOptions?: DisplayValueEntryString[]
-	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: Campaign_Bool_Exp[] } | any>
+	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: CampaignBoolExp[] } | any>
 	defaultOption?: string
 }
 

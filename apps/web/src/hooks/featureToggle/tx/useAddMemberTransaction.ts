@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-
+import { useTranslation } from 'react-i18next'
+import { TransactionData } from 'src/@types/transactionData'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useLogger } from 'src/hooks/useLogger'
 import { useNetworkContext } from 'src/providers/network/modules/context'
-import { useTranslation } from 'react-i18next'
-import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 
 const validation = Yup.object().shape({
@@ -12,12 +11,12 @@ const validation = Yup.object().shape({
 	accountId: Yup.string().required(),
 })
 
-export function useRemoveMemberTransaction(organizationId: string): TransactionData {
+export function useAddMemberTransaction(organizationId: string): TransactionData {
 	const [txState, setTxState] = useState<TransactionData>(null)
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
-	const logger = useLogger('useRemoveMemberTransaction')
+	const logger = useLogger('useAddMemberTransaction')
 
 	useEffect(() => {
 		if (selectedApiProvider?.apiProvider && address && organizationId) {
@@ -31,18 +30,20 @@ export function useRemoveMemberTransaction(organizationId: string): TransactionD
 				// Data validation
 				validation.validateSync(mappedData)
 
-				const tx = selectedApiProvider.apiProvider.tx.control.removeMember(
+				const tx = selectedApiProvider.apiProvider.tx.control.addMember(
 					mappedData.organizationId,
 					mappedData.accountId,
 				)
 
 				setTxState({
 					tx,
-					title: t('transactions:removeMember:title'),
+					title: t('transactions:addMember:title'),
+					description: t('transactions:addMember:description'),
+					actionSubTitle: t('transactions:addMember:action_subtitle'),
 					txMsg: {
-						pending: t('notification:transactions:removeMember:pending'),
-						success: t('notification:transactions:removeMember:success'),
-						error: t('notification:transactions:removeMember:error'),
+						pending: t('notification:transactions:addMember:pending'),
+						success: t('notification:transactions:addMember:success'),
+						error: t('notification:transactions:addMember:error'),
 					},
 				})
 			} catch (e) {
