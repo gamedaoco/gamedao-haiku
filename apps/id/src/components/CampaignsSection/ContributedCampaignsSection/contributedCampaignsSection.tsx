@@ -5,7 +5,7 @@ import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TableItem } from 'src/components/CampaignsSection/ContributedCampaignsSection/modules/tableItem'
 import { Scrollbar } from 'src/components/scrollbar'
-import { CampaignContributorsSubscription, Campaign_Contributor } from 'src/queries'
+import { CampaignContributorsSubscription, CampaignContributor } from 'src/queries'
 
 interface ComponentProps {
 	data: CampaignContributorsSubscription
@@ -42,9 +42,9 @@ export function ContributedCampaignsSection({ data, loading }: ComponentProps) {
 						<LoadingCampaignTable />
 					) : (
 						<TableBody>
-							{data?.campaign_contributor?.map((campaignContributor) => (
+							{data?.campaignContributor?.map((campaignContributor) => (
 								<Fragment key={campaignContributor?.id}>
-									<TableItem campaignContributor={campaignContributor as Campaign_Contributor} />
+									<TableItem campaignContributor={campaignContributor as CampaignContributor} />
 								</Fragment>
 							))}
 						</TableBody>

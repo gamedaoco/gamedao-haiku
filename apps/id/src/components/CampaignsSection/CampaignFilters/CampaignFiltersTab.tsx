@@ -12,12 +12,12 @@ import {
 } from '@mui/material'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Campaign_Bool_Exp, DisplayValueEntryString } from 'src/queries'
+import { CampaignBoolExp, DisplayValueEntryString } from 'src/queries'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
 	setFilters: (p: (prev) => any) => void
-	filters: Campaign_Bool_Exp[]
+	filters: CampaignBoolExp[]
 	filtersOptions: DisplayValueEntryString[]
 }
 

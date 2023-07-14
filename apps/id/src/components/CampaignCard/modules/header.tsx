@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react'
 import { CampaignStatus } from 'src/@types/campaignStatus'
 import { StatusChip } from 'src/components/CampaignCard/modules/statusChip'
 import { Image } from 'src/components/Image/image'
-import { ConfirmDeleteCampaignDraft } from 'src/components/Modals/confirmDeleteCampaignDraft'
+// import { ConfirmDeleteCampaignDraft } from 'src/components/Modals/confirmDeleteCampaignDraft'
 import { SvgIconStyle } from 'src/components/SvgIconStyle/svgIconStyle'
 
 interface ComponentProps {
@@ -82,7 +82,7 @@ export function Header({ organizationImage, headerImage, status, id, orgId }: Co
 				/>
 				<Image src={headerImage} alt="Card cover" ratio="16/9" />
 			</Box>
-			<ConfirmDeleteCampaignDraft orgId={orgId} id={id} onClose={() => setModalState(false)} open={modalState} />
+			{/* <ConfirmDeleteCampaignDraft orgId={orgId} id={id} onClose={() => setModalState(false)} open={modalState} /> */}
 		</>
 	)
 }
