@@ -74,7 +74,7 @@ export const OrganizationList = ({ organizations }: IProps) => {
 						<TableCell>{'Name' || t('page:account:organizations:name')}</TableCell>
 						<TableCell>{'Members' || t('page:account:organizations:members')}</TableCell>
 						<TableCell>{'Collateral' || t('page:account:organizations:value_locked')}</TableCell>
-						<TableCell>{'Access' || t('page:account:organizations:accessModel')}</TableCell>
+						<TableCell>{'Access' || t('page:account:organizations:access_model')}</TableCell>
 						<TableCell>{'Role' || t('page:account:organizations:role')}</TableCell>
 						<TableCell align="right">Actions</TableCell>
 					</TableRow>
