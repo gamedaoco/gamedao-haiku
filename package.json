@@ -43,7 +43,6 @@
     "@commitlint/config-conventional": "^17.4.4",
     "@commitlint/cz-commitlint": "^17.4.4",
     "@picgo/bump-version": "^1.0.3",
-    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@typescript-eslint/utils": "^5.55.0",
     "commitizen": "^4.3.0",
     "conventional-changelog": "^3.1.24",
