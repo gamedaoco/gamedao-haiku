@@ -1,25 +1,22 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react'
-
 import { ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import { Loader } from 'components/Loader'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CampaignFiltersInterface } from 'src/@types/campaign'
+import { CampaignsList } from 'src/components/CampaignsList/campaignsList'
+import { CampaignFiltersTab } from 'src/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
+import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
 import {
 	Campaign,
-	Campaign_Bool_Exp,
-	Campaign_Order_By,
+	CampaignBoolExp,
+	CampaignOrderBy,
 	DisplayValueEntryString,
 	useCampaignsPaginationCountSubscription,
 	useCampaignsPaginationSubscription,
 	useDisplayValuesQuery,
 } from 'src/queries'
-
-import { CampaignsList } from 'src/components/CampaignsList/campaignsList'
-import { CampaignFiltersTab } from 'src/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
-import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
-
-import { Loader } from 'components/Loader'
 
 export function CampaignDApp() {
 	const { t } = useTranslation()
@@ -34,7 +31,7 @@ export function CampaignDApp() {
 
 	// const filtersOptions = useMemo<DisplayValueEntryString[]>(
 	// 	() =>
-	// 		displayValuesData?.displayValues?.campaignFilters?.map((x) => ({
+	// 		displayValuesData?.gamedao?.displayValues?.campaignFilters?.map((x) => ({
 	// 			...x,
 	// 			value: eval(`(${x?.value ?? 'null'})`),
 	// 		})),
@@ -51,11 +48,11 @@ export function CampaignDApp() {
 	// // 	}
 	// // }, [filtersOptions, setFilters])
 
-	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
+	const queryFilters = useMemo<CampaignBoolExp[]>(
 		() => [
 			{
 				_and: [
-					filters.filters.length ? { _or: [...filters.filters] as Campaign_Bool_Exp[] } : {},
+					filters.filters.length ? { _or: [...filters.filters] as CampaignBoolExp[] } : {},
 					{
 						_or: [
 							{
@@ -91,7 +88,7 @@ export function CampaignDApp() {
 		variables: {
 			limit,
 			filters: queryFilters,
-			order_by: filters.sortOption as Campaign_Order_By,
+			orderBy: filters.sortOption as CampaignOrderBy,
 		},
 	})
 	const campaignsCount = useCampaignsPaginationCountSubscription({
@@ -100,19 +97,19 @@ export function CampaignDApp() {
 	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
 
 	const buttonVisibility = useMemo(
-		() => paginatedData?.length < campaignsCount?.data?.campaign_aggregate?.aggregate?.count,
+		() => paginatedData?.length < campaignsCount?.data?.campaignAggregate?.aggregate?.count,
 		[paginatedData?.length, campaignsCount?.data],
 	)
 
 	if (loading) return <Loader />
 
-	if (campaignsCount?.data?.campaign_aggregate?.aggregate.count === 0)
+	if (campaignsCount?.data?.campaignAggregate?.aggregate.count === 0)
 		return <Fragment>No Campaigns yet — why not create one!</Fragment>
 
 	// <FiltersSection
 	// 	setFilters={setFilters}
 	// 	filters={filters}
-	// 	sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
+	// 	sortOptions={displayValuesData?.gamedao?.displayValues?.campaignSortOptions?.concat([])}
 	// 	searchPlaceHolder={t('label:search_campaigns')}
 	// 	ListTab={CampaignFiltersTab}
 	// 	filtersOptions={filtersOptions}
@@ -157,7 +154,7 @@ export function CampaignDApp() {
 						<Typography>
 							{t('page:campaigns:showing_results', {
 								count1: paginatedData?.length,
-								count2: campaignsCount?.data?.campaign_aggregate?.aggregate.count,
+								count2: campaignsCount?.data?.campaignAggregate?.aggregate.count,
 							})}
 						</Typography>
 					</Box>

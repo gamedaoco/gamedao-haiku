@@ -1,11 +1,11 @@
+import { Card, CardContent, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { toUnit } from 'src/utils/token'
-import { useHistoricalBalanceSubscription } from 'src/queries'
-import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { useTheme } from '@mui/material/styles'
-import { Card, CardContent, Typography } from '@mui/material'
 import { StackedAreaChart } from 'src/components/Charts/StackedAreaChart'
+import { useSystemProperties } from 'src/hooks/useSystemProperties'
+import { useHistoricalBalanceSubscription } from 'src/queries'
+import { toUnit } from 'src/utils/token'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 
@@ -36,10 +36,10 @@ export function TreasuryChart({ address, symbol = 'ZERO' }: IBalancesChart) {
 		if (!data || !address) return
 
 		const _symbol = symbol
-		// const _total = data.historical_balance.map((balance) => toUnit(balance.total, tokenDecimals))
-		const _free = data.historical_balance.map((balance) => toUnit(balance.free, tokenDecimals))
-		const _reserved = data.historical_balance.map((balance) => toUnit(balance.reserved, tokenDecimals))
-		const _categories = data.historical_balance.map((balance) => balance.block)
+		// const _total = data.historicalBalance.map((balance) => toUnit(balance.total, tokenDecimals))
+		const _free = data.historicalBalance.map((balance) => toUnit(balance.free, tokenDecimals))
+		const _reserved = data.historicalBalance.map((balance) => toUnit(balance.reserved, tokenDecimals))
+		const _categories = data.historicalBalance.map((balance) => balance.block)
 
 		// console.log('data', _symbol, _categories)
 

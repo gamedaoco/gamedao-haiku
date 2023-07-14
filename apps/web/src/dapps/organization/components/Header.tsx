@@ -1,18 +1,3 @@
-import React, { lazy, useCallback, useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-
-import { useTranslation } from 'react-i18next'
-import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
-
-import { useConfig } from 'src/hooks/useConfig'
-import { useAddMemberTransaction } from 'src/hooks/tx/useAddMemberTransaction'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
-import { Organization, useOrganizationByIdSubscription } from 'src/queries'
-
-import { useTheme } from '@mui/material/styles'
 import { AddAPhoto } from '@mui/icons-material'
 import {
 	Avatar,
@@ -27,9 +12,20 @@ import {
 	Typography,
 	useMediaQuery,
 } from '@mui/material'
-
+import { useTheme } from '@mui/material/styles'
 import { Image } from 'components/Image/image'
 import { Loader } from 'components/Loader'
+import { useAddMemberTransaction } from 'hooks/featureToggle/tx/useAddMemberTransaction'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import React, { lazy, useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useConfig } from 'src/hooks/useConfig'
+import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
+import { Organization, useOrganizationByIdSubscription } from 'src/queries'
+import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
+import { createWarningNotification } from 'src/utils/notificationUtils'
 
 export function Header() {
 	const { query, push } = useRouter()
@@ -161,7 +157,7 @@ export function Header() {
 
 	useEffect(() => {
 		if (!address || !organizationState) return
-		setIsMemberState(organizationState?.organization_members?.some((member) => member.address === address))
+		setIsMemberState(organizationState?.organizationMembers?.some((member) => member.address === address))
 		setIsPrime(organizationState?.prime === address)
 		setTreasury(organizationState?.treasury)
 	}, [organizationState, address])
@@ -248,7 +244,7 @@ export function Header() {
 							}}
 						>
 							{t('label:n_members', {
-								n: organizationState?.organization_members?.length ?? 1,
+								n: organizationState?.organizationMembers?.length ?? 1,
 							})}
 						</Typography>
 					</Stack>
