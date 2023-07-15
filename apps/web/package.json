@@ -8,9 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "generate": "npx graphql-codegen --config codegen.js",
-    "storybook": "start-storybook -p 3333",
-    "build:storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=015a4a235bee"
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
