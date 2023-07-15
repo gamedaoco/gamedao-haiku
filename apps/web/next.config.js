@@ -17,7 +17,7 @@ sitemap({
 	},
 })
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' })
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' })
 
 const withMDX = require('@next/mdx')({
 	extension: /\.mdx?$/,
@@ -29,8 +29,7 @@ const withMDX = require('@next/mdx')({
 	},
 })
 
-module.exports =
-	// withBundleAnalyzer(
+module.exports = // withBundleAnalyzer(
 	withMDX({
 		pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 		reactStrictMode: true,
@@ -54,5 +53,5 @@ module.exports =
 			// 	{ protocol: 'https', hostname: 'gateway.ipfs.io', port: '', pathname: '/ipfs/**', },
 			// ],
 		},
-	}),
-	// )
+	})
+// )
