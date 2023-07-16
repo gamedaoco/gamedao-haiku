@@ -20,7 +20,7 @@
     "format:staged": "pretty-quick --staged --pattern '{apps,packages}/**/*.{ts,tsx}'",
     "lint": "yarn lint:app",
     "lint:app": "yarn eslint 'apps/**/src'",
-    "build:init": "wsrun -s -c install && echo 'install complete.\n\nstarting build...'",
+    "build:init": "wsrun -s -c install",
     "build:codegen": "yarn workspace @gamedao/web generate",
     "build:id": "yarn build:init && yarn workspace @gamedao/id build",
     "build:web": "yarn build:init && yarn workspace @gamedao/web build",
