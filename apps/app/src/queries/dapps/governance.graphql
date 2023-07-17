@@ -1,0 +1,39 @@
+subscription ProposalsByOrganizationId($orgId: String!) {
+    proposal(where: { organizationId: {_eq: $orgId}}) {
+        id
+        creator
+        state
+        start
+        createdAtBlock
+        expiry
+        name
+        description
+    }
+}
+
+subscription ProposalById($proposalId: String!) {
+    proposal(where: { id: {_eq: $proposalId}}) {
+        id
+        type
+        type
+        state
+        createdAtBlock
+        start
+        expiry
+        identity {
+            id
+            displayName
+        }
+        name
+        description
+        voting {
+            proposalVoters {
+                identity {
+                    id
+                    displayName
+                }
+                voted
+            }
+        }
+    }
+}

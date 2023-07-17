@@ -1,0 +1,14 @@
+subscription IdentityByAddress($address: String!) {
+    identityByPk(id: $address) {
+        id
+        email
+        displayName
+        image
+        legalName
+        riot
+        twitter
+        web
+        web3name
+        discord
+    }
+}

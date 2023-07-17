@@ -1,0 +1,162 @@
+subscription SuccessfulCampaignByOrganizationId($orgId: String!) {
+    campaign(where: {organizationId: {_eq: $orgId}, state: {_eq: "Success"}}) {
+        id
+        name
+    }
+}
+subscription CampaignContributors($address: String!) {
+    campaignContributor(where: {identity: {address: {_eq: $address}}}) {
+        id
+        contributed
+        campaign {
+            name
+            title
+            header
+            campaignContributorsAggregate {
+                aggregate {
+                    sum {
+                        contributed
+                    }
+                    count
+                }
+            }
+            organization {
+                name
+            }
+            expiry
+            createdAtBlock
+            tokenSymbol
+            state
+            target
+        }
+    }
+}
+
+
+subscription Campaign($address: String) {
+    campaign(where: {adminIdentityId: {_eq: $address}}) {
+        id
+        target
+        state
+        expiry
+        tokenSymbol
+        title
+        name
+        header
+        logo
+        campaignContributorsAggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count(distinct: true)
+            }
+        }
+        organization {
+            id
+            name
+            logo
+            payCurrency
+        }
+    }
+}
+
+subscription CampaignByOrganizationId($orgId: String!) {
+    campaign(where: {organizationId: {_eq: $orgId}}, orderBy: { expiry: ASC}) {
+        id
+        target
+        state
+        expiry
+        tokenSymbol
+        title
+        name
+        header
+        logo
+        campaignContributorsAggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count(distinct: true)
+            }
+        }
+        organization {
+            id
+            name
+            logo
+            payCurrency
+        }
+    }
+}
+
+
+subscription CampaignById($campaignId: String!, $address: String = "") {
+    campaign(where: {id: {_eq: $campaignId}}) {
+        id
+        expiry
+        target
+        deposit
+        state
+        protocol
+        tokenSymbol
+        description
+        header
+        name
+        markdown
+        campaignContributorsAggregate {
+            aggregate {
+                count(distinct: true)
+                sum {
+                    contributed
+                }
+            }
+        }
+        userContributedCount: campaignContributorsAggregate( where: {address: {_eq: $address}}) {
+            aggregate {
+                count
+            }
+        }
+        organization {
+            id
+            creator
+        }
+    }
+}
+
+
+
+subscription CampaignsPagination($limit: Int, $filters: [CampaignBoolExp!], $orderBy: [CampaignOrderBy!]) {
+    campaign(limit: $limit, where: {_or: $filters}, orderBy: $orderBy) {
+        id
+        target
+        state
+        expiry
+        tokenSymbol
+        title
+        name
+        header
+        logo
+        campaignContributorsAggregate {
+            aggregate {
+                sum {
+                    contributed
+                }
+                count(distinct: true)
+            }
+        }
+        organization {
+            id
+            name
+            logo
+            payCurrency
+        }
+    }
+}
+
+subscription CampaignsPaginationCount($filters: [CampaignBoolExp!]) {
+    campaignAggregate (where: {_or: $filters}) {
+        aggregate {
+            count
+        }
+    }
+}

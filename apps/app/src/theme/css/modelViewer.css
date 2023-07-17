@@ -1,0 +1,13 @@
+@media only screen and (min-device-width: 360px){
+    model-viewer{
+        width: 20rem;
+        height: 15rem;
+    }
+}
+
+@media only screen and (min-device-width: 480px){
+    model-viewer{
+        width: 52rem;
+        height: 36rem;
+    }
+}
