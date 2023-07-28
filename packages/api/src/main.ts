@@ -20,7 +20,6 @@ const balanceManager = BalanceManager.Instance
 const typeDefs = gql(fs.readFileSync(process.cwd() + '/src/schema.graphql').toString())
 
 async function startServer() {
-	// Initialize the chain client
 	await chainClient.Initialize()
 	await dbClient.Initialize()
 	await sessionManager.Initialize()

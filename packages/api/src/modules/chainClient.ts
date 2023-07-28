@@ -20,7 +20,7 @@ export class ChainClient {
 	}
 
 	public get url(): string {
-		return process.env.CHAIN_RPC_URL as string
+		return process.env.CHAIN_RPC_URL || ('wss://rpc.dev.sub.zero.io' as string)
 	}
 
 	public get api(): ApiPromise {
