@@ -36,6 +36,7 @@
     "lint:app": "yarn eslint 'apps/**/src'",
 
     "release": "yarn build && yarn changeset publish",
+    "release:stage": "git checkout dev && git pull && git checkout stage && git pull && git merge dev && git push",
     "commit": "git-cz"
   },
   "publishConfig": {
