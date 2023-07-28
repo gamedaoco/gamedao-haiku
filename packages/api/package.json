@@ -38,7 +38,7 @@
     "graphql-upload": "13.0.0",
     "graphql-ws": "^5.9.1",
     "i": "^0.3.7",
-    "ipfs-http-client": "^57.0.1",
+    "ipfs-http-client": "^60.0.1",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.0",
     "prisma": "^5.0.0",
