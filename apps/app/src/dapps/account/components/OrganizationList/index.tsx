@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Organization } from 'src/queries'
 import { useConfig } from 'src/hooks/useConfig'
-import { useRemoveMemberTransaction } from 'hooks/featureToggle/tx/useRemoveMemberTransaction'
+import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 import { getInitials } from 'src/utils/accountUtils'

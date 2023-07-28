@@ -6,7 +6,7 @@ import { TransactionData } from 'src/@types/transactionData'
 import { Organization } from 'src/queries'
 import { getCampaignStatusPercentage } from 'src/utils/campaignUtils'
 import { getProposalTypesCount } from 'src/utils/proposalUtils'
-import { useRemoveMemberTransaction } from 'hooks/featureToggle/tx/useRemoveMemberTransaction'
+import { useRemoveMemberTransaction } from 'hooks/tx/useRemoveMemberTransaction'
 
 import { useTheme } from '@mui/material/styles'
 import { ChevronRight, Verified } from '@mui/icons-material'

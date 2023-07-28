@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
-import { useAddMemberTransaction } from 'hooks/featureToggle/tx/useAddMemberTransaction'
+import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'

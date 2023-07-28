@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import { useConfig } from 'src/hooks/useConfig'
-import { useCreateCampaignTransaction } from 'hooks/featureToggle/tx/useCreateCampaignTransaction'
+import { useCreateCampaignTransaction } from 'hooks/tx/useCreateCampaignTransaction'
 import { useSaveCampaignDraft } from 'src/hooks/useSaveCampaignDraft'
 import { useTmpCampaign } from 'src/hooks/useTmpCampaign'
 import { useTmpCampaignState } from 'src/hooks/useTmpCampaignState'

@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { Box, Button, Card, CardContent, Divider, LinearProgress, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useContributeTransaction } from 'hooks/featureToggle/tx/useContributeTransaction'
+import { useContributeTransaction } from 'hooks/tx/useContributeTransaction'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { useConfig } from 'src/hooks/useConfig'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'

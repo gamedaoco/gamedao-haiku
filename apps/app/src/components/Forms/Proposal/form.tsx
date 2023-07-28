@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { Button, Stack } from '@mui/material'
 import { ISubmittableResult } from '@polkadot/types/types'
-import { useCreateProposalTransaction } from 'hooks/featureToggle/tx/useCreateProposalTransaction'
+import { useCreateProposalTransaction } from 'hooks/tx/useCreateProposalTransaction'
 import { useConfig } from 'src/hooks/useConfig'
 import { useTMPProposalState } from 'src/hooks/useTMPProposalState'
 import { useTranslation } from 'react-i18next'

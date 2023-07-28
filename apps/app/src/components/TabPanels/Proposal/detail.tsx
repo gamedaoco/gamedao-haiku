@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import moment from 'moment'
 
 import { useTranslation } from 'react-i18next'
-import { useVoteTransaction } from 'hooks/featureToggle/tx/useVoteTransaction'
+import { useVoteTransaction } from 'hooks/tx/useVoteTransaction'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { useDisplayValues } from 'src/hooks/useDisplayValues'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'

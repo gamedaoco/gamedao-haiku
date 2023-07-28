@@ -7,7 +7,7 @@ import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { createWarningNotification } from 'src/utils/notificationUtils'
 
 import { useConfig } from 'src/hooks/useConfig'
-import { useAddMemberTransaction } from 'hooks/featureToggle/tx/useAddMemberTransaction'
+import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'

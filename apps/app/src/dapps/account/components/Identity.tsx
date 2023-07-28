@@ -5,8 +5,8 @@ import type { Identity } from 'src/queries'
 import { useIdentityByAddressSubscription } from 'src/queries'
 
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useClearIdentityTransaction } from 'hooks/featureToggle/tx/useClearIdentityTransaction'
-import { useIdentitySetTransaction, validation } from 'hooks/featureToggle/tx/useIdentitySetTransaction'
+import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
+import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
 
 // import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
 // import { useIdentityByAddressSubscription } from 'hooks/useIdentityByAddress'

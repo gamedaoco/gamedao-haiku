@@ -5,13 +5,13 @@ import { Environment } from 'src/queries'
 const env = process.env.NEXT_PUBLIC_ENVIRONMENT
 
 const developmentEndpoints: Endpoints = [
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'Local Testnet',
-		url: 'http://localhost:9999/v1/graphql',
-		healthCheck: 'http://localhost:9999/healthz',
-		chain: 'wss://localhost:9944',
-	},
+	// {
+	// 	image: '/svg/z-ctrl-45-wht.svg',
+	// 	name: 'Local Testnet',
+	// 	url: 'http://localhost:9999/v1/graphql',
+	// 	healthCheck: 'http://localhost:9999/healthz',
+	// 	chain: 'wss://localhost:9944',
+	// },
 	// {
 	// 	image: '/svg/z-ctrl-45-wht.svg',
 	// 	name: 'Rococo Parachain Testnet',
@@ -24,7 +24,7 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'development ( breaks often )',
+		name: 'development',
 		url: 'https://graph.dev.sub.zero.io/v1/graphql',
 		healthCheck: 'https://graph.dev.sub.zero.io/health',
 		chain: 'wss://rpc.dev.sub.zero.io',

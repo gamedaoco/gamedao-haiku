@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { useConfig } from 'src/hooks/useConfig'
-import { useUpdateOrgTransaction } from 'hooks/featureToggle/tx/useUpdateOrgTransaction'
+import { useUpdateOrgTransaction } from 'hooks/tx/useUpdateOrgTransaction'
 import * as Yup from 'yup'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { DisplayValueEntryNumber, useDisplayValuesQuery, useOrganizationByIdSubscription } from 'src/queries'
