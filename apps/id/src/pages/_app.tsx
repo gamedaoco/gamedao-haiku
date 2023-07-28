@@ -79,7 +79,7 @@ export function MyApp({
 		// if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
 		Fathom.load('XLUUAYWU', {
 			url: 'https://cdn.usefathom.com/script.js',
-			includedDomains: ['gamedao.co'],
+			includedDomains: ['id.gamedao.co'],
 		})
 		function onRouteChangeComplete() {
 			Fathom.trackPageview()
