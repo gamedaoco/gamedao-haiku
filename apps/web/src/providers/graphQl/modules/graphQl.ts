@@ -57,7 +57,7 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 	const httpLink = new HttpLink({
 		uri: endpoint?.url,
 		headers: {
-			'x-hasura-admin-secret': 'password12345',
+			'x-hasura-admin-secret': `${process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET}`,
 			// Authorization: `Bearer ${process.env.HASURA_BEARER_TOKEN}`
 		},
 	})
