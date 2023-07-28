@@ -16,6 +16,7 @@
     "dev:web": "wsrun -p @gamedao/web -c dev",
     "dev:app": "wsrun -p @gamedao/app -c dev",
     "dev:id": "wsrun -p @gamedao/id -c dev",
+    "dev:battlepass": "wsrun -p @gamedao/battlepass -c dev",
 
     "build": "wsrun -e -c -s -x -m build",
     "build:init": "wsrun -s -c install",
