@@ -170,16 +170,16 @@ export const hero = [
 				url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca',
 				icon: 'Book',
 			},
-			{
-				text: 'ONE PAGER',
-				url: 'https://docsend.com/view/gesqag6cbemye63f',
-				icon: 'Book',
-			},
 			// {
-			// 	text: 'JOIN WAITLIST',
-			// 	url: 'https://discord.gg/kr8Q9Jam2N',
-			// 	icon: 'Discord',
+			// 	text: 'ONE PAGER',
+			// 	url: 'https://docsend.com/view/gesqag6cbemye63f',
+			// 	icon: 'Book',
 			// },
+			{
+				text: 'JOIN WAITLIST',
+				url: 'https://discord.gg/kr8Q9Jam2N',
+				icon: 'Discord',
+			},
 		],
 		bg: '#111',
 		img: '/v3/svg/gamedao-color-h-wht-m.svg',
@@ -212,7 +212,7 @@ export const hero2 = [
 				icon: 'Joystick',
 			},
 		],
-		bg: '#069',
+		bg: '#006699',
 	},
 
 	{
@@ -226,7 +226,7 @@ export const hero2 = [
 				icon: 'Joystick',
 			},
 		],
-		bg: '#609',
+		bg: '#660099',
 	},
 	// {
 	// 	title: `WAVE Esports`,
