@@ -33,9 +33,9 @@ const productionEndpoints: Endpoints = [
 	// {
 	// 	image: '/svg/z-ctrl-45-wht.svg',
 	// 	name: 'development ( breaks often )',
-	// 	url: 'https://graph.dev.sub.zero.io/v1/graphql',
-	// 	healthCheck: 'https://graph.dev.sub.zero.io/health',
-	// 	chain: 'wss://rpc.dev.sub.zero.io',
+	// 	url: 'https://graph.dev.gamedao.net/v1/graphql',
+	// 	healthCheck: 'https://graph.dev.gamedao.net/health',
+	// 	chain: 'wss://rpc.dev.gamedao.net',
 	// 	default: true, // ENVIRONMENT === Environment.Development ? true : false,
 	// },
 	// {
@@ -46,14 +46,14 @@ const productionEndpoints: Endpoints = [
 	// 	chain: 'wss://rpc.stage.sub.zero.io',
 	// 	default: ENVIRONMENT === Environment.Staging ? true : false,
 	// },
-	{
-		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'Live',
-		url: 'https://graph.prod.gamedao.net/v1/graphql',
-		healthCheck: 'https://graph.prod.gamedao.net/health',
-		chain: 'wss://node.prod.gamedao.net',
-		default: ENVIRONMENT === Environment.Production ? true : false,
-	},
+	// {
+	// 	image: '/svg/z-ctrl-45-wht.svg',
+	// 	name: 'Live',
+	// 	url: 'https://graph.prod.gamedao.net/v1/graphql',
+	// 	healthCheck: 'https://graph.prod.gamedao.net/health',
+	// 	chain: 'wss://node.prod.gamedao.net',
+	// 	default: ENVIRONMENT === Environment.Production ? true : false,
+	// },
 ]
 
 export const ENDPOINTS: Endpoints =

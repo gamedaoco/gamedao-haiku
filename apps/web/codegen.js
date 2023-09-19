@@ -5,7 +5,7 @@ module.exports = {
 		'src/queries/index.ts': {
 			schema: [
 				{
-					'https://graph.dev.sub.zero.io/v1/graphql': {
+					'https://graph.dev.gamedao.net/v1/graphql': {
 						headers: {
 						// "x-hasura-role": "public",
 						// "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET
@@ -26,7 +26,7 @@ module.exports = {
 		'../../packages/sdk/src/queries/index.ts': {
 			schema: [
 				{
-					'https://graph.dev.sub.zero.io/v1/graphql': {
+					'https://graph.dev.gamedao.net/v1/graphql': {
 						headers: {
 						"x-hasura-admin-secret": "password12345"
 						},

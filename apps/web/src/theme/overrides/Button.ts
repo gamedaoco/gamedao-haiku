@@ -12,6 +12,7 @@ declare module '@mui/material/Button' {
 		glass: true
 		nano: true
 		xs: true
+		sm: true
 		md: true
 	}
 	interface ButtonPropsColorOverrides {
@@ -41,6 +42,27 @@ export default function Button(theme: Theme) {
 							color: '#f3cb14',
 							background: 'black',
 							border: `1px solid #f3cb14`,
+						},
+					},
+				},
+				{
+					props: { variant: 'sm', color: 'lemon' },
+					style: {
+						// height: '15px',
+						background: '#f3cb14',
+						color: 'black',
+						fontSize: '10px',
+						// boxShadow: theme.customShadows.primary,
+						// border: `1px solid transparent`,
+						borderRadius: theme.shape.borderRadiusSm,
+						p: 0,
+						m: 0,
+						opacity: 1,
+						'&:hover': {
+							opacity: 0.8,
+							background: '#f3cb14',
+							color: 'black',
+							// border: `1px solid #000000`,
 						},
 					},
 				},
