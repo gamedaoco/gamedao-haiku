@@ -227,9 +227,9 @@ export function AppProvider({ children }) {
 		<AppContext.Provider
 			value={{
 				ready: !!configQueryResult.data && !!featureQueryResult.data && !!apiProviderConfigQueryResult.data,
-				config: configQueryResult.data?.gamedao.config ?? null,
-				features: featureQueryResult.data?.gamedao.features ?? null,
-				apiProviderConfig: apiProviderConfigQueryResult.data?.gamedao.apiProvider ?? null,
+				config: configQueryResult.data?.config ?? null,
+				features: featureQueryResult.data?.features ?? null,
+				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
 				uuid: user.uuid,
 				user: user,
 				linkAddress: linkAddress,
