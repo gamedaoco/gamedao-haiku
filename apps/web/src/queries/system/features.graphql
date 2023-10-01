@@ -1,5 +1,5 @@
 query Features($env: Environment!) {
-	gamedao {
+	# gamedao {
 		features(env: $env) {
 			CREATE_PROPOSAL
 			CREATE_PROPOSAL_SIMPLE_MAJORITY
@@ -11,5 +11,5 @@ query Features($env: Environment!) {
 			ORGANIZATION_PAGE_SHOW_SEARCH
 			ORGANIZATION_PAGE_SHOW_SORT
 		}
-	}
+	# }
 }
