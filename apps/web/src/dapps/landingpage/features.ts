@@ -6,8 +6,8 @@ export const features = {
 	transform: true,
 	how: true,
 
-	partners: false,
-	supporters: false,
+	partners: true,
+	supporters: true,
 	team: false,
 
 	wallet: false,

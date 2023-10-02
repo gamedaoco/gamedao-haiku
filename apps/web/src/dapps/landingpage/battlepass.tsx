@@ -38,8 +38,8 @@ export function Landingpage() {
 
 	return (
 		<Box>
-			{hero && <Hero size="lg" content={heroContent} />}
-			{hero && <Hero size="sm" content={hero2Content} />}
+			{hero && <Hero size="3/4" content={heroContent} />}
+			{hero && <Hero size="1/4" content={hero2Content} />}
 
 			<Newsletter />
 

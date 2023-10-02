@@ -54,19 +54,20 @@ export function useSaveCampaignDraft(orgId: string): CampaignDraft {
 			const currencySymbol = systemProperties?.tokenSymbol?.[tmpData.currencyId] ?? ''
 			const endSecondsDiff = moment(tmpData.endDate).diff(moment(), 'seconds')
 			const endBlock = currentBlockNumber + Math.ceil(endSecondsDiff / systemProperties?.blockTargetTime)
-			return {
-				id: draftId,
-				tokenSymbol: currencySymbol,
-				organization: data?.organization?.[0] ?? {},
-				state: 'Draft',
-				// TODO: metadata has moved?
-				// campaign_metadata: {
-				// 	name: tmpData?.name,
-				// 	header: tmpData?.bannerCid,
-				// },
-				target: fromUnit(tmpData.target, systemProperties?.tokenDecimals?.[tmpData.currencyId] ?? 18),
-				expiry: endBlock,
-			} as Campaign
+			// return {
+			// 	id: draftId,
+			// 	tokenSymbol: currencySymbol,
+			// 	organization: data?.organization?.[0] ?? {},
+			// 	state: 'Draft',
+			// 	// TODO: metadata has moved?
+			// 	// campaign_metadata: {
+			// 	// 	name: tmpData?.name,
+			// 	// 	header: tmpData?.bannerCid,
+			// 	// },
+			// 	target: fromUnit(tmpData.target, systemProperties?.tokenDecimals?.[tmpData.currencyId] ?? 18),
+			// 	expiry: endBlock,
+			// } // as Campaign
+			return null
 		},
 		[draftState, systemProperties, data],
 	)

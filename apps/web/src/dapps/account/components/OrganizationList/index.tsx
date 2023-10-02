@@ -107,10 +107,10 @@ export const OrganizationList = ({ organizations }: IProps) => {
 									</Box>
 								</TableCell>
 								<TableCell>
-									{reformatNumber(organization.organizationMembersAggregate?.aggregate?.count, 2)}{' '}
+									{reformatNumber(organization.organization_members_aggregate?.aggregate?.count, 2)}{' '}
 								</TableCell>
 								<TableCell>{reformatNumber(organization.deposit, 2)}</TableCell>
-								<TableCell>{organization.accessModel}</TableCell>
+								<TableCell>{organization.access_model}</TableCell>
 								<TableCell> {`${isAdmin(organization.prime) ? 'prime' : 'member'}`} </TableCell>
 
 								<TableCell align="right">

@@ -262,9 +262,9 @@ export const intro = [
 	{
 		header: `For Gamers + Creators`,
 		text: `GameDAO enables the gaming community to
-	collaboratively coordinate, own and fund high quality games.
+	collaborate, fund and own high quality games.
 	We achieve this through community discovery and curation
-	driven by a quality audience and best in class UX, transparency.
+	driven by a quality audience, transparency and accountability.
 	`,
 	},
 	{
@@ -272,18 +272,31 @@ export const intro = [
 		text: `Community curated by design: Get promoted or invited by the
 	community to become part of top tier creators club: GameDAO is
 	for everyone and curation leads to maximum leverage for the best ideas,
-	No matter if you are a fresh Indy or a seasoned AAA.
+	No matter if you are a fresh Indie or a seasoned AAA.
 	`,
 	},
 	{
 		header: `Governance + Democracy`,
 		text: `Voting and directing teams does not need to be boring and
 	gamification drives adoption in governance and participation:
-	Level up voting power and get rewarded through contribution.
+	Level up voting power and get rewarded for your contribution.
 	`,
 	},
 	{
-		header: `Open Protocols built in web3`,
+		header: `Engagement + Incentives`,
+		text: `Whether you are looking for activation of your creative projects,
+		or run a full size eSports team, GameDAO enables monetisation and measurable
+		outcomes for both creators and community through Battlepass.
+		`,
+	},
+	{
+		header: `Fundraising + Ownership`,
+		text: `Raise funds for your creative projects and
+		get support from the community accelerating reach and adoption..
+	`,
+	},
+	{
+		header: `Open Protocols`,
 		text: `GameDAO creates open protocols dedicated to transform and bridge
 	the world of video games into the world of Web3. DAO, DeFi and NFTs
 	shift the power back where it belongs: into the hands of the community.

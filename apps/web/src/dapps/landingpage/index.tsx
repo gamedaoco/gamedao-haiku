@@ -18,7 +18,7 @@ import {
 	Roadmap,
 	Disclaimer,
 	// QuestionsGameDAO,
-	QuestionsBattlepass,
+	// QuestionsBattlepass,
 } from './components'
 
 import { hero as heroContent, hero2 as hero2Content } from './content'
@@ -39,13 +39,14 @@ export function Landingpage() {
 	return (
 		<Fragment>
 			<Box>
-				{hero && <Hero size="lg" content={heroContent} />}
-				{hero && <Hero size="sm" content={hero2Content} />}
+				{hero && <Hero size="3/4" content={heroContent} />}
+				{hero && <Hero size="1/4" content={hero2Content} slide />}
+				{/* {hero && <Hero size="1/4" content={heroContent} />} */}
 				<Newsletter />
 			</Box>
 			<Box>
 				<Container maxWidth="xl" disableGutters>
-					{/* {intro && <Intro />} */}
+					{intro && <Intro />}
 
 					{/* {teaser1 && (
 						<Teaser
@@ -62,18 +63,18 @@ export function Landingpage() {
 						</Teaser>
 					)} */}
 
-					{transform && <Transform />}
+					{/* {transform && <Transform />} */}
 
-					{team && <Team />}
-					{partners && <Partners />}
+					{/* {team && <Team />} */}
+					{/* {partners && <Partners />} */}
 
-					{wallet && <Wallet />}
+					{/* {wallet && <Wallet />} */}
 
-					{questions && <QuestionsBattlepass />}
+					{/* {questions && <QuestionsBattlepass />} */}
 
-					{roadmap && <Roadmap />}
-					{supporters && <Supporters />}
-					{disclaimer && <Disclaimer />}
+					{/* {roadmap && <Roadmap />} */}
+					{/* {supporters && <Supporters />} */}
+					{/* {disclaimer && <Disclaimer />} */}
 				</Container>
 			</Box>
 		</Fragment>

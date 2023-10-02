@@ -8,15 +8,24 @@ module.exports = {
 					'https://graph.dev.gamedao.net/v1/graphql': {
 						headers: {
 						// "x-hasura-role": "public",
-						// "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET
+						// "x-hasura-admin-secret": process.env.HASURA_ADMIN_SECRET,
 						"x-hasura-admin-secret": "password12345"
 						},
 					},
 				},
 			],
 			documents: ['src/queries/**/*.graphql'],
-			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+			plugins: [
+				'typescript',
+				'typescript-operations',
+				'typescript-react-apollo'
+			],
 			config: {
+				// enumsAsTypes: true,
+				// futureProofEnums: true,
+				// constEnums: true,
+
+				//
 				preResolveTypes: true,
 				noSchemaStitching: false,
 				immutableTypes: true,

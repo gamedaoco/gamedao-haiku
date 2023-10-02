@@ -312,8 +312,8 @@ export type Balance_Variance_Fields = {
 	readonly id?: Maybe<Scalars['Float']>
 }
 
-export type Battlepass = {
-	readonly __typename?: 'Battlepass'
+export type Battlepass2 = {
+	readonly __typename?: 'Battlepass2'
 	readonly active: Scalars['Boolean']
 	readonly chainId: Scalars['String']
 	readonly cid?: Maybe<Scalars['String']>
@@ -337,6 +337,155 @@ export type Battlepass = {
 	readonly totalJoined: Scalars['Int']
 }
 
+export type BattlepassBotMutation = {
+	readonly __typename?: 'BattlepassBotMutation'
+	readonly claimReward?: Maybe<BattlepassRewardClaim>
+	readonly identity?: Maybe<BattlepassIdentity>
+	readonly join?: Maybe<BattlepassMember>
+	readonly joinPremium?: Maybe<BattlepassMember>
+	readonly levels?: Maybe<ReadonlyArray<Maybe<BattlepassLevel>>>
+	readonly processPayment?: Maybe<Payment>
+	readonly provideUserToken?: Maybe<BattlepassIdentity>
+	readonly quest?: Maybe<BattlepassQuest>
+	readonly reward?: Maybe<BattlepassReward>
+	readonly setFreePasses?: Maybe<Battlepass2>
+	readonly updateBattlepass?: Maybe<Battlepass2>
+}
+
+export type BattlepassBotMutationClaimRewardArgs = {
+	battlepass: Scalars['String']
+	identityUuid: Scalars['String']
+	reward: Scalars['String']
+}
+
+export type BattlepassBotMutationIdentityArgs = {
+	address?: InputMaybe<Scalars['String']>
+	cid?: InputMaybe<Scalars['String']>
+	discord?: InputMaybe<Scalars['String']>
+	email?: InputMaybe<Scalars['String']>
+	name?: InputMaybe<Scalars['String']>
+	twitter?: InputMaybe<Scalars['String']>
+	uuid?: InputMaybe<Scalars['String']>
+}
+
+export type BattlepassBotMutationJoinArgs = {
+	battlepass: Scalars['String']
+	identityUuid: Scalars['String']
+}
+
+export type BattlepassBotMutationJoinPremiumArgs = {
+	battlepass: Scalars['String']
+	identityUuid: Scalars['String']
+}
+
+export type BattlepassBotMutationLevelsArgs = {
+	battlepass: Scalars['String']
+	levels: ReadonlyArray<InputMaybe<Level>>
+}
+
+export type BattlepassBotMutationProcessPaymentArgs = {
+	battlepass: Scalars['String']
+	identityUuid: Scalars['String']
+	paymentToken: Scalars['String']
+	securityToken: Scalars['String']
+}
+
+export type BattlepassBotMutationProvideUserTokenArgs = {
+	identityUuid: Scalars['String']
+	source: Source
+	token: Scalars['String']
+}
+
+export type BattlepassBotMutationQuestArgs = {
+	battlepass: Scalars['String']
+	channelId?: InputMaybe<Scalars['String']>
+	cid?: InputMaybe<Scalars['String']>
+	daily: Scalars['Boolean']
+	description?: InputMaybe<Scalars['String']>
+	guildId?: InputMaybe<Scalars['String']>
+	hashtag?: InputMaybe<Scalars['String']>
+	link?: InputMaybe<Scalars['String']>
+	max?: InputMaybe<Scalars['Int']>
+	maxDaily?: InputMaybe<Scalars['Int']>
+	name?: InputMaybe<Scalars['String']>
+	points: Scalars['Int']
+	quantity: Scalars['Int']
+	source: Source
+	twitterId?: InputMaybe<Scalars['String']>
+	type: ActivityType
+}
+
+export type BattlepassBotMutationRewardArgs = {
+	battlepass: Scalars['String']
+	cid?: InputMaybe<Scalars['String']>
+	description?: InputMaybe<Scalars['String']>
+	level?: InputMaybe<Scalars['Int']>
+	name?: InputMaybe<Scalars['String']>
+	points?: InputMaybe<Scalars['Int']>
+	total: Scalars['Int']
+}
+
+export type BattlepassBotMutationSetFreePassesArgs = {
+	battlepass: Scalars['String']
+	freePasses: Scalars['Int']
+}
+
+export type BattlepassBotMutationUpdateBattlepassArgs = {
+	battlepass: Scalars['String']
+	freePasses?: InputMaybe<Scalars['Int']>
+	joinable?: InputMaybe<Scalars['Boolean']>
+	premiumPasses?: InputMaybe<Scalars['Int']>
+}
+
+export type BattlepassBotQuery = {
+	readonly __typename?: 'BattlepassBotQuery'
+	readonly battlepasses?: Maybe<ReadonlyArray<Maybe<Battlepass2>>>
+	readonly identities?: Maybe<ReadonlyArray<Maybe<BattlepassIdentity>>>
+	readonly levels?: Maybe<ReadonlyArray<Maybe<BattlepassLevel>>>
+	readonly members?: Maybe<ReadonlyArray<Maybe<BattlepassMember>>>
+	readonly points?: Maybe<ReadonlyArray<Maybe<BattlepassPoint>>>
+	readonly progresses?: Maybe<ReadonlyArray<Maybe<BattlepassQuestProgress>>>
+	readonly quests?: Maybe<ReadonlyArray<Maybe<BattlepassQuest>>>
+	readonly reward_claims?: Maybe<ReadonlyArray<Maybe<BattlepassRewardClaim>>>
+	readonly rewards?: Maybe<ReadonlyArray<Maybe<BattlepassReward>>>
+}
+
+export type BattlepassBotQueryBattlepassesArgs = {
+	where?: InputMaybe<BattlepassesFilter>
+}
+
+export type BattlepassBotQueryIdentitiesArgs = {
+	where?: InputMaybe<IdentityFilter>
+}
+
+export type BattlepassBotQueryLevelsArgs = {
+	where?: InputMaybe<LevelsFilter>
+}
+
+export type BattlepassBotQueryMembersArgs = {
+	where?: InputMaybe<MemberFilter>
+}
+
+export type BattlepassBotQueryPointsArgs = {
+	where?: InputMaybe<PointsFilter>
+}
+
+export type BattlepassBotQueryProgressesArgs = {
+	where?: InputMaybe<ProgressFilter>
+}
+
+export type BattlepassBotQueryQuestsArgs = {
+	where?: InputMaybe<QuestFilter>
+}
+
+export type BattlepassBotQueryReward_ClaimsArgs = {
+	where?: InputMaybe<RewardClaimFilter>
+}
+
+export type BattlepassBotQueryRewardsArgs = {
+	where?: InputMaybe<RewardsFilter>
+}
+
 export type BattlepassIdentity = {
 	readonly __typename?: 'BattlepassIdentity'
 	readonly address?: Maybe<Scalars['String']>
@@ -354,7 +503,7 @@ export type BattlepassIdentity = {
 
 export type BattlepassLevel = {
 	readonly __typename?: 'BattlepassLevel'
-	readonly battlepass: Battlepass
+	readonly battlepass: Battlepass2
 	readonly battlepassId: Scalars['Int']
 	readonly id: Scalars['Int']
 	readonly level: Scalars['Int']
@@ -818,7 +967,7 @@ export type BattlepassLevels_Variance_Order_By = {
 
 export type BattlepassMember = {
 	readonly __typename?: 'BattlepassMember'
-	readonly battlepass: Battlepass
+	readonly battlepass: Battlepass2
 	readonly battlepassId: Scalars['Int']
 	readonly id?: Maybe<Scalars['Int']>
 	readonly identity: BattlepassIdentity
@@ -1355,7 +1504,7 @@ export type BattlepassParticipants_Variance_Order_By = {
 
 export type BattlepassPoint = {
 	readonly __typename?: 'BattlepassPoint'
-	readonly battlepass: Battlepass
+	readonly battlepass: Battlepass2
 	readonly battlepassId: Scalars['Int']
 	readonly identity: BattlepassIdentity
 	readonly identityId?: Maybe<Scalars['Int']>
@@ -1366,7 +1515,7 @@ export type BattlepassPoint = {
 
 export type BattlepassQuest = {
 	readonly __typename?: 'BattlepassQuest'
-	readonly battlepass: Battlepass
+	readonly battlepass: Battlepass2
 	readonly battlepassId: Scalars['Int']
 	readonly channelId?: Maybe<Scalars['String']>
 	readonly cid?: Maybe<Scalars['String']>
@@ -1400,7 +1549,7 @@ export type BattlepassQuestProgress = {
 export type BattlepassReward = {
 	readonly __typename?: 'BattlepassReward'
 	readonly available: Scalars['Int']
-	readonly battlepass: Battlepass
+	readonly battlepass: Battlepass2
 	readonly battlepassId: Scalars['Int']
 	readonly chainId?: Maybe<Scalars['String']>
 	readonly cid?: Maybe<Scalars['String']>
@@ -12573,7 +12722,7 @@ export type Migrations_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
 	readonly __typename?: 'mutation_root'
-	readonly claimReward?: Maybe<BattlepassRewardClaim>
+	readonly BattlepassBot?: Maybe<BattlepassBotMutation>
 	/** delete data from the table: "Balance" */
 	readonly delete_Balance?: Maybe<Balance_Mutation_Response>
 	/** delete single row from the table: "Balance" */
@@ -12750,7 +12899,6 @@ export type Mutation_Root = {
 	readonly delete_voting?: Maybe<Voting_Mutation_Response>
 	/** delete single row from the table: "voting" */
 	readonly delete_voting_by_pk?: Maybe<Voting>
-	readonly identity?: Maybe<BattlepassIdentity>
 	/** insert data into the table: "Balance" */
 	readonly insert_Balance?: Maybe<Balance_Mutation_Response>
 	/** insert a single row into the table: "Balance" */
@@ -12927,16 +13075,7 @@ export type Mutation_Root = {
 	readonly insert_voting?: Maybe<Voting_Mutation_Response>
 	/** insert a single row into the table: "voting" */
 	readonly insert_voting_one?: Maybe<Voting>
-	readonly join?: Maybe<BattlepassMember>
-	readonly joinPremium?: Maybe<BattlepassMember>
-	readonly levels?: Maybe<ReadonlyArray<Maybe<BattlepassLevel>>>
-	readonly processPayment?: Maybe<Payment>
-	readonly provideUserToken?: Maybe<BattlepassIdentity>
-	readonly quest?: Maybe<BattlepassQuest>
-	readonly reward?: Maybe<BattlepassReward>
-	readonly setFreePasses?: Maybe<Battlepass>
 	readonly singleUpload: Scalars['String']
-	readonly updateBattlepass?: Maybe<Battlepass>
 	readonly updateSession: Scalars['Boolean']
 	/** update data of the table: "Balance" */
 	readonly update_Balance?: Maybe<Balance_Mutation_Response>
@@ -13202,13 +13341,6 @@ export type Mutation_Root = {
 	readonly update_voting_by_pk?: Maybe<Voting>
 	/** update multiples rows of table: "voting" */
 	readonly update_voting_many?: Maybe<ReadonlyArray<Maybe<Voting_Mutation_Response>>>
-}
-
-/** mutation root */
-export type Mutation_RootClaimRewardArgs = {
-	battlepass: Scalars['String']
-	identityUuid: Scalars['String']
-	reward: Scalars['String']
 }
 
 /** mutation root */
@@ -13649,17 +13781,6 @@ export type Mutation_RootDelete_VotingArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Voting_By_PkArgs = {
 	id: Scalars['String']
-}
-
-/** mutation root */
-export type Mutation_RootIdentityArgs = {
-	address?: InputMaybe<Scalars['String']>
-	cid?: InputMaybe<Scalars['String']>
-	discord?: InputMaybe<Scalars['String']>
-	email?: InputMaybe<Scalars['String']>
-	name?: InputMaybe<Scalars['String']>
-	twitter?: InputMaybe<Scalars['String']>
-	uuid?: InputMaybe<Scalars['String']>
 }
 
 /** mutation root */
@@ -14191,86 +14312,8 @@ export type Mutation_RootInsert_Voting_OneArgs = {
 }
 
 /** mutation root */
-export type Mutation_RootJoinArgs = {
-	battlepass: Scalars['String']
-	identityUuid: Scalars['String']
-}
-
-/** mutation root */
-export type Mutation_RootJoinPremiumArgs = {
-	battlepass: Scalars['String']
-	identityUuid: Scalars['String']
-}
-
-/** mutation root */
-export type Mutation_RootLevelsArgs = {
-	battlepass: Scalars['String']
-	levels: ReadonlyArray<InputMaybe<Level>>
-}
-
-/** mutation root */
-export type Mutation_RootProcessPaymentArgs = {
-	battlepass: Scalars['String']
-	identityUuid: Scalars['String']
-	paymentToken: Scalars['String']
-	securityToken: Scalars['String']
-}
-
-/** mutation root */
-export type Mutation_RootProvideUserTokenArgs = {
-	identityUuid: Scalars['String']
-	source: Source
-	token: Scalars['String']
-}
-
-/** mutation root */
-export type Mutation_RootQuestArgs = {
-	battlepass: Scalars['String']
-	channelId?: InputMaybe<Scalars['String']>
-	cid?: InputMaybe<Scalars['String']>
-	daily: Scalars['Boolean']
-	description?: InputMaybe<Scalars['String']>
-	guildId?: InputMaybe<Scalars['String']>
-	hashtag?: InputMaybe<Scalars['String']>
-	link?: InputMaybe<Scalars['String']>
-	max?: InputMaybe<Scalars['Int']>
-	maxDaily?: InputMaybe<Scalars['Int']>
-	name?: InputMaybe<Scalars['String']>
-	points: Scalars['Int']
-	quantity: Scalars['Int']
-	source: Source
-	twitterId?: InputMaybe<Scalars['String']>
-	type: ActivityType
-}
-
-/** mutation root */
-export type Mutation_RootRewardArgs = {
-	battlepass: Scalars['String']
-	cid?: InputMaybe<Scalars['String']>
-	description?: InputMaybe<Scalars['String']>
-	level?: InputMaybe<Scalars['Int']>
-	name?: InputMaybe<Scalars['String']>
-	points?: InputMaybe<Scalars['Int']>
-	total: Scalars['Int']
-}
-
-/** mutation root */
-export type Mutation_RootSetFreePassesArgs = {
-	battlepass: Scalars['String']
-	freePasses: Scalars['Int']
-}
-
-/** mutation root */
 export type Mutation_RootSingleUploadArgs = {
 	fileStream: Scalars['Upload']
-}
-
-/** mutation root */
-export type Mutation_RootUpdateBattlepassArgs = {
-	battlepass: Scalars['String']
-	freePasses?: InputMaybe<Scalars['Int']>
-	joinable?: InputMaybe<Scalars['Boolean']>
-	premiumPasses?: InputMaybe<Scalars['Int']>
 }
 
 /** mutation root */
@@ -18348,6 +18391,7 @@ export type Query_Root = {
 	readonly Balance_aggregate: Balance_Aggregate
 	/** fetch data from the table: "Balance" using primary key columns */
 	readonly Balance_by_pk?: Maybe<Balance>
+	readonly BattlepassBot?: Maybe<BattlepassBotQuery>
 	/** An array relationship */
 	readonly BattlepassLevels: ReadonlyArray<BattlepassLevels>
 	/** An aggregate relationship */
@@ -18493,7 +18537,6 @@ export type Query_Root = {
 	readonly battlepass_nft_aggregate: Battlepass_Nft_Aggregate
 	/** fetch data from the table: "battlepass_nft" using primary key columns */
 	readonly battlepass_nft_by_pk?: Maybe<Battlepass_Nft>
-	readonly battlepasses?: Maybe<ReadonlyArray<Maybe<Battlepass>>>
 	/** fetch data from the table: "campaign" */
 	readonly campaign: ReadonlyArray<Campaign>
 	/** fetch aggregated fields from the table: "campaign" */
@@ -18533,16 +18576,13 @@ export type Query_Root = {
 	readonly historical_balance_aggregate: Historical_Balance_Aggregate
 	/** fetch data from the table: "historical_balance" using primary key columns */
 	readonly historical_balance_by_pk?: Maybe<Historical_Balance>
-	readonly identities?: Maybe<ReadonlyArray<Maybe<BattlepassIdentity>>>
 	/** fetch data from the table: "identity" */
 	readonly identity: ReadonlyArray<Identity>
 	/** fetch aggregated fields from the table: "identity" */
 	readonly identity_aggregate: Identity_Aggregate
 	/** fetch data from the table: "identity" using primary key columns */
 	readonly identity_by_pk?: Maybe<Identity>
-	readonly levels?: Maybe<ReadonlyArray<Maybe<BattlepassLevel>>>
 	readonly links: ReadonlyArray<Maybe<Link>>
-	readonly members?: Maybe<ReadonlyArray<Maybe<BattlepassMember>>>
 	/** fetch data from the table: "migrations" */
 	readonly migrations: ReadonlyArray<Migrations>
 	/** fetch aggregated fields from the table: "migrations" */
@@ -18579,8 +18619,6 @@ export type Query_Root = {
 	readonly organization_metadata_aggregate: Organization_Metadata_Aggregate
 	/** fetch data from the table: "organization_metadata" using primary key columns */
 	readonly organization_metadata_by_pk?: Maybe<Organization_Metadata>
-	readonly points?: Maybe<ReadonlyArray<Maybe<BattlepassPoint>>>
-	readonly progresses?: Maybe<ReadonlyArray<Maybe<BattlepassQuestProgress>>>
 	/** fetch data from the table: "proposal" */
 	readonly proposal: ReadonlyArray<Proposal>
 	/** fetch aggregated fields from the table: "proposal" */
@@ -18599,9 +18637,6 @@ export type Query_Root = {
 	readonly proposal_voter_aggregate: Proposal_Voter_Aggregate
 	/** fetch data from the table: "proposal_voter" using primary key columns */
 	readonly proposal_voter_by_pk?: Maybe<Proposal_Voter>
-	readonly quests?: Maybe<ReadonlyArray<Maybe<BattlepassQuest>>>
-	readonly reward_claims?: Maybe<ReadonlyArray<Maybe<BattlepassRewardClaim>>>
-	readonly rewards?: Maybe<ReadonlyArray<Maybe<BattlepassReward>>>
 	readonly rmrkNfts?: Maybe<ReadonlyArray<Maybe<RmrkNft>>>
 	/** fetch data from the table: "sense_entity" */
 	readonly sense_entity: ReadonlyArray<Sense_Entity>
@@ -19124,10 +19159,6 @@ export type Query_RootBattlepass_Nft_By_PkArgs = {
 	id: Scalars['String']
 }
 
-export type Query_RootBattlepassesArgs = {
-	where?: InputMaybe<BattlepassesFilter>
-}
-
 export type Query_RootCampaignArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -19256,10 +19287,6 @@ export type Query_RootHistorical_Balance_By_PkArgs = {
 	id: Scalars['String']
 }
 
-export type Query_RootIdentitiesArgs = {
-	where?: InputMaybe<IdentityFilter>
-}
-
 export type Query_RootIdentityArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -19278,14 +19305,6 @@ export type Query_RootIdentity_AggregateArgs = {
 
 export type Query_RootIdentity_By_PkArgs = {
 	id: Scalars['String']
-}
-
-export type Query_RootLevelsArgs = {
-	where?: InputMaybe<LevelsFilter>
-}
-
-export type Query_RootMembersArgs = {
-	where?: InputMaybe<MemberFilter>
 }
 
 export type Query_RootMigrationsArgs = {
@@ -19408,14 +19427,6 @@ export type Query_RootOrganization_Metadata_By_PkArgs = {
 	id: Scalars['String']
 }
 
-export type Query_RootPointsArgs = {
-	where?: InputMaybe<PointsFilter>
-}
-
-export type Query_RootProgressesArgs = {
-	where?: InputMaybe<ProgressFilter>
-}
-
 export type Query_RootProposalArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -19474,18 +19485,6 @@ export type Query_RootProposal_Voter_AggregateArgs = {
 
 export type Query_RootProposal_Voter_By_PkArgs = {
 	id: Scalars['String']
-}
-
-export type Query_RootQuestsArgs = {
-	where?: InputMaybe<QuestFilter>
-}
-
-export type Query_RootReward_ClaimsArgs = {
-	where?: InputMaybe<RewardClaimFilter>
-}
-
-export type Query_RootRewardsArgs = {
-	where?: InputMaybe<RewardsFilter>
 }
 
 export type Query_RootRmrkNftsArgs = {
@@ -22105,6 +22104,31 @@ export type CollectablesForUserQuery = {
 	} | null> | null
 }
 
+export type ConnectIdentityMutationVariables = Exact<{
+	uuid?: InputMaybe<Scalars['String']>
+	address?: InputMaybe<Scalars['String']>
+	discord?: InputMaybe<Scalars['String']>
+	name?: InputMaybe<Scalars['String']>
+	email?: InputMaybe<Scalars['String']>
+}>
+
+export type ConnectIdentityMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly BattlepassBot?: {
+		readonly __typename?: 'BattlepassBotMutation'
+		readonly identity?: {
+			readonly __typename?: 'BattlepassIdentity'
+			readonly uuid: string
+			readonly address?: string | null
+			readonly discord?: string | null
+			readonly twitter?: string | null
+			readonly name?: string | null
+			readonly email?: string | null
+			readonly epicGames?: string | null
+		} | null
+	} | null
+}
+
 export type SuccessfulCampaignByOrganizationIdSubscriptionVariables = Exact<{
 	orgId: Scalars['String']
 }>
@@ -22935,6 +22959,62 @@ export type CollectablesForUserLazyQueryHookResult = ReturnType<typeof useCollec
 export type CollectablesForUserQueryResult = Apollo.QueryResult<
 	CollectablesForUserQuery,
 	CollectablesForUserQueryVariables
+>
+export const ConnectIdentityDocument = gql`
+	mutation ConnectIdentity($uuid: String, $address: String, $discord: String, $name: String, $email: String) {
+		BattlepassBot {
+			identity(uuid: $uuid, address: $address, discord: $discord, name: $name, email: $email) {
+				uuid
+				address
+				discord
+				twitter
+				name
+				email
+				epicGames
+			}
+		}
+	}
+`
+export type ConnectIdentityMutationFn = Apollo.MutationFunction<
+	ConnectIdentityMutation,
+	ConnectIdentityMutationVariables
+>
+
+/**
+ * __useConnectIdentityMutation__
+ *
+ * To run a mutation, you first call `useConnectIdentityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConnectIdentityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [connectIdentityMutation, { data, loading, error }] = useConnectIdentityMutation({
+ *   variables: {
+ *      uuid: // value for 'uuid'
+ *      address: // value for 'address'
+ *      discord: // value for 'discord'
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useConnectIdentityMutation(
+	baseOptions?: Apollo.MutationHookOptions<ConnectIdentityMutation, ConnectIdentityMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<ConnectIdentityMutation, ConnectIdentityMutationVariables>(
+		ConnectIdentityDocument,
+		options,
+	)
+}
+export type ConnectIdentityMutationHookResult = ReturnType<typeof useConnectIdentityMutation>
+export type ConnectIdentityMutationResult = Apollo.MutationResult<ConnectIdentityMutation>
+export type ConnectIdentityMutationOptions = Apollo.BaseMutationOptions<
+	ConnectIdentityMutation,
+	ConnectIdentityMutationVariables
 >
 export const SuccessfulCampaignByOrganizationIdDocument = gql`
 	subscription SuccessfulCampaignByOrganizationId($orgId: String!) {

@@ -8,12 +8,12 @@ export interface IdentityByAddress {
 }
 
 export function useIdentityByAddress(address: string): IdentityByAddress {
-	const [identityState, setIdentityState] = useState<Identity>(null)
+	const [identityState, setIdentityState] = useState(null)
 	const { data, error, loading } = useIdentityByAddressSubscription({ variables: { address } })
 
 	useEffect(() => {
-		if (data?.identityByPk) {
-			setIdentityState({ ...data.identityByPk } as any)
+		if (data?.identity_by_pk) {
+			setIdentityState({ ...data.identity_by_pk })
 		}
 	}, [data])
 
@@ -23,6 +23,8 @@ export function useIdentityByAddress(address: string): IdentityByAddress {
 			createErrorNotification('Identity could not be loaded ')
 		}
 	}, [error])
+
+	console.log('identityState', identityState)
 
 	return { identity: identityState, loading: loading || !data }
 }

@@ -20,8 +20,8 @@ import { TransactionDialog } from 'src/components/TransactionDialog/transactionD
 import { Loader } from 'src/components/Loader'
 
 const initialState = (identity: Identity) => ({
-	display: identity?.displayName || '',
-	legal: identity?.legalName || '',
+	display: identity?.display_name || '',
+	legal: identity?.legal_name || '',
 	email: identity?.email || '',
 	riot: identity?.riot || '',
 	twitter: identity?.twitter || '',
@@ -38,9 +38,9 @@ export function Identity() {
 	})
 	const [identity, setIdentity] = useState(null)
 	useEffect(() => {
-		if (!data?.identityByPk || data?.identityByPk === identity) return
-		setIdentity(data.identityByPk)
-	}, [data?.identityByPk, identity])
+		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
+		setIdentity(data.identity_by_pk)
+	}, [data?.identity_by_pk, identity])
 
 	//
 
