@@ -18,7 +18,7 @@ import { AreaChartContainer } from 'src/components/TabPanels/Organization/module
 import { RadialChartContainer } from 'src/components/TabPanels/Organization/modules/radialChartContainer'
 import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
 
-import { TreasuryChart } from 'src/dapps/organization/components/TreasuryChart'
+import { TreasuryChart } from 'dapps/community/components/TreasuryChart'
 interface ComponentProps {
 	organization: Organization
 	organizationId: string
@@ -90,7 +90,7 @@ export function Overview({
 
 	const accessModel = useMemo(
 		() =>
-			organization?.accessModel === 'Open'
+			organization?.access_model === 'Open'
 				? {
 						title: t('page:organizations:organization_rules:open:title'),
 						text: t('page:organizations:organization_rules:open:text'),
@@ -101,31 +101,31 @@ export function Overview({
 						text: t('page:organizations:organization_rules:private:text'),
 						status: t('page:organizations:organization_rules:private:status'),
 				  },
-		[organization?.accessModel],
+		[organization?.access_model],
 	)
 
 	const feeModel = useMemo(() => {
-		if (organization?.feeModel === 'NoFees') {
+		if (organization?.fee_model === 'NoFees') {
 			return {
 				title: t('page:organizations:organization_rules:no_fee:title'),
 				text: t('page:organizations:organization_rules:no_fee:text'),
 			}
-		} else if (organization?.feeModel === 'Reserve') {
+		} else if (organization?.fee_model === 'Reserve') {
 			return {
 				title: t('page:organizations:organization_rules:reserved_fee:title'),
 				text: t('page:organizations:organization_rules:reserved_fee:text'),
 			}
-		} else if (organization?.feeModel === 'Transfer') {
+		} else if (organization?.fee_model === 'Transfer') {
 			return {
 				title: t('page:organizations:organization_rules:transferred_fee:title'),
 				text: t('page:organizations:organization_rules:transferred_fee:text'),
 			}
 		}
-	}, [organization?.feeModel])
+	}, [organization?.fee_model])
 
 	const memberLimit = useMemo(
 		() =>
-			organization?.memberLimit === 0
+			organization?.member_limit === 0
 				? {
 						title: t('page:organizations:organization_rules:no_memberLimit:title'),
 						text: t('page:organizations:organization_rules:no_memberLimit:text'),
@@ -133,24 +133,24 @@ export function Overview({
 				: {
 						title: t('page:organizations:organization_rules:memberLimit:title'),
 						text: ` ${t('page:organizations:organization_rules:memberLimit:only')} ${
-							organization?.memberLimit
+							organization?.member_limit
 						}  ${t('page:organizations:organization_rules:memberLimit:text')}`,
 				  },
-		[organization?.memberLimit],
+		[organization?.member_limit],
 	)
 
 	const statesPercentages = useMemo(
 		() =>
 			getCampaignStatusPercentage(
-				organization?.campaignsAggregate?.aggregate?.count,
-				organization?.campaignsAggregate?.nodes,
+				organization?.campaigns_aggregate?.aggregate?.count,
+				organization?.campaigns_aggregate?.nodes,
 			),
-		[organization?.campaignsAggregate?.aggregate?.count, organization?.campaignsAggregate?.nodes],
+		[organization?.campaigns_aggregate?.aggregate?.count, organization?.campaigns_aggregate?.nodes],
 	)
 
 	const proposalTypesCount = useMemo(
-		() => getProposalTypesCount(organization?.proposalsAggregate?.nodes),
-		[organization?.proposalsAggregate?.nodes],
+		() => getProposalTypesCount(organization?.proposals_aggregate?.nodes),
+		[organization?.proposals_aggregate?.nodes],
 	)
 
 	useEffect(() => {
@@ -241,7 +241,7 @@ export function Overview({
 										onClick={handleOpenTxModal}
 										sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}
 									>
-										{organization?.accessModel === 'Open' ? (
+										{organization?.access_model === 'Open' ? (
 											t('button:ui:join_organization')
 										) : (
 											<>Apply</>
@@ -258,7 +258,7 @@ export function Overview({
 						<Typography variant="h6">{t('page:organizations:organizations_rules')}</Typography>
 
 						<Stack direction="column" spacing={3} pt="1rem">
-							{organization?.feeModel && (
+							{organization?.fee_model && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '16px', color: theme.palette.success.main }} />
 									<Stack direction="column">
@@ -268,7 +268,7 @@ export function Overview({
 								</Stack>
 							)}
 
-							{organization?.accessModel && (
+							{organization?.access_model && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">
@@ -278,7 +278,7 @@ export function Overview({
 								</Stack>
 							)}
 
-							{(organization?.memberLimit || organization?.memberLimit === 0) && (
+							{(organization?.member_limit || organization?.member_limit === 0) && (
 								<Stack direction="row" spacing={1}>
 									<Verified sx={{ width: '16px', color: '#A4D808' }} />
 									<Stack direction="column">

@@ -103,11 +103,11 @@ export function Layout({
 				{/*<Transition>*/}
 				<Box>
 					<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
-						{showSidebar && (isMd || sidebarOpen) && connected && (
+						{/* {showSidebar && (isMd || sidebarOpen) && connected && (
 							<Box sx={{ minWidth: baseSpacing, minHeight: spacing }}>
 								<Sidebar />
 							</Box>
-						)}
+						)} */}
 						{noContainer ? (
 							<Box mt={`-${baseSpacing}px`} width="100%">
 								{children}

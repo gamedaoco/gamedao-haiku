@@ -19,7 +19,7 @@ export function Controller({ selected, setSelected }: ComponentProps) {
 	const { t } = useTranslation()
 
 	return (
-		<BaseForm title={'Who will control the organization?'}>
+		<BaseForm title={'Who will control the community?'}>
 			<RadioItem
 				icon={<Group sx={{ width: '40px', height: '40px' }} />}
 				title={t('page:organizations:settings:control:radio_button_community:title')}

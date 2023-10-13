@@ -3,17 +3,17 @@ import { useTranslation } from 'react-i18next'
 
 import { Layout } from 'src/layouts/v2'
 import { Container, Box, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
-import { Form } from 'src/components/Forms/Organization/form'
+import { Form } from 'dapps/community/components/Organization/form'
 
 export function CreateOrganizationPage() {
 	const [activeStep, setActiveStep] = useState<number>(0)
 	const { t } = useTranslation()
 	return (
-		<Layout showHeader showFooter showSidebar title={t('page:organizations:title')}>
+		<Layout showHeader showFooter showSidebar title={'Create Community' || t('page:organizations:title')}>
 			<Box sx={{ mb: 4 }}>
 				<Grid container justifyContent="space-between" spacing={3}>
 					<Grid item>
-						<Typography variant="h3">{t('page:organizations:create')}</Typography>
+						<Typography variant="h3">{'Create Community' || t('page:organizations:create')}</Typography>
 					</Grid>
 					<Grid item></Grid>
 				</Grid>

@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
-    "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules",
+    "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules apps/**/.next packages/**/.next",
 
     "sb": "wsrun -p @gamedao/components -c storybook",
     "dev": "yarn dev:web",
@@ -17,11 +17,14 @@
     "dev:app": "wsrun -p @gamedao/app -c dev",
     "dev:id": "wsrun -p @gamedao/id -c dev",
     "dev:battlepass": "wsrun -p @gamedao/battlepass -c dev",
+    "dev:avatar": "wsrun -p @gamedao/avatar -c dev",
+    "dev:graph": "wsrun -p @gamedao/graph-api -c dev",
 
     "build": "wsrun -e -c -s -x -m build",
     "build:init": "wsrun -s -c install",
     "build:codegen": "yarn workspace @gamedao/web generate",
     "build:id": "yarn build:init && yarn workspace @gamedao/id build",
+    "build:avatar": "yarn build:init && yarn workspace @gamedao/avatar build",
     "build:web": "yarn build:init && yarn workspace @gamedao/web build",
     "build:app": "yarn build:init && yarn workspace @gamedao/app build",
     "build:admin": "yarn build:init && yarn workspace @gamedao/admin build",

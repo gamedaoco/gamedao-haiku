@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { useConfig } from 'src/hooks/useConfig'
 import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { CampaignContributor } from 'src/queries'
+import { Campaign_Contributor } from 'src/queries'
 import { getCampaignProgress, getTimeFromBlock } from 'src/utils/campaignUtils'
 import { abbreviateNumber } from 'src/utils/globalUtils'
 import { parseIpfsHash } from 'src/utils/ipfs'
@@ -14,7 +14,7 @@ import { toUnit } from 'src/utils/token'
 import { StatusChip } from 'src/components/CampaignCard/modules/statusChip'
 
 interface ComponentProps {
-	campaignContributor: CampaignContributor
+	campaignContributor: Campaign_Contributor
 }
 
 export function TableItem({ campaignContributor }: ComponentProps) {
@@ -23,8 +23,8 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 	const systemProperties = useSystemProperties()
 	const blockNumber = useBlockNumber()
 	const currencyId = useMemo(
-		() => systemProperties?.tokenSymbol?.indexOf(campaignContributor?.campaign?.tokenSymbol) ?? 0,
-		[systemProperties, campaignContributor?.campaign?.tokenSymbol],
+		() => systemProperties?.tokenSymbol?.indexOf(campaignContributor?.campaign?.token_symbol) ?? 0,
+		[systemProperties, campaignContributor?.campaign?.token_symbol],
 	)
 	const progress = useMemo(
 		() => getCampaignProgress(campaignContributor?.campaign?.target, campaignContributor?.contributed),
@@ -48,11 +48,11 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 		() =>
 			abbreviateNumber(
 				toUnit(
-					campaignContributor?.campaign?.campaignContributorsAggregate?.aggregate?.sum?.contributed ?? '0',
+					campaignContributor?.campaign?.campaign_contributors_aggregate?.aggregate?.sum?.contributed ?? '0',
 					systemProperties?.tokenDecimals?.[currencyId < 0 ? 0 : currencyId] ?? 18,
 				),
 			),
-		[campaignContributor?.campaign?.campaignContributorsAggregate?.aggregate?.sum, systemProperties, currencyId],
+		[campaignContributor?.campaign?.campaign_contributors_aggregate?.aggregate?.sum, systemProperties, currencyId],
 	)
 	const contributed = useMemo(
 		() =>
@@ -86,7 +86,7 @@ export function TableItem({ campaignContributor }: ComponentProps) {
 					</Box>
 				</Box>
 			</TableCell>
-			<TableCell>{campaignContributor?.campaign?.campaignContributorsAggregate?.aggregate?.count}</TableCell>
+			<TableCell>{campaignContributor?.campaign?.campaign_contributors_aggregate?.aggregate?.count}</TableCell>
 			<TableCell>
 				{contributed} {systemProperties?.tokenSymbol?.[currencyId] ?? ''}
 			</TableCell>

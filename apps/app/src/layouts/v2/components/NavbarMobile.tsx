@@ -25,6 +25,8 @@ import {
 	RiDropLine,
 	RiExchangeFundsLine,
 	RiAwardLine,
+	RiCommunityLine,
+	RiAncientGateLine,
 } from 'react-icons/ri'
 import { RxDiscordLogo } from 'react-icons/rx'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
@@ -45,15 +47,15 @@ interface ComponentProps {
 // TODO: Extract to features / graphql
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organizations',
-		path: '/organizations',
-		icon: <RiShieldLine />,
+		name: 'Community', // 'button:navigation:organizations',
+		path: '/community',
+		icon: <RiAncientGateLine />,
 	},
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiExchangeFundsLine />,
+	// },
 	// {
 	// 	name: 'Battlepass', //'button:navigation:quests',
 	// 	path: '/battlepass',

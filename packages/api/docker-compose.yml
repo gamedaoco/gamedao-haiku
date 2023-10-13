@@ -5,8 +5,8 @@ services:
     image: postgres:14
     environment:
       POSTGRES_DB: graph-api
-      POSTGRES_USER: pguser
-      POSTGRES_PASSWORD: pgpass
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASS}
     ports:
       - "${PG_PORT}:5432"
     volumes:

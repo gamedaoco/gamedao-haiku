@@ -54,7 +54,7 @@
         "public/*"
       ],
       "queries/*": [
-        "src/queries/*"
+        "queries/*"
       ],
       "src/*": [
         "src/*"

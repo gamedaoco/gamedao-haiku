@@ -10,7 +10,7 @@ import { MyCollectables } from './MyCollectables'
 
 export function Overview() {
 	const theme = useTheme()
-
+	console.log('overview')
 	return (
 		<Grid container spacing={theme.spacing(2)}>
 			<Grid item xs={12} md={8}>
@@ -21,6 +21,7 @@ export function Overview() {
 				<MyAchievements />
 			</Grid>
 
+			{/*
 			<Grid item xs={12} md={12}>
 				<MyBalancesChart symbol="ZERO" />
 			</Grid>
@@ -31,7 +32,7 @@ export function Overview() {
 
 			<Grid item xs={12}>
 				<MyCollectables />
-			</Grid>
+			</Grid> */}
 		</Grid>
 	)
 }

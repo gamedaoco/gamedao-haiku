@@ -24,7 +24,7 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 
 	const handleCancel = useCallback(() => {
 		if (currentStep === 0) {
-			push('/organizations')
+			push('/community')
 		}
 	}, [currentStep])
 
@@ -40,8 +40,8 @@ export function Form({ currentStep, setStep }: ComponentProps) {
 		}
 
 		if (currentStep == 2) {
-			createInfoNotification('Organization was saved')
-			push('/organizations/dashboard')
+			createInfoNotification('Community was saved')
+			push('/community/dashboard')
 		}
 	}, [currentStep, setStep, push])
 

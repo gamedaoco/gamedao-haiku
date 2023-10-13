@@ -17,6 +17,8 @@ import {
 	RiDropLine,
 	RiAwardLine,
 	RiChat1Line,
+	RiCommunityLine,
+	RiAncientGateLine,
 } from 'react-icons/ri'
 import { RxDiscordLogo } from 'react-icons/rx'
 import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
@@ -42,25 +44,25 @@ interface ComponentProps {
 
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organizations',
-		path: '/organizations',
-		icon: <RiShieldLine />,
+		name: 'Community', // 'button:navigation:organizations',
+		path: '/community',
+		icon: <RiAncientGateLine />,
 	},
-	// {
-	// 	name: 'Battlepass',
-	// 	path: '/battlepass',
-	// 	icon: <RiSwordLine />,
-	// },
+	{
+		name: 'Battlepass',
+		path: '/battlepass',
+		icon: <RiSwordLine />,
+	},
 	// {
 	// 	name: 'Buy', // button:navigation:campaigns',
 	// 	path: '/buy',
 	// 	icon: <RiVipDiamondLine />,
 	// },
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiVipDiamondLine />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiVipDiamondLine />,
+	// },
 ]
 
 const rightNav = [

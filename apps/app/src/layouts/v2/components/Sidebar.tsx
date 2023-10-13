@@ -41,9 +41,17 @@ export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 	useEffect(() => {
 		if (error) {
 			createErrorNotification('The information for the sidebar could not be retrieved')
-			log.error(error)
+			log.error('sidebar', data, error)
 		}
 	}, [error])
+
+	useEffect(() => {
+		if (!loading && data) {
+			log.info('SIDEBAR', data)
+			log.info('SIDEBAR', data)
+			log.info('SIDEBAR', data)
+		}
+	}, [loading, data])
 
 	return (
 		<Stack

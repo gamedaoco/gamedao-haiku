@@ -159,7 +159,7 @@ export function OrganizationById() {
 	useEffect(() => {
 		if (!cache) return
 
-		// console.log( '==== cache ====\n', cache)
+		console.log('==== cache ====\n', cache)
 		const metaData = {
 			name: cache.name,
 			description: cache.description,
@@ -170,8 +170,7 @@ export function OrganizationById() {
 			tags: cache.tags,
 		}
 
-		// console.log( '==== metadata ====\n', metaData )
-
+		console.log('==== metadata ====\n', metaData)
 		;(async (): Promise<string> => {
 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 				type: 'text/plain',
@@ -206,12 +205,7 @@ export function OrganizationById() {
 	}, [organizationState])
 
 	return (
-		<Layout
-			showHeader
-			showFooter
-			showSidebar
-			title={organizationState?.name ?? cache.name ?? t('page:organizations:title')}
-		>
+		<Layout showHeader showFooter showSidebar title={organizationState?.name ?? cache.name ?? 'Community'}>
 			{(!loading && data) || !organizationIdState ? (
 				<TabContext value={activeStep}>
 					<Stack spacing={4}>

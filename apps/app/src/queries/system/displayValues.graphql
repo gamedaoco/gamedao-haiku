@@ -1,5 +1,5 @@
 query DisplayValues {
-	gamedao {
+	# gamedao {
 		displayValues {
 			collateralTypes {
 				key
@@ -82,5 +82,5 @@ query DisplayValues {
 				value
 			}
 		}
-    }
+    # }
 }

@@ -61,7 +61,7 @@ export function ExtensionProvider({ children }) {
 				// logger.trace(`updateSession for address ${address}, result: ${data?.data.updateSession}`)
 
 				if (!data?.data?.updateSession) {
-					logger.trace('updateSession failed')
+					logger.error('updateSession failed')
 				}
 			}
 		},

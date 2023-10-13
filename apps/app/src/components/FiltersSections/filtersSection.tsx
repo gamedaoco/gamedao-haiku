@@ -4,12 +4,12 @@ import { FilterList, Search } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { useDebouncedState } from 'src/hooks/useDebouncedState'
 import { CampaignFiltersInterface } from 'src/@types/campaign'
-import { CampaignBoolExp, DisplayValueEntryString, OrganizationOrderBy } from 'src/queries'
+import { Campaign_Bool_Exp, DisplayValueEntryString, Organization_Order_By } from 'src/queries'
 
 import { SortOptionsTab } from 'src/components/FiltersSections/sortOptionsTab'
 
 interface ComponentProps {
-	setFilters: (x: string | OrganizationOrderBy | any) => void
+	setFilters: (x: string | Organization_Order_By | any) => void
 	sortOptions: DisplayValueEntryString[]
 	filters?: CampaignFiltersInterface
 	searchPlaceHolder: string
@@ -17,7 +17,7 @@ interface ComponentProps {
 	showSort?: boolean
 	showFilters?: boolean
 	filtersOptions?: DisplayValueEntryString[]
-	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: CampaignBoolExp[] } | any>
+	ListTab: React.FC<{ handleDrawerNavigation: () => void; filters?: Campaign_Bool_Exp[] } | any>
 	defaultOption?: string
 }
 

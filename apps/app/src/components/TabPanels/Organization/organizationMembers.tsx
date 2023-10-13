@@ -48,7 +48,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 
 	// const isPrime = ( prime === address ) ? true : false
 
-	const members = useMemo(() => organizationState?.organizationMembers?.slice(), [organizationState])
+	const members = useMemo(() => organizationState?.organization_members?.slice(), [organizationState])
 	const [rows, setRows] = useState<any[]>([])
 
 	const [approveUserAddress, setApproveUserAddress] = useState(null)
@@ -179,7 +179,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 			members?.map((member, index) => {
 				return {
 					id: member?.address,
-					name: member?.identity?.displayName,
+					name: member?.identity?.display_name,
 					role: t(`label:${member?.address === prime ? 'prime' : 'member'}`),
 					email: member?.identity?.email,
 					address: shortAccountAddress(member),
@@ -191,7 +191,7 @@ export function OrganizationMembersTable({ organizationState }: ComponentProps) 
 					trust: member
 						? prime === member.address
 							? 3
-							: member?.identity?.email || member?.identity?.displayName
+							: member?.identity?.email || member?.identity?.display_name
 							? 2
 							: 1
 						: 0,

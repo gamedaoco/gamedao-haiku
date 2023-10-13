@@ -47,7 +47,7 @@ export function Selector({ onClick }: IComponentProps) {
 		if (address) setAddressShort(shortHash(address))
 
 		const userName =
-			identity?.displayName || // on chain display name
+			identity?.display_name || // on chain display name
 			user?.name /*session?.user?.name*/ || // user name derived from discord
 			getNameFromAccountState(accountState) || // wallet account name
 			'anonymous'
@@ -59,7 +59,7 @@ export function Selector({ onClick }: IComponentProps) {
 	}, [session, identity, user, accountState, address])
 
 	const VerifiedBadge = () =>
-		identity?.displayName ? (
+		identity?.display_name ? (
 			<Verified sx={{ ml: '5px', verticalAlign: 'top' }} fontSize="inherit" color="inherit" />
 		) : null
 

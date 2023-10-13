@@ -161,7 +161,7 @@ export function Header() {
 
 	useEffect(() => {
 		if (!address || !organizationState) return
-		setIsMemberState(organizationState?.organizationMembers?.some((member) => member.address === address))
+		setIsMemberState(organizationState?.organization_members?.some((member) => member.address === address))
 		setIsPrime(organizationState?.prime === address)
 		setTreasury(organizationState?.treasury)
 	}, [organizationState, address])
@@ -248,7 +248,7 @@ export function Header() {
 							}}
 						>
 							{t('label:n_members', {
-								n: organizationState?.organizationMembers?.length ?? 1,
+								n: organizationState?.organization_members?.length ?? 1,
 							})}
 						</Typography>
 					</Stack>

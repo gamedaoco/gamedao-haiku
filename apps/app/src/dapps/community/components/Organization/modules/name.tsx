@@ -17,9 +17,9 @@ interface ComponentProps {
 	setTags: (tags) => void
 }
 
-const validationNameSchema = Yup.string().required('* Organization Name is required')
+const validationNameSchema = Yup.string().required('* a community Name is required')
 // Only temporary, the description will be entered later on another page
-const validationDescriptionSchema = Yup.string().required('* Organization Description is required')
+const validationDescriptionSchema = Yup.string().required('* a community description is required')
 
 export const validationSchema = Yup.object().shape({
 	name: Yup.string().required(),
@@ -176,7 +176,7 @@ export function Name({
 		content.set(e.target.value)
 	}
 
-	console.log(url, setUrl)
+	// console.log(url, setUrl)
 
 	return (
 		<BaseForm title={'Organization'} error={errorState}>
@@ -185,7 +185,7 @@ export function Name({
 				fullWidth
 				onChange={handleNameChange}
 				value={name}
-				label="Organization Name"
+				label="Name"
 				required
 				variant="outlined"
 				error={!!errorState}
@@ -197,7 +197,7 @@ export function Name({
 				minRows={4}
 				onChange={handleDescriptionChange}
 				value={description}
-				label="Organization Description"
+				label="Description"
 				required
 				variant="outlined"
 				error={!!errorState}

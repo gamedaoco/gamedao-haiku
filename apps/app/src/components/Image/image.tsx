@@ -81,13 +81,13 @@ export function Image({ src, alt, ratio, disabledEffect = false, effect = 'blur'
 			}}
 		>
 			<Box
-				component={NextImage}
-				fill
-				alt={alt ?? 'image'}
+				// component={NextImage}
+				// fill
+				// alt={alt ?? 'image'}
 				style={{ objectFit: 'cover' }}
-				wrapperClassName="wrapper"
-				effect={disabledEffect ? undefined : effect}
-				placeholderSrc={placeHolder.src}
+				// wrapperClassName="wrapper"
+				// effect={disabledEffect ? undefined : effect}
+				// placeholderSrc={placeHolder.src}
 				sx={{ width: 1, height: 1, objectFit: 'cover' }}
 				{...other}
 			/>

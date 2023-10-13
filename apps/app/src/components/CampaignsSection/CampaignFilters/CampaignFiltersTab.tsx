@@ -13,12 +13,12 @@ import {
 	Typography,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { CampaignBoolExp, DisplayValueEntryString } from 'src/queries'
+import { Campaign_Bool_Exp, DisplayValueEntryString } from 'src/queries'
 
 interface ComponentProps {
 	handleDrawerNavigation: () => void
 	setFilters: (p: (prev) => any) => void
-	filters: CampaignBoolExp[]
+	filters: Campaign_Bool_Exp[]
 	filtersOptions: DisplayValueEntryString[]
 }
 

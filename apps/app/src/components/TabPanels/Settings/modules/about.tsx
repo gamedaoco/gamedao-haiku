@@ -277,7 +277,7 @@ export function About({ id }: Props) {
 			/>
 
 			<Autocomplete
-				options={data?.gamedao?.displayValues?.countries || []}
+				options={data?.displayValues?.countries || []}
 				sx={{
 					'& fieldset': {
 						borderRadius: '5px',
@@ -294,7 +294,7 @@ export function About({ id }: Props) {
 			<Autocomplete
 				multiple
 				limitTags={5}
-				options={data?.gamedao?.displayValues?.tags}
+				options={data?.displayValues?.tags}
 				sx={{
 					'& fieldset': {
 						borderRadius: '5px',
