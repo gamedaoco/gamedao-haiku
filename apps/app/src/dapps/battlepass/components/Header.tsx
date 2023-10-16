@@ -66,10 +66,10 @@ export const Header = ({ orgId, id, view }: TProps) => {
 	const { data: members } = useGetBattlepassUsersQuery({ variables: { id: id } })
 	useEffect(() => {
 		if (!members) return
-		const _memberCount = members?.BattlepassBot?.Battlepasses[0]?.members.length || 0
+		const _memberCount = members?.battlepassBot?.battlepasses[0]?.members.length || 0
 		if (_memberCount === 0) return
 		setMemberCount(`${_memberCount} member${_memberCount > 1 ? 's' : ''}`)
-		// console.log('members', members?.BattlepassBot?.Battlepasses[0]?.members.length)
+		// console.log('members', members?.battlepassBot?.Battlepasses[0]?.members.length)
 	}, [members])
 
 	// organization + membership
@@ -131,7 +131,7 @@ export const Header = ({ orgId, id, view }: TProps) => {
 
 	useEffect(() => {
 		if (address && organization) {
-			setIsMember(organization.organizationMembers.some((member) => member.address === address))
+			setIsMember(organization.organization_members.some((member) => member.address === address))
 		}
 	}, [organization, address])
 

@@ -50,13 +50,13 @@ export function MyCollectables() {
 					</Fragment>
 				)}
 
-				{kusamaNFT?.gamedao.rmrkNfts && (
+				{kusamaNFT?.rmrkNfts && (
 					<Fragment>
 						<Typography variant="h6" py={2}>
 							{' '}
 							Kusama{' '}
 						</Typography>
-						{kusamaNFT?.gamedao.rmrkNfts.length === 0 ? (
+						{kusamaNFT?.rmrkNfts.length === 0 ? (
 							<Typography variant="body1">
 								You do not own any collectables on this network yet.
 							</Typography>

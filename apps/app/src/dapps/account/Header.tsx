@@ -65,8 +65,8 @@ export function Header() {
 				/>
 				<div>
 					<Typography variant="h6">
-						{identity?.displayName || getNameFromAccountState(accountState)}&nbsp;
-						{identity?.displayName && <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" />}
+						{identity?.display_name || getNameFromAccountState(accountState)}&nbsp;
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" />}
 					</Typography>
 					<Box
 						sx={{

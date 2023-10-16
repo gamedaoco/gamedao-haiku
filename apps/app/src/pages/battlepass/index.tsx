@@ -10,7 +10,7 @@ export function Page() {
 	// console.log('session',session||null)
 
 	return (
-		<Layout showHeader showFooter noContainer hideDApps>
+		<Layout showHeader showFooter noContainer>
 			{/* <Landingpage /> */}
 
 			{

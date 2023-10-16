@@ -109,7 +109,7 @@ export function LevelEditor(id) {
 
 	// const [createLevels, { loading, error }] = useMutation(gql`
 	// 	mutation CreateLevels($id: String!, $levels: [Level!]!) {
-	// 		BattlepassBot {
+	// 		battlepassBot {
 	// 			levels(battlepass: $id, levels: $levels) {
 	// 				battlepassId
 	// 			}
@@ -123,7 +123,7 @@ export function LevelEditor(id) {
 		const create = async () => {
 			const response = await createBattlepassLevelsMutation({ variables: payload }).then((res) => {
 				try {
-					// const _id = res?.data?.BattlepassBot?.levels
+					// const _id = res?.data?.battlepassBot?.levels
 					console.log('create', 'id ->', res)
 					setEnableSend(false)
 				} catch (e) {

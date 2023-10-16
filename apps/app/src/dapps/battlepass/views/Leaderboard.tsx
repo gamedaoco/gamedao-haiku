@@ -34,13 +34,13 @@ export function LeaderboardView({ id }: TProps) {
 
 	useEffect(() => {
 		if (!data) return
-		const points = data?.BattlepassBot?.BattlepassPoints
+		const points = data?.battlepassBot?.BattlepassPoints
 		if (points.length === 0) return
 		const rows = points
 			.map((item, index) => createRow(item.points, item.quests, item.identity.name, item.identityUuid)) //.sort((a, b) => a.points.toString().localeCompare(b.points.toString()))
 			.sort((a, b) => (a.points > b.points ? -1 : a.points < b.points ? 1 : 0))
 		setLeaderboard(rows)
-	}, [data, data?.BattlepassBot?.BattlepassPoints])
+	}, [data, data?.battlepassBot?.BattlepassPoints])
 
 	return loading ? (
 		<Loader />

@@ -297,7 +297,7 @@ export const BPQuests = ({ args }: TArgs) => {
 
 	useEffect(() => {
 		if (!quests) return
-		const _quests = quests.BattlepassBot.BattlepassQuests as TQuestItem[]
+		const _quests = quests.battlepassBot.BattlepassQuests as TQuestItem[]
 		if (_quests === items) return
 		// console.log('q', _quests)
 		setItems(_quests)
@@ -305,7 +305,7 @@ export const BPQuests = ({ args }: TArgs) => {
 
 	useEffect(() => {
 		if (!achievements) return
-		// const a = achievements.BattlepassBot.BattlepassProgresses
+		// const a = achievements.battlepassBot.BattlepassProgresses
 		const a = achievements.QuestProgresses
 		if (!a || a === userAchievements) return
 		// console.log('a', a)

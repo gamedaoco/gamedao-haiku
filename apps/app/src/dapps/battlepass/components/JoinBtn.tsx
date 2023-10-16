@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
-import { useAddMemberTransaction } from 'hooks/featureToggle/tx/useAddMemberTransaction'
+import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 // import { createWarningNotification } from 'src/utils/notificationUtils'
 import { useTheme } from '@mui/material/styles'

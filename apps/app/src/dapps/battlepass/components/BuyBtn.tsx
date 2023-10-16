@@ -122,14 +122,14 @@ export const BPBuyBtn = ({ args }: TProps) => {
 	useEffect(() => {
 		if (loadingBattlepassData) return
 		if (!battlepassData) return
-		if (!battlepassData?.BattlepassBot?.BattlepassIdentities) return
-		const memberships = battlepassData?.BattlepassBot?.BattlepassIdentities[0]?.members
+		if (!battlepassData?.battlepassBot?.identities) return
+		const memberships = battlepassData?.battlepassBot?.identities[0]?.members
 			?.map((b) => b.battlepass.chainId)
 			.filter((i) => i === id)[0]
 		const member = memberships === id
 		// console.log('memberships', memberships, member)
 		setIsMember(member)
-	}, [uuid, loadingBattlepassData, battlepassData?.BattlepassBot])
+	}, [uuid, loadingBattlepassData, battlepassData?.battlepassBot])
 
 	// JOIN TO PARTICIPATE
 
@@ -141,7 +141,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 		const connect = async () => {
 			const response = await joinBattlepassMutation().then((res) => {
 				try {
-					const _uuid = res?.data?.BattlepassBot?.join?.id
+					const _uuid = res?.data?.battlepassBot?.join?.id
 					console.log('join', 'id ->', id)
 					setIsMember(true)
 				} catch (e) {
@@ -164,7 +164,7 @@ export const BPBuyBtn = ({ args }: TProps) => {
 				variables: { battlepass: id, uuid: uuid },
 			}).then((res) => {
 				try {
-					const txs = res?.data?.BattlepassBot?.joinPremium?.status
+					const txs = res?.data?.battlepassBot?.joinPremium?.status
 					console.log('-->', 'tx status', txs)
 					setTxState(txs)
 					if (txs === 'pendingPayment') setOpen(true)

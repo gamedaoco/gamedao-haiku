@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { BattlepassViews } from 'src/constants/battlepass'
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useAddMemberTransaction } from 'hooks/featureToggle/tx/useAddMemberTransaction'
+import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Tab, Tabs, Button, Stack, useMediaQuery } from '@mui/material'

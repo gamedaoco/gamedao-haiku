@@ -25,8 +25,8 @@ export function Page() {
 
 	useEffect(() => {
 		if (loading || !data) return
-		if (data?.BattlepassBot?.Battlepasses?.length === 0) push('/battlepass') // 404
-	}, [loading, data?.BattlepassBot?.Battlepasses, push])
+		if (data?.battlepassBot?.battlepasses?.length === 0) push('/battlepass') // 404
+	}, [loading, data?.battlepassBot?.battlepasses, push])
 
 	const walletGate = false
 	const accountState = useCurrentAccountState()
@@ -38,7 +38,7 @@ export function Page() {
 		<Layout showHeader showFooter noContainer>
 			<Battlepass
 				args={{
-					orgId: data?.BattlepassBot?.Battlepasses[0]?.orgId,
+					orgId: data?.battlepassBot?.battlepasses[0]?.orgId,
 					id: id,
 					view: view,
 				}}

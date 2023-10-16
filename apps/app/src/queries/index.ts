@@ -16,9 +16,24 @@ export type Scalars = {
 	Upload: any
 	_text: any
 	bigint: any
+	bpchar: any
+	enum_BattlepassLevels_syncStatus: any
+	enum_BattlepassParticipants_status: any
+	enum_BattlepassRewards_syncStatus: any
+	enum_ChainActivities_activityType: any
+	enum_DiscordActivities_activityType: any
+	enum_GenericActivities_source: any
+	enum_Quests_source: any
+	enum_Quests_type: any
+	enum_RewardClaims_syncStatus: any
+	enum_TwitterActivities_activityType: any
+	enum_UserTokens_source: any
+	float8: any
+	json: any
 	numeric: any
 	timestamp: any
 	timestamptz: any
+	uuid: any
 }
 
 export enum ActivityType {
@@ -349,6 +364,458 @@ export type BattlepassLevel = {
 	readonly totalPoints: Scalars['Int']
 }
 
+/** columns and relationships of "BattlepassLevels" */
+export type BattlepassLevels = {
+	readonly __typename?: 'BattlepassLevels'
+	/** An object relationship */
+	readonly Battlepass?: Maybe<Battlepasses>
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly createdAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly level: Scalars['Int']
+	readonly name?: Maybe<Scalars['String']>
+	readonly points: Scalars['Int']
+	readonly syncStatus?: Maybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly totalPoints: Scalars['Int']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "BattlepassLevels" */
+export type BattlepassLevels_Aggregate = {
+	readonly __typename?: 'BattlepassLevels_aggregate'
+	readonly aggregate?: Maybe<BattlepassLevels_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<BattlepassLevels>
+}
+
+export type BattlepassLevels_Aggregate_Bool_Exp = {
+	readonly count?: InputMaybe<BattlepassLevels_Aggregate_Bool_Exp_Count>
+}
+
+export type BattlepassLevels_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<BattlepassLevels_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "BattlepassLevels" */
+export type BattlepassLevels_Aggregate_Fields = {
+	readonly __typename?: 'BattlepassLevels_aggregate_fields'
+	readonly avg?: Maybe<BattlepassLevels_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<BattlepassLevels_Max_Fields>
+	readonly min?: Maybe<BattlepassLevels_Min_Fields>
+	readonly stddev?: Maybe<BattlepassLevels_Stddev_Fields>
+	readonly stddev_pop?: Maybe<BattlepassLevels_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<BattlepassLevels_Stddev_Samp_Fields>
+	readonly sum?: Maybe<BattlepassLevels_Sum_Fields>
+	readonly var_pop?: Maybe<BattlepassLevels_Var_Pop_Fields>
+	readonly var_samp?: Maybe<BattlepassLevels_Var_Samp_Fields>
+	readonly variance?: Maybe<BattlepassLevels_Variance_Fields>
+}
+
+/** aggregate fields of "BattlepassLevels" */
+export type BattlepassLevels_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "BattlepassLevels" */
+export type BattlepassLevels_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<BattlepassLevels_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<BattlepassLevels_Max_Order_By>
+	readonly min?: InputMaybe<BattlepassLevels_Min_Order_By>
+	readonly stddev?: InputMaybe<BattlepassLevels_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<BattlepassLevels_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<BattlepassLevels_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<BattlepassLevels_Sum_Order_By>
+	readonly var_pop?: InputMaybe<BattlepassLevels_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<BattlepassLevels_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<BattlepassLevels_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "BattlepassLevels" */
+export type BattlepassLevels_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<BattlepassLevels_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<BattlepassLevels_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type BattlepassLevels_Avg_Fields = {
+	readonly __typename?: 'BattlepassLevels_avg_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Avg_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "BattlepassLevels". All fields are combined with a logical 'AND'. */
+export type BattlepassLevels_Bool_Exp = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<BattlepassLevels_Bool_Exp>>
+	readonly _not?: InputMaybe<BattlepassLevels_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<BattlepassLevels_Bool_Exp>>
+	readonly battlepassId?: InputMaybe<Int_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly level?: InputMaybe<Int_Comparison_Exp>
+	readonly name?: InputMaybe<String_Comparison_Exp>
+	readonly points?: InputMaybe<Int_Comparison_Exp>
+	readonly syncStatus?: InputMaybe<Enum_BattlepassLevels_SyncStatus_Comparison_Exp>
+	readonly totalPoints?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "BattlepassLevels" */
+export enum BattlepassLevels_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	BattlepassLevelsPkey = 'BattlepassLevels_pkey',
+}
+
+/** input type for incrementing numeric columns in table "BattlepassLevels" */
+export type BattlepassLevels_Inc_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly totalPoints?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "BattlepassLevels" */
+export type BattlepassLevels_Insert_Input = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Obj_Rel_Insert_Input>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly totalPoints?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type BattlepassLevels_Max_Fields = {
+	readonly __typename?: 'BattlepassLevels_max_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly level?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly totalPoints?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Max_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type BattlepassLevels_Min_Fields = {
+	readonly __typename?: 'BattlepassLevels_min_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly level?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly totalPoints?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Min_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "BattlepassLevels" */
+export type BattlepassLevels_Mutation_Response = {
+	readonly __typename?: 'BattlepassLevels_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<BattlepassLevels>
+}
+
+/** on_conflict condition type for table "BattlepassLevels" */
+export type BattlepassLevels_On_Conflict = {
+	readonly constraint: BattlepassLevels_Constraint
+	readonly update_columns?: ReadonlyArray<BattlepassLevels_Update_Column>
+	readonly where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "BattlepassLevels". */
+export type BattlepassLevels_Order_By = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: BattlepassLevels */
+export type BattlepassLevels_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "BattlepassLevels" */
+export enum BattlepassLevels_Select_Column {
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Level = 'level',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	SyncStatus = 'syncStatus',
+	/** column name */
+	TotalPoints = 'totalPoints',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "BattlepassLevels" */
+export type BattlepassLevels_Set_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly totalPoints?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type BattlepassLevels_Stddev_Fields = {
+	readonly __typename?: 'BattlepassLevels_stddev_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Stddev_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type BattlepassLevels_Stddev_Pop_Fields = {
+	readonly __typename?: 'BattlepassLevels_stddev_pop_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Stddev_Pop_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type BattlepassLevels_Stddev_Samp_Fields = {
+	readonly __typename?: 'BattlepassLevels_stddev_samp_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Stddev_Samp_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "BattlepassLevels" */
+export type BattlepassLevels_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: BattlepassLevels_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type BattlepassLevels_Stream_Cursor_Value_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly totalPoints?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type BattlepassLevels_Sum_Fields = {
+	readonly __typename?: 'BattlepassLevels_sum_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly level?: Maybe<Scalars['Int']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly totalPoints?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Sum_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** update columns of table "BattlepassLevels" */
+export enum BattlepassLevels_Update_Column {
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Level = 'level',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	SyncStatus = 'syncStatus',
+	/** column name */
+	TotalPoints = 'totalPoints',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type BattlepassLevels_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<BattlepassLevels_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<BattlepassLevels_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: BattlepassLevels_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type BattlepassLevels_Var_Pop_Fields = {
+	readonly __typename?: 'BattlepassLevels_var_pop_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Var_Pop_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type BattlepassLevels_Var_Samp_Fields = {
+	readonly __typename?: 'BattlepassLevels_var_samp_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Var_Samp_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type BattlepassLevels_Variance_Fields = {
+	readonly __typename?: 'BattlepassLevels_variance_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly totalPoints?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "BattlepassLevels" */
+export type BattlepassLevels_Variance_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly totalPoints?: InputMaybe<Order_By>
+}
+
 export type BattlepassMember = {
 	readonly __typename?: 'BattlepassMember'
 	readonly battlepass: Battlepass
@@ -361,6 +828,529 @@ export type BattlepassMember = {
 	readonly premium: Scalars['Boolean']
 	readonly progress?: Maybe<ReadonlyArray<Maybe<BattlepassQuestProgress>>>
 	readonly status: MemberStatus
+}
+
+/** columns and relationships of "BattlepassParticipants" */
+export type BattlepassParticipants = {
+	readonly __typename?: 'BattlepassParticipants'
+	/** An object relationship */
+	readonly Battlepass?: Maybe<Battlepasses>
+	/** An object relationship */
+	readonly Identity?: Maybe<Identities>
+	/** An array relationship */
+	readonly Payments: ReadonlyArray<Payments>
+	/** An aggregate relationship */
+	readonly Payments_aggregate: Payments_Aggregate
+	/** An array relationship */
+	readonly RewardClaims: ReadonlyArray<RewardClaims>
+	/** An aggregate relationship */
+	readonly RewardClaims_aggregate: RewardClaims_Aggregate
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly createdAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly passChainId?: Maybe<Scalars['bpchar']>
+	readonly points: Scalars['Int']
+	readonly premium?: Maybe<Scalars['Boolean']>
+	readonly status: Scalars['enum_BattlepassParticipants_status']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** columns and relationships of "BattlepassParticipants" */
+export type BattlepassParticipantsPaymentsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Payments_Order_By>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+/** columns and relationships of "BattlepassParticipants" */
+export type BattlepassParticipantsPayments_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Payments_Order_By>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+/** columns and relationships of "BattlepassParticipants" */
+export type BattlepassParticipantsRewardClaimsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+/** columns and relationships of "BattlepassParticipants" */
+export type BattlepassParticipantsRewardClaims_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+/** aggregated selection of "BattlepassParticipants" */
+export type BattlepassParticipants_Aggregate = {
+	readonly __typename?: 'BattlepassParticipants_aggregate'
+	readonly aggregate?: Maybe<BattlepassParticipants_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<BattlepassParticipants>
+}
+
+export type BattlepassParticipants_Aggregate_Bool_Exp = {
+	readonly bool_and?: InputMaybe<BattlepassParticipants_Aggregate_Bool_Exp_Bool_And>
+	readonly bool_or?: InputMaybe<BattlepassParticipants_Aggregate_Bool_Exp_Bool_Or>
+	readonly count?: InputMaybe<BattlepassParticipants_Aggregate_Bool_Exp_Count>
+}
+
+export type BattlepassParticipants_Aggregate_Bool_Exp_Bool_And = {
+	readonly arguments: BattlepassParticipants_Select_Column_BattlepassParticipants_Aggregate_Bool_Exp_Bool_And_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly predicate: Boolean_Comparison_Exp
+}
+
+export type BattlepassParticipants_Aggregate_Bool_Exp_Bool_Or = {
+	readonly arguments: BattlepassParticipants_Select_Column_BattlepassParticipants_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly predicate: Boolean_Comparison_Exp
+}
+
+export type BattlepassParticipants_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "BattlepassParticipants" */
+export type BattlepassParticipants_Aggregate_Fields = {
+	readonly __typename?: 'BattlepassParticipants_aggregate_fields'
+	readonly avg?: Maybe<BattlepassParticipants_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<BattlepassParticipants_Max_Fields>
+	readonly min?: Maybe<BattlepassParticipants_Min_Fields>
+	readonly stddev?: Maybe<BattlepassParticipants_Stddev_Fields>
+	readonly stddev_pop?: Maybe<BattlepassParticipants_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<BattlepassParticipants_Stddev_Samp_Fields>
+	readonly sum?: Maybe<BattlepassParticipants_Sum_Fields>
+	readonly var_pop?: Maybe<BattlepassParticipants_Var_Pop_Fields>
+	readonly var_samp?: Maybe<BattlepassParticipants_Var_Samp_Fields>
+	readonly variance?: Maybe<BattlepassParticipants_Variance_Fields>
+}
+
+/** aggregate fields of "BattlepassParticipants" */
+export type BattlepassParticipants_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "BattlepassParticipants" */
+export type BattlepassParticipants_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<BattlepassParticipants_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<BattlepassParticipants_Max_Order_By>
+	readonly min?: InputMaybe<BattlepassParticipants_Min_Order_By>
+	readonly stddev?: InputMaybe<BattlepassParticipants_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<BattlepassParticipants_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<BattlepassParticipants_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<BattlepassParticipants_Sum_Order_By>
+	readonly var_pop?: InputMaybe<BattlepassParticipants_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<BattlepassParticipants_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<BattlepassParticipants_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "BattlepassParticipants" */
+export type BattlepassParticipants_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<BattlepassParticipants_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<BattlepassParticipants_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type BattlepassParticipants_Avg_Fields = {
+	readonly __typename?: 'BattlepassParticipants_avg_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Avg_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "BattlepassParticipants". All fields are combined with a logical 'AND'. */
+export type BattlepassParticipants_Bool_Exp = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Bool_Exp>
+	readonly Identity?: InputMaybe<Identities_Bool_Exp>
+	readonly Payments?: InputMaybe<Payments_Bool_Exp>
+	readonly Payments_aggregate?: InputMaybe<Payments_Aggregate_Bool_Exp>
+	readonly RewardClaims?: InputMaybe<RewardClaims_Bool_Exp>
+	readonly RewardClaims_aggregate?: InputMaybe<RewardClaims_Aggregate_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<BattlepassParticipants_Bool_Exp>>
+	readonly _not?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<BattlepassParticipants_Bool_Exp>>
+	readonly battlepassId?: InputMaybe<Int_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly identityId?: InputMaybe<Int_Comparison_Exp>
+	readonly passChainId?: InputMaybe<Bpchar_Comparison_Exp>
+	readonly points?: InputMaybe<Int_Comparison_Exp>
+	readonly premium?: InputMaybe<Boolean_Comparison_Exp>
+	readonly status?: InputMaybe<Enum_BattlepassParticipants_Status_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "BattlepassParticipants" */
+export enum BattlepassParticipants_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	BattlepassParticipantsPkey = 'BattlepassParticipants_pkey',
+}
+
+/** input type for incrementing numeric columns in table "BattlepassParticipants" */
+export type BattlepassParticipants_Inc_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly points?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "BattlepassParticipants" */
+export type BattlepassParticipants_Insert_Input = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Obj_Rel_Insert_Input>
+	readonly Identity?: InputMaybe<Identities_Obj_Rel_Insert_Input>
+	readonly Payments?: InputMaybe<Payments_Arr_Rel_Insert_Input>
+	readonly RewardClaims?: InputMaybe<RewardClaims_Arr_Rel_Insert_Input>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly passChainId?: InputMaybe<Scalars['bpchar']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly premium?: InputMaybe<Scalars['Boolean']>
+	readonly status?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type BattlepassParticipants_Max_Fields = {
+	readonly __typename?: 'BattlepassParticipants_max_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly passChainId?: Maybe<Scalars['bpchar']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly status?: Maybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Max_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly passChainId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly status?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type BattlepassParticipants_Min_Fields = {
+	readonly __typename?: 'BattlepassParticipants_min_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly passChainId?: Maybe<Scalars['bpchar']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly status?: Maybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Min_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly passChainId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly status?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "BattlepassParticipants" */
+export type BattlepassParticipants_Mutation_Response = {
+	readonly __typename?: 'BattlepassParticipants_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<BattlepassParticipants>
+}
+
+/** input type for inserting object relation for remote table "BattlepassParticipants" */
+export type BattlepassParticipants_Obj_Rel_Insert_Input = {
+	readonly data: BattlepassParticipants_Insert_Input
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<BattlepassParticipants_On_Conflict>
+}
+
+/** on_conflict condition type for table "BattlepassParticipants" */
+export type BattlepassParticipants_On_Conflict = {
+	readonly constraint: BattlepassParticipants_Constraint
+	readonly update_columns?: ReadonlyArray<BattlepassParticipants_Update_Column>
+	readonly where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "BattlepassParticipants". */
+export type BattlepassParticipants_Order_By = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Order_By>
+	readonly Identity?: InputMaybe<Identities_Order_By>
+	readonly Payments_aggregate?: InputMaybe<Payments_Aggregate_Order_By>
+	readonly RewardClaims_aggregate?: InputMaybe<RewardClaims_Aggregate_Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly passChainId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly premium?: InputMaybe<Order_By>
+	readonly status?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: BattlepassParticipants */
+export type BattlepassParticipants_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "BattlepassParticipants" */
+export enum BattlepassParticipants_Select_Column {
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	PassChainId = 'passChainId',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	Premium = 'premium',
+	/** column name */
+	Status = 'status',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** select "BattlepassParticipants_aggregate_bool_exp_bool_and_arguments_columns" columns of table "BattlepassParticipants" */
+export enum BattlepassParticipants_Select_Column_BattlepassParticipants_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+	/** column name */
+	Premium = 'premium',
+}
+
+/** select "BattlepassParticipants_aggregate_bool_exp_bool_or_arguments_columns" columns of table "BattlepassParticipants" */
+export enum BattlepassParticipants_Select_Column_BattlepassParticipants_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+	/** column name */
+	Premium = 'premium',
+}
+
+/** input type for updating data in table "BattlepassParticipants" */
+export type BattlepassParticipants_Set_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly passChainId?: InputMaybe<Scalars['bpchar']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly premium?: InputMaybe<Scalars['Boolean']>
+	readonly status?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type BattlepassParticipants_Stddev_Fields = {
+	readonly __typename?: 'BattlepassParticipants_stddev_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Stddev_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type BattlepassParticipants_Stddev_Pop_Fields = {
+	readonly __typename?: 'BattlepassParticipants_stddev_pop_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Stddev_Pop_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type BattlepassParticipants_Stddev_Samp_Fields = {
+	readonly __typename?: 'BattlepassParticipants_stddev_samp_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Stddev_Samp_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "BattlepassParticipants" */
+export type BattlepassParticipants_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: BattlepassParticipants_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type BattlepassParticipants_Stream_Cursor_Value_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly passChainId?: InputMaybe<Scalars['bpchar']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly premium?: InputMaybe<Scalars['Boolean']>
+	readonly status?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type BattlepassParticipants_Sum_Fields = {
+	readonly __typename?: 'BattlepassParticipants_sum_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly points?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Sum_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** update columns of table "BattlepassParticipants" */
+export enum BattlepassParticipants_Update_Column {
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	PassChainId = 'passChainId',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	Premium = 'premium',
+	/** column name */
+	Status = 'status',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type BattlepassParticipants_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<BattlepassParticipants_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<BattlepassParticipants_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: BattlepassParticipants_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type BattlepassParticipants_Var_Pop_Fields = {
+	readonly __typename?: 'BattlepassParticipants_var_pop_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Var_Pop_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type BattlepassParticipants_Var_Samp_Fields = {
+	readonly __typename?: 'BattlepassParticipants_var_samp_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Var_Samp_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type BattlepassParticipants_Variance_Fields = {
+	readonly __typename?: 'BattlepassParticipants_variance_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "BattlepassParticipants" */
+export type BattlepassParticipants_Variance_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
 }
 
 export type BattlepassPoint = {
@@ -436,6 +1426,676 @@ export type BattlepassRewardClaim = {
 	readonly syncStatus: SyncStatus
 }
 
+/** columns and relationships of "BattlepassRewards" */
+export type BattlepassRewards = {
+	readonly __typename?: 'BattlepassRewards'
+	/** An object relationship */
+	readonly Battlepass?: Maybe<Battlepasses>
+	/** An array relationship */
+	readonly RewardClaims: ReadonlyArray<RewardClaims>
+	/** An aggregate relationship */
+	readonly RewardClaims_aggregate: RewardClaims_Aggregate
+	readonly available?: Maybe<Scalars['Int']>
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly chainId?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt: Scalars['timestamptz']
+	readonly description?: Maybe<Scalars['String']>
+	readonly id: Scalars['Int']
+	readonly level?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly total?: Maybe<Scalars['Int']>
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** columns and relationships of "BattlepassRewards" */
+export type BattlepassRewardsRewardClaimsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+/** columns and relationships of "BattlepassRewards" */
+export type BattlepassRewardsRewardClaims_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+/** aggregated selection of "BattlepassRewards" */
+export type BattlepassRewards_Aggregate = {
+	readonly __typename?: 'BattlepassRewards_aggregate'
+	readonly aggregate?: Maybe<BattlepassRewards_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<BattlepassRewards>
+}
+
+export type BattlepassRewards_Aggregate_Bool_Exp = {
+	readonly count?: InputMaybe<BattlepassRewards_Aggregate_Bool_Exp_Count>
+}
+
+export type BattlepassRewards_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<BattlepassRewards_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "BattlepassRewards" */
+export type BattlepassRewards_Aggregate_Fields = {
+	readonly __typename?: 'BattlepassRewards_aggregate_fields'
+	readonly avg?: Maybe<BattlepassRewards_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<BattlepassRewards_Max_Fields>
+	readonly min?: Maybe<BattlepassRewards_Min_Fields>
+	readonly stddev?: Maybe<BattlepassRewards_Stddev_Fields>
+	readonly stddev_pop?: Maybe<BattlepassRewards_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<BattlepassRewards_Stddev_Samp_Fields>
+	readonly sum?: Maybe<BattlepassRewards_Sum_Fields>
+	readonly var_pop?: Maybe<BattlepassRewards_Var_Pop_Fields>
+	readonly var_samp?: Maybe<BattlepassRewards_Var_Samp_Fields>
+	readonly variance?: Maybe<BattlepassRewards_Variance_Fields>
+}
+
+/** aggregate fields of "BattlepassRewards" */
+export type BattlepassRewards_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "BattlepassRewards" */
+export type BattlepassRewards_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<BattlepassRewards_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<BattlepassRewards_Max_Order_By>
+	readonly min?: InputMaybe<BattlepassRewards_Min_Order_By>
+	readonly stddev?: InputMaybe<BattlepassRewards_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<BattlepassRewards_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<BattlepassRewards_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<BattlepassRewards_Sum_Order_By>
+	readonly var_pop?: InputMaybe<BattlepassRewards_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<BattlepassRewards_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<BattlepassRewards_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "BattlepassRewards" */
+export type BattlepassRewards_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<BattlepassRewards_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<BattlepassRewards_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type BattlepassRewards_Avg_Fields = {
+	readonly __typename?: 'BattlepassRewards_avg_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Avg_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "BattlepassRewards". All fields are combined with a logical 'AND'. */
+export type BattlepassRewards_Bool_Exp = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Bool_Exp>
+	readonly RewardClaims?: InputMaybe<RewardClaims_Bool_Exp>
+	readonly RewardClaims_aggregate?: InputMaybe<RewardClaims_Aggregate_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<BattlepassRewards_Bool_Exp>>
+	readonly _not?: InputMaybe<BattlepassRewards_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<BattlepassRewards_Bool_Exp>>
+	readonly available?: InputMaybe<Int_Comparison_Exp>
+	readonly battlepassId?: InputMaybe<Int_Comparison_Exp>
+	readonly chainId?: InputMaybe<Bpchar_Comparison_Exp>
+	readonly cid?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly description?: InputMaybe<String_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly level?: InputMaybe<Int_Comparison_Exp>
+	readonly name?: InputMaybe<String_Comparison_Exp>
+	readonly points?: InputMaybe<Int_Comparison_Exp>
+	readonly syncStatus?: InputMaybe<Enum_BattlepassRewards_SyncStatus_Comparison_Exp>
+	readonly total?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "BattlepassRewards" */
+export enum BattlepassRewards_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	BattlepassRewardsPkey = 'BattlepassRewards_pkey',
+}
+
+/** input type for incrementing numeric columns in table "BattlepassRewards" */
+export type BattlepassRewards_Inc_Input = {
+	readonly available?: InputMaybe<Scalars['Int']>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly total?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "BattlepassRewards" */
+export type BattlepassRewards_Insert_Input = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Obj_Rel_Insert_Input>
+	readonly RewardClaims?: InputMaybe<RewardClaims_Arr_Rel_Insert_Input>
+	readonly available?: InputMaybe<Scalars['Int']>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly chainId?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly description?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly total?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type BattlepassRewards_Max_Fields = {
+	readonly __typename?: 'BattlepassRewards_max_fields'
+	readonly available?: Maybe<Scalars['Int']>
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly chainId?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly description?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly level?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly total?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Max_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly chainId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly description?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type BattlepassRewards_Min_Fields = {
+	readonly __typename?: 'BattlepassRewards_min_fields'
+	readonly available?: Maybe<Scalars['Int']>
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly chainId?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly description?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly level?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly total?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Min_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly chainId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly description?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "BattlepassRewards" */
+export type BattlepassRewards_Mutation_Response = {
+	readonly __typename?: 'BattlepassRewards_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<BattlepassRewards>
+}
+
+/** input type for inserting object relation for remote table "BattlepassRewards" */
+export type BattlepassRewards_Obj_Rel_Insert_Input = {
+	readonly data: BattlepassRewards_Insert_Input
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<BattlepassRewards_On_Conflict>
+}
+
+/** on_conflict condition type for table "BattlepassRewards" */
+export type BattlepassRewards_On_Conflict = {
+	readonly constraint: BattlepassRewards_Constraint
+	readonly update_columns?: ReadonlyArray<BattlepassRewards_Update_Column>
+	readonly where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "BattlepassRewards". */
+export type BattlepassRewards_Order_By = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Order_By>
+	readonly RewardClaims_aggregate?: InputMaybe<RewardClaims_Aggregate_Order_By>
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly chainId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly description?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: BattlepassRewards */
+export type BattlepassRewards_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "BattlepassRewards" */
+export enum BattlepassRewards_Select_Column {
+	/** column name */
+	Available = 'available',
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	ChainId = 'chainId',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Description = 'description',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Level = 'level',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	SyncStatus = 'syncStatus',
+	/** column name */
+	Total = 'total',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "BattlepassRewards" */
+export type BattlepassRewards_Set_Input = {
+	readonly available?: InputMaybe<Scalars['Int']>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly chainId?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly description?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly total?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type BattlepassRewards_Stddev_Fields = {
+	readonly __typename?: 'BattlepassRewards_stddev_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Stddev_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type BattlepassRewards_Stddev_Pop_Fields = {
+	readonly __typename?: 'BattlepassRewards_stddev_pop_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Stddev_Pop_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type BattlepassRewards_Stddev_Samp_Fields = {
+	readonly __typename?: 'BattlepassRewards_stddev_samp_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Stddev_Samp_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "BattlepassRewards" */
+export type BattlepassRewards_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: BattlepassRewards_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type BattlepassRewards_Stream_Cursor_Value_Input = {
+	readonly available?: InputMaybe<Scalars['Int']>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly chainId?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly description?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly level?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly total?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type BattlepassRewards_Sum_Fields = {
+	readonly __typename?: 'BattlepassRewards_sum_fields'
+	readonly available?: Maybe<Scalars['Int']>
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly level?: Maybe<Scalars['Int']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly total?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Sum_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** update columns of table "BattlepassRewards" */
+export enum BattlepassRewards_Update_Column {
+	/** column name */
+	Available = 'available',
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	ChainId = 'chainId',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Description = 'description',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Level = 'level',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	SyncStatus = 'syncStatus',
+	/** column name */
+	Total = 'total',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type BattlepassRewards_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<BattlepassRewards_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<BattlepassRewards_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: BattlepassRewards_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type BattlepassRewards_Var_Pop_Fields = {
+	readonly __typename?: 'BattlepassRewards_var_pop_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Var_Pop_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type BattlepassRewards_Var_Samp_Fields = {
+	readonly __typename?: 'BattlepassRewards_var_samp_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Var_Samp_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type BattlepassRewards_Variance_Fields = {
+	readonly __typename?: 'BattlepassRewards_variance_fields'
+	readonly available?: Maybe<Scalars['Float']>
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly level?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly total?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "BattlepassRewards" */
+export type BattlepassRewards_Variance_Order_By = {
+	readonly available?: InputMaybe<Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly level?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly total?: InputMaybe<Order_By>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type Battlepasses = {
+	readonly __typename?: 'Battlepasses'
+	/** An array relationship */
+	readonly BattlepassLevels: ReadonlyArray<BattlepassLevels>
+	/** An aggregate relationship */
+	readonly BattlepassLevels_aggregate: BattlepassLevels_Aggregate
+	/** An array relationship */
+	readonly BattlepassParticipants: ReadonlyArray<BattlepassParticipants>
+	/** An aggregate relationship */
+	readonly BattlepassParticipants_aggregate: BattlepassParticipants_Aggregate
+	/** An array relationship */
+	readonly BattlepassRewards: ReadonlyArray<BattlepassRewards>
+	/** An aggregate relationship */
+	readonly BattlepassRewards_aggregate: BattlepassRewards_Aggregate
+	/** An array relationship */
+	readonly Quests: ReadonlyArray<Quests>
+	/** An aggregate relationship */
+	readonly Quests_aggregate: Quests_Aggregate
+	readonly active: Scalars['Boolean']
+	readonly chainId: Scalars['bpchar']
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt: Scalars['timestamptz']
+	readonly endDate?: Maybe<Scalars['timestamptz']>
+	readonly finalized: Scalars['Boolean']
+	readonly freeClaimed: Scalars['Int']
+	readonly freePasses: Scalars['Int']
+	readonly id: Scalars['Int']
+	readonly joinable: Scalars['Boolean']
+	readonly name?: Maybe<Scalars['String']>
+	readonly orgId: Scalars['bpchar']
+	readonly premiumClaimed: Scalars['Int']
+	readonly premiumPasses?: Maybe<Scalars['Int']>
+	readonly price?: Maybe<Scalars['Int']>
+	readonly season?: Maybe<Scalars['Int']>
+	readonly startDate?: Maybe<Scalars['timestamptz']>
+	readonly totalJoined: Scalars['Int']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesBattlepassLevelsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassLevels_Order_By>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesBattlepassLevels_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassLevels_Order_By>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesBattlepassParticipantsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesBattlepassParticipants_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesBattlepassRewardsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassRewards_Order_By>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesBattlepassRewards_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassRewards_Order_By>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Quests_Order_By>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
+/** columns and relationships of "Battlepasses" */
+export type BattlepassesQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Quests_Order_By>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
 export type BattlepassesFilter = {
 	readonly active?: InputMaybe<Scalars['Boolean']>
 	readonly chainId?: InputMaybe<Scalars['String']>
@@ -443,6 +2103,462 @@ export type BattlepassesFilter = {
 	readonly id?: InputMaybe<Scalars['Int']>
 	readonly orgChainId?: InputMaybe<Scalars['String']>
 	readonly season?: InputMaybe<Scalars['Int']>
+}
+
+/** aggregated selection of "Battlepasses" */
+export type Battlepasses_Aggregate = {
+	readonly __typename?: 'Battlepasses_aggregate'
+	readonly aggregate?: Maybe<Battlepasses_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Battlepasses>
+}
+
+/** aggregate fields of "Battlepasses" */
+export type Battlepasses_Aggregate_Fields = {
+	readonly __typename?: 'Battlepasses_aggregate_fields'
+	readonly avg?: Maybe<Battlepasses_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Battlepasses_Max_Fields>
+	readonly min?: Maybe<Battlepasses_Min_Fields>
+	readonly stddev?: Maybe<Battlepasses_Stddev_Fields>
+	readonly stddev_pop?: Maybe<Battlepasses_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<Battlepasses_Stddev_Samp_Fields>
+	readonly sum?: Maybe<Battlepasses_Sum_Fields>
+	readonly var_pop?: Maybe<Battlepasses_Var_Pop_Fields>
+	readonly var_samp?: Maybe<Battlepasses_Var_Samp_Fields>
+	readonly variance?: Maybe<Battlepasses_Variance_Fields>
+}
+
+/** aggregate fields of "Battlepasses" */
+export type Battlepasses_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Battlepasses_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type Battlepasses_Avg_Fields = {
+	readonly __typename?: 'Battlepasses_avg_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "Battlepasses". All fields are combined with a logical 'AND'. */
+export type Battlepasses_Bool_Exp = {
+	readonly BattlepassLevels?: InputMaybe<BattlepassLevels_Bool_Exp>
+	readonly BattlepassLevels_aggregate?: InputMaybe<BattlepassLevels_Aggregate_Bool_Exp>
+	readonly BattlepassParticipants?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly BattlepassParticipants_aggregate?: InputMaybe<BattlepassParticipants_Aggregate_Bool_Exp>
+	readonly BattlepassRewards?: InputMaybe<BattlepassRewards_Bool_Exp>
+	readonly BattlepassRewards_aggregate?: InputMaybe<BattlepassRewards_Aggregate_Bool_Exp>
+	readonly Quests?: InputMaybe<Quests_Bool_Exp>
+	readonly Quests_aggregate?: InputMaybe<Quests_Aggregate_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<Battlepasses_Bool_Exp>>
+	readonly _not?: InputMaybe<Battlepasses_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<Battlepasses_Bool_Exp>>
+	readonly active?: InputMaybe<Boolean_Comparison_Exp>
+	readonly chainId?: InputMaybe<Bpchar_Comparison_Exp>
+	readonly cid?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly endDate?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly finalized?: InputMaybe<Boolean_Comparison_Exp>
+	readonly freeClaimed?: InputMaybe<Int_Comparison_Exp>
+	readonly freePasses?: InputMaybe<Int_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly joinable?: InputMaybe<Boolean_Comparison_Exp>
+	readonly name?: InputMaybe<String_Comparison_Exp>
+	readonly orgId?: InputMaybe<Bpchar_Comparison_Exp>
+	readonly premiumClaimed?: InputMaybe<Int_Comparison_Exp>
+	readonly premiumPasses?: InputMaybe<Int_Comparison_Exp>
+	readonly price?: InputMaybe<Int_Comparison_Exp>
+	readonly season?: InputMaybe<Int_Comparison_Exp>
+	readonly startDate?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly totalJoined?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "Battlepasses" */
+export enum Battlepasses_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	BattlepassesPkey = 'Battlepasses_pkey',
+}
+
+/** input type for incrementing numeric columns in table "Battlepasses" */
+export type Battlepasses_Inc_Input = {
+	readonly freeClaimed?: InputMaybe<Scalars['Int']>
+	readonly freePasses?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly premiumClaimed?: InputMaybe<Scalars['Int']>
+	readonly premiumPasses?: InputMaybe<Scalars['Int']>
+	readonly price?: InputMaybe<Scalars['Int']>
+	readonly season?: InputMaybe<Scalars['Int']>
+	readonly totalJoined?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "Battlepasses" */
+export type Battlepasses_Insert_Input = {
+	readonly BattlepassLevels?: InputMaybe<BattlepassLevels_Arr_Rel_Insert_Input>
+	readonly BattlepassParticipants?: InputMaybe<BattlepassParticipants_Arr_Rel_Insert_Input>
+	readonly BattlepassRewards?: InputMaybe<BattlepassRewards_Arr_Rel_Insert_Input>
+	readonly Quests?: InputMaybe<Quests_Arr_Rel_Insert_Input>
+	readonly active?: InputMaybe<Scalars['Boolean']>
+	readonly chainId?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly endDate?: InputMaybe<Scalars['timestamptz']>
+	readonly finalized?: InputMaybe<Scalars['Boolean']>
+	readonly freeClaimed?: InputMaybe<Scalars['Int']>
+	readonly freePasses?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly joinable?: InputMaybe<Scalars['Boolean']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly orgId?: InputMaybe<Scalars['bpchar']>
+	readonly premiumClaimed?: InputMaybe<Scalars['Int']>
+	readonly premiumPasses?: InputMaybe<Scalars['Int']>
+	readonly price?: InputMaybe<Scalars['Int']>
+	readonly season?: InputMaybe<Scalars['Int']>
+	readonly startDate?: InputMaybe<Scalars['timestamptz']>
+	readonly totalJoined?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type Battlepasses_Max_Fields = {
+	readonly __typename?: 'Battlepasses_max_fields'
+	readonly chainId?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly endDate?: Maybe<Scalars['timestamptz']>
+	readonly freeClaimed?: Maybe<Scalars['Int']>
+	readonly freePasses?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly orgId?: Maybe<Scalars['bpchar']>
+	readonly premiumClaimed?: Maybe<Scalars['Int']>
+	readonly premiumPasses?: Maybe<Scalars['Int']>
+	readonly price?: Maybe<Scalars['Int']>
+	readonly season?: Maybe<Scalars['Int']>
+	readonly startDate?: Maybe<Scalars['timestamptz']>
+	readonly totalJoined?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type Battlepasses_Min_Fields = {
+	readonly __typename?: 'Battlepasses_min_fields'
+	readonly chainId?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly endDate?: Maybe<Scalars['timestamptz']>
+	readonly freeClaimed?: Maybe<Scalars['Int']>
+	readonly freePasses?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly orgId?: Maybe<Scalars['bpchar']>
+	readonly premiumClaimed?: Maybe<Scalars['Int']>
+	readonly premiumPasses?: Maybe<Scalars['Int']>
+	readonly price?: Maybe<Scalars['Int']>
+	readonly season?: Maybe<Scalars['Int']>
+	readonly startDate?: Maybe<Scalars['timestamptz']>
+	readonly totalJoined?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "Battlepasses" */
+export type Battlepasses_Mutation_Response = {
+	readonly __typename?: 'Battlepasses_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<Battlepasses>
+}
+
+/** input type for inserting object relation for remote table "Battlepasses" */
+export type Battlepasses_Obj_Rel_Insert_Input = {
+	readonly data: Battlepasses_Insert_Input
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<Battlepasses_On_Conflict>
+}
+
+/** on_conflict condition type for table "Battlepasses" */
+export type Battlepasses_On_Conflict = {
+	readonly constraint: Battlepasses_Constraint
+	readonly update_columns?: ReadonlyArray<Battlepasses_Update_Column>
+	readonly where?: InputMaybe<Battlepasses_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "Battlepasses". */
+export type Battlepasses_Order_By = {
+	readonly BattlepassLevels_aggregate?: InputMaybe<BattlepassLevels_Aggregate_Order_By>
+	readonly BattlepassParticipants_aggregate?: InputMaybe<BattlepassParticipants_Aggregate_Order_By>
+	readonly BattlepassRewards_aggregate?: InputMaybe<BattlepassRewards_Aggregate_Order_By>
+	readonly Quests_aggregate?: InputMaybe<Quests_Aggregate_Order_By>
+	readonly active?: InputMaybe<Order_By>
+	readonly chainId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly endDate?: InputMaybe<Order_By>
+	readonly finalized?: InputMaybe<Order_By>
+	readonly freeClaimed?: InputMaybe<Order_By>
+	readonly freePasses?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly joinable?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly orgId?: InputMaybe<Order_By>
+	readonly premiumClaimed?: InputMaybe<Order_By>
+	readonly premiumPasses?: InputMaybe<Order_By>
+	readonly price?: InputMaybe<Order_By>
+	readonly season?: InputMaybe<Order_By>
+	readonly startDate?: InputMaybe<Order_By>
+	readonly totalJoined?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: Battlepasses */
+export type Battlepasses_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "Battlepasses" */
+export enum Battlepasses_Select_Column {
+	/** column name */
+	Active = 'active',
+	/** column name */
+	ChainId = 'chainId',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	EndDate = 'endDate',
+	/** column name */
+	Finalized = 'finalized',
+	/** column name */
+	FreeClaimed = 'freeClaimed',
+	/** column name */
+	FreePasses = 'freePasses',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Joinable = 'joinable',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	OrgId = 'orgId',
+	/** column name */
+	PremiumClaimed = 'premiumClaimed',
+	/** column name */
+	PremiumPasses = 'premiumPasses',
+	/** column name */
+	Price = 'price',
+	/** column name */
+	Season = 'season',
+	/** column name */
+	StartDate = 'startDate',
+	/** column name */
+	TotalJoined = 'totalJoined',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "Battlepasses" */
+export type Battlepasses_Set_Input = {
+	readonly active?: InputMaybe<Scalars['Boolean']>
+	readonly chainId?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly endDate?: InputMaybe<Scalars['timestamptz']>
+	readonly finalized?: InputMaybe<Scalars['Boolean']>
+	readonly freeClaimed?: InputMaybe<Scalars['Int']>
+	readonly freePasses?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly joinable?: InputMaybe<Scalars['Boolean']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly orgId?: InputMaybe<Scalars['bpchar']>
+	readonly premiumClaimed?: InputMaybe<Scalars['Int']>
+	readonly premiumPasses?: InputMaybe<Scalars['Int']>
+	readonly price?: InputMaybe<Scalars['Int']>
+	readonly season?: InputMaybe<Scalars['Int']>
+	readonly startDate?: InputMaybe<Scalars['timestamptz']>
+	readonly totalJoined?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type Battlepasses_Stddev_Fields = {
+	readonly __typename?: 'Battlepasses_stddev_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Battlepasses_Stddev_Pop_Fields = {
+	readonly __typename?: 'Battlepasses_stddev_pop_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Battlepasses_Stddev_Samp_Fields = {
+	readonly __typename?: 'Battlepasses_stddev_samp_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "Battlepasses" */
+export type Battlepasses_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: Battlepasses_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Battlepasses_Stream_Cursor_Value_Input = {
+	readonly active?: InputMaybe<Scalars['Boolean']>
+	readonly chainId?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly endDate?: InputMaybe<Scalars['timestamptz']>
+	readonly finalized?: InputMaybe<Scalars['Boolean']>
+	readonly freeClaimed?: InputMaybe<Scalars['Int']>
+	readonly freePasses?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly joinable?: InputMaybe<Scalars['Boolean']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly orgId?: InputMaybe<Scalars['bpchar']>
+	readonly premiumClaimed?: InputMaybe<Scalars['Int']>
+	readonly premiumPasses?: InputMaybe<Scalars['Int']>
+	readonly price?: InputMaybe<Scalars['Int']>
+	readonly season?: InputMaybe<Scalars['Int']>
+	readonly startDate?: InputMaybe<Scalars['timestamptz']>
+	readonly totalJoined?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type Battlepasses_Sum_Fields = {
+	readonly __typename?: 'Battlepasses_sum_fields'
+	readonly freeClaimed?: Maybe<Scalars['Int']>
+	readonly freePasses?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly premiumClaimed?: Maybe<Scalars['Int']>
+	readonly premiumPasses?: Maybe<Scalars['Int']>
+	readonly price?: Maybe<Scalars['Int']>
+	readonly season?: Maybe<Scalars['Int']>
+	readonly totalJoined?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "Battlepasses" */
+export enum Battlepasses_Update_Column {
+	/** column name */
+	Active = 'active',
+	/** column name */
+	ChainId = 'chainId',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	EndDate = 'endDate',
+	/** column name */
+	Finalized = 'finalized',
+	/** column name */
+	FreeClaimed = 'freeClaimed',
+	/** column name */
+	FreePasses = 'freePasses',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Joinable = 'joinable',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	OrgId = 'orgId',
+	/** column name */
+	PremiumClaimed = 'premiumClaimed',
+	/** column name */
+	PremiumPasses = 'premiumPasses',
+	/** column name */
+	Price = 'price',
+	/** column name */
+	Season = 'season',
+	/** column name */
+	StartDate = 'startDate',
+	/** column name */
+	TotalJoined = 'totalJoined',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type Battlepasses_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<Battlepasses_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<Battlepasses_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: Battlepasses_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Battlepasses_Var_Pop_Fields = {
+	readonly __typename?: 'Battlepasses_var_pop_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type Battlepasses_Var_Samp_Fields = {
+	readonly __typename?: 'Battlepasses_var_samp_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type Battlepasses_Variance_Fields = {
+	readonly __typename?: 'Battlepasses_variance_fields'
+	readonly freeClaimed?: Maybe<Scalars['Float']>
+	readonly freePasses?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly premiumClaimed?: Maybe<Scalars['Float']>
+	readonly premiumPasses?: Maybe<Scalars['Float']>
+	readonly price?: Maybe<Scalars['Float']>
+	readonly season?: Maybe<Scalars['Float']>
+	readonly totalJoined?: Maybe<Scalars['Float']>
 }
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -456,6 +2572,238 @@ export type Boolean_Comparison_Exp = {
 	readonly _lte?: InputMaybe<Scalars['Boolean']>
 	readonly _neq?: InputMaybe<Scalars['Boolean']>
 	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['Boolean']>>
+}
+
+/** columns and relationships of "ChainActivities" */
+export type ChainActivities = {
+	readonly __typename?: 'ChainActivities'
+	readonly activityType: Scalars['enum_ChainActivities_activityType']
+	readonly address: Scalars['bpchar']
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id: Scalars['Int']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "ChainActivities" */
+export type ChainActivities_Aggregate = {
+	readonly __typename?: 'ChainActivities_aggregate'
+	readonly aggregate?: Maybe<ChainActivities_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<ChainActivities>
+}
+
+/** aggregate fields of "ChainActivities" */
+export type ChainActivities_Aggregate_Fields = {
+	readonly __typename?: 'ChainActivities_aggregate_fields'
+	readonly avg?: Maybe<ChainActivities_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<ChainActivities_Max_Fields>
+	readonly min?: Maybe<ChainActivities_Min_Fields>
+	readonly stddev?: Maybe<ChainActivities_Stddev_Fields>
+	readonly stddev_pop?: Maybe<ChainActivities_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<ChainActivities_Stddev_Samp_Fields>
+	readonly sum?: Maybe<ChainActivities_Sum_Fields>
+	readonly var_pop?: Maybe<ChainActivities_Var_Pop_Fields>
+	readonly var_samp?: Maybe<ChainActivities_Var_Samp_Fields>
+	readonly variance?: Maybe<ChainActivities_Variance_Fields>
+}
+
+/** aggregate fields of "ChainActivities" */
+export type ChainActivities_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<ChainActivities_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type ChainActivities_Avg_Fields = {
+	readonly __typename?: 'ChainActivities_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "ChainActivities". All fields are combined with a logical 'AND'. */
+export type ChainActivities_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<ChainActivities_Bool_Exp>>
+	readonly _not?: InputMaybe<ChainActivities_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<ChainActivities_Bool_Exp>>
+	readonly activityType?: InputMaybe<Enum_ChainActivities_ActivityType_Comparison_Exp>
+	readonly address?: InputMaybe<Bpchar_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "ChainActivities" */
+export enum ChainActivities_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	ChainActivitiesPkey = 'ChainActivities_pkey',
+}
+
+/** input type for incrementing numeric columns in table "ChainActivities" */
+export type ChainActivities_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "ChainActivities" */
+export type ChainActivities_Insert_Input = {
+	readonly activityType?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly address?: InputMaybe<Scalars['bpchar']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type ChainActivities_Max_Fields = {
+	readonly __typename?: 'ChainActivities_max_fields'
+	readonly activityType?: Maybe<Scalars['enum_ChainActivities_activityType']>
+	readonly address?: Maybe<Scalars['bpchar']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type ChainActivities_Min_Fields = {
+	readonly __typename?: 'ChainActivities_min_fields'
+	readonly activityType?: Maybe<Scalars['enum_ChainActivities_activityType']>
+	readonly address?: Maybe<Scalars['bpchar']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "ChainActivities" */
+export type ChainActivities_Mutation_Response = {
+	readonly __typename?: 'ChainActivities_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<ChainActivities>
+}
+
+/** on_conflict condition type for table "ChainActivities" */
+export type ChainActivities_On_Conflict = {
+	readonly constraint: ChainActivities_Constraint
+	readonly update_columns?: ReadonlyArray<ChainActivities_Update_Column>
+	readonly where?: InputMaybe<ChainActivities_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "ChainActivities". */
+export type ChainActivities_Order_By = {
+	readonly activityType?: InputMaybe<Order_By>
+	readonly address?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: ChainActivities */
+export type ChainActivities_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "ChainActivities" */
+export enum ChainActivities_Select_Column {
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	Address = 'address',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "ChainActivities" */
+export type ChainActivities_Set_Input = {
+	readonly activityType?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly address?: InputMaybe<Scalars['bpchar']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type ChainActivities_Stddev_Fields = {
+	readonly __typename?: 'ChainActivities_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type ChainActivities_Stddev_Pop_Fields = {
+	readonly __typename?: 'ChainActivities_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type ChainActivities_Stddev_Samp_Fields = {
+	readonly __typename?: 'ChainActivities_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "ChainActivities" */
+export type ChainActivities_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: ChainActivities_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type ChainActivities_Stream_Cursor_Value_Input = {
+	readonly activityType?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly address?: InputMaybe<Scalars['bpchar']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type ChainActivities_Sum_Fields = {
+	readonly __typename?: 'ChainActivities_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "ChainActivities" */
+export enum ChainActivities_Update_Column {
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	Address = 'address',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type ChainActivities_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<ChainActivities_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<ChainActivities_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: ChainActivities_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type ChainActivities_Var_Pop_Fields = {
+	readonly __typename?: 'ChainActivities_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type ChainActivities_Var_Samp_Fields = {
+	readonly __typename?: 'ChainActivities_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type ChainActivities_Variance_Fields = {
+	readonly __typename?: 'ChainActivities_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
 }
 
 /** columns and relationships of "ChainInfo" */
@@ -674,6 +3022,616 @@ export type ChainProperties = {
 	readonly tokenSymbol: ReadonlyArray<Maybe<Scalars['String']>>
 }
 
+/** columns and relationships of "ChainStatuses" */
+export type ChainStatuses = {
+	readonly __typename?: 'ChainStatuses'
+	readonly blockNumber: Scalars['Int']
+	readonly createdAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "ChainStatuses" */
+export type ChainStatuses_Aggregate = {
+	readonly __typename?: 'ChainStatuses_aggregate'
+	readonly aggregate?: Maybe<ChainStatuses_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<ChainStatuses>
+}
+
+/** aggregate fields of "ChainStatuses" */
+export type ChainStatuses_Aggregate_Fields = {
+	readonly __typename?: 'ChainStatuses_aggregate_fields'
+	readonly avg?: Maybe<ChainStatuses_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<ChainStatuses_Max_Fields>
+	readonly min?: Maybe<ChainStatuses_Min_Fields>
+	readonly stddev?: Maybe<ChainStatuses_Stddev_Fields>
+	readonly stddev_pop?: Maybe<ChainStatuses_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<ChainStatuses_Stddev_Samp_Fields>
+	readonly sum?: Maybe<ChainStatuses_Sum_Fields>
+	readonly var_pop?: Maybe<ChainStatuses_Var_Pop_Fields>
+	readonly var_samp?: Maybe<ChainStatuses_Var_Samp_Fields>
+	readonly variance?: Maybe<ChainStatuses_Variance_Fields>
+}
+
+/** aggregate fields of "ChainStatuses" */
+export type ChainStatuses_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<ChainStatuses_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type ChainStatuses_Avg_Fields = {
+	readonly __typename?: 'ChainStatuses_avg_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "ChainStatuses". All fields are combined with a logical 'AND'. */
+export type ChainStatuses_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<ChainStatuses_Bool_Exp>>
+	readonly _not?: InputMaybe<ChainStatuses_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<ChainStatuses_Bool_Exp>>
+	readonly blockNumber?: InputMaybe<Int_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "ChainStatuses" */
+export enum ChainStatuses_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	ChainStatusesPkey = 'ChainStatuses_pkey',
+}
+
+/** input type for incrementing numeric columns in table "ChainStatuses" */
+export type ChainStatuses_Inc_Input = {
+	readonly blockNumber?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "ChainStatuses" */
+export type ChainStatuses_Insert_Input = {
+	readonly blockNumber?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type ChainStatuses_Max_Fields = {
+	readonly __typename?: 'ChainStatuses_max_fields'
+	readonly blockNumber?: Maybe<Scalars['Int']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type ChainStatuses_Min_Fields = {
+	readonly __typename?: 'ChainStatuses_min_fields'
+	readonly blockNumber?: Maybe<Scalars['Int']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "ChainStatuses" */
+export type ChainStatuses_Mutation_Response = {
+	readonly __typename?: 'ChainStatuses_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<ChainStatuses>
+}
+
+/** on_conflict condition type for table "ChainStatuses" */
+export type ChainStatuses_On_Conflict = {
+	readonly constraint: ChainStatuses_Constraint
+	readonly update_columns?: ReadonlyArray<ChainStatuses_Update_Column>
+	readonly where?: InputMaybe<ChainStatuses_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "ChainStatuses". */
+export type ChainStatuses_Order_By = {
+	readonly blockNumber?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: ChainStatuses */
+export type ChainStatuses_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "ChainStatuses" */
+export enum ChainStatuses_Select_Column {
+	/** column name */
+	BlockNumber = 'blockNumber',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "ChainStatuses" */
+export type ChainStatuses_Set_Input = {
+	readonly blockNumber?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type ChainStatuses_Stddev_Fields = {
+	readonly __typename?: 'ChainStatuses_stddev_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type ChainStatuses_Stddev_Pop_Fields = {
+	readonly __typename?: 'ChainStatuses_stddev_pop_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type ChainStatuses_Stddev_Samp_Fields = {
+	readonly __typename?: 'ChainStatuses_stddev_samp_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "ChainStatuses" */
+export type ChainStatuses_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: ChainStatuses_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type ChainStatuses_Stream_Cursor_Value_Input = {
+	readonly blockNumber?: InputMaybe<Scalars['Int']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type ChainStatuses_Sum_Fields = {
+	readonly __typename?: 'ChainStatuses_sum_fields'
+	readonly blockNumber?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "ChainStatuses" */
+export enum ChainStatuses_Update_Column {
+	/** column name */
+	BlockNumber = 'blockNumber',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type ChainStatuses_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<ChainStatuses_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<ChainStatuses_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: ChainStatuses_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type ChainStatuses_Var_Pop_Fields = {
+	readonly __typename?: 'ChainStatuses_var_pop_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type ChainStatuses_Var_Samp_Fields = {
+	readonly __typename?: 'ChainStatuses_var_samp_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type ChainStatuses_Variance_Fields = {
+	readonly __typename?: 'ChainStatuses_variance_fields'
+	readonly blockNumber?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** columns and relationships of "CompletedQuests" */
+export type CompletedQuests = {
+	readonly __typename?: 'CompletedQuests'
+	/** An object relationship */
+	readonly Identity?: Maybe<Identities>
+	/** An object relationship */
+	readonly Quest?: Maybe<Quests>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly id: Scalars['Int']
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly questId?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregated selection of "CompletedQuests" */
+export type CompletedQuests_Aggregate = {
+	readonly __typename?: 'CompletedQuests_aggregate'
+	readonly aggregate?: Maybe<CompletedQuests_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<CompletedQuests>
+}
+
+export type CompletedQuests_Aggregate_Bool_Exp = {
+	readonly count?: InputMaybe<CompletedQuests_Aggregate_Bool_Exp_Count>
+}
+
+export type CompletedQuests_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<CompletedQuests_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "CompletedQuests" */
+export type CompletedQuests_Aggregate_Fields = {
+	readonly __typename?: 'CompletedQuests_aggregate_fields'
+	readonly avg?: Maybe<CompletedQuests_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<CompletedQuests_Max_Fields>
+	readonly min?: Maybe<CompletedQuests_Min_Fields>
+	readonly stddev?: Maybe<CompletedQuests_Stddev_Fields>
+	readonly stddev_pop?: Maybe<CompletedQuests_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<CompletedQuests_Stddev_Samp_Fields>
+	readonly sum?: Maybe<CompletedQuests_Sum_Fields>
+	readonly var_pop?: Maybe<CompletedQuests_Var_Pop_Fields>
+	readonly var_samp?: Maybe<CompletedQuests_Var_Samp_Fields>
+	readonly variance?: Maybe<CompletedQuests_Variance_Fields>
+}
+
+/** aggregate fields of "CompletedQuests" */
+export type CompletedQuests_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "CompletedQuests" */
+export type CompletedQuests_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<CompletedQuests_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<CompletedQuests_Max_Order_By>
+	readonly min?: InputMaybe<CompletedQuests_Min_Order_By>
+	readonly stddev?: InputMaybe<CompletedQuests_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<CompletedQuests_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<CompletedQuests_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<CompletedQuests_Sum_Order_By>
+	readonly var_pop?: InputMaybe<CompletedQuests_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<CompletedQuests_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<CompletedQuests_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "CompletedQuests" */
+export type CompletedQuests_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<CompletedQuests_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<CompletedQuests_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type CompletedQuests_Avg_Fields = {
+	readonly __typename?: 'CompletedQuests_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "CompletedQuests" */
+export type CompletedQuests_Avg_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "CompletedQuests". All fields are combined with a logical 'AND'. */
+export type CompletedQuests_Bool_Exp = {
+	readonly Identity?: InputMaybe<Identities_Bool_Exp>
+	readonly Quest?: InputMaybe<Quests_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<CompletedQuests_Bool_Exp>>
+	readonly _not?: InputMaybe<CompletedQuests_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<CompletedQuests_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly guildId?: InputMaybe<String_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly identityId?: InputMaybe<Int_Comparison_Exp>
+	readonly questId?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "CompletedQuests" */
+export enum CompletedQuests_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	CompletedQuestsPkey = 'CompletedQuests_pkey',
+}
+
+/** input type for incrementing numeric columns in table "CompletedQuests" */
+export type CompletedQuests_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "CompletedQuests" */
+export type CompletedQuests_Insert_Input = {
+	readonly Identity?: InputMaybe<Identities_Obj_Rel_Insert_Input>
+	readonly Quest?: InputMaybe<Quests_Obj_Rel_Insert_Input>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type CompletedQuests_Max_Fields = {
+	readonly __typename?: 'CompletedQuests_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly questId?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "CompletedQuests" */
+export type CompletedQuests_Max_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type CompletedQuests_Min_Fields = {
+	readonly __typename?: 'CompletedQuests_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly questId?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "CompletedQuests" */
+export type CompletedQuests_Min_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "CompletedQuests" */
+export type CompletedQuests_Mutation_Response = {
+	readonly __typename?: 'CompletedQuests_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<CompletedQuests>
+}
+
+/** on_conflict condition type for table "CompletedQuests" */
+export type CompletedQuests_On_Conflict = {
+	readonly constraint: CompletedQuests_Constraint
+	readonly update_columns?: ReadonlyArray<CompletedQuests_Update_Column>
+	readonly where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "CompletedQuests". */
+export type CompletedQuests_Order_By = {
+	readonly Identity?: InputMaybe<Identities_Order_By>
+	readonly Quest?: InputMaybe<Quests_Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: CompletedQuests */
+export type CompletedQuests_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "CompletedQuests" */
+export enum CompletedQuests_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	GuildId = 'guildId',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	QuestId = 'questId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "CompletedQuests" */
+export type CompletedQuests_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type CompletedQuests_Stddev_Fields = {
+	readonly __typename?: 'CompletedQuests_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "CompletedQuests" */
+export type CompletedQuests_Stddev_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type CompletedQuests_Stddev_Pop_Fields = {
+	readonly __typename?: 'CompletedQuests_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "CompletedQuests" */
+export type CompletedQuests_Stddev_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type CompletedQuests_Stddev_Samp_Fields = {
+	readonly __typename?: 'CompletedQuests_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "CompletedQuests" */
+export type CompletedQuests_Stddev_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "CompletedQuests" */
+export type CompletedQuests_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: CompletedQuests_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type CompletedQuests_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type CompletedQuests_Sum_Fields = {
+	readonly __typename?: 'CompletedQuests_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly questId?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "CompletedQuests" */
+export type CompletedQuests_Sum_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** update columns of table "CompletedQuests" */
+export enum CompletedQuests_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	GuildId = 'guildId',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	QuestId = 'questId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type CompletedQuests_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<CompletedQuests_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<CompletedQuests_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: CompletedQuests_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type CompletedQuests_Var_Pop_Fields = {
+	readonly __typename?: 'CompletedQuests_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "CompletedQuests" */
+export type CompletedQuests_Var_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type CompletedQuests_Var_Samp_Fields = {
+	readonly __typename?: 'CompletedQuests_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "CompletedQuests" */
+export type CompletedQuests_Var_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type CompletedQuests_Variance_Fields = {
+	readonly __typename?: 'CompletedQuests_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "CompletedQuests" */
+export type CompletedQuests_Variance_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
 export type Config = {
 	readonly __typename?: 'Config'
 	readonly CAMPAIGN_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']>
@@ -687,6 +3645,274 @@ export type Config = {
 	readonly SITE_TITLE?: Maybe<Scalars['String']>
 	readonly TW_SITE_CREATOR?: Maybe<Scalars['String']>
 	readonly TW_SITE_NAME?: Maybe<Scalars['String']>
+}
+
+/** columns and relationships of "DiscordActivities" */
+export type DiscordActivities = {
+	readonly __typename?: 'DiscordActivities'
+	readonly activityId: Scalars['String']
+	readonly activityType?: Maybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly channelId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly discordId: Scalars['String']
+	readonly guildId: Scalars['String']
+	readonly id: Scalars['Int']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "DiscordActivities" */
+export type DiscordActivities_Aggregate = {
+	readonly __typename?: 'DiscordActivities_aggregate'
+	readonly aggregate?: Maybe<DiscordActivities_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<DiscordActivities>
+}
+
+/** aggregate fields of "DiscordActivities" */
+export type DiscordActivities_Aggregate_Fields = {
+	readonly __typename?: 'DiscordActivities_aggregate_fields'
+	readonly avg?: Maybe<DiscordActivities_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<DiscordActivities_Max_Fields>
+	readonly min?: Maybe<DiscordActivities_Min_Fields>
+	readonly stddev?: Maybe<DiscordActivities_Stddev_Fields>
+	readonly stddev_pop?: Maybe<DiscordActivities_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<DiscordActivities_Stddev_Samp_Fields>
+	readonly sum?: Maybe<DiscordActivities_Sum_Fields>
+	readonly var_pop?: Maybe<DiscordActivities_Var_Pop_Fields>
+	readonly var_samp?: Maybe<DiscordActivities_Var_Samp_Fields>
+	readonly variance?: Maybe<DiscordActivities_Variance_Fields>
+}
+
+/** aggregate fields of "DiscordActivities" */
+export type DiscordActivities_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<DiscordActivities_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type DiscordActivities_Avg_Fields = {
+	readonly __typename?: 'DiscordActivities_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "DiscordActivities". All fields are combined with a logical 'AND'. */
+export type DiscordActivities_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<DiscordActivities_Bool_Exp>>
+	readonly _not?: InputMaybe<DiscordActivities_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<DiscordActivities_Bool_Exp>>
+	readonly activityId?: InputMaybe<String_Comparison_Exp>
+	readonly activityType?: InputMaybe<Enum_DiscordActivities_ActivityType_Comparison_Exp>
+	readonly channelId?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly discordId?: InputMaybe<String_Comparison_Exp>
+	readonly guildId?: InputMaybe<String_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "DiscordActivities" */
+export enum DiscordActivities_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	DiscordActivitiesPkey = 'DiscordActivities_pkey',
+}
+
+/** input type for incrementing numeric columns in table "DiscordActivities" */
+export type DiscordActivities_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "DiscordActivities" */
+export type DiscordActivities_Insert_Input = {
+	readonly activityId?: InputMaybe<Scalars['String']>
+	readonly activityType?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly channelId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly discordId?: InputMaybe<Scalars['String']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type DiscordActivities_Max_Fields = {
+	readonly __typename?: 'DiscordActivities_max_fields'
+	readonly activityId?: Maybe<Scalars['String']>
+	readonly activityType?: Maybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly channelId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly discordId?: Maybe<Scalars['String']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type DiscordActivities_Min_Fields = {
+	readonly __typename?: 'DiscordActivities_min_fields'
+	readonly activityId?: Maybe<Scalars['String']>
+	readonly activityType?: Maybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly channelId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly discordId?: Maybe<Scalars['String']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "DiscordActivities" */
+export type DiscordActivities_Mutation_Response = {
+	readonly __typename?: 'DiscordActivities_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<DiscordActivities>
+}
+
+/** on_conflict condition type for table "DiscordActivities" */
+export type DiscordActivities_On_Conflict = {
+	readonly constraint: DiscordActivities_Constraint
+	readonly update_columns?: ReadonlyArray<DiscordActivities_Update_Column>
+	readonly where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "DiscordActivities". */
+export type DiscordActivities_Order_By = {
+	readonly activityId?: InputMaybe<Order_By>
+	readonly activityType?: InputMaybe<Order_By>
+	readonly channelId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly discordId?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: DiscordActivities */
+export type DiscordActivities_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "DiscordActivities" */
+export enum DiscordActivities_Select_Column {
+	/** column name */
+	ActivityId = 'activityId',
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	ChannelId = 'channelId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	DiscordId = 'discordId',
+	/** column name */
+	GuildId = 'guildId',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "DiscordActivities" */
+export type DiscordActivities_Set_Input = {
+	readonly activityId?: InputMaybe<Scalars['String']>
+	readonly activityType?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly channelId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly discordId?: InputMaybe<Scalars['String']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type DiscordActivities_Stddev_Fields = {
+	readonly __typename?: 'DiscordActivities_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type DiscordActivities_Stddev_Pop_Fields = {
+	readonly __typename?: 'DiscordActivities_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type DiscordActivities_Stddev_Samp_Fields = {
+	readonly __typename?: 'DiscordActivities_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "DiscordActivities" */
+export type DiscordActivities_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: DiscordActivities_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type DiscordActivities_Stream_Cursor_Value_Input = {
+	readonly activityId?: InputMaybe<Scalars['String']>
+	readonly activityType?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly channelId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly discordId?: InputMaybe<Scalars['String']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type DiscordActivities_Sum_Fields = {
+	readonly __typename?: 'DiscordActivities_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "DiscordActivities" */
+export enum DiscordActivities_Update_Column {
+	/** column name */
+	ActivityId = 'activityId',
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	ChannelId = 'channelId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	DiscordId = 'discordId',
+	/** column name */
+	GuildId = 'guildId',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type DiscordActivities_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<DiscordActivities_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<DiscordActivities_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: DiscordActivities_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type DiscordActivities_Var_Pop_Fields = {
+	readonly __typename?: 'DiscordActivities_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type DiscordActivities_Var_Samp_Fields = {
+	readonly __typename?: 'DiscordActivities_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type DiscordActivities_Variance_Fields = {
+	readonly __typename?: 'DiscordActivities_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
 }
 
 export type DisplayValueEntry = {
@@ -754,6 +3980,680 @@ export type Features = OrganizationFeatures &
 		readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']
 		readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']
 	}
+
+/** columns and relationships of "GenericActivities" */
+export type GenericActivities = {
+	readonly __typename?: 'GenericActivities'
+	readonly activityType: Scalars['String']
+	readonly authorId: Scalars['String']
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly extra?: Maybe<Scalars['json']>
+	readonly id: Scalars['Int']
+	readonly source: Scalars['enum_GenericActivities_source']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** columns and relationships of "GenericActivities" */
+export type GenericActivitiesExtraArgs = {
+	path?: InputMaybe<Scalars['String']>
+}
+
+/** aggregated selection of "GenericActivities" */
+export type GenericActivities_Aggregate = {
+	readonly __typename?: 'GenericActivities_aggregate'
+	readonly aggregate?: Maybe<GenericActivities_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<GenericActivities>
+}
+
+/** aggregate fields of "GenericActivities" */
+export type GenericActivities_Aggregate_Fields = {
+	readonly __typename?: 'GenericActivities_aggregate_fields'
+	readonly avg?: Maybe<GenericActivities_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<GenericActivities_Max_Fields>
+	readonly min?: Maybe<GenericActivities_Min_Fields>
+	readonly stddev?: Maybe<GenericActivities_Stddev_Fields>
+	readonly stddev_pop?: Maybe<GenericActivities_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<GenericActivities_Stddev_Samp_Fields>
+	readonly sum?: Maybe<GenericActivities_Sum_Fields>
+	readonly var_pop?: Maybe<GenericActivities_Var_Pop_Fields>
+	readonly var_samp?: Maybe<GenericActivities_Var_Samp_Fields>
+	readonly variance?: Maybe<GenericActivities_Variance_Fields>
+}
+
+/** aggregate fields of "GenericActivities" */
+export type GenericActivities_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type GenericActivities_Avg_Fields = {
+	readonly __typename?: 'GenericActivities_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "GenericActivities". All fields are combined with a logical 'AND'. */
+export type GenericActivities_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<GenericActivities_Bool_Exp>>
+	readonly _not?: InputMaybe<GenericActivities_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<GenericActivities_Bool_Exp>>
+	readonly activityType?: InputMaybe<String_Comparison_Exp>
+	readonly authorId?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly extra?: InputMaybe<Json_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly source?: InputMaybe<Enum_GenericActivities_Source_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "GenericActivities" */
+export enum GenericActivities_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	GenericActivitiesPkey = 'GenericActivities_pkey',
+}
+
+/** input type for incrementing numeric columns in table "GenericActivities" */
+export type GenericActivities_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "GenericActivities" */
+export type GenericActivities_Insert_Input = {
+	readonly activityType?: InputMaybe<Scalars['String']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly extra?: InputMaybe<Scalars['json']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type GenericActivities_Max_Fields = {
+	readonly __typename?: 'GenericActivities_max_fields'
+	readonly activityType?: Maybe<Scalars['String']>
+	readonly authorId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly source?: Maybe<Scalars['enum_GenericActivities_source']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type GenericActivities_Min_Fields = {
+	readonly __typename?: 'GenericActivities_min_fields'
+	readonly activityType?: Maybe<Scalars['String']>
+	readonly authorId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly source?: Maybe<Scalars['enum_GenericActivities_source']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "GenericActivities" */
+export type GenericActivities_Mutation_Response = {
+	readonly __typename?: 'GenericActivities_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<GenericActivities>
+}
+
+/** on_conflict condition type for table "GenericActivities" */
+export type GenericActivities_On_Conflict = {
+	readonly constraint: GenericActivities_Constraint
+	readonly update_columns?: ReadonlyArray<GenericActivities_Update_Column>
+	readonly where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "GenericActivities". */
+export type GenericActivities_Order_By = {
+	readonly activityType?: InputMaybe<Order_By>
+	readonly authorId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly extra?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: GenericActivities */
+export type GenericActivities_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "GenericActivities" */
+export enum GenericActivities_Select_Column {
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	AuthorId = 'authorId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Extra = 'extra',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "GenericActivities" */
+export type GenericActivities_Set_Input = {
+	readonly activityType?: InputMaybe<Scalars['String']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly extra?: InputMaybe<Scalars['json']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type GenericActivities_Stddev_Fields = {
+	readonly __typename?: 'GenericActivities_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type GenericActivities_Stddev_Pop_Fields = {
+	readonly __typename?: 'GenericActivities_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type GenericActivities_Stddev_Samp_Fields = {
+	readonly __typename?: 'GenericActivities_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "GenericActivities" */
+export type GenericActivities_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: GenericActivities_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type GenericActivities_Stream_Cursor_Value_Input = {
+	readonly activityType?: InputMaybe<Scalars['String']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly extra?: InputMaybe<Scalars['json']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type GenericActivities_Sum_Fields = {
+	readonly __typename?: 'GenericActivities_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "GenericActivities" */
+export enum GenericActivities_Update_Column {
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	AuthorId = 'authorId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Extra = 'extra',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type GenericActivities_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<GenericActivities_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<GenericActivities_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: GenericActivities_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type GenericActivities_Var_Pop_Fields = {
+	readonly __typename?: 'GenericActivities_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type GenericActivities_Var_Samp_Fields = {
+	readonly __typename?: 'GenericActivities_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type GenericActivities_Variance_Fields = {
+	readonly __typename?: 'GenericActivities_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** columns and relationships of "Identities" */
+export type Identities = {
+	readonly __typename?: 'Identities'
+	/** An array relationship */
+	readonly BattlepassParticipants: ReadonlyArray<BattlepassParticipants>
+	/** An aggregate relationship */
+	readonly BattlepassParticipants_aggregate: BattlepassParticipants_Aggregate
+	/** An array relationship */
+	readonly CompletedQuests: ReadonlyArray<CompletedQuests>
+	/** An aggregate relationship */
+	readonly CompletedQuests_aggregate: CompletedQuests_Aggregate
+	/** An array relationship */
+	readonly QuestProgresses: ReadonlyArray<QuestProgresses>
+	/** An aggregate relationship */
+	readonly QuestProgresses_aggregate: QuestProgresses_Aggregate
+	/** An array relationship */
+	readonly UserTokens: ReadonlyArray<UserTokens>
+	/** An aggregate relationship */
+	readonly UserTokens_aggregate: UserTokens_Aggregate
+	readonly address?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt: Scalars['timestamptz']
+	readonly discord?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly epicGames?: Maybe<Scalars['String']>
+	readonly id: Scalars['Int']
+	readonly name?: Maybe<Scalars['String']>
+	readonly twitter?: Maybe<Scalars['String']>
+	readonly updatedAt: Scalars['timestamptz']
+	readonly uuid: Scalars['uuid']
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesBattlepassParticipantsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesBattlepassParticipants_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesCompletedQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesCompletedQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesQuestProgressesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesQuestProgresses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesUserTokensArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<UserTokens_Order_By>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+/** columns and relationships of "Identities" */
+export type IdentitiesUserTokens_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<UserTokens_Order_By>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+/** aggregated selection of "Identities" */
+export type Identities_Aggregate = {
+	readonly __typename?: 'Identities_aggregate'
+	readonly aggregate?: Maybe<Identities_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Identities>
+}
+
+/** aggregate fields of "Identities" */
+export type Identities_Aggregate_Fields = {
+	readonly __typename?: 'Identities_aggregate_fields'
+	readonly avg?: Maybe<Identities_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Identities_Max_Fields>
+	readonly min?: Maybe<Identities_Min_Fields>
+	readonly stddev?: Maybe<Identities_Stddev_Fields>
+	readonly stddev_pop?: Maybe<Identities_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<Identities_Stddev_Samp_Fields>
+	readonly sum?: Maybe<Identities_Sum_Fields>
+	readonly var_pop?: Maybe<Identities_Var_Pop_Fields>
+	readonly var_samp?: Maybe<Identities_Var_Samp_Fields>
+	readonly variance?: Maybe<Identities_Variance_Fields>
+}
+
+/** aggregate fields of "Identities" */
+export type Identities_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Identities_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type Identities_Avg_Fields = {
+	readonly __typename?: 'Identities_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "Identities". All fields are combined with a logical 'AND'. */
+export type Identities_Bool_Exp = {
+	readonly BattlepassParticipants?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly BattlepassParticipants_aggregate?: InputMaybe<BattlepassParticipants_Aggregate_Bool_Exp>
+	readonly CompletedQuests?: InputMaybe<CompletedQuests_Bool_Exp>
+	readonly CompletedQuests_aggregate?: InputMaybe<CompletedQuests_Aggregate_Bool_Exp>
+	readonly QuestProgresses?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly QuestProgresses_aggregate?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp>
+	readonly UserTokens?: InputMaybe<UserTokens_Bool_Exp>
+	readonly UserTokens_aggregate?: InputMaybe<UserTokens_Aggregate_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<Identities_Bool_Exp>>
+	readonly _not?: InputMaybe<Identities_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<Identities_Bool_Exp>>
+	readonly address?: InputMaybe<Bpchar_Comparison_Exp>
+	readonly cid?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly discord?: InputMaybe<String_Comparison_Exp>
+	readonly email?: InputMaybe<String_Comparison_Exp>
+	readonly epicGames?: InputMaybe<String_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly name?: InputMaybe<String_Comparison_Exp>
+	readonly twitter?: InputMaybe<String_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "Identities" */
+export enum Identities_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	IdentitiesPkey = 'Identities_pkey',
+}
+
+/** input type for incrementing numeric columns in table "Identities" */
+export type Identities_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "Identities" */
+export type Identities_Insert_Input = {
+	readonly BattlepassParticipants?: InputMaybe<BattlepassParticipants_Arr_Rel_Insert_Input>
+	readonly CompletedQuests?: InputMaybe<CompletedQuests_Arr_Rel_Insert_Input>
+	readonly QuestProgresses?: InputMaybe<QuestProgresses_Arr_Rel_Insert_Input>
+	readonly UserTokens?: InputMaybe<UserTokens_Arr_Rel_Insert_Input>
+	readonly address?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly discord?: InputMaybe<Scalars['String']>
+	readonly email?: InputMaybe<Scalars['String']>
+	readonly epicGames?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly twitter?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly uuid?: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export type Identities_Max_Fields = {
+	readonly __typename?: 'Identities_max_fields'
+	readonly address?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly discord?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly epicGames?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly twitter?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+	readonly uuid?: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export type Identities_Min_Fields = {
+	readonly __typename?: 'Identities_min_fields'
+	readonly address?: Maybe<Scalars['bpchar']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly discord?: Maybe<Scalars['String']>
+	readonly email?: Maybe<Scalars['String']>
+	readonly epicGames?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly twitter?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+	readonly uuid?: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "Identities" */
+export type Identities_Mutation_Response = {
+	readonly __typename?: 'Identities_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<Identities>
+}
+
+/** input type for inserting object relation for remote table "Identities" */
+export type Identities_Obj_Rel_Insert_Input = {
+	readonly data: Identities_Insert_Input
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<Identities_On_Conflict>
+}
+
+/** on_conflict condition type for table "Identities" */
+export type Identities_On_Conflict = {
+	readonly constraint: Identities_Constraint
+	readonly update_columns?: ReadonlyArray<Identities_Update_Column>
+	readonly where?: InputMaybe<Identities_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "Identities". */
+export type Identities_Order_By = {
+	readonly BattlepassParticipants_aggregate?: InputMaybe<BattlepassParticipants_Aggregate_Order_By>
+	readonly CompletedQuests_aggregate?: InputMaybe<CompletedQuests_Aggregate_Order_By>
+	readonly QuestProgresses_aggregate?: InputMaybe<QuestProgresses_Aggregate_Order_By>
+	readonly UserTokens_aggregate?: InputMaybe<UserTokens_Aggregate_Order_By>
+	readonly address?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly discord?: InputMaybe<Order_By>
+	readonly email?: InputMaybe<Order_By>
+	readonly epicGames?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly twitter?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+	readonly uuid?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: Identities */
+export type Identities_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "Identities" */
+export enum Identities_Select_Column {
+	/** column name */
+	Address = 'address',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Discord = 'discord',
+	/** column name */
+	Email = 'email',
+	/** column name */
+	EpicGames = 'epicGames',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Twitter = 'twitter',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+	/** column name */
+	Uuid = 'uuid',
+}
+
+/** input type for updating data in table "Identities" */
+export type Identities_Set_Input = {
+	readonly address?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly discord?: InputMaybe<Scalars['String']>
+	readonly email?: InputMaybe<Scalars['String']>
+	readonly epicGames?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly twitter?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly uuid?: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate stddev on columns */
+export type Identities_Stddev_Fields = {
+	readonly __typename?: 'Identities_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Identities_Stddev_Pop_Fields = {
+	readonly __typename?: 'Identities_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Identities_Stddev_Samp_Fields = {
+	readonly __typename?: 'Identities_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "Identities" */
+export type Identities_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: Identities_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Identities_Stream_Cursor_Value_Input = {
+	readonly address?: InputMaybe<Scalars['bpchar']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly discord?: InputMaybe<Scalars['String']>
+	readonly email?: InputMaybe<Scalars['String']>
+	readonly epicGames?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly twitter?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly uuid?: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate sum on columns */
+export type Identities_Sum_Fields = {
+	readonly __typename?: 'Identities_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "Identities" */
+export enum Identities_Update_Column {
+	/** column name */
+	Address = 'address',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Discord = 'discord',
+	/** column name */
+	Email = 'email',
+	/** column name */
+	EpicGames = 'epicGames',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Twitter = 'twitter',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+	/** column name */
+	Uuid = 'uuid',
+}
+
+export type Identities_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<Identities_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<Identities_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: Identities_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Identities_Var_Pop_Fields = {
+	readonly __typename?: 'Identities_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type Identities_Var_Samp_Fields = {
+	readonly __typename?: 'Identities_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type Identities_Variance_Fields = {
+	readonly __typename?: 'Identities_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
 
 export type IdentityFilter = {
 	readonly address?: InputMaybe<Scalars['String']>
@@ -837,6 +4737,351 @@ export type Payment = {
 	readonly status: MemberStatus
 }
 
+/** columns and relationships of "Payments" */
+export type Payments = {
+	readonly __typename?: 'Payments'
+	/** An object relationship */
+	readonly BattlepassParticipant?: Maybe<BattlepassParticipants>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id: Scalars['Int']
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly paymentToken: Scalars['String']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "Payments" */
+export type Payments_Aggregate = {
+	readonly __typename?: 'Payments_aggregate'
+	readonly aggregate?: Maybe<Payments_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Payments>
+}
+
+export type Payments_Aggregate_Bool_Exp = {
+	readonly count?: InputMaybe<Payments_Aggregate_Bool_Exp_Count>
+}
+
+export type Payments_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<Payments_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "Payments" */
+export type Payments_Aggregate_Fields = {
+	readonly __typename?: 'Payments_aggregate_fields'
+	readonly avg?: Maybe<Payments_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Payments_Max_Fields>
+	readonly min?: Maybe<Payments_Min_Fields>
+	readonly stddev?: Maybe<Payments_Stddev_Fields>
+	readonly stddev_pop?: Maybe<Payments_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<Payments_Stddev_Samp_Fields>
+	readonly sum?: Maybe<Payments_Sum_Fields>
+	readonly var_pop?: Maybe<Payments_Var_Pop_Fields>
+	readonly var_samp?: Maybe<Payments_Var_Samp_Fields>
+	readonly variance?: Maybe<Payments_Variance_Fields>
+}
+
+/** aggregate fields of "Payments" */
+export type Payments_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "Payments" */
+export type Payments_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<Payments_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Payments_Max_Order_By>
+	readonly min?: InputMaybe<Payments_Min_Order_By>
+	readonly stddev?: InputMaybe<Payments_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<Payments_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<Payments_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<Payments_Sum_Order_By>
+	readonly var_pop?: InputMaybe<Payments_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<Payments_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<Payments_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "Payments" */
+export type Payments_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<Payments_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<Payments_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type Payments_Avg_Fields = {
+	readonly __typename?: 'Payments_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "Payments" */
+export type Payments_Avg_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "Payments". All fields are combined with a logical 'AND'. */
+export type Payments_Bool_Exp = {
+	readonly BattlepassParticipant?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<Payments_Bool_Exp>>
+	readonly _not?: InputMaybe<Payments_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<Payments_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly participantId?: InputMaybe<Int_Comparison_Exp>
+	readonly paymentToken?: InputMaybe<String_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "Payments" */
+export enum Payments_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	PaymentsPkey = 'Payments_pkey',
+}
+
+/** input type for incrementing numeric columns in table "Payments" */
+export type Payments_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "Payments" */
+export type Payments_Insert_Input = {
+	readonly BattlepassParticipant?: InputMaybe<BattlepassParticipants_Obj_Rel_Insert_Input>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly paymentToken?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type Payments_Max_Fields = {
+	readonly __typename?: 'Payments_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly paymentToken?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "Payments" */
+export type Payments_Max_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly paymentToken?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type Payments_Min_Fields = {
+	readonly __typename?: 'Payments_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly paymentToken?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "Payments" */
+export type Payments_Min_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly paymentToken?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "Payments" */
+export type Payments_Mutation_Response = {
+	readonly __typename?: 'Payments_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<Payments>
+}
+
+/** on_conflict condition type for table "Payments" */
+export type Payments_On_Conflict = {
+	readonly constraint: Payments_Constraint
+	readonly update_columns?: ReadonlyArray<Payments_Update_Column>
+	readonly where?: InputMaybe<Payments_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "Payments". */
+export type Payments_Order_By = {
+	readonly BattlepassParticipant?: InputMaybe<BattlepassParticipants_Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly paymentToken?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: Payments */
+export type Payments_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "Payments" */
+export enum Payments_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	ParticipantId = 'participantId',
+	/** column name */
+	PaymentToken = 'paymentToken',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "Payments" */
+export type Payments_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly paymentToken?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type Payments_Stddev_Fields = {
+	readonly __typename?: 'Payments_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "Payments" */
+export type Payments_Stddev_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type Payments_Stddev_Pop_Fields = {
+	readonly __typename?: 'Payments_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "Payments" */
+export type Payments_Stddev_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type Payments_Stddev_Samp_Fields = {
+	readonly __typename?: 'Payments_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "Payments" */
+export type Payments_Stddev_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "Payments" */
+export type Payments_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: Payments_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Payments_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly paymentToken?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type Payments_Sum_Fields = {
+	readonly __typename?: 'Payments_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "Payments" */
+export type Payments_Sum_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** update columns of table "Payments" */
+export enum Payments_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	ParticipantId = 'participantId',
+	/** column name */
+	PaymentToken = 'paymentToken',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type Payments_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<Payments_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<Payments_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: Payments_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Payments_Var_Pop_Fields = {
+	readonly __typename?: 'Payments_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "Payments" */
+export type Payments_Var_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type Payments_Var_Samp_Fields = {
+	readonly __typename?: 'Payments_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "Payments" */
+export type Payments_Var_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type Payments_Variance_Fields = {
+	readonly __typename?: 'Payments_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "Payments" */
+export type Payments_Variance_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+}
+
 export type PointsFilter = {
 	readonly battlepassChainId?: InputMaybe<Scalars['String']>
 	readonly battlepassId?: InputMaybe<Scalars['Int']>
@@ -871,6 +5116,1218 @@ export type QuestFilter = {
 	readonly type?: InputMaybe<ActivityType>
 }
 
+/** columns and relationships of "QuestProgresses" */
+export type QuestProgresses = {
+	readonly __typename?: 'QuestProgresses'
+	/** An object relationship */
+	readonly Identity?: Maybe<Identities>
+	/** An object relationship */
+	readonly Quest?: Maybe<Quests>
+	readonly createdAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly progress: Scalars['float8']
+	readonly questId?: Maybe<Scalars['Int']>
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "QuestProgresses" */
+export type QuestProgresses_Aggregate = {
+	readonly __typename?: 'QuestProgresses_aggregate'
+	readonly aggregate?: Maybe<QuestProgresses_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<QuestProgresses>
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp = {
+	readonly avg?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Avg>
+	readonly corr?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Corr>
+	readonly count?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Count>
+	readonly covar_samp?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Covar_Samp>
+	readonly max?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Max>
+	readonly min?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Min>
+	readonly stddev_samp?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Stddev_Samp>
+	readonly sum?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Sum>
+	readonly var_samp?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp_Var_Samp>
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Avg = {
+	readonly arguments: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Avg_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Corr = {
+	readonly arguments: QuestProgresses_Aggregate_Bool_Exp_Corr_Arguments
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Corr_Arguments = {
+	readonly X: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Corr_Arguments_Columns
+	readonly Y: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Corr_Arguments_Columns
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Covar_Samp = {
+	readonly arguments: QuestProgresses_Aggregate_Bool_Exp_Covar_Samp_Arguments
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Covar_Samp_Arguments = {
+	readonly X: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns
+	readonly Y: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Max = {
+	readonly arguments: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Max_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Min = {
+	readonly arguments: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Min_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Stddev_Samp = {
+	readonly arguments: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Sum = {
+	readonly arguments: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Sum_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+export type QuestProgresses_Aggregate_Bool_Exp_Var_Samp = {
+	readonly arguments: QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly predicate: Float8_Comparison_Exp
+}
+
+/** aggregate fields of "QuestProgresses" */
+export type QuestProgresses_Aggregate_Fields = {
+	readonly __typename?: 'QuestProgresses_aggregate_fields'
+	readonly avg?: Maybe<QuestProgresses_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<QuestProgresses_Max_Fields>
+	readonly min?: Maybe<QuestProgresses_Min_Fields>
+	readonly stddev?: Maybe<QuestProgresses_Stddev_Fields>
+	readonly stddev_pop?: Maybe<QuestProgresses_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<QuestProgresses_Stddev_Samp_Fields>
+	readonly sum?: Maybe<QuestProgresses_Sum_Fields>
+	readonly var_pop?: Maybe<QuestProgresses_Var_Pop_Fields>
+	readonly var_samp?: Maybe<QuestProgresses_Var_Samp_Fields>
+	readonly variance?: Maybe<QuestProgresses_Variance_Fields>
+}
+
+/** aggregate fields of "QuestProgresses" */
+export type QuestProgresses_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "QuestProgresses" */
+export type QuestProgresses_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<QuestProgresses_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<QuestProgresses_Max_Order_By>
+	readonly min?: InputMaybe<QuestProgresses_Min_Order_By>
+	readonly stddev?: InputMaybe<QuestProgresses_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<QuestProgresses_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<QuestProgresses_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<QuestProgresses_Sum_Order_By>
+	readonly var_pop?: InputMaybe<QuestProgresses_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<QuestProgresses_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<QuestProgresses_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "QuestProgresses" */
+export type QuestProgresses_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<QuestProgresses_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<QuestProgresses_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type QuestProgresses_Avg_Fields = {
+	readonly __typename?: 'QuestProgresses_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "QuestProgresses" */
+export type QuestProgresses_Avg_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "QuestProgresses". All fields are combined with a logical 'AND'. */
+export type QuestProgresses_Bool_Exp = {
+	readonly Identity?: InputMaybe<Identities_Bool_Exp>
+	readonly Quest?: InputMaybe<Quests_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<QuestProgresses_Bool_Exp>>
+	readonly _not?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<QuestProgresses_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly identityId?: InputMaybe<Int_Comparison_Exp>
+	readonly progress?: InputMaybe<Float8_Comparison_Exp>
+	readonly questId?: InputMaybe<Int_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "QuestProgresses" */
+export enum QuestProgresses_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	QuestProgressesPkey = 'QuestProgresses_pkey',
+}
+
+/** input type for incrementing numeric columns in table "QuestProgresses" */
+export type QuestProgresses_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly progress?: InputMaybe<Scalars['float8']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "QuestProgresses" */
+export type QuestProgresses_Insert_Input = {
+	readonly Identity?: InputMaybe<Identities_Obj_Rel_Insert_Input>
+	readonly Quest?: InputMaybe<Quests_Obj_Rel_Insert_Input>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly progress?: InputMaybe<Scalars['float8']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type QuestProgresses_Max_Fields = {
+	readonly __typename?: 'QuestProgresses_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly progress?: Maybe<Scalars['float8']>
+	readonly questId?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "QuestProgresses" */
+export type QuestProgresses_Max_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type QuestProgresses_Min_Fields = {
+	readonly __typename?: 'QuestProgresses_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly progress?: Maybe<Scalars['float8']>
+	readonly questId?: Maybe<Scalars['Int']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "QuestProgresses" */
+export type QuestProgresses_Min_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "QuestProgresses" */
+export type QuestProgresses_Mutation_Response = {
+	readonly __typename?: 'QuestProgresses_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<QuestProgresses>
+}
+
+/** on_conflict condition type for table "QuestProgresses" */
+export type QuestProgresses_On_Conflict = {
+	readonly constraint: QuestProgresses_Constraint
+	readonly update_columns?: ReadonlyArray<QuestProgresses_Update_Column>
+	readonly where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "QuestProgresses". */
+export type QuestProgresses_Order_By = {
+	readonly Identity?: InputMaybe<Identities_Order_By>
+	readonly Quest?: InputMaybe<Quests_Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: QuestProgresses */
+export type QuestProgresses_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	Progress = 'progress',
+	/** column name */
+	QuestId = 'questId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_avg_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Avg_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_corr_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Corr_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_covar_samp_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_max_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Max_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_min_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Min_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_stddev_samp_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_sum_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Sum_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** select "QuestProgresses_aggregate_bool_exp_var_samp_arguments_columns" columns of table "QuestProgresses" */
+export enum QuestProgresses_Select_Column_QuestProgresses_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns {
+	/** column name */
+	Progress = 'progress',
+}
+
+/** input type for updating data in table "QuestProgresses" */
+export type QuestProgresses_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly progress?: InputMaybe<Scalars['float8']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type QuestProgresses_Stddev_Fields = {
+	readonly __typename?: 'QuestProgresses_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "QuestProgresses" */
+export type QuestProgresses_Stddev_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type QuestProgresses_Stddev_Pop_Fields = {
+	readonly __typename?: 'QuestProgresses_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "QuestProgresses" */
+export type QuestProgresses_Stddev_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type QuestProgresses_Stddev_Samp_Fields = {
+	readonly __typename?: 'QuestProgresses_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "QuestProgresses" */
+export type QuestProgresses_Stddev_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "QuestProgresses" */
+export type QuestProgresses_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: QuestProgresses_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type QuestProgresses_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly progress?: InputMaybe<Scalars['float8']>
+	readonly questId?: InputMaybe<Scalars['Int']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type QuestProgresses_Sum_Fields = {
+	readonly __typename?: 'QuestProgresses_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly progress?: Maybe<Scalars['float8']>
+	readonly questId?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "QuestProgresses" */
+export type QuestProgresses_Sum_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** update columns of table "QuestProgresses" */
+export enum QuestProgresses_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	Progress = 'progress',
+	/** column name */
+	QuestId = 'questId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type QuestProgresses_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<QuestProgresses_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<QuestProgresses_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: QuestProgresses_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type QuestProgresses_Var_Pop_Fields = {
+	readonly __typename?: 'QuestProgresses_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "QuestProgresses" */
+export type QuestProgresses_Var_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type QuestProgresses_Var_Samp_Fields = {
+	readonly __typename?: 'QuestProgresses_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "QuestProgresses" */
+export type QuestProgresses_Var_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type QuestProgresses_Variance_Fields = {
+	readonly __typename?: 'QuestProgresses_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+	readonly progress?: Maybe<Scalars['Float']>
+	readonly questId?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "QuestProgresses" */
+export type QuestProgresses_Variance_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly progress?: InputMaybe<Order_By>
+	readonly questId?: InputMaybe<Order_By>
+}
+
+/** columns and relationships of "Quests" */
+export type Quests = {
+	readonly __typename?: 'Quests'
+	/** An object relationship */
+	readonly Battlepass?: Maybe<Battlepasses>
+	/** An array relationship */
+	readonly CompletedQuests: ReadonlyArray<CompletedQuests>
+	/** An aggregate relationship */
+	readonly CompletedQuests_aggregate: CompletedQuests_Aggregate
+	/** An array relationship */
+	readonly QuestProgresses: ReadonlyArray<QuestProgresses>
+	/** An aggregate relationship */
+	readonly QuestProgresses_aggregate: QuestProgresses_Aggregate
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly channelId?: Maybe<Scalars['String']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt: Scalars['timestamptz']
+	readonly description?: Maybe<Scalars['String']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly hashtag?: Maybe<Scalars['String']>
+	readonly id: Scalars['Int']
+	readonly link?: Maybe<Scalars['String']>
+	readonly max?: Maybe<Scalars['Int']>
+	readonly maxDaily?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly quantity?: Maybe<Scalars['Int']>
+	readonly repeat?: Maybe<Scalars['Boolean']>
+	readonly source?: Maybe<Scalars['enum_Quests_source']>
+	readonly twitterId?: Maybe<Scalars['String']>
+	readonly type?: Maybe<Scalars['enum_Quests_type']>
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** columns and relationships of "Quests" */
+export type QuestsCompletedQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+/** columns and relationships of "Quests" */
+export type QuestsCompletedQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+/** columns and relationships of "Quests" */
+export type QuestsQuestProgressesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+/** columns and relationships of "Quests" */
+export type QuestsQuestProgresses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+/** aggregated selection of "Quests" */
+export type Quests_Aggregate = {
+	readonly __typename?: 'Quests_aggregate'
+	readonly aggregate?: Maybe<Quests_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<Quests>
+}
+
+export type Quests_Aggregate_Bool_Exp = {
+	readonly bool_and?: InputMaybe<Quests_Aggregate_Bool_Exp_Bool_And>
+	readonly bool_or?: InputMaybe<Quests_Aggregate_Bool_Exp_Bool_Or>
+	readonly count?: InputMaybe<Quests_Aggregate_Bool_Exp_Count>
+}
+
+export type Quests_Aggregate_Bool_Exp_Bool_And = {
+	readonly arguments: Quests_Select_Column_Quests_Aggregate_Bool_Exp_Bool_And_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<Quests_Bool_Exp>
+	readonly predicate: Boolean_Comparison_Exp
+}
+
+export type Quests_Aggregate_Bool_Exp_Bool_Or = {
+	readonly arguments: Quests_Select_Column_Quests_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<Quests_Bool_Exp>
+	readonly predicate: Boolean_Comparison_Exp
+}
+
+export type Quests_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<Quests_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "Quests" */
+export type Quests_Aggregate_Fields = {
+	readonly __typename?: 'Quests_aggregate_fields'
+	readonly avg?: Maybe<Quests_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<Quests_Max_Fields>
+	readonly min?: Maybe<Quests_Min_Fields>
+	readonly stddev?: Maybe<Quests_Stddev_Fields>
+	readonly stddev_pop?: Maybe<Quests_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<Quests_Stddev_Samp_Fields>
+	readonly sum?: Maybe<Quests_Sum_Fields>
+	readonly var_pop?: Maybe<Quests_Var_Pop_Fields>
+	readonly var_samp?: Maybe<Quests_Var_Samp_Fields>
+	readonly variance?: Maybe<Quests_Variance_Fields>
+}
+
+/** aggregate fields of "Quests" */
+export type Quests_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "Quests" */
+export type Quests_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<Quests_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Quests_Max_Order_By>
+	readonly min?: InputMaybe<Quests_Min_Order_By>
+	readonly stddev?: InputMaybe<Quests_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<Quests_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<Quests_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<Quests_Sum_Order_By>
+	readonly var_pop?: InputMaybe<Quests_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<Quests_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<Quests_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "Quests" */
+export type Quests_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<Quests_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<Quests_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type Quests_Avg_Fields = {
+	readonly __typename?: 'Quests_avg_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "Quests" */
+export type Quests_Avg_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "Quests". All fields are combined with a logical 'AND'. */
+export type Quests_Bool_Exp = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Bool_Exp>
+	readonly CompletedQuests?: InputMaybe<CompletedQuests_Bool_Exp>
+	readonly CompletedQuests_aggregate?: InputMaybe<CompletedQuests_Aggregate_Bool_Exp>
+	readonly QuestProgresses?: InputMaybe<QuestProgresses_Bool_Exp>
+	readonly QuestProgresses_aggregate?: InputMaybe<QuestProgresses_Aggregate_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<Quests_Bool_Exp>>
+	readonly _not?: InputMaybe<Quests_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<Quests_Bool_Exp>>
+	readonly battlepassId?: InputMaybe<Int_Comparison_Exp>
+	readonly channelId?: InputMaybe<String_Comparison_Exp>
+	readonly cid?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly description?: InputMaybe<String_Comparison_Exp>
+	readonly guildId?: InputMaybe<String_Comparison_Exp>
+	readonly hashtag?: InputMaybe<String_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly link?: InputMaybe<String_Comparison_Exp>
+	readonly max?: InputMaybe<Int_Comparison_Exp>
+	readonly maxDaily?: InputMaybe<Int_Comparison_Exp>
+	readonly name?: InputMaybe<String_Comparison_Exp>
+	readonly points?: InputMaybe<Int_Comparison_Exp>
+	readonly quantity?: InputMaybe<Int_Comparison_Exp>
+	readonly repeat?: InputMaybe<Boolean_Comparison_Exp>
+	readonly source?: InputMaybe<Enum_Quests_Source_Comparison_Exp>
+	readonly twitterId?: InputMaybe<String_Comparison_Exp>
+	readonly type?: InputMaybe<Enum_Quests_Type_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "Quests" */
+export enum Quests_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	QuestsPkey = 'Quests_pkey',
+}
+
+/** input type for incrementing numeric columns in table "Quests" */
+export type Quests_Inc_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly max?: InputMaybe<Scalars['Int']>
+	readonly maxDaily?: InputMaybe<Scalars['Int']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly quantity?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "Quests" */
+export type Quests_Insert_Input = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Obj_Rel_Insert_Input>
+	readonly CompletedQuests?: InputMaybe<CompletedQuests_Arr_Rel_Insert_Input>
+	readonly QuestProgresses?: InputMaybe<QuestProgresses_Arr_Rel_Insert_Input>
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly channelId?: InputMaybe<Scalars['String']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly description?: InputMaybe<Scalars['String']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly hashtag?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly link?: InputMaybe<Scalars['String']>
+	readonly max?: InputMaybe<Scalars['Int']>
+	readonly maxDaily?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly quantity?: InputMaybe<Scalars['Int']>
+	readonly repeat?: InputMaybe<Scalars['Boolean']>
+	readonly source?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly twitterId?: InputMaybe<Scalars['String']>
+	readonly type?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type Quests_Max_Fields = {
+	readonly __typename?: 'Quests_max_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly channelId?: Maybe<Scalars['String']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly description?: Maybe<Scalars['String']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly hashtag?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly link?: Maybe<Scalars['String']>
+	readonly max?: Maybe<Scalars['Int']>
+	readonly maxDaily?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly quantity?: Maybe<Scalars['Int']>
+	readonly source?: Maybe<Scalars['enum_Quests_source']>
+	readonly twitterId?: Maybe<Scalars['String']>
+	readonly type?: Maybe<Scalars['enum_Quests_type']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "Quests" */
+export type Quests_Max_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly channelId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly description?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly hashtag?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly link?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly twitterId?: InputMaybe<Order_By>
+	readonly type?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type Quests_Min_Fields = {
+	readonly __typename?: 'Quests_min_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly channelId?: Maybe<Scalars['String']>
+	readonly cid?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly description?: Maybe<Scalars['String']>
+	readonly guildId?: Maybe<Scalars['String']>
+	readonly hashtag?: Maybe<Scalars['String']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly link?: Maybe<Scalars['String']>
+	readonly max?: Maybe<Scalars['Int']>
+	readonly maxDaily?: Maybe<Scalars['Int']>
+	readonly name?: Maybe<Scalars['String']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly quantity?: Maybe<Scalars['Int']>
+	readonly source?: Maybe<Scalars['enum_Quests_source']>
+	readonly twitterId?: Maybe<Scalars['String']>
+	readonly type?: Maybe<Scalars['enum_Quests_type']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "Quests" */
+export type Quests_Min_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly channelId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly description?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly hashtag?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly link?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly twitterId?: InputMaybe<Order_By>
+	readonly type?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "Quests" */
+export type Quests_Mutation_Response = {
+	readonly __typename?: 'Quests_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<Quests>
+}
+
+/** input type for inserting object relation for remote table "Quests" */
+export type Quests_Obj_Rel_Insert_Input = {
+	readonly data: Quests_Insert_Input
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<Quests_On_Conflict>
+}
+
+/** on_conflict condition type for table "Quests" */
+export type Quests_On_Conflict = {
+	readonly constraint: Quests_Constraint
+	readonly update_columns?: ReadonlyArray<Quests_Update_Column>
+	readonly where?: InputMaybe<Quests_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "Quests". */
+export type Quests_Order_By = {
+	readonly Battlepass?: InputMaybe<Battlepasses_Order_By>
+	readonly CompletedQuests_aggregate?: InputMaybe<CompletedQuests_Aggregate_Order_By>
+	readonly QuestProgresses_aggregate?: InputMaybe<QuestProgresses_Aggregate_Order_By>
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly channelId?: InputMaybe<Order_By>
+	readonly cid?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly description?: InputMaybe<Order_By>
+	readonly guildId?: InputMaybe<Order_By>
+	readonly hashtag?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly link?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly name?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+	readonly repeat?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly twitterId?: InputMaybe<Order_By>
+	readonly type?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: Quests */
+export type Quests_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "Quests" */
+export enum Quests_Select_Column {
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	ChannelId = 'channelId',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Description = 'description',
+	/** column name */
+	GuildId = 'guildId',
+	/** column name */
+	Hashtag = 'hashtag',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Link = 'link',
+	/** column name */
+	Max = 'max',
+	/** column name */
+	MaxDaily = 'maxDaily',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	Quantity = 'quantity',
+	/** column name */
+	Repeat = 'repeat',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	TwitterId = 'twitterId',
+	/** column name */
+	Type = 'type',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** select "Quests_aggregate_bool_exp_bool_and_arguments_columns" columns of table "Quests" */
+export enum Quests_Select_Column_Quests_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+	/** column name */
+	Repeat = 'repeat',
+}
+
+/** select "Quests_aggregate_bool_exp_bool_or_arguments_columns" columns of table "Quests" */
+export enum Quests_Select_Column_Quests_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+	/** column name */
+	Repeat = 'repeat',
+}
+
+/** input type for updating data in table "Quests" */
+export type Quests_Set_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly channelId?: InputMaybe<Scalars['String']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly description?: InputMaybe<Scalars['String']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly hashtag?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly link?: InputMaybe<Scalars['String']>
+	readonly max?: InputMaybe<Scalars['Int']>
+	readonly maxDaily?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly quantity?: InputMaybe<Scalars['Int']>
+	readonly repeat?: InputMaybe<Scalars['Boolean']>
+	readonly source?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly twitterId?: InputMaybe<Scalars['String']>
+	readonly type?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type Quests_Stddev_Fields = {
+	readonly __typename?: 'Quests_stddev_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "Quests" */
+export type Quests_Stddev_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type Quests_Stddev_Pop_Fields = {
+	readonly __typename?: 'Quests_stddev_pop_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "Quests" */
+export type Quests_Stddev_Pop_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type Quests_Stddev_Samp_Fields = {
+	readonly __typename?: 'Quests_stddev_samp_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "Quests" */
+export type Quests_Stddev_Samp_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "Quests" */
+export type Quests_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: Quests_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Quests_Stream_Cursor_Value_Input = {
+	readonly battlepassId?: InputMaybe<Scalars['Int']>
+	readonly channelId?: InputMaybe<Scalars['String']>
+	readonly cid?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly description?: InputMaybe<Scalars['String']>
+	readonly guildId?: InputMaybe<Scalars['String']>
+	readonly hashtag?: InputMaybe<Scalars['String']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly link?: InputMaybe<Scalars['String']>
+	readonly max?: InputMaybe<Scalars['Int']>
+	readonly maxDaily?: InputMaybe<Scalars['Int']>
+	readonly name?: InputMaybe<Scalars['String']>
+	readonly points?: InputMaybe<Scalars['Int']>
+	readonly quantity?: InputMaybe<Scalars['Int']>
+	readonly repeat?: InputMaybe<Scalars['Boolean']>
+	readonly source?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly twitterId?: InputMaybe<Scalars['String']>
+	readonly type?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type Quests_Sum_Fields = {
+	readonly __typename?: 'Quests_sum_fields'
+	readonly battlepassId?: Maybe<Scalars['Int']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly max?: Maybe<Scalars['Int']>
+	readonly maxDaily?: Maybe<Scalars['Int']>
+	readonly points?: Maybe<Scalars['Int']>
+	readonly quantity?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "Quests" */
+export type Quests_Sum_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** update columns of table "Quests" */
+export enum Quests_Update_Column {
+	/** column name */
+	BattlepassId = 'battlepassId',
+	/** column name */
+	ChannelId = 'channelId',
+	/** column name */
+	Cid = 'cid',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Description = 'description',
+	/** column name */
+	GuildId = 'guildId',
+	/** column name */
+	Hashtag = 'hashtag',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Link = 'link',
+	/** column name */
+	Max = 'max',
+	/** column name */
+	MaxDaily = 'maxDaily',
+	/** column name */
+	Name = 'name',
+	/** column name */
+	Points = 'points',
+	/** column name */
+	Quantity = 'quantity',
+	/** column name */
+	Repeat = 'repeat',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	TwitterId = 'twitterId',
+	/** column name */
+	Type = 'type',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type Quests_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<Quests_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<Quests_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: Quests_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Quests_Var_Pop_Fields = {
+	readonly __typename?: 'Quests_var_pop_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "Quests" */
+export type Quests_Var_Pop_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type Quests_Var_Samp_Fields = {
+	readonly __typename?: 'Quests_var_samp_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "Quests" */
+export type Quests_Var_Samp_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type Quests_Variance_Fields = {
+	readonly __typename?: 'Quests_variance_fields'
+	readonly battlepassId?: Maybe<Scalars['Float']>
+	readonly id?: Maybe<Scalars['Float']>
+	readonly max?: Maybe<Scalars['Float']>
+	readonly maxDaily?: Maybe<Scalars['Float']>
+	readonly points?: Maybe<Scalars['Float']>
+	readonly quantity?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "Quests" */
+export type Quests_Variance_Order_By = {
+	readonly battlepassId?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<Order_By>
+	readonly maxDaily?: InputMaybe<Order_By>
+	readonly points?: InputMaybe<Order_By>
+	readonly quantity?: InputMaybe<Order_By>
+}
+
 export type RmrkNft = {
 	readonly __typename?: 'RMRKNft'
 	readonly id: Scalars['String']
@@ -881,6 +6338,418 @@ export type RmrkNft = {
 export type RewardClaimFilter = {
 	readonly battlepassChainId?: InputMaybe<Scalars['String']>
 	readonly identityUuid?: InputMaybe<Scalars['String']>
+}
+
+/** columns and relationships of "RewardClaims" */
+export type RewardClaims = {
+	readonly __typename?: 'RewardClaims'
+	/** An object relationship */
+	readonly BattlepassParticipant?: Maybe<BattlepassParticipants>
+	/** An object relationship */
+	readonly BattlepassReward?: Maybe<BattlepassRewards>
+	readonly createdAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly nftId?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly rewardId?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "RewardClaims" */
+export type RewardClaims_Aggregate = {
+	readonly __typename?: 'RewardClaims_aggregate'
+	readonly aggregate?: Maybe<RewardClaims_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<RewardClaims>
+}
+
+export type RewardClaims_Aggregate_Bool_Exp = {
+	readonly count?: InputMaybe<RewardClaims_Aggregate_Bool_Exp_Count>
+}
+
+export type RewardClaims_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<RewardClaims_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "RewardClaims" */
+export type RewardClaims_Aggregate_Fields = {
+	readonly __typename?: 'RewardClaims_aggregate_fields'
+	readonly avg?: Maybe<RewardClaims_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<RewardClaims_Max_Fields>
+	readonly min?: Maybe<RewardClaims_Min_Fields>
+	readonly stddev?: Maybe<RewardClaims_Stddev_Fields>
+	readonly stddev_pop?: Maybe<RewardClaims_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<RewardClaims_Stddev_Samp_Fields>
+	readonly sum?: Maybe<RewardClaims_Sum_Fields>
+	readonly var_pop?: Maybe<RewardClaims_Var_Pop_Fields>
+	readonly var_samp?: Maybe<RewardClaims_Var_Samp_Fields>
+	readonly variance?: Maybe<RewardClaims_Variance_Fields>
+}
+
+/** aggregate fields of "RewardClaims" */
+export type RewardClaims_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "RewardClaims" */
+export type RewardClaims_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<RewardClaims_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<RewardClaims_Max_Order_By>
+	readonly min?: InputMaybe<RewardClaims_Min_Order_By>
+	readonly stddev?: InputMaybe<RewardClaims_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<RewardClaims_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<RewardClaims_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<RewardClaims_Sum_Order_By>
+	readonly var_pop?: InputMaybe<RewardClaims_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<RewardClaims_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<RewardClaims_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "RewardClaims" */
+export type RewardClaims_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<RewardClaims_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<RewardClaims_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type RewardClaims_Avg_Fields = {
+	readonly __typename?: 'RewardClaims_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "RewardClaims" */
+export type RewardClaims_Avg_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "RewardClaims". All fields are combined with a logical 'AND'. */
+export type RewardClaims_Bool_Exp = {
+	readonly BattlepassParticipant?: InputMaybe<BattlepassParticipants_Bool_Exp>
+	readonly BattlepassReward?: InputMaybe<BattlepassRewards_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<RewardClaims_Bool_Exp>>
+	readonly _not?: InputMaybe<RewardClaims_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<RewardClaims_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly nftId?: InputMaybe<Int_Comparison_Exp>
+	readonly participantId?: InputMaybe<Int_Comparison_Exp>
+	readonly rewardId?: InputMaybe<Int_Comparison_Exp>
+	readonly syncStatus?: InputMaybe<Enum_RewardClaims_SyncStatus_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "RewardClaims" */
+export enum RewardClaims_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	RewardClaimsPkey = 'RewardClaims_pkey',
+}
+
+/** input type for incrementing numeric columns in table "RewardClaims" */
+export type RewardClaims_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly nftId?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly rewardId?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "RewardClaims" */
+export type RewardClaims_Insert_Input = {
+	readonly BattlepassParticipant?: InputMaybe<BattlepassParticipants_Obj_Rel_Insert_Input>
+	readonly BattlepassReward?: InputMaybe<BattlepassRewards_Obj_Rel_Insert_Input>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly nftId?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly rewardId?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type RewardClaims_Max_Fields = {
+	readonly __typename?: 'RewardClaims_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly nftId?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly rewardId?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "RewardClaims" */
+export type RewardClaims_Max_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type RewardClaims_Min_Fields = {
+	readonly __typename?: 'RewardClaims_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly nftId?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly rewardId?: Maybe<Scalars['Int']>
+	readonly syncStatus?: Maybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "RewardClaims" */
+export type RewardClaims_Min_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "RewardClaims" */
+export type RewardClaims_Mutation_Response = {
+	readonly __typename?: 'RewardClaims_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<RewardClaims>
+}
+
+/** on_conflict condition type for table "RewardClaims" */
+export type RewardClaims_On_Conflict = {
+	readonly constraint: RewardClaims_Constraint
+	readonly update_columns?: ReadonlyArray<RewardClaims_Update_Column>
+	readonly where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "RewardClaims". */
+export type RewardClaims_Order_By = {
+	readonly BattlepassParticipant?: InputMaybe<BattlepassParticipants_Order_By>
+	readonly BattlepassReward?: InputMaybe<BattlepassRewards_Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+	readonly syncStatus?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: RewardClaims */
+export type RewardClaims_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "RewardClaims" */
+export enum RewardClaims_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	NftId = 'nftId',
+	/** column name */
+	ParticipantId = 'participantId',
+	/** column name */
+	RewardId = 'rewardId',
+	/** column name */
+	SyncStatus = 'syncStatus',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "RewardClaims" */
+export type RewardClaims_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly nftId?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly rewardId?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type RewardClaims_Stddev_Fields = {
+	readonly __typename?: 'RewardClaims_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "RewardClaims" */
+export type RewardClaims_Stddev_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type RewardClaims_Stddev_Pop_Fields = {
+	readonly __typename?: 'RewardClaims_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "RewardClaims" */
+export type RewardClaims_Stddev_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type RewardClaims_Stddev_Samp_Fields = {
+	readonly __typename?: 'RewardClaims_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "RewardClaims" */
+export type RewardClaims_Stddev_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "RewardClaims" */
+export type RewardClaims_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: RewardClaims_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type RewardClaims_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly nftId?: InputMaybe<Scalars['Int']>
+	readonly participantId?: InputMaybe<Scalars['Int']>
+	readonly rewardId?: InputMaybe<Scalars['Int']>
+	readonly syncStatus?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type RewardClaims_Sum_Fields = {
+	readonly __typename?: 'RewardClaims_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+	readonly nftId?: Maybe<Scalars['Int']>
+	readonly participantId?: Maybe<Scalars['Int']>
+	readonly rewardId?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "RewardClaims" */
+export type RewardClaims_Sum_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** update columns of table "RewardClaims" */
+export enum RewardClaims_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	NftId = 'nftId',
+	/** column name */
+	ParticipantId = 'participantId',
+	/** column name */
+	RewardId = 'rewardId',
+	/** column name */
+	SyncStatus = 'syncStatus',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type RewardClaims_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<RewardClaims_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<RewardClaims_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: RewardClaims_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type RewardClaims_Var_Pop_Fields = {
+	readonly __typename?: 'RewardClaims_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "RewardClaims" */
+export type RewardClaims_Var_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type RewardClaims_Var_Samp_Fields = {
+	readonly __typename?: 'RewardClaims_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "RewardClaims" */
+export type RewardClaims_Var_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type RewardClaims_Variance_Fields = {
+	readonly __typename?: 'RewardClaims_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly nftId?: Maybe<Scalars['Float']>
+	readonly participantId?: Maybe<Scalars['Float']>
+	readonly rewardId?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "RewardClaims" */
+export type RewardClaims_Variance_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly nftId?: InputMaybe<Order_By>
+	readonly participantId?: InputMaybe<Order_By>
+	readonly rewardId?: InputMaybe<Order_By>
 }
 
 export type RewardsFilter = {
@@ -1157,6 +7026,1111 @@ export enum SyncStatus {
 	Failed = 'failed',
 	Pending = 'pending',
 	Synced = 'synced',
+}
+
+/** columns and relationships of "TwitterActivities" */
+export type TwitterActivities = {
+	readonly __typename?: 'TwitterActivities'
+	readonly activityId?: Maybe<Scalars['String']>
+	readonly activityType?: Maybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly authorId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id: Scalars['Int']
+	readonly objectAuthor?: Maybe<Scalars['String']>
+	readonly objectId?: Maybe<Scalars['String']>
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "TwitterActivities" */
+export type TwitterActivities_Aggregate = {
+	readonly __typename?: 'TwitterActivities_aggregate'
+	readonly aggregate?: Maybe<TwitterActivities_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<TwitterActivities>
+}
+
+/** aggregate fields of "TwitterActivities" */
+export type TwitterActivities_Aggregate_Fields = {
+	readonly __typename?: 'TwitterActivities_aggregate_fields'
+	readonly avg?: Maybe<TwitterActivities_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<TwitterActivities_Max_Fields>
+	readonly min?: Maybe<TwitterActivities_Min_Fields>
+	readonly stddev?: Maybe<TwitterActivities_Stddev_Fields>
+	readonly stddev_pop?: Maybe<TwitterActivities_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<TwitterActivities_Stddev_Samp_Fields>
+	readonly sum?: Maybe<TwitterActivities_Sum_Fields>
+	readonly var_pop?: Maybe<TwitterActivities_Var_Pop_Fields>
+	readonly var_samp?: Maybe<TwitterActivities_Var_Samp_Fields>
+	readonly variance?: Maybe<TwitterActivities_Variance_Fields>
+}
+
+/** aggregate fields of "TwitterActivities" */
+export type TwitterActivities_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<TwitterActivities_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type TwitterActivities_Avg_Fields = {
+	readonly __typename?: 'TwitterActivities_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "TwitterActivities". All fields are combined with a logical 'AND'. */
+export type TwitterActivities_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<TwitterActivities_Bool_Exp>>
+	readonly _not?: InputMaybe<TwitterActivities_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<TwitterActivities_Bool_Exp>>
+	readonly activityId?: InputMaybe<String_Comparison_Exp>
+	readonly activityType?: InputMaybe<Enum_TwitterActivities_ActivityType_Comparison_Exp>
+	readonly authorId?: InputMaybe<String_Comparison_Exp>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly objectAuthor?: InputMaybe<String_Comparison_Exp>
+	readonly objectId?: InputMaybe<String_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "TwitterActivities" */
+export enum TwitterActivities_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	TwitterActivitiesPkey = 'TwitterActivities_pkey',
+}
+
+/** input type for incrementing numeric columns in table "TwitterActivities" */
+export type TwitterActivities_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "TwitterActivities" */
+export type TwitterActivities_Insert_Input = {
+	readonly activityId?: InputMaybe<Scalars['String']>
+	readonly activityType?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly objectAuthor?: InputMaybe<Scalars['String']>
+	readonly objectId?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type TwitterActivities_Max_Fields = {
+	readonly __typename?: 'TwitterActivities_max_fields'
+	readonly activityId?: Maybe<Scalars['String']>
+	readonly activityType?: Maybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly authorId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly objectAuthor?: Maybe<Scalars['String']>
+	readonly objectId?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type TwitterActivities_Min_Fields = {
+	readonly __typename?: 'TwitterActivities_min_fields'
+	readonly activityId?: Maybe<Scalars['String']>
+	readonly activityType?: Maybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly authorId?: Maybe<Scalars['String']>
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly objectAuthor?: Maybe<Scalars['String']>
+	readonly objectId?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "TwitterActivities" */
+export type TwitterActivities_Mutation_Response = {
+	readonly __typename?: 'TwitterActivities_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<TwitterActivities>
+}
+
+/** on_conflict condition type for table "TwitterActivities" */
+export type TwitterActivities_On_Conflict = {
+	readonly constraint: TwitterActivities_Constraint
+	readonly update_columns?: ReadonlyArray<TwitterActivities_Update_Column>
+	readonly where?: InputMaybe<TwitterActivities_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "TwitterActivities". */
+export type TwitterActivities_Order_By = {
+	readonly activityId?: InputMaybe<Order_By>
+	readonly activityType?: InputMaybe<Order_By>
+	readonly authorId?: InputMaybe<Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly objectAuthor?: InputMaybe<Order_By>
+	readonly objectId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: TwitterActivities */
+export type TwitterActivities_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "TwitterActivities" */
+export enum TwitterActivities_Select_Column {
+	/** column name */
+	ActivityId = 'activityId',
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	AuthorId = 'authorId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	ObjectAuthor = 'objectAuthor',
+	/** column name */
+	ObjectId = 'objectId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "TwitterActivities" */
+export type TwitterActivities_Set_Input = {
+	readonly activityId?: InputMaybe<Scalars['String']>
+	readonly activityType?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly objectAuthor?: InputMaybe<Scalars['String']>
+	readonly objectId?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type TwitterActivities_Stddev_Fields = {
+	readonly __typename?: 'TwitterActivities_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type TwitterActivities_Stddev_Pop_Fields = {
+	readonly __typename?: 'TwitterActivities_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type TwitterActivities_Stddev_Samp_Fields = {
+	readonly __typename?: 'TwitterActivities_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "TwitterActivities" */
+export type TwitterActivities_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: TwitterActivities_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type TwitterActivities_Stream_Cursor_Value_Input = {
+	readonly activityId?: InputMaybe<Scalars['String']>
+	readonly activityType?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly authorId?: InputMaybe<Scalars['String']>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly objectAuthor?: InputMaybe<Scalars['String']>
+	readonly objectId?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type TwitterActivities_Sum_Fields = {
+	readonly __typename?: 'TwitterActivities_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "TwitterActivities" */
+export enum TwitterActivities_Update_Column {
+	/** column name */
+	ActivityId = 'activityId',
+	/** column name */
+	ActivityType = 'activityType',
+	/** column name */
+	AuthorId = 'authorId',
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	ObjectAuthor = 'objectAuthor',
+	/** column name */
+	ObjectId = 'objectId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type TwitterActivities_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<TwitterActivities_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<TwitterActivities_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: TwitterActivities_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type TwitterActivities_Var_Pop_Fields = {
+	readonly __typename?: 'TwitterActivities_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type TwitterActivities_Var_Samp_Fields = {
+	readonly __typename?: 'TwitterActivities_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type TwitterActivities_Variance_Fields = {
+	readonly __typename?: 'TwitterActivities_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** columns and relationships of "TwitterSearches" */
+export type TwitterSearches = {
+	readonly __typename?: 'TwitterSearches'
+	readonly createdAt: Scalars['timestamptz']
+	readonly executedAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly query?: Maybe<Scalars['String']>
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "TwitterSearches" */
+export type TwitterSearches_Aggregate = {
+	readonly __typename?: 'TwitterSearches_aggregate'
+	readonly aggregate?: Maybe<TwitterSearches_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<TwitterSearches>
+}
+
+/** aggregate fields of "TwitterSearches" */
+export type TwitterSearches_Aggregate_Fields = {
+	readonly __typename?: 'TwitterSearches_aggregate_fields'
+	readonly avg?: Maybe<TwitterSearches_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<TwitterSearches_Max_Fields>
+	readonly min?: Maybe<TwitterSearches_Min_Fields>
+	readonly stddev?: Maybe<TwitterSearches_Stddev_Fields>
+	readonly stddev_pop?: Maybe<TwitterSearches_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<TwitterSearches_Stddev_Samp_Fields>
+	readonly sum?: Maybe<TwitterSearches_Sum_Fields>
+	readonly var_pop?: Maybe<TwitterSearches_Var_Pop_Fields>
+	readonly var_samp?: Maybe<TwitterSearches_Var_Samp_Fields>
+	readonly variance?: Maybe<TwitterSearches_Variance_Fields>
+}
+
+/** aggregate fields of "TwitterSearches" */
+export type TwitterSearches_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<TwitterSearches_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type TwitterSearches_Avg_Fields = {
+	readonly __typename?: 'TwitterSearches_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "TwitterSearches". All fields are combined with a logical 'AND'. */
+export type TwitterSearches_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<TwitterSearches_Bool_Exp>>
+	readonly _not?: InputMaybe<TwitterSearches_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<TwitterSearches_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly executedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly query?: InputMaybe<String_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "TwitterSearches" */
+export enum TwitterSearches_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	TwitterSearchesPkey = 'TwitterSearches_pkey',
+}
+
+/** input type for incrementing numeric columns in table "TwitterSearches" */
+export type TwitterSearches_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "TwitterSearches" */
+export type TwitterSearches_Insert_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly executedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly query?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type TwitterSearches_Max_Fields = {
+	readonly __typename?: 'TwitterSearches_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly executedAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly query?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type TwitterSearches_Min_Fields = {
+	readonly __typename?: 'TwitterSearches_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly executedAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly query?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "TwitterSearches" */
+export type TwitterSearches_Mutation_Response = {
+	readonly __typename?: 'TwitterSearches_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<TwitterSearches>
+}
+
+/** on_conflict condition type for table "TwitterSearches" */
+export type TwitterSearches_On_Conflict = {
+	readonly constraint: TwitterSearches_Constraint
+	readonly update_columns?: ReadonlyArray<TwitterSearches_Update_Column>
+	readonly where?: InputMaybe<TwitterSearches_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "TwitterSearches". */
+export type TwitterSearches_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly executedAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly query?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: TwitterSearches */
+export type TwitterSearches_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "TwitterSearches" */
+export enum TwitterSearches_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	ExecutedAt = 'executedAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Query = 'query',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "TwitterSearches" */
+export type TwitterSearches_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly executedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly query?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type TwitterSearches_Stddev_Fields = {
+	readonly __typename?: 'TwitterSearches_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type TwitterSearches_Stddev_Pop_Fields = {
+	readonly __typename?: 'TwitterSearches_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type TwitterSearches_Stddev_Samp_Fields = {
+	readonly __typename?: 'TwitterSearches_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "TwitterSearches" */
+export type TwitterSearches_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: TwitterSearches_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type TwitterSearches_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly executedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly query?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type TwitterSearches_Sum_Fields = {
+	readonly __typename?: 'TwitterSearches_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "TwitterSearches" */
+export enum TwitterSearches_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	ExecutedAt = 'executedAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	Query = 'query',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type TwitterSearches_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<TwitterSearches_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<TwitterSearches_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: TwitterSearches_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type TwitterSearches_Var_Pop_Fields = {
+	readonly __typename?: 'TwitterSearches_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type TwitterSearches_Var_Samp_Fields = {
+	readonly __typename?: 'TwitterSearches_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type TwitterSearches_Variance_Fields = {
+	readonly __typename?: 'TwitterSearches_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** columns and relationships of "TwitterUsers" */
+export type TwitterUsers = {
+	readonly __typename?: 'TwitterUsers'
+	readonly createdAt: Scalars['timestamptz']
+	readonly id: Scalars['Int']
+	readonly twitterId: Scalars['String']
+	readonly updatedAt: Scalars['timestamptz']
+	readonly username: Scalars['String']
+}
+
+/** aggregated selection of "TwitterUsers" */
+export type TwitterUsers_Aggregate = {
+	readonly __typename?: 'TwitterUsers_aggregate'
+	readonly aggregate?: Maybe<TwitterUsers_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<TwitterUsers>
+}
+
+/** aggregate fields of "TwitterUsers" */
+export type TwitterUsers_Aggregate_Fields = {
+	readonly __typename?: 'TwitterUsers_aggregate_fields'
+	readonly avg?: Maybe<TwitterUsers_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<TwitterUsers_Max_Fields>
+	readonly min?: Maybe<TwitterUsers_Min_Fields>
+	readonly stddev?: Maybe<TwitterUsers_Stddev_Fields>
+	readonly stddev_pop?: Maybe<TwitterUsers_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<TwitterUsers_Stddev_Samp_Fields>
+	readonly sum?: Maybe<TwitterUsers_Sum_Fields>
+	readonly var_pop?: Maybe<TwitterUsers_Var_Pop_Fields>
+	readonly var_samp?: Maybe<TwitterUsers_Var_Samp_Fields>
+	readonly variance?: Maybe<TwitterUsers_Variance_Fields>
+}
+
+/** aggregate fields of "TwitterUsers" */
+export type TwitterUsers_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<TwitterUsers_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type TwitterUsers_Avg_Fields = {
+	readonly __typename?: 'TwitterUsers_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "TwitterUsers". All fields are combined with a logical 'AND'. */
+export type TwitterUsers_Bool_Exp = {
+	readonly _and?: InputMaybe<ReadonlyArray<TwitterUsers_Bool_Exp>>
+	readonly _not?: InputMaybe<TwitterUsers_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<TwitterUsers_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly twitterId?: InputMaybe<String_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly username?: InputMaybe<String_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "TwitterUsers" */
+export enum TwitterUsers_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	TwitterUsersPkey = 'TwitterUsers_pkey',
+}
+
+/** input type for incrementing numeric columns in table "TwitterUsers" */
+export type TwitterUsers_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "TwitterUsers" */
+export type TwitterUsers_Insert_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly twitterId?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly username?: InputMaybe<Scalars['String']>
+}
+
+/** aggregate max on columns */
+export type TwitterUsers_Max_Fields = {
+	readonly __typename?: 'TwitterUsers_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly twitterId?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+	readonly username?: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export type TwitterUsers_Min_Fields = {
+	readonly __typename?: 'TwitterUsers_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly twitterId?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+	readonly username?: Maybe<Scalars['String']>
+}
+
+/** response of any mutation on the table "TwitterUsers" */
+export type TwitterUsers_Mutation_Response = {
+	readonly __typename?: 'TwitterUsers_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<TwitterUsers>
+}
+
+/** on_conflict condition type for table "TwitterUsers" */
+export type TwitterUsers_On_Conflict = {
+	readonly constraint: TwitterUsers_Constraint
+	readonly update_columns?: ReadonlyArray<TwitterUsers_Update_Column>
+	readonly where?: InputMaybe<TwitterUsers_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "TwitterUsers". */
+export type TwitterUsers_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly twitterId?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+	readonly username?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: TwitterUsers */
+export type TwitterUsers_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "TwitterUsers" */
+export enum TwitterUsers_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	TwitterId = 'twitterId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+	/** column name */
+	Username = 'username',
+}
+
+/** input type for updating data in table "TwitterUsers" */
+export type TwitterUsers_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly twitterId?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly username?: InputMaybe<Scalars['String']>
+}
+
+/** aggregate stddev on columns */
+export type TwitterUsers_Stddev_Fields = {
+	readonly __typename?: 'TwitterUsers_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type TwitterUsers_Stddev_Pop_Fields = {
+	readonly __typename?: 'TwitterUsers_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type TwitterUsers_Stddev_Samp_Fields = {
+	readonly __typename?: 'TwitterUsers_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "TwitterUsers" */
+export type TwitterUsers_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: TwitterUsers_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type TwitterUsers_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly twitterId?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+	readonly username?: InputMaybe<Scalars['String']>
+}
+
+/** aggregate sum on columns */
+export type TwitterUsers_Sum_Fields = {
+	readonly __typename?: 'TwitterUsers_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "TwitterUsers" */
+export enum TwitterUsers_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	TwitterId = 'twitterId',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+	/** column name */
+	Username = 'username',
+}
+
+export type TwitterUsers_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<TwitterUsers_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<TwitterUsers_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: TwitterUsers_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type TwitterUsers_Var_Pop_Fields = {
+	readonly __typename?: 'TwitterUsers_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type TwitterUsers_Var_Samp_Fields = {
+	readonly __typename?: 'TwitterUsers_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type TwitterUsers_Variance_Fields = {
+	readonly __typename?: 'TwitterUsers_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+}
+
+/** columns and relationships of "UserTokens" */
+export type UserTokens = {
+	readonly __typename?: 'UserTokens'
+	/** An object relationship */
+	readonly Identity?: Maybe<Identities>
+	readonly createdAt: Scalars['timestamptz']
+	readonly expiry?: Maybe<Scalars['timestamptz']>
+	readonly id: Scalars['Int']
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly source: Scalars['enum_UserTokens_source']
+	readonly token: Scalars['String']
+	readonly updatedAt: Scalars['timestamptz']
+}
+
+/** aggregated selection of "UserTokens" */
+export type UserTokens_Aggregate = {
+	readonly __typename?: 'UserTokens_aggregate'
+	readonly aggregate?: Maybe<UserTokens_Aggregate_Fields>
+	readonly nodes: ReadonlyArray<UserTokens>
+}
+
+export type UserTokens_Aggregate_Bool_Exp = {
+	readonly count?: InputMaybe<UserTokens_Aggregate_Bool_Exp_Count>
+}
+
+export type UserTokens_Aggregate_Bool_Exp_Count = {
+	readonly arguments?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	readonly distinct?: InputMaybe<Scalars['Boolean']>
+	readonly filter?: InputMaybe<UserTokens_Bool_Exp>
+	readonly predicate: Int_Comparison_Exp
+}
+
+/** aggregate fields of "UserTokens" */
+export type UserTokens_Aggregate_Fields = {
+	readonly __typename?: 'UserTokens_aggregate_fields'
+	readonly avg?: Maybe<UserTokens_Avg_Fields>
+	readonly count: Scalars['Int']
+	readonly max?: Maybe<UserTokens_Max_Fields>
+	readonly min?: Maybe<UserTokens_Min_Fields>
+	readonly stddev?: Maybe<UserTokens_Stddev_Fields>
+	readonly stddev_pop?: Maybe<UserTokens_Stddev_Pop_Fields>
+	readonly stddev_samp?: Maybe<UserTokens_Stddev_Samp_Fields>
+	readonly sum?: Maybe<UserTokens_Sum_Fields>
+	readonly var_pop?: Maybe<UserTokens_Var_Pop_Fields>
+	readonly var_samp?: Maybe<UserTokens_Var_Samp_Fields>
+	readonly variance?: Maybe<UserTokens_Variance_Fields>
+}
+
+/** aggregate fields of "UserTokens" */
+export type UserTokens_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "UserTokens" */
+export type UserTokens_Aggregate_Order_By = {
+	readonly avg?: InputMaybe<UserTokens_Avg_Order_By>
+	readonly count?: InputMaybe<Order_By>
+	readonly max?: InputMaybe<UserTokens_Max_Order_By>
+	readonly min?: InputMaybe<UserTokens_Min_Order_By>
+	readonly stddev?: InputMaybe<UserTokens_Stddev_Order_By>
+	readonly stddev_pop?: InputMaybe<UserTokens_Stddev_Pop_Order_By>
+	readonly stddev_samp?: InputMaybe<UserTokens_Stddev_Samp_Order_By>
+	readonly sum?: InputMaybe<UserTokens_Sum_Order_By>
+	readonly var_pop?: InputMaybe<UserTokens_Var_Pop_Order_By>
+	readonly var_samp?: InputMaybe<UserTokens_Var_Samp_Order_By>
+	readonly variance?: InputMaybe<UserTokens_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "UserTokens" */
+export type UserTokens_Arr_Rel_Insert_Input = {
+	readonly data: ReadonlyArray<UserTokens_Insert_Input>
+	/** upsert condition */
+	readonly on_conflict?: InputMaybe<UserTokens_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type UserTokens_Avg_Fields = {
+	readonly __typename?: 'UserTokens_avg_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "UserTokens" */
+export type UserTokens_Avg_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "UserTokens". All fields are combined with a logical 'AND'. */
+export type UserTokens_Bool_Exp = {
+	readonly Identity?: InputMaybe<Identities_Bool_Exp>
+	readonly _and?: InputMaybe<ReadonlyArray<UserTokens_Bool_Exp>>
+	readonly _not?: InputMaybe<UserTokens_Bool_Exp>
+	readonly _or?: InputMaybe<ReadonlyArray<UserTokens_Bool_Exp>>
+	readonly createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly expiry?: InputMaybe<Timestamptz_Comparison_Exp>
+	readonly id?: InputMaybe<Int_Comparison_Exp>
+	readonly identityId?: InputMaybe<Int_Comparison_Exp>
+	readonly source?: InputMaybe<Enum_UserTokens_Source_Comparison_Exp>
+	readonly token?: InputMaybe<String_Comparison_Exp>
+	readonly updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "UserTokens" */
+export enum UserTokens_Constraint {
+	/** unique or primary key constraint on columns "id" */
+	UserTokensPkey = 'UserTokens_pkey',
+}
+
+/** input type for incrementing numeric columns in table "UserTokens" */
+export type UserTokens_Inc_Input = {
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "UserTokens" */
+export type UserTokens_Insert_Input = {
+	readonly Identity?: InputMaybe<Identities_Obj_Rel_Insert_Input>
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly expiry?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly token?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type UserTokens_Max_Fields = {
+	readonly __typename?: 'UserTokens_max_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly expiry?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly source?: Maybe<Scalars['enum_UserTokens_source']>
+	readonly token?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "UserTokens" */
+export type UserTokens_Max_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly expiry?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly token?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type UserTokens_Min_Fields = {
+	readonly __typename?: 'UserTokens_min_fields'
+	readonly createdAt?: Maybe<Scalars['timestamptz']>
+	readonly expiry?: Maybe<Scalars['timestamptz']>
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+	readonly source?: Maybe<Scalars['enum_UserTokens_source']>
+	readonly token?: Maybe<Scalars['String']>
+	readonly updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "UserTokens" */
+export type UserTokens_Min_Order_By = {
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly expiry?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly token?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** response of any mutation on the table "UserTokens" */
+export type UserTokens_Mutation_Response = {
+	readonly __typename?: 'UserTokens_mutation_response'
+	/** number of rows affected by the mutation */
+	readonly affected_rows: Scalars['Int']
+	/** data from the rows affected by the mutation */
+	readonly returning: ReadonlyArray<UserTokens>
+}
+
+/** on_conflict condition type for table "UserTokens" */
+export type UserTokens_On_Conflict = {
+	readonly constraint: UserTokens_Constraint
+	readonly update_columns?: ReadonlyArray<UserTokens_Update_Column>
+	readonly where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "UserTokens". */
+export type UserTokens_Order_By = {
+	readonly Identity?: InputMaybe<Identities_Order_By>
+	readonly createdAt?: InputMaybe<Order_By>
+	readonly expiry?: InputMaybe<Order_By>
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+	readonly source?: InputMaybe<Order_By>
+	readonly token?: InputMaybe<Order_By>
+	readonly updatedAt?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: UserTokens */
+export type UserTokens_Pk_Columns_Input = {
+	readonly id: Scalars['Int']
+}
+
+/** select columns of table "UserTokens" */
+export enum UserTokens_Select_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Expiry = 'expiry',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	Token = 'token',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+/** input type for updating data in table "UserTokens" */
+export type UserTokens_Set_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly expiry?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly token?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type UserTokens_Stddev_Fields = {
+	readonly __typename?: 'UserTokens_stddev_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "UserTokens" */
+export type UserTokens_Stddev_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type UserTokens_Stddev_Pop_Fields = {
+	readonly __typename?: 'UserTokens_stddev_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "UserTokens" */
+export type UserTokens_Stddev_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type UserTokens_Stddev_Samp_Fields = {
+	readonly __typename?: 'UserTokens_stddev_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "UserTokens" */
+export type UserTokens_Stddev_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** Streaming cursor of the table "UserTokens" */
+export type UserTokens_Stream_Cursor_Input = {
+	/** Stream column input with initial value */
+	readonly initial_value: UserTokens_Stream_Cursor_Value_Input
+	/** cursor ordering */
+	readonly ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type UserTokens_Stream_Cursor_Value_Input = {
+	readonly createdAt?: InputMaybe<Scalars['timestamptz']>
+	readonly expiry?: InputMaybe<Scalars['timestamptz']>
+	readonly id?: InputMaybe<Scalars['Int']>
+	readonly identityId?: InputMaybe<Scalars['Int']>
+	readonly source?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly token?: InputMaybe<Scalars['String']>
+	readonly updatedAt?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate sum on columns */
+export type UserTokens_Sum_Fields = {
+	readonly __typename?: 'UserTokens_sum_fields'
+	readonly id?: Maybe<Scalars['Int']>
+	readonly identityId?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "UserTokens" */
+export type UserTokens_Sum_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** update columns of table "UserTokens" */
+export enum UserTokens_Update_Column {
+	/** column name */
+	CreatedAt = 'createdAt',
+	/** column name */
+	Expiry = 'expiry',
+	/** column name */
+	Id = 'id',
+	/** column name */
+	IdentityId = 'identityId',
+	/** column name */
+	Source = 'source',
+	/** column name */
+	Token = 'token',
+	/** column name */
+	UpdatedAt = 'updatedAt',
+}
+
+export type UserTokens_Updates = {
+	/** increments the numeric columns with given value of the filtered values */
+	readonly _inc?: InputMaybe<UserTokens_Inc_Input>
+	/** sets the columns of the filtered rows to the given values */
+	readonly _set?: InputMaybe<UserTokens_Set_Input>
+	/** filter the rows which have to be updated */
+	readonly where: UserTokens_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type UserTokens_Var_Pop_Fields = {
+	readonly __typename?: 'UserTokens_var_pop_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "UserTokens" */
+export type UserTokens_Var_Pop_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type UserTokens_Var_Samp_Fields = {
+	readonly __typename?: 'UserTokens_var_samp_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "UserTokens" */
+export type UserTokens_Var_Samp_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type UserTokens_Variance_Fields = {
+	readonly __typename?: 'UserTokens_variance_fields'
+	readonly id?: Maybe<Scalars['Float']>
+	readonly identityId?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "UserTokens" */
+export type UserTokens_Variance_Order_By = {
+	readonly id?: InputMaybe<Order_By>
+	readonly identityId?: InputMaybe<Order_By>
 }
 
 /** columns and relationships of "_prisma_migrations" */
@@ -2567,6 +9541,39 @@ export type Bigint_Comparison_Exp = {
 	readonly _lte?: InputMaybe<Scalars['bigint']>
 	readonly _neq?: InputMaybe<Scalars['bigint']>
 	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['bigint']>>
+}
+
+/** Boolean expression to compare columns of type "bpchar". All fields are combined with logical 'AND'. */
+export type Bpchar_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['bpchar']>
+	readonly _gt?: InputMaybe<Scalars['bpchar']>
+	readonly _gte?: InputMaybe<Scalars['bpchar']>
+	/** does the column match the given case-insensitive pattern */
+	readonly _ilike?: InputMaybe<Scalars['bpchar']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['bpchar']>>
+	/** does the column match the given POSIX regular expression, case insensitive */
+	readonly _iregex?: InputMaybe<Scalars['bpchar']>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	/** does the column match the given pattern */
+	readonly _like?: InputMaybe<Scalars['bpchar']>
+	readonly _lt?: InputMaybe<Scalars['bpchar']>
+	readonly _lte?: InputMaybe<Scalars['bpchar']>
+	readonly _neq?: InputMaybe<Scalars['bpchar']>
+	/** does the column NOT match the given case-insensitive pattern */
+	readonly _nilike?: InputMaybe<Scalars['bpchar']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['bpchar']>>
+	/** does the column NOT match the given POSIX regular expression, case insensitive */
+	readonly _niregex?: InputMaybe<Scalars['bpchar']>
+	/** does the column NOT match the given pattern */
+	readonly _nlike?: InputMaybe<Scalars['bpchar']>
+	/** does the column NOT match the given POSIX regular expression, case sensitive */
+	readonly _nregex?: InputMaybe<Scalars['bpchar']>
+	/** does the column NOT match the given SQL regular expression */
+	readonly _nsimilar?: InputMaybe<Scalars['bpchar']>
+	/** does the column match the given POSIX regular expression, case sensitive */
+	readonly _regex?: InputMaybe<Scalars['bpchar']>
+	/** does the column match the given SQL regular expression */
+	readonly _similar?: InputMaybe<Scalars['bpchar']>
 }
 
 /** columns and relationships of "campaign" */
@@ -4346,6 +11353,162 @@ export enum Cursor_Ordering {
 	Desc = 'DESC',
 }
 
+/** Boolean expression to compare columns of type "enum_BattlepassLevels_syncStatus". All fields are combined with logical 'AND'. */
+export type Enum_BattlepassLevels_SyncStatus_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly _gt?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly _gte?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_BattlepassLevels_syncStatus']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly _lte?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly _neq?: InputMaybe<Scalars['enum_BattlepassLevels_syncStatus']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_BattlepassLevels_syncStatus']>>
+}
+
+/** Boolean expression to compare columns of type "enum_BattlepassParticipants_status". All fields are combined with logical 'AND'. */
+export type Enum_BattlepassParticipants_Status_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly _gt?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly _gte?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_BattlepassParticipants_status']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly _lte?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly _neq?: InputMaybe<Scalars['enum_BattlepassParticipants_status']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_BattlepassParticipants_status']>>
+}
+
+/** Boolean expression to compare columns of type "enum_BattlepassRewards_syncStatus". All fields are combined with logical 'AND'. */
+export type Enum_BattlepassRewards_SyncStatus_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly _gt?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly _gte?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_BattlepassRewards_syncStatus']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly _lte?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly _neq?: InputMaybe<Scalars['enum_BattlepassRewards_syncStatus']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_BattlepassRewards_syncStatus']>>
+}
+
+/** Boolean expression to compare columns of type "enum_ChainActivities_activityType". All fields are combined with logical 'AND'. */
+export type Enum_ChainActivities_ActivityType_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly _gt?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly _gte?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_ChainActivities_activityType']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly _lte?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly _neq?: InputMaybe<Scalars['enum_ChainActivities_activityType']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_ChainActivities_activityType']>>
+}
+
+/** Boolean expression to compare columns of type "enum_DiscordActivities_activityType". All fields are combined with logical 'AND'. */
+export type Enum_DiscordActivities_ActivityType_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly _gt?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly _gte?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_DiscordActivities_activityType']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly _lte?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly _neq?: InputMaybe<Scalars['enum_DiscordActivities_activityType']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_DiscordActivities_activityType']>>
+}
+
+/** Boolean expression to compare columns of type "enum_GenericActivities_source". All fields are combined with logical 'AND'. */
+export type Enum_GenericActivities_Source_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _gt?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _gte?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_GenericActivities_source']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _lte?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _neq?: InputMaybe<Scalars['enum_GenericActivities_source']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_GenericActivities_source']>>
+}
+
+/** Boolean expression to compare columns of type "enum_Quests_source". All fields are combined with logical 'AND'. */
+export type Enum_Quests_Source_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly _gt?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly _gte?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_Quests_source']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly _lte?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly _neq?: InputMaybe<Scalars['enum_Quests_source']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_Quests_source']>>
+}
+
+/** Boolean expression to compare columns of type "enum_Quests_type". All fields are combined with logical 'AND'. */
+export type Enum_Quests_Type_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly _gt?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly _gte?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_Quests_type']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly _lte?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly _neq?: InputMaybe<Scalars['enum_Quests_type']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_Quests_type']>>
+}
+
+/** Boolean expression to compare columns of type "enum_RewardClaims_syncStatus". All fields are combined with logical 'AND'. */
+export type Enum_RewardClaims_SyncStatus_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly _gt?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly _gte?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_RewardClaims_syncStatus']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly _lte?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly _neq?: InputMaybe<Scalars['enum_RewardClaims_syncStatus']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_RewardClaims_syncStatus']>>
+}
+
+/** Boolean expression to compare columns of type "enum_TwitterActivities_activityType". All fields are combined with logical 'AND'. */
+export type Enum_TwitterActivities_ActivityType_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly _gt?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly _gte?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_TwitterActivities_activityType']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly _lte?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly _neq?: InputMaybe<Scalars['enum_TwitterActivities_activityType']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_TwitterActivities_activityType']>>
+}
+
+/** Boolean expression to compare columns of type "enum_UserTokens_source". All fields are combined with logical 'AND'. */
+export type Enum_UserTokens_Source_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly _gt?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly _gte?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['enum_UserTokens_source']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly _lte?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly _neq?: InputMaybe<Scalars['enum_UserTokens_source']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['enum_UserTokens_source']>>
+}
+
+/** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
+export type Float8_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['float8']>
+	readonly _gt?: InputMaybe<Scalars['float8']>
+	readonly _gte?: InputMaybe<Scalars['float8']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['float8']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['float8']>
+	readonly _lte?: InputMaybe<Scalars['float8']>
+	readonly _neq?: InputMaybe<Scalars['float8']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['float8']>>
+}
+
 /** columns and relationships of "historical_balance" */
 export type Historical_Balance = {
 	readonly __typename?: 'historical_balance'
@@ -5326,6 +12489,19 @@ export type Identity_Updates = {
 	readonly where: Identity_Bool_Exp
 }
 
+/** Boolean expression to compare columns of type "json". All fields are combined with logical 'AND'. */
+export type Json_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['json']>
+	readonly _gt?: InputMaybe<Scalars['json']>
+	readonly _gte?: InputMaybe<Scalars['json']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['json']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['json']>
+	readonly _lte?: InputMaybe<Scalars['json']>
+	readonly _neq?: InputMaybe<Scalars['json']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['json']>>
+}
+
 /** columns and relationships of "migrations" */
 export type Migrations = {
 	readonly __typename?: 'migrations'
@@ -5551,14 +12727,86 @@ export type Mutation_Root = {
 	readonly delete_Balance?: Maybe<Balance_Mutation_Response>
 	/** delete single row from the table: "Balance" */
 	readonly delete_Balance_by_pk?: Maybe<Balance>
+	/** delete data from the table: "BattlepassLevels" */
+	readonly delete_BattlepassLevels?: Maybe<BattlepassLevels_Mutation_Response>
+	/** delete single row from the table: "BattlepassLevels" */
+	readonly delete_BattlepassLevels_by_pk?: Maybe<BattlepassLevels>
+	/** delete data from the table: "BattlepassParticipants" */
+	readonly delete_BattlepassParticipants?: Maybe<BattlepassParticipants_Mutation_Response>
+	/** delete single row from the table: "BattlepassParticipants" */
+	readonly delete_BattlepassParticipants_by_pk?: Maybe<BattlepassParticipants>
+	/** delete data from the table: "BattlepassRewards" */
+	readonly delete_BattlepassRewards?: Maybe<BattlepassRewards_Mutation_Response>
+	/** delete single row from the table: "BattlepassRewards" */
+	readonly delete_BattlepassRewards_by_pk?: Maybe<BattlepassRewards>
+	/** delete data from the table: "Battlepasses" */
+	readonly delete_Battlepasses?: Maybe<Battlepasses_Mutation_Response>
+	/** delete single row from the table: "Battlepasses" */
+	readonly delete_Battlepasses_by_pk?: Maybe<Battlepasses>
+	/** delete data from the table: "ChainActivities" */
+	readonly delete_ChainActivities?: Maybe<ChainActivities_Mutation_Response>
+	/** delete single row from the table: "ChainActivities" */
+	readonly delete_ChainActivities_by_pk?: Maybe<ChainActivities>
 	/** delete data from the table: "ChainInfo" */
 	readonly delete_ChainInfo?: Maybe<ChainInfo_Mutation_Response>
 	/** delete single row from the table: "ChainInfo" */
 	readonly delete_ChainInfo_by_pk?: Maybe<ChainInfo>
+	/** delete data from the table: "ChainStatuses" */
+	readonly delete_ChainStatuses?: Maybe<ChainStatuses_Mutation_Response>
+	/** delete single row from the table: "ChainStatuses" */
+	readonly delete_ChainStatuses_by_pk?: Maybe<ChainStatuses>
+	/** delete data from the table: "CompletedQuests" */
+	readonly delete_CompletedQuests?: Maybe<CompletedQuests_Mutation_Response>
+	/** delete single row from the table: "CompletedQuests" */
+	readonly delete_CompletedQuests_by_pk?: Maybe<CompletedQuests>
+	/** delete data from the table: "DiscordActivities" */
+	readonly delete_DiscordActivities?: Maybe<DiscordActivities_Mutation_Response>
+	/** delete single row from the table: "DiscordActivities" */
+	readonly delete_DiscordActivities_by_pk?: Maybe<DiscordActivities>
+	/** delete data from the table: "GenericActivities" */
+	readonly delete_GenericActivities?: Maybe<GenericActivities_Mutation_Response>
+	/** delete single row from the table: "GenericActivities" */
+	readonly delete_GenericActivities_by_pk?: Maybe<GenericActivities>
+	/** delete data from the table: "Identities" */
+	readonly delete_Identities?: Maybe<Identities_Mutation_Response>
+	/** delete single row from the table: "Identities" */
+	readonly delete_Identities_by_pk?: Maybe<Identities>
+	/** delete data from the table: "Payments" */
+	readonly delete_Payments?: Maybe<Payments_Mutation_Response>
+	/** delete single row from the table: "Payments" */
+	readonly delete_Payments_by_pk?: Maybe<Payments>
+	/** delete data from the table: "QuestProgresses" */
+	readonly delete_QuestProgresses?: Maybe<QuestProgresses_Mutation_Response>
+	/** delete single row from the table: "QuestProgresses" */
+	readonly delete_QuestProgresses_by_pk?: Maybe<QuestProgresses>
+	/** delete data from the table: "Quests" */
+	readonly delete_Quests?: Maybe<Quests_Mutation_Response>
+	/** delete single row from the table: "Quests" */
+	readonly delete_Quests_by_pk?: Maybe<Quests>
+	/** delete data from the table: "RewardClaims" */
+	readonly delete_RewardClaims?: Maybe<RewardClaims_Mutation_Response>
+	/** delete single row from the table: "RewardClaims" */
+	readonly delete_RewardClaims_by_pk?: Maybe<RewardClaims>
 	/** delete data from the table: "Session" */
 	readonly delete_Session?: Maybe<Session_Mutation_Response>
 	/** delete single row from the table: "Session" */
 	readonly delete_Session_by_pk?: Maybe<Session>
+	/** delete data from the table: "TwitterActivities" */
+	readonly delete_TwitterActivities?: Maybe<TwitterActivities_Mutation_Response>
+	/** delete single row from the table: "TwitterActivities" */
+	readonly delete_TwitterActivities_by_pk?: Maybe<TwitterActivities>
+	/** delete data from the table: "TwitterSearches" */
+	readonly delete_TwitterSearches?: Maybe<TwitterSearches_Mutation_Response>
+	/** delete single row from the table: "TwitterSearches" */
+	readonly delete_TwitterSearches_by_pk?: Maybe<TwitterSearches>
+	/** delete data from the table: "TwitterUsers" */
+	readonly delete_TwitterUsers?: Maybe<TwitterUsers_Mutation_Response>
+	/** delete single row from the table: "TwitterUsers" */
+	readonly delete_TwitterUsers_by_pk?: Maybe<TwitterUsers>
+	/** delete data from the table: "UserTokens" */
+	readonly delete_UserTokens?: Maybe<UserTokens_Mutation_Response>
+	/** delete single row from the table: "UserTokens" */
+	readonly delete_UserTokens_by_pk?: Maybe<UserTokens>
 	/** delete data from the table: "_prisma_migrations" */
 	readonly delete__prisma_migrations?: Maybe<_Prisma_Migrations_Mutation_Response>
 	/** delete single row from the table: "_prisma_migrations" */
@@ -5651,14 +12899,86 @@ export type Mutation_Root = {
 	readonly insert_Balance?: Maybe<Balance_Mutation_Response>
 	/** insert a single row into the table: "Balance" */
 	readonly insert_Balance_one?: Maybe<Balance>
+	/** insert data into the table: "BattlepassLevels" */
+	readonly insert_BattlepassLevels?: Maybe<BattlepassLevels_Mutation_Response>
+	/** insert a single row into the table: "BattlepassLevels" */
+	readonly insert_BattlepassLevels_one?: Maybe<BattlepassLevels>
+	/** insert data into the table: "BattlepassParticipants" */
+	readonly insert_BattlepassParticipants?: Maybe<BattlepassParticipants_Mutation_Response>
+	/** insert a single row into the table: "BattlepassParticipants" */
+	readonly insert_BattlepassParticipants_one?: Maybe<BattlepassParticipants>
+	/** insert data into the table: "BattlepassRewards" */
+	readonly insert_BattlepassRewards?: Maybe<BattlepassRewards_Mutation_Response>
+	/** insert a single row into the table: "BattlepassRewards" */
+	readonly insert_BattlepassRewards_one?: Maybe<BattlepassRewards>
+	/** insert data into the table: "Battlepasses" */
+	readonly insert_Battlepasses?: Maybe<Battlepasses_Mutation_Response>
+	/** insert a single row into the table: "Battlepasses" */
+	readonly insert_Battlepasses_one?: Maybe<Battlepasses>
+	/** insert data into the table: "ChainActivities" */
+	readonly insert_ChainActivities?: Maybe<ChainActivities_Mutation_Response>
+	/** insert a single row into the table: "ChainActivities" */
+	readonly insert_ChainActivities_one?: Maybe<ChainActivities>
 	/** insert data into the table: "ChainInfo" */
 	readonly insert_ChainInfo?: Maybe<ChainInfo_Mutation_Response>
 	/** insert a single row into the table: "ChainInfo" */
 	readonly insert_ChainInfo_one?: Maybe<ChainInfo>
+	/** insert data into the table: "ChainStatuses" */
+	readonly insert_ChainStatuses?: Maybe<ChainStatuses_Mutation_Response>
+	/** insert a single row into the table: "ChainStatuses" */
+	readonly insert_ChainStatuses_one?: Maybe<ChainStatuses>
+	/** insert data into the table: "CompletedQuests" */
+	readonly insert_CompletedQuests?: Maybe<CompletedQuests_Mutation_Response>
+	/** insert a single row into the table: "CompletedQuests" */
+	readonly insert_CompletedQuests_one?: Maybe<CompletedQuests>
+	/** insert data into the table: "DiscordActivities" */
+	readonly insert_DiscordActivities?: Maybe<DiscordActivities_Mutation_Response>
+	/** insert a single row into the table: "DiscordActivities" */
+	readonly insert_DiscordActivities_one?: Maybe<DiscordActivities>
+	/** insert data into the table: "GenericActivities" */
+	readonly insert_GenericActivities?: Maybe<GenericActivities_Mutation_Response>
+	/** insert a single row into the table: "GenericActivities" */
+	readonly insert_GenericActivities_one?: Maybe<GenericActivities>
+	/** insert data into the table: "Identities" */
+	readonly insert_Identities?: Maybe<Identities_Mutation_Response>
+	/** insert a single row into the table: "Identities" */
+	readonly insert_Identities_one?: Maybe<Identities>
+	/** insert data into the table: "Payments" */
+	readonly insert_Payments?: Maybe<Payments_Mutation_Response>
+	/** insert a single row into the table: "Payments" */
+	readonly insert_Payments_one?: Maybe<Payments>
+	/** insert data into the table: "QuestProgresses" */
+	readonly insert_QuestProgresses?: Maybe<QuestProgresses_Mutation_Response>
+	/** insert a single row into the table: "QuestProgresses" */
+	readonly insert_QuestProgresses_one?: Maybe<QuestProgresses>
+	/** insert data into the table: "Quests" */
+	readonly insert_Quests?: Maybe<Quests_Mutation_Response>
+	/** insert a single row into the table: "Quests" */
+	readonly insert_Quests_one?: Maybe<Quests>
+	/** insert data into the table: "RewardClaims" */
+	readonly insert_RewardClaims?: Maybe<RewardClaims_Mutation_Response>
+	/** insert a single row into the table: "RewardClaims" */
+	readonly insert_RewardClaims_one?: Maybe<RewardClaims>
 	/** insert data into the table: "Session" */
 	readonly insert_Session?: Maybe<Session_Mutation_Response>
 	/** insert a single row into the table: "Session" */
 	readonly insert_Session_one?: Maybe<Session>
+	/** insert data into the table: "TwitterActivities" */
+	readonly insert_TwitterActivities?: Maybe<TwitterActivities_Mutation_Response>
+	/** insert a single row into the table: "TwitterActivities" */
+	readonly insert_TwitterActivities_one?: Maybe<TwitterActivities>
+	/** insert data into the table: "TwitterSearches" */
+	readonly insert_TwitterSearches?: Maybe<TwitterSearches_Mutation_Response>
+	/** insert a single row into the table: "TwitterSearches" */
+	readonly insert_TwitterSearches_one?: Maybe<TwitterSearches>
+	/** insert data into the table: "TwitterUsers" */
+	readonly insert_TwitterUsers?: Maybe<TwitterUsers_Mutation_Response>
+	/** insert a single row into the table: "TwitterUsers" */
+	readonly insert_TwitterUsers_one?: Maybe<TwitterUsers>
+	/** insert data into the table: "UserTokens" */
+	readonly insert_UserTokens?: Maybe<UserTokens_Mutation_Response>
+	/** insert a single row into the table: "UserTokens" */
+	readonly insert_UserTokens_one?: Maybe<UserTokens>
 	/** insert data into the table: "_prisma_migrations" */
 	readonly insert__prisma_migrations?: Maybe<_Prisma_Migrations_Mutation_Response>
 	/** insert a single row into the table: "_prisma_migrations" */
@@ -5755,18 +13075,126 @@ export type Mutation_Root = {
 	readonly update_Balance_by_pk?: Maybe<Balance>
 	/** update multiples rows of table: "Balance" */
 	readonly update_Balance_many?: Maybe<ReadonlyArray<Maybe<Balance_Mutation_Response>>>
+	/** update data of the table: "BattlepassLevels" */
+	readonly update_BattlepassLevels?: Maybe<BattlepassLevels_Mutation_Response>
+	/** update single row of the table: "BattlepassLevels" */
+	readonly update_BattlepassLevels_by_pk?: Maybe<BattlepassLevels>
+	/** update multiples rows of table: "BattlepassLevels" */
+	readonly update_BattlepassLevels_many?: Maybe<ReadonlyArray<Maybe<BattlepassLevels_Mutation_Response>>>
+	/** update data of the table: "BattlepassParticipants" */
+	readonly update_BattlepassParticipants?: Maybe<BattlepassParticipants_Mutation_Response>
+	/** update single row of the table: "BattlepassParticipants" */
+	readonly update_BattlepassParticipants_by_pk?: Maybe<BattlepassParticipants>
+	/** update multiples rows of table: "BattlepassParticipants" */
+	readonly update_BattlepassParticipants_many?: Maybe<ReadonlyArray<Maybe<BattlepassParticipants_Mutation_Response>>>
+	/** update data of the table: "BattlepassRewards" */
+	readonly update_BattlepassRewards?: Maybe<BattlepassRewards_Mutation_Response>
+	/** update single row of the table: "BattlepassRewards" */
+	readonly update_BattlepassRewards_by_pk?: Maybe<BattlepassRewards>
+	/** update multiples rows of table: "BattlepassRewards" */
+	readonly update_BattlepassRewards_many?: Maybe<ReadonlyArray<Maybe<BattlepassRewards_Mutation_Response>>>
+	/** update data of the table: "Battlepasses" */
+	readonly update_Battlepasses?: Maybe<Battlepasses_Mutation_Response>
+	/** update single row of the table: "Battlepasses" */
+	readonly update_Battlepasses_by_pk?: Maybe<Battlepasses>
+	/** update multiples rows of table: "Battlepasses" */
+	readonly update_Battlepasses_many?: Maybe<ReadonlyArray<Maybe<Battlepasses_Mutation_Response>>>
+	/** update data of the table: "ChainActivities" */
+	readonly update_ChainActivities?: Maybe<ChainActivities_Mutation_Response>
+	/** update single row of the table: "ChainActivities" */
+	readonly update_ChainActivities_by_pk?: Maybe<ChainActivities>
+	/** update multiples rows of table: "ChainActivities" */
+	readonly update_ChainActivities_many?: Maybe<ReadonlyArray<Maybe<ChainActivities_Mutation_Response>>>
 	/** update data of the table: "ChainInfo" */
 	readonly update_ChainInfo?: Maybe<ChainInfo_Mutation_Response>
 	/** update single row of the table: "ChainInfo" */
 	readonly update_ChainInfo_by_pk?: Maybe<ChainInfo>
 	/** update multiples rows of table: "ChainInfo" */
 	readonly update_ChainInfo_many?: Maybe<ReadonlyArray<Maybe<ChainInfo_Mutation_Response>>>
+	/** update data of the table: "ChainStatuses" */
+	readonly update_ChainStatuses?: Maybe<ChainStatuses_Mutation_Response>
+	/** update single row of the table: "ChainStatuses" */
+	readonly update_ChainStatuses_by_pk?: Maybe<ChainStatuses>
+	/** update multiples rows of table: "ChainStatuses" */
+	readonly update_ChainStatuses_many?: Maybe<ReadonlyArray<Maybe<ChainStatuses_Mutation_Response>>>
+	/** update data of the table: "CompletedQuests" */
+	readonly update_CompletedQuests?: Maybe<CompletedQuests_Mutation_Response>
+	/** update single row of the table: "CompletedQuests" */
+	readonly update_CompletedQuests_by_pk?: Maybe<CompletedQuests>
+	/** update multiples rows of table: "CompletedQuests" */
+	readonly update_CompletedQuests_many?: Maybe<ReadonlyArray<Maybe<CompletedQuests_Mutation_Response>>>
+	/** update data of the table: "DiscordActivities" */
+	readonly update_DiscordActivities?: Maybe<DiscordActivities_Mutation_Response>
+	/** update single row of the table: "DiscordActivities" */
+	readonly update_DiscordActivities_by_pk?: Maybe<DiscordActivities>
+	/** update multiples rows of table: "DiscordActivities" */
+	readonly update_DiscordActivities_many?: Maybe<ReadonlyArray<Maybe<DiscordActivities_Mutation_Response>>>
+	/** update data of the table: "GenericActivities" */
+	readonly update_GenericActivities?: Maybe<GenericActivities_Mutation_Response>
+	/** update single row of the table: "GenericActivities" */
+	readonly update_GenericActivities_by_pk?: Maybe<GenericActivities>
+	/** update multiples rows of table: "GenericActivities" */
+	readonly update_GenericActivities_many?: Maybe<ReadonlyArray<Maybe<GenericActivities_Mutation_Response>>>
+	/** update data of the table: "Identities" */
+	readonly update_Identities?: Maybe<Identities_Mutation_Response>
+	/** update single row of the table: "Identities" */
+	readonly update_Identities_by_pk?: Maybe<Identities>
+	/** update multiples rows of table: "Identities" */
+	readonly update_Identities_many?: Maybe<ReadonlyArray<Maybe<Identities_Mutation_Response>>>
+	/** update data of the table: "Payments" */
+	readonly update_Payments?: Maybe<Payments_Mutation_Response>
+	/** update single row of the table: "Payments" */
+	readonly update_Payments_by_pk?: Maybe<Payments>
+	/** update multiples rows of table: "Payments" */
+	readonly update_Payments_many?: Maybe<ReadonlyArray<Maybe<Payments_Mutation_Response>>>
+	/** update data of the table: "QuestProgresses" */
+	readonly update_QuestProgresses?: Maybe<QuestProgresses_Mutation_Response>
+	/** update single row of the table: "QuestProgresses" */
+	readonly update_QuestProgresses_by_pk?: Maybe<QuestProgresses>
+	/** update multiples rows of table: "QuestProgresses" */
+	readonly update_QuestProgresses_many?: Maybe<ReadonlyArray<Maybe<QuestProgresses_Mutation_Response>>>
+	/** update data of the table: "Quests" */
+	readonly update_Quests?: Maybe<Quests_Mutation_Response>
+	/** update single row of the table: "Quests" */
+	readonly update_Quests_by_pk?: Maybe<Quests>
+	/** update multiples rows of table: "Quests" */
+	readonly update_Quests_many?: Maybe<ReadonlyArray<Maybe<Quests_Mutation_Response>>>
+	/** update data of the table: "RewardClaims" */
+	readonly update_RewardClaims?: Maybe<RewardClaims_Mutation_Response>
+	/** update single row of the table: "RewardClaims" */
+	readonly update_RewardClaims_by_pk?: Maybe<RewardClaims>
+	/** update multiples rows of table: "RewardClaims" */
+	readonly update_RewardClaims_many?: Maybe<ReadonlyArray<Maybe<RewardClaims_Mutation_Response>>>
 	/** update data of the table: "Session" */
 	readonly update_Session?: Maybe<Session_Mutation_Response>
 	/** update single row of the table: "Session" */
 	readonly update_Session_by_pk?: Maybe<Session>
 	/** update multiples rows of table: "Session" */
 	readonly update_Session_many?: Maybe<ReadonlyArray<Maybe<Session_Mutation_Response>>>
+	/** update data of the table: "TwitterActivities" */
+	readonly update_TwitterActivities?: Maybe<TwitterActivities_Mutation_Response>
+	/** update single row of the table: "TwitterActivities" */
+	readonly update_TwitterActivities_by_pk?: Maybe<TwitterActivities>
+	/** update multiples rows of table: "TwitterActivities" */
+	readonly update_TwitterActivities_many?: Maybe<ReadonlyArray<Maybe<TwitterActivities_Mutation_Response>>>
+	/** update data of the table: "TwitterSearches" */
+	readonly update_TwitterSearches?: Maybe<TwitterSearches_Mutation_Response>
+	/** update single row of the table: "TwitterSearches" */
+	readonly update_TwitterSearches_by_pk?: Maybe<TwitterSearches>
+	/** update multiples rows of table: "TwitterSearches" */
+	readonly update_TwitterSearches_many?: Maybe<ReadonlyArray<Maybe<TwitterSearches_Mutation_Response>>>
+	/** update data of the table: "TwitterUsers" */
+	readonly update_TwitterUsers?: Maybe<TwitterUsers_Mutation_Response>
+	/** update single row of the table: "TwitterUsers" */
+	readonly update_TwitterUsers_by_pk?: Maybe<TwitterUsers>
+	/** update multiples rows of table: "TwitterUsers" */
+	readonly update_TwitterUsers_many?: Maybe<ReadonlyArray<Maybe<TwitterUsers_Mutation_Response>>>
+	/** update data of the table: "UserTokens" */
+	readonly update_UserTokens?: Maybe<UserTokens_Mutation_Response>
+	/** update single row of the table: "UserTokens" */
+	readonly update_UserTokens_by_pk?: Maybe<UserTokens>
+	/** update multiples rows of table: "UserTokens" */
+	readonly update_UserTokens_many?: Maybe<ReadonlyArray<Maybe<UserTokens_Mutation_Response>>>
 	/** update data of the table: "_prisma_migrations" */
 	readonly update__prisma_migrations?: Maybe<_Prisma_Migrations_Mutation_Response>
 	/** update single row of the table: "_prisma_migrations" */
@@ -5912,12 +13340,152 @@ export type Mutation_RootDelete_Balance_By_PkArgs = {
 }
 
 /** mutation root */
+export type Mutation_RootDelete_BattlepassLevelsArgs = {
+	where: BattlepassLevels_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BattlepassLevels_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BattlepassParticipantsArgs = {
+	where: BattlepassParticipants_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BattlepassParticipants_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BattlepassRewardsArgs = {
+	where: BattlepassRewards_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BattlepassRewards_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BattlepassesArgs = {
+	where: Battlepasses_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Battlepasses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_ChainActivitiesArgs = {
+	where: ChainActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_ChainActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
 export type Mutation_RootDelete_ChainInfoArgs = {
 	where: ChainInfo_Bool_Exp
 }
 
 /** mutation root */
 export type Mutation_RootDelete_ChainInfo_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_ChainStatusesArgs = {
+	where: ChainStatuses_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_ChainStatuses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_CompletedQuestsArgs = {
+	where: CompletedQuests_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_CompletedQuests_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_DiscordActivitiesArgs = {
+	where: DiscordActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_DiscordActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_GenericActivitiesArgs = {
+	where: GenericActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_GenericActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_IdentitiesArgs = {
+	where: Identities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Identities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_PaymentsArgs = {
+	where: Payments_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Payments_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_QuestProgressesArgs = {
+	where: QuestProgresses_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_QuestProgresses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_QuestsArgs = {
+	where: Quests_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Quests_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_RewardClaimsArgs = {
+	where: RewardClaims_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_RewardClaims_By_PkArgs = {
 	id: Scalars['Int']
 }
 
@@ -5929,6 +13497,46 @@ export type Mutation_RootDelete_SessionArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Session_By_PkArgs = {
 	id: Scalars['bigint']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_TwitterActivitiesArgs = {
+	where: TwitterActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_TwitterActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_TwitterSearchesArgs = {
+	where: TwitterSearches_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_TwitterSearches_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_TwitterUsersArgs = {
+	where: TwitterUsers_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_TwitterUsers_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_UserTokensArgs = {
+	where: UserTokens_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_UserTokens_By_PkArgs = {
+	id: Scalars['Int']
 }
 
 /** mutation root */
@@ -6164,6 +13772,66 @@ export type Mutation_RootInsert_Balance_OneArgs = {
 }
 
 /** mutation root */
+export type Mutation_RootInsert_BattlepassLevelsArgs = {
+	objects: ReadonlyArray<BattlepassLevels_Insert_Input>
+	on_conflict?: InputMaybe<BattlepassLevels_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BattlepassLevels_OneArgs = {
+	object: BattlepassLevels_Insert_Input
+	on_conflict?: InputMaybe<BattlepassLevels_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BattlepassParticipantsArgs = {
+	objects: ReadonlyArray<BattlepassParticipants_Insert_Input>
+	on_conflict?: InputMaybe<BattlepassParticipants_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BattlepassParticipants_OneArgs = {
+	object: BattlepassParticipants_Insert_Input
+	on_conflict?: InputMaybe<BattlepassParticipants_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BattlepassRewardsArgs = {
+	objects: ReadonlyArray<BattlepassRewards_Insert_Input>
+	on_conflict?: InputMaybe<BattlepassRewards_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BattlepassRewards_OneArgs = {
+	object: BattlepassRewards_Insert_Input
+	on_conflict?: InputMaybe<BattlepassRewards_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BattlepassesArgs = {
+	objects: ReadonlyArray<Battlepasses_Insert_Input>
+	on_conflict?: InputMaybe<Battlepasses_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Battlepasses_OneArgs = {
+	object: Battlepasses_Insert_Input
+	on_conflict?: InputMaybe<Battlepasses_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_ChainActivitiesArgs = {
+	objects: ReadonlyArray<ChainActivities_Insert_Input>
+	on_conflict?: InputMaybe<ChainActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_ChainActivities_OneArgs = {
+	object: ChainActivities_Insert_Input
+	on_conflict?: InputMaybe<ChainActivities_On_Conflict>
+}
+
+/** mutation root */
 export type Mutation_RootInsert_ChainInfoArgs = {
 	objects: ReadonlyArray<ChainInfo_Insert_Input>
 	on_conflict?: InputMaybe<ChainInfo_On_Conflict>
@@ -6176,6 +13844,114 @@ export type Mutation_RootInsert_ChainInfo_OneArgs = {
 }
 
 /** mutation root */
+export type Mutation_RootInsert_ChainStatusesArgs = {
+	objects: ReadonlyArray<ChainStatuses_Insert_Input>
+	on_conflict?: InputMaybe<ChainStatuses_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_ChainStatuses_OneArgs = {
+	object: ChainStatuses_Insert_Input
+	on_conflict?: InputMaybe<ChainStatuses_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_CompletedQuestsArgs = {
+	objects: ReadonlyArray<CompletedQuests_Insert_Input>
+	on_conflict?: InputMaybe<CompletedQuests_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_CompletedQuests_OneArgs = {
+	object: CompletedQuests_Insert_Input
+	on_conflict?: InputMaybe<CompletedQuests_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_DiscordActivitiesArgs = {
+	objects: ReadonlyArray<DiscordActivities_Insert_Input>
+	on_conflict?: InputMaybe<DiscordActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_DiscordActivities_OneArgs = {
+	object: DiscordActivities_Insert_Input
+	on_conflict?: InputMaybe<DiscordActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_GenericActivitiesArgs = {
+	objects: ReadonlyArray<GenericActivities_Insert_Input>
+	on_conflict?: InputMaybe<GenericActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_GenericActivities_OneArgs = {
+	object: GenericActivities_Insert_Input
+	on_conflict?: InputMaybe<GenericActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_IdentitiesArgs = {
+	objects: ReadonlyArray<Identities_Insert_Input>
+	on_conflict?: InputMaybe<Identities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Identities_OneArgs = {
+	object: Identities_Insert_Input
+	on_conflict?: InputMaybe<Identities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_PaymentsArgs = {
+	objects: ReadonlyArray<Payments_Insert_Input>
+	on_conflict?: InputMaybe<Payments_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Payments_OneArgs = {
+	object: Payments_Insert_Input
+	on_conflict?: InputMaybe<Payments_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_QuestProgressesArgs = {
+	objects: ReadonlyArray<QuestProgresses_Insert_Input>
+	on_conflict?: InputMaybe<QuestProgresses_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_QuestProgresses_OneArgs = {
+	object: QuestProgresses_Insert_Input
+	on_conflict?: InputMaybe<QuestProgresses_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_QuestsArgs = {
+	objects: ReadonlyArray<Quests_Insert_Input>
+	on_conflict?: InputMaybe<Quests_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Quests_OneArgs = {
+	object: Quests_Insert_Input
+	on_conflict?: InputMaybe<Quests_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_RewardClaimsArgs = {
+	objects: ReadonlyArray<RewardClaims_Insert_Input>
+	on_conflict?: InputMaybe<RewardClaims_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_RewardClaims_OneArgs = {
+	object: RewardClaims_Insert_Input
+	on_conflict?: InputMaybe<RewardClaims_On_Conflict>
+}
+
+/** mutation root */
 export type Mutation_RootInsert_SessionArgs = {
 	objects: ReadonlyArray<Session_Insert_Input>
 	on_conflict?: InputMaybe<Session_On_Conflict>
@@ -6185,6 +13961,54 @@ export type Mutation_RootInsert_SessionArgs = {
 export type Mutation_RootInsert_Session_OneArgs = {
 	object: Session_Insert_Input
 	on_conflict?: InputMaybe<Session_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_TwitterActivitiesArgs = {
+	objects: ReadonlyArray<TwitterActivities_Insert_Input>
+	on_conflict?: InputMaybe<TwitterActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_TwitterActivities_OneArgs = {
+	object: TwitterActivities_Insert_Input
+	on_conflict?: InputMaybe<TwitterActivities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_TwitterSearchesArgs = {
+	objects: ReadonlyArray<TwitterSearches_Insert_Input>
+	on_conflict?: InputMaybe<TwitterSearches_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_TwitterSearches_OneArgs = {
+	object: TwitterSearches_Insert_Input
+	on_conflict?: InputMaybe<TwitterSearches_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_TwitterUsersArgs = {
+	objects: ReadonlyArray<TwitterUsers_Insert_Input>
+	on_conflict?: InputMaybe<TwitterUsers_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_TwitterUsers_OneArgs = {
+	object: TwitterUsers_Insert_Input
+	on_conflict?: InputMaybe<TwitterUsers_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_UserTokensArgs = {
+	objects: ReadonlyArray<UserTokens_Insert_Input>
+	on_conflict?: InputMaybe<UserTokens_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_UserTokens_OneArgs = {
+	object: UserTokens_Insert_Input
+	on_conflict?: InputMaybe<UserTokens_On_Conflict>
 }
 
 /** mutation root */
@@ -6481,6 +14305,101 @@ export type Mutation_RootUpdate_Balance_ManyArgs = {
 }
 
 /** mutation root */
+export type Mutation_RootUpdate_BattlepassLevelsArgs = {
+	_inc?: InputMaybe<BattlepassLevels_Inc_Input>
+	_set?: InputMaybe<BattlepassLevels_Set_Input>
+	where: BattlepassLevels_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassLevels_By_PkArgs = {
+	_inc?: InputMaybe<BattlepassLevels_Inc_Input>
+	_set?: InputMaybe<BattlepassLevels_Set_Input>
+	pk_columns: BattlepassLevels_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassLevels_ManyArgs = {
+	updates: ReadonlyArray<BattlepassLevels_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassParticipantsArgs = {
+	_inc?: InputMaybe<BattlepassParticipants_Inc_Input>
+	_set?: InputMaybe<BattlepassParticipants_Set_Input>
+	where: BattlepassParticipants_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassParticipants_By_PkArgs = {
+	_inc?: InputMaybe<BattlepassParticipants_Inc_Input>
+	_set?: InputMaybe<BattlepassParticipants_Set_Input>
+	pk_columns: BattlepassParticipants_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassParticipants_ManyArgs = {
+	updates: ReadonlyArray<BattlepassParticipants_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassRewardsArgs = {
+	_inc?: InputMaybe<BattlepassRewards_Inc_Input>
+	_set?: InputMaybe<BattlepassRewards_Set_Input>
+	where: BattlepassRewards_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassRewards_By_PkArgs = {
+	_inc?: InputMaybe<BattlepassRewards_Inc_Input>
+	_set?: InputMaybe<BattlepassRewards_Set_Input>
+	pk_columns: BattlepassRewards_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassRewards_ManyArgs = {
+	updates: ReadonlyArray<BattlepassRewards_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BattlepassesArgs = {
+	_inc?: InputMaybe<Battlepasses_Inc_Input>
+	_set?: InputMaybe<Battlepasses_Set_Input>
+	where: Battlepasses_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Battlepasses_By_PkArgs = {
+	_inc?: InputMaybe<Battlepasses_Inc_Input>
+	_set?: InputMaybe<Battlepasses_Set_Input>
+	pk_columns: Battlepasses_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Battlepasses_ManyArgs = {
+	updates: ReadonlyArray<Battlepasses_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ChainActivitiesArgs = {
+	_inc?: InputMaybe<ChainActivities_Inc_Input>
+	_set?: InputMaybe<ChainActivities_Set_Input>
+	where: ChainActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ChainActivities_By_PkArgs = {
+	_inc?: InputMaybe<ChainActivities_Inc_Input>
+	_set?: InputMaybe<ChainActivities_Set_Input>
+	pk_columns: ChainActivities_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ChainActivities_ManyArgs = {
+	updates: ReadonlyArray<ChainActivities_Updates>
+}
+
+/** mutation root */
 export type Mutation_RootUpdate_ChainInfoArgs = {
 	_inc?: InputMaybe<ChainInfo_Inc_Input>
 	_set?: InputMaybe<ChainInfo_Set_Input>
@@ -6500,6 +14419,177 @@ export type Mutation_RootUpdate_ChainInfo_ManyArgs = {
 }
 
 /** mutation root */
+export type Mutation_RootUpdate_ChainStatusesArgs = {
+	_inc?: InputMaybe<ChainStatuses_Inc_Input>
+	_set?: InputMaybe<ChainStatuses_Set_Input>
+	where: ChainStatuses_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ChainStatuses_By_PkArgs = {
+	_inc?: InputMaybe<ChainStatuses_Inc_Input>
+	_set?: InputMaybe<ChainStatuses_Set_Input>
+	pk_columns: ChainStatuses_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ChainStatuses_ManyArgs = {
+	updates: ReadonlyArray<ChainStatuses_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_CompletedQuestsArgs = {
+	_inc?: InputMaybe<CompletedQuests_Inc_Input>
+	_set?: InputMaybe<CompletedQuests_Set_Input>
+	where: CompletedQuests_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_CompletedQuests_By_PkArgs = {
+	_inc?: InputMaybe<CompletedQuests_Inc_Input>
+	_set?: InputMaybe<CompletedQuests_Set_Input>
+	pk_columns: CompletedQuests_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_CompletedQuests_ManyArgs = {
+	updates: ReadonlyArray<CompletedQuests_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_DiscordActivitiesArgs = {
+	_inc?: InputMaybe<DiscordActivities_Inc_Input>
+	_set?: InputMaybe<DiscordActivities_Set_Input>
+	where: DiscordActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_DiscordActivities_By_PkArgs = {
+	_inc?: InputMaybe<DiscordActivities_Inc_Input>
+	_set?: InputMaybe<DiscordActivities_Set_Input>
+	pk_columns: DiscordActivities_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_DiscordActivities_ManyArgs = {
+	updates: ReadonlyArray<DiscordActivities_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_GenericActivitiesArgs = {
+	_inc?: InputMaybe<GenericActivities_Inc_Input>
+	_set?: InputMaybe<GenericActivities_Set_Input>
+	where: GenericActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_GenericActivities_By_PkArgs = {
+	_inc?: InputMaybe<GenericActivities_Inc_Input>
+	_set?: InputMaybe<GenericActivities_Set_Input>
+	pk_columns: GenericActivities_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_GenericActivities_ManyArgs = {
+	updates: ReadonlyArray<GenericActivities_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_IdentitiesArgs = {
+	_inc?: InputMaybe<Identities_Inc_Input>
+	_set?: InputMaybe<Identities_Set_Input>
+	where: Identities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Identities_By_PkArgs = {
+	_inc?: InputMaybe<Identities_Inc_Input>
+	_set?: InputMaybe<Identities_Set_Input>
+	pk_columns: Identities_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Identities_ManyArgs = {
+	updates: ReadonlyArray<Identities_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_PaymentsArgs = {
+	_inc?: InputMaybe<Payments_Inc_Input>
+	_set?: InputMaybe<Payments_Set_Input>
+	where: Payments_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Payments_By_PkArgs = {
+	_inc?: InputMaybe<Payments_Inc_Input>
+	_set?: InputMaybe<Payments_Set_Input>
+	pk_columns: Payments_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Payments_ManyArgs = {
+	updates: ReadonlyArray<Payments_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_QuestProgressesArgs = {
+	_inc?: InputMaybe<QuestProgresses_Inc_Input>
+	_set?: InputMaybe<QuestProgresses_Set_Input>
+	where: QuestProgresses_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_QuestProgresses_By_PkArgs = {
+	_inc?: InputMaybe<QuestProgresses_Inc_Input>
+	_set?: InputMaybe<QuestProgresses_Set_Input>
+	pk_columns: QuestProgresses_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_QuestProgresses_ManyArgs = {
+	updates: ReadonlyArray<QuestProgresses_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_QuestsArgs = {
+	_inc?: InputMaybe<Quests_Inc_Input>
+	_set?: InputMaybe<Quests_Set_Input>
+	where: Quests_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Quests_By_PkArgs = {
+	_inc?: InputMaybe<Quests_Inc_Input>
+	_set?: InputMaybe<Quests_Set_Input>
+	pk_columns: Quests_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Quests_ManyArgs = {
+	updates: ReadonlyArray<Quests_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_RewardClaimsArgs = {
+	_inc?: InputMaybe<RewardClaims_Inc_Input>
+	_set?: InputMaybe<RewardClaims_Set_Input>
+	where: RewardClaims_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_RewardClaims_By_PkArgs = {
+	_inc?: InputMaybe<RewardClaims_Inc_Input>
+	_set?: InputMaybe<RewardClaims_Set_Input>
+	pk_columns: RewardClaims_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_RewardClaims_ManyArgs = {
+	updates: ReadonlyArray<RewardClaims_Updates>
+}
+
+/** mutation root */
 export type Mutation_RootUpdate_SessionArgs = {
 	_inc?: InputMaybe<Session_Inc_Input>
 	_set?: InputMaybe<Session_Set_Input>
@@ -6516,6 +14606,82 @@ export type Mutation_RootUpdate_Session_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Session_ManyArgs = {
 	updates: ReadonlyArray<Session_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterActivitiesArgs = {
+	_inc?: InputMaybe<TwitterActivities_Inc_Input>
+	_set?: InputMaybe<TwitterActivities_Set_Input>
+	where: TwitterActivities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterActivities_By_PkArgs = {
+	_inc?: InputMaybe<TwitterActivities_Inc_Input>
+	_set?: InputMaybe<TwitterActivities_Set_Input>
+	pk_columns: TwitterActivities_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterActivities_ManyArgs = {
+	updates: ReadonlyArray<TwitterActivities_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterSearchesArgs = {
+	_inc?: InputMaybe<TwitterSearches_Inc_Input>
+	_set?: InputMaybe<TwitterSearches_Set_Input>
+	where: TwitterSearches_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterSearches_By_PkArgs = {
+	_inc?: InputMaybe<TwitterSearches_Inc_Input>
+	_set?: InputMaybe<TwitterSearches_Set_Input>
+	pk_columns: TwitterSearches_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterSearches_ManyArgs = {
+	updates: ReadonlyArray<TwitterSearches_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterUsersArgs = {
+	_inc?: InputMaybe<TwitterUsers_Inc_Input>
+	_set?: InputMaybe<TwitterUsers_Set_Input>
+	where: TwitterUsers_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterUsers_By_PkArgs = {
+	_inc?: InputMaybe<TwitterUsers_Inc_Input>
+	_set?: InputMaybe<TwitterUsers_Set_Input>
+	pk_columns: TwitterUsers_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_TwitterUsers_ManyArgs = {
+	updates: ReadonlyArray<TwitterUsers_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_UserTokensArgs = {
+	_inc?: InputMaybe<UserTokens_Inc_Input>
+	_set?: InputMaybe<UserTokens_Set_Input>
+	where: UserTokens_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_UserTokens_By_PkArgs = {
+	_inc?: InputMaybe<UserTokens_Inc_Input>
+	_set?: InputMaybe<UserTokens_Set_Input>
+	pk_columns: UserTokens_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_UserTokens_ManyArgs = {
+	updates: ReadonlyArray<UserTokens_Updates>
 }
 
 /** mutation root */
@@ -10170,18 +18336,126 @@ export type Query_Root = {
 	readonly Balance_aggregate: Balance_Aggregate
 	/** fetch data from the table: "Balance" using primary key columns */
 	readonly Balance_by_pk?: Maybe<Balance>
+	/** An array relationship */
+	readonly BattlepassLevels: ReadonlyArray<BattlepassLevels>
+	/** An aggregate relationship */
+	readonly BattlepassLevels_aggregate: BattlepassLevels_Aggregate
+	/** fetch data from the table: "BattlepassLevels" using primary key columns */
+	readonly BattlepassLevels_by_pk?: Maybe<BattlepassLevels>
+	/** An array relationship */
+	readonly BattlepassParticipants: ReadonlyArray<BattlepassParticipants>
+	/** An aggregate relationship */
+	readonly BattlepassParticipants_aggregate: BattlepassParticipants_Aggregate
+	/** fetch data from the table: "BattlepassParticipants" using primary key columns */
+	readonly BattlepassParticipants_by_pk?: Maybe<BattlepassParticipants>
+	/** An array relationship */
+	readonly BattlepassRewards: ReadonlyArray<BattlepassRewards>
+	/** An aggregate relationship */
+	readonly BattlepassRewards_aggregate: BattlepassRewards_Aggregate
+	/** fetch data from the table: "BattlepassRewards" using primary key columns */
+	readonly BattlepassRewards_by_pk?: Maybe<BattlepassRewards>
+	/** fetch data from the table: "Battlepasses" */
+	readonly Battlepasses: ReadonlyArray<Battlepasses>
+	/** fetch aggregated fields from the table: "Battlepasses" */
+	readonly Battlepasses_aggregate: Battlepasses_Aggregate
+	/** fetch data from the table: "Battlepasses" using primary key columns */
+	readonly Battlepasses_by_pk?: Maybe<Battlepasses>
+	/** fetch data from the table: "ChainActivities" */
+	readonly ChainActivities: ReadonlyArray<ChainActivities>
+	/** fetch aggregated fields from the table: "ChainActivities" */
+	readonly ChainActivities_aggregate: ChainActivities_Aggregate
+	/** fetch data from the table: "ChainActivities" using primary key columns */
+	readonly ChainActivities_by_pk?: Maybe<ChainActivities>
 	/** fetch data from the table: "ChainInfo" */
 	readonly ChainInfo: ReadonlyArray<ChainInfo>
 	/** fetch aggregated fields from the table: "ChainInfo" */
 	readonly ChainInfo_aggregate: ChainInfo_Aggregate
 	/** fetch data from the table: "ChainInfo" using primary key columns */
 	readonly ChainInfo_by_pk?: Maybe<ChainInfo>
+	/** fetch data from the table: "ChainStatuses" */
+	readonly ChainStatuses: ReadonlyArray<ChainStatuses>
+	/** fetch aggregated fields from the table: "ChainStatuses" */
+	readonly ChainStatuses_aggregate: ChainStatuses_Aggregate
+	/** fetch data from the table: "ChainStatuses" using primary key columns */
+	readonly ChainStatuses_by_pk?: Maybe<ChainStatuses>
+	/** An array relationship */
+	readonly CompletedQuests: ReadonlyArray<CompletedQuests>
+	/** An aggregate relationship */
+	readonly CompletedQuests_aggregate: CompletedQuests_Aggregate
+	/** fetch data from the table: "CompletedQuests" using primary key columns */
+	readonly CompletedQuests_by_pk?: Maybe<CompletedQuests>
+	/** fetch data from the table: "DiscordActivities" */
+	readonly DiscordActivities: ReadonlyArray<DiscordActivities>
+	/** fetch aggregated fields from the table: "DiscordActivities" */
+	readonly DiscordActivities_aggregate: DiscordActivities_Aggregate
+	/** fetch data from the table: "DiscordActivities" using primary key columns */
+	readonly DiscordActivities_by_pk?: Maybe<DiscordActivities>
+	/** fetch data from the table: "GenericActivities" */
+	readonly GenericActivities: ReadonlyArray<GenericActivities>
+	/** fetch aggregated fields from the table: "GenericActivities" */
+	readonly GenericActivities_aggregate: GenericActivities_Aggregate
+	/** fetch data from the table: "GenericActivities" using primary key columns */
+	readonly GenericActivities_by_pk?: Maybe<GenericActivities>
+	/** fetch data from the table: "Identities" */
+	readonly Identities: ReadonlyArray<Identities>
+	/** fetch aggregated fields from the table: "Identities" */
+	readonly Identities_aggregate: Identities_Aggregate
+	/** fetch data from the table: "Identities" using primary key columns */
+	readonly Identities_by_pk?: Maybe<Identities>
+	/** An array relationship */
+	readonly Payments: ReadonlyArray<Payments>
+	/** An aggregate relationship */
+	readonly Payments_aggregate: Payments_Aggregate
+	/** fetch data from the table: "Payments" using primary key columns */
+	readonly Payments_by_pk?: Maybe<Payments>
+	/** An array relationship */
+	readonly QuestProgresses: ReadonlyArray<QuestProgresses>
+	/** An aggregate relationship */
+	readonly QuestProgresses_aggregate: QuestProgresses_Aggregate
+	/** fetch data from the table: "QuestProgresses" using primary key columns */
+	readonly QuestProgresses_by_pk?: Maybe<QuestProgresses>
+	/** An array relationship */
+	readonly Quests: ReadonlyArray<Quests>
+	/** An aggregate relationship */
+	readonly Quests_aggregate: Quests_Aggregate
+	/** fetch data from the table: "Quests" using primary key columns */
+	readonly Quests_by_pk?: Maybe<Quests>
+	/** An array relationship */
+	readonly RewardClaims: ReadonlyArray<RewardClaims>
+	/** An aggregate relationship */
+	readonly RewardClaims_aggregate: RewardClaims_Aggregate
+	/** fetch data from the table: "RewardClaims" using primary key columns */
+	readonly RewardClaims_by_pk?: Maybe<RewardClaims>
 	/** fetch data from the table: "Session" */
 	readonly Session: ReadonlyArray<Session>
 	/** fetch aggregated fields from the table: "Session" */
 	readonly Session_aggregate: Session_Aggregate
 	/** fetch data from the table: "Session" using primary key columns */
 	readonly Session_by_pk?: Maybe<Session>
+	/** fetch data from the table: "TwitterActivities" */
+	readonly TwitterActivities: ReadonlyArray<TwitterActivities>
+	/** fetch aggregated fields from the table: "TwitterActivities" */
+	readonly TwitterActivities_aggregate: TwitterActivities_Aggregate
+	/** fetch data from the table: "TwitterActivities" using primary key columns */
+	readonly TwitterActivities_by_pk?: Maybe<TwitterActivities>
+	/** fetch data from the table: "TwitterSearches" */
+	readonly TwitterSearches: ReadonlyArray<TwitterSearches>
+	/** fetch aggregated fields from the table: "TwitterSearches" */
+	readonly TwitterSearches_aggregate: TwitterSearches_Aggregate
+	/** fetch data from the table: "TwitterSearches" using primary key columns */
+	readonly TwitterSearches_by_pk?: Maybe<TwitterSearches>
+	/** fetch data from the table: "TwitterUsers" */
+	readonly TwitterUsers: ReadonlyArray<TwitterUsers>
+	/** fetch aggregated fields from the table: "TwitterUsers" */
+	readonly TwitterUsers_aggregate: TwitterUsers_Aggregate
+	/** fetch data from the table: "TwitterUsers" using primary key columns */
+	readonly TwitterUsers_by_pk?: Maybe<TwitterUsers>
+	/** An array relationship */
+	readonly UserTokens: ReadonlyArray<UserTokens>
+	/** An aggregate relationship */
+	readonly UserTokens_aggregate: UserTokens_Aggregate
+	/** fetch data from the table: "UserTokens" using primary key columns */
+	readonly UserTokens_by_pk?: Maybe<UserTokens>
 	/** fetch data from the table: "_prisma_migrations" */
 	readonly _prisma_migrations: ReadonlyArray<_Prisma_Migrations>
 	/** fetch aggregated fields from the table: "_prisma_migrations" */
@@ -10344,6 +18618,106 @@ export type Query_RootBalance_By_PkArgs = {
 	id: Scalars['bigint']
 }
 
+export type Query_RootBattlepassLevelsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassLevels_Order_By>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+export type Query_RootBattlepassLevels_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassLevels_Order_By>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+export type Query_RootBattlepassLevels_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootBattlepassParticipantsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+export type Query_RootBattlepassParticipants_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+export type Query_RootBattlepassParticipants_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootBattlepassRewardsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassRewards_Order_By>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+export type Query_RootBattlepassRewards_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassRewards_Order_By>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+export type Query_RootBattlepassRewards_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootBattlepassesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Battlepasses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Battlepasses_Order_By>>
+	where?: InputMaybe<Battlepasses_Bool_Exp>
+}
+
+export type Query_RootBattlepasses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Battlepasses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Battlepasses_Order_By>>
+	where?: InputMaybe<Battlepasses_Bool_Exp>
+}
+
+export type Query_RootBattlepasses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootChainActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainActivities_Order_By>>
+	where?: InputMaybe<ChainActivities_Bool_Exp>
+}
+
+export type Query_RootChainActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainActivities_Order_By>>
+	where?: InputMaybe<ChainActivities_Bool_Exp>
+}
+
+export type Query_RootChainActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
 export type Query_RootChainInfoArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<ChainInfo_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -10361,6 +18735,186 @@ export type Query_RootChainInfo_AggregateArgs = {
 }
 
 export type Query_RootChainInfo_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootChainStatusesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainStatuses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainStatuses_Order_By>>
+	where?: InputMaybe<ChainStatuses_Bool_Exp>
+}
+
+export type Query_RootChainStatuses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainStatuses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainStatuses_Order_By>>
+	where?: InputMaybe<ChainStatuses_Bool_Exp>
+}
+
+export type Query_RootChainStatuses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootCompletedQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+export type Query_RootCompletedQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+export type Query_RootCompletedQuests_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootDiscordActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<DiscordActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<DiscordActivities_Order_By>>
+	where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+export type Query_RootDiscordActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<DiscordActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<DiscordActivities_Order_By>>
+	where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+export type Query_RootDiscordActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootGenericActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<GenericActivities_Order_By>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Query_RootGenericActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<GenericActivities_Order_By>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Query_RootGenericActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootIdentitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Identities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Identities_Order_By>>
+	where?: InputMaybe<Identities_Bool_Exp>
+}
+
+export type Query_RootIdentities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Identities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Identities_Order_By>>
+	where?: InputMaybe<Identities_Bool_Exp>
+}
+
+export type Query_RootIdentities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootPaymentsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Payments_Order_By>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+export type Query_RootPayments_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Payments_Order_By>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+export type Query_RootPayments_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootQuestProgressesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+export type Query_RootQuestProgresses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+export type Query_RootQuestProgresses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Quests_Order_By>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
+export type Query_RootQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Quests_Order_By>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
+export type Query_RootQuests_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootRewardClaimsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+export type Query_RootRewardClaims_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+export type Query_RootRewardClaims_By_PkArgs = {
 	id: Scalars['Int']
 }
 
@@ -10382,6 +18936,86 @@ export type Query_RootSession_AggregateArgs = {
 
 export type Query_RootSession_By_PkArgs = {
 	id: Scalars['bigint']
+}
+
+export type Query_RootTwitterActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterActivities_Order_By>>
+	where?: InputMaybe<TwitterActivities_Bool_Exp>
+}
+
+export type Query_RootTwitterActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterActivities_Order_By>>
+	where?: InputMaybe<TwitterActivities_Bool_Exp>
+}
+
+export type Query_RootTwitterActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootTwitterSearchesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterSearches_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterSearches_Order_By>>
+	where?: InputMaybe<TwitterSearches_Bool_Exp>
+}
+
+export type Query_RootTwitterSearches_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterSearches_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterSearches_Order_By>>
+	where?: InputMaybe<TwitterSearches_Bool_Exp>
+}
+
+export type Query_RootTwitterSearches_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootTwitterUsersArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterUsers_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterUsers_Order_By>>
+	where?: InputMaybe<TwitterUsers_Bool_Exp>
+}
+
+export type Query_RootTwitterUsers_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterUsers_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterUsers_Order_By>>
+	where?: InputMaybe<TwitterUsers_Bool_Exp>
+}
+
+export type Query_RootTwitterUsers_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Query_RootUserTokensArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<UserTokens_Order_By>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+export type Query_RootUserTokens_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<UserTokens_Order_By>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+export type Query_RootUserTokens_By_PkArgs = {
+	id: Scalars['Int']
 }
 
 export type Query_Root_Prisma_MigrationsArgs = {
@@ -11284,6 +19918,46 @@ export type Subscription_Root = {
 	readonly Balance_by_pk?: Maybe<Balance>
 	/** fetch data from the table in a streaming manner: "Balance" */
 	readonly Balance_stream: ReadonlyArray<Balance>
+	/** An array relationship */
+	readonly BattlepassLevels: ReadonlyArray<BattlepassLevels>
+	/** An aggregate relationship */
+	readonly BattlepassLevels_aggregate: BattlepassLevels_Aggregate
+	/** fetch data from the table: "BattlepassLevels" using primary key columns */
+	readonly BattlepassLevels_by_pk?: Maybe<BattlepassLevels>
+	/** fetch data from the table in a streaming manner: "BattlepassLevels" */
+	readonly BattlepassLevels_stream: ReadonlyArray<BattlepassLevels>
+	/** An array relationship */
+	readonly BattlepassParticipants: ReadonlyArray<BattlepassParticipants>
+	/** An aggregate relationship */
+	readonly BattlepassParticipants_aggregate: BattlepassParticipants_Aggregate
+	/** fetch data from the table: "BattlepassParticipants" using primary key columns */
+	readonly BattlepassParticipants_by_pk?: Maybe<BattlepassParticipants>
+	/** fetch data from the table in a streaming manner: "BattlepassParticipants" */
+	readonly BattlepassParticipants_stream: ReadonlyArray<BattlepassParticipants>
+	/** An array relationship */
+	readonly BattlepassRewards: ReadonlyArray<BattlepassRewards>
+	/** An aggregate relationship */
+	readonly BattlepassRewards_aggregate: BattlepassRewards_Aggregate
+	/** fetch data from the table: "BattlepassRewards" using primary key columns */
+	readonly BattlepassRewards_by_pk?: Maybe<BattlepassRewards>
+	/** fetch data from the table in a streaming manner: "BattlepassRewards" */
+	readonly BattlepassRewards_stream: ReadonlyArray<BattlepassRewards>
+	/** fetch data from the table: "Battlepasses" */
+	readonly Battlepasses: ReadonlyArray<Battlepasses>
+	/** fetch aggregated fields from the table: "Battlepasses" */
+	readonly Battlepasses_aggregate: Battlepasses_Aggregate
+	/** fetch data from the table: "Battlepasses" using primary key columns */
+	readonly Battlepasses_by_pk?: Maybe<Battlepasses>
+	/** fetch data from the table in a streaming manner: "Battlepasses" */
+	readonly Battlepasses_stream: ReadonlyArray<Battlepasses>
+	/** fetch data from the table: "ChainActivities" */
+	readonly ChainActivities: ReadonlyArray<ChainActivities>
+	/** fetch aggregated fields from the table: "ChainActivities" */
+	readonly ChainActivities_aggregate: ChainActivities_Aggregate
+	/** fetch data from the table: "ChainActivities" using primary key columns */
+	readonly ChainActivities_by_pk?: Maybe<ChainActivities>
+	/** fetch data from the table in a streaming manner: "ChainActivities" */
+	readonly ChainActivities_stream: ReadonlyArray<ChainActivities>
 	/** fetch data from the table: "ChainInfo" */
 	readonly ChainInfo: ReadonlyArray<ChainInfo>
 	/** fetch aggregated fields from the table: "ChainInfo" */
@@ -11292,6 +19966,78 @@ export type Subscription_Root = {
 	readonly ChainInfo_by_pk?: Maybe<ChainInfo>
 	/** fetch data from the table in a streaming manner: "ChainInfo" */
 	readonly ChainInfo_stream: ReadonlyArray<ChainInfo>
+	/** fetch data from the table: "ChainStatuses" */
+	readonly ChainStatuses: ReadonlyArray<ChainStatuses>
+	/** fetch aggregated fields from the table: "ChainStatuses" */
+	readonly ChainStatuses_aggregate: ChainStatuses_Aggregate
+	/** fetch data from the table: "ChainStatuses" using primary key columns */
+	readonly ChainStatuses_by_pk?: Maybe<ChainStatuses>
+	/** fetch data from the table in a streaming manner: "ChainStatuses" */
+	readonly ChainStatuses_stream: ReadonlyArray<ChainStatuses>
+	/** An array relationship */
+	readonly CompletedQuests: ReadonlyArray<CompletedQuests>
+	/** An aggregate relationship */
+	readonly CompletedQuests_aggregate: CompletedQuests_Aggregate
+	/** fetch data from the table: "CompletedQuests" using primary key columns */
+	readonly CompletedQuests_by_pk?: Maybe<CompletedQuests>
+	/** fetch data from the table in a streaming manner: "CompletedQuests" */
+	readonly CompletedQuests_stream: ReadonlyArray<CompletedQuests>
+	/** fetch data from the table: "DiscordActivities" */
+	readonly DiscordActivities: ReadonlyArray<DiscordActivities>
+	/** fetch aggregated fields from the table: "DiscordActivities" */
+	readonly DiscordActivities_aggregate: DiscordActivities_Aggregate
+	/** fetch data from the table: "DiscordActivities" using primary key columns */
+	readonly DiscordActivities_by_pk?: Maybe<DiscordActivities>
+	/** fetch data from the table in a streaming manner: "DiscordActivities" */
+	readonly DiscordActivities_stream: ReadonlyArray<DiscordActivities>
+	/** fetch data from the table: "GenericActivities" */
+	readonly GenericActivities: ReadonlyArray<GenericActivities>
+	/** fetch aggregated fields from the table: "GenericActivities" */
+	readonly GenericActivities_aggregate: GenericActivities_Aggregate
+	/** fetch data from the table: "GenericActivities" using primary key columns */
+	readonly GenericActivities_by_pk?: Maybe<GenericActivities>
+	/** fetch data from the table in a streaming manner: "GenericActivities" */
+	readonly GenericActivities_stream: ReadonlyArray<GenericActivities>
+	/** fetch data from the table: "Identities" */
+	readonly Identities: ReadonlyArray<Identities>
+	/** fetch aggregated fields from the table: "Identities" */
+	readonly Identities_aggregate: Identities_Aggregate
+	/** fetch data from the table: "Identities" using primary key columns */
+	readonly Identities_by_pk?: Maybe<Identities>
+	/** fetch data from the table in a streaming manner: "Identities" */
+	readonly Identities_stream: ReadonlyArray<Identities>
+	/** An array relationship */
+	readonly Payments: ReadonlyArray<Payments>
+	/** An aggregate relationship */
+	readonly Payments_aggregate: Payments_Aggregate
+	/** fetch data from the table: "Payments" using primary key columns */
+	readonly Payments_by_pk?: Maybe<Payments>
+	/** fetch data from the table in a streaming manner: "Payments" */
+	readonly Payments_stream: ReadonlyArray<Payments>
+	/** An array relationship */
+	readonly QuestProgresses: ReadonlyArray<QuestProgresses>
+	/** An aggregate relationship */
+	readonly QuestProgresses_aggregate: QuestProgresses_Aggregate
+	/** fetch data from the table: "QuestProgresses" using primary key columns */
+	readonly QuestProgresses_by_pk?: Maybe<QuestProgresses>
+	/** fetch data from the table in a streaming manner: "QuestProgresses" */
+	readonly QuestProgresses_stream: ReadonlyArray<QuestProgresses>
+	/** An array relationship */
+	readonly Quests: ReadonlyArray<Quests>
+	/** An aggregate relationship */
+	readonly Quests_aggregate: Quests_Aggregate
+	/** fetch data from the table: "Quests" using primary key columns */
+	readonly Quests_by_pk?: Maybe<Quests>
+	/** fetch data from the table in a streaming manner: "Quests" */
+	readonly Quests_stream: ReadonlyArray<Quests>
+	/** An array relationship */
+	readonly RewardClaims: ReadonlyArray<RewardClaims>
+	/** An aggregate relationship */
+	readonly RewardClaims_aggregate: RewardClaims_Aggregate
+	/** fetch data from the table: "RewardClaims" using primary key columns */
+	readonly RewardClaims_by_pk?: Maybe<RewardClaims>
+	/** fetch data from the table in a streaming manner: "RewardClaims" */
+	readonly RewardClaims_stream: ReadonlyArray<RewardClaims>
 	/** fetch data from the table: "Session" */
 	readonly Session: ReadonlyArray<Session>
 	/** fetch aggregated fields from the table: "Session" */
@@ -11300,6 +20046,38 @@ export type Subscription_Root = {
 	readonly Session_by_pk?: Maybe<Session>
 	/** fetch data from the table in a streaming manner: "Session" */
 	readonly Session_stream: ReadonlyArray<Session>
+	/** fetch data from the table: "TwitterActivities" */
+	readonly TwitterActivities: ReadonlyArray<TwitterActivities>
+	/** fetch aggregated fields from the table: "TwitterActivities" */
+	readonly TwitterActivities_aggregate: TwitterActivities_Aggregate
+	/** fetch data from the table: "TwitterActivities" using primary key columns */
+	readonly TwitterActivities_by_pk?: Maybe<TwitterActivities>
+	/** fetch data from the table in a streaming manner: "TwitterActivities" */
+	readonly TwitterActivities_stream: ReadonlyArray<TwitterActivities>
+	/** fetch data from the table: "TwitterSearches" */
+	readonly TwitterSearches: ReadonlyArray<TwitterSearches>
+	/** fetch aggregated fields from the table: "TwitterSearches" */
+	readonly TwitterSearches_aggregate: TwitterSearches_Aggregate
+	/** fetch data from the table: "TwitterSearches" using primary key columns */
+	readonly TwitterSearches_by_pk?: Maybe<TwitterSearches>
+	/** fetch data from the table in a streaming manner: "TwitterSearches" */
+	readonly TwitterSearches_stream: ReadonlyArray<TwitterSearches>
+	/** fetch data from the table: "TwitterUsers" */
+	readonly TwitterUsers: ReadonlyArray<TwitterUsers>
+	/** fetch aggregated fields from the table: "TwitterUsers" */
+	readonly TwitterUsers_aggregate: TwitterUsers_Aggregate
+	/** fetch data from the table: "TwitterUsers" using primary key columns */
+	readonly TwitterUsers_by_pk?: Maybe<TwitterUsers>
+	/** fetch data from the table in a streaming manner: "TwitterUsers" */
+	readonly TwitterUsers_stream: ReadonlyArray<TwitterUsers>
+	/** An array relationship */
+	readonly UserTokens: ReadonlyArray<UserTokens>
+	/** An aggregate relationship */
+	readonly UserTokens_aggregate: UserTokens_Aggregate
+	/** fetch data from the table: "UserTokens" using primary key columns */
+	readonly UserTokens_by_pk?: Maybe<UserTokens>
+	/** fetch data from the table in a streaming manner: "UserTokens" */
+	readonly UserTokens_stream: ReadonlyArray<UserTokens>
 	/** fetch data from the table: "_prisma_migrations" */
 	readonly _prisma_migrations: ReadonlyArray<_Prisma_Migrations>
 	/** fetch aggregated fields from the table: "_prisma_migrations" */
@@ -11504,6 +20282,136 @@ export type Subscription_RootBalance_StreamArgs = {
 	where?: InputMaybe<Balance_Bool_Exp>
 }
 
+export type Subscription_RootBattlepassLevelsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassLevels_Order_By>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassLevels_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassLevels_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassLevels_Order_By>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassLevels_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootBattlepassLevels_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<BattlepassLevels_Stream_Cursor_Input>>
+	where?: InputMaybe<BattlepassLevels_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassParticipantsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassParticipants_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassParticipants_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassParticipants_Order_By>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassParticipants_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootBattlepassParticipants_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<BattlepassParticipants_Stream_Cursor_Input>>
+	where?: InputMaybe<BattlepassParticipants_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassRewardsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassRewards_Order_By>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassRewards_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<BattlepassRewards_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<BattlepassRewards_Order_By>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassRewards_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootBattlepassRewards_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<BattlepassRewards_Stream_Cursor_Input>>
+	where?: InputMaybe<BattlepassRewards_Bool_Exp>
+}
+
+export type Subscription_RootBattlepassesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Battlepasses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Battlepasses_Order_By>>
+	where?: InputMaybe<Battlepasses_Bool_Exp>
+}
+
+export type Subscription_RootBattlepasses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Battlepasses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Battlepasses_Order_By>>
+	where?: InputMaybe<Battlepasses_Bool_Exp>
+}
+
+export type Subscription_RootBattlepasses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootBattlepasses_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<Battlepasses_Stream_Cursor_Input>>
+	where?: InputMaybe<Battlepasses_Bool_Exp>
+}
+
+export type Subscription_RootChainActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainActivities_Order_By>>
+	where?: InputMaybe<ChainActivities_Bool_Exp>
+}
+
+export type Subscription_RootChainActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainActivities_Order_By>>
+	where?: InputMaybe<ChainActivities_Bool_Exp>
+}
+
+export type Subscription_RootChainActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootChainActivities_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<ChainActivities_Stream_Cursor_Input>>
+	where?: InputMaybe<ChainActivities_Bool_Exp>
+}
+
 export type Subscription_RootChainInfoArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<ChainInfo_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -11530,6 +20438,240 @@ export type Subscription_RootChainInfo_StreamArgs = {
 	where?: InputMaybe<ChainInfo_Bool_Exp>
 }
 
+export type Subscription_RootChainStatusesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainStatuses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainStatuses_Order_By>>
+	where?: InputMaybe<ChainStatuses_Bool_Exp>
+}
+
+export type Subscription_RootChainStatuses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<ChainStatuses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<ChainStatuses_Order_By>>
+	where?: InputMaybe<ChainStatuses_Bool_Exp>
+}
+
+export type Subscription_RootChainStatuses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootChainStatuses_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<ChainStatuses_Stream_Cursor_Input>>
+	where?: InputMaybe<ChainStatuses_Bool_Exp>
+}
+
+export type Subscription_RootCompletedQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+export type Subscription_RootCompletedQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<CompletedQuests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<CompletedQuests_Order_By>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+export type Subscription_RootCompletedQuests_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootCompletedQuests_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<CompletedQuests_Stream_Cursor_Input>>
+	where?: InputMaybe<CompletedQuests_Bool_Exp>
+}
+
+export type Subscription_RootDiscordActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<DiscordActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<DiscordActivities_Order_By>>
+	where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+export type Subscription_RootDiscordActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<DiscordActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<DiscordActivities_Order_By>>
+	where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+export type Subscription_RootDiscordActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootDiscordActivities_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<DiscordActivities_Stream_Cursor_Input>>
+	where?: InputMaybe<DiscordActivities_Bool_Exp>
+}
+
+export type Subscription_RootGenericActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<GenericActivities_Order_By>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Subscription_RootGenericActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<GenericActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<GenericActivities_Order_By>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Subscription_RootGenericActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootGenericActivities_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<GenericActivities_Stream_Cursor_Input>>
+	where?: InputMaybe<GenericActivities_Bool_Exp>
+}
+
+export type Subscription_RootIdentitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Identities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Identities_Order_By>>
+	where?: InputMaybe<Identities_Bool_Exp>
+}
+
+export type Subscription_RootIdentities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Identities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Identities_Order_By>>
+	where?: InputMaybe<Identities_Bool_Exp>
+}
+
+export type Subscription_RootIdentities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootIdentities_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<Identities_Stream_Cursor_Input>>
+	where?: InputMaybe<Identities_Bool_Exp>
+}
+
+export type Subscription_RootPaymentsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Payments_Order_By>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+export type Subscription_RootPayments_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Payments_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Payments_Order_By>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+export type Subscription_RootPayments_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootPayments_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<Payments_Stream_Cursor_Input>>
+	where?: InputMaybe<Payments_Bool_Exp>
+}
+
+export type Subscription_RootQuestProgressesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+export type Subscription_RootQuestProgresses_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<QuestProgresses_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<QuestProgresses_Order_By>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+export type Subscription_RootQuestProgresses_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootQuestProgresses_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<QuestProgresses_Stream_Cursor_Input>>
+	where?: InputMaybe<QuestProgresses_Bool_Exp>
+}
+
+export type Subscription_RootQuestsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Quests_Order_By>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
+export type Subscription_RootQuests_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<Quests_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<Quests_Order_By>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
+export type Subscription_RootQuests_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootQuests_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<Quests_Stream_Cursor_Input>>
+	where?: InputMaybe<Quests_Bool_Exp>
+}
+
+export type Subscription_RootRewardClaimsArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+export type Subscription_RootRewardClaims_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<RewardClaims_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<RewardClaims_Order_By>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
+export type Subscription_RootRewardClaims_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootRewardClaims_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<RewardClaims_Stream_Cursor_Input>>
+	where?: InputMaybe<RewardClaims_Bool_Exp>
+}
+
 export type Subscription_RootSessionArgs = {
 	distinct_on?: InputMaybe<ReadonlyArray<Session_Select_Column>>
 	limit?: InputMaybe<Scalars['Int']>
@@ -11554,6 +20696,110 @@ export type Subscription_RootSession_StreamArgs = {
 	batch_size: Scalars['Int']
 	cursor: ReadonlyArray<InputMaybe<Session_Stream_Cursor_Input>>
 	where?: InputMaybe<Session_Bool_Exp>
+}
+
+export type Subscription_RootTwitterActivitiesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterActivities_Order_By>>
+	where?: InputMaybe<TwitterActivities_Bool_Exp>
+}
+
+export type Subscription_RootTwitterActivities_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterActivities_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterActivities_Order_By>>
+	where?: InputMaybe<TwitterActivities_Bool_Exp>
+}
+
+export type Subscription_RootTwitterActivities_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootTwitterActivities_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<TwitterActivities_Stream_Cursor_Input>>
+	where?: InputMaybe<TwitterActivities_Bool_Exp>
+}
+
+export type Subscription_RootTwitterSearchesArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterSearches_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterSearches_Order_By>>
+	where?: InputMaybe<TwitterSearches_Bool_Exp>
+}
+
+export type Subscription_RootTwitterSearches_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterSearches_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterSearches_Order_By>>
+	where?: InputMaybe<TwitterSearches_Bool_Exp>
+}
+
+export type Subscription_RootTwitterSearches_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootTwitterSearches_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<TwitterSearches_Stream_Cursor_Input>>
+	where?: InputMaybe<TwitterSearches_Bool_Exp>
+}
+
+export type Subscription_RootTwitterUsersArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterUsers_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterUsers_Order_By>>
+	where?: InputMaybe<TwitterUsers_Bool_Exp>
+}
+
+export type Subscription_RootTwitterUsers_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<TwitterUsers_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<TwitterUsers_Order_By>>
+	where?: InputMaybe<TwitterUsers_Bool_Exp>
+}
+
+export type Subscription_RootTwitterUsers_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootTwitterUsers_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<TwitterUsers_Stream_Cursor_Input>>
+	where?: InputMaybe<TwitterUsers_Bool_Exp>
+}
+
+export type Subscription_RootUserTokensArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<UserTokens_Order_By>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+export type Subscription_RootUserTokens_AggregateArgs = {
+	distinct_on?: InputMaybe<ReadonlyArray<UserTokens_Select_Column>>
+	limit?: InputMaybe<Scalars['Int']>
+	offset?: InputMaybe<Scalars['Int']>
+	order_by?: InputMaybe<ReadonlyArray<UserTokens_Order_By>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
+}
+
+export type Subscription_RootUserTokens_By_PkArgs = {
+	id: Scalars['Int']
+}
+
+export type Subscription_RootUserTokens_StreamArgs = {
+	batch_size: Scalars['Int']
+	cursor: ReadonlyArray<InputMaybe<UserTokens_Stream_Cursor_Input>>
+	where?: InputMaybe<UserTokens_Bool_Exp>
 }
 
 export type Subscription_Root_Prisma_MigrationsArgs = {
@@ -12154,6 +21400,19 @@ export type Timestamptz_Comparison_Exp = {
 	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['timestamptz']>>
 }
 
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+	readonly _eq?: InputMaybe<Scalars['uuid']>
+	readonly _gt?: InputMaybe<Scalars['uuid']>
+	readonly _gte?: InputMaybe<Scalars['uuid']>
+	readonly _in?: InputMaybe<ReadonlyArray<Scalars['uuid']>>
+	readonly _is_null?: InputMaybe<Scalars['Boolean']>
+	readonly _lt?: InputMaybe<Scalars['uuid']>
+	readonly _lte?: InputMaybe<Scalars['uuid']>
+	readonly _neq?: InputMaybe<Scalars['uuid']>
+	readonly _nin?: InputMaybe<ReadonlyArray<Scalars['uuid']>>
+}
+
 /** columns and relationships of "voting" */
 export type Voting = {
 	readonly __typename?: 'voting'
@@ -12527,12 +21786,132 @@ export type CollectablesForUserQuery = {
 	} | null> | null
 }
 
-export type CreatebattlepassLevelsMutationVariables = Exact<{
+export type PaymentMutationVariables = Exact<{
+	token: Scalars['String']
+	bpid: Scalars['String']
+	uuid: Scalars['String']
+	txid: Scalars['String']
+}>
+
+export type PaymentMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotMutation'
+		readonly processPayment?: {
+			readonly __typename?: 'Payment'
+			readonly battlepass: string
+			readonly identityUuid: string
+			readonly paymentToken: string
+		} | null
+	} | null
+}
+
+export type ClaimRewardMutationVariables = Exact<{
+	battlepass: Scalars['String']
+	uuid: Scalars['String']
+	reward: Scalars['String']
+}>
+
+export type ClaimRewardMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotMutation'
+		readonly claimReward?: {
+			readonly __typename?: 'BattlepassRewardClaim'
+			readonly id: number
+			readonly syncStatus: SyncStatus
+		} | null
+	} | null
+}
+
+export type BattlepassSubscriptionVariables = Exact<{
+	id: Scalars['bpchar']
+}>
+
+export type BattlepassSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly Battlepasses: ReadonlyArray<{
+		readonly __typename?: 'Battlepasses'
+		readonly id: number
+		readonly cid?: string | null
+		readonly joinable: boolean
+		readonly totalJoined: number
+		readonly premiumPasses?: number | null
+		readonly premiumClaimed: number
+		readonly freePasses: number
+		readonly freeClaimed: number
+		readonly name?: string | null
+		readonly active: boolean
+		readonly season?: number | null
+		readonly chainId: any
+		readonly price?: number | null
+	}>
+}
+
+export type ClaimBattlepassPremiumMutationVariables = Exact<{
+	bid: Scalars['String']
+	uid: Scalars['String']
+	pid: Scalars['String']
+	sid: Scalars['String']
+}>
+
+export type ClaimBattlepassPremiumMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotMutation'
+		readonly processPayment?: { readonly __typename?: 'Payment'; readonly identityUuid: string } | null
+	} | null
+}
+
+export type PayBattlepassMutationVariables = Exact<{
+	battlepass: Scalars['String']
+	uuid: Scalars['String']
+}>
+
+export type PayBattlepassMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotMutation'
+		readonly joinPremium?: {
+			readonly __typename?: 'BattlepassMember'
+			readonly status: MemberStatus
+			readonly premium: boolean
+		} | null
+	} | null
+}
+
+export type JoinBattlepassMutationVariables = Exact<{
+	battlepass: Scalars['String']
+	uuid: Scalars['String']
+}>
+
+export type JoinBattlepassMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotMutation'
+		readonly join?: { readonly __typename?: 'BattlepassMember'; readonly id?: number | null } | null
+	} | null
+}
+
+export type JoinPremiumBattlepassMutationVariables = Exact<{
+	battlepass: Scalars['String']
+	uuid: Scalars['String']
+}>
+
+export type JoinPremiumBattlepassMutation = {
+	readonly __typename?: 'mutation_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotMutation'
+		readonly joinPremium?: { readonly __typename?: 'BattlepassMember'; readonly id?: number | null } | null
+	} | null
+}
+
+export type CreateBattlepassLevelsMutationVariables = Exact<{
 	id: Scalars['String']
 	levels: ReadonlyArray<Level> | Level
 }>
 
-export type CreatebattlepassLevelsMutation = {
+export type CreateBattlepassLevelsMutation = {
 	readonly __typename?: 'mutation_root'
 	readonly battlepassBot?: {
 		readonly __typename?: 'battlepassBotMutation'
@@ -12541,6 +21920,177 @@ export type CreatebattlepassLevelsMutation = {
 			readonly battlepassId: number
 		} | null> | null
 	} | null
+}
+
+export type GetBattlepassUsersQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+}>
+
+export type GetBattlepassUsersQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly battlepasses?: ReadonlyArray<{
+			readonly __typename?: 'Battlepass'
+			readonly members?: ReadonlyArray<{
+				readonly __typename?: 'BattlepassMember'
+				readonly identity: { readonly __typename?: 'BattlepassIdentity'; readonly uuid: string }
+			} | null> | null
+		} | null> | null
+	} | null
+}
+
+export type GetBattlepassNameQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+}>
+
+export type GetBattlepassNameQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepass: ReadonlyArray<{
+		readonly __typename?: 'battlepass'
+		readonly name: string
+		readonly cid: string
+	}>
+}
+
+export type GetBattlepassQuestsQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+}>
+
+export type GetBattlepassQuestsQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly quests?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassQuest'
+			readonly name?: string | null
+			readonly description?: string | null
+			readonly battlepassId: number
+			readonly channelId?: string | null
+			readonly guildId?: string | null
+			readonly twitterId?: string | null
+			readonly id: number
+			readonly maxDaily?: number | null
+			readonly points: number
+			readonly quantity: number
+			readonly repeat: boolean
+			readonly source: Source
+			readonly type: ActivityType
+			readonly link?: string | null
+		} | null> | null
+	} | null
+}
+
+export type GetBattlepassAchievementsQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+	uuid?: InputMaybe<Scalars['String']>
+}>
+
+export type GetBattlepassAchievementsQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly progresses?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassQuestProgress'
+			readonly progress: number
+			readonly questId: number
+		} | null> | null
+	} | null
+}
+
+export type GetBattlepassForUserQueryVariables = Exact<{
+	uuid: Scalars['String']
+}>
+
+export type GetBattlepassForUserQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly identities?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassIdentity'
+			readonly uuid: string
+			readonly members?: ReadonlyArray<{
+				readonly __typename?: 'BattlepassMember'
+				readonly premium: boolean
+				readonly battlepass: { readonly __typename?: 'Battlepass'; readonly chainId: string }
+			} | null> | null
+		} | null> | null
+	} | null
+}
+
+export type GetLeaderboardQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+}>
+
+export type GetLeaderboardQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly points?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassPoint'
+			readonly points: number
+			readonly quests: number
+			readonly identityUuid?: string | null
+			readonly identity: {
+				readonly __typename?: 'BattlepassIdentity'
+				readonly twitter?: string | null
+				readonly discord?: string | null
+				readonly name?: string | null
+			}
+		} | null> | null
+	} | null
+}
+
+export type GetLeaderboardAchievementsQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+	uuid?: InputMaybe<Scalars['String']>
+}>
+
+export type GetLeaderboardAchievementsQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly reward_claims?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassRewardClaim'
+			readonly reward: {
+				readonly __typename?: 'BattlepassReward'
+				readonly cid?: string | null
+				readonly description?: string | null
+				readonly name?: string | null
+				readonly chainId?: string | null
+			}
+		} | null> | null
+	} | null
+}
+
+export type GetScoreSubscriptionVariables = Exact<{
+	id?: InputMaybe<Scalars['bpchar']>
+	uuid?: InputMaybe<Scalars['uuid']>
+}>
+
+export type GetScoreSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly Quests: ReadonlyArray<{
+		readonly __typename?: 'Quests'
+		readonly points?: number | null
+		readonly QuestProgresses: ReadonlyArray<{ readonly __typename?: 'QuestProgresses'; readonly progress: any }>
+	}>
+}
+
+export type ScoreSubscriptionVariables = Exact<{
+	id?: InputMaybe<Scalars['bpchar']>
+	uuid?: InputMaybe<Scalars['uuid']>
+}>
+
+export type ScoreSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly BattlepassParticipants: ReadonlyArray<{
+		readonly __typename?: 'BattlepassParticipants'
+		readonly premium?: boolean | null
+		readonly points: number
+		readonly passChainId?: any | null
+		readonly status: any
+	}>
 }
 
 export type ConnectIdentityMutationVariables = Exact<{
@@ -12590,11 +22140,11 @@ export type ActiveBattlepassSubscription = {
 	}>
 }
 
-export type ActivebattlepassByIdQueryVariables = Exact<{
+export type ActiveBattlepassByIdQueryVariables = Exact<{
 	id: Scalars['String']
 }>
 
-export type ActivebattlepassByIdQuery = {
+export type ActiveBattlepassByIdQuery = {
 	readonly __typename?: 'query_root'
 	readonly battlepassBot?: {
 		readonly __typename?: 'battlepassBotQuery'
@@ -13465,8 +23015,313 @@ export type CollectablesForUserQueryResult = Apollo.QueryResult<
 	CollectablesForUserQuery,
 	CollectablesForUserQueryVariables
 >
-export const CreatebattlepassLevelsDocument = gql`
-	mutation CreatebattlepassLevels($id: String!, $levels: [Level!]!) {
+export const PaymentDocument = gql`
+	mutation Payment($token: String!, $bpid: String!, $uuid: String!, $txid: String!) {
+		battlepassBot {
+			processPayment(securityToken: $token, battlepass: $bpid, identityUuid: $uuid, paymentToken: $txid) {
+				battlepass
+				identityUuid
+				paymentToken
+			}
+		}
+	}
+`
+export type PaymentMutationFn = Apollo.MutationFunction<PaymentMutation, PaymentMutationVariables>
+
+/**
+ * __usePaymentMutation__
+ *
+ * To run a mutation, you first call `usePaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [paymentMutation, { data, loading, error }] = usePaymentMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *      bpid: // value for 'bpid'
+ *      uuid: // value for 'uuid'
+ *      txid: // value for 'txid'
+ *   },
+ * });
+ */
+export function usePaymentMutation(
+	baseOptions?: Apollo.MutationHookOptions<PaymentMutation, PaymentMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<PaymentMutation, PaymentMutationVariables>(PaymentDocument, options)
+}
+export type PaymentMutationHookResult = ReturnType<typeof usePaymentMutation>
+export type PaymentMutationResult = Apollo.MutationResult<PaymentMutation>
+export type PaymentMutationOptions = Apollo.BaseMutationOptions<PaymentMutation, PaymentMutationVariables>
+export const ClaimRewardDocument = gql`
+	mutation ClaimReward($battlepass: String!, $uuid: String!, $reward: String!) {
+		battlepassBot {
+			claimReward(battlepass: $battlepass, identityUuid: $uuid, reward: $reward) {
+				id
+				syncStatus
+			}
+		}
+	}
+`
+export type ClaimRewardMutationFn = Apollo.MutationFunction<ClaimRewardMutation, ClaimRewardMutationVariables>
+
+/**
+ * __useClaimRewardMutation__
+ *
+ * To run a mutation, you first call `useClaimRewardMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useClaimRewardMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [claimRewardMutation, { data, loading, error }] = useClaimRewardMutation({
+ *   variables: {
+ *      battlepass: // value for 'battlepass'
+ *      uuid: // value for 'uuid'
+ *      reward: // value for 'reward'
+ *   },
+ * });
+ */
+export function useClaimRewardMutation(
+	baseOptions?: Apollo.MutationHookOptions<ClaimRewardMutation, ClaimRewardMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<ClaimRewardMutation, ClaimRewardMutationVariables>(ClaimRewardDocument, options)
+}
+export type ClaimRewardMutationHookResult = ReturnType<typeof useClaimRewardMutation>
+export type ClaimRewardMutationResult = Apollo.MutationResult<ClaimRewardMutation>
+export type ClaimRewardMutationOptions = Apollo.BaseMutationOptions<ClaimRewardMutation, ClaimRewardMutationVariables>
+export const BattlepassDocument = gql`
+	subscription Battlepass($id: bpchar!) {
+		Battlepasses(where: { chainId: { _eq: $id } }) {
+			id
+			cid
+			joinable
+			totalJoined
+			premiumPasses
+			premiumClaimed
+			freePasses
+			freeClaimed
+			name
+			active
+			season
+			chainId
+			price
+		}
+	}
+`
+
+/**
+ * __useBattlepassSubscription__
+ *
+ * To run a query within a React component, call `useBattlepassSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useBattlepassSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBattlepassSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useBattlepassSubscription(
+	baseOptions: Apollo.SubscriptionHookOptions<BattlepassSubscription, BattlepassSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<BattlepassSubscription, BattlepassSubscriptionVariables>(BattlepassDocument, options)
+}
+export type BattlepassSubscriptionHookResult = ReturnType<typeof useBattlepassSubscription>
+export type BattlepassSubscriptionResult = Apollo.SubscriptionResult<BattlepassSubscription>
+export const ClaimBattlepassPremiumDocument = gql`
+	mutation ClaimBattlepassPremium($bid: String!, $uid: String!, $pid: String!, $sid: String!) {
+		battlepassBot {
+			processPayment(battlepass: $bid, identityUuid: $uid, paymentToken: $pid, securityToken: $sid) {
+				identityUuid
+			}
+		}
+	}
+`
+export type ClaimBattlepassPremiumMutationFn = Apollo.MutationFunction<
+	ClaimBattlepassPremiumMutation,
+	ClaimBattlepassPremiumMutationVariables
+>
+
+/**
+ * __useClaimBattlepassPremiumMutation__
+ *
+ * To run a mutation, you first call `useClaimBattlepassPremiumMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useClaimBattlepassPremiumMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [claimBattlepassPremiumMutation, { data, loading, error }] = useClaimBattlepassPremiumMutation({
+ *   variables: {
+ *      bid: // value for 'bid'
+ *      uid: // value for 'uid'
+ *      pid: // value for 'pid'
+ *      sid: // value for 'sid'
+ *   },
+ * });
+ */
+export function useClaimBattlepassPremiumMutation(
+	baseOptions?: Apollo.MutationHookOptions<ClaimBattlepassPremiumMutation, ClaimBattlepassPremiumMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<ClaimBattlepassPremiumMutation, ClaimBattlepassPremiumMutationVariables>(
+		ClaimBattlepassPremiumDocument,
+		options,
+	)
+}
+export type ClaimBattlepassPremiumMutationHookResult = ReturnType<typeof useClaimBattlepassPremiumMutation>
+export type ClaimBattlepassPremiumMutationResult = Apollo.MutationResult<ClaimBattlepassPremiumMutation>
+export type ClaimBattlepassPremiumMutationOptions = Apollo.BaseMutationOptions<
+	ClaimBattlepassPremiumMutation,
+	ClaimBattlepassPremiumMutationVariables
+>
+export const PayBattlepassDocument = gql`
+	mutation PayBattlepass($battlepass: String!, $uuid: String!) {
+		battlepassBot {
+			joinPremium(battlepass: $battlepass, identityUuid: $uuid) {
+				status
+				premium
+			}
+		}
+	}
+`
+export type PayBattlepassMutationFn = Apollo.MutationFunction<PayBattlepassMutation, PayBattlepassMutationVariables>
+
+/**
+ * __usePayBattlepassMutation__
+ *
+ * To run a mutation, you first call `usePayBattlepassMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePayBattlepassMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [payBattlepassMutation, { data, loading, error }] = usePayBattlepassMutation({
+ *   variables: {
+ *      battlepass: // value for 'battlepass'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function usePayBattlepassMutation(
+	baseOptions?: Apollo.MutationHookOptions<PayBattlepassMutation, PayBattlepassMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<PayBattlepassMutation, PayBattlepassMutationVariables>(PayBattlepassDocument, options)
+}
+export type PayBattlepassMutationHookResult = ReturnType<typeof usePayBattlepassMutation>
+export type PayBattlepassMutationResult = Apollo.MutationResult<PayBattlepassMutation>
+export type PayBattlepassMutationOptions = Apollo.BaseMutationOptions<
+	PayBattlepassMutation,
+	PayBattlepassMutationVariables
+>
+export const JoinBattlepassDocument = gql`
+	mutation JoinBattlepass($battlepass: String!, $uuid: String!) {
+		battlepassBot {
+			join(battlepass: $battlepass, identityUuid: $uuid) {
+				id
+			}
+		}
+	}
+`
+export type JoinBattlepassMutationFn = Apollo.MutationFunction<JoinBattlepassMutation, JoinBattlepassMutationVariables>
+
+/**
+ * __useJoinBattlepassMutation__
+ *
+ * To run a mutation, you first call `useJoinBattlepassMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useJoinBattlepassMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [joinBattlepassMutation, { data, loading, error }] = useJoinBattlepassMutation({
+ *   variables: {
+ *      battlepass: // value for 'battlepass'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useJoinBattlepassMutation(
+	baseOptions?: Apollo.MutationHookOptions<JoinBattlepassMutation, JoinBattlepassMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<JoinBattlepassMutation, JoinBattlepassMutationVariables>(JoinBattlepassDocument, options)
+}
+export type JoinBattlepassMutationHookResult = ReturnType<typeof useJoinBattlepassMutation>
+export type JoinBattlepassMutationResult = Apollo.MutationResult<JoinBattlepassMutation>
+export type JoinBattlepassMutationOptions = Apollo.BaseMutationOptions<
+	JoinBattlepassMutation,
+	JoinBattlepassMutationVariables
+>
+export const JoinPremiumBattlepassDocument = gql`
+	mutation JoinPremiumBattlepass($battlepass: String!, $uuid: String!) {
+		battlepassBot {
+			joinPremium(battlepass: $battlepass, identityUuid: $uuid) {
+				id
+			}
+		}
+	}
+`
+export type JoinPremiumBattlepassMutationFn = Apollo.MutationFunction<
+	JoinPremiumBattlepassMutation,
+	JoinPremiumBattlepassMutationVariables
+>
+
+/**
+ * __useJoinPremiumBattlepassMutation__
+ *
+ * To run a mutation, you first call `useJoinPremiumBattlepassMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useJoinPremiumBattlepassMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [joinPremiumBattlepassMutation, { data, loading, error }] = useJoinPremiumBattlepassMutation({
+ *   variables: {
+ *      battlepass: // value for 'battlepass'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useJoinPremiumBattlepassMutation(
+	baseOptions?: Apollo.MutationHookOptions<JoinPremiumBattlepassMutation, JoinPremiumBattlepassMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useMutation<JoinPremiumBattlepassMutation, JoinPremiumBattlepassMutationVariables>(
+		JoinPremiumBattlepassDocument,
+		options,
+	)
+}
+export type JoinPremiumBattlepassMutationHookResult = ReturnType<typeof useJoinPremiumBattlepassMutation>
+export type JoinPremiumBattlepassMutationResult = Apollo.MutationResult<JoinPremiumBattlepassMutation>
+export type JoinPremiumBattlepassMutationOptions = Apollo.BaseMutationOptions<
+	JoinPremiumBattlepassMutation,
+	JoinPremiumBattlepassMutationVariables
+>
+export const CreateBattlepassLevelsDocument = gql`
+	mutation CreateBattlepassLevels($id: String!, $levels: [Level!]!) {
 		battlepassBot {
 			levels(battlepass: $id, levels: $levels) {
 				battlepassId
@@ -13474,44 +23329,491 @@ export const CreatebattlepassLevelsDocument = gql`
 		}
 	}
 `
-export type CreatebattlepassLevelsMutationFn = Apollo.MutationFunction<
-	CreatebattlepassLevelsMutation,
-	CreatebattlepassLevelsMutationVariables
+export type CreateBattlepassLevelsMutationFn = Apollo.MutationFunction<
+	CreateBattlepassLevelsMutation,
+	CreateBattlepassLevelsMutationVariables
 >
 
 /**
- * __useCreatebattlepassLevelsMutation__
+ * __useCreateBattlepassLevelsMutation__
  *
- * To run a mutation, you first call `useCreatebattlepassLevelsMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreatebattlepassLevelsMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateBattlepassLevelsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBattlepassLevelsMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createbattlepassLevelsMutation, { data, loading, error }] = useCreatebattlepassLevelsMutation({
+ * const [createBattlepassLevelsMutation, { data, loading, error }] = useCreateBattlepassLevelsMutation({
  *   variables: {
  *      id: // value for 'id'
  *      levels: // value for 'levels'
  *   },
  * });
  */
-export function useCreatebattlepassLevelsMutation(
-	baseOptions?: Apollo.MutationHookOptions<CreatebattlepassLevelsMutation, CreatebattlepassLevelsMutationVariables>,
+export function useCreateBattlepassLevelsMutation(
+	baseOptions?: Apollo.MutationHookOptions<CreateBattlepassLevelsMutation, CreateBattlepassLevelsMutationVariables>,
 ) {
 	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useMutation<CreatebattlepassLevelsMutation, CreatebattlepassLevelsMutationVariables>(
-		CreatebattlepassLevelsDocument,
+	return Apollo.useMutation<CreateBattlepassLevelsMutation, CreateBattlepassLevelsMutationVariables>(
+		CreateBattlepassLevelsDocument,
 		options,
 	)
 }
-export type CreatebattlepassLevelsMutationHookResult = ReturnType<typeof useCreatebattlepassLevelsMutation>
-export type CreatebattlepassLevelsMutationResult = Apollo.MutationResult<CreatebattlepassLevelsMutation>
-export type CreatebattlepassLevelsMutationOptions = Apollo.BaseMutationOptions<
-	CreatebattlepassLevelsMutation,
-	CreatebattlepassLevelsMutationVariables
+export type CreateBattlepassLevelsMutationHookResult = ReturnType<typeof useCreateBattlepassLevelsMutation>
+export type CreateBattlepassLevelsMutationResult = Apollo.MutationResult<CreateBattlepassLevelsMutation>
+export type CreateBattlepassLevelsMutationOptions = Apollo.BaseMutationOptions<
+	CreateBattlepassLevelsMutation,
+	CreateBattlepassLevelsMutationVariables
 >
+export const GetBattlepassUsersDocument = gql`
+	query GetBattlepassUsers($id: String) {
+		battlepassBot {
+			battlepasses(where: { chainId: $id }) {
+				members {
+					identity {
+						uuid
+					}
+				}
+			}
+		}
+	}
+`
+
+/**
+ * __useGetBattlepassUsersQuery__
+ *
+ * To run a query within a React component, call `useGetBattlepassUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBattlepassUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBattlepassUsersQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetBattlepassUsersQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetBattlepassUsersQuery, GetBattlepassUsersQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetBattlepassUsersQuery, GetBattlepassUsersQueryVariables>(
+		GetBattlepassUsersDocument,
+		options,
+	)
+}
+export function useGetBattlepassUsersLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBattlepassUsersQuery, GetBattlepassUsersQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetBattlepassUsersQuery, GetBattlepassUsersQueryVariables>(
+		GetBattlepassUsersDocument,
+		options,
+	)
+}
+export type GetBattlepassUsersQueryHookResult = ReturnType<typeof useGetBattlepassUsersQuery>
+export type GetBattlepassUsersLazyQueryHookResult = ReturnType<typeof useGetBattlepassUsersLazyQuery>
+export type GetBattlepassUsersQueryResult = Apollo.QueryResult<
+	GetBattlepassUsersQuery,
+	GetBattlepassUsersQueryVariables
+>
+export const GetBattlepassNameDocument = gql`
+	query GetBattlepassName($id: String) {
+		battlepass(where: { id: { _eq: $id } }) {
+			name
+			cid
+		}
+	}
+`
+
+/**
+ * __useGetBattlepassNameQuery__
+ *
+ * To run a query within a React component, call `useGetBattlepassNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBattlepassNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBattlepassNameQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetBattlepassNameQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetBattlepassNameQuery, GetBattlepassNameQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetBattlepassNameQuery, GetBattlepassNameQueryVariables>(GetBattlepassNameDocument, options)
+}
+export function useGetBattlepassNameLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBattlepassNameQuery, GetBattlepassNameQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetBattlepassNameQuery, GetBattlepassNameQueryVariables>(
+		GetBattlepassNameDocument,
+		options,
+	)
+}
+export type GetBattlepassNameQueryHookResult = ReturnType<typeof useGetBattlepassNameQuery>
+export type GetBattlepassNameLazyQueryHookResult = ReturnType<typeof useGetBattlepassNameLazyQuery>
+export type GetBattlepassNameQueryResult = Apollo.QueryResult<GetBattlepassNameQuery, GetBattlepassNameQueryVariables>
+export const GetBattlepassQuestsDocument = gql`
+	query GetBattlepassQuests($id: String) {
+		battlepassBot {
+			quests(where: { battlepassChainId: $id }) {
+				name
+				description
+				battlepassId
+				channelId
+				guildId
+				twitterId
+				id
+				maxDaily
+				points
+				quantity
+				repeat
+				source
+				type
+				link
+			}
+		}
+	}
+`
+
+/**
+ * __useGetBattlepassQuestsQuery__
+ *
+ * To run a query within a React component, call `useGetBattlepassQuestsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBattlepassQuestsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBattlepassQuestsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetBattlepassQuestsQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetBattlepassQuestsQuery, GetBattlepassQuestsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetBattlepassQuestsQuery, GetBattlepassQuestsQueryVariables>(
+		GetBattlepassQuestsDocument,
+		options,
+	)
+}
+export function useGetBattlepassQuestsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBattlepassQuestsQuery, GetBattlepassQuestsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetBattlepassQuestsQuery, GetBattlepassQuestsQueryVariables>(
+		GetBattlepassQuestsDocument,
+		options,
+	)
+}
+export type GetBattlepassQuestsQueryHookResult = ReturnType<typeof useGetBattlepassQuestsQuery>
+export type GetBattlepassQuestsLazyQueryHookResult = ReturnType<typeof useGetBattlepassQuestsLazyQuery>
+export type GetBattlepassQuestsQueryResult = Apollo.QueryResult<
+	GetBattlepassQuestsQuery,
+	GetBattlepassQuestsQueryVariables
+>
+export const GetBattlepassAchievementsDocument = gql`
+	query GetBattlepassAchievements($id: String, $uuid: String) {
+		battlepassBot {
+			progresses(where: { battlepassChainId: $id, identityUuid: $uuid }) {
+				progress
+				questId
+			}
+		}
+	}
+`
+
+/**
+ * __useGetBattlepassAchievementsQuery__
+ *
+ * To run a query within a React component, call `useGetBattlepassAchievementsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBattlepassAchievementsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBattlepassAchievementsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useGetBattlepassAchievementsQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetBattlepassAchievementsQuery, GetBattlepassAchievementsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetBattlepassAchievementsQuery, GetBattlepassAchievementsQueryVariables>(
+		GetBattlepassAchievementsDocument,
+		options,
+	)
+}
+export function useGetBattlepassAchievementsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBattlepassAchievementsQuery, GetBattlepassAchievementsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetBattlepassAchievementsQuery, GetBattlepassAchievementsQueryVariables>(
+		GetBattlepassAchievementsDocument,
+		options,
+	)
+}
+export type GetBattlepassAchievementsQueryHookResult = ReturnType<typeof useGetBattlepassAchievementsQuery>
+export type GetBattlepassAchievementsLazyQueryHookResult = ReturnType<typeof useGetBattlepassAchievementsLazyQuery>
+export type GetBattlepassAchievementsQueryResult = Apollo.QueryResult<
+	GetBattlepassAchievementsQuery,
+	GetBattlepassAchievementsQueryVariables
+>
+export const GetBattlepassForUserDocument = gql`
+	query GetBattlepassForUser($uuid: String!) {
+		battlepassBot {
+			identities(where: { uuid: $uuid }) {
+				members {
+					battlepass {
+						chainId
+					}
+					premium
+				}
+				uuid
+			}
+		}
+	}
+`
+
+/**
+ * __useGetBattlepassForUserQuery__
+ *
+ * To run a query within a React component, call `useGetBattlepassForUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBattlepassForUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBattlepassForUserQuery({
+ *   variables: {
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useGetBattlepassForUserQuery(
+	baseOptions: Apollo.QueryHookOptions<GetBattlepassForUserQuery, GetBattlepassForUserQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetBattlepassForUserQuery, GetBattlepassForUserQueryVariables>(
+		GetBattlepassForUserDocument,
+		options,
+	)
+}
+export function useGetBattlepassForUserLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBattlepassForUserQuery, GetBattlepassForUserQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetBattlepassForUserQuery, GetBattlepassForUserQueryVariables>(
+		GetBattlepassForUserDocument,
+		options,
+	)
+}
+export type GetBattlepassForUserQueryHookResult = ReturnType<typeof useGetBattlepassForUserQuery>
+export type GetBattlepassForUserLazyQueryHookResult = ReturnType<typeof useGetBattlepassForUserLazyQuery>
+export type GetBattlepassForUserQueryResult = Apollo.QueryResult<
+	GetBattlepassForUserQuery,
+	GetBattlepassForUserQueryVariables
+>
+export const GetLeaderboardDocument = gql`
+	query GetLeaderboard($id: String) {
+		battlepassBot {
+			points(where: { battlepassChainId: $id }) {
+				points
+				quests
+				identityUuid
+				identity {
+					twitter
+					discord
+					name
+				}
+			}
+		}
+	}
+`
+
+/**
+ * __useGetLeaderboardQuery__
+ *
+ * To run a query within a React component, call `useGetLeaderboardQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLeaderboardQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLeaderboardQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetLeaderboardQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetLeaderboardQuery, GetLeaderboardQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetLeaderboardQuery, GetLeaderboardQueryVariables>(GetLeaderboardDocument, options)
+}
+export function useGetLeaderboardLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetLeaderboardQuery, GetLeaderboardQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetLeaderboardQuery, GetLeaderboardQueryVariables>(GetLeaderboardDocument, options)
+}
+export type GetLeaderboardQueryHookResult = ReturnType<typeof useGetLeaderboardQuery>
+export type GetLeaderboardLazyQueryHookResult = ReturnType<typeof useGetLeaderboardLazyQuery>
+export type GetLeaderboardQueryResult = Apollo.QueryResult<GetLeaderboardQuery, GetLeaderboardQueryVariables>
+export const GetLeaderboardAchievementsDocument = gql`
+	query GetLeaderboardAchievements($id: String, $uuid: String) {
+		battlepassBot {
+			reward_claims(where: { identityUuid: $uuid, battlepassChainId: $id }) {
+				reward {
+					cid
+					description
+					name
+					chainId
+				}
+			}
+		}
+	}
+`
+
+/**
+ * __useGetLeaderboardAchievementsQuery__
+ *
+ * To run a query within a React component, call `useGetLeaderboardAchievementsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLeaderboardAchievementsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLeaderboardAchievementsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useGetLeaderboardAchievementsQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetLeaderboardAchievementsQuery, GetLeaderboardAchievementsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetLeaderboardAchievementsQuery, GetLeaderboardAchievementsQueryVariables>(
+		GetLeaderboardAchievementsDocument,
+		options,
+	)
+}
+export function useGetLeaderboardAchievementsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<
+		GetLeaderboardAchievementsQuery,
+		GetLeaderboardAchievementsQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetLeaderboardAchievementsQuery, GetLeaderboardAchievementsQueryVariables>(
+		GetLeaderboardAchievementsDocument,
+		options,
+	)
+}
+export type GetLeaderboardAchievementsQueryHookResult = ReturnType<typeof useGetLeaderboardAchievementsQuery>
+export type GetLeaderboardAchievementsLazyQueryHookResult = ReturnType<typeof useGetLeaderboardAchievementsLazyQuery>
+export type GetLeaderboardAchievementsQueryResult = Apollo.QueryResult<
+	GetLeaderboardAchievementsQuery,
+	GetLeaderboardAchievementsQueryVariables
+>
+export const GetScoreDocument = gql`
+	subscription GetScore($id: bpchar, $uuid: uuid) {
+		Quests(where: { Battlepass: { chainId: { _eq: $id } } }) {
+			points
+			QuestProgresses(where: { Identity: { uuid: { _eq: $uuid } } }) {
+				progress
+			}
+		}
+	}
+`
+
+/**
+ * __useGetScoreSubscription__
+ *
+ * To run a query within a React component, call `useGetScoreSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetScoreSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetScoreSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useGetScoreSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<GetScoreSubscription, GetScoreSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<GetScoreSubscription, GetScoreSubscriptionVariables>(GetScoreDocument, options)
+}
+export type GetScoreSubscriptionHookResult = ReturnType<typeof useGetScoreSubscription>
+export type GetScoreSubscriptionResult = Apollo.SubscriptionResult<GetScoreSubscription>
+export const ScoreDocument = gql`
+	subscription Score($id: bpchar, $uuid: uuid) {
+		BattlepassParticipants(where: { Battlepass: { chainId: { _eq: $id } }, Identity: { uuid: { _eq: $uuid } } }) {
+			premium
+			points
+			passChainId
+			status
+		}
+	}
+`
+
+/**
+ * __useScoreSubscription__
+ *
+ * To run a query within a React component, call `useScoreSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useScoreSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useScoreSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useScoreSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<ScoreSubscription, ScoreSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<ScoreSubscription, ScoreSubscriptionVariables>(ScoreDocument, options)
+}
+export type ScoreSubscriptionHookResult = ReturnType<typeof useScoreSubscription>
+export type ScoreSubscriptionResult = Apollo.SubscriptionResult<ScoreSubscription>
 export const ConnectIdentityDocument = gql`
 	mutation ConnectIdentity($uuid: String, $address: String, $discord: String, $name: String, $email: String) {
 		battlepassBot {
@@ -13613,8 +23915,8 @@ export function useActiveBattlepassSubscription(
 }
 export type ActiveBattlepassSubscriptionHookResult = ReturnType<typeof useActiveBattlepassSubscription>
 export type ActiveBattlepassSubscriptionResult = Apollo.SubscriptionResult<ActiveBattlepassSubscription>
-export const ActivebattlepassByIdDocument = gql`
-	query ActivebattlepassById($id: String!) {
+export const ActiveBattlepassByIdDocument = gql`
+	query ActiveBattlepassById($id: String!) {
 		battlepassBot {
 			battlepasses(where: { chainId: $id }) {
 				id
@@ -13632,44 +23934,44 @@ export const ActivebattlepassByIdDocument = gql`
 `
 
 /**
- * __useActivebattlepassByIdQuery__
+ * __useActiveBattlepassByIdQuery__
  *
- * To run a query within a React component, call `useActivebattlepassByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useActivebattlepassByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useActiveBattlepassByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useActiveBattlepassByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useActivebattlepassByIdQuery({
+ * const { data, loading, error } = useActiveBattlepassByIdQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useActivebattlepassByIdQuery(
-	baseOptions: Apollo.QueryHookOptions<ActivebattlepassByIdQuery, ActivebattlepassByIdQueryVariables>,
+export function useActiveBattlepassByIdQuery(
+	baseOptions: Apollo.QueryHookOptions<ActiveBattlepassByIdQuery, ActiveBattlepassByIdQueryVariables>,
 ) {
 	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useQuery<ActivebattlepassByIdQuery, ActivebattlepassByIdQueryVariables>(
-		ActivebattlepassByIdDocument,
+	return Apollo.useQuery<ActiveBattlepassByIdQuery, ActiveBattlepassByIdQueryVariables>(
+		ActiveBattlepassByIdDocument,
 		options,
 	)
 }
-export function useActivebattlepassByIdLazyQuery(
-	baseOptions?: Apollo.LazyQueryHookOptions<ActivebattlepassByIdQuery, ActivebattlepassByIdQueryVariables>,
+export function useActiveBattlepassByIdLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<ActiveBattlepassByIdQuery, ActiveBattlepassByIdQueryVariables>,
 ) {
 	const options = { ...defaultOptions, ...baseOptions }
-	return Apollo.useLazyQuery<ActivebattlepassByIdQuery, ActivebattlepassByIdQueryVariables>(
-		ActivebattlepassByIdDocument,
+	return Apollo.useLazyQuery<ActiveBattlepassByIdQuery, ActiveBattlepassByIdQueryVariables>(
+		ActiveBattlepassByIdDocument,
 		options,
 	)
 }
-export type ActivebattlepassByIdQueryHookResult = ReturnType<typeof useActivebattlepassByIdQuery>
-export type ActivebattlepassByIdLazyQueryHookResult = ReturnType<typeof useActivebattlepassByIdLazyQuery>
-export type ActivebattlepassByIdQueryResult = Apollo.QueryResult<
-	ActivebattlepassByIdQuery,
-	ActivebattlepassByIdQueryVariables
+export type ActiveBattlepassByIdQueryHookResult = ReturnType<typeof useActiveBattlepassByIdQuery>
+export type ActiveBattlepassByIdLazyQueryHookResult = ReturnType<typeof useActiveBattlepassByIdLazyQuery>
+export type ActiveBattlepassByIdQueryResult = Apollo.QueryResult<
+	ActiveBattlepassByIdQuery,
+	ActiveBattlepassByIdQueryVariables
 >
 export const SuccessfulCampaignByOrganizationIdDocument = gql`
 	subscription SuccessfulCampaignByOrganizationId($orgId: String!) {
