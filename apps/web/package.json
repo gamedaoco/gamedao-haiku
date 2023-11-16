@@ -88,7 +88,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-quill": "^2.0.0",
     "react-toastify": "^9.0.7",
-    "sharp": "^0.32.1",
+    "sharp": "^0.32.6",
     "slugify": "^1.6.6",
     "stripe": "^11.9.1",
     "three": "^0.151.3",
