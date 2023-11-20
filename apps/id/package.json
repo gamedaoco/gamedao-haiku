@@ -73,7 +73,7 @@
     "moment": "^2.29.4",
     "mongodb": "^4.13.0",
     "next": "^13.2.4",
-    "next-auth": "^4.20.1",
+    "next-auth": "^4.24.5",
     "nodemailer": "^6.9.0",
     "react": "^18.2.0",
     "react-3d-viewer": "^1.0.12",
