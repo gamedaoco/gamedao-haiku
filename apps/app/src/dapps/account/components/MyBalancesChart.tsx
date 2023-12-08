@@ -24,7 +24,7 @@ import {
 	Typography,
 } from '@mui/material'
 
-import { StackedAreaChart } from 'src/components/Charts/StackedAreaChart'
+import { StackedAreaChart } from 'components/molecules/charts/StackedAreaChart'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 

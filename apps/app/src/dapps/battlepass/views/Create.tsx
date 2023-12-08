@@ -50,12 +50,12 @@ import {
 	RadioGroup,
 	MenuItem,
 } from '@mui/material'
-import { RadioItem } from 'src/components/Forms/modules/radioItem'
+import { RadioItem } from 'components/organisms/forms/components/radioItem'
 
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
-import { Image } from 'src/components/Image/image'
-import { Loader } from 'src/components/Loader'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
+import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'components/molecules/content'
+import { Image } from 'components/atoms/Image/image'
+import { Loader } from 'components/atoms/Loader'
 
 import TabBar from '../create/TabBar'
 
@@ -278,6 +278,7 @@ export const Create = () => {
 	// admin utils
 
 	const reset = () => {
+		console.log('reset')
 		setFormState(initialState)
 		localStorage.setItem('battlepass', JSON.stringify(initialState))
 	}
@@ -296,48 +297,102 @@ export const Create = () => {
 	}
 	//
 
+	const [loadPass, setLoadPass] = useState(false)
+	useEffect(() => {
+		if (battlepasses?.length > 0) setLoadPass(true)
+	}, [battlepasses, formState.organizationId])
+
+	const [newPass, setNewPass] = useState(false)
+	const onNewPass = () => {
+		reset()
+		setNewPass(true)
+	}
+
 	return !organizations ? (
 		<Loader />
 	) : (
 		<Fragment>
-			<Stack p={2} direction="row" alignItems="center" justifyContent="start" spacing={2}>
-				<Button variant={'nano'} onClick={reset}>
-					Flush Editor Cache
-				</Button>
-				<Button variant={'nano'} onClick={() => log()}>
-					Log Battlepass Metadata
-				</Button>
-				{/* <Button variant={'nano'} onClick={()=>log(1)}>
-					Log Quest Metadata
-				</Button>
-				<Button variant={'nano'} onClick={()=>log(2)}>
-					Log Reward Metadata
-				</Button> */}
-			</Stack>
+			{/* render org + pass selector on top of tab bar */}
+
+			{/*
+				select org
+				select pass
+			 */}
+			<Section
+				direction={{ xs: 'column', md: 'column' }}
+				// title="Select organization and pass"
+				description={`Select organization and pass or create a new one.`}
+			>
+				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2} justifyContent="space-evenly">
+					<FormControl sx={{ flex: 1 }}>
+						<InputLabel id="organization">Select Organization</InputLabel>
+						<Select
+							name={'organizationId'}
+							value={formState.organizationId}
+							onChange={handleChange}
+							labelId="organization"
+							label="Select Organization"
+							variant="outlined"
+						>
+							{organizations.map((item, index) => (
+								<MenuItem value={item.value} key={index}>
+									{item.label}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+					<FormControl sx={{ flex: 1 }}>
+						<InputLabel id="battlepass">Select Battlepass</InputLabel>
+						<Select
+							name={'battlepassId'}
+							value={formState.battlepassId}
+							onChange={handleChange}
+							labelId="battlepass"
+							label="Select Battlepass"
+							variant="outlined"
+						>
+							{battlepasses.map((item, index) => (
+								<MenuItem value={item.id} key={index}>
+									{item.name}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+					{loadPass && <Button variant="outlined">Load</Button>}
+					<Button variant="outlined" onClick={() => onNewPass()}>
+						New
+					</Button>
+				</Stack>
+			</Section>
 
 			<TabBar />
 
-			<Stack direction="row" spacing={2}>
+			{/* <Stack direction="row" spacing={2}>
 				<Typography>Organization</Typography>
 				<Typography></Typography>
 				<Typography>Battlepass</Typography>
 				<Typography></Typography>
-			</Stack>
+			</Stack> */}
 
 			<TabContext value={view}>
 				<DashboardTab />
 				<GeneralEditor args={{ formState, setFormState }} />
-				<LevelEditor id={formState.battlepassId} />
+
+				{/* <LevelEditor id={formState.battlepassId} /> */}
+
 				{/* <StylingEditor
 					handleUploadImage={handleUploadImage}
 					getImageURL={getImageURL}
 					formState={formState}
 					handleChange={handleChange}
 				/> */}
-				{/* <QuestsEditor/> */}
+
+				{/* <QuestEditor formState={formState} setFormState={setFormState} /> */}
+
 				{/* <RewardsEditor/> */}
 
-				<TabPanel sx={{ py: 2 }} value="general2">
+				{/*
+				<TabPanel sx={{ py: 2 }} value="general">
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
 						title="Deposit + Create Battlepass Draft"
@@ -348,14 +403,14 @@ export const Create = () => {
 					the reputation of your organization. yy
 					`}
 					>
-						{/* <TextField
+						<TextField
 							name={'organizationId'}
 							onChange={handleChange}
 							value={formState.organizationId}
 							label="Organization Id"
 							variant="outlined"
 							fullWidth
-							/> */}
+							/>
 						{organizations?.length > 0 && formState.organizationId ? (
 							<FormControl sx={{ flex: 1 }}>
 								<InputLabel id="organizationId">Select Organization</InputLabel>
@@ -454,7 +509,7 @@ export const Create = () => {
 						</Stack>
 					</Section>
 
-					{/* <Divider /> */}
+
 
 					<Section
 						direction={{ xs: 'column', md: 'column' }}
@@ -649,20 +704,23 @@ export const Create = () => {
 						</Section>
 					)}
 				</TabPanel>
-
-				<TabPanel value="quests">
-					{/* disabled === formState.battlepassId ? false : true */}
+ */}
+				{/*
+				 <TabPanel value="quests">
+					// disabled === formState.battlepassId ? false : true
 					<Typography>4. Quests</Typography>
 					<Section direction={{ xs: 'column', md: 'column' }} description={`Configure Quests`}>
 						<QuestEditor formState={formState} setFormState={setFormState} />
 					</Section>
 				</TabPanel>
-				<TabPanel value="rewards">
+				*/}
+
+				{/* <TabPanel value="rewards">
 					<Typography>5. Rewards</Typography>
 					<Section direction={{ xs: 'column', md: 'column' }} description={`Create rewards`}>
-						{/* <RewardsEditor id={id} /> */}
+						<RewardsEditor id={id} />
 					</Section>
-				</TabPanel>
+				</TabPanel> */}
 			</TabContext>
 
 			{false && (
@@ -742,7 +800,7 @@ export const Create = () => {
 				</ContentPanel>
 			)}
 
-			{/* {showCreateModal && (
+			{showCreateModal && (
 				<TransactionDialog
 					open={showCreateModal}
 					onClose={closeCreateModal}
@@ -765,7 +823,27 @@ export const Create = () => {
 					txData={linkBotTX}
 					txCallback={handleLinkComplete}
 				/>
-			)} */}
+			)}
+			{/*
+			 */}
+
+			<Section>
+				<hr />
+				<Stack p={2} direction="row" alignItems="center" justifyContent="start" spacing={2}>
+					<Button variant={'nano'} onClick={reset}>
+						Flush Editor Cache
+					</Button>
+					<Button variant={'nano'} onClick={() => log()}>
+						Log Battlepass Metadata
+					</Button>
+					{/* <Button variant={'nano'} onClick={()=>log(1)}>
+						Log Quest Metadata
+					</Button>
+					<Button variant={'nano'} onClick={()=>log(2)}>
+						Log Reward Metadata
+					</Button> */}
+				</Stack>
+			</Section>
 		</Fragment>
 	)
 }

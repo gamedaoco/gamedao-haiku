@@ -12,8 +12,8 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
-import { CampaignFiltersTab } from 'src/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
-import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
+import { CampaignFiltersTab } from 'dapps/campaign/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
+import { FiltersSection } from 'components/molecules/FiltersSections/filtersSection'
 
 export function FilterBar() {
 	const { t } = useTranslation()

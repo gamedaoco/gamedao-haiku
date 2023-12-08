@@ -8,9 +8,9 @@ import { Campaign, useCampaignContributorsSubscription, useCampaignSubscription 
 import { Card, CardContent, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { CampaignsList } from 'src/components/CampaignsList/campaignsList'
-import { ContributedCampaignsSection } from 'src/components/CampaignsSection/ContributedCampaignsSection/contributedCampaignsSection'
-import { CampaignEmptyState } from 'src/components/CampaignsSection/campaignEmptyState'
+import { CampaignsList } from 'dapps/campaign/components/CampaignsList'
+import { ContributedCampaignsSection } from 'dapps/campaign/components/CampaignsSection/ContributedCampaignsSection/contributedCampaignsSection'
+import { CampaignEmptyState } from 'dapps/campaign/components/CampaignsSection/campaignEmptyState'
 
 export function MyCampaigns() {
 	const { t } = useTranslation()

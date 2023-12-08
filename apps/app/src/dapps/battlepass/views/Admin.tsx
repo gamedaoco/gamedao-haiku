@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect } from 'react'
 import { scoreToLevelMap } from '../content/mock'
 import { BattlepassViews } from 'src/constants/battlepass'
 
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
 import Edit from '@mui/icons-material/EditOutlined'
 import Save from '@mui/icons-material/SaveOutlined'

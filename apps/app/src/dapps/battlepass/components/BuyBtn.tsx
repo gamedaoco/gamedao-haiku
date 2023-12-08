@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import {
 	useJoinBattlepassMutation,
 	useGetBattlepassForUserQuery,
@@ -13,8 +13,8 @@ import {
 
 import CircularProgress from '@mui/material/CircularProgress'
 import { Button, Typography, Stack } from '@mui/material'
-import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
-import { Checkout } from 'src/components/commerce'
+import { BaseDialog } from 'components/molecules/BaseDialog'
+import { Checkout } from 'components/organisms/commerce'
 
 export enum MemberState {
 	VIEWER,

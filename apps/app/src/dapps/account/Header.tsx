@@ -2,11 +2,11 @@ import React, { useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 
 import { AccountTabs } from 'src/constants/account'
 
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'

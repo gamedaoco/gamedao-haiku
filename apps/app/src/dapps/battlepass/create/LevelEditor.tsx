@@ -19,7 +19,7 @@ import {
 	Typography,
 } from '@mui/material'
 import { TabPanel } from '@mui/lab'
-import { Section } from 'src/components/content'
+import { Section } from 'components/molecules/content'
 
 type TRowData = {
 	id: number

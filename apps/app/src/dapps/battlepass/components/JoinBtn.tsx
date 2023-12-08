@@ -10,7 +10,7 @@ import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 // import { createWarningNotification } from 'src/utils/notificationUtils'
 import { useTheme } from '@mui/material/styles'
 import { Box, Button, useMediaQuery } from '@mui/material'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
 import ShareIcon from '@mui/icons-material/Share'
 
 const TransactionModal = ({}) => {}

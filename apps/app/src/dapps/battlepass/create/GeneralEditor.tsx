@@ -36,11 +36,11 @@ import { TabContext, TabPanel } from '@mui/lab'
 
 //
 
-import { RadioItem } from 'src/components/Forms/modules/radioItem'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
-import { Image } from 'src/components/Image/image'
-import { Loader } from 'src/components/Loader'
+import { RadioItem } from 'components/organisms/forms/components/radioItem'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
+import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'components/molecules/content'
+import { Image } from 'components/atoms/Image/image'
+import { Loader } from 'components/atoms/Loader'
 
 import TabBar from './TabBar'
 
@@ -223,7 +223,7 @@ export const GeneralEditor = ({ args }: TProps) => {
 	const openCreateModal = () => setShowCreateModal(true)
 	const closeCreateModal = () => setShowCreateModal(false)
 	const handleOpenCreateModal = async () => {
-		// console.log('handleOpenTxModal', formState)
+		console.log('handleOpenTxModal', formState)
 		await updateMetadataCID()
 		openCreateModal()
 	}
@@ -269,6 +269,8 @@ export const GeneralEditor = ({ args }: TProps) => {
 		setShowLinkModal(false)
 	}
 
+	console.log(organizations?.length, battlepasses?.length)
+
 	return (
 		<TabPanel sx={{ py: 2 }} value="general">
 			<Section
@@ -290,7 +292,7 @@ export const GeneralEditor = ({ args }: TProps) => {
 					fullWidth
 					/> */}
 
-				{organizations?.length > 0 ? (
+				{/* {organizations?.length > 0 ? (
 					<FormControl sx={{ flex: 1 }}>
 						<InputLabel id="organizationId">Select Organization</InputLabel>
 						<Select
@@ -315,6 +317,26 @@ export const GeneralEditor = ({ args }: TProps) => {
 					`Searching for an organization...`
 				)}
 
+				{battlepasses?.length > 0 ? (
+					<FormControl sx={{ flex: 1 }}>
+						<InputLabel id="battlepass">Select Battlepass</InputLabel>
+						<Select
+							name={'battlepassId'}
+							value={formState.battlepassId}
+							onChange={handleChange}
+							labelId="battlepass"
+							label="Select Battlepass"
+							variant="outlined"
+						>
+							{battlepasses.map((item, index) => (
+								<MenuItem value={item.id} key={index}>
+									{item.name}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				) : null} */}
+
 				<SectionDescription>
 					Estimate the number of subscribers and their subscription price to get a suggestion for a reasonable
 					amount of GAME token. Deposit will trigger a transaction to sign with the prime account of the
@@ -326,7 +348,7 @@ export const GeneralEditor = ({ args }: TProps) => {
 						name={'subscribers'}
 						onChange={handleChange}
 						value={formState.subscribers}
-						label="Estimated Susbcribers"
+						label="Estimated Subscribers"
 						variant="outlined"
 						fullWidth
 						// disabled

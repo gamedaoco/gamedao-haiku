@@ -3,7 +3,7 @@ import { useGetLeaderboardQuery } from 'src/queries'
 
 import { useTheme } from '@mui/material/styles'
 import { Avatar, Grid, Typography, Paper, Stack, useMediaQuery } from '@mui/material'
-import { Loader } from 'components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 export type TArgs = {
 	id?: string

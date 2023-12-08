@@ -15,11 +15,11 @@ import {
 	useDisplayValuesQuery,
 } from 'src/queries'
 
-import { CampaignsList } from 'src/components/CampaignsList/campaignsList'
-import { CampaignFiltersTab } from 'src/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
-import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
+import { CampaignsList } from 'dapps/campaign/components/CampaignsList'
+import { CampaignFiltersTab } from 'dapps/campaign/components/CampaignsSection/CampaignFilters/CampaignFiltersTab'
+import { FiltersSection } from 'components/molecules/FiltersSections/filtersSection'
 
-import { Loader } from 'components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 export function CampaignDApp() {
 	const { t } = useTranslation()

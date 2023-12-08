@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { useGetLevelsQuery, useGetScoreQuery, useLevelsSubscription, useScoreSubscription } from 'src/queries'
 
 import { styled, useTheme } from '@mui/material/styles'
 import { Box, Button, Stack, Typography, useMediaQuery } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
-import { Loader } from 'components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 10,

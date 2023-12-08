@@ -15,9 +15,9 @@ import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTr
 import { useYupValidationResolver } from 'src/hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
 
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 const initialState = (identity: Identity) => ({
 	display: identity?.display_name || '',

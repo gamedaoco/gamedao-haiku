@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect } from 'react'
 import { scoreToLevelMap } from '../content/mock'
 import { BattlepassViews } from 'src/constants/battlepass'
 
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
 import Edit from '@mui/icons-material/EditOutlined'
 import Save from '@mui/icons-material/SaveOutlined'
@@ -34,13 +34,13 @@ export function LeaderboardView({ id }: TProps) {
 
 	useEffect(() => {
 		if (!data) return
-		const points = data?.battlepassBot?.BattlepassPoints
+		const points = data?.battlepassBot?.points
 		if (points.length === 0) return
 		const rows = points
 			.map((item, index) => createRow(item.points, item.quests, item.identity.name, item.identityUuid)) //.sort((a, b) => a.points.toString().localeCompare(b.points.toString()))
 			.sort((a, b) => (a.points > b.points ? -1 : a.points < b.points ? 1 : 0))
 		setLeaderboard(rows)
-	}, [data, data?.battlepassBot?.BattlepassPoints])
+	}, [data, data?.battlepassBot?.points])
 
 	return loading ? (
 		<Loader />

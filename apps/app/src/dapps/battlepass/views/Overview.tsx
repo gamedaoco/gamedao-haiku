@@ -21,6 +21,8 @@ export const Overview = () => {
 	const theme = useTheme()
 	const { push } = useRouter()
 
+	const hideDraft = false
+
 	const address = useCurrentAccountAddress()
 	const [canJoin, setCanJoin] = useState(false)
 	useEffect(() => {
@@ -113,7 +115,7 @@ export const Overview = () => {
 
 			{content &&
 				content.map((item, index) => {
-					return item.state === 'DRAFT' ? null : (
+					return hideDraft && item.state === 'DRAFT' ? null : (
 						<Grid item key={index}>
 							<BPCard>
 								<Card

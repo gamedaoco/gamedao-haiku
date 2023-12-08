@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 // import { useAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import {
 	useGetBattlepassQuestsQuery,
 	useGetBattlepassAchievementsQuery,
@@ -22,12 +22,12 @@ import { styled, useTheme } from '@mui/material/styles'
 import { CardContent, CardActions } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 
-import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
+import { BaseDialog } from 'components/molecules/BaseDialog'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
 
 import { getTwitterAuthorizationURL } from 'src/utils/getTwitterAuthorizationURL'
 import { getEpicAuthorizationURL } from 'src/utils/getEpicAuthorizationURL'
-import { Loader } from 'components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 4,
@@ -106,8 +106,8 @@ export const BPQuestItem = ({ index, item, achievement, active }: TGridItemProps
 		achievement?.progress === 1
 			? 'done'
 			: item?.maxDaily
-			? `${a} of ${item?.maxDaily}`
-			: `${a} of ${item?.quantity}`
+			  ? `${a} of ${item?.maxDaily}`
+			  : `${a} of ${item?.quantity}`
 
 	enum Source {
 		Wallet,
@@ -373,7 +373,7 @@ export const BPQuests = ({ args }: TArgs) => {
 					<Invitational args={{ id, items }} />
 				</Grid> */}
 
-				{items.length > 0 ? (
+				{items?.length > 0 ? (
 					items.map((item, index) => {
 						// TODO: rm when twitter is fixed
 						// if (item.source === 'twitter') return null

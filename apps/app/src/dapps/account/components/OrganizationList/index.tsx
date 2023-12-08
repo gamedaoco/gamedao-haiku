@@ -17,8 +17,8 @@ import Edit from '@mui/icons-material/TuneSharp'
 import ExitToAppSharpIcon from '@mui/icons-material/ExitToAppSharp'
 
 import { Avatar, Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { Scrollbar } from 'src/components/scrollbar'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
+import { Scrollbar } from 'components/atoms/Scrollbar'
 import LoadingTable from './loadingTable'
 
 interface IExitProps {

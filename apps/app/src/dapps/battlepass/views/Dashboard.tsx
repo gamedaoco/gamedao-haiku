@@ -3,7 +3,7 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Grid, Stack, useMediaQuery } from '@mui/material'
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 import { TopPlayers } from '../components/TopPlayers'
 import { XPBar } from '../components/XPBar'

@@ -9,7 +9,7 @@ import { useAddMemberTransaction } from 'hooks/tx/useAddMemberTransaction'
 
 import { useTheme } from '@mui/material/styles'
 import { Box, Tab, Tabs, Button, Stack, useMediaQuery } from '@mui/material'
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 // import { Join } from './JoinBtn'
 
@@ -59,7 +59,7 @@ export function Navigation({ id, view, org }: TProps) {
 
 	useEffect(() => {
 		if (!address || !organization) return
-		setIsMember(organization.organizationMembers.some((member) => member.address === address))
+		setIsMember(organization.organization_members.some((member) => member.address === address))
 		setIsPrime(organization.prime === address)
 		setIsOpen(organization.accessModel === 'Open' ? true : false)
 	}, [address, organization])

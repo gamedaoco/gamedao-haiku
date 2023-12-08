@@ -5,7 +5,7 @@ import type { CollectablesForUserQuery } from 'src/queries'
 import { Grid } from '@mui/material'
 import type { Collectable as TCollectable } from 'src/@types/collectable'
 
-import Collectable from 'src/components/Collectable/collectable'
+import Collectable from 'components/molecules/Collectable/collectable'
 
 import LoadingCollectableCard from './loadingCollectableCard'
 

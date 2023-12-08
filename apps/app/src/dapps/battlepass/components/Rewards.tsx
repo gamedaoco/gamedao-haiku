@@ -7,11 +7,11 @@ import {
 	useRewardsSubscription,
 	useBattlepassSubscription,
 } from 'src/queries'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { useTheme } from '@mui/material/styles'
 import { Box, Card, Button, Typography, Grid, Stack } from '@mui/material'
 import { Avatar, AvatarGroup } from '@mui/material'
-import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
+import { BaseDialog } from 'components/molecules/BaseDialog'
 import { BPCard } from './Card'
 import { FadeInWhenVisible } from './FadeInWhenVisible'
 

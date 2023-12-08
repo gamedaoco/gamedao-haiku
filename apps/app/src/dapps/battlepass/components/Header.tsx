@@ -21,16 +21,16 @@ import { Typography, Avatar, Box, Grid, Stack, useMediaQuery } from '@mui/materi
 
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
-import { Image } from 'src/components/Image/image'
+import { Image } from 'components/atoms/Image/image'
 import NextImage from 'next/image'
 
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { Navigation } from './Navigation'
 
 import { useGetBattlepassUsersQuery, useBattlepassSubscription } from 'src/queries'
 
 import { Join } from './JoinBtn'
-import { Backdrop } from 'components/Backdrop'
+import { Backdrop } from 'components/atoms/Backdrop'
 
 type TProps = {
 	orgId: string

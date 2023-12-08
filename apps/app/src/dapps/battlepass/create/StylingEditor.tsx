@@ -32,12 +32,12 @@ import {
 	MenuItem,
 } from '@mui/material'
 
-import { RadioItem } from 'src/components/Forms/modules/radioItem'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { RadioItem } from 'components/organisms/forms/components/radioItem'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
 
-import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
-import { Image } from 'src/components/Image/image'
-import { Loader } from 'src/components/Loader'
+import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'components/molecules/content'
+import { Image } from 'components/atoms/Image/image'
+import { Loader } from 'components/atoms/Loader'
 import { LevelEditor } from './LevelEditor'
 import { QuestEditor } from './QuestEditor'
 

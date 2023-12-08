@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react'
-import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'src/components/content'
+import { ContentPanel, ContentTitle, Section, SectionTitle, SectionDescription } from 'components/molecules/content'
 
 import { scoreToLevelMap } from '../content/mock'
 import Delete from '@mui/icons-material/DeleteForeverOutlined'
@@ -25,7 +25,7 @@ import {
 	Radio,
 	RadioGroup,
 } from '@mui/material'
-import { RadioItem } from 'src/components/Forms/modules/radioItem'
+import { RadioItem } from 'components/organisms/forms/components/radioItem'
 
 import { useGetBattlepassQuestsQuery } from 'src/queries'
 
@@ -67,11 +67,6 @@ const createData = (data) => {
 	return { ...data }
 }
 // const rows = quests.map((item, index) => createData(item))
-
-type TProps = {
-	formState: TInitialState
-	setFormState: (object) => void
-}
 
 enum QuestSources {
 	gamedao,
@@ -192,6 +187,12 @@ const enumToArray = (data: EnumType): EnumAsArrayType =>
 
 //
 
+type TProps = {
+	formState: TInitialState
+	setFormState: (object) => void
+}
+type TArgs = { args: TProps }
+
 export function QuestEditor({ formState, setFormState }: TProps) {
 	// get battlepass id
 	const { battlepassId: id } = formState
@@ -225,7 +226,7 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 		setQuestCounter(questCounter + 1)
 	}
 
-	const updateQuest = () => {
+	const updateQuests = () => {
 		const updateQuests = questList.concat([
 			{
 				...currentQuestState,
@@ -238,6 +239,7 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 			name: initialQuestState.name + ' ' + (questCounter + 2),
 		})
 		setQuestCounter(questCounter + 1)
+		setFormState({ ...formState, quests: updateQuests })
 	}
 
 	// upstream
@@ -288,9 +290,9 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 							<TableCell align="left">Type</TableCell>
 							<TableCell align="right">BP</TableCell>
 							<TableCell align="right">Max BP</TableCell>
-							<TableCell align="right">T</TableCell>
-							<TableCell align="right">Max T</TableCell>
-							<TableCell align="right">R</TableCell>
+							<TableCell align="right">Qty</TableCell>
+							<TableCell align="right">Max Qty</TableCell>
+							<TableCell align="right">Repeat</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -328,7 +330,7 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 										{row.max}
 									</TableCell>
 									<TableCell align="right" component="th" scope="row">
-										{row.daily ? 'x' : '-'}
+										{row.daily ? 'yes' : 'no'}
 									</TableCell>
 								</TableRow>
 							)
@@ -458,6 +460,12 @@ export function QuestEditor({ formState, setFormState }: TProps) {
 					Add Quest
 				</Button>
 			</Stack>
+
+			<hr />
+
+			<Button size="large" variant="outlined" fullWidth onClick={updateQuests} disabled={questCounter === 0}>
+				Save Quests
+			</Button>
 		</ContentPanel>
 	)
 }

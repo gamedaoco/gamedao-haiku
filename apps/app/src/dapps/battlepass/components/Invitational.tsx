@@ -7,7 +7,7 @@ import { useGetBattlepassUsersQuery } from 'src/queries'
 
 import { useTheme } from '@mui/material/styles'
 import { Button, Grid, Typography, Paper, Stack, useMediaQuery } from '@mui/material'
-import { Loader } from 'components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 const DateTimeDisplay = ({ value, type = null, suffix = null, isDanger }) => {
 	return isDanger ? null : (
