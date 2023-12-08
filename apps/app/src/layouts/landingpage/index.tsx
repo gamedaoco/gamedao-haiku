@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { Box, Container, Stack, useTheme, useMediaQuery } from '@mui/material'
-import { Header } from './modules/header'
-import { Content } from './modules/content'
-import { Footer } from './modules/footer'
+import { Header } from './components/header'
+import { Content } from './components/content'
+import { Footer } from './components/footer'
 
 interface ComponentProps {
 	showHeader?: boolean
@@ -29,7 +29,7 @@ export function Layout({ showHeader, showFooter, showSidebar, children, noContai
 			<Box
 				sx={{
 					width: '100%',
-					// background: theme.palette.background.ocean,
+					background: theme.palette.background.ocean,
 					p: 0,
 					m: 0,
 				}}

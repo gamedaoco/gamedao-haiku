@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
 import { BattlepassViews } from 'src/constants/battlepass'
 import { useActiveBattlepassByIdQuery } from 'src/queries'
 
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 export function Page() {
 	const { query, push } = useRouter()
@@ -22,14 +22,14 @@ export function Page() {
 
 	const { loading, data, error } = useActiveBattlepassByIdQuery({ variables: { id: id } })
 
-	// console.log(loading, query)
-	// console.log(data)
+	console.log(loading, query)
+	console.log(data)
 
 	useEffect(() => {
 		if (loading || !data) return
-		if (data?.BattlepassBot?.Battlepasses?.length === 0) push('/battlepass') // 404
+		if (data?.battlepassBot?.battlepasses?.length === 0) push('/battlepass') // 404
 		push(`/battlepass/${id}/dashboard`)
-	}, [loading, data?.BattlepassBot?.Battlepasses, push])
+	}, [loading, data?.battlepassBot?.battlepasses, push])
 
 	return loading ? <Loader /> : null
 }

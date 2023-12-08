@@ -17,7 +17,7 @@ import { Drawer, Fade } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
-import Link from 'src/components/Link'
+import Link from 'components/atoms/Link'
 import { features } from 'src/dapps/landingpage/features'
 
 const pages = [

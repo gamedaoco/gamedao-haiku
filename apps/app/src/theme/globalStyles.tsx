@@ -24,6 +24,13 @@ export default function GlobalStyles() {
 					scrollbarWidth: 'thin',
 					scrollbarColor: theme.palette.primary.darker,
 				},
+				hr: {
+					background: 'none',
+					border: `1px dotted #ffffff66`,
+				},
+				body: {
+					lineStyle: 'dashed',
+				},
 				'::-webkit-scrollbar': {
 					width: '8px',
 					background: 'transparent',

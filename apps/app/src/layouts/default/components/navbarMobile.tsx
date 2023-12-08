@@ -28,7 +28,7 @@ import {
 } from 'react-icons/ri'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { FontIcons } from 'src/components'
-import Link from 'src/components/Link'
+import Link from 'components/atoms/Link'
 
 const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />
 

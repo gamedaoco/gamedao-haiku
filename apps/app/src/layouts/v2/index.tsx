@@ -20,6 +20,7 @@ interface ComponentProps {
 	noBorder?: boolean
 	title?: string
 	children?: React.ReactNode
+	admin?: boolean
 }
 
 // TODO: Should not be here/ configs and co
@@ -50,6 +51,7 @@ export function Layout({
 	title,
 	noBorder,
 	hideDApps,
+	admin,
 }: ComponentProps) {
 	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 	const config = useConfig()
@@ -78,11 +80,13 @@ export function Layout({
 
 			<Box
 				sx={{
-					backgroundImage: `radial-gradient(circle at top center, #306, #102, #000)`,
+					backgroundImage: admin
+						? `radial-gradient(circle at top center, #012, #001, #000)`
+						: `radial-gradient(circle at top center, #306, #102, #000)`,
 					backgroundSize: `100% 200%`,
 				}}
 			>
-				{/*{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}*/}
+				{/* {admin && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />} */}
 				{showHeader &&
 					(isMd ? (
 						<Header

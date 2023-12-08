@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { ENVIRONMENT } from 'src/constants'
-import { AppContext } from 'src/providers/app/modules/context'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { AppContext } from 'src/providers/app/components/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 

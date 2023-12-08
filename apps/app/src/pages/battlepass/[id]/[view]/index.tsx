@@ -7,11 +7,11 @@ import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { Layout } from 'src/layouts/v2'
 
 import { useActiveBattlepassByIdQuery } from 'src/queries'
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 import { Battlepass } from 'src/dapps/battlepass'
 
-import { NoWalletConnected } from 'src/components/NoWalletConnected/noWalletConnected'
+import { NoWalletConnected } from 'components/molecules/NoWalletConnected'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 export function Page() {

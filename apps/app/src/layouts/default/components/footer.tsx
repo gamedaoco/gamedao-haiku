@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles'
 import NextLink from 'next/link'
 import React from 'react'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
-import { FontIcons } from 'src/components/Icons/icons'
+import { FontIcons } from 'components/atoms/Icons/icons'
 import { ENVIRONMENT } from 'src/constants'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
 

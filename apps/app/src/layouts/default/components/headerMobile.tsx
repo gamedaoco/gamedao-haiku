@@ -8,9 +8,9 @@ import Toolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/material/styles'
 import React, { useCallback, useState } from 'react'
 import { AccountSelector, FontIcons } from 'src/components'
-import Link from 'src/components/Link'
-import { NavLink } from 'src/components/NavLink/navLink'
-import { NavbarMobile } from 'src/layouts/default/modules/navbarMobile'
+import Link from 'components/atoms/Link'
+import { NavLink } from 'components/atoms/NavLink/navLink'
+import { NavbarMobile } from 'src/layouts/default/components/navbarMobile'
 
 // eslint-disable-next-line @next/next/no-img-element
 const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />

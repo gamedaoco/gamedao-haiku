@@ -2,8 +2,8 @@ import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/m
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
-import { FontIcons } from 'src/components/Icons/icons'
-import Link from 'src/components/Link'
+import { FontIcons } from 'components/atoms/Icons/icons'
+import Link from 'components/atoms/Link'
 
 // const Link = ({ href, children }) => (
 // 	<Box>

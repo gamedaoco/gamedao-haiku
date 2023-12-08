@@ -15,7 +15,7 @@ import { ArrowBack } from '@mui/icons-material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Button, Paper, Tab, Typography } from '@mui/material'
 
-import { CampaignDetailsContent } from 'src/components/CampaignsSection/campaignDetailsContent'
+import { CampaignDetailsContent } from 'dapps/campaign/components/CampaignsSection/campaignDetailsContent'
 
 export function CampaignById() {
 	const { t } = useTranslation()

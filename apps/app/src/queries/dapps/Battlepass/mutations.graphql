@@ -1,0 +1,115 @@
+mutation CreateQuest {
+  battlepassBot {
+    quest(
+      battlepass: "",
+      daily: false,
+      points: 10,
+      quantity: 10,
+      source: discord,
+      type: comment
+    ) {
+		id
+	}
+  }
+}
+
+mutation Payment($token: String!, $bpid: String!, $uuid: String!, $txid: String!) {
+    battlepassBot {
+        processPayment(
+            securityToken: $token,
+            battlepass: $bpid,
+            identityUuid: $uuid,
+            paymentToken: $txid
+        ) {
+            battlepass
+            identityUuid
+            paymentToken
+        }
+    }
+}
+
+mutation ClaimReward( $battlepass: String!, $uuid: String!, $reward: String!) {
+    battlepassBot {
+        claimReward(
+            battlepass: $battlepass
+            identityUuid: $uuid,
+            reward: $reward
+        ){
+            id
+            syncStatus
+        }
+    }
+}
+
+mutation ClaimBattlepassPremium (
+    $bid: String!,
+    $uid: String!,
+    $pid: String!,
+    $sid: String!,
+) {
+    battlepassBot {
+        processPayment(
+            battlepass: $bid,
+            identityUuid: $uid,
+            paymentToken: $pid,
+            securityToken: $sid
+        ) {
+            identityUuid
+        }
+    }
+}
+
+mutation PayBattlepass ( $battlepass: String!, $uuid: String!){
+    battlepassBot {
+        joinPremium( battlepass: $battlepass, identityUuid: $uuid) {
+            status
+            premium
+        }
+    }
+}
+
+mutation JoinBattlepass ( $battlepass: String!, $uuid: String!){
+    battlepassBot {
+        join( battlepass: $battlepass, identityUuid: $uuid) {
+            id
+        }
+    }
+}
+
+# # # TODO: RM
+mutation JoinPremiumBattlepass ( $battlepass: String!, $uuid: String!){
+  battlepassBot {
+    joinPremium( battlepass: $battlepass, identityUuid: $uuid) {
+    #   uuid
+      id
+      # status
+      # 'success' -> claimed a free pass
+      # 'payment' -> user needs to pay first
+      # 'errorcode'
+    }
+  }
+}
+
+# # # TODO
+mutation CreateBattlepassLevels ( $id: String!, $levels: [Level!]! ){
+    battlepassBot {
+        levels( battlepass: $id, levels: $levels ) {
+			id
+			battlepassId
+		}
+	}
+}
+
+mutation ConnectIdentity ( $uuid: String, $address: String, $discord: String, $name: String, $email: String) {
+    battlepassBot {
+        identity( uuid: $uuid, address: $address, discord: $discord, name: $name, email: $email ) {
+            uuid
+            address
+            discord
+            twitter
+            name
+            email
+            epicGames
+        }
+    }
+}

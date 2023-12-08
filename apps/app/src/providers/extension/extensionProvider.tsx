@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Wallet } from '@talisman-connect/wallets'
 import { useApiProvider } from 'src/hooks/useApiProvider'
 import { useLogger } from 'src/hooks/useLogger'
-import { SignAndNotify } from 'src/providers/extension/modules/signAndNotify'
+import { SignAndNotify } from 'src/providers/extension/components/signAndNotify'
 import { useTranslation } from 'react-i18next'
 import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
 import { sessionUpdateInterval } from 'src/constants'
@@ -12,10 +12,10 @@ import { useUpdateSessionMutation } from 'src/queries'
 import { createErrorNotification, createWarningNotification } from 'src/utils/notificationUtils'
 import { getWallets } from 'src/walletOverrides/wallets'
 
-import { WalletDialog } from 'src/components/WalletDialog/walletDialog'
+import { WalletDialog } from 'components/molecules/WalletDialog/walletDialog'
 
-import { initializeAccounts } from './modules/accounts'
-import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './modules/context'
+import { initializeAccounts } from './components/accounts'
+import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './components/context'
 
 export function ExtensionProvider({ children }) {
 	const [state, setState] = useState<ExtensionState>(null)

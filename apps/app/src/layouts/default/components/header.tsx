@@ -18,10 +18,10 @@ import {
 	RiAwardLine,
 	RiChat1Line,
 } from 'react-icons/ri'
-import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
-import Feedback from 'src/components/Feedback'
-import Link from 'src/components/Link'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { AccountSelector } from 'components/molecules/AccountSelector'
+import Feedback from 'components/molecules/Feedback'
+import Link from 'components/atoms/Link'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 
 // eslint-disable-next-line @next/next/no-img-element
 const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />

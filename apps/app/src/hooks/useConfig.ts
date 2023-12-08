@@ -1,4 +1,4 @@
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { Config } from 'src/queries'
 
 export function useConfig(): Config {

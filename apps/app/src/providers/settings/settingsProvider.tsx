@@ -4,7 +4,7 @@ import { SettingsState, ThemeColor, ThemeDirection, ThemeMode } from 'src/@types
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { PRIMARY_COLOR } from 'src/theme/palette'
 
-import { SettingsContext } from './modules/context'
+import { SettingsContext } from './components/context'
 
 function SetColor(themeColor: ThemeColor) {
 	let color

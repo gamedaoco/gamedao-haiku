@@ -1,6 +1,6 @@
 import { ReactNode, Fragment } from 'react'
-import { useAppContext } from 'src/providers/app/modules/context'
-import { Loader } from 'src/components/Loader'
+import { useAppContext } from 'src/providers/app/components/context'
+import { Loader } from 'components/atoms/Loader'
 
 interface ComponentProps {
 	children: ReactNode

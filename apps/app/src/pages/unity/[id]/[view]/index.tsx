@@ -33,33 +33,36 @@ import { useTheme } from '@mui/material/styles'
 import { Organization, useOrganizationByIdSubscription } from 'src/queries'
 
 import { Layout } from 'layouts/v2'
-import { Image } from 'components/Image/image'
+import { Image } from 'components/atoms/Image/image'
 
-import { Loader } from 'components/Loader'
-import { Backdrop } from 'components/Backdrop'
+import { Loader } from 'components/atoms/Loader'
+import { Backdrop } from 'components/atoms/Backdrop'
+import { String } from 'lodash'
 
 const CampaignOverview = dynamic(() =>
-	import('components/TabPanels/Campaign/overview').then((mod) => mod.CampaignOverview),
+	import('dapps/unity/components/tabs/campaign/overview').then((mod) => mod.CampaignOverview),
 )
 const TreasuryOverview = dynamic(() =>
-	import('components/TabPanels/Treasury/overview').then((mod) => mod.TreasuryOverview),
+	import('dapps/unity/components/tabs/treasury/overview').then((mod) => mod.TreasuryOverview),
 )
 const OrganizationMembersTable = dynamic(() =>
-	import('components/TabPanels/Organization/organizationMembers').then((mod) => mod.OrganizationMembersTable),
+	import('dapps/unity/components/tabs/organization/organizationMembers').then((mod) => mod.OrganizationMembersTable),
 )
-const Overview = dynamic(() => import('src/components/TabPanels/Organization/overview').then((mod) => mod.Overview))
+const Overview = dynamic(() => import('dapps/unity/components/tabs/organization/overview').then((mod) => mod.Overview))
 const TmpOverview = dynamic(() =>
-	import('components/TabPanels/Organization/tmpOverview').then((mod) => mod.TmpOverview),
+	import('dapps/unity/components/tabs/organization/tmpOverview').then((mod) => mod.TmpOverview),
 )
-const ProposalDetail = dynamic(() => import('components/TabPanels/Proposal/detail').then((mod) => mod.ProposalDetail))
+const ProposalDetail = dynamic(() =>
+	import('dapps/unity/components/tabs/governance/detail').then((mod) => mod.ProposalDetail),
+)
 const ProposalOverview = dynamic(() =>
-	import('components/TabPanels/Proposal/overview').then((mod) => mod.ProposalOverview),
+	import('dapps/unity/components/tabs/governance/overview').then((mod) => mod.ProposalOverview),
 )
 const SettingsOverview = dynamic(() =>
-	import('components/TabPanels/Settings/settings').then((mod) => mod.SettingsOverview),
+	import('dapps/unity/components/tabs/settings/settings').then((mod) => mod.SettingsOverview),
 )
 
-export function OrganizationById() {
+export function OrganizationById({ ...props }) {
 	const { query, push } = useRouter()
 	const config = useConfig()
 	const theme = useTheme()
@@ -99,7 +102,7 @@ export function OrganizationById() {
 	}, [setShowTxModalType])
 
 	const handleInvalidUrl = useCallback(() => {
-		push('/')
+		push('/unity')
 	}, [push])
 
 	const handleTabSelect = useCallback(
@@ -127,25 +130,34 @@ export function OrganizationById() {
 	// Query and route mapping
 
 	useEffect(() => {
-		const param = query?.param
-		if (param && Array.isArray(param)) {
-			if (param.length == 1) {
-				setRouteState(param[0])
-			} else if (param.length >= 2) {
-				if (!param[0].startsWith('0x')) {
-					handleInvalidUrl()
-				}
-				setOrganizationIdState(param[0])
-				setRouteState(param[1])
+		// const param = query?.param
 
-				if (param.length >= 3) {
-					if (!param[2].startsWith('0x')) {
-						handleInvalidUrl()
-					}
-					setProposalIdState(param[2])
-				}
-			}
+		const id = query?.id as string
+		const view = query?.view as string
+		if (!id.startsWith('0x')) {
+			handleInvalidUrl()
 		}
+		setOrganizationIdState(query?.id as string)
+		setRouteState(query?.view as string)
+
+		// if (param && Array.isArray(param)) {
+		// 	if (param.length == 1) {
+		// 		setRouteState(param[0])
+		// 	} else if (param.length >= 2) {
+		// 		if (!param[0].startsWith('0x')) {
+		// 			handleInvalidUrl()
+		// 		}
+		// 		setOrganizationIdState(param[0])
+		// 		setRouteState(param[1])
+
+		// 		if (param.length >= 3) {
+		// 			if (!param[2].startsWith('0x')) {
+		// 				handleInvalidUrl()
+		// 			}
+		// 			setProposalIdState(param[2])
+		// 		}
+		// 	}
+		// }
 	}, [query])
 
 	useEffect(() => {
@@ -159,6 +171,7 @@ export function OrganizationById() {
 	useEffect(() => {
 		if (!cache) return
 
+		console.log('==== cache ====\n')
 		console.log('==== cache ====\n', cache)
 		const metaData = {
 			name: cache.name,
@@ -170,7 +183,7 @@ export function OrganizationById() {
 			tags: cache.tags,
 		}
 
-		console.log('==== metadata ====\n', metaData)
+		// console.log('==== metadata ====\n', metaData)
 		;(async (): Promise<string> => {
 			const file = new File([JSON.stringify(metaData)], `${cache.name}-metadata.json`, {
 				type: 'text/plain',
@@ -190,7 +203,7 @@ export function OrganizationById() {
 
 	useEffect(() => {
 		if (!address || !organizationState) return
-		setIsMemberState(organizationState?.organizationMembers?.some((member) => member.address === address))
+		setIsMemberState(organizationState?.organization_members?.some((member) => member.address === address))
 		setIsPrime(organizationState?.prime === address)
 		setTreasury(organizationState?.treasury)
 		console.log('treasury', organizationState?.treasury)
@@ -293,7 +306,7 @@ export function OrganizationById() {
 											}}
 										>
 											{t('label:n_members', {
-												n: organizationState?.organizationMembers?.length ?? 1,
+												n: organizationState?.organization_members?.length ?? 1,
 											})}
 										</Typography>
 									</Stack>

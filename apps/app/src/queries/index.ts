@@ -21917,9 +21917,72 @@ export type CreateBattlepassLevelsMutation = {
 		readonly __typename?: 'battlepassBotMutation'
 		readonly levels?: ReadonlyArray<{
 			readonly __typename?: 'BattlepassLevel'
+			readonly id: number
 			readonly battlepassId: number
 		} | null> | null
 	} | null
+}
+
+export type GetBattlepassesForOrganizationQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+}>
+
+export type GetBattlepassesForOrganizationQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly battlepasses?: ReadonlyArray<{
+			readonly __typename?: 'Battlepass'
+			readonly active: boolean
+			readonly chainId: string
+			readonly cid?: string | null
+			readonly name?: string | null
+			readonly orgId: string
+		} | null> | null
+	} | null
+}
+
+export type GetAllBattlepassesSubscriptionVariables = Exact<{
+	id?: InputMaybe<Scalars['bpchar']>
+}>
+
+export type GetAllBattlepassesSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly Battlepasses: ReadonlyArray<{
+		readonly __typename?: 'Battlepasses'
+		readonly chainId: any
+		readonly name?: string | null
+		readonly active: boolean
+		readonly orgId: any
+	}>
+}
+
+export type RewardsSubscriptionVariables = Exact<{
+	id?: InputMaybe<Scalars['bpchar']>
+	uuid?: InputMaybe<Scalars['uuid']>
+}>
+
+export type RewardsSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly BattlepassRewards: ReadonlyArray<{
+		readonly __typename?: 'BattlepassRewards'
+		readonly available?: number | null
+		readonly total?: number | null
+		readonly syncStatus?: any | null
+		readonly points?: number | null
+		readonly name?: string | null
+		readonly level?: number | null
+		readonly description?: string | null
+		readonly createdAt: any
+		readonly cid?: string | null
+		readonly chainId?: any | null
+		readonly RewardClaims: ReadonlyArray<{
+			readonly __typename?: 'RewardClaims'
+			readonly syncStatus?: any | null
+			readonly rewardId?: number | null
+			readonly nftId?: number | null
+		}>
+	}>
 }
 
 export type GetBattlepassUsersQueryVariables = Exact<{
@@ -21979,6 +22042,26 @@ export type GetBattlepassQuestsQuery = {
 			readonly link?: string | null
 		} | null> | null
 	} | null
+}
+
+export type GetAchievementsSubscriptionVariables = Exact<{
+	uuid?: InputMaybe<Scalars['uuid']>
+	id?: InputMaybe<Scalars['bpchar']>
+}>
+
+export type GetAchievementsSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly QuestProgresses: ReadonlyArray<{
+		readonly __typename?: 'QuestProgresses'
+		readonly progress: any
+		readonly questId?: number | null
+		readonly identityId?: number | null
+		readonly Quest?: {
+			readonly __typename?: 'Quests'
+			readonly name?: string | null
+			readonly points?: number | null
+		} | null
+	}>
 }
 
 export type GetBattlepassAchievementsQueryVariables = Exact<{
@@ -22091,6 +22174,39 @@ export type ScoreSubscription = {
 		readonly passChainId?: any | null
 		readonly status: any
 	}>
+}
+
+export type LevelsSubscriptionVariables = Exact<{
+	id?: InputMaybe<Scalars['bpchar']>
+}>
+
+export type LevelsSubscription = {
+	readonly __typename?: 'subscription_root'
+	readonly BattlepassLevels: ReadonlyArray<{
+		readonly __typename?: 'BattlepassLevels'
+		readonly level: number
+		readonly name?: string | null
+		readonly points: number
+		readonly totalPoints: number
+	}>
+}
+
+export type GetLevelsQueryVariables = Exact<{
+	id?: InputMaybe<Scalars['String']>
+}>
+
+export type GetLevelsQuery = {
+	readonly __typename?: 'query_root'
+	readonly battlepassBot?: {
+		readonly __typename?: 'battlepassBotQuery'
+		readonly levels?: ReadonlyArray<{
+			readonly __typename?: 'BattlepassLevel'
+			readonly level: number
+			readonly name?: string | null
+			readonly points: number
+			readonly totalPoints: number
+		} | null> | null
+	} | null
 }
 
 export type ConnectIdentityMutationVariables = Exact<{
@@ -23324,6 +23440,7 @@ export const CreateBattlepassLevelsDocument = gql`
 	mutation CreateBattlepassLevels($id: String!, $levels: [Level!]!) {
 		battlepassBot {
 			levels(battlepass: $id, levels: $levels) {
+				id
 				battlepassId
 			}
 		}
@@ -23367,6 +23484,156 @@ export type CreateBattlepassLevelsMutationOptions = Apollo.BaseMutationOptions<
 	CreateBattlepassLevelsMutation,
 	CreateBattlepassLevelsMutationVariables
 >
+export const GetBattlepassesForOrganizationDocument = gql`
+	query GetBattlepassesForOrganization($id: String) {
+		battlepassBot {
+			battlepasses(where: { orgChainId: $id }) {
+				active
+				chainId
+				cid
+				name
+				orgId
+			}
+		}
+	}
+`
+
+/**
+ * __useGetBattlepassesForOrganizationQuery__
+ *
+ * To run a query within a React component, call `useGetBattlepassesForOrganizationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBattlepassesForOrganizationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBattlepassesForOrganizationQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetBattlepassesForOrganizationQuery(
+	baseOptions?: Apollo.QueryHookOptions<
+		GetBattlepassesForOrganizationQuery,
+		GetBattlepassesForOrganizationQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetBattlepassesForOrganizationQuery, GetBattlepassesForOrganizationQueryVariables>(
+		GetBattlepassesForOrganizationDocument,
+		options,
+	)
+}
+export function useGetBattlepassesForOrganizationLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<
+		GetBattlepassesForOrganizationQuery,
+		GetBattlepassesForOrganizationQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetBattlepassesForOrganizationQuery, GetBattlepassesForOrganizationQueryVariables>(
+		GetBattlepassesForOrganizationDocument,
+		options,
+	)
+}
+export type GetBattlepassesForOrganizationQueryHookResult = ReturnType<typeof useGetBattlepassesForOrganizationQuery>
+export type GetBattlepassesForOrganizationLazyQueryHookResult = ReturnType<
+	typeof useGetBattlepassesForOrganizationLazyQuery
+>
+export type GetBattlepassesForOrganizationQueryResult = Apollo.QueryResult<
+	GetBattlepassesForOrganizationQuery,
+	GetBattlepassesForOrganizationQueryVariables
+>
+export const GetAllBattlepassesDocument = gql`
+	subscription GetAllBattlepasses($id: bpchar) {
+		Battlepasses {
+			chainId
+			name
+			active
+			orgId
+		}
+	}
+`
+
+/**
+ * __useGetAllBattlepassesSubscription__
+ *
+ * To run a query within a React component, call `useGetAllBattlepassesSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllBattlepassesSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllBattlepassesSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetAllBattlepassesSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<
+		GetAllBattlepassesSubscription,
+		GetAllBattlepassesSubscriptionVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<GetAllBattlepassesSubscription, GetAllBattlepassesSubscriptionVariables>(
+		GetAllBattlepassesDocument,
+		options,
+	)
+}
+export type GetAllBattlepassesSubscriptionHookResult = ReturnType<typeof useGetAllBattlepassesSubscription>
+export type GetAllBattlepassesSubscriptionResult = Apollo.SubscriptionResult<GetAllBattlepassesSubscription>
+export const RewardsDocument = gql`
+	subscription Rewards($id: bpchar, $uuid: uuid) {
+		BattlepassRewards(where: { Battlepass: { chainId: { _eq: $id } } }, order_by: { points: asc }) {
+			available
+			total
+			syncStatus
+			points
+			name
+			level
+			description
+			createdAt
+			cid
+			chainId
+			RewardClaims(where: { BattlepassParticipant: { Identity: { uuid: { _eq: $uuid } } } }) {
+				syncStatus
+				rewardId
+				nftId
+			}
+		}
+	}
+`
+
+/**
+ * __useRewardsSubscription__
+ *
+ * To run a query within a React component, call `useRewardsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useRewardsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRewardsSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *      uuid: // value for 'uuid'
+ *   },
+ * });
+ */
+export function useRewardsSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<RewardsSubscription, RewardsSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<RewardsSubscription, RewardsSubscriptionVariables>(RewardsDocument, options)
+}
+export type RewardsSubscriptionHookResult = ReturnType<typeof useRewardsSubscription>
+export type RewardsSubscriptionResult = Apollo.SubscriptionResult<RewardsSubscription>
 export const GetBattlepassUsersDocument = gql`
 	query GetBattlepassUsers($id: String) {
 		battlepassBot {
@@ -23527,6 +23794,50 @@ export type GetBattlepassQuestsQueryResult = Apollo.QueryResult<
 	GetBattlepassQuestsQuery,
 	GetBattlepassQuestsQueryVariables
 >
+export const GetAchievementsDocument = gql`
+	subscription GetAchievements($uuid: uuid, $id: bpchar) {
+		QuestProgresses(
+			where: { Identity: { uuid: { _eq: $uuid } }, Quest: { Battlepass: { chainId: { _eq: $id } } } }
+		) {
+			progress
+			questId
+			identityId
+			Quest {
+				name
+				points
+			}
+		}
+	}
+`
+
+/**
+ * __useGetAchievementsSubscription__
+ *
+ * To run a query within a React component, call `useGetAchievementsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetAchievementsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAchievementsSubscription({
+ *   variables: {
+ *      uuid: // value for 'uuid'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetAchievementsSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<GetAchievementsSubscription, GetAchievementsSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<GetAchievementsSubscription, GetAchievementsSubscriptionVariables>(
+		GetAchievementsDocument,
+		options,
+	)
+}
+export type GetAchievementsSubscriptionHookResult = ReturnType<typeof useGetAchievementsSubscription>
+export type GetAchievementsSubscriptionResult = Apollo.SubscriptionResult<GetAchievementsSubscription>
 export const GetBattlepassAchievementsDocument = gql`
 	query GetBattlepassAchievements($id: String, $uuid: String) {
 		battlepassBot {
@@ -23814,6 +24125,83 @@ export function useScoreSubscription(
 }
 export type ScoreSubscriptionHookResult = ReturnType<typeof useScoreSubscription>
 export type ScoreSubscriptionResult = Apollo.SubscriptionResult<ScoreSubscription>
+export const LevelsDocument = gql`
+	subscription Levels($id: bpchar) {
+		BattlepassLevels(where: { Battlepass: { chainId: { _eq: $id } } }) {
+			level
+			name
+			points
+			totalPoints
+		}
+	}
+`
+
+/**
+ * __useLevelsSubscription__
+ *
+ * To run a query within a React component, call `useLevelsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useLevelsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLevelsSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLevelsSubscription(
+	baseOptions?: Apollo.SubscriptionHookOptions<LevelsSubscription, LevelsSubscriptionVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useSubscription<LevelsSubscription, LevelsSubscriptionVariables>(LevelsDocument, options)
+}
+export type LevelsSubscriptionHookResult = ReturnType<typeof useLevelsSubscription>
+export type LevelsSubscriptionResult = Apollo.SubscriptionResult<LevelsSubscription>
+export const GetLevelsDocument = gql`
+	query GetLevels($id: String) {
+		battlepassBot {
+			levels(where: { battlepassChainId: $id }) {
+				level
+				name
+				points
+				totalPoints
+			}
+		}
+	}
+`
+
+/**
+ * __useGetLevelsQuery__
+ *
+ * To run a query within a React component, call `useGetLevelsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLevelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLevelsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetLevelsQuery(baseOptions?: Apollo.QueryHookOptions<GetLevelsQuery, GetLevelsQueryVariables>) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useQuery<GetLevelsQuery, GetLevelsQueryVariables>(GetLevelsDocument, options)
+}
+export function useGetLevelsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetLevelsQuery, GetLevelsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions }
+	return Apollo.useLazyQuery<GetLevelsQuery, GetLevelsQueryVariables>(GetLevelsDocument, options)
+}
+export type GetLevelsQueryHookResult = ReturnType<typeof useGetLevelsQuery>
+export type GetLevelsLazyQueryHookResult = ReturnType<typeof useGetLevelsLazyQuery>
+export type GetLevelsQueryResult = Apollo.QueryResult<GetLevelsQuery, GetLevelsQueryVariables>
 export const ConnectIdentityDocument = gql`
 	mutation ConnectIdentity($uuid: String, $address: String, $discord: String, $name: String, $email: String) {
 		battlepassBot {

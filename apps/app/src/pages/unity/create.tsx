@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Layout } from 'src/layouts/v2'
 import { Container, Box, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
-import { Form } from 'dapps/community/components/Organization/form'
+import { Form } from 'dapps/unity/components/createOrganization/form'
 
 export function CreateOrganizationPage() {
 	const [activeStep, setActiveStep] = useState<number>(0)

@@ -7,11 +7,11 @@ import { Add as AddIcon } from '@mui/icons-material'
 import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useSidebarSubscription } from 'src/queries'
 import { createErrorNotification } from 'src/utils/notificationUtils'
 
-import { OrganizationButtonMemoized } from 'src/layouts/default/modules/organizationButton'
+import { OrganizationButtonMemoized } from 'src/layouts/default/components/organizationButton'
 
 interface ComponentProps {
 	showHeader?: boolean

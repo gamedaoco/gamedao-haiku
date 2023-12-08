@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { Layout } from 'src/layouts/v2'
 import { Box, Grid, Typography } from '@mui/material'
 import { setUserToken } from 'src/utils/auth/storeUserToken'

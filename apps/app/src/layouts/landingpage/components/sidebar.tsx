@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { styled, useTheme } from '@mui/material/styles'
 import { Badge, ListItemButton, ListItemIcon, Stack, Typography, useMediaQuery, Drawer, MenuItem } from '@mui/material'
-import { ThemeSwitch } from 'src/components/ThemeSwitcher/themeSwitch'
-import { FontIcons } from 'src/components/Icons/icons'
+import { ThemeSwitch } from 'components/atoms/ThemeSwitch'
+import { FontIcons } from 'components/atoms/Icons/icons'
 
 // TODO:
 // Fix error on page load!!

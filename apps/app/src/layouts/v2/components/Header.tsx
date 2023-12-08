@@ -21,12 +21,12 @@ import {
 	RiAncientGateLine,
 } from 'react-icons/ri'
 import { RxDiscordLogo } from 'react-icons/rx'
-import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
-import { BaseDialog } from 'src/components/BaseDialog/baseDialog'
-import FeedbackButton from 'src/components/Feedback'
-import Link from 'src/components/Link'
+import { AccountSelector } from 'components/molecules/AccountSelector'
+import { BaseDialog } from 'components/molecules/BaseDialog'
+import FeedbackButton from 'components/molecules/Feedback'
+import Link from 'components/atoms/Link'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 
 // eslint-disable-next-line @next/next/no-img-element
 // const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" />
@@ -44,13 +44,13 @@ interface ComponentProps {
 
 const leftNav = [
 	{
-		name: 'Community', // 'button:navigation:organizations',
-		path: '/community',
+		name: 'Unity', // 'button:navigation:organizations',
+		path: '/unity/overview',
 		icon: <RiAncientGateLine />,
 	},
 	{
 		name: 'Battlepass',
-		path: '/battlepass',
+		path: '/battlepass/overview',
 		icon: <RiSwordLine />,
 	},
 	// {
@@ -59,8 +59,8 @@ const leftNav = [
 	// 	icon: <RiVipDiamondLine />,
 	// },
 	// {
-	// 	name: 'Campaigns', // button:navigation:campaigns',
-	// 	path: '/campaigns',
+	// 	name: 'Fund', // button:navigation:campaigns',
+	// 	path: '/fund/overview',
 	// 	icon: <RiVipDiamondLine />,
 	// },
 ]
@@ -71,11 +71,11 @@ const rightNav = [
 		path: 'https://discord.com/channels/273529551483699200/772045307021885452',
 		icon: <RiDropLine />,
 	},
-	// {
-	// 	name: 'Docs', //'button:navigation:documentation',
-	// 	path: 'https://docs.gamedao.co/',
-	// 	icon: <RiBookOpenLine />,
-	// },
+	{
+		name: 'Docs', //'button:navigation:documentation',
+		path: 'https://docs.gamedao.co/',
+		icon: <RiBookOpenLine />,
+	},
 ]
 
 export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: ComponentProps) {
@@ -217,6 +217,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
 					</Link>
+
 					<Link href="https://discord.gg/gamedao">
 						<Button>
 							<RxDiscordLogo />

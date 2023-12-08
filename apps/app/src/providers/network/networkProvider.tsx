@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { useAppContext } from 'src/providers/app/modules/context'
-import { initializeApis, keepAlive } from 'src/providers/network/modules/network'
+import { useAppContext } from 'src/providers/app/components/context'
+import { initializeApis, keepAlive } from 'src/providers/network/components/network'
 import type { ApiProvider } from 'src/@types/network'
 
-import { NetworkContext } from './modules/context'
+import { NetworkContext } from './components/context'
 
 export function NetworkProvider({ children }) {
 	const [selectedApiProviderState, setSelectedApiProviderState] = useState<ApiProvider>(null)

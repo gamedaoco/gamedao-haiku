@@ -6,10 +6,10 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
 
-import { HeaderMobile } from './modules/headerMobile'
-import { Footer } from './modules/footer'
-import { Header } from './modules/header'
-import { Sidebar } from './modules/sidebar'
+import { HeaderMobile } from './components/headerMobile'
+import { Footer } from './components/footer'
+import { Header } from './components/header'
+import { Sidebar } from './components/sidebar'
 
 interface ComponentProps {
 	showHeader?: boolean
