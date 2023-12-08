@@ -10,7 +10,6 @@
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
     "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules apps/**/.next packages/**/.next",
-
     "sb": "wsrun -p @gamedao/components -c storybook",
     "dev": "yarn dev:web",
     "dev:web": "wsrun -p @gamedao/web -c dev",
@@ -19,7 +18,6 @@
     "dev:battlepass": "wsrun -p @gamedao/battlepass -c dev",
     "dev:avatar": "wsrun -p @gamedao/avatar -c dev",
     "dev:graph": "wsrun -p @gamedao/graph-api -c dev",
-
     "build": "wsrun -e -c -s -x -m build",
     "build:init": "wsrun -s -c install",
     "build:codegen": "yarn workspace @gamedao/web generate",
@@ -30,15 +28,13 @@
     "build:admin": "yarn build:init && yarn workspace @gamedao/admin build",
     "build:battlepass": "yarn build:init && yarn workspace @gamedao/battlepass build",
     "build:prod:app": "yarn npm-run-all -s build:app",
-    "build:api": "yarn workspace @gamedao/graph-api docker:build",
-
+    "build:graph-api": "yarn workspace @gamedao/graph-api docker:build",
     "test": "wsrun -e -c -s --exclude-missing test",
     "format": "prettier --parser babel-ts --write --check '{apps,packages}/**/*.{ts,tsx}'",
     "format:verify": "prettier --parser babel-ts --check '{apps,packages}/**/*.{ts,tsx}'",
-    "format:staged": "pretty-quick --staged --pattern '{apps,packages}/**/*.{ts,tsx}'",
+    "format:staged": "pretty-quick --staged --pattern '*.{js,jsx,ts,tsx}'",
     "lint": "yarn lint:app",
     "lint:app": "yarn eslint 'apps/**/src'",
-
     "release": "yarn build && yarn changeset publish",
     "release:stage": "git checkout dev && git pull && git checkout stage && git pull && git merge dev && git push",
     "commit": "git-cz"
@@ -63,9 +59,9 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.2.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.4",
+    "prettier": "^3.0.3",
     "pretty-quick": "^3.1.3",
-    "rimraf": "^4.4.0",
+    "rimraf": "^5.0.5",
     "wsrun": "^5.2.1"
   },
   "config": {
@@ -80,7 +76,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "yarn format:staged"
+    "*": "yarn format:staged"
   },
   "commitlint": {
     "extends": [

@@ -388,7 +388,8 @@ export type DisplayValueEntryResolvers<
 
 export type DisplayValueEntryCountryResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['DisplayValueEntryCountry'] = ResolversParentTypes['DisplayValueEntryCountry'],
+	ParentType extends
+		ResolversParentTypes['DisplayValueEntryCountry'] = ResolversParentTypes['DisplayValueEntryCountry'],
 > = ResolversObject<{
 	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -398,7 +399,8 @@ export type DisplayValueEntryCountryResolvers<
 
 export type DisplayValueEntryNumberResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['DisplayValueEntryNumber'] = ResolversParentTypes['DisplayValueEntryNumber'],
+	ParentType extends
+		ResolversParentTypes['DisplayValueEntryNumber'] = ResolversParentTypes['DisplayValueEntryNumber'],
 > = ResolversObject<{
 	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
@@ -408,7 +410,8 @@ export type DisplayValueEntryNumberResolvers<
 
 export type DisplayValueEntryStringResolvers<
 	ContextType = any,
-	ParentType extends ResolversParentTypes['DisplayValueEntryString'] = ResolversParentTypes['DisplayValueEntryString'],
+	ParentType extends
+		ResolversParentTypes['DisplayValueEntryString'] = ResolversParentTypes['DisplayValueEntryString'],
 > = ResolversObject<{
 	key?: Resolver<ResolversTypes['String'], ParentType, ContextType>
 	text?: Resolver<ResolversTypes['String'], ParentType, ContextType>
