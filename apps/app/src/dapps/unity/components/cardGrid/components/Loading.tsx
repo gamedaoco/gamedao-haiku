@@ -5,7 +5,7 @@ import { Box, Card, CardContent, CardHeader } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
 import { useTheme } from '@mui/material/styles'
 
-export function LoadingTileCard() {
+export function Loading() {
 	const theme = useTheme()
 
 	const SubHeader = useMemo(() => {

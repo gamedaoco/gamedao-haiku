@@ -14,6 +14,7 @@ import {
 	useOrganizationsPaginationSubscription,
 	useTotalOrganizationsQuery,
 	useTotalSubscription,
+	useTotalActiveSubscription,
 } from 'src/queries'
 
 import { Layout } from 'src/layouts/v2'
@@ -22,7 +23,7 @@ import { Add, ArrowDownward } from '@mui/icons-material'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 // import { FiltersSection } from 'src/components/FiltersSections/filtersSection'
-import { ItemList } from 'dapps/unity/components/OrganizationCard/itemList'
+import { CardGrid } from 'dapps/unity/components/cardGrid/CardGrid'
 // import { OrganizationFiltersListTab } from 'src/components/OrganizationCard/components/listTab'
 
 // const applyPagination = (data: Organization[], rowsPerPage: number): Organization[] =>
@@ -59,13 +60,13 @@ export const Overview = () => {
 	const [itemContent, setItemContent] = useState()
 
 	// total count of communities
-	const totalItemCounterSubscription = useTotalSubscription()
+	// const total = useTotalSubscription()
+	const totalActive = useTotalActiveSubscription()
+
 	useEffect(() => {
-		if (totalItemCounterSubscription.loading) return
-		console.log('total', totalItemCounterSubscription)
-		if (totalItemCounterSubscription?.data)
-			setItemCounter(totalItemCounterSubscription?.data?.organization_aggregate?.aggregate?.count)
-	}, [totalItemCounterSubscription])
+		if (totalActive.loading) return
+		if (totalActive?.data) setItemCounter(totalActive?.data?.organization_aggregate?.aggregate?.count)
+	}, [totalActive])
 
 	const [filters, setFilters] = useState<FiltersInterface>({
 		query: '',
@@ -125,7 +126,7 @@ export const Overview = () => {
 		}
 	}, [w3Enabled, connectWallet, address, push])
 
-	console.log(loading, itemCounter, itemContent)
+	// console.log(loading, itemCounter, itemContent)
 
 	// const PageIntro = () => {
 	// 	return (
@@ -184,7 +185,7 @@ export const Overview = () => {
 			</Grid>
 
 			{itemCounter > 0 ? (
-				<Box>
+				<Box sx={{ p: [2, 2, 4] }}>
 					{/* <FilterInterface/> */}
 
 					{/* {filteredItems?.length === 0 && !loading && (
@@ -195,7 +196,7 @@ export const Overview = () => {
 					)} */}
 
 					<Box sx={{ mb: 4 }}>
-						<ItemList items={itemContent} loading={loading} />
+						<CardGrid items={itemContent} loading={loading} />
 					</Box>
 
 					{/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -139,7 +139,16 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 					zIndex: 9000,
 				}}
 			>
-				<Stack direction="row" alignItems="center" spacing={2} minWidth="50%">
+				<Stack
+					direction="row"
+					alignItems="center"
+					spacing={2}
+					minWidth="50%"
+					sx={{
+						WebkitFilter: 'drop-shadow( 0 2px 5px rgba(0,0,0,0.5) )',
+						filter: 'drop-shadow( 0 2px 5px rgba(0,0,0,0.5) )',
+					}}
+				>
 					<Box>
 						<Link href="/">
 							<MenuItem sx={{ p: 0, m: 0, mr: 2 }}>
@@ -210,7 +219,15 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 						})}
 				</Stack>
 
-				<Stack direction="row" justifyContent="end" alignItems="center">
+				<Stack
+					direction="row"
+					justifyContent="end"
+					alignItems="center"
+					sx={{
+						WebkitFilter: 'drop-shadow( 0 2px 5px rgba(0,0,0,0.5) )',
+						filter: 'drop-shadow( 0 2px 5px rgba(0,0,0,0.5) )',
+					}}
+				>
 					<Link href="#">
 						<Button onClick={() => openFeedback()}>
 							<RiChat1Line />

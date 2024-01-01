@@ -17,9 +17,9 @@ interface ComponentProps {
 	setTags: (tags) => void
 }
 
-const validationNameSchema = Yup.string().required('* a community Name is required')
+const validationNameSchema = Yup.string().required('* a name is required')
 // Only temporary, the description will be entered later on another page
-const validationDescriptionSchema = Yup.string().required('* a community description is required')
+const validationDescriptionSchema = Yup.string().required('* a description is required')
 
 export const validationSchema = Yup.object().shape({
 	name: Yup.string().required(),

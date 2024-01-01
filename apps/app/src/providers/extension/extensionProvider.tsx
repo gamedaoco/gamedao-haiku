@@ -9,7 +9,7 @@ import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/e
 import { sessionUpdateInterval } from 'src/constants'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
 import { useUpdateSessionMutation } from 'src/queries'
-import { createErrorNotification, createWarningNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification, createWarningNotification } from 'src/utils/notification'
 import { getWallets } from 'src/walletOverrides/wallets'
 
 import { WalletDialog } from 'components/molecules/WalletDialog/walletDialog'

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import * as Yup from 'yup'
 
-import { createWarningNotification } from 'src/utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notification'
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
 import { useConfig } from 'src/hooks/useConfig'
 import { useTmpCampaignState } from 'src/hooks/useTmpCampaignState'

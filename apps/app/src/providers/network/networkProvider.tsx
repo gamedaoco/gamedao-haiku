@@ -41,7 +41,7 @@ export function NetworkProvider({ children }) {
 		return () => {
 			isMountedRef.current = false
 			if (intervalRef.current) {
-				clearInterval(intervalRef.current)
+				clearInterval(intervalRef)
 			}
 		}
 	}, [apiProviderConfig])

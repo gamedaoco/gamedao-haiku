@@ -8,7 +8,7 @@ import md5 from 'md5'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 import type { AccountState } from 'src/@types/extension'
 import { getAccountName, getAddressFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
-import { createInfoNotification } from 'src/utils/notificationUtils'
+import { createInfoNotification } from 'src/utils/notification'
 
 interface ComponentProps {
 	accountState: AccountState

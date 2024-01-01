@@ -14,12 +14,13 @@ import { FmdGood, InsertLink, Label, VpnKey } from '@mui/icons-material/'
 import { Box, Chip, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 
 import { DonutChart } from 'components/molecules/charts/DonutChart'
-import { AreaChartContainer } from 'dapps/unity/components/tabs/organization/components/areaChartContainer'
-import { RadialChartContainer } from 'dapps/unity/components/tabs/organization/components/radialChartContainer'
+import { AreaChartContainer } from './components/areaChartContainer'
+import { RadialChartContainer } from './components/radialChartContainer'
+import { TreasuryChart } from './components/treasuryChart'
+
 import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
 
-import { TreasuryChart } from 'dapps/unity/components/TreasuryChart'
-interface ComponentProps {
+type TArgs = {
 	organization: Organization
 	organizationId: string
 	isMember: boolean
@@ -29,17 +30,23 @@ interface ComponentProps {
 	showTxModalType: boolean
 	addMemberTx: TransactionData
 }
+type TProps = {
+	args: TArgs
+}
 
-export function Overview({
-	organization,
-	organizationId,
-	isMember,
-	isAdmin,
-	handleOpenTxModal,
-	handleCloseTxModal,
-	showTxModalType,
-	addMemberTx,
-}: ComponentProps) {
+export function DashboardView( args:TProps ){
+
+	const {
+		organization,
+		organizationId,
+		isMember,
+		isAdmin,
+		handleOpenTxModal,
+		handleCloseTxModal,
+		showTxModalType,
+		addMemberTx,
+	} = args
+
 	const theme = useTheme()
 	const { t } = useTranslation()
 	const { push } = useRouter()

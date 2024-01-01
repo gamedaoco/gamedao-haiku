@@ -1,11 +1,10 @@
-# get aggregate orgs and their names
-# TODO: add slugs to graphql
-query OrganizationVanityUrl($searchQuery: String="%") {
-    organization {
-        id
-        name
-    }
-}
+# query OrganizationVanityUrl($searchQuery: String="%") {
+#     organization( where: { slug: { _eq: $searchQuery } } ) { {
+#         id
+#         name
+# 		slug
+#     }
+# }
 
 subscription GetOrganizationsForPrime ( $id: String! ) {
   organization(where: {prime: {_eq: $id}}) {
@@ -30,6 +29,13 @@ subscription OrganizationMembersByState(
     }
 }
 
+subscription TotalActive {
+    organization_aggregate( where: { state: {_eq: "Active" }} ){
+        aggregate {
+            count
+        }
+    }
+}
 subscription Total {
     organization_aggregate {
         aggregate {
@@ -37,8 +43,9 @@ subscription Total {
         }
     }
 }
+
 query TotalOrganizations {
-    organization_aggregate {
+    organization_aggregate( where: { state: {_eq: "Active"} } ) {
         aggregate {
             count
         }
@@ -48,6 +55,7 @@ query TotalOrganizations {
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
     organization_aggregate(
         where: {
+			state: { _eq: "Active" },
             # organization_metadata: {
                 _or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]
             # }
@@ -60,7 +68,13 @@ subscription OrganizationsPaginationCount($searchQuery: String="%") {
 }
 
 subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
-    organization(limit: $first, order_by: $orderBy, where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
+    organization(
+		limit: $first,
+		order_by: $orderBy,
+		where: {_or: [
+			{name: {_ilike: $searchQuery}},
+			{description: {_ilike: $searchQuery}}
+		], state: {_eq: "Active"} }) {
         id
         name
         description
@@ -68,6 +82,7 @@ subscription OrganizationsPagination($orderBy: [organization_order_by!], $first:
         header
         access_model
         creator
+		state
         organization_members {
             address
             state
@@ -80,6 +95,7 @@ query GetOrganizationByName($name: String!) {
         id
         name
         slug
+		state
     }
 }
 
@@ -88,6 +104,7 @@ query GetOrganizationById($id: String!) {
         id
         name
         slug
+		state
     }
 }
 
@@ -105,6 +122,7 @@ subscription OrganizationById($orgId: String!) {
 		prime
         treasury
         type
+		state
         organization_members {
             address
             state
@@ -163,6 +181,7 @@ subscription OrganizationsByAccount($address: String!) {
     deposit
     slug
     logo
+	state
     organization_members_aggregate {
       aggregate {
         count

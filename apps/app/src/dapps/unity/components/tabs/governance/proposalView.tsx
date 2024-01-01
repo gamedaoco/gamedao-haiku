@@ -78,7 +78,7 @@ const columns: GridColDef[] = [
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
-export function ProposalDetail({ proposalId, isMember, goBack }: ComponentProps) {
+export function ProposalView({ proposalId, isMember, goBack }: ComponentProps) {
 	const displayValues = useDisplayValues()
 	const { t } = useTranslation()
 	const systemProperties = useSystemProperties()

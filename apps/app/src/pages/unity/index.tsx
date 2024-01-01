@@ -1,11 +1,12 @@
 // landingpage for unity to promote existing organizations
-
-import React from 'react'
+import { useRouter } from 'next/router'
 import { Layout } from 'layouts/v2'
-import { Landingpage } from 'src/dapps/landingpage/battlepass'
+// import { Landingpage } from 'src/dapps/unity/views/landingpage'
 
 export function Page() {
-	return <Layout showHeader showFooter noContainer></Layout>
+	const { push } = useRouter()
+	push('/unity/overview')
+	// return <Layout showHeader showFooter noContainer></Layout>
 }
 
 export default Page

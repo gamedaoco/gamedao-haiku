@@ -20,7 +20,7 @@ interface ComponentProps {
 	address: string
 }
 
-export function TreasuryOverview({ address }: ComponentProps) {
+export function TreasuryView({ address }: ComponentProps) {
 	const { t } = useTranslation()
 
 	const [incomeTransactionsData, setIncomeTransactionsData] = useState<HistoricIncome[]>([])

@@ -31,7 +31,7 @@ const defaultGridColDef = {
 
 const rowHeight = 80
 
-export function OrganizationMembersTable({ organizationState }: ComponentProps) {
+export function MembersView({ organizationState }: ComponentProps) {
 	const { t } = useTranslation()
 	const pageSizeOptions = [5, 10, 20, 30]
 	const [pageSize, setPageSize] = useState<number>(10)

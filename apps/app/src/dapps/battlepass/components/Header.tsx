@@ -9,7 +9,7 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notification'
 
 import { useGetBattlepassNameQuery } from 'src/queries'
 

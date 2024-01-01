@@ -9,7 +9,7 @@ import { useTheme } from '@mui/material/styles'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useSidebarSubscription } from 'src/queries'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'src/utils/notification'
 
 import { OrganizationButtonMemoized } from 'src/layouts/default/components/organizationButton'
 

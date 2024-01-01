@@ -15,7 +15,7 @@ export function Page() {
 
 	useEffect(() => {
 		if (loading || !data) return
-		if (data?.organization?.length === 0) push('/unity') // 404
+		if (data?.organization?.length === 0) push('/unity/overview') // 404
 		push(`/unity/${id}/dashboard`)
 	}, [loading, data?.organization, push])
 

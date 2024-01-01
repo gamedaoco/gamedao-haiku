@@ -5,7 +5,7 @@ import { Logger } from 'src/utils/logger'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useSidebarSubscription } from 'src/queries'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'src/utils/notification'
 
 import { Add as AddIcon } from '@mui/icons-material'
 import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'

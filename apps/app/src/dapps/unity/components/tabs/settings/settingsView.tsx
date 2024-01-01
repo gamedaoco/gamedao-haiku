@@ -13,7 +13,7 @@ interface ComponentProps {
 	organizationState: Organization
 }
 
-export function SettingsOverview({ organizationState }: ComponentProps) {
+export function SettingsView({ organizationState }: ComponentProps) {
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>

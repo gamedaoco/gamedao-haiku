@@ -17,6 +17,7 @@ interface ComponentProps extends IProps {
 	src?: string
 	alt?: string
 	layout?: string
+	cover?: boolean
 }
 
 function getRatio(ratio = '1/1') {
@@ -33,7 +34,16 @@ function getRatio(ratio = '1/1') {
 	}[ratio]
 }
 
-export function Image({ src, alt, ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ComponentProps) {
+export function Image({
+	src,
+	alt,
+	ratio,
+	disabledEffect = false,
+	effect = 'blur',
+	sx,
+	cover = true,
+	...other
+}: ComponentProps) {
 	// if (ratio) {
 	// 	return (
 	// 		<Box
@@ -69,7 +79,7 @@ export function Image({ src, alt, ratio, disabledEffect = false, effect = 'blur'
 	// 	)
 	// }
 
-	return !src ? null : (
+	return (
 		<Box
 			component="span"
 			sx={{
@@ -80,17 +90,20 @@ export function Image({ src, alt, ratio, disabledEffect = false, effect = 'blur'
 				...sx,
 			}}
 		>
-			<Box
-				// component={NextImage}
-				// fill
-				// alt={alt ?? 'image'}
-				style={{ objectFit: 'cover' }}
-				// wrapperClassName="wrapper"
-				// effect={disabledEffect ? undefined : effect}
-				// placeholderSrc={placeHolder.src}
-				sx={{ width: 1, height: 1, objectFit: 'cover' }}
-				{...other}
-			/>
+			{!src ? null : (
+				<NextImage
+					// component={NextImage}
+					src={src}
+					fill
+					alt={alt ?? 'image'}
+					style={{ objectFit: cover ? 'cover' : 'fill' }}
+					wrapperClassName="wrapper"
+					effect={disabledEffect ? undefined : effect}
+					placeholderSrc={placeHolder.src}
+					// sx={{ width: 1, height: 1, objectFit: cover ? 'cover' : 'fill' }}
+					{...other}
+				/>
+			)}
 		</Box>
 	)
 }

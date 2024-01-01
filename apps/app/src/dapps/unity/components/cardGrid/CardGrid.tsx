@@ -3,15 +3,15 @@ import React, { Fragment } from 'react'
 import { Grid } from '@mui/material'
 import { Organization } from 'src/queries'
 
-import { LoadingTileCard } from 'dapps/unity/components/OrganizationCard/components/loadingTileCard'
-import { TileCard } from 'dapps/unity/components/OrganizationCard/components/tileCard'
+import { Loading } from 'dapps/unity/components/cardGrid/components/Loading'
+import { Card } from 'dapps/unity/components/cardGrid/components/Card'
 
 interface ComponentProps {
 	items: Organization[]
 	loading: boolean
 }
 
-export function ItemList({ items, loading }: ComponentProps) {
+export function CardGrid({ items, loading }: ComponentProps) {
 	return (
 		<Grid
 			sx={{
@@ -22,11 +22,11 @@ export function ItemList({ items, loading }: ComponentProps) {
 		>
 			{items?.map((item) => (
 				<Fragment key={item.id}>
-					<TileCard item={item} />
+					<Card item={item} />
 				</Fragment>
 			))}
 
-			{(!items || loading) && <LoadingTileCard />}
+			{(!items || loading) && <Loading />}
 		</Grid>
 	)
 }

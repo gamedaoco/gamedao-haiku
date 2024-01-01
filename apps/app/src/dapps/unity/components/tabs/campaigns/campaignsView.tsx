@@ -8,14 +8,14 @@ import { Campaign, useCampaignByOrganizationIdSubscription } from 'src/queries'
 
 import { CampaignsList } from 'dapps/campaign/components/CampaignsList'
 import { CampaignEmptyState } from 'dapps/campaign/components/CampaignsSection/campaignEmptyState'
-import { CreateCampaignPage } from 'dapps/unity/components/tabs/campaign/create'
+import { CreateCampaignPage } from 'dapps/unity/components/tabs/campaigns/create'
 
 interface ComponentProps {
 	organizationId: string
 	isAdmin: boolean
 }
 
-export function CampaignOverview({ organizationId, isAdmin }: ComponentProps) {
+export function CampaignsView({ organizationId, isAdmin }: ComponentProps) {
 	const { data, loading } = useCampaignByOrganizationIdSubscription({
 		variables: { orgId: organizationId },
 	})

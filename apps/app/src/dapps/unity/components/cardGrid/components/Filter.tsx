@@ -20,7 +20,7 @@ interface ComponentProps {
 	handleDrawerNavigation: () => void
 	filters: any
 }
-export function OrganizationFiltersListTab({ handleDrawerNavigation, filters }: ComponentProps) {
+export function Filter({ handleDrawerNavigation, filters }: ComponentProps) {
 	const { t } = useTranslation()
 	return (
 		<Box sx={{ width: 280 }} role="presentation">

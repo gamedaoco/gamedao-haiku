@@ -73,7 +73,7 @@ const columns: GridColDef[] = [
 const pageSizeOptions = [5, 10, 20, 30]
 const rowHeight = 80
 
-export function ProposalOverview({ organizationId, isMember }: ComponentProps) {
+export function GovernanceView({ organizationId, isMember }: ComponentProps) {
 	const { push } = useRouter()
 	const systemProperties = useSystemProperties()
 	const [showFormState, setShowFormState] = useState<boolean>(false)

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import NextImage from 'next/image'
 
 import { Check, Key, Person } from '@mui/icons-material'
-import { Stack, Avatar, Box, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { Stack, Avatar, Box, Card as MUICard, CardContent, CardHeader, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
@@ -15,7 +15,7 @@ interface ComponentPros {
 	item: Organization
 }
 
-export const TileCard = ({ item }: ComponentPros) => {
+export const Card = ({ item }: ComponentPros) => {
 	const theme = useTheme()
 	const config = useConfig()
 	const address = useCurrentAccountAddress()
@@ -117,7 +117,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 			>
 				<Backdrop src={bgImgUrl} />
 
-				<Card
+				<MUICard
 					sx={{
 						position: 'relative',
 						zIndex: 1,
@@ -179,7 +179,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 							</Typography>
 						</Stack>
 					</Stack>
-				</Card>
+				</MUICard>
 			</Box>
 		</NavLink>
 	)

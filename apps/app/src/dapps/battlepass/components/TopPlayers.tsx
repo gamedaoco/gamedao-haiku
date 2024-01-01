@@ -23,9 +23,9 @@ export function TopPlayers({ args }: TProps) {
 	const [leaderboard, setLeaderboard] = useState(null)
 
 	useEffect(() => {
-		if (!id || loading || !data?.battlepassBot?.BattlepassPoints) return
+		if (!id || loading || !data?.battlepassBot?.points) return
 
-		const allPlayers = data?.battlepassBot?.BattlepassPoints
+		const allPlayers = data?.battlepassBot?.points
 		if (allPlayers.length === 0) return
 
 		console.log('id', id)
@@ -38,7 +38,7 @@ export function TopPlayers({ args }: TProps) {
 
 		console.log(players)
 		setLeaderboard(players)
-	}, [data, data?.battlepassBot?.BattlepassPoints])
+	}, [data, data?.battlepassBot?.points])
 
 	if (loading) return <Loader />
 	if (!leaderboard) return null

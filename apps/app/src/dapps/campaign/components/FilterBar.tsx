@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { CampaignFiltersInterface } from 'src/@types/campaign'
 import {
 	Campaign,
-	CampaignBoolExp,
-	CampaignOrderBy,
+	// campaign_bool_exp,
+	// campaign_order_by,
 	DisplayValueEntryString,
-	useCampaignsPaginationCountSubscription,
-	useCampaignsPaginationSubscription,
+	// useCampaignsPaginationCountSubscription,
+	// useCampaignsPaginationSubscription,
 	useDisplayValuesQuery,
 } from 'src/queries'
 
@@ -28,7 +28,7 @@ export function FilterBar() {
 
 	const filtersOptions = useMemo<DisplayValueEntryString[]>(
 		() =>
-			displayValuesData?.gamedao?.displayValues?.campaignFilters?.map((x) => ({
+			displayValuesData?.displayValues?.campaignFilters?.map((x) => ({
 				...x,
 				value: eval(`(${x?.value ?? 'null'})`),
 			})),
@@ -50,7 +50,7 @@ export function FilterBar() {
 		<FiltersSection
 			setFilters={setFilters}
 			filters={filters}
-			sortOptions={displayValuesData?.gamedao?.displayValues?.campaignSortOptions?.concat([])}
+			sortOptions={displayValuesData?.displayValues?.campaignSortOptions?.concat([])}
 			searchPlaceHolder={t('label:search_campaigns')}
 			ListTab={CampaignFiltersTab}
 			filtersOptions={filtersOptions}

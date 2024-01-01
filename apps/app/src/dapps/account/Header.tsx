@@ -12,7 +12,7 @@ import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
 
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
-import { createInfoNotification } from 'src/utils/notificationUtils'
+import { createInfoNotification } from 'src/utils/notification'
 import { avatarImageURL } from 'src/utils/avatars'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'

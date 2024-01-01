@@ -76,7 +76,7 @@ mutation JoinBattlepass ( $battlepass: String!, $uuid: String!){
     }
 }
 
-# # # TODO: RM
+# TODO: RM
 mutation JoinPremiumBattlepass ( $battlepass: String!, $uuid: String!){
   battlepassBot {
     joinPremium( battlepass: $battlepass, identityUuid: $uuid) {
@@ -90,7 +90,7 @@ mutation JoinPremiumBattlepass ( $battlepass: String!, $uuid: String!){
   }
 }
 
-# # # TODO
+# TODO
 mutation CreateBattlepassLevels ( $id: String!, $levels: [Level!]! ){
     battlepassBot {
         levels( battlepass: $id, levels: $levels ) {

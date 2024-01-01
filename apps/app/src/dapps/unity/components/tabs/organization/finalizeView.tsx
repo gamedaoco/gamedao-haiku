@@ -1,30 +1,30 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
+import type { ISubmittableResult } from '@polkadot/types/types'
+import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
+import { useTmpOrganizationState } from 'hooks/useTmpOrganizationState'
+import { useOrganizationByIdSubscription } from 'src/queries'
+
 import { Info } from '@mui/icons-material'
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab'
 import { Button, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from '@mui/material'
-import type { ISubmittableResult } from '@polkadot/types/types'
-import { useCreateOrgTransaction } from 'hooks/tx/useCreateOrgTransaction'
-import { useTmpOrganizationState } from 'src/hooks/useTmpOrganizationState'
-import { useTranslation } from 'react-i18next'
-import { useOrganizationByIdSubscription } from 'src/queries'
-
 import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
 
-const Chart = dynamic(() => import('react-apexcharts'), {
-	ssr: false,
-})
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
-export function TmpOverview() {
-	const [modalState, setModalState] = useState<boolean>(false)
-	const tmpOrgState = useTmpOrganizationState()
+export function FinalizeView() {
 	const { t } = useTranslation()
-	const tx = useCreateOrgTransaction()
 	const { push } = useRouter()
-	const [orgId, setOrgId] = useState<string>(null)
+
+	const [modalState, setModalState] = useState(false)
+	const tmpOrgState = useTmpOrganizationState()
+	const tx = useCreateOrgTransaction()
+
+	const [orgId, setOrgId] = useState(null)
 	const { data: organizationByIdData, loading } = useOrganizationByIdSubscription({ variables: { orgId } })
 
 	const handleModalOpen = useCallback(() => {
@@ -43,27 +43,35 @@ export function TmpOverview() {
 		[tmpOrgState?.setDeposit],
 	)
 
+	// handle create organization callback.
 	const handleTxCallback = useCallback(
 		(state: boolean, result: ISubmittableResult) => {
 			if (state) {
+				// tmpOrgState?.clearAll()
+
 				// The transaction was successful, clear state
-				tmpOrgState?.clearAll()
+
 				result.events.forEach(({ event: { data, method, section } }) => {
 					if (section === 'control' && method === 'OrgCreated') {
+						console.log('org data', data)
+						console.log('org created with id', data?.[1]?.toHex())
+
 						setOrgId(data?.[1]?.toHex())
 					}
 				})
-				push('/organizations/')
+
+				// push('/unity/')
 			}
 		},
 		[tmpOrgState.clearAll],
 	)
 
-	useEffect(() => {
-		if (orgId && organizationByIdData && !loading) {
-			push(`/organizations/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
-		}
-	}, [orgId, organizationByIdData])
+	// redirect.
+	// useEffect(() => {
+	// 	if (orgId && organizationByIdData && !loading) {
+	// 		push(`/unity/${organizationByIdData?.organization?.[0]?.id}/dashboard`)
+	// 	}
+	// }, [orgId, organizationByIdData])
 
 	return (
 		<>

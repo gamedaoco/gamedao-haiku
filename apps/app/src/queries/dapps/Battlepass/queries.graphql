@@ -1,25 +1,29 @@
 
 # # #	purchase processing
 # # #	get free items
-subscription Battlepass ( $id: bpchar! ) {
-    # battlepassBot {
-        Battlepasses(where: {chainId: {_eq: $id}}) {
-            id
-            cid
-            joinable
-            totalJoined
-            premiumPasses
-            premiumClaimed
-            freePasses
-            freeClaimed
-            name
-            active
-            season
-            chainId
-            price
-        }
-    # }
-}
+# query Battlepass ( $id: String ) {
+
+#     battlepassBot {
+
+#         battlepasses( where: { chainId: $id } ) {
+#             id
+#             cid
+#             joinable
+#             totalJoined
+#             premiumPasses
+#             premiumClaimed
+#             freePasses
+#             freeClaimed
+#             name
+#             active
+#             season
+#             chainId
+#             price
+#         }
+
+#     }
+
+# }
 
 query GetBattlepassesForOrganization ($id: String) {
 	    battlepassBot {
@@ -45,8 +49,8 @@ query GetBattlepassesForOrganization ($id: String) {
 # }
 
 
-# # # filtering does not seem to work atm, so lets get all for now
-# # # subscription GetBattlepassesForOrganization ($id: String) {
+# filtering does not seem to work atm, so lets get all for now
+# subscription GetBattlepassesForOrganization ($id: String) {
 subscription GetAllBattlepasses ($id: bpchar){
 	# battlepassBot {
 		# Battlepasses(where: {orgId: {_eq: $id}}) {
@@ -80,22 +84,22 @@ subscription Rewards ($id: bpchar, $uuid: uuid) {
   }
 }
 
-# # query GetBattlepassRewards ($id: String) {
-# # 	battlepassBot {
-# # 		battlepassRewards(where: {battlepassChainId: $id}) {
-# # 			available
-# # 			cid
-# # 			chainId
-# # 			description
-# # 			id
-# # 			level
-# # 			name
-# # 			points
-# # 			total
-# # 			battlepassId
-# # 		}
-# # 	}
-# # }
+query GetBattlepassRewards ($id: String) {
+	battlepassBot {
+		rewards(where: {battlepassChainId: $id}) {
+			available
+			cid
+			chainId
+			description
+			id
+			level
+			name
+			points
+			total
+			battlepassId
+		}
+	}
+}
 
 query GetBattlepassUsers ($id:String) {
   battlepassBot {
@@ -159,16 +163,16 @@ battlepassBot{
         }
 }
 
-# # # query GetBattlepassStateForUser ($uuid: String!, $id: String!) {
-# # #   battlepassBot {
-# # #     battlepassState(where: {uuid: $uuid, battlepassChainId: $id}) {
-# # #       uuid
-# # #       state
-# # #       member
-# # #       premium
-# # #     }
-# # #   }
-# # # }
+# query GetBattlepassStateForUser ($uuid: String!, $id: String!) {
+#   battlepassBot {
+#     battlepassState(where: {uuid: $uuid, battlepassChainId: $id}) {
+#       uuid
+#       state
+#       member
+#       premium
+#     }
+#   }
+# }
 
 query GetBattlepassForUser ($uuid: String!) {
     battlepassBot {
@@ -199,7 +203,7 @@ query GetLeaderboard ( $id: String ) {
     }
 }
 
-# # # get claimed rewards for a user, battlepass
+# get claimed rewards for a user, battlepass
 query GetLeaderboardAchievements ( $id: String, $uuid: String ) {
     battlepassBot {
         reward_claims( where: {
@@ -216,17 +220,17 @@ query GetLeaderboardAchievements ( $id: String, $uuid: String ) {
     }
 }
 
-# # # subscribe to progresses so we can compute points and enable rewards...
-subscription GetScore ( $id: bpchar, $uuid: uuid) {
-    # battlepassBot {
-        Quests(where: {Battlepass: {chainId: {_eq: $id}} }) {
-            points
-            QuestProgresses(where: {Identity: {uuid: {_eq: $uuid}}}) {
-                progress
-            }
-        }
-    # }
-}
+# subscribe to progresses so we can compute points and enable rewards...
+# subscription GetScore ( $id: bpchar, $uuid: uuid) {
+#     # battlepassBot {
+#         Quests(where: {Battlepass: {chainId: {_eq: $id}} }) {
+#             points
+#             QuestProgresses(where: {Identity: {uuid: {_eq: $uuid}}}) {
+#                 progress
+#             }
+#         }
+#     # }
+# }
 
 subscription Score ( $id: bpchar, $uuid: uuid) {
   BattlepassParticipants(where: {Battlepass: {chainId: {_eq: $id}}, Identity: {uuid: {_eq: $uuid}}}) {
@@ -237,20 +241,20 @@ subscription Score ( $id: bpchar, $uuid: uuid) {
   }
 }
 
-# query GetScore ( $id: String, $uuid: String ) {
-# 	battlepassBot {
-# 		battlepassPoints(where: { battlepassChainId: $id, identityUuid: $uuid }) {
-# 			points
-# 			quests
-# 		}
-# 		# battlepassLevels(where: { battlepassChainId: $id }) {
-# 		# 	level
-# 		# 	name
-# 		# 	points
-# 		# 	totalPoints
-# 		# }
-# 	}
-# }
+query GetScore ( $id: String, $uuid: String ) {
+	battlepassBot {
+		points(where: { battlepassChainId: $id, identityUuid: $uuid }) {
+			points
+			quests
+		}
+		# battlepassLevels(where: { battlepassChainId: $id }) {
+		# 	level
+		# 	name
+		# 	points
+		# 	totalPoints
+		# }
+	}
+}
 
 subscription Levels ( $id: bpchar ) {
 	BattlepassLevels(where: {Battlepass: {chainId: {_eq: $id}}}) {
@@ -281,23 +285,23 @@ query GetLevels ( $id: String ) {
 # 	}
 # }
 
-subscription ActiveBattlepass {
-    # battlepass(where: {state: {_eq: "ACTIVE"}}) {
-    battlepass {
-        id
-        name
-        organization {
-            id
-            name
-            header
-            logo
-        }
-        price
-        season
-        state
-        cid
-    }
-}
+# subscription ActiveBattlepass {
+#     # battlepass(where: {state: {_eq: "ACTIVE"}}) {
+#     battlepass {
+#         id
+#         name
+#         organization {
+#             id
+#             name
+#             header
+#             logo
+#         }
+#         price
+#         season
+#         state
+#         cid
+#     }
+# }
 
 query ActiveBattlepassById($id: String!) {
     battlepassBot {
@@ -325,8 +329,8 @@ query ActiveBattlepassById($id: String!) {
 # # 	}
 # # }
 
-# # # if user has connected their wallet
-# # # we can query a battlepass id by wallet address
+# if user has connected their wallet
+# we can query a battlepass id by wallet address
 # query battlepassById($address: String, $battlepass: String) {
 # 	battlepassBot {
 # 		# battlepasses {
@@ -377,8 +381,8 @@ query ActiveBattlepassById($id: String!) {
 # 	}
 # }
 
-# # # if user has connected their wallet
-# # # we can query a battlepass id by wallet address
+# if user has connected their wallet
+# we can query a battlepass id by wallet address
 # # query battlepassIdByAddress($address: bpchar) {
 # #   battlepasses {
 # #     battlepassParticipants(where: {identity: {address: {_eq: $address}}}) {
@@ -398,21 +402,21 @@ query ActiveBattlepassById($id: String!) {
 # # 		# }
 # # }
 
-# # # query battlepassPoints( $id: String! ) {
-# # #   Bot {
-# # #     battlepassPoints(where: {battlepassChainId: $id}) {
-# # #       battlepassId
-# # #       identityId
-# # #       points
-# # #     }
-# # #     BattlePassQuests( where: { battlepass: { _eq: $id } } ) {
-# # #       channelId
-# # #       daily
-# # #       maxDaily
-# # #       points
-# # #       quantity
-# # #       source
-# # #       type
-# # #     }
-# # #   }
-# # # }
+# query battlepassPoints( $id: String! ) {
+#   Bot {
+#     battlepassPoints(where: {battlepassChainId: $id}) {
+#       battlepassId
+#       identityId
+#       points
+#     }
+#     BattlePassQuests( where: { battlepass: { _eq: $id } } ) {
+#       channelId
+#       daily
+#       maxDaily
+#       points
+#       quantity
+#       source
+#       type
+#     }
+#   }
+# }

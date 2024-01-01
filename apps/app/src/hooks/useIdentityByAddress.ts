@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { Identity, useIdentityByAddressSubscription } from 'src/queries'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'src/utils/notification'
 
 export interface IdentityByAddress {
 	identity: Identity

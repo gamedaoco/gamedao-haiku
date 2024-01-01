@@ -297,7 +297,7 @@ export const BPQuests = ({ args }: TArgs) => {
 
 	useEffect(() => {
 		if (!quests) return
-		const _quests = quests.battlepassBot.BattlepassQuests as TQuestItem[]
+		const _quests = quests.battlepassBot.quests as TQuestItem[]
 		if (_quests === items) return
 		// console.log('q', _quests)
 		setItems(_quests)

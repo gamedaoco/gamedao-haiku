@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import slugify from 'slugify'
 
 import { parseIpfsHash, uploadFileToIpfs } from 'src/utils/ipfs'
-import { createWarningNotification } from 'src/utils/notificationUtils'
+import { createWarningNotification } from 'src/utils/notification'
 
 import {
 	useActiveBattlepassSubscription,

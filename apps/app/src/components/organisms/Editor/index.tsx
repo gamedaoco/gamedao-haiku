@@ -7,7 +7,7 @@ import { EditorWrapper } from 'components/organisms/Editor/editorWrapper'
 import { useConfig } from 'src/hooks/useConfig'
 import { uploadBase64File } from 'src/utils/file'
 import { parseIpfsHash } from 'src/utils/ipfs'
-import { ImageDrop } from 'src/utils/quillImageDropModule'
+import { ImageDrop } from 'src/utils/imageDrop'
 import { ImageResize } from 'src/utils/quillImageResizerModule/ImageResize'
 
 const ReactQuill = dynamic(

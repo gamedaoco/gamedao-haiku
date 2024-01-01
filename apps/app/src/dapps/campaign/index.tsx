@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next'
 import { CampaignFiltersInterface } from 'src/@types/campaign'
 import {
 	Campaign,
-	CampaignBoolExp,
-	CampaignOrderBy,
+	Campaign_Bool_Exp,
+	Campaign_Order_By,
 	DisplayValueEntryString,
 	useCampaignsPaginationCountSubscription,
 	useCampaignsPaginationSubscription,
@@ -51,11 +51,11 @@ export function CampaignDApp() {
 	// // 	}
 	// // }, [filtersOptions, setFilters])
 
-	const queryFilters = useMemo<CampaignBoolExp[]>(
+	const queryFilters = useMemo<Campaign_Bool_Exp[]>(
 		() => [
 			{
 				_and: [
-					filters.filters.length ? { _or: [...filters.filters] as CampaignBoolExp[] } : {},
+					filters.filters.length ? { _or: [...filters.filters] as Campaign_Bool_Exp[] } : {},
 					{
 						_or: [
 							{
@@ -91,7 +91,7 @@ export function CampaignDApp() {
 		variables: {
 			limit,
 			filters: queryFilters,
-			orderBy: filters.sortOption as CampaignOrderBy,
+			order_by: filters.sortOption as Campaign_Order_By,
 		},
 	})
 	const campaignsCount = useCampaignsPaginationCountSubscription({
@@ -100,13 +100,13 @@ export function CampaignDApp() {
 	const paginatedData = useMemo<Campaign[]>(() => data?.campaign?.slice() as Campaign[], [data])
 
 	const buttonVisibility = useMemo(
-		() => paginatedData?.length < campaignsCount?.data?.campaignAggregate?.aggregate?.count,
+		() => paginatedData?.length < campaignsCount?.data?.campaign_aggregate?.aggregate?.count,
 		[paginatedData?.length, campaignsCount?.data],
 	)
 
 	if (loading) return <Loader />
 
-	if (campaignsCount?.data?.campaignAggregate?.aggregate.count === 0)
+	if (campaignsCount?.data?.campaign_aggregate?.aggregate.count === 0)
 		return <Fragment>No Campaigns yet — why not create one!</Fragment>
 
 	// <FiltersSection
@@ -157,7 +157,7 @@ export function CampaignDApp() {
 						<Typography>
 							{t('page:campaigns:showing_results', {
 								count1: paginatedData?.length,
-								count2: campaignsCount?.data?.campaignAggregate?.aggregate.count,
+								count2: campaignsCount?.data?.campaign_aggregate?.aggregate.count,
 							})}
 						</Typography>
 					</Box>
