@@ -34,16 +34,16 @@ interface ComponentProps {
 }
 
 const leftNav = [
-	{
-		name: 'Communities', // 'button:navigation:organizations',
-		path: '/communities',
-		icon: <RiShieldLine />,
-	},
-	{
-		name: 'Battlepass', //'button:navigation:quests',
-		path: '/battlepass',
-		icon: <RiSwordLine />,
-	},
+	// {
+	// 	name: 'Communities', // 'button:navigation:organizations',
+	// 	path: '/communities',
+	// 	icon: <RiShieldLine />,
+	// },
+	// {
+	// 	name: 'Battlepass', //'button:navigation:quests',
+	// 	path: '/battlepass',
+	// 	icon: <RiSwordLine />,
+	// },
 ]
 
 const rightNav = [

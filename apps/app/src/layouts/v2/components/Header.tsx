@@ -43,16 +43,16 @@ interface ComponentProps {
 }
 
 const leftNav = [
-	{
-		name: 'Unity', // 'button:navigation:organizations',
-		path: '/unity/overview',
-		icon: <RiAncientGateLine />,
-	},
-	{
-		name: 'Battlepass',
-		path: '/battlepass/overview',
-		icon: <RiSwordLine />,
-	},
+	// {
+	// 	name: 'Unity', // 'button:navigation:organizations',
+	// 	path: '/unity/overview',
+	// 	icon: <RiAncientGateLine />,
+	// },
+	// {
+	// 	name: 'Battlepass',
+	// 	path: '/battlepass/overview',
+	// 	icon: <RiSwordLine />,
+	// },
 	// {
 	// 	name: 'Buy', // button:navigation:campaigns',
 	// 	path: '/buy',
@@ -235,7 +235,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 						</Button>
 					</Link>
 
-					<Link href="https://discord.gg/gamedao">
+					<Link href="https://discord.gg/vKrZ9h7N">
 						<Button>
 							<RxDiscordLogo />
 							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}

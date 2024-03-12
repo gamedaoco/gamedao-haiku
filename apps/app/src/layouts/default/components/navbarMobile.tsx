@@ -39,11 +39,11 @@ interface ComponentProps {
 
 // TODO: Extract to features / graphql
 const leftNav = [
-	{
-		name: 'Guilds', // 'button:navigation:organizations',
-		path: '/organizations',
-		icon: <RiShieldLine />,
-	},
+	// {
+	// 	name: 'Guilds', // 'button:navigation:organizations',
+	// 	path: '/organizations',
+	// 	icon: <RiShieldLine />,
+	// },
 	// {
 	// 	name: 'Quests', //'button:navigation:quests',
 	// 	path: '/quests',
@@ -54,11 +54,11 @@ const leftNav = [
 	// 	path: '/achievements',
 	// 	icon: <RiAwardLine/>
 	// },
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiExchangeFundsLine />,
+	// },
 ]
 
 const rightNav = [

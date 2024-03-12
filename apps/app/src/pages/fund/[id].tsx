@@ -9,7 +9,7 @@ import { useSystemProperties } from 'src/hooks/useSystemProperties'
 import { useCampaignByIdSubscription } from 'src/queries'
 
 import { Layout } from 'src/layouts/v2'
-import { NavLink } from 'src/components'
+import { NavLink } from 'components/atoms/NavLink'
 
 import { ArrowBack } from '@mui/icons-material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
@@ -32,8 +32,8 @@ export function CampaignById() {
 		variables: { campaignId: campaignId, address: address },
 	})
 	const currencyId = useMemo(
-		() => systemProperties?.tokenSymbol?.indexOf(data?.campaign?.[0]?.tokenSymbol) ?? 0,
-		[systemProperties, data?.campaign?.[0]?.tokenSymbol],
+		() => systemProperties?.tokenSymbol?.indexOf(data?.campaign?.[0]?.token_symbol) ?? 0,
+		[systemProperties, data?.campaign?.[0]?.token_symbol],
 	)
 
 	const handleChange = useCallback(
@@ -69,9 +69,11 @@ export function CampaignById() {
 					title={data?.campaign?.[0]?.name}
 					header={data?.campaign[0]?.header}
 					description={data?.campaign?.[0]?.description}
-					backers={data?.campaign?.[0]?.campaignContributorsAggregate?.aggregate?.count ?? 0}
+					backers={data?.campaign?.[0]?.campaign_contributors_aggregate?.aggregate?.count ?? 0}
 					target={data?.campaign?.[0]?.target}
-					contributed={data?.campaign?.[0]?.campaignContributorsAggregate?.aggregate?.sum?.contributed ?? '0'}
+					contributed={
+						data?.campaign?.[0]?.campaign_contributors_aggregate?.aggregate?.sum?.contributed ?? '0'
+					}
 					currencyId={currencyId}
 					expiry={data?.campaign?.[0]?.expiry}
 					protocol={data?.campaign?.[0]?.protocol}
