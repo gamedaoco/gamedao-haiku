@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Container, Typography } from '@mui/material'
 import { Layout } from 'src/layouts/v2'
-import { SelectAccountDialog } from 'src/components/SelectAccountDialog/selectAccountDialog'
+import { SelectAccountDialog } from 'components/molecules/SelectAccountDialog'
 
 export function Page() {
 	const router = useRouter()

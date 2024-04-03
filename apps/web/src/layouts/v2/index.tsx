@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, Fragment } from 'react'
 import Head from 'next/head'
 import { useConfig } from 'src/hooks/useConfig'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
-// import { TopBar } from './components/TopBar'
+import { TopBar } from './components/TopBar'
 import { Header } from './components/Header'
 import { HeaderMobile } from './components/HeaderMobile'
 import { Footer } from './components/Footer'
@@ -20,6 +20,7 @@ interface ComponentProps {
 	noBorder?: boolean
 	title?: string
 	children?: React.ReactNode
+	maxWidth?: string
 }
 
 // TODO: Should not be here/ configs and co
@@ -50,6 +51,7 @@ export function Layout({
 	title,
 	noBorder,
 	hideDApps,
+	maxWidth,
 }: ComponentProps) {
 	const [sidebarOpen, setOpenSidebar] = useState<boolean>(false)
 	const config = useConfig()
@@ -63,7 +65,7 @@ export function Layout({
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
 
-	// const showTopBar = false
+	const showTopBar = true
 	const baseSpacing = 90
 	const spacing = showHeader ? `calc( 100vh - ${baseSpacing}px )` : `100vh`
 	const pageTitle = title
@@ -71,7 +73,7 @@ export function Layout({
 		: `${config?.SITE_NAME || 'GameDAO — for better games'}`
 
 	return (
-		<>
+		<Fragment>
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
@@ -82,7 +84,7 @@ export function Layout({
 					backgroundSize: `100% 200%`,
 				}}
 			>
-				{/*{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}*/}
+				{showTopBar && <TopBar onSidebarOpen={toggleSidebar} sidebarOpen={sidebarOpen} />}
 				{showHeader &&
 					(isMd ? (
 						<Header
@@ -128,6 +130,6 @@ export function Layout({
 			</Box>
 
 			{showFooter && <Footer />}
-		</>
+		</Fragment>
 	)
 }

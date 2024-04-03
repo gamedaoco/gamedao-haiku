@@ -1,4 +1,4 @@
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { Features } from 'src/queries'
 
 export function useFeatures(): Features {

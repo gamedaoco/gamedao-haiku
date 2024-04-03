@@ -7,7 +7,7 @@ import { AccountTabs } from 'src/constants/account'
 import { Layout } from 'src/layouts/v2'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
-import { NoWalletConnected } from 'src/components/NoWalletConnected/noWalletConnected'
+import { NoWalletConnected } from 'components/molecules/NoWalletConnected'
 import { Account } from 'src/dapps/account'
 
 export function Page() {

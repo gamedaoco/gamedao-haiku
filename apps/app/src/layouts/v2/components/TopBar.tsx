@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
-import Link from 'src/components/Link'
+import Link from 'components/atoms/Link'
 
-import { useGraphQlContext } from 'src/providers/graphQl/modules/context'
+import { useGraphQlContext } from 'src/providers/graphQl/components/context'
 
 import { useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'

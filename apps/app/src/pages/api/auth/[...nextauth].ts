@@ -104,7 +104,7 @@ export const authOptions: NextAuthOptions = {
 
 	callbacks: {
 		async jwt({ token, user, account, profile, isNewUser }) {
-			log.info('AUTH', '-->', 'provider', account?.provider)
+			// log.info('AUTH', '-->', 'provider', account?.provider)
 			if (account?.provider && !token[account?.provider]) {
 				token.providers = {
 					...token,
@@ -147,7 +147,7 @@ export const authOptions: NextAuthOptions = {
 			// 	// log.info('AUTH', '-->', 'sent')
 			// }
 
-			log.info('AUTH', '-->', 'token', token)
+			// log.info('AUTH', '-->', 'token', token)
 			// log.info('AUTH', '-->', 'token providers', token.providers)
 
 			return token
@@ -168,7 +168,7 @@ export const authOptions: NextAuthOptions = {
 				epicGames: token.epicGames,
 			}
 
-			log.info('AUTH', '-->', 'session', token, session)
+			// log.info('AUTH', '-->', 'session', token, session)
 			return session
 		},
 		// async signIn({ user, account, profile, email, credentials }) {

@@ -5,8 +5,8 @@
 import defaultsDeep from 'lodash/defaultsDeep'
 
 import DefaultOptions from './DefaultOptions'
-import { DisplaySize } from './modules/DisplaySize'
-import { Resize } from './modules/Resize'
+import { DisplaySize } from './components/DisplaySize'
+import { Resize } from './components/Resize'
 
 const knownModules = { DisplaySize, Resize }
 

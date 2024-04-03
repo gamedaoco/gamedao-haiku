@@ -4,7 +4,7 @@ import { AppBar, Box, Toolbar, Button, Stack, MenuItem, Typography } from '@mui/
 import { useTheme } from '@mui/material/styles'
 import React, { useCallback, useState } from 'react'
 import { AccountSelector, FontIcons } from 'src/components'
-import Link from 'src/components/Link'
+import Link from 'components/atoms/Link'
 
 /* eslint-disable @next/next/no-img-element */
 // const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" alt="GameDAO" />

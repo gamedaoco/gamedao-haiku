@@ -2,17 +2,17 @@ import React, { useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 
 import { AccountTabs } from 'src/constants/account'
 
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
 
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
-import { createInfoNotification } from 'src/utils/notificationUtils'
+import { createInfoNotification } from 'src/utils/notification'
 import { avatarImageURL } from 'src/utils/avatars'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
@@ -65,8 +65,8 @@ export function Header() {
 				/>
 				<div>
 					<Typography variant="h6">
-						{identity?.displayName || getNameFromAccountState(accountState)}&nbsp;
-						{identity?.displayName && <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" />}
+						{identity?.display_name || getNameFromAccountState(accountState)}&nbsp;
+						{identity?.display_name && <Verified sx={{ verticalAlign: 'top' }} fontSize="inherit" />}
 					</Typography>
 					<Box
 						sx={{

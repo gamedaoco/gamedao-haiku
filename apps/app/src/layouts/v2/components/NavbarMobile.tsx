@@ -25,12 +25,13 @@ import {
 	RiDropLine,
 	RiExchangeFundsLine,
 	RiAwardLine,
+	RiCommunityLine,
+	RiAncientGateLine,
 } from 'react-icons/ri'
 import { RxDiscordLogo } from 'react-icons/rx'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
-import { AccountSelector } from 'src/components'
-import { FontIcons } from 'src/components'
-import Link from 'src/components/Link'
+import { AccountSelector } from 'src/components/molecules/AccountSelector'
+import Link from 'components/atoms/Link'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 
 /* eslint-disable @next/next/no-img-element */
@@ -45,19 +46,19 @@ interface ComponentProps {
 // TODO: Extract to features / graphql
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organizations',
-		path: '/organizations',
-		icon: <RiShieldLine />,
+		name: 'Unity', // 'button:navigation:organizations',
+		path: '/unity',
+		icon: <RiAncientGateLine />,
 	},
 	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
+		name: 'Battlepass', //'button:navigation:quests',
+		path: '/battlepass',
+		icon: <RiSwordLine />,
 	},
 	// {
-	// 	name: 'Battlepass', //'button:navigation:quests',
-	// 	path: '/battlepass',
-	// 	icon: <RiSwordLine />,
+	// 	name: 'Fund', // button:navigation:campaigns',
+	// 	path: '/fund',
+	// 	icon: <RiExchangeFundsLine />,
 	// },
 	// {
 	// 	name: 'Achievements', //'button:navigation:quests',

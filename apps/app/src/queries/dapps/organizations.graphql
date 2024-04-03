@@ -1,11 +1,10 @@
-# get aggregate orgs and their names
-# TODO: add slugs to graphql
-query OrganizationVanityUrl($searchQuery: String="%") {
-    organization {
-        id
-        name
-    }
-}
+# query OrganizationVanityUrl($searchQuery: String="%") {
+#     organization( where: { slug: { _eq: $searchQuery } } ) { {
+#         id
+#         name
+# 		slug
+#     }
+# }
 
 subscription GetOrganizationsForPrime ( $id: String! ) {
   organization(where: {prime: {_eq: $id}}) {
@@ -23,17 +22,41 @@ subscription OrganizationMembersByState(
 ) {
     organization(where: { id: {_eq: $id}}) {
         id
-        organizationMembers(where: { state: {_eq: $state}}) {
+        organization_members(where: { state: {_eq: $state}}) {
             address
             state
         }
     }
 }
 
+subscription TotalActive {
+    organization_aggregate( where: { state: {_eq: "Active" }} ){
+        aggregate {
+            count
+        }
+    }
+}
+subscription Total {
+    organization_aggregate {
+        aggregate {
+            count
+        }
+    }
+}
+
+query TotalOrganizations {
+    organization_aggregate( where: { state: {_eq: "Active"} } ) {
+        aggregate {
+            count
+        }
+    }
+}
+
 subscription OrganizationsPaginationCount($searchQuery: String="%") {
-    organizationAggregate(
+    organization_aggregate(
         where: {
-            # organizationMetadata: {
+			state: { _eq: "Active" },
+            # organization_metadata: {
                 _or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]
             # }
         }
@@ -44,16 +67,23 @@ subscription OrganizationsPaginationCount($searchQuery: String="%") {
     }
 }
 
-subscription OrganizationsPagination($orderBy: [OrganizationOrderBy!], $first: Int, , $searchQuery: String="%") {
-    organization(limit: $first, orderBy: $orderBy, where: {_or: [{name: {_ilike: $searchQuery}}, {description: {_ilike: $searchQuery}}]}) {
+subscription OrganizationsPagination($orderBy: [organization_order_by!], $first: Int, , $searchQuery: String="%") {
+    organization(
+		limit: $first,
+		order_by: $orderBy,
+		where: {_or: [
+			{name: {_ilike: $searchQuery}},
+			{description: {_ilike: $searchQuery}}
+		], state: {_eq: "Active"} }) {
         id
         name
         description
         logo
         header
-        accessModel
+        access_model
         creator
-        organizationMembers {
+		state
+        organization_members {
             address
             state
         }
@@ -65,6 +95,7 @@ query GetOrganizationByName($name: String!) {
         id
         name
         slug
+		state
     }
 }
 
@@ -73,30 +104,32 @@ query GetOrganizationById($id: String!) {
         id
         name
         slug
+		state
     }
 }
 
 subscription OrganizationById($orgId: String!) {
     organization(where: { id: {_eq: $orgId}}) {
-        accessModel
+        access_model
         creator
-        createdAtBlock
+        created_at_block
         creator
-        feeModel
-        govCurrency
+        fee_model
+        gov_currency
         id
-        memberLimit
-        payCurrency
+        member_limit
+        pay_currency
 		prime
         treasury
         type
-        organizationMembers {
+		state
+        organization_members {
             address
             state
             identity {
                 id
                 email
-                displayName
+                display_name
             }
         }
         description
@@ -110,12 +143,12 @@ subscription OrganizationById($orgId: String!) {
         url
         location
         tags
-        organizationMembersAggregate {
+        organization_members_aggregate {
             aggregate {
                 count
             }
         }
-        campaignsAggregate {
+        campaigns_aggregate {
             aggregate {
                 count
             }
@@ -124,7 +157,7 @@ subscription OrganizationById($orgId: String!) {
                 state
             }
         }
-        proposalsAggregate {
+        proposals_aggregate {
             nodes {
                 id
                 type
@@ -136,31 +169,32 @@ subscription OrganizationById($orgId: String!) {
     }
 }
 subscription OrganizationsByAccount($address: String!) {
-  organization(where: {organizationMembers: {address: {_eq: $address}}}) {
+  organization(where: {organization_members: {address: {_eq: $address}}}) {
     id
     name
     description
     creator
     prime
-    memberLimit
-    membershipFee
-    accessModel
+    member_limit
+    membership_fee
+    access_model
     deposit
     slug
     logo
-    organizationMembersAggregate {
+	state
+    organization_members_aggregate {
       aggregate {
         count
       }
     }
-    organizationMembers (where: {address: {_eq: $address}}){
+    organization_members (where: {address: {_eq: $address}}){
       address
       state
     }
   }
     # identity_by_pk(id: $address){
     #     id
-    #     organizationMembers {
+    #     organization_members {
     #         id
     #         state
     #         organization {
@@ -169,10 +203,10 @@ subscription OrganizationsByAccount($address: String!) {
     #             logo
     #             accessModel
     #             creator
-    #             organizationMembers {
+    #             organization_members {
     #                 address
     #                 identity {
-    #                     displayName
+    #                     display_name
     #                     image
     #                     email
     #                 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from 'layouts/v2'
+import { Layout } from 'layouts/v3'
 import { Landingpage } from 'src/dapps/landingpage'
 
 export function Page() {

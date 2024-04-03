@@ -42,10 +42,15 @@ interface ComponentProps {
 
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organizations',
-		path: '/organizations',
-		icon: <RiShieldLine />,
+		name: 'Cases', // 'button:navigation:organizations',
+		path: '/cases',
+		icon: <RiTreasureMapLine />,
 	},
+	// {
+	// 	name: 'Organizations', // 'button:navigation:organizations',
+	// 	path: '/organizations',
+	// 	icon: <RiShieldLine />,
+	// },
 	// {
 	// 	name: 'Battlepass',
 	// 	path: '/battlepass',
@@ -56,11 +61,11 @@ const leftNav = [
 	// 	path: '/buy',
 	// 	icon: <RiVipDiamondLine />,
 	// },
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiVipDiamondLine />,
-	},
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiVipDiamondLine />,
+	// },
 ]
 
 const rightNav = [

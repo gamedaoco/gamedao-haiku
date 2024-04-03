@@ -25,9 +25,9 @@ const productionEndpoints: Endpoints = [
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
 		name: 'development',
-		url: 'https://graph.dev.sub.zero.io/v1/graphql',
-		healthCheck: 'https://graph.dev.sub.zero.io/health',
-		chain: 'wss://rpc.dev.sub.zero.io',
+		url: 'https://graph.dev.gamedao.net/v1/graphql',
+		healthCheck: 'https://graph.dev.gamedao.net/health',
+		chain: 'wss://rpc.dev.gamedao.net',
 		default: true, // ENVIRONMENT === Environment.Development ? true : false,
 	},
 	// {

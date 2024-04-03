@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useSession } from 'next-auth/react'
-import { useAppContext } from 'src/providers/app/modules/context'
+import { useAppContext } from 'src/providers/app/components/context'
 
 import { Layout } from 'src/layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'

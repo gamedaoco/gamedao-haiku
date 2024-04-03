@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 export function useCurrentAccountAddress(): string {

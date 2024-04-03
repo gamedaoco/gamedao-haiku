@@ -1,9 +1,0 @@
-query CollectablesForUser($owner: String!) {
-	gamedao {
-		rmrkNfts(address: $owner) {
-			id
-			metadata
-			sn
-		}
-	}
-}

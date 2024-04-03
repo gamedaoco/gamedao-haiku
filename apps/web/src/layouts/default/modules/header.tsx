@@ -35,15 +35,15 @@ interface ComponentProps {
 
 const leftNav = [
 	{
-		name: 'Organizations', // 'button:navigation:organizations',
-		path: '/organizations',
+		name: 'Cases',
+		path: '/cases',
 		icon: <RiShieldLine />,
 	},
-	{
-		name: 'Battlepass', //'button:navigation:quests',
-		path: '/battlepass',
-		icon: <RiSwordLine />,
-	},
+	// {
+	// 	name: 'Battlepass', //'button:navigation:quests',
+	// 	path: '/battlepass',
+	// 	icon: <RiSwordLine />,
+	// },
 ]
 
 const rightNav = [

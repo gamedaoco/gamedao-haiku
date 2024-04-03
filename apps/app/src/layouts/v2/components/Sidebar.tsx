@@ -3,16 +3,16 @@ import { useRouter } from 'next/router'
 import { Logger } from 'src/utils/logger'
 
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useSidebarSubscription } from 'src/queries'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'src/utils/notification'
 
 import { Add as AddIcon } from '@mui/icons-material'
 import { CircularProgress, Divider, Drawer, Fab, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { OrganizationButtonMemoized } from './OrganizationButton'
-import { AccountSelector } from 'src/components/AccountSelector/accountSelector'
+import { AccountSelector } from 'components/molecules/AccountSelector'
 
 interface ComponentProps {
 	showHeader?: boolean
@@ -41,9 +41,17 @@ export function Sidebar({ showHeader, onClose, open }: ComponentProps) {
 	useEffect(() => {
 		if (error) {
 			createErrorNotification('The information for the sidebar could not be retrieved')
-			log.error(error)
+			log.error('sidebar', data, error)
 		}
 	}, [error])
+
+	useEffect(() => {
+		if (!loading && data) {
+			log.info('SIDEBAR', data)
+			log.info('SIDEBAR', data)
+			log.info('SIDEBAR', data)
+		}
+	}, [loading, data])
 
 	return (
 		<Stack
