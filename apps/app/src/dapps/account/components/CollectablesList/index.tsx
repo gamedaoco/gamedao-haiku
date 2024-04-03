@@ -5,7 +5,7 @@ import type { CollectablesForUserQuery } from 'src/queries'
 import { Grid } from '@mui/material'
 import type { Collectable as TCollectable } from 'src/@types/collectable'
 
-import Collectable from 'src/components/Collectable/collectable'
+import Collectable from 'components/molecules/Collectable/collectable'
 
 import LoadingCollectableCard from './loadingCollectableCard'
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const CollectablesList: FC<Props> = ({ loading = false, items }) => {
-	if (!Array.isArray(items?.gamedao.rmrkNfts) && !loading) return null
+	if (!Array.isArray(items?.rmrkNfts) && !loading) return null
 
 	return (
 		<Fragment>
@@ -29,7 +29,7 @@ export const CollectablesList: FC<Props> = ({ loading = false, items }) => {
 					))
 				) : (
 					<>
-						{items?.gamedao.rmrkNfts.map((item: TCollectable) => (
+						{items?.rmrkNfts.map((item: TCollectable) => (
 							<Grid container item xs={12} sm={6} md={4} lg={12 / 5} key={item.id}>
 								<Collectable item={item} />
 							</Grid>

@@ -38,11 +38,11 @@ export function Landingpage() {
 
 	return (
 		<Fragment>
-			{/* <Box>
-				{hero && <Hero size="sm" content={heroContent} />}
-				{hero && <Hero size="sm" content={hero2Content} />}
-				<Newsletter />
-			</Box> */}
+			<Box>
+				{/* {hero && <Hero size="sm" content={heroContent} />} */}
+				{/* {hero && <Hero size="sm" content={hero2Content} />} */}
+				{/* <Newsletter /> */}
+			</Box>
 			<Box>
 				<Container maxWidth="xl" disableGutters>
 					{/* {intro && <Intro />} */}

@@ -10,7 +10,7 @@ import { styled } from '@mui/system'
 import NextImage from 'next/image'
 import { Fragment } from 'react'
 import Carousel from 'react-material-ui-carousel'
-import Link from 'src/components/Link'
+import Link from 'components/atoms/Link'
 
 const Teaser = styled(Typography)(({ theme }) => ({
 	background: GRADIENT.rainbow2,

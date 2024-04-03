@@ -17,8 +17,8 @@ import Edit from '@mui/icons-material/TuneSharp'
 import ExitToAppSharpIcon from '@mui/icons-material/ExitToAppSharp'
 
 import { Avatar, Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
-import { Scrollbar } from 'src/components/scrollbar'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
+import { Scrollbar } from 'components/atoms/Scrollbar'
 import LoadingTable from './loadingTable'
 
 interface IExitProps {
@@ -111,10 +111,10 @@ export const OrganizationList = ({ organizations }: IProps) => {
 									</Box>
 								</TableCell>
 								<TableCell>
-									{reformatNumber(organization.organizationMembersAggregate?.aggregate?.count, 2)}{' '}
+									{reformatNumber(organization.organization_members_aggregate?.aggregate?.count, 2)}{' '}
 								</TableCell>
 								<TableCell>{reformatNumber(organization.deposit, 2)}</TableCell>
-								<TableCell>{organization.accessModel}</TableCell>
+								<TableCell>{organization.access_model}</TableCell>
 								<TableCell> {`${isAdmin(organization.prime) ? 'prime' : 'member'}`} </TableCell>
 
 								<TableCell align="right">

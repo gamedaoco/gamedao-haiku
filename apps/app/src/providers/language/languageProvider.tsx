@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 
 import type { i18n as I18nType } from 'i18next'
-import { getI18next } from 'src/providers/language/modules/i18n'
+import { getI18next } from 'src/providers/language/components/i18n'
 import { I18nextProvider } from 'react-i18next'
 
 interface ComponentProps {

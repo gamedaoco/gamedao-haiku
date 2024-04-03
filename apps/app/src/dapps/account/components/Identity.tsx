@@ -15,13 +15,13 @@ import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTr
 import { useYupValidationResolver } from 'src/hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
-import { TransactionDialog } from 'src/components/TransactionDialog/transactionDialog'
+import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'
 
-import { Loader } from 'src/components/Loader'
+import { Loader } from 'components/atoms/Loader'
 
 const initialState = (identity: Identity) => ({
-	display: identity?.displayName || '',
-	legal: identity?.legalName || '',
+	display: identity?.display_name || '',
+	legal: identity?.legal_name || '',
 	email: identity?.email || '',
 	riot: identity?.riot || '',
 	twitter: identity?.twitter || '',
@@ -29,18 +29,21 @@ const initialState = (identity: Identity) => ({
 	discord: identity?.discord || '',
 	web3name: identity?.web3name || '',
 })
+
 export function Identity() {
 	const { t } = useTranslation()
-
 	const address = useCurrentAccountAddress()
+
 	const { loading, data } = useIdentityByAddressSubscription({
 		variables: { address: address },
 	})
+
 	const [identity, setIdentity] = useState(null)
 	useEffect(() => {
-		if (!data?.identityByPk || data?.identityByPk === identity) return
-		setIdentity(data.identityByPk)
-	}, [data?.identityByPk, identity])
+		if (loading) return
+		if (!data?.identity_by_pk || data?.identity_by_pk === identity) return
+		setIdentity(data.identity_by_pk)
+	}, [loading, data?.identity_by_pk, identity])
 
 	//
 
@@ -55,7 +58,7 @@ export function Identity() {
 		}
 	}, [formHandler, identity])
 
-	//
+	// from hell...
 
 	const [isClearDisabled, setIsClearDisabled] = useState(false)
 	useEffect(() => {
@@ -69,7 +72,6 @@ export function Identity() {
 	//
 
 	const [values, setValues] = useState(null)
-
 	const setIdentityTx = useIdentitySetTransaction(values)
 	const clearIdentityTx = useClearIdentityTransaction()
 
@@ -86,9 +88,12 @@ export function Identity() {
 		<TransactionDialog open={showModal} onClose={closeModal} txData={tx} txCallback={closeModal} />
 	)
 
+	const [submitEnabled, setSubmitEnabled] = useState(true)
+
 	const submit = useCallback((data, action: 'set' | 'clear') => {
 		if (tx) return
 		console.log('submit', data, action)
+		setSubmitEnabled(false)
 		setValues(data)
 		if (action === 'clear') setTx(clearIdentityTx)
 		else setTx(setIdentityTx)
@@ -97,7 +102,7 @@ export function Identity() {
 
 	//
 
-	console.log('tx', tx)
+	// console.log('tx', tx)
 
 	return loading ? (
 		<Loader />
@@ -118,7 +123,7 @@ export function Identity() {
 									render={({ field: { onChange, value }, formState: { errors } }) => (
 										<TextField
 											fullWidth
-											label={t('label:displayName')}
+											label={t('label:display_name')}
 											placeholder="Nickname"
 											sx={{
 												'& fieldset': {
@@ -339,6 +344,7 @@ export function Identity() {
 										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
 										color="primary"
 										variant={!isClearDisabled ? 'outlined' : 'contained'}
+										disabled={!submitEnabled}
 									>
 										{/*{!isClearDisabled ? t('button:form:identity:update') : t('button:form:identity:submit')}*/}
 										{!isClearDisabled ? `Update Identity` : `Set Identity`}

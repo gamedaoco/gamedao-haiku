@@ -4,8 +4,8 @@ import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/m
 import { useTheme } from '@mui/material/styles'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { getConnectedEndpoint } from 'src/constants/endpoints'
-import { FontIcons } from 'src/components/Icons/icons'
-import NextLink from 'src/components/Link'
+import { FontIcons } from 'components/atoms/Icons/icons'
+import NextLink from 'components/atoms/Link'
 
 /* eslint-disable @next/next/no-img-element */
 const Logo = () => <img src="/v3/svg/gamedao-color-v-blk.svg" height="48" alt="GameDAO" />
@@ -44,51 +44,51 @@ export function Footer() {
 						</Grid>
 						<Grid item xs={6} md={2} mb={4}>
 							<Typography variant="h6" mb={2}>
-								About
+								Social
 							</Typography>
 							<Typography variant="caption" mb={2}>
-								<Link href="https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca">
+								{/* <Link href="https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca">
 									pinky paper
-								</Link>
+								</Link> */}
 								<Link href="https://blog.gamedao.co">blog</Link>
-								<Link href="https://docs.gamedao.co">documentation</Link>
+								<Link href="https://docs.gamedao.co">docs</Link>
 								<br />
+								<Link href="https://www.twitch.tv/gamedaoco">twitch</Link>
 								<Link href="https://discord.gg/rhwtr7p">discord</Link>
 								<Link href="https://t.me/gamedaoco">telegram</Link>
 								<Link href="https://twitter.com/gamedaoco">twitter</Link>
 								<Link href="https://www.linkedin.com/company/gamedaoco">linkedin</Link>
-								<br />
-								<NextLink href="/service/account">select account</NextLink>
-								<br />
-								<NextLink href="/service/network">select network</NextLink>
 							</Typography>
 						</Grid>
 						<Grid item xs={6} md={2} mb={4}>
 							<Typography variant="h6" mb={2}>
-								How we build
+								Build
 							</Typography>
 							<Typography variant="caption" mb={2}>
-								<Link href="https://zero.io">zero.io</Link>
-								<Link href="https://acala.network">acala.network</Link>
+								<Link href="https://zero.io">zero network</Link>
+								{/* <Link href="https://acala.network">acala.network</Link> */}
 								<Link href="https://substrate.dev">substrate.dev</Link>
-								<Link href="https://kilt.io">kilt protocol</Link>
-								<Link href="https://fractal.id">fractal id</Link>
-								<br />
+								{/* <Link href="https://kilt.io">kilt protocol</Link> */}
+								{/* <Link href="https://fractal.id">fractal id</Link> */}
 								<Link href="https://github.com/gamedaoco">github</Link>
 								<Link
 									href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
 										chain.toLowerCase(),
 									)}#/explorer`}
 								>
-									Polkadot Explorer
+									block explorer
 								</Link>
+								<br />
+								<NextLink href="/service/account">select account</NextLink>
+								<br />
+								<NextLink href="/service/network">select network</NextLink>
 							</Typography>
 						</Grid>
 						<Grid item xs={12} md={6} mb={4}>
 							<Typography variant="h6" mb={2}>
 								GameDAO.
 								<br />
-								For the Creator and Player Economy.
+								The operating system for the creator and player economy.
 							</Typography>
 							<Typography mb={2}>
 								Community driven ownership and creation will be a vital part of how we see video games

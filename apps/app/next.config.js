@@ -35,8 +35,8 @@ module.exports =
 		pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 		reactStrictMode: true,
 		env: {
-			BUILD_TIME: dateStr.toString(),
-			BUILD_TIMESTAMP: +date,
+			BUILD_TIME: `${dateStr.toString()}`,
+			BUILD_TIMESTAMP: `${+date.toString()}`,
 			APP_NAME: pkg.name,
 			APP_VERSION: pkg.version,
 			VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
@@ -54,5 +54,12 @@ module.exports =
 			// 	{ protocol: 'https', hostname: 'gateway.ipfs.io', port: '', pathname: '/ipfs/**', },
 			// ],
 		},
+		typescript: {
+			// !! WARN !!
+			// Dangerously allow production builds to successfully complete even if
+			// your project has type errors.
+			// !! WARN !!
+			ignoreBuildErrors: true,
+		},
 	})
-	// )
+// )

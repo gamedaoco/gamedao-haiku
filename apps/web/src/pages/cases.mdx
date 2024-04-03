@@ -76,14 +76,17 @@ In conclusion, community-based democratization, as enabled by platforms like Gam
 
 import { Layout } from 'layouts/v2'
 import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 
 export default ({ children }) =>
 	<Layout showHeader showFooter>
-		<Box sx={{
-			// pt: ['5rem', '5rem', '2rem'],
-			// pb: '1rem', minHeight: '100vh',
-			h1: { my:2 }, h2: { my:2 }, h3: { my:2 },  '& > p': { my: 2 }
-		}}>
-			{ children }
-		</Box>
+		<Container maxWidth="lg">
+			<Box sx={{
+				// pt: ['5rem', '5rem', '2rem'],
+				// pb: '1rem', minHeight: '100vh',
+				h1: { my:2 }, h2: { my:2 }, h3: { my:2 },  '& > p': { my: 2 }
+			}}>
+				{ children }
+			</Box>
+		</Container>
 	</Layout>

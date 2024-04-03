@@ -1,10 +1,11 @@
 subscription IdentityByAddress($address: String!) {
-    identityByPk(id: $address) {
+    # identityByPk(id: $address) {
+	identity_by_pk(id: $address) {
         id
         email
-        displayName
+        display_name
         image
-        legalName
+        legal_name
         riot
         twitter
         web

@@ -1,5 +1,5 @@
 query Config($env: Environment!) {
-	gamedao {
+	# gamedao {
 		config(env: $env) {
 			SITE_NAME
 			SITE_TITLE
@@ -13,11 +13,11 @@ query Config($env: Environment!) {
 			PROPOSAL_MIN_EXPIRY_IN_SECONDS
 			CAMPAIGN_MIN_EXPIRY_IN_SECONDS
 		}
-	}
+	# }
 }
 
 query ApiProviderConfig {
-	gamedao {
+	# gamedao {
 		apiProvider {
 			name
 			types
@@ -32,5 +32,5 @@ query ApiProviderConfig {
 				blockTargetTime
 			}
 		}
-	}
+	# }
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { ENVIRONMENT } from 'src/constants'
-import { AppContext } from 'src/providers/app/modules/context'
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { AppContext } from 'src/providers/app/components/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
 
@@ -49,8 +49,10 @@ export function AppProvider({ children }) {
 	useEffect(() => {
 		if (!session || connected) return
 		if (!session.user.discord || user.discord === session?.user?.discord) return
-		console.log('================================================================')
-		console.log('app', 'connect', 'discord ->', session.user.discord)
+
+		// console.log('================================================================')
+		// console.log('app', 'connect', 'discord ->', session.user.discord)
+
 		// setDiscord(session?.user?.discord)
 		const updateUser = {
 			...user,
@@ -67,9 +69,8 @@ export function AppProvider({ children }) {
 		if (!user.discord && !user.address) return
 
 		const connect = async () => {
-			console.log('================================================================')
-			console.log('app', 'fetching id', '...')
-
+			// console.log('================================================================')
+			// console.log('app', 'fetching id', '...')
 			// const response = await connectIdentityMutation({
 			// 	variables: { discord: user.discord },
 			// 	// , name: user.name, email: user.email, twitter: user.twitter },
@@ -105,8 +106,9 @@ export function AppProvider({ children }) {
 
 	useEffect(() => {
 		if (connected && !session) {
-			console.log('================================================================')
-			console.log('app', 'disconnected, rm uuid')
+			// console.log('================================================================')
+			// console.log('app', 'disconnected, rm uuid')
+
 			setUser(initialUserState)
 			setConnected(false)
 		}
@@ -116,7 +118,7 @@ export function AppProvider({ children }) {
 		if (!user.address || !user.uuid) return
 		console.log('user', user)
 		const update = async () => {
-			console.log('app', 'writing address...', user.address, 'for', user.uuid)
+			// console.log('app', 'writing address...', user.address, 'for', user.uuid)
 			// const res = await connectIdentityMutation().then((res) => {
 			// 	try {
 			// 		const _uuid = res?.data?.battlepassBot.identity?.address
@@ -132,12 +134,15 @@ export function AppProvider({ children }) {
 	const linkAddress = useCallback(
 		(adr) => {
 			console.log('link address', user, adr)
+
 			if (user.address) {
 				console.log('app', 'already linked')
+
 				return
 			}
 			if (!user.address && user.uuid) {
 				console.log('app', 'linking address...', adr)
+
 				// setAddress(adr)
 				setUser({ ...user, address: adr })
 			} else {
@@ -228,9 +233,9 @@ export function AppProvider({ children }) {
 		<AppContext.Provider
 			value={{
 				ready: !!configQueryResult.data && !!featureQueryResult.data && !!apiProviderConfigQueryResult.data,
-				config: configQueryResult.data?.gamedao.config ?? null,
-				features: featureQueryResult.data?.gamedao.features ?? null,
-				apiProviderConfig: apiProviderConfigQueryResult.data?.gamedao.apiProvider ?? null,
+				config: configQueryResult.data?.config ?? null,
+				features: featureQueryResult.data?.features ?? null,
+				apiProviderConfig: apiProviderConfigQueryResult.data?.apiProvider ?? null,
 				uuid: user.uuid,
 				user: user,
 				linkAddress: linkAddress,

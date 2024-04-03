@@ -25,6 +25,8 @@ export function MyBalances() {
 	const balances = useBalanceByAddress(address)
 	const { t } = useTranslation()
 
+	console.log('balances', balances || null)
+
 	return (
 		<Card sx={{ minHeight: '100%' }} variant={'glass'}>
 			<CardContent>

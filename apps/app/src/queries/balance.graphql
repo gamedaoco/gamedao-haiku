@@ -1,6 +1,7 @@
 subscription BalanceByAddress($address: String!) {
-    balance(where: {address: {_eq: $address}}) {
-        address
+    Balance(where: {address: {_eq: $address}}) {
+        id
+		address
         balanceId
         free
         frozen
@@ -12,17 +13,18 @@ subscription HistoricalBalance(
   $address: String!,
   $symbol: String
 ) {
-  historicalBalance(
+  historical_balance(
     where: {
       address: {_eq: $address},
-      currencyId: {_eq: $symbol}
+      currency_id: {_eq: $symbol}
     }
   ) {
+	id
     block
     free
     reserved
     total
-    currencyId
+    currency_id
   }
 }
 

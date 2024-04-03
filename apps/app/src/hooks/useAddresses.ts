@@ -1,4 +1,4 @@
-import { useExtensionContext } from 'src/providers/extension/modules/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import type { AccountState } from 'src/@types/extension'
 
 export function useAddresses(): string[] {

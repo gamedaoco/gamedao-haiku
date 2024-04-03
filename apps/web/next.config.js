@@ -35,7 +35,7 @@ module.exports = // withBundleAnalyzer(
 		reactStrictMode: true,
 		env: {
 			BUILD_TIME: dateStr.toString(),
-			BUILD_TIMESTAMP: +date,
+			BUILD_TIMESTAMP: date.toString(),
 			APP_NAME: pkg.name,
 			APP_VERSION: pkg.version,
 			VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',

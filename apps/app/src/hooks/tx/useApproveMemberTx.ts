@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLogger } from 'src/hooks/useLogger'
-import { useNetworkContext } from 'src/providers/network/modules/context'
+import { useNetworkContext } from 'src/providers/network/components/context'
 import { TransactionData } from 'src/@types/transactionData'
 import * as Yup from 'yup'
 

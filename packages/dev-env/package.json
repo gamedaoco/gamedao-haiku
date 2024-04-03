@@ -12,9 +12,7 @@
   "devDependencies": {},
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
-    "@polkadot/api": "^8.14.1",
-    "@polkadot/keyring": "^10.1.1",
-    "@polkadot/util-crypto": "^10.1.1",
+    "@polkadot/api": "^10.10.1",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Layout } from 'src/layouts/v2'
 import { Paper, Box, Grid, Typography } from '@mui/material'
 
-import { Checkout } from 'src/components/commerce'
+import { Checkout } from 'components/organisms/commerce'
 
 export function Page() {
 	// const { query } = useRouter()

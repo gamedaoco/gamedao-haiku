@@ -1,18 +1,18 @@
 subscription SuccessfulCampaignByOrganizationId($orgId: String!) {
-    campaign(where: {organizationId: {_eq: $orgId}, state: {_eq: "Success"}}) {
+    campaign(where: {organization_id: {_eq: $orgId}, state: {_eq: "Success"}}) {
         id
         name
     }
 }
 subscription CampaignContributors($address: String!) {
-    campaignContributor(where: {identity: {address: {_eq: $address}}}) {
+    campaign_contributor(where: {identity: {address: {_eq: $address}}}) {
         id
         contributed
         campaign {
             name
             title
             header
-            campaignContributorsAggregate {
+            campaign_contributors_aggregate {
                 aggregate {
                     sum {
                         contributed
@@ -24,8 +24,8 @@ subscription CampaignContributors($address: String!) {
                 name
             }
             expiry
-            createdAtBlock
-            tokenSymbol
+            created_at_block
+            token_symbol
             state
             target
         }
@@ -34,17 +34,17 @@ subscription CampaignContributors($address: String!) {
 
 
 subscription Campaign($address: String) {
-    campaign(where: {adminIdentityId: {_eq: $address}}) {
+    campaign(where: {admin_identity_id: {_eq: $address}}) {
         id
         target
         state
         expiry
-        tokenSymbol
+        token_symbol
         title
         name
         header
         logo
-        campaignContributorsAggregate {
+        campaign_contributors_aggregate {
             aggregate {
                 sum {
                     contributed
@@ -56,23 +56,23 @@ subscription Campaign($address: String) {
             id
             name
             logo
-            payCurrency
+            pay_currency
         }
     }
 }
 
 subscription CampaignByOrganizationId($orgId: String!) {
-    campaign(where: {organizationId: {_eq: $orgId}}, orderBy: { expiry: ASC}) {
+    campaign(where: {organization_id: {_eq: $orgId}}, order_by: { expiry: asc}) {
         id
         target
         state
         expiry
-        tokenSymbol
+        token_symbol
         title
         name
         header
         logo
-        campaignContributorsAggregate {
+        campaign_contributors_aggregate {
             aggregate {
                 sum {
                     contributed
@@ -84,7 +84,7 @@ subscription CampaignByOrganizationId($orgId: String!) {
             id
             name
             logo
-            payCurrency
+            pay_currency
         }
     }
 }
@@ -98,12 +98,12 @@ subscription CampaignById($campaignId: String!, $address: String = "") {
         deposit
         state
         protocol
-        tokenSymbol
+        token_symbol
         description
         header
         name
         markdown
-        campaignContributorsAggregate {
+        campaign_contributors_aggregate {
             aggregate {
                 count(distinct: true)
                 sum {
@@ -111,7 +111,7 @@ subscription CampaignById($campaignId: String!, $address: String = "") {
                 }
             }
         }
-        userContributedCount: campaignContributorsAggregate( where: {address: {_eq: $address}}) {
+        userContributedCount: campaign_contributors_aggregate( where: {address: {_eq: $address}}) {
             aggregate {
                 count
             }
@@ -125,18 +125,18 @@ subscription CampaignById($campaignId: String!, $address: String = "") {
 
 
 
-subscription CampaignsPagination($limit: Int, $filters: [CampaignBoolExp!], $orderBy: [CampaignOrderBy!]) {
-    campaign(limit: $limit, where: {_or: $filters}, orderBy: $orderBy) {
+subscription CampaignsPagination($limit: Int, $filters: [campaign_bool_exp!], $order_by: [campaign_order_by!]) {
+    campaign(limit: $limit, where: {_or: $filters}, order_by: $order_by) {
         id
         target
         state
         expiry
-        tokenSymbol
+        token_symbol
         title
         name
         header
         logo
-        campaignContributorsAggregate {
+        campaign_contributors_aggregate {
             aggregate {
                 sum {
                     contributed
@@ -148,13 +148,13 @@ subscription CampaignsPagination($limit: Int, $filters: [CampaignBoolExp!], $ord
             id
             name
             logo
-            payCurrency
+            pay_currency
         }
     }
 }
 
-subscription CampaignsPaginationCount($filters: [CampaignBoolExp!]) {
-    campaignAggregate (where: {_or: $filters}) {
+subscription CampaignsPaginationCount($filters: [campaign_bool_exp!]) {
+    campaign_aggregate (where: {_or: $filters}) {
         aggregate {
             count
         }

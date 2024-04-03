@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { useLocalStorage } from 'src/hooks/useLocalStorage'
-import { GraphQlContext } from 'src/providers/graphQl/modules/context'
-import { createApolloClient } from 'src/providers/graphQl/modules/graphQl'
+import { GraphQlContext } from 'src/providers/graphQl/components/context'
+import { createApolloClient } from 'src/providers/graphQl/components/graphQl'
 import { useTranslation } from 'react-i18next'
 import { Endpoint } from 'src/@types/graphql'
 import { ENDPOINTS } from 'src/constants/endpoints'
-import { createErrorNotification } from 'src/utils/notificationUtils'
+import { createErrorNotification } from 'src/utils/notification'
 
-import { SelectNetworkDialog } from 'src/components/SelectNetworkDialog/selectNetworkDialog'
+import { SelectNetworkDialog } from 'components/molecules/SelectNetworkDialog/selectNetworkDialog'
 
 enum HealthCheckStatus {
 	NOT_CHECKED = 'NOT_CHECKED',

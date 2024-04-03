@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Container, Typography } from '@mui/material'
 import { Layout } from 'src/layouts/v2'
-import { SelectNetworkDialog } from 'src/components/SelectNetworkDialog/selectNetworkDialog'
+import { SelectNetworkDialog } from 'components/molecules/SelectNetworkDialog/selectNetworkDialog'
 
 export function Page() {
 	const router = useRouter()

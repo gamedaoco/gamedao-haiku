@@ -24,7 +24,7 @@ import {
 	Typography,
 } from '@mui/material'
 
-import { StackedAreaChart } from 'src/components/Charts/StackedAreaChart'
+import { StackedAreaChart } from 'components/molecules/charts/StackedAreaChart'
 
 const getTotal = (balance) => balance.frozen + balance.free + balance.reserved
 
@@ -58,9 +58,9 @@ export function MyBalancesChart({ symbol = 'ZERO' }: IBalancesChart) {
 
 		const _symbol = symbol
 		// const _total = data.historicalBalance.map((balance) => toUnit(balance.total, tokenDecimals))
-		const _free = data.historicalBalance.map((balance) => toUnit(balance.free, tokenDecimals))
-		const _reserved = data.historicalBalance.map((balance) => toUnit(balance.reserved, tokenDecimals))
-		const _categories = data.historicalBalance.map((balance) => balance.block)
+		const _free = data.historical_balance.map((balance) => toUnit(balance.free, tokenDecimals))
+		const _reserved = data.historical_balance.map((balance) => toUnit(balance.reserved, tokenDecimals))
+		const _categories = data.historical_balance.map((balance) => balance.block)
 
 		console.log('data', _symbol, _categories)
 
