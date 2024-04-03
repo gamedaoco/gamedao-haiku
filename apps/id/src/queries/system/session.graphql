@@ -1,5 +1,0 @@
-mutation UpdateSession($address: String!){
-	updateSession(where: {address: {_eq: $address}} ) {
-		returning { key }
-	}
-}
