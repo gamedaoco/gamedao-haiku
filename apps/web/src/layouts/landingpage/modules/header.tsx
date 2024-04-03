@@ -21,9 +21,9 @@ import Link from 'src/components/Link'
 import { features } from 'src/dapps/landingpage/features'
 
 const pages = [
-	// ['Cases',''],
-	['Join Discord', '//discord.gg/rhwtr7p'],
-	['Blog', '//blog.gamedao.co'],
+	['Cases', '/cases'],
+	// ['Join Discord', '//discord.gg/rhwtr7p'],
+	// ['Blog', '//blog.gamedao.co'],
 	// ['Contact','mailto:hey@gamedao.co'],
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Disconnect']

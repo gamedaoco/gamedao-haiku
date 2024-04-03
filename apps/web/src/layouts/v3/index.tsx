@@ -65,7 +65,7 @@ export function Layout({
 		setOpenSidebar(!sidebarOpen)
 	}, [setOpenSidebar, sidebarOpen])
 
-	const showTopBar = true
+	const showTopBar = false
 	const baseSpacing = 90
 	const spacing = showHeader ? `calc( 100vh - ${baseSpacing}px )` : `100vh`
 	const pageTitle = title

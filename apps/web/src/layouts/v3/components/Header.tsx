@@ -217,13 +217,13 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 					<Link href="#">
 						<Button onClick={() => openFeedback()}>
 							<RiChat1Line />
-							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
+							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
 					</Link>
-					<Link href="https://discord.gg/gamedao">
-						<Button>
+					<Link href="https://discord.gg/h2VMgWY">
+						<Button variant="outlined">
 							<RxDiscordLogo />
-							{isXl && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}
+							{isMd && <Typography sx={{ pl: 2, mr: 2 }}>Join Discord</Typography>}
 						</Button>
 					</Link>
 

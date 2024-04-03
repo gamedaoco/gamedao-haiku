@@ -38,11 +38,11 @@ const CustomForm: FC<FormProps> = ({ status, message, onValidated }) => {
 	}
 
 	return (
-		<Box m={0} p={[2, 4]} sx={{ backgroundColor: '#000', minHeight: '240px', height: { xs: '50vh', md: '25vh' } }}>
+		<Box m={0} p={[2, 4]} sx={{ backgroundColor: '#111', minHeight: '240px', height: { xs: '50vh', md: '25vh' } }}>
 			<Container maxWidth="xl" disableGutters>
 				<Stack justifyContent="center" alignItems="left">
 					<Typography pb={2} variant="hero1">
-						Know it first and subscribe to our newsletter
+						{`sign up here to get app, game and drop invites`.toUpperCase()}
 					</Typography>
 
 					<Stack
