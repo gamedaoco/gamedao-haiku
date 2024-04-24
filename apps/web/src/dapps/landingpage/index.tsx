@@ -33,14 +33,13 @@ const Wrapper = styled(Box)(({ theme }) => ({
 }))
 
 export function Landingpage() {
-	const { hero, intro, transform, teaser1, roadmap, team, partners, supporters, wallet, disclaimer, questions } =
-		features
+	const { hero, intro, transform, teaser1, roadmap, team, partners, supporters, wallet, disclaimer, questions } = features
 
 	return (
 		<Fragment>
 			<Box>
-				{hero && <Hero size="2/4" content={heroContent} />}
-				{hero && <Hero size="1/4" content={hero2Content} slide />}
+				{hero && <Hero size="3/4" content={heroContent} />}
+				{/* {hero && <Hero size="1/4" content={hero2Content} slide />} */}
 				{/* {hero && <Hero size="1/4" content={heroContent} />} */}
 				<Newsletter />
 			</Box>
