@@ -9,6 +9,7 @@ import { Box, Container } from '@mui/material'
 import {
 	Hero,
 	Intro,
+	Introcordion,
 	Transform,
 	Teaser,
 	Wallet,
@@ -45,23 +46,20 @@ export function Landingpage() {
 			</Box>
 			<Box>
 				<Container maxWidth="xl" disableGutters>
-					{intro && <Intro />}
+					<Teaser variant="h2" fontSize={['2rem', '4rem']} padding={[4, 6]} sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}>
+						Unleash Creativity
+						<br />
+						Through Community.
+					</Teaser>
 
-					{/* {teaser1 && (
-						<Teaser
-							variant="h2"
-							fontSize={['2rem', '4rem']}
-							padding={[4, 6]}
-							sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}
-						>
-							Building
+					{intro && <Introcordion />}
+					{teaser1 && (
+						<Teaser variant="h2" fontSize={['2rem', '4rem']} padding={[4, 6]} sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}>
+							Build Better
 							<br />
-							better games
-							<br />
-							together.
+							Games Together.
 						</Teaser>
-					)} */}
-
+					)}
 					{/* {transform && <Transform />} */}
 
 					{/* {team && <Team />} */}

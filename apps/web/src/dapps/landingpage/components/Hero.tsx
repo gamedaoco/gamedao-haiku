@@ -112,7 +112,7 @@ const Item = (props) => {
 						sx={{
 							// backgroundColor: '#11111166',
 							// borderRadius: theme.shape.borderRadiusLg,
-							py: full ? 4 : 2,
+							p: full ? 4 : 2,
 						}}
 					>
 						{props.item.img && (
