@@ -127,7 +127,7 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 							? createTokenType(
 									selectedApiProvider.apiProvider,
 									selectedApiProvider.systemProperties.tokenSymbol[data.currencyId],
-							  )
+								)
 							: null,
 				}
 

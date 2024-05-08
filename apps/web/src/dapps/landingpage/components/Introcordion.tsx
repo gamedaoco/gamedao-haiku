@@ -46,9 +46,9 @@ export const Introcordion = () => (
 				GameDAO Marketplace: A Hub for Games, Assets, and Collaboration
 			</Typography>
 			<Typography variant={'body1'} sx={{ p: [0, 2], mt: [2, 0] }}>
-				GameDAO introduces a comprehensive marketplace that serves as a central hub for trading games, game assets, creative content, and workforce
-				services. This platform is designed to facilitate active participation across the gaming and creative industries, enabling users to buy, sell,
-				and trade assets that are crucial for game development and artistic endeavors.
+				GameDAO introduces a comprehensive marketplace that serves as a central hub for trading games, game assets, creative content, and services. This
+				platform is designed to facilitate active participation across the gaming and creative industries, enabling users to buy, sell, and trade assets
+				that are crucial for game development and artistic endeavors.
 			</Typography>
 			<Accordion>
 				<AccordionSummary expandIcon={<ArrowDownwardIcon />} aria-controls="intro-content" id="intro-header">

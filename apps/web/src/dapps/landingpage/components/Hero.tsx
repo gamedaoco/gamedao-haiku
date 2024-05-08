@@ -62,7 +62,14 @@ const Backdrop = ({ src, title, bg, size, img, ...other }) => {
 				borderTop: size !== '4/4' && img !== '' ? '1px solid #000000' : 'none',
 			}}
 		>
-			{src && <NextImage fill src={src || null} alt={title || 'image'} style={{ objectFit: 'cover', objectPosition: 'bottom' }} />}
+			{src && (
+				<NextImage
+					fill
+					src={src || null}
+					alt={title || 'image'}
+					style={{ objectFit: 'cover', objectPosition: 'bottom' }}
+				/>
+			)}
 		</Box>
 	) : null
 }
@@ -80,7 +87,14 @@ const Item = (props) => {
 
 	return (
 		<Fragment>
-			<Backdrop img={props.img} bg={props.item.bg} size={props.size} src={props.item.image} title={props.item.title} priority={props?.index === 0} />
+			<Backdrop
+				img={props.img}
+				bg={props.item.bg}
+				size={props.size}
+				src={props.item.image}
+				title={props.item.title}
+				priority={props?.index === 0}
+			/>
 			<Box
 				px={[2, 4, 6]}
 				py={[2, 4]}

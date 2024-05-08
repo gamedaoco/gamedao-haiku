@@ -59,9 +59,7 @@ export function Content({ title, organizationName, backers, target, contributed,
 
 					<Stack direction="row" spacing={1}>
 						<Typography variant="body2">{t('label:funded')}</Typography>
-						<Typography variant="body1">{`${funded} ${
-							systemProperties?.tokenSymbol?.[currencyId] ?? ''
-						} (${progress}%)`}</Typography>
+						<Typography variant="body1">{`${funded} ${systemProperties?.tokenSymbol?.[currencyId] ?? ''} (${progress}%)`}</Typography>
 					</Stack>
 				</Stack>
 			</Stack>

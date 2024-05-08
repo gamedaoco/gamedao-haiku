@@ -134,7 +134,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 						? t('button:ui:transaction:get_token_a_b', {
 								tokenA: networkBalance.tokenSymbol,
 								tokenB: depositBalance.tokenSymbol,
-						  })
+							})
 						: t('button:ui:transaction:get_token', { token: networkBalance.tokenSymbol })}
 				</Link>
 			</Stack>

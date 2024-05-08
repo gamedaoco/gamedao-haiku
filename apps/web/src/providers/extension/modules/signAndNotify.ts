@@ -53,10 +53,7 @@ export async function SignAndNotify(
 										: null
 									const errorMessage = translationMessage || docsMessage
 									console.log(
-										`Wallet Transaction Result : LOG ${section}.${method}: ${[
-											translationMessage,
-											docsMessage,
-										].join('; ')}`,
+										`Wallet Transaction Result : LOG ${section}.${method}: ${[translationMessage, docsMessage].join('; ')}`,
 									)
 									createErrorNotification(
 										`${section}.${method}${errorMessage ? ': ' + errorMessage : ''}.`,

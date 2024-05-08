@@ -172,7 +172,7 @@ const Items = ({ items }) => {
 						</Button>
 					</Link>
 				</Box>
-		  ))
+			))
 		: null
 }
 

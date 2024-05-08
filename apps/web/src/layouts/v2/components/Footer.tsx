@@ -76,9 +76,7 @@ export function Footer() {
 								<br />
 								<Link href="https://github.com/gamedaoco">github</Link>
 								<Link
-									href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(
-										chain.toLowerCase(),
-									)}#/explorer`}
+									href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(chain.toLowerCase())}#/explorer`}
 								>
 									Polkadot Explorer
 								</Link>

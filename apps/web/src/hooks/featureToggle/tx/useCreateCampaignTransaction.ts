@@ -45,7 +45,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 				const startBlocks =
 					startSecondsDiff > 0
 						? blockNumber +
-						  Math.ceil(startSecondsDiff / selectedApiProvider.systemProperties.blockTargetTime)
+							Math.ceil(startSecondsDiff / selectedApiProvider.systemProperties.blockTargetTime)
 						: blockNumber
 
 				const endSecondsDiff = moment(data.endDate).diff(moment(), 'seconds')

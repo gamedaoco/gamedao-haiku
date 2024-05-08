@@ -196,7 +196,9 @@ export const hero2 = [
 		title: 'Build your own DAO',
 		// sub: `What you need to know`,
 		description: `Get started with the powerful framework for the gaming space.`,
-		links: [{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' }],
+		links: [
+			{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' },
+		],
 		bg: '#609',
 	},
 	{
@@ -363,15 +365,27 @@ export const transform = {
 		},
 		{
 			title: `🎉 Fan Experience`,
-			content: [`Create new Experience for your fanbase`, `Strengthen loyalty`, `Distribute rewards including digital assets or access to IRL services,`],
+			content: [
+				`Create new Experience for your fanbase`,
+				`Strengthen loyalty`,
+				`Distribute rewards including digital assets or access to IRL services,`,
+			],
 		},
 		{
 			title: `🍕 Market Outreach`,
-			content: [`New opportunities for partnerships and sponsors`, `Increase your outreach to new groups`, `Exposure for existing partners`],
+			content: [
+				`New opportunities for partnerships and sponsors`,
+				`Increase your outreach to new groups`,
+				`Exposure for existing partners`,
+			],
 		},
 		{
 			title: `💸 Sustainable Revenue`,
-			content: [`Monetize fan engagement`, `Use a new, innovative revenue stream`, `Increase sustainability through Web3 revenue share`],
+			content: [
+				`Monetize fan engagement`,
+				`Use a new, innovative revenue stream`,
+				`Increase sustainability through Web3 revenue share`,
+			],
 		},
 	],
 }

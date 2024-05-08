@@ -134,9 +134,7 @@ export function CampaignDetailsContent({
 							</Stack>
 							<Stack direction="column" alignItems="flex-end">
 								<Typography variant="overline">{t('page:campaign_details:target')}</Typography>
-								<Typography variant="body1">{`${aim}  ${
-									systemProperties?.tokenSymbol?.[currencyId] ?? ''
-								}`}</Typography>
+								<Typography variant="body1">{`${aim}  ${systemProperties?.tokenSymbol?.[currencyId] ?? ''}`}</Typography>
 							</Stack>
 						</Stack>
 						<LinearProgress variant="determinate" color="inherit" value={progress} />

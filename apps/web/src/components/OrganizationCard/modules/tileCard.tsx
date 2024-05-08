@@ -38,9 +38,7 @@ export const TileCard = ({ item }: ComponentPros) => {
 					}}
 				>
 					<Person fontSize={'inherit'} />
-					<span>{`${item?.organization_members?.length} ${t(
-						`label:${item?.organization_members?.length > 1 ? 'members' : 'member'}`,
-					)} `}</span>
+					<span>{`${item?.organization_members?.length} ${t(`label:${item?.organization_members?.length > 1 ? 'members' : 'member'}`)} `}</span>
 				</Box>
 				<Box
 					sx={{
