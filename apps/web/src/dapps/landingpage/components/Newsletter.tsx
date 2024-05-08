@@ -38,20 +38,14 @@ const CustomForm: FC<FormProps> = ({ status, message, onValidated }) => {
 	}
 
 	return (
-		<Box m={0} p={[2, 4]} sx={{ backgroundColor: '#111', minHeight: '240px', height: { xs: '50vh', md: '25vh' } }}>
+		<Box m={0} p={[2, 4]} sx={{ backgroundColor: '#111', minHeight: '240px', height: { sm: 'auto' } }}>
 			<Container maxWidth="xl" disableGutters>
 				<Stack justifyContent="center" alignItems="left">
 					<Typography pb={2} variant="hero1">
 						{`sign up here to get app, game and drop invites`.toUpperCase()}
 					</Typography>
 
-					<Stack
-						direction={isSm ? `row` : `column`}
-						spacing={2}
-						width={`100%`}
-						justifyContent="center"
-						alignItems="center"
-					>
+					<Stack direction={isSm ? `row` : `column`} spacing={2} width={`100%`} justifyContent="center" alignItems="center">
 						<Input
 							sx={
 								{
@@ -113,9 +107,7 @@ const CustomForm: FC<FormProps> = ({ status, message, onValidated }) => {
 export const Newsletter: React.FC = () => (
 	<MailchimpSubscribe
 		url={'https://zero.us5.list-manage.com/subscribe/post?u=9b3f3ef14c871758185754652&amp;id=d09264f8c7'}
-		render={({ subscribe, status, message }) => (
-			<CustomForm status={status} message={message} onValidated={(formData) => subscribe(formData)} />
-		)}
+		render={({ subscribe, status, message }) => <CustomForm status={status} message={message} onValidated={(formData) => subscribe(formData)} />}
 	/>
 )
 

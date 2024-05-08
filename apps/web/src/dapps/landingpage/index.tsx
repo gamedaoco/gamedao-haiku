@@ -22,7 +22,7 @@ import {
 	// QuestionsBattlepass,
 } from './components'
 
-import { hero as heroContent, hero2 as hero2Content } from './content'
+import { hero as heroContent, coming_soon } from './content'
 
 const Wrapper = styled(Box)(({ theme }) => ({
 	// '& *': {
@@ -34,8 +34,7 @@ const Wrapper = styled(Box)(({ theme }) => ({
 }))
 
 export function Landingpage() {
-	const { hero, intro, transform, teaser1, roadmap, team, partners, supporters, wallet, disclaimer, questions } =
-		features
+	const { hero, intro, transform, teaser1, roadmap, team, partners, supporters, wallet, disclaimer, questions } = features
 
 	return (
 		<Fragment>
@@ -44,15 +43,11 @@ export function Landingpage() {
 				{/* {hero && <Hero size="1/4" content={hero2Content} slide />} */}
 				{/* {hero && <Hero size="1/4" content={heroContent} />} */}
 				<Newsletter />
+				{/* <Hero size="1/5" content={coming_soon} slide /> */}
 			</Box>
 			<Box>
 				<Container maxWidth="xl" disableGutters>
-					<Teaser
-						variant="h2"
-						fontSize={['2rem', '4rem']}
-						padding={[4, 6]}
-						sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}
-					>
+					<Teaser variant="h2" fontSize={['2rem', '4rem']} padding={[4, 6]} sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}>
 						Unleash Creativity
 						<br />
 						Through Community.
@@ -60,12 +55,7 @@ export function Landingpage() {
 
 					{intro && <Introcordion />}
 					{teaser1 && (
-						<Teaser
-							variant="h2"
-							fontSize={['2rem', '4rem']}
-							padding={[4, 6]}
-							sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}
-						>
+						<Teaser variant="h2" fontSize={['2rem', '4rem']} padding={[4, 6]} sx={{ backgroundColor: '#ee4693', color: '#f3cb14' }}>
 							Build Better
 							<br />
 							Games Together.

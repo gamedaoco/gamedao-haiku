@@ -4,6 +4,16 @@
       "key": "0",
       "text": "GAME",
       "value": 0
+    },
+    {
+      "key": "1",
+      "text": "PLAY",
+      "value": 1
+    },
+    {
+      "key": "2",
+      "text": "ZERO",
+      "value": 2
     }
   ],
   "proposalTypes": [
@@ -26,7 +36,7 @@
     },
     {
       "key": "1",
-      "text": "Token Weight Majority",
+      "text": "Token Weighted Majority",
       "value": 1
     },
     {

@@ -191,57 +191,74 @@ export const hero = [
 //
 //
 
-export const hero2 = [
+export const coming_soon = [
 	{
-		title: 'Build your own DAO',
-		// sub: `What you need to know`,
-		description: `Get started with the powerful framework for the gaming space.`,
-		links: [
-			{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' },
-		],
-		bg: '#609',
+		title: `Esports Tournaments`,
+		sub: `Reach another level of competitiveness with Battlepass`,
+		description: `500 slots not reached, let's try another time!`,
+		image: '/teaser.jpg',
+		align: 'center',
+		// links: [
+		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+		// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+		// ],
+		bg: '#000',
+		img: '/partners/wave-esports-white.png',
+		img_height: '24',
 	},
-	{
-		title: `Fundraising for Creators`,
-		// sub: `Fundraising and go to market for your game project on GameDAO`,
-		description: `Raising funds and awareness has never been easy. GameDAO navigates you through the process of lifting off.`,
-		links: [
-			{
-				text: 'More',
-				url: 'https://blog.gamedao.co/the-art-of-videogames-funding-a81ce6867d43',
-				icon: 'Joystick',
-			},
-		],
-		bg: '#006699',
-	},
-
-	{
-		title: 'Battlepass',
-		// sub: `What you need to know`,
-		description: `What is a Battlepass and why would you need it to set up your gaming organization..`,
-		links: [
-			{
-				text: 'More',
-				url: 'https://blog.gamedao.co/how-gamedaos-battlepass-boosts-growth-458b33a6be64',
-				icon: 'Joystick',
-			},
-		],
-		bg: '#660099',
-	},
-	// {
-	// 	title: `WAVE Esports`,
-	// 	sub: `WAVEpass CASHCUP invitational`,
-	// 	description: `500 slots not reached, let's try another time!`,
-	// 	// image: '/teaser.jpg',
-	// 	// links: [
-	// 	// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
-	// 	// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
-	// 	// ],
-	// 	bg: '#000',
-	// 	img: '/partners/wave-esports-white.png',
-	// 	img_height: '24',
-	// },
 ]
+
+// export const hero2 = [
+// 	{
+// 		title: 'Build your own DAO',
+// 		// sub: `What you need to know`,
+// 		description: `Get started with the powerful framework for the gaming space.`,
+// 		links: [
+// 			{ text: 'More', url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca', icon: 'Joystick' },
+// 		],
+// 		bg: '#609',
+// 	},
+// 	{
+// 		title: `Fundraising for Creators`,
+// 		// sub: `Fundraising and go to market for your game project on GameDAO`,
+// 		description: `Raising funds and awareness has never been easy. GameDAO navigates you through the process of lifting off.`,
+// 		links: [
+// 			{
+// 				text: 'More',
+// 				url: 'https://blog.gamedao.co/the-art-of-videogames-funding-a81ce6867d43',
+// 				icon: 'Joystick',
+// 			},
+// 		],
+// 		bg: '#006699',
+// 	},
+
+// 	{
+// 		title: 'Battlepass',
+// 		// sub: `What you need to know`,
+// 		description: `What is a Battlepass and why would you need it to set up your gaming organization..`,
+// 		links: [
+// 			{
+// 				text: 'More',
+// 				url: 'https://blog.gamedao.co/how-gamedaos-battlepass-boosts-growth-458b33a6be64',
+// 				icon: 'Joystick',
+// 			},
+// 		],
+// 		bg: '#660099',
+// 	},
+// 	// {
+// 	// 	title: `WAVE Esports`,
+// 	// 	sub: `WAVEpass CASHCUP invitational`,
+// 	// 	description: `500 slots not reached, let's try another time!`,
+// 	// 	// image: '/teaser.jpg',
+// 	// 	// links: [
+// 	// 	// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+// 	// 	// 	{ text: 'LEARN MORE', url: '/cases/esports', icon: 'Joystick', },
+// 	// 	// ],
+// 	// 	bg: '#000',
+// 	// 	img: '/partners/wave-esports-white.png',
+// 	// 	img_height: '24',
+// 	// },
+// ]
 
 //
 //
@@ -365,27 +382,15 @@ export const transform = {
 		},
 		{
 			title: `🎉 Fan Experience`,
-			content: [
-				`Create new Experience for your fanbase`,
-				`Strengthen loyalty`,
-				`Distribute rewards including digital assets or access to IRL services,`,
-			],
+			content: [`Create new Experience for your fanbase`, `Strengthen loyalty`, `Distribute rewards including digital assets or access to IRL services,`],
 		},
 		{
 			title: `🍕 Market Outreach`,
-			content: [
-				`New opportunities for partnerships and sponsors`,
-				`Increase your outreach to new groups`,
-				`Exposure for existing partners`,
-			],
+			content: [`New opportunities for partnerships and sponsors`, `Increase your outreach to new groups`, `Exposure for existing partners`],
 		},
 		{
 			title: `💸 Sustainable Revenue`,
-			content: [
-				`Monetize fan engagement`,
-				`Use a new, innovative revenue stream`,
-				`Increase sustainability through Web3 revenue share`,
-			],
+			content: [`Monetize fan engagement`, `Use a new, innovative revenue stream`, `Increase sustainability through Web3 revenue share`],
 		},
 	],
 }

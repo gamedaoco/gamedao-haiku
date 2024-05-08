@@ -12,25 +12,30 @@ import { Fragment } from 'react'
 import Carousel from 'react-material-ui-carousel'
 import Link from 'src/components/Link'
 
-type Size = '1/4' | '2/4' | '3/4' | '4/4'
+import { AspectRatio } from './AspectRatio'
+
+type Size = '1' | '1/4' | '2/4' | '3/4' | '4/4' | '1/5' | '2/5' | '3/5' | '4/5'
 
 const dimensions = (size: Size) => {
 	switch (size) {
 		case '1/4':
 			return { minHeight: { xs: '50vh', md: '25vh' }, height: { xs: '50vh', md: '25vh' } }
-			break
 		case '2/4':
 			return { minHeight: { xs: '100vh', md: '50vh' }, height: { xs: '100vh', md: '50vh' } }
-			break
 		case '3/4':
 			return { minHeight: { xs: '100vh', md: '75vh' }, height: { xs: '100vh', md: '75vh' } }
-			break
-		case '4/4':
+		case '1/5':
+			return { minHeight: { xs: '100vh', md: '20vh' }, height: { xs: '100vh', md: '20vh' } }
+		case '2/5':
+			return { minHeight: { xs: '100vh', md: '40vh' }, height: { xs: '100vh', md: '40vh' } }
+		case '3/5':
+			return { minHeight: { xs: '100vh', md: '60vh' }, height: { xs: '100vh', md: '60vh' } }
+		case '4/5':
+			return { minHeight: { xs: '100vh', md: '80vh' }, height: { xs: '100vh', md: '80vh' } }
+		case '1':
 			return { minHeight: { xs: '100vh' }, height: { xs: '100vh' } }
-			break
 		default:
-			return { minHeight: { xs: '100vh' }, height: { xs: '100vh' } }
-			break
+			return { minHeight: { xs: '100%' }, height: { xs: '100%' } }
 	}
 }
 
@@ -48,9 +53,9 @@ const Teaser = styled(Typography)(({ theme }) => ({
 	textAlign: 'left',
 }))
 
-const Backdrop = ({ src, title, bg, size, img, ...other }) => {
+const Backdrop = ({ src, title, bg, size, img, imagePosition, ...other }) => {
 	const computedStyles = dimensions(size)
-	console.log('bg', bg, src, title, size)
+	console.log('bg', bg, src, title, size, imagePosition)
 	return src ? (
 		<Box
 			sx={{
@@ -62,14 +67,7 @@ const Backdrop = ({ src, title, bg, size, img, ...other }) => {
 				borderTop: size !== '4/4' && img !== '' ? '1px solid #000000' : 'none',
 			}}
 		>
-			{src && (
-				<NextImage
-					fill
-					src={src || null}
-					alt={title || 'image'}
-					style={{ objectFit: 'cover', objectPosition: 'bottom' }}
-				/>
-			)}
+			{src && <NextImage fill src={src || null} alt={title || 'image'} style={{ objectFit: 'cover', objectPosition: imagePosition }} />}
 		</Box>
 	) : null
 }
@@ -94,6 +92,7 @@ const Item = (props) => {
 				src={props.item.image}
 				title={props.item.title}
 				priority={props?.index === 0}
+				imagePosition={props.item.imagePosition}
 			/>
 			<Box
 				px={[2, 4, 6]}
@@ -186,9 +185,10 @@ interface HeroProps {
 	content?: Array<any>
 	size?: Size
 	slide?: boolean
+	ratio?: number
 }
 
-export const Hero = ({ content, size = '4/4', slide = false }: HeroProps) => {
+export const Hero = ({ content, size = '4/4', slide = false, ratio }: HeroProps) => {
 	const theme = useTheme()
 	const isSm = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,

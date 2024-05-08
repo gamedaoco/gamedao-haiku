@@ -25,8 +25,8 @@ export async function apiProviderResolver(): Promise<ApiProvider> {
 
 			// TODO: Remove hardcoded values
 			networkCurrency: 0, // 0 = ZERO
-			governanceCurrency: 2, // 2 = GAME
 			paymentCurrencies: 1, // 1 = PLAY
+			governanceCurrency: 2, // 2 = GAME
 			blockTargetTime: blockDuration ?? 12,
 		},
 		name: (systemName.toHuman() as any) ?? 'ZERO',
