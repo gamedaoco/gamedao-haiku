@@ -303,31 +303,34 @@ export const hero2 = [
 // ]
 
 export const intro = [
+	// {
+	// 	header: `Revolutionizing Game Publishing with Community Power`,
+	// 	text: `GameDAO is transforming the game publishing landscape
+	// 	by empowering creators and players to co-own and co-create
+	// 	in the world of indie games, arts, music, and entertainment.
+	// 	With over 2.7 billion gamers worldwide, GameDAO leverages this vast community to
+	// 	set new standards in game development and ownership,
+	// 	facilitating collaboration from concept to market in a secure, transparent environment.`,
+	// },
 	{
-		header: `Empowering Creators and Gamers`,
-		text: `GameDAO is revolutionizing the way indie games, arts, music, and entertainment are produced and owned.
-		With the gaming population exceeding 2.7 billion globally, it's clear that community-driven ownership and game creation should be the industry standard.
-		GameDAO facilitates this by providing a secure and transparent environment where gamers and creators can collaborate from the inception of an idea to the creation of game economies.`,
+		header: 'Elevating Games through Community Curation',
+		text: "Our platform puts the power of discovery and curation in the hands of the community, ensuring that the finest projects from both budding indie talents and established AAA studios receive the visibility and support they deserve. GameDAO's community-driven approach guarantees that top-tier projects achieve maximum exposure and leverage.",
 	},
 	{
-		header: 'Discovery and Curation Driven by Community',
-		text: 'At GameDAO, the community is at the heart of discovery and curation. Our platform is designed for maximum community involvement, where both emerging indie talents and established AAA creators can be promoted or invited to join an elite creators club. This process ensures that only the highest quality projects are elevated, leveraging the collective power of our audience.',
+		header: 'Engaging and Governing with Tokenized Democracy',
+		text: "At GameDAO, governance goes beyond traditional methods by integrating tokenized engagement. Holders of GAME tokens participate directly in the decision-making processes through the GAME3 foundation, enhancing governance with gamified elements that reward participation and elevate the community's voice in project directions.",
 	},
 	{
-		header: 'Tokenized Engagement and Democratic Governance',
-		text: 'GameDAO enhances engagement through the innovative use of GAME tokens, allowing token holders to participate in the governance of GameDAO via the GAME3 foundation. This tokenized system not only democratizes the decision-making process but also gamifies participation, making it exciting and rewarding. Members can level up their voting power and earn rewards, driving greater involvement and adoption.',
+		header: 'Transparent Funding for Game Creators',
+		text: 'Creators at GameDAO can tap into community-driven funding, gaining rapid access to resources and support. Our blockchain-backed system ensures every transaction and governance decision is recorded, offering a layer of transparency and accountability that protects creators, investors, and community members, reducing financial risks and boosting confidence.',
 	},
 	{
-		header: 'Fundraising and Financial Transparency',
-		text: 'Through GameDAO, creators can raise funds directly from the community, which accelerates project reach and adoption while providing a clear, milestone-based release of funds. Our system notarizes membership, fund usage, and governance decisions on the blockchain, offering unmatched transparency and accountability. This structure reduces risks for creators, community members, and investors alike.',
+		header: 'Streamlining Creation with Web3 Technology',
+		text: "We enable traditional and contemporary creators to effortlessly form collectives and manage their projects with blockchain technology. GameDAO's framework simplifies the adoption of Web3 innovations, allowing creators to focus on what they do best—creating engaging content and games.",
 	},
 	{
-		header: 'Comprehensive Support for Creators',
-		text: 'GameDAO offers a robust platform for creators to form collectives or organizations, manage memberships, and govern their projects effectively using Web3 technology. This seamless integration enables traditional creators to adopt and benefit from the advancements in blockchain technology without the typical complexities involved.',
-	},
-	{
-		header: 'Engagement and Monetization through Battlepass',
-		text: 'Our unique product, Battlepass, provides tangible incentives for collaboration and creation. It measures real-world engagement and outcomes—from game asset creation to social media interactions and more. This system not only incentivizes contributors but also ensures that all achievements are verifiable and rewarded appropriately, fostering a thriving ecosystem for creators and participants.',
+		header: 'Monetizing Engagement with Battlepass',
+		text: 'GameDAO’s Battlepass system revolutionizes engagement and monetization, providing measurable and verifiable rewards for a variety of contributions, from game asset creation to competitive gaming and social media interactions. This approach not only motivates but also financially supports creators and participants in achieving tangible outcomes.',
 	},
 	// {
 	// 	header: '',
