@@ -1,15 +1,16 @@
 import React, { useCallback } from 'react'
 import { GRADIENT } from '../styles'
 import { intro } from '../content'
-import { Grid, Paper, Typography } from '@mui/material'
+import { Container, Grid, Paper, Typography } from '@mui/material'
 import { Hero, Team, Partners, Supporters } from '.'
 
 export const Intro = () => (
-	<Paper sx={{ mx: '2rem', backgroundColor: 'transparent', height: '100%' }} elevation={0}>
+	<Container maxWidth="xl" disableGutters sx={{ mb: '2rem', backgroundColor: '#transparent', height: '100%' }}>
+		{/* <Paper sx={{ mx: '2rem', backgroundColor: '#111', height: '100%' }} elevation={0}> */}
 		<Grid container spacing={[0, 2, 4]} pt={[0, 2]}>
 			{intro.map((item, i) => {
 				return (
-					<Grid key={i} container item xs={12} md={6} direction="column">
+					<Grid key={i} container item xs={12} md={4} direction="column">
 						<Typography variant={'h3'} py={2}>
 							{' '}
 							{item.header}{' '}
@@ -22,5 +23,6 @@ export const Intro = () => (
 				)
 			})}
 		</Grid>
-	</Paper>
+		{/* </Paper> */}
+	</Container>
 )

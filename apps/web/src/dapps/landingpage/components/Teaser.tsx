@@ -3,7 +3,7 @@ import { Typography } from '@mui/material'
 import { GRADIENT } from '../styles'
 
 export const Teaser = styled(Typography)(({ theme }) => ({
-	background: GRADIENT.pink,
+	background: GRADIENT.blue,
 	WebkitBackgroundClip: 'text',
 	WebkitTextFillColor: 'transparent',
 	width: '100%',

@@ -156,31 +156,30 @@ export const hero = [
 		// Empowering creators to
 		// build better games through
 		// democratization and community ownership.
-		sub: `Enhance your gaming experience with GameDAO`,
+		// sub: `Just better games`,
 		description: `
-		The ultimate platform for community-driven
-		fan engagement, governance, fundraising, and collectibles.
-		Connect with other gamers, creators, and investors
-		to build better games together.
+		GameDAO creates the ultimate community powered games publishing platform,
+		covering the full life cycle of your project idea and enabling you to
+		build, launch and scale your games with transparency and confidence.
 		`,
 		// image: '/art/IP39-DeepMarket.jpg',
 		image: '/v4/tall.png',
 		links: [
-			{
-				text: 'PINKY PAPER',
-				url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca',
-				icon: 'Book',
-			},
+			// {
+			// 	text: 'PINKY PAPER',
+			// 	url: 'https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca',
+			// 	icon: 'Book',
+			// },
 			// {
 			// 	text: 'ONE PAGER',
 			// 	url: 'https://docsend.com/view/gesqag6cbemye63f',
 			// 	icon: 'Book',
 			// },
-			{
-				text: 'JOIN WAITLIST',
-				url: 'https://discord.gg/kr8Q9Jam2N',
-				icon: 'Discord',
-			},
+			// {
+			// 	text: 'JOIN WAITLIST',
+			// 	url: 'https://discord.gg/kr8Q9Jam2N',
+			// 	icon: 'Discord',
+			// },
 		],
 		bg: '#111',
 		img: '/v3/svg/gamedao-color-h-wht-m.svg',
@@ -246,61 +245,97 @@ export const hero2 = [
 //
 //
 
-export const intro = [
-	{
-		header: `GameDAO`,
-		text: `With more than 2.7 billion gamers worldwide,
-	community driven ownership and game creation should be
-	the standard for the video game industry.
+// export const intro = [
+// 	{
+// 		header: `GameDAO`,
+// 		text: `With more than 2.7 billion gamers worldwide,
+// 	community driven ownership and game creation should be
+// 	the standard for the video game industry.
 
-	From forging the initial idea over collaboration
-	to fundraising and finally creating game economies,
-	it is vital to provide gamers with a safe environment to collaborate.
-	`,
+// 	From forging the initial idea over collaboration
+// 	to fundraising and finally creating game economies,
+// 	it is vital to provide gamers with a safe environment to collaborate.
+// 	`,
+// 	},
+// 	{
+// 		header: `For Gamers + Creators`,
+// 		text: `GameDAO enables the gaming community to
+// 	collaborate, fund and own high quality games.
+// 	We achieve this through community discovery and curation
+// 	driven by a quality audience, transparency and accountability.
+// 	`,
+// 	},
+// 	{
+// 		header: `Discovery + Curation`,
+// 		text: `Community curated by design: Get promoted or invited by the
+// 	community to become part of top tier creators club: GameDAO is
+// 	for everyone and curation leads to maximum leverage for the best ideas,
+// 	No matter if you are a fresh Indie or a seasoned AAA.
+// 	`,
+// 	},
+// 	{
+// 		header: `Governance + Democracy`,
+// 		text: `Voting and directing teams does not need to be boring and
+// 	gamification drives adoption in governance and participation:
+// 	Level up voting power and get rewarded for your contribution.
+// 	`,
+// 	},
+// 	{
+// 		header: `Engagement + Incentives`,
+// 		text: `Whether you are looking for activation of your creative projects,
+// 		or run a full size eSports team, GameDAO enables monetisation and measurable
+// 		outcomes for both creators and community through Battlepass.
+// 		`,
+// 	},
+// 	{
+// 		header: `Fundraising + Ownership`,
+// 		text: `Raise funds for your creative projects and
+// 		get support from the community accelerating reach and adoption..
+// 	`,
+// 	},
+// 	// {
+// 	// 	header: `Open Protocols`,
+// 	// 	text: `GameDAO creates open protocols dedicated to transform and bridge
+// 	// the world of video games into the world of Web3. DAO, DeFi and NFTs
+// 	// shift the power back where it belongs: into the hands of the community.
+// 	// `,
+// 	// },
+// ]
+
+export const intro = [
+	// {
+	// 	header: `Revolutionizing Game Publishing with Community Power`,
+	// 	text: `GameDAO is transforming the game publishing landscape
+	// 	by empowering creators and players to co-own and co-create
+	// 	in the world of indie games, arts, music, and entertainment.
+	// 	With over 2.7 billion gamers worldwide, GameDAO leverages this vast community to
+	// 	set new standards in game development and ownership,
+	// 	facilitating collaboration from concept to market in a secure, transparent environment.`,
+	// },
+	{
+		header: 'Elevating Games through Community Curation',
+		text: "Our platform puts the power of discovery and curation in the hands of the community, ensuring that the finest projects from both budding indie talents and established AAA studios receive the visibility and support they deserve. GameDAO's community-driven approach guarantees that top-tier projects achieve maximum exposure and leverage.",
 	},
 	{
-		header: `For Gamers + Creators`,
-		text: `GameDAO enables the gaming community to
-	collaborate, fund and own high quality games.
-	We achieve this through community discovery and curation
-	driven by a quality audience, transparency and accountability.
-	`,
+		header: 'Engaging and Governing with Tokenized Democracy',
+		text: "At GameDAO, governance goes beyond traditional methods by integrating tokenized engagement. Holders of GAME tokens participate directly in the decision-making processes through the GAME3 foundation, enhancing governance with gamified elements that reward participation and elevate the community's voice in project directions.",
 	},
 	{
-		header: `Discovery + Curation`,
-		text: `Community curated by design: Get promoted or invited by the
-	community to become part of top tier creators club: GameDAO is
-	for everyone and curation leads to maximum leverage for the best ideas,
-	No matter if you are a fresh Indie or a seasoned AAA.
-	`,
+		header: 'Transparent Funding for Game Creators',
+		text: 'Creators at GameDAO can tap into community-driven funding, gaining rapid access to resources and support. Our blockchain-backed system ensures every transaction and governance decision is recorded, offering a layer of transparency and accountability that protects creators, investors, and community members, reducing financial risks and boosting confidence.',
 	},
 	{
-		header: `Governance + Democracy`,
-		text: `Voting and directing teams does not need to be boring and
-	gamification drives adoption in governance and participation:
-	Level up voting power and get rewarded for your contribution.
-	`,
+		header: 'Streamlining Creation with Web3 Technology',
+		text: "We enable traditional and contemporary creators to effortlessly form collectives and manage their projects with blockchain technology. GameDAO's framework simplifies the adoption of Web3 innovations, allowing creators to focus on what they do best—creating engaging content and games.",
 	},
 	{
-		header: `Engagement + Incentives`,
-		text: `Whether you are looking for activation of your creative projects,
-		or run a full size eSports team, GameDAO enables monetisation and measurable
-		outcomes for both creators and community through Battlepass.
-		`,
+		header: 'Monetizing Engagement with Battlepass',
+		text: 'GameDAO’s Battlepass system revolutionizes engagement and monetization, providing measurable and verifiable rewards for a variety of contributions, from game asset creation to competitive gaming and social media interactions. This approach not only motivates but also financially supports creators and participants in achieving tangible outcomes.',
 	},
-	{
-		header: `Fundraising + Ownership`,
-		text: `Raise funds for your creative projects and
-		get support from the community accelerating reach and adoption..
-	`,
-	},
-	{
-		header: `Open Protocols`,
-		text: `GameDAO creates open protocols dedicated to transform and bridge
-	the world of video games into the world of Web3. DAO, DeFi and NFTs
-	shift the power back where it belongs: into the hands of the community.
-	`,
-	},
+	// {
+	// 	header: '',
+	// 	text: 'By reinforcing the foundation of GameDAO with these principles, we establish ourselves as a pioneering, community-driven publisher for new and experienced content creators in the gaming industry.',
+	// },
 ]
 
 export const teaser1 = {
