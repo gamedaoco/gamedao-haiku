@@ -58,16 +58,16 @@ const leftNav = [
 	// 	path: '/battlepass/overview',
 	// 	icon: <RiSwordLine />,
 	// },
-	{
-		name: 'Collectives', // 'button:navigation:organizations',
-		path: '/collectives/overview',
-		icon: <RiAncientGateLine />,
-	},
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns/overview',
-		icon: <RiVipDiamondLine />,
-	},
+	// {
+	// 	name: 'Collectives', // 'button:navigation:organizations',
+	// 	path: '/collectives/overview',
+	// 	icon: <RiAncientGateLine />,
+	// },
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns/overview',
+	// 	icon: <RiVipDiamondLine />,
+	// },
 	// {
 	// 	name: 'Buy', // button:navigation:campaigns',
 	// 	path: '/buy',

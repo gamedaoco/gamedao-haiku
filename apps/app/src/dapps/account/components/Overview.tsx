@@ -8,23 +8,25 @@ import { MyBalances } from './MyBalances'
 import { MyBalancesChart } from './MyBalancesChart'
 import { MyCollectables } from './MyCollectables'
 
+import { Staking } from './Staking'
+
 export function Overview() {
 	const theme = useTheme()
 	console.log('overview')
 	return (
 		<Grid container spacing={theme.spacing(2)}>
-			<Grid item xs={12} md={8}>
+			<Grid item xs={12}>
 				<MyBalances />
 			</Grid>
 
-			<Grid item xs={12} md={4}>
+			{/* <Grid item xs={12} md={4}>
 				<MyAchievements />
-			</Grid>
+			</Grid> */}
 
-			{/*
 			<Grid item xs={12} md={12}>
 				<MyBalancesChart symbol="ZERO" />
 			</Grid>
+			{/*
 
 			<Grid item xs={12}>
 				<MyOrganizations />
@@ -33,6 +35,10 @@ export function Overview() {
 			<Grid item xs={12}>
 				<MyCollectables />
 			</Grid> */}
+
+			<Grid item xs={12}>
+				<Staking />
+			</Grid>
 		</Grid>
 	)
 }

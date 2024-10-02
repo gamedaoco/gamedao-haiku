@@ -1,5 +1,17 @@
 import { Close } from '@mui/icons-material'
-import { Box, Button, Drawer, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Stack, Typography, Toolbar, MenuItem } from '@mui/material'
+import {
+	Box,
+	Button,
+	Drawer,
+	ListItemButton,
+	ListItemIcon,
+	ListItemText,
+	Link as MUILink,
+	Stack,
+	Typography,
+	Toolbar,
+	MenuItem,
+} from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useRouter } from 'next/router'
 import React, { Fragment, useCallback } from 'react'
@@ -33,11 +45,11 @@ interface ComponentProps {
 
 // TODO: Extract to features / graphql
 const leftNav = [
-	{
-		name: 'Collectives', // 'button:navigation:organizations',
-		path: '/collectives',
-		icon: <RiAncientGateLine />,
-	},
+	// {
+	// 	name: 'Collectives', // 'button:navigation:organizations',
+	// 	path: '/collectives',
+	// 	icon: <RiAncientGateLine />,
+	// },
 	// {
 	// 	name: 'Battlepass', //'button:navigation:quests',
 	// 	path: '/battlepass',

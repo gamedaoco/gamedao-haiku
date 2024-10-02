@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
@@ -10,6 +10,7 @@ import { useExtensionContext } from 'src/providers/extension/components/context'
 import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
+import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
 
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notification'
@@ -24,6 +25,7 @@ export function Header() {
 	const { t } = useTranslation()
 
 	const address = useCurrentAccountAddress()
+	const balances = useBalanceByAddress(address)
 	const { identity } = useIdentityByAddress(address)
 	const accountState = useCurrentAccountState()
 	const { user } = useAppContext()
@@ -36,8 +38,23 @@ export function Header() {
 		navigator.clipboard.writeText(address).then(() => createInfoNotification(t('notification:info:address_copied')))
 	}, [address, t])
 
+	// render balance in currency
+	const [fx, setFx] = useState({ zero: 0.1, game: 0.6, play: 1 })
+	const [displayBalance, setDisplayBalance] = useState('0.00')
+	const [currency, setCurrency] = useState('EUR')
+	useEffect(() => {
+		if (!balances) return
+		setDisplayBalance(
+			Math.round(
+				(balances[0]?.free || 0) * fx.zero +
+					(balances[1]?.free || 0) * fx.play +
+					(balances[2]?.free || 0) * fx.game,
+			).toFixed(2),
+		)
+	}, [balances])
+
 	return (
-		<Grid container justifyContent="space-between" spacing={3}>
+		<Grid container justifyContent="space-between" verticalAlign="middle" spacing={3}>
 			<Grid
 				item
 				sx={{
@@ -89,6 +106,12 @@ export function Header() {
 					</Button>
 */}
 				</div>
+			</Grid>
+			<Grid item>
+				<Typography variant="h3">
+					{displayBalance}&nbsp;
+					{currency}
+				</Typography>
 			</Grid>
 		</Grid>
 	)
