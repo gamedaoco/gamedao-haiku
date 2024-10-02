@@ -9,7 +9,7 @@ export const Intro = () => (
 		<Grid container spacing={[0, 2, 4]} pt={[0, 2]}>
 			{intro.map((item, i) => {
 				return (
-					<Grid key={i} container item xs={12} md={6} direction="column">
+					<Grid key={i} container item xs={12} md={4} direction="column">
 						<Typography variant={'h3'} py={2}>
 							{' '}
 							{item.header}{' '}

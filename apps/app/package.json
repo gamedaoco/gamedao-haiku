@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 5555",
+    "dev": "next dev -p 1234",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -32,6 +32,7 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.91",
     "@mui/material": "^5.9.1",
+    "@mui/x-charts": "^7.6.2",
     "@mui/x-data-grid": "^5.13.1",
     "@mui/x-date-pickers": "^5.0.0-beta.1",
     "@next-auth/mongodb-adapter": "^1.1.1",

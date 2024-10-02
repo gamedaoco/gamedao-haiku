@@ -61,7 +61,7 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 							},
 						},
 					}),
-			  )
+				)
 			: null
 
 	const httpLink = new HttpLink({
@@ -82,7 +82,7 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 					},
 					wsLink,
 					httpLink,
-			  )
+				)
 			: httpLink
 
 	await persistCache({

@@ -25,6 +25,12 @@ const clientSideEmotionCache = createEmotionCache()
 
 const log = Logger()
 
+import { u8aToHex } from '@polkadot/util'
+import { decodeAddress } from '@polkadot/util-crypto'
+const ADDR = '7MEF9syzCQZK2iMEz4a9ZiFiQxaj8HQN5scdJDzbB4mqC1CB'
+const hex = u8aToHex(decodeAddress(ADDR))
+console.log('hex', hex)
+
 function HeadAndMetaTags() {
 	const config = useConfig()
 

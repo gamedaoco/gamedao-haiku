@@ -335,7 +335,11 @@ export const Create = () => {
 							variant="outlined"
 						>
 							{organizations.map((item, index) => (
-								<MenuItem value={item.value} key={index}>
+								<MenuItem
+									value={item.value}
+									key={index}
+									selected={formState.organizationId === item.value}
+								>
 									{item.label}
 								</MenuItem>
 							))}
@@ -351,7 +355,7 @@ export const Create = () => {
 							label="Select Battlepass"
 							variant="outlined"
 						>
-							{battlepasses.map((item, index) => (
+							{battlepasses?.map((item, index) => (
 								<MenuItem value={item.id} key={index}>
 									{item.name}
 								</MenuItem>
@@ -364,6 +368,8 @@ export const Create = () => {
 					</Button>
 				</Stack>
 			</Section>
+
+			<hr />
 
 			<TabBar />
 

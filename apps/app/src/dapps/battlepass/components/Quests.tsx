@@ -106,8 +106,8 @@ export const BPQuestItem = ({ index, item, achievement, active }: TGridItemProps
 		achievement?.progress === 1
 			? 'done'
 			: item?.maxDaily
-			  ? `${a} of ${item?.maxDaily}`
-			  : `${a} of ${item?.quantity}`
+				? `${a} of ${item?.maxDaily}`
+				: `${a} of ${item?.quantity}`
 
 	enum Source {
 		Wallet,

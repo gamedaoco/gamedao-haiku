@@ -1,5 +1,14 @@
 import MenuIcon from '@mui/icons-material/Menu'
-import { Button, Typography, MenuItem, ListItemIcon, ListItemText, ListItemButton, useMediaQuery } from '@mui/material'
+import {
+	Button,
+	Chip,
+	Typography,
+	MenuItem,
+	ListItemIcon,
+	ListItemText,
+	ListItemButton,
+	useMediaQuery,
+} from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -26,6 +35,7 @@ import { BaseDialog } from 'components/molecules/BaseDialog'
 import FeedbackButton from 'components/molecules/Feedback'
 import Link from 'components/atoms/Link'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 
 // eslint-disable-next-line @next/next/no-img-element
@@ -44,23 +54,23 @@ interface ComponentProps {
 
 const leftNav = [
 	// {
-	// 	name: 'Unity', // 'button:navigation:organizations',
-	// 	path: '/unity/overview',
-	// 	icon: <RiAncientGateLine />,
-	// },
-	// {
 	// 	name: 'Battlepass',
 	// 	path: '/battlepass/overview',
 	// 	icon: <RiSwordLine />,
 	// },
+	{
+		name: 'Collectives', // 'button:navigation:organizations',
+		path: '/collectives/overview',
+		icon: <RiAncientGateLine />,
+	},
+	{
+		name: 'Campaigns', // button:navigation:campaigns',
+		path: '/campaigns/overview',
+		icon: <RiVipDiamondLine />,
+	},
 	// {
 	// 	name: 'Buy', // button:navigation:campaigns',
 	// 	path: '/buy',
-	// 	icon: <RiVipDiamondLine />,
-	// },
-	// {
-	// 	name: 'Fund', // button:navigation:campaigns',
-	// 	path: '/fund/overview',
 	// 	icon: <RiVipDiamondLine />,
 	// },
 ]
@@ -96,11 +106,28 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 	})
 
 	const connected = useCurrentAccountAddress()
+	const blockNumber = useBlockNumber()
 
 	const [showFeedback, setFeedback] = useState(false)
 	const anchorRef = useRef(null)
 	const openFeedback = () => setFeedback(true)
 	const closeFeedback = () => setFeedback(false)
+
+	const Network = () => {
+		return (
+			<Chip
+				label={connected ? blockNumber : 'connecting...'}
+				variant="outlined"
+				size="small"
+				title={`Network ${connected ? 'connected' : 'disconnected'}`}
+				color={connected ? 'success' : 'warning'}
+				sx={{
+					fontSize: '10px',
+					mr: 2,
+				}}
+			/>
+		)
+	}
 
 	return (
 		<AppBar
@@ -266,6 +293,8 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 							</Box>
 						</BaseDialog>
 					)}
+
+					<Network />
 
 					{!hideDApps && <AccountSelector />}
 

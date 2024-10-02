@@ -1,5 +1,6 @@
 import { TabPanel } from '@mui/lab'
 import { Typography } from '@mui/material'
+// import PieColor from 'dapps/battlepass/components/charts/PieColor'
 
 export const DashboardTab = () => {
 	// select organization
@@ -16,6 +17,7 @@ export const DashboardTab = () => {
 	return (
 		<TabPanel sx={{ py: 2 }} value="dashboard">
 			<Typography></Typography>
+			{/* <PieColor /> */}
 		</TabPanel>
 	)
 }

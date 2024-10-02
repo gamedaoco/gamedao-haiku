@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { styled, useTheme } from '@mui/material/styles'
 import { Badge, ListItemButton, ListItemIcon, Stack, Typography, useMediaQuery, Drawer, MenuItem } from '@mui/material'
-import { ThemeSwitch } from 'components/atoms/ThemeSwitch'
+import { ThemeSwitch } from 'components/molecules/ThemeSwitch'
 import { FontIcons } from 'components/atoms/Icons/icons'
 
 // TODO:

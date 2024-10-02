@@ -80,9 +80,13 @@ export function Layout({
 
 			<Box
 				sx={{
-					backgroundImage: admin
-						? `radial-gradient(circle at top center, #012, #001, #000)`
-						: `radial-gradient(circle at top center, #306, #102, #000)`,
+					// admin
+					backgroundImage:
+						// ?
+						// `radial-gradient(circle at top center, #112200, #001100, #111)`,
+						// `radial-gradient(circle at top center, #012, #001, #000)`,
+						// :
+						`radial-gradient(circle at top center, #306, #102, #000)`,
 					backgroundSize: `100% 200%`,
 				}}
 			>
@@ -107,11 +111,9 @@ export function Layout({
 				{/*<Transition>*/}
 				<Box>
 					<Stack direction="row" spacing={0} sx={{ minHeight: spacing }}>
-						{/* {showSidebar && (isMd || sidebarOpen) && connected && (
-							<Box sx={{ minWidth: baseSpacing, minHeight: spacing }}>
-								<Sidebar />
-							</Box>
-						)} */}
+						{showSidebar && (isMd || sidebarOpen) && connected && (
+							<Sidebar baseSpacing={baseSpacing} spacing={spacing} />
+						)}
 						{noContainer ? (
 							<Box mt={`-${baseSpacing}px`} width="100%">
 								{children}

@@ -42,18 +42,23 @@ export const partners = [
 	// ['XP Fantasy', 'Esports Oracles', '/img/xpfantasy.png', 'https://'],
 ]
 
-export const backers1 = [['Scytale Digital', 'Horizon II', '/img/scytale.png', 'https://scytale.digital']]
+export const backers1 = [
+	['Scytale Digital', '', '/img/scytale.png', 'https://scytale.digital'],
+	['Valhalla Capital', '', '/img/valhalla.png', 'https://valhalla.capital'],
+	['Primal Capital', '', '/img/primal.png', 'https://primalcapital.io'],
+]
 
 export const backers2 = [
-	['1PAR Research', '', '/img/1par.png', 'https://1par.com'],
 	['Automata Network', '', '/img/automata.png', 'https://ata.network'],
-	['Outlier Ventures', '', '/img/ov.png', 'https://outlierventures.io'],
-	['Primal', '', '/img/primal.png', 'https://primalcapital.io'],
-	// ['Scytale Ventures', 'Horizon II', '/img/scytale.png', 'https://scytale.digital'],
-	['Tek Forest', '', '/img/tekforest.png', 'https://tekforest.io'],
-	['Valhalla Capital', '', '/img/valhalla.png', 'https://valhalla.capital'],
-	['Vyoma Partners', '', '/img/vyoma.png', 'https://vyoma.ch'],
 	['Yaoqi Jia', '', '/img/yaoqi.png', 'https://jiayaoqi.com'],
+	['1PAR Research', '', '/img/1par.png', 'https://1par.com'],
+	['Tek Forest', '', '/img/tekforest.png', 'https://tekforest.io'],
+	['Vyoma Partners', '', '/img/vyoma.png', 'https://vyoma.ch'],
+]
+
+export const peers = [
+	['Outlier Ventures', 'Polkadot Base Camp I', '/img/ov.png', 'https://outlierventures.io'],
+	['Substrate Builders Program', 'Chain Track', '/img/sbp.png', 'https://substrate.io'],
 ]
 
 //
@@ -156,12 +161,9 @@ export const hero = [
 		// Empowering creators to
 		// build better games through
 		// democratization and community ownership.
-		sub: `Enhance your gaming experience with GameDAO`,
+		sub: `Better games with GameDAO`,
 		description: `
-		The ultimate platform for community-driven
-		fan engagement, governance, fundraising, and collectibles.
-		Connect with other gamers, creators, and investors
-		to build better games together.
+
 		`,
 		image: '/art/IP39-DeepMarket.jpg',
 		links: [
@@ -193,7 +195,7 @@ export const hero = [
 
 export const hero2 = [
 	{
-		title: 'Build your own DAO',
+		title: 'Build and run your own collective',
 		// sub: `What you need to know`,
 		description: `Get started with the powerful framework for the gaming space.`,
 		links: [
@@ -202,7 +204,7 @@ export const hero2 = [
 		bg: '#609',
 	},
 	{
-		title: `Fundraising for Creators`,
+		title: `Fundraise, build and launch your game`,
 		// sub: `Fundraising and go to market for your game project on GameDAO`,
 		description: `Raising funds and awareness has never been easy. GameDAO navigates you through the process of lifting off.`,
 		links: [

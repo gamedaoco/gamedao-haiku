@@ -24,7 +24,7 @@ const developmentEndpoints: Endpoints = [
 const productionEndpoints: Endpoints = [
 	{
 		image: '/svg/z-ctrl-45-wht.svg',
-		name: 'development',
+		name: 'private',
 		url: 'https://graph.dev.gamedao.net/v1/graphql',
 		healthCheck: 'https://graph.dev.gamedao.net/health',
 		chain: 'wss://rpc.dev.gamedao.net',

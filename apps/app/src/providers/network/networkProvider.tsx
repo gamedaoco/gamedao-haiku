@@ -10,7 +10,9 @@ export function NetworkProvider({ children }) {
 	const [selectedApiProviderState, setSelectedApiProviderState] = useState<ApiProvider>(null)
 	const [apiProvidersState, setApiProvidersState] = useState<ApiProvider[]>(null)
 	const isMountedRef = useRef<null | boolean>(null)
+
 	const intervalRef = useRef<NodeJS.Timer>(null)
+
 	const { apiProviderConfig } = useAppContext()
 
 	const handleSelectApiProvider = useCallback(
@@ -31,6 +33,7 @@ export function NetworkProvider({ children }) {
 				if (isMountedRef.current && providers.length) {
 					setApiProvidersState(providers)
 					setSelectedApiProviderState(providers[0])
+
 					if (!intervalRef.current) {
 						intervalRef.current = setInterval(keepAlive, 30000, providers)
 					}

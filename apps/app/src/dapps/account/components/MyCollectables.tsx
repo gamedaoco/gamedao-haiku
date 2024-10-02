@@ -34,7 +34,7 @@ export function MyCollectables() {
 					<Fragment>
 						<Typography variant="h6" py={2}>
 							{' '}
-							ZERO Ecosystem{' '}
+							kusama://subzero{' '}
 						</Typography>
 						<Typography variant="body1">
 							No collectables have been indexed on this network yet. Please try again later.
@@ -54,7 +54,7 @@ export function MyCollectables() {
 					<Fragment>
 						<Typography variant="h6" py={2}>
 							{' '}
-							Kusama{' '}
+							kusama://rmrk{' '}
 						</Typography>
 						{kusamaNFT?.rmrkNfts.length === 0 ? (
 							<Typography variant="body1">

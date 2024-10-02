@@ -141,9 +141,7 @@ export const XPBar = ({ args }: TProps) => {
 					</Typography>
 				</Button>
 				<Stack direction="column" alignItems="bottom">
-					<Typography color="white">{`${displayPoints}${
-						maxPoints > 0 ? ` / ${nFormat(maxPoints)}` : ``
-					} BP`}</Typography>
+					<Typography color="white">{`${displayPoints}${maxPoints > 0 ? ` / ${nFormat(maxPoints)}` : ``} BP`}</Typography>
 					<Typography variant="body1" color="white">
 						{rank}
 					</Typography>

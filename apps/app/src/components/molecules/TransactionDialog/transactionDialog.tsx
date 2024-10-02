@@ -24,6 +24,7 @@ interface ComponentProps {
 }
 
 export function TransactionDialog({ open, onClose, txData, txCallback, children }: ComponentProps) {
+	console.log('transactionDialog', open, txData)
 	const { t } = useTranslation()
 
 	const [showDescription, setShowDescription] = useState<boolean>(false)
@@ -67,10 +68,9 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 
 					<Stack direction="row" justifyContent="space-between" spacing={{ xs: 2, sm: 4 }}>
 						<Typography variant="body2">{t('button:ui:transaction:transaction_fee')}</Typography>
-						<Typography variant="body1">{`-${formatBalanceString(
-							paymentInfo?.partialFee?.toString() ?? '0',
-							18,
-						)} ${networkBalance.tokenSymbol}`}</Typography>
+						<Typography variant="body1">{`-${formatBalanceString(paymentInfo?.partialFee?.toString() ?? '0', 18)} ${
+							networkBalance.tokenSymbol
+						}`}</Typography>
 					</Stack>
 					<Divider variant="dashed" />
 				</Stack>
@@ -79,12 +79,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 					<Stack direction="row" justifyContent="space-between" spacing={{ xs: 2, sm: 4 }}>
 						<Typography>{txData.actionSubTitle || ''}</Typography>
 						{txData?.description && (
-							<Link
-								variant="body1"
-								component="button"
-								underline="always"
-								onClick={() => setShowDescription(!showDescription)}
-							>
+							<Link variant="body1" component="button" underline="always" onClick={() => setShowDescription(!showDescription)}>
 								{t('button:ui:transaction:description_toggle')}
 							</Link>
 						)}
@@ -108,10 +103,9 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 						<Stack direction="row" justifyContent="space-between" spacing={{ xs: 2, sm: 4 }}>
 							<Typography variant="body2">{txData.actionSubLine || ''}</Typography>
 
-							<Typography variant="body1">{`-${formatBalanceString(
-								txData.deposit,
-								depositBalance.tokenDecimals,
-							)} ${depositBalance.tokenSymbol}`}</Typography>
+							<Typography variant="body1">{`-${formatBalanceString(txData.deposit, depositBalance.tokenDecimals)} ${
+								depositBalance.tokenSymbol
+							}`}</Typography>
 						</Stack>
 						<Divider variant="dashed" />
 					</Stack>

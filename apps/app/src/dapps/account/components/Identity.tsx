@@ -82,34 +82,33 @@ export function Identity() {
 	const closeModal = useCallback(() => {
 		setShowModal(false)
 		resetTx()
+		setSubmitEnabled(true)
 	}, [setShowModal])
-
-	const TransactionModal = (tx) => (
-		<TransactionDialog open={showModal} onClose={closeModal} txData={tx} txCallback={closeModal} />
-	)
 
 	const [submitEnabled, setSubmitEnabled] = useState(true)
 
 	const submit = useCallback((data, action: 'set' | 'clear') => {
 		if (tx) return
-		console.log('submit', data, action)
-		setSubmitEnabled(false)
-		setValues(data)
-		if (action === 'clear') setTx(clearIdentityTx)
-		else setTx(setIdentityTx)
-		setShowModal(true)
+		const send = async () => {
+			console.log('submit', data, action)
+			setSubmitEnabled(false)
+			setValues(data)
+			if (action === 'clear') setTx(clearIdentityTx)
+			else setTx(setIdentityTx)
+			setShowModal(true)
+		}
+		send()
 	}, [])
 
 	//
 
-	// console.log('tx', tx)
+	console.log('tx', tx)
 
 	return loading ? (
 		<Loader />
 	) : (
 		<FormProvider {...formHandler}>
-			{tx && <TransactionModal tx={tx} />}
-
+			{<TransactionDialog open={showModal} onClose={closeModal} txData={tx} txCallback={closeModal} />}
 			<form>
 				<Card variant={'glass'}>
 					<CardContent>
@@ -344,7 +343,7 @@ export function Identity() {
 										onClick={formHandler.handleSubmit((data) => submit(data, 'set'))}
 										color="primary"
 										variant={!isClearDisabled ? 'outlined' : 'contained'}
-										disabled={!submitEnabled}
+										// disabled={submitEnabled}
 									>
 										{/*{!isClearDisabled ? t('button:form:identity:update') : t('button:form:identity:submit')}*/}
 										{!isClearDisabled ? `Update Identity` : `Set Identity`}

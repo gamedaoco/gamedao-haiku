@@ -6,6 +6,7 @@ import { AccountState } from 'src/@types/extension'
 import { PromiseMsg } from 'src/@types/promiseMsg'
 import { createErrorNotification, createPromiseNotification, createSuccessNotification } from 'src/utils/notification'
 import { TFunction } from 'i18next'
+import { Issue } from 'next/dist/build/swc'
 
 export async function SignAndNotify(
 	ApiProvider: ApiPromise,
@@ -28,53 +29,54 @@ export async function SignAndNotify(
 		}
 
 		const [error] = await to(
-			tx.signAndSend(accountState.account.address, { nonce: -1, signer: accountState.signer }, (result) => {
-				if (result.status.isFinalized) {
-					let hasError = false
-					result.events
-						.filter(({ event }) => ApiProvider.events.system.ExtrinsicFailed.is(event))
-						.forEach(
-							({
-								event: {
-									data: [error, info],
+			tx.signAndSend(
+				accountState.account.address,
+				{ nonce: -1, signer: accountState.signer as any },
+				(result: any) => {
+					if (result.status.isFinalized) {
+						let hasError = false
+						result.events
+							.filter(({ event }) => ApiProvider.events.system.ExtrinsicFailed.is(event))
+							.forEach(
+								({
+									event: {
+										data: [error, info],
+									},
+								}) => {
+									hasError = true
+									if ((error as any).isModule) {
+										const decoded = ApiProvider.registry.findMetaError((error as any).asModule)
+										const { docs, method, section } = decoded
+										const docsMessage = docs.join(' ')
+										const translationMessage = t
+											? t(`notification:transactions:errors:${section}:${method}`)
+											: null
+										const errorMessage = translationMessage || docsMessage
+										console.log(
+											`Wallet Transaction Result : LOG ${section}.${method}: ${[translationMessage, docsMessage].join('; ')}`,
+										)
+										createErrorNotification(
+											`${section}.${method}${errorMessage ? ': ' + errorMessage : ''}.`,
+										)
+									} else {
+										// Other, CannotLookup, BadOrigin, no extra info
+										console.log('Wallet Transaction Result:', error.toString())
+										createErrorNotification(error.toString())
+									}
 								},
-							}) => {
-								hasError = true
-								if ((error as any).isModule) {
-									const decoded = ApiProvider.registry.findMetaError((error as any).asModule)
-									const { docs, method, section } = decoded
-									const docsMessage = docs.join(' ')
-									const translationMessage = t
-										? t(`notification:transactions:errors:${section}:${method}`)
-										: null
-									const errorMessage = translationMessage || docsMessage
-									console.log(
-										`Wallet Transaction Result : LOG ${section}.${method}: ${[
-											translationMessage,
-											docsMessage,
-										].join('; ')}`,
-									)
-									createErrorNotification(
-										`${section}.${method}${errorMessage ? ': ' + errorMessage : ''}.`,
-									)
-								} else {
-									// Other, CannotLookup, BadOrigin, no extra info
-									console.log('Wallet Transaction Result:', error.toString())
-									createErrorNotification(error.toString())
-								}
-							},
-						)
+							)
 
-					if (hasError) {
-						if (callback) callback(false, result)
-						return reject()
-					} else {
-						createSuccessNotification(`${result.txHash}`)
-						if (callback) callback(true, result)
-						return resolve('')
+						if (hasError) {
+							if (callback) callback(false, result)
+							return reject()
+						} else {
+							createSuccessNotification(`${result.txHash}`)
+							if (callback) callback(true, result)
+							return resolve('')
+						}
 					}
-				}
-			}),
+				},
+			),
 		)
 
 		if (error) {

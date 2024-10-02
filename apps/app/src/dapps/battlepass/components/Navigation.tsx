@@ -72,21 +72,21 @@ export function Navigation({ id, view, org }: TProps) {
 							label: 'Dashboard',
 							value: BattlepassViews.DASHBOARD,
 							disabled: !isBattlePass,
-					  }
+						}
 					: null,
 				isBattlePass
 					? {
 							label: 'Leaderboard',
 							value: BattlepassViews.LEADERBOARD,
 							disabled: !isBattlePass,
-					  }
+						}
 					: null,
 				isPrime
 					? {
 							label: 'Admin',
 							value: BattlepassViews.ADMIN,
 							disabled: !isPrime,
-					  }
+						}
 					: null,
 			].filter((item) => item !== null),
 		[isBattlePass, isMember, isPrime],

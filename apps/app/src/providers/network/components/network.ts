@@ -12,7 +12,6 @@ export async function keepAlive(apiProviders: ApiProvider[]) {
 			console.error('Keep alive could not be performed', 'error', error)
 		}
 	}
-
 	return null
 }
 
@@ -25,9 +24,9 @@ export async function initializeApis(configs: ApiProviderConfig[]): Promise<ApiP
 	for (const config of configs) {
 		try {
 			const apiProvider = await ApiPromise.create({
-				provider: new WsProvider('wss://rpc.dev.gamedao.net' || config.wsProviderUrl),
+				provider: new WsProvider('wss://rpc.dev.gamedao.net' || config.wsProviderUrl, 10000),
 				types: JSON.parse(config.types),
-				throwOnConnect: true,
+				throwOnConnect: false,
 				noInitWarn: true,
 			})
 			await apiProvider.isReady
@@ -38,15 +37,13 @@ export async function initializeApis(configs: ApiProviderConfig[]): Promise<ApiP
 				apiProvider: apiProvider,
 			})
 		} catch (error: any) {
-			console.error(
-				'The RPC could not be initialized',
-				'error',
-				error,
-				'url:',
-				config.wsProviderUrl,
-				'types:',
-				config.types,
-			)
+			console.error = (message) => {
+				if (typeof message === 'string' && message.startsWith('API-WS: disconnected from')) {
+					return // Skip logging the default message
+				}
+			}
+
+			// console.error('The RPC could not be initialized', 'error', error, 'url:', config.wsProviderUrl, 'types:', config.types)
 		}
 	}
 

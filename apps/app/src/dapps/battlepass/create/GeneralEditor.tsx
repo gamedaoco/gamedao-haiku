@@ -48,6 +48,18 @@ import TabBar from './TabBar'
 
 import { initialState } from './const'
 
+//
+
+enum TransactionType {
+	CREATE = 'CREATE',
+	ACTIVATE = 'ACTIVATE',
+	LINK = 'LINK',
+}
+
+const TransactionModal = ({ open, onClose, txData, txCallback }) => {}
+
+//
+
 type TArgs = {
 	organizationId?: string
 	battlepassId?: string
@@ -216,6 +228,15 @@ export const GeneralEditor = ({ args }: TProps) => {
 	// bp_collection_metadata
 	// bp_user_metadata - user side battlepass nft metadata
 	// bp_reward_content drop item nft metadata
+
+	const [showModal, setShowModal] = useState<boolean>(false)
+	const openModal = () => setShowModal(true)
+	const closeModal = () => setShowModal(false)
+	const handleTxComplete = (e: any) => {
+		console.log('transaction complete', e)
+		closeModal()
+	}
+	const [txData, setTxData] = useState()
 
 	// create
 
@@ -420,15 +441,35 @@ export const GeneralEditor = ({ args }: TProps) => {
 			`}
 			>
 				<Stack direction={{ sm: 'column', md: 'row' }} spacing={2}>
-					<Box>
-						<label htmlFor="card-image-upload">
-							<input
-								style={{ display: 'none' }}
-								accept="image/*"
-								id="card-image-upload"
-								type="file"
-								onChange={(e) => handleUploadImage(e, 'coverImageCid')}
-							/>
+					<label htmlFor="card-image-upload">
+						<input
+							style={{ display: 'none' }}
+							accept="image/*"
+							id="card-image-upload"
+							type="file"
+							onChange={(e) => handleUploadImage(e, 'coverImageCid')}
+						/>
+						<Box
+							sx={{
+								border: '5px black solid',
+								borderRadius: Number(theme.shape.borderRadius),
+								height: '400px',
+								width: '300px',
+								backgroundColor: theme.palette.background.default,
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								overflow: 'hidden',
+								cursor: 'pointer',
+								backgroundSize: 'cover',
+								backgroundAlign: 'center',
+								backgroundPosition: 'center',
+								backgroundRepeat: 'no-repeat',
+								backgroundImage: formState.coverImageCid
+									? `url(${getImageURL(formState.coverImageCid)})`
+									: null,
+							}}
+						>
 							{!formState.coverImageCid ? (
 								<Stack spacing={1} direction="column" alignItems="center" justifyContent="center">
 									<AddPhotoAlternateOutlinedIcon
@@ -439,18 +480,10 @@ export const GeneralEditor = ({ args }: TProps) => {
 									</Typography>
 								</Stack>
 							) : (
-								<Image
-									src={getImageURL(formState.coverImageCid)}
-									alt="card"
-									sx={{
-										borderRadius: Number(theme.shape.borderRadius),
-										height: '400px',
-										width: '300px',
-									}}
-								/>
+								<Typography>CoverImage</Typography>
 							)}
-						</label>
-					</Box>
+						</Box>
+					</label>
 
 					<Stack
 						sx={{ width: '100%' }}
@@ -703,6 +736,15 @@ export const GeneralEditor = ({ args }: TProps) => {
 					</Stack>
 				</Section>
 			)}
+			{showModal && (
+				<TransactionDialog
+					open={showModal}
+					onClose={closeModal}
+					txData={txData}
+					txCallback={handleTxComplete}
+				/>
+			)}
+
 			{showCreateModal && (
 				<TransactionDialog
 					open={showCreateModal}

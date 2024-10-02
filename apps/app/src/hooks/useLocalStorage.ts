@@ -40,9 +40,8 @@ export function useLocalStorage<T>(key: string, defaultValue: any): [T, Dispatch
 
 	useEffect(() => {
 		const storedValue = window.localStorage.getItem(key)
-		if (storedValue !== null) {
-			setState(JSON.parse(storedValue))
-		}
+		if (!window || !storedValue || storedValue == undefined) return
+		setState(JSON.parse(storedValue))
 	}, [key])
 
 	return [state, handleSetValue]

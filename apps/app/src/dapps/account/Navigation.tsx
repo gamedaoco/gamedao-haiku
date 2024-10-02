@@ -23,14 +23,14 @@ export function Navigation({ param }: ComponentProps) {
 				label: t('button:navigation:overview'),
 				value: AccountTabs.OVERVIEW,
 			},
-			{
-				label: `Organizations`, //t('button:navigation:my_organizations'),
-				value: AccountTabs.ORGANIZATIONS,
-			},
-			{
-				label: t('button:navigation:my_campaigns'),
-				value: AccountTabs.CAMPAIGNS,
-			},
+			// {
+			// 	label: `Organizations`, //t('button:navigation:my_organizations'),
+			// 	value: AccountTabs.ORGANIZATIONS,
+			// },
+			// {
+			// 	label: t('button:navigation:my_campaigns'),
+			// 	value: AccountTabs.CAMPAIGNS,
+			// },
 			{
 				label: t('button:navigation:my_collectables'),
 				value: AccountTabs.COLLECTABLES,
