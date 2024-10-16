@@ -27,6 +27,7 @@ export function Providers({ children }) {
 		</ThemeProvider>
 		// </SettingsProvider>
 	)
+}
 
 // export function Providers({ children }) {
 // 	return (
