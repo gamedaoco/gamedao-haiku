@@ -17,10 +17,10 @@ export function Content({ param }: Props) {
 	const accountState = useCurrentAccountAddress()
 	const reroute = useCallback(() => {
 		switch (param) {
-			case AccountTabs.CAMPAIGNS:
-				return <MyCampaigns />
-			case AccountTabs.ORGANIZATIONS:
-				return <MyOrganizations />
+			// case AccountTabs.CAMPAIGNS:
+			// 	return <MyCampaigns />
+			// case AccountTabs.ORGANIZATIONS:
+			// 	return <MyOrganizations />
 			case AccountTabs.COLLECTABLES:
 				return <MyCollectables />
 			case AccountTabs.IDENTITY:

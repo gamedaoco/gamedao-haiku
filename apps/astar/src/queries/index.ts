@@ -241,8 +241,19 @@ export type String_Comparison_Exp = {
 export type Account_Balance = {
   readonly __typename?: 'account_balance';
   readonly balance_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  readonly historical_balance?: Maybe<Historical_Balance>;
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly identity_id?: Maybe<Scalars['String']>;
+};
+
+/** order by aggregate values of table "account_balance" */
+export type Account_Balance_Aggregate_Order_By = {
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Account_Balance_Max_Order_By>;
+  readonly min?: InputMaybe<Account_Balance_Min_Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "account_balance". All fields are combined with a logical 'AND'. */
@@ -251,14 +262,32 @@ export type Account_Balance_Bool_Exp = {
   readonly _not?: InputMaybe<Account_Balance_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Account_Balance_Bool_Exp>>;
   readonly balance_id?: InputMaybe<String_Comparison_Exp>;
+  readonly historical_balance?: InputMaybe<Historical_Balance_Bool_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly identity_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "account_balance" */
+export type Account_Balance_Max_Order_By = {
+  readonly balance_id?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "account_balance" */
+export type Account_Balance_Min_Order_By = {
+  readonly balance_id?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "account_balance". */
 export type Account_Balance_Order_By = {
   readonly balance_id?: InputMaybe<Order_By>;
+  readonly historical_balance?: InputMaybe<Historical_Balance_Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly identity_id?: InputMaybe<Order_By>;
 };
 
@@ -416,18 +445,58 @@ export type Battlepass = {
   readonly __typename?: 'battlepass';
   readonly active_from_block?: Maybe<Scalars['Int']>;
   readonly active_to_block?: Maybe<Scalars['Int']>;
+  /** An array relationship */
+  readonly battlepass_nfts: ReadonlyArray<Battlepass_Nft>;
   readonly cid: Scalars['String'];
   readonly created_at_block: Scalars['Int'];
   readonly creator_id?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly image?: Maybe<Scalars['String']>;
   readonly name: Scalars['String'];
   readonly org_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  readonly organization?: Maybe<Organization>;
   readonly price: Scalars['numeric'];
   readonly season: Scalars['String'];
   readonly state: Scalars['String'];
   readonly updated_at_block: Scalars['Int'];
+};
+
+
+/** columns and relationships of "battlepass" */
+export type BattlepassBattlepass_NftsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
+  where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
+};
+
+/** order by aggregate values of table "battlepass" */
+export type Battlepass_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Battlepass_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Battlepass_Max_Order_By>;
+  readonly min?: InputMaybe<Battlepass_Min_Order_By>;
+  readonly stddev?: InputMaybe<Battlepass_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Battlepass_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Battlepass_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Battlepass_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Battlepass_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Battlepass_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Battlepass_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "battlepass" */
+export type Battlepass_Avg_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "battlepass". All fields are combined with a logical 'AND'. */
@@ -437,27 +506,79 @@ export type Battlepass_Bool_Exp = {
   readonly _or?: InputMaybe<ReadonlyArray<Battlepass_Bool_Exp>>;
   readonly active_from_block?: InputMaybe<Int_Comparison_Exp>;
   readonly active_to_block?: InputMaybe<Int_Comparison_Exp>;
+  readonly battlepass_nfts?: InputMaybe<Battlepass_Nft_Bool_Exp>;
   readonly cid?: InputMaybe<String_Comparison_Exp>;
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly creator_id?: InputMaybe<String_Comparison_Exp>;
   readonly description?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly image?: InputMaybe<String_Comparison_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
   readonly org_id?: InputMaybe<String_Comparison_Exp>;
+  readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly price?: InputMaybe<Numeric_Comparison_Exp>;
   readonly season?: InputMaybe<String_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
   readonly updated_at_block?: InputMaybe<Int_Comparison_Exp>;
 };
 
+/** order by max() on columns of table "battlepass" */
+export type Battlepass_Max_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator_id?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly image?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly org_id?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly season?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "battlepass" */
+export type Battlepass_Min_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator_id?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly image?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly org_id?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly season?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
 /** columns and relationships of "battlepass_nft" */
 export type Battlepass_Nft = {
   readonly __typename?: 'battlepass_nft';
+  /** An object relationship */
+  readonly battlepass?: Maybe<Battlepass>;
   readonly battlepass_id?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
+  /** An object relationship */
+  readonly nft?: Maybe<Nft>;
   readonly nft_id?: Maybe<Scalars['String']>;
   readonly owner_id?: Maybe<Scalars['String']>;
+};
+
+/** order by aggregate values of table "battlepass_nft" */
+export type Battlepass_Nft_Aggregate_Order_By = {
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Battlepass_Nft_Max_Order_By>;
+  readonly min?: InputMaybe<Battlepass_Nft_Min_Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "battlepass_nft". All fields are combined with a logical 'AND'. */
@@ -465,16 +586,38 @@ export type Battlepass_Nft_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Battlepass_Nft_Bool_Exp>>;
   readonly _not?: InputMaybe<Battlepass_Nft_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Battlepass_Nft_Bool_Exp>>;
+  readonly battlepass?: InputMaybe<Battlepass_Bool_Exp>;
   readonly battlepass_id?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
+  readonly nft?: InputMaybe<Nft_Bool_Exp>;
   readonly nft_id?: InputMaybe<String_Comparison_Exp>;
   readonly owner_id?: InputMaybe<String_Comparison_Exp>;
 };
 
-/** Ordering options when selecting data from "battlepass_nft". */
-export type Battlepass_Nft_Order_By = {
+/** order by max() on columns of table "battlepass_nft" */
+export type Battlepass_Nft_Max_Order_By = {
   readonly battlepass_id?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly nft_id?: InputMaybe<Order_By>;
+  readonly owner_id?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "battlepass_nft" */
+export type Battlepass_Nft_Min_Order_By = {
+  readonly battlepass_id?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly nft_id?: InputMaybe<Order_By>;
+  readonly owner_id?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "battlepass_nft". */
+export type Battlepass_Nft_Order_By = {
+  readonly battlepass?: InputMaybe<Battlepass_Order_By>;
+  readonly battlepass_id?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
+  readonly nft?: InputMaybe<Nft_Order_By>;
   readonly nft_id?: InputMaybe<Order_By>;
   readonly owner_id?: InputMaybe<Order_By>;
 };
@@ -511,14 +654,17 @@ export type Battlepass_Nft_Stream_Cursor_Value_Input = {
 export type Battlepass_Order_By = {
   readonly active_from_block?: InputMaybe<Order_By>;
   readonly active_to_block?: InputMaybe<Order_By>;
+  readonly battlepass_nfts_aggregate?: InputMaybe<Battlepass_Nft_Aggregate_Order_By>;
   readonly cid?: InputMaybe<Order_By>;
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly creator_id?: InputMaybe<Order_By>;
   readonly description?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly image?: InputMaybe<Order_By>;
   readonly name?: InputMaybe<Order_By>;
   readonly org_id?: InputMaybe<Order_By>;
+  readonly organization?: InputMaybe<Organization_Order_By>;
   readonly price?: InputMaybe<Order_By>;
   readonly season?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
@@ -557,6 +703,33 @@ export enum Battlepass_Select_Column {
   UpdatedAtBlock = 'updated_at_block'
 }
 
+/** order by stddev() on columns of table "battlepass" */
+export type Battlepass_Stddev_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "battlepass" */
+export type Battlepass_Stddev_Pop_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "battlepass" */
+export type Battlepass_Stddev_Samp_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "battlepass" */
 export type Battlepass_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -581,6 +754,42 @@ export type Battlepass_Stream_Cursor_Value_Input = {
   readonly season?: InputMaybe<Scalars['String']>;
   readonly state?: InputMaybe<Scalars['String']>;
   readonly updated_at_block?: InputMaybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "battlepass" */
+export type Battlepass_Sum_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "battlepass" */
+export type Battlepass_Var_Pop_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "battlepass" */
+export type Battlepass_Var_Samp_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "battlepass" */
+export type Battlepass_Variance_Order_By = {
+  readonly active_from_block?: InputMaybe<Order_By>;
+  readonly active_to_block?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly price?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
@@ -663,6 +872,8 @@ export type Campaign = {
   readonly __typename?: 'campaign';
   readonly admin: Scalars['String'];
   readonly admin_identity_id?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly campaign_contributors: ReadonlyArray<Campaign_Contributor>;
   readonly cid: Scalars['String'];
   readonly created_at_block: Scalars['Int'];
   readonly creator: Scalars['String'];
@@ -674,10 +885,18 @@ export type Campaign = {
   readonly governance: Scalars['String'];
   readonly header: Scalars['String'];
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
+  /** An object relationship */
+  readonly identityByCreatorIdentityId?: Maybe<Identity>;
   readonly logo: Scalars['String'];
   readonly markdown: Scalars['String'];
   readonly name: Scalars['String'];
+  /** An object relationship */
+  readonly organization?: Maybe<Organization>;
   readonly organization_id?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly proposals: ReadonlyArray<Proposal>;
   readonly protocol: Scalars['String'];
   readonly start: Scalars['Int'];
   readonly state: Scalars['String'];
@@ -687,6 +906,50 @@ export type Campaign = {
   readonly token_symbol?: Maybe<Scalars['String']>;
 };
 
+
+/** columns and relationships of "campaign" */
+export type CampaignCampaign_ContributorsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>;
+  where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
+};
+
+
+/** columns and relationships of "campaign" */
+export type CampaignProposalsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+/** order by aggregate values of table "campaign" */
+export type Campaign_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Campaign_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Campaign_Max_Order_By>;
+  readonly min?: InputMaybe<Campaign_Min_Order_By>;
+  readonly stddev?: InputMaybe<Campaign_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Campaign_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Campaign_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Campaign_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Campaign_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Campaign_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Campaign_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "campaign" */
+export type Campaign_Avg_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "campaign". All fields are combined with a logical 'AND'. */
 export type Campaign_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Campaign_Bool_Exp>>;
@@ -694,6 +957,7 @@ export type Campaign_Bool_Exp = {
   readonly _or?: InputMaybe<ReadonlyArray<Campaign_Bool_Exp>>;
   readonly admin?: InputMaybe<String_Comparison_Exp>;
   readonly admin_identity_id?: InputMaybe<String_Comparison_Exp>;
+  readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>;
   readonly cid?: InputMaybe<String_Comparison_Exp>;
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly creator?: InputMaybe<String_Comparison_Exp>;
@@ -705,10 +969,14 @@ export type Campaign_Bool_Exp = {
   readonly governance?: InputMaybe<String_Comparison_Exp>;
   readonly header?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
+  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Bool_Exp>;
   readonly logo?: InputMaybe<String_Comparison_Exp>;
   readonly markdown?: InputMaybe<String_Comparison_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
+  readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly organization_id?: InputMaybe<String_Comparison_Exp>;
+  readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly protocol?: InputMaybe<String_Comparison_Exp>;
   readonly start?: InputMaybe<Int_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
@@ -722,10 +990,34 @@ export type Campaign_Bool_Exp = {
 export type Campaign_Contributor = {
   readonly __typename?: 'campaign_contributor';
   readonly address: Scalars['String'];
+  /** An object relationship */
+  readonly campaign?: Maybe<Campaign>;
   readonly campaign_id?: Maybe<Scalars['String']>;
   readonly contributed: Scalars['numeric'];
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly identity_id?: Maybe<Scalars['String']>;
+};
+
+/** order by aggregate values of table "campaign_contributor" */
+export type Campaign_Contributor_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Campaign_Contributor_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Campaign_Contributor_Max_Order_By>;
+  readonly min?: InputMaybe<Campaign_Contributor_Min_Order_By>;
+  readonly stddev?: InputMaybe<Campaign_Contributor_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Campaign_Contributor_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Campaign_Contributor_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Campaign_Contributor_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Campaign_Contributor_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Campaign_Contributor_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Campaign_Contributor_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Avg_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "campaign_contributor". All fields are combined with a logical 'AND'. */
@@ -734,18 +1026,40 @@ export type Campaign_Contributor_Bool_Exp = {
   readonly _not?: InputMaybe<Campaign_Contributor_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Campaign_Contributor_Bool_Exp>>;
   readonly address?: InputMaybe<String_Comparison_Exp>;
+  readonly campaign?: InputMaybe<Campaign_Bool_Exp>;
   readonly campaign_id?: InputMaybe<String_Comparison_Exp>;
   readonly contributed?: InputMaybe<Numeric_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly identity_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Max_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly campaign_id?: InputMaybe<Order_By>;
+  readonly contributed?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Min_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly campaign_id?: InputMaybe<Order_By>;
+  readonly contributed?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "campaign_contributor". */
 export type Campaign_Contributor_Order_By = {
   readonly address?: InputMaybe<Order_By>;
+  readonly campaign?: InputMaybe<Campaign_Order_By>;
   readonly campaign_id?: InputMaybe<Order_By>;
   readonly contributed?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly identity_id?: InputMaybe<Order_By>;
 };
 
@@ -763,6 +1077,21 @@ export enum Campaign_Contributor_Select_Column {
   IdentityId = 'identity_id'
 }
 
+/** order by stddev() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Stddev_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Stddev_Pop_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Stddev_Samp_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "campaign_contributor" */
 export type Campaign_Contributor_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -778,6 +1107,54 @@ export type Campaign_Contributor_Stream_Cursor_Value_Input = {
   readonly contributed?: InputMaybe<Scalars['numeric']>;
   readonly id?: InputMaybe<Scalars['String']>;
   readonly identity_id?: InputMaybe<Scalars['String']>;
+};
+
+/** order by sum() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Sum_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Var_Pop_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Var_Samp_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "campaign_contributor" */
+export type Campaign_Contributor_Variance_Order_By = {
+  readonly contributed?: InputMaybe<Order_By>;
+};
+
+/** order by max() on columns of table "campaign" */
+export type Campaign_Max_Order_By = {
+  readonly admin?: InputMaybe<Order_By>;
+  readonly admin_identity_id?: InputMaybe<Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator?: InputMaybe<Order_By>;
+  readonly creator_identity_id?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly email?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly governance?: InputMaybe<Order_By>;
+  readonly header?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly logo?: InputMaybe<Order_By>;
+  readonly markdown?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly organization_id?: InputMaybe<Order_By>;
+  readonly protocol?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+  readonly title?: InputMaybe<Order_By>;
+  readonly token_name?: InputMaybe<Order_By>;
+  readonly token_symbol?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "campaign_metadata" */
@@ -860,8 +1237,8 @@ export type Campaign_Metadata_Stream_Cursor_Value_Input = {
   readonly title?: InputMaybe<Scalars['String']>;
 };
 
-/** Ordering options when selecting data from "campaign". */
-export type Campaign_Order_By = {
+/** order by min() on columns of table "campaign" */
+export type Campaign_Min_Order_By = {
   readonly admin?: InputMaybe<Order_By>;
   readonly admin_identity_id?: InputMaybe<Order_By>;
   readonly cid?: InputMaybe<Order_By>;
@@ -879,6 +1256,39 @@ export type Campaign_Order_By = {
   readonly markdown?: InputMaybe<Order_By>;
   readonly name?: InputMaybe<Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
+  readonly protocol?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+  readonly title?: InputMaybe<Order_By>;
+  readonly token_name?: InputMaybe<Order_By>;
+  readonly token_symbol?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "campaign". */
+export type Campaign_Order_By = {
+  readonly admin?: InputMaybe<Order_By>;
+  readonly admin_identity_id?: InputMaybe<Order_By>;
+  readonly campaign_contributors_aggregate?: InputMaybe<Campaign_Contributor_Aggregate_Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator?: InputMaybe<Order_By>;
+  readonly creator_identity_id?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly email?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly governance?: InputMaybe<Order_By>;
+  readonly header?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
+  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Order_By>;
+  readonly logo?: InputMaybe<Order_By>;
+  readonly markdown?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly organization?: InputMaybe<Organization_Order_By>;
+  readonly organization_id?: InputMaybe<Order_By>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly protocol?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
@@ -940,6 +1350,33 @@ export enum Campaign_Select_Column {
   TokenSymbol = 'token_symbol'
 }
 
+/** order by stddev() on columns of table "campaign" */
+export type Campaign_Stddev_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "campaign" */
+export type Campaign_Stddev_Pop_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "campaign" */
+export type Campaign_Stddev_Samp_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "campaign" */
 export type Campaign_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -974,6 +1411,42 @@ export type Campaign_Stream_Cursor_Value_Input = {
   readonly title?: InputMaybe<Scalars['String']>;
   readonly token_name?: InputMaybe<Scalars['String']>;
   readonly token_symbol?: InputMaybe<Scalars['String']>;
+};
+
+/** order by sum() on columns of table "campaign" */
+export type Campaign_Sum_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "campaign" */
+export type Campaign_Var_Pop_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "campaign" */
+export type Campaign_Var_Samp_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "campaign" */
+export type Campaign_Variance_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly target?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "ChainInfo" */
@@ -1453,6 +1926,8 @@ export type Grouped_Staking_Event_Stream_Cursor_Value_Input = {
 /** columns and relationships of "historical_balance" */
 export type Historical_Balance = {
   readonly __typename?: 'historical_balance';
+  /** An array relationship */
+  readonly account_balances: ReadonlyArray<Account_Balance>;
   readonly address: Scalars['String'];
   readonly block: Scalars['Int'];
   readonly currency_id: Scalars['String'];
@@ -1462,11 +1937,22 @@ export type Historical_Balance = {
   readonly total: Scalars['numeric'];
 };
 
+
+/** columns and relationships of "historical_balance" */
+export type Historical_BalanceAccount_BalancesArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Account_Balance_Order_By>>;
+  where?: InputMaybe<Account_Balance_Bool_Exp>;
+};
+
 /** Boolean expression to filter rows from the table "historical_balance". All fields are combined with a logical 'AND'. */
 export type Historical_Balance_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Historical_Balance_Bool_Exp>>;
   readonly _not?: InputMaybe<Historical_Balance_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Historical_Balance_Bool_Exp>>;
+  readonly account_balances?: InputMaybe<Account_Balance_Bool_Exp>;
   readonly address?: InputMaybe<String_Comparison_Exp>;
   readonly block?: InputMaybe<Int_Comparison_Exp>;
   readonly currency_id?: InputMaybe<String_Comparison_Exp>;
@@ -1478,6 +1964,7 @@ export type Historical_Balance_Bool_Exp = {
 
 /** Ordering options when selecting data from "historical_balance". */
 export type Historical_Balance_Order_By = {
+  readonly account_balances_aggregate?: InputMaybe<Account_Balance_Aggregate_Order_By>;
   readonly address?: InputMaybe<Order_By>;
   readonly block?: InputMaybe<Order_By>;
   readonly currency_id?: InputMaybe<Order_By>;
@@ -1527,17 +2014,209 @@ export type Historical_Balance_Stream_Cursor_Value_Input = {
 /** columns and relationships of "identity" */
 export type Identity = {
   readonly __typename?: 'identity';
+  /** An array relationship */
+  readonly account_balances: ReadonlyArray<Account_Balance>;
   readonly address: Scalars['String'];
+  /** An array relationship */
+  readonly battlepass_nfts: ReadonlyArray<Battlepass_Nft>;
+  /** An array relationship */
+  readonly battlepasses: ReadonlyArray<Battlepass>;
+  /** An array relationship */
+  readonly campaign_contributors: ReadonlyArray<Campaign_Contributor>;
+  /** An array relationship */
+  readonly campaigns: ReadonlyArray<Campaign>;
+  /** An array relationship */
+  readonly campaignsByCreatorIdentityId: ReadonlyArray<Campaign>;
   readonly discord?: Maybe<Scalars['String']>;
   readonly display_name?: Maybe<Scalars['String']>;
   readonly email?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
   readonly image?: Maybe<Scalars['String']>;
   readonly legal_name?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly nft_collections: ReadonlyArray<Nft_Collection>;
+  /** An array relationship */
+  readonly nfts: ReadonlyArray<Nft>;
+  /** An array relationship */
+  readonly organization_members: ReadonlyArray<Organization_Member>;
+  /** An array relationship */
+  readonly organizations: ReadonlyArray<Organization>;
+  /** An array relationship */
+  readonly organizationsByCreatorIdentityId: ReadonlyArray<Organization>;
+  /** An array relationship */
+  readonly organizationsByTreasuryIdentityId: ReadonlyArray<Organization>;
+  /** An array relationship */
+  readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
+  /** An array relationship */
+  readonly proposals: ReadonlyArray<Proposal>;
+  /** An array relationship */
+  readonly proposalsByBeneficiaryIdentityId: ReadonlyArray<Proposal>;
   readonly riot?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly sense_entities: ReadonlyArray<Sense_Entity>;
   readonly twitter?: Maybe<Scalars['String']>;
   readonly web?: Maybe<Scalars['String']>;
   readonly web3name?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityAccount_BalancesArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Account_Balance_Order_By>>;
+  where?: InputMaybe<Account_Balance_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityBattlepass_NftsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
+  where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityBattlepassesArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Battlepass_Order_By>>;
+  where?: InputMaybe<Battlepass_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCampaign_ContributorsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>;
+  where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCampaignsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCampaignsByCreatorIdentityIdArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityNft_CollectionsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Nft_Collection_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Nft_Collection_Order_By>>;
+  where?: InputMaybe<Nft_Collection_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityNftsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Nft_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Nft_Order_By>>;
+  where?: InputMaybe<Nft_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityOrganization_MembersArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
+  where?: InputMaybe<Organization_Member_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityOrganizationsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityOrganizationsByCreatorIdentityIdArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityOrganizationsByTreasuryIdentityIdArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityProposal_VotersArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Voter_Order_By>>;
+  where?: InputMaybe<Proposal_Voter_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityProposalsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityProposalsByBeneficiaryIdentityIdArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentitySense_EntitiesArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Sense_Entity_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Sense_Entity_Order_By>>;
+  where?: InputMaybe<Sense_Entity_Bool_Exp>;
 };
 
 /** Boolean expression to filter rows from the table "identity". All fields are combined with a logical 'AND'. */
@@ -1545,14 +2224,30 @@ export type Identity_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Identity_Bool_Exp>>;
   readonly _not?: InputMaybe<Identity_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Identity_Bool_Exp>>;
+  readonly account_balances?: InputMaybe<Account_Balance_Bool_Exp>;
   readonly address?: InputMaybe<String_Comparison_Exp>;
+  readonly battlepass_nfts?: InputMaybe<Battlepass_Nft_Bool_Exp>;
+  readonly battlepasses?: InputMaybe<Battlepass_Bool_Exp>;
+  readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>;
+  readonly campaigns?: InputMaybe<Campaign_Bool_Exp>;
+  readonly campaignsByCreatorIdentityId?: InputMaybe<Campaign_Bool_Exp>;
   readonly discord?: InputMaybe<String_Comparison_Exp>;
   readonly display_name?: InputMaybe<String_Comparison_Exp>;
   readonly email?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
   readonly image?: InputMaybe<String_Comparison_Exp>;
   readonly legal_name?: InputMaybe<String_Comparison_Exp>;
+  readonly nft_collections?: InputMaybe<Nft_Collection_Bool_Exp>;
+  readonly nfts?: InputMaybe<Nft_Bool_Exp>;
+  readonly organization_members?: InputMaybe<Organization_Member_Bool_Exp>;
+  readonly organizations?: InputMaybe<Organization_Bool_Exp>;
+  readonly organizationsByCreatorIdentityId?: InputMaybe<Organization_Bool_Exp>;
+  readonly organizationsByTreasuryIdentityId?: InputMaybe<Organization_Bool_Exp>;
+  readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
+  readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
+  readonly proposalsByBeneficiaryIdentityId?: InputMaybe<Proposal_Bool_Exp>;
   readonly riot?: InputMaybe<String_Comparison_Exp>;
+  readonly sense_entities?: InputMaybe<Sense_Entity_Bool_Exp>;
   readonly twitter?: InputMaybe<String_Comparison_Exp>;
   readonly web?: InputMaybe<String_Comparison_Exp>;
   readonly web3name?: InputMaybe<String_Comparison_Exp>;
@@ -1560,14 +2255,30 @@ export type Identity_Bool_Exp = {
 
 /** Ordering options when selecting data from "identity". */
 export type Identity_Order_By = {
+  readonly account_balances_aggregate?: InputMaybe<Account_Balance_Aggregate_Order_By>;
   readonly address?: InputMaybe<Order_By>;
+  readonly battlepass_nfts_aggregate?: InputMaybe<Battlepass_Nft_Aggregate_Order_By>;
+  readonly battlepasses_aggregate?: InputMaybe<Battlepass_Aggregate_Order_By>;
+  readonly campaign_contributors_aggregate?: InputMaybe<Campaign_Contributor_Aggregate_Order_By>;
+  readonly campaignsByCreatorIdentityId_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
+  readonly campaigns_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
   readonly discord?: InputMaybe<Order_By>;
   readonly display_name?: InputMaybe<Order_By>;
   readonly email?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
   readonly image?: InputMaybe<Order_By>;
   readonly legal_name?: InputMaybe<Order_By>;
+  readonly nft_collections_aggregate?: InputMaybe<Nft_Collection_Aggregate_Order_By>;
+  readonly nfts_aggregate?: InputMaybe<Nft_Aggregate_Order_By>;
+  readonly organization_members_aggregate?: InputMaybe<Organization_Member_Aggregate_Order_By>;
+  readonly organizationsByCreatorIdentityId_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
+  readonly organizationsByTreasuryIdentityId_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
+  readonly organizations_aggregate?: InputMaybe<Organization_Aggregate_Order_By>;
+  readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>;
+  readonly proposalsByBeneficiaryIdentityId_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly riot?: InputMaybe<Order_By>;
+  readonly sense_entities_aggregate?: InputMaybe<Sense_Entity_Aggregate_Order_By>;
   readonly twitter?: InputMaybe<Order_By>;
   readonly web?: InputMaybe<Order_By>;
   readonly web3name?: InputMaybe<Order_By>;
@@ -1740,14 +2451,37 @@ export type Mutation_RootUpdate_Session_ManyArgs = {
 /** columns and relationships of "nft" */
 export type Nft = {
   readonly __typename?: 'nft';
+  /** An array relationship */
+  readonly battlepass_nfts: ReadonlyArray<Battlepass_Nft>;
   readonly collection_id?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly image?: Maybe<Scalars['String']>;
   readonly metadata?: Maybe<Scalars['String']>;
   readonly metadata_is_frozen?: Maybe<Scalars['Boolean']>;
   readonly name?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  readonly nft_collection?: Maybe<Nft_Collection>;
   readonly owner_id?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "nft" */
+export type NftBattlepass_NftsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
+  where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
+};
+
+/** order by aggregate values of table "nft" */
+export type Nft_Aggregate_Order_By = {
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Nft_Max_Order_By>;
+  readonly min?: InputMaybe<Nft_Min_Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "nft". All fields are combined with a logical 'AND'. */
@@ -1755,13 +2489,16 @@ export type Nft_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Nft_Bool_Exp>>;
   readonly _not?: InputMaybe<Nft_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Nft_Bool_Exp>>;
+  readonly battlepass_nfts?: InputMaybe<Battlepass_Nft_Bool_Exp>;
   readonly collection_id?: InputMaybe<String_Comparison_Exp>;
   readonly description?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly image?: InputMaybe<String_Comparison_Exp>;
   readonly metadata?: InputMaybe<String_Comparison_Exp>;
   readonly metadata_is_frozen?: InputMaybe<Boolean_Comparison_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
+  readonly nft_collection?: InputMaybe<Nft_Collection_Bool_Exp>;
   readonly owner_id?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1770,12 +2507,46 @@ export type Nft_Collection = {
   readonly __typename?: 'nft_collection';
   readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly image?: Maybe<Scalars['String']>;
   readonly max?: Maybe<Scalars['Int']>;
   readonly metadata?: Maybe<Scalars['String']>;
   readonly metadata_is_frozen?: Maybe<Scalars['Boolean']>;
   readonly name?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly nfts: ReadonlyArray<Nft>;
   readonly owner_id?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "nft_collection" */
+export type Nft_CollectionNftsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Nft_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Nft_Order_By>>;
+  where?: InputMaybe<Nft_Bool_Exp>;
+};
+
+/** order by aggregate values of table "nft_collection" */
+export type Nft_Collection_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Nft_Collection_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Nft_Collection_Max_Order_By>;
+  readonly min?: InputMaybe<Nft_Collection_Min_Order_By>;
+  readonly stddev?: InputMaybe<Nft_Collection_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Nft_Collection_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Nft_Collection_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Nft_Collection_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Nft_Collection_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Nft_Collection_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Nft_Collection_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "nft_collection" */
+export type Nft_Collection_Avg_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "nft_collection". All fields are combined with a logical 'AND'. */
@@ -1785,23 +2556,49 @@ export type Nft_Collection_Bool_Exp = {
   readonly _or?: InputMaybe<ReadonlyArray<Nft_Collection_Bool_Exp>>;
   readonly description?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly image?: InputMaybe<String_Comparison_Exp>;
   readonly max?: InputMaybe<Int_Comparison_Exp>;
   readonly metadata?: InputMaybe<String_Comparison_Exp>;
   readonly metadata_is_frozen?: InputMaybe<Boolean_Comparison_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
+  readonly nfts?: InputMaybe<Nft_Bool_Exp>;
   readonly owner_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "nft_collection" */
+export type Nft_Collection_Max_Order_By = {
+  readonly description?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly image?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Order_By>;
+  readonly metadata?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly owner_id?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "nft_collection" */
+export type Nft_Collection_Min_Order_By = {
+  readonly description?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly image?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Order_By>;
+  readonly metadata?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly owner_id?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "nft_collection". */
 export type Nft_Collection_Order_By = {
   readonly description?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly image?: InputMaybe<Order_By>;
   readonly max?: InputMaybe<Order_By>;
   readonly metadata?: InputMaybe<Order_By>;
   readonly metadata_is_frozen?: InputMaybe<Order_By>;
   readonly name?: InputMaybe<Order_By>;
+  readonly nfts_aggregate?: InputMaybe<Nft_Aggregate_Order_By>;
   readonly owner_id?: InputMaybe<Order_By>;
 };
 
@@ -1825,6 +2622,21 @@ export enum Nft_Collection_Select_Column {
   OwnerId = 'owner_id'
 }
 
+/** order by stddev() on columns of table "nft_collection" */
+export type Nft_Collection_Stddev_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "nft_collection" */
+export type Nft_Collection_Stddev_Pop_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "nft_collection" */
+export type Nft_Collection_Stddev_Samp_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "nft_collection" */
 export type Nft_Collection_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -1845,15 +2657,60 @@ export type Nft_Collection_Stream_Cursor_Value_Input = {
   readonly owner_id?: InputMaybe<Scalars['String']>;
 };
 
-/** Ordering options when selecting data from "nft". */
-export type Nft_Order_By = {
+/** order by sum() on columns of table "nft_collection" */
+export type Nft_Collection_Sum_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "nft_collection" */
+export type Nft_Collection_Var_Pop_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "nft_collection" */
+export type Nft_Collection_Var_Samp_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "nft_collection" */
+export type Nft_Collection_Variance_Order_By = {
+  readonly max?: InputMaybe<Order_By>;
+};
+
+/** order by max() on columns of table "nft" */
+export type Nft_Max_Order_By = {
   readonly collection_id?: InputMaybe<Order_By>;
   readonly description?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
   readonly image?: InputMaybe<Order_By>;
   readonly metadata?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly owner_id?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "nft" */
+export type Nft_Min_Order_By = {
+  readonly collection_id?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly image?: InputMaybe<Order_By>;
+  readonly metadata?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly owner_id?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "nft". */
+export type Nft_Order_By = {
+  readonly battlepass_nfts_aggregate?: InputMaybe<Battlepass_Nft_Aggregate_Order_By>;
+  readonly collection_id?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
+  readonly image?: InputMaybe<Order_By>;
+  readonly metadata?: InputMaybe<Order_By>;
   readonly metadata_is_frozen?: InputMaybe<Order_By>;
   readonly name?: InputMaybe<Order_By>;
+  readonly nft_collection?: InputMaybe<Nft_Collection_Order_By>;
   readonly owner_id?: InputMaybe<Order_By>;
 };
 
@@ -1930,6 +2787,10 @@ export enum Order_By {
 export type Organization = {
   readonly __typename?: 'organization';
   readonly access_model: Scalars['String'];
+  /** An array relationship */
+  readonly battlepasses: ReadonlyArray<Battlepass>;
+  /** An array relationship */
+  readonly campaigns: ReadonlyArray<Campaign>;
   readonly cid: Scalars['String'];
   readonly created_at_block: Scalars['Int'];
   readonly creator: Scalars['String'];
@@ -1941,14 +2802,24 @@ export type Organization = {
   readonly gov_currency: Scalars['String'];
   readonly header: Scalars['String'];
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
+  /** An object relationship */
+  readonly identityByCreatorIdentityId?: Maybe<Identity>;
+  /** An object relationship */
+  readonly identityByTreasuryIdentityId?: Maybe<Identity>;
   readonly location: Scalars['String'];
   readonly logo: Scalars['String'];
   readonly member_limit: Scalars['Int'];
   readonly membership_fee?: Maybe<Scalars['numeric']>;
   readonly name: Scalars['String'];
+  /** An array relationship */
+  readonly organization_members: ReadonlyArray<Organization_Member>;
   readonly pay_currency: Scalars['String'];
   readonly prime: Scalars['String'];
   readonly prime_identity_id?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  readonly proposals: ReadonlyArray<Proposal>;
   readonly repo: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly state: Scalars['String'];
@@ -1961,12 +2832,78 @@ export type Organization = {
   readonly website: Scalars['String'];
 };
 
+
+/** columns and relationships of "organization" */
+export type OrganizationBattlepassesArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Battlepass_Order_By>>;
+  where?: InputMaybe<Battlepass_Bool_Exp>;
+};
+
+
+/** columns and relationships of "organization" */
+export type OrganizationCampaignsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "organization" */
+export type OrganizationOrganization_MembersArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
+  where?: InputMaybe<Organization_Member_Bool_Exp>;
+};
+
+
+/** columns and relationships of "organization" */
+export type OrganizationProposalsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+/** order by aggregate values of table "organization" */
+export type Organization_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Organization_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Organization_Max_Order_By>;
+  readonly min?: InputMaybe<Organization_Min_Order_By>;
+  readonly stddev?: InputMaybe<Organization_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Organization_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Organization_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Organization_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Organization_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Organization_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Organization_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "organization" */
+export type Organization_Avg_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "organization". All fields are combined with a logical 'AND'. */
 export type Organization_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Organization_Bool_Exp>>;
   readonly _not?: InputMaybe<Organization_Bool_Exp>;
   readonly _or?: InputMaybe<ReadonlyArray<Organization_Bool_Exp>>;
   readonly access_model?: InputMaybe<String_Comparison_Exp>;
+  readonly battlepasses?: InputMaybe<Battlepass_Bool_Exp>;
+  readonly campaigns?: InputMaybe<Campaign_Bool_Exp>;
   readonly cid?: InputMaybe<String_Comparison_Exp>;
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly creator?: InputMaybe<String_Comparison_Exp>;
@@ -1978,14 +2915,19 @@ export type Organization_Bool_Exp = {
   readonly gov_currency?: InputMaybe<String_Comparison_Exp>;
   readonly header?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
+  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Bool_Exp>;
+  readonly identityByTreasuryIdentityId?: InputMaybe<Identity_Bool_Exp>;
   readonly location?: InputMaybe<String_Comparison_Exp>;
   readonly logo?: InputMaybe<String_Comparison_Exp>;
   readonly member_limit?: InputMaybe<Int_Comparison_Exp>;
   readonly membership_fee?: InputMaybe<Numeric_Comparison_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
+  readonly organization_members?: InputMaybe<Organization_Member_Bool_Exp>;
   readonly pay_currency?: InputMaybe<String_Comparison_Exp>;
   readonly prime?: InputMaybe<String_Comparison_Exp>;
   readonly prime_identity_id?: InputMaybe<String_Comparison_Exp>;
+  readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly repo?: InputMaybe<String_Comparison_Exp>;
   readonly slug?: InputMaybe<String_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
@@ -1998,14 +2940,59 @@ export type Organization_Bool_Exp = {
   readonly website?: InputMaybe<String_Comparison_Exp>;
 };
 
+/** order by max() on columns of table "organization" */
+export type Organization_Max_Order_By = {
+  readonly access_model?: InputMaybe<Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator?: InputMaybe<Order_By>;
+  readonly creator_identity_id?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly email?: InputMaybe<Order_By>;
+  readonly fee_model?: InputMaybe<Order_By>;
+  readonly gov_currency?: InputMaybe<Order_By>;
+  readonly header?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly location?: InputMaybe<Order_By>;
+  readonly logo?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly pay_currency?: InputMaybe<Order_By>;
+  readonly prime?: InputMaybe<Order_By>;
+  readonly prime_identity_id?: InputMaybe<Order_By>;
+  readonly repo?: InputMaybe<Order_By>;
+  readonly slug?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly tags?: InputMaybe<Order_By>;
+  readonly treasury?: InputMaybe<Order_By>;
+  readonly treasury_identity_id?: InputMaybe<Order_By>;
+  readonly type?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+  readonly url?: InputMaybe<Order_By>;
+  readonly website?: InputMaybe<Order_By>;
+};
+
 /** columns and relationships of "organization_member" */
 export type Organization_Member = {
   readonly __typename?: 'organization_member';
   readonly address: Scalars['String'];
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly identity_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  readonly organization?: Maybe<Organization>;
   readonly organization_id?: Maybe<Scalars['String']>;
   readonly state: Scalars['String'];
+};
+
+/** order by aggregate values of table "organization_member" */
+export type Organization_Member_Aggregate_Order_By = {
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Organization_Member_Max_Order_By>;
+  readonly min?: InputMaybe<Organization_Member_Min_Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "organization_member". All fields are combined with a logical 'AND'. */
@@ -2015,16 +3002,38 @@ export type Organization_Member_Bool_Exp = {
   readonly _or?: InputMaybe<ReadonlyArray<Organization_Member_Bool_Exp>>;
   readonly address?: InputMaybe<String_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly identity_id?: InputMaybe<String_Comparison_Exp>;
+  readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly organization_id?: InputMaybe<String_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "organization_member" */
+export type Organization_Member_Max_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+  readonly organization_id?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "organization_member" */
+export type Organization_Member_Min_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+  readonly organization_id?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "organization_member". */
 export type Organization_Member_Order_By = {
   readonly address?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly identity_id?: InputMaybe<Order_By>;
+  readonly organization?: InputMaybe<Organization_Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
 };
@@ -2140,8 +3149,8 @@ export type Organization_Metadata_Stream_Cursor_Value_Input = {
   readonly website?: InputMaybe<Scalars['String']>;
 };
 
-/** Ordering options when selecting data from "organization". */
-export type Organization_Order_By = {
+/** order by min() on columns of table "organization" */
+export type Organization_Min_Order_By = {
   readonly access_model?: InputMaybe<Order_By>;
   readonly cid?: InputMaybe<Order_By>;
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -2162,6 +3171,47 @@ export type Organization_Order_By = {
   readonly pay_currency?: InputMaybe<Order_By>;
   readonly prime?: InputMaybe<Order_By>;
   readonly prime_identity_id?: InputMaybe<Order_By>;
+  readonly repo?: InputMaybe<Order_By>;
+  readonly slug?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly tags?: InputMaybe<Order_By>;
+  readonly treasury?: InputMaybe<Order_By>;
+  readonly treasury_identity_id?: InputMaybe<Order_By>;
+  readonly type?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+  readonly url?: InputMaybe<Order_By>;
+  readonly website?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "organization". */
+export type Organization_Order_By = {
+  readonly access_model?: InputMaybe<Order_By>;
+  readonly battlepasses_aggregate?: InputMaybe<Battlepass_Aggregate_Order_By>;
+  readonly campaigns_aggregate?: InputMaybe<Campaign_Aggregate_Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator?: InputMaybe<Order_By>;
+  readonly creator_identity_id?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly email?: InputMaybe<Order_By>;
+  readonly fee_model?: InputMaybe<Order_By>;
+  readonly gov_currency?: InputMaybe<Order_By>;
+  readonly header?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
+  readonly identityByCreatorIdentityId?: InputMaybe<Identity_Order_By>;
+  readonly identityByTreasuryIdentityId?: InputMaybe<Identity_Order_By>;
+  readonly location?: InputMaybe<Order_By>;
+  readonly logo?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly organization_members_aggregate?: InputMaybe<Organization_Member_Aggregate_Order_By>;
+  readonly pay_currency?: InputMaybe<Order_By>;
+  readonly prime?: InputMaybe<Order_By>;
+  readonly prime_identity_id?: InputMaybe<Order_By>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly repo?: InputMaybe<Order_By>;
   readonly slug?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
@@ -2238,6 +3288,33 @@ export enum Organization_Select_Column {
   Website = 'website'
 }
 
+/** order by stddev() on columns of table "organization" */
+export type Organization_Stddev_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "organization" */
+export type Organization_Stddev_Pop_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "organization" */
+export type Organization_Stddev_Samp_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "organization" */
 export type Organization_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -2280,12 +3357,50 @@ export type Organization_Stream_Cursor_Value_Input = {
   readonly website?: InputMaybe<Scalars['String']>;
 };
 
+/** order by sum() on columns of table "organization" */
+export type Organization_Sum_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "organization" */
+export type Organization_Var_Pop_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "organization" */
+export type Organization_Var_Samp_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "organization" */
+export type Organization_Variance_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly member_limit?: InputMaybe<Order_By>;
+  readonly membership_fee?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
 /** columns and relationships of "proposal" */
 export type Proposal = {
   readonly __typename?: 'proposal';
   readonly amount?: Maybe<Scalars['numeric']>;
   readonly beneficiary?: Maybe<Scalars['String']>;
   readonly beneficiary_identity_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  readonly campaign?: Maybe<Campaign>;
   readonly campaign_id?: Maybe<Scalars['String']>;
   readonly cid: Scalars['String'];
   readonly created_at_block: Scalars['Int'];
@@ -2296,13 +3411,45 @@ export type Proposal = {
   readonly description: Scalars['String'];
   readonly expiry: Scalars['Int'];
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
+  /** An object relationship */
+  readonly identityByBeneficiaryIdentityId?: Maybe<Identity>;
   readonly name: Scalars['String'];
+  /** An object relationship */
+  readonly organization?: Maybe<Organization>;
   readonly organization_id?: Maybe<Scalars['String']>;
   readonly slashing_rule?: Maybe<Scalars['String']>;
   readonly start: Scalars['Int'];
   readonly state: Scalars['String'];
   readonly type: Scalars['String'];
+  /** An object relationship */
+  readonly voting?: Maybe<Voting>;
   readonly voting_id?: Maybe<Scalars['String']>;
+};
+
+/** order by aggregate values of table "proposal" */
+export type Proposal_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Proposal_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Proposal_Max_Order_By>;
+  readonly min?: InputMaybe<Proposal_Min_Order_By>;
+  readonly stddev?: InputMaybe<Proposal_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Proposal_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Proposal_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Proposal_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Proposal_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Proposal_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Proposal_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "proposal" */
+export type Proposal_Avg_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "proposal". All fields are combined with a logical 'AND'. */
@@ -2313,6 +3460,7 @@ export type Proposal_Bool_Exp = {
   readonly amount?: InputMaybe<Numeric_Comparison_Exp>;
   readonly beneficiary?: InputMaybe<String_Comparison_Exp>;
   readonly beneficiary_identity_id?: InputMaybe<String_Comparison_Exp>;
+  readonly campaign?: InputMaybe<Campaign_Bool_Exp>;
   readonly campaign_id?: InputMaybe<String_Comparison_Exp>;
   readonly cid?: InputMaybe<String_Comparison_Exp>;
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
@@ -2323,13 +3471,41 @@ export type Proposal_Bool_Exp = {
   readonly description?: InputMaybe<String_Comparison_Exp>;
   readonly expiry?: InputMaybe<Int_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
+  readonly identityByBeneficiaryIdentityId?: InputMaybe<Identity_Bool_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
+  readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly organization_id?: InputMaybe<String_Comparison_Exp>;
   readonly slashing_rule?: InputMaybe<String_Comparison_Exp>;
   readonly start?: InputMaybe<Int_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
   readonly type?: InputMaybe<String_Comparison_Exp>;
+  readonly voting?: InputMaybe<Voting_Bool_Exp>;
   readonly voting_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "proposal" */
+export type Proposal_Max_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly beneficiary?: InputMaybe<Order_By>;
+  readonly beneficiary_identity_id?: InputMaybe<Order_By>;
+  readonly campaign_id?: InputMaybe<Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator?: InputMaybe<Order_By>;
+  readonly creator_identity_id?: InputMaybe<Order_By>;
+  readonly currency_id?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly organization_id?: InputMaybe<Order_By>;
+  readonly slashing_rule?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly type?: InputMaybe<Order_By>;
+  readonly voting_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "proposal_metadata" */
@@ -2382,8 +3558,8 @@ export type Proposal_Metadata_Stream_Cursor_Value_Input = {
   readonly name?: InputMaybe<Scalars['String']>;
 };
 
-/** Ordering options when selecting data from "proposal". */
-export type Proposal_Order_By = {
+/** order by min() on columns of table "proposal" */
+export type Proposal_Min_Order_By = {
   readonly amount?: InputMaybe<Order_By>;
   readonly beneficiary?: InputMaybe<Order_By>;
   readonly beneficiary_identity_id?: InputMaybe<Order_By>;
@@ -2403,6 +3579,35 @@ export type Proposal_Order_By = {
   readonly start?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
   readonly type?: InputMaybe<Order_By>;
+  readonly voting_id?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "proposal". */
+export type Proposal_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly beneficiary?: InputMaybe<Order_By>;
+  readonly beneficiary_identity_id?: InputMaybe<Order_By>;
+  readonly campaign?: InputMaybe<Campaign_Order_By>;
+  readonly campaign_id?: InputMaybe<Order_By>;
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly creator?: InputMaybe<Order_By>;
+  readonly creator_identity_id?: InputMaybe<Order_By>;
+  readonly currency_id?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly description?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
+  readonly identityByBeneficiaryIdentityId?: InputMaybe<Identity_Order_By>;
+  readonly name?: InputMaybe<Order_By>;
+  readonly organization?: InputMaybe<Organization_Order_By>;
+  readonly organization_id?: InputMaybe<Order_By>;
+  readonly slashing_rule?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+  readonly state?: InputMaybe<Order_By>;
+  readonly type?: InputMaybe<Order_By>;
+  readonly voting?: InputMaybe<Voting_Order_By>;
   readonly voting_id?: InputMaybe<Order_By>;
 };
 
@@ -2450,6 +3655,33 @@ export enum Proposal_Select_Column {
   VotingId = 'voting_id'
 }
 
+/** order by stddev() on columns of table "proposal" */
+export type Proposal_Stddev_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "proposal" */
+export type Proposal_Stddev_Pop_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "proposal" */
+export type Proposal_Stddev_Samp_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "proposal" */
 export type Proposal_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -2482,16 +3714,77 @@ export type Proposal_Stream_Cursor_Value_Input = {
   readonly voting_id?: InputMaybe<Scalars['String']>;
 };
 
+/** order by sum() on columns of table "proposal" */
+export type Proposal_Sum_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "proposal" */
+export type Proposal_Var_Pop_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "proposal" */
+export type Proposal_Var_Samp_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "proposal" */
+export type Proposal_Variance_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly deposit?: InputMaybe<Order_By>;
+  readonly expiry?: InputMaybe<Order_By>;
+  readonly start?: InputMaybe<Order_By>;
+};
+
 /** columns and relationships of "proposal_voter" */
 export type Proposal_Voter = {
   readonly __typename?: 'proposal_voter';
   readonly address: Scalars['String'];
   readonly amount?: Maybe<Scalars['numeric']>;
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly identity_id?: Maybe<Scalars['String']>;
   readonly power: Scalars['numeric'];
   readonly voted: Scalars['Boolean'];
+  /** An object relationship */
+  readonly voting?: Maybe<Voting>;
   readonly voting_id?: Maybe<Scalars['String']>;
+};
+
+/** order by aggregate values of table "proposal_voter" */
+export type Proposal_Voter_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Proposal_Voter_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Proposal_Voter_Max_Order_By>;
+  readonly min?: InputMaybe<Proposal_Voter_Min_Order_By>;
+  readonly stddev?: InputMaybe<Proposal_Voter_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Proposal_Voter_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Proposal_Voter_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Proposal_Voter_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Proposal_Voter_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Proposal_Voter_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Proposal_Voter_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "proposal_voter" */
+export type Proposal_Voter_Avg_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "proposal_voter". All fields are combined with a logical 'AND'. */
@@ -2502,10 +3795,32 @@ export type Proposal_Voter_Bool_Exp = {
   readonly address?: InputMaybe<String_Comparison_Exp>;
   readonly amount?: InputMaybe<Numeric_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly identity_id?: InputMaybe<String_Comparison_Exp>;
   readonly power?: InputMaybe<Numeric_Comparison_Exp>;
   readonly voted?: InputMaybe<Boolean_Comparison_Exp>;
+  readonly voting?: InputMaybe<Voting_Bool_Exp>;
   readonly voting_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "proposal_voter" */
+export type Proposal_Voter_Max_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly amount?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+  readonly voting_id?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "proposal_voter" */
+export type Proposal_Voter_Min_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly amount?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+  readonly voting_id?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "proposal_voter". */
@@ -2513,9 +3828,11 @@ export type Proposal_Voter_Order_By = {
   readonly address?: InputMaybe<Order_By>;
   readonly amount?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly identity_id?: InputMaybe<Order_By>;
   readonly power?: InputMaybe<Order_By>;
   readonly voted?: InputMaybe<Order_By>;
+  readonly voting?: InputMaybe<Voting_Order_By>;
   readonly voting_id?: InputMaybe<Order_By>;
 };
 
@@ -2537,6 +3854,24 @@ export enum Proposal_Voter_Select_Column {
   VotingId = 'voting_id'
 }
 
+/** order by stddev() on columns of table "proposal_voter" */
+export type Proposal_Voter_Stddev_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "proposal_voter" */
+export type Proposal_Voter_Stddev_Pop_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "proposal_voter" */
+export type Proposal_Voter_Stddev_Samp_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "proposal_voter" */
 export type Proposal_Voter_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -2554,6 +3889,30 @@ export type Proposal_Voter_Stream_Cursor_Value_Input = {
   readonly power?: InputMaybe<Scalars['numeric']>;
   readonly voted?: InputMaybe<Scalars['Boolean']>;
   readonly voting_id?: InputMaybe<Scalars['String']>;
+};
+
+/** order by sum() on columns of table "proposal_voter" */
+export type Proposal_Voter_Sum_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "proposal_voter" */
+export type Proposal_Voter_Var_Pop_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "proposal_voter" */
+export type Proposal_Voter_Var_Samp_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "proposal_voter" */
+export type Proposal_Voter_Variance_Order_By = {
+  readonly amount?: InputMaybe<Order_By>;
+  readonly power?: InputMaybe<Order_By>;
 };
 
 export type Query_Root = {
@@ -3511,10 +4870,36 @@ export type Sense_Entity = {
   readonly created_at_block: Scalars['Int'];
   readonly experience: Scalars['numeric'];
   readonly id: Scalars['String'];
+  /** An object relationship */
+  readonly identity?: Maybe<Identity>;
   readonly identity_id?: Maybe<Scalars['String']>;
   readonly reputation: Scalars['numeric'];
   readonly trust: Scalars['numeric'];
   readonly updated_at_block: Scalars['Int'];
+};
+
+/** order by aggregate values of table "sense_entity" */
+export type Sense_Entity_Aggregate_Order_By = {
+  readonly avg?: InputMaybe<Sense_Entity_Avg_Order_By>;
+  readonly count?: InputMaybe<Order_By>;
+  readonly max?: InputMaybe<Sense_Entity_Max_Order_By>;
+  readonly min?: InputMaybe<Sense_Entity_Min_Order_By>;
+  readonly stddev?: InputMaybe<Sense_Entity_Stddev_Order_By>;
+  readonly stddev_pop?: InputMaybe<Sense_Entity_Stddev_Pop_Order_By>;
+  readonly stddev_samp?: InputMaybe<Sense_Entity_Stddev_Samp_Order_By>;
+  readonly sum?: InputMaybe<Sense_Entity_Sum_Order_By>;
+  readonly var_pop?: InputMaybe<Sense_Entity_Var_Pop_Order_By>;
+  readonly var_samp?: InputMaybe<Sense_Entity_Var_Samp_Order_By>;
+  readonly variance?: InputMaybe<Sense_Entity_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "sense_entity" */
+export type Sense_Entity_Avg_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "sense_entity". All fields are combined with a logical 'AND'. */
@@ -3526,10 +4911,35 @@ export type Sense_Entity_Bool_Exp = {
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly experience?: InputMaybe<Numeric_Comparison_Exp>;
   readonly id?: InputMaybe<String_Comparison_Exp>;
+  readonly identity?: InputMaybe<Identity_Bool_Exp>;
   readonly identity_id?: InputMaybe<String_Comparison_Exp>;
   readonly reputation?: InputMaybe<Numeric_Comparison_Exp>;
   readonly trust?: InputMaybe<Numeric_Comparison_Exp>;
   readonly updated_at_block?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "sense_entity" */
+export type Sense_Entity_Max_Order_By = {
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "sense_entity" */
+export type Sense_Entity_Min_Order_By = {
+  readonly cid?: InputMaybe<Order_By>;
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly identity_id?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "sense_entity". */
@@ -3538,6 +4948,7 @@ export type Sense_Entity_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
   readonly experience?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
+  readonly identity?: InputMaybe<Identity_Order_By>;
   readonly identity_id?: InputMaybe<Order_By>;
   readonly reputation?: InputMaybe<Order_By>;
   readonly trust?: InputMaybe<Order_By>;
@@ -3564,6 +4975,33 @@ export enum Sense_Entity_Select_Column {
   UpdatedAtBlock = 'updated_at_block'
 }
 
+/** order by stddev() on columns of table "sense_entity" */
+export type Sense_Entity_Stddev_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "sense_entity" */
+export type Sense_Entity_Stddev_Pop_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "sense_entity" */
+export type Sense_Entity_Stddev_Samp_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "sense_entity" */
 export type Sense_Entity_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -3582,6 +5020,42 @@ export type Sense_Entity_Stream_Cursor_Value_Input = {
   readonly reputation?: InputMaybe<Scalars['numeric']>;
   readonly trust?: InputMaybe<Scalars['numeric']>;
   readonly updated_at_block?: InputMaybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "sense_entity" */
+export type Sense_Entity_Sum_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "sense_entity" */
+export type Sense_Entity_Var_Pop_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "sense_entity" */
+export type Sense_Entity_Var_Samp_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "sense_entity" */
+export type Sense_Entity_Variance_Order_By = {
+  readonly created_at_block?: InputMaybe<Order_By>;
+  readonly experience?: InputMaybe<Order_By>;
+  readonly reputation?: InputMaybe<Order_By>;
+  readonly trust?: InputMaybe<Order_By>;
+  readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "Session" */
@@ -5506,10 +6980,34 @@ export type Voting = {
   readonly id: Scalars['String'];
   readonly majority: Scalars['String'];
   readonly no: Scalars['numeric'];
+  /** An array relationship */
+  readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
+  /** An array relationship */
+  readonly proposals: ReadonlyArray<Proposal>;
   readonly quorum?: Maybe<Scalars['String']>;
   readonly scale: Scalars['String'];
   readonly unit: Scalars['String'];
   readonly yes: Scalars['numeric'];
+};
+
+
+/** columns and relationships of "voting" */
+export type VotingProposal_VotersArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Voter_Order_By>>;
+  where?: InputMaybe<Proposal_Voter_Bool_Exp>;
+};
+
+
+/** columns and relationships of "voting" */
+export type VotingProposalsArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
 /** Boolean expression to filter rows from the table "voting". All fields are combined with a logical 'AND'. */
@@ -5520,6 +7018,8 @@ export type Voting_Bool_Exp = {
   readonly id?: InputMaybe<String_Comparison_Exp>;
   readonly majority?: InputMaybe<String_Comparison_Exp>;
   readonly no?: InputMaybe<Numeric_Comparison_Exp>;
+  readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
+  readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly quorum?: InputMaybe<String_Comparison_Exp>;
   readonly scale?: InputMaybe<String_Comparison_Exp>;
   readonly unit?: InputMaybe<String_Comparison_Exp>;
@@ -5531,6 +7031,8 @@ export type Voting_Order_By = {
   readonly id?: InputMaybe<Order_By>;
   readonly majority?: InputMaybe<Order_By>;
   readonly no?: InputMaybe<Order_By>;
+  readonly proposal_voters_aggregate?: InputMaybe<Proposal_Voter_Aggregate_Order_By>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Order_By>;
   readonly quorum?: InputMaybe<Order_By>;
   readonly scale?: InputMaybe<Order_By>;
   readonly unit?: InputMaybe<Order_By>;
@@ -5579,6 +7081,22 @@ export type CurrentTvlSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 export type CurrentTvlSubscription = { readonly __typename?: 'subscription_root', readonly tvl_aggregated_daily: ReadonlyArray<{ readonly __typename?: 'tvl_aggregated_daily', readonly block_number: number, readonly tvl: any, readonly usd_price: any, readonly lockers_count: number, readonly id: string }> };
 
+export type StakingDataSubscriptionVariables = Exact<{
+  dapp_address: Scalars['String'];
+  staker_address: Scalars['String'];
+}>;
+
+
+export type StakingDataSubscription = { readonly __typename?: 'subscription_root', readonly stake: ReadonlyArray<{ readonly __typename?: 'stake', readonly amount: any, readonly block_number: number, readonly dapp_address: string, readonly period: number, readonly staker_address: string, readonly timestamp: any }> };
+
+export type DappDataQueryVariables = Exact<{
+  dapp_address: Scalars['String'];
+  staker_address: Scalars['String'];
+}>;
+
+
+export type DappDataQuery = { readonly __typename?: 'query_root', readonly dapp: ReadonlyArray<{ readonly __typename?: 'dapp', readonly dapp_id: number, readonly beneficiary?: string | null, readonly owner: string, readonly id: string }> };
+
 export type BalanceByAddressSubscriptionVariables = Exact<{
   address: Scalars['String'];
 }>;
@@ -5600,6 +7118,20 @@ export type CollectablesForUserQueryVariables = Exact<{
 
 
 export type CollectablesForUserQuery = { readonly __typename?: 'query_root', readonly rmrkNfts?: ReadonlyArray<{ readonly __typename?: 'RMRKNft', readonly id: string, readonly metadata: string, readonly sn: string } | null> | null };
+
+export type ProposalsByOrganizationIdSubscriptionVariables = Exact<{
+  orgId: Scalars['String'];
+}>;
+
+
+export type ProposalsByOrganizationIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly creator: string, readonly state: string, readonly start: number, readonly created_at_block: number, readonly expiry: number, readonly name: string, readonly description: string }> };
+
+export type ProposalByIdSubscriptionVariables = Exact<{
+  proposalId: Scalars['String'];
+}>;
+
+
+export type ProposalByIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly type: string, readonly state: string, readonly created_at_block: number, readonly start: number, readonly expiry: number, readonly name: string, readonly description: string, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } | null, readonly voting?: { readonly __typename?: 'voting', readonly proposal_voters: ReadonlyArray<{ readonly __typename?: 'proposal_voter', readonly voted: boolean, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } | null }> } | null }> };
 
 export type IdentityByAddressSubscriptionVariables = Exact<{
   address: Scalars['String'];
@@ -5673,6 +7205,83 @@ export function useCurrentTvlSubscription(baseOptions?: Apollo.SubscriptionHookO
       }
 export type CurrentTvlSubscriptionHookResult = ReturnType<typeof useCurrentTvlSubscription>;
 export type CurrentTvlSubscriptionResult = Apollo.SubscriptionResult<CurrentTvlSubscription>;
+export const StakingDataDocument = gql`
+    subscription StakingData($dapp_address: String!, $staker_address: String!) {
+  stake(
+    where: {staker_address: {_eq: $staker_address}, dapp_address: {_eq: $dapp_address}}
+  ) {
+    amount
+    block_number
+    dapp_address
+    period
+    staker_address
+    timestamp
+  }
+}
+    `;
+
+/**
+ * __useStakingDataSubscription__
+ *
+ * To run a query within a React component, call `useStakingDataSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useStakingDataSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStakingDataSubscription({
+ *   variables: {
+ *      dapp_address: // value for 'dapp_address'
+ *      staker_address: // value for 'staker_address'
+ *   },
+ * });
+ */
+export function useStakingDataSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakingDataSubscription, StakingDataSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<StakingDataSubscription, StakingDataSubscriptionVariables>(StakingDataDocument, options);
+      }
+export type StakingDataSubscriptionHookResult = ReturnType<typeof useStakingDataSubscription>;
+export type StakingDataSubscriptionResult = Apollo.SubscriptionResult<StakingDataSubscription>;
+export const DappDataDocument = gql`
+    query DappData($dapp_address: String!, $staker_address: String!) {
+  dapp(where: {id: {_eq: $staker_address}}) {
+    dapp_id
+    beneficiary
+    owner
+    id
+  }
+}
+    `;
+
+/**
+ * __useDappDataQuery__
+ *
+ * To run a query within a React component, call `useDappDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDappDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDappDataQuery({
+ *   variables: {
+ *      dapp_address: // value for 'dapp_address'
+ *      staker_address: // value for 'staker_address'
+ *   },
+ * });
+ */
+export function useDappDataQuery(baseOptions: Apollo.QueryHookOptions<DappDataQuery, DappDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DappDataQuery, DappDataQueryVariables>(DappDataDocument, options);
+      }
+export function useDappDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DappDataQuery, DappDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DappDataQuery, DappDataQueryVariables>(DappDataDocument, options);
+        }
+export type DappDataQueryHookResult = ReturnType<typeof useDappDataQuery>;
+export type DappDataLazyQueryHookResult = ReturnType<typeof useDappDataLazyQuery>;
+export type DappDataQueryResult = Apollo.QueryResult<DappDataQuery, DappDataQueryVariables>;
 export const BalanceByAddressDocument = gql`
     subscription BalanceByAddress($address: String!) {
   balance(where: {address: {_eq: $address}}) {
@@ -5783,6 +7392,94 @@ export function useCollectablesForUserLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type CollectablesForUserQueryHookResult = ReturnType<typeof useCollectablesForUserQuery>;
 export type CollectablesForUserLazyQueryHookResult = ReturnType<typeof useCollectablesForUserLazyQuery>;
 export type CollectablesForUserQueryResult = Apollo.QueryResult<CollectablesForUserQuery, CollectablesForUserQueryVariables>;
+export const ProposalsByOrganizationIdDocument = gql`
+    subscription ProposalsByOrganizationId($orgId: String!) {
+  proposal(where: {organization_id: {_eq: $orgId}}) {
+    id
+    creator
+    state
+    start
+    created_at_block
+    expiry
+    name
+    description
+  }
+}
+    `;
+
+/**
+ * __useProposalsByOrganizationIdSubscription__
+ *
+ * To run a query within a React component, call `useProposalsByOrganizationIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useProposalsByOrganizationIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProposalsByOrganizationIdSubscription({
+ *   variables: {
+ *      orgId: // value for 'orgId'
+ *   },
+ * });
+ */
+export function useProposalsByOrganizationIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables>(ProposalsByOrganizationIdDocument, options);
+      }
+export type ProposalsByOrganizationIdSubscriptionHookResult = ReturnType<typeof useProposalsByOrganizationIdSubscription>;
+export type ProposalsByOrganizationIdSubscriptionResult = Apollo.SubscriptionResult<ProposalsByOrganizationIdSubscription>;
+export const ProposalByIdDocument = gql`
+    subscription ProposalById($proposalId: String!) {
+  proposal(where: {id: {_eq: $proposalId}}) {
+    id
+    type
+    type
+    state
+    created_at_block
+    start
+    expiry
+    identity {
+      id
+      display_name
+    }
+    name
+    description
+    voting {
+      proposal_voters {
+        identity {
+          id
+          display_name
+        }
+        voted
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProposalByIdSubscription__
+ *
+ * To run a query within a React component, call `useProposalByIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useProposalByIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProposalByIdSubscription({
+ *   variables: {
+ *      proposalId: // value for 'proposalId'
+ *   },
+ * });
+ */
+export function useProposalByIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>(ProposalByIdDocument, options);
+      }
+export type ProposalByIdSubscriptionHookResult = ReturnType<typeof useProposalByIdSubscription>;
+export type ProposalByIdSubscriptionResult = Apollo.SubscriptionResult<ProposalByIdSubscription>;
 export const IdentityByAddressDocument = gql`
     subscription IdentityByAddress($address: String!) {
   identity_by_pk(id: $address) {

@@ -6,32 +6,36 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useAstarStaking } from 'hooks/useAstarStaking'
-import { Stack, Typography, useMediaQuery } from '@mui/material'
+import { useAstarTVL } from 'hooks/useAstarTVL'
 
 import { useTheme } from '@mui/material/styles'
+import { Stack, Typography, useMediaQuery } from '@mui/material'
 import { Loader } from 'components/atoms/Loader'
 
 export function Dashboard() {
 	const logger = useLogger('astar')
-	// const theme = useTheme()
-	// const { t } = useTranslation()
-	// const isMd = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true, })
 	const { query } = useRouter()
 
-	const [stakingData, setStakingData] = useState({
+	const [data, setData] = useState({
 		block_number: 0,
 		lockers_count: 0,
 		tvl: 0,
 		usd_price: 0,
 	})
-	const { loading, data } = useAstarStaking()
 	const address = useCurrentAccountAddress()
+	const { tvlLoading, tvlData } = useAstarTVL()
+	const { stakingLoading, stakingData } = useAstarStaking(address)
 
 	useEffect(() => {
-		if (!data) return
-		logger.log('stakingData', data)
-		setStakingData(data)
-	}, [data])
+		if (tvlLoading) return
+		setData({ ...data, ...tvlData })
+	}, [tvlData])
+
+	const [loading, setLoading] = useState(false)
+	useEffect(() => {
+		const _ = tvlLoading && stakingLoading
+		setLoading(_)
+	}, [tvlLoading, stakingLoading])
 
 	// global stuff
 
@@ -57,7 +61,7 @@ export function Dashboard() {
 
 	// const { loading, data, error } = useDappStakingDappsSubscription()
 
-	if (loading || !data) return <Loader text="Preparing your Stakeboard..." />
+	if (loading) return <Loader text="Preparing your Stakeboard..." />
 
 	return (
 		<Stack spacing={4}>
@@ -65,8 +69,11 @@ export function Dashboard() {
 				GameDAO Stakeboard
 			</Typography>
 			<Typography variant={'body1'} color={'white'}>
-				1 $ASTR = {stakingData.usd_price} USD <br />
-				TVL: {stakingData.tvl} $ASTR / {stakingData.tvl * stakingData.tvl} USD
+				1 $ASTR = {stakingData?.usd_price} USD <br />
+				TVL: {stakingData?.tvl} $ASTR / {stakingData?.tvl * stakingData?.tvl} USD
+			</Typography>
+			<Typography variant={'h5'} color={'white'}>
+				Connected Adress: {address}
 			</Typography>
 		</Stack>
 	)

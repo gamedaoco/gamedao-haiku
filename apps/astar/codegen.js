@@ -15,15 +15,11 @@ module.exports = {
 			documents: ['src/queries/**/*.graphql'],
 			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
 			config: {
-				// enumsAsTypes: true,
-				// futureProofEnums: true,
-				// constEnums: true,
-
-				//
 				preResolveTypes: true,
 				noSchemaStitching: false,
 				immutableTypes: true,
 				useIndexSignature: true,
+				withHooks: true,
 			},
 		},
 		// '../../packages/sdk/src/queries/index.ts': {
