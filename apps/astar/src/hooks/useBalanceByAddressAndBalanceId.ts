@@ -1,0 +1,16 @@
+import { useEffect, useState } from 'react'
+
+import { Balance, useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
+
+export function useBalanceByAddressAndBalanceId(address: string, balanceId: number): Balance {
+	const [balanceState, setBalanceState] = useState<Balance>(null)
+	const balance = useBalanceByAddress(address)
+
+	useEffect(() => {
+		if (balance) {
+			setBalanceState(balance.find((b) => b.balanceId === balanceId))
+		}
+	}, [balance, balanceId])
+
+	return balanceState
+}

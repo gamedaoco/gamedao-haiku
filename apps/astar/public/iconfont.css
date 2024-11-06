@@ -1,0 +1,226 @@
+@font-face {
+    font-family: 'gamedao';
+    src: url('./fonts/gamedao.eot?3srzpk');
+    src: url('./fonts/gamedao.eot?3srzpk#iefix') format('embedded-opentype'),
+    url('./fonts/gamedao.ttf?3srzpk') format('truetype'),
+    url('./fonts/gamedao.woff?3srzpk') format('woff'),
+    url('./fonts/gamedao.svg?3srzpk#gamedao') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'gamedao' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-logo-colored .path1:before {
+    content: "\e900";
+    color: rgb(241, 252, 0);
+}
+
+.icon-logo-colored .path2:before {
+    content: "\e901";
+    margin-left: -1em;
+    color: rgb(26, 128, 255);
+}
+
+.icon-logo-colored .path3:before {
+    content: "\e902";
+    margin-left: -1em;
+    color: rgb(242, 0, 17);
+}
+
+.icon-logo-colored .path4:before {
+    content: "\e903";
+    margin-left: -1em;
+    color: rgb(241, 194, 0);
+}
+
+.icon-logo-colored .path5:before {
+    content: "\e904";
+    margin-left: -1em;
+    color: rgb(33, 255, 60);
+}
+
+.icon-logo-colored .path6:before {
+    content: "\e905";
+    margin-left: -1em;
+    color: rgb(13, 242, 201);
+}
+
+.icon-logo-colored .path7:before {
+    content: "\e906";
+    margin-left: -1em;
+    color: rgb(243, 0, 230);
+}
+
+.icon-logo:before {
+    content: "\e907";
+}
+
+.icon-gamedao-logo-colored .path1:before {
+    content: "\e908";
+    color: rgb(241, 252, 0);
+}
+
+.icon-gamedao-logo-colored .path2:before {
+    content: "\e909";
+    margin-left: -2.2880859375em;
+    color: rgb(26, 128, 255);
+}
+
+.icon-gamedao-logo-colored .path3:before {
+    content: "\e90a";
+    margin-left: -2.2880859375em;
+    color: rgb(242, 0, 17);
+}
+
+.icon-gamedao-logo-colored .path4:before {
+    content: "\e90b";
+    margin-left: -2.2880859375em;
+    color: rgb(241, 194, 0);
+}
+
+.icon-gamedao-logo-colored .path5:before {
+    content: "\e90c";
+    margin-left: -2.2880859375em;
+    color: rgb(33, 255, 60);
+}
+
+.icon-gamedao-logo-colored .path6:before {
+    content: "\e90d";
+    margin-left: -2.2880859375em;
+    color: rgb(13, 242, 201);
+}
+
+.icon-gamedao-logo-colored .path7:before {
+    content: "\e90e";
+    margin-left: -2.2880859375em;
+    color: rgb(243, 0, 230);
+}
+
+.icon-gamedao-logo-colored .path8:before {
+    content: "\e90f";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-gamedao-logo-colored .path9:before {
+    content: "\e910";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-gamedao-logo-colored .path10:before {
+    content: "\e911";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-gamedao-logo-colored .path11:before {
+    content: "\e912";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-gamedao-logo-colored .path12:before {
+    content: "\e913";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-gamedao-logo-colored .path13:before {
+    content: "\e914";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-gamedao-logo-colored .path14:before {
+    content: "\e915";
+    margin-left: -2.2880859375em;
+    color: rgb(0, 0, 0);
+}
+
+.icon-moon:before {
+    content: "\e916";
+}
+
+.icon-sun:before {
+    content: "\e917";
+}
+
+.icon-calendar:before {
+    content: "\e800";
+}
+
+.icon-arrowdown:before {
+    content: "\e801";
+}
+
+.icon-arrowup:before {
+    content: "\e805";
+}
+
+.icon-campaign:before {
+    content: "\e80d";
+}
+
+.icon-check:before {
+    content: "\e83c";
+}
+
+.icon-dashboard:before {
+    content: "\e83d";
+}
+
+.icon-document:before {
+    content: "\e83e";
+}
+
+.icon-howto:before {
+    content: "\e83f";
+}
+
+.icon-image:before {
+    content: "\e840";
+}
+
+.icon-organization:before {
+    content: "\e841";
+}
+
+.icon-organization2:before {
+    content: "\e842";
+}
+
+.icon-store:before {
+    content: "\e843";
+}
+
+.icon-tangram:before {
+    content: "\e844";
+}
+
+.icon-voting:before {
+    content: "\e845";
+}
+
+.icon-wallet:before {
+    content: "\e846";
+}
+
+.icon-logout:before {
+    content: "\e918";
+}

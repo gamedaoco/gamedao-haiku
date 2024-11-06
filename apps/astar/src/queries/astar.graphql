@@ -1,0 +1,11 @@
+subscription CurrentTVL {
+
+  tvl_aggregated_daily(limit: 1, order_by:{block_number:desc}) {
+    block_number
+    tvl
+    usd_price
+    lockers_count
+    id
+  }
+
+}

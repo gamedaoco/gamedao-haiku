@@ -3,18 +3,18 @@
         "navigation": {
             "governance": "Governance",
             "campaigns": "Campaigns",
-            "organizations": "Organizations",
+            "organizations": "Collectives",
             "dashboard": "Dashboard",
             "wallet": "Wallet",
             "documentation": "Documentation",
             "faucet": "Faucet",
             "overview": "Overview",
-            "my_organizations": "Organizations",
+            "my_organizations": "Collectives",
             "my_campaigns": "Campaigns",
             "my_collectables": "Collectables",
             "identity": "Identity",
-            "set_on_chain_identity": "Set On-Chain Identity",
             "proposals": "Proposals",
+            "set_on_chain_identity": "Set On-Chain Identity",
             "members": "Members",
             "treasury": "Treasury",
             "settings": "Settings"
@@ -43,8 +43,8 @@
             "explore_campaigns": "Explore Campaigns",
             "contribute_now": "Contribute now",
             "contribute_again": "Contribute again",
-            "join_organization": "Join Organization",
-            "leave_organization": "Leave Organization",
+            "join_organization": "Join Collective",
+            "leave_organization": "Leave Collective",
             "create_proposal": "Create Proposal",
             "show_more": "Show More",
             "show_less": "Show Less",
@@ -59,7 +59,7 @@
         "form": {
             "publish_now": "Publish Now",
             "next_step": "Next step",
-            "save_organization": "Save Organization",
+            "save_organization": "Save Collective",
             "back": "Back",
             "cancel": "Cancel",
             "proposal": {
@@ -95,8 +95,8 @@
       "explore_campaigns": "Explore Campaigns",
       "contribute_now": "Contribute now",
       "contribute_again": "Contribute again",
-      "join_organization": "Join Organization",
-      "leave_organization": "Leave Organization",
+      "join_organization": "Join Collective",
+      "leave_organization": "Leave Collective",
       "create_proposal": "Create Proposal",
       "show_more": "Show More",
       "show_less": "Show Less",
@@ -113,7 +113,7 @@
     "progress_will_be_lost": "All your progress will be lost. Maybe save it as a draft and continue later",
     "campaign_draft_will_be_deleted": "Your draft campaign will be deleted.",
     "dashboard": "Dashboard",
-    "connect_wallet": "To use GameDAO DApp, the Polkadot or Talisman Extension is required. Please connect your wallet or install the Extension.",
+    "connect_wallet": "To use GameDAO DApp, the Polkadot compatible wallet is recommended. Please connect your wallet.",
     "my_collectables": "My Collectables",
     "sort_by": "Sort By",
     "filters": "Filters",
@@ -150,13 +150,13 @@
     "tmp_organization_description": "To start using your organization and deploy it on the chain, please complete following steps and earn experience points!",
     "add_logo_and_banner": "Add a logo and banner",
     "click_placeholder_upload": "Click on the placeholder to upload an image",
-    "save_organization_on_chain": "Save organization on chain",
-    "deploy_organization_to_chain": "Deploy your organization onto the chain",
+    "save_organization_on_chain": "Save collective on chain",
+    "deploy_organization_to_chain": "Deploy your unstoppable collective",
     "total_received_xp": "Receive Total {{xp}}XP",
-    "organization_level_description": "Your organization is currently on the level Padavan. Reach another {{xp}}XP to reach the next level!",
-    "deploy_organization_min_deposit": "Deploy organization on chain A min deposit of {{value}} GAME is needed.",
+    "organization_level_description": "Your collective is currently on Padavan level. Reach another {{xp}}XP to reach the next level!",
+    "deploy_organization_min_deposit": "Publish collective on chain. A minimum deposit of {{value}} GAME is needed.",
     "get_token_here": "Get {{token}} here.",
-    "deploy_organization": "Save on chain",
+    "deploy_organization": "Publish collective on chain",
     "proposal_by": "by {{creator}}",
     "information": "Information",
     "creator": "Creator",
@@ -188,10 +188,10 @@
   },
   "transactions": {
     "createOrganization": {
-      "title": "Create Organization",
-      "action_subtitle": "Organization deposit",
+      "title": "Create Collective",
+      "action_subtitle": "Collective deposit",
       "action_sub_line": "Deposit",
-      "description": "You need to deposit the amount so you can create an organization. You will receive your deposit back when you close the organization."
+      "description": "You need to deposit the amount so you can create a collective. You will receive your deposit back when you close the organization."
     },
     "createCampaign": {
       "title": "Create Campaign",
@@ -211,10 +211,10 @@
     "addMember": {
       "title": "Join",
       "action_subtitle": "Free",
-      "description": "This organization does not require any fee."
+      "description": "This collective does not require any fee."
     },
     "removeMember": {
-      "title": "Leave Organization"
+      "title": "Leave Collective"
     },
     "setIdentity": {
       "title": "Claim Identity",
@@ -247,7 +247,7 @@
           "total": "Total"
       },
       "organizations": {
-        "title": "Organizations",
+        "title": "Collectives",
         "name": "Name",
         "members": "Members",
         "value_locked": "Value Locked",
@@ -268,15 +268,15 @@
       }
     },
     "organizations": {
-      "title": "Organizations",
+      "title": "Collectives",
       "no_campaigns": "No Campaigns Yet",
-      "no_organizations": "No organization found",
+      "no_organizations": "No collective found",
       "no_result": "No results found for {{query}} Try checking for typos or using a different term.",
-      "search_place_holder": "Search Organizations",
-      "load_more": "Load More Organizations",
-      "showing_results": "Showing {{count1}} of {{count2}} organizations",
+      "search_place_holder": "Search Collectives",
+      "load_more": "Load More Collectives",
+      "showing_results": "Showing {{count1}} of {{count2}} collectives",
       "votings": "Votings",
-      "organizations_rules": "Organization Rules",
+      "organizations_rules": "Collective Rules",
       "about": "About",
       "general_proposal": "General Proposal",
       "withdrawal_proposal": "Withdrawal Proposal",
@@ -302,15 +302,15 @@
         },
         "transferred_fee": {
           "title": "Transferred Membership Fee",
-          "text": "Members pay a fee to join this organization."
+          "text": "Members pay a fee to join this collective."
         },
         "no_member_limit": {
           "title": "No Member Limit",
-          "text": " Unlimited Members can join this organization."
+          "text": " Unlimited Members can join this collective."
         },
         "member_limit": {
           "title": "Member Limit",
-          "text": "members can join this organization",
+          "text": "members can join this collective",
           "only": "Only"
         }
       },
