@@ -13,6 +13,34 @@ subscription CurrentTVL {
 
 }
 
+subscription StakesPerDappAndPeriod( $dapp:String!) {
+  stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
+    dapp_address
+    id
+    period
+    reward_amount
+    stake_amount
+  }
+}
+
+subscription StakesPerStakerAndPeriod( $dapp:String!, $address: String!){
+  stakers(where: {dapp_address: {_eq: $dapp}, staker_address: {_eq: $address}}) {
+
+    amount
+  }
+	# stakes_per_staker_and_period_aggregate (where: {
+	# 	# id: {_eq: $dapp },
+	# 	staker_address: {_eq: $address }
+	# }) {
+	# 	bonus_reward_amount
+	# 	id
+	# 	period
+	# 	stake_amount
+	# 	staker_address
+	# 	staker_reward_amount
+	# }
+}
+
 subscription StakingData (
 	$dapp_address: String!,
 	$staker_address: String!
@@ -41,3 +69,21 @@ query DappData (
     id
   }
 }
+
+# query AggregatedStakingData (
+# 	$dapp_address: String!,
+# 	$staker_address: String!
+# ){
+
+#   stake_aggregate(where: {
+# 	dapp_address: {_eq: $dapp_address},
+#   	staker_address: {_eq: $staker_address}
+# }) {
+#     aggregate {
+#       sum {
+#         amount
+#         period
+#       }
+#     }
+#   }
+# }

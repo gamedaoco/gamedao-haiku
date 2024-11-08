@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
 import { useAstarStaking } from 'hooks/useAstarStaking'
 import { useAstarTVL } from 'hooks/useAstarTVL'
+import { useAstarStakedByAddress } from 'hooks/useAstarStakedByAddress'
 
 import { useTheme } from '@mui/material/styles'
 import { Stack, Typography, useMediaQuery } from '@mui/material'
@@ -23,13 +24,14 @@ export function Dashboard() {
 		usd_price: 0,
 	})
 	const address = useCurrentAccountAddress()
-	const { tvlLoading, tvlData } = useAstarTVL()
+	const { state: stakedByAddress } = useAstarStakedByAddress(address)
+	const { tvlLoading, state: tvl } = useAstarTVL()
 	const { stakingLoading, stakingData } = useAstarStaking(address)
 
 	useEffect(() => {
 		if (tvlLoading) return
-		setData({ ...data, ...tvlData })
-	}, [tvlData])
+		setData({ ...data, ...tvl })
+	}, [data, tvl])
 
 	const [loading, setLoading] = useState(false)
 	useEffect(() => {
@@ -69,11 +71,14 @@ export function Dashboard() {
 				GameDAO Stakeboard
 			</Typography>
 			<Typography variant={'body1'} color={'white'}>
-				1 $ASTR = {stakingData?.usd_price} USD <br />
-				TVL: {stakingData?.tvl} $ASTR / {stakingData?.tvl * stakingData?.tvl} USD
+				1 $ASTR = {tvl?.usd_price} USD <br />
+				TVL: {tvl?.tvl} $ASTR / {tvl?.tvl * tvl?.tvl} USD
 			</Typography>
 			<Typography variant={'h5'} color={'white'}>
-				Connected Adress: {address}
+				Connected Address: {address}
+			</Typography>
+			<Typography variant={'h5'} color={'white'}>
+				Staked by Address: {stakedByAddress.amount}
 			</Typography>
 		</Stack>
 	)

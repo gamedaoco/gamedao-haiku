@@ -10,7 +10,7 @@ const encrypt = (message, secret) => {
 }
 
 const decrypt = (hash, nonce, secret) => {
-	const messageDecrypted = naclDecrypt(encrypted, nonce, secret)
+	const messageDecrypted = naclDecrypt(hash, nonce, secret)
 	return null
 }
 

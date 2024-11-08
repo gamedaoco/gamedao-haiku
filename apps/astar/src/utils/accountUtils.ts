@@ -24,6 +24,10 @@ export function getKusamaAddressFromAccountState(accountState: AccountState) {
 	return encodeAddress(decodeAddress(getAddressFromAccountState(accountState)), 2)
 }
 
+export function getAstarAddress(accountState: AccountState) {
+	return encodeAddress(decodeAddress(getAddressFromAccountState(accountState)), 5)
+}
+
 export function getDecodedAddress(address: string): string {
 	try {
 		return decodeAddress(address).toString()
