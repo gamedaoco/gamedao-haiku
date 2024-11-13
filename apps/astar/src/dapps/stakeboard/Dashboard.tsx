@@ -74,12 +74,21 @@ export function Dashboard() {
 				1 $ASTR = {tvl?.usd_price} USD <br />
 				TVL: {tvl?.tvl} $ASTR / {tvl?.tvl * tvl?.tvl} USD
 			</Typography>
-			<Typography variant={'h5'} color={'white'}>
-				Connected Address: {address}
-			</Typography>
-			<Typography variant={'h5'} color={'white'}>
-				Staked by Address: {stakedByAddress.amount}
-			</Typography>
+			{!address && (
+				<Typography variant={'h5'} color={'white'}>
+					Please connect your wallet to access Stakeboard.
+				</Typography>
+			)}
+			{address && (
+				<>
+					<Typography variant={'h5'} color={'white'}>
+						Connected Address: {address}
+					</Typography>
+					<Typography variant={'h5'} color={'white'}>
+						Staked by Address: {stakedByAddress.amount}
+					</Typography>
+				</>
+			)}
 		</Stack>
 	)
 }

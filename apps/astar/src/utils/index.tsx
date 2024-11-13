@@ -6,4 +6,5 @@ export const copyToClipboard = (content) => {
 	return navigator.clipboard.writeText(content).then(() => createInfoNotification('copied'))
 }
 
-export const convertSS58Prefix = (address, prefix) => encodeAddress(decodeAddress(address), prefix)
+export const convertSS58Prefix = (address, prefix = 0) =>
+	address ? encodeAddress(decodeAddress(address), prefix) : null
