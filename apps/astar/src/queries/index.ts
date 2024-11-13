@@ -28,74 +28,6 @@ export type ApiProvider = {
   readonly wsProviderUrl: Scalars['String'];
 };
 
-/** columns and relationships of "Balance" */
-export type Balance = {
-  readonly __typename?: 'Balance';
-  readonly address: Scalars['String'];
-  readonly balanceId: Scalars['Int'];
-  readonly free: Scalars['String'];
-  readonly frozen: Scalars['String'];
-  readonly id: Scalars['bigint'];
-  readonly reserved: Scalars['String'];
-};
-
-/** Boolean expression to filter rows from the table "Balance". All fields are combined with a logical 'AND'. */
-export type Balance_Bool_Exp = {
-  readonly _and?: InputMaybe<ReadonlyArray<Balance_Bool_Exp>>;
-  readonly _not?: InputMaybe<Balance_Bool_Exp>;
-  readonly _or?: InputMaybe<ReadonlyArray<Balance_Bool_Exp>>;
-  readonly address?: InputMaybe<String_Comparison_Exp>;
-  readonly balanceId?: InputMaybe<Int_Comparison_Exp>;
-  readonly free?: InputMaybe<String_Comparison_Exp>;
-  readonly frozen?: InputMaybe<String_Comparison_Exp>;
-  readonly id?: InputMaybe<Bigint_Comparison_Exp>;
-  readonly reserved?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** Ordering options when selecting data from "Balance". */
-export type Balance_Order_By = {
-  readonly address?: InputMaybe<Order_By>;
-  readonly balanceId?: InputMaybe<Order_By>;
-  readonly free?: InputMaybe<Order_By>;
-  readonly frozen?: InputMaybe<Order_By>;
-  readonly id?: InputMaybe<Order_By>;
-  readonly reserved?: InputMaybe<Order_By>;
-};
-
-/** select columns of table "Balance" */
-export enum Balance_Select_Column {
-  /** column name */
-  Address = 'address',
-  /** column name */
-  BalanceId = 'balanceId',
-  /** column name */
-  Free = 'free',
-  /** column name */
-  Frozen = 'frozen',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Reserved = 'reserved'
-}
-
-/** Streaming cursor of the table "Balance" */
-export type Balance_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  readonly initial_value: Balance_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  readonly ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Balance_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly balanceId?: InputMaybe<Scalars['Int']>;
-  readonly free?: InputMaybe<Scalars['String']>;
-  readonly frozen?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['bigint']>;
-  readonly reserved?: InputMaybe<Scalars['String']>;
-};
-
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
   readonly _eq?: InputMaybe<Scalars['Boolean']>;
@@ -438,6 +370,74 @@ export type Astar_Indexer_Status_Stream_Cursor_Value_Input = {
   readonly height?: InputMaybe<Scalars['Int']>;
   readonly id?: InputMaybe<Scalars['Int']>;
   readonly nonce?: InputMaybe<Scalars['Int']>;
+};
+
+/** columns and relationships of "Balance" */
+export type Balance = {
+  readonly __typename?: 'balance';
+  readonly address: Scalars['String'];
+  readonly balanceId: Scalars['Int'];
+  readonly free: Scalars['String'];
+  readonly frozen: Scalars['String'];
+  readonly id: Scalars['bigint'];
+  readonly reserved: Scalars['String'];
+};
+
+/** Boolean expression to filter rows from the table "Balance". All fields are combined with a logical 'AND'. */
+export type Balance_Bool_Exp = {
+  readonly _and?: InputMaybe<ReadonlyArray<Balance_Bool_Exp>>;
+  readonly _not?: InputMaybe<Balance_Bool_Exp>;
+  readonly _or?: InputMaybe<ReadonlyArray<Balance_Bool_Exp>>;
+  readonly address?: InputMaybe<String_Comparison_Exp>;
+  readonly balanceId?: InputMaybe<Int_Comparison_Exp>;
+  readonly free?: InputMaybe<String_Comparison_Exp>;
+  readonly frozen?: InputMaybe<String_Comparison_Exp>;
+  readonly id?: InputMaybe<Bigint_Comparison_Exp>;
+  readonly reserved?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** Ordering options when selecting data from "Balance". */
+export type Balance_Order_By = {
+  readonly address?: InputMaybe<Order_By>;
+  readonly balanceId?: InputMaybe<Order_By>;
+  readonly free?: InputMaybe<Order_By>;
+  readonly frozen?: InputMaybe<Order_By>;
+  readonly id?: InputMaybe<Order_By>;
+  readonly reserved?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "Balance" */
+export enum Balance_Select_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  BalanceId = 'balanceId',
+  /** column name */
+  Free = 'free',
+  /** column name */
+  Frozen = 'frozen',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Reserved = 'reserved'
+}
+
+/** Streaming cursor of the table "balance" */
+export type Balance_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  readonly initial_value: Balance_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  readonly ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Balance_Stream_Cursor_Value_Input = {
+  readonly address?: InputMaybe<Scalars['String']>;
+  readonly balanceId?: InputMaybe<Scalars['Int']>;
+  readonly free?: InputMaybe<Scalars['String']>;
+  readonly frozen?: InputMaybe<Scalars['String']>;
+  readonly id?: InputMaybe<Scalars['bigint']>;
+  readonly reserved?: InputMaybe<Scalars['String']>;
 };
 
 /** columns and relationships of "battlepass" */
@@ -3917,10 +3917,6 @@ export type Proposal_Voter_Variance_Order_By = {
 
 export type Query_Root = {
   readonly __typename?: 'query_root';
-  /** fetch data from the table: "Balance" */
-  readonly Balance: ReadonlyArray<Balance>;
-  /** fetch data from the table: "Balance" using primary key columns */
-  readonly Balance_by_pk?: Maybe<Balance>;
   /** fetch data from the table: "account_balance" */
   readonly account_balance: ReadonlyArray<Account_Balance>;
   /** fetch data from the table: "account_balance" using primary key columns */
@@ -3930,6 +3926,10 @@ export type Query_Root = {
   readonly astar_indexer_status: ReadonlyArray<Astar_Indexer_Status>;
   /** fetch data from the table: "squid_processor.status" using primary key columns */
   readonly astar_indexer_status_by_pk?: Maybe<Astar_Indexer_Status>;
+  /** fetch data from the table: "Balance" */
+  readonly balance: ReadonlyArray<Balance>;
+  /** fetch data from the table: "Balance" using primary key columns */
+  readonly balance_by_pk?: Maybe<Balance>;
   /** fetch data from the table: "battlepass" */
   readonly battlepass: ReadonlyArray<Battlepass>;
   /** fetch data from the table: "battlepass" using primary key columns */
@@ -4099,20 +4099,6 @@ export type Query_Root = {
 };
 
 
-export type Query_RootBalanceArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Balance_Order_By>>;
-  where?: InputMaybe<Balance_Bool_Exp>;
-};
-
-
-export type Query_RootBalance_By_PkArgs = {
-  id: Scalars['bigint'];
-};
-
-
 export type Query_RootAccount_BalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4138,6 +4124,20 @@ export type Query_RootAstar_Indexer_StatusArgs = {
 
 export type Query_RootAstar_Indexer_Status_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootBalanceArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Balance_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Balance_Order_By>>;
+  where?: InputMaybe<Balance_Bool_Exp>;
+};
+
+
+export type Query_RootBalance_By_PkArgs = {
+  id: Scalars['bigint'];
 };
 
 
@@ -5641,12 +5641,6 @@ export type Subperiod_Stream_Cursor_Value_Input = {
 
 export type Subscription_Root = {
   readonly __typename?: 'subscription_root';
-  /** fetch data from the table: "Balance" */
-  readonly Balance: ReadonlyArray<Balance>;
-  /** fetch data from the table: "Balance" using primary key columns */
-  readonly Balance_by_pk?: Maybe<Balance>;
-  /** fetch data from the table in a streaming manner: "Balance" */
-  readonly Balance_stream: ReadonlyArray<Balance>;
   /** fetch data from the table: "account_balance" */
   readonly account_balance: ReadonlyArray<Account_Balance>;
   /** fetch data from the table: "account_balance" using primary key columns */
@@ -5659,6 +5653,12 @@ export type Subscription_Root = {
   readonly astar_indexer_status_by_pk?: Maybe<Astar_Indexer_Status>;
   /** fetch data from the table in a streaming manner: "squid_processor.status" */
   readonly astar_indexer_status_stream: ReadonlyArray<Astar_Indexer_Status>;
+  /** fetch data from the table: "Balance" */
+  readonly balance: ReadonlyArray<Balance>;
+  /** fetch data from the table: "Balance" using primary key columns */
+  readonly balance_by_pk?: Maybe<Balance>;
+  /** fetch data from the table in a streaming manner: "Balance" */
+  readonly balance_stream: ReadonlyArray<Balance>;
   /** fetch data from the table: "battlepass" */
   readonly battlepass: ReadonlyArray<Battlepass>;
   /** fetch data from the table: "battlepass" using primary key columns */
@@ -5902,27 +5902,6 @@ export type Subscription_Root = {
 };
 
 
-export type Subscription_RootBalanceArgs = {
-  distinct_on?: InputMaybe<ReadonlyArray<Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<ReadonlyArray<Balance_Order_By>>;
-  where?: InputMaybe<Balance_Bool_Exp>;
-};
-
-
-export type Subscription_RootBalance_By_PkArgs = {
-  id: Scalars['bigint'];
-};
-
-
-export type Subscription_RootBalance_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: ReadonlyArray<InputMaybe<Balance_Stream_Cursor_Input>>;
-  where?: InputMaybe<Balance_Bool_Exp>;
-};
-
-
 export type Subscription_RootAccount_BalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5962,6 +5941,27 @@ export type Subscription_RootAstar_Indexer_Status_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: ReadonlyArray<InputMaybe<Astar_Indexer_Status_Stream_Cursor_Input>>;
   where?: InputMaybe<Astar_Indexer_Status_Bool_Exp>;
+};
+
+
+export type Subscription_RootBalanceArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Balance_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<ReadonlyArray<Balance_Order_By>>;
+  where?: InputMaybe<Balance_Bool_Exp>;
+};
+
+
+export type Subscription_RootBalance_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+export type Subscription_RootBalance_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: ReadonlyArray<InputMaybe<Balance_Stream_Cursor_Input>>;
+  where?: InputMaybe<Balance_Bool_Exp>;
 };
 
 
@@ -7117,7 +7117,7 @@ export type BalanceByAddressSubscriptionVariables = Exact<{
 }>;
 
 
-export type BalanceByAddressSubscription = { readonly __typename?: 'subscription_root', readonly Balance: ReadonlyArray<{ readonly __typename?: 'Balance', readonly id: any, readonly address: string, readonly balanceId: number, readonly free: string, readonly frozen: string, readonly reserved: string }> };
+export type BalanceByAddressSubscription = { readonly __typename?: 'subscription_root', readonly balance: ReadonlyArray<{ readonly __typename?: 'balance', readonly id: any, readonly address: string, readonly balanceId: number, readonly free: string, readonly frozen: string, readonly reserved: string }> };
 
 export type HistoricalBalanceSubscriptionVariables = Exact<{
   address: Scalars['String'];
@@ -7364,7 +7364,7 @@ export type DappDataLazyQueryHookResult = ReturnType<typeof useDappDataLazyQuery
 export type DappDataQueryResult = Apollo.QueryResult<DappDataQuery, DappDataQueryVariables>;
 export const BalanceByAddressDocument = gql`
     subscription BalanceByAddress($address: String!) {
-  Balance(where: {address: {_eq: $address}}) {
+  balance(where: {address: {_eq: $address}}) {
     id
     address
     balanceId
