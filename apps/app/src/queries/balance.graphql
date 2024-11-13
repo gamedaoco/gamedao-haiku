@@ -1,5 +1,5 @@
 subscription BalanceByAddress($address: String!) {
-    Balance(where: {address: {_eq: $address}}) {
+    balance(where: {address: {_eq: $address}}) {
         id
 		address
         balanceId
