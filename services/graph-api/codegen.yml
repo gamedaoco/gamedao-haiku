@@ -1,0 +1,12 @@
+schema: ./src/schema.graphql
+overwrite: true
+
+generates:
+  ./src/@types/schema.d.ts:
+    config:
+      useIndexSignature: true
+      immutableTypes: true
+      preResolveTypes: true
+    plugins:
+      - typescript
+      - typescript-resolvers
