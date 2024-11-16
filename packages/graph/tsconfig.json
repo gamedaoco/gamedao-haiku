@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "jsx": "preserve",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": "src",
+    "paths": {
+      "@types/*": ["src/@types/*"],
+      "graphql/*": [ "src/graphql/*" ],
+      "config/*": [ "src/config/*" ],
+      "constants/*": [ "src/constants/*" ],
+      "components/*": [ "src/components/*" ],
+      "dapps/*": [ "src/dapps/*" ],
+      "data/*": [ "src/data/*" ],
+      "hooks/*": [ "src/hooks/*" ],
+      "layouts/*": [ "src/layouts/*" ],
+      "providers/*": [ "src/providers/*" ],
+      "public/*": [ "public/*" ],
+      "queries/*": [ "src/queries/*" ],
+      "src/*": [ "src/*" ],
+      "themes/*": [ "src/themes/*" ],
+      "utils/*": [ "src/utils/*" ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.local",
+    "src/*.local"
+  ]
+}

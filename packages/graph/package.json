@@ -1,0 +1,33 @@
+{
+  "name": "@gamedao/graph",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/queries/index.ts"
+  },
+  "scripts": {
+    "generate": "npx graphql-codegen --config codegen.js",
+    "test": "echo test"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.6",
+    "@graphql-tools/graphql-file-loader": "^7.3.14",
+    "@graphql-tools/load": "^7.5.13",
+    "@graphql-tools/schema": "^8.3.13",
+    "@graphql-tools/stitch": "^8.6.12",
+    "@graphql-tools/wrap": "^8.4.19",
+    "graphql": "^16.5.0",
+    "graphql-type-json": "^0.3.2",
+    "graphql-ws": "^5.9.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/import-types-preset": "^2.1.20",
+    "@graphql-codegen/typed-document-node": "^2.2.13",
+    "@graphql-codegen/typescript-operations": "^2.4.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.16",
+    "@graphql-codegen/typescript-resolvers": "^2.6.6",
+    "typescript": "^5.2.2"
+  }
+}

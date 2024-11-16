@@ -1,0 +1,5 @@
+subscription BlockNumber {
+	chain_info {
+		blockNumber
+	}
+}
