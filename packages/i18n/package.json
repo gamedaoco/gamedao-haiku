@@ -1,8 +1,11 @@
 {
-  "name": "@gamedao/translations",
+  "name": "@gamedao/i18n",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^5.2.2"
   }
