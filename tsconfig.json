@@ -1,8 +1,18 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "module": "NodeNext",
+    "moduleResolution":"NodeNext",
+    "target": "esnext",
     "jsx": "react-jsx",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@gamedao/*": ["packages/*/src"]
+    }
   },
+  "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["node_modules"]
 }
