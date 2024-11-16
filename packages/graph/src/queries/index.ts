@@ -5,92 +5,94 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Upload: any;
-  bigint: any;
-  numeric: any;
-  timestamp: any;
-  timestamptz: any;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  Upload: { input: any; output: any; }
+  bigint: { input: any; output: any; }
+  numeric: { input: any; output: any; }
+  timestamp: { input: any; output: any; }
+  timestamptz: { input: any; output: any; }
 };
 
 export type ApiProvider = {
   readonly __typename?: 'ApiProvider';
   readonly chainProperties: ChainProperties;
-  readonly name: Scalars['String'];
-  readonly types: Scalars['String'];
-  readonly wsProviderUrl: Scalars['String'];
+  readonly name: Scalars['String']['output'];
+  readonly types: Scalars['String']['output'];
+  readonly wsProviderUrl: Scalars['String']['output'];
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['Boolean']>;
-  readonly _gt?: InputMaybe<Scalars['Boolean']>;
-  readonly _gte?: InputMaybe<Scalars['Boolean']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['Boolean']>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<Scalars['Boolean']>;
-  readonly _lte?: InputMaybe<Scalars['Boolean']>;
-  readonly _neq?: InputMaybe<Scalars['Boolean']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['Boolean']>>;
+  readonly _eq?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _gt?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _gte?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['Boolean']['input']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lte?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _neq?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['Boolean']['input']>>;
 };
 
 export type ChainProperties = {
   readonly __typename?: 'ChainProperties';
-  readonly blockTargetTime: Scalars['Int'];
-  readonly governanceCurrency: Scalars['Int'];
-  readonly networkCurrency: Scalars['Int'];
-  readonly paymentCurrencies: Scalars['Int'];
-  readonly ss58Format: Scalars['Int'];
-  readonly tokenDecimals: ReadonlyArray<Maybe<Scalars['String']>>;
-  readonly tokenSymbol: ReadonlyArray<Maybe<Scalars['String']>>;
+  readonly blockTargetTime: Scalars['Int']['output'];
+  readonly governanceCurrency: Scalars['Int']['output'];
+  readonly networkCurrency: Scalars['Int']['output'];
+  readonly paymentCurrencies: Scalars['Int']['output'];
+  readonly ss58Format: Scalars['Int']['output'];
+  readonly tokenDecimals: ReadonlyArray<Maybe<Scalars['String']['output']>>;
+  readonly tokenSymbol: ReadonlyArray<Maybe<Scalars['String']['output']>>;
 };
 
 export type Config = {
   readonly __typename?: 'Config';
-  readonly CAMPAIGN_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']>;
-  readonly CONTACT?: Maybe<Scalars['String']>;
-  readonly IPFS_GATEWAY?: Maybe<Scalars['String']>;
+  readonly CAMPAIGN_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']['output']>;
+  readonly CONTACT?: Maybe<Scalars['String']['output']>;
+  readonly IPFS_GATEWAY?: Maybe<Scalars['String']['output']>;
   readonly LOG_LEVEL?: Maybe<LogLevel>;
-  readonly PROPOSAL_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']>;
-  readonly SITE_DESCRIPTION?: Maybe<Scalars['String']>;
-  readonly SITE_IMAGE?: Maybe<Scalars['String']>;
-  readonly SITE_NAME?: Maybe<Scalars['String']>;
-  readonly SITE_TITLE?: Maybe<Scalars['String']>;
-  readonly TW_SITE_CREATOR?: Maybe<Scalars['String']>;
-  readonly TW_SITE_NAME?: Maybe<Scalars['String']>;
+  readonly PROPOSAL_MIN_EXPIRY_IN_SECONDS?: Maybe<Scalars['String']['output']>;
+  readonly SITE_DESCRIPTION?: Maybe<Scalars['String']['output']>;
+  readonly SITE_IMAGE?: Maybe<Scalars['String']['output']>;
+  readonly SITE_NAME?: Maybe<Scalars['String']['output']>;
+  readonly SITE_TITLE?: Maybe<Scalars['String']['output']>;
+  readonly TW_SITE_CREATOR?: Maybe<Scalars['String']['output']>;
+  readonly TW_SITE_NAME?: Maybe<Scalars['String']['output']>;
 };
 
 export type DisplayValueEntry = {
-  readonly key: Scalars['String'];
-  readonly text: Scalars['String'];
+  readonly key: Scalars['String']['output'];
+  readonly text: Scalars['String']['output'];
 };
 
 export type DisplayValueEntryCountry = DisplayValueEntry & {
   readonly __typename?: 'DisplayValueEntryCountry';
-  readonly key: Scalars['String'];
-  readonly text: Scalars['String'];
-  readonly value: Scalars['String'];
+  readonly key: Scalars['String']['output'];
+  readonly text: Scalars['String']['output'];
+  readonly value: Scalars['String']['output'];
 };
 
 export type DisplayValueEntryNumber = DisplayValueEntry & {
   readonly __typename?: 'DisplayValueEntryNumber';
-  readonly key: Scalars['String'];
-  readonly text: Scalars['String'];
-  readonly value: Scalars['Int'];
+  readonly key: Scalars['String']['output'];
+  readonly text: Scalars['String']['output'];
+  readonly value: Scalars['Int']['output'];
 };
 
 export type DisplayValueEntryString = DisplayValueEntry & {
   readonly __typename?: 'DisplayValueEntryString';
-  readonly key: Scalars['String'];
-  readonly text: Scalars['String'];
-  readonly value: Scalars['String'];
+  readonly key: Scalars['String']['output'];
+  readonly text: Scalars['String']['output'];
+  readonly value: Scalars['String']['output'];
 };
 
 export type DisplayValues = {
@@ -121,39 +123,39 @@ export enum Environment {
 
 export type Features = OrganizationFeatures & ProposalFeatures & {
   readonly __typename?: 'Features';
-  readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean'];
-  readonly CREATE_PROPOSAL: Scalars['Boolean'];
-  readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean'];
-  readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean'];
-  readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean'];
-  readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean'];
-  readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean'];
-  readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean'];
-  readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean'];
+  readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']['output'];
+  readonly CREATE_PROPOSAL: Scalars['Boolean']['output'];
+  readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']['output'];
+  readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']['output'];
+  readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']['output'];
+  readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']['output'];
+  readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']['output'];
+  readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']['output'];
+  readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']['output'];
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['Int']>;
-  readonly _gt?: InputMaybe<Scalars['Int']>;
-  readonly _gte?: InputMaybe<Scalars['Int']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['Int']>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<Scalars['Int']>;
-  readonly _lte?: InputMaybe<Scalars['Int']>;
-  readonly _neq?: InputMaybe<Scalars['Int']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['Int']>>;
+  readonly _eq?: InputMaybe<Scalars['Int']['input']>;
+  readonly _gt?: InputMaybe<Scalars['Int']['input']>;
+  readonly _gte?: InputMaybe<Scalars['Int']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['Int']['input']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<Scalars['Int']['input']>;
+  readonly _lte?: InputMaybe<Scalars['Int']['input']>;
+  readonly _neq?: InputMaybe<Scalars['Int']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['Int']['input']>>;
 };
 
 export type Link = {
   readonly __typename?: 'Link';
-  readonly category?: Maybe<Scalars['String']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly id?: Maybe<Scalars['String']>;
-  readonly imageUrl?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
-  readonly url?: Maybe<Scalars['String']>;
-  readonly users?: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly category?: Maybe<Scalars['String']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly imageUrl?: Maybe<Scalars['String']['output']>;
+  readonly title?: Maybe<Scalars['String']['output']>;
+  readonly url?: Maybe<Scalars['String']['output']>;
+  readonly users?: Maybe<ReadonlyArray<Maybe<Scalars['String']['output']>>>;
 };
 
 export enum LogLevel {
@@ -166,87 +168,87 @@ export enum LogLevel {
 }
 
 export type OrganizationFeatures = {
-  readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean'];
-  readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean'];
-  readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean'];
+  readonly ORGANIZATION_PAGE_SHOW_FILTERS: Scalars['Boolean']['output'];
+  readonly ORGANIZATION_PAGE_SHOW_SEARCH: Scalars['Boolean']['output'];
+  readonly ORGANIZATION_PAGE_SHOW_SORT: Scalars['Boolean']['output'];
 };
 
 export type ProposalFeatures = {
-  readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean'];
-  readonly CREATE_PROPOSAL: Scalars['Boolean'];
-  readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean'];
-  readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean'];
-  readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean'];
-  readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean'];
+  readonly CREATE_GENERAL_PROPOSAL: Scalars['Boolean']['output'];
+  readonly CREATE_PROPOSAL: Scalars['Boolean']['output'];
+  readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: Scalars['Boolean']['output'];
+  readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: Scalars['Boolean']['output'];
+  readonly CREATE_SPENDING_PROPOSAL: Scalars['Boolean']['output'];
+  readonly CREATE_WITHDRAW_PROPOSAL: Scalars['Boolean']['output'];
 };
 
 export type RmrkNft = {
   readonly __typename?: 'RMRKNft';
-  readonly id: Scalars['String'];
-  readonly metadata: Scalars['String'];
-  readonly sn: Scalars['String'];
+  readonly id: Scalars['String']['output'];
+  readonly metadata: Scalars['String']['output'];
+  readonly sn: Scalars['String']['output'];
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Array_Comparison_Exp = {
   /** is the array contained in the given array value */
-  readonly _contained_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly _contained_in?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
   /** does the array contain the given value */
-  readonly _contains?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _eq?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _gt?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _gte?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _in?: InputMaybe<ReadonlyArray<ReadonlyArray<Scalars['String']>>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _lte?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _neq?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly _nin?: InputMaybe<ReadonlyArray<ReadonlyArray<Scalars['String']>>>;
+  readonly _contains?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _eq?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _gt?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _gte?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _in?: InputMaybe<ReadonlyArray<ReadonlyArray<Scalars['String']['input']>>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _lte?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _neq?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly _nin?: InputMaybe<ReadonlyArray<ReadonlyArray<Scalars['String']['input']>>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['String']>;
-  readonly _gt?: InputMaybe<Scalars['String']>;
-  readonly _gte?: InputMaybe<Scalars['String']>;
+  readonly _eq?: InputMaybe<Scalars['String']['input']>;
+  readonly _gt?: InputMaybe<Scalars['String']['input']>;
+  readonly _gte?: InputMaybe<Scalars['String']['input']>;
   /** does the column match the given case-insensitive pattern */
-  readonly _ilike?: InputMaybe<Scalars['String']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly _ilike?: InputMaybe<Scalars['String']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
   /** does the column match the given POSIX regular expression, case insensitive */
-  readonly _iregex?: InputMaybe<Scalars['String']>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
+  readonly _iregex?: InputMaybe<Scalars['String']['input']>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
   /** does the column match the given pattern */
-  readonly _like?: InputMaybe<Scalars['String']>;
-  readonly _lt?: InputMaybe<Scalars['String']>;
-  readonly _lte?: InputMaybe<Scalars['String']>;
-  readonly _neq?: InputMaybe<Scalars['String']>;
+  readonly _like?: InputMaybe<Scalars['String']['input']>;
+  readonly _lt?: InputMaybe<Scalars['String']['input']>;
+  readonly _lte?: InputMaybe<Scalars['String']['input']>;
+  readonly _neq?: InputMaybe<Scalars['String']['input']>;
   /** does the column NOT match the given case-insensitive pattern */
-  readonly _nilike?: InputMaybe<Scalars['String']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly _nilike?: InputMaybe<Scalars['String']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
   /** does the column NOT match the given POSIX regular expression, case insensitive */
-  readonly _niregex?: InputMaybe<Scalars['String']>;
+  readonly _niregex?: InputMaybe<Scalars['String']['input']>;
   /** does the column NOT match the given pattern */
-  readonly _nlike?: InputMaybe<Scalars['String']>;
+  readonly _nlike?: InputMaybe<Scalars['String']['input']>;
   /** does the column NOT match the given POSIX regular expression, case sensitive */
-  readonly _nregex?: InputMaybe<Scalars['String']>;
+  readonly _nregex?: InputMaybe<Scalars['String']['input']>;
   /** does the column NOT match the given SQL regular expression */
-  readonly _nsimilar?: InputMaybe<Scalars['String']>;
+  readonly _nsimilar?: InputMaybe<Scalars['String']['input']>;
   /** does the column match the given POSIX regular expression, case sensitive */
-  readonly _regex?: InputMaybe<Scalars['String']>;
+  readonly _regex?: InputMaybe<Scalars['String']['input']>;
   /** does the column match the given SQL regular expression */
-  readonly _similar?: InputMaybe<Scalars['String']>;
+  readonly _similar?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "account_balance" */
 export type Account_Balance = {
   readonly __typename?: 'account_balance';
-  readonly balance_id?: Maybe<Scalars['String']>;
+  readonly balance_id?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   readonly historical_balance?: Maybe<Historical_Balance>;
-  readonly id: Scalars['String'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly identity_id?: Maybe<Scalars['String']>;
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by aggregate values of table "account_balance" */
@@ -311,18 +313,18 @@ export type Account_Balance_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Account_Balance_Stream_Cursor_Value_Input = {
-  readonly balance_id?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly identity_id?: InputMaybe<Scalars['String']>;
+  readonly balance_id?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly identity_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "squid_processor.status" */
 export type Astar_Indexer_Status = {
   readonly __typename?: 'astar_indexer_status';
-  readonly hash?: Maybe<Scalars['String']>;
-  readonly height: Scalars['Int'];
-  readonly id: Scalars['Int'];
-  readonly nonce?: Maybe<Scalars['Int']>;
+  readonly hash?: Maybe<Scalars['String']['output']>;
+  readonly height: Scalars['Int']['output'];
+  readonly id: Scalars['Int']['output'];
+  readonly nonce?: Maybe<Scalars['Int']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "squid_processor.status". All fields are combined with a logical 'AND'. */
@@ -366,21 +368,21 @@ export type Astar_Indexer_Status_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Astar_Indexer_Status_Stream_Cursor_Value_Input = {
-  readonly hash?: InputMaybe<Scalars['String']>;
-  readonly height?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['Int']>;
-  readonly nonce?: InputMaybe<Scalars['Int']>;
+  readonly hash?: InputMaybe<Scalars['String']['input']>;
+  readonly height?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['Int']['input']>;
+  readonly nonce?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** columns and relationships of "Balance" */
 export type Balance = {
   readonly __typename?: 'balance';
-  readonly address: Scalars['String'];
-  readonly balanceId: Scalars['Int'];
-  readonly free: Scalars['String'];
-  readonly frozen: Scalars['String'];
-  readonly id: Scalars['bigint'];
-  readonly reserved: Scalars['String'];
+  readonly address: Scalars['String']['output'];
+  readonly balanceId: Scalars['Int']['output'];
+  readonly free: Scalars['String']['output'];
+  readonly frozen: Scalars['String']['output'];
+  readonly id: Scalars['bigint']['output'];
+  readonly reserved: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "Balance". All fields are combined with a logical 'AND'. */
@@ -432,45 +434,45 @@ export type Balance_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Balance_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly balanceId?: InputMaybe<Scalars['Int']>;
-  readonly free?: InputMaybe<Scalars['String']>;
-  readonly frozen?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['bigint']>;
-  readonly reserved?: InputMaybe<Scalars['String']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly balanceId?: InputMaybe<Scalars['Int']['input']>;
+  readonly free?: InputMaybe<Scalars['String']['input']>;
+  readonly frozen?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['bigint']['input']>;
+  readonly reserved?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "battlepass" */
 export type Battlepass = {
   readonly __typename?: 'battlepass';
-  readonly active_from_block?: Maybe<Scalars['Int']>;
-  readonly active_to_block?: Maybe<Scalars['Int']>;
+  readonly active_from_block?: Maybe<Scalars['Int']['output']>;
+  readonly active_to_block?: Maybe<Scalars['Int']['output']>;
   /** An array relationship */
   readonly battlepass_nfts: ReadonlyArray<Battlepass_Nft>;
-  readonly cid: Scalars['String'];
-  readonly created_at_block: Scalars['Int'];
-  readonly creator_id?: Maybe<Scalars['String']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly id: Scalars['String'];
+  readonly cid: Scalars['String']['output'];
+  readonly created_at_block: Scalars['Int']['output'];
+  readonly creator_id?: Maybe<Scalars['String']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly image?: Maybe<Scalars['String']>;
-  readonly name: Scalars['String'];
-  readonly org_id?: Maybe<Scalars['String']>;
+  readonly image?: Maybe<Scalars['String']['output']>;
+  readonly name: Scalars['String']['output'];
+  readonly org_id?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   readonly organization?: Maybe<Organization>;
-  readonly price: Scalars['numeric'];
-  readonly season: Scalars['String'];
-  readonly state: Scalars['String'];
-  readonly updated_at_block: Scalars['Int'];
+  readonly price: Scalars['numeric']['output'];
+  readonly season: Scalars['String']['output'];
+  readonly state: Scalars['String']['output'];
+  readonly updated_at_block: Scalars['Int']['output'];
 };
 
 
 /** columns and relationships of "battlepass" */
 export type BattlepassBattlepass_NftsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
   where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
 };
@@ -564,14 +566,14 @@ export type Battlepass_Nft = {
   readonly __typename?: 'battlepass_nft';
   /** An object relationship */
   readonly battlepass?: Maybe<Battlepass>;
-  readonly battlepass_id?: Maybe<Scalars['String']>;
-  readonly id: Scalars['String'];
+  readonly battlepass_id?: Maybe<Scalars['String']['output']>;
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
   /** An object relationship */
   readonly nft?: Maybe<Nft>;
-  readonly nft_id?: Maybe<Scalars['String']>;
-  readonly owner_id?: Maybe<Scalars['String']>;
+  readonly nft_id?: Maybe<Scalars['String']['output']>;
+  readonly owner_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by aggregate values of table "battlepass_nft" */
@@ -644,10 +646,10 @@ export type Battlepass_Nft_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Battlepass_Nft_Stream_Cursor_Value_Input = {
-  readonly battlepass_id?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly nft_id?: InputMaybe<Scalars['String']>;
-  readonly owner_id?: InputMaybe<Scalars['String']>;
+  readonly battlepass_id?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly nft_id?: InputMaybe<Scalars['String']['input']>;
+  readonly owner_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Ordering options when selecting data from "battlepass". */
@@ -740,20 +742,20 @@ export type Battlepass_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Battlepass_Stream_Cursor_Value_Input = {
-  readonly active_from_block?: InputMaybe<Scalars['Int']>;
-  readonly active_to_block?: InputMaybe<Scalars['Int']>;
-  readonly cid?: InputMaybe<Scalars['String']>;
-  readonly created_at_block?: InputMaybe<Scalars['Int']>;
-  readonly creator_id?: InputMaybe<Scalars['String']>;
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly image?: InputMaybe<Scalars['String']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly org_id?: InputMaybe<Scalars['String']>;
-  readonly price?: InputMaybe<Scalars['numeric']>;
-  readonly season?: InputMaybe<Scalars['String']>;
-  readonly state?: InputMaybe<Scalars['String']>;
-  readonly updated_at_block?: InputMaybe<Scalars['Int']>;
+  readonly active_from_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly active_to_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly cid?: InputMaybe<Scalars['String']['input']>;
+  readonly created_at_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly creator_id?: InputMaybe<Scalars['String']['input']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly image?: InputMaybe<Scalars['String']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly org_id?: InputMaybe<Scalars['String']['input']>;
+  readonly price?: InputMaybe<Scalars['numeric']['input']>;
+  readonly season?: InputMaybe<Scalars['String']['input']>;
+  readonly state?: InputMaybe<Scalars['String']['input']>;
+  readonly updated_at_block?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** order by sum() on columns of table "battlepass" */
@@ -794,25 +796,25 @@ export type Battlepass_Variance_Order_By = {
 
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
 export type Bigint_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['bigint']>;
-  readonly _gt?: InputMaybe<Scalars['bigint']>;
-  readonly _gte?: InputMaybe<Scalars['bigint']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['bigint']>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<Scalars['bigint']>;
-  readonly _lte?: InputMaybe<Scalars['bigint']>;
-  readonly _neq?: InputMaybe<Scalars['bigint']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['bigint']>>;
+  readonly _eq?: InputMaybe<Scalars['bigint']['input']>;
+  readonly _gt?: InputMaybe<Scalars['bigint']['input']>;
+  readonly _gte?: InputMaybe<Scalars['bigint']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['bigint']['input']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<Scalars['bigint']['input']>;
+  readonly _lte?: InputMaybe<Scalars['bigint']['input']>;
+  readonly _neq?: InputMaybe<Scalars['bigint']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['bigint']['input']>>;
 };
 
 /** columns and relationships of "burn" */
 export type Burn = {
   readonly __typename?: 'burn';
-  readonly amount: Scalars['numeric'];
-  readonly block_number: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['numeric'];
-  readonly user: Scalars['String'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
+  readonly user: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "burn". All fields are combined with a logical 'AND'. */
@@ -860,58 +862,58 @@ export type Burn_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Burn_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
-  readonly user?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
+  readonly user?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "campaign" */
 export type Campaign = {
   readonly __typename?: 'campaign';
-  readonly admin: Scalars['String'];
-  readonly admin_identity_id?: Maybe<Scalars['String']>;
+  readonly admin: Scalars['String']['output'];
+  readonly admin_identity_id?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly campaign_contributors: ReadonlyArray<Campaign_Contributor>;
-  readonly cid: Scalars['String'];
-  readonly created_at_block: Scalars['Int'];
-  readonly creator: Scalars['String'];
-  readonly creator_identity_id?: Maybe<Scalars['String']>;
-  readonly deposit: Scalars['numeric'];
-  readonly description: Scalars['String'];
-  readonly email: Scalars['String'];
-  readonly expiry: Scalars['Int'];
-  readonly governance: Scalars['String'];
-  readonly header: Scalars['String'];
-  readonly id: Scalars['String'];
+  readonly cid: Scalars['String']['output'];
+  readonly created_at_block: Scalars['Int']['output'];
+  readonly creator: Scalars['String']['output'];
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit: Scalars['numeric']['output'];
+  readonly description: Scalars['String']['output'];
+  readonly email: Scalars['String']['output'];
+  readonly expiry: Scalars['Int']['output'];
+  readonly governance: Scalars['String']['output'];
+  readonly header: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
   /** An object relationship */
   readonly identityByCreatorIdentityId?: Maybe<Identity>;
-  readonly logo: Scalars['String'];
-  readonly markdown: Scalars['String'];
-  readonly name: Scalars['String'];
+  readonly logo: Scalars['String']['output'];
+  readonly markdown: Scalars['String']['output'];
+  readonly name: Scalars['String']['output'];
   /** An object relationship */
   readonly organization?: Maybe<Organization>;
-  readonly organization_id?: Maybe<Scalars['String']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
-  readonly protocol: Scalars['String'];
-  readonly start: Scalars['Int'];
-  readonly state: Scalars['String'];
-  readonly target: Scalars['numeric'];
-  readonly title: Scalars['String'];
-  readonly token_name?: Maybe<Scalars['String']>;
-  readonly token_symbol?: Maybe<Scalars['String']>;
+  readonly protocol: Scalars['String']['output'];
+  readonly start: Scalars['Int']['output'];
+  readonly state: Scalars['String']['output'];
+  readonly target: Scalars['numeric']['output'];
+  readonly title: Scalars['String']['output'];
+  readonly token_name?: Maybe<Scalars['String']['output']>;
+  readonly token_symbol?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** columns and relationships of "campaign" */
 export type CampaignCampaign_ContributorsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>;
   where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
 };
@@ -920,8 +922,8 @@ export type CampaignCampaign_ContributorsArgs = {
 /** columns and relationships of "campaign" */
 export type CampaignProposalsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
@@ -989,15 +991,15 @@ export type Campaign_Bool_Exp = {
 /** columns and relationships of "campaign_contributor" */
 export type Campaign_Contributor = {
   readonly __typename?: 'campaign_contributor';
-  readonly address: Scalars['String'];
+  readonly address: Scalars['String']['output'];
   /** An object relationship */
   readonly campaign?: Maybe<Campaign>;
-  readonly campaign_id?: Maybe<Scalars['String']>;
-  readonly contributed: Scalars['numeric'];
-  readonly id: Scalars['String'];
+  readonly campaign_id?: Maybe<Scalars['String']['output']>;
+  readonly contributed: Scalars['numeric']['output'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly identity_id?: Maybe<Scalars['String']>;
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by aggregate values of table "campaign_contributor" */
@@ -1102,11 +1104,11 @@ export type Campaign_Contributor_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Campaign_Contributor_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly campaign_id?: InputMaybe<Scalars['String']>;
-  readonly contributed?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly identity_id?: InputMaybe<Scalars['String']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly campaign_id?: InputMaybe<Scalars['String']['input']>;
+  readonly contributed?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly identity_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "campaign_contributor" */
@@ -1160,14 +1162,14 @@ export type Campaign_Max_Order_By = {
 /** columns and relationships of "campaign_metadata" */
 export type Campaign_Metadata = {
   readonly __typename?: 'campaign_metadata';
-  readonly description: Scalars['String'];
-  readonly email: Scalars['String'];
-  readonly header: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly logo: Scalars['String'];
-  readonly markdown: Scalars['String'];
-  readonly name: Scalars['String'];
-  readonly title: Scalars['String'];
+  readonly description: Scalars['String']['output'];
+  readonly email: Scalars['String']['output'];
+  readonly header: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly logo: Scalars['String']['output'];
+  readonly markdown: Scalars['String']['output'];
+  readonly name: Scalars['String']['output'];
+  readonly title: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "campaign_metadata". All fields are combined with a logical 'AND'. */
@@ -1227,14 +1229,14 @@ export type Campaign_Metadata_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Campaign_Metadata_Stream_Cursor_Value_Input = {
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly email?: InputMaybe<Scalars['String']>;
-  readonly header?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly logo?: InputMaybe<Scalars['String']>;
-  readonly markdown?: InputMaybe<Scalars['String']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly title?: InputMaybe<Scalars['String']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly email?: InputMaybe<Scalars['String']['input']>;
+  readonly header?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly logo?: InputMaybe<Scalars['String']['input']>;
+  readonly markdown?: InputMaybe<Scalars['String']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by min() on columns of table "campaign" */
@@ -1387,30 +1389,30 @@ export type Campaign_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Campaign_Stream_Cursor_Value_Input = {
-  readonly admin?: InputMaybe<Scalars['String']>;
-  readonly admin_identity_id?: InputMaybe<Scalars['String']>;
-  readonly cid?: InputMaybe<Scalars['String']>;
-  readonly created_at_block?: InputMaybe<Scalars['Int']>;
-  readonly creator?: InputMaybe<Scalars['String']>;
-  readonly creator_identity_id?: InputMaybe<Scalars['String']>;
-  readonly deposit?: InputMaybe<Scalars['numeric']>;
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly email?: InputMaybe<Scalars['String']>;
-  readonly expiry?: InputMaybe<Scalars['Int']>;
-  readonly governance?: InputMaybe<Scalars['String']>;
-  readonly header?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly logo?: InputMaybe<Scalars['String']>;
-  readonly markdown?: InputMaybe<Scalars['String']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly organization_id?: InputMaybe<Scalars['String']>;
-  readonly protocol?: InputMaybe<Scalars['String']>;
-  readonly start?: InputMaybe<Scalars['Int']>;
-  readonly state?: InputMaybe<Scalars['String']>;
-  readonly target?: InputMaybe<Scalars['numeric']>;
-  readonly title?: InputMaybe<Scalars['String']>;
-  readonly token_name?: InputMaybe<Scalars['String']>;
-  readonly token_symbol?: InputMaybe<Scalars['String']>;
+  readonly admin?: InputMaybe<Scalars['String']['input']>;
+  readonly admin_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly cid?: InputMaybe<Scalars['String']['input']>;
+  readonly created_at_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly creator?: InputMaybe<Scalars['String']['input']>;
+  readonly creator_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly deposit?: InputMaybe<Scalars['numeric']['input']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly email?: InputMaybe<Scalars['String']['input']>;
+  readonly expiry?: InputMaybe<Scalars['Int']['input']>;
+  readonly governance?: InputMaybe<Scalars['String']['input']>;
+  readonly header?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly logo?: InputMaybe<Scalars['String']['input']>;
+  readonly markdown?: InputMaybe<Scalars['String']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly organization_id?: InputMaybe<Scalars['String']['input']>;
+  readonly protocol?: InputMaybe<Scalars['String']['input']>;
+  readonly start?: InputMaybe<Scalars['Int']['input']>;
+  readonly state?: InputMaybe<Scalars['String']['input']>;
+  readonly target?: InputMaybe<Scalars['numeric']['input']>;
+  readonly title?: InputMaybe<Scalars['String']['input']>;
+  readonly token_name?: InputMaybe<Scalars['String']['input']>;
+  readonly token_symbol?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "campaign" */
@@ -1452,8 +1454,8 @@ export type Campaign_Variance_Order_By = {
 /** columns and relationships of "ChainInfo" */
 export type Chain_Info = {
   readonly __typename?: 'chain_info';
-  readonly blockNumber: Scalars['bigint'];
-  readonly id: Scalars['Int'];
+  readonly blockNumber: Scalars['bigint']['output'];
+  readonly id: Scalars['Int']['output'];
 };
 
 /** Boolean expression to filter rows from the table "ChainInfo". All fields are combined with a logical 'AND'. */
@@ -1489,18 +1491,18 @@ export type Chain_Info_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Chain_Info_Stream_Cursor_Value_Input = {
-  readonly blockNumber?: InputMaybe<Scalars['bigint']>;
-  readonly id?: InputMaybe<Scalars['Int']>;
+  readonly blockNumber?: InputMaybe<Scalars['bigint']['input']>;
+  readonly id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** columns and relationships of "chain_state" */
 export type Chain_State = {
   readonly __typename?: 'chain_state';
-  readonly block_number: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['timestamptz'];
-  readonly token_balance: Scalars['numeric'];
-  readonly token_holders: Scalars['Int'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['timestamptz']['output'];
+  readonly token_balance: Scalars['numeric']['output'];
+  readonly token_holders: Scalars['Int']['output'];
 };
 
 /** Boolean expression to filter rows from the table "chain_state". All fields are combined with a logical 'AND'. */
@@ -1548,21 +1550,21 @@ export type Chain_State_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Chain_State_Stream_Cursor_Value_Input = {
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['timestamptz']>;
-  readonly token_balance?: InputMaybe<Scalars['numeric']>;
-  readonly token_holders?: InputMaybe<Scalars['Int']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly token_balance?: InputMaybe<Scalars['numeric']['input']>;
+  readonly token_holders?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** columns and relationships of "current_chain_state" */
 export type Current_Chain_State = {
   readonly __typename?: 'current_chain_state';
-  readonly block_number: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['timestamptz'];
-  readonly token_balance: Scalars['numeric'];
-  readonly token_holders: Scalars['Int'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['timestamptz']['output'];
+  readonly token_balance: Scalars['numeric']['output'];
+  readonly token_holders: Scalars['Int']['output'];
 };
 
 /** Boolean expression to filter rows from the table "current_chain_state". All fields are combined with a logical 'AND'. */
@@ -1610,11 +1612,11 @@ export type Current_Chain_State_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Current_Chain_State_Stream_Cursor_Value_Input = {
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['timestamptz']>;
-  readonly token_balance?: InputMaybe<Scalars['numeric']>;
-  readonly token_holders?: InputMaybe<Scalars['Int']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly token_balance?: InputMaybe<Scalars['numeric']['input']>;
+  readonly token_holders?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** ordering argument of a cursor */
@@ -1628,25 +1630,25 @@ export enum Cursor_Ordering {
 /** columns and relationships of "dapp" */
 export type Dapp = {
   readonly __typename?: 'dapp';
-  readonly beneficiary?: Maybe<Scalars['String']>;
-  readonly dapp_id: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly owner: Scalars['String'];
-  readonly registered_at: Scalars['numeric'];
-  readonly registration_block_number: Scalars['Int'];
-  readonly stakers_count: Scalars['Int'];
-  readonly state: Scalars['String'];
-  readonly unregistered_at?: Maybe<Scalars['numeric']>;
-  readonly unregistration_block_number?: Maybe<Scalars['Int']>;
+  readonly beneficiary?: Maybe<Scalars['String']['output']>;
+  readonly dapp_id: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly owner: Scalars['String']['output'];
+  readonly registered_at: Scalars['numeric']['output'];
+  readonly registration_block_number: Scalars['Int']['output'];
+  readonly stakers_count: Scalars['Int']['output'];
+  readonly state: Scalars['String']['output'];
+  readonly unregistered_at?: Maybe<Scalars['numeric']['output']>;
+  readonly unregistration_block_number?: Maybe<Scalars['Int']['output']>;
 };
 
 /** columns and relationships of "dapp_aggregated_daily" */
 export type Dapp_Aggregated_Daily = {
   readonly __typename?: 'dapp_aggregated_daily';
-  readonly dapp_address: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly stakers_count: Scalars['Int'];
-  readonly timestamp: Scalars['numeric'];
+  readonly dapp_address: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly stakers_count: Scalars['Int']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "dapp_aggregated_daily". All fields are combined with a logical 'AND'. */
@@ -1690,10 +1692,10 @@ export type Dapp_Aggregated_Daily_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Dapp_Aggregated_Daily_Stream_Cursor_Value_Input = {
-  readonly dapp_address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly stakers_count?: InputMaybe<Scalars['Int']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
+  readonly dapp_address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly stakers_count?: InputMaybe<Scalars['Int']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** Boolean expression to filter rows from the table "dapp". All fields are combined with a logical 'AND'. */
@@ -1761,23 +1763,23 @@ export type Dapp_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Dapp_Stream_Cursor_Value_Input = {
-  readonly beneficiary?: InputMaybe<Scalars['String']>;
-  readonly dapp_id?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly owner?: InputMaybe<Scalars['String']>;
-  readonly registered_at?: InputMaybe<Scalars['numeric']>;
-  readonly registration_block_number?: InputMaybe<Scalars['Int']>;
-  readonly stakers_count?: InputMaybe<Scalars['Int']>;
-  readonly state?: InputMaybe<Scalars['String']>;
-  readonly unregistered_at?: InputMaybe<Scalars['numeric']>;
-  readonly unregistration_block_number?: InputMaybe<Scalars['Int']>;
+  readonly beneficiary?: InputMaybe<Scalars['String']['input']>;
+  readonly dapp_id?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly owner?: InputMaybe<Scalars['String']['input']>;
+  readonly registered_at?: InputMaybe<Scalars['numeric']['input']>;
+  readonly registration_block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly stakers_count?: InputMaybe<Scalars['Int']['input']>;
+  readonly state?: InputMaybe<Scalars['String']['input']>;
+  readonly unregistered_at?: InputMaybe<Scalars['numeric']['input']>;
+  readonly unregistration_block_number?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** columns and relationships of "squid_processor.status" */
 export type Gamedao_Indexer_Status = {
   readonly __typename?: 'gamedao_indexer_status';
-  readonly height: Scalars['Int'];
-  readonly id: Scalars['Int'];
+  readonly height: Scalars['Int']['output'];
+  readonly id: Scalars['Int']['output'];
 };
 
 /** Boolean expression to filter rows from the table "squid_processor.status". All fields are combined with a logical 'AND'. */
@@ -1813,16 +1815,16 @@ export type Gamedao_Indexer_Status_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Gamedao_Indexer_Status_Stream_Cursor_Value_Input = {
-  readonly height?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['Int']>;
+  readonly height?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** columns and relationships of "migrations" */
 export type Gamedao_Squid_Migrations = {
   readonly __typename?: 'gamedao_squid_migrations';
-  readonly id: Scalars['Int'];
-  readonly name: Scalars['String'];
-  readonly timestamp: Scalars['bigint'];
+  readonly id: Scalars['Int']['output'];
+  readonly name: Scalars['String']['output'];
+  readonly timestamp: Scalars['bigint']['output'];
 };
 
 /** Boolean expression to filter rows from the table "migrations". All fields are combined with a logical 'AND'. */
@@ -1862,18 +1864,18 @@ export type Gamedao_Squid_Migrations_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Gamedao_Squid_Migrations_Stream_Cursor_Value_Input = {
-  readonly id?: InputMaybe<Scalars['Int']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['bigint']>;
+  readonly id?: InputMaybe<Scalars['Int']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** columns and relationships of "grouped_staking_event" */
 export type Grouped_Staking_Event = {
   readonly __typename?: 'grouped_staking_event';
-  readonly amount: Scalars['numeric'];
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['numeric'];
-  readonly transaction: Scalars['String'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
+  readonly transaction: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "grouped_staking_event". All fields are combined with a logical 'AND'. */
@@ -1917,10 +1919,10 @@ export type Grouped_Staking_Event_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Grouped_Staking_Event_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
-  readonly transaction?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
+  readonly transaction?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "historical_balance" */
@@ -1928,21 +1930,21 @@ export type Historical_Balance = {
   readonly __typename?: 'historical_balance';
   /** An array relationship */
   readonly account_balances: ReadonlyArray<Account_Balance>;
-  readonly address: Scalars['String'];
-  readonly block: Scalars['Int'];
-  readonly currency_id: Scalars['String'];
-  readonly free: Scalars['numeric'];
-  readonly id: Scalars['String'];
-  readonly reserved: Scalars['numeric'];
-  readonly total: Scalars['numeric'];
+  readonly address: Scalars['String']['output'];
+  readonly block: Scalars['Int']['output'];
+  readonly currency_id: Scalars['String']['output'];
+  readonly free: Scalars['numeric']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly reserved: Scalars['numeric']['output'];
+  readonly total: Scalars['numeric']['output'];
 };
 
 
 /** columns and relationships of "historical_balance" */
 export type Historical_BalanceAccount_BalancesArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Account_Balance_Order_By>>;
   where?: InputMaybe<Account_Balance_Bool_Exp>;
 };
@@ -2002,13 +2004,13 @@ export type Historical_Balance_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Historical_Balance_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly block?: InputMaybe<Scalars['Int']>;
-  readonly currency_id?: InputMaybe<Scalars['String']>;
-  readonly free?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly reserved?: InputMaybe<Scalars['numeric']>;
-  readonly total?: InputMaybe<Scalars['numeric']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly block?: InputMaybe<Scalars['Int']['input']>;
+  readonly currency_id?: InputMaybe<Scalars['String']['input']>;
+  readonly free?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly reserved?: InputMaybe<Scalars['numeric']['input']>;
+  readonly total?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "identity" */
@@ -2016,7 +2018,7 @@ export type Identity = {
   readonly __typename?: 'identity';
   /** An array relationship */
   readonly account_balances: ReadonlyArray<Account_Balance>;
-  readonly address: Scalars['String'];
+  readonly address: Scalars['String']['output'];
   /** An array relationship */
   readonly battlepass_nfts: ReadonlyArray<Battlepass_Nft>;
   /** An array relationship */
@@ -2027,12 +2029,12 @@ export type Identity = {
   readonly campaigns: ReadonlyArray<Campaign>;
   /** An array relationship */
   readonly campaignsByCreatorIdentityId: ReadonlyArray<Campaign>;
-  readonly discord?: Maybe<Scalars['String']>;
-  readonly display_name?: Maybe<Scalars['String']>;
-  readonly email?: Maybe<Scalars['String']>;
-  readonly id: Scalars['String'];
-  readonly image?: Maybe<Scalars['String']>;
-  readonly legal_name?: Maybe<Scalars['String']>;
+  readonly discord?: Maybe<Scalars['String']['output']>;
+  readonly display_name?: Maybe<Scalars['String']['output']>;
+  readonly email?: Maybe<Scalars['String']['output']>;
+  readonly id: Scalars['String']['output'];
+  readonly image?: Maybe<Scalars['String']['output']>;
+  readonly legal_name?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly nft_collections: ReadonlyArray<Nft_Collection>;
   /** An array relationship */
@@ -2051,20 +2053,20 @@ export type Identity = {
   readonly proposals: ReadonlyArray<Proposal>;
   /** An array relationship */
   readonly proposalsByBeneficiaryIdentityId: ReadonlyArray<Proposal>;
-  readonly riot?: Maybe<Scalars['String']>;
+  readonly riot?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly sense_entities: ReadonlyArray<Sense_Entity>;
-  readonly twitter?: Maybe<Scalars['String']>;
-  readonly web?: Maybe<Scalars['String']>;
-  readonly web3name?: Maybe<Scalars['String']>;
+  readonly twitter?: Maybe<Scalars['String']['output']>;
+  readonly web?: Maybe<Scalars['String']['output']>;
+  readonly web3name?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** columns and relationships of "identity" */
 export type IdentityAccount_BalancesArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Account_Balance_Order_By>>;
   where?: InputMaybe<Account_Balance_Bool_Exp>;
 };
@@ -2073,8 +2075,8 @@ export type IdentityAccount_BalancesArgs = {
 /** columns and relationships of "identity" */
 export type IdentityBattlepass_NftsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
   where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
 };
@@ -2083,8 +2085,8 @@ export type IdentityBattlepass_NftsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityBattlepassesArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Order_By>>;
   where?: InputMaybe<Battlepass_Bool_Exp>;
 };
@@ -2093,8 +2095,8 @@ export type IdentityBattlepassesArgs = {
 /** columns and relationships of "identity" */
 export type IdentityCampaign_ContributorsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>;
   where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
 };
@@ -2103,8 +2105,8 @@ export type IdentityCampaign_ContributorsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityCampaignsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
 };
@@ -2113,8 +2115,8 @@ export type IdentityCampaignsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityCampaignsByCreatorIdentityIdArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
 };
@@ -2123,8 +2125,8 @@ export type IdentityCampaignsByCreatorIdentityIdArgs = {
 /** columns and relationships of "identity" */
 export type IdentityNft_CollectionsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Collection_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Collection_Order_By>>;
   where?: InputMaybe<Nft_Collection_Bool_Exp>;
 };
@@ -2133,8 +2135,8 @@ export type IdentityNft_CollectionsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityNftsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Order_By>>;
   where?: InputMaybe<Nft_Bool_Exp>;
 };
@@ -2143,8 +2145,8 @@ export type IdentityNftsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityOrganization_MembersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
   where?: InputMaybe<Organization_Member_Bool_Exp>;
 };
@@ -2153,8 +2155,8 @@ export type IdentityOrganization_MembersArgs = {
 /** columns and relationships of "identity" */
 export type IdentityOrganizationsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
   where?: InputMaybe<Organization_Bool_Exp>;
 };
@@ -2163,8 +2165,8 @@ export type IdentityOrganizationsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityOrganizationsByCreatorIdentityIdArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
   where?: InputMaybe<Organization_Bool_Exp>;
 };
@@ -2173,8 +2175,8 @@ export type IdentityOrganizationsByCreatorIdentityIdArgs = {
 /** columns and relationships of "identity" */
 export type IdentityOrganizationsByTreasuryIdentityIdArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
   where?: InputMaybe<Organization_Bool_Exp>;
 };
@@ -2183,8 +2185,8 @@ export type IdentityOrganizationsByTreasuryIdentityIdArgs = {
 /** columns and relationships of "identity" */
 export type IdentityProposal_VotersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Voter_Order_By>>;
   where?: InputMaybe<Proposal_Voter_Bool_Exp>;
 };
@@ -2193,8 +2195,8 @@ export type IdentityProposal_VotersArgs = {
 /** columns and relationships of "identity" */
 export type IdentityProposalsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
@@ -2203,8 +2205,8 @@ export type IdentityProposalsArgs = {
 /** columns and relationships of "identity" */
 export type IdentityProposalsByBeneficiaryIdentityIdArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
@@ -2213,8 +2215,8 @@ export type IdentityProposalsByBeneficiaryIdentityIdArgs = {
 /** columns and relationships of "identity" */
 export type IdentitySense_EntitiesArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Sense_Entity_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Sense_Entity_Order_By>>;
   where?: InputMaybe<Sense_Entity_Bool_Exp>;
 };
@@ -2320,25 +2322,25 @@ export type Identity_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Identity_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly discord?: InputMaybe<Scalars['String']>;
-  readonly display_name?: InputMaybe<Scalars['String']>;
-  readonly email?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly image?: InputMaybe<Scalars['String']>;
-  readonly legal_name?: InputMaybe<Scalars['String']>;
-  readonly riot?: InputMaybe<Scalars['String']>;
-  readonly twitter?: InputMaybe<Scalars['String']>;
-  readonly web?: InputMaybe<Scalars['String']>;
-  readonly web3name?: InputMaybe<Scalars['String']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly discord?: InputMaybe<Scalars['String']['input']>;
+  readonly display_name?: InputMaybe<Scalars['String']['input']>;
+  readonly email?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly image?: InputMaybe<Scalars['String']['input']>;
+  readonly legal_name?: InputMaybe<Scalars['String']['input']>;
+  readonly riot?: InputMaybe<Scalars['String']['input']>;
+  readonly twitter?: InputMaybe<Scalars['String']['input']>;
+  readonly web?: InputMaybe<Scalars['String']['input']>;
+  readonly web3name?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "migrations" */
 export type Migrations = {
   readonly __typename?: 'migrations';
-  readonly id: Scalars['Int'];
-  readonly name: Scalars['String'];
-  readonly timestamp: Scalars['bigint'];
+  readonly id: Scalars['Int']['output'];
+  readonly name: Scalars['String']['output'];
+  readonly timestamp: Scalars['bigint']['output'];
 };
 
 /** Boolean expression to filter rows from the table "migrations". All fields are combined with a logical 'AND'. */
@@ -2378,9 +2380,9 @@ export type Migrations_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Migrations_Stream_Cursor_Value_Input = {
-  readonly id?: InputMaybe<Scalars['Int']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['bigint']>;
+  readonly id?: InputMaybe<Scalars['Int']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** mutation root */
@@ -2390,8 +2392,8 @@ export type Mutation_Root = {
   readonly insert_session?: Maybe<Session_Mutation_Response>;
   /** insert a single row into the table: "Session" */
   readonly insert_session_one?: Maybe<Session>;
-  readonly singleUpload: Scalars['String'];
-  readonly updateSession: Scalars['Boolean'];
+  readonly singleUpload: Scalars['String']['output'];
+  readonly updateSession: Scalars['Boolean']['output'];
   /** update data of the table: "Session" */
   readonly update_session?: Maybe<Session_Mutation_Response>;
   /** update single row of the table: "Session" */
@@ -2417,13 +2419,13 @@ export type Mutation_RootInsert_Session_OneArgs = {
 
 /** mutation root */
 export type Mutation_RootSingleUploadArgs = {
-  fileStream: Scalars['Upload'];
+  fileStream: Scalars['Upload']['input'];
 };
 
 
 /** mutation root */
 export type Mutation_RootUpdateSessionArgs = {
-  address: Scalars['String'];
+  address: Scalars['String']['input'];
 };
 
 
@@ -2453,26 +2455,26 @@ export type Nft = {
   readonly __typename?: 'nft';
   /** An array relationship */
   readonly battlepass_nfts: ReadonlyArray<Battlepass_Nft>;
-  readonly collection_id?: Maybe<Scalars['String']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly id: Scalars['String'];
+  readonly collection_id?: Maybe<Scalars['String']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly image?: Maybe<Scalars['String']>;
-  readonly metadata?: Maybe<Scalars['String']>;
-  readonly metadata_is_frozen?: Maybe<Scalars['Boolean']>;
-  readonly name?: Maybe<Scalars['String']>;
+  readonly image?: Maybe<Scalars['String']['output']>;
+  readonly metadata?: Maybe<Scalars['String']['output']>;
+  readonly metadata_is_frozen?: Maybe<Scalars['Boolean']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   readonly nft_collection?: Maybe<Nft_Collection>;
-  readonly owner_id?: Maybe<Scalars['String']>;
+  readonly owner_id?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** columns and relationships of "nft" */
 export type NftBattlepass_NftsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
   where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
 };
@@ -2505,26 +2507,26 @@ export type Nft_Bool_Exp = {
 /** columns and relationships of "nft_collection" */
 export type Nft_Collection = {
   readonly __typename?: 'nft_collection';
-  readonly description?: Maybe<Scalars['String']>;
-  readonly id: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly image?: Maybe<Scalars['String']>;
-  readonly max?: Maybe<Scalars['Int']>;
-  readonly metadata?: Maybe<Scalars['String']>;
-  readonly metadata_is_frozen?: Maybe<Scalars['Boolean']>;
-  readonly name?: Maybe<Scalars['String']>;
+  readonly image?: Maybe<Scalars['String']['output']>;
+  readonly max?: Maybe<Scalars['Int']['output']>;
+  readonly metadata?: Maybe<Scalars['String']['output']>;
+  readonly metadata_is_frozen?: Maybe<Scalars['Boolean']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly nfts: ReadonlyArray<Nft>;
-  readonly owner_id?: Maybe<Scalars['String']>;
+  readonly owner_id?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** columns and relationships of "nft_collection" */
 export type Nft_CollectionNftsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Order_By>>;
   where?: InputMaybe<Nft_Bool_Exp>;
 };
@@ -2647,14 +2649,14 @@ export type Nft_Collection_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Nft_Collection_Stream_Cursor_Value_Input = {
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly image?: InputMaybe<Scalars['String']>;
-  readonly max?: InputMaybe<Scalars['Int']>;
-  readonly metadata?: InputMaybe<Scalars['String']>;
-  readonly metadata_is_frozen?: InputMaybe<Scalars['Boolean']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly owner_id?: InputMaybe<Scalars['String']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly image?: InputMaybe<Scalars['String']['input']>;
+  readonly max?: InputMaybe<Scalars['Int']['input']>;
+  readonly metadata?: InputMaybe<Scalars['String']['input']>;
+  readonly metadata_is_frozen?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly owner_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "nft_collection" */
@@ -2744,27 +2746,27 @@ export type Nft_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Nft_Stream_Cursor_Value_Input = {
-  readonly collection_id?: InputMaybe<Scalars['String']>;
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly image?: InputMaybe<Scalars['String']>;
-  readonly metadata?: InputMaybe<Scalars['String']>;
-  readonly metadata_is_frozen?: InputMaybe<Scalars['Boolean']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly owner_id?: InputMaybe<Scalars['String']>;
+  readonly collection_id?: InputMaybe<Scalars['String']['input']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly image?: InputMaybe<Scalars['String']['input']>;
+  readonly metadata?: InputMaybe<Scalars['String']['input']>;
+  readonly metadata_is_frozen?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly owner_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
 export type Numeric_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['numeric']>;
-  readonly _gt?: InputMaybe<Scalars['numeric']>;
-  readonly _gte?: InputMaybe<Scalars['numeric']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['numeric']>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<Scalars['numeric']>;
-  readonly _lte?: InputMaybe<Scalars['numeric']>;
-  readonly _neq?: InputMaybe<Scalars['numeric']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['numeric']>>;
+  readonly _eq?: InputMaybe<Scalars['numeric']['input']>;
+  readonly _gt?: InputMaybe<Scalars['numeric']['input']>;
+  readonly _gte?: InputMaybe<Scalars['numeric']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['numeric']['input']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<Scalars['numeric']['input']>;
+  readonly _lte?: InputMaybe<Scalars['numeric']['input']>;
+  readonly _neq?: InputMaybe<Scalars['numeric']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['numeric']['input']>>;
 };
 
 /** column ordering options */
@@ -2786,58 +2788,58 @@ export enum Order_By {
 /** columns and relationships of "organization" */
 export type Organization = {
   readonly __typename?: 'organization';
-  readonly access_model: Scalars['String'];
+  readonly access_model: Scalars['String']['output'];
   /** An array relationship */
   readonly battlepasses: ReadonlyArray<Battlepass>;
   /** An array relationship */
   readonly campaigns: ReadonlyArray<Campaign>;
-  readonly cid: Scalars['String'];
-  readonly created_at_block: Scalars['Int'];
-  readonly creator: Scalars['String'];
-  readonly creator_identity_id?: Maybe<Scalars['String']>;
-  readonly deposit: Scalars['numeric'];
-  readonly description: Scalars['String'];
-  readonly email: Scalars['String'];
-  readonly fee_model: Scalars['String'];
-  readonly gov_currency: Scalars['String'];
-  readonly header: Scalars['String'];
-  readonly id: Scalars['String'];
+  readonly cid: Scalars['String']['output'];
+  readonly created_at_block: Scalars['Int']['output'];
+  readonly creator: Scalars['String']['output'];
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit: Scalars['numeric']['output'];
+  readonly description: Scalars['String']['output'];
+  readonly email: Scalars['String']['output'];
+  readonly fee_model: Scalars['String']['output'];
+  readonly gov_currency: Scalars['String']['output'];
+  readonly header: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
   /** An object relationship */
   readonly identityByCreatorIdentityId?: Maybe<Identity>;
   /** An object relationship */
   readonly identityByTreasuryIdentityId?: Maybe<Identity>;
-  readonly location: Scalars['String'];
-  readonly logo: Scalars['String'];
-  readonly member_limit: Scalars['Int'];
-  readonly membership_fee?: Maybe<Scalars['numeric']>;
-  readonly name: Scalars['String'];
+  readonly location: Scalars['String']['output'];
+  readonly logo: Scalars['String']['output'];
+  readonly member_limit: Scalars['Int']['output'];
+  readonly membership_fee?: Maybe<Scalars['numeric']['output']>;
+  readonly name: Scalars['String']['output'];
   /** An array relationship */
   readonly organization_members: ReadonlyArray<Organization_Member>;
-  readonly pay_currency: Scalars['String'];
-  readonly prime: Scalars['String'];
-  readonly prime_identity_id?: Maybe<Scalars['String']>;
+  readonly pay_currency: Scalars['String']['output'];
+  readonly prime: Scalars['String']['output'];
+  readonly prime_identity_id?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
-  readonly repo: Scalars['String'];
-  readonly slug: Scalars['String'];
-  readonly state: Scalars['String'];
-  readonly tags: ReadonlyArray<Scalars['String']>;
-  readonly treasury: Scalars['String'];
-  readonly treasury_identity_id?: Maybe<Scalars['String']>;
-  readonly type: Scalars['String'];
-  readonly updated_at_block: Scalars['Int'];
-  readonly url: Scalars['String'];
-  readonly website: Scalars['String'];
+  readonly repo: Scalars['String']['output'];
+  readonly slug: Scalars['String']['output'];
+  readonly state: Scalars['String']['output'];
+  readonly tags: ReadonlyArray<Scalars['String']['output']>;
+  readonly treasury: Scalars['String']['output'];
+  readonly treasury_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly type: Scalars['String']['output'];
+  readonly updated_at_block: Scalars['Int']['output'];
+  readonly url: Scalars['String']['output'];
+  readonly website: Scalars['String']['output'];
 };
 
 
 /** columns and relationships of "organization" */
 export type OrganizationBattlepassesArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Order_By>>;
   where?: InputMaybe<Battlepass_Bool_Exp>;
 };
@@ -2846,8 +2848,8 @@ export type OrganizationBattlepassesArgs = {
 /** columns and relationships of "organization" */
 export type OrganizationCampaignsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
 };
@@ -2856,8 +2858,8 @@ export type OrganizationCampaignsArgs = {
 /** columns and relationships of "organization" */
 export type OrganizationOrganization_MembersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
   where?: InputMaybe<Organization_Member_Bool_Exp>;
 };
@@ -2866,8 +2868,8 @@ export type OrganizationOrganization_MembersArgs = {
 /** columns and relationships of "organization" */
 export type OrganizationProposalsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
@@ -2977,15 +2979,15 @@ export type Organization_Max_Order_By = {
 /** columns and relationships of "organization_member" */
 export type Organization_Member = {
   readonly __typename?: 'organization_member';
-  readonly address: Scalars['String'];
-  readonly id: Scalars['String'];
+  readonly address: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly identity_id?: Maybe<Scalars['String']>;
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   readonly organization?: Maybe<Organization>;
-  readonly organization_id?: Maybe<Scalars['String']>;
-  readonly state: Scalars['String'];
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly state: Scalars['String']['output'];
 };
 
 /** order by aggregate values of table "organization_member" */
@@ -3062,24 +3064,24 @@ export type Organization_Member_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Organization_Member_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly identity_id?: InputMaybe<Scalars['String']>;
-  readonly organization_id?: InputMaybe<Scalars['String']>;
-  readonly state?: InputMaybe<Scalars['String']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly organization_id?: InputMaybe<Scalars['String']['input']>;
+  readonly state?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "organization_metadata" */
 export type Organization_Metadata = {
   readonly __typename?: 'organization_metadata';
-  readonly description: Scalars['String'];
-  readonly email: Scalars['String'];
-  readonly header: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly logo: Scalars['String'];
-  readonly name: Scalars['String'];
-  readonly repo: Scalars['String'];
-  readonly website: Scalars['String'];
+  readonly description: Scalars['String']['output'];
+  readonly email: Scalars['String']['output'];
+  readonly header: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly logo: Scalars['String']['output'];
+  readonly name: Scalars['String']['output'];
+  readonly repo: Scalars['String']['output'];
+  readonly website: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "organization_metadata". All fields are combined with a logical 'AND'. */
@@ -3139,14 +3141,14 @@ export type Organization_Metadata_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Organization_Metadata_Stream_Cursor_Value_Input = {
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly email?: InputMaybe<Scalars['String']>;
-  readonly header?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly logo?: InputMaybe<Scalars['String']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly repo?: InputMaybe<Scalars['String']>;
-  readonly website?: InputMaybe<Scalars['String']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly email?: InputMaybe<Scalars['String']['input']>;
+  readonly header?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly logo?: InputMaybe<Scalars['String']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly repo?: InputMaybe<Scalars['String']['input']>;
+  readonly website?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by min() on columns of table "organization" */
@@ -3325,36 +3327,36 @@ export type Organization_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Organization_Stream_Cursor_Value_Input = {
-  readonly access_model?: InputMaybe<Scalars['String']>;
-  readonly cid?: InputMaybe<Scalars['String']>;
-  readonly created_at_block?: InputMaybe<Scalars['Int']>;
-  readonly creator?: InputMaybe<Scalars['String']>;
-  readonly creator_identity_id?: InputMaybe<Scalars['String']>;
-  readonly deposit?: InputMaybe<Scalars['numeric']>;
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly email?: InputMaybe<Scalars['String']>;
-  readonly fee_model?: InputMaybe<Scalars['String']>;
-  readonly gov_currency?: InputMaybe<Scalars['String']>;
-  readonly header?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly location?: InputMaybe<Scalars['String']>;
-  readonly logo?: InputMaybe<Scalars['String']>;
-  readonly member_limit?: InputMaybe<Scalars['Int']>;
-  readonly membership_fee?: InputMaybe<Scalars['numeric']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly pay_currency?: InputMaybe<Scalars['String']>;
-  readonly prime?: InputMaybe<Scalars['String']>;
-  readonly prime_identity_id?: InputMaybe<Scalars['String']>;
-  readonly repo?: InputMaybe<Scalars['String']>;
-  readonly slug?: InputMaybe<Scalars['String']>;
-  readonly state?: InputMaybe<Scalars['String']>;
-  readonly tags?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly treasury?: InputMaybe<Scalars['String']>;
-  readonly treasury_identity_id?: InputMaybe<Scalars['String']>;
-  readonly type?: InputMaybe<Scalars['String']>;
-  readonly updated_at_block?: InputMaybe<Scalars['Int']>;
-  readonly url?: InputMaybe<Scalars['String']>;
-  readonly website?: InputMaybe<Scalars['String']>;
+  readonly access_model?: InputMaybe<Scalars['String']['input']>;
+  readonly cid?: InputMaybe<Scalars['String']['input']>;
+  readonly created_at_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly creator?: InputMaybe<Scalars['String']['input']>;
+  readonly creator_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly deposit?: InputMaybe<Scalars['numeric']['input']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly email?: InputMaybe<Scalars['String']['input']>;
+  readonly fee_model?: InputMaybe<Scalars['String']['input']>;
+  readonly gov_currency?: InputMaybe<Scalars['String']['input']>;
+  readonly header?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly location?: InputMaybe<Scalars['String']['input']>;
+  readonly logo?: InputMaybe<Scalars['String']['input']>;
+  readonly member_limit?: InputMaybe<Scalars['Int']['input']>;
+  readonly membership_fee?: InputMaybe<Scalars['numeric']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly pay_currency?: InputMaybe<Scalars['String']['input']>;
+  readonly prime?: InputMaybe<Scalars['String']['input']>;
+  readonly prime_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly repo?: InputMaybe<Scalars['String']['input']>;
+  readonly slug?: InputMaybe<Scalars['String']['input']>;
+  readonly state?: InputMaybe<Scalars['String']['input']>;
+  readonly tags?: InputMaybe<ReadonlyArray<Scalars['String']['input']>>;
+  readonly treasury?: InputMaybe<Scalars['String']['input']>;
+  readonly treasury_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly type?: InputMaybe<Scalars['String']['input']>;
+  readonly updated_at_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly url?: InputMaybe<Scalars['String']['input']>;
+  readonly website?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "organization" */
@@ -3396,36 +3398,36 @@ export type Organization_Variance_Order_By = {
 /** columns and relationships of "proposal" */
 export type Proposal = {
   readonly __typename?: 'proposal';
-  readonly amount?: Maybe<Scalars['numeric']>;
-  readonly beneficiary?: Maybe<Scalars['String']>;
-  readonly beneficiary_identity_id?: Maybe<Scalars['String']>;
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly beneficiary?: Maybe<Scalars['String']['output']>;
+  readonly beneficiary_identity_id?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   readonly campaign?: Maybe<Campaign>;
-  readonly campaign_id?: Maybe<Scalars['String']>;
-  readonly cid: Scalars['String'];
-  readonly created_at_block: Scalars['Int'];
-  readonly creator: Scalars['String'];
-  readonly creator_identity_id?: Maybe<Scalars['String']>;
-  readonly currency_id?: Maybe<Scalars['String']>;
-  readonly deposit: Scalars['numeric'];
-  readonly description: Scalars['String'];
-  readonly expiry: Scalars['Int'];
-  readonly id: Scalars['String'];
+  readonly campaign_id?: Maybe<Scalars['String']['output']>;
+  readonly cid: Scalars['String']['output'];
+  readonly created_at_block: Scalars['Int']['output'];
+  readonly creator: Scalars['String']['output'];
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly currency_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit: Scalars['numeric']['output'];
+  readonly description: Scalars['String']['output'];
+  readonly expiry: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
   /** An object relationship */
   readonly identityByBeneficiaryIdentityId?: Maybe<Identity>;
-  readonly name: Scalars['String'];
+  readonly name: Scalars['String']['output'];
   /** An object relationship */
   readonly organization?: Maybe<Organization>;
-  readonly organization_id?: Maybe<Scalars['String']>;
-  readonly slashing_rule?: Maybe<Scalars['String']>;
-  readonly start: Scalars['Int'];
-  readonly state: Scalars['String'];
-  readonly type: Scalars['String'];
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly slashing_rule?: Maybe<Scalars['String']['output']>;
+  readonly start: Scalars['Int']['output'];
+  readonly state: Scalars['String']['output'];
+  readonly type: Scalars['String']['output'];
   /** An object relationship */
   readonly voting?: Maybe<Voting>;
-  readonly voting_id?: Maybe<Scalars['String']>;
+  readonly voting_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by aggregate values of table "proposal" */
@@ -3511,9 +3513,9 @@ export type Proposal_Max_Order_By = {
 /** columns and relationships of "proposal_metadata" */
 export type Proposal_Metadata = {
   readonly __typename?: 'proposal_metadata';
-  readonly description: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly name: Scalars['String'];
+  readonly description: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly name: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "proposal_metadata". All fields are combined with a logical 'AND'. */
@@ -3553,9 +3555,9 @@ export type Proposal_Metadata_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Proposal_Metadata_Stream_Cursor_Value_Input = {
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly name?: InputMaybe<Scalars['String']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by min() on columns of table "proposal" */
@@ -3692,26 +3694,26 @@ export type Proposal_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Proposal_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly beneficiary?: InputMaybe<Scalars['String']>;
-  readonly beneficiary_identity_id?: InputMaybe<Scalars['String']>;
-  readonly campaign_id?: InputMaybe<Scalars['String']>;
-  readonly cid?: InputMaybe<Scalars['String']>;
-  readonly created_at_block?: InputMaybe<Scalars['Int']>;
-  readonly creator?: InputMaybe<Scalars['String']>;
-  readonly creator_identity_id?: InputMaybe<Scalars['String']>;
-  readonly currency_id?: InputMaybe<Scalars['String']>;
-  readonly deposit?: InputMaybe<Scalars['numeric']>;
-  readonly description?: InputMaybe<Scalars['String']>;
-  readonly expiry?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  readonly organization_id?: InputMaybe<Scalars['String']>;
-  readonly slashing_rule?: InputMaybe<Scalars['String']>;
-  readonly start?: InputMaybe<Scalars['Int']>;
-  readonly state?: InputMaybe<Scalars['String']>;
-  readonly type?: InputMaybe<Scalars['String']>;
-  readonly voting_id?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly beneficiary?: InputMaybe<Scalars['String']['input']>;
+  readonly beneficiary_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly campaign_id?: InputMaybe<Scalars['String']['input']>;
+  readonly cid?: InputMaybe<Scalars['String']['input']>;
+  readonly created_at_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly creator?: InputMaybe<Scalars['String']['input']>;
+  readonly creator_identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly currency_id?: InputMaybe<Scalars['String']['input']>;
+  readonly deposit?: InputMaybe<Scalars['numeric']['input']>;
+  readonly description?: InputMaybe<Scalars['String']['input']>;
+  readonly expiry?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly name?: InputMaybe<Scalars['String']['input']>;
+  readonly organization_id?: InputMaybe<Scalars['String']['input']>;
+  readonly slashing_rule?: InputMaybe<Scalars['String']['input']>;
+  readonly start?: InputMaybe<Scalars['Int']['input']>;
+  readonly state?: InputMaybe<Scalars['String']['input']>;
+  readonly type?: InputMaybe<Scalars['String']['input']>;
+  readonly voting_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "proposal" */
@@ -3753,17 +3755,17 @@ export type Proposal_Variance_Order_By = {
 /** columns and relationships of "proposal_voter" */
 export type Proposal_Voter = {
   readonly __typename?: 'proposal_voter';
-  readonly address: Scalars['String'];
-  readonly amount?: Maybe<Scalars['numeric']>;
-  readonly id: Scalars['String'];
+  readonly address: Scalars['String']['output'];
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly identity_id?: Maybe<Scalars['String']>;
-  readonly power: Scalars['numeric'];
-  readonly voted: Scalars['Boolean'];
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
+  readonly power: Scalars['numeric']['output'];
+  readonly voted: Scalars['Boolean']['output'];
   /** An object relationship */
   readonly voting?: Maybe<Voting>;
-  readonly voting_id?: Maybe<Scalars['String']>;
+  readonly voting_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by aggregate values of table "proposal_voter" */
@@ -3882,13 +3884,13 @@ export type Proposal_Voter_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Proposal_Voter_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly identity_id?: InputMaybe<Scalars['String']>;
-  readonly power?: InputMaybe<Scalars['numeric']>;
-  readonly voted?: InputMaybe<Scalars['Boolean']>;
-  readonly voting_id?: InputMaybe<Scalars['String']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly power?: InputMaybe<Scalars['numeric']['input']>;
+  readonly voted?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly voting_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** order by sum() on columns of table "proposal_voter" */
@@ -4091,7 +4093,7 @@ export type Query_Root = {
   readonly unique_staker_address: ReadonlyArray<Unique_Staker_Address>;
   /** fetch data from the table: "unique_staker_address" using primary key columns */
   readonly unique_staker_address_by_pk?: Maybe<Unique_Staker_Address>;
-  readonly version: Scalars['String'];
+  readonly version: Scalars['String']['output'];
   /** fetch data from the table: "voting" */
   readonly voting: ReadonlyArray<Voting>;
   /** fetch data from the table: "voting" using primary key columns */
@@ -4101,155 +4103,155 @@ export type Query_Root = {
 
 export type Query_RootAccount_BalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Account_Balance_Order_By>>;
   where?: InputMaybe<Account_Balance_Bool_Exp>;
 };
 
 
 export type Query_RootAccount_Balance_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootAstar_Indexer_StatusArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Astar_Indexer_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Astar_Indexer_Status_Order_By>>;
   where?: InputMaybe<Astar_Indexer_Status_Bool_Exp>;
 };
 
 
 export type Query_RootAstar_Indexer_Status_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Query_RootBalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Balance_Order_By>>;
   where?: InputMaybe<Balance_Bool_Exp>;
 };
 
 
 export type Query_RootBalance_By_PkArgs = {
-  id: Scalars['bigint'];
+  id: Scalars['bigint']['input'];
 };
 
 
 export type Query_RootBattlepassArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Order_By>>;
   where?: InputMaybe<Battlepass_Bool_Exp>;
 };
 
 
 export type Query_RootBattlepass_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootBattlepass_NftArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
   where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
 };
 
 
 export type Query_RootBattlepass_Nft_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootBurnArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Burn_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Burn_Order_By>>;
   where?: InputMaybe<Burn_Bool_Exp>;
 };
 
 
 export type Query_RootBurn_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootCampaignArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
 };
 
 
 export type Query_RootCampaign_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootCampaign_ContributorArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>;
   where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
 };
 
 
 export type Query_RootCampaign_Contributor_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootCampaign_MetadataArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Metadata_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Metadata_Order_By>>;
   where?: InputMaybe<Campaign_Metadata_Bool_Exp>;
 };
 
 
 export type Query_RootCampaign_Metadata_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootChain_InfoArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Chain_Info_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Chain_Info_Order_By>>;
   where?: InputMaybe<Chain_Info_Bool_Exp>;
 };
 
 
 export type Query_RootChain_Info_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Query_RootChain_StateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Chain_State_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Chain_State_Order_By>>;
   where?: InputMaybe<Chain_State_Bool_Exp>;
 };
 
 
 export type Query_RootChain_State_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -4260,22 +4262,22 @@ export type Query_RootConfigArgs = {
 
 export type Query_RootCurrent_Chain_StateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Current_Chain_State_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Current_Chain_State_Order_By>>;
   where?: InputMaybe<Current_Chain_State_Bool_Exp>;
 };
 
 
 export type Query_RootCurrent_Chain_State_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootDappArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Dapp_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Dapp_Order_By>>;
   where?: InputMaybe<Dapp_Bool_Exp>;
 };
@@ -4283,20 +4285,20 @@ export type Query_RootDappArgs = {
 
 export type Query_RootDapp_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Dapp_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Dapp_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Dapp_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Query_RootDapp_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootDapp_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -4307,421 +4309,421 @@ export type Query_RootFeaturesArgs = {
 
 export type Query_RootGamedao_Indexer_StatusArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Gamedao_Indexer_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Gamedao_Indexer_Status_Order_By>>;
   where?: InputMaybe<Gamedao_Indexer_Status_Bool_Exp>;
 };
 
 
 export type Query_RootGamedao_Indexer_Status_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Query_RootGamedao_Squid_MigrationsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Gamedao_Squid_Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Gamedao_Squid_Migrations_Order_By>>;
   where?: InputMaybe<Gamedao_Squid_Migrations_Bool_Exp>;
 };
 
 
 export type Query_RootGamedao_Squid_Migrations_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Query_RootGrouped_Staking_EventArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Grouped_Staking_Event_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Grouped_Staking_Event_Order_By>>;
   where?: InputMaybe<Grouped_Staking_Event_Bool_Exp>;
 };
 
 
 export type Query_RootGrouped_Staking_Event_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootHistorical_BalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Historical_Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Historical_Balance_Order_By>>;
   where?: InputMaybe<Historical_Balance_Bool_Exp>;
 };
 
 
 export type Query_RootHistorical_Balance_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootIdentityArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Identity_Order_By>>;
   where?: InputMaybe<Identity_Bool_Exp>;
 };
 
 
 export type Query_RootIdentity_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootMigrationsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Migrations_Order_By>>;
   where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 
 export type Query_RootMigrations_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Query_RootNftArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Order_By>>;
   where?: InputMaybe<Nft_Bool_Exp>;
 };
 
 
 export type Query_RootNft_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootNft_CollectionArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Collection_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Collection_Order_By>>;
   where?: InputMaybe<Nft_Collection_Bool_Exp>;
 };
 
 
 export type Query_RootNft_Collection_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootOrganizationArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
   where?: InputMaybe<Organization_Bool_Exp>;
 };
 
 
 export type Query_RootOrganization_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootOrganization_MemberArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
   where?: InputMaybe<Organization_Member_Bool_Exp>;
 };
 
 
 export type Query_RootOrganization_Member_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootOrganization_MetadataArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Metadata_Order_By>>;
   where?: InputMaybe<Organization_Metadata_Bool_Exp>;
 };
 
 
 export type Query_RootOrganization_Metadata_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootProposalArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
 
 export type Query_RootProposal_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootProposal_MetadataArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Metadata_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Metadata_Order_By>>;
   where?: InputMaybe<Proposal_Metadata_Bool_Exp>;
 };
 
 
 export type Query_RootProposal_Metadata_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootProposal_VoterArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Voter_Order_By>>;
   where?: InputMaybe<Proposal_Voter_Bool_Exp>;
 };
 
 
 export type Query_RootProposal_Voter_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootReward_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Reward_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Reward_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Reward_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Query_RootReward_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootReward_EventArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Reward_Event_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Reward_Event_Order_By>>;
   where?: InputMaybe<Reward_Event_Bool_Exp>;
 };
 
 
 export type Query_RootReward_Event_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootRmrkNftsArgs = {
-  address: Scalars['String'];
+  address: Scalars['String']['input'];
 };
 
 
 export type Query_RootSense_EntityArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Sense_Entity_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Sense_Entity_Order_By>>;
   where?: InputMaybe<Sense_Entity_Bool_Exp>;
 };
 
 
 export type Query_RootSense_Entity_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootSessionArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Session_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Session_Order_By>>;
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
 
 export type Query_RootSession_By_PkArgs = {
-  id: Scalars['bigint'];
+  id: Scalars['bigint']['input'];
 };
 
 
 export type Query_RootStakeArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stake_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stake_Order_By>>;
   where?: InputMaybe<Stake_Bool_Exp>;
 };
 
 
 export type Query_RootStake_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootStakersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakers_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakers_Order_By>>;
   where?: InputMaybe<Stakers_Bool_Exp>;
 };
 
 
 export type Query_RootStakers_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootStakers_Count_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakers_Count_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakers_Count_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Stakers_Count_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Query_RootStakers_Count_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootStakes_Per_Dap_And_PeriodArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakes_Per_Dap_And_Period_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakes_Per_Dap_And_Period_Order_By>>;
   where?: InputMaybe<Stakes_Per_Dap_And_Period_Bool_Exp>;
 };
 
 
 export type Query_RootStakes_Per_Dap_And_Period_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootStakes_Per_Staker_And_PeriodArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakes_Per_Staker_And_Period_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakes_Per_Staker_And_Period_Order_By>>;
   where?: InputMaybe<Stakes_Per_Staker_And_Period_Bool_Exp>;
 };
 
 
 export type Query_RootStakes_Per_Staker_And_Period_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootStaking_EventArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Staking_Event_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Staking_Event_Order_By>>;
   where?: InputMaybe<Staking_Event_Bool_Exp>;
 };
 
 
 export type Query_RootStaking_Event_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootSubperiodArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Subperiod_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Subperiod_Order_By>>;
   where?: InputMaybe<Subperiod_Bool_Exp>;
 };
 
 
 export type Query_RootSubperiod_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootTvl_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Tvl_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Tvl_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Tvl_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Query_RootTvl_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootUnique_Locker_AddressArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Unique_Locker_Address_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Unique_Locker_Address_Order_By>>;
   where?: InputMaybe<Unique_Locker_Address_Bool_Exp>;
 };
 
 
 export type Query_RootUnique_Locker_Address_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootUnique_Staker_AddressArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Unique_Staker_Address_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Unique_Staker_Address_Order_By>>;
   where?: InputMaybe<Unique_Staker_Address_Bool_Exp>;
 };
 
 
 export type Query_RootUnique_Staker_Address_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Query_RootVotingArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Voting_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Voting_Order_By>>;
   where?: InputMaybe<Voting_Bool_Exp>;
 };
 
 
 export type Query_RootVoting_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 /** columns and relationships of "reward_aggregated_daily" */
 export type Reward_Aggregated_Daily = {
   readonly __typename?: 'reward_aggregated_daily';
-  readonly amount: Scalars['numeric'];
-  readonly beneficiary: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['numeric'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly beneficiary: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "reward_aggregated_daily". All fields are combined with a logical 'AND'. */
@@ -4765,25 +4767,25 @@ export type Reward_Aggregated_Daily_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Reward_Aggregated_Daily_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly beneficiary?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly beneficiary?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "reward_event" */
 export type Reward_Event = {
   readonly __typename?: 'reward_event';
-  readonly amount: Scalars['numeric'];
-  readonly block_number: Scalars['numeric'];
-  readonly contract_address?: Maybe<Scalars['String']>;
-  readonly era?: Maybe<Scalars['numeric']>;
-  readonly id: Scalars['String'];
-  readonly period?: Maybe<Scalars['Int']>;
-  readonly tier_id?: Maybe<Scalars['Int']>;
-  readonly timestamp: Scalars['numeric'];
-  readonly transaction: Scalars['String'];
-  readonly user_address: Scalars['String'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly block_number: Scalars['numeric']['output'];
+  readonly contract_address?: Maybe<Scalars['String']['output']>;
+  readonly era?: Maybe<Scalars['numeric']['output']>;
+  readonly id: Scalars['String']['output'];
+  readonly period?: Maybe<Scalars['Int']['output']>;
+  readonly tier_id?: Maybe<Scalars['Int']['output']>;
+  readonly timestamp: Scalars['numeric']['output'];
+  readonly transaction: Scalars['String']['output'];
+  readonly user_address: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "reward_event". All fields are combined with a logical 'AND'. */
@@ -4851,31 +4853,31 @@ export type Reward_Event_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Reward_Event_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly block_number?: InputMaybe<Scalars['numeric']>;
-  readonly contract_address?: InputMaybe<Scalars['String']>;
-  readonly era?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly period?: InputMaybe<Scalars['Int']>;
-  readonly tier_id?: InputMaybe<Scalars['Int']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
-  readonly transaction?: InputMaybe<Scalars['String']>;
-  readonly user_address?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly block_number?: InputMaybe<Scalars['numeric']['input']>;
+  readonly contract_address?: InputMaybe<Scalars['String']['input']>;
+  readonly era?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly period?: InputMaybe<Scalars['Int']['input']>;
+  readonly tier_id?: InputMaybe<Scalars['Int']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
+  readonly transaction?: InputMaybe<Scalars['String']['input']>;
+  readonly user_address?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "sense_entity" */
 export type Sense_Entity = {
   readonly __typename?: 'sense_entity';
-  readonly cid: Scalars['String'];
-  readonly created_at_block: Scalars['Int'];
-  readonly experience: Scalars['numeric'];
-  readonly id: Scalars['String'];
+  readonly cid: Scalars['String']['output'];
+  readonly created_at_block: Scalars['Int']['output'];
+  readonly experience: Scalars['numeric']['output'];
+  readonly id: Scalars['String']['output'];
   /** An object relationship */
   readonly identity?: Maybe<Identity>;
-  readonly identity_id?: Maybe<Scalars['String']>;
-  readonly reputation: Scalars['numeric'];
-  readonly trust: Scalars['numeric'];
-  readonly updated_at_block: Scalars['Int'];
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
+  readonly reputation: Scalars['numeric']['output'];
+  readonly trust: Scalars['numeric']['output'];
+  readonly updated_at_block: Scalars['Int']['output'];
 };
 
 /** order by aggregate values of table "sense_entity" */
@@ -5012,14 +5014,14 @@ export type Sense_Entity_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Sense_Entity_Stream_Cursor_Value_Input = {
-  readonly cid?: InputMaybe<Scalars['String']>;
-  readonly created_at_block?: InputMaybe<Scalars['Int']>;
-  readonly experience?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly identity_id?: InputMaybe<Scalars['String']>;
-  readonly reputation?: InputMaybe<Scalars['numeric']>;
-  readonly trust?: InputMaybe<Scalars['numeric']>;
-  readonly updated_at_block?: InputMaybe<Scalars['Int']>;
+  readonly cid?: InputMaybe<Scalars['String']['input']>;
+  readonly created_at_block?: InputMaybe<Scalars['Int']['input']>;
+  readonly experience?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly identity_id?: InputMaybe<Scalars['String']['input']>;
+  readonly reputation?: InputMaybe<Scalars['numeric']['input']>;
+  readonly trust?: InputMaybe<Scalars['numeric']['input']>;
+  readonly updated_at_block?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** order by sum() on columns of table "sense_entity" */
@@ -5061,10 +5063,10 @@ export type Sense_Entity_Variance_Order_By = {
 /** columns and relationships of "Session" */
 export type Session = {
   readonly __typename?: 'session';
-  readonly address: Scalars['String'];
-  readonly id: Scalars['bigint'];
-  readonly key: Scalars['String'];
-  readonly updatedAt: Scalars['timestamp'];
+  readonly address: Scalars['String']['output'];
+  readonly id: Scalars['bigint']['output'];
+  readonly key: Scalars['String']['output'];
+  readonly updatedAt: Scalars['timestamp']['output'];
 };
 
 /** Boolean expression to filter rows from the table "Session". All fields are combined with a logical 'AND'. */
@@ -5090,22 +5092,22 @@ export enum Session_Constraint {
 
 /** input type for incrementing numeric columns in table "Session" */
 export type Session_Inc_Input = {
-  readonly id?: InputMaybe<Scalars['bigint']>;
+  readonly id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** input type for inserting data into table "Session" */
 export type Session_Insert_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['bigint']>;
-  readonly key?: InputMaybe<Scalars['String']>;
-  readonly updatedAt?: InputMaybe<Scalars['timestamp']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['bigint']['input']>;
+  readonly key?: InputMaybe<Scalars['String']['input']>;
+  readonly updatedAt?: InputMaybe<Scalars['timestamp']['input']>;
 };
 
 /** response of any mutation on the table "Session" */
 export type Session_Mutation_Response = {
   readonly __typename?: 'session_mutation_response';
   /** number of rows affected by the mutation */
-  readonly affected_rows: Scalars['Int'];
+  readonly affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   readonly returning: ReadonlyArray<Session>;
 };
@@ -5127,7 +5129,7 @@ export type Session_Order_By = {
 
 /** primary key columns input for table: Session */
 export type Session_Pk_Columns_Input = {
-  readonly id: Scalars['bigint'];
+  readonly id: Scalars['bigint']['input'];
 };
 
 /** select columns of table "Session" */
@@ -5144,10 +5146,10 @@ export enum Session_Select_Column {
 
 /** input type for updating data in table "Session" */
 export type Session_Set_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['bigint']>;
-  readonly key?: InputMaybe<Scalars['String']>;
-  readonly updatedAt?: InputMaybe<Scalars['timestamp']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['bigint']['input']>;
+  readonly key?: InputMaybe<Scalars['String']['input']>;
+  readonly updatedAt?: InputMaybe<Scalars['timestamp']['input']>;
 };
 
 /** Streaming cursor of the table "session" */
@@ -5160,10 +5162,10 @@ export type Session_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Session_Stream_Cursor_Value_Input = {
-  readonly address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['bigint']>;
-  readonly key?: InputMaybe<Scalars['String']>;
-  readonly updatedAt?: InputMaybe<Scalars['timestamp']>;
+  readonly address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['bigint']['input']>;
+  readonly key?: InputMaybe<Scalars['String']['input']>;
+  readonly updatedAt?: InputMaybe<Scalars['timestamp']['input']>;
 };
 
 /** update columns of table "Session" */
@@ -5190,13 +5192,13 @@ export type Session_Updates = {
 /** columns and relationships of "stake" */
 export type Stake = {
   readonly __typename?: 'stake';
-  readonly amount: Scalars['numeric'];
-  readonly block_number: Scalars['Int'];
-  readonly dapp_address: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly period: Scalars['Int'];
-  readonly staker_address: Scalars['String'];
-  readonly timestamp: Scalars['numeric'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly dapp_address: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly period: Scalars['Int']['output'];
+  readonly staker_address: Scalars['String']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "stake". All fields are combined with a logical 'AND'. */
@@ -5252,22 +5254,22 @@ export type Stake_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Stake_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly dapp_address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly period?: InputMaybe<Scalars['Int']>;
-  readonly staker_address?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly dapp_address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly period?: InputMaybe<Scalars['Int']['input']>;
+  readonly staker_address?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "stakers" */
 export type Stakers = {
   readonly __typename?: 'stakers';
-  readonly amount: Scalars['numeric'];
-  readonly dapp_address: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly staker_address: Scalars['String'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly dapp_address: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly staker_address: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "stakers". All fields are combined with a logical 'AND'. */
@@ -5284,11 +5286,11 @@ export type Stakers_Bool_Exp = {
 /** columns and relationships of "stakers_count_aggregated_daily" */
 export type Stakers_Count_Aggregated_Daily = {
   readonly __typename?: 'stakers_count_aggregated_daily';
-  readonly block_number: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly stakers_amount: Scalars['numeric'];
-  readonly stakers_count: Scalars['Int'];
-  readonly usd_price: Scalars['numeric'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly stakers_amount: Scalars['numeric']['output'];
+  readonly stakers_count: Scalars['Int']['output'];
+  readonly usd_price: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "stakers_count_aggregated_daily". All fields are combined with a logical 'AND'. */
@@ -5336,11 +5338,11 @@ export type Stakers_Count_Aggregated_Daily_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Stakers_Count_Aggregated_Daily_Stream_Cursor_Value_Input = {
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly stakers_amount?: InputMaybe<Scalars['numeric']>;
-  readonly stakers_count?: InputMaybe<Scalars['Int']>;
-  readonly usd_price?: InputMaybe<Scalars['numeric']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly stakers_amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly stakers_count?: InputMaybe<Scalars['Int']['input']>;
+  readonly usd_price?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** Ordering options when selecting data from "stakers". */
@@ -5373,20 +5375,20 @@ export type Stakers_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Stakers_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly dapp_address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly staker_address?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly dapp_address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly staker_address?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "stakes_per_dap_and_period" */
 export type Stakes_Per_Dap_And_Period = {
   readonly __typename?: 'stakes_per_dap_and_period';
-  readonly dapp_address: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly period: Scalars['Int'];
-  readonly reward_amount: Scalars['numeric'];
-  readonly stake_amount: Scalars['numeric'];
+  readonly dapp_address: Scalars['String']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly period: Scalars['Int']['output'];
+  readonly reward_amount: Scalars['numeric']['output'];
+  readonly stake_amount: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "stakes_per_dap_and_period". All fields are combined with a logical 'AND'. */
@@ -5434,22 +5436,22 @@ export type Stakes_Per_Dap_And_Period_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Stakes_Per_Dap_And_Period_Stream_Cursor_Value_Input = {
-  readonly dapp_address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly period?: InputMaybe<Scalars['Int']>;
-  readonly reward_amount?: InputMaybe<Scalars['numeric']>;
-  readonly stake_amount?: InputMaybe<Scalars['numeric']>;
+  readonly dapp_address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly period?: InputMaybe<Scalars['Int']['input']>;
+  readonly reward_amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly stake_amount?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "stakes_per_staker_and_period" */
 export type Stakes_Per_Staker_And_Period = {
   readonly __typename?: 'stakes_per_staker_and_period';
-  readonly bonus_reward_amount: Scalars['numeric'];
-  readonly id: Scalars['String'];
-  readonly period: Scalars['Int'];
-  readonly stake_amount: Scalars['numeric'];
-  readonly staker_address: Scalars['String'];
-  readonly staker_reward_amount: Scalars['numeric'];
+  readonly bonus_reward_amount: Scalars['numeric']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly period: Scalars['Int']['output'];
+  readonly stake_amount: Scalars['numeric']['output'];
+  readonly staker_address: Scalars['String']['output'];
+  readonly staker_reward_amount: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "stakes_per_staker_and_period". All fields are combined with a logical 'AND'. */
@@ -5501,24 +5503,24 @@ export type Stakes_Per_Staker_And_Period_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Stakes_Per_Staker_And_Period_Stream_Cursor_Value_Input = {
-  readonly bonus_reward_amount?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly period?: InputMaybe<Scalars['Int']>;
-  readonly stake_amount?: InputMaybe<Scalars['numeric']>;
-  readonly staker_address?: InputMaybe<Scalars['String']>;
-  readonly staker_reward_amount?: InputMaybe<Scalars['numeric']>;
+  readonly bonus_reward_amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly period?: InputMaybe<Scalars['Int']['input']>;
+  readonly stake_amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly staker_address?: InputMaybe<Scalars['String']['input']>;
+  readonly staker_reward_amount?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "staking_event" */
 export type Staking_Event = {
   readonly __typename?: 'staking_event';
-  readonly amount: Scalars['numeric'];
-  readonly block_number: Scalars['numeric'];
-  readonly contract_address?: Maybe<Scalars['String']>;
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['numeric'];
-  readonly transaction: Scalars['String'];
-  readonly user_address: Scalars['String'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly block_number: Scalars['numeric']['output'];
+  readonly contract_address?: Maybe<Scalars['String']['output']>;
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
+  readonly transaction: Scalars['String']['output'];
+  readonly user_address: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "staking_event". All fields are combined with a logical 'AND'. */
@@ -5574,22 +5576,22 @@ export type Staking_Event_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Staking_Event_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly block_number?: InputMaybe<Scalars['numeric']>;
-  readonly contract_address?: InputMaybe<Scalars['String']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
-  readonly transaction?: InputMaybe<Scalars['String']>;
-  readonly user_address?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly block_number?: InputMaybe<Scalars['numeric']['input']>;
+  readonly contract_address?: InputMaybe<Scalars['String']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
+  readonly transaction?: InputMaybe<Scalars['String']['input']>;
+  readonly user_address?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "subperiod" */
 export type Subperiod = {
   readonly __typename?: 'subperiod';
-  readonly block_number: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly timestamp: Scalars['numeric'];
-  readonly type: Scalars['String'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly timestamp: Scalars['numeric']['output'];
+  readonly type: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "subperiod". All fields are combined with a logical 'AND'. */
@@ -5633,10 +5635,10 @@ export type Subperiod_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Subperiod_Stream_Cursor_Value_Input = {
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly timestamp?: InputMaybe<Scalars['numeric']>;
-  readonly type?: InputMaybe<Scalars['String']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
+  readonly type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Subscription_Root = {
@@ -5904,20 +5906,20 @@ export type Subscription_Root = {
 
 export type Subscription_RootAccount_BalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Account_Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Account_Balance_Order_By>>;
   where?: InputMaybe<Account_Balance_Bool_Exp>;
 };
 
 
 export type Subscription_RootAccount_Balance_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootAccount_Balance_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Account_Balance_Stream_Cursor_Input>>;
   where?: InputMaybe<Account_Balance_Bool_Exp>;
 };
@@ -5925,20 +5927,20 @@ export type Subscription_RootAccount_Balance_StreamArgs = {
 
 export type Subscription_RootAstar_Indexer_StatusArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Astar_Indexer_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Astar_Indexer_Status_Order_By>>;
   where?: InputMaybe<Astar_Indexer_Status_Bool_Exp>;
 };
 
 
 export type Subscription_RootAstar_Indexer_Status_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Subscription_RootAstar_Indexer_Status_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Astar_Indexer_Status_Stream_Cursor_Input>>;
   where?: InputMaybe<Astar_Indexer_Status_Bool_Exp>;
 };
@@ -5946,20 +5948,20 @@ export type Subscription_RootAstar_Indexer_Status_StreamArgs = {
 
 export type Subscription_RootBalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Balance_Order_By>>;
   where?: InputMaybe<Balance_Bool_Exp>;
 };
 
 
 export type Subscription_RootBalance_By_PkArgs = {
-  id: Scalars['bigint'];
+  id: Scalars['bigint']['input'];
 };
 
 
 export type Subscription_RootBalance_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Balance_Stream_Cursor_Input>>;
   where?: InputMaybe<Balance_Bool_Exp>;
 };
@@ -5967,41 +5969,41 @@ export type Subscription_RootBalance_StreamArgs = {
 
 export type Subscription_RootBattlepassArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Order_By>>;
   where?: InputMaybe<Battlepass_Bool_Exp>;
 };
 
 
 export type Subscription_RootBattlepass_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootBattlepass_NftArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Battlepass_Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Battlepass_Nft_Order_By>>;
   where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
 };
 
 
 export type Subscription_RootBattlepass_Nft_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootBattlepass_Nft_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Battlepass_Nft_Stream_Cursor_Input>>;
   where?: InputMaybe<Battlepass_Nft_Bool_Exp>;
 };
 
 
 export type Subscription_RootBattlepass_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Battlepass_Stream_Cursor_Input>>;
   where?: InputMaybe<Battlepass_Bool_Exp>;
 };
@@ -6009,20 +6011,20 @@ export type Subscription_RootBattlepass_StreamArgs = {
 
 export type Subscription_RootBurnArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Burn_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Burn_Order_By>>;
   where?: InputMaybe<Burn_Bool_Exp>;
 };
 
 
 export type Subscription_RootBurn_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootBurn_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Burn_Stream_Cursor_Input>>;
   where?: InputMaybe<Burn_Bool_Exp>;
 };
@@ -6030,34 +6032,34 @@ export type Subscription_RootBurn_StreamArgs = {
 
 export type Subscription_RootCampaignArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
 };
 
 
 export type Subscription_RootCampaign_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootCampaign_ContributorArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Contributor_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Contributor_Order_By>>;
   where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
 };
 
 
 export type Subscription_RootCampaign_Contributor_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootCampaign_Contributor_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Campaign_Contributor_Stream_Cursor_Input>>;
   where?: InputMaybe<Campaign_Contributor_Bool_Exp>;
 };
@@ -6065,27 +6067,27 @@ export type Subscription_RootCampaign_Contributor_StreamArgs = {
 
 export type Subscription_RootCampaign_MetadataArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Metadata_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Campaign_Metadata_Order_By>>;
   where?: InputMaybe<Campaign_Metadata_Bool_Exp>;
 };
 
 
 export type Subscription_RootCampaign_Metadata_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootCampaign_Metadata_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Campaign_Metadata_Stream_Cursor_Input>>;
   where?: InputMaybe<Campaign_Metadata_Bool_Exp>;
 };
 
 
 export type Subscription_RootCampaign_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Campaign_Stream_Cursor_Input>>;
   where?: InputMaybe<Campaign_Bool_Exp>;
 };
@@ -6093,20 +6095,20 @@ export type Subscription_RootCampaign_StreamArgs = {
 
 export type Subscription_RootChain_InfoArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Chain_Info_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Chain_Info_Order_By>>;
   where?: InputMaybe<Chain_Info_Bool_Exp>;
 };
 
 
 export type Subscription_RootChain_Info_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Subscription_RootChain_Info_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Chain_Info_Stream_Cursor_Input>>;
   where?: InputMaybe<Chain_Info_Bool_Exp>;
 };
@@ -6114,20 +6116,20 @@ export type Subscription_RootChain_Info_StreamArgs = {
 
 export type Subscription_RootChain_StateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Chain_State_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Chain_State_Order_By>>;
   where?: InputMaybe<Chain_State_Bool_Exp>;
 };
 
 
 export type Subscription_RootChain_State_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootChain_State_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Chain_State_Stream_Cursor_Input>>;
   where?: InputMaybe<Chain_State_Bool_Exp>;
 };
@@ -6135,20 +6137,20 @@ export type Subscription_RootChain_State_StreamArgs = {
 
 export type Subscription_RootCurrent_Chain_StateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Current_Chain_State_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Current_Chain_State_Order_By>>;
   where?: InputMaybe<Current_Chain_State_Bool_Exp>;
 };
 
 
 export type Subscription_RootCurrent_Chain_State_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootCurrent_Chain_State_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Current_Chain_State_Stream_Cursor_Input>>;
   where?: InputMaybe<Current_Chain_State_Bool_Exp>;
 };
@@ -6156,8 +6158,8 @@ export type Subscription_RootCurrent_Chain_State_StreamArgs = {
 
 export type Subscription_RootDappArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Dapp_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Dapp_Order_By>>;
   where?: InputMaybe<Dapp_Bool_Exp>;
 };
@@ -6165,32 +6167,32 @@ export type Subscription_RootDappArgs = {
 
 export type Subscription_RootDapp_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Dapp_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Dapp_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Dapp_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Subscription_RootDapp_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootDapp_Aggregated_Daily_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Dapp_Aggregated_Daily_Stream_Cursor_Input>>;
   where?: InputMaybe<Dapp_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Subscription_RootDapp_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootDapp_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Dapp_Stream_Cursor_Input>>;
   where?: InputMaybe<Dapp_Bool_Exp>;
 };
@@ -6198,20 +6200,20 @@ export type Subscription_RootDapp_StreamArgs = {
 
 export type Subscription_RootGamedao_Indexer_StatusArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Gamedao_Indexer_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Gamedao_Indexer_Status_Order_By>>;
   where?: InputMaybe<Gamedao_Indexer_Status_Bool_Exp>;
 };
 
 
 export type Subscription_RootGamedao_Indexer_Status_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Subscription_RootGamedao_Indexer_Status_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Gamedao_Indexer_Status_Stream_Cursor_Input>>;
   where?: InputMaybe<Gamedao_Indexer_Status_Bool_Exp>;
 };
@@ -6219,20 +6221,20 @@ export type Subscription_RootGamedao_Indexer_Status_StreamArgs = {
 
 export type Subscription_RootGamedao_Squid_MigrationsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Gamedao_Squid_Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Gamedao_Squid_Migrations_Order_By>>;
   where?: InputMaybe<Gamedao_Squid_Migrations_Bool_Exp>;
 };
 
 
 export type Subscription_RootGamedao_Squid_Migrations_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Subscription_RootGamedao_Squid_Migrations_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Gamedao_Squid_Migrations_Stream_Cursor_Input>>;
   where?: InputMaybe<Gamedao_Squid_Migrations_Bool_Exp>;
 };
@@ -6240,20 +6242,20 @@ export type Subscription_RootGamedao_Squid_Migrations_StreamArgs = {
 
 export type Subscription_RootGrouped_Staking_EventArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Grouped_Staking_Event_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Grouped_Staking_Event_Order_By>>;
   where?: InputMaybe<Grouped_Staking_Event_Bool_Exp>;
 };
 
 
 export type Subscription_RootGrouped_Staking_Event_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootGrouped_Staking_Event_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Grouped_Staking_Event_Stream_Cursor_Input>>;
   where?: InputMaybe<Grouped_Staking_Event_Bool_Exp>;
 };
@@ -6261,20 +6263,20 @@ export type Subscription_RootGrouped_Staking_Event_StreamArgs = {
 
 export type Subscription_RootHistorical_BalanceArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Historical_Balance_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Historical_Balance_Order_By>>;
   where?: InputMaybe<Historical_Balance_Bool_Exp>;
 };
 
 
 export type Subscription_RootHistorical_Balance_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootHistorical_Balance_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Historical_Balance_Stream_Cursor_Input>>;
   where?: InputMaybe<Historical_Balance_Bool_Exp>;
 };
@@ -6282,20 +6284,20 @@ export type Subscription_RootHistorical_Balance_StreamArgs = {
 
 export type Subscription_RootIdentityArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Identity_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Identity_Order_By>>;
   where?: InputMaybe<Identity_Bool_Exp>;
 };
 
 
 export type Subscription_RootIdentity_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootIdentity_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Identity_Stream_Cursor_Input>>;
   where?: InputMaybe<Identity_Bool_Exp>;
 };
@@ -6303,20 +6305,20 @@ export type Subscription_RootIdentity_StreamArgs = {
 
 export type Subscription_RootMigrationsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Migrations_Order_By>>;
   where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 
 export type Subscription_RootMigrations_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['Int']['input'];
 };
 
 
 export type Subscription_RootMigrations_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Migrations_Stream_Cursor_Input>>;
   where?: InputMaybe<Migrations_Bool_Exp>;
 };
@@ -6324,41 +6326,41 @@ export type Subscription_RootMigrations_StreamArgs = {
 
 export type Subscription_RootNftArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Order_By>>;
   where?: InputMaybe<Nft_Bool_Exp>;
 };
 
 
 export type Subscription_RootNft_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootNft_CollectionArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Collection_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Nft_Collection_Order_By>>;
   where?: InputMaybe<Nft_Collection_Bool_Exp>;
 };
 
 
 export type Subscription_RootNft_Collection_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootNft_Collection_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Nft_Collection_Stream_Cursor_Input>>;
   where?: InputMaybe<Nft_Collection_Bool_Exp>;
 };
 
 
 export type Subscription_RootNft_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Nft_Stream_Cursor_Input>>;
   where?: InputMaybe<Nft_Bool_Exp>;
 };
@@ -6366,34 +6368,34 @@ export type Subscription_RootNft_StreamArgs = {
 
 export type Subscription_RootOrganizationArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
   where?: InputMaybe<Organization_Bool_Exp>;
 };
 
 
 export type Subscription_RootOrganization_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootOrganization_MemberArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
   where?: InputMaybe<Organization_Member_Bool_Exp>;
 };
 
 
 export type Subscription_RootOrganization_Member_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootOrganization_Member_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Organization_Member_Stream_Cursor_Input>>;
   where?: InputMaybe<Organization_Member_Bool_Exp>;
 };
@@ -6401,27 +6403,27 @@ export type Subscription_RootOrganization_Member_StreamArgs = {
 
 export type Subscription_RootOrganization_MetadataArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Metadata_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Organization_Metadata_Order_By>>;
   where?: InputMaybe<Organization_Metadata_Bool_Exp>;
 };
 
 
 export type Subscription_RootOrganization_Metadata_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootOrganization_Metadata_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Organization_Metadata_Stream_Cursor_Input>>;
   where?: InputMaybe<Organization_Metadata_Bool_Exp>;
 };
 
 
 export type Subscription_RootOrganization_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Organization_Stream_Cursor_Input>>;
   where?: InputMaybe<Organization_Bool_Exp>;
 };
@@ -6429,41 +6431,41 @@ export type Subscription_RootOrganization_StreamArgs = {
 
 export type Subscription_RootProposalArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
 
 export type Subscription_RootProposal_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootProposal_MetadataArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Metadata_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Metadata_Order_By>>;
   where?: InputMaybe<Proposal_Metadata_Bool_Exp>;
 };
 
 
 export type Subscription_RootProposal_Metadata_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootProposal_Metadata_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Proposal_Metadata_Stream_Cursor_Input>>;
   where?: InputMaybe<Proposal_Metadata_Bool_Exp>;
 };
 
 
 export type Subscription_RootProposal_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Proposal_Stream_Cursor_Input>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
@@ -6471,20 +6473,20 @@ export type Subscription_RootProposal_StreamArgs = {
 
 export type Subscription_RootProposal_VoterArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Voter_Order_By>>;
   where?: InputMaybe<Proposal_Voter_Bool_Exp>;
 };
 
 
 export type Subscription_RootProposal_Voter_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootProposal_Voter_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Proposal_Voter_Stream_Cursor_Input>>;
   where?: InputMaybe<Proposal_Voter_Bool_Exp>;
 };
@@ -6492,20 +6494,20 @@ export type Subscription_RootProposal_Voter_StreamArgs = {
 
 export type Subscription_RootReward_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Reward_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Reward_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Reward_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Subscription_RootReward_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootReward_Aggregated_Daily_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Reward_Aggregated_Daily_Stream_Cursor_Input>>;
   where?: InputMaybe<Reward_Aggregated_Daily_Bool_Exp>;
 };
@@ -6513,20 +6515,20 @@ export type Subscription_RootReward_Aggregated_Daily_StreamArgs = {
 
 export type Subscription_RootReward_EventArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Reward_Event_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Reward_Event_Order_By>>;
   where?: InputMaybe<Reward_Event_Bool_Exp>;
 };
 
 
 export type Subscription_RootReward_Event_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootReward_Event_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Reward_Event_Stream_Cursor_Input>>;
   where?: InputMaybe<Reward_Event_Bool_Exp>;
 };
@@ -6534,20 +6536,20 @@ export type Subscription_RootReward_Event_StreamArgs = {
 
 export type Subscription_RootSense_EntityArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Sense_Entity_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Sense_Entity_Order_By>>;
   where?: InputMaybe<Sense_Entity_Bool_Exp>;
 };
 
 
 export type Subscription_RootSense_Entity_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootSense_Entity_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Sense_Entity_Stream_Cursor_Input>>;
   where?: InputMaybe<Sense_Entity_Bool_Exp>;
 };
@@ -6555,20 +6557,20 @@ export type Subscription_RootSense_Entity_StreamArgs = {
 
 export type Subscription_RootSessionArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Session_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Session_Order_By>>;
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
 
 export type Subscription_RootSession_By_PkArgs = {
-  id: Scalars['bigint'];
+  id: Scalars['bigint']['input'];
 };
 
 
 export type Subscription_RootSession_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Session_Stream_Cursor_Input>>;
   where?: InputMaybe<Session_Bool_Exp>;
 };
@@ -6576,20 +6578,20 @@ export type Subscription_RootSession_StreamArgs = {
 
 export type Subscription_RootStakeArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stake_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stake_Order_By>>;
   where?: InputMaybe<Stake_Bool_Exp>;
 };
 
 
 export type Subscription_RootStake_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootStake_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Stake_Stream_Cursor_Input>>;
   where?: InputMaybe<Stake_Bool_Exp>;
 };
@@ -6597,41 +6599,41 @@ export type Subscription_RootStake_StreamArgs = {
 
 export type Subscription_RootStakersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakers_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakers_Order_By>>;
   where?: InputMaybe<Stakers_Bool_Exp>;
 };
 
 
 export type Subscription_RootStakers_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootStakers_Count_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakers_Count_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakers_Count_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Stakers_Count_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Subscription_RootStakers_Count_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootStakers_Count_Aggregated_Daily_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Stakers_Count_Aggregated_Daily_Stream_Cursor_Input>>;
   where?: InputMaybe<Stakers_Count_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Subscription_RootStakers_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Stakers_Stream_Cursor_Input>>;
   where?: InputMaybe<Stakers_Bool_Exp>;
 };
@@ -6639,20 +6641,20 @@ export type Subscription_RootStakers_StreamArgs = {
 
 export type Subscription_RootStakes_Per_Dap_And_PeriodArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakes_Per_Dap_And_Period_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakes_Per_Dap_And_Period_Order_By>>;
   where?: InputMaybe<Stakes_Per_Dap_And_Period_Bool_Exp>;
 };
 
 
 export type Subscription_RootStakes_Per_Dap_And_Period_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootStakes_Per_Dap_And_Period_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Stakes_Per_Dap_And_Period_Stream_Cursor_Input>>;
   where?: InputMaybe<Stakes_Per_Dap_And_Period_Bool_Exp>;
 };
@@ -6660,20 +6662,20 @@ export type Subscription_RootStakes_Per_Dap_And_Period_StreamArgs = {
 
 export type Subscription_RootStakes_Per_Staker_And_PeriodArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stakes_Per_Staker_And_Period_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Stakes_Per_Staker_And_Period_Order_By>>;
   where?: InputMaybe<Stakes_Per_Staker_And_Period_Bool_Exp>;
 };
 
 
 export type Subscription_RootStakes_Per_Staker_And_Period_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootStakes_Per_Staker_And_Period_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Stakes_Per_Staker_And_Period_Stream_Cursor_Input>>;
   where?: InputMaybe<Stakes_Per_Staker_And_Period_Bool_Exp>;
 };
@@ -6681,20 +6683,20 @@ export type Subscription_RootStakes_Per_Staker_And_Period_StreamArgs = {
 
 export type Subscription_RootStaking_EventArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Staking_Event_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Staking_Event_Order_By>>;
   where?: InputMaybe<Staking_Event_Bool_Exp>;
 };
 
 
 export type Subscription_RootStaking_Event_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootStaking_Event_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Staking_Event_Stream_Cursor_Input>>;
   where?: InputMaybe<Staking_Event_Bool_Exp>;
 };
@@ -6702,20 +6704,20 @@ export type Subscription_RootStaking_Event_StreamArgs = {
 
 export type Subscription_RootSubperiodArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Subperiod_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Subperiod_Order_By>>;
   where?: InputMaybe<Subperiod_Bool_Exp>;
 };
 
 
 export type Subscription_RootSubperiod_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootSubperiod_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Subperiod_Stream_Cursor_Input>>;
   where?: InputMaybe<Subperiod_Bool_Exp>;
 };
@@ -6723,20 +6725,20 @@ export type Subscription_RootSubperiod_StreamArgs = {
 
 export type Subscription_RootTvl_Aggregated_DailyArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Tvl_Aggregated_Daily_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Tvl_Aggregated_Daily_Order_By>>;
   where?: InputMaybe<Tvl_Aggregated_Daily_Bool_Exp>;
 };
 
 
 export type Subscription_RootTvl_Aggregated_Daily_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootTvl_Aggregated_Daily_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Tvl_Aggregated_Daily_Stream_Cursor_Input>>;
   where?: InputMaybe<Tvl_Aggregated_Daily_Bool_Exp>;
 };
@@ -6744,20 +6746,20 @@ export type Subscription_RootTvl_Aggregated_Daily_StreamArgs = {
 
 export type Subscription_RootUnique_Locker_AddressArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Unique_Locker_Address_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Unique_Locker_Address_Order_By>>;
   where?: InputMaybe<Unique_Locker_Address_Bool_Exp>;
 };
 
 
 export type Subscription_RootUnique_Locker_Address_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootUnique_Locker_Address_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Unique_Locker_Address_Stream_Cursor_Input>>;
   where?: InputMaybe<Unique_Locker_Address_Bool_Exp>;
 };
@@ -6765,20 +6767,20 @@ export type Subscription_RootUnique_Locker_Address_StreamArgs = {
 
 export type Subscription_RootUnique_Staker_AddressArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Unique_Staker_Address_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Unique_Staker_Address_Order_By>>;
   where?: InputMaybe<Unique_Staker_Address_Bool_Exp>;
 };
 
 
 export type Subscription_RootUnique_Staker_Address_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootUnique_Staker_Address_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Unique_Staker_Address_Stream_Cursor_Input>>;
   where?: InputMaybe<Unique_Staker_Address_Bool_Exp>;
 };
@@ -6786,58 +6788,58 @@ export type Subscription_RootUnique_Staker_Address_StreamArgs = {
 
 export type Subscription_RootVotingArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Voting_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Voting_Order_By>>;
   where?: InputMaybe<Voting_Bool_Exp>;
 };
 
 
 export type Subscription_RootVoting_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootVoting_StreamArgs = {
-  batch_size: Scalars['Int'];
+  batch_size: Scalars['Int']['input'];
   cursor: ReadonlyArray<InputMaybe<Voting_Stream_Cursor_Input>>;
   where?: InputMaybe<Voting_Bool_Exp>;
 };
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
 export type Timestamp_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['timestamp']>;
-  readonly _gt?: InputMaybe<Scalars['timestamp']>;
-  readonly _gte?: InputMaybe<Scalars['timestamp']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['timestamp']>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<Scalars['timestamp']>;
-  readonly _lte?: InputMaybe<Scalars['timestamp']>;
-  readonly _neq?: InputMaybe<Scalars['timestamp']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['timestamp']>>;
+  readonly _eq?: InputMaybe<Scalars['timestamp']['input']>;
+  readonly _gt?: InputMaybe<Scalars['timestamp']['input']>;
+  readonly _gte?: InputMaybe<Scalars['timestamp']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['timestamp']['input']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<Scalars['timestamp']['input']>;
+  readonly _lte?: InputMaybe<Scalars['timestamp']['input']>;
+  readonly _neq?: InputMaybe<Scalars['timestamp']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['timestamp']['input']>>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
-  readonly _eq?: InputMaybe<Scalars['timestamptz']>;
-  readonly _gt?: InputMaybe<Scalars['timestamptz']>;
-  readonly _gte?: InputMaybe<Scalars['timestamptz']>;
-  readonly _in?: InputMaybe<ReadonlyArray<Scalars['timestamptz']>>;
-  readonly _is_null?: InputMaybe<Scalars['Boolean']>;
-  readonly _lt?: InputMaybe<Scalars['timestamptz']>;
-  readonly _lte?: InputMaybe<Scalars['timestamptz']>;
-  readonly _neq?: InputMaybe<Scalars['timestamptz']>;
-  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['timestamptz']>>;
+  readonly _eq?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly _gt?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly _gte?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly _in?: InputMaybe<ReadonlyArray<Scalars['timestamptz']['input']>>;
+  readonly _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly _lt?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly _lte?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly _neq?: InputMaybe<Scalars['timestamptz']['input']>;
+  readonly _nin?: InputMaybe<ReadonlyArray<Scalars['timestamptz']['input']>>;
 };
 
 /** columns and relationships of "tvl_aggregated_daily" */
 export type Tvl_Aggregated_Daily = {
   readonly __typename?: 'tvl_aggregated_daily';
-  readonly block_number: Scalars['Int'];
-  readonly id: Scalars['String'];
-  readonly lockers_count: Scalars['Int'];
-  readonly tvl: Scalars['numeric'];
-  readonly usd_price: Scalars['numeric'];
+  readonly block_number: Scalars['Int']['output'];
+  readonly id: Scalars['String']['output'];
+  readonly lockers_count: Scalars['Int']['output'];
+  readonly tvl: Scalars['numeric']['output'];
+  readonly usd_price: Scalars['numeric']['output'];
 };
 
 /** Boolean expression to filter rows from the table "tvl_aggregated_daily". All fields are combined with a logical 'AND'. */
@@ -6885,18 +6887,18 @@ export type Tvl_Aggregated_Daily_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Tvl_Aggregated_Daily_Stream_Cursor_Value_Input = {
-  readonly block_number?: InputMaybe<Scalars['Int']>;
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly lockers_count?: InputMaybe<Scalars['Int']>;
-  readonly tvl?: InputMaybe<Scalars['numeric']>;
-  readonly usd_price?: InputMaybe<Scalars['numeric']>;
+  readonly block_number?: InputMaybe<Scalars['Int']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly lockers_count?: InputMaybe<Scalars['Int']['input']>;
+  readonly tvl?: InputMaybe<Scalars['numeric']['input']>;
+  readonly usd_price?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 /** columns and relationships of "unique_locker_address" */
 export type Unique_Locker_Address = {
   readonly __typename?: 'unique_locker_address';
-  readonly amount: Scalars['numeric'];
-  readonly id: Scalars['String'];
+  readonly amount: Scalars['numeric']['output'];
+  readonly id: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "unique_locker_address". All fields are combined with a logical 'AND'. */
@@ -6932,14 +6934,14 @@ export type Unique_Locker_Address_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Unique_Locker_Address_Stream_Cursor_Value_Input = {
-  readonly amount?: InputMaybe<Scalars['numeric']>;
-  readonly id?: InputMaybe<Scalars['String']>;
+  readonly amount?: InputMaybe<Scalars['numeric']['input']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "unique_staker_address" */
 export type Unique_Staker_Address = {
   readonly __typename?: 'unique_staker_address';
-  readonly id: Scalars['String'];
+  readonly id: Scalars['String']['output'];
 };
 
 /** Boolean expression to filter rows from the table "unique_staker_address". All fields are combined with a logical 'AND'. */
@@ -6971,31 +6973,31 @@ export type Unique_Staker_Address_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Unique_Staker_Address_Stream_Cursor_Value_Input = {
-  readonly id?: InputMaybe<Scalars['String']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "voting" */
 export type Voting = {
   readonly __typename?: 'voting';
-  readonly id: Scalars['String'];
-  readonly majority: Scalars['String'];
-  readonly no: Scalars['numeric'];
+  readonly id: Scalars['String']['output'];
+  readonly majority: Scalars['String']['output'];
+  readonly no: Scalars['numeric']['output'];
   /** An array relationship */
   readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
-  readonly quorum?: Maybe<Scalars['String']>;
-  readonly scale: Scalars['String'];
-  readonly unit: Scalars['String'];
-  readonly yes: Scalars['numeric'];
+  readonly quorum?: Maybe<Scalars['String']['output']>;
+  readonly scale: Scalars['String']['output'];
+  readonly unit: Scalars['String']['output'];
+  readonly yes: Scalars['numeric']['output'];
 };
 
 
 /** columns and relationships of "voting" */
 export type VotingProposal_VotersArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Voter_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Voter_Order_By>>;
   where?: InputMaybe<Proposal_Voter_Bool_Exp>;
 };
@@ -7004,8 +7006,8 @@ export type VotingProposal_VotersArgs = {
 /** columns and relationships of "voting" */
 export type VotingProposalsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
@@ -7067,13 +7069,13 @@ export type Voting_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Voting_Stream_Cursor_Value_Input = {
-  readonly id?: InputMaybe<Scalars['String']>;
-  readonly majority?: InputMaybe<Scalars['String']>;
-  readonly no?: InputMaybe<Scalars['numeric']>;
-  readonly quorum?: InputMaybe<Scalars['String']>;
-  readonly scale?: InputMaybe<Scalars['String']>;
-  readonly unit?: InputMaybe<Scalars['String']>;
-  readonly yes?: InputMaybe<Scalars['numeric']>;
+  readonly id?: InputMaybe<Scalars['String']['input']>;
+  readonly majority?: InputMaybe<Scalars['String']['input']>;
+  readonly no?: InputMaybe<Scalars['numeric']['input']>;
+  readonly quorum?: InputMaybe<Scalars['String']['input']>;
+  readonly scale?: InputMaybe<Scalars['String']['input']>;
+  readonly unit?: InputMaybe<Scalars['String']['input']>;
+  readonly yes?: InputMaybe<Scalars['numeric']['input']>;
 };
 
 export type CurrentTvlSubscriptionVariables = Exact<{ [key: string]: never; }>;
@@ -7082,74 +7084,74 @@ export type CurrentTvlSubscriptionVariables = Exact<{ [key: string]: never; }>;
 export type CurrentTvlSubscription = { readonly __typename?: 'subscription_root', readonly tvl_aggregated_daily: ReadonlyArray<{ readonly __typename?: 'tvl_aggregated_daily', readonly block_number: number, readonly tvl: any, readonly usd_price: any, readonly lockers_count: number, readonly id: string }> };
 
 export type StakesPerDappAndPeriodSubscriptionVariables = Exact<{
-  dapp: Scalars['String'];
+  dapp: Scalars['String']['input'];
 }>;
 
 
 export type StakesPerDappAndPeriodSubscription = { readonly __typename?: 'subscription_root', readonly stakes_per_dap_and_period: ReadonlyArray<{ readonly __typename?: 'stakes_per_dap_and_period', readonly dapp_address: string, readonly id: string, readonly period: number, readonly reward_amount: any, readonly stake_amount: any }> };
 
 export type StakesPerStakerAndPeriodSubscriptionVariables = Exact<{
-  dapp: Scalars['String'];
-  address: Scalars['String'];
+  dapp: Scalars['String']['input'];
+  address: Scalars['String']['input'];
 }>;
 
 
 export type StakesPerStakerAndPeriodSubscription = { readonly __typename?: 'subscription_root', readonly stakers: ReadonlyArray<{ readonly __typename?: 'stakers', readonly amount: any }> };
 
 export type StakingDataSubscriptionVariables = Exact<{
-  dapp_address: Scalars['String'];
-  staker_address: Scalars['String'];
+  dapp_address: Scalars['String']['input'];
+  staker_address: Scalars['String']['input'];
 }>;
 
 
 export type StakingDataSubscription = { readonly __typename?: 'subscription_root', readonly stake: ReadonlyArray<{ readonly __typename?: 'stake', readonly amount: any, readonly block_number: number, readonly dapp_address: string, readonly period: number, readonly staker_address: string, readonly timestamp: any }> };
 
 export type DappDataQueryVariables = Exact<{
-  dapp_address: Scalars['String'];
-  staker_address: Scalars['String'];
+  dapp_address: Scalars['String']['input'];
+  staker_address: Scalars['String']['input'];
 }>;
 
 
 export type DappDataQuery = { readonly __typename?: 'query_root', readonly dapp: ReadonlyArray<{ readonly __typename?: 'dapp', readonly dapp_id: number, readonly beneficiary?: string | null, readonly owner: string, readonly id: string }> };
 
 export type BalanceByAddressSubscriptionVariables = Exact<{
-  address: Scalars['String'];
+  address: Scalars['String']['input'];
 }>;
 
 
 export type BalanceByAddressSubscription = { readonly __typename?: 'subscription_root', readonly balance: ReadonlyArray<{ readonly __typename?: 'balance', readonly id: any, readonly address: string, readonly balanceId: number, readonly free: string, readonly frozen: string, readonly reserved: string }> };
 
 export type HistoricalBalanceSubscriptionVariables = Exact<{
-  address: Scalars['String'];
-  symbol?: InputMaybe<Scalars['String']>;
+  address: Scalars['String']['input'];
+  symbol?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
 export type HistoricalBalanceSubscription = { readonly __typename?: 'subscription_root', readonly historical_balance: ReadonlyArray<{ readonly __typename?: 'historical_balance', readonly id: string, readonly block: number, readonly free: any, readonly reserved: any, readonly total: any, readonly currency_id: string }> };
 
 export type CollectablesForUserQueryVariables = Exact<{
-  owner: Scalars['String'];
+  owner: Scalars['String']['input'];
 }>;
 
 
 export type CollectablesForUserQuery = { readonly __typename?: 'query_root', readonly rmrkNfts?: ReadonlyArray<{ readonly __typename?: 'RMRKNft', readonly id: string, readonly metadata: string, readonly sn: string } | null> | null };
 
 export type ProposalsByOrganizationIdSubscriptionVariables = Exact<{
-  orgId: Scalars['String'];
+  orgId: Scalars['String']['input'];
 }>;
 
 
 export type ProposalsByOrganizationIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly creator: string, readonly state: string, readonly start: number, readonly created_at_block: number, readonly expiry: number, readonly name: string, readonly description: string }> };
 
 export type ProposalByIdSubscriptionVariables = Exact<{
-  proposalId: Scalars['String'];
+  proposalId: Scalars['String']['input'];
 }>;
 
 
 export type ProposalByIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly type: string, readonly state: string, readonly created_at_block: number, readonly start: number, readonly expiry: number, readonly name: string, readonly description: string, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } | null, readonly voting?: { readonly __typename?: 'voting', readonly proposal_voters: ReadonlyArray<{ readonly __typename?: 'proposal_voter', readonly voted: boolean, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } | null }> } | null }> };
 
 export type IdentityByAddressSubscriptionVariables = Exact<{
-  address: Scalars['String'];
+  address: Scalars['String']['input'];
 }>;
 
 
@@ -7180,7 +7182,7 @@ export type FeaturesQueryVariables = Exact<{
 export type FeaturesQuery = { readonly __typename?: 'query_root', readonly features: { readonly __typename?: 'Features', readonly CREATE_PROPOSAL: boolean, readonly CREATE_PROPOSAL_SIMPLE_MAJORITY: boolean, readonly CREATE_PROPOSAL_RELATIVE_MAJORITY: boolean, readonly CREATE_GENERAL_PROPOSAL: boolean, readonly CREATE_WITHDRAW_PROPOSAL: boolean, readonly CREATE_SPENDING_PROPOSAL: boolean, readonly ORGANIZATION_PAGE_SHOW_FILTERS: boolean, readonly ORGANIZATION_PAGE_SHOW_SEARCH: boolean, readonly ORGANIZATION_PAGE_SHOW_SORT: boolean } };
 
 export type UpdateSessionMutationVariables = Exact<{
-  address: Scalars['String'];
+  address: Scalars['String']['input'];
 }>;
 
 
@@ -7248,7 +7250,7 @@ export const StakesPerDappAndPeriodDocument = gql`
  *   },
  * });
  */
-export function useStakesPerDappAndPeriodSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakesPerDappAndPeriodSubscription, StakesPerDappAndPeriodSubscriptionVariables>) {
+export function useStakesPerDappAndPeriodSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakesPerDappAndPeriodSubscription, StakesPerDappAndPeriodSubscriptionVariables> & ({ variables: StakesPerDappAndPeriodSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<StakesPerDappAndPeriodSubscription, StakesPerDappAndPeriodSubscriptionVariables>(StakesPerDappAndPeriodDocument, options);
       }
@@ -7279,7 +7281,7 @@ export const StakesPerStakerAndPeriodDocument = gql`
  *   },
  * });
  */
-export function useStakesPerStakerAndPeriodSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakesPerStakerAndPeriodSubscription, StakesPerStakerAndPeriodSubscriptionVariables>) {
+export function useStakesPerStakerAndPeriodSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakesPerStakerAndPeriodSubscription, StakesPerStakerAndPeriodSubscriptionVariables> & ({ variables: StakesPerStakerAndPeriodSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<StakesPerStakerAndPeriodSubscription, StakesPerStakerAndPeriodSubscriptionVariables>(StakesPerStakerAndPeriodDocument, options);
       }
@@ -7317,7 +7319,7 @@ export const StakingDataDocument = gql`
  *   },
  * });
  */
-export function useStakingDataSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakingDataSubscription, StakingDataSubscriptionVariables>) {
+export function useStakingDataSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakingDataSubscription, StakingDataSubscriptionVariables> & ({ variables: StakingDataSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<StakingDataSubscription, StakingDataSubscriptionVariables>(StakingDataDocument, options);
       }
@@ -7351,7 +7353,7 @@ export const DappDataDocument = gql`
  *   },
  * });
  */
-export function useDappDataQuery(baseOptions: Apollo.QueryHookOptions<DappDataQuery, DappDataQueryVariables>) {
+export function useDappDataQuery(baseOptions: Apollo.QueryHookOptions<DappDataQuery, DappDataQueryVariables> & ({ variables: DappDataQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<DappDataQuery, DappDataQueryVariables>(DappDataDocument, options);
       }
@@ -7359,8 +7361,13 @@ export function useDappDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<D
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<DappDataQuery, DappDataQueryVariables>(DappDataDocument, options);
         }
+export function useDappDataSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<DappDataQuery, DappDataQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<DappDataQuery, DappDataQueryVariables>(DappDataDocument, options);
+        }
 export type DappDataQueryHookResult = ReturnType<typeof useDappDataQuery>;
 export type DappDataLazyQueryHookResult = ReturnType<typeof useDappDataLazyQuery>;
+export type DappDataSuspenseQueryHookResult = ReturnType<typeof useDappDataSuspenseQuery>;
 export type DappDataQueryResult = Apollo.QueryResult<DappDataQuery, DappDataQueryVariables>;
 export const BalanceByAddressDocument = gql`
     subscription BalanceByAddress($address: String!) {
@@ -7391,7 +7398,7 @@ export const BalanceByAddressDocument = gql`
  *   },
  * });
  */
-export function useBalanceByAddressSubscription(baseOptions: Apollo.SubscriptionHookOptions<BalanceByAddressSubscription, BalanceByAddressSubscriptionVariables>) {
+export function useBalanceByAddressSubscription(baseOptions: Apollo.SubscriptionHookOptions<BalanceByAddressSubscription, BalanceByAddressSubscriptionVariables> & ({ variables: BalanceByAddressSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<BalanceByAddressSubscription, BalanceByAddressSubscriptionVariables>(BalanceByAddressDocument, options);
       }
@@ -7429,7 +7436,7 @@ export const HistoricalBalanceDocument = gql`
  *   },
  * });
  */
-export function useHistoricalBalanceSubscription(baseOptions: Apollo.SubscriptionHookOptions<HistoricalBalanceSubscription, HistoricalBalanceSubscriptionVariables>) {
+export function useHistoricalBalanceSubscription(baseOptions: Apollo.SubscriptionHookOptions<HistoricalBalanceSubscription, HistoricalBalanceSubscriptionVariables> & ({ variables: HistoricalBalanceSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<HistoricalBalanceSubscription, HistoricalBalanceSubscriptionVariables>(HistoricalBalanceDocument, options);
       }
@@ -7461,7 +7468,7 @@ export const CollectablesForUserDocument = gql`
  *   },
  * });
  */
-export function useCollectablesForUserQuery(baseOptions: Apollo.QueryHookOptions<CollectablesForUserQuery, CollectablesForUserQueryVariables>) {
+export function useCollectablesForUserQuery(baseOptions: Apollo.QueryHookOptions<CollectablesForUserQuery, CollectablesForUserQueryVariables> & ({ variables: CollectablesForUserQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<CollectablesForUserQuery, CollectablesForUserQueryVariables>(CollectablesForUserDocument, options);
       }
@@ -7469,8 +7476,13 @@ export function useCollectablesForUserLazyQuery(baseOptions?: Apollo.LazyQueryHo
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<CollectablesForUserQuery, CollectablesForUserQueryVariables>(CollectablesForUserDocument, options);
         }
+export function useCollectablesForUserSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<CollectablesForUserQuery, CollectablesForUserQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CollectablesForUserQuery, CollectablesForUserQueryVariables>(CollectablesForUserDocument, options);
+        }
 export type CollectablesForUserQueryHookResult = ReturnType<typeof useCollectablesForUserQuery>;
 export type CollectablesForUserLazyQueryHookResult = ReturnType<typeof useCollectablesForUserLazyQuery>;
+export type CollectablesForUserSuspenseQueryHookResult = ReturnType<typeof useCollectablesForUserSuspenseQuery>;
 export type CollectablesForUserQueryResult = Apollo.QueryResult<CollectablesForUserQuery, CollectablesForUserQueryVariables>;
 export const ProposalsByOrganizationIdDocument = gql`
     subscription ProposalsByOrganizationId($orgId: String!) {
@@ -7503,7 +7515,7 @@ export const ProposalsByOrganizationIdDocument = gql`
  *   },
  * });
  */
-export function useProposalsByOrganizationIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables>) {
+export function useProposalsByOrganizationIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables> & ({ variables: ProposalsByOrganizationIdSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<ProposalsByOrganizationIdSubscription, ProposalsByOrganizationIdSubscriptionVariables>(ProposalsByOrganizationIdDocument, options);
       }
@@ -7554,7 +7566,7 @@ export const ProposalByIdDocument = gql`
  *   },
  * });
  */
-export function useProposalByIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>) {
+export function useProposalByIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<ProposalByIdSubscription, ProposalByIdSubscriptionVariables> & ({ variables: ProposalByIdSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<ProposalByIdSubscription, ProposalByIdSubscriptionVariables>(ProposalByIdDocument, options);
       }
@@ -7593,7 +7605,7 @@ export const IdentityByAddressDocument = gql`
  *   },
  * });
  */
-export function useIdentityByAddressSubscription(baseOptions: Apollo.SubscriptionHookOptions<IdentityByAddressSubscription, IdentityByAddressSubscriptionVariables>) {
+export function useIdentityByAddressSubscription(baseOptions: Apollo.SubscriptionHookOptions<IdentityByAddressSubscription, IdentityByAddressSubscriptionVariables> & ({ variables: IdentityByAddressSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<IdentityByAddressSubscription, IdentityByAddressSubscriptionVariables>(IdentityByAddressDocument, options);
       }
@@ -7662,7 +7674,7 @@ export const ConfigDocument = gql`
  *   },
  * });
  */
-export function useConfigQuery(baseOptions: Apollo.QueryHookOptions<ConfigQuery, ConfigQueryVariables>) {
+export function useConfigQuery(baseOptions: Apollo.QueryHookOptions<ConfigQuery, ConfigQueryVariables> & ({ variables: ConfigQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ConfigQuery, ConfigQueryVariables>(ConfigDocument, options);
       }
@@ -7670,8 +7682,13 @@ export function useConfigLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Con
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ConfigQuery, ConfigQueryVariables>(ConfigDocument, options);
         }
+export function useConfigSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<ConfigQuery, ConfigQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ConfigQuery, ConfigQueryVariables>(ConfigDocument, options);
+        }
 export type ConfigQueryHookResult = ReturnType<typeof useConfigQuery>;
 export type ConfigLazyQueryHookResult = ReturnType<typeof useConfigLazyQuery>;
+export type ConfigSuspenseQueryHookResult = ReturnType<typeof useConfigSuspenseQuery>;
 export type ConfigQueryResult = Apollo.QueryResult<ConfigQuery, ConfigQueryVariables>;
 export const ApiProviderConfigDocument = gql`
     query ApiProviderConfig {
@@ -7715,8 +7732,13 @@ export function useApiProviderConfigLazyQuery(baseOptions?: Apollo.LazyQueryHook
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>(ApiProviderConfigDocument, options);
         }
+export function useApiProviderConfigSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>(ApiProviderConfigDocument, options);
+        }
 export type ApiProviderConfigQueryHookResult = ReturnType<typeof useApiProviderConfigQuery>;
 export type ApiProviderConfigLazyQueryHookResult = ReturnType<typeof useApiProviderConfigLazyQuery>;
+export type ApiProviderConfigSuspenseQueryHookResult = ReturnType<typeof useApiProviderConfigSuspenseQuery>;
 export type ApiProviderConfigQueryResult = Apollo.QueryResult<ApiProviderConfigQuery, ApiProviderConfigQueryVariables>;
 export const FeaturesDocument = gql`
     query Features($env: Environment!) {
@@ -7750,7 +7772,7 @@ export const FeaturesDocument = gql`
  *   },
  * });
  */
-export function useFeaturesQuery(baseOptions: Apollo.QueryHookOptions<FeaturesQuery, FeaturesQueryVariables>) {
+export function useFeaturesQuery(baseOptions: Apollo.QueryHookOptions<FeaturesQuery, FeaturesQueryVariables> & ({ variables: FeaturesQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<FeaturesQuery, FeaturesQueryVariables>(FeaturesDocument, options);
       }
@@ -7758,8 +7780,13 @@ export function useFeaturesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<F
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<FeaturesQuery, FeaturesQueryVariables>(FeaturesDocument, options);
         }
+export function useFeaturesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<FeaturesQuery, FeaturesQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<FeaturesQuery, FeaturesQueryVariables>(FeaturesDocument, options);
+        }
 export type FeaturesQueryHookResult = ReturnType<typeof useFeaturesQuery>;
 export type FeaturesLazyQueryHookResult = ReturnType<typeof useFeaturesLazyQuery>;
+export type FeaturesSuspenseQueryHookResult = ReturnType<typeof useFeaturesSuspenseQuery>;
 export type FeaturesQueryResult = Apollo.QueryResult<FeaturesQuery, FeaturesQueryVariables>;
 export const UpdateSessionDocument = gql`
     mutation UpdateSession($address: String!) {
