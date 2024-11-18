@@ -1,7 +1,0 @@
-subscription Sidebar($address: String!) {
-    organization(where: {organizationMembers: {address: {_eq: $address}}}) {
-        id
-        logo
-        name
-    }
-}

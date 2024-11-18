@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution":"NodeNext",
+    "module": "nodenext",
+    "moduleResolution":"nodenext",
     "target": "esnext",
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -9,9 +9,11 @@
     "resolveJsonModule": true,
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      "@gamedao/*": ["packages/*/src"]
-    }
+    "references": [
+      { "path": "./packages/core" },
+      { "path": "./packages/ui" },
+      { "path": "./packages/graph" }
+    ]
   },
   "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["node_modules"]

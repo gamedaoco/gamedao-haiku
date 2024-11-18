@@ -1,3 +1,4 @@
+const path = require('path')
 const sitemap = require('nextjs-sitemap-generator')
 const pkg = require('./package')
 const date = new Date()
@@ -44,9 +45,9 @@ module.exports =
 			VERCEL_ENV: process.env.VERCEL_ENV || '',
 		},
 		poweredByHeader: false,
-		// experiments: {
-		// 	topLevelAwait: true,
-		// },
+		experimental: {
+			// externalDir: true,
+		},
 		images: {
 			minimumCacheTTL: 3600,
 			domains: ['ipfs.infura.io', 'gateway.ipfs.io', 'gamedao.infura-ipfs.io'],
@@ -55,11 +56,17 @@ module.exports =
 			// ],
 		},
 		typescript: {
-			// !! WARN !!
-			// Dangerously allow production builds to successfully complete even if
-			// your project has type errors.
-			// !! WARN !!
 			ignoreBuildErrors: true,
 		},
+		// transpile external dependencies
+		transpilePackages: ['@gamedao/graph', '@gamedao/core'],
+		// webpack: (config, { defaultLoaders }) => {
+		// 	config.module.rules.push({
+		// 		test: /\.tsx?$/,
+		// 		include: [path.resolve(__dirname, '../../packages/graph')],
+		// 		use: defaultLoaders.babel, // Let Next.js handle the transpilation
+		// 	})
+		// 	return config
+		// },
 	})
 // )

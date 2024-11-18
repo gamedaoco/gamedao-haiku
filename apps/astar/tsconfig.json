@@ -13,36 +13,18 @@
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "",
     "paths": {
-      "@types/*": [
-        "src/@types/*"
-      ],
-      "graphql/*": [
-        "src/graphql/*"
-      ],
-      "config/*": [
-        "src/config/*"
-      ],
-      "constants/*": [
-        "src/constants/*"
-      ],
       "components/*": [
         "src/components/*"
       ],
       "dapps/*": [
         "src/dapps/*"
-      ],
-      "data/*": [
-        "src/data/*"
-      ],
-      "hooks/*": [
-        "src/hooks/*"
       ],
       "layouts/*": [
         "src/layouts/*"
@@ -53,18 +35,12 @@
       "public/*": [
         "public/*"
       ],
-      "queries/*": [
-        "queries/*"
-      ],
       "src/*": [
         "src/*"
       ],
       "themes/*": [
         "src/themes/*"
       ],
-      "utils/*": [
-        "src/utils/*"
-      ]
     }
   },
   "include": [
