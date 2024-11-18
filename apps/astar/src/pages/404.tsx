@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import { Layout } from 'layouts/default'
+import { Layout } from 'layouts/astar'
 
 export function Page() {
 	return (

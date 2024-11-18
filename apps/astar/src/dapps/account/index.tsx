@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AccountTabs } from 'src/constants/account'
+import { AccountTabs } from '@gamedao/core/constants/account'
 import { Box } from '@mui/material'
 import { Header } from './Header'
 import { Navigation } from './Navigation'

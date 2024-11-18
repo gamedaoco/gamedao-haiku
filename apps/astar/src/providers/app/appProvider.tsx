@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
-import { ENVIRONMENT } from 'src/constants'
+import { ENVIRONMENT } from '@gamedao/core/constants/environment'
 import { AppContext } from 'src/providers/app/components/context'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 
-import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from 'src/queries'
+import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from '@gamedao/graph'
 
 export type TAppContext = {
 	dapp?: string

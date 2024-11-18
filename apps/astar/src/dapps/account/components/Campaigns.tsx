@@ -2,8 +2,8 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { Campaign, useCampaignContributorsSubscription, useCampaignSubscription } from 'src/queries'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { Campaign, useCampaignContributorsSubscription, useCampaignSubscription } from '@gamedao/graph'
 
 import { Card, CardContent, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'

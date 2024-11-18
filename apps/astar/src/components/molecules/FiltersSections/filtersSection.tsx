@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { FilterList, Search } from '@mui/icons-material'
 import { Box, Drawer, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
-import { useDebouncedState } from 'src/hooks/useDebouncedState'
-import { CampaignFiltersInterface } from 'src/@types/campaign'
-import { Campaign_Bool_Exp, DisplayValueEntryString, Organization_Order_By } from 'src/queries'
+import { useDebouncedState } from '@gamedao/core/hooks/useDebouncedState'
+import { CampaignFiltersInterface } from '@gamedao/core/@types/campaign'
+import { Campaign_Bool_Exp, DisplayValueEntryString, Organization_Order_By } from '@gamedao/graph'
 
 import { SortOptionsTab } from 'components/molecules/FiltersSections/sortOptionsTab'
 

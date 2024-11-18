@@ -3,7 +3,7 @@ import React from 'react'
 import { Divider, IconButton, Paper, Stack } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { FontIcons } from 'components/atoms/Icons/icons'
-import { useSettings } from 'src/hooks/useSettings'
+import { useSettings } from '@gamedao/core/hooks/useSettings'
 
 export function ThemeSwitch() {
 	const theme = useTheme()

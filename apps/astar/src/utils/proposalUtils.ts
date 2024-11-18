@@ -1,4 +1,4 @@
-import { Proposal } from 'src/queries'
+import { Proposal } from '@gamedao/graph'
 
 export function isProposalActive(blockTime: number, proposal: Proposal) {
 	if (!proposal) return false

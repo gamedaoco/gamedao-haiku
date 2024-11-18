@@ -1,7 +1,7 @@
 import { Card, Stack, Typography } from '@mui/material'
-import { useBalanceByAddressAndBalanceId } from 'src/hooks/useBalanceByAddressAndBalanceId'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useSystemProperties } from 'src/hooks/useSystemProperties'
+import { useBalanceByAddressAndBalanceId } from '@gamedao/core/hooks/useBalanceByAddressAndBalanceId'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useSystemProperties } from '@gamedao/core/hooks/useSystemProperties'
 
 export function BalanceCard() {
 	const address = useCurrentAccountAddress()

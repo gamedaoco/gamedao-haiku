@@ -1,4 +1,4 @@
-import { CampaignContributor } from 'src/queries'
+import { CampaignContributor } from '@gamedao/graph'
 
 export function getContributedCampaignProgress(campaignContributor: CampaignContributor): number {
 	return (

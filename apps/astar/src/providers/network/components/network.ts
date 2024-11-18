@@ -1,6 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
-import type { ApiProvider } from 'src/@types/network'
-import type { ApiProvider as ApiProviderConfig } from 'src/queries'
+import type { ApiProvider } from '@gamedao/core/@types/network'
+import type { ApiProvider as ApiProviderConfig } from '@gamedao/graph'
 
 // Call health every 30 seconds as keepalive
 // Websocket is closed after one minute if no request is made

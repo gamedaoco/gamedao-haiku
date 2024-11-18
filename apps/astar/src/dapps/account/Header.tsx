@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next'
 import md5 from 'md5'
 import { useAppContext } from 'src/providers/app/components/context'
 
-import { AccountTabs } from 'src/constants/account'
+import { AccountTabs } from '@gamedao/core/constants/account'
 
 import { useExtensionContext } from 'src/providers/extension/components/context'
-import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
-import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
+import { useCurrentAccountState } from '@gamedao/core/hooks/useCurrentAccountState'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useIdentityByAddress } from '@gamedao/core/hooks/useIdentityByAddress'
+import { useBalanceByAddress } from '@gamedao/core/hooks/useBalanceByAddress'
 
 import { getAddressFromAccountState, getNameFromAccountState, shortAccountAddress } from 'src/utils/accountUtils'
 import { createInfoNotification } from 'src/utils/notification'

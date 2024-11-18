@@ -1,6 +1,6 @@
 import { Person } from '@mui/icons-material'
-import { useProposalFeatures } from 'src/hooks/featureToggle/useProposalFeatures'
-import { PROPOSAL_CREATE_DEPOSIT, PROPOSAL_KEYS } from 'src/constants/proposal'
+import { useProposalFeatures } from '@gamedao/core/hooks/featureToggle/useProposalFeatures'
+import { PROPOSAL_CREATE_DEPOSIT, PROPOSAL_KEYS } from '@gamedao/core/constants/proposal'
 import { useTranslation } from 'react-i18next'
 
 import { BaseForm } from 'components/organisms/forms/baseForm'

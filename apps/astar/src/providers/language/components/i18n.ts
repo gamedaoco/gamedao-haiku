@@ -1,4 +1,4 @@
-import { enUS } from '@gamedao/translations'
+import { enUS } from '@gamedao/i18n'
 import i18n, { i18n as I18nType } from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'

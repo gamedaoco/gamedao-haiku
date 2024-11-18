@@ -3,7 +3,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist'
 import { createClient } from 'graphql-ws'
-import { Endpoint } from 'src/@types/graphql'
+import { Endpoint } from '@gamedao/core/@types/graphql'
 
 const cache = new InMemoryCache({
 	addTypename: false,

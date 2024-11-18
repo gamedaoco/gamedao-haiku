@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from 'layouts/default'
+import { Layout } from 'layouts/astar'
 import { Dashboard } from 'dapps/stakeboard/Dashboard'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 

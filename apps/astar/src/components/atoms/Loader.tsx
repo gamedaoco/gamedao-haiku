@@ -16,7 +16,13 @@ export const Spinner = ({ text }: Props) => {
 
 export const Loader = ({ text }: Props) => {
 	return (
-		<Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true}>
+		<Backdrop
+			sx={{
+				color: '#fff',
+				zIndex: (theme) => theme.zIndex.drawer + 1,
+			}}
+			open={true}
+		>
 			<Spinner text={text} />
 		</Backdrop>
 	)

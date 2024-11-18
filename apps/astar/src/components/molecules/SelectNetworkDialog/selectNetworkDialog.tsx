@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react'
 
 import { Grid } from '@mui/material'
 import { useGraphQlContext } from 'src/providers/graphQl/components/context'
-import { Endpoint } from 'src/@types/graphql'
+import { Endpoint } from '@gamedao/core/@types/graphql'
 
 import { BaseDialog } from 'components/molecules/BaseDialog'
 import { NetworkCard } from 'components/molecules/SelectNetworkDialog/components/networkCard'

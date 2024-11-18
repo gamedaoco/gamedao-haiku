@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import Head from 'next/head'
-import { useConfig } from 'src/hooks/useConfig'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useConfig } from '@gamedao/core/hooks/useConfig'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 
 import { Box, Container, Stack, useMediaQuery, useTheme } from '@mui/material'
 // import { TopBar } from './components/TopBar'

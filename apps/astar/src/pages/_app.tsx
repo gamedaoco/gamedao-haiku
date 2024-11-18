@@ -6,13 +6,16 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
-import { ENVIRONMENT } from 'src/constants/index'
-import { useConfig } from 'src/hooks/useConfig'
+
+import { ENVIRONMENT } from '@gamedao/core/constants/index'
+
+import { useConfig } from '@gamedao/core/hooks/useConfig'
 import { Providers } from 'src/providers'
+
 import createEmotionCache from 'src/theme/createEmotionCache'
 import 'src/theme/css/modelViewer.css'
 import 'src/theme/css/toastify.css'
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/core/logger'
 
 const clientSideEmotionCache = createEmotionCache()
 

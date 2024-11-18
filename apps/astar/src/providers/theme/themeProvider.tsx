@@ -5,7 +5,7 @@ import { ThemeProvider as MuiThemeProvider, Theme, ThemeOptions, createTheme } f
 import 'react-quill/dist/quill.snow.css'
 import { ToastContainer, Zoom } from 'react-toastify'
 import { ThemePrimaryColor } from 'components/molecules/ThemePrimaryColor'
-import { useSettings } from 'src/hooks/useSettings'
+import { useSettings } from '@gamedao/core/hooks/useSettings'
 
 import breakpoints from 'src/theme/breakpoints'
 import GlobalStyles from 'src/theme/globalStyles'

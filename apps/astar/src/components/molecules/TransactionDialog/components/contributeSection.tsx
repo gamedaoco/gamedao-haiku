@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 
 import { Info } from '@mui/icons-material'
 import { Divider, InputAdornment, Stack, TextField, Typography } from '@mui/material'
-import { useBalanceByAddressAndBalanceId } from 'src/hooks/useBalanceByAddressAndBalanceId'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useBalanceByAddressAndBalanceId } from '@gamedao/core/hooks/useBalanceByAddressAndBalanceId'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 import { useTranslation } from 'react-i18next'
 
 interface ComponentProps {

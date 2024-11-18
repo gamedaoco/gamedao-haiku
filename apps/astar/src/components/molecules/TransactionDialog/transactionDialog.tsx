@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { TransactionData } from 'src/@types/transactionData'
+import { TransactionData } from '@gamedao/core/@types/transactionData'
 import { formatBalanceString } from 'src/utils/balance'
 
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces'
 import type { ISubmittableResult } from '@polkadot/types/types'
-import { Balance } from 'src/hooks/useBalanceByAddress'
-import { useBalanceByAddressAndBalanceId } from 'src/hooks/useBalanceByAddressAndBalanceId'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useSystemProperties } from 'src/hooks/useSystemProperties'
-import { useTransaction } from 'src/hooks/useTransaction'
+import { Balance } from '@gamedao/core/hooks/useBalanceByAddress'
+import { useBalanceByAddressAndBalanceId } from '@gamedao/core/hooks/useBalanceByAddressAndBalanceId'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useSystemProperties } from '@gamedao/core/hooks/useSystemProperties'
+import { useTransaction } from '@gamedao/core/hooks/useTransaction'
 
 import { Box, Button, Card, Divider, Link, Stack, Typography } from '@mui/material'
 import { BaseDialog } from 'components/molecules/BaseDialog'
@@ -24,7 +24,6 @@ interface ComponentProps {
 }
 
 export function TransactionDialog({ open, onClose, txData, txCallback, children }: ComponentProps) {
-
 	console.log('transactionDialog', open, txData)
 
 	const { t } = useTranslation()
@@ -81,7 +80,12 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 					<Stack direction="row" justifyContent="space-between" spacing={{ xs: 2, sm: 4 }}>
 						<Typography>{txData.actionSubTitle || ''}</Typography>
 						{txData?.description && (
-							<Link variant="body1" component="button" underline="always" onClick={() => setShowDescription(!showDescription)}>
+							<Link
+								variant="body1"
+								component="button"
+								underline="always"
+								onClick={() => setShowDescription(!showDescription)}
+							>
 								{t('button:ui:transaction:description_toggle')}
 							</Link>
 						)}
@@ -130,7 +134,7 @@ export function TransactionDialog({ open, onClose, txData, txCallback, children 
 						? t('button:ui:transaction:get_token_a_b', {
 								tokenA: networkBalance.tokenSymbol,
 								tokenB: depositBalance.tokenSymbol,
-						  })
+							})
 						: t('button:ui:transaction:get_token', { token: networkBalance.tokenSymbol })}
 				</Link>
 			</Stack>

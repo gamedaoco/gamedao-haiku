@@ -3,13 +3,13 @@ import { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useAppContext } from 'src/providers/app/components/context'
 
-import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
+import { useBalanceByAddress } from '@gamedao/core/hooks/useBalanceByAddress'
 import { formatBalanceString } from 'src/utils/balance'
 
 import { shortHash, getNameFromAccountState } from 'src/utils/accountUtils'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
-import { useIdentityByAddress } from 'src/hooks/useIdentityByAddress'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useCurrentAccountState } from '@gamedao/core/hooks/useCurrentAccountState'
+import { useIdentityByAddress } from '@gamedao/core/hooks/useIdentityByAddress'
 
 import { useTheme } from '@mui/material/styles'
 import { Button, Avatar, Box, Stack, Typography, useMediaQuery } from '@mui/material'

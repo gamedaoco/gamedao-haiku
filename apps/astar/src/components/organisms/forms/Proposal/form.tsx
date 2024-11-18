@@ -4,11 +4,11 @@ import { useRouter } from 'next/router'
 
 import { Button, Stack } from '@mui/material'
 import { ISubmittableResult } from '@polkadot/types/types'
-import { useCreateProposalTransaction } from 'hooks/tx/useCreateProposalTransaction'
-import { useConfig } from 'src/hooks/useConfig'
-import { useTMPProposalState } from 'src/hooks/useTMPProposalState'
+import { useCreateProposalTransaction } from '@gamedao/core/hooks/tx/useCreateProposalTransaction'
+import { useConfig } from '@gamedao/core/hooks/useConfig'
+import { useTMPProposalState } from '@gamedao/core/hooks/useTMPProposalState'
 import { useTranslation } from 'react-i18next'
-import { PROPOSAL_KEYS } from 'src/constants/proposal'
+import { PROPOSAL_KEYS } from '@gamedao/core/constants/proposal'
 import { uploadFileToIpfs } from 'src/utils/ipfs'
 
 import {

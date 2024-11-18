@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useAppContext } from 'src/providers/app/components/context'
 import { initializeApis, keepAlive } from 'src/providers/network/components/network'
-import type { ApiProvider } from 'src/@types/network'
+import type { ApiProvider } from '@gamedao/core/@types/network'
 
 import { NetworkContext } from './components/context'
 

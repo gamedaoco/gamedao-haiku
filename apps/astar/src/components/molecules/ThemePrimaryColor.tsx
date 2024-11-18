@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from 'react'
 
 import { ThemeProvider, alpha, createTheme, useTheme } from '@mui/material/styles'
-import { useSettings } from 'src/hooks/useSettings'
+import { useSettings } from '@gamedao/core/hooks/useSettings'
 
 import componentsOverride from '../../theme/overrides'
 

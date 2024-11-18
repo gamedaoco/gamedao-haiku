@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 
-import type { NetworkState } from 'src/@types/network'
+import type { NetworkState } from '@gamedao/core/@types/network'
 
 export const NetworkContext = createContext<NetworkState>({
 	selectedApiProvider: null,

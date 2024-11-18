@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import type { Identity } from 'src/queries'
-import { useIdentityByAddressSubscription } from 'src/queries'
+import type { Identity } from '@gamedao/graph'
+import { useIdentityByAddressSubscription } from '@gamedao/graph'
 
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useClearIdentityTransaction } from 'hooks/tx/useClearIdentityTransaction'
-import { useIdentitySetTransaction, validation } from 'hooks/tx/useIdentitySetTransaction'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useClearIdentityTransaction } from '@gamedao/core/hooks/tx/useClearIdentityTransaction'
+import { useIdentitySetTransaction, validation } from '@gamedao/core/hooks/tx/useIdentitySetTransaction'
 
-// import { useCurrentAccountState } from 'hooks/useCurrentAccountState'
-// import { useIdentityByAddressSubscription } from 'hooks/useIdentityByAddress'
+// import { useCurrentAccountState } from '@gamedao/core/hooks/useCurrentAccountState'
+// import { useIdentityByAddressSubscription } from '@gamedao/core/hooks/useIdentityByAddress'
 // import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
-import { useYupValidationResolver } from 'src/hooks/useYupValidationResolver'
+import { useYupValidationResolver } from '@gamedao/core/hooks/useYupValidationResolver'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { Box, Button, Card, CardContent, CardHeader, Grid, TextField, Typography } from '@mui/material'
 import { TransactionDialog } from 'components/molecules/TransactionDialog/transactionDialog'

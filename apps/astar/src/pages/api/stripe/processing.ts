@@ -6,7 +6,7 @@ export const config = {
 import Discord from 'discord.js'
 import Stripe from 'stripe'
 import { buffer } from 'micro'
-import { getConnectedEndpoint } from 'src/constants/endpoints'
+import { getConnectedEndpoint } from '@gamedao/core/constants/endpoints'
 
 // curl -X POST localhost:3000/api/feedback -H "Content-Type:application/json;charset=utf-8" -d '{"msg":"hello"}'
 // send a message: discord.send({ content: msg })

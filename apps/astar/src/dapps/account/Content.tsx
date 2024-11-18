@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 
-import { AccountTabs } from 'src/constants/account'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { AccountTabs } from '@gamedao/core/constants/account'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 
 import { Overview } from './components/Overview'
 import { MyCampaigns } from './components/Campaigns'

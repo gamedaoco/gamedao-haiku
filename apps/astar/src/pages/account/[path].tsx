@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 import { useTranslation } from 'react-i18next'
-import { AccountTabs } from 'src/constants/account'
+import { AccountTabs } from '@gamedao/core/constants/account'
 
-import { Layout } from 'layouts/default'
+import { Layout } from 'layouts/astar'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 import { NoWalletConnected } from 'components/molecules/NoWalletConnected'

@@ -2,9 +2,9 @@ import { Fragment, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { getKusamaAddressFromAccountState } from 'src/utils/accountUtils'
-import { useCurrentAccountState } from 'src/hooks/useCurrentAccountState'
-import { useCollectablesForUserLazyQuery } from 'src/queries'
-import { CollectablesForUserQuery } from 'src/queries'
+import { useCurrentAccountState } from '@gamedao/core/hooks/useCurrentAccountState'
+import { useCollectablesForUserLazyQuery } from '@gamedao/graph'
+import { CollectablesForUserQuery } from '@gamedao/graph'
 
 import { Card, CardContent, Typography } from '@mui/material'
 import CollectablesList from './CollectablesList'

@@ -32,7 +32,7 @@ import { RxDiscordLogo } from 'react-icons/rx'
 import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
 import { AccountSelector } from 'src/components/molecules/AccountSelector'
 import Link from 'components/atoms/Link'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 
 /* eslint-disable @next/next/no-img-element */
 // const Logo = () => <img src="/v3/svg/gamedao-color-h-wht.svg" height="32px" alt="GameDAO" />

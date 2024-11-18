@@ -1,43 +1,44 @@
 import React, { lazy, useCallback, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { useLogger } from 'src/hooks/useLogger'
+import { useLogger } from '@gamedao/core/hooks/useLogger'
 
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useAstarStaking } from 'hooks/useAstarStaking'
-import { useAstarTVL } from 'hooks/useAstarTVL'
-import { useAstarStakedByAddress } from 'hooks/useAstarStakedByAddress'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useAstarStaking } from '@gamedao/core/hooks/useAstarStaking'
+import { useAstarTVL } from '@gamedao/core/hooks/useAstarTVL'
+import { useAstarStakedByAddress } from '@gamedao/core/hooks/useAstarStakedByAddress'
 
 import { useTheme } from '@mui/material/styles'
-import { Stack, Typography, useMediaQuery } from '@mui/material'
+import { Stack, Typography, useMediaQuery, Box } from '@mui/material'
 import { Loader } from 'components/atoms/Loader'
 
-export function Dashboard() {
+export function DashboardView() {
 	const logger = useLogger('astar')
 	const { query } = useRouter()
-
+	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState({
 		block_number: 0,
 		lockers_count: 0,
-		tvl: 0,
-		usd_price: 0,
+		stakers: 0,
+		tvl_astar: 0,
+		tvl_usd: 0,
+		astr_usd: 0,
 	})
 	const address = useCurrentAccountAddress()
 	const { state: stakedByAddress } = useAstarStakedByAddress(address)
-	const { tvlLoading, state: tvl } = useAstarTVL()
-	const { stakingLoading, stakingData } = useAstarStaking(address)
+	// const { tvlLoading, state: tvl } = useAstarTVL()
+	// const { stakingLoading, stakingData } = useAstarStaking(address)
 
-	useEffect(() => {
-		if (tvlLoading) return
-		setData({ ...data, ...tvl })
-	}, [data, tvl])
+	// useEffect(() => {
+	// 	if (tvlLoading) return
+	// 	setData({ ...data, ...tvl })
+	// }, [data, tvl])
 
-	const [loading, setLoading] = useState(false)
-	useEffect(() => {
-		const _ = tvlLoading && stakingLoading
-		setLoading(_)
-	}, [tvlLoading, stakingLoading])
+	// useEffect(() => {
+	// 	const _ = tvlLoading && stakingLoading
+	// 	setLoading(_)
+	// }, [tvlLoading, stakingLoading])
 
 	// global stuff
 
@@ -66,29 +67,35 @@ export function Dashboard() {
 	if (loading) return <Loader text="Preparing your Stakeboard..." />
 
 	return (
+		<Box>
+			<Typography variant={'body1'} color={'white'}>
+				1 $ASTR = {data.astr_usd} USD <br />
+				TVL: {data.tvl_astar} $ASTR / {data.tvl_usd} USD
+			</Typography>
+			<Typography variant={'h5'} color={'white'}>
+				Please connect your wallet to access Stakeboard.
+			</Typography>
+			<Typography variant={'h5'} color={'white'}>
+				Connected Address: {address}
+			</Typography>
+			<Typography variant={'h5'} color={'white'}>
+				Staked by Address: {stakedByAddress.amount}
+			</Typography>
+		</Box>
+	)
+}
+
+export const Dashboard = () => {
+	const address = useCurrentAccountAddress()
+
+	const Content = () => (address ? <DashboardView /> : <Loader text="Waiting For Wallet" />)
+
+	return (
 		<Stack spacing={4}>
 			<Typography variant={'h3'} color={'white'}>
 				GameDAO Stakeboard
 			</Typography>
-			<Typography variant={'body1'} color={'white'}>
-				1 $ASTR = {tvl?.usd_price} USD <br />
-				TVL: {tvl?.tvl} $ASTR / {tvl?.tvl * tvl?.tvl} USD
-			</Typography>
-			{!address && (
-				<Typography variant={'h5'} color={'white'}>
-					Please connect your wallet to access Stakeboard.
-				</Typography>
-			)}
-			{address && (
-				<>
-					<Typography variant={'h5'} color={'white'}>
-						Connected Address: {address}
-					</Typography>
-					<Typography variant={'h5'} color={'white'}>
-						Staked by Address: {stakedByAddress.amount}
-					</Typography>
-				</>
-			)}
+			<Content />
 		</Stack>
 	)
 }

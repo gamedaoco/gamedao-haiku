@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { AccountTabs } from 'src/constants/account'
+import { AccountTabs } from '@gamedao/core/constants/account'
 
 export function Page() {
 	const { push } = useRouter()

@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 
-import { GraphQlState } from 'src/@types/graphql'
+import { GraphQlState } from '@gamedao/core/@types/graphql'
 
 export const GraphQlContext = createContext<GraphQlState>({
 	selectedEndpoint: null,

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Autocomplete as MUIAutocomplete, TextField } from '@mui/material'
-import { useAddresses } from 'src/hooks/useAddresses'
+import { useAddresses } from '@gamedao/core/hooks/useAddresses'
 import { Controller } from 'react-hook-form'
 
 interface ComponentProps {

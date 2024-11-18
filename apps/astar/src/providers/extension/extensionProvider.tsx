@@ -1,19 +1,23 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Wallet } from '@talisman-connect/wallets'
-import { useApiProvider } from 'src/hooks/useApiProvider'
-import { useLogger } from 'src/hooks/useLogger'
+
+import type { AccountSettings, AccountState, ExtensionState } from '@gamedao/core/@types/extension'
+
+import { sessionUpdateInterval } from '@gamedao/core/constants/session'
+import { useLogger } from '@gamedao/core/hooks/useLogger'
+
+import { useUpdateSessionMutation } from '@gamedao/graph'
+
+import { useApiProvider } from '@gamedao/core/hooks/useApiProvider'
+import { useLocalStorage } from '@gamedao/core/hooks/useLocalStorage'
+
 import { SignAndNotify } from 'src/providers/extension/components/signAndNotify'
-import { useTranslation } from 'react-i18next'
-import type { AccountSettings, AccountState, ExtensionState } from 'src/@types/extension'
-import { sessionUpdateInterval } from 'src/constants'
-import { useLocalStorage } from 'src/hooks/useLocalStorage'
-import { useUpdateSessionMutation } from 'src/queries'
 import { createErrorNotification, createWarningNotification } from 'src/utils/notification'
 import { getWallets } from 'src/walletOverrides/wallets'
 
 import { WalletDialog } from 'components/molecules/WalletDialog/walletDialog'
-
 import { initializeAccounts } from './components/accounts'
 import { EXTENSION_STATE_DEFAULT, ExtensionContext } from './components/context'
 

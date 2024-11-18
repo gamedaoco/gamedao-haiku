@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useTheme } from '@mui/material/styles'
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { AccountTabs } from 'src/constants/account'
+import { AccountTabs } from '@gamedao/core/constants/account'
 
 interface ComponentProps {
 	param: AccountTabs

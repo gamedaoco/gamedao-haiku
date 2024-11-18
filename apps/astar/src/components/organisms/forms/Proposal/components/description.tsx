@@ -17,16 +17,16 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import enLocale from 'date-fns/locale/en-US'
-import { useConfig } from 'src/hooks/useConfig'
+import { useConfig } from '@gamedao/core/hooks/useConfig'
 import moment from 'moment'
 import { useNetworkContext } from 'src/providers/network/components/context'
 import { useTranslation } from 'react-i18next'
-import { CREATE_PROPOSAL_TYPE_TITLES, PROPOSAL_KEYS } from 'src/constants/proposal'
+import { CREATE_PROPOSAL_TYPE_TITLES, PROPOSAL_KEYS } from '@gamedao/core/constants/proposal'
 import {
 	Organization,
 	useOrganizationByIdSubscription,
 	useSuccessfulCampaignByOrganizationIdSubscription,
-} from 'src/queries'
+} from '@gamedao/graph'
 import { getCurrenciesForSelect } from 'src/utils/forms/currencyUtils'
 import * as Yup from 'yup'
 

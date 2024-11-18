@@ -2,7 +2,7 @@
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
-import { getConnectedEndpoint } from 'src/constants/endpoints'
+import { getConnectedEndpoint } from '@gamedao/core/constants/endpoints'
 
 import { Logger } from 'src/utils/logger'
 const log = Logger('lib/token')

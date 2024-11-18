@@ -1,9 +1,9 @@
 import { FC, memo, Fragment } from 'react'
 import Script from 'next/script'
 
-import type { CollectablesForUserQuery } from 'src/queries'
+import type { CollectablesForUserQuery } from '@gamedao/graph'
 import { Grid } from '@mui/material'
-import type { Collectable as TCollectable } from 'src/@types/collectable'
+import type { Collectable as TCollectable } from '@gamedao/core/@types/collectable'
 
 import Collectable from 'components/molecules/Collectable/collectable'
 

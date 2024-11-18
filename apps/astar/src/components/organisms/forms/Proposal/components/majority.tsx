@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import { Person } from '@mui/icons-material'
 import { InputAdornment, Stack, TextField, Typography } from '@mui/material'
-import { useProposalFeatures } from 'src/hooks/featureToggle/useProposalFeatures'
-import { PROPOSAL_CREATE_DEPOSIT } from 'src/constants/proposal'
+import { useProposalFeatures } from '@gamedao/core/hooks/featureToggle/useProposalFeatures'
+import { PROPOSAL_CREATE_DEPOSIT } from '@gamedao/core/constants/proposal'
 
 import { BaseForm } from 'components/organisms/forms/baseForm'
 import { RadioItem } from 'components/organisms/forms/components/radioItem'

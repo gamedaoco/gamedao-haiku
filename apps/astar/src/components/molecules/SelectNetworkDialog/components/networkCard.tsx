@@ -4,7 +4,7 @@ import { Check } from '@mui/icons-material'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/material'
 import { useGraphQlContext } from 'src/providers/graphQl/components/context'
 import { useTranslation } from 'react-i18next'
-import { Endpoint } from 'src/@types/graphql'
+import { Endpoint } from '@gamedao/core/@types/graphql'
 
 interface ComponentProps {
 	endpoint: Endpoint

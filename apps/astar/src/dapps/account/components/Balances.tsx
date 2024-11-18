@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useBalanceByAddress } from '@gamedao/core/hooks/useBalanceByAddress'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 import { useTheme } from '@mui/material/styles'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import {

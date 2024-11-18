@@ -1,10 +1,12 @@
 import React from 'react'
-import { ENVIRONMENT } from 'src/constants'
-import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
+
+import { ENVIRONMENT } from '@gamedao/core/constants/environment'
+import { getConnectedEndpoint } from '@gamedao/core/constants/endpoints'
+
 import { useTheme } from '@mui/material/styles'
-import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
-import { getConnectedEndpoint } from 'src/constants/endpoints'
-import { FontIcons } from 'components/atoms/Icons/icons'
+import { Box, Container, Grid, Link as MUILink, Stack, Typography } from '@mui/material'
+// import { SiDiscord, SiGithub, SiLinkedin, SiTelegram, SiTwitter } from 'react-icons/si'
+// import { FontIcons } from 'components/atoms/Icons/icons'
 import NextLink from 'components/atoms/Link'
 
 /* eslint-disable @next/next/no-img-element */

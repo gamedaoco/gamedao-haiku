@@ -3,7 +3,7 @@ import { Fragment, useEffect } from 'react'
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useExtensionContext } from 'src/providers/extension/components/context'
-import { AccountState } from 'src/@types/extension'
+import { AccountState } from '@gamedao/core/@types/extension'
 import { getAddressFromAccountState } from 'src/utils/accountUtils'
 
 import { AccountCard } from 'components/molecules/AccountCard'

@@ -2,12 +2,12 @@ import { Fragment, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { formatBalanceString } from 'src/utils/balance'
-import { useSystemProperties } from 'src/hooks/useSystemProperties'
+import { useSystemProperties } from '@gamedao/core/hooks/useSystemProperties'
 import { toUnit } from 'src/utils/token'
 
-import { useHistoricalBalanceSubscription } from 'src/queries'
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
-import { useBalanceByAddress } from 'src/hooks/useBalanceByAddress'
+import { useHistoricalBalanceSubscription } from '@gamedao/graph'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
+import { useBalanceByAddress } from '@gamedao/core/hooks/useBalanceByAddress'
 
 import { useTheme } from '@mui/material/styles'
 import MoreVertIcon from '@mui/icons-material/MoreVert'

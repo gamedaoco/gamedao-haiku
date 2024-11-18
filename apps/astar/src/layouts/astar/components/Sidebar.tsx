@@ -2,9 +2,9 @@ import React, { Fragment, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Logger } from 'src/utils/logger'
 
-import { useCurrentAccountAddress } from 'src/hooks/useCurrentAccountAddress'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'src/providers/extension/components/context'
-import { useSidebarSubscription } from 'src/queries'
+import { useSidebarSubscription } from '@gamedao/graph'
 import { createErrorNotification } from 'src/utils/notification'
 
 import { Add as AddIcon } from '@mui/icons-material'
@@ -124,7 +124,9 @@ export function Sidebar({ showHeader, onClose, open, baseSpacing, spacing }: Com
 					)}
 
 					<Stack alignItems="center" spacing={2} width="100%">
-						{(loading || (data?.organization.length > 0 && selectedAccount)) && <Divider sx={{ width: '50%' }} />}
+						{(loading || (data?.organization.length > 0 && selectedAccount)) && (
+							<Divider sx={{ width: '50%' }} />
+						)}
 
 						<Fab
 							// color={'primary'}
