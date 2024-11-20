@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useCurrentAccountAddress } from '../../hooks/useCurrentAccountAddress'
 import { useLogger } from '../../hooks/useLogger'
-import { useNetworkContext } from '../../providers/network/components/context'
+import { useNetworkContext } from 'src/providers/network/components/context'
 import { useTranslation } from 'react-i18next'
 import { TransactionData } from '@gamedao/core/@types/transactionData'
 import * as Yup from 'yup'

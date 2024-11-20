@@ -1,6 +1,25 @@
 # gamedao contract address 0x89ed50cec44a3db4186ba54cdf575ec140937c55
 # gamedao owner address aCVweEHsJYeE7gbd88zvccqBX53PEttrdwJYLRydFrXiRCA
 
+subscription StakersPerDapp($dapp: String!) {
+  stakers(where: {dapp_address: {_eq: $dapp}}) {
+    amount
+    dapp_address
+    id
+    staker_address
+  }
+}
+
+subscription StakesPerDappAndPeriod($dapp: String!) {
+  stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
+    dapp_address
+    id
+    period
+    reward_amount
+    stake_amount
+  }
+}
+
 subscription CurrentTVL {
 
   tvl_aggregated_daily(limit: 1, order_by:{block_number:desc}) {

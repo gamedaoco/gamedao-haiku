@@ -1,4 +1,4 @@
-import { ProposalFeatures } from '../../../../../services/graph-api/@gamedao/core/@types/schema'
+import { ProposalFeatures } from '../../../../../services/api/@gamedao/core/@types/schema'
 import { useFeatures } from '../hooks/useFeatures'
 
 // import { ProposalFeatures } from '@gamedao/graph'

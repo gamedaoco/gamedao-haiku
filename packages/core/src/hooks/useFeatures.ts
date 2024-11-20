@@ -1,4 +1,4 @@
-import { useAppContext } from '../providers/app/components/context'
+import { useAppContext } from 'src/providers/app/components/context'
 import { Features } from '@gamedao/graph'
 
 export function useFeatures(): Features {

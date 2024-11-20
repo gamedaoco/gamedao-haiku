@@ -1,4 +1,4 @@
-import { useExtensionContext } from '../providers/extension/components/context'
+import { useExtensionContext } from 'src/providers/extension/components/context'
 import type { AccountState } from '@gamedao/core/@types/extension'
 
 export function useAddresses(): string[] {

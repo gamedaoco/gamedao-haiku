@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { useLogger } from '../../hooks/useLogger'
-import { useNetworkContext } from '../../providers/network/components/context'
 import { useTranslation } from 'react-i18next'
+import { useLogger } from '../../hooks/useLogger'
+import { useNetworkContext } from 'src/providers/network/components/context'
 import { TransactionData } from '@gamedao/core/@types/transactionData'
 
 export function useClearIdentityTransaction(): TransactionData {

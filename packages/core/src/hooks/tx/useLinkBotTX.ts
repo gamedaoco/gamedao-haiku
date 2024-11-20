@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { TransactionData } from '@gamedao/core/@types/transactionData'
-import { useNetworkContext } from '../../providers/network/components/context'
+import { useNetworkContext } from 'src/providers/network/components/context'
 import { useCurrentAccountAddress } from '../../hooks/useCurrentAccountAddress'
 import { useLogger } from '../../hooks/useLogger'
 

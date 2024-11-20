@@ -19,8 +19,8 @@ export function Content({ param }: Props) {
 		switch (param) {
 			// case AccountTabs.CAMPAIGNS:
 			// 	return <MyCampaigns />
-			// case AccountTabs.ORGANIZATIONS:
-			// 	return <MyOrganizations />
+			case AccountTabs.ORGANIZATIONS:
+				return <MyOrganizations />
 			case AccountTabs.COLLECTABLES:
 				return <MyCollectables />
 			case AccountTabs.IDENTITY:

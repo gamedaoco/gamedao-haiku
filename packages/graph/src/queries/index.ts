@@ -7078,10 +7078,12 @@ export type Voting_Stream_Cursor_Value_Input = {
   readonly yes?: InputMaybe<Scalars['numeric']['input']>;
 };
 
-export type CurrentTvlSubscriptionVariables = Exact<{ [key: string]: never; }>;
+export type StakersPerDappSubscriptionVariables = Exact<{
+  dapp: Scalars['String']['input'];
+}>;
 
 
-export type CurrentTvlSubscription = { readonly __typename?: 'subscription_root', readonly tvl_aggregated_daily: ReadonlyArray<{ readonly __typename?: 'tvl_aggregated_daily', readonly block_number: number, readonly tvl: any, readonly usd_price: any, readonly lockers_count: number, readonly id: string }> };
+export type StakersPerDappSubscription = { readonly __typename?: 'subscription_root', readonly stakers: ReadonlyArray<{ readonly __typename?: 'stakers', readonly amount: any, readonly dapp_address: string, readonly id: string, readonly staker_address: string }> };
 
 export type StakesPerDappAndPeriodSubscriptionVariables = Exact<{
   dapp: Scalars['String']['input'];
@@ -7089,6 +7091,11 @@ export type StakesPerDappAndPeriodSubscriptionVariables = Exact<{
 
 
 export type StakesPerDappAndPeriodSubscription = { readonly __typename?: 'subscription_root', readonly stakes_per_dap_and_period: ReadonlyArray<{ readonly __typename?: 'stakes_per_dap_and_period', readonly dapp_address: string, readonly id: string, readonly period: number, readonly reward_amount: any, readonly stake_amount: any }> };
+
+export type CurrentTvlSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrentTvlSubscription = { readonly __typename?: 'subscription_root', readonly tvl_aggregated_daily: ReadonlyArray<{ readonly __typename?: 'tvl_aggregated_daily', readonly block_number: number, readonly tvl: any, readonly usd_price: any, readonly lockers_count: number, readonly id: string }> };
 
 export type StakesPerStakerAndPeriodSubscriptionVariables = Exact<{
   dapp: Scalars['String']['input'];
@@ -7189,39 +7196,39 @@ export type UpdateSessionMutationVariables = Exact<{
 export type UpdateSessionMutation = { readonly __typename?: 'mutation_root', readonly updateSession: boolean };
 
 
-export const CurrentTvlDocument = gql`
-    subscription CurrentTVL {
-  tvl_aggregated_daily(limit: 1, order_by: {block_number: desc}) {
-    block_number
-    tvl
-    usd_price
-    lockers_count
+export const StakersPerDappDocument = gql`
+    subscription StakersPerDapp($dapp: String!) {
+  stakers(where: {dapp_address: {_eq: $dapp}}) {
+    amount
+    dapp_address
     id
+    staker_address
   }
 }
     `;
 
 /**
- * __useCurrentTvlSubscription__
+ * __useStakersPerDappSubscription__
  *
- * To run a query within a React component, call `useCurrentTvlSubscription` and pass it any options that fit your needs.
- * When your component renders, `useCurrentTvlSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useStakersPerDappSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useStakersPerDappSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCurrentTvlSubscription({
+ * const { data, loading, error } = useStakersPerDappSubscription({
  *   variables: {
+ *      dapp: // value for 'dapp'
  *   },
  * });
  */
-export function useCurrentTvlSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CurrentTvlSubscription, CurrentTvlSubscriptionVariables>) {
+export function useStakersPerDappSubscription(baseOptions: Apollo.SubscriptionHookOptions<StakersPerDappSubscription, StakersPerDappSubscriptionVariables> & ({ variables: StakersPerDappSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<CurrentTvlSubscription, CurrentTvlSubscriptionVariables>(CurrentTvlDocument, options);
+        return Apollo.useSubscription<StakersPerDappSubscription, StakersPerDappSubscriptionVariables>(StakersPerDappDocument, options);
       }
-export type CurrentTvlSubscriptionHookResult = ReturnType<typeof useCurrentTvlSubscription>;
-export type CurrentTvlSubscriptionResult = Apollo.SubscriptionResult<CurrentTvlSubscription>;
+export type StakersPerDappSubscriptionHookResult = ReturnType<typeof useStakersPerDappSubscription>;
+export type StakersPerDappSubscriptionResult = Apollo.SubscriptionResult<StakersPerDappSubscription>;
 export const StakesPerDappAndPeriodDocument = gql`
     subscription StakesPerDappAndPeriod($dapp: String!) {
   stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
@@ -7256,6 +7263,39 @@ export function useStakesPerDappAndPeriodSubscription(baseOptions: Apollo.Subscr
       }
 export type StakesPerDappAndPeriodSubscriptionHookResult = ReturnType<typeof useStakesPerDappAndPeriodSubscription>;
 export type StakesPerDappAndPeriodSubscriptionResult = Apollo.SubscriptionResult<StakesPerDappAndPeriodSubscription>;
+export const CurrentTvlDocument = gql`
+    subscription CurrentTVL {
+  tvl_aggregated_daily(limit: 1, order_by: {block_number: desc}) {
+    block_number
+    tvl
+    usd_price
+    lockers_count
+    id
+  }
+}
+    `;
+
+/**
+ * __useCurrentTvlSubscription__
+ *
+ * To run a query within a React component, call `useCurrentTvlSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentTvlSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentTvlSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentTvlSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CurrentTvlSubscription, CurrentTvlSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CurrentTvlSubscription, CurrentTvlSubscriptionVariables>(CurrentTvlDocument, options);
+      }
+export type CurrentTvlSubscriptionHookResult = ReturnType<typeof useCurrentTvlSubscription>;
+export type CurrentTvlSubscriptionResult = Apollo.SubscriptionResult<CurrentTvlSubscription>;
 export const StakesPerStakerAndPeriodDocument = gql`
     subscription StakesPerStakerAndPeriod($dapp: String!, $address: String!) {
   stakers(where: {dapp_address: {_eq: $dapp}, staker_address: {_eq: $address}}) {
