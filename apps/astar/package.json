@@ -21,6 +21,7 @@
     "@gamedao/graph": "*",
     "@gamedao/i18n": "*",
     "@gamedao/ui": "*",
+    "@gamedao/utils": "*",
     "@google/model-viewer": "^3.3.0",
     "@graphql-tools/graphql-file-loader": "^7.3.14",
     "@graphql-tools/load": "^7.5.13",

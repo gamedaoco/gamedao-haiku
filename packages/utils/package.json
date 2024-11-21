@@ -1,14 +1,12 @@
 {
-  "name": "@gamedao/core",
-  "description": "gamedao core artefacts",
+  "name": "@gamedao/utils",
+  "description": "gamedao utils",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",
   "exports": {
-    "./@types/*": "./src/@types/*",
-    "./constants/*": "./src/constants/*",
-    "./hooks/*": "./src/hooks/*",
-    "./utils/*": "./src/utils/*",
+    ".": "./src/index.ts",
+    "./*": "./src/*",
     "./logger": "./src/utils/logger.ts"
   },
   "scripts": {
@@ -17,6 +15,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.6",
     "@date-io/moment": "^2.17.0",
+    "@gamedao/core": "*",
     "@gamedao/i18n": "*",
     "@gamedao/graph": "*",
     "@graphql-tools/graphql-file-loader": "^7.3.14",

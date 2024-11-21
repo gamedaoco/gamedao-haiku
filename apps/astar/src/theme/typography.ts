@@ -19,6 +19,7 @@ declare module '@mui/material/styles' {
 		pass1: React.CSSProperties
 		teaserTitle: React.CSSProperties
 		teaserText: React.CSSProperties
+		mono: React.CSSProperties
 	}
 
 	// allow configuration using `createTheme`
@@ -40,6 +41,7 @@ declare module '@mui/material/styles' {
 		pass1: React.CSSProperties
 		teaserTitle: React.CSSProperties
 		teaserText: React.CSSProperties
+		mono: React.CSSProperties
 	}
 }
 
@@ -62,6 +64,7 @@ declare module '@mui/material/Typography' {
 		pass1: true
 		teaserTitle: true
 		teaserText: true
+		mono: true
 	}
 }
 
@@ -89,6 +92,7 @@ const FONT_HEADER = 'MedievalSharp, serif'
 const FONT_PRIMARY = 'Inter, Helvetica Neue, Helvetica, sans-serif'
 const FONT_UI = 'Inter, sans-serif'
 const FONT_SECONDARY = 'Times New Roman, serif'
+const FONT_MONO = 'Courier, Courier New, monospace'
 
 const FONT_LIGHT = 200
 const FONT_REGULAR = 400
@@ -247,6 +251,14 @@ const typography = {
 		fontSize: pxToRem(14),
 		textTransform: 'uppercase',
 	},
+	mono: {
+		fontFamily: FONT_MONO,
+		fontWeight: 300,
+		lineHeight: 24 / 14,
+		fontSize: pxToRem(14),
+		textTransform: 'uppercase',
+	},
+
 	time: {
 		fontFamily: FONT_HEADER,
 	},

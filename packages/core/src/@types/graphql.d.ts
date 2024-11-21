@@ -5,6 +5,7 @@ export interface Endpoint {
 	healthCheck: string
 	chain: string
 	default?: boolean
+	id?: number
 }
 
 export type Endpoints = Array<Endpoint>
@@ -12,5 +13,5 @@ export type Endpoints = Array<Endpoint>
 export interface GraphQlState {
 	selectedEndpoint: Endpoint
 	endpoints: Endpoints
-	selectEndpoint: Function<Endpoint>
+	selectEndpoint: (endpoint: Endpoint) => void
 }

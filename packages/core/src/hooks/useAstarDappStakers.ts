@@ -1,28 +1,23 @@
 import { useEffect, useState } from 'react'
+import BigNumber from 'bignumber.js'
+
+import { useLogger, formatBalanceString, convertSS58Prefix, sumBigNumbers } from '@gamedao/utils'
 import { useStakersPerDappSubscription } from '@gamedao/graph'
-import { useLogger } from './useLogger'
-import { formatBalanceString } from '../utils/balance'
-import { convertSS58Prefix } from '../utils'
 
 type Staker = {
 	address: string
 	amount: number
 }
-
-const initialState = {
+type State = {
+	totalStakers: number
+	totalStaked: BigNumber | number
+	stakers: null | Object[]
+}
+const initialState: State = {
 	totalStakers: 0,
 	totalStaked: 0,
-	stakers: [{}],
+	stakers: null,
 }
-
-// subscription StakersPerDapp($dapp: String!) {
-// 	stakers(where: {dapp_address: {_eq: $dapp}}) {
-// 		amount
-// 		dapp_address
-// 		id
-// 		staker_address
-// 	}
-// }
 
 export function useAstarStakers(dAppId: string, address: string) {
 	const logger = useLogger('astar')
@@ -35,20 +30,26 @@ export function useAstarStakers(dAppId: string, address: string) {
 	})
 
 	useEffect(() => {
-		if (loading || !data) return
-		const stakers = data?.stakers.map((staker) => {
-			const _ = staker?.amount?.toString()
-			const amount = formatBalanceString(_, 18, 4)
-			const address = staker?.staker_address
+		if (loading || !data || data.stakers.length === 0) return
+
+		const stakers = data.stakers.map((staker) => {
+			const _amount = staker.amount.toString()
+			const amount = formatBalanceString(_amount, 18, 4)
+			const address = staker.staker_address
 			return {
-				id: staker?.id,
+				id: staker.id,
 				address: convertSS58Prefix(address),
 				amount,
 			}
 		})
-		const totalStakers = data?.stakers?.length
-		const totalStaked = data?.stakers?.reduce((acc, staker) => acc + Number(staker?.amount), 0)
-		// logger.log('stakers', stakers)
+
+		const totalStakers = data.stakers.length
+
+		const stakes = data.stakers.map((s) => BigNumber(s.amount ?? 0))
+		const totalStaked = sumBigNumbers(stakes)
+
+		console.error('totalStaked', totalStaked.toString())
+
 		setState({ totalStakers, totalStaked, stakers })
 	}, [loading, data])
 
