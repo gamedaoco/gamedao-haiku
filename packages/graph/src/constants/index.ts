@@ -1,6 +1,6 @@
-import { TMPCampaign } from '@gamedao/core/@types/campaign'
-import type { TMPOrganization } from '@gamedao/core/@types/organization'
-import { TMPProposal } from '@gamedao/core/@types/proposal'
+import { DraftCampaign } from '@gamedao/core/@types/campaign'
+import type { DraftOrganization } from '@gamedao/core/@types/organization'
+import { DraftProposal } from '@gamedao/core/@types/proposal'
 
 import type { Environment } from '@gamedao/core/queries'
 
@@ -10,7 +10,7 @@ export const ENVIRONMENT: Environment = (
 
 export const sessionUpdateInterval: number = 5 * 60 * 1000
 
-// export const defaultValuesTmpOrganization: TMPOrganization = {
+// export const defaultValuesTmpOrganization: DraftOrganization = {
 // 	type: 0,
 // 	name: '',
 // 	mode: 0,
@@ -29,7 +29,7 @@ export const sessionUpdateInterval: number = 5 * 60 * 1000
 // 	tags: [],
 // }
 
-// export const defaultValuesTMPProposal: TMPProposal = {
+// export const defaultValuesDraftProposal: DraftProposal = {
 // 	type: 0,
 // 	name: '',
 // 	description: '',
@@ -44,7 +44,7 @@ export const sessionUpdateInterval: number = 5 * 60 * 1000
 // 	beneficiaryAddress: '',
 // }
 
-// export const defaultValuesTmpCampaign: TMPCampaign = {
+// export const defaultValuesTmpCampaign: DraftCampaign = {
 // 	orgId: '',
 // 	name: '',
 // 	description: '',

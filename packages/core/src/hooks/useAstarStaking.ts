@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
+import { dAppId } from '@gamedao/constants'
+import { useLogger } from '@gamedao/core/logger'
 import { type StakingDataSubscription, useStakingDataSubscription } from '@gamedao/graph'
-import { useLogger } from '../hooks/useLogger'
-import { dAppId } from '../constants/astar'
 
 const initialState = {
 	amount: 0,
@@ -13,7 +13,6 @@ const initialState = {
 }
 
 export function useAstarStaking(address: string) {
-	const logger = useLogger('astar')
 	const [state, setState] = useState(initialState)
 	const { loading, data, error } = useStakingDataSubscription({
 		variables: {
@@ -22,9 +21,9 @@ export function useAstarStaking(address: string) {
 		},
 	})
 	useEffect(() => {
-		if (loading) return
+		if (loading || !data?.stake) return
 		setState(data?.stake[0])
-	}, [loading, data, state])
+	}, [loading, data])
 
 	useEffect(() => {
 		if (error) logger.error(error)

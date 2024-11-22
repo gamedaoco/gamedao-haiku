@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
-
 import { useLogger, formatBalanceString, convertSS58Prefix, sumBigNumbers } from '@gamedao/utils'
 import { useStakersPerDappSubscription } from '@gamedao/graph'
 
@@ -47,8 +46,6 @@ export function useAstarStakers(dAppId: string, address: string) {
 
 		const stakes = data.stakers.map((s) => BigNumber(s.amount ?? 0))
 		const totalStaked = sumBigNumbers(stakes)
-
-		console.error('totalStaked', totalStaked.toString())
 
 		setState({ totalStakers, totalStaked, stakers })
 	}, [loading, data])

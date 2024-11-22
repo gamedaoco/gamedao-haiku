@@ -1,14 +1,15 @@
 {
-  "ts-node": {
-    "esm": true
-  },
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "module": "esnext",
-    "rootDir": "./src",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "paths": {
+      "src/*": ["./src/*"],
+      "@types/*": ["./src/@types/*"],
+      "constants/*": ["./src/constants/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "utils/*": ["./src/utils/*"]
+    },
     "types": [
       "node"
     ],
@@ -21,7 +22,11 @@
     "typeRoots": [
       "node_modules/@types",
       "./src/@types/*"
-    ]
+    ],
+    "type":"module"
+  },
+  "ts-node": {
+    "esm": true
   },
   "exclude": [
     "node_modules"

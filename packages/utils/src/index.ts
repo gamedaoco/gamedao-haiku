@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js'
 
 export * from './logger'
 export * from './balance'
+export * from './accountUtils'
 
 export const copyToClipboard = (content) =>
 	navigator.clipboard.writeText(content).then(() => createInfoNotification('copied'))

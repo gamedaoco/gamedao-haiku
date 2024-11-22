@@ -12,7 +12,12 @@
     "references": [
       { "path": "./packages/core" },
       { "path": "./packages/ui" },
-      { "path": "./packages/graph" }
+      { "path": "./packages/graph" },
+      { "path": "./packages/constants" },
+      { "path": "./packages/utils" },
+      { "path": "./packages/types" },
+      { "path": "./packages/providers" },
+      { "path": "./services/api" }
     ]
   },
   "include": ["packages/**/*", "apps/**/*"],

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useConfig } from '../hooks/useConfig'
-import { type LoggerType, Logger } from '../utils/logger'
+import { useConfig } from './useConfig'
+import { type LoggerType, Logger } from '@gamedao/utils'
 
 export function useLogger(name: string = '📜'): LoggerType {
 	const config = useConfig()

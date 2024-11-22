@@ -20,7 +20,7 @@ export async function nftsResolver(_: any, args: ResolverArgs): Promise<RmrkNft[
 			}
 		`
 
-		const data = await request('https://gql-rmrk2-prod.graphcdn.app/', query)
+		const data = await request('https://gql.rmrk.link/v1/graphql/', query)
 		return data?.nfts ?? []
 	} catch (e) {
 		console.error('RMRK nft cannot be loaded', e)

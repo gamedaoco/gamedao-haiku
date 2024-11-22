@@ -5,12 +5,12 @@ import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from '../../hooks/useBlockNumber'
 import { useCurrentAccountAddress } from '../../hooks/useCurrentAccountAddress'
 import { useLogger } from '../../hooks/useLogger'
-import { useTMPProposal } from '../../hooks/useTMPProposal'
+import { useDraftProposal } from '../../hooks/useDraftProposal'
 import moment from 'moment'
 import { useNetworkContext } from 'src/providers/network/components/context'
 import { useTranslation } from 'react-i18next'
 import { ApiProvider } from '@gamedao/core/@types/network'
-import { TMPProposal } from '@gamedao/core/@types/proposal'
+import { DraftProposal } from '@gamedao/core/@types/proposal'
 import { TransactionData } from '@gamedao/core/@types/transactionData'
 import { PROPOSAL_KEYS, PROPOSAL_MAJORITIES, PROPOSAL_TYPES, PROPOSAL_UNITS } from '../../constants/proposal'
 import { createTokenType, fromUnit } from '../../utils/token'
@@ -43,7 +43,7 @@ const proposalValidation = Yup.object().shape({
 })
 
 // Calculation for start and end block (BlockTime / blockNumbers) form Date
-function getBlockTimeFromDate(data: TMPProposal, blockNumber: number, blockTime): BlockTime {
+function getBlockTimeFromDate(data: DraftProposal, blockNumber: number, blockTime): BlockTime {
 	// Convert date to moment date.
 	const startDate = moment(data.startDate)
 	const endDate = moment(data.endDate)
@@ -82,7 +82,7 @@ export function useCreateProposalTransaction(organizationId: string): Transactio
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
-	const data = useTMPProposal()
+	const data = useDraftProposal()
 	const blockNumber = useBlockNumber()
 	const logger = useLogger('useCreateProposalTransaction')
 

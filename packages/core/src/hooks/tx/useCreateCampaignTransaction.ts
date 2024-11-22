@@ -4,7 +4,7 @@ import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
 import { useBlockNumber } from '../../hooks/useBlockNumber'
 import { useCurrentAccountAddress } from '../../hooks/useCurrentAccountAddress'
 import { useLogger } from '../../hooks/useLogger'
-import { useTmpCampaign } from '../../hooks/useTmpCampaign'
+import { useDraftCampaign } from '../../hooks/useDraftCampaign'
 import moment from 'moment'
 import { useNetworkContext } from 'src/providers/network/components/context'
 import { useTranslation } from 'react-i18next'
@@ -33,7 +33,7 @@ export function useCreateCampaignTransaction(): TransactionData {
 	const { t } = useTranslation()
 	const { selectedApiProvider } = useNetworkContext()
 	const address = useCurrentAccountAddress()
-	const data = useTmpCampaign()
+	const data = useDraftCampaign()
 	const logger = useLogger('useCreateCampaignTransaction')
 	const blockNumber = useBlockNumber()
 

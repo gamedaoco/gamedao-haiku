@@ -1,8 +1,11 @@
 {
-  "name": "@gamedao/graph-api",
+  "name": "@gamedao/api",
   "version": "0.75.0",
   "private": true,
   "type": "module",
+  "exports": {
+    "./@types": "./src/@types/schema.d.ts"
+  },
   "scripts": {
     "setup": "yarn install && yarn generate",
     "docker:build": "docker build -t gamedao/graph-api:local .",

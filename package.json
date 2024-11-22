@@ -5,7 +5,8 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "services/*"
   ],
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
@@ -20,8 +21,8 @@
     "dev:graph": "wsrun -p @gamedao/graph-api -c dev",
     "build:all": "wsrun -e -c -s -x -m build",
     "build:init": "wsrun -s -c install",
-    "build:codegen": "yarn workspace @gamedao/web generate",
-    "build:astar": "yarn build:init && yarn workspace @gamedao/astar build",
+    "build:codegen": "yarn workspace @gamedao/graph generate",
+    "build:astar": "yarn build:init && yarn build:codegen && yarn workspace @gamedao/astar build",
     "build:avatar": "yarn build:init && yarn workspace @gamedao/avatar build",
     "build:web": "yarn build:init && yarn workspace @gamedao/web build",
     "build:app": "yarn build:init && yarn workspace @gamedao/app build",

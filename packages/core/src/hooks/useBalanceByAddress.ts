@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-
-import { useLogger } from '../hooks/useLogger'
-import { useSystemProperties } from '../hooks/useSystemProperties'
 import { useBalanceByAddressSubscription } from '@gamedao/graph'
-import { formatBalanceString } from '../utils/balance'
+import { useLogger, formatBalanceString } from '@gamedao/utils'
+import { useSystemProperties } from './useSystemProperties'
 
 export interface Balance {
 	frozen: number

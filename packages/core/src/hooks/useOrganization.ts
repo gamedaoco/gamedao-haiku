@@ -3,7 +3,7 @@
 // TODO: make names claimable
 
 import { useEffect, useState } from 'react'
-import { useLogger } from '../hooks/useLogger'
+import { useLogger } from '@gamedao/utils'
 
 // import { useOrganizationVanityUrlQuery } from '@gamedao/graph'
 // import { useOrganizationMembersByStateSubscription } from '@gamedao/graph'

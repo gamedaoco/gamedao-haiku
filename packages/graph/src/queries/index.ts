@@ -899,6 +899,8 @@ export type Campaign = {
   readonly organization_id?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
+  /** An aggregate relationship */
+  readonly proposals_aggregate: Proposal_Aggregate;
   readonly protocol: Scalars['String']['output'];
   readonly start: Scalars['Int']['output'];
   readonly state: Scalars['String']['output'];
@@ -928,6 +930,57 @@ export type CampaignProposalsArgs = {
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
+
+/** columns and relationships of "campaign" */
+export type CampaignProposals_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+/** aggregated selection of "campaign" */
+export type Campaign_Aggregate = {
+  readonly __typename?: 'campaign_aggregate';
+  readonly aggregate?: Maybe<Campaign_Aggregate_Fields>;
+  readonly nodes: ReadonlyArray<Campaign>;
+};
+
+export type Campaign_Aggregate_Bool_Exp = {
+  readonly count?: InputMaybe<Campaign_Aggregate_Bool_Exp_Count>;
+};
+
+export type Campaign_Aggregate_Bool_Exp_Count = {
+  readonly arguments?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  readonly distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly filter?: InputMaybe<Campaign_Bool_Exp>;
+  readonly predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "campaign" */
+export type Campaign_Aggregate_Fields = {
+  readonly __typename?: 'campaign_aggregate_fields';
+  readonly avg?: Maybe<Campaign_Avg_Fields>;
+  readonly count: Scalars['Int']['output'];
+  readonly max?: Maybe<Campaign_Max_Fields>;
+  readonly min?: Maybe<Campaign_Min_Fields>;
+  readonly stddev?: Maybe<Campaign_Stddev_Fields>;
+  readonly stddev_pop?: Maybe<Campaign_Stddev_Pop_Fields>;
+  readonly stddev_samp?: Maybe<Campaign_Stddev_Samp_Fields>;
+  readonly sum?: Maybe<Campaign_Sum_Fields>;
+  readonly var_pop?: Maybe<Campaign_Var_Pop_Fields>;
+  readonly var_samp?: Maybe<Campaign_Var_Samp_Fields>;
+  readonly variance?: Maybe<Campaign_Variance_Fields>;
+};
+
+
+/** aggregate fields of "campaign" */
+export type Campaign_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** order by aggregate values of table "campaign" */
 export type Campaign_Aggregate_Order_By = {
   readonly avg?: InputMaybe<Campaign_Avg_Order_By>;
@@ -941,6 +994,16 @@ export type Campaign_Aggregate_Order_By = {
   readonly var_pop?: InputMaybe<Campaign_Var_Pop_Order_By>;
   readonly var_samp?: InputMaybe<Campaign_Var_Samp_Order_By>;
   readonly variance?: InputMaybe<Campaign_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Campaign_Avg_Fields = {
+  readonly __typename?: 'campaign_avg_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by avg() on columns of table "campaign" */
@@ -979,6 +1042,7 @@ export type Campaign_Bool_Exp = {
   readonly organization?: InputMaybe<Organization_Bool_Exp>;
   readonly organization_id?: InputMaybe<String_Comparison_Exp>;
   readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Bool_Exp>;
   readonly protocol?: InputMaybe<String_Comparison_Exp>;
   readonly start?: InputMaybe<Int_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
@@ -1131,6 +1195,35 @@ export type Campaign_Contributor_Variance_Order_By = {
   readonly contributed?: InputMaybe<Order_By>;
 };
 
+/** aggregate max on columns */
+export type Campaign_Max_Fields = {
+  readonly __typename?: 'campaign_max_fields';
+  readonly admin?: Maybe<Scalars['String']['output']>;
+  readonly admin_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly cid?: Maybe<Scalars['String']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly creator?: Maybe<Scalars['String']['output']>;
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly email?: Maybe<Scalars['String']['output']>;
+  readonly expiry?: Maybe<Scalars['Int']['output']>;
+  readonly governance?: Maybe<Scalars['String']['output']>;
+  readonly header?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly logo?: Maybe<Scalars['String']['output']>;
+  readonly markdown?: Maybe<Scalars['String']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly protocol?: Maybe<Scalars['String']['output']>;
+  readonly start?: Maybe<Scalars['Int']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+  readonly target?: Maybe<Scalars['numeric']['output']>;
+  readonly title?: Maybe<Scalars['String']['output']>;
+  readonly token_name?: Maybe<Scalars['String']['output']>;
+  readonly token_symbol?: Maybe<Scalars['String']['output']>;
+};
+
 /** order by max() on columns of table "campaign" */
 export type Campaign_Max_Order_By = {
   readonly admin?: InputMaybe<Order_By>;
@@ -1237,6 +1330,35 @@ export type Campaign_Metadata_Stream_Cursor_Value_Input = {
   readonly markdown?: InputMaybe<Scalars['String']['input']>;
   readonly name?: InputMaybe<Scalars['String']['input']>;
   readonly title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate min on columns */
+export type Campaign_Min_Fields = {
+  readonly __typename?: 'campaign_min_fields';
+  readonly admin?: Maybe<Scalars['String']['output']>;
+  readonly admin_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly cid?: Maybe<Scalars['String']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly creator?: Maybe<Scalars['String']['output']>;
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly email?: Maybe<Scalars['String']['output']>;
+  readonly expiry?: Maybe<Scalars['Int']['output']>;
+  readonly governance?: Maybe<Scalars['String']['output']>;
+  readonly header?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly logo?: Maybe<Scalars['String']['output']>;
+  readonly markdown?: Maybe<Scalars['String']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly protocol?: Maybe<Scalars['String']['output']>;
+  readonly start?: Maybe<Scalars['Int']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+  readonly target?: Maybe<Scalars['numeric']['output']>;
+  readonly title?: Maybe<Scalars['String']['output']>;
+  readonly token_name?: Maybe<Scalars['String']['output']>;
+  readonly token_symbol?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by min() on columns of table "campaign" */
@@ -1352,6 +1474,16 @@ export enum Campaign_Select_Column {
   TokenSymbol = 'token_symbol'
 }
 
+/** aggregate stddev on columns */
+export type Campaign_Stddev_Fields = {
+  readonly __typename?: 'campaign_stddev_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by stddev() on columns of table "campaign" */
 export type Campaign_Stddev_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -1361,6 +1493,16 @@ export type Campaign_Stddev_Order_By = {
   readonly target?: InputMaybe<Order_By>;
 };
 
+/** aggregate stddev_pop on columns */
+export type Campaign_Stddev_Pop_Fields = {
+  readonly __typename?: 'campaign_stddev_pop_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by stddev_pop() on columns of table "campaign" */
 export type Campaign_Stddev_Pop_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -1368,6 +1510,16 @@ export type Campaign_Stddev_Pop_Order_By = {
   readonly expiry?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
   readonly target?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Campaign_Stddev_Samp_Fields = {
+  readonly __typename?: 'campaign_stddev_samp_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_samp() on columns of table "campaign" */
@@ -1415,6 +1567,16 @@ export type Campaign_Stream_Cursor_Value_Input = {
   readonly token_symbol?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** aggregate sum on columns */
+export type Campaign_Sum_Fields = {
+  readonly __typename?: 'campaign_sum_fields';
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly expiry?: Maybe<Scalars['Int']['output']>;
+  readonly start?: Maybe<Scalars['Int']['output']>;
+  readonly target?: Maybe<Scalars['numeric']['output']>;
+};
+
 /** order by sum() on columns of table "campaign" */
 export type Campaign_Sum_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -1422,6 +1584,16 @@ export type Campaign_Sum_Order_By = {
   readonly expiry?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
   readonly target?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_pop on columns */
+export type Campaign_Var_Pop_Fields = {
+  readonly __typename?: 'campaign_var_pop_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_pop() on columns of table "campaign" */
@@ -1433,6 +1605,16 @@ export type Campaign_Var_Pop_Order_By = {
   readonly target?: InputMaybe<Order_By>;
 };
 
+/** aggregate var_samp on columns */
+export type Campaign_Var_Samp_Fields = {
+  readonly __typename?: 'campaign_var_samp_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by var_samp() on columns of table "campaign" */
 export type Campaign_Var_Samp_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -1440,6 +1622,16 @@ export type Campaign_Var_Samp_Order_By = {
   readonly expiry?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
   readonly target?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Campaign_Variance_Fields = {
+  readonly __typename?: 'campaign_variance_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+  readonly target?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by variance() on columns of table "campaign" */
@@ -2029,6 +2221,10 @@ export type Identity = {
   readonly campaigns: ReadonlyArray<Campaign>;
   /** An array relationship */
   readonly campaignsByCreatorIdentityId: ReadonlyArray<Campaign>;
+  /** An aggregate relationship */
+  readonly campaignsByCreatorIdentityId_aggregate: Campaign_Aggregate;
+  /** An aggregate relationship */
+  readonly campaigns_aggregate: Campaign_Aggregate;
   readonly discord?: Maybe<Scalars['String']['output']>;
   readonly display_name?: Maybe<Scalars['String']['output']>;
   readonly email?: Maybe<Scalars['String']['output']>;
@@ -2041,18 +2237,30 @@ export type Identity = {
   readonly nfts: ReadonlyArray<Nft>;
   /** An array relationship */
   readonly organization_members: ReadonlyArray<Organization_Member>;
+  /** An aggregate relationship */
+  readonly organization_members_aggregate: Organization_Member_Aggregate;
   /** An array relationship */
   readonly organizations: ReadonlyArray<Organization>;
   /** An array relationship */
   readonly organizationsByCreatorIdentityId: ReadonlyArray<Organization>;
+  /** An aggregate relationship */
+  readonly organizationsByCreatorIdentityId_aggregate: Organization_Aggregate;
   /** An array relationship */
   readonly organizationsByTreasuryIdentityId: ReadonlyArray<Organization>;
+  /** An aggregate relationship */
+  readonly organizationsByTreasuryIdentityId_aggregate: Organization_Aggregate;
+  /** An aggregate relationship */
+  readonly organizations_aggregate: Organization_Aggregate;
   /** An array relationship */
   readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
   /** An array relationship */
   readonly proposalsByBeneficiaryIdentityId: ReadonlyArray<Proposal>;
+  /** An aggregate relationship */
+  readonly proposalsByBeneficiaryIdentityId_aggregate: Proposal_Aggregate;
+  /** An aggregate relationship */
+  readonly proposals_aggregate: Proposal_Aggregate;
   readonly riot?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly sense_entities: ReadonlyArray<Sense_Entity>;
@@ -2123,6 +2331,26 @@ export type IdentityCampaignsByCreatorIdentityIdArgs = {
 
 
 /** columns and relationships of "identity" */
+export type IdentityCampaignsByCreatorIdentityId_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityCampaigns_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
 export type IdentityNft_CollectionsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Nft_Collection_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2153,6 +2381,16 @@ export type IdentityOrganization_MembersArgs = {
 
 
 /** columns and relationships of "identity" */
+export type IdentityOrganization_Members_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
+  where?: InputMaybe<Organization_Member_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
 export type IdentityOrganizationsArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2173,7 +2411,37 @@ export type IdentityOrganizationsByCreatorIdentityIdArgs = {
 
 
 /** columns and relationships of "identity" */
+export type IdentityOrganizationsByCreatorIdentityId_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
 export type IdentityOrganizationsByTreasuryIdentityIdArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityOrganizationsByTreasuryIdentityId_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityOrganizations_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2213,6 +2481,26 @@ export type IdentityProposalsByBeneficiaryIdentityIdArgs = {
 
 
 /** columns and relationships of "identity" */
+export type IdentityProposalsByBeneficiaryIdentityId_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
+export type IdentityProposals_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+/** columns and relationships of "identity" */
 export type IdentitySense_EntitiesArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Sense_Entity_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2233,6 +2521,8 @@ export type Identity_Bool_Exp = {
   readonly campaign_contributors?: InputMaybe<Campaign_Contributor_Bool_Exp>;
   readonly campaigns?: InputMaybe<Campaign_Bool_Exp>;
   readonly campaignsByCreatorIdentityId?: InputMaybe<Campaign_Bool_Exp>;
+  readonly campaignsByCreatorIdentityId_aggregate?: InputMaybe<Campaign_Aggregate_Bool_Exp>;
+  readonly campaigns_aggregate?: InputMaybe<Campaign_Aggregate_Bool_Exp>;
   readonly discord?: InputMaybe<String_Comparison_Exp>;
   readonly display_name?: InputMaybe<String_Comparison_Exp>;
   readonly email?: InputMaybe<String_Comparison_Exp>;
@@ -2242,12 +2532,18 @@ export type Identity_Bool_Exp = {
   readonly nft_collections?: InputMaybe<Nft_Collection_Bool_Exp>;
   readonly nfts?: InputMaybe<Nft_Bool_Exp>;
   readonly organization_members?: InputMaybe<Organization_Member_Bool_Exp>;
+  readonly organization_members_aggregate?: InputMaybe<Organization_Member_Aggregate_Bool_Exp>;
   readonly organizations?: InputMaybe<Organization_Bool_Exp>;
   readonly organizationsByCreatorIdentityId?: InputMaybe<Organization_Bool_Exp>;
+  readonly organizationsByCreatorIdentityId_aggregate?: InputMaybe<Organization_Aggregate_Bool_Exp>;
   readonly organizationsByTreasuryIdentityId?: InputMaybe<Organization_Bool_Exp>;
+  readonly organizationsByTreasuryIdentityId_aggregate?: InputMaybe<Organization_Aggregate_Bool_Exp>;
+  readonly organizations_aggregate?: InputMaybe<Organization_Aggregate_Bool_Exp>;
   readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
   readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
   readonly proposalsByBeneficiaryIdentityId?: InputMaybe<Proposal_Bool_Exp>;
+  readonly proposalsByBeneficiaryIdentityId_aggregate?: InputMaybe<Proposal_Aggregate_Bool_Exp>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Bool_Exp>;
   readonly riot?: InputMaybe<String_Comparison_Exp>;
   readonly sense_entities?: InputMaybe<Sense_Entity_Bool_Exp>;
   readonly twitter?: InputMaybe<String_Comparison_Exp>;
@@ -2793,6 +3089,8 @@ export type Organization = {
   readonly battlepasses: ReadonlyArray<Battlepass>;
   /** An array relationship */
   readonly campaigns: ReadonlyArray<Campaign>;
+  /** An aggregate relationship */
+  readonly campaigns_aggregate: Campaign_Aggregate;
   readonly cid: Scalars['String']['output'];
   readonly created_at_block: Scalars['Int']['output'];
   readonly creator: Scalars['String']['output'];
@@ -2817,11 +3115,15 @@ export type Organization = {
   readonly name: Scalars['String']['output'];
   /** An array relationship */
   readonly organization_members: ReadonlyArray<Organization_Member>;
+  /** An aggregate relationship */
+  readonly organization_members_aggregate: Organization_Member_Aggregate;
   readonly pay_currency: Scalars['String']['output'];
   readonly prime: Scalars['String']['output'];
   readonly prime_identity_id?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
+  /** An aggregate relationship */
+  readonly proposals_aggregate: Proposal_Aggregate;
   readonly repo: Scalars['String']['output'];
   readonly slug: Scalars['String']['output'];
   readonly state: Scalars['String']['output'];
@@ -2856,7 +3158,27 @@ export type OrganizationCampaignsArgs = {
 
 
 /** columns and relationships of "organization" */
+export type OrganizationCampaigns_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+/** columns and relationships of "organization" */
 export type OrganizationOrganization_MembersArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
+  where?: InputMaybe<Organization_Member_Bool_Exp>;
+};
+
+
+/** columns and relationships of "organization" */
+export type OrganizationOrganization_Members_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2874,6 +3196,57 @@ export type OrganizationProposalsArgs = {
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
+
+/** columns and relationships of "organization" */
+export type OrganizationProposals_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+/** aggregated selection of "organization" */
+export type Organization_Aggregate = {
+  readonly __typename?: 'organization_aggregate';
+  readonly aggregate?: Maybe<Organization_Aggregate_Fields>;
+  readonly nodes: ReadonlyArray<Organization>;
+};
+
+export type Organization_Aggregate_Bool_Exp = {
+  readonly count?: InputMaybe<Organization_Aggregate_Bool_Exp_Count>;
+};
+
+export type Organization_Aggregate_Bool_Exp_Count = {
+  readonly arguments?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  readonly distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly filter?: InputMaybe<Organization_Bool_Exp>;
+  readonly predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "organization" */
+export type Organization_Aggregate_Fields = {
+  readonly __typename?: 'organization_aggregate_fields';
+  readonly avg?: Maybe<Organization_Avg_Fields>;
+  readonly count: Scalars['Int']['output'];
+  readonly max?: Maybe<Organization_Max_Fields>;
+  readonly min?: Maybe<Organization_Min_Fields>;
+  readonly stddev?: Maybe<Organization_Stddev_Fields>;
+  readonly stddev_pop?: Maybe<Organization_Stddev_Pop_Fields>;
+  readonly stddev_samp?: Maybe<Organization_Stddev_Samp_Fields>;
+  readonly sum?: Maybe<Organization_Sum_Fields>;
+  readonly var_pop?: Maybe<Organization_Var_Pop_Fields>;
+  readonly var_samp?: Maybe<Organization_Var_Samp_Fields>;
+  readonly variance?: Maybe<Organization_Variance_Fields>;
+};
+
+
+/** aggregate fields of "organization" */
+export type Organization_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** order by aggregate values of table "organization" */
 export type Organization_Aggregate_Order_By = {
   readonly avg?: InputMaybe<Organization_Avg_Order_By>;
@@ -2887,6 +3260,16 @@ export type Organization_Aggregate_Order_By = {
   readonly var_pop?: InputMaybe<Organization_Var_Pop_Order_By>;
   readonly var_samp?: InputMaybe<Organization_Var_Samp_Order_By>;
   readonly variance?: InputMaybe<Organization_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Organization_Avg_Fields = {
+  readonly __typename?: 'organization_avg_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by avg() on columns of table "organization" */
@@ -2906,6 +3289,7 @@ export type Organization_Bool_Exp = {
   readonly access_model?: InputMaybe<String_Comparison_Exp>;
   readonly battlepasses?: InputMaybe<Battlepass_Bool_Exp>;
   readonly campaigns?: InputMaybe<Campaign_Bool_Exp>;
+  readonly campaigns_aggregate?: InputMaybe<Campaign_Aggregate_Bool_Exp>;
   readonly cid?: InputMaybe<String_Comparison_Exp>;
   readonly created_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly creator?: InputMaybe<String_Comparison_Exp>;
@@ -2926,10 +3310,12 @@ export type Organization_Bool_Exp = {
   readonly membership_fee?: InputMaybe<Numeric_Comparison_Exp>;
   readonly name?: InputMaybe<String_Comparison_Exp>;
   readonly organization_members?: InputMaybe<Organization_Member_Bool_Exp>;
+  readonly organization_members_aggregate?: InputMaybe<Organization_Member_Aggregate_Bool_Exp>;
   readonly pay_currency?: InputMaybe<String_Comparison_Exp>;
   readonly prime?: InputMaybe<String_Comparison_Exp>;
   readonly prime_identity_id?: InputMaybe<String_Comparison_Exp>;
   readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Bool_Exp>;
   readonly repo?: InputMaybe<String_Comparison_Exp>;
   readonly slug?: InputMaybe<String_Comparison_Exp>;
   readonly state?: InputMaybe<String_Comparison_Exp>;
@@ -2940,6 +3326,41 @@ export type Organization_Bool_Exp = {
   readonly updated_at_block?: InputMaybe<Int_Comparison_Exp>;
   readonly url?: InputMaybe<String_Comparison_Exp>;
   readonly website?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Organization_Max_Fields = {
+  readonly __typename?: 'organization_max_fields';
+  readonly access_model?: Maybe<Scalars['String']['output']>;
+  readonly cid?: Maybe<Scalars['String']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly creator?: Maybe<Scalars['String']['output']>;
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly email?: Maybe<Scalars['String']['output']>;
+  readonly fee_model?: Maybe<Scalars['String']['output']>;
+  readonly gov_currency?: Maybe<Scalars['String']['output']>;
+  readonly header?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly location?: Maybe<Scalars['String']['output']>;
+  readonly logo?: Maybe<Scalars['String']['output']>;
+  readonly member_limit?: Maybe<Scalars['Int']['output']>;
+  readonly membership_fee?: Maybe<Scalars['numeric']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly pay_currency?: Maybe<Scalars['String']['output']>;
+  readonly prime?: Maybe<Scalars['String']['output']>;
+  readonly prime_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly repo?: Maybe<Scalars['String']['output']>;
+  readonly slug?: Maybe<Scalars['String']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']['output']>>;
+  readonly treasury?: Maybe<Scalars['String']['output']>;
+  readonly treasury_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly type?: Maybe<Scalars['String']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly url?: Maybe<Scalars['String']['output']>;
+  readonly website?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by max() on columns of table "organization" */
@@ -2990,6 +3411,39 @@ export type Organization_Member = {
   readonly state: Scalars['String']['output'];
 };
 
+/** aggregated selection of "organization_member" */
+export type Organization_Member_Aggregate = {
+  readonly __typename?: 'organization_member_aggregate';
+  readonly aggregate?: Maybe<Organization_Member_Aggregate_Fields>;
+  readonly nodes: ReadonlyArray<Organization_Member>;
+};
+
+export type Organization_Member_Aggregate_Bool_Exp = {
+  readonly count?: InputMaybe<Organization_Member_Aggregate_Bool_Exp_Count>;
+};
+
+export type Organization_Member_Aggregate_Bool_Exp_Count = {
+  readonly arguments?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  readonly distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly filter?: InputMaybe<Organization_Member_Bool_Exp>;
+  readonly predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "organization_member" */
+export type Organization_Member_Aggregate_Fields = {
+  readonly __typename?: 'organization_member_aggregate_fields';
+  readonly count: Scalars['Int']['output'];
+  readonly max?: Maybe<Organization_Member_Max_Fields>;
+  readonly min?: Maybe<Organization_Member_Min_Fields>;
+};
+
+
+/** aggregate fields of "organization_member" */
+export type Organization_Member_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** order by aggregate values of table "organization_member" */
 export type Organization_Member_Aggregate_Order_By = {
   readonly count?: InputMaybe<Order_By>;
@@ -3011,6 +3465,16 @@ export type Organization_Member_Bool_Exp = {
   readonly state?: InputMaybe<String_Comparison_Exp>;
 };
 
+/** aggregate max on columns */
+export type Organization_Member_Max_Fields = {
+  readonly __typename?: 'organization_member_max_fields';
+  readonly address?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+};
+
 /** order by max() on columns of table "organization_member" */
 export type Organization_Member_Max_Order_By = {
   readonly address?: InputMaybe<Order_By>;
@@ -3018,6 +3482,16 @@ export type Organization_Member_Max_Order_By = {
   readonly identity_id?: InputMaybe<Order_By>;
   readonly organization_id?: InputMaybe<Order_By>;
   readonly state?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Organization_Member_Min_Fields = {
+  readonly __typename?: 'organization_member_min_fields';
+  readonly address?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly identity_id?: Maybe<Scalars['String']['output']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by min() on columns of table "organization_member" */
@@ -3149,6 +3623,41 @@ export type Organization_Metadata_Stream_Cursor_Value_Input = {
   readonly name?: InputMaybe<Scalars['String']['input']>;
   readonly repo?: InputMaybe<Scalars['String']['input']>;
   readonly website?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate min on columns */
+export type Organization_Min_Fields = {
+  readonly __typename?: 'organization_min_fields';
+  readonly access_model?: Maybe<Scalars['String']['output']>;
+  readonly cid?: Maybe<Scalars['String']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly creator?: Maybe<Scalars['String']['output']>;
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly email?: Maybe<Scalars['String']['output']>;
+  readonly fee_model?: Maybe<Scalars['String']['output']>;
+  readonly gov_currency?: Maybe<Scalars['String']['output']>;
+  readonly header?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly location?: Maybe<Scalars['String']['output']>;
+  readonly logo?: Maybe<Scalars['String']['output']>;
+  readonly member_limit?: Maybe<Scalars['Int']['output']>;
+  readonly membership_fee?: Maybe<Scalars['numeric']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly pay_currency?: Maybe<Scalars['String']['output']>;
+  readonly prime?: Maybe<Scalars['String']['output']>;
+  readonly prime_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly repo?: Maybe<Scalars['String']['output']>;
+  readonly slug?: Maybe<Scalars['String']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']['output']>>;
+  readonly treasury?: Maybe<Scalars['String']['output']>;
+  readonly treasury_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly type?: Maybe<Scalars['String']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly url?: Maybe<Scalars['String']['output']>;
+  readonly website?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by min() on columns of table "organization" */
@@ -3290,6 +3799,16 @@ export enum Organization_Select_Column {
   Website = 'website'
 }
 
+/** aggregate stddev on columns */
+export type Organization_Stddev_Fields = {
+  readonly __typename?: 'organization_stddev_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by stddev() on columns of table "organization" */
 export type Organization_Stddev_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -3299,6 +3818,16 @@ export type Organization_Stddev_Order_By = {
   readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
+/** aggregate stddev_pop on columns */
+export type Organization_Stddev_Pop_Fields = {
+  readonly __typename?: 'organization_stddev_pop_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by stddev_pop() on columns of table "organization" */
 export type Organization_Stddev_Pop_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -3306,6 +3835,16 @@ export type Organization_Stddev_Pop_Order_By = {
   readonly member_limit?: InputMaybe<Order_By>;
   readonly membership_fee?: InputMaybe<Order_By>;
   readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Organization_Stddev_Samp_Fields = {
+  readonly __typename?: 'organization_stddev_samp_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_samp() on columns of table "organization" */
@@ -3359,6 +3898,16 @@ export type Organization_Stream_Cursor_Value_Input = {
   readonly website?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** aggregate sum on columns */
+export type Organization_Sum_Fields = {
+  readonly __typename?: 'organization_sum_fields';
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly member_limit?: Maybe<Scalars['Int']['output']>;
+  readonly membership_fee?: Maybe<Scalars['numeric']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Int']['output']>;
+};
+
 /** order by sum() on columns of table "organization" */
 export type Organization_Sum_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -3366,6 +3915,16 @@ export type Organization_Sum_Order_By = {
   readonly member_limit?: InputMaybe<Order_By>;
   readonly membership_fee?: InputMaybe<Order_By>;
   readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_pop on columns */
+export type Organization_Var_Pop_Fields = {
+  readonly __typename?: 'organization_var_pop_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_pop() on columns of table "organization" */
@@ -3377,6 +3936,16 @@ export type Organization_Var_Pop_Order_By = {
   readonly updated_at_block?: InputMaybe<Order_By>;
 };
 
+/** aggregate var_samp on columns */
+export type Organization_Var_Samp_Fields = {
+  readonly __typename?: 'organization_var_samp_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by var_samp() on columns of table "organization" */
 export type Organization_Var_Samp_Order_By = {
   readonly created_at_block?: InputMaybe<Order_By>;
@@ -3384,6 +3953,16 @@ export type Organization_Var_Samp_Order_By = {
   readonly member_limit?: InputMaybe<Order_By>;
   readonly membership_fee?: InputMaybe<Order_By>;
   readonly updated_at_block?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Organization_Variance_Fields = {
+  readonly __typename?: 'organization_variance_fields';
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly member_limit?: Maybe<Scalars['Float']['output']>;
+  readonly membership_fee?: Maybe<Scalars['Float']['output']>;
+  readonly updated_at_block?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by variance() on columns of table "organization" */
@@ -3430,6 +4009,47 @@ export type Proposal = {
   readonly voting_id?: Maybe<Scalars['String']['output']>;
 };
 
+/** aggregated selection of "proposal" */
+export type Proposal_Aggregate = {
+  readonly __typename?: 'proposal_aggregate';
+  readonly aggregate?: Maybe<Proposal_Aggregate_Fields>;
+  readonly nodes: ReadonlyArray<Proposal>;
+};
+
+export type Proposal_Aggregate_Bool_Exp = {
+  readonly count?: InputMaybe<Proposal_Aggregate_Bool_Exp_Count>;
+};
+
+export type Proposal_Aggregate_Bool_Exp_Count = {
+  readonly arguments?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  readonly distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  readonly filter?: InputMaybe<Proposal_Bool_Exp>;
+  readonly predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "proposal" */
+export type Proposal_Aggregate_Fields = {
+  readonly __typename?: 'proposal_aggregate_fields';
+  readonly avg?: Maybe<Proposal_Avg_Fields>;
+  readonly count: Scalars['Int']['output'];
+  readonly max?: Maybe<Proposal_Max_Fields>;
+  readonly min?: Maybe<Proposal_Min_Fields>;
+  readonly stddev?: Maybe<Proposal_Stddev_Fields>;
+  readonly stddev_pop?: Maybe<Proposal_Stddev_Pop_Fields>;
+  readonly stddev_samp?: Maybe<Proposal_Stddev_Samp_Fields>;
+  readonly sum?: Maybe<Proposal_Sum_Fields>;
+  readonly var_pop?: Maybe<Proposal_Var_Pop_Fields>;
+  readonly var_samp?: Maybe<Proposal_Var_Samp_Fields>;
+  readonly variance?: Maybe<Proposal_Variance_Fields>;
+};
+
+
+/** aggregate fields of "proposal" */
+export type Proposal_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** order by aggregate values of table "proposal" */
 export type Proposal_Aggregate_Order_By = {
   readonly avg?: InputMaybe<Proposal_Avg_Order_By>;
@@ -3443,6 +4063,16 @@ export type Proposal_Aggregate_Order_By = {
   readonly var_pop?: InputMaybe<Proposal_Var_Pop_Order_By>;
   readonly var_samp?: InputMaybe<Proposal_Var_Samp_Order_By>;
   readonly variance?: InputMaybe<Proposal_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Proposal_Avg_Fields = {
+  readonly __typename?: 'proposal_avg_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by avg() on columns of table "proposal" */
@@ -3484,6 +4114,31 @@ export type Proposal_Bool_Exp = {
   readonly type?: InputMaybe<String_Comparison_Exp>;
   readonly voting?: InputMaybe<Voting_Bool_Exp>;
   readonly voting_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Proposal_Max_Fields = {
+  readonly __typename?: 'proposal_max_fields';
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly beneficiary?: Maybe<Scalars['String']['output']>;
+  readonly beneficiary_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly campaign_id?: Maybe<Scalars['String']['output']>;
+  readonly cid?: Maybe<Scalars['String']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly creator?: Maybe<Scalars['String']['output']>;
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly currency_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly expiry?: Maybe<Scalars['Int']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly slashing_rule?: Maybe<Scalars['String']['output']>;
+  readonly start?: Maybe<Scalars['Int']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+  readonly type?: Maybe<Scalars['String']['output']>;
+  readonly voting_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by max() on columns of table "proposal" */
@@ -3558,6 +4213,31 @@ export type Proposal_Metadata_Stream_Cursor_Value_Input = {
   readonly description?: InputMaybe<Scalars['String']['input']>;
   readonly id?: InputMaybe<Scalars['String']['input']>;
   readonly name?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate min on columns */
+export type Proposal_Min_Fields = {
+  readonly __typename?: 'proposal_min_fields';
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly beneficiary?: Maybe<Scalars['String']['output']>;
+  readonly beneficiary_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly campaign_id?: Maybe<Scalars['String']['output']>;
+  readonly cid?: Maybe<Scalars['String']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly creator?: Maybe<Scalars['String']['output']>;
+  readonly creator_identity_id?: Maybe<Scalars['String']['output']>;
+  readonly currency_id?: Maybe<Scalars['String']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly description?: Maybe<Scalars['String']['output']>;
+  readonly expiry?: Maybe<Scalars['Int']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly organization_id?: Maybe<Scalars['String']['output']>;
+  readonly slashing_rule?: Maybe<Scalars['String']['output']>;
+  readonly start?: Maybe<Scalars['Int']['output']>;
+  readonly state?: Maybe<Scalars['String']['output']>;
+  readonly type?: Maybe<Scalars['String']['output']>;
+  readonly voting_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** order by min() on columns of table "proposal" */
@@ -3657,6 +4337,16 @@ export enum Proposal_Select_Column {
   VotingId = 'voting_id'
 }
 
+/** aggregate stddev on columns */
+export type Proposal_Stddev_Fields = {
+  readonly __typename?: 'proposal_stddev_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by stddev() on columns of table "proposal" */
 export type Proposal_Stddev_Order_By = {
   readonly amount?: InputMaybe<Order_By>;
@@ -3666,6 +4356,16 @@ export type Proposal_Stddev_Order_By = {
   readonly start?: InputMaybe<Order_By>;
 };
 
+/** aggregate stddev_pop on columns */
+export type Proposal_Stddev_Pop_Fields = {
+  readonly __typename?: 'proposal_stddev_pop_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by stddev_pop() on columns of table "proposal" */
 export type Proposal_Stddev_Pop_Order_By = {
   readonly amount?: InputMaybe<Order_By>;
@@ -3673,6 +4373,16 @@ export type Proposal_Stddev_Pop_Order_By = {
   readonly deposit?: InputMaybe<Order_By>;
   readonly expiry?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Proposal_Stddev_Samp_Fields = {
+  readonly __typename?: 'proposal_stddev_samp_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_samp() on columns of table "proposal" */
@@ -3716,6 +4426,16 @@ export type Proposal_Stream_Cursor_Value_Input = {
   readonly voting_id?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** aggregate sum on columns */
+export type Proposal_Sum_Fields = {
+  readonly __typename?: 'proposal_sum_fields';
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Int']['output']>;
+  readonly deposit?: Maybe<Scalars['numeric']['output']>;
+  readonly expiry?: Maybe<Scalars['Int']['output']>;
+  readonly start?: Maybe<Scalars['Int']['output']>;
+};
+
 /** order by sum() on columns of table "proposal" */
 export type Proposal_Sum_Order_By = {
   readonly amount?: InputMaybe<Order_By>;
@@ -3723,6 +4443,16 @@ export type Proposal_Sum_Order_By = {
   readonly deposit?: InputMaybe<Order_By>;
   readonly expiry?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_pop on columns */
+export type Proposal_Var_Pop_Fields = {
+  readonly __typename?: 'proposal_var_pop_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_pop() on columns of table "proposal" */
@@ -3734,6 +4464,16 @@ export type Proposal_Var_Pop_Order_By = {
   readonly start?: InputMaybe<Order_By>;
 };
 
+/** aggregate var_samp on columns */
+export type Proposal_Var_Samp_Fields = {
+  readonly __typename?: 'proposal_var_samp_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
+};
+
 /** order by var_samp() on columns of table "proposal" */
 export type Proposal_Var_Samp_Order_By = {
   readonly amount?: InputMaybe<Order_By>;
@@ -3741,6 +4481,16 @@ export type Proposal_Var_Samp_Order_By = {
   readonly deposit?: InputMaybe<Order_By>;
   readonly expiry?: InputMaybe<Order_By>;
   readonly start?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Proposal_Variance_Fields = {
+  readonly __typename?: 'proposal_variance_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly created_at_block?: Maybe<Scalars['Float']['output']>;
+  readonly deposit?: Maybe<Scalars['Float']['output']>;
+  readonly expiry?: Maybe<Scalars['Float']['output']>;
+  readonly start?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by variance() on columns of table "proposal" */
@@ -3946,6 +4696,8 @@ export type Query_Root = {
   readonly burn_by_pk?: Maybe<Burn>;
   /** fetch data from the table: "campaign" */
   readonly campaign: ReadonlyArray<Campaign>;
+  /** fetch aggregated fields from the table: "campaign" */
+  readonly campaign_aggregate: Campaign_Aggregate;
   /** fetch data from the table: "campaign" using primary key columns */
   readonly campaign_by_pk?: Maybe<Campaign>;
   /** fetch data from the table: "campaign_contributor" */
@@ -4014,10 +4766,14 @@ export type Query_Root = {
   readonly nft_collection_by_pk?: Maybe<Nft_Collection>;
   /** fetch data from the table: "organization" */
   readonly organization: ReadonlyArray<Organization>;
+  /** fetch aggregated fields from the table: "organization" */
+  readonly organization_aggregate: Organization_Aggregate;
   /** fetch data from the table: "organization" using primary key columns */
   readonly organization_by_pk?: Maybe<Organization>;
   /** fetch data from the table: "organization_member" */
   readonly organization_member: ReadonlyArray<Organization_Member>;
+  /** fetch aggregated fields from the table: "organization_member" */
+  readonly organization_member_aggregate: Organization_Member_Aggregate;
   /** fetch data from the table: "organization_member" using primary key columns */
   readonly organization_member_by_pk?: Maybe<Organization_Member>;
   /** fetch data from the table: "organization_metadata" */
@@ -4026,6 +4782,8 @@ export type Query_Root = {
   readonly organization_metadata_by_pk?: Maybe<Organization_Metadata>;
   /** fetch data from the table: "proposal" */
   readonly proposal: ReadonlyArray<Proposal>;
+  /** fetch aggregated fields from the table: "proposal" */
+  readonly proposal_aggregate: Proposal_Aggregate;
   /** fetch data from the table: "proposal" using primary key columns */
   readonly proposal_by_pk?: Maybe<Proposal>;
   /** fetch data from the table: "proposal_metadata" */
@@ -4186,6 +4944,15 @@ export type Query_RootBurn_By_PkArgs = {
 
 
 export type Query_RootCampaignArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+export type Query_RootCampaign_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -4428,12 +5195,30 @@ export type Query_RootOrganizationArgs = {
 };
 
 
+export type Query_RootOrganization_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
 export type Query_RootOrganization_By_PkArgs = {
   id: Scalars['String']['input'];
 };
 
 
 export type Query_RootOrganization_MemberArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
+  where?: InputMaybe<Organization_Member_Bool_Exp>;
+};
+
+
+export type Query_RootOrganization_Member_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -4462,6 +5247,15 @@ export type Query_RootOrganization_Metadata_By_PkArgs = {
 
 
 export type Query_RootProposalArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+export type Query_RootProposal_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -5681,6 +6475,8 @@ export type Subscription_Root = {
   readonly burn_stream: ReadonlyArray<Burn>;
   /** fetch data from the table: "campaign" */
   readonly campaign: ReadonlyArray<Campaign>;
+  /** fetch aggregated fields from the table: "campaign" */
+  readonly campaign_aggregate: Campaign_Aggregate;
   /** fetch data from the table: "campaign" using primary key columns */
   readonly campaign_by_pk?: Maybe<Campaign>;
   /** fetch data from the table: "campaign_contributor" */
@@ -5777,10 +6573,14 @@ export type Subscription_Root = {
   readonly nft_stream: ReadonlyArray<Nft>;
   /** fetch data from the table: "organization" */
   readonly organization: ReadonlyArray<Organization>;
+  /** fetch aggregated fields from the table: "organization" */
+  readonly organization_aggregate: Organization_Aggregate;
   /** fetch data from the table: "organization" using primary key columns */
   readonly organization_by_pk?: Maybe<Organization>;
   /** fetch data from the table: "organization_member" */
   readonly organization_member: ReadonlyArray<Organization_Member>;
+  /** fetch aggregated fields from the table: "organization_member" */
+  readonly organization_member_aggregate: Organization_Member_Aggregate;
   /** fetch data from the table: "organization_member" using primary key columns */
   readonly organization_member_by_pk?: Maybe<Organization_Member>;
   /** fetch data from the table in a streaming manner: "organization_member" */
@@ -5795,6 +6595,8 @@ export type Subscription_Root = {
   readonly organization_stream: ReadonlyArray<Organization>;
   /** fetch data from the table: "proposal" */
   readonly proposal: ReadonlyArray<Proposal>;
+  /** fetch aggregated fields from the table: "proposal" */
+  readonly proposal_aggregate: Proposal_Aggregate;
   /** fetch data from the table: "proposal" using primary key columns */
   readonly proposal_by_pk?: Maybe<Proposal>;
   /** fetch data from the table: "proposal_metadata" */
@@ -6031,6 +6833,15 @@ export type Subscription_RootBurn_StreamArgs = {
 
 
 export type Subscription_RootCampaignArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Campaign_Order_By>>;
+  where?: InputMaybe<Campaign_Bool_Exp>;
+};
+
+
+export type Subscription_RootCampaign_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Campaign_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -6375,12 +7186,30 @@ export type Subscription_RootOrganizationArgs = {
 };
 
 
+export type Subscription_RootOrganization_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Order_By>>;
+  where?: InputMaybe<Organization_Bool_Exp>;
+};
+
+
 export type Subscription_RootOrganization_By_PkArgs = {
   id: Scalars['String']['input'];
 };
 
 
 export type Subscription_RootOrganization_MemberArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Organization_Member_Order_By>>;
+  where?: InputMaybe<Organization_Member_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_Member_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Organization_Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -6430,6 +7259,15 @@ export type Subscription_RootOrganization_StreamArgs = {
 
 
 export type Subscription_RootProposalArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
+
+export type Subscription_RootProposal_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -6986,6 +7824,8 @@ export type Voting = {
   readonly proposal_voters: ReadonlyArray<Proposal_Voter>;
   /** An array relationship */
   readonly proposals: ReadonlyArray<Proposal>;
+  /** An aggregate relationship */
+  readonly proposals_aggregate: Proposal_Aggregate;
   readonly quorum?: Maybe<Scalars['String']['output']>;
   readonly scale: Scalars['String']['output'];
   readonly unit: Scalars['String']['output'];
@@ -7012,6 +7852,16 @@ export type VotingProposalsArgs = {
   where?: InputMaybe<Proposal_Bool_Exp>;
 };
 
+
+/** columns and relationships of "voting" */
+export type VotingProposals_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Proposal_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Proposal_Order_By>>;
+  where?: InputMaybe<Proposal_Bool_Exp>;
+};
+
 /** Boolean expression to filter rows from the table "voting". All fields are combined with a logical 'AND'. */
 export type Voting_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Voting_Bool_Exp>>;
@@ -7022,6 +7872,7 @@ export type Voting_Bool_Exp = {
   readonly no?: InputMaybe<Numeric_Comparison_Exp>;
   readonly proposal_voters?: InputMaybe<Proposal_Voter_Bool_Exp>;
   readonly proposals?: InputMaybe<Proposal_Bool_Exp>;
+  readonly proposals_aggregate?: InputMaybe<Proposal_Aggregate_Bool_Exp>;
   readonly quorum?: InputMaybe<String_Comparison_Exp>;
   readonly scale?: InputMaybe<String_Comparison_Exp>;
   readonly unit?: InputMaybe<String_Comparison_Exp>;
@@ -7156,6 +8007,20 @@ export type ProposalByIdSubscriptionVariables = Exact<{
 
 
 export type ProposalByIdSubscription = { readonly __typename?: 'subscription_root', readonly proposal: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly type: string, readonly state: string, readonly created_at_block: number, readonly start: number, readonly expiry: number, readonly name: string, readonly description: string, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } | null, readonly voting?: { readonly __typename?: 'voting', readonly proposal_voters: ReadonlyArray<{ readonly __typename?: 'proposal_voter', readonly voted: boolean, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly display_name?: string | null } | null }> } | null }> };
+
+export type OrganizationByIdSubscriptionVariables = Exact<{
+  orgId: Scalars['String']['input'];
+}>;
+
+
+export type OrganizationByIdSubscription = { readonly __typename?: 'subscription_root', readonly organization: ReadonlyArray<{ readonly __typename?: 'organization', readonly access_model: string, readonly creator: string, readonly created_at_block: number, readonly fee_model: string, readonly gov_currency: string, readonly id: string, readonly member_limit: number, readonly pay_currency: string, readonly prime: string, readonly treasury: string, readonly type: string, readonly description: string, readonly email: string, readonly logo: string, readonly header: string, readonly name: string, readonly repo: string, readonly website: string, readonly url: string, readonly location: string, readonly tags: ReadonlyArray<string>, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string, readonly state: string, readonly identity?: { readonly __typename?: 'identity', readonly id: string, readonly email?: string | null, readonly display_name?: string | null } | null }>, readonly organization_members_aggregate: { readonly __typename?: 'organization_member_aggregate', readonly aggregate?: { readonly __typename?: 'organization_member_aggregate_fields', readonly count: number } | null }, readonly campaigns_aggregate: { readonly __typename?: 'campaign_aggregate', readonly aggregate?: { readonly __typename?: 'campaign_aggregate_fields', readonly count: number } | null, readonly nodes: ReadonlyArray<{ readonly __typename?: 'campaign', readonly id: string, readonly state: string }> }, readonly proposals_aggregate: { readonly __typename?: 'proposal_aggregate', readonly nodes: ReadonlyArray<{ readonly __typename?: 'proposal', readonly id: string, readonly type: string }>, readonly aggregate?: { readonly __typename?: 'proposal_aggregate_fields', readonly count: number } | null } }> };
+
+export type OrganizationsByAccountSubscriptionVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type OrganizationsByAccountSubscription = { readonly __typename?: 'subscription_root', readonly organization: ReadonlyArray<{ readonly __typename?: 'organization', readonly id: string, readonly name: string, readonly description: string, readonly creator: string, readonly prime: string, readonly member_limit: number, readonly membership_fee?: any | null, readonly access_model: string, readonly deposit: any, readonly slug: string, readonly logo: string, readonly organization_members_aggregate: { readonly __typename?: 'organization_member_aggregate', readonly aggregate?: { readonly __typename?: 'organization_member_aggregate_fields', readonly count: number } | null }, readonly organization_members: ReadonlyArray<{ readonly __typename?: 'organization_member', readonly address: string, readonly state: string }> }> };
 
 export type IdentityByAddressSubscriptionVariables = Exact<{
   address: Scalars['String']['input'];
@@ -7612,6 +8477,139 @@ export function useProposalByIdSubscription(baseOptions: Apollo.SubscriptionHook
       }
 export type ProposalByIdSubscriptionHookResult = ReturnType<typeof useProposalByIdSubscription>;
 export type ProposalByIdSubscriptionResult = Apollo.SubscriptionResult<ProposalByIdSubscription>;
+export const OrganizationByIdDocument = gql`
+    subscription OrganizationById($orgId: String!) {
+  organization(where: {id: {_eq: $orgId}}) {
+    access_model
+    creator
+    created_at_block
+    creator
+    fee_model
+    gov_currency
+    id
+    member_limit
+    pay_currency
+    prime
+    treasury
+    type
+    organization_members {
+      address
+      state
+      identity {
+        id
+        email
+        display_name
+      }
+    }
+    description
+    email
+    id
+    logo
+    header
+    name
+    repo
+    website
+    url
+    location
+    tags
+    organization_members_aggregate {
+      aggregate {
+        count
+      }
+    }
+    campaigns_aggregate {
+      aggregate {
+        count
+      }
+      nodes {
+        id
+        state
+      }
+    }
+    proposals_aggregate {
+      nodes {
+        id
+        type
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useOrganizationByIdSubscription__
+ *
+ * To run a query within a React component, call `useOrganizationByIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationByIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrganizationByIdSubscription({
+ *   variables: {
+ *      orgId: // value for 'orgId'
+ *   },
+ * });
+ */
+export function useOrganizationByIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<OrganizationByIdSubscription, OrganizationByIdSubscriptionVariables> & ({ variables: OrganizationByIdSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OrganizationByIdSubscription, OrganizationByIdSubscriptionVariables>(OrganizationByIdDocument, options);
+      }
+export type OrganizationByIdSubscriptionHookResult = ReturnType<typeof useOrganizationByIdSubscription>;
+export type OrganizationByIdSubscriptionResult = Apollo.SubscriptionResult<OrganizationByIdSubscription>;
+export const OrganizationsByAccountDocument = gql`
+    subscription OrganizationsByAccount($address: String!) {
+  organization(where: {organization_members: {address: {_eq: $address}}}) {
+    id
+    name
+    description
+    creator
+    prime
+    member_limit
+    membership_fee
+    access_model
+    deposit
+    slug
+    logo
+    organization_members_aggregate {
+      aggregate {
+        count
+      }
+    }
+    organization_members(where: {address: {_eq: $address}}) {
+      address
+      state
+    }
+  }
+}
+    `;
+
+/**
+ * __useOrganizationsByAccountSubscription__
+ *
+ * To run a query within a React component, call `useOrganizationsByAccountSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationsByAccountSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrganizationsByAccountSubscription({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useOrganizationsByAccountSubscription(baseOptions: Apollo.SubscriptionHookOptions<OrganizationsByAccountSubscription, OrganizationsByAccountSubscriptionVariables> & ({ variables: OrganizationsByAccountSubscriptionVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OrganizationsByAccountSubscription, OrganizationsByAccountSubscriptionVariables>(OrganizationsByAccountDocument, options);
+      }
+export type OrganizationsByAccountSubscriptionHookResult = ReturnType<typeof useOrganizationsByAccountSubscription>;
+export type OrganizationsByAccountSubscriptionResult = Apollo.SubscriptionResult<OrganizationsByAccountSubscription>;
 export const IdentityByAddressDocument = gql`
     subscription IdentityByAddress($address: String!) {
   identity_by_pk(id: $address) {

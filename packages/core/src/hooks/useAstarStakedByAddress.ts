@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
+import { dAppId } from '@gamedao/constants'
 import { useStakesPerStakerAndPeriodSubscription } from '@gamedao/graph'
-import { useLogger } from '../hooks/useLogger'
-import { dAppId } from '../constants/astar'
-import { formatBalanceString } from '../utils/balance'
-import { convertSS58Prefix } from '../utils'
+import { useLogger, formatBalanceString, convertSS58Prefix } from '@gamedao/utils'
 
 const initialState = {
 	amount: 0,
