@@ -1,0 +1,18 @@
+manifestVersion: subsquid.io/v0.1
+name: squid-astar
+version: 1
+description: Substrate squid template
+build: 
+deploy:
+  addons:
+    postgres: 
+    rpc:
+      - kusama.http
+  processor:
+    cmd:
+      - sqd
+      - process:prod
+  api:
+    cmd:
+      - sqd
+      - serve:prod
