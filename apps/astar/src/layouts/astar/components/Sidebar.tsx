@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 
 import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
 import { useExtensionContext } from 'src/providers/extension/components/context'

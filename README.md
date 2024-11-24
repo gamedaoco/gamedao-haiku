@@ -3,7 +3,17 @@
 (!(Commitizen friendly]<https://img.shields.io/badge/commitizen-friendly-brightgreen.svg]]<http://commitizen.github.io/cz-cli/]
 [![API Docker Image CI](https://github.com/gamedaoco/gamedao-haiku/actions/workflows/api-docker-image.yml/badge.svg?branch=dev)](https://github.com/gamedaoco/gamedao-haiku/actions/workflows/api-docker-image.yml)
 
-GameDAO is a community owned fundraising, coordination and ownership protocol for the GAME industry ( Games, Arts, Music, Entertainment ). It is governed by the GAME token and follows the vision to create a legal DAO and fully regulatory compliant protocols, thus enabling transition of traditional gamers, creators, publishers, investors to make use of decentralised protocols.
+GameDAO is a community owned video games publishing, storefront and production guild for games, arts, music and entertainment. It is governed by the community using the GAME token and follows the vision to operate a legal DAO along wiht fully regulatory compliant protocols for fundraising, coordination and ownership for the creative industry, thus enabling transition of traditional gamers, creators, publishers, investors to make use of decentralised protocols to create better together.
+
+## How does it work
+
+Creative individuals and teams form a guild on GameDAO to get discovered by the GameDAO community. The community supports the guilds in creating a proposal for their project idea to allocate seed funding to create e.g. a Game Design Document along with concept art and prototypes. If the proposal gets accepted, the guild receives a publishing agreement and support by the community to get started and coordinate until release. To achieve this in a transparent and accountable fashion, project teams would agree on milestones and present their results to keep up the support by the community.
+
+## Technology
+
+GameDAO operates independently across ecosystems. At the current point in time, various technical integrations take place. The original protocols have been developed in rust and have also been soft audited through automated testing by SRLabs during the substrate builders program participation. Now the team is working on ink and EVM implementations to enable true crosschain deployment and interaction.
+
+### Protocols
 
 - CONTROL — building unstoppable organizations
 - FLOW — fundraising and project curation
@@ -36,9 +46,9 @@ This is a monorepo creating multiple web dapps, projects can be accessed through
 - tests `yarn build`
 - storybook `yarn sb`
 
-## Core Contributors in no particular order
+## Contributors in no particular order
 
-Marco Bahn, Andre Schnelzer, Yevhen Vasylenko, Volodymyr Brazhnyk, Pascal Akhidue, Yuri Filimonchuk, Carsten Greif, Inan Güder, Mike Planzer, Zhenya Ddzidziguri, Johannes Halm, Jaayden Halko, and many more.
+Marco Bahn, Johannes Halm, Andre Schnelzer, Yevhen Vasylenko, Volodymyr Brazhnyk, Pascal Akhidue, Yuri Filimonchuk, Carsten Greif, Inan Güder, Yonghan Lee, Mike Planzer, Zhenya Ddzidziguri, Jaayden Halko, and many more.
 
 ## Friends, Partners, Credits
 

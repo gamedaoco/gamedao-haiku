@@ -6,7 +6,7 @@ import { getConnectedEndpoint } from '@gamedao/core/constants/endpoints'
 
 import { useConnectIdentityMutation } from '@gamedao/graph'
 
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 const log = Logger('lib/uuid')
 
 const battlepass_url = getConnectedEndpoint().url

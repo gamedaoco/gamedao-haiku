@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 
 import { DocumentContext, DocumentInitialProps } from 'next/dist/shared/lib/utils'
 import Document, { Head, Html, Main, NextScript } from 'next/document'

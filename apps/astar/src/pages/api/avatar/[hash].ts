@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { createAvatar } from '@dicebear/core'
 import { pixelArt } from '@dicebear/collection'
 
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 const log = Logger('avatar')
 
 const Avatar = async (req: NextApiRequest, res: NextApiResponse) => {

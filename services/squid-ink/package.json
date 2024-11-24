@@ -1,5 +1,6 @@
 {
   "name": "@gamedao/squid-ink",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "rm -rf lib && tsc",

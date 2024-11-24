@@ -15,7 +15,7 @@ import { setUserToken } from 'src/utils/auth/storeUserToken'
 // const options = { databaseName: process.env.MONGO_DATABASE }
 // console.log('db', process.env.MONGO_DATABASE)
 
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 const log = Logger('auth')
 
 const scope = ['identify'].join(' ')

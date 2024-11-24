@@ -3,7 +3,7 @@ import { Card, Stack, Menu, Button, TextareaAutosize, TextField, Typography } fr
 import { Loader } from 'components/atoms/Loader'
 import { useAppContext } from 'src/providers/app/components/context'
 
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 const log = Logger('feedback')
 
 // const Flyout = ({ anchorEl, handleClose, handleSend }) => {

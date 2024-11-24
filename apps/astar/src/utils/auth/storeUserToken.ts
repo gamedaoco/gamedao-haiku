@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
 import { getConnectedEndpoint } from '@gamedao/core/constants/endpoints'
 
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 const log = Logger('lib/token')
 
 const battlepass_url = getConnectedEndpoint().url

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Discord, { ChannelType } from 'discord.js'
-import { Logger } from 'src/utils/logger'
+import { Logger } from '@gamedao/utils'
 
 const log = Logger('API')
 

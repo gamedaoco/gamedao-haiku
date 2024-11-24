@@ -9,4 +9,5 @@ export * from './useAstarStakedByAddress'
 export * from './useAstarStaking'
 export * from './useAstarTVL'
 
+export * from './useConfig'
 export * from './useCurrentAccountAddress'

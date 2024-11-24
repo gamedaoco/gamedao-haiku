@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
 	trailingComma: 'all',
 	singleQuote: true,
 	bracketSpacing: true,
@@ -7,4 +7,18 @@ module.exports = {
 	useTabs: true,
 	parser: 'typescript',
 	semi: false,
+	overrides: [
+		{
+			files: '**/*.json',
+			options: {
+				parser: 'json',
+				useTabs: false,
+				tabWidth: 2,
+				singleQuote: false,
+				trailingComma: 'none',
+			},
+		},
+	],
 }
+
+export default config

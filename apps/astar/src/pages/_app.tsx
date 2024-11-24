@@ -1,21 +1,23 @@
-import { CacheProvider, EmotionCache } from '@emotion/react'
-import * as Fathom from 'fathom-client'
+import { useEffect, useState } from 'react'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import 'react-toastify/dist/ReactToastify.css'
 
-import { ENVIRONMENT } from '@gamedao/core/constants/index'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import * as Fathom from 'fathom-client'
 
-import { useConfig } from '@gamedao/core/hooks/useConfig'
+import { ENVIRONMENT } from '@gamedao/constants'
+import { useConfig } from '@gamedao/core/hooks'
+import { Logger } from '@gamedao/utils'
+
 import { Providers } from 'src/providers'
 
 import createEmotionCache from 'src/theme/createEmotionCache'
-import 'src/theme/css/modelViewer.css'
+// import 'src/theme/css/modelViewer.css'
 import 'src/theme/css/toastify.css'
-import { Logger } from '@gamedao/core/logger'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -126,14 +128,14 @@ export function MyApp({
 	Component,
 	emotionCache = clientSideEmotionCache,
 	pageProps: { session, ...pageProps },
-}: AppProps) {
+}: MyAppProps) {
 	const router = useRouter()
 
 	useEffect(() => {
 		// if (!ENVIRONMENT || ENVIRONMENT === 'DEVELOPMENT') return
 		Fathom.load('XLUUAYWU', {
 			url: 'https://cdn.usefathom.com/script.js',
-			includedDomains: ['app.gamedao.co'],
+			includedDomains: ['gamedao.app'],
 		})
 		function onRouteChangeComplete() {
 			Fathom.trackPageview()
