@@ -8,3 +8,5 @@ export const copyToClipboard = (content) => {
 
 export const convertSS58Prefix = (address, prefix = 0) =>
 	address ? encodeAddress(decodeAddress(address), prefix) : null
+
+

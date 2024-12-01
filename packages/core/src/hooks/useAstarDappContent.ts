@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import { dAppId } from '@gamedao/constants'
 import { useLogger } from '@gamedao/core/logger'
 import { useAstarDappContentQuery } from '@gamedao/graph'
-import assert from 'assert'
 
 const initialState: any = []
 
@@ -13,9 +11,16 @@ export function useAstarDappContent(id?: string) {
 
 	useEffect(() => {
 		if (loading || !data?.dAppContent ) return
-		const content = id
+		const raw = id
 			? data?.dAppContent.filter( dapp => dapp?.address === id )
 			: data?.dAppContent
+
+		const content = raw.map( dapp => {
+			const parsed = {
+				...dapp
+			}
+			return  parsed
+		}).sort( (a,b) => b.amount - a.amount )
 		setState(content)
 	}, [loading, data])
 

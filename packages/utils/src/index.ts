@@ -14,3 +14,6 @@ export const convertSS58Prefix = (address, prefix = 0) =>
 
 export const sumBigNumbers = (numbers: BigNumber[]): BigNumber =>
 	numbers.reduce((acc, curr) => acc.plus(curr), BigNumber(0))
+
+export const formatNumber = ( amount: number ) =>
+	amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')

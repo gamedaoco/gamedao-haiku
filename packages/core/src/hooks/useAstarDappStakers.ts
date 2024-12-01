@@ -18,7 +18,7 @@ const initialState: State = {
 	stakers: null,
 }
 
-export function useAstarStakers(dAppId: string, address: string) {
+export function useAstarStakers(dAppId: string) {
 	const logger = useLogger('astar')
 	const [state, setState] = useState(initialState)
 
