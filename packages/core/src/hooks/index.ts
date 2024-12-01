@@ -8,6 +8,7 @@ export * from './useAstarDappStakers'
 export * from './useAstarStakedByAddress'
 export * from './useAstarStaking'
 export * from './useAstarTVL'
+export * from './useAstarDappContent'
 
 export * from './useConfig'
 export * from './useCurrentAccountAddress'

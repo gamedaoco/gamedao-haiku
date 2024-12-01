@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useExtensionContext } from 'src/providers/extension/components/context'
-import { getAddressFromAccountState } from '../utils/accountUtils'
+import { getAddressFromAccountState } from '@gamedao/utils'
 
 export function useCurrentAccountAddress(): string {
 	const [addressState, setAddressState] = useState<string>('')

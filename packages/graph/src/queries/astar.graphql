@@ -1,6 +1,19 @@
 # gamedao contract address 0x89ed50cec44a3db4186ba54cdf575ec140937c55
 # gamedao owner address aCVweEHsJYeE7gbd88zvccqBX53PEttrdwJYLRydFrXiRCA
 
+query AstarDappContent($id:String) {
+  dAppContent(id:$id) {
+    address
+    creationTime
+    iconUrl
+    imagesUrl
+    mainCategory
+    name
+    shortDescription
+  }
+}
+
+
 subscription StakersPerDapp($dapp: String!) {
   stakers(where: {dapp_address: {_eq: $dapp}}) {
     amount

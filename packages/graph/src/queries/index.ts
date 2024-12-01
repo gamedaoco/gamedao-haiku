@@ -69,6 +69,17 @@ export type Config = {
   readonly TW_SITE_NAME?: Maybe<Scalars['String']['output']>;
 };
 
+export type DAppContent = {
+  readonly __typename?: 'DAppContent';
+  readonly address?: Maybe<Scalars['String']['output']>;
+  readonly creationTime?: Maybe<Scalars['Int']['output']>;
+  readonly iconUrl?: Maybe<Scalars['String']['output']>;
+  readonly imagesUrl?: Maybe<ReadonlyArray<Maybe<Scalars['String']['output']>>>;
+  readonly mainCategory?: Maybe<Scalars['String']['output']>;
+  readonly name?: Maybe<Scalars['String']['output']>;
+  readonly shortDescription?: Maybe<Scalars['String']['output']>;
+};
+
 export type DisplayValueEntry = {
   readonly key: Scalars['String']['output'];
   readonly text: Scalars['String']['output'];
@@ -4721,6 +4732,8 @@ export type Query_Root = {
   readonly current_chain_state: ReadonlyArray<Current_Chain_State>;
   /** fetch data from the table: "current_chain_state" using primary key columns */
   readonly current_chain_state_by_pk?: Maybe<Current_Chain_State>;
+  /** Astar dApp Staking Content */
+  readonly dAppContent?: Maybe<ReadonlyArray<Maybe<DAppContent>>>;
   /** fetch data from the table: "dapp" */
   readonly dapp: ReadonlyArray<Dapp>;
   /** fetch data from the table: "dapp_aggregated_daily" */
@@ -5038,6 +5051,11 @@ export type Query_RootCurrent_Chain_StateArgs = {
 
 export type Query_RootCurrent_Chain_State_By_PkArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type Query_RootDAppContentArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -7929,6 +7947,13 @@ export type Voting_Stream_Cursor_Value_Input = {
   readonly yes?: InputMaybe<Scalars['numeric']['input']>;
 };
 
+export type AstarDappContentQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type AstarDappContentQuery = { readonly __typename?: 'query_root', readonly dAppContent?: ReadonlyArray<{ readonly __typename?: 'DAppContent', readonly address?: string | null, readonly creationTime?: number | null, readonly iconUrl?: string | null, readonly imagesUrl?: ReadonlyArray<string | null> | null, readonly mainCategory?: string | null, readonly name?: string | null, readonly shortDescription?: string | null } | null> | null };
+
 export type StakersPerDappSubscriptionVariables = Exact<{
   dapp: Scalars['String']['input'];
 }>;
@@ -8061,6 +8086,52 @@ export type UpdateSessionMutationVariables = Exact<{
 export type UpdateSessionMutation = { readonly __typename?: 'mutation_root', readonly updateSession: boolean };
 
 
+export const AstarDappContentDocument = gql`
+    query AstarDappContent($id: String) {
+  dAppContent(id: $id) {
+    address
+    creationTime
+    iconUrl
+    imagesUrl
+    mainCategory
+    name
+    shortDescription
+  }
+}
+    `;
+
+/**
+ * __useAstarDappContentQuery__
+ *
+ * To run a query within a React component, call `useAstarDappContentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAstarDappContentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAstarDappContentQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAstarDappContentQuery(baseOptions?: Apollo.QueryHookOptions<AstarDappContentQuery, AstarDappContentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AstarDappContentQuery, AstarDappContentQueryVariables>(AstarDappContentDocument, options);
+      }
+export function useAstarDappContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AstarDappContentQuery, AstarDappContentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AstarDappContentQuery, AstarDappContentQueryVariables>(AstarDappContentDocument, options);
+        }
+export function useAstarDappContentSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AstarDappContentQuery, AstarDappContentQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AstarDappContentQuery, AstarDappContentQueryVariables>(AstarDappContentDocument, options);
+        }
+export type AstarDappContentQueryHookResult = ReturnType<typeof useAstarDappContentQuery>;
+export type AstarDappContentLazyQueryHookResult = ReturnType<typeof useAstarDappContentLazyQuery>;
+export type AstarDappContentSuspenseQueryHookResult = ReturnType<typeof useAstarDappContentSuspenseQuery>;
+export type AstarDappContentQueryResult = Apollo.QueryResult<AstarDappContentQuery, AstarDappContentQueryVariables>;
 export const StakersPerDappDocument = gql`
     subscription StakersPerDapp($dapp: String!) {
   stakers(where: {dapp_address: {_eq: $dapp}}) {
