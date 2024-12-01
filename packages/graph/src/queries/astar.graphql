@@ -34,7 +34,6 @@ subscription StakesPerDappAndPeriod($dapp: String!) {
 }
 
 subscription CurrentTVL {
-
   tvl_aggregated_daily(limit: 1, order_by:{block_number:desc}) {
     block_number
     tvl
@@ -42,7 +41,6 @@ subscription CurrentTVL {
     lockers_count
     id
   }
-
 }
 
 subscription StakesPerDappAndPeriod( $dapp:String!) {
@@ -57,7 +55,6 @@ subscription StakesPerDappAndPeriod( $dapp:String!) {
 
 subscription StakesPerStakerAndPeriod( $dapp:String!, $address: String!){
   stakers(where: {dapp_address: {_eq: $dapp}, staker_address: {_eq: $address}}) {
-
     amount
   }
 	# stakes_per_staker_and_period_aggregate (where: {

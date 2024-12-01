@@ -20,6 +20,7 @@ import {
 } from '@gamedao/core/hooks'
 
 // import { useTheme } from '@mui/material/styles'
+import { RxClock } from 'react-icons/rx'
 import { Stack, Typography, useMediaQuery, Box, Paper, TextField } from '@mui/material'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
@@ -28,6 +29,27 @@ import { Loader } from 'components/atoms/Loader'
 type TStaker = {
 	amount: number
 	address: string
+}
+
+const initDappState = {
+	astr:0,
+	usd:0,
+	stakers:0,
+	id: "",
+	creationTime: 0,
+	iconUrl: "",
+	imagesUrl: [],
+	mainCategory: "",
+	name: "",
+	shortDescription: "",
+}
+const initAstarState = {
+	block: 0,
+	lockers: 0,
+	stakers: 0,
+	astr: 0,
+	usd: 0,
+	fx: 0,
 }
 
 export function DashboardView() {
@@ -39,49 +61,22 @@ export function DashboardView() {
 	const pathname = usePathname()
 	const { query } = useRouter()
 
-	const [id, setId] = useState<string>( query.id as string || dAppId )
-	const [loading, setLoading] = useState(false)
-	const [data, setData] = useState({
-		astar: {
-			block: 0,
-			lockers: 0,
-			stakers: 0,
-			astr: 0,
-			usd: 0,
-		},
-		fx: 0,
-	})
+	const [ id, setId ] = useState<string>( query.id as string || dAppId )
+	const [ fx, setFx ] = useState(0)
+	const [ dapp, updateDapp ] = useState(initDappState)
+	const [ data, setData ] = useState(initAstarState)
 
 	// connected wallet address
 	const address = useCurrentAccountAddress()
 
 	// get all dapp info to feed into dropdowns etc
-	const [content,setContent] = useState()
-	const { state: dappContent, loading: loadingDappContent } = useAstarDappContent( '' )
-	useEffect(()=>{
-		if(loadingDappContent || dappContent.length === 0) return
-		setContent(dappContent)
-		console.log('dappContent',dappContent)
-	},[ loadingDappContent,dappContent])
-
-	// subscriptions for global, dapp and individual stake
+	const { state: dappContent } = useAstarDappContent( '' )
 	const { state: stakedByAddress } = useAstarStakedByAddress(address)
-	const { state: stakers, loading: loadingStakers } = useAstarStakers(id)
+	const { state: stakers, loading } = useAstarStakers(id)
 	const { state: tvl } = useAstarTVL()
-
-	// TODO: migrate to state
-	// fx rate for astr/usd
-	const [fx, setFx] = useState(0)
-	useEffect(() => {
-		if (!tvl?.astrusd) return
-		const fx = Number(tvl.astrusd)
-		setData({ ...data, fx: fx })
-		setFx(fx)
-	}, [tvl])
 
 	// track the selected or injected dapp id
 	const updateDAppId = useCallback((e) => {
-		console.log('dropdown',e.target.value)
 		setId(e.target.value)
 		if (query.id) {
 			params.delete('id')
@@ -89,45 +84,39 @@ export function DashboardView() {
 		}
 	}, [])
 
-	// initial dapp info
-	const [ dapp,updateDapp] = useState({
-		astr:0,
-		usd:0,
-		stakers:0,
-		id: "",
-		creationTime: 0,
-		iconUrl: "",
-		imagesUrl: [],
-		mainCategory: "",
-		name: "",
-		shortDescription: "",
-	})
-
 	// update selected dapp content
 	useEffect(()=>{
-		if (!dappContent.length) return
+		if ( dappContent.length < 1 ) return
 		console.log('id changed:',id)
 		const data = dappContent.find( dapp => dapp.address === id )
-		console.log('data:',data)
-
-		updateDapp({
-			...dapp,
-			...data,
-			id: data.address,
-		})
+		console.log('data',{ ...dapp, ...data, id: data.address })
+		updateDapp({ ...dapp, ...data, id: data.address })
 	},[id, dappContent])
 
 	// update selected dapp staking data
-	const [totalStaked, setTotalStaked] = useState(['', ''])
 	useEffect(() => {
 		if (!stakers.stakers || stakers.stakers.length === 0) return
+		console.log('stakers changed:', stakers.stakers)
 		const _ = stakers.stakers.map((staker:TStaker) => staker.amount).reduce((acc, amount) => (acc += amount))
 		const astr = _
-		const usd = ( _ * data.fx )
-		const value = setTotalStaked([ formatNumber(astr), formatNumber(usd) ])
-		setData({ ...data, astar: { ...data.astar, astr: astr, usd: usd }})
-		updateDapp({ ...dapp, astr:astr,usd:usd, stakers:stakers.stakers.length })
+		const usd = ( _ * fx )
+		updateDapp({ ...dapp, astr:astr, usd:usd, stakers:stakers.totalStakers })
 	}, [id, stakers, fx])
+
+	useEffect(()=>{
+		if (!tvl) return
+		const _ = {
+			block: tvl.block,
+			lockers: tvl.lockers,
+			stakers: 0,
+			astr: 0,
+			usd: 0,
+			fx: Number(tvl.fx),
+		}
+		setData(_)
+		setFx( Number(tvl.fx) )
+	},[tvl])
+
 
 	//
 	// ui fragments
@@ -163,40 +152,48 @@ export function DashboardView() {
 
 	const StakerList = () => {
 
-		if (loadingStakers) return <Loader text="Loading Stakers..." />
+		if (loading) return <Loader text="Loading Stakers..." />
 
-		if (stakers.stakers && stakers.stakers.length > 0) {
+		if ( dapp.stakers > 0) {
 			return (
 				<>
-
-					<Stack direction="column">
-						<Typography variant={'h4'}>Total Value Locked (TVL)</Typography>
-						<Stack direction="row" spacing={2} justifyContent="space-between">
-							<Stack direction="column">
-								<Typography variant={'micro'} color={'white'}>
-									$ASTR
-								</Typography>
-								<Typography variant={'hero2'} color={'white'}>
-									{ formatNumber(dapp.astr) || '...' }
-								</Typography>
-							</Stack>
-							<Stack direction="column">
-								<Typography variant={'micro'} color={'white'}>
-									USD
-								</Typography>
-								<Typography variant={'hero2'} color={'white'}>
-									${ formatNumber(dapp.usd) || '...' }
-								</Typography>
-							</Stack>
-							<Stack direction="column">
-								<Typography variant={'micro'} color={'white'}>
-									Stakers
-								</Typography>
-								<Typography variant={'hero2'} color={'white'}>
-									{ dapp.stakers || '...'}
-								</Typography>
-							</Stack>
+					<Stack direction="column" spacing={2} sx={{ padding: 2, border: 1, borderColor: '#ffffff33'}}>
+						<Stack direction="row" spacing={2} alignContent="center">
+							<img src={dapp.iconUrl} width={64} height={64}/>
+							<Box>
+								<Typography variant={'h4'}>{dapp.name}</Typography>
+								<Typography variant={'body1'}>{dapp.shortDescription}</Typography>
+							</Box>
 						</Stack>
+						<Box>
+							<Typography variant={'body1'}>Total Value Locked (TVL)</Typography>
+							<Stack direction="row" spacing={2} justifyContent="space-between">
+								<Stack direction="column">
+									<Typography variant={'micro'} color={'white'}>
+										$ASTR
+									</Typography>
+									<Typography variant={'hero2'} color={'white'}>
+										{ formatNumber(dapp.astr) || '...' }
+									</Typography>
+								</Stack>
+								<Stack direction="column">
+									<Typography variant={'micro'} color={'white'}>
+										USD
+									</Typography>
+									<Typography variant={'hero2'} color={'white'}>
+										${ formatNumber(dapp.usd) || '...' }
+									</Typography>
+								</Stack>
+								<Stack direction="column">
+									<Typography variant={'micro'} color={'white'}>
+										Stakers
+									</Typography>
+									<Typography variant={'hero2'} color={'white'}>
+										{ dapp.stakers || '...'}
+									</Typography>
+								</Stack>
+							</Stack>
+						</Box>
 					</Stack>
 
 					<Typography variant={'h4'}>Top stakers over time</Typography>
@@ -208,6 +205,7 @@ export function DashboardView() {
 									<TableCell>Address</TableCell>
 									<TableCell align="right">Stake</TableCell>
 									<TableCell align="left">Unit</TableCell>
+									<TableCell align="right">Eras</TableCell>
 									<TableCell align="right">Reward ($GAME)</TableCell>
 								</TableRow>
 							</TableHead>
@@ -247,7 +245,10 @@ export function DashboardView() {
 													<Typography variant="mono">USD</Typography>
 												</TableCell>
 												<TableCell align="right">
-													<Typography variant="mono">...</Typography>
+													<Typography variant="mono"></Typography>
+												</TableCell>
+												<TableCell align="right">
+													<Typography variant="mono"><RxClock/></Typography>
 												</TableCell>
 											</TableRow>
 										)
@@ -267,33 +268,30 @@ export function DashboardView() {
 
 	const AstarTVL = () =>
 		<Stack direction="column" sx={{ backgroundColor: '#ffffff11', padding:2}}>
-			<Typography variant={'body1'}>Astar Global dAppStaking Results</Typography>
+			<Typography variant={'body1'}>Astar Global dAppStaking</Typography>
 			<Stack direction="row" spacing={2}>
 				<Typography variant={'body1'} color={'white'}>
 					TVL
 				</Typography>
 				<Typography variant={'body1'} color={'white'}>
-					{ formatNumber(data.astar.astr) || '...' } $ASTR
+					{ formatNumber(data.astr) || '...' } $ASTR
 				</Typography>
 				<Typography variant={'body1'} color={'white'}>
-					{ formatNumber(data.astar.usd) || '...' } USD
+					{ formatNumber(data.usd) || '...' } USD
 				</Typography>
 				<Typography variant={'body1'} color={'white'}>
-					Stakers: {stakers?.stakers?.length || '...'}
+					Lockers: {data.lockers || '...'}
 				</Typography>
 			</Stack>
 		</Stack>
 
-
 	const  UserDetails = () =>
-		<Typography variant={'body1'} color={'white'}>
+		<Typography variant={'body1'} color={'white'} sx={{ backgroundColor: '#ffffff11', padding:2}}>
 			Connected Address: <em>{address}</em><br />
 			Staked by Address: <em>{stakedByAddress.amount}</em>
 		</Typography>
 
-if (loading) return <Loader text="Preparing your Stakeboard..." />
-
-	return (
+	return loading ? <Loader text="Preparing your Stakeboard..." /> : (
 		<Stack spacing={4}>
 			<AstarTVL/>
 			<DappSelector/>
