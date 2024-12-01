@@ -63,8 +63,8 @@ export function DashboardView() {
 
 	const [ id, setId ] = useState<string>( query.id as string || dAppId )
 	const [ fx, setFx ] = useState(0)
-	const [ dapp, updateDapp ] = useState(initDappState)
 	const [ data, setData ] = useState(initAstarState)
+	const [ dapp, updateDapp ] = useState(initDappState)
 
 	// connected wallet address
 	const address = useCurrentAccountAddress()
@@ -84,24 +84,29 @@ export function DashboardView() {
 		}
 	}, [])
 
+	// update selected dapp staking data
+	useEffect(() => {
+		if (!stakers.stakers || stakers.stakers.length === 0) return
+		console.log('stakers changed:', stakers.stakers)
+		const tvl = stakers.stakers.map((staker:TStaker) => staker.amount).reduce((acc, amount) => (acc += amount))
+		const astr = tvl
+		const usd = ( tvl * fx )
+		const _ = {
+			...dapp,
+			astr, usd, stakers:stakers.totalStakers
+		}
+		updateDapp(_)
+	}, [id, stakers, fx])
+
 	// update selected dapp content
 	useEffect(()=>{
 		if ( dappContent.length < 1 ) return
 		console.log('id changed:',id)
 		const data = dappContent.find( dapp => dapp.address === id )
-		console.log('data',{ ...dapp, ...data, id: data.address })
-		updateDapp({ ...dapp, ...data, id: data.address })
+		console.log('data', data.name, { ...dapp })
+		const _ = { ...dapp, ...data, id: data.address }
+		updateDapp(_)
 	},[id, dappContent])
-
-	// update selected dapp staking data
-	useEffect(() => {
-		if (!stakers.stakers || stakers.stakers.length === 0) return
-		console.log('stakers changed:', stakers.stakers)
-		const _ = stakers.stakers.map((staker:TStaker) => staker.amount).reduce((acc, amount) => (acc += amount))
-		const astr = _
-		const usd = ( _ * fx )
-		updateDapp({ ...dapp, astr:astr, usd:usd, stakers:stakers.totalStakers })
-	}, [id, stakers, fx])
 
 	useEffect(()=>{
 		if (!tvl) return
@@ -118,6 +123,8 @@ export function DashboardView() {
 	},[tvl])
 
 
+
+	console.log( id, dapp.name, dapp.iconUrl  )
 	//
 	// ui fragments
 	//
@@ -269,10 +276,7 @@ export function DashboardView() {
 	const AstarTVL = () =>
 		<Stack direction="column" sx={{ backgroundColor: '#ffffff11', padding:2}}>
 			<Typography variant={'body1'}>Astar Global dAppStaking</Typography>
-			<Stack direction="row" spacing={2}>
-				<Typography variant={'body1'} color={'white'}>
-					TVL
-				</Typography>
+			<Stack direction="row" spacing={2} justifyContent="space-between">
 				<Typography variant={'body1'} color={'white'}>
 					{ formatNumber(data.astr) || '...' } $ASTR
 				</Typography>
