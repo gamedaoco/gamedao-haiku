@@ -11,6 +11,7 @@ import { useAstarStakers } from '@gamedao/core/hooks'
 import { useAstarStaking } from '@gamedao/core/hooks'
 import { useAstarTVL } from '@gamedao/core/hooks'
 import { useAstarStakedByAddress } from '@gamedao/core/hooks'
+import { useAstarDappContent } from '@gamedao/core/hooks'
 
 import { useTheme } from '@mui/material/styles'
 import { Stack, Typography, useMediaQuery, Box, Paper, TextField } from '@mui/material'
@@ -22,6 +23,7 @@ import { dAppId } from '@gamedao/constants'
 
 import { usePathname, useSearchParams, useParams } from 'next/navigation'
 import { CommandInteractionOptionResolver } from 'discord.js'
+import { Campaign_Contributor_Select_Column } from '@gamedao/graph'
 
 export function DashboardView() {
 	const logger = useLogger('astar')
@@ -30,7 +32,7 @@ export function DashboardView() {
 	const router = useRouter()
 	const pathname = usePathname()
 	const { query } = useRouter()
-	const [id, setId] = useState(query.id || dAppId)
+	const [id, setId] = useState<string>( query.id as string || dAppId )
 
 	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState({
@@ -52,9 +54,17 @@ export function DashboardView() {
 		ASTRUSD: 0,
 	})
 
+	// get all dapp info to feed into dropdowns etc
+	const [content,setContent] = useState()
+	const { state: dappContent, loading: loadingDappContent } = useAstarDappContent( id )
+	useEffect(()=>{
+		if(loadingDappContent) return
+		setContent(dappContent)
+	},[ loadingDappContent,dappContent])
+
 	const address = useCurrentAccountAddress()
 	const { state: stakedByAddress } = useAstarStakedByAddress(address)
-	const { state: stakers } = useAstarStakers(id)
+	const { state: stakers } = useAstarStakers(id, address)
 	const { state: tvl } = useAstarTVL()
 
 	const [ASTRUSD, setASTRUSD] = useState(0)
