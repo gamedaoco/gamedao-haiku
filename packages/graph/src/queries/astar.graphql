@@ -1,6 +1,47 @@
 # gamedao contract address 0x89ed50cec44a3db4186ba54cdf575ec140937c55
 # gamedao owner address aCVweEHsJYeE7gbd88zvccqBX53PEttrdwJYLRydFrXiRCA
 
+# Get all staking events for a user and a dapp in a period
+query AstarDappStakingEvents ( $address:String, $period:Int, $dapp:String) {
+	stake(where: {
+		dapp_address: { _eq: $dapp },
+		staker_address: { _eq: $address },
+		period: { _eq: $period }
+	}) {
+		id
+		dapp_address
+		block_number
+		amount
+		period
+		staker_address
+		timestamp
+	}
+}
+query AstarDappStakingEventsAggregate ( $dapp:String ) {
+	stake_aggregate(where: {
+		dapp_address: {_eq: $dapp}
+	}) {
+
+		nodes {
+			block_number
+			amount
+			staker_address
+		}
+	}
+}
+
+
+subscription CurrentDappStake( $id:String, $period:Int ) {
+  stakes_per_dap_and_period(where: {
+    dapp_address: { _eq: $id }
+    period: { _eq: $period }
+  }) {
+    stake_amount
+    period
+    reward_amount
+  }
+}
+
 query AstarDappContent($id:String) {
   dAppContent(id:$id) {
     address
@@ -23,8 +64,13 @@ subscription StakersPerDapp($dapp: String!) {
   }
 }
 
-subscription StakesPerDappAndPeriod($dapp: String!) {
-  stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
+subscription StakesPerDappAndPeriod($dapp: String!, $period: Int!) {
+  stakes_per_dap_and_period(
+	where: {
+		dapp_address: {_eq: $dapp},
+		period: { _eq: $period }
+	}
+) {
     dapp_address
     id
     period
@@ -43,19 +89,28 @@ subscription CurrentTVL {
   }
 }
 
-subscription StakesPerDappAndPeriod( $dapp:String!) {
-  stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
-    dapp_address
-    id
-    period
-    reward_amount
-    stake_amount
-  }
-}
+# subscription StakesPerDappAndPeriod( $dapp:String!) {
+#   stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
+#     dapp_address
+#     id
+#     period
+#     reward_amount
+#     stake_amount
+#   }
+# }
 
-subscription StakesPerStakerAndPeriod( $dapp:String!, $address: String!){
-  stakers(where: {dapp_address: {_eq: $dapp}, staker_address: {_eq: $address}}) {
-    amount
+subscription StakesPerStakerAndPeriod(
+	$dapp:String!,
+	# $address: String!,
+	# $period: Int!
+){
+  stakes_per_dap_and_period(where: {
+	dapp_address: {_eq: $dapp},
+	# staker_address: {_eq: $address},
+	# period: 3
+  }) {
+	id
+    stake_amount
   }
 	# stakes_per_staker_and_period_aggregate (where: {
 	# 	# id: {_eq: $dapp },

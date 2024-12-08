@@ -4826,6 +4826,8 @@ export type Query_Root = {
   readonly session_by_pk?: Maybe<Session>;
   /** fetch data from the table: "stake" */
   readonly stake: ReadonlyArray<Stake>;
+  /** fetch aggregated fields from the table: "stake" */
+  readonly stake_aggregate: Stake_Aggregate;
   /** fetch data from the table: "stake" using primary key columns */
   readonly stake_by_pk?: Maybe<Stake>;
   /** fetch data from the table: "stakers" */
@@ -5377,6 +5379,15 @@ export type Query_RootSession_By_PkArgs = {
 
 
 export type Query_RootStakeArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Stake_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Stake_Order_By>>;
+  where?: InputMaybe<Stake_Bool_Exp>;
+};
+
+
+export type Query_RootStake_AggregateArgs = {
   distinct_on?: InputMaybe<ReadonlyArray<Stake_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -6013,6 +6024,45 @@ export type Stake = {
   readonly timestamp: Scalars['numeric']['output'];
 };
 
+/** aggregated selection of "stake" */
+export type Stake_Aggregate = {
+  readonly __typename?: 'stake_aggregate';
+  readonly aggregate?: Maybe<Stake_Aggregate_Fields>;
+  readonly nodes: ReadonlyArray<Stake>;
+};
+
+/** aggregate fields of "stake" */
+export type Stake_Aggregate_Fields = {
+  readonly __typename?: 'stake_aggregate_fields';
+  readonly avg?: Maybe<Stake_Avg_Fields>;
+  readonly count: Scalars['Int']['output'];
+  readonly max?: Maybe<Stake_Max_Fields>;
+  readonly min?: Maybe<Stake_Min_Fields>;
+  readonly stddev?: Maybe<Stake_Stddev_Fields>;
+  readonly stddev_pop?: Maybe<Stake_Stddev_Pop_Fields>;
+  readonly stddev_samp?: Maybe<Stake_Stddev_Samp_Fields>;
+  readonly sum?: Maybe<Stake_Sum_Fields>;
+  readonly var_pop?: Maybe<Stake_Var_Pop_Fields>;
+  readonly var_samp?: Maybe<Stake_Var_Samp_Fields>;
+  readonly variance?: Maybe<Stake_Variance_Fields>;
+};
+
+
+/** aggregate fields of "stake" */
+export type Stake_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<ReadonlyArray<Stake_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Stake_Avg_Fields = {
+  readonly __typename?: 'stake_avg_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
+};
+
 /** Boolean expression to filter rows from the table "stake". All fields are combined with a logical 'AND'. */
 export type Stake_Bool_Exp = {
   readonly _and?: InputMaybe<ReadonlyArray<Stake_Bool_Exp>>;
@@ -6025,6 +6075,30 @@ export type Stake_Bool_Exp = {
   readonly period?: InputMaybe<Int_Comparison_Exp>;
   readonly staker_address?: InputMaybe<String_Comparison_Exp>;
   readonly timestamp?: InputMaybe<Numeric_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Stake_Max_Fields = {
+  readonly __typename?: 'stake_max_fields';
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly block_number?: Maybe<Scalars['Int']['output']>;
+  readonly dapp_address?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly period?: Maybe<Scalars['Int']['output']>;
+  readonly staker_address?: Maybe<Scalars['String']['output']>;
+  readonly timestamp?: Maybe<Scalars['numeric']['output']>;
+};
+
+/** aggregate min on columns */
+export type Stake_Min_Fields = {
+  readonly __typename?: 'stake_min_fields';
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly block_number?: Maybe<Scalars['Int']['output']>;
+  readonly dapp_address?: Maybe<Scalars['String']['output']>;
+  readonly id?: Maybe<Scalars['String']['output']>;
+  readonly period?: Maybe<Scalars['Int']['output']>;
+  readonly staker_address?: Maybe<Scalars['String']['output']>;
+  readonly timestamp?: Maybe<Scalars['numeric']['output']>;
 };
 
 /** Ordering options when selecting data from "stake". */
@@ -6056,6 +6130,33 @@ export enum Stake_Select_Column {
   Timestamp = 'timestamp'
 }
 
+/** aggregate stddev on columns */
+export type Stake_Stddev_Fields = {
+  readonly __typename?: 'stake_stddev_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Stake_Stddev_Pop_Fields = {
+  readonly __typename?: 'stake_stddev_pop_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Stake_Stddev_Samp_Fields = {
+  readonly __typename?: 'stake_stddev_samp_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
+};
+
 /** Streaming cursor of the table "stake" */
 export type Stake_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -6073,6 +6174,42 @@ export type Stake_Stream_Cursor_Value_Input = {
   readonly period?: InputMaybe<Scalars['Int']['input']>;
   readonly staker_address?: InputMaybe<Scalars['String']['input']>;
   readonly timestamp?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Stake_Sum_Fields = {
+  readonly __typename?: 'stake_sum_fields';
+  readonly amount?: Maybe<Scalars['numeric']['output']>;
+  readonly block_number?: Maybe<Scalars['Int']['output']>;
+  readonly period?: Maybe<Scalars['Int']['output']>;
+  readonly timestamp?: Maybe<Scalars['numeric']['output']>;
+};
+
+/** aggregate var_pop on columns */
+export type Stake_Var_Pop_Fields = {
+  readonly __typename?: 'stake_var_pop_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Stake_Var_Samp_Fields = {
+  readonly __typename?: 'stake_var_samp_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Stake_Variance_Fields = {
+  readonly __typename?: 'stake_variance_fields';
+  readonly amount?: Maybe<Scalars['Float']['output']>;
+  readonly block_number?: Maybe<Scalars['Float']['output']>;
+  readonly period?: Maybe<Scalars['Float']['output']>;
+  readonly timestamp?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "stakers" */
@@ -6657,6 +6794,8 @@ export type Subscription_Root = {
   readonly session_stream: ReadonlyArray<Session>;
   /** fetch data from the table: "stake" */
   readonly stake: ReadonlyArray<Stake>;
+  /** fetch aggregated fields from the table: "stake" */
+  readonly stake_aggregate: Stake_Aggregate;
   /** fetch data from the table: "stake" using primary key columns */
   readonly stake_by_pk?: Maybe<Stake>;
   /** fetch data from the table in a streaming manner: "stake" */
@@ -7441,6 +7580,15 @@ export type Subscription_RootStakeArgs = {
 };
 
 
+export type Subscription_RootStake_AggregateArgs = {
+  distinct_on?: InputMaybe<ReadonlyArray<Stake_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<ReadonlyArray<Stake_Order_By>>;
+  where?: InputMaybe<Stake_Bool_Exp>;
+};
+
+
 export type Subscription_RootStake_By_PkArgs = {
   id: Scalars['String']['input'];
 };
@@ -7947,6 +8095,30 @@ export type Voting_Stream_Cursor_Value_Input = {
   readonly yes?: InputMaybe<Scalars['numeric']['input']>;
 };
 
+export type AstarDappStakingEventsQueryVariables = Exact<{
+  address?: InputMaybe<Scalars['String']['input']>;
+  period?: InputMaybe<Scalars['Int']['input']>;
+  dapp?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type AstarDappStakingEventsQuery = { readonly __typename?: 'query_root', readonly stake: ReadonlyArray<{ readonly __typename?: 'stake', readonly id: string, readonly dapp_address: string, readonly block_number: number, readonly amount: any, readonly period: number, readonly staker_address: string, readonly timestamp: any }> };
+
+export type AstarDappStakingEventsAggregateQueryVariables = Exact<{
+  dapp?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type AstarDappStakingEventsAggregateQuery = { readonly __typename?: 'query_root', readonly stake_aggregate: { readonly __typename?: 'stake_aggregate', readonly nodes: ReadonlyArray<{ readonly __typename?: 'stake', readonly block_number: number, readonly amount: any, readonly staker_address: string }> } };
+
+export type CurrentDappStakeSubscriptionVariables = Exact<{
+  id?: InputMaybe<Scalars['String']['input']>;
+  period?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CurrentDappStakeSubscription = { readonly __typename?: 'subscription_root', readonly stakes_per_dap_and_period: ReadonlyArray<{ readonly __typename?: 'stakes_per_dap_and_period', readonly stake_amount: any, readonly period: number, readonly reward_amount: any }> };
+
 export type AstarDappContentQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -7963,6 +8135,7 @@ export type StakersPerDappSubscription = { readonly __typename?: 'subscription_r
 
 export type StakesPerDappAndPeriodSubscriptionVariables = Exact<{
   dapp: Scalars['String']['input'];
+  period: Scalars['Int']['input'];
 }>;
 
 
@@ -7975,11 +8148,10 @@ export type CurrentTvlSubscription = { readonly __typename?: 'subscription_root'
 
 export type StakesPerStakerAndPeriodSubscriptionVariables = Exact<{
   dapp: Scalars['String']['input'];
-  address: Scalars['String']['input'];
 }>;
 
 
-export type StakesPerStakerAndPeriodSubscription = { readonly __typename?: 'subscription_root', readonly stakers: ReadonlyArray<{ readonly __typename?: 'stakers', readonly amount: any }> };
+export type StakesPerStakerAndPeriodSubscription = { readonly __typename?: 'subscription_root', readonly stakes_per_dap_and_period: ReadonlyArray<{ readonly __typename?: 'stakes_per_dap_and_period', readonly id: string, readonly stake_amount: any }> };
 
 export type StakingDataSubscriptionVariables = Exact<{
   dapp_address: Scalars['String']['input'];
@@ -8086,6 +8258,135 @@ export type UpdateSessionMutationVariables = Exact<{
 export type UpdateSessionMutation = { readonly __typename?: 'mutation_root', readonly updateSession: boolean };
 
 
+export const AstarDappStakingEventsDocument = gql`
+    query AstarDappStakingEvents($address: String, $period: Int, $dapp: String) {
+  stake(
+    where: {dapp_address: {_eq: $dapp}, staker_address: {_eq: $address}, period: {_eq: $period}}
+  ) {
+    id
+    dapp_address
+    block_number
+    amount
+    period
+    staker_address
+    timestamp
+  }
+}
+    `;
+
+/**
+ * __useAstarDappStakingEventsQuery__
+ *
+ * To run a query within a React component, call `useAstarDappStakingEventsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAstarDappStakingEventsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAstarDappStakingEventsQuery({
+ *   variables: {
+ *      address: // value for 'address'
+ *      period: // value for 'period'
+ *      dapp: // value for 'dapp'
+ *   },
+ * });
+ */
+export function useAstarDappStakingEventsQuery(baseOptions?: Apollo.QueryHookOptions<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>(AstarDappStakingEventsDocument, options);
+      }
+export function useAstarDappStakingEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>(AstarDappStakingEventsDocument, options);
+        }
+export function useAstarDappStakingEventsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>(AstarDappStakingEventsDocument, options);
+        }
+export type AstarDappStakingEventsQueryHookResult = ReturnType<typeof useAstarDappStakingEventsQuery>;
+export type AstarDappStakingEventsLazyQueryHookResult = ReturnType<typeof useAstarDappStakingEventsLazyQuery>;
+export type AstarDappStakingEventsSuspenseQueryHookResult = ReturnType<typeof useAstarDappStakingEventsSuspenseQuery>;
+export type AstarDappStakingEventsQueryResult = Apollo.QueryResult<AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables>;
+export const AstarDappStakingEventsAggregateDocument = gql`
+    query AstarDappStakingEventsAggregate($dapp: String) {
+  stake_aggregate(where: {dapp_address: {_eq: $dapp}}) {
+    nodes {
+      block_number
+      amount
+      staker_address
+    }
+  }
+}
+    `;
+
+/**
+ * __useAstarDappStakingEventsAggregateQuery__
+ *
+ * To run a query within a React component, call `useAstarDappStakingEventsAggregateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAstarDappStakingEventsAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAstarDappStakingEventsAggregateQuery({
+ *   variables: {
+ *      dapp: // value for 'dapp'
+ *   },
+ * });
+ */
+export function useAstarDappStakingEventsAggregateQuery(baseOptions?: Apollo.QueryHookOptions<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>(AstarDappStakingEventsAggregateDocument, options);
+      }
+export function useAstarDappStakingEventsAggregateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>(AstarDappStakingEventsAggregateDocument, options);
+        }
+export function useAstarDappStakingEventsAggregateSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>(AstarDappStakingEventsAggregateDocument, options);
+        }
+export type AstarDappStakingEventsAggregateQueryHookResult = ReturnType<typeof useAstarDappStakingEventsAggregateQuery>;
+export type AstarDappStakingEventsAggregateLazyQueryHookResult = ReturnType<typeof useAstarDappStakingEventsAggregateLazyQuery>;
+export type AstarDappStakingEventsAggregateSuspenseQueryHookResult = ReturnType<typeof useAstarDappStakingEventsAggregateSuspenseQuery>;
+export type AstarDappStakingEventsAggregateQueryResult = Apollo.QueryResult<AstarDappStakingEventsAggregateQuery, AstarDappStakingEventsAggregateQueryVariables>;
+export const CurrentDappStakeDocument = gql`
+    subscription CurrentDappStake($id: String, $period: Int) {
+  stakes_per_dap_and_period(
+    where: {dapp_address: {_eq: $id}, period: {_eq: $period}}
+  ) {
+    stake_amount
+    period
+    reward_amount
+  }
+}
+    `;
+
+/**
+ * __useCurrentDappStakeSubscription__
+ *
+ * To run a query within a React component, call `useCurrentDappStakeSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentDappStakeSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentDappStakeSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *      period: // value for 'period'
+ *   },
+ * });
+ */
+export function useCurrentDappStakeSubscription(baseOptions?: Apollo.SubscriptionHookOptions<CurrentDappStakeSubscription, CurrentDappStakeSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<CurrentDappStakeSubscription, CurrentDappStakeSubscriptionVariables>(CurrentDappStakeDocument, options);
+      }
+export type CurrentDappStakeSubscriptionHookResult = ReturnType<typeof useCurrentDappStakeSubscription>;
+export type CurrentDappStakeSubscriptionResult = Apollo.SubscriptionResult<CurrentDappStakeSubscription>;
 export const AstarDappContentDocument = gql`
     query AstarDappContent($id: String) {
   dAppContent(id: $id) {
@@ -8166,8 +8467,10 @@ export function useStakersPerDappSubscription(baseOptions: Apollo.SubscriptionHo
 export type StakersPerDappSubscriptionHookResult = ReturnType<typeof useStakersPerDappSubscription>;
 export type StakersPerDappSubscriptionResult = Apollo.SubscriptionResult<StakersPerDappSubscription>;
 export const StakesPerDappAndPeriodDocument = gql`
-    subscription StakesPerDappAndPeriod($dapp: String!) {
-  stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
+    subscription StakesPerDappAndPeriod($dapp: String!, $period: Int!) {
+  stakes_per_dap_and_period(
+    where: {dapp_address: {_eq: $dapp}, period: {_eq: $period}}
+  ) {
     dapp_address
     id
     period
@@ -8190,6 +8493,7 @@ export const StakesPerDappAndPeriodDocument = gql`
  * const { data, loading, error } = useStakesPerDappAndPeriodSubscription({
  *   variables: {
  *      dapp: // value for 'dapp'
+ *      period: // value for 'period'
  *   },
  * });
  */
@@ -8233,9 +8537,10 @@ export function useCurrentTvlSubscription(baseOptions?: Apollo.SubscriptionHookO
 export type CurrentTvlSubscriptionHookResult = ReturnType<typeof useCurrentTvlSubscription>;
 export type CurrentTvlSubscriptionResult = Apollo.SubscriptionResult<CurrentTvlSubscription>;
 export const StakesPerStakerAndPeriodDocument = gql`
-    subscription StakesPerStakerAndPeriod($dapp: String!, $address: String!) {
-  stakers(where: {dapp_address: {_eq: $dapp}, staker_address: {_eq: $address}}) {
-    amount
+    subscription StakesPerStakerAndPeriod($dapp: String!) {
+  stakes_per_dap_and_period(where: {dapp_address: {_eq: $dapp}}) {
+    id
+    stake_amount
   }
 }
     `;
@@ -8253,7 +8558,6 @@ export const StakesPerStakerAndPeriodDocument = gql`
  * const { data, loading, error } = useStakesPerStakerAndPeriodSubscription({
  *   variables: {
  *      dapp: // value for 'dapp'
- *      address: // value for 'address'
  *   },
  * });
  */
