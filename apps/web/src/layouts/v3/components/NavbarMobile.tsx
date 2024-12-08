@@ -44,16 +44,16 @@ interface ComponentProps {
 
 // TODO: Extract to features / graphql
 const leftNav = [
-	{
-		name: 'Organizations', // 'button:navigation:organizations',
-		path: '/organizations',
-		icon: <RiShieldLine />,
-	},
-	{
-		name: 'Campaigns', // button:navigation:campaigns',
-		path: '/campaigns',
-		icon: <RiExchangeFundsLine />,
-	},
+	// {
+	// 	name: 'Organizations', // 'button:navigation:organizations',
+	// 	path: '/organizations',
+	// 	icon: <RiShieldLine />,
+	// },
+	// {
+	// 	name: 'Campaigns', // button:navigation:campaigns',
+	// 	path: '/campaigns',
+	// 	icon: <RiExchangeFundsLine />,
+	// },
 	// {
 	// 	name: 'Battlepass', //'button:navigation:quests',
 	// 	path: '/battlepass',
@@ -173,17 +173,17 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 
 			<Stack p={4} justifyContent="space-between" height="100%">
 				<Stack spacing={2}>
-					<AccountSelector />
+					{/* <AccountSelector /> */}
 
 					{leftNav.map((item) => {
 						return (
 							<Fragment key={item.name}>
-								<Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
+								{/* <Link href={item.path} target={item.path.includes('http') ? '_blank' : null}>
 									<ListItemButton>
 										{item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
 										<ListItemText>{t(item.name)}</ListItemText>
 									</ListItemButton>
-								</Link>
+								</Link> */}
 							</Fragment>
 						)
 					})}
@@ -220,10 +220,7 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 						</Button>
 					</Box>
 
-					{/*					<Stack direction="row" spacing={4}>
-						<Link href="https://discord.gg/P7NHWGzJ7r">
-							<SiDiscord size="25" />
-						</Link>
+					<Stack direction="row" spacing={4}>
 						<Link href="https://t.me/gamedaoco">
 							<SiTelegram size="25" />
 						</Link>
@@ -236,7 +233,12 @@ export function NavbarMobile({ onClose, open }: ComponentProps) {
 						<Link href="https://www.linkedin.com/company/gamedaoco">
 							<SiLinkedin size="25" />
 						</Link>
-					</Stack>*/}
+					</Stack>
+					{/*
+						<Link href="https://discord.gg/P7NHWGzJ7r">
+							<SiDiscord size="25" />
+						</Link>
+					*/}
 				</Stack>
 			</Stack>
 		</Drawer>

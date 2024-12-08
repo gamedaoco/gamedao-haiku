@@ -1,0 +1,81 @@
+
+## Why
+
+For game creators and studios, the challenges of game development are often compounded
+by the lack of access to transparent funding, reliable publishing options, and the ability
+to maintain control over their creative vision.
+
+Investors, on the other hand, face the difficulty of identifying high-potential projects
+and navigating the complexities of supporting indie studios without overwhelming risk.
+
+Traditional publishing and production pipelines tend to prioritize corporate interests
+over community input, leaving indie developers and their players disconnected from the decision-making process.
+
+## Risk
+
+Indie game creators and studios risk sacrificing their creative autonomy
+in exchange for funding, or worse, losing momentum due to lack of resources.
+The pressure to compromise on innovation in favor of market trends can lead to
+uninspired releases, reducing the game's long-term potential.
+For investors, these broken systems can mean missed opportunities, unclear returns,
+and lack of influence in the projects they back.
+
+Without a community-governed model, both creators and investors remain at the
+mercy of outdated structures that limit growth and innovation.
+
+## GameDAO
+
+GameDAO offers a groundbreaking alternative.
+It’s more than a platform—it’s a decentralized, community-governed ecosystem
+where creators, studios, and investors can thrive.
+
+GameDAO brings together all the tools needed for successful game production,
+publishing, and community engagement, while also enabling transparent and
+community-driven funding. Game creators and studios can access a treasury of resources,
+voted on by the community, ensuring alignment between players, creators, and funders.
+
+Investors have the opportunity to support the next big indie hit with confidence,
+knowing their input can directly influence project outcomes, governance decisions,
+and the future direction of a game’s development.
+
+## Imagine
+
+Imagine a world where your creative vision is not just supported but amplified
+by a community that’s actively invested in your success. As a game creator or studio,
+you can remain in control of your project while engaging with a passionate player base
+that offers feedback, governance, and resources along the way.
+
+Investors, on the other hand, gain unprecedented access to community-approved projects,
+ensuring alignment and reducing risk. With GameDAO’s governance framework,
+every decision—from development milestones to funding allocation—happens transparently and democratically.
+
+## Join
+
+GameDAO provides an ecosystem that caters to the needs of creators, studios, and investors alike.
+With GameDAO, you can publish your game independently, raise community-backed funds through
+decentralized treasuries, and engage in a transparent production pipeline where decisions
+are driven by those who care most—your community.
+
+For investors, GameDAO offers access to vetted, high-potential projects with clear governance,
+giving you both insight and influence in the growth of the games you fund.
+
+##
+
+The future of game development is here, and it’s powered by community. Whether you’re a game creator looking to break free from traditional models, a studio seeking resources and player engagement, or an investor eager to support the next generation of gaming innovation, GameDAO is your platform. Join GameDAO today to take control of your creative journey, connect with like-minded studios, and shape the future of gaming with the power of decentralized governance. Visit [GameDAO.com] to get started and take the next step toward a community-driven game development revolution.
+
+import { Layout } from 'layouts/v3'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+
+export default ({ children }) =>
+	<Layout showHeader showFooter>
+		<Container maxWidth="lg">
+			<Box sx={{
+				// pt: ['5rem', '5rem', '2rem'],
+				// pb: '1rem', minHeight: '100vh',
+				h1: { my:2 }, h2: { my:2 }, h3: { my:2 },  '& > p': { my: 2 }
+			}}>
+				{ children }
+			</Box>
+		</Container>
+	</Layout>

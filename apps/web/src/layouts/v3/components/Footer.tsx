@@ -28,7 +28,7 @@ export function Footer() {
 			py={3}
 			px={1}
 			sx={{
-				backgroundColor: `#00000069`,
+				backgroundColor: '#ff00ff',
 				a: { opacity: 0.8, textShadow: '15px pink' },
 				'a:hover': { color: '#fcf', opacity: 1, textShadow: '0 0 5px #f3f', borderBottom: '1px dotted #f3f' },
 				'*': { transitionTimingFunction: 'ease-in-out;', transitionDuration: '150ms' },
@@ -48,38 +48,41 @@ export function Footer() {
 							</Typography>
 							<Typography variant="caption" mb={2}>
 								<Link href="https://blog.gamedao.co/the-gamedao-pinky-paper-8dcda7f2e1ca">
-									pinky paper
+									Pinky Paper
 								</Link>
-								<Link href="https://blog.gamedao.co">blog</Link>
-								<Link href="https://docs.gamedao.co">documentation</Link>
+								<Link href="https://blog.gamedao.co">Blog</Link>
+								<Link href="https://docs.gamedao.co">Documentation</Link>
 								<br />
-								<Link href="https://discord.gg/rhwtr7p">discord</Link>
-								<Link href="https://t.me/gamedaoco">telegram</Link>
-								<Link href="https://twitter.com/gamedaoco">twitter</Link>
-								<Link href="https://www.linkedin.com/company/gamedaoco">linkedin</Link>
-								<br />
-								<NextLink href="/service/account">select account</NextLink>
-								<br />
-								<NextLink href="/service/network">select network</NextLink>
+								<Link href="https://discord.gg/rhwtr7p">Discord</Link>
+								<Link href="https://www.twitch.tv/gamedaoco">Twitch</Link>
+								<Link href="https://t.me/gamedaoco">Telegram</Link>
+								<Link href="https://twitter.com/gamedaoco">Twitter</Link>
+								<Link href="https://www.linkedin.com/company/gamedaoco">Linkedin</Link>
+								{/* <br /> */}
+								{/* <NextLink href="/service/account">select account</NextLink> */}
+								{/* <br /> */}
+								{/* <NextLink href="/service/network">select network</NextLink> */}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} md={2} mb={4}>
 							<Typography variant="h6" mb={2}>
-								How we build
+								Join
 							</Typography>
 							<Typography variant="caption" mb={2}>
-								<Link href="https://zero.io">zero.io</Link>
-								<Link href="https://acala.network">acala.network</Link>
-								<Link href="https://substrate.dev">substrate.dev</Link>
-								<Link href="https://kilt.io">kilt protocol</Link>
-								<Link href="https://fractal.id">fractal id</Link>
-								<br />
-								<Link href="https://github.com/gamedaoco">github</Link>
-								<Link
+								<Link href="/join#creator">Creator</Link>
+								<Link href="/join#studio">Studio</Link>
+								<Link href="/join#investor">Investor</Link>
+								{/* <Link href="https://acala.network">acala.network</Link> */}
+								{/* <Link href="https://substrate.dev">substrate.dev</Link> */}
+								{/* <Link href="https://kilt.io">kilt protocol</Link> */}
+								{/* <Link href="https://fractal.id">fractal id</Link> */}
+								{/* <br /> */}
+								{/* <Link href="https://github.com/gamedaoco">github</Link> */}
+								{/* <Link
 									href={`https://polkadot.js.org/apps/?rpc=${encodeURIComponent(chain.toLowerCase())}#/explorer`}
 								>
 									Polkadot Explorer
-								</Link>
+								</Link> */}
 							</Typography>
 						</Grid>
 						<Grid item xs={12} md={6} mb={4}>

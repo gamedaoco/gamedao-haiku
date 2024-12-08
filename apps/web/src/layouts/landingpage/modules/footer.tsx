@@ -138,12 +138,12 @@ export function Footer() {
 							<Typography variant="body1" mb={2}>
 								<Link href="https://zero.io">zero.io</Link>
 								<br />
-								<Link href="https://acala.network">acala.network</Link>
+								{/* <Link href="https://acala.network">acala.network</Link>
 								<br />
-								<Link href="https://substrate.dev">substrate.dev</Link>
+								<Link href="https://astar.network">substrate.dev</Link>
 								<br />
 								<Link href="https://kilt.io">kilt protocol</Link>
-								<br />
+								<br /> */}
 								{/*<Link href="https://fractal.id">fractal id</Link><br/>*/}
 								<br />
 								<br />

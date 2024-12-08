@@ -41,11 +41,11 @@ interface ComponentProps {
 }
 
 const leftNav = [
-	{
-		name: 'Cases', // 'button:navigation:organizations',
-		path: '/cases',
-		icon: <RiTreasureMapLine />,
-	},
+	// {
+	// 	name: 'Cases', // 'button:navigation:organizations',
+	// 	path: '/cases',
+	// 	icon: <RiTreasureMapLine />,
+	// },
 	// {
 	// 	name: 'Organizations', // 'button:navigation:organizations',
 	// 	path: '/organizations',
@@ -220,14 +220,15 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 							{isLg && <Typography sx={{ pl: 2, mr: 2 }}>Feedback</Typography>}
 						</Button>
 					</Link>
+
 					<Link href="https://discord.gg/h2VMgWY">
-						<Button variant="outlined">
+						<Button>
 							<RxDiscordLogo />
-							{isMd && <Typography sx={{ pl: 2, mr: 2 }}>Join Discord</Typography>}
+							{isMd && <Typography sx={{ pl: 2, mr: 2 }}>Discord</Typography>}
 						</Button>
 					</Link>
 
-					{!connected &&
+					{/* {!connected &&
 						w3Enabled &&
 						rightNav.map((item) => {
 							return (
@@ -242,7 +243,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 									</Button>
 								</Link>
 							)
-						})}
+						})} */}
 
 					{showFeedback && (
 						<BaseDialog open={true} onClose={closeFeedback} title="Send us some Feedback!">
@@ -252,9 +253,9 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 						</BaseDialog>
 					)}
 
-					{!hideDApps && <AccountSelector />}
+					{/* {!hideDApps && <AccountSelector />} */}
 
-					<Box sx={{ display: { xs: 'block', md: 'none' } }} marginLeft={4}>
+					{/* <Box sx={{ display: { xs: 'block', md: 'none' } }} marginLeft={4}>
 						<Button
 							onClick={() => onSidebarOpen()}
 							aria-label="Menu"
@@ -267,7 +268,7 @@ export function Header({ onSidebarOpen, sidebarOpen, noContainer, hideDApps }: C
 						>
 							<MenuIcon />
 						</Button>
-					</Box>
+					</Box> */}
 				</Stack>
 			</Toolbar>
 		</AppBar>
