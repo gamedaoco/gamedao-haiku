@@ -6,7 +6,6 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { CacheProvider, EmotionCache } from '@emotion/react'
 import * as Fathom from 'fathom-client'
 
 import { ENVIRONMENT } from '@gamedao/constants'
@@ -15,6 +14,7 @@ import { Logger } from '@gamedao/utils'
 
 import { Providers } from 'src/providers'
 
+import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'src/theme/createEmotionCache'
 // import 'src/theme/css/modelViewer.css'
 import 'src/theme/css/toastify.css'

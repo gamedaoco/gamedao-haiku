@@ -20,27 +20,14 @@
     "jsx": "preserve",
     "baseUrl": "",
     "paths": {
-      "components/*": [
-        "src/components/*"
-      ],
-      "dapps/*": [
-        "src/dapps/*"
-      ],
-      "layouts/*": [
-        "src/layouts/*"
-      ],
-      "providers/*": [
-        "src/providers/*"
-      ],
-      "public/*": [
-        "public/*"
-      ],
-      "src/*": [
-        "src/*"
-      ],
-      "themes/*": [
-        "src/themes/*"
-      ],
+      "components/*": [ "src/components/*" ],
+      "dapps/*": [ "src/dapps/*" ],
+      "layouts/*": [ "src/layouts/*" ],
+      "providers/*": [ "src/providers/*" ],
+      "public/*": [ "public/*" ],
+      "src/*": [ "src/*" ],
+      "themes/*": [ "src/themes/*" ],
+      "react": [ "./node_modules/@types/react" ]
     }
   },
   "include": [
