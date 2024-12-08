@@ -11,10 +11,8 @@ const initialState = {
 }
 
 export function useAstarTVL() {
-	const logger = useLogger('astar')
-
+	const logger = useLogger('useAstarTVL')
 	const [state, setState] = useState(initialState)
-
 	const { loading, data, error } = useCurrentTvlSubscription()
 
 	useEffect(() => {

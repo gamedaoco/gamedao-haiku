@@ -1,5 +1,5 @@
 import { SubmittableExtrinsic } from '@polkadot/api/promise/types'
-import { PromiseMsg } from 'src/@types/promiseMsg'
+import { PromiseMsg } from './promiseMsg'
 
 export interface TransactionData {
 	tx: SubmittableExtrinsic

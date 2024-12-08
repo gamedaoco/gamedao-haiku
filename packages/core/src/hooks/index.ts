@@ -4,11 +4,15 @@ export * from './featureToggle/useProposalFeatures'
 export * from './useAddresses'
 export * from './useApiProvider'
 
-export * from './useAstarDappStakers'
 export * from './useAstarStakedByAddress'
 export * from './useAstarStaking'
 export * from './useAstarTVL'
+
 export * from './useAstarDappContent'
+export * from './useAstarDappStakers'
+export * from './useAstarDappStakingEvents'
+export * from './useAstarDappStakingEventsAggregate'
+export * from './useAstarDappCurrentTVL'
 
 export * from './useConfig'
 export * from './useCurrentAccountAddress'

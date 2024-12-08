@@ -13,7 +13,7 @@ const initialState = {
 }
 
 export function useAstarStaking(address: string) {
-	const logger = useLogger()
+	const logger = useLogger('useAstarStaking')
 	const [state, setState] = useState(initialState)
 	const { loading, data, error } = useStakingDataSubscription({
 		variables: {
