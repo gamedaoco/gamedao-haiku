@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
 	trailingComma: 'all',
 	singleQuote: true,
 	bracketSpacing: true,
@@ -20,5 +20,3 @@ const config = {
 		},
 	],
 }
-
-export default config

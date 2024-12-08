@@ -63,11 +63,6 @@
       "@commitlint/config-conventional"
     ]
   },
-  "eslintConfig": {
-    "rules": {
-      "@next/next/no-img-element": "off"
-    }
-  },
   "devDependencies": {
     "@changesets/cli": "^2.23.2",
     "@commitlint/cli": "19.5.0",
@@ -102,6 +97,9 @@
     "@polkadot/wasm-crypto": "^7.3.1",
     "@polkadot/wasm-util": "^7.3.1",
     "@polkadot/x-randomvalues": "^13.2.3",
+    "next": "^13.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.2.2"
   }
 }
