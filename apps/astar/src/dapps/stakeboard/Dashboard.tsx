@@ -29,12 +29,21 @@ import { Stack, Typography, useMediaQuery, Box, Paper, TextField } from '@mui/ma
 // import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 // import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 
+//
+// TODO:
+// -- duration = current block - first block staked
+// -- reward factors =
+//    periods of dapp staking participation
+//    total stakers per period * stake
+//
+
 import { type TStaker } from './types'
 
 import { Loader } from 'components/atoms/Loader'
 import { DappSelector } from './components/DappSelector'
 import { DappStakers } from './components/DappStakers'
 import { DappInfo } from './components/DappInfo'
+import { RewardChart } from './components/RewardChart'
 
 const initDappState = {
 	astr: 0,
@@ -183,6 +192,7 @@ export function DashboardView() {
 			{/* <AstarTVL/> */}
 			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
 			<DappInfo dapp={dapp} />
+			<RewardChart id={id} />
 			<StakerList />
 			{/* <UserDetails /> */}
 		</Stack>
