@@ -16,3 +16,5 @@ export * from './useAstarDappCurrentTVL'
 
 export * from './useConfig'
 export * from './useCurrentAccountAddress'
+
+export * from './useLocalStorage'

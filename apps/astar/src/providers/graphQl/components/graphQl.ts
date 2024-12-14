@@ -38,8 +38,8 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 						connectionParams: {
 							headers: {
 								'Access-Control-Allow-Origin': '*',
-								// 'x-hasura-admin-secret': process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-								// Authorization: `Bearer ${process.env.NEXT_PUBLIC_HASURA_BEARER_TOKEN}`,
+								'x-hasura-admin-secret': process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
+								Authorization: `Bearer ${process.env.NEXT_PUBLIC_HASURA_BEARER_TOKEN}`,
 							},
 						},
 					}),
@@ -50,8 +50,8 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 		uri: endpoint?.url,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
-			// 'x-hasura-admin-secret': process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
-			// Authorization: `Bearer ${process.env.NEXT_PUBLIC_HASURA_BEARER_TOKEN}`,
+			'x-hasura-admin-secret': process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
+			Authorization: `Bearer ${process.env.NEXT_PUBLIC_HASURA_BEARER_TOKEN}`,
 		},
 	})
 

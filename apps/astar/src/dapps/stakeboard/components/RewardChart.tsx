@@ -1,5 +1,5 @@
 import { LineChart } from '@mui/x-charts/LineChart'
-import { Stack, Typography, Box } from '@mui/material'
+import { Stack } from '@mui/material'
 
 // sigmoid function from distribution document
 
@@ -18,18 +18,24 @@ export const dataset = [
 	{ x: 121, y: 0.004070137716 },
 ]
 
+const lin = [0.0833, 0.1667, 0.25, 0.3333, 0.4167, 0.5, 0.5833, 0.6667, 0.75, 0.8333, 0.9167, 1.0]
+
 export const RewardChart = ({ id }) => {
-	return id === '0x89ed50cec44a3db4186ba54cdf575ec140937c55' ? (
+	if (id !== '0x89ed50cec44a3db4186ba54cdf575ec140937c55') return null
+	return (
 		<Stack direction="column" spacing={1} sx={{ width: '100%', padding: 1, border: 1, borderColor: '#ffffff33' }}>
 			<LineChart
 				dataset={dataset}
 				xAxis={[{ scaleType: 'point', dataKey: 'x' }]}
-				series={[{ dataKey: 'y' }]}
+				series={[
+					{ dataKey: 'y' },
+					// { data: lin }
+				]}
 				height={200}
 				grid={{ horizontal: true }}
 				margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
-				skipAnimation={true}
+				skipAnimation
 			/>
 		</Stack>
-	) : null
+	)
 }

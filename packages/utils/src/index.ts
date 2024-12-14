@@ -6,6 +6,7 @@ export * from './accountUtils'
 export * from './avatars'
 export * from './balance'
 export * from './logger'
+export * from './notificationUtils'
 
 export const copyToClipboard = (content) =>
 	navigator.clipboard.writeText(content).then(() => createInfoNotification('copied'))

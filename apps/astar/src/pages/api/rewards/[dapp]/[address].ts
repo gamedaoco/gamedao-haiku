@@ -29,6 +29,10 @@ export async function handler(req: NextApiRequest, res: NextApiResponse<Response
 		const wsProvider = new WsProvider(url)
 		const api = await ApiPromise.create({ provider: wsProvider })
 
+		// query current stake by `address` for `dapp`
+		// const dappFallback = '0x89ed50cec44a3db4186ba54cdf575ec140937c55'
+		// const staked = await api.query.dappStaking.stakerInfo([address,])
+
 		try {
 			const locked = await api.query.dappStaking.ledger(address).then((_) => _.locked.toString())
 			const last = await api.query.dappStaking.ledger(address).then((_) => _.staked.era)

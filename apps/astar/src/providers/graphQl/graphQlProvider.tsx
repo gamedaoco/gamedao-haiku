@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { ApolloClient, ApolloProvider } from '@apollo/client'
-import { useLocalStorage } from '@gamedao/core/hooks/useLocalStorage'
 import { GraphQlContext } from 'src/providers/graphQl/components/context'
 import { createApolloClient } from 'src/providers/graphQl/components/graphQl'
-import { useTranslation } from 'react-i18next'
-import { Endpoint } from '@gamedao/core/@types/graphql'
+
+import { ApolloClient, ApolloProvider } from '@apollo/client'
+import type { Endpoint } from '@gamedao/core/@types/graphql'
 import { ENDPOINTS } from '@gamedao/core/constants/endpoints'
-import { createErrorNotification } from 'src/utils/notification'
+import { useLocalStorage } from '@gamedao/core/hooks'
+
+import { createErrorNotification } from '@gamedao/utils/notificationUtils'
 
 import { SelectNetworkDialog } from 'components/molecules/SelectNetworkDialog/selectNetworkDialog'
 
