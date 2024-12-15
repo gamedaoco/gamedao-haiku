@@ -8,6 +8,7 @@ module.exports = {
 						headers: {
 							'x-hasura-role': 'public',
 							'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
+							Authorization: `Bearer ${process.env.HASURA_BEARER_TOKEN}`,
 						},
 					},
 				},

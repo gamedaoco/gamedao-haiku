@@ -12,7 +12,7 @@ export * from './useAstarDappContent'
 export * from './useAstarDappStakers'
 export * from './useAstarDappStakingEvents'
 export * from './useAstarDappStakingEventsAggregate'
-export * from './useAstarDappCurrentTVL'
+export * from './useAstarDappTVL'
 
 export * from './useConfig'
 export * from './useCurrentAccountAddress'

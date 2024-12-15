@@ -8,7 +8,9 @@ import { useRouter } from 'next/router'
 // import dynamic from 'next/dynamic'
 // import { useTranslation } from 'react-i18next'
 
-import { convertSS58Prefix, useLogger, formatNumber } from '@gamedao/utils'
+import { convertSS58Prefix, useLogger, formatNumber, formatBalanceString } from '@gamedao/utils'
+import BigNumber from 'bignumber.js'
+
 import { dAppId } from '@gamedao/constants'
 import {
 	useCurrentAccountAddress,
@@ -17,7 +19,7 @@ import {
 	useAstarTVL,
 	useAstarStakedByAddress,
 	useAstarDappContent,
-	useAstarDappCurrentTVL,
+	useAstarDappTVL,
 	useAstarDappStakingEvents,
 	useAstarDappStakingEventsAggregate,
 } from '@gamedao/core/hooks'
@@ -77,20 +79,22 @@ export function DashboardView() {
 	const { query } = useRouter()
 
 	const [id, setId] = useState<string>((query.id as string) || dAppId)
+	const [period, setPeriod] = useState(3)
 	const [fx, setFx] = useState(0)
 	const [data, setData] = useState(initAstarState)
 	const [dapp, updateDapp] = useState(initDappState)
 
 	// connected wallet address
 	const address = useCurrentAccountAddress()
-
-	// get all dapp info to feed into dropdowns etc
-	const { state: dappContent } = useAstarDappContent('')
-	const { state: dappTVL } = useAstarDappCurrentTVL(id)
-	const { state: dappStakers, loading } = useAstarStakers(id)
+	// account related
 	const { state: stakedByAddress } = useAstarStakedByAddress(address)
-	const { state: astarTVL } = useAstarTVL()
+	// dapp related
+	const { state: dappContent } = useAstarDappContent('')
+	const { state: dappTVL } = useAstarDappTVL(id, period)
+	const { state: dappStakers, loading } = useAstarStakers(id)
 	const { state: dappStaking } = useAstarDappStakingEventsAggregate(id)
+	// astar related
+	const { state: astarTVL } = useAstarTVL()
 
 	// track the selected or injected dapp id
 	const updateDAppId = useCallback((e) => {
@@ -101,21 +105,35 @@ export function DashboardView() {
 		}
 	}, [])
 
-	// update selected dapp staking data
+	// update selected dapp stakers
 	useEffect(() => {
 		if (!dappStakers.stakers || dappStakers.stakers.length === 0) return
 		console.log('stakers changed:', dappStakers.stakers)
-		const tvl = dappStakers.stakers.map((staker: TStaker) => staker.amount).reduce((acc, amount) => (acc += amount))
-		const astr = tvl
-		const usd = tvl * fx
+		// const tvl = dappStakers.stakers.map((staker: TStaker) => staker.amount).reduce((acc, amount) => (acc += amount))
+		// const astr = tvl
+		// const usd = tvl * fx
 		const _ = {
 			...dapp,
-			astr,
-			usd,
+			// astr,
+			// usd,
 			stakers: dappStakers.totalStakers,
 		}
 		updateDapp(_)
 	}, [id, dappStakers, fx])
+
+	// update selected dapp tvl
+	useEffect(() => {
+		if (!dappTVL) return
+		console.log('tvl changed:', dappTVL)
+		const astr = BigNumber(dappTVL.totalStaked)
+		const usd = astr.multipliedBy(BigNumber(fx))
+		const _ = {
+			...dapp,
+			astr: formatBalanceString(astr.toString(), 18, 4),
+			usd: formatBalanceString(usd.toString(), 18, 4),
+		}
+		updateDapp(_)
+	}, [id, dappTVL, fx])
 
 	// update selected dapp content
 	useEffect(() => {

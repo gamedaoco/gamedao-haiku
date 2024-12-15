@@ -2695,32 +2695,8 @@ export type Migrations_Stream_Cursor_Value_Input = {
 /** mutation root */
 export type Mutation_Root = {
   readonly __typename?: 'mutation_root';
-  /** insert data into the table: "Session" */
-  readonly insert_session?: Maybe<Session_Mutation_Response>;
-  /** insert a single row into the table: "Session" */
-  readonly insert_session_one?: Maybe<Session>;
   readonly singleUpload: Scalars['String']['output'];
   readonly updateSession: Scalars['Boolean']['output'];
-  /** update data of the table: "Session" */
-  readonly update_session?: Maybe<Session_Mutation_Response>;
-  /** update single row of the table: "Session" */
-  readonly update_session_by_pk?: Maybe<Session>;
-  /** update multiples rows of table: "Session" */
-  readonly update_session_many?: Maybe<ReadonlyArray<Maybe<Session_Mutation_Response>>>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_SessionArgs = {
-  objects: ReadonlyArray<Session_Insert_Input>;
-  on_conflict?: InputMaybe<Session_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Session_OneArgs = {
-  object: Session_Insert_Input;
-  on_conflict?: InputMaybe<Session_On_Conflict>;
 };
 
 
@@ -2733,28 +2709,6 @@ export type Mutation_RootSingleUploadArgs = {
 /** mutation root */
 export type Mutation_RootUpdateSessionArgs = {
   address: Scalars['String']['input'];
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_SessionArgs = {
-  _inc?: InputMaybe<Session_Inc_Input>;
-  _set?: InputMaybe<Session_Set_Input>;
-  where: Session_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Session_By_PkArgs = {
-  _inc?: InputMaybe<Session_Inc_Input>;
-  _set?: InputMaybe<Session_Set_Input>;
-  pk_columns: Session_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Session_ManyArgs = {
-  updates: ReadonlyArray<Session_Updates>;
 };
 
 /** columns and relationships of "nft" */
@@ -5903,56 +5857,12 @@ export type Session_Bool_Exp = {
   readonly updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "Session" */
-export enum Session_Constraint {
-  /** unique or primary key constraint on columns "address" */
-  SessionAddressKey = 'Session_address_key',
-  /** unique or primary key constraint on columns "key" */
-  SessionKeyKey = 'Session_key_key',
-  /** unique or primary key constraint on columns "id" */
-  SessionPkey = 'Session_pkey'
-}
-
-/** input type for incrementing numeric columns in table "Session" */
-export type Session_Inc_Input = {
-  readonly id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "Session" */
-export type Session_Insert_Input = {
-  readonly address?: InputMaybe<Scalars['String']['input']>;
-  readonly id?: InputMaybe<Scalars['bigint']['input']>;
-  readonly key?: InputMaybe<Scalars['String']['input']>;
-  readonly updatedAt?: InputMaybe<Scalars['timestamp']['input']>;
-};
-
-/** response of any mutation on the table "Session" */
-export type Session_Mutation_Response = {
-  readonly __typename?: 'session_mutation_response';
-  /** number of rows affected by the mutation */
-  readonly affected_rows: Scalars['Int']['output'];
-  /** data from the rows affected by the mutation */
-  readonly returning: ReadonlyArray<Session>;
-};
-
-/** on_conflict condition type for table "Session" */
-export type Session_On_Conflict = {
-  readonly constraint: Session_Constraint;
-  readonly update_columns?: ReadonlyArray<Session_Update_Column>;
-  readonly where?: InputMaybe<Session_Bool_Exp>;
-};
-
 /** Ordering options when selecting data from "Session". */
 export type Session_Order_By = {
   readonly address?: InputMaybe<Order_By>;
   readonly id?: InputMaybe<Order_By>;
   readonly key?: InputMaybe<Order_By>;
   readonly updatedAt?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: Session */
-export type Session_Pk_Columns_Input = {
-  readonly id: Scalars['bigint']['input'];
 };
 
 /** select columns of table "Session" */
@@ -5966,14 +5876,6 @@ export enum Session_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt'
 }
-
-/** input type for updating data in table "Session" */
-export type Session_Set_Input = {
-  readonly address?: InputMaybe<Scalars['String']['input']>;
-  readonly id?: InputMaybe<Scalars['bigint']['input']>;
-  readonly key?: InputMaybe<Scalars['String']['input']>;
-  readonly updatedAt?: InputMaybe<Scalars['timestamp']['input']>;
-};
 
 /** Streaming cursor of the table "session" */
 export type Session_Stream_Cursor_Input = {
@@ -5989,27 +5891,6 @@ export type Session_Stream_Cursor_Value_Input = {
   readonly id?: InputMaybe<Scalars['bigint']['input']>;
   readonly key?: InputMaybe<Scalars['String']['input']>;
   readonly updatedAt?: InputMaybe<Scalars['timestamp']['input']>;
-};
-
-/** update columns of table "Session" */
-export enum Session_Update_Column {
-  /** column name */
-  Address = 'address',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Key = 'key',
-  /** column name */
-  UpdatedAt = 'updatedAt'
-}
-
-export type Session_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  readonly _inc?: InputMaybe<Session_Inc_Input>;
-  /** sets the columns of the filtered rows to the given values */
-  readonly _set?: InputMaybe<Session_Set_Input>;
-  /** filter the rows which have to be updated */
-  readonly where: Session_Bool_Exp;
 };
 
 /** columns and relationships of "stake" */

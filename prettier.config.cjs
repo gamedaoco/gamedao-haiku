@@ -18,5 +18,18 @@ module.exports = {
 				trailingComma: 'none',
 			},
 		},
+		{
+			files: ['*.md', '*.mdx'],
+			options: {
+				printWidth: 80,
+				proseWrap: 'preserve',
+			},
+		},
+		{
+			files: '*.svg',
+			options: {
+				parser: 'html',
+			},
+		},
 	],
 }
