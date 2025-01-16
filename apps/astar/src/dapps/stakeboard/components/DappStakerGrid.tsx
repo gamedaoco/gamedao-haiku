@@ -7,6 +7,33 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import { type TStaker } from '../types'
 import { useAstarStakers, useAstarDappStakingEventsAggregate } from '@gamedao/core/hooks'
 
+const interpolateColor = (color1: string, color2: string, percentage: number) => {
+	percentage = Math.min(Math.max(percentage, 0), 100)
+
+	const fraction = percentage / 100
+
+	color1 = color1.replace('#', '')
+	color2 = color2.replace('#', '')
+
+	const r1 = parseInt(color1.slice(0, 2), 16),
+		g1 = parseInt(color1.slice(2, 4), 16),
+		b1 = parseInt(color1.slice(4, 6), 16)
+
+	const r2 = parseInt(color2.slice(0, 2), 16),
+		g2 = parseInt(color2.slice(2, 4), 16),
+		b2 = parseInt(color2.slice(4, 6), 16)
+
+	const r = Math.round(r1 + (r2 - r1) * fraction)
+	const g = Math.round(g1 + (g2 - g1) * fraction)
+	const b = Math.round(b1 + (b2 - b1) * fraction)
+
+	const hr = r.toString(16).padStart(2, '0')
+	const hg = g.toString(16).padStart(2, '0')
+	const hb = b.toString(16).padStart(2, '0')
+
+	return `#${hr}${hg}${hb}`
+}
+
 export const DappStakerGrid = ({ stakers, fx, id }) => {
 	const { state: stakingAggregation, loading } = useAstarDappStakingEventsAggregate(id)
 	const [aggregate, setAggregate] = useState([])
@@ -38,6 +65,8 @@ export const DappStakerGrid = ({ stakers, fx, id }) => {
 		const durationInBlocks = getStakeDuration(address)
 		const rewardEstimate = getRewardEstimate(address)
 
+		const border = interpolateColor('#00ff33', '#0033ff', (rank / stakers.length) * 100) + '99'
+
 		return (
 			<Grid container spacing={2}>
 				<Grid
@@ -62,7 +91,8 @@ export const DappStakerGrid = ({ stakers, fx, id }) => {
 							display: 'flex',
 							minWidth: '4ch',
 							aspectRatio: '1',
-							border: '1px solid #ffffff',
+							border: '1px solid ' + border,
+							boxShadow: '0 0 20px ' + border,
 							borderRadius: '50%',
 						}}
 						variant={'h6'}
