@@ -18,16 +18,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "",
+    "baseUrl": "./",
     "paths": {
       "components/*": [ "src/components/*" ],
       "dapps/*": [ "src/dapps/*" ],
       "layouts/*": [ "src/layouts/*" ],
+      "lib/*": [ "src/lib/*" ],
       "providers/*": [ "src/providers/*" ],
       "public/*": [ "public/*" ],
+      "react": [ "./node_modules/@types/react" ],
       "src/*": [ "src/*" ],
-      "themes/*": [ "src/themes/*" ],
-      "react": [ "./node_modules/@types/react" ]
+      "themes/*": [ "src/themes/*" ]
     }
   },
   "include": [

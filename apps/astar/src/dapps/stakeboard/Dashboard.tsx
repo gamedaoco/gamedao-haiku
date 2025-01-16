@@ -25,7 +25,7 @@ import {
 } from '@gamedao/core/hooks'
 
 // import { useTheme } from '@mui/material/styles'
-import { Stack, Typography, useMediaQuery, Box, Paper, TextField } from '@mui/material'
+import { Stack, Typography, Grid, useMediaQuery, Box, Paper, TextField } from '@mui/material'
 
 // import { RxClock } from 'react-icons/rx'
 // import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
@@ -46,6 +46,7 @@ import { DappSelector } from './components/DappSelector'
 import { DappStakers } from './components/DappStakers'
 import { DappInfo } from './components/DappInfo'
 import { RewardChart } from './components/RewardChart'
+import { DappStakerGrid } from './components/DappStakerGrid'
 
 const initDappState = {
 	astr: 0,
@@ -207,11 +208,12 @@ export function DashboardView() {
 		<Loader text="Preparing your Stakeboard..." />
 	) : (
 		<Stack spacing={4}>
-			{/* <AstarTVL/> */}
+			<Typography variant="h2">Stakeboard</Typography>
 			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
 			<DappInfo dapp={dapp} />
 			<RewardChart id={id} />
-			<StakerList />
+			<DappStakerGrid stakers={dappStakers.stakers} fx={fx} id={id} />
+			{/* <AstarTVL/> */}
 			{/* <UserDetails /> */}
 		</Stack>
 	)
