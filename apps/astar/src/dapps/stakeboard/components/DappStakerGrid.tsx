@@ -5,7 +5,8 @@ import { RxClock } from 'react-icons/rx'
 import { Stack, Typography, Avatar, Box, Paper, TextField, Grid } from '@mui/material'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { type TStaker } from '../types'
-import { useAstarStakers, useAstarDappStakingEventsAggregate } from '@gamedao/core/hooks'
+
+import { DappStakerRewards } from './DappStakerRewards'
 
 const interpolateColor = (color1: string, color2: string, percentage: number) => {
 	percentage = Math.min(Math.max(percentage, 0), 100)
@@ -34,36 +35,16 @@ const interpolateColor = (color1: string, color2: string, percentage: number) =>
 	return `#${hr}${hg}${hb}`
 }
 
-export const DappStakerGrid = ({ stakers, fx, id }) => {
-	const { state: stakingAggregation, loading } = useAstarDappStakingEventsAggregate(id)
-	const [aggregate, setAggregate] = useState([])
-	useEffect(() => {
-		if (loading) return
-		console.log('stakingAggregation', stakingAggregation)
-	}, [])
-	const getStakesForAddress = (adr: string) => {
-		const res = aggregate.find((item) => {
-			convertSS58Prefix(item.address, 5) === convertSS58Prefix(adr, 5)
-		})
-		return res ? res.tx.length : -1
-	}
-	const getFirstStakeBlock = (address) => -1
-	const getStakeDuration = (address) => -1
-	const getRewardEstimate = (address) => 0
-
+export const DappStakerGrid = ({ stakers, events, fx, id }) => {
 	if (!stakers) return null
+
+	const localEvents = (address) => events.stakes.filter((e) => e.address === address)
 
 	const StakerRow = ({ s, i }) => {
 		const rank = i + 1
 		const address = convertSS58Prefix(s.address, 5)
 		const amountASTR = formatNumber(s.amount)
 		const amountUSD = formatNumber(s.amount * fx)
-
-		// rewards estimate
-		const totalStakingEvents = getStakesForAddress(address)
-		const firstStakingBlock = getFirstStakeBlock(address)
-		const durationInBlocks = getStakeDuration(address)
-		const rewardEstimate = getRewardEstimate(address)
 
 		const border = interpolateColor('#00ff33', '#0033ff', (rank / stakers.length) * 100) + '99'
 
@@ -81,8 +62,6 @@ export const DappStakerGrid = ({ stakers, fx, id }) => {
 						mb: { xs: 0, lg: 2 },
 					}}
 					pb={2}
-					// mb={ xs:0,lg:2 }
-					direction="row"
 				>
 					<Typography
 						alignItems="center"
@@ -178,23 +157,7 @@ export const DappStakerGrid = ({ stakers, fx, id }) => {
 					<Typography sx={{ display: { lg: 'none' } }} variant={'micro'}>
 						Rewards
 					</Typography>
-					<Stack direction="row" spacing={1}>
-						<Typography align="right" variant="mono">
-							{totalStakingEvents}
-						</Typography>
-
-						<Typography align="left" variant="mono">
-							{firstStakingBlock}
-						</Typography>
-					</Stack>
-					<Stack direction="row" spacing={1}>
-						<Typography align="right" variant="mono">
-							{durationInBlocks}
-						</Typography>
-						<Typography align="left" variant="mono">
-							{rewardEstimate}
-						</Typography>
-					</Stack>
+					<DappStakerRewards events={localEvents(address)} address={address} />
 				</Grid>
 			</Grid>
 		)

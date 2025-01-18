@@ -14,23 +14,25 @@ import { useCurrentDappStakeSubscription } from '@gamedao/graph'
 //   }
 // }
 
-export function useAstarDappCurrentTVL(id?: string, period: number = 3 ) {
+export function useAstarDappCurrentTVL(id?: string, period: number = 3) {
 	const logger = useLogger('useAstarDappCurrentTVL')
-	const [ state, setState ] = useState({})
-	const { loading, data, error } = useCurrentDappStakeSubscription({ variables: {
-		id: id, period: period
-	}})
+	const [state, setState] = useState({})
+	const { loading, data, error } = useCurrentDappStakeSubscription({
+		variables: {
+			id: id,
+			period: period,
+		},
+	})
 
 	useEffect(() => {
-		if ( loading || !data || !data.stakes_per_dap_and_period ) return
+		if (loading || !data || !data.stakes_per_dap_and_period) return
 
-		logger.log('dapp tvl', data.stakes_per_dap_and_period )
+		// logger.log('dapp tvl', data.stakes_per_dap_and_period )
 		const _data = {
 			// stake: formatBalanceString( data.stakes_per_dap_and_period.stake_amount.toString(),18 ,4 ),
 			// rewards: formatBalanceString( data.stakes_per_dap_and_period.reward_amount.toString(),18 ,4 ),
 		}
-		setState( _data  )
-
+		setState(_data)
 	}, [loading, data])
 
 	useEffect(() => {

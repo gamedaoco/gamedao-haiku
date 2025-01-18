@@ -18,13 +18,13 @@ const initialState: State = {
 	stakers: null,
 }
 
-export function useAstarStakers(id: string) {
+export function useAstarDappStakers(id: string) {
 	const logger = useLogger('useAstarStakers')
 	const [state, setState] = useState(initialState)
 
 	const { loading, data, error } = useStakersPerDappSubscription({
 		variables: {
-			dapp: id
+			dapp: id,
 		},
 	})
 

@@ -3,15 +3,15 @@ import BigNumber from 'bignumber.js'
 import { useLogger } from '@gamedao/utils'
 import { useStakesPerDappAndPeriodSubscription } from '@gamedao/graph'
 
-type State = {
+type DappState = {
 	totalStaked: string
 	totalRewards: string
 	period: number
 }
 
-const initialState: State = {
-	totalStaked: 0,
-	totalRewards: 0,
+const initialState: DappState = {
+	totalStaked: '',
+	totalRewards: '',
 	period: 0,
 }
 
@@ -32,7 +32,7 @@ export function useAstarDappTVL(id: string, period = 3) {
 		const totalStaked = _.stake_amount
 		const totalRewards = _.reward_amount
 		const period = _.period
-		logger.log('tvl', totalStaked, totalRewards)
+		// logger.log('tvl', totalStaked, totalRewards)
 		setState({ totalStaked, totalRewards, period })
 	}, [loading, data])
 

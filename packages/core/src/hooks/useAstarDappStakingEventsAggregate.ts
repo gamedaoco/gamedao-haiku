@@ -27,12 +27,10 @@ export function useAstarDappStakingEventsAggregate(dapp: string) {
 		if (loading || !data || !data.stake_aggregate.nodes) return
 		const _data = data.stake_aggregate.nodes
 		const stakesCount = _data.length
-		logger.log('dapp staking actions', stakesCount)
 
 		const stakers = [
 			...new Set(_data.map((item) => (item.amount > 0 ? item.staker_address : null)).filter((i) => i !== null)),
 		]
-		logger.log('dapp stakers', stakers.length)
 
 		const stakes = stakers.map((adr, index) => {
 			const val = _data
@@ -41,7 +39,10 @@ export function useAstarDappStakingEventsAggregate(dapp: string) {
 			const res = { address: adr, tx: val }
 			return res
 		})
-		logger.log('dapp stakes', stakes)
+
+		// logger.log('dapp staking actions', stakesCount)
+		// logger.log('dapp stakers', stakers.length)
+		// logger.log('dapp stakes', stakes)
 
 		// reduce((stakes, item) => {
 		// 	const key: string = `${item.staker_address}`

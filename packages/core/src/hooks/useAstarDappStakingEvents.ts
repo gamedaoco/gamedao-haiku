@@ -28,15 +28,14 @@ export function useAstarDappStakingEvents(dapp: string, address: string, period:
 	useEffect(() => {
 		if (loading || !data || !data.stake) return
 
-		logger.log('dapp staking actions', data.stake)
-
 		const stakeCount = data.stake.length
 		let initialValue = new BigNumber(0)
 		const stakeAmount = data.stake.reduce(
 			(acc: BigNumber, value) => acc.plus(new BigNumber(value.amount)),
 			initialValue,
 		)
-		logger.log('staking count / total stake', stakeCount, stakeAmount)
+		// logger.log('dapp staking actions', data.stake)
+		// logger.log('staking count / total stake', stakeCount, stakeAmount)
 
 		const _data = {
 			// stake: formatBalanceString( data.stakes_per_dap_and_period.stake_amount.toString(),18 ,4 ),

@@ -7976,6 +7976,21 @@ export type Voting_Stream_Cursor_Value_Input = {
   readonly yes?: InputMaybe<Scalars['numeric']['input']>;
 };
 
+export type AstarDappStakingRewardsAggregateQueryVariables = Exact<{
+  dapp?: InputMaybe<Scalars['String']['input']>;
+  period?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type AstarDappStakingRewardsAggregateQuery = { readonly __typename?: 'query_root', readonly stake_aggregate: { readonly __typename?: 'stake_aggregate', readonly nodes: ReadonlyArray<{ readonly __typename?: 'stake', readonly amount: any, readonly block_number: number, readonly staker_address: string }> } };
+
+export type AstarDappStakingGeneralInfoSubscriptionVariables = Exact<{
+  dapp?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type AstarDappStakingGeneralInfoSubscription = { readonly __typename?: 'subscription_root', readonly dapp: ReadonlyArray<{ readonly __typename?: 'dapp', readonly id: string, readonly dapp_id: number, readonly stakers_count: number, readonly registration_block_number: number, readonly state: string }> };
+
 export type AstarDappStakingEventsQueryVariables = Exact<{
   address?: InputMaybe<Scalars['String']['input']>;
   period?: InputMaybe<Scalars['Int']['input']>;
@@ -7998,7 +8013,7 @@ export type CurrentDappStakeSubscriptionVariables = Exact<{
 }>;
 
 
-export type CurrentDappStakeSubscription = { readonly __typename?: 'subscription_root', readonly stakes_per_dap_and_period: ReadonlyArray<{ readonly __typename?: 'stakes_per_dap_and_period', readonly stake_amount: any, readonly period: number, readonly reward_amount: any }> };
+export type CurrentDappStakeSubscription = { readonly __typename?: 'subscription_root', readonly stakes_per_dap_and_period: ReadonlyArray<{ readonly __typename?: 'stakes_per_dap_and_period', readonly period: number, readonly reward_amount: any, readonly stake_amount: any }> };
 
 export type AstarDappContentQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']['input']>;
@@ -8139,6 +8154,85 @@ export type UpdateSessionMutationVariables = Exact<{
 export type UpdateSessionMutation = { readonly __typename?: 'mutation_root', readonly updateSession: boolean };
 
 
+export const AstarDappStakingRewardsAggregateDocument = gql`
+    query AstarDappStakingRewardsAggregate($dapp: String, $period: Int) {
+  stake_aggregate(where: {dapp_address: {_eq: $dapp}, period: {_eq: $period}}) {
+    nodes {
+      amount
+      block_number
+      staker_address
+    }
+  }
+}
+    `;
+
+/**
+ * __useAstarDappStakingRewardsAggregateQuery__
+ *
+ * To run a query within a React component, call `useAstarDappStakingRewardsAggregateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAstarDappStakingRewardsAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAstarDappStakingRewardsAggregateQuery({
+ *   variables: {
+ *      dapp: // value for 'dapp'
+ *      period: // value for 'period'
+ *   },
+ * });
+ */
+export function useAstarDappStakingRewardsAggregateQuery(baseOptions?: Apollo.QueryHookOptions<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>(AstarDappStakingRewardsAggregateDocument, options);
+      }
+export function useAstarDappStakingRewardsAggregateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>(AstarDappStakingRewardsAggregateDocument, options);
+        }
+export function useAstarDappStakingRewardsAggregateSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>(AstarDappStakingRewardsAggregateDocument, options);
+        }
+export type AstarDappStakingRewardsAggregateQueryHookResult = ReturnType<typeof useAstarDappStakingRewardsAggregateQuery>;
+export type AstarDappStakingRewardsAggregateLazyQueryHookResult = ReturnType<typeof useAstarDappStakingRewardsAggregateLazyQuery>;
+export type AstarDappStakingRewardsAggregateSuspenseQueryHookResult = ReturnType<typeof useAstarDappStakingRewardsAggregateSuspenseQuery>;
+export type AstarDappStakingRewardsAggregateQueryResult = Apollo.QueryResult<AstarDappStakingRewardsAggregateQuery, AstarDappStakingRewardsAggregateQueryVariables>;
+export const AstarDappStakingGeneralInfoDocument = gql`
+    subscription AstarDappStakingGeneralInfo($dapp: String) {
+  dapp(where: {id: {_eq: $dapp}}) {
+    id
+    dapp_id
+    stakers_count
+    registration_block_number
+    state
+  }
+}
+    `;
+
+/**
+ * __useAstarDappStakingGeneralInfoSubscription__
+ *
+ * To run a query within a React component, call `useAstarDappStakingGeneralInfoSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useAstarDappStakingGeneralInfoSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAstarDappStakingGeneralInfoSubscription({
+ *   variables: {
+ *      dapp: // value for 'dapp'
+ *   },
+ * });
+ */
+export function useAstarDappStakingGeneralInfoSubscription(baseOptions?: Apollo.SubscriptionHookOptions<AstarDappStakingGeneralInfoSubscription, AstarDappStakingGeneralInfoSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<AstarDappStakingGeneralInfoSubscription, AstarDappStakingGeneralInfoSubscriptionVariables>(AstarDappStakingGeneralInfoDocument, options);
+      }
+export type AstarDappStakingGeneralInfoSubscriptionHookResult = ReturnType<typeof useAstarDappStakingGeneralInfoSubscription>;
+export type AstarDappStakingGeneralInfoSubscriptionResult = Apollo.SubscriptionResult<AstarDappStakingGeneralInfoSubscription>;
 export const AstarDappStakingEventsDocument = gql`
     query AstarDappStakingEvents($address: String, $period: Int, $dapp: String) {
   stake(
@@ -8238,9 +8332,9 @@ export const CurrentDappStakeDocument = gql`
   stakes_per_dap_and_period(
     where: {dapp_address: {_eq: $id}, period: {_eq: $period}}
   ) {
-    stake_amount
     period
     reward_amount
+    stake_amount
   }
 }
     `;
