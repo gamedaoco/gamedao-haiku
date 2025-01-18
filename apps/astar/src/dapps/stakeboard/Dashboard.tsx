@@ -14,14 +14,14 @@ import BigNumber from 'bignumber.js'
 import { dAppId } from '@gamedao/constants'
 import {
 	useCurrentAccountAddress,
-	useAstarStakers,
+	useAstarDappStakers,
 	useAstarStaking,
 	useAstarTVL,
 	useAstarStakedByAddress,
 	useAstarDappContent,
 	useAstarDappTVL,
-	useAstarDappStakingEvents,
-	useAstarDappStakingEventsAggregate,
+	useAstarDappStakingGeneralInfo,
+	useAstarDappStakingRewardsAggregate,
 } from '@gamedao/core/hooks'
 
 // import { useTheme } from '@mui/material/styles'
@@ -81,21 +81,37 @@ export function DashboardView() {
 
 	const [id, setId] = useState<string>((query.id as string) || dAppId)
 	const [period, setPeriod] = useState(3)
+	// TODO: calculate current epoch
+	const [epoc, setEpoc] = useState(42)
 	const [fx, setFx] = useState(0)
+
 	const [data, setData] = useState(initAstarState)
 	const [dapp, updateDapp] = useState(initDappState)
 
 	// connected wallet address
 	const address = useCurrentAccountAddress()
+
 	// account related
 	const { state: stakedByAddress } = useAstarStakedByAddress(address)
+
 	// dapp related
 	const { state: dappContent } = useAstarDappContent('')
 	const { state: dappTVL } = useAstarDappTVL(id, period)
-	const { state: dappStakers, loading } = useAstarStakers(id)
-	const { state: dappStaking } = useAstarDappStakingEventsAggregate(id)
+	const { state: dappStakers, loading } = useAstarDappStakers(id)
+	// const { state: dappStaking } = useAstarDappStakingEventsAggregate(id)
+	const { state: dappInfo } = useAstarDappStakingGeneralInfo(id)
+
 	// astar related
 	const { state: astarTVL } = useAstarTVL()
+
+	// get all eligibile staking events for the dapp in the current period
+	const { state: stakingEvents } = useAstarDappStakingRewardsAggregate(id, 3)
+	const [events, setEvents] = useState({})
+	useEffect(() => {
+		if (!stakingEvents) return
+		console.log('stakingEvents', stakingEvents)
+		setEvents(stakingEvents)
+	}, [stakingEvents])
 
 	// track the selected or injected dapp id
 	const updateDAppId = useCallback((e) => {
@@ -108,24 +124,18 @@ export function DashboardView() {
 
 	// update selected dapp stakers
 	useEffect(() => {
-		if (!dappStakers.stakers || dappStakers.stakers.length === 0) return
-		console.log('stakers changed:', dappStakers.stakers)
-		// const tvl = dappStakers.stakers.map((staker: TStaker) => staker.amount).reduce((acc, amount) => (acc += amount))
-		// const astr = tvl
-		// const usd = tvl * fx
-		const _ = {
+		if (!dappInfo || !dappInfo.stakers_count) return
+		// console.log('dappInfo:', dappInfo)
+		updateDapp({
 			...dapp,
-			// astr,
-			// usd,
-			stakers: dappStakers.totalStakers,
-		}
-		updateDapp(_)
-	}, [id, dappStakers, fx])
+			stakers: dappInfo.stakers_count,
+		})
+	}, [id, dappInfo])
 
 	// update selected dapp tvl
 	useEffect(() => {
 		if (!dappTVL) return
-		console.log('tvl changed:', dappTVL)
+		// console.log('tvl changed:', dappTVL)
 		const astr = BigNumber(dappTVL.totalStaked)
 		const usd = astr.multipliedBy(BigNumber(fx))
 		const _ = {
@@ -139,9 +149,9 @@ export function DashboardView() {
 	// update selected dapp content
 	useEffect(() => {
 		if (dappContent.length < 1) return
-		console.log('id changed:', id)
+		// console.log('id changed:', id)
 		const data = dappContent.find((dapp) => dapp.address === id)
-		console.log('data', data.name, { ...dapp })
+		// console.log('data', data.name, { ...dapp })
 		const _ = { ...dapp, ...data, id: data.address }
 		updateDapp(_)
 	}, [id, dappContent])
@@ -160,49 +170,49 @@ export function DashboardView() {
 		setFx(Number(astarTVL.fx))
 	}, [astarTVL])
 
-	console.log(id, dapp.name, dapp.iconUrl)
+	// console.log(id, dapp.name, dapp.iconUrl)
 
-	const StakerList = () => {
-		if (loading) return <Loader text="Loading Stakers..." />
+	// const StakerList = () => {
+	// 	if (loading) return <Loader text="Loading Stakers..." />
 
-		if (dapp.stakers > 0) {
-			return (
-				<>
-					<DappStakers fx={fx} stakers={dappStakers.stakers} id={id} />
-				</>
-			)
-		}
-		return (
-			<Typography variant={'body1'} color={'white'}>
-				No stakers yet.
-			</Typography>
-		)
-	}
+	// 	if (dapp.stakers > 0) {
+	// 		return (
+	// 			<>
+	// 				<DappStakers fx={fx} stakers={dappStakers.stakers} id={id} />
+	// 			</>
+	// 		)
+	// 	}
+	// 	return (
+	// 		<Typography variant={'body1'} color={'white'}>
+	// 			No stakers yet.
+	// 		</Typography>
+	// 	)
+	// }
 
-	const AstarTVL = () => (
-		<Stack direction="column" sx={{ backgroundColor: '#ffffff11', padding: 2 }}>
-			<Typography variant={'body1'}>Astar Global dAppStaking</Typography>
-			<Stack direction="row" spacing={2} justifyContent="space-between">
-				<Typography variant={'body1'} color={'white'}>
-					{formatNumber(data.astr) || '...'} $ASTR
-				</Typography>
-				<Typography variant={'body1'} color={'white'}>
-					{formatNumber(data.usd) || '...'} USD
-				</Typography>
-				<Typography variant={'body1'} color={'white'}>
-					Lockers: {data.lockers || '...'}
-				</Typography>
-			</Stack>
-		</Stack>
-	)
+	// const AstarTVL = () => (
+	// 	<Stack direction="column" sx={{ backgroundColor: '#ffffff11', padding: 2 }}>
+	// 		<Typography variant={'body1'}>Astar Global dAppStaking</Typography>
+	// 		<Stack direction="row" spacing={2} justifyContent="space-between">
+	// 			<Typography variant={'body1'} color={'white'}>
+	// 				{formatNumber(data.astr) || '...'} $ASTR
+	// 			</Typography>
+	// 			<Typography variant={'body1'} color={'white'}>
+	// 				{formatNumber(data.usd) || '...'} USD
+	// 			</Typography>
+	// 			<Typography variant={'body1'} color={'white'}>
+	// 				Lockers: {data.lockers || '...'}
+	// 			</Typography>
+	// 		</Stack>
+	// 	</Stack>
+	// )
 
-	const UserDetails = () => (
-		<Typography variant={'body1'} color={'white'} sx={{ backgroundColor: '#ffffff11', padding: 2 }}>
-			Connected Address: <em>{address}</em>
-			<br />
-			Staked by Address: <em>{stakedByAddress.amount}</em>
-		</Typography>
-	)
+	// const UserDetails = () => (
+	// 	<Typography variant={'body1'} color={'white'} sx={{ backgroundColor: '#ffffff11', padding: 2 }}>
+	// 		Connected Address: <em>{address}</em>
+	// 		<br />
+	// 		Staked by Address: <em>{stakedByAddress.amount}</em>
+	// 	</Typography>
+	// )
 
 	return loading ? (
 		<Loader text="Preparing your Stakeboard..." />
@@ -211,9 +221,9 @@ export function DashboardView() {
 			<Typography variant="h2">Stakeboard</Typography>
 			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
 			<DappInfo dapp={dapp} />
-			<RewardChart id={id} />
-			<DappStakerGrid stakers={dappStakers.stakers} fx={fx} id={id} />
-			{/* <AstarTVL/> */}
+			<RewardChart id={id} epoc={epoc} />
+			<DappStakerGrid stakers={dappStakers.stakers} events={events} fx={fx} id={id} />
+			{/* <AstarTVL /> */}
 			{/* <UserDetails /> */}
 		</Stack>
 	)
