@@ -6,13 +6,14 @@ import { useAstarDappStakingRewardsAggregateQuery } from '@gamedao/graph'
 export function useAstarDappStakingRewardsAggregate(dapp: string, period: number = 3) {
 	const logger = useLogger('DappStakingRewardsAggregate')
 
-	const [state, setState] = useState({})
+	const [state, setState] = useState({ totalStakingEvents: 0, stakers: [], stakes: [] })
 	const { loading, data, error } = useAstarDappStakingRewardsAggregateQuery({
 		variables: {
 			dapp: dapp,
 			period: period,
 		},
 	})
+
 	useEffect(() => {
 		if (loading || !data || !data.stake_aggregate.nodes) return
 		const _data = data.stake_aggregate.nodes

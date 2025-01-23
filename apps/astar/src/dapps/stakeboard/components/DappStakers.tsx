@@ -96,9 +96,9 @@ export const DappStakers = ({ stakers, fx, id }) => {
 															>
 																SUBSCAN
 															</a>
-														</Typography>
-														{' · '}
-														<Typography variant="micro">
+															{/* </Typography> */}
+															{' · '}
+															{/* <Typography variant="micro"> */}
 															<a
 																href={'https://astar.subscan.io/account/' + address}
 																target="_blank"

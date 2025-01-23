@@ -17,6 +17,7 @@ export const AppContext = createContext<AppState>({
 	twa: false,
 	setTwitterAuthorized: () => {},
 	flush: () => {},
+	astar: { block: 0 },
 })
 
 export function useAppContext(): AppState {

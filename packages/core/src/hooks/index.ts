@@ -15,6 +15,7 @@ export * from './useAstarDappStakingEventsAggregate'
 export * from './useAstarDappTVL'
 export * from './useAstarDappStakingGeneralInfo'
 export * from './useAstarDappStakingRewardsAggregate'
+export * from './useAstarBlockNumber'
 
 export * from './useConfig'
 export * from './useCurrentAccountAddress'

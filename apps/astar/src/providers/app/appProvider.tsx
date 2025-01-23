@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
-import { ENVIRONMENT } from '@gamedao/core/constants/environment'
+import { ENVIRONMENT } from '@gamedao/constants'
 import { AppContext } from 'src/providers/app/components/context'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from '@gamedao/graph'
+import { useAstarBlockNumber } from '@gamedao/core/hooks'
 
 export type TAppContext = {
 	dapp?: string
@@ -38,6 +39,15 @@ export function AppProvider({ children }) {
 	const [bpid, setBpid] = useState<string>(null)
 	const [processing, setProcessing] = useState<boolean>(false)
 	const [connected, setConnected] = useState(false)
+
+	const block = useAstarBlockNumber()
+	const [currentBlock, setCurrentBlock] = useState(0)
+
+	useEffect(() => {
+		const b = typeof block === 'number' ? block : 0
+		console.log('block', block)
+		setCurrentBlock(b)
+	}, [block])
 
 	// const [connectIdentityMutation] = useConnectIdentityMutation({
 	// 	variables: {
@@ -247,6 +257,7 @@ export function AppProvider({ children }) {
 				twa: twa,
 				setTwitterAuthorized: setTwitterAuthorized,
 				flush: flush,
+				astar: { block: currentBlock },
 			}}
 		>
 			{children}

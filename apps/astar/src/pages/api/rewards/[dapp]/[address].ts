@@ -7,6 +7,11 @@ import { graphqlClient } from 'src/lib'
 import { AstarDappStakingEventsQuery, AstarDappStakingEventsQueryVariables } from '@gamedao/graph'
 import { gql } from '@apollo/client'
 
+// === calculate rewards per block / epoc ===
+// total rewards =
+// 1 - get array with passed blocks from first stake block to current block
+// 2 - multiply each stake per block by block reward by curve function
+
 const QUERY = gql`
 	query AstarDappStakingEvents($address: String, $period: Int, $dapp: String) {
 		stake(where: { dapp_address: { _eq: $dapp }, staker_address: { _eq: $address }, period: { _eq: $period } }) {

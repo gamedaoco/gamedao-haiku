@@ -108,7 +108,7 @@ export function DashboardView() {
 	const { state: stakingEvents } = useAstarDappStakingRewardsAggregate(id, 3)
 	const [events, setEvents] = useState({})
 	useEffect(() => {
-		if (!stakingEvents) return
+		if (!stakingEvents || stakingEvents.totalStakingEvents === 0) return
 		console.log('stakingEvents', stakingEvents)
 		setEvents(stakingEvents)
 	}, [stakingEvents])
@@ -222,7 +222,7 @@ export function DashboardView() {
 			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
 			<DappInfo dapp={dapp} />
 			<RewardChart id={id} epoc={epoc} />
-			<DappStakerGrid stakers={dappStakers.stakers} events={events} fx={fx} id={id} />
+			{dappStakers.stakers && <DappStakerGrid stakers={dappStakers.stakers} events={events} fx={fx} id={id} />}
 			{/* <AstarTVL /> */}
 			{/* <UserDetails /> */}
 		</Stack>
@@ -232,14 +232,15 @@ export function DashboardView() {
 export const Dashboard = () => {
 	const address = useCurrentAccountAddress()
 
-	const Content = () =>
-		address ? (
-			<DashboardView />
-		) : (
-			<Typography variant={'h5'} color={'white'}>
-				Please connect your wallet to access Stakeboard.
-			</Typography>
-		)
+	const Content = () => (
+		// address ? (
+		<DashboardView />
+	)
+	// ) : (
+	// 	<Typography variant={'h5'} color={'white'}>
+	// 		Please connect your wallet to access Stakeboard.
+	// 	</Typography>
+	// )
 
 	return <Content />
 }
