@@ -22,7 +22,7 @@ export default function GlobalStyles() {
 					scrollBehavior: 'smooth',
 					WebkitOverflowScrolling: 'touch',
 					scrollbarWidth: 'thin',
-					scrollbarColor: theme.palette.primary.darker,
+					// scrollbarColor: theme.palette.primary.darker,
 				},
 				hr: {
 					background: 'none',
@@ -67,7 +67,7 @@ export default function GlobalStyles() {
 						opacity: 1,
 						color: theme.palette.text.disabled,
 					},
-					'&:-ms-input-placeholder': {
+					'&::-ms-input-placeholder': {
 						color: theme.palette.text.disabled,
 					},
 					'&::placeholder': {

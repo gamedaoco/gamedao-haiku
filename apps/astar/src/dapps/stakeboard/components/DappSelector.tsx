@@ -15,20 +15,23 @@ export const DappSelector = ({ content, onUpdate, id }) => {
 					label="Select dApp"
 					variant="outlined"
 				>
-					{content.length > 1 &&
-						// .filter((item) => item.stakers.length > 0)
-						content.map((item, index) => (
-							<MenuItem
-								value={item.address}
-								key={index}
-								sx={{
-									backgroundColor: '#00000099',
-									backdropFilter: 'blur(10px)',
-								}}
-							>
-								{item.name}
-							</MenuItem>
-						))}
+					{content &&
+						id &&
+						content.length > 0 &&
+						content
+							// .filter((item) => item.stakers.length > 0)
+							.map((item, index) => (
+								<MenuItem
+									value={item.address}
+									key={index}
+									sx={{
+										backgroundColor: '#00000099',
+										backdropFilter: 'blur(10px)',
+									}}
+								>
+									{item.name}
+								</MenuItem>
+							))}
 				</Select>
 			</FormControl>
 		</Grid>

@@ -13,6 +13,7 @@ import { useConfig } from '@gamedao/core/hooks'
 import { Logger } from '@gamedao/utils'
 
 import { Providers } from 'src/providers'
+// import { Providers } from '@gamedao/providers'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'src/theme/createEmotionCache'

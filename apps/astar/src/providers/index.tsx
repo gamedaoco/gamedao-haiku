@@ -16,11 +16,11 @@ export function Providers({ children }) {
 				<GraphQlProvider>
 					<AppProvider>
 						{/* <ReadyProvider> */}
-						{/* <NetworkProvider> */}
-						{/* <ExtensionProvider> */}
-						{children}
-						{/* </ExtensionProvider> */}
-						{/* </NetworkProvider> */}
+						<NetworkProvider>
+							{/* <ExtensionProvider> */}
+							{children}
+							{/* </ExtensionProvider> */}
+						</NetworkProvider>
 						{/* </ReadyProvider> */}
 					</AppProvider>
 				</GraphQlProvider>
