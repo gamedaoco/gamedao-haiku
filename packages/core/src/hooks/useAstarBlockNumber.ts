@@ -2,25 +2,35 @@ import { useState, useEffect } from 'react'
 import { ApiPromise, WsProvider } from '@polkadot/api'
 
 export const useAstarBlockNumber = (): number => {
-	const [block, setBlock] = useState(0)
+	const [block, setBlock] = useState<number>(0)
+	const [api, setApi] = useState<ApiPromise | null>(null)
 
 	useEffect(() => {
-		const getBlock = async () => {
+		const getApi = async () => {
 			try {
 				const wsProvider = new WsProvider('wss://rpc.astar.network')
-				const api = ApiPromise.create({ provider: wsProvider })
-				// get current block number from the Astar network
+				const api = await ApiPromise.create({ provider: wsProvider })
+				setApi((await api.isReady) ? api : null)
+			} catch (error) {
+				console.error('Failed to connect:', error)
+			}
+		}
+		getApi()
+	}, [])
+
+	useEffect(() => {
+		const fetchBlockNumber = async () => {
+			if (!api) return
+			try {
 				const lastHeader = await api.rpc.chain.getHeader()
-				// convert to a number and set the state
-				const block = lastHeader.number.toNumber()
-				setBlock(block)
-				console.log(`Current block number: ${block}`)
+				const blockNumber = lastHeader.number.toNumber()
+				setBlock(blockNumber)
 			} catch (error) {
 				console.error('Failed to fetch block number:', error)
 			}
 		}
-		getBlock()
-	}, [])
+		fetchBlockNumber()
+	}, [api])
 
 	return block
 }

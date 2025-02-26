@@ -2,6 +2,12 @@
 # gamedao contract address 0x89ed50cec44a3db4186ba54cdf575ec140937c55
 # gamedao owner address aCVweEHsJYeE7gbd88zvccqBX53PEttrdwJYLRydFrXiRCA
 
+query AstarCurrentBlock {
+  astar_indexer_status {
+    height
+  }
+}
+
 query AstarDappStakingRewardsAggregate( $dapp: String, $period: Int ) {
 	stake_aggregate(where: {
 		dapp_address: {_eq: $dapp},

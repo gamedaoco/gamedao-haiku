@@ -7976,6 +7976,11 @@ export type Voting_Stream_Cursor_Value_Input = {
   readonly yes?: InputMaybe<Scalars['numeric']['input']>;
 };
 
+export type AstarCurrentBlockQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AstarCurrentBlockQuery = { readonly __typename?: 'query_root', readonly astar_indexer_status: ReadonlyArray<{ readonly __typename?: 'astar_indexer_status', readonly height: number }> };
+
 export type AstarDappStakingRewardsAggregateQueryVariables = Exact<{
   dapp?: InputMaybe<Scalars['String']['input']>;
   period?: InputMaybe<Scalars['Int']['input']>;
@@ -8154,6 +8159,45 @@ export type UpdateSessionMutationVariables = Exact<{
 export type UpdateSessionMutation = { readonly __typename?: 'mutation_root', readonly updateSession: boolean };
 
 
+export const AstarCurrentBlockDocument = gql`
+    query AstarCurrentBlock {
+  astar_indexer_status {
+    height
+  }
+}
+    `;
+
+/**
+ * __useAstarCurrentBlockQuery__
+ *
+ * To run a query within a React component, call `useAstarCurrentBlockQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAstarCurrentBlockQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAstarCurrentBlockQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAstarCurrentBlockQuery(baseOptions?: Apollo.QueryHookOptions<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>(AstarCurrentBlockDocument, options);
+      }
+export function useAstarCurrentBlockLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>(AstarCurrentBlockDocument, options);
+        }
+export function useAstarCurrentBlockSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>(AstarCurrentBlockDocument, options);
+        }
+export type AstarCurrentBlockQueryHookResult = ReturnType<typeof useAstarCurrentBlockQuery>;
+export type AstarCurrentBlockLazyQueryHookResult = ReturnType<typeof useAstarCurrentBlockLazyQuery>;
+export type AstarCurrentBlockSuspenseQueryHookResult = ReturnType<typeof useAstarCurrentBlockSuspenseQuery>;
+export type AstarCurrentBlockQueryResult = Apollo.QueryResult<AstarCurrentBlockQuery, AstarCurrentBlockQueryVariables>;
 export const AstarDappStakingRewardsAggregateDocument = gql`
     query AstarDappStakingRewardsAggregate($dapp: String, $period: Int) {
   stake_aggregate(where: {dapp_address: {_eq: $dapp}, period: {_eq: $period}}) {

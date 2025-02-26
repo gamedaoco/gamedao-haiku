@@ -261,7 +261,7 @@ export function DashboardView() {
 			</FormControl>
 			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
 			<DappInfo dapp={dapp} />
-			<RewardChart id={id} epoc={epoc} />
+			<RewardChart id={id} />
 			{dappStakers.stakers && <DappStakerGrid stakers={dappStakers.stakers} events={events} fx={fx} id={id} />}
 			{/* <AstarTVL /> */}
 			{/* <UserDetails /> */}
