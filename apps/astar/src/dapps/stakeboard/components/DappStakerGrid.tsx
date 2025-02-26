@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { avatarImageURL, convertSS58Prefix, useLogger, formatNumber } from '@gamedao/utils'
 import { Stack, Typography, Avatar, Box, Paper, TextField, Grid } from '@mui/material'
 import { type TStaker } from '../types'
@@ -11,6 +12,8 @@ export const DappStakerGrid = ({ stakers, events, fx, id }) => {
 	const {
 		astar: { block },
 	} = useAppContext()
+
+	const [showRewards, setShowRewards] = useState(id === '0x89ed50cec44a3db4186ba54cdf575ec140937c55')
 
 	const localEvents = (address) => events?.stakes?.filter((e) => e.address === address)
 
@@ -61,6 +64,7 @@ export const DappStakerGrid = ({ stakers, events, fx, id }) => {
 								totalStakers={stakers.length}
 								fx={fx}
 								block={block}
+								showRewards={showRewards}
 							/>
 						)
 					})}

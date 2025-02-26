@@ -30,7 +30,7 @@ const interpolateColor = (color1: string, color2: string, percentage: number) =>
 	return `#${hr}${hg}${hb}`
 }
 
-export const DappStakerRow = ({ s, i, events, totalStakers, fx, block = 0 }) => {
+export const DappStakerRow = ({ s, i, events, totalStakers, fx, block = 0, showRewards = false }) => {
 	const rank = i + 1
 	const address = convertSS58Prefix(s.address, 5)
 	const amountASTR = formatNumber(s.amount)
@@ -142,10 +142,14 @@ export const DappStakerRow = ({ s, i, events, totalStakers, fx, block = 0 }) => 
 				</Stack>
 			</Grid>
 			<Grid item xs={5} lg={3} sx={{ borderBottom: '1px dotted #ffffff33' }} pb={2} mb={2}>
-				<Typography sx={{ display: { lg: 'none' } }} variant={'micro'}>
-					Rewards
-				</Typography>
-				{events && <DappStakerRewards events={events} block={block} />}
+				{showRewards && (
+					<>
+						<Typography sx={{ display: { lg: 'none' } }} variant={'micro'}>
+							Rewards
+						</Typography>
+						{events && <DappStakerRewards events={events} block={block} />}
+					</>
+				)}
 			</Grid>
 		</Grid>
 	)
