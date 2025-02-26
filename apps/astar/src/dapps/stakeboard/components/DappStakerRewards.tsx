@@ -1,12 +1,12 @@
 import { Stack, Typography } from '@mui/material'
 
-export const DappStakerRewards = ({ events }) => {
-	const currentBlock = 0 // TODO: get current block number
+export const DappStakerRewards = ({ events, block = 0 }) => {
+	if (!events || events.tx.length === 0 || events.tx[0].length === 0) return null
+	const currentBlock = block
 	const totalStakingEvents = events?.tx.length || 0
 	const firstStakingBlock = events?.tx[0][0] || 0
 	const durationInBlocks = currentBlock - firstStakingBlock
 	const rewardEstimate = totalStakingEvents > 0 ? 1 : 0
-
 	return (
 		<>
 			<Stack direction="row" spacing={1}>

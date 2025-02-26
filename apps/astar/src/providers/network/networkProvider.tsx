@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useAppContext } from 'src/providers/app/components/context'
 import { initializeApis, keepAlive } from 'src/providers/network/components/network'
-import type { ApiProvider } from '@gamedao/core/@types/network'
+import type { ApiProvider } from '@gamedao/types'
 
 import { NetworkContext } from './components/context'
 
@@ -11,7 +11,7 @@ export function NetworkProvider({ children }) {
 	const [apiProvidersState, setApiProvidersState] = useState<ApiProvider[]>(null)
 	const isMountedRef = useRef<null | boolean>(null)
 
-	const intervalRef = useRef<NodeJS.Timer>()
+	const intervalRef = useRef<NodeJS.Timeout>()
 
 	const { apiProviderConfig } = useAppContext()
 
@@ -44,7 +44,7 @@ export function NetworkProvider({ children }) {
 		return () => {
 			isMountedRef.current = false
 			if (intervalRef.current) {
-				clearInterval(intervalRef)
+				clearInterval(intervalRef.current)
 			}
 		}
 	}, [apiProviderConfig])

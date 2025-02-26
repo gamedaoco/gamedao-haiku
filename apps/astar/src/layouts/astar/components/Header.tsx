@@ -34,8 +34,8 @@ import { AccountSelector } from 'components/molecules/AccountSelector'
 import { BaseDialog } from 'components/molecules/BaseDialog'
 import FeedbackButton from 'components/molecules/Feedback'
 import Link from 'components/atoms/Link'
-import { useCurrentAccountAddress } from '@gamedao/core/hooks/useCurrentAccountAddress'
-import { useBlockNumber } from '@gamedao/core/hooks/useBlockNumber'
+import { useCurrentAccountAddress } from '@gamedao/core/hooks'
+import { useBlockNumber } from '@gamedao/core/hooks'
 import { useExtensionContext } from 'src/providers/extension/components/context'
 
 // eslint-disable-next-line @next/next/no-img-element

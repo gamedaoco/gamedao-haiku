@@ -10,23 +10,21 @@ import { ExtensionProvider } from 'src/providers/extension/extensionProvider'
 
 export function Providers({ children }) {
 	return (
-		// <SettingsProvider>
-		<ThemeProvider>
-			<LanguageProvider>
-				<GraphQlProvider>
-					<AppProvider>
-						{/* <ReadyProvider> */}
-						<NetworkProvider>
-							{/* <ExtensionProvider> */}
-							{children}
-							{/* </ExtensionProvider> */}
-						</NetworkProvider>
-						{/* </ReadyProvider> */}
-					</AppProvider>
-				</GraphQlProvider>
-			</LanguageProvider>
-		</ThemeProvider>
-		// </SettingsProvider>
+		<SettingsProvider>
+			<ThemeProvider>
+				<LanguageProvider>
+					<GraphQlProvider>
+						<AppProvider>
+							<ReadyProvider>
+								<NetworkProvider>
+									<ExtensionProvider>{children}</ExtensionProvider>
+								</NetworkProvider>
+							</ReadyProvider>
+						</AppProvider>
+					</GraphQlProvider>
+				</LanguageProvider>
+			</ThemeProvider>
+		</SettingsProvider>
 	)
 }
 

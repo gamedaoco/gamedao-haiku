@@ -3,7 +3,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist'
 import { createClient } from 'graphql-ws'
-import { Endpoint } from '@gamedao/core/@types/graphql'
+import { Endpoint } from '@gamedao/types'
 
 const cache = new InMemoryCache({
 	addTypename: false,
@@ -33,6 +33,7 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 		typeof window !== 'undefined'
 			? new GraphQLWsLink(
 					createClient({
+						// url: 'wss://graph.gamedao.net/v1/graphql/',
 						url: endpoint?.url?.replace('http://', 'ws://').replace('https://', 'wss://'),
 						webSocketImpl: require('websocket').w3cwebsocket,
 						connectionParams: {
@@ -47,6 +48,7 @@ export async function createApolloClient(endpoint: Endpoint): Promise<ApolloClie
 			: null
 
 	const httpLink = new HttpLink({
+		// uri: 'https://graph.gamedao.net/v1/graphql/',
 		uri: endpoint?.url,
 		headers: {
 			'Access-Control-Allow-Origin': '*',

@@ -1,5 +1,5 @@
 // import Discord from 'discord.js'
-import { authOptions } from 'src/pages/api/auth/[...nextauth]'
+import { authOptions } from 'dapps/stakeboard/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
 import { getConnectedEndpoint } from '@gamedao/core/constants/endpoints'

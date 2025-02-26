@@ -8,10 +8,11 @@ import { useRouter } from 'next/router'
 // import dynamic from 'next/dynamic'
 // import { useTranslation } from 'react-i18next'
 
-import { convertSS58Prefix, useLogger, formatNumber, formatBalanceString } from '@gamedao/utils'
 import BigNumber from 'bignumber.js'
 
+import { convertSS58Prefix, useLogger, formatNumber, formatBalanceString } from '@gamedao/utils'
 import { dAppId } from '@gamedao/constants'
+
 import {
 	useCurrentAccountAddress,
 	useAstarDappStakers,
@@ -24,8 +25,22 @@ import {
 	useAstarDappStakingRewardsAggregate,
 } from '@gamedao/core/hooks'
 
+import { useAppContext } from 'providers/app/components/context'
+
 // import { useTheme } from '@mui/material/styles'
-import { Stack, Typography, Grid, useMediaQuery, Box, Paper, TextField } from '@mui/material'
+import {
+	Stack,
+	Typography,
+	Grid,
+	useMediaQuery,
+	Box,
+	Paper,
+	TextField,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
+} from '@mui/material'
 
 // import { RxClock } from 'react-icons/rx'
 // import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
@@ -61,6 +76,7 @@ const initDappState = {
 	shortDescription: '',
 	tvl: '',
 }
+
 const initAstarState = {
 	block: 0,
 	lockers: 0,
@@ -72,6 +88,9 @@ const initAstarState = {
 
 export function DashboardView() {
 	const logger = useLogger('astar')
+	const {
+		astar: { block },
+	} = useAppContext()
 
 	const searchParams = useSearchParams()
 	const params = new URLSearchParams(searchParams)
@@ -80,12 +99,14 @@ export function DashboardView() {
 	const { query } = useRouter()
 
 	const [id, setId] = useState<string>((query.id as string) || dAppId)
-	const [period, setPeriod] = useState(3)
+	const [period, setPeriod] = useState(4)
 	// TODO: calculate current epoch
-	const [epoc, setEpoc] = useState(42)
+	const [epoc, setEpoc] = useState(105)
 	const [fx, setFx] = useState(0)
 
-	const [data, setData] = useState(initAstarState)
+	const [astarBlock, setAstarBlock] = useState(0)
+
+	const [astarData, setAstarData] = useState(initAstarState)
 	const [dapp, updateDapp] = useState(initDappState)
 
 	// connected wallet address
@@ -109,7 +130,7 @@ export function DashboardView() {
 	const [events, setEvents] = useState({})
 	useEffect(() => {
 		if (!stakingEvents || stakingEvents.totalStakingEvents === 0) return
-		console.log('stakingEvents', stakingEvents)
+		// console.log('stakingEvents', stakingEvents)
 		setEvents(stakingEvents)
 	}, [stakingEvents])
 
@@ -130,7 +151,7 @@ export function DashboardView() {
 			...dapp,
 			stakers: dappInfo.stakers_count,
 		})
-	}, [id, dappInfo])
+	}, [id, dappInfo, period])
 
 	// update selected dapp tvl
 	useEffect(() => {
@@ -144,7 +165,7 @@ export function DashboardView() {
 			usd: formatBalanceString(usd.toString(), 18, 4),
 		}
 		updateDapp(_)
-	}, [id, dappTVL, fx])
+	}, [id, dappTVL, fx, period])
 
 	// update selected dapp content
 	useEffect(() => {
@@ -154,7 +175,7 @@ export function DashboardView() {
 		// console.log('data', data.name, { ...dapp })
 		const _ = { ...dapp, ...data, id: data.address }
 		updateDapp(_)
-	}, [id, dappContent])
+	}, [id, dappContent, period])
 
 	useEffect(() => {
 		if (!astarTVL) return
@@ -166,7 +187,7 @@ export function DashboardView() {
 			usd: 0,
 			fx: Number(astarTVL.fx),
 		}
-		setData(_)
+		setAstarData(_)
 		setFx(Number(astarTVL.fx))
 	}, [astarTVL])
 
@@ -214,11 +235,30 @@ export function DashboardView() {
 	// 	</Typography>
 	// )
 
+	const handlePeriodChange = (event) => {
+		setPeriod(event.target.value)
+	}
+
 	return loading ? (
 		<Loader text="Preparing your Stakeboard..." />
 	) : (
 		<Stack spacing={4}>
 			<Typography variant="h2">Stakeboard</Typography>
+			<FormControl fullWidth>
+				<InputLabel id="period-select-label">Select Period</InputLabel>
+				<Select
+					labelId="period-select-label"
+					id="period-select"
+					value={period}
+					label="Select Period"
+					onChange={handlePeriodChange}
+				>
+					<MenuItem value={1}>Period 1</MenuItem>
+					<MenuItem value={2}>Period 2</MenuItem>
+					<MenuItem value={3}>Period 3</MenuItem>
+					<MenuItem value={4}>Period 4</MenuItem>
+				</Select>
+			</FormControl>
 			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
 			<DappInfo dapp={dapp} />
 			<RewardChart id={id} epoc={epoc} />

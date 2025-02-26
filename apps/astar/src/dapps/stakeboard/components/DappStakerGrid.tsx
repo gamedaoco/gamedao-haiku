@@ -2,9 +2,16 @@ import { avatarImageURL, convertSS58Prefix, useLogger, formatNumber } from '@gam
 import { Stack, Typography, Avatar, Box, Paper, TextField, Grid } from '@mui/material'
 import { type TStaker } from '../types'
 import { DappStakerRow } from './DappStakerRow'
+import { useAppContext } from 'providers/app/components/context'
 
 export const DappStakerGrid = ({ stakers, events, fx, id }) => {
-	console.log('events', events)
+	//
+
+	// console.log('events', events)
+	const {
+		astar: { block },
+	} = useAppContext()
+
 	const localEvents = (address) => events?.stakes?.filter((e) => e.address === address)
 
 	return (
@@ -53,6 +60,7 @@ export const DappStakerGrid = ({ stakers, events, fx, id }) => {
 								events={stakerEvents}
 								totalStakers={stakers.length}
 								fx={fx}
+								block={block}
 							/>
 						)
 					})}

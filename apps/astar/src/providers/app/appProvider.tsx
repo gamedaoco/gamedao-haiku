@@ -3,26 +3,13 @@ import { useSession, signOut } from 'next-auth/react'
 import { ENVIRONMENT } from '@gamedao/constants'
 import { AppContext } from 'src/providers/app/components/context'
 import { useExtensionContext } from 'src/providers/extension/components/context'
-
 import { useApiProviderConfigQuery, useConfigQuery, useFeaturesQuery } from '@gamedao/graph'
-import { useAstarBlockNumber } from '@gamedao/core/hooks'
+import { ApiPromise, WsProvider } from '@polkadot/api'
+import { TAppUser, TAppContext } from './types'
 
-export type TAppContext = {
-	dapp?: string
-	bpid?: string
-}
-const initialContextState = { dapp: null, bpid: null }
+const initialContextState: TAppContext = { dapp: null, bpid: null }
 
-export type TAppUser = {
-	uuid?: string
-	address?: string
-	discord?: string
-	twitter?: string
-	email?: string
-	name?: string
-	epicGames?: string
-}
-export const initialUserState: TAppUser = {
+const initialUserState: TAppUser = {
 	uuid: null,
 	address: null,
 	discord: null,
@@ -40,14 +27,32 @@ export function AppProvider({ children }) {
 	const [processing, setProcessing] = useState<boolean>(false)
 	const [connected, setConnected] = useState(false)
 
-	const block = useAstarBlockNumber()
-	const [currentBlock, setCurrentBlock] = useState(0)
+	//
+	//
+	//
+
+	const [currentBlock, setBlock] = useState(0)
 
 	useEffect(() => {
-		const b = typeof block === 'number' ? block : 0
-		console.log('block', block)
-		setCurrentBlock(b)
-	}, [block])
+		const getBlock = async () => {
+			try {
+				const wsProvider = new WsProvider('wss://rpc.astar.network')
+				const api = ApiPromise.create({ provider: wsProvider })
+					.then((api) => api.rpc.chain.getHeader())
+					.then((block) => {
+						setBlock(block.number.toNumber())
+						// console.log('block', block.number.toNumber())
+					})
+			} catch (error) {
+				console.error('Failed to fetch block number:', error)
+			}
+		}
+		getBlock()
+	}, [])
+
+	//
+	//
+	//
 
 	// const [connectIdentityMutation] = useConnectIdentityMutation({
 	// 	variables: {

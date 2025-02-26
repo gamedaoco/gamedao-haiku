@@ -1,5 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
-import type { ApiProvider } from '@gamedao/core/@types/network'
+import type { ApiProvider } from '@gamedao/types'
 import type { ApiProvider as ApiProviderConfig } from '@gamedao/graph'
 
 // Call health every 30 seconds as keepalive

@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react'
-import { AppState } from '@gamedao/core/@types/app'
+import type { ApiProvider as ApiProviderConfig, Config, Features } from '@gamedao/graph'
+import { AppState } from '../types'
 
 export const AppContext = createContext<AppState>({
 	ready: false,

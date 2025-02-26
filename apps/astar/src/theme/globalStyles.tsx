@@ -2,7 +2,9 @@
 import { GlobalStyles as GlobalThemeStyles } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-// ----------------------------------------------------------------------
+// import 'react-toastify/dist/ReactToastify.css'
+// import 'src/theme/css/modelViewer.css'
+// import 'src/theme/css/toastify.css'
 
 export default function GlobalStyles() {
 	const theme = useTheme()

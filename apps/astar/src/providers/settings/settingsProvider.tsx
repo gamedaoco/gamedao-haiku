@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
-import { SettingsState, ThemeColor, ThemeDirection, ThemeMode } from '@gamedao/core/@types/settings'
-import { useLocalStorage } from '@gamedao/core/hooks/useLocalStorage'
+import { SettingsState, ThemeColor, ThemeDirection, ThemeMode } from '@gamedao/types'
+import { useLocalStorage } from '@gamedao/core/hooks'
 import { PRIMARY_COLOR } from 'src/theme/palette'
 
 import { SettingsContext } from './components/context'
