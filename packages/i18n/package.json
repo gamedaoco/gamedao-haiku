@@ -8,5 +8,13 @@
   },
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "workspaceDependencies": {
+    "@gamedao/api": "*",
+    "@gamedao/core": "*",
+    "@gamedao/graph": "*",
+    "@gamedao/i18n": "*",
+    "@gamedao/ui": "*",
+    "@gamedao/utils": "*"
   }
 }

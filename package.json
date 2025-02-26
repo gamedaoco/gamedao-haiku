@@ -3,14 +3,10 @@
   "description": "a monorepo for gamedao dapps",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "services/*"
-  ],
+  "workspaces": ["apps/*", "packages/*", "services/*"],
   "scripts": {
     "setup": "yarn && wsrun -s -c install",
-    "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules apps/**/.next packages/**/.next",
+    "reset": "rm -rf node_modules apps/**/node_modules packages/**/node_modules services /**/node_modules  apps/**/.next packages/**/.next",
     "sb": "wsrun -p @gamedao/components -c storybook",
     "dev": "yarn dev:web",
     "dev:web": "wsrun -p @gamedao/web -c dev",
@@ -59,9 +55,7 @@
     "*": "echo yarn format:staged"
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "extends": ["@commitlint/config-conventional"]
   },
   "devDependencies": {
     "@changesets/cli": "^2.23.2",

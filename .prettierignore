@@ -3,4 +3,4 @@ build
 dist
 archive
 node_modules
-*.json
+*.yml

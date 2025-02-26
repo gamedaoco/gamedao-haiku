@@ -1,4 +1,4 @@
-import { CampaignStatus } from '@gamedao/core/@types/campaignStatus'
+import { CampaignStatus } from './campaignStatus'
 
 export const CampaignsListSortMapping = {
 	[CampaignStatus.ACTIVE]: 0,

@@ -15,9 +15,6 @@
   "dependencies": {
     "@apollo/client": "^3.8.6",
     "@date-io/moment": "^2.17.0",
-    "@gamedao/core": "*",
-    "@gamedao/i18n": "*",
-    "@gamedao/graph": "*",
     "@graphql-tools/graphql-file-loader": "^7.3.14",
     "@graphql-tools/load": "^7.5.13",
     "@graphql-tools/schema": "^8.3.13",
@@ -67,5 +64,13 @@
     "@types/webpack-bundle-analyzer": "^4.6.1",
     "dotenv": "^16.0.1",
     "typescript": "^5.2.2"
+  },
+  "workspaceDependencies": {
+    "@gamedao/api": "*",
+    "@gamedao/core": "*",
+    "@gamedao/graph": "*",
+    "@gamedao/i18n": "*",
+    "@gamedao/ui": "*",
+    "@gamedao/utils": "*"
   }
 }

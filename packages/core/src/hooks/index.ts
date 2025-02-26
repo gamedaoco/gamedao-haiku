@@ -8,6 +8,7 @@ export * from './useAstarStakedByAddress'
 export * from './useAstarStaking'
 export * from './useAstarTVL'
 
+export * from './useAstar'
 export * from './useAstarDappContent'
 export * from './useAstarDappStakers'
 export * from './useAstarDappStakingEvents'
@@ -21,3 +22,6 @@ export * from './useConfig'
 export * from './useCurrentAccountAddress'
 
 export * from './useLocalStorage'
+
+export * from './useBlockNumber'
+export * from './useSettings'

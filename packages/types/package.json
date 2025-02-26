@@ -9,9 +9,17 @@
   "scripts": {
     "test": "echo test"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@polkadot/extension-inject": "0.58.2",
     "typescript": "5.6.3"
+  },
+  "workspaceDependencies": {
+    "@gamedao/api": "*",
+    "@gamedao/core": "*",
+    "@gamedao/graph": "*",
+    "@gamedao/i18n": "*",
+    "@gamedao/ui": "*",
+    "@gamedao/utils": "*"
   }
 }

@@ -1,7 +1,5 @@
 import { ApiPromise } from '@polkadot/api'
 
-import { ApiProvider } from './ApiProvider'
-
 export interface SystemProperties {
 	ss58Format: number
 	tokenDecimals: number
@@ -21,5 +19,5 @@ export interface ApiProvider {
 export interface NetworkState {
 	selectedApiProvider: ApiProvider
 	apiProviders: ApiProvider[]
-	selectApiProvider: Function<ApiProvider>
+	selectApiProvider: ApiProvider | Function
 }

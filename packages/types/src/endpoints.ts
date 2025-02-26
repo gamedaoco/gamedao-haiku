@@ -1,6 +1,6 @@
 // import { ENVIRONMENT } from 'constants/environment'
 // import { Environment } from '@gamedao/graph'
-import type { Endpoints } from 'src/@types'
+import type { Endpoints } from './graphql'
 
 const env = process.env.NEXT_PUBLIC_ENVIRONMENT
 

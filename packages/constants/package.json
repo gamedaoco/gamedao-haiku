@@ -10,9 +10,15 @@
   "scripts": {
     "test": "echo test"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "5.6.3"
+  },
+  "workspaceDependencies": {
+    "@gamedao/core": "*",
+    "@gamedao/graph": "*",
+    "@gamedao/i18n": "*",
+    "@gamedao/ui": "*",
+    "@gamedao/utils": "*"
   }
 }

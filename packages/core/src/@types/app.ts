@@ -1,5 +1,5 @@
 import type { ApiProvider as ApiProviderConfig, Config, Features } from '@gamedao/graph'
-import type { TAppUser } from 'src/providers/app/appProvider'
+// import type { TAppUser } from 'src/providers/app/appProvider'
 
 export interface AppState {
 	ready: boolean

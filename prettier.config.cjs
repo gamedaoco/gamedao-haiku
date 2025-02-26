@@ -9,6 +9,16 @@ module.exports = {
 	semi: false,
 	overrides: [
 		{
+			files: ['**/*.yml', '**/*.yaml'],
+			options: {
+				parser: 'yaml',
+				useTabs: true,
+				tabWidth: 4,
+				singleQuote: false,
+				trailingComma: 'none',
+			},
+		},
+		{
 			files: '**/*.json',
 			options: {
 				parser: 'json',
