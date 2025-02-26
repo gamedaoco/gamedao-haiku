@@ -10,7 +10,7 @@ const productionEndpoints: Endpoints = [
 		name: 'ZERO Alphaville',
 		url: 'https://graph.gamedao.net/v1/graphql',
 		healthCheck: 'https://graph.gamedao.net/health',
-		chain: 'wss://rpc.dev.gamedao.net',
+		chain: 'wss://rpc.gamedao.net',
 		default: false,
 		id: 25,
 	},

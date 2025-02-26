@@ -1,16 +1,18 @@
-// GameDAO Stakeboard
-// A simple Dashboard for Astar dApp Staking,
-// rendering information about dapp stakers
+import { Dashboard } from 'dapps/stakeboard/Dashboard'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { lazy, useCallback, useEffect, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
+
 import BigNumber from 'bignumber.js'
-import { useLogger, formatBalanceString } from '@gamedao/utils'
+
+import { convertSS58Prefix, useLogger, formatNumber, formatBalanceString } from '@gamedao/utils'
 import { dAppId } from '@gamedao/constants'
+
 import {
 	useCurrentAccountAddress,
 	useAstarDappStakers,
+	useAstarStaking,
 	useAstarTVL,
 	useAstarStakedByAddress,
 	useAstarDappContent,
@@ -18,13 +20,13 @@ import {
 	useAstarDappStakingGeneralInfo,
 	useAstarDappStakingRewardsAggregate,
 } from '@gamedao/core/hooks'
+
 import { useAppContext } from 'providers/app/components/context'
+
 import { Stack, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
-import { Loader } from 'components/atoms/Loader'
-import { DappSelector } from './components/DappSelector'
-import { DappInfo } from './components/DappInfo'
-import { RewardChart } from './components/RewardChart'
-import { DappStakerGrid } from './components/DappStakerGrid'
+
+import { type TStaker } from './types'
+import { Layout } from 'layouts/astar'
 
 const initDappState = {
 	astr: 0,
@@ -49,7 +51,7 @@ const initAstarState = {
 	fx: 0,
 }
 
-export function DashboardView() {
+export function Page() {
 	const logger = useLogger('astar')
 	const {
 		astar: { block },
@@ -63,27 +65,41 @@ export function DashboardView() {
 
 	const [id, setId] = useState<string>((query.id as string) || dAppId)
 	const [period, setPeriod] = useState(4)
+	// TODO: calculate current epoch
 	const [epoc, setEpoc] = useState(105)
 	const [fx, setFx] = useState(0)
+
 	const [astarBlock, setAstarBlock] = useState(0)
+
 	const [astarData, setAstarData] = useState(initAstarState)
 	const [dapp, updateDapp] = useState(initDappState)
 
+	// connected wallet address
 	const address = useCurrentAccountAddress()
+
+	// account related
 	const { state: stakedByAddress } = useAstarStakedByAddress(address)
+
+	// dapp related
 	const { state: dappContent } = useAstarDappContent('')
 	const { state: dappTVL } = useAstarDappTVL(id, period)
 	const { state: dappStakers, loading } = useAstarDappStakers(id)
+	// const { state: dappStaking } = useAstarDappStakingEventsAggregate(id)
 	const { state: dappInfo } = useAstarDappStakingGeneralInfo(id)
+
+	// astar related
 	const { state: astarTVL } = useAstarTVL()
+
+	// get all eligibile staking events for the dapp in the current period
 	const { state: stakingEvents } = useAstarDappStakingRewardsAggregate(id, 3)
 	const [events, setEvents] = useState({})
-
 	useEffect(() => {
 		if (!stakingEvents || stakingEvents.totalStakingEvents === 0) return
+		// console.log('stakingEvents', stakingEvents)
 		setEvents(stakingEvents)
 	}, [stakingEvents])
 
+	// track the selected or injected dapp id
 	const updateDAppId = useCallback((e) => {
 		setId(e.target.value)
 		if (query.id) {
@@ -92,16 +108,20 @@ export function DashboardView() {
 		}
 	}, [])
 
+	// update selected dapp stakers
 	useEffect(() => {
 		if (!dappInfo || !dappInfo.stakers_count) return
+		// console.log('dappInfo:', dappInfo)
 		updateDapp({
 			...dapp,
 			stakers: dappInfo.stakers_count,
 		})
 	}, [id, dappInfo, period])
 
+	// update selected dapp tvl
 	useEffect(() => {
 		if (!dappTVL) return
+		// console.log('tvl changed:', dappTVL)
 		const astr = BigNumber(dappTVL.totalStaked)
 		const usd = astr.multipliedBy(BigNumber(fx))
 		const _ = {
@@ -112,9 +132,12 @@ export function DashboardView() {
 		updateDapp(_)
 	}, [id, dappTVL, fx, period])
 
+	// update selected dapp content
 	useEffect(() => {
 		if (dappContent.length < 1) return
+		// console.log('id changed:', id)
 		const data = dappContent.find((dapp) => dapp.address === id)
+		// console.log('data', data.name, { ...dapp })
 		const _ = { ...dapp, ...data, id: data.address }
 		updateDapp(_)
 	}, [id, dappContent, period])
@@ -137,40 +160,13 @@ export function DashboardView() {
 		setPeriod(event.target.value)
 	}
 
-	return loading ? (
-		<Loader text="Preparing your Stakeboard..." />
-	) : (
-		<Stack spacing={4}>
-			<Typography variant="h2">Stakeboard</Typography>
-			<FormControl fullWidth>
-				<InputLabel id="period-select-label">Select Period</InputLabel>
-				<Select
-					labelId="period-select-label"
-					id="period-select"
-					value={period}
-					label="Select Period"
-					onChange={handlePeriodChange}
-				>
-					<MenuItem value={1}>Period 1</MenuItem>
-					<MenuItem value={2}>Period 2</MenuItem>
-					<MenuItem value={3}>Period 3</MenuItem>
-					<MenuItem value={4}>Period 4</MenuItem>
-				</Select>
-			</FormControl>
-			<DappSelector onUpdate={updateDAppId} content={dappContent} id={id} />
-			<DappInfo dapp={dapp} />
-			<RewardChart id={id} />
-			{dappStakers.stakers && <DappStakerGrid stakers={dappStakers.stakers} events={events} fx={fx} id={id} />}
-		</Stack>
+	return (
+		<Layout showHeader showFooter>
+			<Stack spacing={4}>
+				<Typography variant="h2">Ranking</Typography>
+			</Stack>
+		</Layout>
 	)
 }
 
-export const Dashboard = () => {
-	const address = useCurrentAccountAddress()
-
-	const Content = () => <DashboardView />
-
-	return <Content />
-}
-
-export default Dashboard
+export default Page

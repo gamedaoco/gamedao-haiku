@@ -4,11 +4,9 @@ import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine'
 import { LinePlot } from '@mui/x-charts/LineChart'
 import { BarChart } from '@mui/x-charts/BarChart'
 import { Stack } from '@mui/material'
-// import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis'
-// import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis'
 
 import { useAstarBlockNumber } from '@gamedao/core/hooks'
-import { votingDuration, stakingDuration, periods } from '@gamedao/constants'
+import { periods } from '@gamedao/constants'
 
 // TODO: show marker at current epoc of staking period
 
@@ -33,7 +31,6 @@ const lin = [0.0833, 0.1667, 0.25, 0.3333, 0.4167, 0.5, 0.5833, 0.6667, 0.75, 0.
 
 export const Chart = ({ id }) => {
 	const blockNumber = useAstarBlockNumber()
-	const [stakingPeriod, setStakingPeriod] = useState(null)
 	const [era, setEra] = useState(0)
 
 	useEffect(() => {
@@ -52,13 +49,9 @@ export const Chart = ({ id }) => {
 		console.log('progress', eraProgress)
 	}, [blockNumber])
 
-	const barChartConfig = {
-		xAxis: [{ label: 'progress' }],
-	}
 	const vote = era < 11 ? era : 11
 	const build = era > 11 ? era - 11 : 0
 
-	// TODO: implement custom curve
 	return (
 		<Stack direction="column" spacing={1} sx={{ width: '100%', padding: 1, border: 1, borderColor: '#ffffff33' }}>
 			<ResponsiveChartContainer
@@ -72,9 +65,6 @@ export const Chart = ({ id }) => {
 				<LinePlot />
 				<ChartsReferenceLine x={0} label="vote" lineStyle={{ stroke: '#ffffff00' }} />
 				<ChartsReferenceLine x={11} label="build" lineStyle={{ stroke: '#ffffff33' }} />
-				{/* {epoc > 0 && <ChartsReferenceLine x={epoc} lineStyle={{ stroke: '#ffffff33' }} />} */}
-				{/* <ChartsXAxis /> */}
-				{/* <ChartsYAxis /> */}
 			</ResponsiveChartContainer>
 			<BarChart
 				layout="horizontal"
@@ -86,7 +76,6 @@ export const Chart = ({ id }) => {
 						data: [0, 121],
 						disableLine: true,
 						disableTicks: true,
-						// TODO: sort ticks when in voting period
 						tickInterval: [0, 11, era, 121],
 						tickNumber: 100,
 						valueFormatter: (value) => `${value}`,

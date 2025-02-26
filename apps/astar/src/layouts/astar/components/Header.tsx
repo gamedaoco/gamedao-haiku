@@ -28,6 +28,7 @@ import {
 	RiChat1Line,
 	RiCommunityLine,
 	RiAncientGateLine,
+	RiGlobalLine,
 } from 'react-icons/ri'
 import { RxDiscordLogo } from 'react-icons/rx'
 import { AccountSelector } from 'components/molecules/AccountSelector'
@@ -53,26 +54,21 @@ interface ComponentProps {
 }
 
 const leftNav = [
+	{
+		name: 'Stakeboard',
+		path: '/',
+		icon: <RiAncientGateLine />,
+	},
 	// {
-	// 	name: 'Battlepass',
-	// 	path: '/battlepass/overview',
-	// 	icon: <RiSwordLine />,
+	// 	name: 'Ranking',
+	// 	path: '/ranking',
+	// 	icon: <RiAwardLine />,
 	// },
-	// {
-	// 	name: 'Collectives', // 'button:navigation:organizations',
-	// 	path: '/collectives/overview',
-	// 	icon: <RiAncientGateLine />,
-	// },
-	// {
-	// 	name: 'Campaigns', // button:navigation:campaigns',
-	// 	path: '/campaigns/overview',
-	// 	icon: <RiVipDiamondLine />,
-	// },
-	// {
-	// 	name: 'Buy', // button:navigation:campaigns',
-	// 	path: '/buy',
-	// 	icon: <RiVipDiamondLine />,
-	// },
+	{
+		name: 'Astar DAppStaking',
+		path: 'https://portal.astar.network/astar/dapp-staking/discover',
+		icon: <RiGlobalLine />,
+	},
 ]
 
 const rightNav = [

@@ -5,7 +5,7 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
 export function Page() {
 	return (
-		<Layout showFooter>
+		<Layout showHeader showFooter>
 			<Dashboard />
 		</Layout>
 	)
