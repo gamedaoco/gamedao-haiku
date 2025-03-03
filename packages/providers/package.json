@@ -4,7 +4,7 @@
   "private": true,
   "main": "src/index.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.tsx"
   },
   "scripts": {
     "test": "echo test"

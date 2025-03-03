@@ -1,3 +1,5 @@
+export * from './tx'
+
 export * from './featureToggle/useOrganizationFeatures'
 export * from './featureToggle/useProposalFeatures'
 
