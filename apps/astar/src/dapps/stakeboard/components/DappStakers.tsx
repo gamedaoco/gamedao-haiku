@@ -5,7 +5,7 @@ import { RxClock } from 'react-icons/rx'
 import { Stack, Typography, Avatar, Box, Paper, TextField, Grid } from '@mui/material'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { type TStaker } from '../types'
-import { useAstarStakers, useAstarDappStakingEventsAggregate } from '@gamedao/core/hooks'
+import { useAstarDappStakingEventsAggregate } from '@gamedao/core/hooks'
 
 export const DappStakers = ({ stakers, fx, id }) => {
 	const { state: stakingAggregation, loading } = useAstarDappStakingEventsAggregate(id)

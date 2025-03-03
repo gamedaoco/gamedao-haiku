@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 
 export const DappStakerRewards = ({ events, block = 0 }) => {
-	if (!events || events.tx.length === 0 || events.tx[0].length === 0) return null
+	if (!events || !events?.tx || events.tx.length === 0 || events.tx[0].length === 0) return null
 	const currentBlock = block
 	const totalStakingEvents = events?.tx.length || 0
 	const firstStakingBlock = events?.tx[0][0] || 0
