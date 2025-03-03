@@ -2,7 +2,7 @@ import { avatarImageURL, convertSS58Prefix, useLogger, formatNumber } from '@gam
 import { Stack, Typography, Avatar, Box, Paper, TextField, Grid } from '@mui/material'
 import { type TStaker } from '../types'
 import { DappStakerRewards } from './DappStakerRewards'
-
+import { formatAddressShort } from 'src/utils/address'
 const interpolateColor = (color1: string, color2: string, percentage: number) => {
 	percentage = Math.min(Math.max(percentage, 0), 100)
 
@@ -32,7 +32,9 @@ const interpolateColor = (color1: string, color2: string, percentage: number) =>
 
 export const DappStakerRow = ({ s, i, events, totalStakers, fx, block = 0, showRewards = false }) => {
 	const rank = i + 1
+
 	const address = convertSS58Prefix(s.address, 5)
+	const shortAddress = formatAddressShort(address)
 	const amountASTR = formatNumber(s.amount)
 	const amountUSD = formatNumber(s.amount * fx)
 
@@ -95,7 +97,9 @@ export const DappStakerRow = ({ s, i, events, totalStakers, fx, block = 0, showR
 						src={avatarImageURL(address)}
 					/>
 					<Box>
-						<Typography variant="mono">{address}</Typography>
+						<Typography variant="mono" title={address}>
+							{shortAddress}
+						</Typography>
 						<br />
 						<Typography variant="micro">
 							<a href={'https://astar.subscan.io/account/' + address} target="_blank" rel="noreferrer">
@@ -129,12 +133,12 @@ export const DappStakerRow = ({ s, i, events, totalStakers, fx, block = 0, showR
 						{amountASTR}
 					</Typography>
 					<Typography align="left" variant="mono">
-						ASTR
+						$ASTR
 					</Typography>
 				</Stack>
 				<Stack direction="row" spacing={1}>
 					<Typography align="right" variant="mono">
-						{amountUSD}
+						${amountUSD}
 					</Typography>
 					<Typography align="left" variant="mono">
 						USD

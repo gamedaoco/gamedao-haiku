@@ -10,18 +10,18 @@ export const DappStakerRewards = ({ events, block = 0 }) => {
 	return (
 		<>
 			<Stack direction="row" spacing={1}>
-				<Typography align="right" variant="mono">
+				<Typography align="right" variant="mono" title="first block">
 					𝑓:{firstStakingBlock}
 				</Typography>
-				<Typography align="left" variant="mono">
+				<Typography align="left" variant="mono" title="duration">
 					𝛥:{durationInBlocks}
 				</Typography>
 			</Stack>
 			<Stack direction="row" spacing={1}>
-				<Typography align="right" variant="mono">
+				<Typography align="right" variant="mono" title="total events">
 					∈:{totalStakingEvents}
 				</Typography>
-				<Typography align="left" variant="mono">
+				<Typography align="left" variant="mono" title="eligible">
 					𝛴:{rewardEstimate}
 				</Typography>
 			</Stack>
